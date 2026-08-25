@@ -41,7 +41,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
     /// GAAP realserver can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Gaap/realserver:Realserver  tencentcloud_gaap_realserver.foo rs-4ftghy6
+    ///   $ pulumi import tencentcloud:Gaap/realserver:Realserver foo rs-4ftghy6
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Gaap/realserver:Realserver")]

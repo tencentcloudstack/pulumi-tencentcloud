@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * dcdb db_parameters can be imported using the id, e.g.
+ * dcdb dbParameters can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Dcdb/dbParameters:DbParameters db_parameters instanceId#paramName
@@ -107,11 +107,11 @@ export interface DbParametersState {
     /**
      * The ID of instance.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Parameter list, each element is a combination of Param and Value.
      */
-    params?: pulumi.Input<inputs.Dcdb.DbParametersParams>;
+    params?: pulumi.Input<inputs.Dcdb.DbParametersParams | undefined>;
 }
 
 /**

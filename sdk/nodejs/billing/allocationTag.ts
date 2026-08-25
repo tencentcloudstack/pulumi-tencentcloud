@@ -100,11 +100,11 @@ export interface AllocationTagState {
     /**
      * Tag type, 0 normal tag, 1 account tag.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * Cost allocation tag key.
      */
-    tagKey?: pulumi.Input<string>;
+    tagKey?: pulumi.Input<string | undefined>;
 }
 
 /**

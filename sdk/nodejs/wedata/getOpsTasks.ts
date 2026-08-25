@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataOpsTasks = tencentcloud.Wedata.getOpsTasks({
+ * const wedataOpsTasks = tencentcloud.wedata.getOpsTasks({
  *     projectId: "1859317240494305280",
  *     taskTypeId: "34",
  *     workflowId: "d7184172-4879-11ee-ba36-b8cef6a5af5c",
@@ -139,7 +139,7 @@ export interface GetOpsTasksResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataOpsTasks = tencentcloud.Wedata.getOpsTasks({
+ * const wedataOpsTasks = tencentcloud.wedata.getOpsTasks({
  *     projectId: "1859317240494305280",
  *     taskTypeId: "34",
  *     workflowId: "d7184172-4879-11ee-ba36-b8cef6a5af5c",
@@ -177,19 +177,19 @@ export interface GetOpsTasksOutputArgs {
     /**
      * Task Cycle Type: ONEOFF_CYCLE: One-time, YEAR_CYCLE: Yearly, MONTH_CYCLE: Monthly, WEEK_CYCLE: Weekly, DAY_CYCLE: Daily, HOUR_CYCLE: Hourly, MINUTE_CYCLE: Minute-level, CRONTAB_CYCLE: Crontab expression-based.
      */
-    cycleType?: pulumi.Input<string>;
+    cycleType?: pulumi.Input<string | undefined>;
     /**
      * Executor Group ID.
      */
-    executorGroupId?: pulumi.Input<string>;
+    executorGroupId?: pulumi.Input<string | undefined>;
     /**
      * Folder ID.
      */
-    folderId?: pulumi.Input<string>;
+    folderId?: pulumi.Input<string | undefined>;
     /**
      * Owner id.
      */
-    ownerUin?: pulumi.Input<string>;
+    ownerUin?: pulumi.Input<string | undefined>;
     /**
      * Project ID.
      */
@@ -197,33 +197,33 @@ export interface GetOpsTasksOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Data source ID.
      */
-    sourceServiceId?: pulumi.Input<string>;
+    sourceServiceId?: pulumi.Input<string | undefined>;
     /**
      * Task Status: -Y: Running, -F: Stopped, -O: Frozen, -T: Stopping, -INVALID: Invalid.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Target data source id.
      */
-    targetServiceId?: pulumi.Input<string>;
+    targetServiceId?: pulumi.Input<string | undefined>;
     /**
      * Task type Id. -20: common data sync, - 25:ETLTaskType, - 26:ETLTaskType, - 30:python, - 31:pyspark, - 34:HiveSQLTaskType, - 35:shell, - 36:SparkSQLTaskType, - 21:JDBCSQLTaskType, - 32:DLCTaskType, - 33:ImpalaTaskType, - 40:CDWTaskType, - 41:kettle, - 46:DLCSparkTaskType, -47: TiOne machine learning, - 48:TrinoTaskType, - 50:DLCPyspark39:spark, - 92:mr, -38: shell script, -70: hivesql script, -1000: common custom business.
      */
-    taskTypeId?: pulumi.Input<string>;
+    taskTypeId?: pulumi.Input<string | undefined>;
     /**
      * Time zone. defaults to UTC+8.
      */
-    timeZone?: pulumi.Input<string>;
+    timeZone?: pulumi.Input<string | undefined>;
     /**
      * Workflow ID.
      */
-    workflowId?: pulumi.Input<string>;
+    workflowId?: pulumi.Input<string | undefined>;
     /**
      * Workflow name.
      */
-    workflowName?: pulumi.Input<string>;
+    workflowName?: pulumi.Input<string | undefined>;
 }

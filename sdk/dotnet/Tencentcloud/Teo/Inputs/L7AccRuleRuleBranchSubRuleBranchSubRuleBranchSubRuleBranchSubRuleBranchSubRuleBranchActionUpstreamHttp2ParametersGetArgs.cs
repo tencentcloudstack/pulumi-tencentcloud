@@ -14,7 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
     public sealed class L7AccRuleRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchActionUpstreamHttp2ParametersGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Whether to enable http2 origin-pull. valid values: on: enable; off: disable.
+        /// Whether to enable HTTP2 origin-pull. Values: on: enable; off: disable.
         /// </summary>
         [Input("switch")]
         public Input<string>? Switch { get; set; }

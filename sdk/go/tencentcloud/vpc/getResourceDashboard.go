@@ -69,12 +69,8 @@ type GetResourceDashboardResult struct {
 }
 
 func GetResourceDashboardOutput(ctx *pulumi.Context, args GetResourceDashboardOutputArgs, opts ...pulumi.InvokeOption) GetResourceDashboardResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetResourceDashboardResultOutput, error) {
-			args := v.(GetResourceDashboardArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Vpc/getResourceDashboard:getResourceDashboard", args, GetResourceDashboardResultOutput{}, options).(GetResourceDashboardResultOutput), nil
-		}).(GetResourceDashboardResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Vpc/getResourceDashboard:getResourceDashboard", args, GetResourceDashboardResultOutput{}, options).(GetResourceDashboardResultOutput)
 }
 
 // A collection of arguments for invoking getResourceDashboard.

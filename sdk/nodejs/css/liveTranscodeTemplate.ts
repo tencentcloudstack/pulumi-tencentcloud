@@ -41,8 +41,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * css live_transcode_template can be imported using the id, e.g.
- *
+ * css liveTranscodeTemplate can be imported using the id, e.g.
  * ```sh
  * $ pulumi import tencentcloud:Css/liveTranscodeTemplate:LiveTranscodeTemplate live_transcode_template liveTranscodeTemplate_id
  * ```
@@ -242,91 +241,91 @@ export interface LiveTranscodeTemplateState {
     /**
      * default aac, not support now.
      */
-    acodec?: pulumi.Input<string>;
+    acodec?: pulumi.Input<string | undefined>;
     /**
      * high speed mode adapt bitrate, support 0 - 0.5.
      */
-    adaptBitratePercent?: pulumi.Input<number>;
+    adaptBitratePercent?: pulumi.Input<number | undefined>;
     /**
      * enable high speed mode, default 0, 1 for enable, 0 for no.
      */
-    aiTransCode?: pulumi.Input<number>;
+    aiTransCode?: pulumi.Input<number | undefined>;
     /**
      * default 0, range 0 - 500.
      */
-    audioBitrate?: pulumi.Input<number>;
+    audioBitrate?: pulumi.Input<number | undefined>;
     /**
      * base on origin bitrate if origin bitrate is lower than the setting bitrate. default 0, 1 for yes, 0 for no.
      */
-    bitrateToOrig?: pulumi.Input<number>;
+    bitrateToOrig?: pulumi.Input<number | undefined>;
     /**
      * template desc.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * DRM tracks, support AUDIO/SD/HD/UHD1/UHD2.
      */
-    drmTracks?: pulumi.Input<string>;
+    drmTracks?: pulumi.Input<string | undefined>;
     /**
      * DRM type, support fairplay/normalaes/widevine.
      */
-    drmType?: pulumi.Input<string>;
+    drmType?: pulumi.Input<string | undefined>;
     /**
      * video fps, default 0, range 0 - 60.
      */
-    fps?: pulumi.Input<number>;
+    fps?: pulumi.Input<number | undefined>;
     /**
      * base on origin fps if origin fps is lower than the setting fps. default 0, 1 for yes, 0 for no.
      */
-    fpsToOrig?: pulumi.Input<number>;
+    fpsToOrig?: pulumi.Input<number | undefined>;
     /**
      * gop of the video, second, default origin of the video, range 2 - 6.
      */
-    gop?: pulumi.Input<number>;
+    gop?: pulumi.Input<number | undefined>;
     /**
      * template height, default 0, range 0 - 3000, must be pow of 2, needed while AiTransCode = 1.
      */
-    height?: pulumi.Input<number>;
+    height?: pulumi.Input<number | undefined>;
     /**
      * base on origin height if origin height is lower than the setting height. default 0, 1 for yes, 0 for no.
      */
-    heightToOrig?: pulumi.Input<number>;
+    heightToOrig?: pulumi.Input<number | undefined>;
     /**
      * keep audio or not, default 1 for yes, 0 for no.
      */
-    needAudio?: pulumi.Input<number>;
+    needAudio?: pulumi.Input<number | undefined>;
     /**
      * keep video or not, default 1 for yes, 0 for no.
      */
-    needVideo?: pulumi.Input<number>;
+    needVideo?: pulumi.Input<number | undefined>;
     /**
      * quality of the video, default baseline, support baseline/main/high.
      */
-    profile?: pulumi.Input<string>;
+    profile?: pulumi.Input<string | undefined>;
     /**
      * roate degree, default 0, support 0/90/180/270.
      */
-    rotate?: pulumi.Input<number>;
+    rotate?: pulumi.Input<number | undefined>;
     /**
      * let the short edge as the height.
      */
-    shortEdgeAsHeight?: pulumi.Input<number>;
+    shortEdgeAsHeight?: pulumi.Input<number | undefined>;
     /**
      * template name, only support 0-9 and a-z.
      */
-    templateName?: pulumi.Input<string>;
+    templateName?: pulumi.Input<string | undefined>;
     /**
      * video codec, default origin, support h264/h265/origin.
      */
-    vcodec?: pulumi.Input<string>;
+    vcodec?: pulumi.Input<string | undefined>;
     /**
      * video bitrate, 0 for origin, range 0kbps - 8000kbps.
      */
-    videoBitrate?: pulumi.Input<number>;
+    videoBitrate?: pulumi.Input<number | undefined>;
     /**
      * template width, default 0, range 0 - 3000, must be pow of 2.
      */
-    width?: pulumi.Input<number>;
+    width?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -336,75 +335,75 @@ export interface LiveTranscodeTemplateArgs {
     /**
      * default aac, not support now.
      */
-    acodec?: pulumi.Input<string>;
+    acodec?: pulumi.Input<string | undefined>;
     /**
      * high speed mode adapt bitrate, support 0 - 0.5.
      */
-    adaptBitratePercent?: pulumi.Input<number>;
+    adaptBitratePercent?: pulumi.Input<number | undefined>;
     /**
      * enable high speed mode, default 0, 1 for enable, 0 for no.
      */
-    aiTransCode?: pulumi.Input<number>;
+    aiTransCode?: pulumi.Input<number | undefined>;
     /**
      * default 0, range 0 - 500.
      */
-    audioBitrate?: pulumi.Input<number>;
+    audioBitrate?: pulumi.Input<number | undefined>;
     /**
      * base on origin bitrate if origin bitrate is lower than the setting bitrate. default 0, 1 for yes, 0 for no.
      */
-    bitrateToOrig?: pulumi.Input<number>;
+    bitrateToOrig?: pulumi.Input<number | undefined>;
     /**
      * template desc.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * DRM tracks, support AUDIO/SD/HD/UHD1/UHD2.
      */
-    drmTracks?: pulumi.Input<string>;
+    drmTracks?: pulumi.Input<string | undefined>;
     /**
      * DRM type, support fairplay/normalaes/widevine.
      */
-    drmType?: pulumi.Input<string>;
+    drmType?: pulumi.Input<string | undefined>;
     /**
      * video fps, default 0, range 0 - 60.
      */
-    fps?: pulumi.Input<number>;
+    fps?: pulumi.Input<number | undefined>;
     /**
      * base on origin fps if origin fps is lower than the setting fps. default 0, 1 for yes, 0 for no.
      */
-    fpsToOrig?: pulumi.Input<number>;
+    fpsToOrig?: pulumi.Input<number | undefined>;
     /**
      * gop of the video, second, default origin of the video, range 2 - 6.
      */
-    gop?: pulumi.Input<number>;
+    gop?: pulumi.Input<number | undefined>;
     /**
      * template height, default 0, range 0 - 3000, must be pow of 2, needed while AiTransCode = 1.
      */
-    height?: pulumi.Input<number>;
+    height?: pulumi.Input<number | undefined>;
     /**
      * base on origin height if origin height is lower than the setting height. default 0, 1 for yes, 0 for no.
      */
-    heightToOrig?: pulumi.Input<number>;
+    heightToOrig?: pulumi.Input<number | undefined>;
     /**
      * keep audio or not, default 1 for yes, 0 for no.
      */
-    needAudio?: pulumi.Input<number>;
+    needAudio?: pulumi.Input<number | undefined>;
     /**
      * keep video or not, default 1 for yes, 0 for no.
      */
-    needVideo?: pulumi.Input<number>;
+    needVideo?: pulumi.Input<number | undefined>;
     /**
      * quality of the video, default baseline, support baseline/main/high.
      */
-    profile?: pulumi.Input<string>;
+    profile?: pulumi.Input<string | undefined>;
     /**
      * roate degree, default 0, support 0/90/180/270.
      */
-    rotate?: pulumi.Input<number>;
+    rotate?: pulumi.Input<number | undefined>;
     /**
      * let the short edge as the height.
      */
-    shortEdgeAsHeight?: pulumi.Input<number>;
+    shortEdgeAsHeight?: pulumi.Input<number | undefined>;
     /**
      * template name, only support 0-9 and a-z.
      */
@@ -412,7 +411,7 @@ export interface LiveTranscodeTemplateArgs {
     /**
      * video codec, default origin, support h264/h265/origin.
      */
-    vcodec?: pulumi.Input<string>;
+    vcodec?: pulumi.Input<string | undefined>;
     /**
      * video bitrate, 0 for origin, range 0kbps - 8000kbps.
      */
@@ -420,5 +419,5 @@ export interface LiveTranscodeTemplateArgs {
     /**
      * template width, default 0, range 0 - 3000, must be pow of 2.
      */
-    width?: pulumi.Input<number>;
+    width?: pulumi.Input<number | undefined>;
 }

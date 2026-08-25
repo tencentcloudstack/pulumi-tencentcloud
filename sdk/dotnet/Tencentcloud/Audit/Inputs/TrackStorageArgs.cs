@@ -14,6 +14,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit.Inputs
     public sealed class TrackStorageArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Whether to compress. `1`: compress, `2`: do not compress.
+        /// </summary>
+        [Input("compress")]
+        public Input<int>? Compress { get; set; }
+
+        /// <summary>
         /// Designated to store user ID.
         /// </summary>
         [Input("storageAccountId")]
@@ -44,7 +50,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit.Inputs
         public Input<string> StorageRegion { get; set; } = null!;
 
         /// <summary>
-        /// Track Storage type, optional:- `Cos`- `Cls`.
+        /// Track Storage type, optional:- `Cos`- `Cls`- `Ckafka`.
         /// </summary>
         [Input("storageType", required: true)]
         public Input<string> StorageType { get; set; } = null!;

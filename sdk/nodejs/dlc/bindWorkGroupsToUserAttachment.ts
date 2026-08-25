@@ -98,7 +98,7 @@ export interface BindWorkGroupsToUserAttachmentState {
     /**
      * Information about bound working groups and users.
      */
-    addInfo?: pulumi.Input<inputs.Dlc.BindWorkGroupsToUserAttachmentAddInfo>;
+    addInfo?: pulumi.Input<inputs.Dlc.BindWorkGroupsToUserAttachmentAddInfo | undefined>;
 }
 
 /**

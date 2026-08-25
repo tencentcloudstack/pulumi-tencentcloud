@@ -104,12 +104,8 @@ type GetMonitorsResult struct {
 }
 
 func GetMonitorsOutput(ctx *pulumi.Context, args GetMonitorsOutputArgs, opts ...pulumi.InvokeOption) GetMonitorsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetMonitorsResultOutput, error) {
-			args := v.(GetMonitorsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Igtm/getMonitors:getMonitors", args, GetMonitorsResultOutput{}, options).(GetMonitorsResultOutput), nil
-		}).(GetMonitorsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Igtm/getMonitors:getMonitors", args, GetMonitorsResultOutput{}, options).(GetMonitorsResultOutput)
 }
 
 // A collection of arguments for invoking getMonitors.

@@ -21,6 +21,8 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "tencentcloud:Cbs/copySnapshotCrossRegion:CopySnapshotCrossRegion":
+		r = &CopySnapshotCrossRegion{}
 	case "tencentcloud:Cbs/diskBackup:DiskBackup":
 		r = &DiskBackup{}
 	case "tencentcloud:Cbs/diskBackupRollbackOperation:DiskBackupRollbackOperation":
@@ -54,6 +56,11 @@ func init() {
 	if err != nil {
 		version = semver.Version{Major: 1}
 	}
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cbs/copySnapshotCrossRegion",
+		&module{version},
+	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Cbs/diskBackup",

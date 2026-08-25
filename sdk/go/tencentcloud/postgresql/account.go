@@ -37,7 +37,7 @@ import (
 //				availabilityZone = param
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
@@ -45,10 +45,10 @@ import (
 //				return err
 //			}
 //			// create vpc subnet
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("subnet"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("10.0.20.0/28"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -60,8 +60,8 @@ import (
 //				Name:             pulumi.String("example"),
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
-//				VpcId:            vpc.ID(),
-//				SubnetId:         subnet.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 //				DbMajorVersion:   pulumi.String("10"),
 //				EngineVersion:    pulumi.String("10.23"),
 //				RootUser:         pulumi.String("root123"),
@@ -80,7 +80,7 @@ import (
 //			}
 //			// create account
 //			_, err = postgresql.NewAccount(ctx, "example", &postgresql.AccountArgs{
-//				DbInstanceId: example.ID(),
+//				DbInstanceId: example.ID().ToIDOutput().ToStringOutput(),
 //				UserName:     pulumi.String("tf_example"),
 //				Password:     pulumi.String("Password@123"),
 //				Type:         pulumi.String("normal"),

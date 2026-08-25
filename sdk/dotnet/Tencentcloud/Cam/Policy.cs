@@ -42,6 +42,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// }
     /// ",
     ///         Description = "tf_test",
+    ///         Tags = 
+    ///         {
+    ///             { "createBy", "Terraform" },
+    ///             { "env", "test" },
+    ///         },
     ///     });
     /// 
     /// });
@@ -70,6 +75,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         [Output("description")]
         public Output<string?> Description { get; private set; } = null!;
 
+        /// <summary>
+        /// Document of the CAM policy. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in terraform: 1. The elements in JSON claimed supporting two types as `String` and `Array` only support type `Array`; 2. Terraform does not support the `Root` syntax, when it appears, it must be replaced with the uin it stands for.
+        /// </summary>
         [Output("document")]
         public Output<string> Document { get; private set; } = null!;
 
@@ -78,6 +86,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
+
+        /// <summary>
+        /// Instance tag.
+        /// </summary>
+        [Output("tags")]
+        public Output<ImmutableDictionary<string, string>?> Tags { get; private set; } = null!;
 
         /// <summary>
         /// Type of the policy strategy. Valid values: `1`, `2`.  `1` means customer strategy and `2` means preset strategy.
@@ -144,6 +158,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         [Input("description")]
         public Input<string>? Description { get; set; }
 
+        /// <summary>
+        /// Document of the CAM policy. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in terraform: 1. The elements in JSON claimed supporting two types as `String` and `Array` only support type `Array`; 2. Terraform does not support the `Root` syntax, when it appears, it must be replaced with the uin it stands for.
+        /// </summary>
         [Input("document", required: true)]
         public Input<string> Document { get; set; } = null!;
 
@@ -152,6 +169,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        [Input("tags")]
+        private InputMap<string>? _tags;
+
+        /// <summary>
+        /// Instance tag.
+        /// </summary>
+        public InputMap<string> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<string>());
+            set => _tags = value;
+        }
 
         public PolicyArgs()
         {
@@ -173,6 +202,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         [Input("description")]
         public Input<string>? Description { get; set; }
 
+        /// <summary>
+        /// Document of the CAM policy. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in terraform: 1. The elements in JSON claimed supporting two types as `String` and `Array` only support type `Array`; 2. Terraform does not support the `Root` syntax, when it appears, it must be replaced with the uin it stands for.
+        /// </summary>
         [Input("document")]
         public Input<string>? Document { get; set; }
 
@@ -181,6 +213,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        [Input("tags")]
+        private InputMap<string>? _tags;
+
+        /// <summary>
+        /// Instance tag.
+        /// </summary>
+        public InputMap<string> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<string>());
+            set => _tags = value;
+        }
 
         /// <summary>
         /// Type of the policy strategy. Valid values: `1`, `2`.  `1` means customer strategy and `2` means preset strategy.

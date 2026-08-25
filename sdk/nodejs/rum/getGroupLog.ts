@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const groupLog = tencentcloud.Rum.getGroupLog({
+ * const groupLog = tencentcloud.rum.getGroupLog({
  *     orderBy: "desc",
  *     startTime: "1625444040000",
  *     query: "id:123 AND type:\"log\"",
@@ -99,7 +99,7 @@ export interface GetGroupLogResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const groupLog = tencentcloud.Rum.getGroupLog({
+ * const groupLog = tencentcloud.rum.getGroupLog({
  *     orderBy: "desc",
  *     startTime: "1625444040000",
  *     query: "id:123 AND type:\"log\"",
@@ -149,7 +149,7 @@ export interface GetGroupLogOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Start time but is represented using a timestamp in milliseconds.
      */

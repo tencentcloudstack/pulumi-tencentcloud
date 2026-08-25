@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "cdb",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -129,6 +129,40 @@ import * as utilities from "../utilities";
  *     rotationFrequency: 30,
  *     tags: {
  *         createdBy: "terraform",
+ *     },
+ * });
+ * ```
+ *
+ * ### Ssm secret for mongodb
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.ssm.ProductSecret("example", {
+ *     secretName: "tf-mongodb-example",
+ *     userNamePrefix: "ssm",
+ *     productName: "MongoDB",
+ *     instanceId: "cmgo-xxxxxx",
+ *     domains: ["%"],
+ *     privilegesLists: [
+ *         {
+ *             privilegeName: "GlobalPrivileges",
+ *             privileges: ["READ_ONLY"],
+ *         },
+ *         {
+ *             privilegeName: "DatabasePrivileges",
+ *             database: "admin",
+ *             privileges: ["READ_WRITE"],
+ *         },
+ *     ],
+ *     description: "MongoDB secret",
+ *     status: "Enabled",
+ *     enableRotation: true,
+ *     rotationBeginTime: "2026-02-04 00:00:00",
+ *     rotationFrequency: 30,
+ *     tags: {
+ *         env: "test",
  *     },
  * });
  * ```
@@ -298,63 +332,63 @@ export interface ProductSecretState {
     /**
      * Credential creation time in UNIX timestamp format.
      */
-    createTime?: pulumi.Input<number>;
+    createTime?: pulumi.Input<number | undefined>;
     /**
      * Description, which is used to describe the purpose in detail and can contain up to 2,048 bytes.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Domain name of the account in the form of IP. You can enter `%`.
      */
-    domains?: pulumi.Input<pulumi.Input<string>[]>;
+    domains?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Specifies whether to enable rotation, when secret status is `Disabled`, rotation will be disabled. `True` - enable, `False` - do not enable. If this parameter is not specified, `False` will be used by default.
      */
-    enableRotation?: pulumi.Input<boolean>;
+    enableRotation?: pulumi.Input<boolean | undefined>;
     /**
      * Tencent Cloud service instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Specifies the KMS CMK that encrypts the credential. If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.
      */
-    kmsKeyId?: pulumi.Input<string>;
+    kmsKeyId?: pulumi.Input<string | undefined>;
     /**
      * List of permissions that need to be granted when the credential is bound to a Tencent Cloud service.
      */
-    privilegesLists?: pulumi.Input<pulumi.Input<inputs.Ssm.ProductSecretPrivilegesList>[]>;
+    privilegesLists?: pulumi.Input<pulumi.Input<inputs.Ssm.ProductSecretPrivilegesList>[] | undefined>;
     /**
      * Name of the Tencent Cloud service bound to the credential, such as `Mysql`, `Tdsql-mysql`, `Tdsql_C_Mysql`. you can use dataSource `tencentcloud.Ssm.getProducts` to query supported products.
      */
-    productName?: pulumi.Input<string>;
+    productName?: pulumi.Input<string | undefined>;
     /**
      * User-Defined rotation start time in the format of 2006-01-02 15:04:05.When `EnableRotation` is `True`, this parameter is required.
      */
-    rotationBeginTime?: pulumi.Input<string>;
+    rotationBeginTime?: pulumi.Input<string | undefined>;
     /**
      * Rotation frequency in days. Default value: 1 day.
      */
-    rotationFrequency?: pulumi.Input<number>;
+    rotationFrequency?: pulumi.Input<number | undefined>;
     /**
      * Credential name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens, and underscores and must begin with a letter or digit.
      */
-    secretName?: pulumi.Input<string>;
+    secretName?: pulumi.Input<string | undefined>;
     /**
      * `0`: user-defined secret. `1`: Tencent Cloud services secret. `2`: SSH key secret. `3`: Tencent Cloud API key secret. Note: this field may return `null`, indicating that no valid values can be obtained.
      */
-    secretType?: pulumi.Input<number>;
+    secretType?: pulumi.Input<number | undefined>;
     /**
      * Enable or Disable Secret. Valid values is `Enabled` or `Disabled`. Default is `Enabled`.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Tags of secret.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Prefix of the user account name, which is specified by you and can contain up to 8 characters.Supported character sets include:Digits: [0, 9].Lowercase letters: [a, z].Uppercase letters: [A, Z].Special symbols: underscore.The prefix must begin with a letter.
      */
-    userNamePrefix?: pulumi.Input<string>;
+    userNamePrefix?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -364,7 +398,7 @@ export interface ProductSecretArgs {
     /**
      * Description, which is used to describe the purpose in detail and can contain up to 2,048 bytes.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Domain name of the account in the form of IP. You can enter `%`.
      */
@@ -372,7 +406,7 @@ export interface ProductSecretArgs {
     /**
      * Specifies whether to enable rotation, when secret status is `Disabled`, rotation will be disabled. `True` - enable, `False` - do not enable. If this parameter is not specified, `False` will be used by default.
      */
-    enableRotation?: pulumi.Input<boolean>;
+    enableRotation?: pulumi.Input<boolean | undefined>;
     /**
      * Tencent Cloud service instance ID.
      */
@@ -380,7 +414,7 @@ export interface ProductSecretArgs {
     /**
      * Specifies the KMS CMK that encrypts the credential. If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.You can also specify a custom KMS CMK created in the same region for encryption.
      */
-    kmsKeyId?: pulumi.Input<string>;
+    kmsKeyId?: pulumi.Input<string | undefined>;
     /**
      * List of permissions that need to be granted when the credential is bound to a Tencent Cloud service.
      */
@@ -392,11 +426,11 @@ export interface ProductSecretArgs {
     /**
      * User-Defined rotation start time in the format of 2006-01-02 15:04:05.When `EnableRotation` is `True`, this parameter is required.
      */
-    rotationBeginTime?: pulumi.Input<string>;
+    rotationBeginTime?: pulumi.Input<string | undefined>;
     /**
      * Rotation frequency in days. Default value: 1 day.
      */
-    rotationFrequency?: pulumi.Input<number>;
+    rotationFrequency?: pulumi.Input<number | undefined>;
     /**
      * Credential name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens, and underscores and must begin with a letter or digit.
      */
@@ -404,11 +438,11 @@ export interface ProductSecretArgs {
     /**
      * Enable or Disable Secret. Valid values is `Enabled` or `Disabled`. Default is `Enabled`.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Tags of secret.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Prefix of the user account name, which is specified by you and can contain up to 8 characters.Supported character sets include:Digits: [0, 9].Lowercase letters: [a, z].Uppercase letters: [A, Z].Special symbols: underscore.The prefix must begin with a letter.
      */

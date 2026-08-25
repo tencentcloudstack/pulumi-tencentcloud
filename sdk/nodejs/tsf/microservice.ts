@@ -118,19 +118,19 @@ export interface MicroserviceState {
     /**
      * Microservice description information.
      */
-    microserviceDesc?: pulumi.Input<string>;
+    microserviceDesc?: pulumi.Input<string | undefined>;
     /**
      * Microservice name.
      */
-    microserviceName?: pulumi.Input<string>;
+    microserviceName?: pulumi.Input<string | undefined>;
     /**
      * Namespace ID.
      */
-    namespaceId?: pulumi.Input<string>;
+    namespaceId?: pulumi.Input<string | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 /**
@@ -140,7 +140,7 @@ export interface MicroserviceArgs {
     /**
      * Microservice description information.
      */
-    microserviceDesc?: pulumi.Input<string>;
+    microserviceDesc?: pulumi.Input<string | undefined>;
     /**
      * Microservice name.
      */
@@ -152,5 +152,5 @@ export interface MicroserviceArgs {
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

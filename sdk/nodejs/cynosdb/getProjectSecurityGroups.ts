@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const projectSecurityGroups = tencentcloud.Cynosdb.getProjectSecurityGroups({
+ * const projectSecurityGroups = tencentcloud.cynosdb.getProjectSecurityGroups({
  *     projectId: 1250480,
  *     searchKey: "自定义模版",
  * });
@@ -77,7 +77,7 @@ export interface GetProjectSecurityGroupsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const projectSecurityGroups = tencentcloud.Cynosdb.getProjectSecurityGroups({
+ * const projectSecurityGroups = tencentcloud.cynosdb.getProjectSecurityGroups({
  *     projectId: 1250480,
  *     searchKey: "自定义模版",
  * });
@@ -100,13 +100,13 @@ export interface GetProjectSecurityGroupsOutputArgs {
     /**
      * Project ID.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Search Keywords.
      */
-    searchKey?: pulumi.Input<string>;
+    searchKey?: pulumi.Input<string | undefined>;
 }

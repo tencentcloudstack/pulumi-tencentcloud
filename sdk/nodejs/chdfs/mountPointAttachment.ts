@@ -24,7 +24,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * chdfs mount_point_attachment can be imported using the id, e.g.
+ * chdfs mountPointAttachment can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Chdfs/mountPointAttachment:MountPointAttachment mount_point_attachment mount_point_id
@@ -105,11 +105,11 @@ export interface MountPointAttachmentState {
     /**
      * associate access group id.
      */
-    accessGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    accessGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * associate mount point.
      */
-    mountPointId?: pulumi.Input<string>;
+    mountPointId?: pulumi.Input<string | undefined>;
 }
 
 /**

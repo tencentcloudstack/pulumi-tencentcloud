@@ -252,6 +252,48 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ### alarm policy with hierarchical notices
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const foo = new tencentcloud.monitor.AlarmPolicy("foo", {
+ *     policyName: "tf-policy",
+ *     monitorType: "MT_QCE",
+ *     enable: 1,
+ *     projectId: 0,
+ *     namespace: "cvm_device",
+ *     conditions: {
+ *         isUnionRule: 1,
+ *         rules: [{
+ *             metricName: "CpuUsage",
+ *             period: 60,
+ *             operator: "ge",
+ *             value: "89.9",
+ *             continuePeriod: 1,
+ *             noticeFrequency: 3600,
+ *             isPowerNotice: 0,
+ *         }],
+ *     },
+ *     eventConditions: [{
+ *         metricName: "ping_unreachable",
+ *     }],
+ *     noticeIds: [fooTencentcloudMonitorAlarmNotice.id],
+ *     hierarchicalNotices: [{
+ *         noticeId: fooTencentcloudMonitorAlarmNotice.id,
+ *         classifications: [
+ *             "Remind",
+ *             "Serious",
+ *         ],
+ *     }],
+ *     noticeContentTmplBindInfos: [{
+ *         contentTmplId: "tmpl-xxxx",
+ *         noticeId: fooTencentcloudMonitorAlarmNotice.id,
+ *     }],
+ * });
+ * ```
+ *
  * ## Import
  *
  * Alarm policy instance can be imported, e.g.
@@ -317,6 +359,10 @@ export class AlarmPolicy extends pulumi.CustomResource {
      */
     declare public readonly groupBies: pulumi.Output<string[] | undefined>;
     /**
+     * Alarm hierarchical notice rules configuration.
+     */
+    declare public readonly hierarchicalNotices: pulumi.Output<outputs.Monitor.AlarmPolicyHierarchicalNotice[]>;
+    /**
      * The type of monitor.
      */
     declare public readonly monitorType: pulumi.Output<string>;
@@ -325,9 +371,13 @@ export class AlarmPolicy extends pulumi.CustomResource {
      */
     declare public readonly namespace: pulumi.Output<string>;
     /**
+     * Notice content template binding info.
+     */
+    declare public readonly noticeContentTmplBindInfos: pulumi.Output<outputs.Monitor.AlarmPolicyNoticeContentTmplBindInfo[]>;
+    /**
      * List of notification rule IDs.
      */
-    declare public readonly noticeIds: pulumi.Output<string[] | undefined>;
+    declare public readonly noticeIds: pulumi.Output<string[]>;
     /**
      * The name of policy.
      */
@@ -373,8 +423,10 @@ export class AlarmPolicy extends pulumi.CustomResource {
             resourceInputs["eventConditions"] = state?.eventConditions;
             resourceInputs["filter"] = state?.filter;
             resourceInputs["groupBies"] = state?.groupBies;
+            resourceInputs["hierarchicalNotices"] = state?.hierarchicalNotices;
             resourceInputs["monitorType"] = state?.monitorType;
             resourceInputs["namespace"] = state?.namespace;
+            resourceInputs["noticeContentTmplBindInfos"] = state?.noticeContentTmplBindInfos;
             resourceInputs["noticeIds"] = state?.noticeIds;
             resourceInputs["policyName"] = state?.policyName;
             resourceInputs["policyTags"] = state?.policyTags;
@@ -399,8 +451,10 @@ export class AlarmPolicy extends pulumi.CustomResource {
             resourceInputs["eventConditions"] = args?.eventConditions;
             resourceInputs["filter"] = args?.filter;
             resourceInputs["groupBies"] = args?.groupBies;
+            resourceInputs["hierarchicalNotices"] = args?.hierarchicalNotices;
             resourceInputs["monitorType"] = args?.monitorType;
             resourceInputs["namespace"] = args?.namespace;
+            resourceInputs["noticeContentTmplBindInfos"] = args?.noticeContentTmplBindInfos;
             resourceInputs["noticeIds"] = args?.noticeIds;
             resourceInputs["policyName"] = args?.policyName;
             resourceInputs["policyTags"] = args?.policyTags;
@@ -422,67 +476,75 @@ export interface AlarmPolicyState {
     /**
      * A list of metric trigger condition.
      */
-    conditions?: pulumi.Input<inputs.Monitor.AlarmPolicyConditions>;
+    conditions?: pulumi.Input<inputs.Monitor.AlarmPolicyConditions | undefined>;
     /**
      * ID of trigger condition template.
      */
-    conditonTemplateId?: pulumi.Input<number>;
+    conditonTemplateId?: pulumi.Input<number | undefined>;
     /**
      * The alarm policy create time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable, default is `1`.
      */
-    enable?: pulumi.Input<number>;
+    enable?: pulumi.Input<number | undefined>;
     /**
      * A list of event trigger condition.
      */
-    eventConditions?: pulumi.Input<pulumi.Input<inputs.Monitor.AlarmPolicyEventCondition>[]>;
+    eventConditions?: pulumi.Input<pulumi.Input<inputs.Monitor.AlarmPolicyEventCondition>[] | undefined>;
     /**
      * Global filters.
      */
-    filter?: pulumi.Input<inputs.Monitor.AlarmPolicyFilter>;
+    filter?: pulumi.Input<inputs.Monitor.AlarmPolicyFilter | undefined>;
     /**
      * Aggregate dimension list, specify which dimension keys to use for group by.
      */
-    groupBies?: pulumi.Input<pulumi.Input<string>[]>;
+    groupBies?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
+     * Alarm hierarchical notice rules configuration.
+     */
+    hierarchicalNotices?: pulumi.Input<pulumi.Input<inputs.Monitor.AlarmPolicyHierarchicalNotice>[] | undefined>;
     /**
      * The type of monitor.
      */
-    monitorType?: pulumi.Input<string>;
+    monitorType?: pulumi.Input<string | undefined>;
     /**
      * The type of alarm.
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
+    /**
+     * Notice content template binding info.
+     */
+    noticeContentTmplBindInfos?: pulumi.Input<pulumi.Input<inputs.Monitor.AlarmPolicyNoticeContentTmplBindInfo>[] | undefined>;
     /**
      * List of notification rule IDs.
      */
-    noticeIds?: pulumi.Input<pulumi.Input<string>[]>;
+    noticeIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The name of policy.
      */
-    policyName?: pulumi.Input<string>;
+    policyName?: pulumi.Input<string | undefined>;
     /**
      * Policy tag to bind object.
      */
-    policyTags?: pulumi.Input<pulumi.Input<inputs.Monitor.AlarmPolicyPolicyTag>[]>;
+    policyTags?: pulumi.Input<pulumi.Input<inputs.Monitor.AlarmPolicyPolicyTag>[] | undefined>;
     /**
      * Project ID. For products with different projects, a value other than -1 must be passed in.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * The remark of policy group.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Triggered task list.
      */
-    triggerTasks?: pulumi.Input<pulumi.Input<inputs.Monitor.AlarmPolicyTriggerTask>[]>;
+    triggerTasks?: pulumi.Input<pulumi.Input<inputs.Monitor.AlarmPolicyTriggerTask>[] | undefined>;
     /**
      * The alarm policy update time.
      */
-    updateTime?: pulumi.Input<string>;
+    updateTime?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -492,27 +554,31 @@ export interface AlarmPolicyArgs {
     /**
      * A list of metric trigger condition.
      */
-    conditions?: pulumi.Input<inputs.Monitor.AlarmPolicyConditions>;
+    conditions?: pulumi.Input<inputs.Monitor.AlarmPolicyConditions | undefined>;
     /**
      * ID of trigger condition template.
      */
-    conditonTemplateId?: pulumi.Input<number>;
+    conditonTemplateId?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable, default is `1`.
      */
-    enable?: pulumi.Input<number>;
+    enable?: pulumi.Input<number | undefined>;
     /**
      * A list of event trigger condition.
      */
-    eventConditions?: pulumi.Input<pulumi.Input<inputs.Monitor.AlarmPolicyEventCondition>[]>;
+    eventConditions?: pulumi.Input<pulumi.Input<inputs.Monitor.AlarmPolicyEventCondition>[] | undefined>;
     /**
      * Global filters.
      */
-    filter?: pulumi.Input<inputs.Monitor.AlarmPolicyFilter>;
+    filter?: pulumi.Input<inputs.Monitor.AlarmPolicyFilter | undefined>;
     /**
      * Aggregate dimension list, specify which dimension keys to use for group by.
      */
-    groupBies?: pulumi.Input<pulumi.Input<string>[]>;
+    groupBies?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
+     * Alarm hierarchical notice rules configuration.
+     */
+    hierarchicalNotices?: pulumi.Input<pulumi.Input<inputs.Monitor.AlarmPolicyHierarchicalNotice>[] | undefined>;
     /**
      * The type of monitor.
      */
@@ -522,9 +588,13 @@ export interface AlarmPolicyArgs {
      */
     namespace: pulumi.Input<string>;
     /**
+     * Notice content template binding info.
+     */
+    noticeContentTmplBindInfos?: pulumi.Input<pulumi.Input<inputs.Monitor.AlarmPolicyNoticeContentTmplBindInfo>[] | undefined>;
+    /**
      * List of notification rule IDs.
      */
-    noticeIds?: pulumi.Input<pulumi.Input<string>[]>;
+    noticeIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The name of policy.
      */
@@ -532,17 +602,17 @@ export interface AlarmPolicyArgs {
     /**
      * Policy tag to bind object.
      */
-    policyTags?: pulumi.Input<pulumi.Input<inputs.Monitor.AlarmPolicyPolicyTag>[]>;
+    policyTags?: pulumi.Input<pulumi.Input<inputs.Monitor.AlarmPolicyPolicyTag>[] | undefined>;
     /**
      * Project ID. For products with different projects, a value other than -1 must be passed in.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * The remark of policy group.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Triggered task list.
      */
-    triggerTasks?: pulumi.Input<pulumi.Input<inputs.Monitor.AlarmPolicyTriggerTask>[]>;
+    triggerTasks?: pulumi.Input<pulumi.Input<inputs.Monitor.AlarmPolicyTriggerTask>[] | undefined>;
 }

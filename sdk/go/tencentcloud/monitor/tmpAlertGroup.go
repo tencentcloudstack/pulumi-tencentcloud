@@ -11,7 +11,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a monitor tmpAlertGroup
+// Provides a resource to create a monitor tmp alert group
 //
 // ## Example Usage
 //
@@ -35,15 +35,15 @@ import (
 //			if param := cfg.Get("availabilityZone"); param != "" {
 //				availabilityZone = param
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("tf_monitor_vpc"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("tf_monitor_subnet"),
 //				CidrBlock:        pulumi.String("10.0.1.0/24"),
@@ -53,8 +53,8 @@ import (
 //			}
 //			example, err := monitor.NewTmpInstance(ctx, "example", &monitor.TmpInstanceArgs{
 //				InstanceName:      pulumi.String("tf-tmp-instance"),
-//				VpcId:             vpc.ID(),
-//				SubnetId:          subnet.ID(),
+//				VpcId:             vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:          subnet2.ID().ToIDOutput().ToStringOutput(),
 //				DataRetentionTime: pulumi.Int(30),
 //				Zone:              pulumi.String(availabilityZone),
 //				Tags: pulumi.StringMap{
@@ -66,7 +66,7 @@ import (
 //			}
 //			_, err = monitor.NewTmpAlertGroup(ctx, "example", &monitor.TmpAlertGroupArgs{
 //				GroupName:      pulumi.String("tf-example"),
-//				InstanceId:     example.ID(),
+//				InstanceId:     example.ID().ToIDOutput().ToStringOutput(),
 //				RepeatInterval: pulumi.String("5m"),
 //				CustomReceiver: &monitor.TmpAlertGroupCustomReceiverArgs{
 //					Type: pulumi.String("amp"),
@@ -98,7 +98,7 @@ import (
 //
 // ## Import
 //
-// monitor tmp_alert_group can be imported using the id, e.g.
+// monitor tmp alert group can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Monitor/tmpAlertGroup:TmpAlertGroup example prom-34qkzwvs#alert-rfkkr6cw

@@ -34,8 +34,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     /// 
     /// ## Import
     /// 
-    /// mariadb log_file_retention_period can be imported using the id, e.g.
-    /// 
+    /// mariadb LogFileRetentionPeriod can be imported using the id, e.g.
     /// ```sh
     /// $ pulumi import tencentcloud:Mariadb/logFileRetentionPeriod:LogFileRetentionPeriod log_file_retention_period tdsql-4pzs5b67
     /// ```

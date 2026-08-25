@@ -69,12 +69,8 @@ type GetInstanceByCertIdResult struct {
 }
 
 func GetInstanceByCertIdOutput(ctx *pulumi.Context, args GetInstanceByCertIdOutputArgs, opts ...pulumi.InvokeOption) GetInstanceByCertIdResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstanceByCertIdResultOutput, error) {
-			args := v.(GetInstanceByCertIdArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Clb/getInstanceByCertId:getInstanceByCertId", args, GetInstanceByCertIdResultOutput{}, options).(GetInstanceByCertIdResultOutput), nil
-		}).(GetInstanceByCertIdResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Clb/getInstanceByCertId:getInstanceByCertId", args, GetInstanceByCertIdResultOutput{}, options).(GetInstanceByCertIdResultOutput)
 }
 
 // A collection of arguments for invoking getInstanceByCertId.

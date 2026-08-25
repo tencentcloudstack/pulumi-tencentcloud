@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const diagDbInstances = tencentcloud.Dbbrain.getDiagDbInstances({
+ * const diagDbInstances = tencentcloud.dbbrain.getDiagDbInstances({
  *     isSupported: true,
  *     product: "mysql",
  *     instanceNames: ["keep_preset_mysql"],
@@ -102,7 +102,7 @@ export interface GetDiagDbInstancesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const diagDbInstances = tencentcloud.Dbbrain.getDiagDbInstances({
+ * const diagDbInstances = tencentcloud.dbbrain.getDiagDbInstances({
  *     isSupported: true,
  *     product: "mysql",
  *     instanceNames: ["keep_preset_mysql"],
@@ -128,11 +128,11 @@ export interface GetDiagDbInstancesOutputArgs {
     /**
      * query based on the instance ID condition.
      */
-    instanceIds?: pulumi.Input<pulumi.Input<string>[]>;
+    instanceIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * query based on the instance name condition.
      */
-    instanceNames?: pulumi.Input<pulumi.Input<string>[]>;
+    instanceNames?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * whether it is an instance supported by DBbrain, always pass `true`.
      */
@@ -144,9 +144,9 @@ export interface GetDiagDbInstancesOutputArgs {
     /**
      * query based on geographical conditions.
      */
-    regions?: pulumi.Input<pulumi.Input<string>[]>;
+    regions?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

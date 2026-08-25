@@ -2,6 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -15,26 +17,55 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const config = new pulumi.Config();
- * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
- * const vpc = tencentcloud.Vpc.getSubnets({
- *     isDefault: true,
- *     availabilityZone: availabilityZone,
- * });
- * const vpcId = vpc.then(vpc => vpc.instanceLists?.[0]?.vpcId);
- * const subnetId = vpc.then(vpc => vpc.instanceLists?.[0]?.subnetId);
  * const example = new tencentcloud.tcaplus.Cluster("example", {
  *     idlType: "PROTO",
  *     clusterName: "tf_example_tcaplus_cluster",
- *     vpcId: vpcId,
- *     subnetId: subnetId,
- *     password: "your_pw_123111",
+ *     vpcId: "vpc-i5yyodl9",
+ *     subnetId: "subnet-hhi88a58",
+ *     password: "Password@2026",
  *     oldPasswordExpireLast: 3600,
  * });
  * const exampleTablegroup = new tencentcloud.tcaplus.Tablegroup("example", {
  *     clusterId: example.id,
  *     tablegroupName: "tf_example_group_name",
+ *     resourceTags: [{
+ *         tagKey: "CreatedBy",
+ *         tagValue: "Terraform",
+ *     }],
  * });
+ * ```
+ *
+ * ### Create a tcaplusdb table group with user-specified table group id
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.tcaplus.Cluster("example", {
+ *     idlType: "PROTO",
+ *     clusterName: "tf_example_tcaplus_cluster",
+ *     vpcId: "vpc-i5yyodl9",
+ *     subnetId: "subnet-hhi88a58",
+ *     password: "Password@2026",
+ *     oldPasswordExpireLast: 3600,
+ * });
+ * const exampleTablegroup = new tencentcloud.tcaplus.Tablegroup("example", {
+ *     clusterId: example.id,
+ *     tablegroupName: "tf_example_group_name",
+ *     tableGroupId: "109",
+ *     resourceTags: [{
+ *         tagKey: "CreatedBy",
+ *         tagValue: "Terraform",
+ *     }],
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * TcaplusDB table group can be imported using the clusterId:tableGroupId, e.g.
+ *
+ * ```sh
+ * $ pulumi import tencentcloud:Tcaplus/tablegroup:Tablegroup example 5516511420:52
  * ```
  */
 export class Tablegroup extends pulumi.CustomResource {
@@ -74,11 +105,19 @@ export class Tablegroup extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly createTime: pulumi.Output<string>;
     /**
+     * Set of table group tags.
+     */
+    declare public readonly resourceTags: pulumi.Output<outputs.Tcaplus.TablegroupResourceTag[] | undefined>;
+    /**
      * Number of tables.
      */
     declare public /*out*/ readonly tableCount: pulumi.Output<number>;
     /**
-     * Name of the TcaplusDB table group. Name length should be between 1 and 30.
+     * ID of the TcaplusDB table group, can be user-specified (must be unique within the cluster) or auto-incremented by the API when not set. Immutable after creation.
+     */
+    declare public readonly tableGroupId: pulumi.Output<string>;
+    /**
+     * Table group name; may consist of Chinese characters, English letters, or numeric characters, with a maximum length of 32 characters.
      */
     declare public readonly tablegroupName: pulumi.Output<string>;
     /**
@@ -101,7 +140,9 @@ export class Tablegroup extends pulumi.CustomResource {
             const state = argsOrState as TablegroupState | undefined;
             resourceInputs["clusterId"] = state?.clusterId;
             resourceInputs["createTime"] = state?.createTime;
+            resourceInputs["resourceTags"] = state?.resourceTags;
             resourceInputs["tableCount"] = state?.tableCount;
+            resourceInputs["tableGroupId"] = state?.tableGroupId;
             resourceInputs["tablegroupName"] = state?.tablegroupName;
             resourceInputs["totalSize"] = state?.totalSize;
         } else {
@@ -113,6 +154,8 @@ export class Tablegroup extends pulumi.CustomResource {
                 throw new Error("Missing required property 'tablegroupName'");
             }
             resourceInputs["clusterId"] = args?.clusterId;
+            resourceInputs["resourceTags"] = args?.resourceTags;
+            resourceInputs["tableGroupId"] = args?.tableGroupId;
             resourceInputs["tablegroupName"] = args?.tablegroupName;
             resourceInputs["createTime"] = undefined /*out*/;
             resourceInputs["tableCount"] = undefined /*out*/;
@@ -130,23 +173,31 @@ export interface TablegroupState {
     /**
      * ID of the TcaplusDB cluster to which the table group belongs.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Create time of the TcaplusDB table group.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
+    /**
+     * Set of table group tags.
+     */
+    resourceTags?: pulumi.Input<pulumi.Input<inputs.Tcaplus.TablegroupResourceTag>[] | undefined>;
     /**
      * Number of tables.
      */
-    tableCount?: pulumi.Input<number>;
+    tableCount?: pulumi.Input<number | undefined>;
     /**
-     * Name of the TcaplusDB table group. Name length should be between 1 and 30.
+     * ID of the TcaplusDB table group, can be user-specified (must be unique within the cluster) or auto-incremented by the API when not set. Immutable after creation.
      */
-    tablegroupName?: pulumi.Input<string>;
+    tableGroupId?: pulumi.Input<string | undefined>;
+    /**
+     * Table group name; may consist of Chinese characters, English letters, or numeric characters, with a maximum length of 32 characters.
+     */
+    tablegroupName?: pulumi.Input<string | undefined>;
     /**
      * Total storage size (MB).
      */
-    totalSize?: pulumi.Input<number>;
+    totalSize?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -158,7 +209,15 @@ export interface TablegroupArgs {
      */
     clusterId: pulumi.Input<string>;
     /**
-     * Name of the TcaplusDB table group. Name length should be between 1 and 30.
+     * Set of table group tags.
+     */
+    resourceTags?: pulumi.Input<pulumi.Input<inputs.Tcaplus.TablegroupResourceTag>[] | undefined>;
+    /**
+     * ID of the TcaplusDB table group, can be user-specified (must be unique within the cluster) or auto-incremented by the API when not set. Immutable after creation.
+     */
+    tableGroupId?: pulumi.Input<string | undefined>;
+    /**
+     * Table group name; may consist of Chinese characters, English letters, or numeric characters, with a maximum length of 32 characters.
      */
     tablegroupName: pulumi.Input<string>;
 }

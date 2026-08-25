@@ -13,6 +13,47 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// <summary>
     /// Provides a resource to create a TDMQ rabbitmq vip instance
     /// 
+    /// ### Enable public network access
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Tdmq.RabbitmqVipInstance("example", new()
+    ///     {
+    ///         ZoneIds = new[]
+    ///         {
+    ///             100006,
+    ///         },
+    ///         VpcId = "vpc-i5yyodl9",
+    ///         SubnetId = "subnet-hhi88a58",
+    ///         ClusterName = "tf-example",
+    ///         NodeSpec = "rabbit-vip-basic-1",
+    ///         NodeNum = 1,
+    ///         StorageSize = 200,
+    ///         EnableCreateDefaultHaMirrorQueue = false,
+    ///         AutoRenewFlag = true,
+    ///         PayMode = 0,
+    ///         ClusterVersion = "3.11.8",
+    ///         EnablePublicAccess = true,
+    ///         BandWidth = 100,
+    ///         ResourceTags = new[]
+    ///         {
+    ///             new Tencentcloud.Tdmq.Inputs.RabbitmqVipInstanceResourceTagArgs
+    ///             {
+    ///                 TagKey = "tagKey",
+    ///                 TagValue = "tagValue",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
     /// ## Import
     /// 
     /// TDMQ rabbitmq vip instance can be imported using the id, e.g.
@@ -28,7 +69,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// Automatic renewal, the default is true.
         /// </summary>
         [Output("autoRenewFlag")]
-        public Output<bool?> AutoRenewFlag { get; private set; } = null!;
+        public Output<bool> AutoRenewFlag { get; private set; } = null!;
+
+        /// <summary>
+        /// Public network bandwidth in Mbps.
+        /// </summary>
+        [Output("bandWidth")]
+        public Output<int> BandWidth { get; private set; } = null!;
 
         /// <summary>
         /// cluster name.
@@ -49,16 +96,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public Output<bool?> EnableCreateDefaultHaMirrorQueue { get; private set; } = null!;
 
         /// <summary>
+        /// Whether to enable public network access. Default is false.
+        /// </summary>
+        [Output("enablePublicAccess")]
+        public Output<bool?> EnablePublicAccess { get; private set; } = null!;
+
+        /// <summary>
         /// The number of nodes, a minimum of 3 nodes for a multi-availability zone. If not passed, the default single availability zone is 1, and the multi-availability zone is 3.
         /// </summary>
         [Output("nodeNum")]
-        public Output<int?> NodeNum { get; private set; } = null!;
+        public Output<int> NodeNum { get; private set; } = null!;
 
         /// <summary>
         /// Node specifications. Valid values: rabbit-vip-basic-5 (for 2C4G), rabbit-vip-profession-2c8g (for 2C8G), rabbit-vip-basic-1 (for 4C8G), rabbit-vip-profession-4c16g (for 4C16G), rabbit-vip-basic-2 (for 8C16G), rabbit-vip-profession-8c32g (for 8C32G), rabbit-vip-basic-4 (for 16C32G), rabbit-vip-profession-16c64g (for 16C64G). The default is rabbit-vip-basic-1. NOTE: The above specifications may be sold out or removed from the shelves.
         /// </summary>
         [Output("nodeSpec")]
-        public Output<string?> NodeSpec { get; private set; } = null!;
+        public Output<string> NodeSpec { get; private set; } = null!;
 
         /// <summary>
         /// Payment method: 0 indicates postpaid; 1 indicates prepaid. Default: prepaid.
@@ -73,10 +126,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public Output<string> PublicAccessEndpoint { get; private set; } = null!;
 
         /// <summary>
+        /// Instance resource tags. Each tag is a key-value pair for resource identification and management.
+        /// </summary>
+        [Output("resourceTags")]
+        public Output<ImmutableArray<Outputs.RabbitmqVipInstanceResourceTag>> ResourceTags { get; private set; } = null!;
+
+        /// <summary>
         /// Single node storage specification, the default is 200G.
         /// </summary>
         [Output("storageSize")]
-        public Output<int?> StorageSize { get; private set; } = null!;
+        public Output<int> StorageSize { get; private set; } = null!;
 
         /// <summary>
         /// Private network SubnetId.
@@ -88,7 +147,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// Purchase duration, the default is 1 (month).
         /// </summary>
         [Output("timeSpan")]
-        public Output<int?> TimeSpan { get; private set; } = null!;
+        public Output<int> TimeSpan { get; private set; } = null!;
 
         /// <summary>
         /// Private network VpcId.
@@ -162,6 +221,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public Input<bool>? AutoRenewFlag { get; set; }
 
         /// <summary>
+        /// Public network bandwidth in Mbps.
+        /// </summary>
+        [Input("bandWidth")]
+        public Input<int>? BandWidth { get; set; }
+
+        /// <summary>
         /// cluster name.
         /// </summary>
         [Input("clusterName", required: true)]
@@ -180,6 +245,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public Input<bool>? EnableCreateDefaultHaMirrorQueue { get; set; }
 
         /// <summary>
+        /// Whether to enable public network access. Default is false.
+        /// </summary>
+        [Input("enablePublicAccess")]
+        public Input<bool>? EnablePublicAccess { get; set; }
+
+        /// <summary>
         /// The number of nodes, a minimum of 3 nodes for a multi-availability zone. If not passed, the default single availability zone is 1, and the multi-availability zone is 3.
         /// </summary>
         [Input("nodeNum")]
@@ -196,6 +267,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// </summary>
         [Input("payMode")]
         public Input<int>? PayMode { get; set; }
+
+        [Input("resourceTags")]
+        private InputList<Inputs.RabbitmqVipInstanceResourceTagArgs>? _resourceTags;
+
+        /// <summary>
+        /// Instance resource tags. Each tag is a key-value pair for resource identification and management.
+        /// </summary>
+        public InputList<Inputs.RabbitmqVipInstanceResourceTagArgs> ResourceTags
+        {
+            get => _resourceTags ?? (_resourceTags = new InputList<Inputs.RabbitmqVipInstanceResourceTagArgs>());
+            set => _resourceTags = value;
+        }
 
         /// <summary>
         /// Single node storage specification, the default is 200G.
@@ -248,6 +331,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public Input<bool>? AutoRenewFlag { get; set; }
 
         /// <summary>
+        /// Public network bandwidth in Mbps.
+        /// </summary>
+        [Input("bandWidth")]
+        public Input<int>? BandWidth { get; set; }
+
+        /// <summary>
         /// cluster name.
         /// </summary>
         [Input("clusterName")]
@@ -264,6 +353,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// </summary>
         [Input("enableCreateDefaultHaMirrorQueue")]
         public Input<bool>? EnableCreateDefaultHaMirrorQueue { get; set; }
+
+        /// <summary>
+        /// Whether to enable public network access. Default is false.
+        /// </summary>
+        [Input("enablePublicAccess")]
+        public Input<bool>? EnablePublicAccess { get; set; }
 
         /// <summary>
         /// The number of nodes, a minimum of 3 nodes for a multi-availability zone. If not passed, the default single availability zone is 1, and the multi-availability zone is 3.
@@ -288,6 +383,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// </summary>
         [Input("publicAccessEndpoint")]
         public Input<string>? PublicAccessEndpoint { get; set; }
+
+        [Input("resourceTags")]
+        private InputList<Inputs.RabbitmqVipInstanceResourceTagGetArgs>? _resourceTags;
+
+        /// <summary>
+        /// Instance resource tags. Each tag is a key-value pair for resource identification and management.
+        /// </summary>
+        public InputList<Inputs.RabbitmqVipInstanceResourceTagGetArgs> ResourceTags
+        {
+            get => _resourceTags ?? (_resourceTags = new InputList<Inputs.RabbitmqVipInstanceResourceTagGetArgs>());
+            set => _resourceTags = value;
+        }
 
         /// <summary>
         /// Single node storage specification, the default is 200G.

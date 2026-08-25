@@ -34,7 +34,7 @@ import * as utilities from "../utilities";
  * API gateway attach access key can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:ApiGateway/apiKeyAttachment:ApiKeyAttachment attach [your api_key_id]#usagePlan-gyeafpab
+ * $ terraform import tencentcloud_api_gateway_api_key_attachment.attach [your api_key_id]#usagePlan-gyeafpab
  * ```
  */
 export class ApiKeyAttachment extends pulumi.CustomResource {
@@ -112,11 +112,11 @@ export interface ApiKeyAttachmentState {
     /**
      * ID of API key.
      */
-    apiKeyId?: pulumi.Input<string>;
+    apiKeyId?: pulumi.Input<string | undefined>;
     /**
      * ID of the usage plan.
      */
-    usagePlanId?: pulumi.Input<string>;
+    usagePlanId?: pulumi.Input<string | undefined>;
 }
 
 /**

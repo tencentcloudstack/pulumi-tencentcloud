@@ -151,39 +151,39 @@ export interface DiskState {
     /**
      * Automatically mount and initialize data disks.
      */
-    autoMountConfiguration?: pulumi.Input<inputs.Lighthouse.DiskAutoMountConfiguration>;
+    autoMountConfiguration?: pulumi.Input<inputs.Lighthouse.DiskAutoMountConfiguration | undefined>;
     /**
      * Whether to automatically use the voucher. Not used by default.
      */
-    autoVoucher?: pulumi.Input<boolean>;
+    autoVoucher?: pulumi.Input<boolean | undefined>;
     /**
      * Specify the disk backup quota. If not uploaded, the default is no backup quota. Currently, only one disk backup quota is supported.
      */
-    diskBackupQuota?: pulumi.Input<number>;
+    diskBackupQuota?: pulumi.Input<number | undefined>;
     /**
      * Disk subscription related parameter settings.
      */
-    diskChargePrepaid?: pulumi.Input<inputs.Lighthouse.DiskDiskChargePrepaid>;
+    diskChargePrepaid?: pulumi.Input<inputs.Lighthouse.DiskDiskChargePrepaid | undefined>;
     /**
      * Disk count. Values: [1, 30]. Default: 1.
      */
-    diskCount?: pulumi.Input<number>;
+    diskCount?: pulumi.Input<number | undefined>;
     /**
      * Disk name. Maximum length 60.
      */
-    diskName?: pulumi.Input<string>;
+    diskName?: pulumi.Input<string | undefined>;
     /**
      * Disk size, unit: GB.
      */
-    diskSize?: pulumi.Input<number>;
+    diskSize?: pulumi.Input<number | undefined>;
     /**
      * Disk type. Value:CLOUD_PREMIUM, CLOUD_SSD.
      */
-    diskType?: pulumi.Input<string>;
+    diskType?: pulumi.Input<string | undefined>;
     /**
      * Availability zone.
      */
-    zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -193,15 +193,15 @@ export interface DiskArgs {
     /**
      * Automatically mount and initialize data disks.
      */
-    autoMountConfiguration?: pulumi.Input<inputs.Lighthouse.DiskAutoMountConfiguration>;
+    autoMountConfiguration?: pulumi.Input<inputs.Lighthouse.DiskAutoMountConfiguration | undefined>;
     /**
      * Whether to automatically use the voucher. Not used by default.
      */
-    autoVoucher?: pulumi.Input<boolean>;
+    autoVoucher?: pulumi.Input<boolean | undefined>;
     /**
      * Specify the disk backup quota. If not uploaded, the default is no backup quota. Currently, only one disk backup quota is supported.
      */
-    diskBackupQuota?: pulumi.Input<number>;
+    diskBackupQuota?: pulumi.Input<number | undefined>;
     /**
      * Disk subscription related parameter settings.
      */
@@ -209,11 +209,11 @@ export interface DiskArgs {
     /**
      * Disk count. Values: [1, 30]. Default: 1.
      */
-    diskCount?: pulumi.Input<number>;
+    diskCount?: pulumi.Input<number | undefined>;
     /**
      * Disk name. Maximum length 60.
      */
-    diskName?: pulumi.Input<string>;
+    diskName?: pulumi.Input<string | undefined>;
     /**
      * Disk size, unit: GB.
      */

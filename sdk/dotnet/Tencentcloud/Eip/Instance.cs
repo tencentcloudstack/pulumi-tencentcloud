@@ -187,7 +187,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         public Output<ImmutableDictionary<string, string>?> Tags { get; private set; } = null!;
 
         /// <summary>
-        /// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP`. Default is `EIP`.
+        /// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP` and `ResidentialEIP`. Default is `EIP`.
         /// </summary>
         [Output("type")]
         public Output<string?> Type { get; private set; } = null!;
@@ -324,7 +324,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         }
 
         /// <summary>
-        /// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP`. Default is `EIP`.
+        /// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP` and `ResidentialEIP`. Default is `EIP`.
         /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }
@@ -434,7 +434,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         }
 
         /// <summary>
-        /// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP`. Default is `EIP`.
+        /// The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP` and `ResidentialEIP`. Default is `EIP`.
         /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }

@@ -31,7 +31,7 @@ import * as utilities from "../utilities";
  *     type: "Normal",
  *     remark: "remark.",
  * });
- * const example = tencentcloud.Tdmq.getRocketmqTopicOutput({
+ * const example = tencentcloud.tdmq.getRocketmqTopicOutput({
  *     clusterId: exampleRocketmqCluster.clusterId,
  *     namespaceId: exampleRocketmqNamespace.namespaceName,
  *     filterName: exampleRocketmqTopic.topicName,
@@ -118,7 +118,7 @@ export interface GetRocketmqTopicResult {
  *     type: "Normal",
  *     remark: "remark.",
  * });
- * const example = tencentcloud.Tdmq.getRocketmqTopicOutput({
+ * const example = tencentcloud.tdmq.getRocketmqTopicOutput({
  *     clusterId: exampleRocketmqCluster.clusterId,
  *     namespaceId: exampleRocketmqNamespace.namespaceName,
  *     filterName: exampleRocketmqTopic.topicName,
@@ -147,11 +147,11 @@ export interface GetRocketmqTopicOutputArgs {
     /**
      * Search by topic name. Fuzzy query is supported.
      */
-    filterName?: pulumi.Input<string>;
+    filterName?: pulumi.Input<string | undefined>;
     /**
      * Filter by topic type. Valid values: `Normal`, `GlobalOrder`, `PartitionedOrder`, `Transaction`.
      */
-    filterTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    filterTypes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Namespace.
      */
@@ -159,5 +159,5 @@ export interface GetRocketmqTopicOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

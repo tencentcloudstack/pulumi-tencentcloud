@@ -71,12 +71,8 @@ type GetSavepointListResult struct {
 }
 
 func GetSavepointListOutput(ctx *pulumi.Context, args GetSavepointListOutputArgs, opts ...pulumi.InvokeOption) GetSavepointListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSavepointListResultOutput, error) {
-			args := v.(GetSavepointListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Oceanus/getSavepointList:getSavepointList", args, GetSavepointListResultOutput{}, options).(GetSavepointListResultOutput), nil
-		}).(GetSavepointListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Oceanus/getSavepointList:getSavepointList", args, GetSavepointListResultOutput{}, options).(GetSavepointListResultOutput)
 }
 
 // A collection of arguments for invoking getSavepointList.

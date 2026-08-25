@@ -11,13 +11,43 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
- * ### Sync mysql database to cynosdb through cdb access type
+ * ### Sync MySQL database to CynosDB through cdb access type
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.cynosdb.Cluster("example", {
+ * const example = new tencentcloud.mysql.Instance("example", {
+ *     instanceName: "tf-example",
+ *     internetService: 1,
+ *     engineVersion: "5.7",
+ *     chargeType: "POSTPAID",
+ *     rootPassword: "Mysql@2026",
+ *     slaveDeployMode: 0,
+ *     slaveSyncMode: 0,
+ *     deviceType: "CLOUD_NATIVE_CLUSTER",
+ *     availabilityZone: "ap-guangzhou-6",
+ *     cpu: 2,
+ *     memSize: 4000,
+ *     volumeSize: 200,
+ *     vpcId: "vpc-i5yyodl9",
+ *     subnetId: "subnet-hhi88a58",
+ *     intranetPort: 3306,
+ *     securityGroups: ["sg-4rd5741x"],
+ *     parameters: {
+ *         character_set_server: "utf8",
+ *         max_connections: "1000",
+ *     },
+ *     tags: {
+ *         createBy: "terraform",
+ *     },
+ *     clusterTopology: {
+ *         readWriteNode: {
+ *             zone: "ap-guangzhou-6",
+ *         },
+ *     },
+ * });
+ * const exampleCluster = new tencentcloud.cynosdb.Cluster("example", {
  *     availableZone: "ap-guangzhou-6",
  *     vpcId: "vpc-i5yyodl9",
  *     subnetId: "subnet-hhi88a58",
@@ -26,7 +56,7 @@ import * as utilities from "../utilities";
  *     dbVersion: "5.7",
  *     port: 3306,
  *     clusterName: "tf-example",
- *     password: "cynosDB@123",
+ *     password: "CynosDB@2026",
  *     instanceMaintainDuration: 7200,
  *     instanceMaintainStartTime: 10800,
  *     instanceCpuCore: 2,
@@ -78,102 +108,52 @@ import * as utilities from "../utilities";
  *     objects: {
  *         mode: "Partial",
  *         databases: [{
- *             dbName: "tf_ci_test",
- *             newDbName: "tf_ci_test_new",
+ *             dbName: "testDB",
  *             dbMode: "Partial",
- *             tableMode: "All",
+ *             tableMode: "Partial",
+ *             viewMode: "Partial",
+ *             procedureMode: "Partial",
+ *             functionMode: "Partial",
  *             tables: [{
- *                 tableName: "test",
- *                 newTableName: "test_new",
+ *                 tableName: "testTable",
+ *                 columnMode: "Partial",
+ *                 columns: [{
+ *                     columnName: "id",
+ *                 }],
+ *                 tmpTables: [
+ *                     "_testTable_new",
+ *                     "_testTable_old",
+ *                     "_testTable_ghc",
+ *                     "_testTable_gho",
+ *                     "_testTable_del",
+ *                 ],
+ *                 tableEditMode: "pt",
  *             }],
  *         }],
+ *         advancedObjects: [
+ *             "procedure",
+ *             "function",
+ *         ],
  *     },
  *     srcInfo: {
- *         region: "ap-guangzhou",
- *         instanceId: "cdb-fitq5t9h",
- *         user: "your_user_name",
- *         password: "*",
- *         dbName: "tf_ci_test",
- *         vpcId: "vpc-i5yyodl9",
- *         subnetId: "subnet-hhi88a58",
- *     },
- *     dstInfo: {
  *         region: "ap-guangzhou",
  *         instanceId: example.id,
  *         user: "root",
- *         password: "*",
- *         dbName: "tf_ci_test_new",
+ *         password: example.rootPassword,
+ *         dbName: "testDB",
  *         vpcId: "vpc-i5yyodl9",
  *         subnetId: "subnet-hhi88a58",
  *     },
- *     autoRetryTimeRangeMinutes: 0,
- * });
- * ```
- *
- * ### Sync mysql database using CCN to route from ap-shanghai to ap-guangzhou
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@tencentcloud_iac/pulumi";
- *
- * const vpcIdSh = "vpc-evtcyb3g";
- * const subnetIdSh = "subnet-1t83cxkp";
- * const srcMysql = tencentcloud.Mysql.getInstance({
- *     instanceName: "your_user_name_mysql_src",
- * });
- * const srcIp = srcMysql.then(srcMysql => srcMysql.instanceLists?.[0]?.intranetIp);
- * const srcPort = srcMysql.then(srcMysql => srcMysql.instanceLists?.[0]?.intranetPort);
- * const ccns = tencentcloud.Ccn.getInstances({
- *     name: "keep-ccn-dts-sh",
- * });
- * const ccnId = ccns.then(ccns => ccns.instanceLists?.[0]?.ccnId);
- * const dstMysql = tencentcloud.Mysql.getInstance({
- *     instanceName: "your_user_name_mysql_src",
- * });
- * const dstMysqlId = dstMysql.then(dstMysql => dstMysql.instanceLists?.[0]?.mysqlId);
- * const config = new pulumi.Config();
- * const srcAzSh = config.get("srcAzSh") || "ap-shanghai";
- * const dstAzGz = config.get("dstAzGz") || "ap-guangzhou";
- * const syncJobs = tencentcloud.Dts.getSyncJobs({
- *     jobName: "keep_sync_config_ccn_2_cdb",
- * });
- * const example = new tencentcloud.dts.SyncConfig("example", {
- *     jobId: syncJobs.then(syncJobs => syncJobs.lists?.[0]?.jobId),
- *     srcAccessType: "ccn",
- *     dstAccessType: "cdb",
- *     jobMode: "liteMode",
- *     runMode: "Immediate",
- *     objects: {
- *         mode: "Partial",
- *         databases: [{
- *             dbName: "tf_ci_test",
- *             newDbName: "tf_ci_test_new",
- *             dbMode: "Partial",
- *             tableMode: "All",
- *             tables: [{
- *                 tableName: "test",
- *                 newTableName: "test_new",
- *             }],
- *         }],
- *     },
- *     srcInfo: {
- *         region: srcAzSh,
- *         user: "your_user_name",
- *         password: "your_pass_word",
- *         ip: srcIp,
- *         port: srcPort,
- *         vpcId: vpcIdSh,
- *         subnetId: subnetIdSh,
- *         ccnId: ccnId,
- *         databaseNetEnv: "TencentVPC",
- *     },
  *     dstInfo: {
- *         region: dstAzGz,
- *         instanceId: dstMysqlId,
- *         user: "your_user_name",
- *         password: "your_pass_word",
+ *         region: "ap-guangzhou",
+ *         instanceId: exampleCluster.id,
+ *         user: "root",
+ *         password: exampleCluster.password,
+ *         dbName: "testDB",
+ *         vpcId: "vpc-i5yyodl9",
+ *         subnetId: "subnet-hhi88a58",
  *     },
- *     autoRetryTimeRangeMinutes: 0,
+ *     autoRetryTimeRangeMinutes: 5,
  * });
  * ```
  *
@@ -326,51 +306,51 @@ export interface SyncConfigState {
     /**
      * The time period of automatic retry, can be set from 5 to 720 minutes, 0 means no retry.
      */
-    autoRetryTimeRangeMinutes?: pulumi.Input<number>;
+    autoRetryTimeRangeMinutes?: pulumi.Input<number | undefined>;
     /**
      * Target end access type, cdb (cloud database), cvm (cloud host self-built), vpc (private network), extranet (external network), vpncloud (vpn access), dcg (dedicated line access), ccn (cloud networking ), intranet (self-developed cloud), noProxy, note that the specific optional value depends on the current link.
      */
-    dstAccessType?: pulumi.Input<string>;
+    dstAccessType?: pulumi.Input<string | undefined>;
     /**
      * Target information, single-node database use.
      */
-    dstInfo?: pulumi.Input<inputs.Dts.SyncConfigDstInfo>;
+    dstInfo?: pulumi.Input<inputs.Dts.SyncConfigDstInfo | undefined>;
     /**
      * Expected start time, when the value of RunMode is Timed, this value is required, such as: 2006-01-02 15:04:05.
      */
-    expectRunTime?: pulumi.Input<string>;
+    expectRunTime?: pulumi.Input<string | undefined>;
     /**
      * Synchronization instance id (i.e. identifies a synchronization job).
      */
-    jobId?: pulumi.Input<string>;
+    jobId?: pulumi.Input<string | undefined>;
     /**
      * The enumeration values are liteMode and fullMode, corresponding to lite mode or normal mode respectively.
      */
-    jobMode?: pulumi.Input<string>;
+    jobMode?: pulumi.Input<string | undefined>;
     /**
      * Sync job name.
      */
-    jobName?: pulumi.Input<string>;
+    jobName?: pulumi.Input<string | undefined>;
     /**
      * Synchronize database table object information.
      */
-    objects?: pulumi.Input<inputs.Dts.SyncConfigObjects>;
+    objects?: pulumi.Input<inputs.Dts.SyncConfigObjects | undefined>;
     /**
      * Sync Task Options.
      */
-    options?: pulumi.Input<inputs.Dts.SyncConfigOptions>;
+    options?: pulumi.Input<inputs.Dts.SyncConfigOptions | undefined>;
     /**
      * Operation mode, such as: Immediate (indicates immediate operation, the default value is this value), Timed (indicates scheduled operation).
      */
-    runMode?: pulumi.Input<string>;
+    runMode?: pulumi.Input<string | undefined>;
     /**
      * Source access type, cdb (cloud database), cvm (cloud host self-built), vpc (private network), extranet (external network), vpncloud (vpn access), dcg (dedicated line access), ccn (cloud networking ), intranet (self-developed cloud), noProxy, note that the specific optional value depends on the current link.
      */
-    srcAccessType?: pulumi.Input<string>;
+    srcAccessType?: pulumi.Input<string | undefined>;
     /**
      * Source information, single-node database use.
      */
-    srcInfo?: pulumi.Input<inputs.Dts.SyncConfigSrcInfo>;
+    srcInfo?: pulumi.Input<inputs.Dts.SyncConfigSrcInfo | undefined>;
 }
 
 /**
@@ -380,7 +360,7 @@ export interface SyncConfigArgs {
     /**
      * The time period of automatic retry, can be set from 5 to 720 minutes, 0 means no retry.
      */
-    autoRetryTimeRangeMinutes?: pulumi.Input<number>;
+    autoRetryTimeRangeMinutes?: pulumi.Input<number | undefined>;
     /**
      * Target end access type, cdb (cloud database), cvm (cloud host self-built), vpc (private network), extranet (external network), vpncloud (vpn access), dcg (dedicated line access), ccn (cloud networking ), intranet (self-developed cloud), noProxy, note that the specific optional value depends on the current link.
      */
@@ -388,11 +368,11 @@ export interface SyncConfigArgs {
     /**
      * Target information, single-node database use.
      */
-    dstInfo?: pulumi.Input<inputs.Dts.SyncConfigDstInfo>;
+    dstInfo?: pulumi.Input<inputs.Dts.SyncConfigDstInfo | undefined>;
     /**
      * Expected start time, when the value of RunMode is Timed, this value is required, such as: 2006-01-02 15:04:05.
      */
-    expectRunTime?: pulumi.Input<string>;
+    expectRunTime?: pulumi.Input<string | undefined>;
     /**
      * Synchronization instance id (i.e. identifies a synchronization job).
      */
@@ -400,11 +380,11 @@ export interface SyncConfigArgs {
     /**
      * The enumeration values are liteMode and fullMode, corresponding to lite mode or normal mode respectively.
      */
-    jobMode?: pulumi.Input<string>;
+    jobMode?: pulumi.Input<string | undefined>;
     /**
      * Sync job name.
      */
-    jobName?: pulumi.Input<string>;
+    jobName?: pulumi.Input<string | undefined>;
     /**
      * Synchronize database table object information.
      */
@@ -412,11 +392,11 @@ export interface SyncConfigArgs {
     /**
      * Sync Task Options.
      */
-    options?: pulumi.Input<inputs.Dts.SyncConfigOptions>;
+    options?: pulumi.Input<inputs.Dts.SyncConfigOptions | undefined>;
     /**
      * Operation mode, such as: Immediate (indicates immediate operation, the default value is this value), Timed (indicates scheduled operation).
      */
-    runMode?: pulumi.Input<string>;
+    runMode?: pulumi.Input<string | undefined>;
     /**
      * Source access type, cdb (cloud database), cvm (cloud host self-built), vpc (private network), extranet (external network), vpncloud (vpn access), dcg (dedicated line access), ccn (cloud networking ), intranet (self-developed cloud), noProxy, note that the specific optional value depends on the current link.
      */
@@ -424,5 +404,5 @@ export interface SyncConfigArgs {
     /**
      * Source information, single-node database use.
      */
-    srcInfo?: pulumi.Input<inputs.Dts.SyncConfigSrcInfo>;
+    srcInfo?: pulumi.Input<inputs.Dts.SyncConfigSrcInfo | undefined>;
 }

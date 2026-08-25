@@ -15,7 +15,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// 
     /// &gt; **NOTE:** This resource must exclusive in one share unit, do not declare additional translation nat rules resources of this nat gateway elsewhere.
     /// 
+    /// &gt; **NOTE:** Append-only convention for typed lists: The provider preserves the API's authoritative order in state (rules are currently ordered by creation time at the backend, and may gain user-defined ordering semantics in the future). To keep plans clean and avoid spurious churn, **add new rules ONLY at the end of each typed list, and do NOT reorder or insert rules in the middle of an existing list**. Inserting in the middle, removing from the middle, or reordering will produce a connected `~` plan and may trigger uniqueness errors at apply time (e.g. `MODIFY` on slot N attempts to rename rule A's IP to rule B's still-existing IP). When that happens, the SDK error message points at the offending IP — fix the HCL by appending instead of inserting.
+    /// 
     /// ## Example Usage
+    /// 
+    /// ### Recommended typed list usage
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
@@ -26,6 +30,50 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
     ///     var example = new Tencentcloud.Vpc.PrivateNatGatewayTranslationNatRule("example", new()
+    ///     {
+    ///         NatGatewayId = "intranat-r46f6pxl",
+    ///         LocalNetworkLayerRules = new[]
+    ///         {
+    ///             new Tencentcloud.Vpc.Inputs.PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArgs
+    ///             {
+    ///                 TranslationIp = "2.2.2.2",
+    ///                 OriginalIp = "1.1.1.1",
+    ///                 Description = "LOCAL three-layer rule.",
+    ///             },
+    ///         },
+    ///         LocalTransportLayerRules = new[]
+    ///         {
+    ///             new Tencentcloud.Vpc.Inputs.PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArgs
+    ///             {
+    ///                 TranslationIp = "3.3.3.3",
+    ///                 Description = "LOCAL four-layer rule.",
+    ///             },
+    ///         },
+    ///         PeerNetworkLayerRules = new[]
+    ///         {
+    ///             new Tencentcloud.Vpc.Inputs.PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArgs
+    ///             {
+    ///                 TranslationIp = "5.5.5.5",
+    ///                 OriginalIp = "4.4.4.4",
+    ///                 Description = "PEER three-layer rule.",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Deprecated TranslationNatRules usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var exampleDeprecated = new Tencentcloud.Vpc.PrivateNatGatewayTranslationNatRule("example_deprecated", new()
     ///     {
     ///         NatGatewayId = "intranat-r46f6pxl",
     ///         TranslationNatRules = new[]
@@ -63,13 +111,31 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     public partial class PrivateNatGatewayTranslationNatRule : global::Pulumi.CustomResource
     {
         /// <summary>
+        /// Translation rules for the LOCAL direction at the NETWORK_LAYER (three-layer). Identity is keyed by `OriginalIp` (unique within this bucket). Editing `Description` or `TranslationIp` is applied in place via ModifyPrivateNatGatewayTranslationNatRule; editing `OriginalIp` is treated as deleting the old rule and creating a new one.
+        /// </summary>
+        [Output("localNetworkLayerRules")]
+        public Output<ImmutableArray<Outputs.PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRule>> LocalNetworkLayerRules { get; private set; } = null!;
+
+        /// <summary>
+        /// Translation rules for the LOCAL direction at the TRANSPORT_LAYER (four-layer). Identity is keyed by `TranslationIp` (unique within this bucket). `OriginalIp` is not applicable for transport-layer rules and is intentionally not exposed.
+        /// </summary>
+        [Output("localTransportLayerRules")]
+        public Output<ImmutableArray<Outputs.PrivateNatGatewayTranslationNatRuleLocalTransportLayerRule>> LocalTransportLayerRules { get; private set; } = null!;
+
+        /// <summary>
         /// Private NAT gateway unique ID, such as: `intranat-xxxxxxxx`.
         /// </summary>
         [Output("natGatewayId")]
         public Output<string> NatGatewayId { get; private set; } = null!;
 
         /// <summary>
-        /// Translation rule object array.
+        /// Translation rules for the PEER direction at the NETWORK_LAYER (three-layer). Identity is keyed by `OriginalIp` (unique within this bucket). Editing `Description` or `TranslationIp` is applied in place via ModifyPrivateNatGatewayTranslationNatRule; editing `OriginalIp` is treated as deleting the old rule and creating a new one.
+        /// </summary>
+        [Output("peerNetworkLayerRules")]
+        public Output<ImmutableArray<Outputs.PrivateNatGatewayTranslationNatRulePeerNetworkLayerRule>> PeerNetworkLayerRules { get; private set; } = null!;
+
+        /// <summary>
+        /// It has been deprecated from version 1.82.98, please use LocalNetworkLayerRules / LocalTransportLayerRules / PeerNetworkLayerRules instead. Cannot be used together with the new fields. (Deprecated) Translation rule object array. Use the typed list fields `LocalNetworkLayerRules`, `LocalTransportLayerRules`, and `PeerNetworkLayerRules` instead. The legacy field continues to work but does not benefit from in-place ModifyPrivateNatGatewayTranslationNatRule support.
         /// </summary>
         [Output("translationNatRules")]
         public Output<ImmutableArray<Outputs.PrivateNatGatewayTranslationNatRuleTranslationNatRule>> TranslationNatRules { get; private set; } = null!;
@@ -121,18 +187,55 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
 
     public sealed class PrivateNatGatewayTranslationNatRuleArgs : global::Pulumi.ResourceArgs
     {
+        [Input("localNetworkLayerRules")]
+        private InputList<Inputs.PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArgs>? _localNetworkLayerRules;
+
+        /// <summary>
+        /// Translation rules for the LOCAL direction at the NETWORK_LAYER (three-layer). Identity is keyed by `OriginalIp` (unique within this bucket). Editing `Description` or `TranslationIp` is applied in place via ModifyPrivateNatGatewayTranslationNatRule; editing `OriginalIp` is treated as deleting the old rule and creating a new one.
+        /// </summary>
+        public InputList<Inputs.PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArgs> LocalNetworkLayerRules
+        {
+            get => _localNetworkLayerRules ?? (_localNetworkLayerRules = new InputList<Inputs.PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleArgs>());
+            set => _localNetworkLayerRules = value;
+        }
+
+        [Input("localTransportLayerRules")]
+        private InputList<Inputs.PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArgs>? _localTransportLayerRules;
+
+        /// <summary>
+        /// Translation rules for the LOCAL direction at the TRANSPORT_LAYER (four-layer). Identity is keyed by `TranslationIp` (unique within this bucket). `OriginalIp` is not applicable for transport-layer rules and is intentionally not exposed.
+        /// </summary>
+        public InputList<Inputs.PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArgs> LocalTransportLayerRules
+        {
+            get => _localTransportLayerRules ?? (_localTransportLayerRules = new InputList<Inputs.PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleArgs>());
+            set => _localTransportLayerRules = value;
+        }
+
         /// <summary>
         /// Private NAT gateway unique ID, such as: `intranat-xxxxxxxx`.
         /// </summary>
         [Input("natGatewayId", required: true)]
         public Input<string> NatGatewayId { get; set; } = null!;
 
-        [Input("translationNatRules", required: true)]
+        [Input("peerNetworkLayerRules")]
+        private InputList<Inputs.PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArgs>? _peerNetworkLayerRules;
+
+        /// <summary>
+        /// Translation rules for the PEER direction at the NETWORK_LAYER (three-layer). Identity is keyed by `OriginalIp` (unique within this bucket). Editing `Description` or `TranslationIp` is applied in place via ModifyPrivateNatGatewayTranslationNatRule; editing `OriginalIp` is treated as deleting the old rule and creating a new one.
+        /// </summary>
+        public InputList<Inputs.PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArgs> PeerNetworkLayerRules
+        {
+            get => _peerNetworkLayerRules ?? (_peerNetworkLayerRules = new InputList<Inputs.PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleArgs>());
+            set => _peerNetworkLayerRules = value;
+        }
+
+        [Input("translationNatRules")]
         private InputList<Inputs.PrivateNatGatewayTranslationNatRuleTranslationNatRuleArgs>? _translationNatRules;
 
         /// <summary>
-        /// Translation rule object array.
+        /// It has been deprecated from version 1.82.98, please use LocalNetworkLayerRules / LocalTransportLayerRules / PeerNetworkLayerRules instead. Cannot be used together with the new fields. (Deprecated) Translation rule object array. Use the typed list fields `LocalNetworkLayerRules`, `LocalTransportLayerRules`, and `PeerNetworkLayerRules` instead. The legacy field continues to work but does not benefit from in-place ModifyPrivateNatGatewayTranslationNatRule support.
         /// </summary>
+        [Obsolete(@"It has been deprecated from version 1.82.98, please use LocalNetworkLayerRules / LocalTransportLayerRules / PeerNetworkLayerRules instead. Cannot be used together with the new fields.")]
         public InputList<Inputs.PrivateNatGatewayTranslationNatRuleTranslationNatRuleArgs> TranslationNatRules
         {
             get => _translationNatRules ?? (_translationNatRules = new InputList<Inputs.PrivateNatGatewayTranslationNatRuleTranslationNatRuleArgs>());
@@ -147,18 +250,55 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
 
     public sealed class PrivateNatGatewayTranslationNatRuleState : global::Pulumi.ResourceArgs
     {
+        [Input("localNetworkLayerRules")]
+        private InputList<Inputs.PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleGetArgs>? _localNetworkLayerRules;
+
+        /// <summary>
+        /// Translation rules for the LOCAL direction at the NETWORK_LAYER (three-layer). Identity is keyed by `OriginalIp` (unique within this bucket). Editing `Description` or `TranslationIp` is applied in place via ModifyPrivateNatGatewayTranslationNatRule; editing `OriginalIp` is treated as deleting the old rule and creating a new one.
+        /// </summary>
+        public InputList<Inputs.PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleGetArgs> LocalNetworkLayerRules
+        {
+            get => _localNetworkLayerRules ?? (_localNetworkLayerRules = new InputList<Inputs.PrivateNatGatewayTranslationNatRuleLocalNetworkLayerRuleGetArgs>());
+            set => _localNetworkLayerRules = value;
+        }
+
+        [Input("localTransportLayerRules")]
+        private InputList<Inputs.PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleGetArgs>? _localTransportLayerRules;
+
+        /// <summary>
+        /// Translation rules for the LOCAL direction at the TRANSPORT_LAYER (four-layer). Identity is keyed by `TranslationIp` (unique within this bucket). `OriginalIp` is not applicable for transport-layer rules and is intentionally not exposed.
+        /// </summary>
+        public InputList<Inputs.PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleGetArgs> LocalTransportLayerRules
+        {
+            get => _localTransportLayerRules ?? (_localTransportLayerRules = new InputList<Inputs.PrivateNatGatewayTranslationNatRuleLocalTransportLayerRuleGetArgs>());
+            set => _localTransportLayerRules = value;
+        }
+
         /// <summary>
         /// Private NAT gateway unique ID, such as: `intranat-xxxxxxxx`.
         /// </summary>
         [Input("natGatewayId")]
         public Input<string>? NatGatewayId { get; set; }
 
+        [Input("peerNetworkLayerRules")]
+        private InputList<Inputs.PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleGetArgs>? _peerNetworkLayerRules;
+
+        /// <summary>
+        /// Translation rules for the PEER direction at the NETWORK_LAYER (three-layer). Identity is keyed by `OriginalIp` (unique within this bucket). Editing `Description` or `TranslationIp` is applied in place via ModifyPrivateNatGatewayTranslationNatRule; editing `OriginalIp` is treated as deleting the old rule and creating a new one.
+        /// </summary>
+        public InputList<Inputs.PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleGetArgs> PeerNetworkLayerRules
+        {
+            get => _peerNetworkLayerRules ?? (_peerNetworkLayerRules = new InputList<Inputs.PrivateNatGatewayTranslationNatRulePeerNetworkLayerRuleGetArgs>());
+            set => _peerNetworkLayerRules = value;
+        }
+
         [Input("translationNatRules")]
         private InputList<Inputs.PrivateNatGatewayTranslationNatRuleTranslationNatRuleGetArgs>? _translationNatRules;
 
         /// <summary>
-        /// Translation rule object array.
+        /// It has been deprecated from version 1.82.98, please use LocalNetworkLayerRules / LocalTransportLayerRules / PeerNetworkLayerRules instead. Cannot be used together with the new fields. (Deprecated) Translation rule object array. Use the typed list fields `LocalNetworkLayerRules`, `LocalTransportLayerRules`, and `PeerNetworkLayerRules` instead. The legacy field continues to work but does not benefit from in-place ModifyPrivateNatGatewayTranslationNatRule support.
         /// </summary>
+        [Obsolete(@"It has been deprecated from version 1.82.98, please use LocalNetworkLayerRules / LocalTransportLayerRules / PeerNetworkLayerRules instead. Cannot be used together with the new fields.")]
         public InputList<Inputs.PrivateNatGatewayTranslationNatRuleTranslationNatRuleGetArgs> TranslationNatRules
         {
             get => _translationNatRules ?? (_translationNatRules = new InputList<Inputs.PrivateNatGatewayTranslationNatRuleTranslationNatRuleGetArgs>());

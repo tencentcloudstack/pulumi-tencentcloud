@@ -55,7 +55,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * tem gateway can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Tem/gateway:Gateway gateway environmentId#gatewayName
  * ```
@@ -123,7 +122,7 @@ export interface GatewayState {
     /**
      * gateway properties.
      */
-    ingress?: pulumi.Input<inputs.Tem.GatewayIngress>;
+    ingress?: pulumi.Input<inputs.Tem.GatewayIngress | undefined>;
 }
 
 /**
@@ -133,5 +132,5 @@ export interface GatewayArgs {
     /**
      * gateway properties.
      */
-    ingress?: pulumi.Input<inputs.Tem.GatewayIngress>;
+    ingress?: pulumi.Input<inputs.Tem.GatewayIngress | undefined>;
 }

@@ -135,35 +135,35 @@ export interface RocketmqVipInstanceState {
     /**
      * Public IP access control rules.
      */
-    ipRules?: pulumi.Input<pulumi.Input<inputs.Tdmq.RocketmqVipInstanceIpRule>[]>;
+    ipRules?: pulumi.Input<pulumi.Input<inputs.Tdmq.RocketmqVipInstanceIpRule>[] | undefined>;
     /**
      * Instance name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Number of nodes, minimum 2, maximum 20.
      */
-    nodeCount?: pulumi.Input<number>;
+    nodeCount?: pulumi.Input<number | undefined>;
     /**
      * Instance specification: Universal type, rocket-vip-basic-0, Basic type: `rocket-vip-basic-1`, Standard type: `rocket-vip-basic-2`, Advanced Type I: `rocket-vip-basic-3`, Advanced Type II: `rocket-vip-basic-4`.
      */
-    spec?: pulumi.Input<string>;
+    spec?: pulumi.Input<string | undefined>;
     /**
      * Single node storage space, in GB, minimum 200GB.
      */
-    storageSize?: pulumi.Input<number>;
+    storageSize?: pulumi.Input<number | undefined>;
     /**
      * Purchase period, in months.
      */
-    timeSpan?: pulumi.Input<number>;
+    timeSpan?: pulumi.Input<number | undefined>;
     /**
      * VPC information.
      */
-    vpcInfo?: pulumi.Input<inputs.Tdmq.RocketmqVipInstanceVpcInfo>;
+    vpcInfo?: pulumi.Input<inputs.Tdmq.RocketmqVipInstanceVpcInfo | undefined>;
     /**
      * The Zone ID list for node deployment, such as Guangzhou Zone 1, is 100001. For details, please refer to the official website of Tencent Cloud.
      */
-    zoneIds?: pulumi.Input<pulumi.Input<string>[]>;
+    zoneIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -173,11 +173,11 @@ export interface RocketmqVipInstanceArgs {
     /**
      * Public IP access control rules.
      */
-    ipRules?: pulumi.Input<pulumi.Input<inputs.Tdmq.RocketmqVipInstanceIpRule>[]>;
+    ipRules?: pulumi.Input<pulumi.Input<inputs.Tdmq.RocketmqVipInstanceIpRule>[] | undefined>;
     /**
      * Instance name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Number of nodes, minimum 2, maximum 20.
      */

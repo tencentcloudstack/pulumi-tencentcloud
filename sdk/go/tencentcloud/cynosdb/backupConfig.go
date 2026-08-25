@@ -12,7 +12,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a cynosdb backupConfig
+// Provides a resource to create a CynosDB backup config
 //
 // ## Example Usage
 //
@@ -30,10 +30,51 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := cynosdb.NewBackupConfig(ctx, "foo", &cynosdb.BackupConfigArgs{
+//			example, err := cynosdb.NewCluster(ctx, "example", &cynosdb.ClusterArgs{
+//				AvailableZone:             pulumi.String("ap-guangzhou-6"),
+//				VpcId:                     pulumi.String("vpc-i5yyodl9"),
+//				SubnetId:                  pulumi.String("subnet-hhi88a58"),
+//				DbMode:                    pulumi.String("NORMAL"),
+//				DbType:                    pulumi.String("MYSQL"),
+//				DbVersion:                 pulumi.String("5.7"),
+//				Port:                      pulumi.Int(3306),
+//				ClusterName:               pulumi.String("tf-example"),
+//				Password:                  pulumi.String("cynosDB@123"),
+//				InstanceMaintainDuration:  pulumi.Int(7200),
+//				InstanceMaintainStartTime: pulumi.Int(10800),
+//				InstanceCpuCore:           pulumi.Int(2),
+//				InstanceMemorySize:        pulumi.Int(4),
+//				ForceDelete:               pulumi.Bool(true),
+//				InstanceMaintainWeekdays: pulumi.StringArray{
+//					pulumi.String("Fri"),
+//					pulumi.String("Mon"),
+//					pulumi.String("Sat"),
+//					pulumi.String("Sun"),
+//					pulumi.String("Thu"),
+//					pulumi.String("Wed"),
+//					pulumi.String("Tue"),
+//				},
+//				ParamItems: cynosdb.ClusterParamItemArray{
+//					&cynosdb.ClusterParamItemArgs{
+//						Name:         pulumi.String("character_set_server"),
+//						CurrentValue: pulumi.String("utf8mb4"),
+//					},
+//					&cynosdb.ClusterParamItemArgs{
+//						Name:         pulumi.String("lower_case_table_names"),
+//						CurrentValue: pulumi.String("1"),
+//					},
+//				},
+//				Tags: pulumi.StringMap{
+//					"createBy": pulumi.String("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = cynosdb.NewBackupConfig(ctx, "example", &cynosdb.BackupConfigArgs{
+//				ClusterId:       example.ID().ToIDOutput().ToStringOutput(),
 //				BackupTimeBeg:   pulumi.Int(7200),
 //				BackupTimeEnd:   pulumi.Int(21600),
-//				ClusterId:       pulumi.String("cynosdbmysql-bws8h88b"),
 //				ReserveDuration: pulumi.Int(604800),
 //				LogicBackupConfig: &cynosdb.BackupConfigLogicBackupConfigArgs{
 //					LogicBackupEnable:  pulumi.String("ON"),
@@ -43,7 +84,7 @@ import (
 //						pulumi.String("ap-shanghai"),
 //					},
 //					LogicCrossRegionsEnable: pulumi.String("ON"),
-//					LogicReserveDuration:    pulumi.Int(259200),
+//					LogicReserveDuration:    pulumi.Int(604800),
 //				},
 //			})
 //			if err != nil {
@@ -69,10 +110,10 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := cynosdb.NewBackupConfig(ctx, "foo", &cynosdb.BackupConfigArgs{
+//			_, err := cynosdb.NewBackupConfig(ctx, "example", &cynosdb.BackupConfigArgs{
+//				ClusterId:       pulumi.Any(exampleTencentcloudCynosdbCluster.Id),
 //				BackupTimeBeg:   pulumi.Int(7200),
 //				BackupTimeEnd:   pulumi.Int(21600),
-//				ClusterId:       pulumi.String("cynosdbmysql-bws8h88b"),
 //				ReserveDuration: pulumi.Int(604800),
 //				LogicBackupConfig: &cynosdb.BackupConfigLogicBackupConfigArgs{
 //					LogicBackupEnable: pulumi.String("OFF"),
@@ -87,12 +128,47 @@ import (
 //
 // ```
 //
+// ### Enable secondary snapshot backup configuration
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cynosdb"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := cynosdb.NewBackupConfig(ctx, "example", &cynosdb.BackupConfigArgs{
+//				ClusterId:       pulumi.Any(exampleTencentcloudCynosdbCluster.Id),
+//				BackupTimeBeg:   pulumi.Int(7200),
+//				BackupTimeEnd:   pulumi.Int(21600),
+//				ReserveDuration: pulumi.Int(604800),
+//				SnapshotSecondaryBackupConfig: &cynosdb.BackupConfigSnapshotSecondaryBackupConfigArgs{
+//					BackupTimeBeg:         pulumi.Int(7200),
+//					BackupTimeEnd:         pulumi.Int(21600),
+//					ReserveDuration:       pulumi.Int(604800),
+//					BackupTriggerStrategy: pulumi.String("periodically"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
 // ## Import
 //
-// cynosdb backup_config can be imported using the id, e.g.
+// CynosDB backup config can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Cynosdb/backupConfig:BackupConfig foo cynosdbmysql-bws8h88b
+// $ pulumi import tencentcloud:Cynosdb/backupConfig:BackupConfig example cynosdbmysql-bws8h88b
 // ```
 type BackupConfig struct {
 	pulumi.CustomResourceState
@@ -108,9 +184,11 @@ type BackupConfig struct {
 	// Cluster ID.
 	ClusterId pulumi.StringOutput `pulumi:"clusterId"`
 	// Logical backup configuration. Do not set this field if it is not enabled. Example value: [{"LogicBackupEnable": "ON","LogicBackupTimeBeg": "2023-04-24 15:06:04","LogicBackupTimeEnd": "2024-04-24 15:06:04","LogicReserveDuration": "60","LogicCrossRegionsEnable": "ON","LogicCrossRegions": ["ap-guangzhou"]}].
-	LogicBackupConfig BackupConfigLogicBackupConfigPtrOutput `pulumi:"logicBackupConfig"`
+	LogicBackupConfig BackupConfigLogicBackupConfigOutput `pulumi:"logicBackupConfig"`
 	// Backup retention period in seconds. Backups will be cleared after this period elapses. 7 days is represented by 3600*24*7 = 604800. Maximum value: 158112000.
 	ReserveDuration pulumi.IntOutput `pulumi:"reserveDuration"`
+	// Secondary snapshot backup configuration.
+	SnapshotSecondaryBackupConfig BackupConfigSnapshotSecondaryBackupConfigOutput `pulumi:"snapshotSecondaryBackupConfig"`
 }
 
 // NewBackupConfig registers a new resource with the given unique name, arguments, and options.
@@ -169,6 +247,8 @@ type backupConfigState struct {
 	LogicBackupConfig *BackupConfigLogicBackupConfig `pulumi:"logicBackupConfig"`
 	// Backup retention period in seconds. Backups will be cleared after this period elapses. 7 days is represented by 3600*24*7 = 604800. Maximum value: 158112000.
 	ReserveDuration *int `pulumi:"reserveDuration"`
+	// Secondary snapshot backup configuration.
+	SnapshotSecondaryBackupConfig *BackupConfigSnapshotSecondaryBackupConfig `pulumi:"snapshotSecondaryBackupConfig"`
 }
 
 type BackupConfigState struct {
@@ -186,6 +266,8 @@ type BackupConfigState struct {
 	LogicBackupConfig BackupConfigLogicBackupConfigPtrInput
 	// Backup retention period in seconds. Backups will be cleared after this period elapses. 7 days is represented by 3600*24*7 = 604800. Maximum value: 158112000.
 	ReserveDuration pulumi.IntPtrInput
+	// Secondary snapshot backup configuration.
+	SnapshotSecondaryBackupConfig BackupConfigSnapshotSecondaryBackupConfigPtrInput
 }
 
 func (BackupConfigState) ElementType() reflect.Type {
@@ -203,6 +285,8 @@ type backupConfigArgs struct {
 	LogicBackupConfig *BackupConfigLogicBackupConfig `pulumi:"logicBackupConfig"`
 	// Backup retention period in seconds. Backups will be cleared after this period elapses. 7 days is represented by 3600*24*7 = 604800. Maximum value: 158112000.
 	ReserveDuration int `pulumi:"reserveDuration"`
+	// Secondary snapshot backup configuration.
+	SnapshotSecondaryBackupConfig *BackupConfigSnapshotSecondaryBackupConfig `pulumi:"snapshotSecondaryBackupConfig"`
 }
 
 // The set of arguments for constructing a BackupConfig resource.
@@ -217,6 +301,8 @@ type BackupConfigArgs struct {
 	LogicBackupConfig BackupConfigLogicBackupConfigPtrInput
 	// Backup retention period in seconds. Backups will be cleared after this period elapses. 7 days is represented by 3600*24*7 = 604800. Maximum value: 158112000.
 	ReserveDuration pulumi.IntInput
+	// Secondary snapshot backup configuration.
+	SnapshotSecondaryBackupConfig BackupConfigSnapshotSecondaryBackupConfigPtrInput
 }
 
 func (BackupConfigArgs) ElementType() reflect.Type {
@@ -332,13 +418,20 @@ func (o BackupConfigOutput) ClusterId() pulumi.StringOutput {
 }
 
 // Logical backup configuration. Do not set this field if it is not enabled. Example value: [{"LogicBackupEnable": "ON","LogicBackupTimeBeg": "2023-04-24 15:06:04","LogicBackupTimeEnd": "2024-04-24 15:06:04","LogicReserveDuration": "60","LogicCrossRegionsEnable": "ON","LogicCrossRegions": ["ap-guangzhou"]}].
-func (o BackupConfigOutput) LogicBackupConfig() BackupConfigLogicBackupConfigPtrOutput {
-	return o.ApplyT(func(v *BackupConfig) BackupConfigLogicBackupConfigPtrOutput { return v.LogicBackupConfig }).(BackupConfigLogicBackupConfigPtrOutput)
+func (o BackupConfigOutput) LogicBackupConfig() BackupConfigLogicBackupConfigOutput {
+	return o.ApplyT(func(v *BackupConfig) BackupConfigLogicBackupConfigOutput { return v.LogicBackupConfig }).(BackupConfigLogicBackupConfigOutput)
 }
 
 // Backup retention period in seconds. Backups will be cleared after this period elapses. 7 days is represented by 3600*24*7 = 604800. Maximum value: 158112000.
 func (o BackupConfigOutput) ReserveDuration() pulumi.IntOutput {
 	return o.ApplyT(func(v *BackupConfig) pulumi.IntOutput { return v.ReserveDuration }).(pulumi.IntOutput)
+}
+
+// Secondary snapshot backup configuration.
+func (o BackupConfigOutput) SnapshotSecondaryBackupConfig() BackupConfigSnapshotSecondaryBackupConfigOutput {
+	return o.ApplyT(func(v *BackupConfig) BackupConfigSnapshotSecondaryBackupConfigOutput {
+		return v.SnapshotSecondaryBackupConfig
+	}).(BackupConfigSnapshotSecondaryBackupConfigOutput)
 }
 
 type BackupConfigArrayOutput struct{ *pulumi.OutputState }

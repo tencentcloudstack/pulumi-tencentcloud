@@ -21,6 +21,8 @@ import (
 //
 // import (
 //
+//	"strconv"
+//
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dasb"
 //
@@ -60,7 +62,7 @@ import (
 //				return err
 //			}
 //			exampleDeviceAccount, err := dasb.NewDeviceAccount(ctx, "example", &dasb.DeviceAccountArgs{
-//				DeviceId: exampleDevice.ID(),
+//				DeviceId: exampleDevice.ID().ToIDOutput().ApplyT(func(id pulumi.ID) (int, error) { return strconv.Atoi(string(id)) }).(pulumi.IntOutput),
 //				Account:  pulumi.String("root"),
 //			})
 //			if err != nil {
@@ -86,22 +88,22 @@ import (
 //				MaxFileUpSize:     pulumi.Int(0),
 //				MaxFileDownSize:   pulumi.Int(0),
 //				UserIdSets: pulumi.IntArray{
-//					example.ID(),
+//					example.ID().ToIDOutput().ApplyT(func(id pulumi.ID) (int, error) { return strconv.Atoi(string(id)) }).(pulumi.IntOutput),
 //				},
 //				UserGroupIdSets: pulumi.IntArray{
-//					exampleUserGroup.ID(),
+//					exampleUserGroup.ID().ToIDOutput().ApplyT(func(id pulumi.ID) (int, error) { return strconv.Atoi(string(id)) }).(pulumi.IntOutput),
 //				},
 //				DeviceIdSets: pulumi.IntArray{
-//					exampleDevice.ID(),
+//					exampleDevice.ID().ToIDOutput().ApplyT(func(id pulumi.ID) (int, error) { return strconv.Atoi(string(id)) }).(pulumi.IntOutput),
 //				},
 //				DeviceGroupIdSets: pulumi.IntArray{
-//					exampleDeviceGroup.ID(),
+//					exampleDeviceGroup.ID().ToIDOutput().ApplyT(func(id pulumi.ID) (int, error) { return strconv.Atoi(string(id)) }).(pulumi.IntOutput),
 //				},
 //				AccountSets: pulumi.StringArray{
-//					exampleDeviceAccount.ID(),
+//					exampleDeviceAccount.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				CmdTemplateIdSets: pulumi.IntArray{
-//					exampleCmdTemplate.ID(),
+//					exampleCmdTemplate.ID().ToIDOutput().ApplyT(func(id pulumi.ID) (int, error) { return strconv.Atoi(string(id)) }).(pulumi.IntOutput),
 //				},
 //				AcTemplateIdSets:      pulumi.StringArray{},
 //				AllowDiskFileUp:       pulumi.Bool(true),

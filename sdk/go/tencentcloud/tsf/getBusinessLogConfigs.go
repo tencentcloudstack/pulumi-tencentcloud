@@ -77,12 +77,8 @@ type LookupBusinessLogConfigsResult struct {
 }
 
 func LookupBusinessLogConfigsOutput(ctx *pulumi.Context, args LookupBusinessLogConfigsOutputArgs, opts ...pulumi.InvokeOption) LookupBusinessLogConfigsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupBusinessLogConfigsResultOutput, error) {
-			args := v.(LookupBusinessLogConfigsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tsf/getBusinessLogConfigs:getBusinessLogConfigs", args, LookupBusinessLogConfigsResultOutput{}, options).(LookupBusinessLogConfigsResultOutput), nil
-		}).(LookupBusinessLogConfigsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tsf/getBusinessLogConfigs:getBusinessLogConfigs", args, LookupBusinessLogConfigsResultOutput{}, options).(LookupBusinessLogConfigsResultOutput)
 }
 
 // A collection of arguments for invoking getBusinessLogConfigs.

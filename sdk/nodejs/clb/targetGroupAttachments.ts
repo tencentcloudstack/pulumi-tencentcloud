@@ -123,15 +123,15 @@ export interface TargetGroupAttachmentsState {
     /**
      * Association array, the combination cannot exceed 20.
      */
-    associations?: pulumi.Input<pulumi.Input<inputs.Clb.TargetGroupAttachmentsAssociation>[]>;
+    associations?: pulumi.Input<pulumi.Input<inputs.Clb.TargetGroupAttachmentsAssociation>[] | undefined>;
     /**
      * CLB instance ID, (load_balancer_id and targetGroupId require at least one).
      */
-    loadBalancerId?: pulumi.Input<string>;
+    loadBalancerId?: pulumi.Input<string | undefined>;
     /**
      * Target group ID, (load_balancer_id and targetGroupId require at least one).
      */
-    targetGroupId?: pulumi.Input<string>;
+    targetGroupId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -145,9 +145,9 @@ export interface TargetGroupAttachmentsArgs {
     /**
      * CLB instance ID, (load_balancer_id and targetGroupId require at least one).
      */
-    loadBalancerId?: pulumi.Input<string>;
+    loadBalancerId?: pulumi.Input<string | undefined>;
     /**
      * Target group ID, (load_balancer_id and targetGroupId require at least one).
      */
-    targetGroupId?: pulumi.Input<string>;
+    targetGroupId?: pulumi.Input<string | undefined>;
 }

@@ -54,7 +54,7 @@ import (
 //
 // ## Import
 //
-// elasticsearch logstash_pipeline can be imported using the id, e.g.
+// elasticsearch logstashPipeline can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Elasticsearch/logstashPipeline:LogstashPipeline logstash_pipeline ${instance_id}#${pipeline_id}

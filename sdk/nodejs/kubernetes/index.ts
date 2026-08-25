@@ -25,6 +25,11 @@ export type BackupStorageLocation = import("./backupStorageLocation").BackupStor
 export const BackupStorageLocation: typeof import("./backupStorageLocation").BackupStorageLocation = null as any;
 utilities.lazyLoad(exports, ["BackupStorageLocation"], () => require("./backupStorageLocation"));
 
+export { CancelUpgradePlanOperationArgs, CancelUpgradePlanOperationState } from "./cancelUpgradePlanOperation";
+export type CancelUpgradePlanOperation = import("./cancelUpgradePlanOperation").CancelUpgradePlanOperation;
+export const CancelUpgradePlanOperation: typeof import("./cancelUpgradePlanOperation").CancelUpgradePlanOperation = null as any;
+utilities.lazyLoad(exports, ["CancelUpgradePlanOperation"], () => require("./cancelUpgradePlanOperation"));
+
 export { ClusterArgs, ClusterState } from "./cluster";
 export type Cluster = import("./cluster").Cluster;
 export const Cluster: typeof import("./cluster").Cluster = null as any;
@@ -40,6 +45,16 @@ export type ClusterEndpoint = import("./clusterEndpoint").ClusterEndpoint;
 export const ClusterEndpoint: typeof import("./clusterEndpoint").ClusterEndpoint = null as any;
 utilities.lazyLoad(exports, ["ClusterEndpoint"], () => require("./clusterEndpoint"));
 
+export { ClusterExtraArgsConfigArgs, ClusterExtraArgsConfigState } from "./clusterExtraArgsConfig";
+export type ClusterExtraArgsConfig = import("./clusterExtraArgsConfig").ClusterExtraArgsConfig;
+export const ClusterExtraArgsConfig: typeof import("./clusterExtraArgsConfig").ClusterExtraArgsConfig = null as any;
+utilities.lazyLoad(exports, ["ClusterExtraArgsConfig"], () => require("./clusterExtraArgsConfig"));
+
+export { ClusterMaintenanceWindowAndExclusionArgs, ClusterMaintenanceWindowAndExclusionState } from "./clusterMaintenanceWindowAndExclusion";
+export type ClusterMaintenanceWindowAndExclusion = import("./clusterMaintenanceWindowAndExclusion").ClusterMaintenanceWindowAndExclusion;
+export const ClusterMaintenanceWindowAndExclusion: typeof import("./clusterMaintenanceWindowAndExclusion").ClusterMaintenanceWindowAndExclusion = null as any;
+utilities.lazyLoad(exports, ["ClusterMaintenanceWindowAndExclusion"], () => require("./clusterMaintenanceWindowAndExclusion"));
+
 export { ClusterMasterAttachmentArgs, ClusterMasterAttachmentState } from "./clusterMasterAttachment";
 export type ClusterMasterAttachment = import("./clusterMasterAttachment").ClusterMasterAttachment;
 export const ClusterMasterAttachment: typeof import("./clusterMasterAttachment").ClusterMasterAttachment = null as any;
@@ -49,6 +64,21 @@ export { ClusterReleaseArgs, ClusterReleaseState } from "./clusterRelease";
 export type ClusterRelease = import("./clusterRelease").ClusterRelease;
 export const ClusterRelease: typeof import("./clusterRelease").ClusterRelease = null as any;
 utilities.lazyLoad(exports, ["ClusterRelease"], () => require("./clusterRelease"));
+
+export { ClusterRollOutSequenceTagConfigArgs, ClusterRollOutSequenceTagConfigState } from "./clusterRollOutSequenceTagConfig";
+export type ClusterRollOutSequenceTagConfig = import("./clusterRollOutSequenceTagConfig").ClusterRollOutSequenceTagConfig;
+export const ClusterRollOutSequenceTagConfig: typeof import("./clusterRollOutSequenceTagConfig").ClusterRollOutSequenceTagConfig = null as any;
+utilities.lazyLoad(exports, ["ClusterRollOutSequenceTagConfig"], () => require("./clusterRollOutSequenceTagConfig"));
+
+export { ClusterSchedulerPolicyConfigArgs, ClusterSchedulerPolicyConfigState } from "./clusterSchedulerPolicyConfig";
+export type ClusterSchedulerPolicyConfig = import("./clusterSchedulerPolicyConfig").ClusterSchedulerPolicyConfig;
+export const ClusterSchedulerPolicyConfig: typeof import("./clusterSchedulerPolicyConfig").ClusterSchedulerPolicyConfig = null as any;
+utilities.lazyLoad(exports, ["ClusterSchedulerPolicyConfig"], () => require("./clusterSchedulerPolicyConfig"));
+
+export { ControlPlaneLogArgs, ControlPlaneLogState } from "./controlPlaneLog";
+export type ControlPlaneLog = import("./controlPlaneLog").ControlPlaneLog;
+export const ControlPlaneLog: typeof import("./controlPlaneLog").ControlPlaneLog = null as any;
+utilities.lazyLoad(exports, ["ControlPlaneLog"], () => require("./controlPlaneLog"));
 
 export { EncryptionProtectionArgs, EncryptionProtectionState } from "./encryptionProtection";
 export type EncryptionProtection = import("./encryptionProtection").EncryptionProtection;
@@ -70,10 +100,20 @@ export const getCharts: typeof import("./getCharts").getCharts = null as any;
 export const getChartsOutput: typeof import("./getCharts").getChartsOutput = null as any;
 utilities.lazyLoad(exports, ["getCharts","getChartsOutput"], () => require("./getCharts"));
 
+export { GetClusterAdminRoleArgs, GetClusterAdminRoleResult, GetClusterAdminRoleOutputArgs } from "./getClusterAdminRole";
+export const getClusterAdminRole: typeof import("./getClusterAdminRole").getClusterAdminRole = null as any;
+export const getClusterAdminRoleOutput: typeof import("./getClusterAdminRole").getClusterAdminRoleOutput = null as any;
+utilities.lazyLoad(exports, ["getClusterAdminRole","getClusterAdminRoleOutput"], () => require("./getClusterAdminRole"));
+
 export { GetClusterAuthenticationOptionsArgs, GetClusterAuthenticationOptionsResult, GetClusterAuthenticationOptionsOutputArgs } from "./getClusterAuthenticationOptions";
 export const getClusterAuthenticationOptions: typeof import("./getClusterAuthenticationOptions").getClusterAuthenticationOptions = null as any;
 export const getClusterAuthenticationOptionsOutput: typeof import("./getClusterAuthenticationOptions").getClusterAuthenticationOptionsOutput = null as any;
 utilities.lazyLoad(exports, ["getClusterAuthenticationOptions","getClusterAuthenticationOptionsOutput"], () => require("./getClusterAuthenticationOptions"));
+
+export { GetClusterAvailableExtraArgsArgs, GetClusterAvailableExtraArgsResult, GetClusterAvailableExtraArgsOutputArgs } from "./getClusterAvailableExtraArgs";
+export const getClusterAvailableExtraArgs: typeof import("./getClusterAvailableExtraArgs").getClusterAvailableExtraArgs = null as any;
+export const getClusterAvailableExtraArgsOutput: typeof import("./getClusterAvailableExtraArgs").getClusterAvailableExtraArgsOutput = null as any;
+utilities.lazyLoad(exports, ["getClusterAvailableExtraArgs","getClusterAvailableExtraArgsOutput"], () => require("./getClusterAvailableExtraArgs"));
 
 export { GetClusterCommonNamesArgs, GetClusterCommonNamesResult, GetClusterCommonNamesOutputArgs } from "./getClusterCommonNames";
 export const getClusterCommonNames: typeof import("./getClusterCommonNames").getClusterCommonNames = null as any;
@@ -105,6 +145,21 @@ export const getClusters: typeof import("./getClusters").getClusters = null as a
 export const getClustersOutput: typeof import("./getClusters").getClustersOutput = null as any;
 utilities.lazyLoad(exports, ["getClusters","getClustersOutput"], () => require("./getClusters"));
 
+export { GetUpgradeTaskDetailArgs, GetUpgradeTaskDetailResult, GetUpgradeTaskDetailOutputArgs } from "./getUpgradeTaskDetail";
+export const getUpgradeTaskDetail: typeof import("./getUpgradeTaskDetail").getUpgradeTaskDetail = null as any;
+export const getUpgradeTaskDetailOutput: typeof import("./getUpgradeTaskDetail").getUpgradeTaskDetailOutput = null as any;
+utilities.lazyLoad(exports, ["getUpgradeTaskDetail","getUpgradeTaskDetailOutput"], () => require("./getUpgradeTaskDetail"));
+
+export { GetUpgradeTasksArgs, GetUpgradeTasksResult, GetUpgradeTasksOutputArgs } from "./getUpgradeTasks";
+export const getUpgradeTasks: typeof import("./getUpgradeTasks").getUpgradeTasks = null as any;
+export const getUpgradeTasksOutput: typeof import("./getUpgradeTasks").getUpgradeTasksOutput = null as any;
+utilities.lazyLoad(exports, ["getUpgradeTasks","getUpgradeTasksOutput"], () => require("./getUpgradeTasks"));
+
+export { GlobalMaintenanceWindowAndExclusionArgs, GlobalMaintenanceWindowAndExclusionState } from "./globalMaintenanceWindowAndExclusion";
+export type GlobalMaintenanceWindowAndExclusion = import("./globalMaintenanceWindowAndExclusion").GlobalMaintenanceWindowAndExclusion;
+export const GlobalMaintenanceWindowAndExclusion: typeof import("./globalMaintenanceWindowAndExclusion").GlobalMaintenanceWindowAndExclusion = null as any;
+utilities.lazyLoad(exports, ["GlobalMaintenanceWindowAndExclusion"], () => require("./globalMaintenanceWindowAndExclusion"));
+
 export { HealthCheckPolicyArgs, HealthCheckPolicyState } from "./healthCheckPolicy";
 export type HealthCheckPolicy = import("./healthCheckPolicy").HealthCheckPolicy;
 export const HealthCheckPolicy: typeof import("./healthCheckPolicy").HealthCheckPolicy = null as any;
@@ -125,6 +180,11 @@ export type NodePool = import("./nodePool").NodePool;
 export const NodePool: typeof import("./nodePool").NodePool = null as any;
 utilities.lazyLoad(exports, ["NodePool"], () => require("./nodePool"));
 
+export { RollOutSequenceArgs, RollOutSequenceState } from "./rollOutSequence";
+export type RollOutSequence = import("./rollOutSequence").RollOutSequence;
+export const RollOutSequence: typeof import("./rollOutSequence").RollOutSequence = null as any;
+utilities.lazyLoad(exports, ["RollOutSequence"], () => require("./rollOutSequence"));
+
 export { ScaleWorkerArgs, ScaleWorkerState } from "./scaleWorker";
 export type ScaleWorker = import("./scaleWorker").ScaleWorker;
 export const ScaleWorker: typeof import("./scaleWorker").ScaleWorker = null as any;
@@ -134,6 +194,11 @@ export { ServerlessNodePoolArgs, ServerlessNodePoolState } from "./serverlessNod
 export type ServerlessNodePool = import("./serverlessNodePool").ServerlessNodePool;
 export const ServerlessNodePool: typeof import("./serverlessNodePool").ServerlessNodePool = null as any;
 utilities.lazyLoad(exports, ["ServerlessNodePool"], () => require("./serverlessNodePool"));
+
+export { UserPermissionsArgs, UserPermissionsState } from "./userPermissions";
+export type UserPermissions = import("./userPermissions").UserPermissions;
+export const UserPermissions: typeof import("./userPermissions").UserPermissions = null as any;
+utilities.lazyLoad(exports, ["UserPermissions"], () => require("./userPermissions"));
 
 
 const _module = {
@@ -148,18 +213,32 @@ const _module = {
                 return new AuthAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Kubernetes/backupStorageLocation:BackupStorageLocation":
                 return new BackupStorageLocation(name, <any>undefined, { urn })
+            case "tencentcloud:Kubernetes/cancelUpgradePlanOperation:CancelUpgradePlanOperation":
+                return new CancelUpgradePlanOperation(name, <any>undefined, { urn })
             case "tencentcloud:Kubernetes/cluster:Cluster":
                 return new Cluster(name, <any>undefined, { urn })
             case "tencentcloud:Kubernetes/clusterAttachment:ClusterAttachment":
                 return new ClusterAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Kubernetes/clusterEndpoint:ClusterEndpoint":
                 return new ClusterEndpoint(name, <any>undefined, { urn })
+            case "tencentcloud:Kubernetes/clusterExtraArgsConfig:ClusterExtraArgsConfig":
+                return new ClusterExtraArgsConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Kubernetes/clusterMaintenanceWindowAndExclusion:ClusterMaintenanceWindowAndExclusion":
+                return new ClusterMaintenanceWindowAndExclusion(name, <any>undefined, { urn })
             case "tencentcloud:Kubernetes/clusterMasterAttachment:ClusterMasterAttachment":
                 return new ClusterMasterAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Kubernetes/clusterRelease:ClusterRelease":
                 return new ClusterRelease(name, <any>undefined, { urn })
+            case "tencentcloud:Kubernetes/clusterRollOutSequenceTagConfig:ClusterRollOutSequenceTagConfig":
+                return new ClusterRollOutSequenceTagConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Kubernetes/clusterSchedulerPolicyConfig:ClusterSchedulerPolicyConfig":
+                return new ClusterSchedulerPolicyConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Kubernetes/controlPlaneLog:ControlPlaneLog":
+                return new ControlPlaneLog(name, <any>undefined, { urn })
             case "tencentcloud:Kubernetes/encryptionProtection:EncryptionProtection":
                 return new EncryptionProtection(name, <any>undefined, { urn })
+            case "tencentcloud:Kubernetes/globalMaintenanceWindowAndExclusion:GlobalMaintenanceWindowAndExclusion":
+                return new GlobalMaintenanceWindowAndExclusion(name, <any>undefined, { urn })
             case "tencentcloud:Kubernetes/healthCheckPolicy:HealthCheckPolicy":
                 return new HealthCheckPolicy(name, <any>undefined, { urn })
             case "tencentcloud:Kubernetes/logConfig:LogConfig":
@@ -168,10 +247,14 @@ const _module = {
                 return new NativeNodePool(name, <any>undefined, { urn })
             case "tencentcloud:Kubernetes/nodePool:NodePool":
                 return new NodePool(name, <any>undefined, { urn })
+            case "tencentcloud:Kubernetes/rollOutSequence:RollOutSequence":
+                return new RollOutSequence(name, <any>undefined, { urn })
             case "tencentcloud:Kubernetes/scaleWorker:ScaleWorker":
                 return new ScaleWorker(name, <any>undefined, { urn })
             case "tencentcloud:Kubernetes/serverlessNodePool:ServerlessNodePool":
                 return new ServerlessNodePool(name, <any>undefined, { urn })
+            case "tencentcloud:Kubernetes/userPermissions:UserPermissions":
+                return new UserPermissions(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
@@ -181,15 +264,24 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/addon", _modul
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/addonConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/authAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/backupStorageLocation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/cancelUpgradePlanOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/cluster", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/clusterAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/clusterEndpoint", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/clusterExtraArgsConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/clusterMaintenanceWindowAndExclusion", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/clusterMasterAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/clusterRelease", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/clusterRollOutSequenceTagConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/clusterSchedulerPolicyConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/controlPlaneLog", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/encryptionProtection", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/globalMaintenanceWindowAndExclusion", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/healthCheckPolicy", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/logConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/nativeNodePool", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/nodePool", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/rollOutSequence", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/scaleWorker", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/serverlessNodePool", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/userPermissions", _module)

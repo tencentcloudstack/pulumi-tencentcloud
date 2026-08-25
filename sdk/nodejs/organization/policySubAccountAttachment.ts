@@ -22,8 +22,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * organization policy_sub_account_attachment can be imported using the id, e.g.
- *
+ * organization policySubAccountAttachment can be imported using the id, e.g.
  * ```sh
  * $ pulumi import tencentcloud:Organization/policySubAccountAttachment:PolicySubAccountAttachment policy_sub_account_attachment policyId#memberUin#orgSubAccountUin
  * ```
@@ -154,43 +153,43 @@ export interface PolicySubAccountAttachmentState {
     /**
      * Creation time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Manage Identity ID.
      */
-    identityId?: pulumi.Input<number>;
+    identityId?: pulumi.Input<number | undefined>;
     /**
      * Identity role alias name.
      */
-    identityRoleAliasName?: pulumi.Input<string>;
+    identityRoleAliasName?: pulumi.Input<string | undefined>;
     /**
      * Identity role name.
      */
-    identityRoleName?: pulumi.Input<string>;
+    identityRoleName?: pulumi.Input<string | undefined>;
     /**
      * Organization member uin.
      */
-    memberUin?: pulumi.Input<number>;
+    memberUin?: pulumi.Input<number | undefined>;
     /**
      * Organization administrator sub account name.
      */
-    orgSubAccountName?: pulumi.Input<string>;
+    orgSubAccountName?: pulumi.Input<string | undefined>;
     /**
      * Organization administrator sub account uin list.
      */
-    orgSubAccountUin?: pulumi.Input<number>;
+    orgSubAccountUin?: pulumi.Input<number | undefined>;
     /**
      * Policy ID.
      */
-    policyId?: pulumi.Input<number>;
+    policyId?: pulumi.Input<number | undefined>;
     /**
      * Policy name.
      */
-    policyName?: pulumi.Input<string>;
+    policyName?: pulumi.Input<string | undefined>;
     /**
      * Update time.
      */
-    updateTime?: pulumi.Input<string>;
+    updateTime?: pulumi.Input<string | undefined>;
 }
 
 /**

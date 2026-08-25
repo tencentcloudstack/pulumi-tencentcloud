@@ -32,7 +32,7 @@ import (
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := clb.NewCustomizedConfig(ctx, "example", &clb.CustomizedConfigArgs{
 //				ConfigName:    pulumi.String("tf-example"),
-//				ConfigContent: pulumi.String("client_max_body_size 224M;\nclient_body_timeout 60s;"),
+//				ConfigContent: pulumi.String("client_max_body_size 224M;\r\nclient_body_timeout 60s;"),
 //			})
 //			if err != nil {
 //				return err
@@ -59,7 +59,7 @@ import (
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := clb.NewCustomizedConfig(ctx, "example", &clb.CustomizedConfigArgs{
 //				ConfigName:    pulumi.String("tf-example"),
-//				ConfigContent: pulumi.String("client_max_body_size 224M;\nclient_body_timeout 60s;"),
+//				ConfigContent: pulumi.String("client_max_body_size 224M;\r\nclient_body_timeout 60s;"),
 //				LoadBalancerIds: pulumi.StringArray{
 //					pulumi.String("lb-l6cp6jt4"),
 //					pulumi.String("lb-muk4zzxi"),

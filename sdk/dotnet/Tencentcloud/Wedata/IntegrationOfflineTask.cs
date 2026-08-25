@@ -86,7 +86,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
     /// 
     /// ## Import
     /// 
-    /// wedata integration_offline_task can be imported using the id, e.g.
+    /// wedata IntegrationOfflineTask can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Wedata/integrationOfflineTask:IntegrationOfflineTask example 1612982498218618880#20231102200955095

@@ -48,7 +48,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * organization service assign can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Organization/serviceAssign:ServiceAssign example 15
  * ```
@@ -146,23 +145,23 @@ export interface ServiceAssignState {
     /**
      * Management scope of the delegated admin. Valid values: 1 (all members), 2 (partial members). Default value: `1`.
      */
-    managementScope?: pulumi.Input<number>;
+    managementScope?: pulumi.Input<number | undefined>;
     /**
      * ID list of the managed departments. This parameter is valid when `managementScope` is `2`.
      */
-    managementScopeNodeIds?: pulumi.Input<pulumi.Input<number>[]>;
+    managementScopeNodeIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Uin list of the managed members. This parameter is valid when `managementScope` is `2`.
      */
-    managementScopeUins?: pulumi.Input<pulumi.Input<number>[]>;
+    managementScopeUins?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Uin list of the delegated admins, Including up to 20 items.
      */
-    memberUins?: pulumi.Input<pulumi.Input<number>[]>;
+    memberUins?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Organization service ID.
      */
-    serviceId?: pulumi.Input<number>;
+    serviceId?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -172,15 +171,15 @@ export interface ServiceAssignArgs {
     /**
      * Management scope of the delegated admin. Valid values: 1 (all members), 2 (partial members). Default value: `1`.
      */
-    managementScope?: pulumi.Input<number>;
+    managementScope?: pulumi.Input<number | undefined>;
     /**
      * ID list of the managed departments. This parameter is valid when `managementScope` is `2`.
      */
-    managementScopeNodeIds?: pulumi.Input<pulumi.Input<number>[]>;
+    managementScopeNodeIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Uin list of the managed members. This parameter is valid when `managementScope` is `2`.
      */
-    managementScopeUins?: pulumi.Input<pulumi.Input<number>[]>;
+    managementScopeUins?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Uin list of the delegated admins, Including up to 20 items.
      */

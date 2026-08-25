@@ -142,27 +142,27 @@ export interface TdsqlAuditLogState {
     /**
      * Deadline time, such as `2019-09-11 10:13:14`.
      */
-    endTime?: pulumi.Input<string>;
+    endTime?: pulumi.Input<string | undefined>;
     /**
      * Filter conditions. Logs can be filtered according to the filter conditions set.
      */
-    filter?: pulumi.Input<inputs.Dbbrain.TdsqlAuditLogFilter>;
+    filter?: pulumi.Input<inputs.Dbbrain.TdsqlAuditLogFilter | undefined>;
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Consistent with Product. For example: dcdb, mariadb.
      */
-    nodeRequestType?: pulumi.Input<string>;
+    nodeRequestType?: pulumi.Input<string | undefined>;
     /**
      * Service product type, supported values include: dcdb - cloud database Tdsql, mariadb - cloud database MariaDB for MariaDB..
      */
-    product?: pulumi.Input<string>;
+    product?: pulumi.Input<string | undefined>;
     /**
      * Start time, such as `2019-09-10 12:13:14`.
      */
-    startTime?: pulumi.Input<string>;
+    startTime?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -176,7 +176,7 @@ export interface TdsqlAuditLogArgs {
     /**
      * Filter conditions. Logs can be filtered according to the filter conditions set.
      */
-    filter?: pulumi.Input<inputs.Dbbrain.TdsqlAuditLogFilter>;
+    filter?: pulumi.Input<inputs.Dbbrain.TdsqlAuditLogFilter | undefined>;
     /**
      * Instance ID.
      */

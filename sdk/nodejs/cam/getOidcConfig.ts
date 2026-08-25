@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const oidcConfig = tencentcloud.Cam.getOidcConfig({
+ * const oidcConfig = tencentcloud.cam.getOidcConfig({
  *     name: "cls-kzilgv5m",
  * });
  * export const identityKey = oidcConfig.then(oidcConfig => oidcConfig.identityKey);
@@ -86,7 +86,7 @@ export interface GetOidcConfigResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const oidcConfig = tencentcloud.Cam.getOidcConfig({
+ * const oidcConfig = tencentcloud.cam.getOidcConfig({
  *     name: "cls-kzilgv5m",
  * });
  * export const identityKey = oidcConfig.then(oidcConfig => oidcConfig.identityKey);
@@ -112,5 +112,5 @@ export interface GetOidcConfigOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

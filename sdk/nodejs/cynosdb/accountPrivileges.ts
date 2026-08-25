@@ -51,7 +51,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * cynosdb account_privileges can be imported using the id, e.g.
+ * cynosdb accountPrivileges can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Cynosdb/accountPrivileges:AccountPrivileges account_privileges account_privileges_id
@@ -159,27 +159,27 @@ export interface AccountPrivilegesState {
     /**
      * Account.
      */
-    accountName?: pulumi.Input<string>;
+    accountName?: pulumi.Input<string | undefined>;
     /**
      * Cluster ID.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Array of database permissions.
      */
-    databasePrivileges?: pulumi.Input<pulumi.Input<inputs.Cynosdb.AccountPrivilegesDatabasePrivilege>[]>;
+    databasePrivileges?: pulumi.Input<pulumi.Input<inputs.Cynosdb.AccountPrivilegesDatabasePrivilege>[] | undefined>;
     /**
      * Array of global permissions.
      */
-    globalPrivileges?: pulumi.Input<pulumi.Input<string>[]>;
+    globalPrivileges?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Host, default `%`.
      */
-    host?: pulumi.Input<string>;
+    host?: pulumi.Input<string | undefined>;
     /**
      * array of table permissions.
      */
-    tablePrivileges?: pulumi.Input<pulumi.Input<inputs.Cynosdb.AccountPrivilegesTablePrivilege>[]>;
+    tablePrivileges?: pulumi.Input<pulumi.Input<inputs.Cynosdb.AccountPrivilegesTablePrivilege>[] | undefined>;
 }
 
 /**
@@ -197,7 +197,7 @@ export interface AccountPrivilegesArgs {
     /**
      * Array of database permissions.
      */
-    databasePrivileges?: pulumi.Input<pulumi.Input<inputs.Cynosdb.AccountPrivilegesDatabasePrivilege>[]>;
+    databasePrivileges?: pulumi.Input<pulumi.Input<inputs.Cynosdb.AccountPrivilegesDatabasePrivilege>[] | undefined>;
     /**
      * Array of global permissions.
      */
@@ -205,9 +205,9 @@ export interface AccountPrivilegesArgs {
     /**
      * Host, default `%`.
      */
-    host?: pulumi.Input<string>;
+    host?: pulumi.Input<string | undefined>;
     /**
      * array of table permissions.
      */
-    tablePrivileges?: pulumi.Input<pulumi.Input<inputs.Cynosdb.AccountPrivilegesTablePrivilege>[]>;
+    tablePrivileges?: pulumi.Input<pulumi.Input<inputs.Cynosdb.AccountPrivilegesTablePrivilege>[] | undefined>;
 }

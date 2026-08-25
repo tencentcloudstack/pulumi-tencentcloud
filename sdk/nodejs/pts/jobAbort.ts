@@ -110,19 +110,19 @@ export interface JobAbortState {
     /**
      * The reason for aborting the job.
      */
-    abortReason?: pulumi.Input<number>;
+    abortReason?: pulumi.Input<number | undefined>;
     /**
      * Job ID.
      */
-    jobId?: pulumi.Input<string>;
+    jobId?: pulumi.Input<string | undefined>;
     /**
      * Project ID.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * Scenario ID.
      */
-    scenarioId?: pulumi.Input<string>;
+    scenarioId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -132,7 +132,7 @@ export interface JobAbortArgs {
     /**
      * The reason for aborting the job.
      */
-    abortReason?: pulumi.Input<number>;
+    abortReason?: pulumi.Input<number | undefined>;
     /**
      * Job ID.
      */

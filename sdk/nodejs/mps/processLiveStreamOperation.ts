@@ -177,47 +177,47 @@ export interface ProcessLiveStreamOperationState {
     /**
      * AI video intelligent analysis input parameter types.
      */
-    aiAnalysisTask?: pulumi.Input<inputs.Mps.ProcessLiveStreamOperationAiAnalysisTask>;
+    aiAnalysisTask?: pulumi.Input<inputs.Mps.ProcessLiveStreamOperationAiAnalysisTask | undefined>;
     /**
      * Type parameter of a video content audit task.
      */
-    aiContentReviewTask?: pulumi.Input<inputs.Mps.ProcessLiveStreamOperationAiContentReviewTask>;
+    aiContentReviewTask?: pulumi.Input<inputs.Mps.ProcessLiveStreamOperationAiContentReviewTask | undefined>;
     /**
      * The parameters for a video quality control task.
      */
-    aiQualityControlTask?: pulumi.Input<inputs.Mps.ProcessLiveStreamOperationAiQualityControlTask>;
+    aiQualityControlTask?: pulumi.Input<inputs.Mps.ProcessLiveStreamOperationAiQualityControlTask | undefined>;
     /**
      * Type parameter of video content recognition task.
      */
-    aiRecognitionTask?: pulumi.Input<inputs.Mps.ProcessLiveStreamOperationAiRecognitionTask>;
+    aiRecognitionTask?: pulumi.Input<inputs.Mps.ProcessLiveStreamOperationAiRecognitionTask | undefined>;
     /**
      * Target directory of a live stream processing output file, such as `/movie/201909/`. If this parameter is left empty, the `/` directory will be used.
      */
-    outputDir?: pulumi.Input<string>;
+    outputDir?: pulumi.Input<string | undefined>;
     /**
      * Target bucket of a live stream processing output file. This parameter is required if a file will be output.
      */
-    outputStorage?: pulumi.Input<inputs.Mps.ProcessLiveStreamOperationOutputStorage>;
+    outputStorage?: pulumi.Input<inputs.Mps.ProcessLiveStreamOperationOutputStorage | undefined>;
     /**
      * The scheme ID.Note 1: About `OutputStorage` and `OutputDir`:If an output storage and directory are specified for a subtask of the scheme, those output settings will be applied.If an output storage and directory are not specified for the subtasks of a scheme, the output parameters passed in the `ProcessMedia` API will be applied.Note 2: If `TaskNotifyConfig` is specified, the specified settings will be used instead of the default callback settings of the scheme.
      */
-    scheduleId?: pulumi.Input<number>;
+    scheduleId?: pulumi.Input<number | undefined>;
     /**
      * The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
      */
-    sessionContext?: pulumi.Input<string>;
+    sessionContext?: pulumi.Input<string | undefined>;
     /**
      * The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
      */
-    sessionId?: pulumi.Input<string>;
+    sessionId?: pulumi.Input<string | undefined>;
     /**
      * Event notification information of a task, which is used to specify the live stream processing result.
      */
-    taskNotifyConfig?: pulumi.Input<inputs.Mps.ProcessLiveStreamOperationTaskNotifyConfig>;
+    taskNotifyConfig?: pulumi.Input<inputs.Mps.ProcessLiveStreamOperationTaskNotifyConfig | undefined>;
     /**
      * Live stream URL, which must be a live stream file address. RTMP, HLS, and FLV are supported.
      */
-    url?: pulumi.Input<string>;
+    url?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -227,39 +227,39 @@ export interface ProcessLiveStreamOperationArgs {
     /**
      * AI video intelligent analysis input parameter types.
      */
-    aiAnalysisTask?: pulumi.Input<inputs.Mps.ProcessLiveStreamOperationAiAnalysisTask>;
+    aiAnalysisTask?: pulumi.Input<inputs.Mps.ProcessLiveStreamOperationAiAnalysisTask | undefined>;
     /**
      * Type parameter of a video content audit task.
      */
-    aiContentReviewTask?: pulumi.Input<inputs.Mps.ProcessLiveStreamOperationAiContentReviewTask>;
+    aiContentReviewTask?: pulumi.Input<inputs.Mps.ProcessLiveStreamOperationAiContentReviewTask | undefined>;
     /**
      * The parameters for a video quality control task.
      */
-    aiQualityControlTask?: pulumi.Input<inputs.Mps.ProcessLiveStreamOperationAiQualityControlTask>;
+    aiQualityControlTask?: pulumi.Input<inputs.Mps.ProcessLiveStreamOperationAiQualityControlTask | undefined>;
     /**
      * Type parameter of video content recognition task.
      */
-    aiRecognitionTask?: pulumi.Input<inputs.Mps.ProcessLiveStreamOperationAiRecognitionTask>;
+    aiRecognitionTask?: pulumi.Input<inputs.Mps.ProcessLiveStreamOperationAiRecognitionTask | undefined>;
     /**
      * Target directory of a live stream processing output file, such as `/movie/201909/`. If this parameter is left empty, the `/` directory will be used.
      */
-    outputDir?: pulumi.Input<string>;
+    outputDir?: pulumi.Input<string | undefined>;
     /**
      * Target bucket of a live stream processing output file. This parameter is required if a file will be output.
      */
-    outputStorage?: pulumi.Input<inputs.Mps.ProcessLiveStreamOperationOutputStorage>;
+    outputStorage?: pulumi.Input<inputs.Mps.ProcessLiveStreamOperationOutputStorage | undefined>;
     /**
      * The scheme ID.Note 1: About `OutputStorage` and `OutputDir`:If an output storage and directory are specified for a subtask of the scheme, those output settings will be applied.If an output storage and directory are not specified for the subtasks of a scheme, the output parameters passed in the `ProcessMedia` API will be applied.Note 2: If `TaskNotifyConfig` is specified, the specified settings will be used instead of the default callback settings of the scheme.
      */
-    scheduleId?: pulumi.Input<number>;
+    scheduleId?: pulumi.Input<number | undefined>;
     /**
      * The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
      */
-    sessionContext?: pulumi.Input<string>;
+    sessionContext?: pulumi.Input<string | undefined>;
     /**
      * The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
      */
-    sessionId?: pulumi.Input<string>;
+    sessionId?: pulumi.Input<string | undefined>;
     /**
      * Event notification information of a task, which is used to specify the live stream processing result.
      */

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataWorkflowFolders = tencentcloud.Wedata.getWorkflowFolders({
+ * const wedataWorkflowFolders = tencentcloud.wedata.getWorkflowFolders({
  *     projectId: "2905622749543821312",
  *     parentFolderPath: "/",
  * });
@@ -73,7 +73,7 @@ export interface GetWorkflowFoldersResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataWorkflowFolders = tencentcloud.Wedata.getWorkflowFolders({
+ * const wedataWorkflowFolders = tencentcloud.wedata.getWorkflowFolders({
  *     projectId: "2905622749543821312",
  *     parentFolderPath: "/",
  * });
@@ -103,5 +103,5 @@ export interface GetWorkflowFoldersOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

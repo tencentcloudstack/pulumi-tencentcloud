@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
 {
     /// <summary>
-    /// Provides a resource to create a cynosdb ClusterTransparentEncrypt
+    /// Provides a resource to create a Cynosdb cluster transparent encrypt
     /// 
     /// &gt; **NOTE:** Once activated, it cannot be deactivated.
     /// 
@@ -27,13 +27,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var cynosdbClusterTransparentEncrypt = new Tencentcloud.Cynosdb.ClusterTransparentEncrypt("cynosdb_cluster_transparent_encrypt", new()
+    ///     var example = new Tencentcloud.Cynosdb.ClusterTransparentEncrypt("example", new()
     ///     {
     ///         ClusterId = cynosdbmysql_bu6hlulf,
-    ///         IsOpenGlobalEncryption = false,
     ///         KeyId = "f063c18b-xxxx-xxxx-xxxx-525400d3a886",
     ///         KeyRegion = "ap-guangzhou",
     ///         KeyType = "custom",
+    ///         IsOpenGlobalEncryption = false,
     ///     });
     /// 
     /// });
@@ -41,10 +41,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// ## Import
     /// 
-    /// cynosdb cluster_transparent_encrypt can be imported using the id, e.g.
+    /// Cynosdb cluster transparent encrypt can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Cynosdb/clusterTransparentEncrypt:ClusterTransparentEncrypt cynosdb_cluster_transparent_encrypt cynosdbmysql-bu6hlulf
+    /// $ pulumi import tencentcloud:Cynosdb/clusterTransparentEncrypt:ClusterTransparentEncrypt example cynosdbmysql-bu6hlulf
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/clusterTransparentEncrypt:ClusterTransparentEncrypt")]

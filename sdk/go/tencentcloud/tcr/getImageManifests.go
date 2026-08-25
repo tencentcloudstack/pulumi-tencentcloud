@@ -81,12 +81,8 @@ type GetImageManifestsResult struct {
 }
 
 func GetImageManifestsOutput(ctx *pulumi.Context, args GetImageManifestsOutputArgs, opts ...pulumi.InvokeOption) GetImageManifestsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetImageManifestsResultOutput, error) {
-			args := v.(GetImageManifestsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tcr/getImageManifests:getImageManifests", args, GetImageManifestsResultOutput{}, options).(GetImageManifestsResultOutput), nil
-		}).(GetImageManifestsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tcr/getImageManifests:getImageManifests", args, GetImageManifestsResultOutput{}, options).(GetImageManifestsResultOutput)
 }
 
 // A collection of arguments for invoking getImageManifests.

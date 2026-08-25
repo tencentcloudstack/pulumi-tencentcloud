@@ -36,7 +36,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("tf_nat_gateway_vpc"),
 //			})
@@ -57,7 +57,7 @@ import (
 //			}
 //			_, err = nat.NewGateway(ctx, "example", &nat.GatewayArgs{
 //				Name:              pulumi.String("tf_example_nat_gateway"),
-//				VpcId:             vpc.ID(),
+//				VpcId:             vpc2.ID().ToIDOutput().ToStringOutput(),
 //				NatProductVersion: pulumi.Int(1),
 //				Bandwidth:         pulumi.Int(100),
 //				MaxConcurrent:     pulumi.Int(1000000),
@@ -94,7 +94,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("tf_nat_gateway_vpc"),
 //			})
@@ -115,7 +115,7 @@ import (
 //			}
 //			_, err = nat.NewGateway(ctx, "example", &nat.GatewayArgs{
 //				Name:              pulumi.String("tf_example_nat_gateway"),
-//				VpcId:             vpc.ID(),
+//				VpcId:             vpc2.ID().ToIDOutput().ToStringOutput(),
 //				NatProductVersion: pulumi.Int(2),
 //				AssignedEipSets: pulumi.StringArray{
 //					eipExample1.PublicIp,
@@ -150,7 +150,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("tf_nat_gateway_vpc"),
 //			})
@@ -171,7 +171,7 @@ import (
 //			}
 //			_, err = nat.NewGateway(ctx, "example", &nat.GatewayArgs{
 //				Name:                               pulumi.String("tf_example_nat_gateway"),
-//				VpcId:                              vpc.ID(),
+//				VpcId:                              vpc2.ID().ToIDOutput().ToStringOutput(),
 //				NatProductVersion:                  pulumi.Int(2),
 //				StockPublicIpAddressesBandwidthOut: pulumi.Int(100),
 //				AssignedEipSets: pulumi.StringArray{

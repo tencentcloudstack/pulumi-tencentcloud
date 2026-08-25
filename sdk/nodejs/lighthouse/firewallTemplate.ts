@@ -38,7 +38,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * lighthouse firewall_template can be imported using the id, e.g.
+ * lighthouse firewallTemplate can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Lighthouse/firewallTemplate:FirewallTemplate firewall_template firewall_template_id
@@ -116,11 +116,11 @@ export interface FirewallTemplateState {
     /**
      * Template name.
      */
-    templateName?: pulumi.Input<string>;
+    templateName?: pulumi.Input<string | undefined>;
     /**
      * List of firewall rules.
      */
-    templateRules?: pulumi.Input<pulumi.Input<inputs.Lighthouse.FirewallTemplateTemplateRule>[]>;
+    templateRules?: pulumi.Input<pulumi.Input<inputs.Lighthouse.FirewallTemplateTemplateRule>[] | undefined>;
 }
 
 /**
@@ -134,5 +134,5 @@ export interface FirewallTemplateArgs {
     /**
      * List of firewall rules.
      */
-    templateRules?: pulumi.Input<pulumi.Input<inputs.Lighthouse.FirewallTemplateTemplateRule>[]>;
+    templateRules?: pulumi.Input<pulumi.Input<inputs.Lighthouse.FirewallTemplateTemplateRule>[] | undefined>;
 }

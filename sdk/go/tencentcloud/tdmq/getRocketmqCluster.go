@@ -77,12 +77,8 @@ type LookupRocketmqClusterResult struct {
 }
 
 func LookupRocketmqClusterOutput(ctx *pulumi.Context, args LookupRocketmqClusterOutputArgs, opts ...pulumi.InvokeOption) LookupRocketmqClusterResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupRocketmqClusterResultOutput, error) {
-			args := v.(LookupRocketmqClusterArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tdmq/getRocketmqCluster:getRocketmqCluster", args, LookupRocketmqClusterResultOutput{}, options).(LookupRocketmqClusterResultOutput), nil
-		}).(LookupRocketmqClusterResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tdmq/getRocketmqCluster:getRocketmqCluster", args, LookupRocketmqClusterResultOutput{}, options).(LookupRocketmqClusterResultOutput)
 }
 
 // A collection of arguments for invoking getRocketmqCluster.

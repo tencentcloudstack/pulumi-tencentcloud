@@ -47,12 +47,8 @@ type GetProxyNodeResult struct {
 }
 
 func GetProxyNodeOutput(ctx *pulumi.Context, args GetProxyNodeOutputArgs, opts ...pulumi.InvokeOption) GetProxyNodeResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetProxyNodeResultOutput, error) {
-			args := v.(GetProxyNodeArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cynosdb/getProxyNode:getProxyNode", args, GetProxyNodeResultOutput{}, options).(GetProxyNodeResultOutput), nil
-		}).(GetProxyNodeResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cynosdb/getProxyNode:getProxyNode", args, GetProxyNodeResultOutput{}, options).(GetProxyNodeResultOutput)
 }
 
 // A collection of arguments for invoking getProxyNode.

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const describeHostDeployRecord = tencentcloud.Ssl.getDescribeHostDeployRecord({
+ * const describeHostDeployRecord = tencentcloud.ssl.getDescribeHostDeployRecord({
  *     certificateId: "8u8DII0l",
  *     resourceType: "ddos",
  * });
@@ -76,7 +76,7 @@ export interface GetDescribeHostDeployRecordResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const describeHostDeployRecord = tencentcloud.Ssl.getDescribeHostDeployRecord({
+ * const describeHostDeployRecord = tencentcloud.ssl.getDescribeHostDeployRecord({
  *     certificateId: "8u8DII0l",
  *     resourceType: "ddos",
  * });
@@ -102,9 +102,9 @@ export interface GetDescribeHostDeployRecordOutputArgs {
     /**
      * Resource Type.
      */
-    resourceType?: pulumi.Input<string>;
+    resourceType?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

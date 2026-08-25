@@ -68,8 +68,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * tcm access_log_config can be imported using the mesh_id(mesh_name), e.g.
- *
+ * tcm accessLogConfig can be imported using the mesh_id(mesh_name), e.g.
  * ```sh
  * $ pulumi import tencentcloud:Tcm/accessLogConfig:AccessLogConfig access_log_config mesh-rofjmxxx
  * ```
@@ -194,43 +193,43 @@ export interface AccessLogConfigState {
     /**
      * Third party grpc server address.
      */
-    address?: pulumi.Input<string>;
+    address?: pulumi.Input<string | undefined>;
     /**
      * CLS config.
      */
-    cls?: pulumi.Input<inputs.Tcm.AccessLogConfigCls>;
+    cls?: pulumi.Input<inputs.Tcm.AccessLogConfigCls | undefined>;
     /**
      * Whether enable log.
      */
-    enable?: pulumi.Input<boolean>;
+    enable?: pulumi.Input<boolean | undefined>;
     /**
      * Whether enable third party grpc server.
      */
-    enableServer?: pulumi.Input<boolean>;
+    enableServer?: pulumi.Input<boolean | undefined>;
     /**
      * Whether enable stdout.
      */
-    enableStdout?: pulumi.Input<boolean>;
+    enableStdout?: pulumi.Input<boolean | undefined>;
     /**
      * Log encoding, TEXT or JSON.
      */
-    encoding?: pulumi.Input<string>;
+    encoding?: pulumi.Input<string | undefined>;
     /**
      * Log format.
      */
-    format?: pulumi.Input<string>;
+    format?: pulumi.Input<string | undefined>;
     /**
      * Mesh ID.
      */
-    meshName?: pulumi.Input<string>;
+    meshName?: pulumi.Input<string | undefined>;
     /**
      * Selected range.
      */
-    selectedRange?: pulumi.Input<inputs.Tcm.AccessLogConfigSelectedRange>;
+    selectedRange?: pulumi.Input<inputs.Tcm.AccessLogConfigSelectedRange | undefined>;
     /**
      * Log template, istio/trace/custome.
      */
-    template?: pulumi.Input<string>;
+    template?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -240,31 +239,31 @@ export interface AccessLogConfigArgs {
     /**
      * Third party grpc server address.
      */
-    address?: pulumi.Input<string>;
+    address?: pulumi.Input<string | undefined>;
     /**
      * CLS config.
      */
-    cls?: pulumi.Input<inputs.Tcm.AccessLogConfigCls>;
+    cls?: pulumi.Input<inputs.Tcm.AccessLogConfigCls | undefined>;
     /**
      * Whether enable log.
      */
-    enable?: pulumi.Input<boolean>;
+    enable?: pulumi.Input<boolean | undefined>;
     /**
      * Whether enable third party grpc server.
      */
-    enableServer?: pulumi.Input<boolean>;
+    enableServer?: pulumi.Input<boolean | undefined>;
     /**
      * Whether enable stdout.
      */
-    enableStdout?: pulumi.Input<boolean>;
+    enableStdout?: pulumi.Input<boolean | undefined>;
     /**
      * Log encoding, TEXT or JSON.
      */
-    encoding?: pulumi.Input<string>;
+    encoding?: pulumi.Input<string | undefined>;
     /**
      * Log format.
      */
-    format?: pulumi.Input<string>;
+    format?: pulumi.Input<string | undefined>;
     /**
      * Mesh ID.
      */
@@ -272,9 +271,9 @@ export interface AccessLogConfigArgs {
     /**
      * Selected range.
      */
-    selectedRange?: pulumi.Input<inputs.Tcm.AccessLogConfigSelectedRange>;
+    selectedRange?: pulumi.Input<inputs.Tcm.AccessLogConfigSelectedRange | undefined>;
     /**
      * Log template, istio/trace/custome.
      */
-    template?: pulumi.Input<string>;
+    template?: pulumi.Input<string | undefined>;
 }

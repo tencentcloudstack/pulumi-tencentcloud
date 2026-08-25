@@ -48,7 +48,7 @@ import (
 //					&as.GetInstancesFilterArgs{
 //						Name: pulumi.String("auto-scaling-group-id"),
 //						Values: pulumi.StringArray{
-//							scalingGroup.ID(),
+//							scalingGroup.ID().ToIDOutput().ToStringOutput(),
 //						},
 //					},
 //				},
@@ -90,12 +90,8 @@ type GetInstancesResult struct {
 }
 
 func GetInstancesOutput(ctx *pulumi.Context, args GetInstancesOutputArgs, opts ...pulumi.InvokeOption) GetInstancesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstancesResultOutput, error) {
-			args := v.(GetInstancesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:As/getInstances:getInstances", args, GetInstancesResultOutput{}, options).(GetInstancesResultOutput), nil
-		}).(GetInstancesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:As/getInstances:getInstances", args, GetInstancesResultOutput{}, options).(GetInstancesResultOutput)
 }
 
 // A collection of arguments for invoking getInstances.

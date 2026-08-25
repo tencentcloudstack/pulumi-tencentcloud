@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Cynosdb.getClusters({
+ * const foo = tencentcloud.cynosdb.getClusters({
  *     clusterId: "cynosdbmysql-dzj5l8gz",
  *     projectId: 0,
  *     dbType: "MYSQL",
@@ -100,7 +100,7 @@ export interface GetClustersResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Cynosdb.getClusters({
+ * const foo = tencentcloud.cynosdb.getClusters({
  *     clusterId: "cynosdbmysql-dzj5l8gz",
  *     projectId: 0,
  *     dbType: "MYSQL",
@@ -127,21 +127,21 @@ export interface GetClustersOutputArgs {
     /**
      * ID of the cluster to be queried.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Name of the cluster to be queried.
      */
-    clusterName?: pulumi.Input<string>;
+    clusterName?: pulumi.Input<string | undefined>;
     /**
      * Type of CynosDB, and available values include `MYSQL`, `POSTGRESQL`.
      */
-    dbType?: pulumi.Input<string>;
+    dbType?: pulumi.Input<string | undefined>;
     /**
      * ID of the project to be queried.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

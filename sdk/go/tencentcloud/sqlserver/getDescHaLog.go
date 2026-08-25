@@ -43,12 +43,8 @@ type GetDescHaLogResult struct {
 }
 
 func GetDescHaLogOutput(ctx *pulumi.Context, args GetDescHaLogOutputArgs, opts ...pulumi.InvokeOption) GetDescHaLogResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDescHaLogResultOutput, error) {
-			args := v.(GetDescHaLogArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Sqlserver/getDescHaLog:getDescHaLog", args, GetDescHaLogResultOutput{}, options).(GetDescHaLogResultOutput), nil
-		}).(GetDescHaLogResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Sqlserver/getDescHaLog:getDescHaLog", args, GetDescHaLogResultOutput{}, options).(GetDescHaLogResultOutput)
 }
 
 // A collection of arguments for invoking getDescHaLog.

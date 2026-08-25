@@ -47,7 +47,7 @@ import (
 //
 // ## Import
 //
-// teo teo_function_rule_priority can be imported using the id, e.g.
+// teo teoFunctionRulePriority can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Teo/functionRulePriority:FunctionRulePriority teo_function_rule_priority zone_id#function_id

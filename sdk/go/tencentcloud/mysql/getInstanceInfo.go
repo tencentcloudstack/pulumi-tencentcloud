@@ -75,12 +75,8 @@ type GetInstanceInfoResult struct {
 }
 
 func GetInstanceInfoOutput(ctx *pulumi.Context, args GetInstanceInfoOutputArgs, opts ...pulumi.InvokeOption) GetInstanceInfoResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstanceInfoResultOutput, error) {
-			args := v.(GetInstanceInfoArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mysql/getInstanceInfo:getInstanceInfo", args, GetInstanceInfoResultOutput{}, options).(GetInstanceInfoResultOutput), nil
-		}).(GetInstanceInfoResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mysql/getInstanceInfo:getInstanceInfo", args, GetInstanceInfoResultOutput{}, options).(GetInstanceInfoResultOutput)
 }
 
 // A collection of arguments for invoking getInstanceInfo.

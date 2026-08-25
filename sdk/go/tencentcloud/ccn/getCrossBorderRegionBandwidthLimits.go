@@ -82,12 +82,8 @@ type GetCrossBorderRegionBandwidthLimitsResult struct {
 }
 
 func GetCrossBorderRegionBandwidthLimitsOutput(ctx *pulumi.Context, args GetCrossBorderRegionBandwidthLimitsOutputArgs, opts ...pulumi.InvokeOption) GetCrossBorderRegionBandwidthLimitsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetCrossBorderRegionBandwidthLimitsResultOutput, error) {
-			args := v.(GetCrossBorderRegionBandwidthLimitsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ccn/getCrossBorderRegionBandwidthLimits:getCrossBorderRegionBandwidthLimits", args, GetCrossBorderRegionBandwidthLimitsResultOutput{}, options).(GetCrossBorderRegionBandwidthLimitsResultOutput), nil
-		}).(GetCrossBorderRegionBandwidthLimitsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ccn/getCrossBorderRegionBandwidthLimits:getCrossBorderRegionBandwidthLimits", args, GetCrossBorderRegionBandwidthLimitsResultOutput{}, options).(GetCrossBorderRegionBandwidthLimitsResultOutput)
 }
 
 // A collection of arguments for invoking getCrossBorderRegionBandwidthLimits.

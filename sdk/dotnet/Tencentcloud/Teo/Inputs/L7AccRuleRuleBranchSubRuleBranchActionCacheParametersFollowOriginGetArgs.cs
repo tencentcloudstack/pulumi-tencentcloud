@@ -14,7 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
     public sealed class L7AccRuleRuleBranchSubRuleBranchActionCacheParametersFollowOriginGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Whether to cache when an origin server does not return the cache-control header. this field is required when switch is on; when switch is off, this field is not required and will be ineffective if filled. valid values: On: cache; Off: do not cache.
+        /// Whether to cache when an origin server does not return the cache-control header. this field is required when switch is on; when switch is off, this field is not required and will be ineffective if filled. valid values: on: cache; off: do not cache.
         /// </summary>
         [Input("defaultCache")]
         public Input<string>? DefaultCache { get; set; }

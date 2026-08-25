@@ -142,27 +142,27 @@ export interface DatasourceHouseAttachmentState {
     /**
      * Engine name, only one engine can be bound.
      */
-    dataEngineNames?: pulumi.Input<string>;
+    dataEngineNames?: pulumi.Input<string | undefined>;
     /**
      * Data source network configuration.
      */
-    datasourceConnectionConfig?: pulumi.Input<inputs.Dlc.DatasourceHouseAttachmentDatasourceConnectionConfig>;
+    datasourceConnectionConfig?: pulumi.Input<inputs.Dlc.DatasourceHouseAttachmentDatasourceConnectionConfig | undefined>;
     /**
      * Network configuration name.
      */
-    datasourceConnectionName?: pulumi.Input<string>;
+    datasourceConnectionName?: pulumi.Input<string | undefined>;
     /**
      * Data source type. Allow value: Mysql, HiveCos, HiveHdfs, HiveCHdfs, Kafka, OtherDatasourceConnection, PostgreSql, SqlServer, ClickHouse, Elasticsearch, TDSQLPostgreSql, TCHouseD, TccHive.
      */
-    datasourceConnectionType?: pulumi.Input<string>;
+    datasourceConnectionType?: pulumi.Input<string | undefined>;
     /**
      * Network configuration description.
      */
-    networkConnectionDesc?: pulumi.Input<string>;
+    networkConnectionDesc?: pulumi.Input<string | undefined>;
     /**
      * Network type, 2-cross-source type, 4-enhanced type.
      */
-    networkConnectionType?: pulumi.Input<number>;
+    networkConnectionType?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -188,7 +188,7 @@ export interface DatasourceHouseAttachmentArgs {
     /**
      * Network configuration description.
      */
-    networkConnectionDesc?: pulumi.Input<string>;
+    networkConnectionDesc?: pulumi.Input<string | undefined>;
     /**
      * Network type, 2-cross-source type, 4-enhanced type.
      */

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "sqlserver",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -115,7 +115,7 @@ import * as utilities from "../utilities";
  *         subscribeDatabase: exampleSubDb.name,
  *     }],
  * });
- * const example = tencentcloud.Sqlserver.getPublishSubscribesOutput({
+ * const example = tencentcloud.sqlserver.getPublishSubscribesOutput({
  *     instanceId: examplePublishSubscribe.publishInstanceId,
  * });
  * ```
@@ -214,7 +214,7 @@ export interface GetPublishSubscribesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "sqlserver",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -314,7 +314,7 @@ export interface GetPublishSubscribesResult {
  *         subscribeDatabase: exampleSubDb.name,
  *     }],
  * });
- * const example = tencentcloud.Sqlserver.getPublishSubscribesOutput({
+ * const example = tencentcloud.sqlserver.getPublishSubscribesOutput({
  *     instanceId: examplePublishSubscribe.publishInstanceId,
  * });
  * ```
@@ -344,29 +344,29 @@ export interface GetPublishSubscribesOutputArgs {
     /**
      * The subscribe/publish instance ID. It is related to whether the `instanceId` is a publish instance or a subscribe instance. when `instanceId` is a publish instance, this field is filtered according to the subscribe instance ID; when `instanceId` is a subscribe instance, this field is filtering according to the publish instance ID.
      */
-    pubOrSubInstanceId?: pulumi.Input<string>;
+    pubOrSubInstanceId?: pulumi.Input<string | undefined>;
     /**
      * The intranet IP of the subscribe/publish instance. It is related to whether the `instanceId` is a publish instance or a subscribe instance. when `instanceId` is a publish instance, this field is filtered according to the intranet IP of the subscribe instance; when `instanceId` is a subscribe instance, this field is based on the publish instance intranet IP filter.
      */
-    pubOrSubInstanceIp?: pulumi.Input<string>;
+    pubOrSubInstanceIp?: pulumi.Input<string | undefined>;
     /**
      * Name of publish database.
      */
-    publishDatabase?: pulumi.Input<string>;
+    publishDatabase?: pulumi.Input<string | undefined>;
     /**
      * The id of the Publish and Subscribe.
      */
-    publishSubscribeId?: pulumi.Input<number>;
+    publishSubscribeId?: pulumi.Input<number | undefined>;
     /**
      * The name of the Publish and Subscribe.
      */
-    publishSubscribeName?: pulumi.Input<string>;
+    publishSubscribeName?: pulumi.Input<string | undefined>;
     /**
      * Used to store results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Name of subscribe database.
      */
-    subscribeDatabase?: pulumi.Input<string>;
+    subscribeDatabase?: pulumi.Input<string | undefined>;
 }

@@ -463,223 +463,223 @@ export interface ImportOpenApiState {
     /**
      * When `authType` is OAUTH, this field is valid, NORMAL: Business API, OAUTH: Authorization API.
      */
-    apiBusinessType?: pulumi.Input<string>;
+    apiBusinessType?: pulumi.Input<string | undefined>;
     /**
      * Custom API description.
      */
-    apiDesc?: pulumi.Input<string>;
+    apiDesc?: pulumi.Input<string | undefined>;
     /**
      * Custom Api Id.
      */
-    apiId?: pulumi.Input<string>;
+    apiId?: pulumi.Input<string | undefined>;
     /**
      * Custom API name.
      */
-    apiName?: pulumi.Input<string>;
+    apiName?: pulumi.Input<string | undefined>;
     /**
      * API type, supports NORMAL (regular API) and TSF (microservice API), defaults to NORMAL.
      */
-    apiType?: pulumi.Input<string>;
+    apiType?: pulumi.Input<string | undefined>;
     /**
      * The unique ID of the associated authorization API takes effect when AuthType is OAUTH and ApiBusinessType is NORMAL. The unique ID of the oauth2.0 authorized API that identifies the business API binding.
      */
-    authRelationApiId?: pulumi.Input<string>;
+    authRelationApiId?: pulumi.Input<string | undefined>;
     /**
      * API authentication type. Support SECRET (Key Pair Authentication), NONE (Authentication Exemption), OAUTH, APP (Application Authentication). The default is NONE.
      */
-    authType?: pulumi.Input<string>;
+    authType?: pulumi.Input<string | undefined>;
     /**
      * Constant parameter.
      */
-    constantParameters?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ImportOpenApiConstantParameter>[]>;
+    constantParameters?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ImportOpenApiConstantParameter>[] | undefined>;
     /**
      * OpenAPI body content.
      */
-    content?: pulumi.Input<string>;
+    content?: pulumi.Input<string | undefined>;
     /**
      * The Content version defaults to OpenAPI and currently only supports OpenAPI.
      */
-    contentVersion?: pulumi.Input<string>;
+    contentVersion?: pulumi.Input<string | undefined>;
     /**
      * Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable CORS. Default value: `true`.
      */
-    enableCors?: pulumi.Input<boolean>;
+    enableCors?: pulumi.Input<boolean | undefined>;
     /**
      * The Content format can only be YAML or JSON, and the default is YAML.
      */
-    encodeType?: pulumi.Input<string>;
+    encodeType?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable Base64 encoding will only take effect when the backend is scf.
      */
-    isBase64Encoded?: pulumi.Input<boolean>;
+    isBase64Encoded?: pulumi.Input<boolean | undefined>;
     /**
      * Charge after starting debugging. (Cloud Market Reserved Fields).
      */
-    isDebugAfterCharge?: pulumi.Input<boolean>;
+    isDebugAfterCharge?: pulumi.Input<boolean | undefined>;
     /**
      * Do you want to delete the custom response configuration error code? If it is not passed or False is passed, it will not be deleted. If True is passed, all custom response configuration error codes for this API will be deleted.
      */
-    isDeleteResponseErrorCodes?: pulumi.Input<boolean>;
+    isDeleteResponseErrorCodes?: pulumi.Input<boolean | undefined>;
     /**
      * API bound microservice list.
      */
-    microServices?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ImportOpenApiMicroService>[]>;
+    microServices?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ImportOpenApiMicroService>[] | undefined>;
     /**
      * OAuth configuration. Effective when AuthType is OAUTH.
      */
-    oauthConfigs?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ImportOpenApiOauthConfig>[]>;
+    oauthConfigs?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ImportOpenApiOauthConfig>[] | undefined>;
     /**
      * API frontend request type. Valid values: `HTTP`, `WEBSOCKET`. Default value: `HTTP`.
      */
-    protocol?: pulumi.Input<string>;
+    protocol?: pulumi.Input<string | undefined>;
     /**
      * Request frontend method configuration. Valid values: `GET`,`POST`,`PUT`,`DELETE`,`HEAD`,`ANY`. Default value: `GET`.
      */
-    requestConfigMethod?: pulumi.Input<string>;
+    requestConfigMethod?: pulumi.Input<string | undefined>;
     /**
      * Request frontend path configuration. Like `/user/getinfo`.
      */
-    requestConfigPath?: pulumi.Input<string>;
+    requestConfigPath?: pulumi.Input<string | undefined>;
     /**
      * Frontend request parameters.
      */
-    requestParameters?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ImportOpenApiRequestParameter>[]>;
+    requestParameters?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ImportOpenApiRequestParameter>[] | undefined>;
     /**
      * Custom error code configuration. Must keep at least one after set.
      */
-    responseErrorCodes?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ImportOpenApiResponseErrorCode>[]>;
+    responseErrorCodes?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ImportOpenApiResponseErrorCode>[] | undefined>;
     /**
      * Response failure sample of custom response configuration.
      */
-    responseFailExample?: pulumi.Input<string>;
+    responseFailExample?: pulumi.Input<string | undefined>;
     /**
      * Successful response sample of custom response configuration.
      */
-    responseSuccessExample?: pulumi.Input<string>;
+    responseSuccessExample?: pulumi.Input<string | undefined>;
     /**
      * Return type. Valid values: `HTML`, `JSON`, `TEXT`, `BINARY`, `XML`. Default value: `HTML`.
      */
-    responseType?: pulumi.Input<string>;
+    responseType?: pulumi.Input<string | undefined>;
     /**
      * API backend COS configuration. If ServiceType is COS, then this parameter must be passed.Note: This field may return null, indicating that a valid value cannot be obtained.
      */
-    serviceConfigCosConfigs?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ImportOpenApiServiceConfigCosConfig>[]>;
+    serviceConfigCosConfigs?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ImportOpenApiServiceConfigCosConfig>[] | undefined>;
     /**
      * API backend service request method, such as `GET`. If `serviceConfigType` is `HTTP`, this parameter will be required. The frontend `requestConfigMethod` and backend method `serviceConfigMethod` can be different.
      */
-    serviceConfigMethod?: pulumi.Input<string>;
+    serviceConfigMethod?: pulumi.Input<string | undefined>;
     /**
      * Returned information of API backend mocking. This parameter is required when `serviceConfigType` is `MOCK`.
      */
-    serviceConfigMockReturnMessage?: pulumi.Input<string>;
+    serviceConfigMockReturnMessage?: pulumi.Input<string | undefined>;
     /**
      * API backend service path, such as /path. If `serviceConfigType` is `HTTP`, this parameter will be required. The frontend `requestConfigPath` and backend path `serviceConfigPath` can be different.
      */
-    serviceConfigPath?: pulumi.Input<string>;
+    serviceConfigPath?: pulumi.Input<string | undefined>;
     /**
      * Backend type. Effective when enabling vpc, currently supported types are clb, cvm, and upstream.
      */
-    serviceConfigProduct?: pulumi.Input<string>;
+    serviceConfigProduct?: pulumi.Input<string | undefined>;
     /**
      * SCF function name. This parameter takes effect when `serviceConfigType` is `SCF`.
      */
-    serviceConfigScfFunctionName?: pulumi.Input<string>;
+    serviceConfigScfFunctionName?: pulumi.Input<string | undefined>;
     /**
      * SCF function namespace. This parameter takes effect when `serviceConfigType` is `SCF`.
      */
-    serviceConfigScfFunctionNamespace?: pulumi.Input<string>;
+    serviceConfigScfFunctionNamespace?: pulumi.Input<string | undefined>;
     /**
      * SCF function version. This parameter takes effect when `serviceConfigType` is `SCF`.
      */
-    serviceConfigScfFunctionQualifier?: pulumi.Input<string>;
+    serviceConfigScfFunctionQualifier?: pulumi.Input<string | undefined>;
     /**
      * Scf function type. Effective when the backend type is SCF. Support Event Triggering (EVENT) and HTTP Direct Cloud Function (HTTP).
      */
-    serviceConfigScfFunctionType?: pulumi.Input<string>;
+    serviceConfigScfFunctionType?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable response integration. Effective when the backend type is SCF.
      */
-    serviceConfigScfIsIntegratedResponse?: pulumi.Input<boolean>;
+    serviceConfigScfIsIntegratedResponse?: pulumi.Input<boolean | undefined>;
     /**
      * API backend service timeout period in seconds. Default value: `5`.
      */
-    serviceConfigTimeout?: pulumi.Input<number>;
+    serviceConfigTimeout?: pulumi.Input<number | undefined>;
     /**
      * The backend service type of the API. Supports HTTP, MOCK, TSF, SCF, WEBSOCKET, COS, TARGET (internal testing).
      */
-    serviceConfigType?: pulumi.Input<string>;
+    serviceConfigType?: pulumi.Input<string | undefined>;
     /**
      * Only required when binding to VPC channelsNote: This field may return null, indicating that a valid value cannot be obtained.
      */
-    serviceConfigUpstreamId?: pulumi.Input<string>;
+    serviceConfigUpstreamId?: pulumi.Input<string | undefined>;
     /**
      * The backend service URL of the API. If the ServiceType is HTTP, this parameter must be passed.
      */
-    serviceConfigUrl?: pulumi.Input<string>;
+    serviceConfigUrl?: pulumi.Input<string | undefined>;
     /**
      * Unique VPC ID.
      */
-    serviceConfigVpcId?: pulumi.Input<string>;
+    serviceConfigVpcId?: pulumi.Input<string | undefined>;
     /**
      * Scf websocket cleaning function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
      */
-    serviceConfigWebsocketCleanupFunctionName?: pulumi.Input<string>;
+    serviceConfigWebsocketCleanupFunctionName?: pulumi.Input<string | undefined>;
     /**
      * Scf websocket cleans up the function namespace. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
      */
-    serviceConfigWebsocketCleanupFunctionNamespace?: pulumi.Input<string>;
+    serviceConfigWebsocketCleanupFunctionNamespace?: pulumi.Input<string | undefined>;
     /**
      * Scf websocket cleaning function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
      */
-    serviceConfigWebsocketCleanupFunctionQualifier?: pulumi.Input<string>;
+    serviceConfigWebsocketCleanupFunctionQualifier?: pulumi.Input<string | undefined>;
     /**
      * Scf websocket registration function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
      */
-    serviceConfigWebsocketRegisterFunctionName?: pulumi.Input<string>;
+    serviceConfigWebsocketRegisterFunctionName?: pulumi.Input<string | undefined>;
     /**
      * Scf websocket registers function namespaces. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
      */
-    serviceConfigWebsocketRegisterFunctionNamespace?: pulumi.Input<string>;
+    serviceConfigWebsocketRegisterFunctionNamespace?: pulumi.Input<string | undefined>;
     /**
      * Scf websocket transfer function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
      */
-    serviceConfigWebsocketRegisterFunctionQualifier?: pulumi.Input<string>;
+    serviceConfigWebsocketRegisterFunctionQualifier?: pulumi.Input<string | undefined>;
     /**
      * Scf websocket transfer function. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
      */
-    serviceConfigWebsocketTransportFunctionName?: pulumi.Input<string>;
+    serviceConfigWebsocketTransportFunctionName?: pulumi.Input<string | undefined>;
     /**
      * Scf websocket transfer function namespace. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
      */
-    serviceConfigWebsocketTransportFunctionNamespace?: pulumi.Input<string>;
+    serviceConfigWebsocketTransportFunctionNamespace?: pulumi.Input<string | undefined>;
     /**
      * Scf websocket transfer function version. It takes effect when the current end type is WEBSOCKET and the backend type is SCF.
      */
-    serviceConfigWebsocketTransportFunctionQualifier?: pulumi.Input<string>;
+    serviceConfigWebsocketTransportFunctionQualifier?: pulumi.Input<string | undefined>;
     /**
      * The unique ID of the service where the API is located.
      */
-    serviceId?: pulumi.Input<string>;
+    serviceId?: pulumi.Input<string | undefined>;
     /**
      * The backend service parameters of the API.
      */
-    serviceParameters?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ImportOpenApiServiceParameter>[]>;
+    serviceParameters?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ImportOpenApiServiceParameter>[] | undefined>;
     /**
      * Health check configuration for microservices.
      */
-    serviceTsfHealthCheckConfs?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ImportOpenApiServiceTsfHealthCheckConf>[]>;
+    serviceTsfHealthCheckConfs?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ImportOpenApiServiceTsfHealthCheckConf>[] | undefined>;
     /**
      * Load balancing configuration for microservices.
      */
-    serviceTsfLoadBalanceConfs?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ImportOpenApiServiceTsfLoadBalanceConf>[]>;
+    serviceTsfLoadBalanceConfs?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ImportOpenApiServiceTsfLoadBalanceConf>[] | undefined>;
     /**
      * Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
      */
-    updateTime?: pulumi.Input<string>;
+    updateTime?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -693,11 +693,11 @@ export interface ImportOpenApiArgs {
     /**
      * The Content version defaults to OpenAPI and currently only supports OpenAPI.
      */
-    contentVersion?: pulumi.Input<string>;
+    contentVersion?: pulumi.Input<string | undefined>;
     /**
      * The Content format can only be YAML or JSON, and the default is YAML.
      */
-    encodeType?: pulumi.Input<string>;
+    encodeType?: pulumi.Input<string | undefined>;
     /**
      * The unique ID of the service where the API is located.
      */

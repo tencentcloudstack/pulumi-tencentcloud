@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Cdn.getDomains({
+ * const foo = tencentcloud.cdn.getDomains({
  *     domain: "xxxx.com",
  *     serviceType: "web",
  *     fullUrlCache: false,
@@ -110,7 +110,7 @@ export interface GetDomainsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Cdn.getDomains({
+ * const foo = tencentcloud.cdn.getDomains({
  *     domain: "xxxx.com",
  *     serviceType: "web",
  *     fullUrlCache: false,
@@ -139,25 +139,25 @@ export interface GetDomainsOutputArgs {
     /**
      * Acceleration domain name.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable full-path cache.
      */
-    fullUrlCache?: pulumi.Input<boolean>;
+    fullUrlCache?: pulumi.Input<boolean | undefined>;
     /**
      * HTTPS configuration. Valid values: `on`, `off` and `processing`.
      */
-    httpsSwitch?: pulumi.Input<string>;
+    httpsSwitch?: pulumi.Input<string | undefined>;
     /**
      * Origin-pull protocol configuration. Valid values: `http`, `https` and `follow`.
      */
-    originPullProtocol?: pulumi.Input<string>;
+    originPullProtocol?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Service type of acceleration domain name. The available value include `web`, `download` and `media`.
      */
-    serviceType?: pulumi.Input<string>;
+    serviceType?: pulumi.Input<string | undefined>;
 }

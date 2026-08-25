@@ -13,7 +13,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
 
     public sealed class BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs : global::Pulumi.ResourceArgs
     {
-        [Input("cert", required: true)]
+        [Input("cert")]
         private Input<string>? _cert;
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
         [Input("certId")]
         public Input<string>? CertId { get; set; }
 
-        [Input("privateKey", required: true)]
+        [Input("privateKey")]
         private Input<string>? _privateKey;
 
         /// <summary>

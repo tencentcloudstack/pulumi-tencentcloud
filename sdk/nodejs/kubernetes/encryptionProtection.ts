@@ -7,7 +7,7 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a tke encryptionProtection
+ * Provides a resource to create a TKE encryption protection
  *
  * ## Example Usage
  *
@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  * const exampleRegion = config.get("exampleRegion") || "ap-guangzhou";
  * const exampleClusterCidr = config.get("exampleClusterCidr") || "10.32.0.0/16";
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
- * const vpc = tencentcloud.Vpc.getSubnets({
+ * const vpc = tencentcloud.vpc.getSubnets({
  *     isDefault: true,
  *     availabilityZone: availabilityZone,
  * });
@@ -130,15 +130,15 @@ export interface EncryptionProtectionState {
     /**
      * cluster id.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * kms encryption configuration.
      */
-    kmsConfiguration?: pulumi.Input<inputs.Kubernetes.EncryptionProtectionKmsConfiguration>;
+    kmsConfiguration?: pulumi.Input<inputs.Kubernetes.EncryptionProtectionKmsConfiguration | undefined>;
     /**
      * kms encryption status.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
 }
 
 /**

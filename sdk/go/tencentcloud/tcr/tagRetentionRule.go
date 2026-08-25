@@ -12,7 +12,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a tcr tag retention rule.
+// Provides a resource to create a TCR tag retention rule.
 //
 // ## Example Usage
 //
@@ -31,38 +31,42 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			example, err := tcr.NewInstance(ctx, "example", &tcr.InstanceArgs{
-//				Name:         pulumi.String("tf-example-tcr"),
-//				InstanceType: pulumi.String("basic"),
+//				Name:         pulumi.String("tf-example"),
+//				InstanceType: pulumi.String("standard"),
 //				DeleteBucket: pulumi.Bool(true),
 //				Tags: pulumi.StringMap{
-//					"createdBy": pulumi.String("terraform"),
+//					"createdBy": pulumi.String("Terraform"),
 //				},
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			exampleNamespace, err := tcr.NewNamespace(ctx, "example", &tcr.NamespaceArgs{
-//				InstanceId:   example.ID(),
-//				Name:         pulumi.String("tf_example_ns_retention"),
-//				IsPublic:     pulumi.Bool(true),
-//				IsAutoScan:   pulumi.Bool(true),
-//				IsPreventVul: pulumi.Bool(true),
-//				Severity:     pulumi.String("medium"),
-//				CveWhitelistItems: tcr.NamespaceCveWhitelistItemArray{
-//					&tcr.NamespaceCveWhitelistItemArgs{
-//						CveId: pulumi.String("cve-xxxxx"),
-//					},
-//				},
+//				InstanceId: example.ID().ToIDOutput().ToStringOutput(),
+//				Name:       pulumi.String("tf_example"),
+//				Severity:   pulumi.String("medium"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = tcr.NewTagRetentionRule(ctx, "my_rule", &tcr.TagRetentionRuleArgs{
-//				RegistryId:    example.ID(),
+//			_, err = tcr.NewTagRetentionRule(ctx, "example", &tcr.TagRetentionRuleArgs{
+//				RegistryId:    example.ID().ToIDOutput().ToStringOutput(),
 //				NamespaceName: exampleNamespace.Name,
-//				RetentionRule: &tcr.TagRetentionRuleRetentionRuleArgs{
-//					Key:   pulumi.String("nDaysSinceLastPush"),
-//					Value: pulumi.Int(2),
+//				AdvancedRuleItems: tcr.TagRetentionRuleAdvancedRuleItemArray{
+//					&tcr.TagRetentionRuleAdvancedRuleItemArgs{
+//						RepositoryFilter: &tcr.TagRetentionRuleAdvancedRuleItemRepositoryFilterArgs{
+//							Decoration: pulumi.String("repoMatches"),
+//							Pattern:    pulumi.String("**"),
+//						},
+//						RetentionPolicy: &tcr.TagRetentionRuleAdvancedRuleItemRetentionPolicyArgs{
+//							Key:   pulumi.String("nDaysSinceLastPush"),
+//							Value: pulumi.Int(2),
+//						},
+//						TagFilter: &tcr.TagRetentionRuleAdvancedRuleItemTagFilterArgs{
+//							Decoration: pulumi.String("matches"),
+//							Pattern:    pulumi.String("**"),
+//						},
+//					},
 //				},
 //				CronSetting: pulumi.String("daily"),
 //			})
@@ -74,9 +78,19 @@ import (
 //	}
 //
 // ```
+//
+// ## Import
+//
+// TCR tag retention rule can be imported using the registryId#namespaceName#retentionId, e.g.
+//
+// ```sh
+// $ pulumi import tencentcloud:Tcr/tagRetentionRule:TagRetentionRule example tcr-s1jud21h#tf_example#3
+// ```
 type TagRetentionRule struct {
 	pulumi.CustomResourceState
 
+	// The advanced retention policy takes precedence; when both the basic and advanced retention policies are configured, the advanced retention policy will be used.
+	AdvancedRuleItems TagRetentionRuleAdvancedRuleItemArrayOutput `pulumi:"advancedRuleItems"`
 	// Execution cycle, currently only available selections are: manual; daily; weekly; monthly.
 	CronSetting pulumi.StringOutput `pulumi:"cronSetting"`
 	// Whether to disable the rule, with the default value of false.
@@ -107,9 +121,6 @@ func NewTagRetentionRule(ctx *pulumi.Context,
 	if args.RegistryId == nil {
 		return nil, errors.New("invalid value for required argument 'RegistryId'")
 	}
-	if args.RetentionRule == nil {
-		return nil, errors.New("invalid value for required argument 'RetentionRule'")
-	}
 	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource TagRetentionRule
 	err := ctx.RegisterResource("tencentcloud:Tcr/tagRetentionRule:TagRetentionRule", name, args, &resource, opts...)
@@ -133,6 +144,8 @@ func GetTagRetentionRule(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering TagRetentionRule resources.
 type tagRetentionRuleState struct {
+	// The advanced retention policy takes precedence; when both the basic and advanced retention policies are configured, the advanced retention policy will be used.
+	AdvancedRuleItems []TagRetentionRuleAdvancedRuleItem `pulumi:"advancedRuleItems"`
 	// Execution cycle, currently only available selections are: manual; daily; weekly; monthly.
 	CronSetting *string `pulumi:"cronSetting"`
 	// Whether to disable the rule, with the default value of false.
@@ -148,6 +161,8 @@ type tagRetentionRuleState struct {
 }
 
 type TagRetentionRuleState struct {
+	// The advanced retention policy takes precedence; when both the basic and advanced retention policies are configured, the advanced retention policy will be used.
+	AdvancedRuleItems TagRetentionRuleAdvancedRuleItemArrayInput
 	// Execution cycle, currently only available selections are: manual; daily; weekly; monthly.
 	CronSetting pulumi.StringPtrInput
 	// Whether to disable the rule, with the default value of false.
@@ -167,6 +182,8 @@ func (TagRetentionRuleState) ElementType() reflect.Type {
 }
 
 type tagRetentionRuleArgs struct {
+	// The advanced retention policy takes precedence; when both the basic and advanced retention policies are configured, the advanced retention policy will be used.
+	AdvancedRuleItems []TagRetentionRuleAdvancedRuleItem `pulumi:"advancedRuleItems"`
 	// Execution cycle, currently only available selections are: manual; daily; weekly; monthly.
 	CronSetting string `pulumi:"cronSetting"`
 	// Whether to disable the rule, with the default value of false.
@@ -176,11 +193,13 @@ type tagRetentionRuleArgs struct {
 	// The main instance ID.
 	RegistryId string `pulumi:"registryId"`
 	// Retention Policy.
-	RetentionRule TagRetentionRuleRetentionRule `pulumi:"retentionRule"`
+	RetentionRule *TagRetentionRuleRetentionRule `pulumi:"retentionRule"`
 }
 
 // The set of arguments for constructing a TagRetentionRule resource.
 type TagRetentionRuleArgs struct {
+	// The advanced retention policy takes precedence; when both the basic and advanced retention policies are configured, the advanced retention policy will be used.
+	AdvancedRuleItems TagRetentionRuleAdvancedRuleItemArrayInput
 	// Execution cycle, currently only available selections are: manual; daily; weekly; monthly.
 	CronSetting pulumi.StringInput
 	// Whether to disable the rule, with the default value of false.
@@ -190,7 +209,7 @@ type TagRetentionRuleArgs struct {
 	// The main instance ID.
 	RegistryId pulumi.StringInput
 	// Retention Policy.
-	RetentionRule TagRetentionRuleRetentionRuleInput
+	RetentionRule TagRetentionRuleRetentionRulePtrInput
 }
 
 func (TagRetentionRuleArgs) ElementType() reflect.Type {
@@ -278,6 +297,11 @@ func (o TagRetentionRuleOutput) ToTagRetentionRuleOutput() TagRetentionRuleOutpu
 
 func (o TagRetentionRuleOutput) ToTagRetentionRuleOutputWithContext(ctx context.Context) TagRetentionRuleOutput {
 	return o
+}
+
+// The advanced retention policy takes precedence; when both the basic and advanced retention policies are configured, the advanced retention policy will be used.
+func (o TagRetentionRuleOutput) AdvancedRuleItems() TagRetentionRuleAdvancedRuleItemArrayOutput {
+	return o.ApplyT(func(v *TagRetentionRule) TagRetentionRuleAdvancedRuleItemArrayOutput { return v.AdvancedRuleItems }).(TagRetentionRuleAdvancedRuleItemArrayOutput)
 }
 
 // Execution cycle, currently only available selections are: manual; daily; weekly; monthly.

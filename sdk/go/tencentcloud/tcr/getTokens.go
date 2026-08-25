@@ -71,12 +71,8 @@ type GetTokensResult struct {
 }
 
 func GetTokensOutput(ctx *pulumi.Context, args GetTokensOutputArgs, opts ...pulumi.InvokeOption) GetTokensResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetTokensResultOutput, error) {
-			args := v.(GetTokensArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tcr/getTokens:getTokens", args, GetTokensResultOutput{}, options).(GetTokensResultOutput), nil
-		}).(GetTokensResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tcr/getTokens:getTokens", args, GetTokensResultOutput{}, options).(GetTokensResultOutput)
 }
 
 // A collection of arguments for invoking getTokens.

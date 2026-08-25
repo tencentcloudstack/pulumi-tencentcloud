@@ -20,7 +20,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public Input<int>? CacheTimePercent { get; set; }
 
         /// <summary>
-        /// Whether to enable cache prefresh. values: enable; off: disable.
+        /// Whether to enable cache prefresh. values: on: enable; off: disable.
         /// </summary>
         [Input("switch")]
         public Input<string>? Switch { get; set; }

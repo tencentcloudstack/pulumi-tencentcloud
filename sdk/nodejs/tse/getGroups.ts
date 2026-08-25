@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const groups = tencentcloud.Tse.getGroups({
+ * const groups = tencentcloud.tse.getGroups({
  *     gatewayId: "gateway-ddbb709b",
  *     filters: [{
  *         name: "GroupId",
@@ -79,7 +79,7 @@ export interface GetGroupsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const groups = tencentcloud.Tse.getGroups({
+ * const groups = tencentcloud.tse.getGroups({
  *     gatewayId: "gateway-ddbb709b",
  *     filters: [{
  *         name: "GroupId",
@@ -104,7 +104,7 @@ export interface GetGroupsOutputArgs {
     /**
      * filter conditions, valid value:Name,GroupId.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Tse.GetGroupsFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Tse.GetGroupsFilterArgs>[] | undefined>;
     /**
      * gateway ID.
      */
@@ -112,5 +112,5 @@ export interface GetGroupsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

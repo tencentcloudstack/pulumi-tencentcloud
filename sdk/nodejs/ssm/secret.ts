@@ -32,7 +32,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zone = tencentcloud.Redis.getZoneConfig({
+ * const zone = tencentcloud.redis.getZoneConfig({
  *     typeId: 8,
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -79,7 +79,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * SSM secret can be imported using the secretName, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Ssm/secret:Secret foo test
  * ```
@@ -198,39 +197,39 @@ export interface SecretState {
     /**
      * Additional config for specific secret types in JSON string format.
      */
-    additionalConfig?: pulumi.Input<string>;
+    additionalConfig?: pulumi.Input<string | undefined>;
     /**
      * Description of secret. The maximum is 2048 bytes.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Specify whether to enable secret. Default value is `true`.
      */
-    isEnabled?: pulumi.Input<boolean>;
+    isEnabled?: pulumi.Input<boolean | undefined>;
     /**
      * KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
      */
-    kmsKeyId?: pulumi.Input<string>;
+    kmsKeyId?: pulumi.Input<string | undefined>;
     /**
      * Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
      */
-    recoveryWindowInDays?: pulumi.Input<number>;
+    recoveryWindowInDays?: pulumi.Input<number | undefined>;
     /**
      * Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
      */
-    secretName?: pulumi.Input<string>;
+    secretName?: pulumi.Input<string | undefined>;
     /**
      * Type of secret. `0`: user-defined secret. `4`: redis secret. Default is `0`.
      */
-    secretType?: pulumi.Input<number>;
+    secretType?: pulumi.Input<number | undefined>;
     /**
      * Status of secret.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Tags of secret.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 /**
@@ -240,23 +239,23 @@ export interface SecretArgs {
     /**
      * Additional config for specific secret types in JSON string format.
      */
-    additionalConfig?: pulumi.Input<string>;
+    additionalConfig?: pulumi.Input<string | undefined>;
     /**
      * Description of secret. The maximum is 2048 bytes.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Specify whether to enable secret. Default value is `true`.
      */
-    isEnabled?: pulumi.Input<boolean>;
+    isEnabled?: pulumi.Input<boolean | undefined>;
     /**
      * KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
      */
-    kmsKeyId?: pulumi.Input<string>;
+    kmsKeyId?: pulumi.Input<string | undefined>;
     /**
      * Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
      */
-    recoveryWindowInDays?: pulumi.Input<number>;
+    recoveryWindowInDays?: pulumi.Input<number | undefined>;
     /**
      * Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
      */
@@ -264,9 +263,9 @@ export interface SecretArgs {
     /**
      * Type of secret. `0`: user-defined secret. `4`: redis secret. Default is `0`.
      */
-    secretType?: pulumi.Input<number>;
+    secretType?: pulumi.Input<number | undefined>;
     /**
      * Tags of secret.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

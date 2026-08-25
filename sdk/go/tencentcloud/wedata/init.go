@@ -23,12 +23,16 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "tencentcloud:Wedata/addCalcEnginesToProjectOperation:AddCalcEnginesToProjectOperation":
 		r = &AddCalcEnginesToProjectOperation{}
+	case "tencentcloud:Wedata/authorizeDataSource:AuthorizeDataSource":
+		r = &AuthorizeDataSource{}
 	case "tencentcloud:Wedata/codeFile:CodeFile":
 		r = &CodeFile{}
 	case "tencentcloud:Wedata/codeFolder:CodeFolder":
 		r = &CodeFolder{}
-	case "tencentcloud:Wedata/dataBackfillPlanOperation:DataBackfillPlanOperation":
-		r = &DataBackfillPlanOperation{}
+	case "tencentcloud:Wedata/codePermissions:CodePermissions":
+		r = &CodePermissions{}
+	case "tencentcloud:Wedata/dataBackfillPlan:DataBackfillPlan":
+		r = &DataBackfillPlan{}
 	case "tencentcloud:Wedata/datasource:Datasource":
 		r = &Datasource{}
 	case "tencentcloud:Wedata/dqRule:DqRule":
@@ -41,6 +45,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &IntegrationRealtimeTask{}
 	case "tencentcloud:Wedata/integrationTaskNode:IntegrationTaskNode":
 		r = &IntegrationTaskNode{}
+	case "tencentcloud:Wedata/killTriggerWorkflowRun:KillTriggerWorkflowRun":
+		r = &KillTriggerWorkflowRun{}
 	case "tencentcloud:Wedata/lineageAttachment:LineageAttachment":
 		r = &LineageAttachment{}
 	case "tencentcloud:Wedata/opsAlarmRule:OpsAlarmRule":
@@ -55,6 +61,12 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Project{}
 	case "tencentcloud:Wedata/projectMember:ProjectMember":
 		r = &ProjectMember{}
+	case "tencentcloud:Wedata/qualityRule:QualityRule":
+		r = &QualityRule{}
+	case "tencentcloud:Wedata/qualityRuleGroup:QualityRuleGroup":
+		r = &QualityRuleGroup{}
+	case "tencentcloud:Wedata/rerunTriggerWorkflowRunAsync:RerunTriggerWorkflowRunAsync":
+		r = &RerunTriggerWorkflowRunAsync{}
 	case "tencentcloud:Wedata/resourceFile:ResourceFile":
 		r = &ResourceFile{}
 	case "tencentcloud:Wedata/resourceFolder:ResourceFolder":
@@ -75,6 +87,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &StopSqlScriptRunOperation{}
 	case "tencentcloud:Wedata/submitTaskOperation:SubmitTaskOperation":
 		r = &SubmitTaskOperation{}
+	case "tencentcloud:Wedata/submitTriggerTask:SubmitTriggerTask":
+		r = &SubmitTriggerTask{}
 	case "tencentcloud:Wedata/task:Task":
 		r = &Task{}
 	case "tencentcloud:Wedata/taskKillInstanceAsync:TaskKillInstanceAsync":
@@ -83,12 +97,18 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &TaskRerunInstanceAsync{}
 	case "tencentcloud:Wedata/taskSetSuccessInstanceAsync:TaskSetSuccessInstanceAsync":
 		r = &TaskSetSuccessInstanceAsync{}
+	case "tencentcloud:Wedata/triggerTask:TriggerTask":
+		r = &TriggerTask{}
+	case "tencentcloud:Wedata/triggerWorkflow:TriggerWorkflow":
+		r = &TriggerWorkflow{}
 	case "tencentcloud:Wedata/weDataDataSource:WeDataDataSource":
 		r = &WeDataDataSource{}
 	case "tencentcloud:Wedata/workflow:Workflow":
 		r = &Workflow{}
 	case "tencentcloud:Wedata/workflowFolder:WorkflowFolder":
 		r = &WorkflowFolder{}
+	case "tencentcloud:Wedata/workflowPermissions:WorkflowPermissions":
+		r = &WorkflowPermissions{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -109,6 +129,11 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Wedata/authorizeDataSource",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Wedata/codeFile",
 		&module{version},
 	)
@@ -119,7 +144,12 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"Wedata/dataBackfillPlanOperation",
+		"Wedata/codePermissions",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Wedata/dataBackfillPlan",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -150,6 +180,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Wedata/integrationTaskNode",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Wedata/killTriggerWorkflowRun",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -185,6 +220,21 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Wedata/projectMember",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Wedata/qualityRule",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Wedata/qualityRuleGroup",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Wedata/rerunTriggerWorkflowRunAsync",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -239,6 +289,11 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Wedata/submitTriggerTask",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Wedata/task",
 		&module{version},
 	)
@@ -259,6 +314,16 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Wedata/triggerTask",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Wedata/triggerWorkflow",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Wedata/weDataDataSource",
 		&module{version},
 	)
@@ -270,6 +335,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Wedata/workflowFolder",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Wedata/workflowPermissions",
 		&module{version},
 	)
 }

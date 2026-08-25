@@ -15,7 +15,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// 
     /// ## Import
     /// 
-    /// vpc ipv6_subnet_cidr_block can be imported using the id, e.g.
+    /// vpc Ipv6SubnetCidrBlock can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Vpc/ipv6SubnetCidrBlock:Ipv6SubnetCidrBlock ipv6_subnet_cidr_block ipv6_subnet_cidr_block_id

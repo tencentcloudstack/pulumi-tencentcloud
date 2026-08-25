@@ -35,7 +35,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * tdmqRocketmq group can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Tdmq/rocketmqGroup:RocketmqGroup group group_id
  * ```
@@ -202,63 +201,63 @@ export interface RocketmqGroupState {
     /**
      * Whether to enable broadcast consumption.
      */
-    broadcastEnable?: pulumi.Input<boolean>;
+    broadcastEnable?: pulumi.Input<boolean | undefined>;
     /**
      * Client protocol.
      */
-    clientProtocol?: pulumi.Input<string>;
+    clientProtocol?: pulumi.Input<string | undefined>;
     /**
      * Cluster ID.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * The number of online consumers.
      */
-    consumerNum?: pulumi.Input<number>;
+    consumerNum?: pulumi.Input<number | undefined>;
     /**
      * Consumer type. Enumerated values: ACTIVELY or PASSIVELY.
      */
-    consumerType?: pulumi.Input<string>;
+    consumerType?: pulumi.Input<string | undefined>;
     /**
      * `0`: Cluster consumption mode; `1`: Broadcast consumption mode; `-1`: Unknown.
      */
-    consumptionMode?: pulumi.Input<number>;
+    consumptionMode?: pulumi.Input<number | undefined>;
     /**
      * Creation time in milliseconds.
      */
-    createTime?: pulumi.Input<number>;
+    createTime?: pulumi.Input<number | undefined>;
     /**
      * Group name (8-64 characters).
      */
-    groupName?: pulumi.Input<string>;
+    groupName?: pulumi.Input<string | undefined>;
     /**
      * Namespace. Currently, only one namespace is supported.
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable consumption.
      */
-    readEnable?: pulumi.Input<boolean>;
+    readEnable?: pulumi.Input<boolean | undefined>;
     /**
      * Remarks (up to 128 characters).
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * The number of partitions in a retry topic.
      */
-    retryPartitionNum?: pulumi.Input<number>;
+    retryPartitionNum?: pulumi.Input<number | undefined>;
     /**
      * The total number of heaped messages.
      */
-    totalAccumulative?: pulumi.Input<number>;
+    totalAccumulative?: pulumi.Input<number | undefined>;
     /**
      * Consumption TPS.
      */
-    tps?: pulumi.Input<number>;
+    tps?: pulumi.Input<number | undefined>;
     /**
      * Modification time in milliseconds.
      */
-    updateTime?: pulumi.Input<number>;
+    updateTime?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -288,5 +287,5 @@ export interface RocketmqGroupArgs {
     /**
      * Remarks (up to 128 characters).
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
 }

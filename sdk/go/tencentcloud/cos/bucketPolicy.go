@@ -21,8 +21,6 @@ import (
 //
 // import (
 //
-//	"fmt"
-//
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/user"
@@ -44,7 +42,7 @@ import (
 //				return err
 //			}
 //			_, err = cos.NewBucketPolicy(ctx, "example", &cos.BucketPolicyArgs{
-//				Bucket: example.ID(),
+//				Bucket: example.ID().ToIDOutput().ToStringOutput(),
 //				Policy: pulumi.String(`{
 //	  \"version\": \"2.0\",
 //	  \"Statement\": [

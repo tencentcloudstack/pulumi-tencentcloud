@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const cynosdbSsl = new tencentcloud.cynosdb.Ssl("cynosdb_ssl", {
+ * const example = new tencentcloud.cynosdb.Ssl("example", {
  *     clusterId: "cynosdbmysql-1e0nzayx",
  *     instanceId: "cynosdbmysql-ins-pfsv6q1e",
  *     status: "ON",
@@ -22,10 +22,10 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * cynosdb ssl can be imported using the id, e.g.
+ * cynosdb ssl can be imported using the clusterId#instanceId, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Cynosdb/ssl:Ssl cynosdb_ssl ${cluster_id}#${instance_id}
+ * $ pulumi import tencentcloud:Cynosdb/ssl:Ssl example cynosdbmysql-1e0nzayx#cynosdbmysql-ins-pfsv6q1e
  * ```
  */
 export class Ssl extends pulumi.CustomResource {
@@ -118,19 +118,19 @@ export interface SslState {
     /**
      * Cluster id.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Certificate download address.
      */
-    downloadUrl?: pulumi.Input<string>;
+    downloadUrl?: pulumi.Input<string | undefined>;
     /**
      * instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable SSL. `ON` means enabled, `OFF` means not enabled.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
 }
 
 /**

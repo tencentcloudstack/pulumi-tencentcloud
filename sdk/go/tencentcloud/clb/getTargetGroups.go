@@ -35,7 +35,7 @@ import (
 //				return err
 //			}
 //			listenerBasic, err := clb.NewListener(ctx, "listener_basic", &clb.ListenerArgs{
-//				ClbId:        clbBasic.ID(),
+//				ClbId:        clbBasic.ID().ToIDOutput().ToStringOutput(),
 //				Port:         pulumi.Int(1),
 //				Protocol:     pulumi.String("HTTP"),
 //				ListenerName: pulumi.String("listener_basic"),
@@ -44,7 +44,7 @@ import (
 //				return err
 //			}
 //			ruleBasic, err := clb.NewListenerRule(ctx, "rule_basic", &clb.ListenerRuleArgs{
-//				ClbId:             clbBasic.ID(),
+//				ClbId:             clbBasic.ID().ToIDOutput().ToStringOutput(),
 //				ListenerId:        listenerBasic.ListenerId,
 //				Domain:            pulumi.String("abc.com"),
 //				Url:               pulumi.String("/"),
@@ -62,7 +62,7 @@ import (
 //				return err
 //			}
 //			_, err = clb.NewTargetGroupAttachment(ctx, "group", &clb.TargetGroupAttachmentArgs{
-//				ClbId:         clbBasic.ID(),
+//				ClbId:         clbBasic.ID().ToIDOutput().ToStringOutput(),
 //				ListenerId:    listenerBasic.ListenerId,
 //				RuleId:        ruleBasic.RuleId,
 //				TargrtGroupId: test.ID(),
@@ -71,7 +71,7 @@ import (
 //				return err
 //			}
 //			_ = clb.GetTargetGroupsOutput(ctx, clb.GetTargetGroupsOutputArgs{
-//				TargetGroupId: test.ID(),
+//				TargetGroupId: test.ID().ToIDOutput().ToStringOutput(),
 //			}, nil)
 //			return nil
 //		})
@@ -116,12 +116,8 @@ type GetTargetGroupsResult struct {
 }
 
 func GetTargetGroupsOutput(ctx *pulumi.Context, args GetTargetGroupsOutputArgs, opts ...pulumi.InvokeOption) GetTargetGroupsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetTargetGroupsResultOutput, error) {
-			args := v.(GetTargetGroupsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Clb/getTargetGroups:getTargetGroups", args, GetTargetGroupsResultOutput{}, options).(GetTargetGroupsResultOutput), nil
-		}).(GetTargetGroupsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Clb/getTargetGroups:getTargetGroups", args, GetTargetGroupsResultOutput{}, options).(GetTargetGroupsResultOutput)
 }
 
 // A collection of arguments for invoking getTargetGroups.

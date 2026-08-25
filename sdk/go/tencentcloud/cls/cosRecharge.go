@@ -12,6 +12,10 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
+// Provides a resource to create a cls cosRecharge
+//
+// > **NOTE:** This resource can not be deleted if you run `terraform destroy`.
+//
 // ## Example Usage
 //
 // ```go
@@ -60,7 +64,7 @@ import (
 //
 // ## Import
 //
-// cls cos_recharge can be imported using the id, e.g.
+// cls cosRecharge can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Cls/cosRecharge:CosRecharge cos_recharge topic_id#cos_recharge_id

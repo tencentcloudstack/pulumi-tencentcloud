@@ -43,7 +43,7 @@ import (
 //
 // ## Import
 //
-// organization identity_center_scim_synchronization_status can be imported using the id, e.g.
+// organization identityCenterScimSynchronizationStatus can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Identity/centerScimSynchronizationStatus:CenterScimSynchronizationStatus identity_center_scim_synchronization_status ${zone_id}

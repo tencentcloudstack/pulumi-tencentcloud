@@ -255,51 +255,51 @@ export interface NativeNodePoolState {
     /**
      * Node Annotation List.
      */
-    annotations?: pulumi.Input<pulumi.Input<inputs.Kubernetes.NativeNodePoolAnnotation>[]>;
+    annotations?: pulumi.Input<pulumi.Input<inputs.Kubernetes.NativeNodePoolAnnotation>[] | undefined>;
     /**
      * ID of the cluster.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Creation time.
      */
-    createdAt?: pulumi.Input<string>;
+    createdAt?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable deletion protection.
      */
-    deletionProtection?: pulumi.Input<boolean>;
+    deletionProtection?: pulumi.Input<boolean | undefined>;
     /**
      * Node Labels.
      */
-    labels?: pulumi.Input<pulumi.Input<inputs.Kubernetes.NativeNodePoolLabel>[]>;
+    labels?: pulumi.Input<pulumi.Input<inputs.Kubernetes.NativeNodePoolLabel>[] | undefined>;
     /**
      * Node pool status.
      */
-    lifeState?: pulumi.Input<string>;
+    lifeState?: pulumi.Input<string | undefined>;
     /**
      * Node pool name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Native node pool creation parameters.
      */
-    native?: pulumi.Input<inputs.Kubernetes.NativeNodePoolNative>;
+    native?: pulumi.Input<inputs.Kubernetes.NativeNodePoolNative | undefined>;
     /**
      * Node tags.
      */
-    tags?: pulumi.Input<pulumi.Input<inputs.Kubernetes.NativeNodePoolTag>[]>;
+    tags?: pulumi.Input<pulumi.Input<inputs.Kubernetes.NativeNodePoolTag>[] | undefined>;
     /**
      * Node taint.
      */
-    taints?: pulumi.Input<pulumi.Input<inputs.Kubernetes.NativeNodePoolTaint>[]>;
+    taints?: pulumi.Input<pulumi.Input<inputs.Kubernetes.NativeNodePoolTaint>[] | undefined>;
     /**
      * Node pool type. Optional value is `Native`.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
     /**
      * Whether the node is not schedulable by default. The native node is not aware of it and passes false by default.
      */
-    unschedulable?: pulumi.Input<boolean>;
+    unschedulable?: pulumi.Input<boolean | undefined>;
 }
 
 /**
@@ -309,7 +309,7 @@ export interface NativeNodePoolArgs {
     /**
      * Node Annotation List.
      */
-    annotations?: pulumi.Input<pulumi.Input<inputs.Kubernetes.NativeNodePoolAnnotation>[]>;
+    annotations?: pulumi.Input<pulumi.Input<inputs.Kubernetes.NativeNodePoolAnnotation>[] | undefined>;
     /**
      * ID of the cluster.
      */
@@ -317,15 +317,15 @@ export interface NativeNodePoolArgs {
     /**
      * Whether to enable deletion protection.
      */
-    deletionProtection?: pulumi.Input<boolean>;
+    deletionProtection?: pulumi.Input<boolean | undefined>;
     /**
      * Node Labels.
      */
-    labels?: pulumi.Input<pulumi.Input<inputs.Kubernetes.NativeNodePoolLabel>[]>;
+    labels?: pulumi.Input<pulumi.Input<inputs.Kubernetes.NativeNodePoolLabel>[] | undefined>;
     /**
      * Node pool name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Native node pool creation parameters.
      */
@@ -333,11 +333,11 @@ export interface NativeNodePoolArgs {
     /**
      * Node tags.
      */
-    tags?: pulumi.Input<pulumi.Input<inputs.Kubernetes.NativeNodePoolTag>[]>;
+    tags?: pulumi.Input<pulumi.Input<inputs.Kubernetes.NativeNodePoolTag>[] | undefined>;
     /**
      * Node taint.
      */
-    taints?: pulumi.Input<pulumi.Input<inputs.Kubernetes.NativeNodePoolTaint>[]>;
+    taints?: pulumi.Input<pulumi.Input<inputs.Kubernetes.NativeNodePoolTaint>[] | undefined>;
     /**
      * Node pool type. Optional value is `Native`.
      */
@@ -345,5 +345,5 @@ export interface NativeNodePoolArgs {
     /**
      * Whether the node is not schedulable by default. The native node is not aware of it and passes false by default.
      */
-    unschedulable?: pulumi.Input<boolean>;
+    unschedulable?: pulumi.Input<boolean | undefined>;
 }

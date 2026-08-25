@@ -79,12 +79,8 @@ type GetInstancePluginListResult struct {
 }
 
 func GetInstancePluginListOutput(ctx *pulumi.Context, args GetInstancePluginListOutputArgs, opts ...pulumi.InvokeOption) GetInstancePluginListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstancePluginListResultOutput, error) {
-			args := v.(GetInstancePluginListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Elasticsearch/getInstancePluginList:getInstancePluginList", args, GetInstancePluginListResultOutput{}, options).(GetInstancePluginListResultOutput), nil
-		}).(GetInstancePluginListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Elasticsearch/getInstancePluginList:getInstancePluginList", args, GetInstancePluginListResultOutput{}, options).(GetInstancePluginListResultOutput)
 }
 
 // A collection of arguments for invoking getInstancePluginList.

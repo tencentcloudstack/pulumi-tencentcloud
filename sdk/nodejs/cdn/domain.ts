@@ -17,8 +17,8 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.cdn.Domain("foo", {
- *     domain: "xxxx.com",
+ * const example = new tencentcloud.cdn.Domain("example", {
+ *     domain: "example.com",
  *     serviceType: "web",
  *     area: "mainland",
  *     fullUrlCache: false,
@@ -51,8 +51,8 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.cdn.Domain("foo", {
- *     domain: "xxxx.com",
+ * const example = new tencentcloud.cdn.Domain("example", {
+ *     domain: "example.com",
  *     serviceType: "web",
  *     area: "mainland",
  *     cacheKey: {
@@ -108,8 +108,8 @@ import * as utilities from "../utilities";
  *     acl: "private",
  * });
  * // Create cdn domain
- * const cdn = new tencentcloud.cdn.Domain("cdn", {
- *     domain: "abc.com",
+ * const example = new tencentcloud.cdn.Domain("example", {
+ *     domain: "example.com",
  *     serviceType: "web",
  *     area: "mainland",
  *     cacheKey: {
@@ -132,12 +132,73 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ### Example Usage of CDN domain with advanced fields
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.cdn.Domain("example", {
+ *     domain: "example.com",
+ *     serviceType: "web",
+ *     area: "mainland",
+ *     origin: {
+ *         originType: "ip",
+ *         originLists: ["127.0.0.1"],
+ *         originPullProtocol: "follow",
+ *     },
+ *     httpsConfig: {
+ *         httpsSwitch: "off",
+ *         http2Switch: "off",
+ *         ocspStaplingSwitch: "off",
+ *         spdySwitch: "off",
+ *         verifyClient: "off",
+ *         hsts: {
+ *             "switch": "on",
+ *             maxAge: 31536000,
+ *             includeSubDomains: "on",
+ *         },
+ *     },
+ *     userAgentFilter: {
+ *         "switch": "on",
+ *         filterRules: [{
+ *             ruleType: "all",
+ *             rulePaths: ["*"],
+ *             userAgents: ["Mozilla/5.0"],
+ *             filterType: "blacklist",
+ *         }],
+ *     },
+ *     urlRedirect: {
+ *         "switch": "on",
+ *         pathRules: [{
+ *             redirectStatusCode: 302,
+ *             pattern: "/old/*",
+ *             redirectUrl: "/new/$1",
+ *         }],
+ *     },
+ *     originCombine: {
+ *         "switch": "on",
+ *     },
+ *     rangeOriginPull: {
+ *         "switch": "on",
+ *         rangeRules: [{
+ *             "switch": "on",
+ *             ruleType: "file",
+ *             rulePaths: [
+ *                 "jpg",
+ *                 "png",
+ *             ],
+ *         }],
+ *     },
+ * });
+ * ```
+ *
  * ## Import
  *
  * CDN domain can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Cdn/domain:Domain foo xxxx.com
+ * $ pulumi import tencentcloud:Cdn/domain:Domain example example.com
  * ```
  */
 export class Domain extends pulumi.CustomResource {
@@ -169,25 +230,33 @@ export class Domain extends pulumi.CustomResource {
     }
 
     /**
+     * Access port configuration. List of ports that can be accessed.
+     */
+    declare public readonly accessPorts: pulumi.Output<number[]>;
+    /**
      * Domain name acceleration region. `mainland`: acceleration inside mainland China, `overseas`: acceleration outside mainland China, `global`: global acceleration. Overseas acceleration service must be enabled to use overseas acceleration and global acceleration.
      */
-    declare public readonly area: pulumi.Output<string | undefined>;
+    declare public readonly area: pulumi.Output<string>;
     /**
      * Specify timestamp hotlink protection configuration, NOTE: only one type can choose for the sub elements.
      */
-    declare public readonly authentication: pulumi.Output<outputs.Cdn.DomainAuthentication | undefined>;
+    declare public readonly authentication: pulumi.Output<outputs.Cdn.DomainAuthentication>;
+    /**
+     * Traffic anti-hotlinking protection configuration. Note: Create API does not support this field, it will be set via Update API after creation.
+     */
+    declare public readonly autoGuard: pulumi.Output<outputs.Cdn.DomainAutoGuard>;
     /**
      * Access authentication for S3 origin.
      */
-    declare public readonly awsPrivateAccess: pulumi.Output<outputs.Cdn.DomainAwsPrivateAccess | undefined>;
+    declare public readonly awsPrivateAccess: pulumi.Output<outputs.Cdn.DomainAwsPrivateAccess>;
     /**
      * Bandwidth cap configuration.
      */
-    declare public readonly bandWidthAlert: pulumi.Output<outputs.Cdn.DomainBandWidthAlert | undefined>;
+    declare public readonly bandWidthAlert: pulumi.Output<outputs.Cdn.DomainBandWidthAlert>;
     /**
      * Cache key configuration (Ignore Query String configuration). NOTE: All of `fullUrlCache` default value is `on`.
      */
-    declare public readonly cacheKey: pulumi.Output<outputs.Cdn.DomainCacheKey | undefined>;
+    declare public readonly cacheKey: pulumi.Output<outputs.Cdn.DomainCacheKey>;
     /**
      * CNAME address of domain name.
      */
@@ -195,7 +264,7 @@ export class Domain extends pulumi.CustomResource {
     /**
      * Smart compression configurations.
      */
-    declare public readonly compression: pulumi.Output<outputs.Cdn.DomainCompression | undefined>;
+    declare public readonly compression: pulumi.Output<outputs.Cdn.DomainCompression>;
     /**
      * Creation time of domain name.
      */
@@ -207,7 +276,7 @@ export class Domain extends pulumi.CustomResource {
     /**
      * Downstream capping configuration.
      */
-    declare public readonly downstreamCapping: pulumi.Output<outputs.Cdn.DomainDownstreamCapping | undefined>;
+    declare public readonly downstreamCapping: pulumi.Output<outputs.Cdn.DomainDownstreamCapping>;
     /**
      * Used for store `dryRun` request json.
      */
@@ -219,11 +288,11 @@ export class Domain extends pulumi.CustomResource {
     /**
      * Error page configurations.
      */
-    declare public readonly errorPage: pulumi.Output<outputs.Cdn.DomainErrorPage | undefined>;
+    declare public readonly errorPage: pulumi.Output<outputs.Cdn.DomainErrorPage>;
     /**
      * Used for validate only by store arguments to request json string as expected, WARNING: if set to `true`, NO Cloud Api will be invoked but store as local data, do not use this argument unless you really know what you are doing.
      */
-    declare public readonly explicitUsingDryRun: pulumi.Output<boolean | undefined>;
+    declare public readonly explicitUsingDryRun: pulumi.Output<boolean>;
     /**
      * 301/302 redirect following switch, available values: `on`, `off` (default).
      */
@@ -235,21 +304,29 @@ export class Domain extends pulumi.CustomResource {
      */
     declare public readonly fullUrlCache: pulumi.Output<boolean | undefined>;
     /**
+     * Regional access control configuration. Note: Create API does not support this field, it will be set via Update API after creation.
+     */
+    declare public readonly geoBlocker: pulumi.Output<outputs.Cdn.DomainGeoBlocker>;
+    /**
+     * HTTPS service is enabled by default (this is a paid service; please refer to the billing information and product documentation for details).
+     */
+    declare public readonly httpsBilling: pulumi.Output<outputs.Cdn.DomainHttpsBilling>;
+    /**
      * HTTPS acceleration configuration. It's a list and consist of at most one item.
      */
     declare public readonly httpsConfig: pulumi.Output<outputs.Cdn.DomainHttpsConfig>;
     /**
      * Access authentication for OBS origin.
      */
-    declare public readonly hwPrivateAccess: pulumi.Output<outputs.Cdn.DomainHwPrivateAccess | undefined>;
+    declare public readonly hwPrivateAccess: pulumi.Output<outputs.Cdn.DomainHwPrivateAccess>;
     /**
      * Specify Ip filter configurations.
      */
-    declare public readonly ipFilter: pulumi.Output<outputs.Cdn.DomainIpFilter | undefined>;
+    declare public readonly ipFilter: pulumi.Output<outputs.Cdn.DomainIpFilter>;
     /**
      * Specify Ip frequency limit configurations.
      */
-    declare public readonly ipFreqLimit: pulumi.Output<outputs.Cdn.DomainIpFreqLimit | undefined>;
+    declare public readonly ipFreqLimit: pulumi.Output<outputs.Cdn.DomainIpFreqLimit>;
     /**
      * ipv6 access configuration switch. Only available when area set to `mainland`. Valid values are `on` and `off`. Default value is `off`.
      */
@@ -257,35 +334,39 @@ export class Domain extends pulumi.CustomResource {
     /**
      * Browser cache configuration. (This feature is in beta and not generally available yet).
      */
-    declare public readonly maxAge: pulumi.Output<outputs.Cdn.DomainMaxAge | undefined>;
+    declare public readonly maxAge: pulumi.Output<outputs.Cdn.DomainMaxAge>;
     /**
      * Offline cache switch, available values: `on`, `off` (default).
      */
-    declare public readonly offlineCacheSwitch: pulumi.Output<string | undefined>;
+    declare public readonly offlineCacheSwitch: pulumi.Output<string>;
     /**
      * Origin server configuration. It's a list and consist of at most one item.
      */
     declare public readonly origin: pulumi.Output<outputs.Cdn.DomainOrigin>;
     /**
+     * Origin combine configuration.
+     */
+    declare public readonly originCombine: pulumi.Output<outputs.Cdn.DomainOriginCombine>;
+    /**
      * Cross-border linkage optimization configuration. (This feature is in beta and not generally available yet).
      */
-    declare public readonly originPullOptimization: pulumi.Output<outputs.Cdn.DomainOriginPullOptimization | undefined>;
+    declare public readonly originPullOptimization: pulumi.Output<outputs.Cdn.DomainOriginPullOptimization>;
     /**
      * Cross-border linkage optimization configuration.
      */
-    declare public readonly originPullTimeout: pulumi.Output<outputs.Cdn.DomainOriginPullTimeout | undefined>;
+    declare public readonly originPullTimeout: pulumi.Output<outputs.Cdn.DomainOriginPullTimeout>;
     /**
      * Access authentication for OSS origin.
      */
-    declare public readonly ossPrivateAccess: pulumi.Output<outputs.Cdn.DomainOssPrivateAccess | undefined>;
+    declare public readonly ossPrivateAccess: pulumi.Output<outputs.Cdn.DomainOssPrivateAccess>;
     /**
      * Object storage back-to-source authentication of other vendors.
      */
-    declare public readonly othersPrivateAccess: pulumi.Output<outputs.Cdn.DomainOthersPrivateAccess | undefined>;
+    declare public readonly othersPrivateAccess: pulumi.Output<outputs.Cdn.DomainOthersPrivateAccess>;
     /**
      * Maximum post size configuration.
      */
-    declare public readonly postMaxSizes: pulumi.Output<outputs.Cdn.DomainPostMaxSize[] | undefined>;
+    declare public readonly postMaxSizes: pulumi.Output<outputs.Cdn.DomainPostMaxSize[]>;
     /**
      * The project CDN belongs to, default to 0.
      */
@@ -293,11 +374,15 @@ export class Domain extends pulumi.CustomResource {
     /**
      * Access authentication for OBS origin.
      */
-    declare public readonly qnPrivateAccess: pulumi.Output<outputs.Cdn.DomainQnPrivateAccess | undefined>;
+    declare public readonly qnPrivateAccess: pulumi.Output<outputs.Cdn.DomainQnPrivateAccess>;
     /**
      * QUIC switch, available values: `on`, `off` (default).
      */
-    declare public readonly quicSwitch: pulumi.Output<string | undefined>;
+    declare public readonly quicSwitch: pulumi.Output<string>;
+    /**
+     * Range origin pull configuration with path-based rules.
+     */
+    declare public readonly rangeOriginPull: pulumi.Output<outputs.Cdn.DomainRangeOriginPull>;
     /**
      * Sharding back to source configuration switch. Valid values are `on` and `off`. Default value is `on`.
      */
@@ -305,7 +390,7 @@ export class Domain extends pulumi.CustomResource {
     /**
      * Referer configuration.
      */
-    declare public readonly referer: pulumi.Output<outputs.Cdn.DomainReferer | undefined>;
+    declare public readonly referer: pulumi.Output<outputs.Cdn.DomainReferer>;
     /**
      * Request header configuration. It's a list and consist of at most one item.
      */
@@ -313,19 +398,19 @@ export class Domain extends pulumi.CustomResource {
     /**
      * Response header configurations.
      */
-    declare public readonly responseHeader: pulumi.Output<outputs.Cdn.DomainResponseHeader | undefined>;
+    declare public readonly responseHeader: pulumi.Output<outputs.Cdn.DomainResponseHeader>;
     /**
      * Response header cache switch, available values: `on`, `off` (default).
      */
-    declare public readonly responseHeaderCacheSwitch: pulumi.Output<string | undefined>;
+    declare public readonly responseHeaderCacheSwitch: pulumi.Output<string>;
     /**
      * Advanced path cache configuration.
      */
-    declare public readonly ruleCaches: pulumi.Output<outputs.Cdn.DomainRuleCache[] | undefined>;
+    declare public readonly ruleCaches: pulumi.Output<outputs.Cdn.DomainRuleCache[]>;
     /**
      * SEO switch, available values: `on`, `off` (default).
      */
-    declare public readonly seoSwitch: pulumi.Output<string | undefined>;
+    declare public readonly seoSwitch: pulumi.Output<string>;
     /**
      * Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration, `hybrid`: hybrid acceleration, `dynamic`: dynamic acceleration.
      */
@@ -333,11 +418,11 @@ export class Domain extends pulumi.CustomResource {
     /**
      * Specific configuration for mainland, NOTE: Both specifying full schema or using it is superfluous, please use cloud api parameters json passthroughs, check the [Data Types](https://www.tencentcloud.com/document/api/228/31739#MainlandConfig) for more details.
      */
-    declare public readonly specificConfigMainland: pulumi.Output<string | undefined>;
+    declare public readonly specificConfigMainland: pulumi.Output<string>;
     /**
      * Specific configuration for oversea, NOTE: Both specifying full schema or using it is superfluous, please use cloud api parameters json passthroughs, check the [Data Types](https://www.tencentcloud.com/document/api/228/31739#OverseaConfig) for more details.
      */
-    declare public readonly specificConfigOverseas: pulumi.Output<string | undefined>;
+    declare public readonly specificConfigOverseas: pulumi.Output<string>;
     /**
      * Acceleration service status.
      */
@@ -345,15 +430,23 @@ export class Domain extends pulumi.CustomResource {
     /**
      * Status code cache configurations.
      */
-    declare public readonly statusCodeCache: pulumi.Output<outputs.Cdn.DomainStatusCodeCache | undefined>;
+    declare public readonly statusCodeCache: pulumi.Output<outputs.Cdn.DomainStatusCodeCache>;
     /**
      * Tags of cdn domain.
      */
     declare public readonly tags: pulumi.Output<{[key: string]: string} | undefined>;
     /**
+     * URL redirect configuration.
+     */
+    declare public readonly urlRedirect: pulumi.Output<outputs.Cdn.DomainUrlRedirect>;
+    /**
+     * UserAgent blacklist/whitelist configuration.
+     */
+    declare public readonly userAgentFilter: pulumi.Output<outputs.Cdn.DomainUserAgentFilter>;
+    /**
      * Video seek switch, available values: `on`, `off` (default).
      */
-    declare public readonly videoSeekSwitch: pulumi.Output<string | undefined>;
+    declare public readonly videoSeekSwitch: pulumi.Output<string>;
 
     /**
      * Create a Domain resource with the given unique name, arguments, and options.
@@ -368,8 +461,10 @@ export class Domain extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as DomainState | undefined;
+            resourceInputs["accessPorts"] = state?.accessPorts;
             resourceInputs["area"] = state?.area;
             resourceInputs["authentication"] = state?.authentication;
+            resourceInputs["autoGuard"] = state?.autoGuard;
             resourceInputs["awsPrivateAccess"] = state?.awsPrivateAccess;
             resourceInputs["bandWidthAlert"] = state?.bandWidthAlert;
             resourceInputs["cacheKey"] = state?.cacheKey;
@@ -384,6 +479,8 @@ export class Domain extends pulumi.CustomResource {
             resourceInputs["explicitUsingDryRun"] = state?.explicitUsingDryRun;
             resourceInputs["followRedirectSwitch"] = state?.followRedirectSwitch;
             resourceInputs["fullUrlCache"] = state?.fullUrlCache;
+            resourceInputs["geoBlocker"] = state?.geoBlocker;
+            resourceInputs["httpsBilling"] = state?.httpsBilling;
             resourceInputs["httpsConfig"] = state?.httpsConfig;
             resourceInputs["hwPrivateAccess"] = state?.hwPrivateAccess;
             resourceInputs["ipFilter"] = state?.ipFilter;
@@ -392,6 +489,7 @@ export class Domain extends pulumi.CustomResource {
             resourceInputs["maxAge"] = state?.maxAge;
             resourceInputs["offlineCacheSwitch"] = state?.offlineCacheSwitch;
             resourceInputs["origin"] = state?.origin;
+            resourceInputs["originCombine"] = state?.originCombine;
             resourceInputs["originPullOptimization"] = state?.originPullOptimization;
             resourceInputs["originPullTimeout"] = state?.originPullTimeout;
             resourceInputs["ossPrivateAccess"] = state?.ossPrivateAccess;
@@ -400,6 +498,7 @@ export class Domain extends pulumi.CustomResource {
             resourceInputs["projectId"] = state?.projectId;
             resourceInputs["qnPrivateAccess"] = state?.qnPrivateAccess;
             resourceInputs["quicSwitch"] = state?.quicSwitch;
+            resourceInputs["rangeOriginPull"] = state?.rangeOriginPull;
             resourceInputs["rangeOriginSwitch"] = state?.rangeOriginSwitch;
             resourceInputs["referer"] = state?.referer;
             resourceInputs["requestHeader"] = state?.requestHeader;
@@ -413,6 +512,8 @@ export class Domain extends pulumi.CustomResource {
             resourceInputs["status"] = state?.status;
             resourceInputs["statusCodeCache"] = state?.statusCodeCache;
             resourceInputs["tags"] = state?.tags;
+            resourceInputs["urlRedirect"] = state?.urlRedirect;
+            resourceInputs["userAgentFilter"] = state?.userAgentFilter;
             resourceInputs["videoSeekSwitch"] = state?.videoSeekSwitch;
         } else {
             const args = argsOrState as DomainArgs | undefined;
@@ -425,8 +526,10 @@ export class Domain extends pulumi.CustomResource {
             if (args?.serviceType === undefined && !opts.urn) {
                 throw new Error("Missing required property 'serviceType'");
             }
+            resourceInputs["accessPorts"] = args?.accessPorts;
             resourceInputs["area"] = args?.area;
             resourceInputs["authentication"] = args?.authentication;
+            resourceInputs["autoGuard"] = args?.autoGuard;
             resourceInputs["awsPrivateAccess"] = args?.awsPrivateAccess;
             resourceInputs["bandWidthAlert"] = args?.bandWidthAlert;
             resourceInputs["cacheKey"] = args?.cacheKey;
@@ -437,6 +540,8 @@ export class Domain extends pulumi.CustomResource {
             resourceInputs["explicitUsingDryRun"] = args?.explicitUsingDryRun;
             resourceInputs["followRedirectSwitch"] = args?.followRedirectSwitch;
             resourceInputs["fullUrlCache"] = args?.fullUrlCache;
+            resourceInputs["geoBlocker"] = args?.geoBlocker;
+            resourceInputs["httpsBilling"] = args?.httpsBilling;
             resourceInputs["httpsConfig"] = args?.httpsConfig;
             resourceInputs["hwPrivateAccess"] = args?.hwPrivateAccess;
             resourceInputs["ipFilter"] = args?.ipFilter;
@@ -445,6 +550,7 @@ export class Domain extends pulumi.CustomResource {
             resourceInputs["maxAge"] = args?.maxAge;
             resourceInputs["offlineCacheSwitch"] = args?.offlineCacheSwitch;
             resourceInputs["origin"] = args?.origin;
+            resourceInputs["originCombine"] = args?.originCombine;
             resourceInputs["originPullOptimization"] = args?.originPullOptimization;
             resourceInputs["originPullTimeout"] = args?.originPullTimeout;
             resourceInputs["ossPrivateAccess"] = args?.ossPrivateAccess;
@@ -453,6 +559,7 @@ export class Domain extends pulumi.CustomResource {
             resourceInputs["projectId"] = args?.projectId;
             resourceInputs["qnPrivateAccess"] = args?.qnPrivateAccess;
             resourceInputs["quicSwitch"] = args?.quicSwitch;
+            resourceInputs["rangeOriginPull"] = args?.rangeOriginPull;
             resourceInputs["rangeOriginSwitch"] = args?.rangeOriginSwitch;
             resourceInputs["referer"] = args?.referer;
             resourceInputs["requestHeader"] = args?.requestHeader;
@@ -465,6 +572,8 @@ export class Domain extends pulumi.CustomResource {
             resourceInputs["specificConfigOverseas"] = args?.specificConfigOverseas;
             resourceInputs["statusCodeCache"] = args?.statusCodeCache;
             resourceInputs["tags"] = args?.tags;
+            resourceInputs["urlRedirect"] = args?.urlRedirect;
+            resourceInputs["userAgentFilter"] = args?.userAgentFilter;
             resourceInputs["videoSeekSwitch"] = args?.videoSeekSwitch;
             resourceInputs["cname"] = undefined /*out*/;
             resourceInputs["createTime"] = undefined /*out*/;
@@ -482,191 +591,223 @@ export class Domain extends pulumi.CustomResource {
  */
 export interface DomainState {
     /**
+     * Access port configuration. List of ports that can be accessed.
+     */
+    accessPorts?: pulumi.Input<pulumi.Input<number>[] | undefined>;
+    /**
      * Domain name acceleration region. `mainland`: acceleration inside mainland China, `overseas`: acceleration outside mainland China, `global`: global acceleration. Overseas acceleration service must be enabled to use overseas acceleration and global acceleration.
      */
-    area?: pulumi.Input<string>;
+    area?: pulumi.Input<string | undefined>;
     /**
      * Specify timestamp hotlink protection configuration, NOTE: only one type can choose for the sub elements.
      */
-    authentication?: pulumi.Input<inputs.Cdn.DomainAuthentication>;
+    authentication?: pulumi.Input<inputs.Cdn.DomainAuthentication | undefined>;
+    /**
+     * Traffic anti-hotlinking protection configuration. Note: Create API does not support this field, it will be set via Update API after creation.
+     */
+    autoGuard?: pulumi.Input<inputs.Cdn.DomainAutoGuard | undefined>;
     /**
      * Access authentication for S3 origin.
      */
-    awsPrivateAccess?: pulumi.Input<inputs.Cdn.DomainAwsPrivateAccess>;
+    awsPrivateAccess?: pulumi.Input<inputs.Cdn.DomainAwsPrivateAccess | undefined>;
     /**
      * Bandwidth cap configuration.
      */
-    bandWidthAlert?: pulumi.Input<inputs.Cdn.DomainBandWidthAlert>;
+    bandWidthAlert?: pulumi.Input<inputs.Cdn.DomainBandWidthAlert | undefined>;
     /**
      * Cache key configuration (Ignore Query String configuration). NOTE: All of `fullUrlCache` default value is `on`.
      */
-    cacheKey?: pulumi.Input<inputs.Cdn.DomainCacheKey>;
+    cacheKey?: pulumi.Input<inputs.Cdn.DomainCacheKey | undefined>;
     /**
      * CNAME address of domain name.
      */
-    cname?: pulumi.Input<string>;
+    cname?: pulumi.Input<string | undefined>;
     /**
      * Smart compression configurations.
      */
-    compression?: pulumi.Input<inputs.Cdn.DomainCompression>;
+    compression?: pulumi.Input<inputs.Cdn.DomainCompression | undefined>;
     /**
      * Creation time of domain name.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Name of the acceleration domain.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Downstream capping configuration.
      */
-    downstreamCapping?: pulumi.Input<inputs.Cdn.DomainDownstreamCapping>;
+    downstreamCapping?: pulumi.Input<inputs.Cdn.DomainDownstreamCapping | undefined>;
     /**
      * Used for store `dryRun` request json.
      */
-    dryRunCreateResult?: pulumi.Input<string>;
+    dryRunCreateResult?: pulumi.Input<string | undefined>;
     /**
      * Used for store `dryRun` update request json.
      */
-    dryRunUpdateResult?: pulumi.Input<string>;
+    dryRunUpdateResult?: pulumi.Input<string | undefined>;
     /**
      * Error page configurations.
      */
-    errorPage?: pulumi.Input<inputs.Cdn.DomainErrorPage>;
+    errorPage?: pulumi.Input<inputs.Cdn.DomainErrorPage | undefined>;
     /**
      * Used for validate only by store arguments to request json string as expected, WARNING: if set to `true`, NO Cloud Api will be invoked but store as local data, do not use this argument unless you really know what you are doing.
      */
-    explicitUsingDryRun?: pulumi.Input<boolean>;
+    explicitUsingDryRun?: pulumi.Input<boolean | undefined>;
     /**
      * 301/302 redirect following switch, available values: `on`, `off` (default).
      */
-    followRedirectSwitch?: pulumi.Input<string>;
+    followRedirectSwitch?: pulumi.Input<string | undefined>;
     /**
      * Use `cacheKey` > `fullUrlCache` instead. Whether to enable full-path cache. Default value is `true`.
      *
      * @deprecated Use `cacheKey` -> `fullUrlCache` instead.
      */
-    fullUrlCache?: pulumi.Input<boolean>;
+    fullUrlCache?: pulumi.Input<boolean | undefined>;
+    /**
+     * Regional access control configuration. Note: Create API does not support this field, it will be set via Update API after creation.
+     */
+    geoBlocker?: pulumi.Input<inputs.Cdn.DomainGeoBlocker | undefined>;
+    /**
+     * HTTPS service is enabled by default (this is a paid service; please refer to the billing information and product documentation for details).
+     */
+    httpsBilling?: pulumi.Input<inputs.Cdn.DomainHttpsBilling | undefined>;
     /**
      * HTTPS acceleration configuration. It's a list and consist of at most one item.
      */
-    httpsConfig?: pulumi.Input<inputs.Cdn.DomainHttpsConfig>;
+    httpsConfig?: pulumi.Input<inputs.Cdn.DomainHttpsConfig | undefined>;
     /**
      * Access authentication for OBS origin.
      */
-    hwPrivateAccess?: pulumi.Input<inputs.Cdn.DomainHwPrivateAccess>;
+    hwPrivateAccess?: pulumi.Input<inputs.Cdn.DomainHwPrivateAccess | undefined>;
     /**
      * Specify Ip filter configurations.
      */
-    ipFilter?: pulumi.Input<inputs.Cdn.DomainIpFilter>;
+    ipFilter?: pulumi.Input<inputs.Cdn.DomainIpFilter | undefined>;
     /**
      * Specify Ip frequency limit configurations.
      */
-    ipFreqLimit?: pulumi.Input<inputs.Cdn.DomainIpFreqLimit>;
+    ipFreqLimit?: pulumi.Input<inputs.Cdn.DomainIpFreqLimit | undefined>;
     /**
      * ipv6 access configuration switch. Only available when area set to `mainland`. Valid values are `on` and `off`. Default value is `off`.
      */
-    ipv6AccessSwitch?: pulumi.Input<string>;
+    ipv6AccessSwitch?: pulumi.Input<string | undefined>;
     /**
      * Browser cache configuration. (This feature is in beta and not generally available yet).
      */
-    maxAge?: pulumi.Input<inputs.Cdn.DomainMaxAge>;
+    maxAge?: pulumi.Input<inputs.Cdn.DomainMaxAge | undefined>;
     /**
      * Offline cache switch, available values: `on`, `off` (default).
      */
-    offlineCacheSwitch?: pulumi.Input<string>;
+    offlineCacheSwitch?: pulumi.Input<string | undefined>;
     /**
      * Origin server configuration. It's a list and consist of at most one item.
      */
-    origin?: pulumi.Input<inputs.Cdn.DomainOrigin>;
+    origin?: pulumi.Input<inputs.Cdn.DomainOrigin | undefined>;
+    /**
+     * Origin combine configuration.
+     */
+    originCombine?: pulumi.Input<inputs.Cdn.DomainOriginCombine | undefined>;
     /**
      * Cross-border linkage optimization configuration. (This feature is in beta and not generally available yet).
      */
-    originPullOptimization?: pulumi.Input<inputs.Cdn.DomainOriginPullOptimization>;
+    originPullOptimization?: pulumi.Input<inputs.Cdn.DomainOriginPullOptimization | undefined>;
     /**
      * Cross-border linkage optimization configuration.
      */
-    originPullTimeout?: pulumi.Input<inputs.Cdn.DomainOriginPullTimeout>;
+    originPullTimeout?: pulumi.Input<inputs.Cdn.DomainOriginPullTimeout | undefined>;
     /**
      * Access authentication for OSS origin.
      */
-    ossPrivateAccess?: pulumi.Input<inputs.Cdn.DomainOssPrivateAccess>;
+    ossPrivateAccess?: pulumi.Input<inputs.Cdn.DomainOssPrivateAccess | undefined>;
     /**
      * Object storage back-to-source authentication of other vendors.
      */
-    othersPrivateAccess?: pulumi.Input<inputs.Cdn.DomainOthersPrivateAccess>;
+    othersPrivateAccess?: pulumi.Input<inputs.Cdn.DomainOthersPrivateAccess | undefined>;
     /**
      * Maximum post size configuration.
      */
-    postMaxSizes?: pulumi.Input<pulumi.Input<inputs.Cdn.DomainPostMaxSize>[]>;
+    postMaxSizes?: pulumi.Input<pulumi.Input<inputs.Cdn.DomainPostMaxSize>[] | undefined>;
     /**
      * The project CDN belongs to, default to 0.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Access authentication for OBS origin.
      */
-    qnPrivateAccess?: pulumi.Input<inputs.Cdn.DomainQnPrivateAccess>;
+    qnPrivateAccess?: pulumi.Input<inputs.Cdn.DomainQnPrivateAccess | undefined>;
     /**
      * QUIC switch, available values: `on`, `off` (default).
      */
-    quicSwitch?: pulumi.Input<string>;
+    quicSwitch?: pulumi.Input<string | undefined>;
+    /**
+     * Range origin pull configuration with path-based rules.
+     */
+    rangeOriginPull?: pulumi.Input<inputs.Cdn.DomainRangeOriginPull | undefined>;
     /**
      * Sharding back to source configuration switch. Valid values are `on` and `off`. Default value is `on`.
      */
-    rangeOriginSwitch?: pulumi.Input<string>;
+    rangeOriginSwitch?: pulumi.Input<string | undefined>;
     /**
      * Referer configuration.
      */
-    referer?: pulumi.Input<inputs.Cdn.DomainReferer>;
+    referer?: pulumi.Input<inputs.Cdn.DomainReferer | undefined>;
     /**
      * Request header configuration. It's a list and consist of at most one item.
      */
-    requestHeader?: pulumi.Input<inputs.Cdn.DomainRequestHeader>;
+    requestHeader?: pulumi.Input<inputs.Cdn.DomainRequestHeader | undefined>;
     /**
      * Response header configurations.
      */
-    responseHeader?: pulumi.Input<inputs.Cdn.DomainResponseHeader>;
+    responseHeader?: pulumi.Input<inputs.Cdn.DomainResponseHeader | undefined>;
     /**
      * Response header cache switch, available values: `on`, `off` (default).
      */
-    responseHeaderCacheSwitch?: pulumi.Input<string>;
+    responseHeaderCacheSwitch?: pulumi.Input<string | undefined>;
     /**
      * Advanced path cache configuration.
      */
-    ruleCaches?: pulumi.Input<pulumi.Input<inputs.Cdn.DomainRuleCache>[]>;
+    ruleCaches?: pulumi.Input<pulumi.Input<inputs.Cdn.DomainRuleCache>[] | undefined>;
     /**
      * SEO switch, available values: `on`, `off` (default).
      */
-    seoSwitch?: pulumi.Input<string>;
+    seoSwitch?: pulumi.Input<string | undefined>;
     /**
      * Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration, `hybrid`: hybrid acceleration, `dynamic`: dynamic acceleration.
      */
-    serviceType?: pulumi.Input<string>;
+    serviceType?: pulumi.Input<string | undefined>;
     /**
      * Specific configuration for mainland, NOTE: Both specifying full schema or using it is superfluous, please use cloud api parameters json passthroughs, check the [Data Types](https://www.tencentcloud.com/document/api/228/31739#MainlandConfig) for more details.
      */
-    specificConfigMainland?: pulumi.Input<string>;
+    specificConfigMainland?: pulumi.Input<string | undefined>;
     /**
      * Specific configuration for oversea, NOTE: Both specifying full schema or using it is superfluous, please use cloud api parameters json passthroughs, check the [Data Types](https://www.tencentcloud.com/document/api/228/31739#OverseaConfig) for more details.
      */
-    specificConfigOverseas?: pulumi.Input<string>;
+    specificConfigOverseas?: pulumi.Input<string | undefined>;
     /**
      * Acceleration service status.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Status code cache configurations.
      */
-    statusCodeCache?: pulumi.Input<inputs.Cdn.DomainStatusCodeCache>;
+    statusCodeCache?: pulumi.Input<inputs.Cdn.DomainStatusCodeCache | undefined>;
     /**
      * Tags of cdn domain.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
+    /**
+     * URL redirect configuration.
+     */
+    urlRedirect?: pulumi.Input<inputs.Cdn.DomainUrlRedirect | undefined>;
+    /**
+     * UserAgent blacklist/whitelist configuration.
+     */
+    userAgentFilter?: pulumi.Input<inputs.Cdn.DomainUserAgentFilter | undefined>;
     /**
      * Video seek switch, available values: `on`, `off` (default).
      */
-    videoSeekSwitch?: pulumi.Input<string>;
+    videoSeekSwitch?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -674,29 +815,37 @@ export interface DomainState {
  */
 export interface DomainArgs {
     /**
+     * Access port configuration. List of ports that can be accessed.
+     */
+    accessPorts?: pulumi.Input<pulumi.Input<number>[] | undefined>;
+    /**
      * Domain name acceleration region. `mainland`: acceleration inside mainland China, `overseas`: acceleration outside mainland China, `global`: global acceleration. Overseas acceleration service must be enabled to use overseas acceleration and global acceleration.
      */
-    area?: pulumi.Input<string>;
+    area?: pulumi.Input<string | undefined>;
     /**
      * Specify timestamp hotlink protection configuration, NOTE: only one type can choose for the sub elements.
      */
-    authentication?: pulumi.Input<inputs.Cdn.DomainAuthentication>;
+    authentication?: pulumi.Input<inputs.Cdn.DomainAuthentication | undefined>;
+    /**
+     * Traffic anti-hotlinking protection configuration. Note: Create API does not support this field, it will be set via Update API after creation.
+     */
+    autoGuard?: pulumi.Input<inputs.Cdn.DomainAutoGuard | undefined>;
     /**
      * Access authentication for S3 origin.
      */
-    awsPrivateAccess?: pulumi.Input<inputs.Cdn.DomainAwsPrivateAccess>;
+    awsPrivateAccess?: pulumi.Input<inputs.Cdn.DomainAwsPrivateAccess | undefined>;
     /**
      * Bandwidth cap configuration.
      */
-    bandWidthAlert?: pulumi.Input<inputs.Cdn.DomainBandWidthAlert>;
+    bandWidthAlert?: pulumi.Input<inputs.Cdn.DomainBandWidthAlert | undefined>;
     /**
      * Cache key configuration (Ignore Query String configuration). NOTE: All of `fullUrlCache` default value is `on`.
      */
-    cacheKey?: pulumi.Input<inputs.Cdn.DomainCacheKey>;
+    cacheKey?: pulumi.Input<inputs.Cdn.DomainCacheKey | undefined>;
     /**
      * Smart compression configurations.
      */
-    compression?: pulumi.Input<inputs.Cdn.DomainCompression>;
+    compression?: pulumi.Input<inputs.Cdn.DomainCompression | undefined>;
     /**
      * Name of the acceleration domain.
      */
@@ -704,117 +853,133 @@ export interface DomainArgs {
     /**
      * Downstream capping configuration.
      */
-    downstreamCapping?: pulumi.Input<inputs.Cdn.DomainDownstreamCapping>;
+    downstreamCapping?: pulumi.Input<inputs.Cdn.DomainDownstreamCapping | undefined>;
     /**
      * Error page configurations.
      */
-    errorPage?: pulumi.Input<inputs.Cdn.DomainErrorPage>;
+    errorPage?: pulumi.Input<inputs.Cdn.DomainErrorPage | undefined>;
     /**
      * Used for validate only by store arguments to request json string as expected, WARNING: if set to `true`, NO Cloud Api will be invoked but store as local data, do not use this argument unless you really know what you are doing.
      */
-    explicitUsingDryRun?: pulumi.Input<boolean>;
+    explicitUsingDryRun?: pulumi.Input<boolean | undefined>;
     /**
      * 301/302 redirect following switch, available values: `on`, `off` (default).
      */
-    followRedirectSwitch?: pulumi.Input<string>;
+    followRedirectSwitch?: pulumi.Input<string | undefined>;
     /**
      * Use `cacheKey` > `fullUrlCache` instead. Whether to enable full-path cache. Default value is `true`.
      *
      * @deprecated Use `cacheKey` -> `fullUrlCache` instead.
      */
-    fullUrlCache?: pulumi.Input<boolean>;
+    fullUrlCache?: pulumi.Input<boolean | undefined>;
+    /**
+     * Regional access control configuration. Note: Create API does not support this field, it will be set via Update API after creation.
+     */
+    geoBlocker?: pulumi.Input<inputs.Cdn.DomainGeoBlocker | undefined>;
+    /**
+     * HTTPS service is enabled by default (this is a paid service; please refer to the billing information and product documentation for details).
+     */
+    httpsBilling?: pulumi.Input<inputs.Cdn.DomainHttpsBilling | undefined>;
     /**
      * HTTPS acceleration configuration. It's a list and consist of at most one item.
      */
-    httpsConfig?: pulumi.Input<inputs.Cdn.DomainHttpsConfig>;
+    httpsConfig?: pulumi.Input<inputs.Cdn.DomainHttpsConfig | undefined>;
     /**
      * Access authentication for OBS origin.
      */
-    hwPrivateAccess?: pulumi.Input<inputs.Cdn.DomainHwPrivateAccess>;
+    hwPrivateAccess?: pulumi.Input<inputs.Cdn.DomainHwPrivateAccess | undefined>;
     /**
      * Specify Ip filter configurations.
      */
-    ipFilter?: pulumi.Input<inputs.Cdn.DomainIpFilter>;
+    ipFilter?: pulumi.Input<inputs.Cdn.DomainIpFilter | undefined>;
     /**
      * Specify Ip frequency limit configurations.
      */
-    ipFreqLimit?: pulumi.Input<inputs.Cdn.DomainIpFreqLimit>;
+    ipFreqLimit?: pulumi.Input<inputs.Cdn.DomainIpFreqLimit | undefined>;
     /**
      * ipv6 access configuration switch. Only available when area set to `mainland`. Valid values are `on` and `off`. Default value is `off`.
      */
-    ipv6AccessSwitch?: pulumi.Input<string>;
+    ipv6AccessSwitch?: pulumi.Input<string | undefined>;
     /**
      * Browser cache configuration. (This feature is in beta and not generally available yet).
      */
-    maxAge?: pulumi.Input<inputs.Cdn.DomainMaxAge>;
+    maxAge?: pulumi.Input<inputs.Cdn.DomainMaxAge | undefined>;
     /**
      * Offline cache switch, available values: `on`, `off` (default).
      */
-    offlineCacheSwitch?: pulumi.Input<string>;
+    offlineCacheSwitch?: pulumi.Input<string | undefined>;
     /**
      * Origin server configuration. It's a list and consist of at most one item.
      */
     origin: pulumi.Input<inputs.Cdn.DomainOrigin>;
     /**
+     * Origin combine configuration.
+     */
+    originCombine?: pulumi.Input<inputs.Cdn.DomainOriginCombine | undefined>;
+    /**
      * Cross-border linkage optimization configuration. (This feature is in beta and not generally available yet).
      */
-    originPullOptimization?: pulumi.Input<inputs.Cdn.DomainOriginPullOptimization>;
+    originPullOptimization?: pulumi.Input<inputs.Cdn.DomainOriginPullOptimization | undefined>;
     /**
      * Cross-border linkage optimization configuration.
      */
-    originPullTimeout?: pulumi.Input<inputs.Cdn.DomainOriginPullTimeout>;
+    originPullTimeout?: pulumi.Input<inputs.Cdn.DomainOriginPullTimeout | undefined>;
     /**
      * Access authentication for OSS origin.
      */
-    ossPrivateAccess?: pulumi.Input<inputs.Cdn.DomainOssPrivateAccess>;
+    ossPrivateAccess?: pulumi.Input<inputs.Cdn.DomainOssPrivateAccess | undefined>;
     /**
      * Object storage back-to-source authentication of other vendors.
      */
-    othersPrivateAccess?: pulumi.Input<inputs.Cdn.DomainOthersPrivateAccess>;
+    othersPrivateAccess?: pulumi.Input<inputs.Cdn.DomainOthersPrivateAccess | undefined>;
     /**
      * Maximum post size configuration.
      */
-    postMaxSizes?: pulumi.Input<pulumi.Input<inputs.Cdn.DomainPostMaxSize>[]>;
+    postMaxSizes?: pulumi.Input<pulumi.Input<inputs.Cdn.DomainPostMaxSize>[] | undefined>;
     /**
      * The project CDN belongs to, default to 0.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Access authentication for OBS origin.
      */
-    qnPrivateAccess?: pulumi.Input<inputs.Cdn.DomainQnPrivateAccess>;
+    qnPrivateAccess?: pulumi.Input<inputs.Cdn.DomainQnPrivateAccess | undefined>;
     /**
      * QUIC switch, available values: `on`, `off` (default).
      */
-    quicSwitch?: pulumi.Input<string>;
+    quicSwitch?: pulumi.Input<string | undefined>;
+    /**
+     * Range origin pull configuration with path-based rules.
+     */
+    rangeOriginPull?: pulumi.Input<inputs.Cdn.DomainRangeOriginPull | undefined>;
     /**
      * Sharding back to source configuration switch. Valid values are `on` and `off`. Default value is `on`.
      */
-    rangeOriginSwitch?: pulumi.Input<string>;
+    rangeOriginSwitch?: pulumi.Input<string | undefined>;
     /**
      * Referer configuration.
      */
-    referer?: pulumi.Input<inputs.Cdn.DomainReferer>;
+    referer?: pulumi.Input<inputs.Cdn.DomainReferer | undefined>;
     /**
      * Request header configuration. It's a list and consist of at most one item.
      */
-    requestHeader?: pulumi.Input<inputs.Cdn.DomainRequestHeader>;
+    requestHeader?: pulumi.Input<inputs.Cdn.DomainRequestHeader | undefined>;
     /**
      * Response header configurations.
      */
-    responseHeader?: pulumi.Input<inputs.Cdn.DomainResponseHeader>;
+    responseHeader?: pulumi.Input<inputs.Cdn.DomainResponseHeader | undefined>;
     /**
      * Response header cache switch, available values: `on`, `off` (default).
      */
-    responseHeaderCacheSwitch?: pulumi.Input<string>;
+    responseHeaderCacheSwitch?: pulumi.Input<string | undefined>;
     /**
      * Advanced path cache configuration.
      */
-    ruleCaches?: pulumi.Input<pulumi.Input<inputs.Cdn.DomainRuleCache>[]>;
+    ruleCaches?: pulumi.Input<pulumi.Input<inputs.Cdn.DomainRuleCache>[] | undefined>;
     /**
      * SEO switch, available values: `on`, `off` (default).
      */
-    seoSwitch?: pulumi.Input<string>;
+    seoSwitch?: pulumi.Input<string | undefined>;
     /**
      * Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration, `hybrid`: hybrid acceleration, `dynamic`: dynamic acceleration.
      */
@@ -822,21 +987,29 @@ export interface DomainArgs {
     /**
      * Specific configuration for mainland, NOTE: Both specifying full schema or using it is superfluous, please use cloud api parameters json passthroughs, check the [Data Types](https://www.tencentcloud.com/document/api/228/31739#MainlandConfig) for more details.
      */
-    specificConfigMainland?: pulumi.Input<string>;
+    specificConfigMainland?: pulumi.Input<string | undefined>;
     /**
      * Specific configuration for oversea, NOTE: Both specifying full schema or using it is superfluous, please use cloud api parameters json passthroughs, check the [Data Types](https://www.tencentcloud.com/document/api/228/31739#OverseaConfig) for more details.
      */
-    specificConfigOverseas?: pulumi.Input<string>;
+    specificConfigOverseas?: pulumi.Input<string | undefined>;
     /**
      * Status code cache configurations.
      */
-    statusCodeCache?: pulumi.Input<inputs.Cdn.DomainStatusCodeCache>;
+    statusCodeCache?: pulumi.Input<inputs.Cdn.DomainStatusCodeCache | undefined>;
     /**
      * Tags of cdn domain.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
+    /**
+     * URL redirect configuration.
+     */
+    urlRedirect?: pulumi.Input<inputs.Cdn.DomainUrlRedirect | undefined>;
+    /**
+     * UserAgent blacklist/whitelist configuration.
+     */
+    userAgentFilter?: pulumi.Input<inputs.Cdn.DomainUserAgentFilter | undefined>;
     /**
      * Video seek switch, available values: `on`, `off` (default).
      */
-    videoSeekSwitch?: pulumi.Input<string>;
+    videoSeekSwitch?: pulumi.Input<string | undefined>;
 }

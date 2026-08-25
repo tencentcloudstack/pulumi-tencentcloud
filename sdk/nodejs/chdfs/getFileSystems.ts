@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const fileSystems = tencentcloud.Chdfs.getFileSystems({});
+ * const fileSystems = tencentcloud.chdfs.getFileSystems({});
  * ```
  */
 export function getFileSystems(args?: GetFileSystemsArgs, opts?: pulumi.InvokeOptions): Promise<GetFileSystemsResult> {
@@ -59,7 +59,7 @@ export interface GetFileSystemsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const fileSystems = tencentcloud.Chdfs.getFileSystems({});
+ * const fileSystems = tencentcloud.chdfs.getFileSystems({});
  * ```
  */
 export function getFileSystemsOutput(args?: GetFileSystemsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetFileSystemsResult> {
@@ -77,5 +77,5 @@ export interface GetFileSystemsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

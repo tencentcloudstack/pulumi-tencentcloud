@@ -108,11 +108,11 @@ export interface StartFlowOperationState {
     /**
      * Flow Id.
      */
-    flowId?: pulumi.Input<string>;
+    flowId?: pulumi.Input<string | undefined>;
     /**
      * `true`: start mps stream link flow; `false`: stop.
      */
-    start?: pulumi.Input<boolean>;
+    start?: pulumi.Input<boolean | undefined>;
 }
 
 /**

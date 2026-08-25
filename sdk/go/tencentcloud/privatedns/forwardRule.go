@@ -46,7 +46,7 @@ import (
 //				RuleName:   pulumi.String("tf-example"),
 //				RuleType:   pulumi.String("DOWN"),
 //				ZoneId:     pulumi.String("zone-cmmbvaq8"),
-//				EndPointId: example.ID(),
+//				EndPointId: example.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err

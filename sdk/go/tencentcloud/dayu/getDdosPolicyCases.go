@@ -73,12 +73,8 @@ type GetDdosPolicyCasesResult struct {
 }
 
 func GetDdosPolicyCasesOutput(ctx *pulumi.Context, args GetDdosPolicyCasesOutputArgs, opts ...pulumi.InvokeOption) GetDdosPolicyCasesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDdosPolicyCasesResultOutput, error) {
-			args := v.(GetDdosPolicyCasesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dayu/getDdosPolicyCases:getDdosPolicyCases", args, GetDdosPolicyCasesResultOutput{}, options).(GetDdosPolicyCasesResultOutput), nil
-		}).(GetDdosPolicyCasesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dayu/getDdosPolicyCases:getDdosPolicyCases", args, GetDdosPolicyCasesResultOutput{}, options).(GetDdosPolicyCasesResultOutput)
 }
 
 // A collection of arguments for invoking getDdosPolicyCases.

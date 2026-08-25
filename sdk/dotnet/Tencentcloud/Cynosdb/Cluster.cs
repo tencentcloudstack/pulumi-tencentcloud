@@ -13,6 +13,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// <summary>
     /// Provide a resource to create a CynosDB cluster.
     /// 
+    /// &gt; **NOTE:** Compared to Resource `tencentcloud.Cynosdb.Cluster`, Resource `tencentcloud.Cynosdb.ClusterV2` places greater emphasis on optimizing security group configurations for read-only groups and read-only instances, making them more precise and efficient. `RwGroupSg` represents the read-write instance security group, `RoGroupSg` represents the read-only group security group, and `SingleRoGroupSg` represents the read-only instance security group. notably, to configure `RoGroupSg`, ``OpenRoGroup`must be set`True`first. If you need to configure`RoGroupSg`or`SingleRoGroupSg`security group, please use Resource`tencentcloud.Cynosdb.ClusterV2`.
+    /// 
     /// &gt; **NOTE:** params `InstanceCount` and `InstanceInitInfos` only choose one. If neither parameter is set, the CynosDB cluster is created with parameter `InstanceCount` set to `2` by default(one RW instance + one Ro instance). If you only need to create a master instance, explicitly set the `InstanceCount` field to `1`, or configure the RW instance information in the `InstanceInitInfos` field.
     /// 
     /// ## Example Usage
@@ -102,10 +104,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     ///         {
     ///             example.Id,
     ///         },
-    ///         RoGroupSgs = new[]
-    ///         {
-    ///             example.Id,
-    ///         },
     ///         InstanceInitInfos = new[]
     ///         {
     ///             new Tencentcloud.Cynosdb.Inputs.ClusterInstanceInitInfoArgs
@@ -125,6 +123,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     ///                 DeviceType = "exclusive",
     ///             },
     ///         },
+    ///         SyncWay = "async",
+    ///         SemiSyncTimeout = 10000,
+    ///         CynosVersion = "2.1.14.001",
     ///         Tags = 
     ///         {
     ///             { "createBy", "terraform" },
@@ -134,7 +135,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// });
     /// ```
     /// 
-    /// ### Create a multiple availability zone SERVERLESS CynosDB cluster
+    /// ### API.
+    /// 
+    /// Create a multiple availability zone SERVERLESS CynosDB cluster
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
@@ -212,6 +215,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     ///         MaxCpu = 4,
     ///         ParamTemplateId = exampleParamTemplate.TemplateId,
     ///         ForceDelete = false,
+    ///         SyncWay = "async",
+    ///         SemiSyncTimeout = 10000,
     ///         InstanceMaintainWeekdays = new[]
     ///         {
     ///             "Fri",
@@ -223,10 +228,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     ///             "Tue",
     ///         },
     ///         RwGroupSgs = new[]
-    ///         {
-    ///             example.Id,
-    ///         },
-    ///         RoGroupSgs = new[]
     ///         {
     ///             example.Id,
     ///         },
@@ -305,7 +306,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public Output<string> CreateTime { get; private set; } = null!;
 
         /// <summary>
-        /// Kernel version, you can enter it when modifying.
+        /// Kernel minor version, like `3.1.16.002`.
         /// </summary>
         [Output("cynosVersion")]
         public Output<string> CynosVersion { get; private set; } = null!;
@@ -383,7 +384,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public Output<int?> InstanceMemorySize { get; private set; } = null!;
 
         /// <summary>
-        /// Name of instance.
+        /// Name of instance. Only supported when modifying.
         /// </summary>
         [Output("instanceName")]
         public Output<string> InstanceName { get; private set; } = null!;
@@ -509,6 +510,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public Output<ImmutableArray<string>> RwGroupSgs { get; private set; } = null!;
 
         /// <summary>
+        /// Semi-sync timeout in ms. Value range: `[1000, 4294967295]`, default `10000`.
+        /// </summary>
+        [Output("semiSyncTimeout")]
+        public Output<int> SemiSyncTimeout { get; private set; } = null!;
+
+        /// <summary>
         /// Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set `ServerlessStatusFlag`.
         /// </summary>
         [Output("serverlessStatus")]
@@ -524,7 +531,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// Multi zone Addresses of the CynosDB Cluster.
         /// </summary>
         [Output("slaveZone")]
-        public Output<string?> SlaveZone { get; private set; } = null!;
+        public Output<string> SlaveZone { get; private set; } = null!;
 
         /// <summary>
         /// Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If DbType is `MYSQL` and ChargeType is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is `order and pay`. when ChargeType is `POSTPAID_BY_HOUR`, this argument is unnecessary.
@@ -549,6 +556,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// </summary>
         [Output("subnetId")]
         public Output<string> SubnetId { get; private set; } = null!;
+
+        /// <summary>
+        /// Synchronization way. Valid values: `Async`, `Semisync`, `Sync`.
+        /// </summary>
+        [Output("syncWay")]
+        public Output<string> SyncWay { get; private set; } = null!;
 
         /// <summary>
         /// The tags of the CynosDB cluster.
@@ -650,7 +663,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public Input<string> ClusterName { get; set; } = null!;
 
         /// <summary>
-        /// Kernel version, you can enter it when modifying.
+        /// Kernel minor version, like `3.1.16.002`.
         /// </summary>
         [Input("cynosVersion")]
         public Input<string>? CynosVersion { get; set; }
@@ -732,6 +745,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// </summary>
         [Input("instanceMemorySize")]
         public Input<int>? InstanceMemorySize { get; set; }
+
+        /// <summary>
+        /// Name of instance. Only supported when modifying.
+        /// </summary>
+        [Input("instanceName")]
+        public Input<string>? InstanceName { get; set; }
 
         /// <summary>
         /// Maximum CPU core count, required while `DbMode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
@@ -834,6 +853,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         }
 
         /// <summary>
+        /// Semi-sync timeout in ms. Value range: `[1000, 4294967295]`, default `10000`.
+        /// </summary>
+        [Input("semiSyncTimeout")]
+        public Input<int>? SemiSyncTimeout { get; set; }
+
+        /// <summary>
         /// Specify whether to pause or resume serverless cluster. values: `Resume`, `Pause`.
         /// </summary>
         [Input("serverlessStatusFlag")]
@@ -862,6 +887,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// </summary>
         [Input("subnetId", required: true)]
         public Input<string> SubnetId { get; set; } = null!;
+
+        /// <summary>
+        /// Synchronization way. Valid values: `Async`, `Semisync`, `Sync`.
+        /// </summary>
+        [Input("syncWay")]
+        public Input<string>? SyncWay { get; set; }
 
         [Input("tags")]
         private InputMap<string>? _tags;
@@ -944,7 +975,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public Input<string>? CreateTime { get; set; }
 
         /// <summary>
-        /// Kernel version, you can enter it when modifying.
+        /// Kernel minor version, like `3.1.16.002`.
         /// </summary>
         [Input("cynosVersion")]
         public Input<string>? CynosVersion { get; set; }
@@ -1034,7 +1065,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public Input<int>? InstanceMemorySize { get; set; }
 
         /// <summary>
-        /// Name of instance.
+        /// Name of instance. Only supported when modifying.
         /// </summary>
         [Input("instanceName")]
         public Input<string>? InstanceName { get; set; }
@@ -1212,6 +1243,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         }
 
         /// <summary>
+        /// Semi-sync timeout in ms. Value range: `[1000, 4294967295]`, default `10000`.
+        /// </summary>
+        [Input("semiSyncTimeout")]
+        public Input<int>? SemiSyncTimeout { get; set; }
+
+        /// <summary>
         /// Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set `ServerlessStatusFlag`.
         /// </summary>
         [Input("serverlessStatus")]
@@ -1252,6 +1289,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// </summary>
         [Input("subnetId")]
         public Input<string>? SubnetId { get; set; }
+
+        /// <summary>
+        /// Synchronization way. Valid values: `Async`, `Semisync`, `Sync`.
+        /// </summary>
+        [Input("syncWay")]
+        public Input<string>? SyncWay { get; set; }
 
         [Input("tags")]
         private InputMap<string>? _tags;

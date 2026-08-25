@@ -5,6 +5,10 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
+ * Provides a resource to create a dnspod customLine
+ *
+ * > **NOTE:** Terraform uses the combined id of doamin and name when importing. When the name changes, the combined id will also change.
+ *
  * ## Example Usage
  *
  * ```typescript
@@ -20,7 +24,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * dnspod custom_line can be imported using the id, e.g.
+ * dnspod customLine can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Dnspod/customLine:CustomLine custom_line domain#name
@@ -107,15 +111,15 @@ export interface CustomLineState {
     /**
      * The IP segment of custom line, split with `-`.
      */
-    area?: pulumi.Input<string>;
+    area?: pulumi.Input<string | undefined>;
     /**
      * Domain.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * The Name of custom line.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -133,5 +137,5 @@ export interface CustomLineArgs {
     /**
      * The Name of custom line.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }

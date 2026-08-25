@@ -67,12 +67,8 @@ type GetDbCharsetsResult struct {
 }
 
 func GetDbCharsetsOutput(ctx *pulumi.Context, args GetDbCharsetsOutputArgs, opts ...pulumi.InvokeOption) GetDbCharsetsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDbCharsetsResultOutput, error) {
-			args := v.(GetDbCharsetsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Sqlserver/getDbCharsets:getDbCharsets", args, GetDbCharsetsResultOutput{}, options).(GetDbCharsetsResultOutput), nil
-		}).(GetDbCharsetsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Sqlserver/getDbCharsets:getDbCharsets", args, GetDbCharsetsResultOutput{}, options).(GetDbCharsetsResultOutput)
 }
 
 // A collection of arguments for invoking getDbCharsets.

@@ -54,7 +54,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
     /// 
     /// ## Import
     /// 
-    /// lighthouse firewall_rule can be imported using the id, e.g.
+    /// lighthouse FirewallRule can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Lighthouse/firewallRule:FirewallRule firewall_rule lighthouse_instance_id

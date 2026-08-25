@@ -7,7 +7,7 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Use this data source to query detailed information of cdwdoris instances
+ * Use this data source to query detailed information of CDWDoris instances
  *
  * ## Example Usage
  *
@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cdwdoris.getInstances({});
+ * const example = tencentcloud.cdwdoris.getInstances({});
  * ```
  */
 export function getInstances(args?: GetInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetInstancesResult> {
@@ -71,7 +71,7 @@ export interface GetInstancesResult {
     readonly searchTags?: outputs.Cdwdoris.GetInstancesSearchTag[];
 }
 /**
- * Use this data source to query detailed information of cdwdoris instances
+ * Use this data source to query detailed information of CDWDoris instances
  *
  * ## Example Usage
  *
@@ -81,7 +81,7 @@ export interface GetInstancesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cdwdoris.getInstances({});
+ * const example = tencentcloud.cdwdoris.getInstances({});
  * ```
  */
 export function getInstancesOutput(args?: GetInstancesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstancesResult> {
@@ -102,17 +102,17 @@ export interface GetInstancesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * The name of the cluster ID for the search.
      */
-    searchInstanceId?: pulumi.Input<string>;
+    searchInstanceId?: pulumi.Input<string | undefined>;
     /**
      * The cluster name for the search.
      */
-    searchInstanceName?: pulumi.Input<string>;
+    searchInstanceName?: pulumi.Input<string | undefined>;
     /**
      * Search tag list.
      */
-    searchTags?: pulumi.Input<pulumi.Input<inputs.Cdwdoris.GetInstancesSearchTagArgs>[]>;
+    searchTags?: pulumi.Input<pulumi.Input<inputs.Cdwdoris.GetInstancesSearchTagArgs>[] | undefined>;
 }

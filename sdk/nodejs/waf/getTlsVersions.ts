@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getTlsVersions({});
+ * const example = tencentcloud.waf.getTlsVersions({});
  * ```
  */
 export function getTlsVersions(args?: GetTlsVersionsArgs, opts?: pulumi.InvokeOptions): Promise<GetTlsVersionsResult> {
@@ -59,7 +59,7 @@ export interface GetTlsVersionsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getTlsVersions({});
+ * const example = tencentcloud.waf.getTlsVersions({});
  * ```
  */
 export function getTlsVersionsOutput(args?: GetTlsVersionsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTlsVersionsResult> {
@@ -77,5 +77,5 @@ export interface GetTlsVersionsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

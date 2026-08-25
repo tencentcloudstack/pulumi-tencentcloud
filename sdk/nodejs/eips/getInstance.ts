@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Eips.getInstance({});
+ * const example = tencentcloud.eips.getInstance({});
  * ```
  *
  * ### Query eip instances by eip ID
@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Eips.getInstance({
+ * const example = tencentcloud.eips.getInstance({
  *     eipId: "eip-ry9h95hg",
  * });
  * ```
@@ -37,7 +37,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Eips.getInstance({
+ * const example = tencentcloud.eips.getInstance({
  *     eipName: "tf-example",
  * });
  * ```
@@ -48,7 +48,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Eips.getInstance({
+ * const example = tencentcloud.eips.getInstance({
  *     publicIp: "1.12.62.3",
  * });
  * ```
@@ -59,7 +59,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Eips.getInstance({
+ * const example = tencentcloud.eips.getInstance({
  *     tags: {
  *         test: "test",
  *     },
@@ -145,7 +145,7 @@ export interface GetInstanceResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Eips.getInstance({});
+ * const example = tencentcloud.eips.getInstance({});
  * ```
  *
  * ### Query eip instances by eip ID
@@ -154,7 +154,7 @@ export interface GetInstanceResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Eips.getInstance({
+ * const example = tencentcloud.eips.getInstance({
  *     eipId: "eip-ry9h95hg",
  * });
  * ```
@@ -165,7 +165,7 @@ export interface GetInstanceResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Eips.getInstance({
+ * const example = tencentcloud.eips.getInstance({
  *     eipName: "tf-example",
  * });
  * ```
@@ -176,7 +176,7 @@ export interface GetInstanceResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Eips.getInstance({
+ * const example = tencentcloud.eips.getInstance({
  *     publicIp: "1.12.62.3",
  * });
  * ```
@@ -187,7 +187,7 @@ export interface GetInstanceResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Eips.getInstance({
+ * const example = tencentcloud.eips.getInstance({
  *     tags: {
  *         test: "test",
  *     },
@@ -213,21 +213,21 @@ export interface GetInstanceOutputArgs {
     /**
      * ID of the EIP to be queried.
      */
-    eipId?: pulumi.Input<string>;
+    eipId?: pulumi.Input<string | undefined>;
     /**
      * Name of the EIP to be queried.
      */
-    eipName?: pulumi.Input<string>;
+    eipName?: pulumi.Input<string | undefined>;
     /**
      * The elastic ip address.
      */
-    publicIp?: pulumi.Input<string>;
+    publicIp?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * The tags of EIP.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

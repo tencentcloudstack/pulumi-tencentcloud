@@ -15,14 +15,14 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const fooType = tencentcloud.Dayu.getDdosPolicyAttachments({
+ * const fooType = tencentcloud.dayu.getDdosPolicyAttachments({
  *     resourceType: dayuDdosPolicyAttachment.resourceType,
  * });
- * const fooResource = tencentcloud.Dayu.getDdosPolicyAttachments({
+ * const fooResource = tencentcloud.dayu.getDdosPolicyAttachments({
  *     resourceId: dayuDdosPolicyAttachment.resourceId,
  *     resourceType: dayuDdosPolicyAttachment.resourceType,
  * });
- * const fooPolicy = tencentcloud.Dayu.getDdosPolicyAttachments({
+ * const fooPolicy = tencentcloud.dayu.getDdosPolicyAttachments({
  *     resourceType: dayuDdosPolicyAttachment.resourceType,
  *     policyId: dayuDdosPolicyAttachment.policyId,
  * });
@@ -95,14 +95,14 @@ export interface GetDdosPolicyAttachmentsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const fooType = tencentcloud.Dayu.getDdosPolicyAttachments({
+ * const fooType = tencentcloud.dayu.getDdosPolicyAttachments({
  *     resourceType: dayuDdosPolicyAttachment.resourceType,
  * });
- * const fooResource = tencentcloud.Dayu.getDdosPolicyAttachments({
+ * const fooResource = tencentcloud.dayu.getDdosPolicyAttachments({
  *     resourceId: dayuDdosPolicyAttachment.resourceId,
  *     resourceType: dayuDdosPolicyAttachment.resourceType,
  * });
- * const fooPolicy = tencentcloud.Dayu.getDdosPolicyAttachments({
+ * const fooPolicy = tencentcloud.dayu.getDdosPolicyAttachments({
  *     resourceType: dayuDdosPolicyAttachment.resourceType,
  *     policyId: dayuDdosPolicyAttachment.policyId,
  * });
@@ -125,11 +125,11 @@ export interface GetDdosPolicyAttachmentsOutputArgs {
     /**
      * Id of the policy to be queried.
      */
-    policyId?: pulumi.Input<string>;
+    policyId?: pulumi.Input<string | undefined>;
     /**
      * ID of the attached resource to be queried.
      */
-    resourceId?: pulumi.Input<string>;
+    resourceId?: pulumi.Input<string | undefined>;
     /**
      * Type of the resource that the DDoS policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
      */
@@ -137,5 +137,5 @@ export interface GetDdosPolicyAttachmentsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

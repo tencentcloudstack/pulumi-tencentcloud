@@ -40,17 +40,17 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc-example"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String(zones.Zones[4].Name),
 //				Name:             pulumi.String("subnet-example"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("10.0.0.0/16"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -68,8 +68,8 @@ import (
 //				Name:             pulumi.String("tf-example"),
 //				AvailabilityZone: pulumi.String(zones.Zones[4].Name),
 //				ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
-//				VpcId:            vpc.ID(),
-//				SubnetId:         subnet.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 //				ProjectId:        pulumi.Int(0),
 //				Memory:           pulumi.Int(4),
 //				Storage:          pulumi.Int(100),
@@ -83,7 +83,7 @@ import (
 //				MaintenanceStartTime: pulumi.String("09:00"),
 //				MaintenanceTimeSpan:  pulumi.Int(3),
 //				SecurityGroups: pulumi.StringArray{
-//					securityGroup.ID(),
+//					securityGroup.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				Tags: pulumi.StringMap{
 //					"test": pulumi.String("test"),
@@ -93,7 +93,7 @@ import (
 //				return err
 //			}
 //			_, err = sqlserver.NewConfigBackupStrategy(ctx, "example", &sqlserver.ConfigBackupStrategyArgs{
-//				InstanceId:  example.ID(),
+//				InstanceId:  example.ID().ToIDOutput().ToStringOutput(),
 //				BackupType:  pulumi.String("daily"),
 //				BackupTime:  pulumi.Int(0),
 //				BackupDay:   pulumi.Int(1),
@@ -195,7 +195,7 @@ import (
 //
 // ## Import
 //
-// sqlserver config_backup_strategy can be imported using the id, e.g.
+// sqlserver configBackupStrategy can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Sqlserver/configBackupStrategy:ConfigBackupStrategy example mssql-si2823jyl

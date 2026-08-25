@@ -43,7 +43,7 @@ import (
 //
 // ## Import
 //
-// clb instance_mix_ip_target_config can be imported using the id, e.g.
+// clb instanceMixIpTargetConfig can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Clb/instanceMixIpTargetConfig:InstanceMixIpTargetConfig instance_mix_ip_target_config instance_id

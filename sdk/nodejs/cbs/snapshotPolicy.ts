@@ -122,19 +122,19 @@ export interface SnapshotPolicyState {
     /**
      * Trigger times of periodic snapshot. Valid value ranges: (0~23). The 0 means 00:00, and so on.
      */
-    repeatHours?: pulumi.Input<pulumi.Input<number>[]>;
+    repeatHours?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Periodic snapshot is enabled. Valid values: [0, 1, 2, 3, 4, 5, 6]. 0 means Sunday, 1-6 means Monday to Saturday.
      */
-    repeatWeekdays?: pulumi.Input<pulumi.Input<number>[]>;
+    repeatWeekdays?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Retention days of the snapshot, and the default value is 7.
      */
-    retentionDays?: pulumi.Input<number>;
+    retentionDays?: pulumi.Input<number | undefined>;
     /**
      * Name of snapshot policy. The maximum length can not exceed 60 bytes.
      */
-    snapshotPolicyName?: pulumi.Input<string>;
+    snapshotPolicyName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -152,7 +152,7 @@ export interface SnapshotPolicyArgs {
     /**
      * Retention days of the snapshot, and the default value is 7.
      */
-    retentionDays?: pulumi.Input<number>;
+    retentionDays?: pulumi.Input<number | undefined>;
     /**
      * Name of snapshot policy. The maximum length can not exceed 60 bytes.
      */

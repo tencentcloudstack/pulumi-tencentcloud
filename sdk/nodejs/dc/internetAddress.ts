@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * dc internet_address can be imported using the id, e.g.
+ * dc internetAddress can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Dc/internetAddress:InternetAddress internet_address internet_address_id
@@ -112,15 +112,15 @@ export interface InternetAddressState {
     /**
      * 0: IPv4, 1: IPv6.
      */
-    addrProto?: pulumi.Input<number>;
+    addrProto?: pulumi.Input<number | undefined>;
     /**
      * 0: BGP, 1: china telecom, 2: china mobile, 3: china unicom.
      */
-    addrType?: pulumi.Input<number>;
+    addrType?: pulumi.Input<number | undefined>;
     /**
      * CIDR address mask.
      */
-    maskLen?: pulumi.Input<number>;
+    maskLen?: pulumi.Input<number | undefined>;
 }
 
 /**

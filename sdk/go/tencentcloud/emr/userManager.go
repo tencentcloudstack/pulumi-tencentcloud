@@ -51,7 +51,7 @@ import (
 //
 // ## Import
 //
-// emr user_manager can be imported using the id, e.g.
+// emr userManager can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Emr/userManager:UserManager user_manager instanceId#userName

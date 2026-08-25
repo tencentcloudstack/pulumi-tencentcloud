@@ -11,7 +11,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * scf function_alias can be imported using the id, e.g.
+ * scf functionAlias can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Scf/functionAlias:FunctionAlias function_alias namespace#functionName#name
@@ -116,27 +116,27 @@ export interface FunctionAliasState {
     /**
      * Alias description information.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Function name.
      */
-    functionName?: pulumi.Input<string>;
+    functionName?: pulumi.Input<string | undefined>;
     /**
      * Master version pointed to by the alias.
      */
-    functionVersion?: pulumi.Input<string>;
+    functionVersion?: pulumi.Input<string | undefined>;
     /**
      * Alias name, which must be unique in the function, can contain 1 to 64 letters, digits, _, and -, and must begin with a letter.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Function namespace.
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
     /**
      * Request routing configuration of alias.
      */
-    routingConfig?: pulumi.Input<inputs.Scf.FunctionAliasRoutingConfig>;
+    routingConfig?: pulumi.Input<inputs.Scf.FunctionAliasRoutingConfig | undefined>;
 }
 
 /**
@@ -146,7 +146,7 @@ export interface FunctionAliasArgs {
     /**
      * Alias description information.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Function name.
      */
@@ -158,13 +158,13 @@ export interface FunctionAliasArgs {
     /**
      * Alias name, which must be unique in the function, can contain 1 to 64 letters, digits, _, and -, and must begin with a letter.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Function namespace.
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
     /**
      * Request routing configuration of alias.
      */
-    routingConfig?: pulumi.Input<inputs.Scf.FunctionAliasRoutingConfig>;
+    routingConfig?: pulumi.Input<inputs.Scf.FunctionAliasRoutingConfig | undefined>;
 }

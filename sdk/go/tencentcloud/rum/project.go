@@ -43,7 +43,7 @@ import (
 //			}
 //			_, err = rum.NewProject(ctx, "example", &rum.ProjectArgs{
 //				Name:           pulumi.String("tf-example"),
-//				InstanceId:     example.ID(),
+//				InstanceId:     example.ID().ToIDOutput().ToStringOutput(),
 //				Rate:           pulumi.String("100"),
 //				EnableUrlGroup: pulumi.Int(0),
 //				Type:           pulumi.String("web"),
@@ -63,7 +63,6 @@ import (
 // ## Import
 //
 // rum project can be imported using the id, e.g.
-//
 // ```sh
 // $ pulumi import tencentcloud:Rum/project:Project example 139422
 // ```

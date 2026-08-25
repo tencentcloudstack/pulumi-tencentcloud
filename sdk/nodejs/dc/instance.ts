@@ -220,71 +220,71 @@ export interface InstanceState {
     /**
      * Access point of connection.You can call `DescribeAccessPoints` to get the region ID. The selected access point must exist and be available.
      */
-    accessPointId?: pulumi.Input<string>;
+    accessPointId?: pulumi.Input<string | undefined>;
     /**
      * Connection port bandwidth in Mbps. Value range: [2,10240]. Default value: 1000.
      */
-    bandwidth?: pulumi.Input<number>;
+    bandwidth?: pulumi.Input<number | undefined>;
     /**
      * Circuit code of a connection, which is provided by the ISP or connection provider.
      */
-    circuitCode?: pulumi.Input<string>;
+    circuitCode?: pulumi.Input<string | undefined>;
     /**
      * User-side IP address for connection debugging, which is automatically assigned by default.
      */
-    customerAddress?: pulumi.Input<string>;
+    customerAddress?: pulumi.Input<string | undefined>;
     /**
      * Email address of connection applicant, which is obtained from the account system by default.
      */
-    customerContactMail?: pulumi.Input<string>;
+    customerContactMail?: pulumi.Input<string | undefined>;
     /**
      * Contact number of connection applicant, which is obtained from the account system by default.
      */
-    customerContactNumber?: pulumi.Input<string>;
+    customerContactNumber?: pulumi.Input<string | undefined>;
     /**
      * Name of connection applicant, which is obtained from the account system by default.
      */
-    customerName?: pulumi.Input<string>;
+    customerName?: pulumi.Input<string | undefined>;
     /**
      * Connection name.
      */
-    directConnectName?: pulumi.Input<string>;
+    directConnectName?: pulumi.Input<string | undefined>;
     /**
      * Fault reporting contact number.
      */
-    faultReportContactNumber?: pulumi.Input<string>;
+    faultReportContactNumber?: pulumi.Input<string | undefined>;
     /**
      * Fault reporting contact person.
      */
-    faultReportContactPerson?: pulumi.Input<string>;
+    faultReportContactPerson?: pulumi.Input<string | undefined>;
     /**
      * ISP that provides connections. Valid values: ChinaTelecom (China Telecom), ChinaMobile (China Mobile), ChinaUnicom (China Unicom), In-houseWiring (in-house wiring), ChinaOther (other Chinese ISPs), InternationalOperator (international ISPs).
      */
-    lineOperator?: pulumi.Input<string>;
+    lineOperator?: pulumi.Input<string | undefined>;
     /**
      * Local IDC location.
      */
-    location?: pulumi.Input<string>;
+    location?: pulumi.Input<string | undefined>;
     /**
      * Port type of connection. Valid values: 100Base-T (100-Megabit electrical Ethernet interface), 1000Base-T (1-Gigabit electrical Ethernet interface), 1000Base-LX (1-Gigabit single-module optical Ethernet interface; 10 KM), 10GBase-T (10-Gigabit electrical Ethernet interface), 10GBase-LR (10-Gigabit single-module optical Ethernet interface; 10 KM). Default value: 1000Base-LX.
      */
-    portType?: pulumi.Input<string>;
+    portType?: pulumi.Input<string | undefined>;
     /**
      * ID of redundant connection.
      */
-    redundantDirectConnectId?: pulumi.Input<string>;
+    redundantDirectConnectId?: pulumi.Input<string | undefined>;
     /**
      * Whether the connection applicant has signed the service agreement. Default value: true.
      */
-    signLaw?: pulumi.Input<boolean>;
+    signLaw?: pulumi.Input<boolean | undefined>;
     /**
      * Tencent-side IP address for connection debugging, which is automatically assigned by default.
      */
-    tencentAddress?: pulumi.Input<string>;
+    tencentAddress?: pulumi.Input<string | undefined>;
     /**
      * VLAN for connection debugging, which is enabled and automatically assigned by default.
      */
-    vlan?: pulumi.Input<number>;
+    vlan?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -298,27 +298,27 @@ export interface InstanceArgs {
     /**
      * Connection port bandwidth in Mbps. Value range: [2,10240]. Default value: 1000.
      */
-    bandwidth?: pulumi.Input<number>;
+    bandwidth?: pulumi.Input<number | undefined>;
     /**
      * Circuit code of a connection, which is provided by the ISP or connection provider.
      */
-    circuitCode?: pulumi.Input<string>;
+    circuitCode?: pulumi.Input<string | undefined>;
     /**
      * User-side IP address for connection debugging, which is automatically assigned by default.
      */
-    customerAddress?: pulumi.Input<string>;
+    customerAddress?: pulumi.Input<string | undefined>;
     /**
      * Email address of connection applicant, which is obtained from the account system by default.
      */
-    customerContactMail?: pulumi.Input<string>;
+    customerContactMail?: pulumi.Input<string | undefined>;
     /**
      * Contact number of connection applicant, which is obtained from the account system by default.
      */
-    customerContactNumber?: pulumi.Input<string>;
+    customerContactNumber?: pulumi.Input<string | undefined>;
     /**
      * Name of connection applicant, which is obtained from the account system by default.
      */
-    customerName?: pulumi.Input<string>;
+    customerName?: pulumi.Input<string | undefined>;
     /**
      * Connection name.
      */
@@ -326,11 +326,11 @@ export interface InstanceArgs {
     /**
      * Fault reporting contact number.
      */
-    faultReportContactNumber?: pulumi.Input<string>;
+    faultReportContactNumber?: pulumi.Input<string | undefined>;
     /**
      * Fault reporting contact person.
      */
-    faultReportContactPerson?: pulumi.Input<string>;
+    faultReportContactPerson?: pulumi.Input<string | undefined>;
     /**
      * ISP that provides connections. Valid values: ChinaTelecom (China Telecom), ChinaMobile (China Mobile), ChinaUnicom (China Unicom), In-houseWiring (in-house wiring), ChinaOther (other Chinese ISPs), InternationalOperator (international ISPs).
      */
@@ -338,7 +338,7 @@ export interface InstanceArgs {
     /**
      * Local IDC location.
      */
-    location?: pulumi.Input<string>;
+    location?: pulumi.Input<string | undefined>;
     /**
      * Port type of connection. Valid values: 100Base-T (100-Megabit electrical Ethernet interface), 1000Base-T (1-Gigabit electrical Ethernet interface), 1000Base-LX (1-Gigabit single-module optical Ethernet interface; 10 KM), 10GBase-T (10-Gigabit electrical Ethernet interface), 10GBase-LR (10-Gigabit single-module optical Ethernet interface; 10 KM). Default value: 1000Base-LX.
      */
@@ -346,17 +346,17 @@ export interface InstanceArgs {
     /**
      * ID of redundant connection.
      */
-    redundantDirectConnectId?: pulumi.Input<string>;
+    redundantDirectConnectId?: pulumi.Input<string | undefined>;
     /**
      * Whether the connection applicant has signed the service agreement. Default value: true.
      */
-    signLaw?: pulumi.Input<boolean>;
+    signLaw?: pulumi.Input<boolean | undefined>;
     /**
      * Tencent-side IP address for connection debugging, which is automatically assigned by default.
      */
-    tencentAddress?: pulumi.Input<string>;
+    tencentAddress?: pulumi.Input<string | undefined>;
     /**
      * VLAN for connection debugging, which is enabled and automatically assigned by default.
      */
-    vlan?: pulumi.Input<number>;
+    vlan?: pulumi.Input<number | undefined>;
 }

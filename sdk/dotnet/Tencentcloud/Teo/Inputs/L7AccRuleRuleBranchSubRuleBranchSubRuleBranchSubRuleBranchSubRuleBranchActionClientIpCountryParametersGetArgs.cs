@@ -14,7 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
     public sealed class L7AccRuleRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchActionClientIpCountryParametersGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Name of the request header that contains the client ip region. it is valid when switch=on. the default value eo-client-ipcountry is used when it is not specified.
+        /// Name of the request header that contains the client ip region. it is valid when switch=on. the default value EO-Client-IPCountry is used when it is not specified.
         /// </summary>
         [Input("headerName")]
         public Input<string>? HeaderName { get; set; }

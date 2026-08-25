@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * css callback_rule can be imported using the id, e.g.
+ * css callbackRule can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Css/callbackRuleAttachment:CallbackRuleAttachment callback_rule templateId#domainName
@@ -112,15 +112,15 @@ export interface CallbackRuleAttachmentState {
     /**
      * The streaming path is consistent with the AppName in the streaming and playback addresses. The default is live.
      */
-    appName?: pulumi.Input<string>;
+    appName?: pulumi.Input<string | undefined>;
     /**
      * Streaming domain name.
      */
-    domainName?: pulumi.Input<string>;
+    domainName?: pulumi.Input<string | undefined>;
     /**
      * Template ID.
      */
-    templateId?: pulumi.Input<number>;
+    templateId?: pulumi.Input<number | undefined>;
 }
 
 /**

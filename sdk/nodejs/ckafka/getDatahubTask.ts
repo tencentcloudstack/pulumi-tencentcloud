@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const datahubTask = tencentcloud.Ckafka.getDatahubTask({});
+ * const datahubTask = tencentcloud.ckafka.getDatahubTask({});
  * ```
  */
 export function getDatahubTask(args?: GetDatahubTaskArgs, opts?: pulumi.InvokeOptions): Promise<GetDatahubTaskResult> {
@@ -95,7 +95,7 @@ export interface GetDatahubTaskResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const datahubTask = tencentcloud.Ckafka.getDatahubTask({});
+ * const datahubTask = tencentcloud.ckafka.getDatahubTask({});
  * ```
  */
 export function getDatahubTaskOutput(args?: GetDatahubTaskOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDatahubTaskResult> {
@@ -118,25 +118,25 @@ export interface GetDatahubTaskOutputArgs {
     /**
      * Resource.
      */
-    resource?: pulumi.Input<string>;
+    resource?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * search key.
      */
-    searchWord?: pulumi.Input<string>;
+    searchWord?: pulumi.Input<string | undefined>;
     /**
      * The source type.
      */
-    sourceType?: pulumi.Input<string>;
+    sourceType?: pulumi.Input<string | undefined>;
     /**
      * Destination type of dump.
      */
-    targetType?: pulumi.Input<string>;
+    targetType?: pulumi.Input<string | undefined>;
     /**
      * Task type, SOURCE|SINK.
      */
-    taskType?: pulumi.Input<string>;
+    taskType?: pulumi.Input<string | undefined>;
 }

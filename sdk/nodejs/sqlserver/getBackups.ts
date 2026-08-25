@@ -6,22 +6,6 @@ import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
-/**
- * Use this data source to query the list of SQL Server backups.
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@tencentcloud_iac/pulumi";
- *
- * const foo = tencentcloud.Sqlserver.getBackups({
- *     instanceId: "mssql-3cdq7kx5",
- *     startTime: "2020-06-17 00:00:00",
- *     endTime: "2020-06-22 00:00:00",
- * });
- * ```
- */
 export function getBackups(args: GetBackupsArgs, opts?: pulumi.InvokeOptions): Promise<GetBackupsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Sqlserver/getBackups:getBackups", {
@@ -38,21 +22,9 @@ export function getBackups(args: GetBackupsArgs, opts?: pulumi.InvokeOptions): P
  */
 export interface GetBackupsArgs {
     backupName?: string;
-    /**
-     * End time of the instance list, like yyyy-MM-dd HH:mm:ss.
-     */
     endTime: string;
-    /**
-     * Instance ID.
-     */
     instanceId: string;
-    /**
-     * Used to store results.
-     */
     resultOutputFile?: string;
-    /**
-     * Start time of the instance list, like yyyy-MM-dd HH:mm:ss.
-     */
     startTime: string;
 }
 
@@ -61,44 +33,16 @@ export interface GetBackupsArgs {
  */
 export interface GetBackupsResult {
     readonly backupName?: string;
-    /**
-     * End time of the backup.
-     */
     readonly endTime: string;
     /**
      * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
-    /**
-     * Instance ID.
-     */
     readonly instanceId: string;
-    /**
-     * A list of SQL Server backup. Each element contains the following attributes:
-     */
     readonly lists: outputs.Sqlserver.GetBackupsList[];
     readonly resultOutputFile?: string;
-    /**
-     * Start time of the backup.
-     */
     readonly startTime: string;
 }
-/**
- * Use this data source to query the list of SQL Server backups.
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@tencentcloud_iac/pulumi";
- *
- * const foo = tencentcloud.Sqlserver.getBackups({
- *     instanceId: "mssql-3cdq7kx5",
- *     startTime: "2020-06-17 00:00:00",
- *     endTime: "2020-06-22 00:00:00",
- * });
- * ```
- */
 export function getBackupsOutput(args: GetBackupsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetBackupsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("tencentcloud:Sqlserver/getBackups:getBackups", {
@@ -114,21 +58,9 @@ export function getBackupsOutput(args: GetBackupsOutputArgs, opts?: pulumi.Invok
  * A collection of arguments for invoking getBackups.
  */
 export interface GetBackupsOutputArgs {
-    backupName?: pulumi.Input<string>;
-    /**
-     * End time of the instance list, like yyyy-MM-dd HH:mm:ss.
-     */
+    backupName?: pulumi.Input<string | undefined>;
     endTime: pulumi.Input<string>;
-    /**
-     * Instance ID.
-     */
     instanceId: pulumi.Input<string>;
-    /**
-     * Used to store results.
-     */
-    resultOutputFile?: pulumi.Input<string>;
-    /**
-     * Start time of the instance list, like yyyy-MM-dd HH:mm:ss.
-     */
+    resultOutputFile?: pulumi.Input<string | undefined>;
     startTime: pulumi.Input<string>;
 }

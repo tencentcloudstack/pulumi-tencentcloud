@@ -31,10 +31,16 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &DomainLock{}
 	case "tencentcloud:Dnspod/downloadSnapshotOperation:DownloadSnapshotOperation":
 		r = &DownloadSnapshotOperation{}
+	case "tencentcloud:Dnspod/lineGroup:LineGroup":
+		r = &LineGroup{}
 	case "tencentcloud:Dnspod/modifyDomainOwnerOperation:ModifyDomainOwnerOperation":
 		r = &ModifyDomainOwnerOperation{}
 	case "tencentcloud:Dnspod/modifyRecordGroupOperation:ModifyRecordGroupOperation":
 		r = &ModifyRecordGroupOperation{}
+	case "tencentcloud:Dnspod/packageDomain:PackageDomain":
+		r = &PackageDomain{}
+	case "tencentcloud:Dnspod/packageOrder:PackageOrder":
+		r = &PackageOrder{}
 	case "tencentcloud:Dnspod/record:Record":
 		r = &Record{}
 	case "tencentcloud:Dnspod/recordGroup:RecordGroup":
@@ -81,12 +87,27 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Dnspod/lineGroup",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Dnspod/modifyDomainOwnerOperation",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Dnspod/modifyRecordGroupOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Dnspod/packageDomain",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Dnspod/packageOrder",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

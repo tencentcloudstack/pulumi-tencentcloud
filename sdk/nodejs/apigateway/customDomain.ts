@@ -159,43 +159,43 @@ export interface CustomDomainState {
     /**
      * Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value `https` or `http&https`.
      */
-    certificateId?: pulumi.Input<string>;
+    certificateId?: pulumi.Input<string | undefined>;
     /**
      * Default domain name.
      */
-    defaultDomain?: pulumi.Input<string>;
+    defaultDomain?: pulumi.Input<string | undefined>;
     /**
      * Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping. In this case, the `pathMappings` attribute is required.
      */
-    isDefaultMapping?: pulumi.Input<boolean>;
+    isDefaultMapping?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.
      */
-    isForcedHttps?: pulumi.Input<boolean>;
+    isForcedHttps?: pulumi.Input<boolean | undefined>;
     /**
      * Network type. Valid values: `OUTER`, `INNER`.
      */
-    netType?: pulumi.Input<string>;
+    netType?: pulumi.Input<string | undefined>;
     /**
      * Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`, `prepub`, and `release`.
      */
-    pathMappings?: pulumi.Input<pulumi.Input<string>[]>;
+    pathMappings?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Protocol supported by service. Valid values: `http`, `https`, `http&https`.
      */
-    protocol?: pulumi.Input<string>;
+    protocol?: pulumi.Input<string | undefined>;
     /**
      * Unique service ID.
      */
-    serviceId?: pulumi.Input<string>;
+    serviceId?: pulumi.Input<string | undefined>;
     /**
      * Domain name resolution status. `1` means normal analysis, `0` means parsing failed.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * Custom domain name to be bound.
      */
-    subDomain?: pulumi.Input<string>;
+    subDomain?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -205,7 +205,7 @@ export interface CustomDomainArgs {
     /**
      * Unique certificate ID of the custom domain name to be bound. You can choose to upload for the `protocol` attribute value `https` or `http&https`.
      */
-    certificateId?: pulumi.Input<string>;
+    certificateId?: pulumi.Input<string | undefined>;
     /**
      * Default domain name.
      */
@@ -213,11 +213,11 @@ export interface CustomDomainArgs {
     /**
      * Whether the default path mapping is used. The default value is `true`. When it is `false`, it means custom path mapping. In this case, the `pathMappings` attribute is required.
      */
-    isDefaultMapping?: pulumi.Input<boolean>;
+    isDefaultMapping?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to force HTTP requests to jump to HTTPS, default to false. When the parameter is true, the API gateway will redirect all HTTP protocol requests using the custom domain name to the HTTPS protocol for forwarding.
      */
-    isForcedHttps?: pulumi.Input<boolean>;
+    isForcedHttps?: pulumi.Input<boolean | undefined>;
     /**
      * Network type. Valid values: `OUTER`, `INNER`.
      */
@@ -225,7 +225,7 @@ export interface CustomDomainArgs {
     /**
      * Custom domain name path mapping. The data format is: `path#environment`. Optional values for the environment are `test`, `prepub`, and `release`.
      */
-    pathMappings?: pulumi.Input<pulumi.Input<string>[]>;
+    pathMappings?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Protocol supported by service. Valid values: `http`, `https`, `http&https`.
      */

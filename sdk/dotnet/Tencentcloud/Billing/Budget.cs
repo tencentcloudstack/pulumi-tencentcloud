@@ -91,7 +91,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Billing
     /// 
     /// ## Import
     /// 
-    /// billing billing_budget can be imported using the id, e.g.
+    /// billing BillingBudget can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Billing/budget:Budget billing_budget billing_budget_id

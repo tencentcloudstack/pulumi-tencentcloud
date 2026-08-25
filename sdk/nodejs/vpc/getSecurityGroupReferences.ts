@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const securityGroupReferences = tencentcloud.Vpc.getSecurityGroupReferences({
+ * const securityGroupReferences = tencentcloud.vpc.getSecurityGroupReferences({
  *     securityGroupIds: ["sg-edmur627"],
  * });
  * ```
@@ -66,7 +66,7 @@ export interface GetSecurityGroupReferencesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const securityGroupReferences = tencentcloud.Vpc.getSecurityGroupReferences({
+ * const securityGroupReferences = tencentcloud.vpc.getSecurityGroupReferences({
  *     securityGroupIds: ["sg-edmur627"],
  * });
  * ```
@@ -86,7 +86,7 @@ export interface GetSecurityGroupReferencesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * A set of security group instance IDs, e.g. [sg-12345678].
      */

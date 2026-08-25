@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getAttackLogHistogram({
+ * const example = tencentcloud.waf.getAttackLogHistogram({
  *     domain: "domain.com",
  *     startTime: "2023-09-01 00:00:00",
  *     endTime: "2023-09-29 00:00:00",
@@ -31,7 +31,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getAttackLogHistogram({
+ * const example = tencentcloud.waf.getAttackLogHistogram({
  *     domain: "all",
  *     startTime: "2023-09-01 00:00:00",
  *     endTime: "2023-09-29 00:00:00",
@@ -113,7 +113,7 @@ export interface GetAttackLogHistogramResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getAttackLogHistogram({
+ * const example = tencentcloud.waf.getAttackLogHistogram({
  *     domain: "domain.com",
  *     startTime: "2023-09-01 00:00:00",
  *     endTime: "2023-09-29 00:00:00",
@@ -127,7 +127,7 @@ export interface GetAttackLogHistogramResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getAttackLogHistogram({
+ * const example = tencentcloud.waf.getAttackLogHistogram({
  *     domain: "all",
  *     startTime: "2023-09-01 00:00:00",
  *     endTime: "2023-09-29 00:00:00",
@@ -165,7 +165,7 @@ export interface GetAttackLogHistogramOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Begin time.
      */

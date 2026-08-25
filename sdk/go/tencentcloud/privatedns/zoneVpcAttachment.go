@@ -45,7 +45,7 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc-example"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
@@ -53,9 +53,9 @@ import (
 //				return err
 //			}
 //			_, err = privatedns.NewZoneVpcAttachment(ctx, "example", &privatedns.ZoneVpcAttachmentArgs{
-//				ZoneId: example.ID(),
+//				ZoneId: example.ID().ToIDOutput().ToStringOutput(),
 //				VpcSet: &privatedns.ZoneVpcAttachmentVpcSetArgs{
-//					UniqVpcId: vpc.ID(),
+//					UniqVpcId: vpc2.ID().ToIDOutput().ToStringOutput(),
 //					Region:    pulumi.String("ap-guangzhou"),
 //				},
 //			})
@@ -101,7 +101,7 @@ import (
 //
 // ## Import
 //
-// PrivateDns zone vpc attachment can be imported using the id, e.g.
+// PrivateDns zone vpc attachment can be imported using the zoneId#uniqVpcId, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:PrivateDns/zoneVpcAttachment:ZoneVpcAttachment example zone-6t11lof0#vpc-jdx11z0t

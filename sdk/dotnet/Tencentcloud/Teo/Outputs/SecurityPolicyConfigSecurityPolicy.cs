@@ -15,9 +15,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class SecurityPolicyConfigSecurityPolicy
     {
         /// <summary>
+        /// Bot management configuration.
+        /// </summary>
+        public readonly Outputs.SecurityPolicyConfigSecurityPolicyBotManagement? BotManagement;
+        /// <summary>
+        /// Basic Bot management configuration.
+        /// </summary>
+        public readonly Outputs.SecurityPolicyConfigSecurityPolicyBotManagementLite? BotManagementLite;
+        /// <summary>
         /// Custom rule configuration.
         /// </summary>
         public readonly Outputs.SecurityPolicyConfigSecurityPolicyCustomRules? CustomRules;
+        /// <summary>
+        /// Default deny action configuration. If not specified, the existing configuration is kept.
+        /// </summary>
+        public readonly Outputs.SecurityPolicyConfigSecurityPolicyDefaultDenySecurityActionParameters? DefaultDenySecurityActionParameters;
         /// <summary>
         /// Exception rule configuration.
         /// </summary>
@@ -37,7 +49,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
 
         [OutputConstructor]
         private SecurityPolicyConfigSecurityPolicy(
+            Outputs.SecurityPolicyConfigSecurityPolicyBotManagement? botManagement,
+
+            Outputs.SecurityPolicyConfigSecurityPolicyBotManagementLite? botManagementLite,
+
             Outputs.SecurityPolicyConfigSecurityPolicyCustomRules? customRules,
+
+            Outputs.SecurityPolicyConfigSecurityPolicyDefaultDenySecurityActionParameters? defaultDenySecurityActionParameters,
 
             Outputs.SecurityPolicyConfigSecurityPolicyExceptionRules? exceptionRules,
 
@@ -47,7 +65,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
 
             Outputs.SecurityPolicyConfigSecurityPolicyRateLimitingRules? rateLimitingRules)
         {
+            BotManagement = botManagement;
+            BotManagementLite = botManagementLite;
             CustomRules = customRules;
+            DefaultDenySecurityActionParameters = defaultDenySecurityActionParameters;
             ExceptionRules = exceptionRules;
             HttpDdosProtection = httpDdosProtection;
             ManagedRules = managedRules;

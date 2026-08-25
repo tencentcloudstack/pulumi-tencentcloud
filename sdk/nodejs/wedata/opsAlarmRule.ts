@@ -183,39 +183,39 @@ export interface OpsAlarmRuleState {
     /**
      * Alarm receiver configuration information.
      */
-    alarmGroups?: pulumi.Input<pulumi.Input<inputs.Wedata.OpsAlarmRuleAlarmGroup>[]>;
+    alarmGroups?: pulumi.Input<pulumi.Input<inputs.Wedata.OpsAlarmRuleAlarmGroup>[] | undefined>;
     /**
      * Alarm level: 1. Normal, 2. Major, 3. Urgent (default 1. Normal).
      */
-    alarmLevel?: pulumi.Input<number>;
+    alarmLevel?: pulumi.Input<number | undefined>;
     /**
      * Alarm rule configuration information: Success alarms do not require configuration. Failure alarms can be configured as either first-failure alarms or all retry failure alarms. Timeout configuration requires the timeout type and timeout threshold. Project fluctuation alarms require the fluctuation rate and anti-shake period.
      */
-    alarmRuleDetail?: pulumi.Input<inputs.Wedata.OpsAlarmRuleAlarmRuleDetail>;
+    alarmRuleDetail?: pulumi.Input<inputs.Wedata.OpsAlarmRuleAlarmRuleDetail | undefined>;
     /**
      * Alert rule name.
      */
-    alarmRuleName?: pulumi.Input<string>;
+    alarmRuleName?: pulumi.Input<string | undefined>;
     /**
      * Alarm Rule Monitoring Types: failure: failure alarm; overtime: timeout alarm; success: success alarm; backTrackingOrRerunSuccess: backTrackingOrRerunSuccess: backTrackingOrRerunFailure: backTrackingOrRerunFailure. Project Fluctuation Alarms: projectFailureInstanceUpwardFluctuationAlarm: alarm if the upward fluctuation rate of failed instances exceeds the threshold. projectSuccessInstanceDownwardFluctuationAlarm: alarm if the downward fluctuation rate of successful instances exceeds the threshold. Offline Integration Task Reconciliation Alarms: reconciliationFailure: offline reconciliation task failure alarm; reconciliationOvertime: offline reconciliation task timeout alarm; reconciliationMismatch: alarm if the number of inconsistent entries in a data reconciliation task exceeds the threshold. Example value: ["failure"].
      */
-    alarmTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    alarmTypes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Alarm rule description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * A list of monitored object business IDs. Different business IDs are passed in based on the MonitorType setting. For example, 1 (Task) - MonitorObjectIds is a list of task IDs; 2 (Workflow) - MonitorObjectIds is a list of workflow IDs (workflow IDs can be obtained from the ListWorkflows interface); 3 (Project) - MonitorObjectIds is a list of project IDs. Example value: ["ddc"].
      */
-    monitorObjectIds?: pulumi.Input<pulumi.Input<string>[]>;
+    monitorObjectIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Monitoring object type, Task-based monitoring: Configurable by task/workflow/project: 1. Task, 2. Workflow, 3. Project (default is 1. Task). Project-based monitoring: Alerts for overall project task fluctuations, 7: Project fluctuation monitoring alerts.
      */
-    monitorObjectType?: pulumi.Input<number>;
+    monitorObjectType?: pulumi.Input<number | undefined>;
     /**
      * Project id.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -229,11 +229,11 @@ export interface OpsAlarmRuleArgs {
     /**
      * Alarm level: 1. Normal, 2. Major, 3. Urgent (default 1. Normal).
      */
-    alarmLevel?: pulumi.Input<number>;
+    alarmLevel?: pulumi.Input<number | undefined>;
     /**
      * Alarm rule configuration information: Success alarms do not require configuration. Failure alarms can be configured as either first-failure alarms or all retry failure alarms. Timeout configuration requires the timeout type and timeout threshold. Project fluctuation alarms require the fluctuation rate and anti-shake period.
      */
-    alarmRuleDetail?: pulumi.Input<inputs.Wedata.OpsAlarmRuleAlarmRuleDetail>;
+    alarmRuleDetail?: pulumi.Input<inputs.Wedata.OpsAlarmRuleAlarmRuleDetail | undefined>;
     /**
      * Alert rule name.
      */
@@ -245,7 +245,7 @@ export interface OpsAlarmRuleArgs {
     /**
      * Alarm rule description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * A list of monitored object business IDs. Different business IDs are passed in based on the MonitorType setting. For example, 1 (Task) - MonitorObjectIds is a list of task IDs; 2 (Workflow) - MonitorObjectIds is a list of workflow IDs (workflow IDs can be obtained from the ListWorkflows interface); 3 (Project) - MonitorObjectIds is a list of project IDs. Example value: ["ddc"].
      */
@@ -253,7 +253,7 @@ export interface OpsAlarmRuleArgs {
     /**
      * Monitoring object type, Task-based monitoring: Configurable by task/workflow/project: 1. Task, 2. Workflow, 3. Project (default is 1. Task). Project-based monitoring: Alerts for overall project task fluctuations, 7: Project fluctuation monitoring alerts.
      */
-    monitorObjectType?: pulumi.Input<number>;
+    monitorObjectType?: pulumi.Input<number | undefined>;
     /**
      * Project id.
      */

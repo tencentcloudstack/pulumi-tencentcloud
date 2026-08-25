@@ -3183,8 +3183,8 @@ type GetScalingGroupsScalingGroupList struct {
 	DefaultCooldown int `pulumi:"defaultCooldown"`
 	// The desired number of CVM instances.
 	DesiredCapacity int `pulumi:"desiredCapacity"`
-	// A list of application clb ids.
-	ForwardBalancerIds []GetScalingGroupsScalingGroupListForwardBalancerId `pulumi:"forwardBalancerIds"`
+	// A list of application clb.
+	ForwardLoadBalancers []GetScalingGroupsScalingGroupListForwardLoadBalancer `pulumi:"forwardLoadBalancers"`
 	// Number of instance.
 	InstanceCount int `pulumi:"instanceCount"`
 	// A list of traditional clb ids which the CVM instances attached to.
@@ -3237,8 +3237,8 @@ type GetScalingGroupsScalingGroupListArgs struct {
 	DefaultCooldown pulumi.IntInput `pulumi:"defaultCooldown"`
 	// The desired number of CVM instances.
 	DesiredCapacity pulumi.IntInput `pulumi:"desiredCapacity"`
-	// A list of application clb ids.
-	ForwardBalancerIds GetScalingGroupsScalingGroupListForwardBalancerIdArrayInput `pulumi:"forwardBalancerIds"`
+	// A list of application clb.
+	ForwardLoadBalancers GetScalingGroupsScalingGroupListForwardLoadBalancerArrayInput `pulumi:"forwardLoadBalancers"`
 	// Number of instance.
 	InstanceCount pulumi.IntInput `pulumi:"instanceCount"`
 	// A list of traditional clb ids which the CVM instances attached to.
@@ -3342,11 +3342,11 @@ func (o GetScalingGroupsScalingGroupListOutput) DesiredCapacity() pulumi.IntOutp
 	return o.ApplyT(func(v GetScalingGroupsScalingGroupList) int { return v.DesiredCapacity }).(pulumi.IntOutput)
 }
 
-// A list of application clb ids.
-func (o GetScalingGroupsScalingGroupListOutput) ForwardBalancerIds() GetScalingGroupsScalingGroupListForwardBalancerIdArrayOutput {
-	return o.ApplyT(func(v GetScalingGroupsScalingGroupList) []GetScalingGroupsScalingGroupListForwardBalancerId {
-		return v.ForwardBalancerIds
-	}).(GetScalingGroupsScalingGroupListForwardBalancerIdArrayOutput)
+// A list of application clb.
+func (o GetScalingGroupsScalingGroupListOutput) ForwardLoadBalancers() GetScalingGroupsScalingGroupListForwardLoadBalancerArrayOutput {
+	return o.ApplyT(func(v GetScalingGroupsScalingGroupList) []GetScalingGroupsScalingGroupListForwardLoadBalancer {
+		return v.ForwardLoadBalancers
+	}).(GetScalingGroupsScalingGroupListForwardLoadBalancerArrayOutput)
 }
 
 // Number of instance.
@@ -3444,7 +3444,7 @@ func (o GetScalingGroupsScalingGroupListArrayOutput) Index(i pulumi.IntInput) Ge
 	}).(GetScalingGroupsScalingGroupListOutput)
 }
 
-type GetScalingGroupsScalingGroupListForwardBalancerId struct {
+type GetScalingGroupsScalingGroupListForwardLoadBalancer struct {
 	// Listener ID for application load balancers.
 	ListenerId string `pulumi:"listenerId"`
 	// ID of available load balancers.
@@ -3452,21 +3452,21 @@ type GetScalingGroupsScalingGroupListForwardBalancerId struct {
 	// ID of forwarding rules.
 	LocationId string `pulumi:"locationId"`
 	// Attribute list of target rules.
-	TargetAttributes []GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttribute `pulumi:"targetAttributes"`
+	TargetAttributes []GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttribute `pulumi:"targetAttributes"`
 }
 
-// GetScalingGroupsScalingGroupListForwardBalancerIdInput is an input type that accepts GetScalingGroupsScalingGroupListForwardBalancerIdArgs and GetScalingGroupsScalingGroupListForwardBalancerIdOutput values.
-// You can construct a concrete instance of `GetScalingGroupsScalingGroupListForwardBalancerIdInput` via:
+// GetScalingGroupsScalingGroupListForwardLoadBalancerInput is an input type that accepts GetScalingGroupsScalingGroupListForwardLoadBalancerArgs and GetScalingGroupsScalingGroupListForwardLoadBalancerOutput values.
+// You can construct a concrete instance of `GetScalingGroupsScalingGroupListForwardLoadBalancerInput` via:
 //
-//	GetScalingGroupsScalingGroupListForwardBalancerIdArgs{...}
-type GetScalingGroupsScalingGroupListForwardBalancerIdInput interface {
+//	GetScalingGroupsScalingGroupListForwardLoadBalancerArgs{...}
+type GetScalingGroupsScalingGroupListForwardLoadBalancerInput interface {
 	pulumi.Input
 
-	ToGetScalingGroupsScalingGroupListForwardBalancerIdOutput() GetScalingGroupsScalingGroupListForwardBalancerIdOutput
-	ToGetScalingGroupsScalingGroupListForwardBalancerIdOutputWithContext(context.Context) GetScalingGroupsScalingGroupListForwardBalancerIdOutput
+	ToGetScalingGroupsScalingGroupListForwardLoadBalancerOutput() GetScalingGroupsScalingGroupListForwardLoadBalancerOutput
+	ToGetScalingGroupsScalingGroupListForwardLoadBalancerOutputWithContext(context.Context) GetScalingGroupsScalingGroupListForwardLoadBalancerOutput
 }
 
-type GetScalingGroupsScalingGroupListForwardBalancerIdArgs struct {
+type GetScalingGroupsScalingGroupListForwardLoadBalancerArgs struct {
 	// Listener ID for application load balancers.
 	ListenerId pulumi.StringInput `pulumi:"listenerId"`
 	// ID of available load balancers.
@@ -3474,206 +3474,206 @@ type GetScalingGroupsScalingGroupListForwardBalancerIdArgs struct {
 	// ID of forwarding rules.
 	LocationId pulumi.StringInput `pulumi:"locationId"`
 	// Attribute list of target rules.
-	TargetAttributes GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayInput `pulumi:"targetAttributes"`
+	TargetAttributes GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArrayInput `pulumi:"targetAttributes"`
 }
 
-func (GetScalingGroupsScalingGroupListForwardBalancerIdArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetScalingGroupsScalingGroupListForwardBalancerId)(nil)).Elem()
+func (GetScalingGroupsScalingGroupListForwardLoadBalancerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScalingGroupsScalingGroupListForwardLoadBalancer)(nil)).Elem()
 }
 
-func (i GetScalingGroupsScalingGroupListForwardBalancerIdArgs) ToGetScalingGroupsScalingGroupListForwardBalancerIdOutput() GetScalingGroupsScalingGroupListForwardBalancerIdOutput {
-	return i.ToGetScalingGroupsScalingGroupListForwardBalancerIdOutputWithContext(context.Background())
+func (i GetScalingGroupsScalingGroupListForwardLoadBalancerArgs) ToGetScalingGroupsScalingGroupListForwardLoadBalancerOutput() GetScalingGroupsScalingGroupListForwardLoadBalancerOutput {
+	return i.ToGetScalingGroupsScalingGroupListForwardLoadBalancerOutputWithContext(context.Background())
 }
 
-func (i GetScalingGroupsScalingGroupListForwardBalancerIdArgs) ToGetScalingGroupsScalingGroupListForwardBalancerIdOutputWithContext(ctx context.Context) GetScalingGroupsScalingGroupListForwardBalancerIdOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetScalingGroupsScalingGroupListForwardBalancerIdOutput)
+func (i GetScalingGroupsScalingGroupListForwardLoadBalancerArgs) ToGetScalingGroupsScalingGroupListForwardLoadBalancerOutputWithContext(ctx context.Context) GetScalingGroupsScalingGroupListForwardLoadBalancerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScalingGroupsScalingGroupListForwardLoadBalancerOutput)
 }
 
-// GetScalingGroupsScalingGroupListForwardBalancerIdArrayInput is an input type that accepts GetScalingGroupsScalingGroupListForwardBalancerIdArray and GetScalingGroupsScalingGroupListForwardBalancerIdArrayOutput values.
-// You can construct a concrete instance of `GetScalingGroupsScalingGroupListForwardBalancerIdArrayInput` via:
+// GetScalingGroupsScalingGroupListForwardLoadBalancerArrayInput is an input type that accepts GetScalingGroupsScalingGroupListForwardLoadBalancerArray and GetScalingGroupsScalingGroupListForwardLoadBalancerArrayOutput values.
+// You can construct a concrete instance of `GetScalingGroupsScalingGroupListForwardLoadBalancerArrayInput` via:
 //
-//	GetScalingGroupsScalingGroupListForwardBalancerIdArray{ GetScalingGroupsScalingGroupListForwardBalancerIdArgs{...} }
-type GetScalingGroupsScalingGroupListForwardBalancerIdArrayInput interface {
+//	GetScalingGroupsScalingGroupListForwardLoadBalancerArray{ GetScalingGroupsScalingGroupListForwardLoadBalancerArgs{...} }
+type GetScalingGroupsScalingGroupListForwardLoadBalancerArrayInput interface {
 	pulumi.Input
 
-	ToGetScalingGroupsScalingGroupListForwardBalancerIdArrayOutput() GetScalingGroupsScalingGroupListForwardBalancerIdArrayOutput
-	ToGetScalingGroupsScalingGroupListForwardBalancerIdArrayOutputWithContext(context.Context) GetScalingGroupsScalingGroupListForwardBalancerIdArrayOutput
+	ToGetScalingGroupsScalingGroupListForwardLoadBalancerArrayOutput() GetScalingGroupsScalingGroupListForwardLoadBalancerArrayOutput
+	ToGetScalingGroupsScalingGroupListForwardLoadBalancerArrayOutputWithContext(context.Context) GetScalingGroupsScalingGroupListForwardLoadBalancerArrayOutput
 }
 
-type GetScalingGroupsScalingGroupListForwardBalancerIdArray []GetScalingGroupsScalingGroupListForwardBalancerIdInput
+type GetScalingGroupsScalingGroupListForwardLoadBalancerArray []GetScalingGroupsScalingGroupListForwardLoadBalancerInput
 
-func (GetScalingGroupsScalingGroupListForwardBalancerIdArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetScalingGroupsScalingGroupListForwardBalancerId)(nil)).Elem()
+func (GetScalingGroupsScalingGroupListForwardLoadBalancerArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScalingGroupsScalingGroupListForwardLoadBalancer)(nil)).Elem()
 }
 
-func (i GetScalingGroupsScalingGroupListForwardBalancerIdArray) ToGetScalingGroupsScalingGroupListForwardBalancerIdArrayOutput() GetScalingGroupsScalingGroupListForwardBalancerIdArrayOutput {
-	return i.ToGetScalingGroupsScalingGroupListForwardBalancerIdArrayOutputWithContext(context.Background())
+func (i GetScalingGroupsScalingGroupListForwardLoadBalancerArray) ToGetScalingGroupsScalingGroupListForwardLoadBalancerArrayOutput() GetScalingGroupsScalingGroupListForwardLoadBalancerArrayOutput {
+	return i.ToGetScalingGroupsScalingGroupListForwardLoadBalancerArrayOutputWithContext(context.Background())
 }
 
-func (i GetScalingGroupsScalingGroupListForwardBalancerIdArray) ToGetScalingGroupsScalingGroupListForwardBalancerIdArrayOutputWithContext(ctx context.Context) GetScalingGroupsScalingGroupListForwardBalancerIdArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetScalingGroupsScalingGroupListForwardBalancerIdArrayOutput)
+func (i GetScalingGroupsScalingGroupListForwardLoadBalancerArray) ToGetScalingGroupsScalingGroupListForwardLoadBalancerArrayOutputWithContext(ctx context.Context) GetScalingGroupsScalingGroupListForwardLoadBalancerArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScalingGroupsScalingGroupListForwardLoadBalancerArrayOutput)
 }
 
-type GetScalingGroupsScalingGroupListForwardBalancerIdOutput struct{ *pulumi.OutputState }
+type GetScalingGroupsScalingGroupListForwardLoadBalancerOutput struct{ *pulumi.OutputState }
 
-func (GetScalingGroupsScalingGroupListForwardBalancerIdOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetScalingGroupsScalingGroupListForwardBalancerId)(nil)).Elem()
+func (GetScalingGroupsScalingGroupListForwardLoadBalancerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScalingGroupsScalingGroupListForwardLoadBalancer)(nil)).Elem()
 }
 
-func (o GetScalingGroupsScalingGroupListForwardBalancerIdOutput) ToGetScalingGroupsScalingGroupListForwardBalancerIdOutput() GetScalingGroupsScalingGroupListForwardBalancerIdOutput {
+func (o GetScalingGroupsScalingGroupListForwardLoadBalancerOutput) ToGetScalingGroupsScalingGroupListForwardLoadBalancerOutput() GetScalingGroupsScalingGroupListForwardLoadBalancerOutput {
 	return o
 }
 
-func (o GetScalingGroupsScalingGroupListForwardBalancerIdOutput) ToGetScalingGroupsScalingGroupListForwardBalancerIdOutputWithContext(ctx context.Context) GetScalingGroupsScalingGroupListForwardBalancerIdOutput {
+func (o GetScalingGroupsScalingGroupListForwardLoadBalancerOutput) ToGetScalingGroupsScalingGroupListForwardLoadBalancerOutputWithContext(ctx context.Context) GetScalingGroupsScalingGroupListForwardLoadBalancerOutput {
 	return o
 }
 
 // Listener ID for application load balancers.
-func (o GetScalingGroupsScalingGroupListForwardBalancerIdOutput) ListenerId() pulumi.StringOutput {
-	return o.ApplyT(func(v GetScalingGroupsScalingGroupListForwardBalancerId) string { return v.ListenerId }).(pulumi.StringOutput)
+func (o GetScalingGroupsScalingGroupListForwardLoadBalancerOutput) ListenerId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScalingGroupsScalingGroupListForwardLoadBalancer) string { return v.ListenerId }).(pulumi.StringOutput)
 }
 
 // ID of available load balancers.
-func (o GetScalingGroupsScalingGroupListForwardBalancerIdOutput) LoadBalancerId() pulumi.StringOutput {
-	return o.ApplyT(func(v GetScalingGroupsScalingGroupListForwardBalancerId) string { return v.LoadBalancerId }).(pulumi.StringOutput)
+func (o GetScalingGroupsScalingGroupListForwardLoadBalancerOutput) LoadBalancerId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScalingGroupsScalingGroupListForwardLoadBalancer) string { return v.LoadBalancerId }).(pulumi.StringOutput)
 }
 
 // ID of forwarding rules.
-func (o GetScalingGroupsScalingGroupListForwardBalancerIdOutput) LocationId() pulumi.StringOutput {
-	return o.ApplyT(func(v GetScalingGroupsScalingGroupListForwardBalancerId) string { return v.LocationId }).(pulumi.StringOutput)
+func (o GetScalingGroupsScalingGroupListForwardLoadBalancerOutput) LocationId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetScalingGroupsScalingGroupListForwardLoadBalancer) string { return v.LocationId }).(pulumi.StringOutput)
 }
 
 // Attribute list of target rules.
-func (o GetScalingGroupsScalingGroupListForwardBalancerIdOutput) TargetAttributes() GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayOutput {
-	return o.ApplyT(func(v GetScalingGroupsScalingGroupListForwardBalancerId) []GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttribute {
+func (o GetScalingGroupsScalingGroupListForwardLoadBalancerOutput) TargetAttributes() GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArrayOutput {
+	return o.ApplyT(func(v GetScalingGroupsScalingGroupListForwardLoadBalancer) []GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttribute {
 		return v.TargetAttributes
-	}).(GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayOutput)
+	}).(GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArrayOutput)
 }
 
-type GetScalingGroupsScalingGroupListForwardBalancerIdArrayOutput struct{ *pulumi.OutputState }
+type GetScalingGroupsScalingGroupListForwardLoadBalancerArrayOutput struct{ *pulumi.OutputState }
 
-func (GetScalingGroupsScalingGroupListForwardBalancerIdArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetScalingGroupsScalingGroupListForwardBalancerId)(nil)).Elem()
+func (GetScalingGroupsScalingGroupListForwardLoadBalancerArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScalingGroupsScalingGroupListForwardLoadBalancer)(nil)).Elem()
 }
 
-func (o GetScalingGroupsScalingGroupListForwardBalancerIdArrayOutput) ToGetScalingGroupsScalingGroupListForwardBalancerIdArrayOutput() GetScalingGroupsScalingGroupListForwardBalancerIdArrayOutput {
+func (o GetScalingGroupsScalingGroupListForwardLoadBalancerArrayOutput) ToGetScalingGroupsScalingGroupListForwardLoadBalancerArrayOutput() GetScalingGroupsScalingGroupListForwardLoadBalancerArrayOutput {
 	return o
 }
 
-func (o GetScalingGroupsScalingGroupListForwardBalancerIdArrayOutput) ToGetScalingGroupsScalingGroupListForwardBalancerIdArrayOutputWithContext(ctx context.Context) GetScalingGroupsScalingGroupListForwardBalancerIdArrayOutput {
+func (o GetScalingGroupsScalingGroupListForwardLoadBalancerArrayOutput) ToGetScalingGroupsScalingGroupListForwardLoadBalancerArrayOutputWithContext(ctx context.Context) GetScalingGroupsScalingGroupListForwardLoadBalancerArrayOutput {
 	return o
 }
 
-func (o GetScalingGroupsScalingGroupListForwardBalancerIdArrayOutput) Index(i pulumi.IntInput) GetScalingGroupsScalingGroupListForwardBalancerIdOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScalingGroupsScalingGroupListForwardBalancerId {
-		return vs[0].([]GetScalingGroupsScalingGroupListForwardBalancerId)[vs[1].(int)]
-	}).(GetScalingGroupsScalingGroupListForwardBalancerIdOutput)
+func (o GetScalingGroupsScalingGroupListForwardLoadBalancerArrayOutput) Index(i pulumi.IntInput) GetScalingGroupsScalingGroupListForwardLoadBalancerOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScalingGroupsScalingGroupListForwardLoadBalancer {
+		return vs[0].([]GetScalingGroupsScalingGroupListForwardLoadBalancer)[vs[1].(int)]
+	}).(GetScalingGroupsScalingGroupListForwardLoadBalancerOutput)
 }
 
-type GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttribute struct {
+type GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttribute struct {
 	// Port number.
 	Port int `pulumi:"port"`
 	// Weight.
 	Weight int `pulumi:"weight"`
 }
 
-// GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeInput is an input type that accepts GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArgs and GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeOutput values.
-// You can construct a concrete instance of `GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeInput` via:
+// GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeInput is an input type that accepts GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArgs and GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeOutput values.
+// You can construct a concrete instance of `GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeInput` via:
 //
-//	GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArgs{...}
-type GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeInput interface {
+//	GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArgs{...}
+type GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeInput interface {
 	pulumi.Input
 
-	ToGetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeOutput() GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeOutput
-	ToGetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeOutputWithContext(context.Context) GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeOutput
+	ToGetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeOutput() GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeOutput
+	ToGetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeOutputWithContext(context.Context) GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeOutput
 }
 
-type GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArgs struct {
+type GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArgs struct {
 	// Port number.
 	Port pulumi.IntInput `pulumi:"port"`
 	// Weight.
 	Weight pulumi.IntInput `pulumi:"weight"`
 }
 
-func (GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttribute)(nil)).Elem()
+func (GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttribute)(nil)).Elem()
 }
 
-func (i GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArgs) ToGetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeOutput() GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeOutput {
-	return i.ToGetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeOutputWithContext(context.Background())
+func (i GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArgs) ToGetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeOutput() GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeOutput {
+	return i.ToGetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeOutputWithContext(context.Background())
 }
 
-func (i GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArgs) ToGetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeOutputWithContext(ctx context.Context) GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeOutput)
+func (i GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArgs) ToGetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeOutputWithContext(ctx context.Context) GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeOutput)
 }
 
-// GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayInput is an input type that accepts GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArray and GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayOutput values.
-// You can construct a concrete instance of `GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayInput` via:
+// GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArrayInput is an input type that accepts GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArray and GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArrayOutput values.
+// You can construct a concrete instance of `GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArrayInput` via:
 //
-//	GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArray{ GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArgs{...} }
-type GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayInput interface {
+//	GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArray{ GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArgs{...} }
+type GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArrayInput interface {
 	pulumi.Input
 
-	ToGetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayOutput() GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayOutput
-	ToGetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayOutputWithContext(context.Context) GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayOutput
+	ToGetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArrayOutput() GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArrayOutput
+	ToGetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArrayOutputWithContext(context.Context) GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArrayOutput
 }
 
-type GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArray []GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeInput
+type GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArray []GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeInput
 
-func (GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttribute)(nil)).Elem()
+func (GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttribute)(nil)).Elem()
 }
 
-func (i GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArray) ToGetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayOutput() GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayOutput {
-	return i.ToGetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayOutputWithContext(context.Background())
+func (i GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArray) ToGetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArrayOutput() GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArrayOutput {
+	return i.ToGetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArrayOutputWithContext(context.Background())
 }
 
-func (i GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArray) ToGetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayOutputWithContext(ctx context.Context) GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayOutput)
+func (i GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArray) ToGetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArrayOutputWithContext(ctx context.Context) GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArrayOutput)
 }
 
-type GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeOutput struct{ *pulumi.OutputState }
+type GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeOutput struct{ *pulumi.OutputState }
 
-func (GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttribute)(nil)).Elem()
+func (GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttribute)(nil)).Elem()
 }
 
-func (o GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeOutput) ToGetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeOutput() GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeOutput {
+func (o GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeOutput) ToGetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeOutput() GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeOutput {
 	return o
 }
 
-func (o GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeOutput) ToGetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeOutputWithContext(ctx context.Context) GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeOutput {
+func (o GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeOutput) ToGetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeOutputWithContext(ctx context.Context) GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeOutput {
 	return o
 }
 
 // Port number.
-func (o GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeOutput) Port() pulumi.IntOutput {
-	return o.ApplyT(func(v GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttribute) int { return v.Port }).(pulumi.IntOutput)
+func (o GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttribute) int { return v.Port }).(pulumi.IntOutput)
 }
 
 // Weight.
-func (o GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeOutput) Weight() pulumi.IntOutput {
-	return o.ApplyT(func(v GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttribute) int { return v.Weight }).(pulumi.IntOutput)
+func (o GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeOutput) Weight() pulumi.IntOutput {
+	return o.ApplyT(func(v GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttribute) int { return v.Weight }).(pulumi.IntOutput)
 }
 
-type GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayOutput struct{ *pulumi.OutputState }
+type GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArrayOutput struct{ *pulumi.OutputState }
 
-func (GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttribute)(nil)).Elem()
+func (GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttribute)(nil)).Elem()
 }
 
-func (o GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayOutput) ToGetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayOutput() GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayOutput {
+func (o GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArrayOutput) ToGetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArrayOutput() GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArrayOutput {
 	return o
 }
 
-func (o GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayOutput) ToGetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayOutputWithContext(ctx context.Context) GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayOutput {
+func (o GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArrayOutput) ToGetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArrayOutputWithContext(ctx context.Context) GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArrayOutput {
 	return o
 }
 
-func (o GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayOutput) Index(i pulumi.IntInput) GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttribute {
-		return vs[0].([]GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttribute)[vs[1].(int)]
-	}).(GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeOutput)
+func (o GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArrayOutput) Index(i pulumi.IntInput) GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttribute {
+		return vs[0].([]GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttribute)[vs[1].(int)]
+	}).(GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeOutput)
 }
 
 type GetScalingPoliciesScalingPolicyList struct {
@@ -3917,10 +3917,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetScalingConfigsConfigurationListDataDiskArrayInput)(nil)).Elem(), GetScalingConfigsConfigurationListDataDiskArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetScalingGroupsScalingGroupListInput)(nil)).Elem(), GetScalingGroupsScalingGroupListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetScalingGroupsScalingGroupListArrayInput)(nil)).Elem(), GetScalingGroupsScalingGroupListArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetScalingGroupsScalingGroupListForwardBalancerIdInput)(nil)).Elem(), GetScalingGroupsScalingGroupListForwardBalancerIdArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetScalingGroupsScalingGroupListForwardBalancerIdArrayInput)(nil)).Elem(), GetScalingGroupsScalingGroupListForwardBalancerIdArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeInput)(nil)).Elem(), GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayInput)(nil)).Elem(), GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScalingGroupsScalingGroupListForwardLoadBalancerInput)(nil)).Elem(), GetScalingGroupsScalingGroupListForwardLoadBalancerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScalingGroupsScalingGroupListForwardLoadBalancerArrayInput)(nil)).Elem(), GetScalingGroupsScalingGroupListForwardLoadBalancerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeInput)(nil)).Elem(), GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArrayInput)(nil)).Elem(), GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetScalingPoliciesScalingPolicyListInput)(nil)).Elem(), GetScalingPoliciesScalingPolicyListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetScalingPoliciesScalingPolicyListArrayInput)(nil)).Elem(), GetScalingPoliciesScalingPolicyListArray{})
 	pulumi.RegisterOutputType(LifecycleHookLifecycleCommandOutput{})
@@ -3967,10 +3967,10 @@ func init() {
 	pulumi.RegisterOutputType(GetScalingConfigsConfigurationListDataDiskArrayOutput{})
 	pulumi.RegisterOutputType(GetScalingGroupsScalingGroupListOutput{})
 	pulumi.RegisterOutputType(GetScalingGroupsScalingGroupListArrayOutput{})
-	pulumi.RegisterOutputType(GetScalingGroupsScalingGroupListForwardBalancerIdOutput{})
-	pulumi.RegisterOutputType(GetScalingGroupsScalingGroupListForwardBalancerIdArrayOutput{})
-	pulumi.RegisterOutputType(GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeOutput{})
-	pulumi.RegisterOutputType(GetScalingGroupsScalingGroupListForwardBalancerIdTargetAttributeArrayOutput{})
+	pulumi.RegisterOutputType(GetScalingGroupsScalingGroupListForwardLoadBalancerOutput{})
+	pulumi.RegisterOutputType(GetScalingGroupsScalingGroupListForwardLoadBalancerArrayOutput{})
+	pulumi.RegisterOutputType(GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeOutput{})
+	pulumi.RegisterOutputType(GetScalingGroupsScalingGroupListForwardLoadBalancerTargetAttributeArrayOutput{})
 	pulumi.RegisterOutputType(GetScalingPoliciesScalingPolicyListOutput{})
 	pulumi.RegisterOutputType(GetScalingPoliciesScalingPolicyListArrayOutput{})
 }

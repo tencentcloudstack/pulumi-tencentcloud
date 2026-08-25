@@ -30,12 +30,15 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := clb.NewRedirection(ctx, "foo", &clb.RedirectionArgs{
-//				ClbId:            pulumi.String("lb-p7olt9e5"),
-//				SourceListenerId: pulumi.String("lbl-jc1dx6ju"),
-//				TargetListenerId: pulumi.String("lbl-asj1hzuo"),
-//				SourceRuleId:     pulumi.String("loc-ft8fmngv"),
-//				TargetRuleId:     pulumi.String("loc-4xxr2cy7"),
+//			_, err := clb.NewRedirection(ctx, "example", &clb.RedirectionArgs{
+//				ClbId:            pulumi.String("lb-ab09jtd2"),
+//				SourceListenerId: pulumi.String("lbl-qgtfowas"),
+//				TargetListenerId: pulumi.String("lbl-lpwdkukk"),
+//				SourceRuleId:     pulumi.String("loc-liz99mtg"),
+//				TargetRuleId:     pulumi.String("loc-4f53xn52"),
+//				RewriteCode:      pulumi.Int(307),
+//				TakeUrl:          pulumi.Bool(true),
+//				SourceDomian:     pulumi.String("www.demo.com"),
 //			})
 //			if err != nil {
 //				return err
@@ -60,10 +63,10 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := clb.NewRedirection(ctx, "foo", &clb.RedirectionArgs{
-//				ClbId:            pulumi.String("lb-p7olt9e5"),
-//				TargetListenerId: pulumi.String("lbl-asj1hzuo"),
-//				TargetRuleId:     pulumi.String("loc-4xxr2cy7"),
+//			_, err := clb.NewRedirection(ctx, "example", &clb.RedirectionArgs{
+//				ClbId:            pulumi.String("lb-ab09jtd2"),
+//				TargetListenerId: pulumi.String("lbl-l7550kum"),
+//				TargetRuleId:     pulumi.String("loc-op7uz010"),
 //				IsAutoRewrite:    pulumi.Bool(true),
 //			})
 //			if err != nil {
@@ -77,10 +80,10 @@ import (
 //
 // ## Import
 //
-// CLB redirection can be imported using the id, e.g.
+// CLB redirection can be imported using the sourceLocId#targetLocId#sourceListenerId#targetListenerId#clbId, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Clb/redirection:Redirection foo loc-ft8fmngv#loc-4xxr2cy7#lbl-jc1dx6ju#lbl-asj1hzuo#lb-p7olt9e5
+// $ pulumi import tencentcloud:Clb/redirection:Redirection example loc-ft8fmngv#loc-4xxr2cy7#lbl-jc1dx6ju#lbl-asj1hzuo#lb-p7olt9e5
 // ```
 type Redirection struct {
 	pulumi.CustomResourceState
@@ -91,10 +94,16 @@ type Redirection struct {
 	DeleteAllAutoRewrite pulumi.BoolPtrOutput `pulumi:"deleteAllAutoRewrite"`
 	// Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.
 	IsAutoRewrite pulumi.BoolPtrOutput `pulumi:"isAutoRewrite"`
+	// Redirection status codes, with possible values of `301`, `302`, `307`.
+	RewriteCode pulumi.IntOutput `pulumi:"rewriteCode"`
+	// The domain name for source forwarding must be the domain name corresponding to `sourceRuleId`, which is required when configuring `rewriteCode`. Only support `isAutoRewrite` is `false`.
+	SourceDomian pulumi.StringOutput `pulumi:"sourceDomian"`
 	// ID of source listener.
 	SourceListenerId pulumi.StringOutput `pulumi:"sourceListenerId"`
 	// Rule ID of source listener.
 	SourceRuleId pulumi.StringOutput `pulumi:"sourceRuleId"`
+	// Whether the redirect carries a matching URL is required when configuring `rewriteCode`.
+	TakeUrl pulumi.BoolOutput `pulumi:"takeUrl"`
 	// ID of source listener.
 	TargetListenerId pulumi.StringOutput `pulumi:"targetListenerId"`
 	// Rule ID of target listener.
@@ -146,10 +155,16 @@ type redirectionState struct {
 	DeleteAllAutoRewrite *bool `pulumi:"deleteAllAutoRewrite"`
 	// Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.
 	IsAutoRewrite *bool `pulumi:"isAutoRewrite"`
+	// Redirection status codes, with possible values of `301`, `302`, `307`.
+	RewriteCode *int `pulumi:"rewriteCode"`
+	// The domain name for source forwarding must be the domain name corresponding to `sourceRuleId`, which is required when configuring `rewriteCode`. Only support `isAutoRewrite` is `false`.
+	SourceDomian *string `pulumi:"sourceDomian"`
 	// ID of source listener.
 	SourceListenerId *string `pulumi:"sourceListenerId"`
 	// Rule ID of source listener.
 	SourceRuleId *string `pulumi:"sourceRuleId"`
+	// Whether the redirect carries a matching URL is required when configuring `rewriteCode`.
+	TakeUrl *bool `pulumi:"takeUrl"`
 	// ID of source listener.
 	TargetListenerId *string `pulumi:"targetListenerId"`
 	// Rule ID of target listener.
@@ -163,10 +178,16 @@ type RedirectionState struct {
 	DeleteAllAutoRewrite pulumi.BoolPtrInput
 	// Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.
 	IsAutoRewrite pulumi.BoolPtrInput
+	// Redirection status codes, with possible values of `301`, `302`, `307`.
+	RewriteCode pulumi.IntPtrInput
+	// The domain name for source forwarding must be the domain name corresponding to `sourceRuleId`, which is required when configuring `rewriteCode`. Only support `isAutoRewrite` is `false`.
+	SourceDomian pulumi.StringPtrInput
 	// ID of source listener.
 	SourceListenerId pulumi.StringPtrInput
 	// Rule ID of source listener.
 	SourceRuleId pulumi.StringPtrInput
+	// Whether the redirect carries a matching URL is required when configuring `rewriteCode`.
+	TakeUrl pulumi.BoolPtrInput
 	// ID of source listener.
 	TargetListenerId pulumi.StringPtrInput
 	// Rule ID of target listener.
@@ -184,10 +205,16 @@ type redirectionArgs struct {
 	DeleteAllAutoRewrite *bool `pulumi:"deleteAllAutoRewrite"`
 	// Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.
 	IsAutoRewrite *bool `pulumi:"isAutoRewrite"`
+	// Redirection status codes, with possible values of `301`, `302`, `307`.
+	RewriteCode *int `pulumi:"rewriteCode"`
+	// The domain name for source forwarding must be the domain name corresponding to `sourceRuleId`, which is required when configuring `rewriteCode`. Only support `isAutoRewrite` is `false`.
+	SourceDomian *string `pulumi:"sourceDomian"`
 	// ID of source listener.
 	SourceListenerId *string `pulumi:"sourceListenerId"`
 	// Rule ID of source listener.
 	SourceRuleId *string `pulumi:"sourceRuleId"`
+	// Whether the redirect carries a matching URL is required when configuring `rewriteCode`.
+	TakeUrl *bool `pulumi:"takeUrl"`
 	// ID of source listener.
 	TargetListenerId string `pulumi:"targetListenerId"`
 	// Rule ID of target listener.
@@ -202,10 +229,16 @@ type RedirectionArgs struct {
 	DeleteAllAutoRewrite pulumi.BoolPtrInput
 	// Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.
 	IsAutoRewrite pulumi.BoolPtrInput
+	// Redirection status codes, with possible values of `301`, `302`, `307`.
+	RewriteCode pulumi.IntPtrInput
+	// The domain name for source forwarding must be the domain name corresponding to `sourceRuleId`, which is required when configuring `rewriteCode`. Only support `isAutoRewrite` is `false`.
+	SourceDomian pulumi.StringPtrInput
 	// ID of source listener.
 	SourceListenerId pulumi.StringPtrInput
 	// Rule ID of source listener.
 	SourceRuleId pulumi.StringPtrInput
+	// Whether the redirect carries a matching URL is required when configuring `rewriteCode`.
+	TakeUrl pulumi.BoolPtrInput
 	// ID of source listener.
 	TargetListenerId pulumi.StringInput
 	// Rule ID of target listener.
@@ -314,6 +347,16 @@ func (o RedirectionOutput) IsAutoRewrite() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Redirection) pulumi.BoolPtrOutput { return v.IsAutoRewrite }).(pulumi.BoolPtrOutput)
 }
 
+// Redirection status codes, with possible values of `301`, `302`, `307`.
+func (o RedirectionOutput) RewriteCode() pulumi.IntOutput {
+	return o.ApplyT(func(v *Redirection) pulumi.IntOutput { return v.RewriteCode }).(pulumi.IntOutput)
+}
+
+// The domain name for source forwarding must be the domain name corresponding to `sourceRuleId`, which is required when configuring `rewriteCode`. Only support `isAutoRewrite` is `false`.
+func (o RedirectionOutput) SourceDomian() pulumi.StringOutput {
+	return o.ApplyT(func(v *Redirection) pulumi.StringOutput { return v.SourceDomian }).(pulumi.StringOutput)
+}
+
 // ID of source listener.
 func (o RedirectionOutput) SourceListenerId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Redirection) pulumi.StringOutput { return v.SourceListenerId }).(pulumi.StringOutput)
@@ -322,6 +365,11 @@ func (o RedirectionOutput) SourceListenerId() pulumi.StringOutput {
 // Rule ID of source listener.
 func (o RedirectionOutput) SourceRuleId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Redirection) pulumi.StringOutput { return v.SourceRuleId }).(pulumi.StringOutput)
+}
+
+// Whether the redirect carries a matching URL is required when configuring `rewriteCode`.
+func (o RedirectionOutput) TakeUrl() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Redirection) pulumi.BoolOutput { return v.TakeUrl }).(pulumi.BoolOutput)
 }
 
 // ID of source listener.

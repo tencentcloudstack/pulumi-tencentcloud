@@ -13,7 +13,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// <summary>
     /// Provides a resource to create a CLB target group.
     /// 
+    /// &gt; **NOTE:** Currently, `V1` target group is not supported set `HealthCheck` anymore, Please use `V2` target group.
+    /// 
     /// ## Example Usage
+    /// 
+    /// ### Create V1 target group and tags
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
@@ -25,8 +29,210 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// {
     ///     var test = new Tencentcloud.Clb.TargetGroup("test", new()
     ///     {
-    ///         TargetGroupName = "test",
-    ///         Port = 33,
+    ///         TargetGroupName = "test-v1",
+    ///         Port = 80,
+    ///         Type = "v1",
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Create V2 TCP target group with TCP health check
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var tcpTg = new Tencentcloud.Clb.TargetGroup("tcp_tg", new()
+    ///     {
+    ///         TargetGroupName = "tcp_tg",
+    ///         VpcId = "vpc-xxxxxx",
+    ///         Type = "v2",
+    ///         Protocol = "TCP",
+    ///         HealthCheck = new Tencentcloud.Clb.Inputs.TargetGroupHealthCheckArgs
+    ///         {
+    ///             HealthSwitch = true,
+    ///             Protocol = "TCP",
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Create V2 target group with advanced features
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var testV2 = new Tencentcloud.Clb.TargetGroup("test_v2", new()
+    ///     {
+    ///         TargetGroupName = "test-v2",
+    ///         VpcId = "vpc-xxxxxx",
+    ///         Port = 80,
+    ///         Type = "v2",
+    ///         Protocol = "HTTP",
+    ///         ScheduleAlgorithm = "WRR",
+    ///         SessionExpireTime = 1800,
+    ///         KeepaliveEnable = true,
+    ///         Weight = 50,
+    ///         HealthCheck = new Tencentcloud.Clb.Inputs.TargetGroupHealthCheckArgs
+    ///         {
+    ///             HealthSwitch = true,
+    ///             Protocol = "HTTP",
+    ///             Port = 8080,
+    ///             Timeout = 5,
+    ///             GapTime = 11,
+    ///             GoodLimit = 4,
+    ///             BadLimit = 4,
+    ///             HttpCheckPath = "/health",
+    ///             HttpCheckMethod = "GET",
+    ///             HttpCheckDomain = "test.com",
+    ///             HttpCode = 2,
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///             { "env", "production" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Create V2 HTTP target group with IP hash scheduling
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var ipHash = new Tencentcloud.Clb.TargetGroup("ip_hash", new()
+    ///     {
+    ///         TargetGroupName = "ip-hash-tg",
+    ///         VpcId = "vpc-xxxxxxx",
+    ///         Type = "v2",
+    ///         Protocol = "HTTP",
+    ///         ScheduleAlgorithm = "IP_HASH",
+    ///         IpVersion = "IPv4",
+    ///         HealthCheck = new Tencentcloud.Clb.Inputs.TargetGroupHealthCheckArgs
+    ///         {
+    ///             HealthSwitch = true,
+    ///             Protocol = "HTTP",
+    ///             HttpCheckDomain = "test.com",
+    ///             Timeout = 5,
+    ///             GapTime = 11,
+    ///             GoodLimit = 4,
+    ///             BadLimit = 4,
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Create V2 full listener target group
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var fullListener = new Tencentcloud.Clb.TargetGroup("full_listener", new()
+    ///     {
+    ///         TargetGroupName = "full-listener-tg",
+    ///         VpcId = "vpc-xxxxxx",
+    ///         Type = "v2",
+    ///         Protocol = "TCP",
+    ///         FullListenSwitch = true,
+    ///         HealthCheck = new Tencentcloud.Clb.Inputs.TargetGroupHealthCheckArgs
+    ///         {
+    ///             HealthSwitch = true,
+    ///             Protocol = "HTTP",
+    ///             HttpVersion = "HTTP/1.1",
+    ///             HttpCheckPath = "/healthz",
+    ///             HttpCheckDomain = "test.com",
+    ///             Timeout = 5,
+    ///             GapTime = 11,
+    ///             GoodLimit = 4,
+    ///             BadLimit = 4,
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Create IPv6 target group
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var ipv6 = new Tencentcloud.Clb.TargetGroup("ipv6", new()
+    ///     {
+    ///         TargetGroupName = "ipv6-tg",
+    ///         VpcId = "vpc-xxxxxx",
+    ///         Type = "v2",
+    ///         Protocol = "HTTP",
+    ///         IpVersion = "IPv6",
+    ///         HealthCheck = new Tencentcloud.Clb.Inputs.TargetGroupHealthCheckArgs
+    ///         {
+    ///             HealthSwitch = true,
+    ///             Protocol = "HTTP",
+    ///             HttpCheckDomain = "test.com",
+    ///             Timeout = 5,
+    ///             GapTime = 11,
+    ///             GoodLimit = 4,
+    ///             BadLimit = 4,
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Create V2 target group with SNAT enabled
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var snat = new Tencentcloud.Clb.TargetGroup("snat", new()
+    ///     {
+    ///         TargetGroupName = "snat-tg",
+    ///         VpcId = "vpc-xxxxxx",
+    ///         Type = "v2",
+    ///         Protocol = "TCP",
+    ///         SnatEnable = true,
+    ///         HealthCheck = new Tencentcloud.Clb.Inputs.TargetGroupHealthCheckArgs
+    ///         {
+    ///             HealthSwitch = true,
+    ///             Protocol = "TCP",
+    ///         },
     ///     });
     /// 
     /// });
@@ -44,10 +250,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     public partial class TargetGroup : global::Pulumi.CustomResource
     {
         /// <summary>
+        /// Whether this is a full listener target group. Only valid for v2 target groups. true: full listener target group, false: normal target group.
+        /// </summary>
+        [Output("fullListenSwitch")]
+        public Output<bool?> FullListenSwitch { get; private set; } = null!;
+
+        /// <summary>
+        /// Health check configuration.
+        /// </summary>
+        [Output("healthCheck")]
+        public Output<Outputs.TargetGroupHealthCheck> HealthCheck { get; private set; } = null!;
+
+        /// <summary>
+        /// IP version type. Common values: IPv4, IPv6, IPv6FullChain.
+        /// </summary>
+        [Output("ipVersion")]
+        public Output<string> IpVersion { get; private set; } = null!;
+
+        /// <summary>
+        /// Enable keep-alive connections. Only valid for HTTP/HTTPS target groups. true: enable, false: disable. Default: false.
+        /// </summary>
+        [Output("keepaliveEnable")]
+        public Output<bool?> KeepaliveEnable { get; private set; } = null!;
+
+        /// <summary>
         /// The default port of target group, add server after can use it.
         /// </summary>
         [Output("port")]
         public Output<int?> Port { get; private set; } = null!;
+
+        /// <summary>
+        /// Backend forwarding protocol of the target group. this field is required for the new version (v2) target group. currently supports TCP, UDP, HTTP, HTTPS, GRPC.
+        /// </summary>
+        [Output("protocol")]
+        public Output<string> Protocol { get; private set; } = null!;
+
+        /// <summary>
+        /// Scheduling algorithm. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Valid values: WRR (weighted round robin), LEAST_CONN (least connections), IP_HASH (IP hash). Default: WRR.
+        /// </summary>
+        [Output("scheduleAlgorithm")]
+        public Output<string> ScheduleAlgorithm { get; private set; } = null!;
+
+        /// <summary>
+        /// Session persistence time in seconds. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Range: 30-3600 or 0 (disabled). Default: 0 (disabled).
+        /// </summary>
+        [Output("sessionExpireTime")]
+        public Output<int?> SessionExpireTime { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to enable SNAT (Source Network Address Translation) for the target group. true: enable, false: disable. Whether SNAT actually takes effect depends on the target group type (v1/v2) and protocol; the cloud side determines applicability.
+        /// </summary>
+        [Output("snatEnable")]
+        public Output<bool> SnatEnable { get; private set; } = null!;
+
+        /// <summary>
+        /// Resource tags for the target group.
+        /// </summary>
+        [Output("tags")]
+        public Output<ImmutableDictionary<string, string>?> Tags { get; private set; } = null!;
 
         /// <summary>
         /// It has been deprecated from version 1.77.3. please use `tencentcloud.Clb.TargetGroupInstanceAttachment` instead. The backend server of target group bind.
@@ -62,10 +322,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Output<string?> TargetGroupName { get; private set; } = null!;
 
         /// <summary>
+        /// Target group type, currently supported v1 (legacy version target group) and v2 (new version target group), defaults to v1 (legacy version target group).
+        /// </summary>
+        [Output("type")]
+        public Output<string> Type { get; private set; } = null!;
+
+        /// <summary>
         /// VPC ID, default is based on the network.
         /// </summary>
         [Output("vpcId")]
-        public Output<string?> VpcId { get; private set; } = null!;
+        public Output<string> VpcId { get; private set; } = null!;
+
+        /// <summary>
+        /// Default backend server weight. Range: [0, 100]. Only valid for v2 target groups. When set, backend servers added to the target group will use this default weight if not specified.
+        /// </summary>
+        [Output("weight")]
+        public Output<int?> Weight { get; private set; } = null!;
 
 
         /// <summary>
@@ -115,10 +387,70 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     public sealed class TargetGroupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Whether this is a full listener target group. Only valid for v2 target groups. true: full listener target group, false: normal target group.
+        /// </summary>
+        [Input("fullListenSwitch")]
+        public Input<bool>? FullListenSwitch { get; set; }
+
+        /// <summary>
+        /// Health check configuration.
+        /// </summary>
+        [Input("healthCheck")]
+        public Input<Inputs.TargetGroupHealthCheckArgs>? HealthCheck { get; set; }
+
+        /// <summary>
+        /// IP version type. Common values: IPv4, IPv6, IPv6FullChain.
+        /// </summary>
+        [Input("ipVersion")]
+        public Input<string>? IpVersion { get; set; }
+
+        /// <summary>
+        /// Enable keep-alive connections. Only valid for HTTP/HTTPS target groups. true: enable, false: disable. Default: false.
+        /// </summary>
+        [Input("keepaliveEnable")]
+        public Input<bool>? KeepaliveEnable { get; set; }
+
+        /// <summary>
         /// The default port of target group, add server after can use it.
         /// </summary>
         [Input("port")]
         public Input<int>? Port { get; set; }
+
+        /// <summary>
+        /// Backend forwarding protocol of the target group. this field is required for the new version (v2) target group. currently supports TCP, UDP, HTTP, HTTPS, GRPC.
+        /// </summary>
+        [Input("protocol")]
+        public Input<string>? Protocol { get; set; }
+
+        /// <summary>
+        /// Scheduling algorithm. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Valid values: WRR (weighted round robin), LEAST_CONN (least connections), IP_HASH (IP hash). Default: WRR.
+        /// </summary>
+        [Input("scheduleAlgorithm")]
+        public Input<string>? ScheduleAlgorithm { get; set; }
+
+        /// <summary>
+        /// Session persistence time in seconds. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Range: 30-3600 or 0 (disabled). Default: 0 (disabled).
+        /// </summary>
+        [Input("sessionExpireTime")]
+        public Input<int>? SessionExpireTime { get; set; }
+
+        /// <summary>
+        /// Whether to enable SNAT (Source Network Address Translation) for the target group. true: enable, false: disable. Whether SNAT actually takes effect depends on the target group type (v1/v2) and protocol; the cloud side determines applicability.
+        /// </summary>
+        [Input("snatEnable")]
+        public Input<bool>? SnatEnable { get; set; }
+
+        [Input("tags")]
+        private InputMap<string>? _tags;
+
+        /// <summary>
+        /// Resource tags for the target group.
+        /// </summary>
+        public InputMap<string> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<string>());
+            set => _tags = value;
+        }
 
         [Input("targetGroupInstances")]
         private InputList<Inputs.TargetGroupTargetGroupInstanceArgs>? _targetGroupInstances;
@@ -140,10 +472,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<string>? TargetGroupName { get; set; }
 
         /// <summary>
+        /// Target group type, currently supported v1 (legacy version target group) and v2 (new version target group), defaults to v1 (legacy version target group).
+        /// </summary>
+        [Input("type")]
+        public Input<string>? Type { get; set; }
+
+        /// <summary>
         /// VPC ID, default is based on the network.
         /// </summary>
         [Input("vpcId")]
         public Input<string>? VpcId { get; set; }
+
+        /// <summary>
+        /// Default backend server weight. Range: [0, 100]. Only valid for v2 target groups. When set, backend servers added to the target group will use this default weight if not specified.
+        /// </summary>
+        [Input("weight")]
+        public Input<int>? Weight { get; set; }
 
         public TargetGroupArgs()
         {
@@ -154,10 +498,70 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     public sealed class TargetGroupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Whether this is a full listener target group. Only valid for v2 target groups. true: full listener target group, false: normal target group.
+        /// </summary>
+        [Input("fullListenSwitch")]
+        public Input<bool>? FullListenSwitch { get; set; }
+
+        /// <summary>
+        /// Health check configuration.
+        /// </summary>
+        [Input("healthCheck")]
+        public Input<Inputs.TargetGroupHealthCheckGetArgs>? HealthCheck { get; set; }
+
+        /// <summary>
+        /// IP version type. Common values: IPv4, IPv6, IPv6FullChain.
+        /// </summary>
+        [Input("ipVersion")]
+        public Input<string>? IpVersion { get; set; }
+
+        /// <summary>
+        /// Enable keep-alive connections. Only valid for HTTP/HTTPS target groups. true: enable, false: disable. Default: false.
+        /// </summary>
+        [Input("keepaliveEnable")]
+        public Input<bool>? KeepaliveEnable { get; set; }
+
+        /// <summary>
         /// The default port of target group, add server after can use it.
         /// </summary>
         [Input("port")]
         public Input<int>? Port { get; set; }
+
+        /// <summary>
+        /// Backend forwarding protocol of the target group. this field is required for the new version (v2) target group. currently supports TCP, UDP, HTTP, HTTPS, GRPC.
+        /// </summary>
+        [Input("protocol")]
+        public Input<string>? Protocol { get; set; }
+
+        /// <summary>
+        /// Scheduling algorithm. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Valid values: WRR (weighted round robin), LEAST_CONN (least connections), IP_HASH (IP hash). Default: WRR.
+        /// </summary>
+        [Input("scheduleAlgorithm")]
+        public Input<string>? ScheduleAlgorithm { get; set; }
+
+        /// <summary>
+        /// Session persistence time in seconds. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Range: 30-3600 or 0 (disabled). Default: 0 (disabled).
+        /// </summary>
+        [Input("sessionExpireTime")]
+        public Input<int>? SessionExpireTime { get; set; }
+
+        /// <summary>
+        /// Whether to enable SNAT (Source Network Address Translation) for the target group. true: enable, false: disable. Whether SNAT actually takes effect depends on the target group type (v1/v2) and protocol; the cloud side determines applicability.
+        /// </summary>
+        [Input("snatEnable")]
+        public Input<bool>? SnatEnable { get; set; }
+
+        [Input("tags")]
+        private InputMap<string>? _tags;
+
+        /// <summary>
+        /// Resource tags for the target group.
+        /// </summary>
+        public InputMap<string> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<string>());
+            set => _tags = value;
+        }
 
         [Input("targetGroupInstances")]
         private InputList<Inputs.TargetGroupTargetGroupInstanceGetArgs>? _targetGroupInstances;
@@ -179,10 +583,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<string>? TargetGroupName { get; set; }
 
         /// <summary>
+        /// Target group type, currently supported v1 (legacy version target group) and v2 (new version target group), defaults to v1 (legacy version target group).
+        /// </summary>
+        [Input("type")]
+        public Input<string>? Type { get; set; }
+
+        /// <summary>
         /// VPC ID, default is based on the network.
         /// </summary>
         [Input("vpcId")]
         public Input<string>? VpcId { get; set; }
+
+        /// <summary>
+        /// Default backend server weight. Range: [0, 100]. Only valid for v2 target groups. When set, backend servers added to the target group will use this default weight if not specified.
+        /// </summary>
+        [Input("weight")]
+        public Input<int>? Weight { get; set; }
 
         public TargetGroupState()
         {

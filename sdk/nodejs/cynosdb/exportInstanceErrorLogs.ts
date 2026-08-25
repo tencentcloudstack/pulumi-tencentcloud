@@ -141,39 +141,39 @@ export interface ExportInstanceErrorLogsState {
     /**
      * Latest log time.
      */
-    endTime?: pulumi.Input<string>;
+    endTime?: pulumi.Input<string | undefined>;
     /**
      * List of instances in the read-write instance group.
      */
-    errorLogItemExports?: pulumi.Input<pulumi.Input<inputs.Cynosdb.ExportInstanceErrorLogsErrorLogItemExport>[]>;
+    errorLogItemExports?: pulumi.Input<pulumi.Input<inputs.Cynosdb.ExportInstanceErrorLogsErrorLogItemExport>[] | undefined>;
     /**
      * File type, optional values: csv, original.
      */
-    fileType?: pulumi.Input<string>;
+    fileType?: pulumi.Input<string | undefined>;
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * keyword.
      */
-    keyWords?: pulumi.Input<pulumi.Input<string>[]>;
+    keyWords?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Log level.
      */
-    logLevels?: pulumi.Input<pulumi.Input<string>[]>;
+    logLevels?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Optional value Timestamp.
      */
-    orderBy?: pulumi.Input<string>;
+    orderBy?: pulumi.Input<string | undefined>;
     /**
      * ASC or DESC.
      */
-    orderByType?: pulumi.Input<string>;
+    orderByType?: pulumi.Input<string | undefined>;
     /**
      * Log earliest time.
      */
-    startTime?: pulumi.Input<string>;
+    startTime?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -183,11 +183,11 @@ export interface ExportInstanceErrorLogsArgs {
     /**
      * Latest log time.
      */
-    endTime?: pulumi.Input<string>;
+    endTime?: pulumi.Input<string | undefined>;
     /**
      * File type, optional values: csv, original.
      */
-    fileType?: pulumi.Input<string>;
+    fileType?: pulumi.Input<string | undefined>;
     /**
      * Instance ID.
      */
@@ -195,21 +195,21 @@ export interface ExportInstanceErrorLogsArgs {
     /**
      * keyword.
      */
-    keyWords?: pulumi.Input<pulumi.Input<string>[]>;
+    keyWords?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Log level.
      */
-    logLevels?: pulumi.Input<pulumi.Input<string>[]>;
+    logLevels?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Optional value Timestamp.
      */
-    orderBy?: pulumi.Input<string>;
+    orderBy?: pulumi.Input<string | undefined>;
     /**
      * ASC or DESC.
      */
-    orderByType?: pulumi.Input<string>;
+    orderByType?: pulumi.Input<string | undefined>;
     /**
      * Log earliest time.
      */
-    startTime?: pulumi.Input<string>;
+    startTime?: pulumi.Input<string | undefined>;
 }

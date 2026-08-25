@@ -68,12 +68,8 @@ type GetLayersResult struct {
 }
 
 func GetLayersOutput(ctx *pulumi.Context, args GetLayersOutputArgs, opts ...pulumi.InvokeOption) GetLayersResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetLayersResultOutput, error) {
-			args := v.(GetLayersArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Scf/getLayers:getLayers", args, GetLayersResultOutput{}, options).(GetLayersResultOutput), nil
-		}).(GetLayersResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Scf/getLayers:getLayers", args, GetLayersResultOutput{}, options).(GetLayersResultOutput)
 }
 
 // A collection of arguments for invoking getLayers.

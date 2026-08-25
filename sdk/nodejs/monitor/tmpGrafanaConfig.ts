@@ -50,7 +50,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * monitor tmp_grafana_config can be imported using the id, e.g.
+ * monitor tmpGrafanaConfig can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Monitor/tmpGrafanaConfig:TmpGrafanaConfig tmp_grafana_config tmp_grafana_config_id
@@ -131,11 +131,11 @@ export interface TmpGrafanaConfigState {
     /**
      * JSON encoded string.
      */
-    config?: pulumi.Input<string>;
+    config?: pulumi.Input<string | undefined>;
     /**
      * Instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**

@@ -98,17 +98,17 @@ export interface GetTablesOutputArgs {
     /**
      * File for saving results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Table ID to be query.
      */
-    tableId?: pulumi.Input<string>;
+    tableId?: pulumi.Input<string | undefined>;
     /**
      * Table name to be query.
      */
-    tableName?: pulumi.Input<string>;
+    tableName?: pulumi.Input<string | undefined>;
     /**
      * ID of the table group to be query.
      */
-    tablegroupId?: pulumi.Input<string>;
+    tablegroupId?: pulumi.Input<string | undefined>;
 }

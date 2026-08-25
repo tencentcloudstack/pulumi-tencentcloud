@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const datahubTopic = tencentcloud.Ckafka.getDatahubTopic({});
+ * const datahubTopic = tencentcloud.ckafka.getDatahubTopic({});
  * ```
  */
 export function getDatahubTopic(args?: GetDatahubTopicArgs, opts?: pulumi.InvokeOptions): Promise<GetDatahubTopicResult> {
@@ -77,7 +77,7 @@ export interface GetDatahubTopicResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const datahubTopic = tencentcloud.Ckafka.getDatahubTopic({});
+ * const datahubTopic = tencentcloud.ckafka.getDatahubTopic({});
  * ```
  */
 export function getDatahubTopicOutput(args?: GetDatahubTopicOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDatahubTopicResult> {
@@ -98,17 +98,17 @@ export interface GetDatahubTopicOutputArgs {
     /**
      * The maximum number of results returned this time, the default is 50, and the maximum value is 50.
      */
-    limit?: pulumi.Input<number>;
+    limit?: pulumi.Input<number | undefined>;
     /**
      * The offset position of this query, the default is 0.
      */
-    offset?: pulumi.Input<number>;
+    offset?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * query key word.
      */
-    searchWord?: pulumi.Input<string>;
+    searchWord?: pulumi.Input<string | undefined>;
 }

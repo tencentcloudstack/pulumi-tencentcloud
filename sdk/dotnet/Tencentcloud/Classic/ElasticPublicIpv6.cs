@@ -38,7 +38,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Classic
     /// 
     /// ## Import
     /// 
-    /// vpc classic_elastic_public_ipv6 can be imported using the id, e.g.
+    /// vpc ClassicElasticPublicIpv6 can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Classic/elasticPublicIpv6:ElasticPublicIpv6 classic_elastic_public_ipv6 classic_elastic_public_ipv6_id

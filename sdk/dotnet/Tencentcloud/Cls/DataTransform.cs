@@ -104,6 +104,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     public partial class DataTransform : global::Pulumi.CustomResource
     {
         /// <summary>
+        /// When `FuncType` is `2`, whether to discard data when the number of dynamically created logsets and topics exceeds the product specification limit. Default is `False`. `False`: Create backup logset and topic and write logs to the backup topic; `True`: Discard log data.
+        /// </summary>
+        [Output("backupGiveUpData")]
+        public Output<bool?> BackupGiveUpData { get; private set; } = null!;
+
+        /// <summary>
+        /// Associated data source information.
+        /// </summary>
+        [Output("dataTransformSqlDataSources")]
+        public Output<ImmutableArray<Outputs.DataTransformDataTransformSqlDataSource>> DataTransformSqlDataSources { get; private set; } = null!;
+
+        /// <summary>
+        /// Data transform type. `0`: Standard data transform task; `1`: Pre-processing data transform task (process collected logs before writing to the log topic).
+        /// </summary>
+        [Output("dataTransformType")]
+        public Output<int?> DataTransformType { get; private set; } = null!;
+
+        /// <summary>
         /// Data transform des resources. If `FuncType` is `1`, this parameter is required. If `FuncType` is `2`, this parameter does not need to be filled in.
         /// </summary>
         [Output("dstResources")]
@@ -116,10 +134,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public Output<int?> EnableFlag { get; private set; } = null!;
 
         /// <summary>
+        /// Set environment variables.
+        /// </summary>
+        [Output("envInfos")]
+        public Output<ImmutableArray<Outputs.DataTransformEnvInfo>> EnvInfos { get; private set; } = null!;
+
+        /// <summary>
         /// Data transform content. If `FuncType` is `2`, must use `LogAutoOutput`.
         /// </summary>
         [Output("etlContent")]
         public Output<string> EtlContent { get; private set; } = null!;
+
+        /// <summary>
+        /// Field name for failure logs.
+        /// </summary>
+        [Output("failureLogKey")]
+        public Output<string> FailureLogKey { get; private set; } = null!;
 
         /// <summary>
         /// Task type. `1`: Specify the theme; `2`: Dynamic creation.
@@ -128,10 +158,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public Output<int> FuncType { get; private set; } = null!;
 
         /// <summary>
+        /// Whether to enable service log delivery. `1`: disable; `2`: enable.
+        /// </summary>
+        [Output("hasServicesLog")]
+        public Output<int> HasServicesLog { get; private set; } = null!;
+
+        /// <summary>
+        /// Keep failure log status. `1`: do not keep (default); `2`: keep.
+        /// </summary>
+        [Output("keepFailureLog")]
+        public Output<int> KeepFailureLog { get; private set; } = null!;
+
+        /// <summary>
         /// Task name.
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
+
+        /// <summary>
+        /// Specify the start time of processing data, in seconds-level timestamp. Any time range within the log topic lifecycle. If it exceeds the lifecycle, only the part with data within the lifecycle is processed.
+        /// </summary>
+        [Output("processFromTimestamp")]
+        public Output<int> ProcessFromTimestamp { get; private set; } = null!;
+
+        /// <summary>
+        /// Specify the end time of processing data, in seconds-level timestamp. Cannot specify a future time. If not filled, it means continuous execution.
+        /// </summary>
+        [Output("processToTimestamp")]
+        public Output<int?> ProcessToTimestamp { get; private set; } = null!;
 
         /// <summary>
         /// Source topic ID.
@@ -192,6 +246,30 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
 
     public sealed class DataTransformArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// When `FuncType` is `2`, whether to discard data when the number of dynamically created logsets and topics exceeds the product specification limit. Default is `False`. `False`: Create backup logset and topic and write logs to the backup topic; `True`: Discard log data.
+        /// </summary>
+        [Input("backupGiveUpData")]
+        public Input<bool>? BackupGiveUpData { get; set; }
+
+        [Input("dataTransformSqlDataSources")]
+        private InputList<Inputs.DataTransformDataTransformSqlDataSourceArgs>? _dataTransformSqlDataSources;
+
+        /// <summary>
+        /// Associated data source information.
+        /// </summary>
+        public InputList<Inputs.DataTransformDataTransformSqlDataSourceArgs> DataTransformSqlDataSources
+        {
+            get => _dataTransformSqlDataSources ?? (_dataTransformSqlDataSources = new InputList<Inputs.DataTransformDataTransformSqlDataSourceArgs>());
+            set => _dataTransformSqlDataSources = value;
+        }
+
+        /// <summary>
+        /// Data transform type. `0`: Standard data transform task; `1`: Pre-processing data transform task (process collected logs before writing to the log topic).
+        /// </summary>
+        [Input("dataTransformType")]
+        public Input<int>? DataTransformType { get; set; }
+
         [Input("dstResources")]
         private InputList<Inputs.DataTransformDstResourceArgs>? _dstResources;
 
@@ -210,11 +288,29 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         [Input("enableFlag")]
         public Input<int>? EnableFlag { get; set; }
 
+        [Input("envInfos")]
+        private InputList<Inputs.DataTransformEnvInfoArgs>? _envInfos;
+
+        /// <summary>
+        /// Set environment variables.
+        /// </summary>
+        public InputList<Inputs.DataTransformEnvInfoArgs> EnvInfos
+        {
+            get => _envInfos ?? (_envInfos = new InputList<Inputs.DataTransformEnvInfoArgs>());
+            set => _envInfos = value;
+        }
+
         /// <summary>
         /// Data transform content. If `FuncType` is `2`, must use `LogAutoOutput`.
         /// </summary>
         [Input("etlContent", required: true)]
         public Input<string> EtlContent { get; set; } = null!;
+
+        /// <summary>
+        /// Field name for failure logs.
+        /// </summary>
+        [Input("failureLogKey")]
+        public Input<string>? FailureLogKey { get; set; }
 
         /// <summary>
         /// Task type. `1`: Specify the theme; `2`: Dynamic creation.
@@ -223,10 +319,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public Input<int> FuncType { get; set; } = null!;
 
         /// <summary>
+        /// Whether to enable service log delivery. `1`: disable; `2`: enable.
+        /// </summary>
+        [Input("hasServicesLog")]
+        public Input<int>? HasServicesLog { get; set; }
+
+        /// <summary>
+        /// Keep failure log status. `1`: do not keep (default); `2`: keep.
+        /// </summary>
+        [Input("keepFailureLog")]
+        public Input<int>? KeepFailureLog { get; set; }
+
+        /// <summary>
         /// Task name.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// Specify the start time of processing data, in seconds-level timestamp. Any time range within the log topic lifecycle. If it exceeds the lifecycle, only the part with data within the lifecycle is processed.
+        /// </summary>
+        [Input("processFromTimestamp")]
+        public Input<int>? ProcessFromTimestamp { get; set; }
+
+        /// <summary>
+        /// Specify the end time of processing data, in seconds-level timestamp. Cannot specify a future time. If not filled, it means continuous execution.
+        /// </summary>
+        [Input("processToTimestamp")]
+        public Input<int>? ProcessToTimestamp { get; set; }
 
         /// <summary>
         /// Source topic ID.
@@ -248,6 +368,30 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
 
     public sealed class DataTransformState : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// When `FuncType` is `2`, whether to discard data when the number of dynamically created logsets and topics exceeds the product specification limit. Default is `False`. `False`: Create backup logset and topic and write logs to the backup topic; `True`: Discard log data.
+        /// </summary>
+        [Input("backupGiveUpData")]
+        public Input<bool>? BackupGiveUpData { get; set; }
+
+        [Input("dataTransformSqlDataSources")]
+        private InputList<Inputs.DataTransformDataTransformSqlDataSourceGetArgs>? _dataTransformSqlDataSources;
+
+        /// <summary>
+        /// Associated data source information.
+        /// </summary>
+        public InputList<Inputs.DataTransformDataTransformSqlDataSourceGetArgs> DataTransformSqlDataSources
+        {
+            get => _dataTransformSqlDataSources ?? (_dataTransformSqlDataSources = new InputList<Inputs.DataTransformDataTransformSqlDataSourceGetArgs>());
+            set => _dataTransformSqlDataSources = value;
+        }
+
+        /// <summary>
+        /// Data transform type. `0`: Standard data transform task; `1`: Pre-processing data transform task (process collected logs before writing to the log topic).
+        /// </summary>
+        [Input("dataTransformType")]
+        public Input<int>? DataTransformType { get; set; }
+
         [Input("dstResources")]
         private InputList<Inputs.DataTransformDstResourceGetArgs>? _dstResources;
 
@@ -266,11 +410,29 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         [Input("enableFlag")]
         public Input<int>? EnableFlag { get; set; }
 
+        [Input("envInfos")]
+        private InputList<Inputs.DataTransformEnvInfoGetArgs>? _envInfos;
+
+        /// <summary>
+        /// Set environment variables.
+        /// </summary>
+        public InputList<Inputs.DataTransformEnvInfoGetArgs> EnvInfos
+        {
+            get => _envInfos ?? (_envInfos = new InputList<Inputs.DataTransformEnvInfoGetArgs>());
+            set => _envInfos = value;
+        }
+
         /// <summary>
         /// Data transform content. If `FuncType` is `2`, must use `LogAutoOutput`.
         /// </summary>
         [Input("etlContent")]
         public Input<string>? EtlContent { get; set; }
+
+        /// <summary>
+        /// Field name for failure logs.
+        /// </summary>
+        [Input("failureLogKey")]
+        public Input<string>? FailureLogKey { get; set; }
 
         /// <summary>
         /// Task type. `1`: Specify the theme; `2`: Dynamic creation.
@@ -279,10 +441,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public Input<int>? FuncType { get; set; }
 
         /// <summary>
+        /// Whether to enable service log delivery. `1`: disable; `2`: enable.
+        /// </summary>
+        [Input("hasServicesLog")]
+        public Input<int>? HasServicesLog { get; set; }
+
+        /// <summary>
+        /// Keep failure log status. `1`: do not keep (default); `2`: keep.
+        /// </summary>
+        [Input("keepFailureLog")]
+        public Input<int>? KeepFailureLog { get; set; }
+
+        /// <summary>
         /// Task name.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// Specify the start time of processing data, in seconds-level timestamp. Any time range within the log topic lifecycle. If it exceeds the lifecycle, only the part with data within the lifecycle is processed.
+        /// </summary>
+        [Input("processFromTimestamp")]
+        public Input<int>? ProcessFromTimestamp { get; set; }
+
+        /// <summary>
+        /// Specify the end time of processing data, in seconds-level timestamp. Cannot specify a future time. If not filled, it means continuous execution.
+        /// </summary>
+        [Input("processToTimestamp")]
+        public Input<int>? ProcessToTimestamp { get; set; }
 
         /// <summary>
         /// Source topic ID.

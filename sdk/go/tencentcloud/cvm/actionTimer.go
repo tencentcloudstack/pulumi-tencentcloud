@@ -38,7 +38,7 @@ import (
 //			if param := cfg.Get("availabilityZone"); param != "" {
 //				availabilityZone = param
 //			}
-//			images, err := images.GetInstance(ctx, &images.GetInstanceArgs{
+//			images2, err := images.GetInstance(ctx, &images.GetInstanceArgs{
 //				ImageTypes: []string{
 //					"PUBLIC_IMAGE",
 //				},
@@ -48,7 +48,7 @@ import (
 //				return err
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
@@ -56,9 +56,9 @@ import (
 //				return err
 //			}
 //			// create vpc subnet
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				Name:             pulumi.String("subnet"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				CidrBlock:        pulumi.String("10.0.20.0/28"),
 //				IsMulticast:      pulumi.Bool(false),
@@ -70,14 +70,14 @@ import (
 //			example, err := instance.NewInstance(ctx, "example", &instance.InstanceArgs{
 //				InstanceName:     pulumi.String("tf_example"),
 //				AvailabilityZone: pulumi.String(availabilityZone),
-//				ImageId:          pulumi.String(images.Images[0].ImageId),
+//				ImageId:          pulumi.String(images2.Images[0].ImageId),
 //				InstanceType:     pulumi.String("SA3.MEDIUM4"),
 //				SystemDiskType:   pulumi.String("CLOUD_HSSD"),
 //				SystemDiskSize:   pulumi.Int(100),
 //				Hostname:         pulumi.String("example"),
 //				ProjectId:        pulumi.Int(0),
-//				VpcId:            vpc.ID(),
-//				SubnetId:         subnet.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 //				DataDisks: instance.InstanceDataDiskArray{
 //					&instance.InstanceDataDiskArgs{
 //						DataDiskType: pulumi.String("CLOUD_HSSD"),
@@ -94,7 +94,7 @@ import (
 //			}
 //			// create cvm action timer
 //			_, err = cvm.NewActionTimer(ctx, "example", &cvm.ActionTimerArgs{
-//				InstanceId: example.ID(),
+//				InstanceId: example.ID().ToIDOutput().ToStringOutput(),
 //				ActionTimer: &cvm.ActionTimerActionTimerArgs{
 //					TimerAction: pulumi.String("TerminateInstances"),
 //					ActionTime:  pulumi.String("2024-11-11T11:26:40Z"),

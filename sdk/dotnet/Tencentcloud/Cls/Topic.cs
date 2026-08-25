@@ -13,6 +13,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// <summary>
     /// Provides a resource to create a cls topic.
     /// 
+    /// &gt; **NOTE:** Field `Encryption` can only be enabled, not disabled.
+    /// 
+    /// &gt; **NOTE:** Field `CustomKmsInfo` is for user-defined KMS key. If not set, the CLS default key (alias KMS-CLS) is used.
+    /// 
     /// ## Example Usage
     /// 
     /// ### Create a standard cls topic
@@ -114,6 +118,89 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// });
     /// ```
     /// 
+    /// ### Create a cls metric topic(biz_type=1)
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Cls.Logset("example", new()
+    ///     {
+    ///         LogsetName = "tf_example",
+    ///         Tags = 
+    ///         {
+    ///             { "tagKey", "tagValue" },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleTopic = new Tencentcloud.Cls.Topic("example", new()
+    ///     {
+    ///         TopicName = "tf_example",
+    ///         LogsetId = example.Id,
+    ///         AutoSplit = false,
+    ///         MaxSplitPartitions = 20,
+    ///         PartitionCount = 1,
+    ///         Period = 30,
+    ///         StorageType = "hot",
+    ///         Describes = "Test Demo.",
+    ///         BizType = 1,
+    ///         Tags = 
+    ///         {
+    ///             { "tagKey", "tagValue" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Create a cls topic with custom KMS key (encryption=1)
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Cls.Logset("example", new()
+    ///     {
+    ///         LogsetName = "tf_example",
+    ///         Tags = 
+    ///         {
+    ///             { "tagKey", "tagValue" },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleTopic = new Tencentcloud.Cls.Topic("example", new()
+    ///     {
+    ///         TopicName = "tf_example",
+    ///         LogsetId = example.Id,
+    ///         AutoSplit = false,
+    ///         MaxSplitPartitions = 20,
+    ///         PartitionCount = 1,
+    ///         Period = 30,
+    ///         StorageType = "hot",
+    ///         Describes = "Test Demo.",
+    ///         Encryption = 1,
+    ///         CustomKmsInfo = new Tencentcloud.Cls.Inputs.TopicCustomKmsInfoArgs
+    ///         {
+    ///             KmsRegion = "ap-guangzhou",
+    ///             KmsKeyId = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "tagKey", "tagValue" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
     /// ## Import
     /// 
     /// cls topic can be imported using the id, e.g.
@@ -121,78 +208,102 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// ```sh
     /// $ pulumi import tencentcloud:Cls/topic:Topic example 2f5764c1-c833-44c5-84c7-950979b2a278
     /// ```
+    /// 
+    /// cls metric topic (biz_type=1) can be imported using the id with "#1" suffix, e.g.
+    /// 
+    /// ```sh
+    /// $ pulumi import tencentcloud:Cls/topic:Topic example 2f5764c1-c833-44c5-84c7-950979b2a278#1
+    /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cls/topic:Topic")]
     public partial class Topic : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Whether to enable automatic split. Default value: true.
+        /// Whether to enable automatic split. Default value: `True`.
         /// </summary>
         [Output("autoSplit")]
         public Output<bool> AutoSplit { get; private set; } = null!;
 
         /// <summary>
-        /// Log Topic Description.
+        /// Topic type. `0`: log topic (default), `1`: metric topic.
+        /// </summary>
+        [Output("bizType")]
+        public Output<int> BizType { get; private set; } = null!;
+
+        /// <summary>
+        /// User-defined KMS key information. If empty, the default key (alias `KMS-CLS`) is used.
+        /// </summary>
+        [Output("customKmsInfo")]
+        public Output<Outputs.TopicCustomKmsInfo> CustomKmsInfo { get; private set; } = null!;
+
+        /// <summary>
+        /// Log topic description.
         /// </summary>
         [Output("describes")]
         public Output<string?> Describes { get; private set; } = null!;
 
         /// <summary>
-        /// Log Subject Extension Information.
+        /// Encryption-related parameters. Supported for encryption-enabled regions and allowlisted users; cannot be passed in other scenarios. `0` or not passed: no encryption; `1`: kms-cls cloud product key encryption. Once enabled, it cannot be disabled. Supported regions: ap-beijing, ap-guangzhou, ap-shanghai, ap-singapore, ap-bangkok, ap-jakarta, eu-frankfurt, ap-seoul, ap-tokyo.
+        /// </summary>
+        [Output("encryption")]
+        public Output<int> Encryption { get; private set; } = null!;
+
+        /// <summary>
+        /// Topic extension information.
         /// </summary>
         [Output("extends")]
         public Output<Outputs.TopicExtends?> Extends { get; private set; } = null!;
 
         /// <summary>
-        /// 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
+        /// `0`: turn off log settling. Non-`0`: the number of days of standard storage after enabling log settling. HotPeriod must be greater than or equal to 7 and less than Period. Only effective when `StorageType` is `Hot`. Not supported for metric topics.
         /// </summary>
         [Output("hotPeriod")]
         public Output<int> HotPeriod { get; private set; } = null!;
 
         /// <summary>
-        /// No authentication switch. False: closed; True: Enable. The default is false. After activation, anonymous access to the log topic will be supported for specified operations.
+        /// Free authentication switch. `False`: closed (default); `True`: enabled. When enabled, anonymous access to the log topic will be supported for specified operations. Not supported for metric topics.
         /// </summary>
         [Output("isWebTracking")]
         public Output<bool> IsWebTracking { get; private set; } = null!;
 
         /// <summary>
-        /// Logset ID.
+        /// Logset ID. Get the logset ID via `DescribeLogsets` API.
         /// </summary>
         [Output("logsetId")]
         public Output<string> LogsetId { get; private set; } = null!;
 
         /// <summary>
-        /// Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.
+        /// Maximum number of partitions allowed for the topic if automatic split is enabled. Default value: `50`.
         /// </summary>
         [Output("maxSplitPartitions")]
         public Output<int> MaxSplitPartitions { get; private set; } = null!;
 
         /// <summary>
-        /// Number of log topic partitions. Default value: 1. Maximum value: 10.
+        /// Number of log topic partitions. Default: 1, maximum: 10.
         /// </summary>
         [Output("partitionCount")]
         public Output<int> PartitionCount { get; private set; } = null!;
 
         /// <summary>
-        /// lifetime. Unit: days. Standard storage value range: 1 to 3600. Infrequent storage value range: 7 to 3600 days. A value of 3640 indicates permanent retention.If this value is not input, it defaults to the Period value of the log set corresponding to the accessed log topic (defaults to 30 days in case of access failure).
+        /// Retention period, unit: days. Log topic (standard storage): 1 to 3600 days, value `3640` means permanent retention. Log topic (infrequent storage): 7 to 3600 days, value `3640` means permanent retention. Metric topic: 1 to 3600 days, value `3640` means permanent retention.
         /// </summary>
         [Output("period")]
         public Output<int> Period { get; private set; } = null!;
 
         /// <summary>
-        /// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first.
+        /// Log topic storage type. Valid values: `Hot`: standard storage; `Cold`: infrequent storage. Default value: `Hot`. Not supported for metric topics.
         /// </summary>
         [Output("storageType")]
         public Output<string> StorageType { get; private set; } = null!;
 
         /// <summary>
-        /// Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
+        /// Tag description list. Up to 10 tag key-value pairs are supported, and the same resource can only be bound to the same tag key.
         /// </summary>
         [Output("tags")]
         public Output<ImmutableDictionary<string, string>?> Tags { get; private set; } = null!;
 
         /// <summary>
-        /// Log topic name.
+        /// Log topic name. Constraints: cannot be an empty string, cannot contain the `|` character, and cannot use the following reserved names: `ClsServiceLog`, `LoglistenerStatus`, `LoglistenerAlarm`, `LoglistenerBusiness`, `ClsServiceMetric`.
         /// </summary>
         [Output("topicName")]
         public Output<string> TopicName { get; private set; } = null!;
@@ -245,61 +356,79 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     public sealed class TopicArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Whether to enable automatic split. Default value: true.
+        /// Whether to enable automatic split. Default value: `True`.
         /// </summary>
         [Input("autoSplit")]
         public Input<bool>? AutoSplit { get; set; }
 
         /// <summary>
-        /// Log Topic Description.
+        /// Topic type. `0`: log topic (default), `1`: metric topic.
+        /// </summary>
+        [Input("bizType")]
+        public Input<int>? BizType { get; set; }
+
+        /// <summary>
+        /// User-defined KMS key information. If empty, the default key (alias `KMS-CLS`) is used.
+        /// </summary>
+        [Input("customKmsInfo")]
+        public Input<Inputs.TopicCustomKmsInfoArgs>? CustomKmsInfo { get; set; }
+
+        /// <summary>
+        /// Log topic description.
         /// </summary>
         [Input("describes")]
         public Input<string>? Describes { get; set; }
 
         /// <summary>
-        /// Log Subject Extension Information.
+        /// Encryption-related parameters. Supported for encryption-enabled regions and allowlisted users; cannot be passed in other scenarios. `0` or not passed: no encryption; `1`: kms-cls cloud product key encryption. Once enabled, it cannot be disabled. Supported regions: ap-beijing, ap-guangzhou, ap-shanghai, ap-singapore, ap-bangkok, ap-jakarta, eu-frankfurt, ap-seoul, ap-tokyo.
+        /// </summary>
+        [Input("encryption")]
+        public Input<int>? Encryption { get; set; }
+
+        /// <summary>
+        /// Topic extension information.
         /// </summary>
         [Input("extends")]
         public Input<Inputs.TopicExtendsArgs>? Extends { get; set; }
 
         /// <summary>
-        /// 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
+        /// `0`: turn off log settling. Non-`0`: the number of days of standard storage after enabling log settling. HotPeriod must be greater than or equal to 7 and less than Period. Only effective when `StorageType` is `Hot`. Not supported for metric topics.
         /// </summary>
         [Input("hotPeriod")]
         public Input<int>? HotPeriod { get; set; }
 
         /// <summary>
-        /// No authentication switch. False: closed; True: Enable. The default is false. After activation, anonymous access to the log topic will be supported for specified operations.
+        /// Free authentication switch. `False`: closed (default); `True`: enabled. When enabled, anonymous access to the log topic will be supported for specified operations. Not supported for metric topics.
         /// </summary>
         [Input("isWebTracking")]
         public Input<bool>? IsWebTracking { get; set; }
 
         /// <summary>
-        /// Logset ID.
+        /// Logset ID. Get the logset ID via `DescribeLogsets` API.
         /// </summary>
         [Input("logsetId", required: true)]
         public Input<string> LogsetId { get; set; } = null!;
 
         /// <summary>
-        /// Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.
+        /// Maximum number of partitions allowed for the topic if automatic split is enabled. Default value: `50`.
         /// </summary>
         [Input("maxSplitPartitions")]
         public Input<int>? MaxSplitPartitions { get; set; }
 
         /// <summary>
-        /// Number of log topic partitions. Default value: 1. Maximum value: 10.
+        /// Number of log topic partitions. Default: 1, maximum: 10.
         /// </summary>
         [Input("partitionCount")]
         public Input<int>? PartitionCount { get; set; }
 
         /// <summary>
-        /// lifetime. Unit: days. Standard storage value range: 1 to 3600. Infrequent storage value range: 7 to 3600 days. A value of 3640 indicates permanent retention.If this value is not input, it defaults to the Period value of the log set corresponding to the accessed log topic (defaults to 30 days in case of access failure).
+        /// Retention period, unit: days. Log topic (standard storage): 1 to 3600 days, value `3640` means permanent retention. Log topic (infrequent storage): 7 to 3600 days, value `3640` means permanent retention. Metric topic: 1 to 3600 days, value `3640` means permanent retention.
         /// </summary>
         [Input("period")]
         public Input<int>? Period { get; set; }
 
         /// <summary>
-        /// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first.
+        /// Log topic storage type. Valid values: `Hot`: standard storage; `Cold`: infrequent storage. Default value: `Hot`. Not supported for metric topics.
         /// </summary>
         [Input("storageType")]
         public Input<string>? StorageType { get; set; }
@@ -308,7 +437,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         private InputMap<string>? _tags;
 
         /// <summary>
-        /// Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
+        /// Tag description list. Up to 10 tag key-value pairs are supported, and the same resource can only be bound to the same tag key.
         /// </summary>
         public InputMap<string> Tags
         {
@@ -317,7 +446,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         }
 
         /// <summary>
-        /// Log topic name.
+        /// Log topic name. Constraints: cannot be an empty string, cannot contain the `|` character, and cannot use the following reserved names: `ClsServiceLog`, `LoglistenerStatus`, `LoglistenerAlarm`, `LoglistenerBusiness`, `ClsServiceMetric`.
         /// </summary>
         [Input("topicName", required: true)]
         public Input<string> TopicName { get; set; } = null!;
@@ -331,61 +460,79 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     public sealed class TopicState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Whether to enable automatic split. Default value: true.
+        /// Whether to enable automatic split. Default value: `True`.
         /// </summary>
         [Input("autoSplit")]
         public Input<bool>? AutoSplit { get; set; }
 
         /// <summary>
-        /// Log Topic Description.
+        /// Topic type. `0`: log topic (default), `1`: metric topic.
+        /// </summary>
+        [Input("bizType")]
+        public Input<int>? BizType { get; set; }
+
+        /// <summary>
+        /// User-defined KMS key information. If empty, the default key (alias `KMS-CLS`) is used.
+        /// </summary>
+        [Input("customKmsInfo")]
+        public Input<Inputs.TopicCustomKmsInfoGetArgs>? CustomKmsInfo { get; set; }
+
+        /// <summary>
+        /// Log topic description.
         /// </summary>
         [Input("describes")]
         public Input<string>? Describes { get; set; }
 
         /// <summary>
-        /// Log Subject Extension Information.
+        /// Encryption-related parameters. Supported for encryption-enabled regions and allowlisted users; cannot be passed in other scenarios. `0` or not passed: no encryption; `1`: kms-cls cloud product key encryption. Once enabled, it cannot be disabled. Supported regions: ap-beijing, ap-guangzhou, ap-shanghai, ap-singapore, ap-bangkok, ap-jakarta, eu-frankfurt, ap-seoul, ap-tokyo.
+        /// </summary>
+        [Input("encryption")]
+        public Input<int>? Encryption { get; set; }
+
+        /// <summary>
+        /// Topic extension information.
         /// </summary>
         [Input("extends")]
         public Input<Inputs.TopicExtendsGetArgs>? Extends { get; set; }
 
         /// <summary>
-        /// 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
+        /// `0`: turn off log settling. Non-`0`: the number of days of standard storage after enabling log settling. HotPeriod must be greater than or equal to 7 and less than Period. Only effective when `StorageType` is `Hot`. Not supported for metric topics.
         /// </summary>
         [Input("hotPeriod")]
         public Input<int>? HotPeriod { get; set; }
 
         /// <summary>
-        /// No authentication switch. False: closed; True: Enable. The default is false. After activation, anonymous access to the log topic will be supported for specified operations.
+        /// Free authentication switch. `False`: closed (default); `True`: enabled. When enabled, anonymous access to the log topic will be supported for specified operations. Not supported for metric topics.
         /// </summary>
         [Input("isWebTracking")]
         public Input<bool>? IsWebTracking { get; set; }
 
         /// <summary>
-        /// Logset ID.
+        /// Logset ID. Get the logset ID via `DescribeLogsets` API.
         /// </summary>
         [Input("logsetId")]
         public Input<string>? LogsetId { get; set; }
 
         /// <summary>
-        /// Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.
+        /// Maximum number of partitions allowed for the topic if automatic split is enabled. Default value: `50`.
         /// </summary>
         [Input("maxSplitPartitions")]
         public Input<int>? MaxSplitPartitions { get; set; }
 
         /// <summary>
-        /// Number of log topic partitions. Default value: 1. Maximum value: 10.
+        /// Number of log topic partitions. Default: 1, maximum: 10.
         /// </summary>
         [Input("partitionCount")]
         public Input<int>? PartitionCount { get; set; }
 
         /// <summary>
-        /// lifetime. Unit: days. Standard storage value range: 1 to 3600. Infrequent storage value range: 7 to 3600 days. A value of 3640 indicates permanent retention.If this value is not input, it defaults to the Period value of the log set corresponding to the accessed log topic (defaults to 30 days in case of access failure).
+        /// Retention period, unit: days. Log topic (standard storage): 1 to 3600 days, value `3640` means permanent retention. Log topic (infrequent storage): 7 to 3600 days, value `3640` means permanent retention. Metric topic: 1 to 3600 days, value `3640` means permanent retention.
         /// </summary>
         [Input("period")]
         public Input<int>? Period { get; set; }
 
         /// <summary>
-        /// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first.
+        /// Log topic storage type. Valid values: `Hot`: standard storage; `Cold`: infrequent storage. Default value: `Hot`. Not supported for metric topics.
         /// </summary>
         [Input("storageType")]
         public Input<string>? StorageType { get; set; }
@@ -394,7 +541,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         private InputMap<string>? _tags;
 
         /// <summary>
-        /// Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
+        /// Tag description list. Up to 10 tag key-value pairs are supported, and the same resource can only be bound to the same tag key.
         /// </summary>
         public InputMap<string> Tags
         {
@@ -403,7 +550,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         }
 
         /// <summary>
-        /// Log topic name.
+        /// Log topic name. Constraints: cannot be an empty string, cannot contain the `|` character, and cannot use the following reserved names: `ClsServiceLog`, `LoglistenerStatus`, `LoglistenerAlarm`, `LoglistenerBusiness`, `ClsServiceMetric`.
         /// </summary>
         [Input("topicName")]
         public Input<string>? TopicName { get; set; }

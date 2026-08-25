@@ -108,19 +108,19 @@ export interface ProtectionModeState {
     /**
      * Domain.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * WAF edition. clb-waf means clb-waf, sparta-waf means saas-waf, default is sparta-waf.
      */
-    edition?: pulumi.Input<string>;
+    edition?: pulumi.Input<string | undefined>;
     /**
      * Protection status:10: Rule observation; AI off mode, 11: Rule observation; AI observation mode, 12: Rule observation; AI interception mode20: Rule interception; AI off mode, 21: Rule interception; AI observation mode, 22: Rule interception; AI interception mode.
      */
-    mode?: pulumi.Input<number>;
+    mode?: pulumi.Input<number | undefined>;
     /**
      * 0 is to modify the rule engine status, 1 is to modify the AI status.
      */
-    type?: pulumi.Input<number>;
+    type?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -134,7 +134,7 @@ export interface ProtectionModeArgs {
     /**
      * WAF edition. clb-waf means clb-waf, sparta-waf means saas-waf, default is sparta-waf.
      */
-    edition?: pulumi.Input<string>;
+    edition?: pulumi.Input<string | undefined>;
     /**
      * Protection status:10: Rule observation; AI off mode, 11: Rule observation; AI observation mode, 12: Rule observation; AI interception mode20: Rule interception; AI off mode, 21: Rule interception; AI observation mode, 22: Rule interception; AI interception mode.
      */
@@ -142,5 +142,5 @@ export interface ProtectionModeArgs {
     /**
      * 0 is to modify the rule engine status, 1 is to modify the AI status.
      */
-    type?: pulumi.Input<number>;
+    type?: pulumi.Input<number | undefined>;
 }

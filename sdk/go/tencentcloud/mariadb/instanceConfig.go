@@ -47,7 +47,7 @@ import (
 //
 // ## Import
 //
-// mariadb instance_config can be imported using the id, e.g.
+// mariadb instanceConfig can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Mariadb/instanceConfig:InstanceConfig test id

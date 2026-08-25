@@ -88,12 +88,8 @@ type GetSlowLogUserSqlAdviceResult struct {
 }
 
 func GetSlowLogUserSqlAdviceOutput(ctx *pulumi.Context, args GetSlowLogUserSqlAdviceOutputArgs, opts ...pulumi.InvokeOption) GetSlowLogUserSqlAdviceResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSlowLogUserSqlAdviceResultOutput, error) {
-			args := v.(GetSlowLogUserSqlAdviceArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dbbrain/getSlowLogUserSqlAdvice:getSlowLogUserSqlAdvice", args, GetSlowLogUserSqlAdviceResultOutput{}, options).(GetSlowLogUserSqlAdviceResultOutput), nil
-		}).(GetSlowLogUserSqlAdviceResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dbbrain/getSlowLogUserSqlAdvice:getSlowLogUserSqlAdvice", args, GetSlowLogUserSqlAdviceResultOutput{}, options).(GetSlowLogUserSqlAdviceResultOutput)
 }
 
 // A collection of arguments for invoking getSlowLogUserSqlAdvice.

@@ -11,7 +11,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Use this data source to query detailed information of cdwdoris instances
+// Use this data source to query detailed information of CDWDoris instances
 //
 // ## Example Usage
 //
@@ -73,12 +73,8 @@ type GetInstancesResult struct {
 }
 
 func GetInstancesOutput(ctx *pulumi.Context, args GetInstancesOutputArgs, opts ...pulumi.InvokeOption) GetInstancesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstancesResultOutput, error) {
-			args := v.(GetInstancesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cdwdoris/getInstances:getInstances", args, GetInstancesResultOutput{}, options).(GetInstancesResultOutput), nil
-		}).(GetInstancesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cdwdoris/getInstances:getInstances", args, GetInstancesResultOutput{}, options).(GetInstancesResultOutput)
 }
 
 // A collection of arguments for invoking getInstances.

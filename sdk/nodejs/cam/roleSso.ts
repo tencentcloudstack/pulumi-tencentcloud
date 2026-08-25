@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a CAM-ROLE-SSO (Only support OIDC).
+ * Provides a resource to create a CAM-ROLE-SSO(Only support OIDC).
  *
  * ## Example Usage
  *
@@ -13,21 +13,22 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.cam.RoleSso("foo", {
- *     name: "tf_cam_role_sso",
+ * const example = new tencentcloud.cam.RoleSso("example", {
+ *     name: "tf_example",
  *     identityUrl: "https://login.microsoftonline.com/.../v2.0",
- *     identityKey: "...",
- *     clientIds: ["..."],
+ *     identityKey: "baz****",
+ *     clientIds: ["61adcf00620c31e3ddbc9546"],
  *     description: "this is a description",
+ *     autoRotateKey: 1,
  * });
  * ```
  *
  * ## Import
  *
- * CAM-ROLE-SSO can be imported using the `name`, e.g.
+ * CAM-ROLE-SSO(Only support OIDC) can be imported using the `name`, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Cam/roleSso:RoleSso foo "test"
+ * $ pulumi import tencentcloud:Cam/roleSso:RoleSso example tf_example
  * ```
  */
 export class RoleSso extends pulumi.CustomResource {
@@ -59,6 +60,10 @@ export class RoleSso extends pulumi.CustomResource {
     }
 
     /**
+     * OIDC public key auto-rotation switch. Enum values: 0 (disabled), 1 (enabled). Default value: 0.
+     */
+    declare public readonly autoRotateKey: pulumi.Output<number>;
+    /**
      * Client ids.
      */
     declare public readonly clientIds: pulumi.Output<string[]>;
@@ -67,7 +72,7 @@ export class RoleSso extends pulumi.CustomResource {
      */
     declare public readonly description: pulumi.Output<string | undefined>;
     /**
-     * Sign the public key.
+     * Sign the public key. Base64 encryption is required.
      */
     declare public readonly identityKey: pulumi.Output<string>;
     /**
@@ -92,6 +97,7 @@ export class RoleSso extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as RoleSsoState | undefined;
+            resourceInputs["autoRotateKey"] = state?.autoRotateKey;
             resourceInputs["clientIds"] = state?.clientIds;
             resourceInputs["description"] = state?.description;
             resourceInputs["identityKey"] = state?.identityKey;
@@ -108,6 +114,7 @@ export class RoleSso extends pulumi.CustomResource {
             if (args?.identityUrl === undefined && !opts.urn) {
                 throw new Error("Missing required property 'identityUrl'");
             }
+            resourceInputs["autoRotateKey"] = args?.autoRotateKey;
             resourceInputs["clientIds"] = args?.clientIds;
             resourceInputs["description"] = args?.description;
             resourceInputs["identityKey"] = args?.identityKey;
@@ -124,25 +131,29 @@ export class RoleSso extends pulumi.CustomResource {
  */
 export interface RoleSsoState {
     /**
+     * OIDC public key auto-rotation switch. Enum values: 0 (disabled), 1 (enabled). Default value: 0.
+     */
+    autoRotateKey?: pulumi.Input<number | undefined>;
+    /**
      * Client ids.
      */
-    clientIds?: pulumi.Input<pulumi.Input<string>[]>;
+    clientIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The description of resource.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
-     * Sign the public key.
+     * Sign the public key. Base64 encryption is required.
      */
-    identityKey?: pulumi.Input<string>;
+    identityKey?: pulumi.Input<string | undefined>;
     /**
      * Identity provider URL.
      */
-    identityUrl?: pulumi.Input<string>;
+    identityUrl?: pulumi.Input<string | undefined>;
     /**
      * The name of resource.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -150,15 +161,19 @@ export interface RoleSsoState {
  */
 export interface RoleSsoArgs {
     /**
+     * OIDC public key auto-rotation switch. Enum values: 0 (disabled), 1 (enabled). Default value: 0.
+     */
+    autoRotateKey?: pulumi.Input<number | undefined>;
+    /**
      * Client ids.
      */
     clientIds: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The description of resource.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
-     * Sign the public key.
+     * Sign the public key. Base64 encryption is required.
      */
     identityKey: pulumi.Input<string>;
     /**
@@ -168,5 +183,5 @@ export interface RoleSsoArgs {
     /**
      * The name of resource.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }

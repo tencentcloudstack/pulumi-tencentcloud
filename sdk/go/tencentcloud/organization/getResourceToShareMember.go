@@ -82,12 +82,8 @@ type GetResourceToShareMemberResult struct {
 }
 
 func GetResourceToShareMemberOutput(ctx *pulumi.Context, args GetResourceToShareMemberOutputArgs, opts ...pulumi.InvokeOption) GetResourceToShareMemberResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetResourceToShareMemberResultOutput, error) {
-			args := v.(GetResourceToShareMemberArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Organization/getResourceToShareMember:getResourceToShareMember", args, GetResourceToShareMemberResultOutput{}, options).(GetResourceToShareMemberResultOutput), nil
-		}).(GetResourceToShareMemberResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Organization/getResourceToShareMember:getResourceToShareMember", args, GetResourceToShareMemberResultOutput{}, options).(GetResourceToShareMemberResultOutput)
 }
 
 // A collection of arguments for invoking getResourceToShareMember.

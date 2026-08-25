@@ -48,12 +48,8 @@ type GetStatisticDataResult struct {
 }
 
 func GetStatisticDataOutput(ctx *pulumi.Context, args GetStatisticDataOutputArgs, opts ...pulumi.InvokeOption) GetStatisticDataResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetStatisticDataResultOutput, error) {
-			args := v.(GetStatisticDataArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Monitor/getStatisticData:getStatisticData", args, GetStatisticDataResultOutput{}, options).(GetStatisticDataResultOutput), nil
-		}).(GetStatisticDataResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Monitor/getStatisticData:getStatisticData", args, GetStatisticDataResultOutput{}, options).(GetStatisticDataResultOutput)
 }
 
 // A collection of arguments for invoking getStatisticData.

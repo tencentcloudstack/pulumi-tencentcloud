@@ -11,7 +11,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Use this data source to query detailed information of teo zoneAvailablePlans
+// Use this data source to query detailed information of TEO zones.
 //
 // ## Example Usage
 //
@@ -92,12 +92,8 @@ type GetZonesResult struct {
 }
 
 func GetZonesOutput(ctx *pulumi.Context, args GetZonesOutputArgs, opts ...pulumi.InvokeOption) GetZonesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetZonesResultOutput, error) {
-			args := v.(GetZonesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Teo/getZones:getZones", args, GetZonesResultOutput{}, options).(GetZonesResultOutput), nil
-		}).(GetZonesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Teo/getZones:getZones", args, GetZonesResultOutput{}, options).(GetZonesResultOutput)
 }
 
 // A collection of arguments for invoking getZones.

@@ -100,12 +100,8 @@ type GetDedicatedClustersResult struct {
 }
 
 func GetDedicatedClustersOutput(ctx *pulumi.Context, args GetDedicatedClustersOutputArgs, opts ...pulumi.InvokeOption) GetDedicatedClustersResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDedicatedClustersResultOutput, error) {
-			args := v.(GetDedicatedClustersArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Postgresql/getDedicatedClusters:getDedicatedClusters", args, GetDedicatedClustersResultOutput{}, options).(GetDedicatedClustersResultOutput), nil
-		}).(GetDedicatedClustersResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Postgresql/getDedicatedClusters:getDedicatedClusters", args, GetDedicatedClustersResultOutput{}, options).(GetDedicatedClustersResultOutput)
 }
 
 // A collection of arguments for invoking getDedicatedClusters.

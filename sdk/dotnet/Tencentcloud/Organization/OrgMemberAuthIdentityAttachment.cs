@@ -37,7 +37,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
     /// 
     /// ## Import
     /// 
-    /// organization org_member_auth_identity can be imported using the id, e.g.
+    /// organization OrgMemberAuthIdentity can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Organization/orgMemberAuthIdentityAttachment:OrgMemberAuthIdentityAttachment org_member_auth_identity org_member_auth_identity_id

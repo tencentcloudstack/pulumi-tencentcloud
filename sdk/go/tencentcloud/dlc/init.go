@@ -25,8 +25,12 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &AddUsersToWorkGroupAttachment{}
 	case "tencentcloud:Dlc/attachDataMaskPolicy:AttachDataMaskPolicy":
 		r = &AttachDataMaskPolicy{}
+	case "tencentcloud:Dlc/attachUserPolicyAttachment:AttachUserPolicyAttachment":
+		r = &AttachUserPolicyAttachment{}
 	case "tencentcloud:Dlc/attachUserPolicyOperation:AttachUserPolicyOperation":
 		r = &AttachUserPolicyOperation{}
+	case "tencentcloud:Dlc/attachWorkGroupPolicyAttachment:AttachWorkGroupPolicyAttachment":
+		r = &AttachWorkGroupPolicyAttachment{}
 	case "tencentcloud:Dlc/attachWorkGroupPolicyOperation:AttachWorkGroupPolicyOperation":
 		r = &AttachWorkGroupPolicyOperation{}
 	case "tencentcloud:Dlc/bindWorkGroupsToUserAttachment:BindWorkGroupsToUserAttachment":
@@ -100,7 +104,17 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Dlc/attachUserPolicyAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Dlc/attachUserPolicyOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Dlc/attachWorkGroupPolicyAttachment",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

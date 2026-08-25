@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const resources = tencentcloud.Clb.getResources({
+ * const resources = tencentcloud.clb.getResources({
  *     filters: [{
  *         name: "isp",
  *         values: ["BGP"],
@@ -70,7 +70,7 @@ export interface GetResourcesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const resources = tencentcloud.Clb.getResources({
+ * const resources = tencentcloud.clb.getResources({
  *     filters: [{
  *         name: "isp",
  *         values: ["BGP"],
@@ -94,9 +94,9 @@ export interface GetResourcesOutputArgs {
     /**
      * Filter to query the list of AZ resources as detailed below: zone - String - Optional - Filter by AZ, such as ap-guangzhou-1. isp -- String - Optional - Filter by the ISP. Values: BGP, CMCC, CUCC and CTCC.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Clb.GetResourcesFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Clb.GetResourcesFilterArgs>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

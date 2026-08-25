@@ -68,7 +68,7 @@ import (
 //
 // ## Import
 //
-// dasb user_group can be imported using the id, e.g.
+// dasb userGroup can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Dasb/userGroup:UserGroup example 16

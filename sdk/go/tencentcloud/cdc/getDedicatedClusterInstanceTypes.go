@@ -67,12 +67,8 @@ type GetDedicatedClusterInstanceTypesResult struct {
 }
 
 func GetDedicatedClusterInstanceTypesOutput(ctx *pulumi.Context, args GetDedicatedClusterInstanceTypesOutputArgs, opts ...pulumi.InvokeOption) GetDedicatedClusterInstanceTypesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDedicatedClusterInstanceTypesResultOutput, error) {
-			args := v.(GetDedicatedClusterInstanceTypesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cdc/getDedicatedClusterInstanceTypes:getDedicatedClusterInstanceTypes", args, GetDedicatedClusterInstanceTypesResultOutput{}, options).(GetDedicatedClusterInstanceTypesResultOutput), nil
-		}).(GetDedicatedClusterInstanceTypesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cdc/getDedicatedClusterInstanceTypes:getDedicatedClusterInstanceTypes", args, GetDedicatedClusterInstanceTypesResultOutput{}, options).(GetDedicatedClusterInstanceTypesResultOutput)
 }
 
 // A collection of arguments for invoking getDedicatedClusterInstanceTypes.

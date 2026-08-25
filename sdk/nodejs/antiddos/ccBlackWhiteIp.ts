@@ -30,7 +30,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * antiddos cc_black_white_ip can be imported using the id, e.g.
+ * antiddos ccBlackWhiteIp can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Antiddos/ccBlackWhiteIp:CcBlackWhiteIp cc_black_white_ip ${instanceId}#${policyId}#${instanceIp}#${domain}#${protocol}
@@ -147,27 +147,27 @@ export interface CcBlackWhiteIpState {
     /**
      * Black white ip.
      */
-    blackWhiteIp?: pulumi.Input<inputs.Antiddos.CcBlackWhiteIpBlackWhiteIp>;
+    blackWhiteIp?: pulumi.Input<inputs.Antiddos.CcBlackWhiteIpBlackWhiteIp | undefined>;
     /**
      * domain.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * ip address.
      */
-    ip?: pulumi.Input<string>;
+    ip?: pulumi.Input<string | undefined>;
     /**
      * protocol.
      */
-    protocol?: pulumi.Input<string>;
+    protocol?: pulumi.Input<string | undefined>;
     /**
      * IP type, value [black(blacklist IP), white(whitelist IP)].
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }
 
 /**

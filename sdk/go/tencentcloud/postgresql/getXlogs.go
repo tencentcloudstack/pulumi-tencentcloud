@@ -77,12 +77,8 @@ type GetXlogsResult struct {
 }
 
 func GetXlogsOutput(ctx *pulumi.Context, args GetXlogsOutputArgs, opts ...pulumi.InvokeOption) GetXlogsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetXlogsResultOutput, error) {
-			args := v.(GetXlogsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Postgresql/getXlogs:getXlogs", args, GetXlogsResultOutput{}, options).(GetXlogsResultOutput), nil
-		}).(GetXlogsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Postgresql/getXlogs:getXlogs", args, GetXlogsResultOutput{}, options).(GetXlogsResultOutput)
 }
 
 // A collection of arguments for invoking getXlogs.

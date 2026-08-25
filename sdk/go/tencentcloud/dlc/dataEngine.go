@@ -48,6 +48,12 @@ import (
 //					ExecutorNums:       pulumi.Int(1),
 //					ExecutorSize:       pulumi.String("medium"),
 //				},
+//				Tags: dlc.DataEngineTagArray{
+//					&dlc.DataEngineTagArgs{
+//						TagKey:   pulumi.String("createBy"),
+//						TagValue: pulumi.String("Terraform"),
+//					},
+//				},
 //			})
 //			if err != nil {
 //				return err
@@ -60,7 +66,7 @@ import (
 //
 // ## Import
 //
-// DLC data engine can be imported using the id, e.g.
+// DLC data engine can be imported using the dataEngineName#dataEngineId, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Dlc/dataEngine:DataEngine example tf-example#DataEngine-d3gk8r5h
@@ -88,6 +94,8 @@ type DataEngine struct {
 	CrontabResumeSuspendStrategy DataEngineCrontabResumeSuspendStrategyOutput `pulumi:"crontabResumeSuspendStrategy"`
 	// The advanced configurations of clusters.
 	DataEngineConfigPairs DataEngineDataEngineConfigPairArrayOutput `pulumi:"dataEngineConfigPairs"`
+	// Data engine ID.
+	DataEngineId pulumi.StringOutput `pulumi:"dataEngineId"`
 	// The name of the virtual cluster.
 	DataEngineName pulumi.StringOutput `pulumi:"dataEngineName"`
 	// Whether it is the default virtual cluster.
@@ -126,6 +134,8 @@ type DataEngine struct {
 	SessionResourceTemplate DataEngineSessionResourceTemplateOutput `pulumi:"sessionResourceTemplate"`
 	// Cluster size. Required when updating.
 	Size pulumi.IntPtrOutput `pulumi:"size"`
+	// Tag list. Each tag contains a key-value pair. Changing this parameter will trigger a new resource since the DLC `UpdateDataEngine` API does not support modifying tags.
+	Tags DataEngineTagArrayOutput `pulumi:"tags"`
 	// The usage duration of the resource. Postpaid: Fill in 3,600 as a fixed figure; prepaid: fill in a figure equal to or bigger than 1 which means purchasing resources for one month. The maximum figure is not bigger than 120. The default value is 1.
 	TimeSpan pulumi.IntPtrOutput `pulumi:"timeSpan"`
 	// The unit of the resource period. Valid values: `s` (default) for the postpaid mode and `m` for the prepaid mode.
@@ -199,6 +209,8 @@ type dataEngineState struct {
 	CrontabResumeSuspendStrategy *DataEngineCrontabResumeSuspendStrategy `pulumi:"crontabResumeSuspendStrategy"`
 	// The advanced configurations of clusters.
 	DataEngineConfigPairs []DataEngineDataEngineConfigPair `pulumi:"dataEngineConfigPairs"`
+	// Data engine ID.
+	DataEngineId *string `pulumi:"dataEngineId"`
 	// The name of the virtual cluster.
 	DataEngineName *string `pulumi:"dataEngineName"`
 	// Whether it is the default virtual cluster.
@@ -237,6 +249,8 @@ type dataEngineState struct {
 	SessionResourceTemplate *DataEngineSessionResourceTemplate `pulumi:"sessionResourceTemplate"`
 	// Cluster size. Required when updating.
 	Size *int `pulumi:"size"`
+	// Tag list. Each tag contains a key-value pair. Changing this parameter will trigger a new resource since the DLC `UpdateDataEngine` API does not support modifying tags.
+	Tags []DataEngineTag `pulumi:"tags"`
 	// The usage duration of the resource. Postpaid: Fill in 3,600 as a fixed figure; prepaid: fill in a figure equal to or bigger than 1 which means purchasing resources for one month. The maximum figure is not bigger than 120. The default value is 1.
 	TimeSpan *int `pulumi:"timeSpan"`
 	// The unit of the resource period. Valid values: `s` (default) for the postpaid mode and `m` for the prepaid mode.
@@ -266,6 +280,8 @@ type DataEngineState struct {
 	CrontabResumeSuspendStrategy DataEngineCrontabResumeSuspendStrategyPtrInput
 	// The advanced configurations of clusters.
 	DataEngineConfigPairs DataEngineDataEngineConfigPairArrayInput
+	// Data engine ID.
+	DataEngineId pulumi.StringPtrInput
 	// The name of the virtual cluster.
 	DataEngineName pulumi.StringPtrInput
 	// Whether it is the default virtual cluster.
@@ -304,6 +320,8 @@ type DataEngineState struct {
 	SessionResourceTemplate DataEngineSessionResourceTemplatePtrInput
 	// Cluster size. Required when updating.
 	Size pulumi.IntPtrInput
+	// Tag list. Each tag contains a key-value pair. Changing this parameter will trigger a new resource since the DLC `UpdateDataEngine` API does not support modifying tags.
+	Tags DataEngineTagArrayInput
 	// The usage duration of the resource. Postpaid: Fill in 3,600 as a fixed figure; prepaid: fill in a figure equal to or bigger than 1 which means purchasing resources for one month. The maximum figure is not bigger than 120. The default value is 1.
 	TimeSpan pulumi.IntPtrInput
 	// The unit of the resource period. Valid values: `s` (default) for the postpaid mode and `m` for the prepaid mode.
@@ -375,6 +393,8 @@ type dataEngineArgs struct {
 	SessionResourceTemplate *DataEngineSessionResourceTemplate `pulumi:"sessionResourceTemplate"`
 	// Cluster size. Required when updating.
 	Size *int `pulumi:"size"`
+	// Tag list. Each tag contains a key-value pair. Changing this parameter will trigger a new resource since the DLC `UpdateDataEngine` API does not support modifying tags.
+	Tags []DataEngineTag `pulumi:"tags"`
 	// The usage duration of the resource. Postpaid: Fill in 3,600 as a fixed figure; prepaid: fill in a figure equal to or bigger than 1 which means purchasing resources for one month. The maximum figure is not bigger than 120. The default value is 1.
 	TimeSpan *int `pulumi:"timeSpan"`
 	// The unit of the resource period. Valid values: `s` (default) for the postpaid mode and `m` for the prepaid mode.
@@ -443,6 +463,8 @@ type DataEngineArgs struct {
 	SessionResourceTemplate DataEngineSessionResourceTemplatePtrInput
 	// Cluster size. Required when updating.
 	Size pulumi.IntPtrInput
+	// Tag list. Each tag contains a key-value pair. Changing this parameter will trigger a new resource since the DLC `UpdateDataEngine` API does not support modifying tags.
+	Tags DataEngineTagArrayInput
 	// The usage duration of the resource. Postpaid: Fill in 3,600 as a fixed figure; prepaid: fill in a figure equal to or bigger than 1 which means purchasing resources for one month. The maximum figure is not bigger than 120. The default value is 1.
 	TimeSpan pulumi.IntPtrInput
 	// The unit of the resource period. Valid values: `s` (default) for the postpaid mode and `m` for the prepaid mode.
@@ -590,6 +612,11 @@ func (o DataEngineOutput) DataEngineConfigPairs() DataEngineDataEngineConfigPair
 	return o.ApplyT(func(v *DataEngine) DataEngineDataEngineConfigPairArrayOutput { return v.DataEngineConfigPairs }).(DataEngineDataEngineConfigPairArrayOutput)
 }
 
+// Data engine ID.
+func (o DataEngineOutput) DataEngineId() pulumi.StringOutput {
+	return o.ApplyT(func(v *DataEngine) pulumi.StringOutput { return v.DataEngineId }).(pulumi.StringOutput)
+}
+
 // The name of the virtual cluster.
 func (o DataEngineOutput) DataEngineName() pulumi.StringOutput {
 	return o.ApplyT(func(v *DataEngine) pulumi.StringOutput { return v.DataEngineName }).(pulumi.StringOutput)
@@ -683,6 +710,11 @@ func (o DataEngineOutput) SessionResourceTemplate() DataEngineSessionResourceTem
 // Cluster size. Required when updating.
 func (o DataEngineOutput) Size() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DataEngine) pulumi.IntPtrOutput { return v.Size }).(pulumi.IntPtrOutput)
+}
+
+// Tag list. Each tag contains a key-value pair. Changing this parameter will trigger a new resource since the DLC `UpdateDataEngine` API does not support modifying tags.
+func (o DataEngineOutput) Tags() DataEngineTagArrayOutput {
+	return o.ApplyT(func(v *DataEngine) DataEngineTagArrayOutput { return v.Tags }).(DataEngineTagArrayOutput)
 }
 
 // The usage duration of the resource. Postpaid: Fill in 3,600 as a fixed figure; prepaid: fill in a figure equal to or bigger than 1 which means purchasing resources for one month. The maximum figure is not bigger than 120. The default value is 1.

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const compareTasks = tencentcloud.Dts.getCompareTasks({
+ * const compareTasks = tencentcloud.dts.getCompareTasks({
  *     jobId: "",
  * });
  * ```
@@ -69,7 +69,7 @@ export interface GetCompareTasksResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const compareTasks = tencentcloud.Dts.getCompareTasks({
+ * const compareTasks = tencentcloud.dts.getCompareTasks({
  *     jobId: "",
  * });
  * ```
@@ -93,5 +93,5 @@ export interface GetCompareTasksOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

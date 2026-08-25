@@ -80,12 +80,8 @@ type GetXp2pDetailInfoListResult struct {
 }
 
 func GetXp2pDetailInfoListOutput(ctx *pulumi.Context, args GetXp2pDetailInfoListOutputArgs, opts ...pulumi.InvokeOption) GetXp2pDetailInfoListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetXp2pDetailInfoListResultOutput, error) {
-			args := v.(GetXp2pDetailInfoListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Css/getXp2pDetailInfoList:getXp2pDetailInfoList", args, GetXp2pDetailInfoListResultOutput{}, options).(GetXp2pDetailInfoListResultOutput), nil
-		}).(GetXp2pDetailInfoListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Css/getXp2pDetailInfoList:getXp2pDetailInfoList", args, GetXp2pDetailInfoListResultOutput{}, options).(GetXp2pDetailInfoListResultOutput)
 }
 
 // A collection of arguments for invoking getXp2pDetailInfoList.

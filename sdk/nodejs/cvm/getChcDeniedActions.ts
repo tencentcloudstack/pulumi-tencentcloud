@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const chcDeniedActions = tencentcloud.Cvm.getChcDeniedActions({
+ * const chcDeniedActions = tencentcloud.cvm.getChcDeniedActions({
  *     chcIds: ["chc-xxxxx"],
  * });
  * ```
@@ -66,7 +66,7 @@ export interface GetChcDeniedActionsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const chcDeniedActions = tencentcloud.Cvm.getChcDeniedActions({
+ * const chcDeniedActions = tencentcloud.cvm.getChcDeniedActions({
  *     chcIds: ["chc-xxxxx"],
  * });
  * ```
@@ -90,5 +90,5 @@ export interface GetChcDeniedActionsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

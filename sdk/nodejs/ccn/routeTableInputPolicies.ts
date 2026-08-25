@@ -163,15 +163,15 @@ export interface RouteTableInputPoliciesState {
     /**
      * CCN Instance ID.
      */
-    ccnId?: pulumi.Input<string>;
+    ccnId?: pulumi.Input<string | undefined>;
     /**
      * Routing reception strategy.
      */
-    policies?: pulumi.Input<pulumi.Input<inputs.Ccn.RouteTableInputPoliciesPolicy>[]>;
+    policies?: pulumi.Input<pulumi.Input<inputs.Ccn.RouteTableInputPoliciesPolicy>[] | undefined>;
     /**
      * CCN Route table ID.
      */
-    routeTableId?: pulumi.Input<string>;
+    routeTableId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -185,7 +185,7 @@ export interface RouteTableInputPoliciesArgs {
     /**
      * Routing reception strategy.
      */
-    policies?: pulumi.Input<pulumi.Input<inputs.Ccn.RouteTableInputPoliciesPolicy>[]>;
+    policies?: pulumi.Input<pulumi.Input<inputs.Ccn.RouteTableInputPoliciesPolicy>[] | undefined>;
     /**
      * CCN Route table ID.
      */

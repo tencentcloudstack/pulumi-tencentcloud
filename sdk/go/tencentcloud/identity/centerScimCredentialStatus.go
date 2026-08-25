@@ -44,7 +44,7 @@ import (
 //
 // ## Import
 //
-// organization identity_center_scim_credential_status can be imported using the id, e.g.
+// organization identityCenterScimCredentialStatus can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Identity/centerScimCredentialStatus:CenterScimCredentialStatus identity_center_scim_credential_status ${zone_id}#${credential_id}

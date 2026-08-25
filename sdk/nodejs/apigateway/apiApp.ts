@@ -38,7 +38,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * apigateway api_app can be imported using the id, e.g.
+ * apigateway apiApp can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:ApiGateway/apiApp:ApiApp example app-poe0pyex
@@ -152,35 +152,35 @@ export interface ApiAppState {
     /**
      * App description.
      */
-    apiAppDesc?: pulumi.Input<string>;
+    apiAppDesc?: pulumi.Input<string | undefined>;
     /**
      * Api app ID.
      */
-    apiAppId?: pulumi.Input<string>;
+    apiAppId?: pulumi.Input<string | undefined>;
     /**
      * Api app key.
      */
-    apiAppKey?: pulumi.Input<string>;
+    apiAppKey?: pulumi.Input<string | undefined>;
     /**
      * Api app name.
      */
-    apiAppName?: pulumi.Input<string>;
+    apiAppName?: pulumi.Input<string | undefined>;
     /**
      * Api app secret.
      */
-    apiAppSecret?: pulumi.Input<string>;
+    apiAppSecret?: pulumi.Input<string | undefined>;
     /**
      * Api app created time.
      */
-    createdTime?: pulumi.Input<string>;
+    createdTime?: pulumi.Input<string | undefined>;
     /**
      * Api app modified time.
      */
-    modifiedTime?: pulumi.Input<string>;
+    modifiedTime?: pulumi.Input<string | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 /**
@@ -190,7 +190,7 @@ export interface ApiAppArgs {
     /**
      * App description.
      */
-    apiAppDesc?: pulumi.Input<string>;
+    apiAppDesc?: pulumi.Input<string | undefined>;
     /**
      * Api app name.
      */
@@ -198,5 +198,5 @@ export interface ApiAppArgs {
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

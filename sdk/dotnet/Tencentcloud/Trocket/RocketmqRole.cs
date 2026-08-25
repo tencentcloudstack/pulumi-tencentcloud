@@ -57,7 +57,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
     /// 
     /// ## Import
     /// 
-    /// trocket rocketmq_role can be imported using the id, e.g.
+    /// trocket RocketmqRole can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Trocket/rocketmqRole:RocketmqRole rocketmq_role instanceId#role

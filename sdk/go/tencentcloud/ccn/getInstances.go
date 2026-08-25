@@ -36,7 +36,7 @@ import (
 //				return err
 //			}
 //			_ = ccn.GetInstancesOutput(ctx, ccn.GetInstancesOutputArgs{
-//				CcnId: main.ID(),
+//				CcnId: main.ID().ToIDOutput().ToStringOutput(),
 //			}, nil)
 //			_ = ccn.GetInstancesOutput(ctx, ccn.GetInstancesOutputArgs{
 //				Name: main.Name,
@@ -80,12 +80,8 @@ type GetInstancesResult struct {
 }
 
 func GetInstancesOutput(ctx *pulumi.Context, args GetInstancesOutputArgs, opts ...pulumi.InvokeOption) GetInstancesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstancesResultOutput, error) {
-			args := v.(GetInstancesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ccn/getInstances:getInstances", args, GetInstancesResultOutput{}, options).(GetInstancesResultOutput), nil
-		}).(GetInstancesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ccn/getInstances:getInstances", args, GetInstancesResultOutput{}, options).(GetInstancesResultOutput)
 }
 
 // A collection of arguments for invoking getInstances.

@@ -23,7 +23,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * tse cngw_certificate can be imported using the id, e.g.
+ * tse cngwCertificate can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Tse/cngwCertificate:CngwCertificate cngw_certificate gatewayId#Id
@@ -131,27 +131,27 @@ export interface CngwCertificateState {
     /**
      * Domains of the binding.
      */
-    bindDomains?: pulumi.Input<pulumi.Input<string>[]>;
+    bindDomains?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Certificate ID of ssl platform.
      */
-    certId?: pulumi.Input<string>;
+    certId?: pulumi.Input<string | undefined>;
     /**
      * Pem format of certificate.
      */
-    crt?: pulumi.Input<string>;
+    crt?: pulumi.Input<string | undefined>;
     /**
      * Gateway ID.
      */
-    gatewayId?: pulumi.Input<string>;
+    gatewayId?: pulumi.Input<string | undefined>;
     /**
      * Private key of certificate.
      */
-    key?: pulumi.Input<string>;
+    key?: pulumi.Input<string | undefined>;
     /**
      * Certificate name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -173,5 +173,5 @@ export interface CngwCertificateArgs {
     /**
      * Certificate name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }

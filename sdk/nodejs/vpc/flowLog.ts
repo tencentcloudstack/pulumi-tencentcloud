@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * vpc flow_log can be imported using the flow log Id combine vpc Id, e.g.
+ * vpc flowLog can be imported using the flow log Id combine vpc Id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Vpc/flowLog:FlowLog example fl-7k59x22l#vpc-n6qjlen5
@@ -156,47 +156,47 @@ export interface FlowLogState {
     /**
      * The storage ID of the flow log.
      */
-    cloudLogId?: pulumi.Input<string>;
+    cloudLogId?: pulumi.Input<string | undefined>;
     /**
      * The region corresponding to the flow log storage ID. If not passed in, this field defaults to the current region.
      */
-    cloudLogRegion?: pulumi.Input<string>;
+    cloudLogRegion?: pulumi.Input<string | undefined>;
     /**
      * The description of the flow log.
      */
-    flowLogDescription?: pulumi.Input<string>;
+    flowLogDescription?: pulumi.Input<string | undefined>;
     /**
      * The name of the flow log instance.
      */
-    flowLogName?: pulumi.Input<string>;
+    flowLogName?: pulumi.Input<string | undefined>;
     /**
      * Information of the flow log consumer, required while `storageType` is `ckafka`.
      */
-    flowLogStorage?: pulumi.Input<inputs.Vpc.FlowLogFlowLogStorage>;
+    flowLogStorage?: pulumi.Input<inputs.Vpc.FlowLogFlowLogStorage | undefined>;
     /**
      * The unique ID of the resource.
      */
-    resourceId?: pulumi.Input<string>;
+    resourceId?: pulumi.Input<string | undefined>;
     /**
      * The type of resource associated with the flow log. Valid values: `VPC`, `SUBNET`, `NETWORKINTERFACE`, `CCN`, `NAT`, and `DCG`.
      */
-    resourceType?: pulumi.Input<string>;
+    resourceType?: pulumi.Input<string | undefined>;
     /**
      * Consumer types: `cls` and `ckafka`.
      */
-    storageType?: pulumi.Input<string>;
+    storageType?: pulumi.Input<string | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Type of the flow logs to be collected. Valid values: `ACCEPT`, `REJECT` and `ALL`.
      */
-    trafficType?: pulumi.Input<string>;
+    trafficType?: pulumi.Input<string | undefined>;
     /**
      * The VPC ID or unique ID of the resource. We recommend using the unique ID. This parameter is required unless the `ResourceType` is set to `CCN`.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -206,15 +206,15 @@ export interface FlowLogArgs {
     /**
      * The storage ID of the flow log.
      */
-    cloudLogId?: pulumi.Input<string>;
+    cloudLogId?: pulumi.Input<string | undefined>;
     /**
      * The region corresponding to the flow log storage ID. If not passed in, this field defaults to the current region.
      */
-    cloudLogRegion?: pulumi.Input<string>;
+    cloudLogRegion?: pulumi.Input<string | undefined>;
     /**
      * The description of the flow log.
      */
-    flowLogDescription?: pulumi.Input<string>;
+    flowLogDescription?: pulumi.Input<string | undefined>;
     /**
      * The name of the flow log instance.
      */
@@ -222,7 +222,7 @@ export interface FlowLogArgs {
     /**
      * Information of the flow log consumer, required while `storageType` is `ckafka`.
      */
-    flowLogStorage?: pulumi.Input<inputs.Vpc.FlowLogFlowLogStorage>;
+    flowLogStorage?: pulumi.Input<inputs.Vpc.FlowLogFlowLogStorage | undefined>;
     /**
      * The unique ID of the resource.
      */
@@ -234,11 +234,11 @@ export interface FlowLogArgs {
     /**
      * Consumer types: `cls` and `ckafka`.
      */
-    storageType?: pulumi.Input<string>;
+    storageType?: pulumi.Input<string | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Type of the flow logs to be collected. Valid values: `ACCEPT`, `REJECT` and `ALL`.
      */
@@ -246,5 +246,5 @@ export interface FlowLogArgs {
     /**
      * The VPC ID or unique ID of the resource. We recommend using the unique ID. This parameter is required unless the `ResourceType` is set to `CCN`.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }

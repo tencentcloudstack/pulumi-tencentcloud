@@ -75,12 +75,8 @@ type GetCvmQuotaResult struct {
 }
 
 func GetCvmQuotaOutput(ctx *pulumi.Context, args GetCvmQuotaOutputArgs, opts ...pulumi.InvokeOption) GetCvmQuotaResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetCvmQuotaResultOutput, error) {
-			args := v.(GetCvmQuotaArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Emr/getCvmQuota:getCvmQuota", args, GetCvmQuotaResultOutput{}, options).(GetCvmQuotaResultOutput), nil
-		}).(GetCvmQuotaResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Emr/getCvmQuota:getCvmQuota", args, GetCvmQuotaResultOutput{}, options).(GetCvmQuotaResultOutput)
 }
 
 // A collection of arguments for invoking getCvmQuota.

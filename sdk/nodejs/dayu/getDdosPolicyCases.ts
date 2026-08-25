@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const idTest = tencentcloud.Dayu.getDdosPolicyCases({
+ * const idTest = tencentcloud.dayu.getDdosPolicyCases({
  *     resourceType: testPolicyCase.resourceType,
  *     sceneId: testPolicyCase.sceneId,
  * });
@@ -79,7 +79,7 @@ export interface GetDdosPolicyCasesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const idTest = tencentcloud.Dayu.getDdosPolicyCases({
+ * const idTest = tencentcloud.dayu.getDdosPolicyCases({
  *     resourceType: testPolicyCase.resourceType,
  *     sceneId: testPolicyCase.sceneId,
  * });
@@ -105,7 +105,7 @@ export interface GetDdosPolicyCasesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * ID of the DDoS policy case to be query.
      */

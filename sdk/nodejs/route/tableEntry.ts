@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create an entry of a routing table.
+ * Provides a resource to create a Route table entry.
  *
  * > **NOTE:** When setting the route item switch, do not use it together with resource `tencentcloud.Route.TableEntryConfig`.
  *
@@ -48,7 +48,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * Route table entry can be imported using the id, e.g.
+ * Route table entry can be imported using the routeEntryId.routeTableId, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Route/tableEntry:TableEntry example 3065857.rtb-b050fg94
@@ -99,9 +99,13 @@ export class TableEntry extends pulumi.CustomResource {
      */
     declare public readonly nextHub: pulumi.Output<string>;
     /**
-     * Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP`, `LOCAL_GATEWAY`, `INTRANAT` and `USER_CCN`.
+     * Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP`, `LOCAL_GATEWAY`, `INTRANAT`, `USER_CCN` and `GWLB_ENDPOINT`.
      */
     declare public readonly nextType: pulumi.Output<string>;
+    /**
+     * ID of route entry.
+     */
+    declare public /*out*/ readonly routeEntryId: pulumi.Output<number>;
     /**
      * ID of route table entry.
      */
@@ -129,6 +133,7 @@ export class TableEntry extends pulumi.CustomResource {
             resourceInputs["disabled"] = state?.disabled;
             resourceInputs["nextHub"] = state?.nextHub;
             resourceInputs["nextType"] = state?.nextType;
+            resourceInputs["routeEntryId"] = state?.routeEntryId;
             resourceInputs["routeItemId"] = state?.routeItemId;
             resourceInputs["routeTableId"] = state?.routeTableId;
         } else {
@@ -151,6 +156,7 @@ export class TableEntry extends pulumi.CustomResource {
             resourceInputs["nextHub"] = args?.nextHub;
             resourceInputs["nextType"] = args?.nextType;
             resourceInputs["routeTableId"] = args?.routeTableId;
+            resourceInputs["routeEntryId"] = undefined /*out*/;
             resourceInputs["routeItemId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -165,31 +171,35 @@ export interface TableEntryState {
     /**
      * Description of the routing table entry.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Destination address block.
      */
-    destinationCidrBlock?: pulumi.Input<string>;
+    destinationCidrBlock?: pulumi.Input<string | undefined>;
     /**
      * Whether the entry is disabled, default is `false`.
      */
-    disabled?: pulumi.Input<boolean>;
+    disabled?: pulumi.Input<boolean | undefined>;
     /**
      * ID of next-hop gateway. Note: when `nextType` is EIP, `nextHub` should be `0`.
      */
-    nextHub?: pulumi.Input<string>;
+    nextHub?: pulumi.Input<string | undefined>;
     /**
-     * Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP`, `LOCAL_GATEWAY`, `INTRANAT` and `USER_CCN`.
+     * Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP`, `LOCAL_GATEWAY`, `INTRANAT`, `USER_CCN` and `GWLB_ENDPOINT`.
      */
-    nextType?: pulumi.Input<string>;
+    nextType?: pulumi.Input<string | undefined>;
+    /**
+     * ID of route entry.
+     */
+    routeEntryId?: pulumi.Input<number | undefined>;
     /**
      * ID of route table entry.
      */
-    routeItemId?: pulumi.Input<string>;
+    routeItemId?: pulumi.Input<string | undefined>;
     /**
      * ID of routing table to which this entry belongs.
      */
-    routeTableId?: pulumi.Input<string>;
+    routeTableId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -199,7 +209,7 @@ export interface TableEntryArgs {
     /**
      * Description of the routing table entry.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Destination address block.
      */
@@ -207,13 +217,13 @@ export interface TableEntryArgs {
     /**
      * Whether the entry is disabled, default is `false`.
      */
-    disabled?: pulumi.Input<boolean>;
+    disabled?: pulumi.Input<boolean | undefined>;
     /**
      * ID of next-hop gateway. Note: when `nextType` is EIP, `nextHub` should be `0`.
      */
     nextHub: pulumi.Input<string>;
     /**
-     * Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP`, `LOCAL_GATEWAY`, `INTRANAT` and `USER_CCN`.
+     * Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP`, `LOCAL_GATEWAY`, `INTRANAT`, `USER_CCN` and `GWLB_ENDPOINT`.
      */
     nextType: pulumi.Input<string>;
     /**

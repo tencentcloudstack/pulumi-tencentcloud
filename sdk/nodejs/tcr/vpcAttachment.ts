@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const vpc = tencentcloud.Vpc.getSubnets({
+ * const vpc = tencentcloud.vpc.getSubnets({
  *     isDefault: true,
  *     availabilityZone: availabilityZone,
  * });
@@ -30,7 +30,7 @@ import * as utilities from "../utilities";
  *     },
  * });
  * const tcrId = example.id;
- * const sg = tencentcloud.Security.getGroups({
+ * const sg = tencentcloud.security.getGroups({
  *     name: "default",
  * });
  * const foo = new tencentcloud.tcr.VpcAttachment("foo", {
@@ -170,41 +170,41 @@ export interface VpcAttachmentState {
     /**
      * IP address of the internal access.
      */
-    accessIp?: pulumi.Input<string>;
+    accessIp?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable public domain dns. Default value is `false`.
      */
-    enablePublicDomainDns?: pulumi.Input<boolean>;
+    enablePublicDomainDns?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to enable vpc domain dns. Default value is `false`.
      */
-    enableVpcDomainDns?: pulumi.Input<boolean>;
+    enableVpcDomainDns?: pulumi.Input<boolean | undefined>;
     /**
      * ID of the TCR instance.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * this argument was deprecated, use `regionName` instead. ID of region. Conflict with region_name, can not be set at the same time.
      *
      * @deprecated this argument was deprecated, use `regionName` instead.
      */
-    regionId?: pulumi.Input<number>;
+    regionId?: pulumi.Input<number | undefined>;
     /**
      * Name of region. Conflict with region_id, can not be set at the same time.
      */
-    regionName?: pulumi.Input<string>;
+    regionName?: pulumi.Input<string | undefined>;
     /**
      * Status of the internal access.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * ID of subnet.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * ID of VPC.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -214,11 +214,11 @@ export interface VpcAttachmentArgs {
     /**
      * Whether to enable public domain dns. Default value is `false`.
      */
-    enablePublicDomainDns?: pulumi.Input<boolean>;
+    enablePublicDomainDns?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to enable vpc domain dns. Default value is `false`.
      */
-    enableVpcDomainDns?: pulumi.Input<boolean>;
+    enableVpcDomainDns?: pulumi.Input<boolean | undefined>;
     /**
      * ID of the TCR instance.
      */
@@ -228,11 +228,11 @@ export interface VpcAttachmentArgs {
      *
      * @deprecated this argument was deprecated, use `regionName` instead.
      */
-    regionId?: pulumi.Input<number>;
+    regionId?: pulumi.Input<number | undefined>;
     /**
      * Name of region. Conflict with region_id, can not be set at the same time.
      */
-    regionName?: pulumi.Input<string>;
+    regionName?: pulumi.Input<string | undefined>;
     /**
      * ID of subnet.
      */

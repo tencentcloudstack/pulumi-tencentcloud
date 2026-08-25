@@ -78,12 +78,8 @@ type GetOverviewDdosEventListResult struct {
 }
 
 func GetOverviewDdosEventListOutput(ctx *pulumi.Context, args GetOverviewDdosEventListOutputArgs, opts ...pulumi.InvokeOption) GetOverviewDdosEventListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetOverviewDdosEventListResultOutput, error) {
-			args := v.(GetOverviewDdosEventListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Antiddos/getOverviewDdosEventList:getOverviewDdosEventList", args, GetOverviewDdosEventListResultOutput{}, options).(GetOverviewDdosEventListResultOutput), nil
-		}).(GetOverviewDdosEventListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Antiddos/getOverviewDdosEventList:getOverviewDdosEventList", args, GetOverviewDdosEventListResultOutput{}, options).(GetOverviewDdosEventListResultOutput)
 }
 
 // A collection of arguments for invoking getOverviewDdosEventList.

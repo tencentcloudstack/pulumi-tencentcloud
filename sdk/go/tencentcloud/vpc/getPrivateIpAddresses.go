@@ -73,12 +73,8 @@ type GetPrivateIpAddressesResult struct {
 }
 
 func GetPrivateIpAddressesOutput(ctx *pulumi.Context, args GetPrivateIpAddressesOutputArgs, opts ...pulumi.InvokeOption) GetPrivateIpAddressesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetPrivateIpAddressesResultOutput, error) {
-			args := v.(GetPrivateIpAddressesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Vpc/getPrivateIpAddresses:getPrivateIpAddresses", args, GetPrivateIpAddressesResultOutput{}, options).(GetPrivateIpAddressesResultOutput), nil
-		}).(GetPrivateIpAddressesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Vpc/getPrivateIpAddresses:getPrivateIpAddresses", args, GetPrivateIpAddressesResultOutput{}, options).(GetPrivateIpAddressesResultOutput)
 }
 
 // A collection of arguments for invoking getPrivateIpAddresses.

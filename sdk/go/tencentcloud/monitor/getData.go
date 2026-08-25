@@ -28,7 +28,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			instances, err := instances.GetInstance(ctx, &instances.GetInstanceArgs{}, nil)
+//			instances2, err := instances.GetInstance(ctx, &instances.GetInstanceArgs{}, nil)
 //			if err != nil {
 //				return err
 //			}
@@ -39,7 +39,7 @@ import (
 //				Dimensions: []monitor.GetDataDimension{
 //					{
 //						Name:  "InstanceId",
-//						Value: instances.InstanceLists[0].InstanceId,
+//						Value: instances2.InstanceLists[0].InstanceId,
 //					},
 //				},
 //				Period:    pulumi.IntRef(300),
@@ -119,12 +119,8 @@ type GetDataResult struct {
 }
 
 func GetDataOutput(ctx *pulumi.Context, args GetDataOutputArgs, opts ...pulumi.InvokeOption) GetDataResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDataResultOutput, error) {
-			args := v.(GetDataArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Monitor/getData:getData", args, GetDataResultOutput{}, options).(GetDataResultOutput), nil
-		}).(GetDataResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Monitor/getData:getData", args, GetDataResultOutput{}, options).(GetDataResultOutput)
 }
 
 // A collection of arguments for invoking getData.

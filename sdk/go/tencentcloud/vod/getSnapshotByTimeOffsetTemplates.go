@@ -41,7 +41,7 @@ import (
 //			}
 //			_ = vod.GetSnapshotByTimeOffsetTemplatesOutput(ctx, vod.GetSnapshotByTimeOffsetTemplatesOutputArgs{
 //				Type:       pulumi.String("Custom"),
-//				Definition: fooSnapshotByTimeOffsetTemplate.ID(),
+//				Definition: fooSnapshotByTimeOffsetTemplate.ID().ToIDOutput().ToStringOutput(),
 //			}, nil)
 //			return nil
 //		})
@@ -85,12 +85,8 @@ type GetSnapshotByTimeOffsetTemplatesResult struct {
 }
 
 func GetSnapshotByTimeOffsetTemplatesOutput(ctx *pulumi.Context, args GetSnapshotByTimeOffsetTemplatesOutputArgs, opts ...pulumi.InvokeOption) GetSnapshotByTimeOffsetTemplatesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSnapshotByTimeOffsetTemplatesResultOutput, error) {
-			args := v.(GetSnapshotByTimeOffsetTemplatesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Vod/getSnapshotByTimeOffsetTemplates:getSnapshotByTimeOffsetTemplates", args, GetSnapshotByTimeOffsetTemplatesResultOutput{}, options).(GetSnapshotByTimeOffsetTemplatesResultOutput), nil
-		}).(GetSnapshotByTimeOffsetTemplatesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Vod/getSnapshotByTimeOffsetTemplates:getSnapshotByTimeOffsetTemplates", args, GetSnapshotByTimeOffsetTemplatesResultOutput{}, options).(GetSnapshotByTimeOffsetTemplatesResultOutput)
 }
 
 // A collection of arguments for invoking getSnapshotByTimeOffsetTemplates.

@@ -137,12 +137,8 @@ type GetPerformancePageResult struct {
 }
 
 func GetPerformancePageOutput(ctx *pulumi.Context, args GetPerformancePageOutputArgs, opts ...pulumi.InvokeOption) GetPerformancePageResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetPerformancePageResultOutput, error) {
-			args := v.(GetPerformancePageArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Rum/getPerformancePage:getPerformancePage", args, GetPerformancePageResultOutput{}, options).(GetPerformancePageResultOutput), nil
-		}).(GetPerformancePageResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Rum/getPerformancePage:getPerformancePage", args, GetPerformancePageResultOutput{}, options).(GetPerformancePageResultOutput)
 }
 
 // A collection of arguments for invoking getPerformancePage.

@@ -62,12 +62,8 @@ type GetDetectorsResult struct {
 }
 
 func GetDetectorsOutput(ctx *pulumi.Context, args GetDetectorsOutputArgs, opts ...pulumi.InvokeOption) GetDetectorsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDetectorsResultOutput, error) {
-			args := v.(GetDetectorsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Igtm/getDetectors:getDetectors", args, GetDetectorsResultOutput{}, options).(GetDetectorsResultOutput), nil
-		}).(GetDetectorsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Igtm/getDetectors:getDetectors", args, GetDetectorsResultOutput{}, options).(GetDetectorsResultOutput)
 }
 
 // A collection of arguments for invoking getDetectors.

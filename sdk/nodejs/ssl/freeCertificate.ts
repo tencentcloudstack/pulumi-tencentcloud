@@ -36,7 +36,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * FreeCertificate instance can be imported, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Ssl/freeCertificate:FreeCertificate test free_certificate-id
  * ```
@@ -256,103 +255,103 @@ export interface FreeCertificateState {
     /**
      * Specify alias for remark.
      */
-    alias?: pulumi.Input<string>;
+    alias?: pulumi.Input<string | undefined>;
     /**
      * Certificate begin time.
      */
-    certBeginTime?: pulumi.Input<string>;
+    certBeginTime?: pulumi.Input<string | undefined>;
     /**
      * Certificate end time.
      */
-    certEndTime?: pulumi.Input<string>;
+    certEndTime?: pulumi.Input<string | undefined>;
     /**
      * Certificate private key.
      */
-    certificatePrivateKey?: pulumi.Input<string>;
+    certificatePrivateKey?: pulumi.Input<string | undefined>;
     /**
      * Certificate public key.
      */
-    certificatePublicKey?: pulumi.Input<string>;
+    certificatePublicKey?: pulumi.Input<string | undefined>;
     /**
      * Email address.
      */
-    contactEmail?: pulumi.Input<string>;
+    contactEmail?: pulumi.Input<string | undefined>;
     /**
      * Phone number.
      */
-    contactPhone?: pulumi.Input<string>;
+    contactPhone?: pulumi.Input<string | undefined>;
     /**
      * Specify CSR encrypt algorithm, only support `RSA` for now.
      */
-    csrEncryptAlgo?: pulumi.Input<string>;
+    csrEncryptAlgo?: pulumi.Input<string | undefined>;
     /**
      * Specify CSR key parameter, only support `"2048"` for now.
      */
-    csrKeyParameter?: pulumi.Input<string>;
+    csrKeyParameter?: pulumi.Input<string | undefined>;
     /**
      * Specify CSR key password.
      */
-    csrKeyPassword?: pulumi.Input<string>;
+    csrKeyPassword?: pulumi.Input<string | undefined>;
     /**
      * Indicates whether the certificate deployable.
      */
-    deployable?: pulumi.Input<boolean>;
+    deployable?: pulumi.Input<boolean | undefined>;
     /**
      * Specify domain name.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Specify DV authorize method. Available values: `DNS_AUTO` - automatic DNS auth, `DNS` - manual DNS auth, `FILE` - auth by file.
      */
-    dvAuthMethod?: pulumi.Input<string>;
+    dvAuthMethod?: pulumi.Input<string | undefined>;
     /**
      * DV certification information.
      */
-    dvAuths?: pulumi.Input<pulumi.Input<inputs.Ssl.FreeCertificateDvAuth>[]>;
+    dvAuths?: pulumi.Input<pulumi.Input<inputs.Ssl.FreeCertificateDvAuth>[] | undefined>;
     /**
      * Certificate insert time.
      */
-    insertTime?: pulumi.Input<string>;
+    insertTime?: pulumi.Input<string | undefined>;
     /**
      * Specify old certificate ID, used for re-apply.
      */
-    oldCertificateId?: pulumi.Input<string>;
+    oldCertificateId?: pulumi.Input<string | undefined>;
     /**
      * Type of package. Only support `"83"` (TrustAsia TLS RSA CA).
      */
-    packageType?: pulumi.Input<string>;
+    packageType?: pulumi.Input<string | undefined>;
     /**
      * Product zh name.
      */
-    productZhName?: pulumi.Input<string>;
+    productZhName?: pulumi.Input<string | undefined>;
     /**
      * ID of projects which this certification belong to.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Indicates whether the certificate renewable.
      */
-    renewable?: pulumi.Input<boolean>;
+    renewable?: pulumi.Input<boolean | undefined>;
     /**
      * Certificate status. 0 = Approving, 1 = Approved, 2 = Approve failed, 3 = expired, 4 = DNS record added, 5 = OV/EV Certificate and confirm letter needed, 6 = Order canceling, 7 = Order canceled, 8 = Submitted and confirm letter needed, 9 = Revoking, 10 = Revoked, 11 = re-applying, 12 = Revoke and confirm letter needed, 13 = Free SSL and confirm letter needed.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * Certificate status message.
      */
-    statusMsg?: pulumi.Input<string>;
+    statusMsg?: pulumi.Input<string | undefined>;
     /**
      * Certificate status name.
      */
-    statusName?: pulumi.Input<string>;
+    statusName?: pulumi.Input<string | undefined>;
     /**
      * Specify validity period in month, only support `"3"` months for now.
      */
-    validityPeriod?: pulumi.Input<string>;
+    validityPeriod?: pulumi.Input<string | undefined>;
     /**
      * Vulnerability status.
      */
-    vulnerabilityStatus?: pulumi.Input<string>;
+    vulnerabilityStatus?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -362,27 +361,27 @@ export interface FreeCertificateArgs {
     /**
      * Specify alias for remark.
      */
-    alias?: pulumi.Input<string>;
+    alias?: pulumi.Input<string | undefined>;
     /**
      * Email address.
      */
-    contactEmail?: pulumi.Input<string>;
+    contactEmail?: pulumi.Input<string | undefined>;
     /**
      * Phone number.
      */
-    contactPhone?: pulumi.Input<string>;
+    contactPhone?: pulumi.Input<string | undefined>;
     /**
      * Specify CSR encrypt algorithm, only support `RSA` for now.
      */
-    csrEncryptAlgo?: pulumi.Input<string>;
+    csrEncryptAlgo?: pulumi.Input<string | undefined>;
     /**
      * Specify CSR key parameter, only support `"2048"` for now.
      */
-    csrKeyParameter?: pulumi.Input<string>;
+    csrKeyParameter?: pulumi.Input<string | undefined>;
     /**
      * Specify CSR key password.
      */
-    csrKeyPassword?: pulumi.Input<string>;
+    csrKeyPassword?: pulumi.Input<string | undefined>;
     /**
      * Specify domain name.
      */
@@ -394,17 +393,17 @@ export interface FreeCertificateArgs {
     /**
      * Specify old certificate ID, used for re-apply.
      */
-    oldCertificateId?: pulumi.Input<string>;
+    oldCertificateId?: pulumi.Input<string | undefined>;
     /**
      * Type of package. Only support `"83"` (TrustAsia TLS RSA CA).
      */
-    packageType?: pulumi.Input<string>;
+    packageType?: pulumi.Input<string | undefined>;
     /**
      * ID of projects which this certification belong to.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Specify validity period in month, only support `"3"` months for now.
      */
-    validityPeriod?: pulumi.Input<string>;
+    validityPeriod?: pulumi.Input<string | undefined>;
 }

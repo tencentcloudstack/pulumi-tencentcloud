@@ -23,6 +23,10 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "tencentcloud:Vod/adaptiveDynamicStreamingTemplate:AdaptiveDynamicStreamingTemplate":
 		r = &AdaptiveDynamicStreamingTemplate{}
+	case "tencentcloud:Vod/aigcApiToken:AigcApiToken":
+		r = &AigcApiToken{}
+	case "tencentcloud:Vod/aigcQuota:AigcQuota":
+		r = &AigcQuota{}
 	case "tencentcloud:Vod/eventConfig:EventConfig":
 		r = &EventConfig{}
 	case "tencentcloud:Vod/imageSpriteTemplate:ImageSpriteTemplate":
@@ -57,6 +61,16 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Vod/adaptiveDynamicStreamingTemplate",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Vod/aigcApiToken",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Vod/aigcQuota",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

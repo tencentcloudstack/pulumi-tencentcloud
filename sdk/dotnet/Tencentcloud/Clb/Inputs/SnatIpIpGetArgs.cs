@@ -16,8 +16,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Inputs
         /// <summary>
         /// Snat IP.
         /// </summary>
-        [Input("ip", required: true)]
-        public Input<string> Ip { get; set; } = null!;
+        [Input("ip")]
+        public Input<string>? Ip { get; set; }
 
         /// <summary>
         /// Subnet ID.

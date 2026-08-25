@@ -122,6 +122,7 @@ export class ReadonlyInstance extends pulumi.CustomResource {
      * - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
      * - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
      * - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+     * - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
      */
     declare public readonly engineVersion: pulumi.Output<string>;
     /**
@@ -136,7 +137,7 @@ export class ReadonlyInstance extends pulumi.CustomResource {
      * Switch time for instance configuration changes.
      * - 0: When the adjustment is completed, perform the configuration task immediately. Default is 0.
      * - 1: Perform reconfiguration tasks within the maintenance time window.
-     * Note: Adjusting the number of nodes and slices does not support changes within the maintenance window.
+     *   Note: Adjusting the number of nodes and slices does not support changes within the maintenance window.
      */
     declare public readonly inMaintenance: pulumi.Output<number | undefined>;
     /**
@@ -327,23 +328,23 @@ export interface ReadonlyInstanceState {
     /**
      * Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
      */
-    autoRenewFlag?: pulumi.Input<number>;
+    autoRenewFlag?: pulumi.Input<number | undefined>;
     /**
      * The available zone of the Mongodb.
      */
-    availableZone?: pulumi.Input<string>;
+    availableZone?: pulumi.Input<string | undefined>;
     /**
      * The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
     /**
      * Instance schema type.	- REPLSET: Replset cluster;	- SHARD: Shard cluster.
      */
-    clusterType?: pulumi.Input<string>;
+    clusterType?: pulumi.Input<string | undefined>;
     /**
      * Creation time of the Mongodb instance.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Refers to version information. The DescribeSpecInfo API can be called to obtain detailed information about the supported versions.
      * - MONGO_40_WT: version of the MongoDB 4.0 WiredTiger storage engine.
@@ -352,99 +353,100 @@ export interface ReadonlyInstanceState {
      * - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
      * - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
      * - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+     * - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
      */
-    engineVersion?: pulumi.Input<string>;
+    engineVersion?: pulumi.Input<string | undefined>;
     /**
      * Indicates the main instance ID of readonly instances.
      */
-    fatherInstanceId?: pulumi.Input<string>;
+    fatherInstanceId?: pulumi.Input<string | undefined>;
     /**
      * Indicates the region of main instance.
      */
-    fatherInstanceRegion?: pulumi.Input<string>;
+    fatherInstanceRegion?: pulumi.Input<string | undefined>;
     /**
      * Switch time for instance configuration changes.
      * - 0: When the adjustment is completed, perform the configuration task immediately. Default is 0.
      * - 1: Perform reconfiguration tasks within the maintenance time window.
-     * Note: Adjusting the number of nodes and slices does not support changes within the maintenance window.
+     *   Note: Adjusting the number of nodes and slices does not support changes within the maintenance window.
      */
-    inMaintenance?: pulumi.Input<number>;
+    inMaintenance?: pulumi.Input<number | undefined>;
     /**
      * Name of the Mongodb instance.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
      */
-    machineType?: pulumi.Input<string>;
+    machineType?: pulumi.Input<string | undefined>;
     /**
      * Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
      */
-    memory?: pulumi.Input<number>;
+    memory?: pulumi.Input<number | undefined>;
     /**
      * Number of mongos cpu.
      */
-    mongosCpu?: pulumi.Input<number>;
+    mongosCpu?: pulumi.Input<number | undefined>;
     /**
      * Mongos memory size in GB.
      */
-    mongosMemory?: pulumi.Input<number>;
+    mongosMemory?: pulumi.Input<number | undefined>;
     /**
      * Number of mongos.
      */
-    mongosNodeNum?: pulumi.Input<number>;
+    mongosNodeNum?: pulumi.Input<number | undefined>;
     /**
      * The number of nodes in each replica set. Default value: 3.
      */
-    nodeNum?: pulumi.Input<number>;
+    nodeNum?: pulumi.Input<number | undefined>;
     /**
      * Number of nodes per shard, at least 3(one master and two slaves).
      */
-    nodesPerShard?: pulumi.Input<number>;
+    nodesPerShard?: pulumi.Input<number | undefined>;
     /**
      * The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when chargeType is set to `PREPAID`.
      */
-    prepaidPeriod?: pulumi.Input<number>;
+    prepaidPeriod?: pulumi.Input<number | undefined>;
     /**
      * ID of the project which the instance belongs.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * ID of the security group.
      */
-    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroups?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Number of sharding.
      */
-    shardQuantity?: pulumi.Input<number>;
+    shardQuantity?: pulumi.Input<number | undefined>;
     /**
      * Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * ID of the subnet within this VPC. The value is required if `vpcId` is set.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * The tags of the Mongodb. Key name `project` is system reserved and can't be used.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * IP of the Mongodb instance.
      */
-    vip?: pulumi.Input<string>;
+    vip?: pulumi.Input<string | undefined>;
     /**
      * Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
      */
-    volume?: pulumi.Input<number>;
+    volume?: pulumi.Input<number | undefined>;
     /**
      * ID of the VPC.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * IP port of the Mongodb instance.
      */
-    vport?: pulumi.Input<number>;
+    vport?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -454,7 +456,7 @@ export interface ReadonlyInstanceArgs {
     /**
      * Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
      */
-    autoRenewFlag?: pulumi.Input<number>;
+    autoRenewFlag?: pulumi.Input<number | undefined>;
     /**
      * The available zone of the Mongodb.
      */
@@ -462,7 +464,7 @@ export interface ReadonlyInstanceArgs {
     /**
      * The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
     /**
      * Instance schema type.	- REPLSET: Replset cluster;	- SHARD: Shard cluster.
      */
@@ -475,6 +477,7 @@ export interface ReadonlyInstanceArgs {
      * - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
      * - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
      * - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+     * - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
      */
     engineVersion: pulumi.Input<string>;
     /**
@@ -489,9 +492,9 @@ export interface ReadonlyInstanceArgs {
      * Switch time for instance configuration changes.
      * - 0: When the adjustment is completed, perform the configuration task immediately. Default is 0.
      * - 1: Perform reconfiguration tasks within the maintenance time window.
-     * Note: Adjusting the number of nodes and slices does not support changes within the maintenance window.
+     *   Note: Adjusting the number of nodes and slices does not support changes within the maintenance window.
      */
-    inMaintenance?: pulumi.Input<number>;
+    inMaintenance?: pulumi.Input<number | undefined>;
     /**
      * Name of the Mongodb instance.
      */
@@ -507,47 +510,47 @@ export interface ReadonlyInstanceArgs {
     /**
      * Number of mongos cpu.
      */
-    mongosCpu?: pulumi.Input<number>;
+    mongosCpu?: pulumi.Input<number | undefined>;
     /**
      * Mongos memory size in GB.
      */
-    mongosMemory?: pulumi.Input<number>;
+    mongosMemory?: pulumi.Input<number | undefined>;
     /**
      * Number of mongos.
      */
-    mongosNodeNum?: pulumi.Input<number>;
+    mongosNodeNum?: pulumi.Input<number | undefined>;
     /**
      * The number of nodes in each replica set. Default value: 3.
      */
-    nodeNum?: pulumi.Input<number>;
+    nodeNum?: pulumi.Input<number | undefined>;
     /**
      * Number of nodes per shard, at least 3(one master and two slaves).
      */
-    nodesPerShard?: pulumi.Input<number>;
+    nodesPerShard?: pulumi.Input<number | undefined>;
     /**
      * The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when chargeType is set to `PREPAID`.
      */
-    prepaidPeriod?: pulumi.Input<number>;
+    prepaidPeriod?: pulumi.Input<number | undefined>;
     /**
      * ID of the project which the instance belongs.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * ID of the security group.
      */
-    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroups?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Number of sharding.
      */
-    shardQuantity?: pulumi.Input<number>;
+    shardQuantity?: pulumi.Input<number | undefined>;
     /**
      * ID of the subnet within this VPC. The value is required if `vpcId` is set.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * The tags of the Mongodb. Key name `project` is system reserved and can't be used.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
      */
@@ -555,5 +558,5 @@ export interface ReadonlyInstanceArgs {
     /**
      * ID of the VPC.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }

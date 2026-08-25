@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const timeShiftRecordDetail = tencentcloud.Css.getTimeShiftRecordDetail({
+ * const timeShiftRecordDetail = tencentcloud.css.getTimeShiftRecordDetail({
  *     domain: "177154.push.tlivecloud.com",
  *     appName: "qqq",
  *     streamName: "live",
@@ -114,7 +114,7 @@ export interface GetTimeShiftRecordDetailResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const timeShiftRecordDetail = tencentcloud.Css.getTimeShiftRecordDetail({
+ * const timeShiftRecordDetail = tencentcloud.css.getTimeShiftRecordDetail({
  *     domain: "177154.push.tlivecloud.com",
  *     appName: "qqq",
  *     streamName: "live",
@@ -154,7 +154,7 @@ export interface GetTimeShiftRecordDetailOutputArgs {
     /**
      * The streaming domain belongs to a group. If there is no domain group or the domain group is an empty string, it can be left blank.
      */
-    domainGroup?: pulumi.Input<string>;
+    domainGroup?: pulumi.Input<string | undefined>;
     /**
      * The ending time of the query range is specified in Unix timestamp.
      */
@@ -162,7 +162,7 @@ export interface GetTimeShiftRecordDetailOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * The starting time of the query range is specified in Unix timestamp.
      */
@@ -174,5 +174,5 @@ export interface GetTimeShiftRecordDetailOutputArgs {
     /**
      * The transcoding template ID can be left blank if it is 0.
      */
-    transCodeId?: pulumi.Input<number>;
+    transCodeId?: pulumi.Input<number | undefined>;
 }

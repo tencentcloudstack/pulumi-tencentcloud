@@ -107,15 +107,15 @@ export interface RenewDiskState {
     /**
      * Whether to automatically use the voucher. Not used by default.
      */
-    autoVoucher?: pulumi.Input<boolean>;
+    autoVoucher?: pulumi.Input<boolean | undefined>;
     /**
      * List of disk ID.
      */
-    diskId?: pulumi.Input<string>;
+    diskId?: pulumi.Input<string | undefined>;
     /**
      * Renew cloud hard disk subscription related parameter settings.
      */
-    renewDiskChargePrepaid?: pulumi.Input<inputs.Lighthouse.RenewDiskRenewDiskChargePrepaid>;
+    renewDiskChargePrepaid?: pulumi.Input<inputs.Lighthouse.RenewDiskRenewDiskChargePrepaid | undefined>;
 }
 
 /**
@@ -125,7 +125,7 @@ export interface RenewDiskArgs {
     /**
      * Whether to automatically use the voucher. Not used by default.
      */
-    autoVoucher?: pulumi.Input<boolean>;
+    autoVoucher?: pulumi.Input<boolean | undefined>;
     /**
      * List of disk ID.
      */

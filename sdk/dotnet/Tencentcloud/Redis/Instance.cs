@@ -25,7 +25,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -73,7 +72,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// using System.Linq;
     /// using Pulumi;
     /// using Std = Pulumi.Std;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -105,7 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     ///         Name = "tf-redis-sg",
     ///     });
     /// 
-    ///     var sgRule = new Tencentcloud.Index.SecurityGroupLiteRule("sg_rule", new()
+    ///     var sgRule = new Tencentcloud.SecurityGroupLiteRule("sg_rule", new()
     ///     {
     ///         SecurityGroupId = securityGroup.Id,
     ///         Ingresses = new[]
@@ -143,7 +141,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     ///         ReplicaZoneIds = Output.Tuple(Std.Range.Invoke(new()
     ///         {
     ///             Limit = redisReplicasNum,
-    ///         }), az, az.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones).Length).Apply(values =&gt;
+    ///         }), az, az.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones).Length()).Apply(values =&gt;
     ///         {
     ///             var invoke = values.Item1;
     ///             var az = values.Item2;
@@ -164,7 +162,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -193,7 +190,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     ///         Name = "tf-redis-sg",
     ///     });
     /// 
-    ///     var sgRule = new Tencentcloud.Index.SecurityGroupLiteRule("sg_rule", new()
+    ///     var sgRule = new Tencentcloud.SecurityGroupLiteRule("sg_rule", new()
     ///     {
     ///         SecurityGroupId = securityGroup.Id,
     ///         Ingresses = new[]
@@ -239,7 +236,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -275,7 +271,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     ///         Name = "tf-redis-sg",
     ///     });
     /// 
-    ///     var sgRule = new Tencentcloud.Index.SecurityGroupLiteRule("sg_rule", new()
+    ///     var sgRule = new Tencentcloud.SecurityGroupLiteRule("sg_rule", new()
     ///     {
     ///         SecurityGroupId = securityGroup.Id,
     ///         Ingresses = new[]
@@ -320,7 +316,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -426,7 +421,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -505,7 +499,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Output<string> AvailabilityZone { get; private set; } = null!;
 
         /// <summary>
-        /// The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create new with new charge type.
+        /// The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`.
         /// </summary>
         [Output("chargeType")]
         public Output<string?> ChargeType { get; private set; } = null!;
@@ -760,7 +754,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Input<string> AvailabilityZone { get; set; } = null!;
 
         /// <summary>
-        /// The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create new with new charge type.
+        /// The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`.
         /// </summary>
         [Input("chargeType")]
         public Input<string>? ChargeType { get; set; }
@@ -970,7 +964,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Input<string>? AvailabilityZone { get; set; }
 
         /// <summary>
-        /// The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create new with new charge type.
+        /// The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`.
         /// </summary>
         [Input("chargeType")]
         public Input<string>? ChargeType { get; set; }

@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * organization identity_center_scim_synchronization_status can be imported using the id, e.g.
+ * organization identityCenterScimSynchronizationStatus can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Identity/centerScimSynchronizationStatus:CenterScimSynchronizationStatus identity_center_scim_synchronization_status ${zone_id}
@@ -102,11 +102,11 @@ export interface CenterScimSynchronizationStatusState {
     /**
      * SCIM synchronization status. Enabled-enabled. Disabled-disables.
      */
-    scimSynchronizationStatus?: pulumi.Input<string>;
+    scimSynchronizationStatus?: pulumi.Input<string | undefined>;
     /**
      * Space ID. z-prefix starts with 12 random digits/lowercase letters.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**

@@ -67,12 +67,8 @@ type LookupImageSharePermissionResult struct {
 }
 
 func LookupImageSharePermissionOutput(ctx *pulumi.Context, args LookupImageSharePermissionOutputArgs, opts ...pulumi.InvokeOption) LookupImageSharePermissionResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupImageSharePermissionResultOutput, error) {
-			args := v.(LookupImageSharePermissionArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cvm/getImageSharePermission:getImageSharePermission", args, LookupImageSharePermissionResultOutput{}, options).(LookupImageSharePermissionResultOutput), nil
-		}).(LookupImageSharePermissionResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cvm/getImageSharePermission:getImageSharePermission", args, LookupImageSharePermissionResultOutput{}, options).(LookupImageSharePermissionResultOutput)
 }
 
 // A collection of arguments for invoking getImageSharePermission.

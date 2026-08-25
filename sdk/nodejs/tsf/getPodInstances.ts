@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const podInstances = tencentcloud.Tsf.getPodInstances({
+ * const podInstances = tencentcloud.tsf.getPodInstances({
  *     groupId: "group-ynd95rea",
  *     podNameLists: ["keep-terraform-6f8f977688-zvphm"],
  * });
@@ -73,7 +73,7 @@ export interface GetPodInstancesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const podInstances = tencentcloud.Tsf.getPodInstances({
+ * const podInstances = tencentcloud.tsf.getPodInstances({
  *     groupId: "group-ynd95rea",
  *     podNameLists: ["keep-terraform-6f8f977688-zvphm"],
  * });
@@ -99,9 +99,9 @@ export interface GetPodInstancesOutputArgs {
     /**
      * Filter, pod name list.
      */
-    podNameLists?: pulumi.Input<pulumi.Input<string>[]>;
+    podNameLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

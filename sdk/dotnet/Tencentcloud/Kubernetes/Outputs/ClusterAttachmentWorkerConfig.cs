@@ -23,7 +23,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
         /// </summary>
         public readonly int? DesiredPodNum;
         /// <summary>
-        /// Docker graph path. Default is `/var/lib/docker`.
+        /// Docker graph path. Default is determined by the platform (currently /var/lib/containerd for containerd-based nodes).
         /// </summary>
         public readonly string? DockerGraphPath;
         /// <summary>
@@ -51,9 +51,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
         /// </summary>
         public readonly ImmutableArray<Outputs.ClusterAttachmentWorkerConfigTaint> Taints;
         /// <summary>
-        /// Base64-encoded User Data text, the length limit is 16KB.
+        /// It has been deprecated from version 1.83.16. Use `UserScript` instead. Base64-encoded User Data text, the length limit is 16KB.
         /// </summary>
         public readonly string? UserData;
+        /// <summary>
+        /// A Base64-encoded user script that executes after Kubernetes components start. Users must ensure the script supports re-entrancy and retry logic. The script and its generated log files can be found in the `/data/ccs_userscript/` directory on the node. If the node should only join the scheduling pool after initialization is complete, the `Unschedulable` parameter can be used; in this case, add the command `kubectl uncordon nodename --kubeconfig=/root/.kube/config` at the end of the user script to enable scheduling on the node. Note: This field may return null, indicating that no valid value is available. Example value: `#!/bin/sh echo "hello world"`.
+        /// </summary>
+        public readonly string? UserScript;
 
         [OutputConstructor]
         private ClusterAttachmentWorkerConfig(
@@ -75,7 +79,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
 
             ImmutableArray<Outputs.ClusterAttachmentWorkerConfigTaint> taints,
 
-            string? userData)
+            string? userData,
+
+            string? userScript)
         {
             DataDisks = dataDisks;
             DesiredPodNum = desiredPodNum;
@@ -87,6 +93,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
             PreStartUserScript = preStartUserScript;
             Taints = taints;
             UserData = userData;
+            UserScript = userScript;
         }
     }
 }

@@ -38,15 +38,15 @@ import (
 //			if param := cfg.Get("availabilityZone"); param != "" {
 //				availabilityZone = param
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("tf_monitor_vpc"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("tf_monitor_subnet"),
 //				CidrBlock:        pulumi.String("10.0.1.0/24"),
@@ -56,8 +56,8 @@ import (
 //			}
 //			foo, err := monitor.NewTmpInstance(ctx, "foo", &monitor.TmpInstanceArgs{
 //				InstanceName:      pulumi.String("tf-tmp-instance"),
-//				VpcId:             vpc.ID(),
-//				SubnetId:          subnet.ID(),
+//				VpcId:             vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:          subnet2.ID().ToIDOutput().ToStringOutput(),
 //				DataRetentionTime: pulumi.Int(30),
 //				Zone:              pulumi.String(availabilityZone),
 //				Tags: pulumi.StringMap{
@@ -68,7 +68,7 @@ import (
 //				return err
 //			}
 //			_, err = monitor.NewTmpCvmAgent(ctx, "foo", &monitor.TmpCvmAgentArgs{
-//				InstanceId: foo.ID(),
+//				InstanceId: foo.ID().ToIDOutput().ToStringOutput(),
 //				Name:       pulumi.String("tf-agent"),
 //			})
 //			if err != nil {
@@ -77,7 +77,7 @@ import (
 //			_, err = monitor.NewTmpAlertRule(ctx, "foo", &monitor.TmpAlertRuleArgs{
 //				Duration:   pulumi.String("2m"),
 //				Expr:       pulumi.String("avg by (instance) (mysql_global_status_threads_connected) / avg by (instance) (mysql_global_variables_max_connections)  > 0.8"),
-//				InstanceId: foo.ID(),
+//				InstanceId: foo.ID().ToIDOutput().ToStringOutput(),
 //				Receivers: pulumi.StringArray{
 //					pulumi.String("notice-f2svbu3w"),
 //				},
@@ -113,7 +113,6 @@ import (
 // ## Import
 //
 // monitor tmpAlertRule can be imported using the id, e.g.
-//
 // ```sh
 // $ pulumi import tencentcloud:Monitor/tmpAlertRule:TmpAlertRule tmpAlertRule instanceId#Rule_id
 // ```

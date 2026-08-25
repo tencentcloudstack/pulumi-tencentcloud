@@ -76,12 +76,8 @@ type LookupDiagnoseResult struct {
 }
 
 func LookupDiagnoseOutput(ctx *pulumi.Context, args LookupDiagnoseOutputArgs, opts ...pulumi.InvokeOption) LookupDiagnoseResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupDiagnoseResultOutput, error) {
-			args := v.(LookupDiagnoseArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Elasticsearch/getDiagnose:getDiagnose", args, LookupDiagnoseResultOutput{}, options).(LookupDiagnoseResultOutput), nil
-		}).(LookupDiagnoseResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Elasticsearch/getDiagnose:getDiagnose", args, LookupDiagnoseResultOutput{}, options).(LookupDiagnoseResultOutput)
 }
 
 // A collection of arguments for invoking getDiagnose.

@@ -110,12 +110,8 @@ type GetProductEventResult struct {
 }
 
 func GetProductEventOutput(ctx *pulumi.Context, args GetProductEventOutputArgs, opts ...pulumi.InvokeOption) GetProductEventResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetProductEventResultOutput, error) {
-			args := v.(GetProductEventArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Monitor/getProductEvent:getProductEvent", args, GetProductEventResultOutput{}, options).(GetProductEventResultOutput), nil
-		}).(GetProductEventResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Monitor/getProductEvent:getProductEvent", args, GetProductEventResultOutput{}, options).(GetProductEventResultOutput)
 }
 
 // A collection of arguments for invoking getProductEvent.

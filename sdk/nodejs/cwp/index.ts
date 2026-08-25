@@ -5,6 +5,16 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export { AutoOpenProversionConfigArgs, AutoOpenProversionConfigState } from "./autoOpenProversionConfig";
+export type AutoOpenProversionConfig = import("./autoOpenProversionConfig").AutoOpenProversionConfig;
+export const AutoOpenProversionConfig: typeof import("./autoOpenProversionConfig").AutoOpenProversionConfig = null as any;
+utilities.lazyLoad(exports, ["AutoOpenProversionConfig"], () => require("./autoOpenProversionConfig"));
+
+export { GetMachinesArgs, GetMachinesResult, GetMachinesOutputArgs } from "./getMachines";
+export const getMachines: typeof import("./getMachines").getMachines = null as any;
+export const getMachinesOutput: typeof import("./getMachines").getMachinesOutput = null as any;
+utilities.lazyLoad(exports, ["getMachines","getMachinesOutput"], () => require("./getMachines"));
+
 export { GetMachinesSimpleArgs, GetMachinesSimpleResult, GetMachinesSimpleOutputArgs } from "./getMachinesSimple";
 export const getMachinesSimple: typeof import("./getMachinesSimple").getMachinesSimple = null as any;
 export const getMachinesSimpleOutput: typeof import("./getMachinesSimple").getMachinesSimpleOutput = null as any;
@@ -25,6 +35,8 @@ const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "tencentcloud:Cwp/autoOpenProversionConfig:AutoOpenProversionConfig":
+                return new AutoOpenProversionConfig(name, <any>undefined, { urn })
             case "tencentcloud:Cwp/licenseBindAttachment:LicenseBindAttachment":
                 return new LicenseBindAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Cwp/licenseOrder:LicenseOrder":
@@ -34,5 +46,6 @@ const _module = {
         }
     },
 };
+pulumi.runtime.registerResourceModule("tencentcloud", "Cwp/autoOpenProversionConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cwp/licenseBindAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cwp/licenseOrder", _module)

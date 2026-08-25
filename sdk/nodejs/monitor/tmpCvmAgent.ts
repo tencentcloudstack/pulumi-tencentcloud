@@ -44,7 +44,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * monitor tmpCvmAgent can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Monitor/tmpCvmAgent:TmpCvmAgent tmpCvmAgent instance_id#agent_id
  * ```
@@ -127,15 +126,15 @@ export interface TmpCvmAgentState {
     /**
      * Agent id.
      */
-    agentId?: pulumi.Input<string>;
+    agentId?: pulumi.Input<string | undefined>;
     /**
      * Instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Agent name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -149,5 +148,5 @@ export interface TmpCvmAgentArgs {
     /**
      * Agent name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }

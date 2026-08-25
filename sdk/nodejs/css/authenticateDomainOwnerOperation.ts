@@ -105,11 +105,11 @@ export interface AuthenticateDomainOwnerOperationState {
     /**
      * The domain name to verify.
      */
-    domainName?: pulumi.Input<string>;
+    domainName?: pulumi.Input<string | undefined>;
     /**
      * Authentication type. Possible values:`dnsCheck`: Immediately verify whether the resolution record of the configured dns is consistent with the content to be verified, and save the record if successful.`fileCheck`: Immediately verify whether the web file is consistent with the content to be verified, and save the record if successful.`dbCheck`: Check if authentication has been successful.
      */
-    verifyType?: pulumi.Input<string>;
+    verifyType?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -123,5 +123,5 @@ export interface AuthenticateDomainOwnerOperationArgs {
     /**
      * Authentication type. Possible values:`dnsCheck`: Immediately verify whether the resolution record of the configured dns is consistent with the content to be verified, and save the record if successful.`fileCheck`: Immediately verify whether the web file is consistent with the content to be verified, and save the record if successful.`dbCheck`: Check if authentication has been successful.
      */
-    verifyType?: pulumi.Input<string>;
+    verifyType?: pulumi.Input<string | undefined>;
 }

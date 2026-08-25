@@ -67,12 +67,8 @@ type GetInstanceVncUrlResult struct {
 }
 
 func GetInstanceVncUrlOutput(ctx *pulumi.Context, args GetInstanceVncUrlOutputArgs, opts ...pulumi.InvokeOption) GetInstanceVncUrlResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstanceVncUrlResultOutput, error) {
-			args := v.(GetInstanceVncUrlArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Lighthouse/getInstanceVncUrl:getInstanceVncUrl", args, GetInstanceVncUrlResultOutput{}, options).(GetInstanceVncUrlResultOutput), nil
-		}).(GetInstanceVncUrlResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Lighthouse/getInstanceVncUrl:getInstanceVncUrl", args, GetInstanceVncUrlResultOutput{}, options).(GetInstanceVncUrlResultOutput)
 }
 
 // A collection of arguments for invoking getInstanceVncUrl.

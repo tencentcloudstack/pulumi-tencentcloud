@@ -86,12 +86,8 @@ type GetTopSpaceSchemaTimeSeriesResult struct {
 }
 
 func GetTopSpaceSchemaTimeSeriesOutput(ctx *pulumi.Context, args GetTopSpaceSchemaTimeSeriesOutputArgs, opts ...pulumi.InvokeOption) GetTopSpaceSchemaTimeSeriesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetTopSpaceSchemaTimeSeriesResultOutput, error) {
-			args := v.(GetTopSpaceSchemaTimeSeriesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dbbrain/getTopSpaceSchemaTimeSeries:getTopSpaceSchemaTimeSeries", args, GetTopSpaceSchemaTimeSeriesResultOutput{}, options).(GetTopSpaceSchemaTimeSeriesResultOutput), nil
-		}).(GetTopSpaceSchemaTimeSeriesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dbbrain/getTopSpaceSchemaTimeSeries:getTopSpaceSchemaTimeSeries", args, GetTopSpaceSchemaTimeSeriesResultOutput{}, options).(GetTopSpaceSchemaTimeSeriesResultOutput)
 }
 
 // A collection of arguments for invoking getTopSpaceSchemaTimeSeries.

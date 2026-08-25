@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Oceanus.getMetaTable({
+ * const example = tencentcloud.oceanus.getMetaTable({
  *     workSpaceId: "space-6w8eab6f",
  *     catalog: "_dc",
  *     database: "_db",
@@ -93,7 +93,7 @@ export interface GetMetaTableResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Oceanus.getMetaTable({
+ * const example = tencentcloud.oceanus.getMetaTable({
  *     workSpaceId: "space-6w8eab6f",
  *     catalog: "_dc",
  *     database: "_db",
@@ -127,7 +127,7 @@ export interface GetMetaTableOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Table name.
      */

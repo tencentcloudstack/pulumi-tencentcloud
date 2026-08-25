@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "cdb",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -76,7 +76,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * mysql backup_encryption_status can be imported using the id, e.g.
+ * mysql backupEncryptionStatus can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Mysql/backupEncryptionStatus:BackupEncryptionStatus backup_encryption_status backup_encryption_status_id
@@ -157,11 +157,11 @@ export interface BackupEncryptionStatusState {
     /**
      * Whether physical backup encryption is enabled for the instance. Possible values are `on`, `off`.
      */
-    encryptionStatus?: pulumi.Input<string>;
+    encryptionStatus?: pulumi.Input<string | undefined>;
     /**
      * Instance ID, in the format: cdb-XXXX. Same instance ID as displayed in the ApsaraDB for Console page.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**

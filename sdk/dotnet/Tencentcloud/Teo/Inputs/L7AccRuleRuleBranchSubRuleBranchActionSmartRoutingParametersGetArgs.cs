@@ -14,7 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
     public sealed class L7AccRuleRuleBranchSubRuleBranchActionSmartRoutingParametersGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Whether to enable smart acceleration. values: on: enable; Off: disable.
+        /// Whether to enable smart acceleration. values: on: enable; off: disable.
         /// </summary>
         [Input("switch")]
         public Input<string>? Switch { get; set; }

@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * eb event_bus can be imported using the id, e.g.
+ * eb eventBus can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Eb/eventBus:EventBus event_bus event_bus_id
@@ -122,23 +122,23 @@ export interface EventBusState {
     /**
      * Event set description, unlimited character type, description within 200 characters.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Whether the EB storage is enabled.
      */
-    enableStore?: pulumi.Input<boolean>;
+    enableStore?: pulumi.Input<boolean | undefined>;
     /**
      * Event set name, which can only contain letters, numbers, underscores, hyphens, starts with a letter and ends with a number or letter, 2~60 characters.
      */
-    eventBusName?: pulumi.Input<string>;
+    eventBusName?: pulumi.Input<string | undefined>;
     /**
      * EB storage duration.
      */
-    saveDays?: pulumi.Input<number>;
+    saveDays?: pulumi.Input<number | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 /**
@@ -148,11 +148,11 @@ export interface EventBusArgs {
     /**
      * Event set description, unlimited character type, description within 200 characters.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Whether the EB storage is enabled.
      */
-    enableStore?: pulumi.Input<boolean>;
+    enableStore?: pulumi.Input<boolean | undefined>;
     /**
      * Event set name, which can only contain letters, numbers, underscores, hyphens, starts with a letter and ends with a number or letter, 2~60 characters.
      */
@@ -160,9 +160,9 @@ export interface EventBusArgs {
     /**
      * EB storage duration.
      */
-    saveDays?: pulumi.Input<number>;
+    saveDays?: pulumi.Input<number | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

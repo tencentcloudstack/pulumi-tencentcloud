@@ -21,8 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * dcdb security_group_attachment can be imported using the id, e.g.
- *
+ * dcdb securityGroupAttachment can be imported using the id, e.g.
  * ```sh
  * $ pulumi import tencentcloud:Dcdb/securityGroupAttachment:SecurityGroupAttachment security_group_attachment securityGroupAttachment_id
  * ```
@@ -102,11 +101,11 @@ export interface SecurityGroupAttachmentState {
     /**
      * attached instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * security group id.
      */
-    securityGroupId?: pulumi.Input<string>;
+    securityGroupId?: pulumi.Input<string | undefined>;
 }
 
 /**

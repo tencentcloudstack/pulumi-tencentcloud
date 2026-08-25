@@ -72,12 +72,8 @@ type GetGatewayNodesResult struct {
 }
 
 func GetGatewayNodesOutput(ctx *pulumi.Context, args GetGatewayNodesOutputArgs, opts ...pulumi.InvokeOption) GetGatewayNodesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetGatewayNodesResultOutput, error) {
-			args := v.(GetGatewayNodesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tse/getGatewayNodes:getGatewayNodes", args, GetGatewayNodesResultOutput{}, options).(GetGatewayNodesResultOutput), nil
-		}).(GetGatewayNodesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tse/getGatewayNodes:getGatewayNodes", args, GetGatewayNodesResultOutput{}, options).(GetGatewayNodesResultOutput)
 }
 
 // A collection of arguments for invoking getGatewayNodes.

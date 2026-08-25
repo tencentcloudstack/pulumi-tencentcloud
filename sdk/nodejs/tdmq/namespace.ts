@@ -31,6 +31,10 @@ import * as utilities from "../utilities";
  *         sizeInMb: 10,
  *     },
  *     remark: "remark.",
+ *     tags: [{
+ *         tagKey: "createdBy",
+ *         tagValue: "terraform",
+ *     }],
  * });
  * ```
  *
@@ -90,6 +94,10 @@ export class Namespace extends pulumi.CustomResource {
      * The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `timeInMinutes`: the time of message to retain; `sizeInMb`: the size of message to retain.
      */
     declare public readonly retentionPolicy: pulumi.Output<outputs.Tdmq.NamespaceRetentionPolicy>;
+    /**
+     * The tags of the tencentcloud_tdmq_namespace.
+     */
+    declare public readonly tags: pulumi.Output<outputs.Tdmq.NamespaceTag[] | undefined>;
 
     /**
      * Create a Namespace resource with the given unique name, arguments, and options.
@@ -109,6 +117,7 @@ export class Namespace extends pulumi.CustomResource {
             resourceInputs["msgTtl"] = state?.msgTtl;
             resourceInputs["remark"] = state?.remark;
             resourceInputs["retentionPolicy"] = state?.retentionPolicy;
+            resourceInputs["tags"] = state?.tags;
         } else {
             const args = argsOrState as NamespaceArgs | undefined;
             if (args?.clusterId === undefined && !opts.urn) {
@@ -125,6 +134,7 @@ export class Namespace extends pulumi.CustomResource {
             resourceInputs["msgTtl"] = args?.msgTtl;
             resourceInputs["remark"] = args?.remark;
             resourceInputs["retentionPolicy"] = args?.retentionPolicy;
+            resourceInputs["tags"] = args?.tags;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Namespace.__pulumiType, name, resourceInputs, opts);
@@ -138,23 +148,27 @@ export interface NamespaceState {
     /**
      * The Dedicated Cluster Id.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * The name of namespace to be created.
      */
-    environName?: pulumi.Input<string>;
+    environName?: pulumi.Input<string | undefined>;
     /**
      * The expiration time of unconsumed message.
      */
-    msgTtl?: pulumi.Input<number>;
+    msgTtl?: pulumi.Input<number | undefined>;
     /**
      * Description of the namespace.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `timeInMinutes`: the time of message to retain; `sizeInMb`: the size of message to retain.
      */
-    retentionPolicy?: pulumi.Input<inputs.Tdmq.NamespaceRetentionPolicy>;
+    retentionPolicy?: pulumi.Input<inputs.Tdmq.NamespaceRetentionPolicy | undefined>;
+    /**
+     * The tags of the tencentcloud_tdmq_namespace.
+     */
+    tags?: pulumi.Input<pulumi.Input<inputs.Tdmq.NamespaceTag>[] | undefined>;
 }
 
 /**
@@ -176,9 +190,13 @@ export interface NamespaceArgs {
     /**
      * Description of the namespace.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `timeInMinutes`: the time of message to retain; `sizeInMb`: the size of message to retain.
      */
-    retentionPolicy?: pulumi.Input<inputs.Tdmq.NamespaceRetentionPolicy>;
+    retentionPolicy?: pulumi.Input<inputs.Tdmq.NamespaceRetentionPolicy | undefined>;
+    /**
+     * The tags of the tencentcloud_tdmq_namespace.
+     */
+    tags?: pulumi.Input<pulumi.Input<inputs.Tdmq.NamespaceTag>[] | undefined>;
 }

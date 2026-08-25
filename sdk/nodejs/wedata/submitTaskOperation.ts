@@ -116,23 +116,23 @@ export interface SubmitTaskOperationState {
     /**
      * Project ID.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * Status.
      */
-    status?: pulumi.Input<boolean>;
+    status?: pulumi.Input<boolean | undefined>;
     /**
      * Task ID.
      */
-    taskId?: pulumi.Input<string>;
+    taskId?: pulumi.Input<string | undefined>;
     /**
      * Version id.
      */
-    versionId?: pulumi.Input<string>;
+    versionId?: pulumi.Input<string | undefined>;
     /**
      * Version remarks.
      */
-    versionRemark?: pulumi.Input<string>;
+    versionRemark?: pulumi.Input<string | undefined>;
 }
 
 /**

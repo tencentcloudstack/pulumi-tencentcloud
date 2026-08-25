@@ -74,12 +74,8 @@ type GetListEntitiesForPolicyResult struct {
 }
 
 func GetListEntitiesForPolicyOutput(ctx *pulumi.Context, args GetListEntitiesForPolicyOutputArgs, opts ...pulumi.InvokeOption) GetListEntitiesForPolicyResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetListEntitiesForPolicyResultOutput, error) {
-			args := v.(GetListEntitiesForPolicyArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cam/getListEntitiesForPolicy:getListEntitiesForPolicy", args, GetListEntitiesForPolicyResultOutput{}, options).(GetListEntitiesForPolicyResultOutput), nil
-		}).(GetListEntitiesForPolicyResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cam/getListEntitiesForPolicy:getListEntitiesForPolicy", args, GetListEntitiesForPolicyResultOutput{}, options).(GetListEntitiesForPolicyResultOutput)
 }
 
 // A collection of arguments for invoking getListEntitiesForPolicy.

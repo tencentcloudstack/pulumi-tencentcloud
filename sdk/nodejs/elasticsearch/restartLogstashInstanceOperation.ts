@@ -94,11 +94,11 @@ export interface RestartLogstashInstanceOperationState {
     /**
      * Instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Restart type, 0 full restart, 1 rolling restart.
      */
-    type?: pulumi.Input<number>;
+    type?: pulumi.Input<number | undefined>;
 }
 
 /**

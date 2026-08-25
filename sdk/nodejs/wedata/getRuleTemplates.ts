@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const ruleTemplates = tencentcloud.Wedata.getRuleTemplates({
+ * const ruleTemplates = tencentcloud.wedata.getRuleTemplates({
  *     type: 2,
  *     sourceObjectType: 2,
  *     projectId: "1840731346428280832",
@@ -101,7 +101,7 @@ export interface GetRuleTemplatesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const ruleTemplates = tencentcloud.Wedata.getRuleTemplates({
+ * const ruleTemplates = tencentcloud.wedata.getRuleTemplates({
  *     type: 2,
  *     sourceObjectType: 2,
  *     projectId: "1840731346428280832",
@@ -132,21 +132,21 @@ export interface GetRuleTemplatesOutputArgs {
     /**
      * Project ID.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Applicable type of source data.
      */
-    sourceEngineTypes?: pulumi.Input<pulumi.Input<number>[]>;
+    sourceEngineTypes?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Source data object type. `1`: Constant, `2`: Offline table level, `3`: Offline field level.
      */
-    sourceObjectType?: pulumi.Input<number>;
+    sourceObjectType?: pulumi.Input<number | undefined>;
     /**
      * Template type. `1` means System template, `2` means Custom template.
      */
-    type?: pulumi.Input<number>;
+    type?: pulumi.Input<number | undefined>;
 }

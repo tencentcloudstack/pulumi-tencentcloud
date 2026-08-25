@@ -16,11 +16,11 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * // query by group_id
- * const foo = tencentcloud.Cam.getGroupPolicyAttachments({
+ * const foo = tencentcloud.cam.getGroupPolicyAttachments({
  *     groupId: fooTencentcloudCamGroup.id,
  * });
  * // query by group_id and policy_id
- * const bar = tencentcloud.Cam.getGroupPolicyAttachments({
+ * const bar = tencentcloud.cam.getGroupPolicyAttachments({
  *     groupId: fooTencentcloudCamGroup.id,
  *     policyId: fooTencentcloudCamPolicy.id,
  * });
@@ -103,11 +103,11 @@ export interface GetGroupPolicyAttachmentsResult {
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * // query by group_id
- * const foo = tencentcloud.Cam.getGroupPolicyAttachments({
+ * const foo = tencentcloud.cam.getGroupPolicyAttachments({
  *     groupId: fooTencentcloudCamGroup.id,
  * });
  * // query by group_id and policy_id
- * const bar = tencentcloud.Cam.getGroupPolicyAttachments({
+ * const bar = tencentcloud.cam.getGroupPolicyAttachments({
  *     groupId: fooTencentcloudCamGroup.id,
  *     policyId: fooTencentcloudCamPolicy.id,
  * });
@@ -131,7 +131,7 @@ export interface GetGroupPolicyAttachmentsOutputArgs {
     /**
      * Mode of creation of the CAM user policy attachment. 1 means the cam policy attachment is created by production, and the others indicate syntax strategy ways.
      */
-    createMode?: pulumi.Input<number>;
+    createMode?: pulumi.Input<number | undefined>;
     /**
      * ID of the attached CAM group to be queried.
      */
@@ -139,13 +139,13 @@ export interface GetGroupPolicyAttachmentsOutputArgs {
     /**
      * ID of CAM policy to be queried.
      */
-    policyId?: pulumi.Input<string>;
+    policyId?: pulumi.Input<string | undefined>;
     /**
      * Type of the policy strategy. 'User' means customer strategy and 'QCS' means preset strategy.
      */
-    policyType?: pulumi.Input<string>;
+    policyType?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

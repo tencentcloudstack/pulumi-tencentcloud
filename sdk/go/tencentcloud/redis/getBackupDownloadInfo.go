@@ -86,12 +86,8 @@ type GetBackupDownloadInfoResult struct {
 }
 
 func GetBackupDownloadInfoOutput(ctx *pulumi.Context, args GetBackupDownloadInfoOutputArgs, opts ...pulumi.InvokeOption) GetBackupDownloadInfoResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetBackupDownloadInfoResultOutput, error) {
-			args := v.(GetBackupDownloadInfoArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Redis/getBackupDownloadInfo:getBackupDownloadInfo", args, GetBackupDownloadInfoResultOutput{}, options).(GetBackupDownloadInfoResultOutput), nil
-		}).(GetBackupDownloadInfoResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Redis/getBackupDownloadInfo:getBackupDownloadInfo", args, GetBackupDownloadInfoResultOutput{}, options).(GetBackupDownloadInfoResultOutput)
 }
 
 // A collection of arguments for invoking getBackupDownloadInfo.

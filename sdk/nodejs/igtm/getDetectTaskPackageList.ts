@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Igtm.getDetectTaskPackageList({});
+ * const example = tencentcloud.igtm.getDetectTaskPackageList({});
  * ```
  *
  * ### Query igtm detect task package list by filter
@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Igtm.getDetectTaskPackageList({
+ * const example = tencentcloud.igtm.getDetectTaskPackageList({
  *     filters: [{
  *         name: "ResourceId",
  *         values: ["task-qqcoptejbwbf"],
@@ -84,7 +84,7 @@ export interface GetDetectTaskPackageListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Igtm.getDetectTaskPackageList({});
+ * const example = tencentcloud.igtm.getDetectTaskPackageList({});
  * ```
  *
  * ### Query igtm detect task package list by filter
@@ -93,7 +93,7 @@ export interface GetDetectTaskPackageListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Igtm.getDetectTaskPackageList({
+ * const example = tencentcloud.igtm.getDetectTaskPackageList({
  *     filters: [{
  *         name: "ResourceId",
  *         values: ["task-qqcoptejbwbf"],
@@ -118,9 +118,9 @@ export interface GetDetectTaskPackageListOutputArgs {
     /**
      * Detect task filter conditions.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Igtm.GetDetectTaskPackageListFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Igtm.GetDetectTaskPackageListFilterArgs>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

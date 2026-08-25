@@ -55,7 +55,7 @@ import (
 //
 // ## Import
 //
-// ckafka acl_rule can be imported using the id, e.g.
+// ckafka aclRule can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Ckafka/aclRule:AclRule acl_rule acl_rule_id

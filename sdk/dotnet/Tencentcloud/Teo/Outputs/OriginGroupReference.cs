@@ -15,6 +15,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class OriginGroupReference
     {
         /// <summary>
+        /// The alias zone name of the referenced instance.
+        /// </summary>
+        public readonly string? AliasZoneName;
+        /// <summary>
         /// The instance ID of the reference type.
         /// </summary>
         public readonly string? InstanceId;
@@ -30,18 +34,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// - `ApplicationProxy`: Four-layer proxy.
         /// </summary>
         public readonly string? InstanceType;
+        /// <summary>
+        /// Site ID.
+        /// </summary>
+        public readonly string? ZoneId;
+        /// <summary>
+        /// The zone name of the referenced instance.
+        /// </summary>
+        public readonly string? ZoneName;
 
         [OutputConstructor]
         private OriginGroupReference(
+            string? aliasZoneName,
+
             string? instanceId,
 
             string? instanceName,
 
-            string? instanceType)
+            string? instanceType,
+
+            string? zoneId,
+
+            string? zoneName)
         {
+            AliasZoneName = aliasZoneName;
             InstanceId = instanceId;
             InstanceName = instanceName;
             InstanceType = instanceType;
+            ZoneId = zoneId;
+            ZoneName = zoneName;
         }
     }
 }

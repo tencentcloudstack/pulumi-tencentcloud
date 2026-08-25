@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getOwaspRules({
+ * const example = tencentcloud.waf.getOwaspRules({
  *     domain: "example.qcloud.com",
  *     by: "RuleId",
  *     order: "desc",
@@ -91,7 +91,7 @@ export interface GetOwaspRulesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getOwaspRules({
+ * const example = tencentcloud.waf.getOwaspRules({
  *     domain: "example.qcloud.com",
  *     by: "RuleId",
  *     order: "desc",
@@ -121,7 +121,7 @@ export interface GetOwaspRulesOutputArgs {
     /**
      * Specifies the field used to sort. valid values: RuleId, ModifyTime.
      */
-    by?: pulumi.Input<string>;
+    by?: pulumi.Input<string | undefined>;
     /**
      * Domain to be queried.
      */
@@ -129,13 +129,13 @@ export interface GetOwaspRulesOutputArgs {
     /**
      * Specifies the criteria, support RuleId, TypeId, Desc, CveID, Status, and VulLevel.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Waf.GetOwaspRulesFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Waf.GetOwaspRulesFilterArgs>[] | undefined>;
     /**
      * Sorting method. supports asc, desc.
      */
-    order?: pulumi.Input<string>;
+    order?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

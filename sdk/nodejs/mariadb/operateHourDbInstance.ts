@@ -94,11 +94,11 @@ export interface OperateHourDbInstanceState {
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Operation, `activate`- activate the hour db instance, `isolate`- isolate the hour db instance.
      */
-    operate?: pulumi.Input<string>;
+    operate?: pulumi.Input<string | undefined>;
 }
 
 /**

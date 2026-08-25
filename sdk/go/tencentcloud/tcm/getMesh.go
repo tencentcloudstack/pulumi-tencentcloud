@@ -88,12 +88,8 @@ type LookupMeshResult struct {
 }
 
 func LookupMeshOutput(ctx *pulumi.Context, args LookupMeshOutputArgs, opts ...pulumi.InvokeOption) LookupMeshResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupMeshResultOutput, error) {
-			args := v.(LookupMeshArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tcm/getMesh:getMesh", args, LookupMeshResultOutput{}, options).(LookupMeshResultOutput), nil
-		}).(LookupMeshResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tcm/getMesh:getMesh", args, LookupMeshResultOutput{}, options).(LookupMeshResultOutput)
 }
 
 // A collection of arguments for invoking getMesh.

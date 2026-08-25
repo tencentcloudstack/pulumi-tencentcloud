@@ -11,12 +11,35 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * ### Query all Ckafka instances
+ *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Ckafka.getInstances({
- *     instanceIds: ["ckafka-vv7wpvae"],
+ * const example = tencentcloud.ckafka.getInstances({});
+ * ```
+ *
+ * ### Query Ckafka instances by filters
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = tencentcloud.ckafka.getInstances({
+ *     instanceIds: [
+ *         "ckafka-7k5nbnem",
+ *         "ckafka-8j4raxv8",
+ *     ],
+ *     statuses: [
+ *         0,
+ *         1,
+ *         2,
+ *     ],
+ *     filters: [{
+ *         name: "InstanceType",
+ *         values: ["profession"],
+ *     }],
  * });
  * ```
  */
@@ -48,11 +71,15 @@ export interface GetInstancesArgs {
      */
     instanceIds?: string[];
     /**
-     * The number of pages, default is `10`.
+     * This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances. The number of pages, default is `10`.
+     *
+     * @deprecated This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.
      */
     limit?: number;
     /**
-     * The page start offset, default is `0`.
+     * This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances. The page start offset, default is `0`.
+     *
+     * @deprecated This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.
      */
     offset?: number;
     /**
@@ -87,7 +114,13 @@ export interface GetInstancesResult {
      * A list of ckafka users. Each element contains the following attributes:
      */
     readonly instanceLists: outputs.Ckafka.GetInstancesInstanceList[];
+    /**
+     * @deprecated This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.
+     */
     readonly limit?: number;
+    /**
+     * @deprecated This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.
+     */
     readonly offset?: number;
     readonly resultOutputFile?: string;
     readonly searchWord?: string;
@@ -105,12 +138,35 @@ export interface GetInstancesResult {
  *
  * ## Example Usage
  *
+ * ### Query all Ckafka instances
+ *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Ckafka.getInstances({
- *     instanceIds: ["ckafka-vv7wpvae"],
+ * const example = tencentcloud.ckafka.getInstances({});
+ * ```
+ *
+ * ### Query Ckafka instances by filters
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = tencentcloud.ckafka.getInstances({
+ *     instanceIds: [
+ *         "ckafka-7k5nbnem",
+ *         "ckafka-8j4raxv8",
+ *     ],
+ *     statuses: [
+ *         0,
+ *         1,
+ *         2,
+ *     ],
+ *     filters: [{
+ *         name: "InstanceType",
+ *         values: ["profession"],
+ *     }],
  * });
  * ```
  */
@@ -136,33 +192,37 @@ export interface GetInstancesOutputArgs {
     /**
      * Filter. filter.name supports ('Ip', 'VpcId', 'SubNetId', 'InstanceType','InstanceId'), filter.values can pass up to 10 values.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Ckafka.GetInstancesFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Ckafka.GetInstancesFilterArgs>[] | undefined>;
     /**
      * Filter by instance ID.
      */
-    instanceIds?: pulumi.Input<pulumi.Input<string>[]>;
+    instanceIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
-     * The number of pages, default is `10`.
+     * This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances. The number of pages, default is `10`.
+     *
+     * @deprecated This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.
      */
-    limit?: pulumi.Input<number>;
+    limit?: pulumi.Input<number | undefined>;
     /**
-     * The page start offset, default is `0`.
+     * This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances. The page start offset, default is `0`.
+     *
+     * @deprecated This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.
      */
-    offset?: pulumi.Input<number>;
+    offset?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Filter by instance name, support fuzzy query.
      */
-    searchWord?: pulumi.Input<string>;
+    searchWord?: pulumi.Input<string | undefined>;
     /**
      * (Filter Criteria) The status of the instance. 0: Create, 1: Run, 2: Delete, do not fill the default return all.
      */
-    statuses?: pulumi.Input<pulumi.Input<number>[]>;
+    statuses?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Matches the tag key value.
      */
-    tagKey?: pulumi.Input<string>;
+    tagKey?: pulumi.Input<string | undefined>;
 }

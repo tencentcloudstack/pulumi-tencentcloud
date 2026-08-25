@@ -67,12 +67,8 @@ type LookupApplicationAttributeResult struct {
 }
 
 func LookupApplicationAttributeOutput(ctx *pulumi.Context, args LookupApplicationAttributeOutputArgs, opts ...pulumi.InvokeOption) LookupApplicationAttributeResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupApplicationAttributeResultOutput, error) {
-			args := v.(LookupApplicationAttributeArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tsf/getApplicationAttribute:getApplicationAttribute", args, LookupApplicationAttributeResultOutput{}, options).(LookupApplicationAttributeResultOutput), nil
-		}).(LookupApplicationAttributeResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tsf/getApplicationAttribute:getApplicationAttribute", args, LookupApplicationAttributeResultOutput{}, options).(LookupApplicationAttributeResultOutput)
 }
 
 // A collection of arguments for invoking getApplicationAttribute.

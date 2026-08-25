@@ -18,7 +18,7 @@ type ClusterAttachmentWorkerConfig struct {
 	DataDisks []ClusterAttachmentWorkerConfigDataDisk `pulumi:"dataDisks"`
 	// Indicate to set desired pod number in node. valid when the cluster is podCIDR.
 	DesiredPodNum *int `pulumi:"desiredPodNum"`
-	// Docker graph path. Default is `/var/lib/docker`.
+	// Docker graph path. Default is determined by the platform (currently /var/lib/containerd for containerd-based nodes).
 	DockerGraphPath *string `pulumi:"dockerGraphPath"`
 	// Custom parameter information related to the node. This is a white-list parameter.
 	ExtraArgs []string `pulumi:"extraArgs"`
@@ -34,8 +34,12 @@ type ClusterAttachmentWorkerConfig struct {
 	PreStartUserScript *string `pulumi:"preStartUserScript"`
 	// Node taint.
 	Taints []ClusterAttachmentWorkerConfigTaint `pulumi:"taints"`
-	// Base64-encoded User Data text, the length limit is 16KB.
+	// It has been deprecated from version 1.83.16. Use `userScript` instead. Base64-encoded User Data text, the length limit is 16KB.
+	//
+	// Deprecated: It has been deprecated from version 1.83.16. Use `userScript` instead.
 	UserData *string `pulumi:"userData"`
+	// A Base64-encoded user script that executes after Kubernetes components start. Users must ensure the script supports re-entrancy and retry logic. The script and its generated log files can be found in the `/data/ccs_userscript/` directory on the node. If the node should only join the scheduling pool after initialization is complete, the `unschedulable` parameter can be used; in this case, add the command `kubectl uncordon nodename --kubeconfig=/root/.kube/config` at the end of the user script to enable scheduling on the node. Note: This field may return null, indicating that no valid value is available. Example value: `#!/bin/sh echo "hello world"`.
+	UserScript *string `pulumi:"userScript"`
 }
 
 // ClusterAttachmentWorkerConfigInput is an input type that accepts ClusterAttachmentWorkerConfigArgs and ClusterAttachmentWorkerConfigOutput values.
@@ -54,7 +58,7 @@ type ClusterAttachmentWorkerConfigArgs struct {
 	DataDisks ClusterAttachmentWorkerConfigDataDiskArrayInput `pulumi:"dataDisks"`
 	// Indicate to set desired pod number in node. valid when the cluster is podCIDR.
 	DesiredPodNum pulumi.IntPtrInput `pulumi:"desiredPodNum"`
-	// Docker graph path. Default is `/var/lib/docker`.
+	// Docker graph path. Default is determined by the platform (currently /var/lib/containerd for containerd-based nodes).
 	DockerGraphPath pulumi.StringPtrInput `pulumi:"dockerGraphPath"`
 	// Custom parameter information related to the node. This is a white-list parameter.
 	ExtraArgs pulumi.StringArrayInput `pulumi:"extraArgs"`
@@ -70,8 +74,12 @@ type ClusterAttachmentWorkerConfigArgs struct {
 	PreStartUserScript pulumi.StringPtrInput `pulumi:"preStartUserScript"`
 	// Node taint.
 	Taints ClusterAttachmentWorkerConfigTaintArrayInput `pulumi:"taints"`
-	// Base64-encoded User Data text, the length limit is 16KB.
+	// It has been deprecated from version 1.83.16. Use `userScript` instead. Base64-encoded User Data text, the length limit is 16KB.
+	//
+	// Deprecated: It has been deprecated from version 1.83.16. Use `userScript` instead.
 	UserData pulumi.StringPtrInput `pulumi:"userData"`
+	// A Base64-encoded user script that executes after Kubernetes components start. Users must ensure the script supports re-entrancy and retry logic. The script and its generated log files can be found in the `/data/ccs_userscript/` directory on the node. If the node should only join the scheduling pool after initialization is complete, the `unschedulable` parameter can be used; in this case, add the command `kubectl uncordon nodename --kubeconfig=/root/.kube/config` at the end of the user script to enable scheduling on the node. Note: This field may return null, indicating that no valid value is available. Example value: `#!/bin/sh echo "hello world"`.
+	UserScript pulumi.StringPtrInput `pulumi:"userScript"`
 }
 
 func (ClusterAttachmentWorkerConfigArgs) ElementType() reflect.Type {
@@ -161,7 +169,7 @@ func (o ClusterAttachmentWorkerConfigOutput) DesiredPodNum() pulumi.IntPtrOutput
 	return o.ApplyT(func(v ClusterAttachmentWorkerConfig) *int { return v.DesiredPodNum }).(pulumi.IntPtrOutput)
 }
 
-// Docker graph path. Default is `/var/lib/docker`.
+// Docker graph path. Default is determined by the platform (currently /var/lib/containerd for containerd-based nodes).
 func (o ClusterAttachmentWorkerConfigOutput) DockerGraphPath() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterAttachmentWorkerConfig) *string { return v.DockerGraphPath }).(pulumi.StringPtrOutput)
 }
@@ -198,9 +206,16 @@ func (o ClusterAttachmentWorkerConfigOutput) Taints() ClusterAttachmentWorkerCon
 	return o.ApplyT(func(v ClusterAttachmentWorkerConfig) []ClusterAttachmentWorkerConfigTaint { return v.Taints }).(ClusterAttachmentWorkerConfigTaintArrayOutput)
 }
 
-// Base64-encoded User Data text, the length limit is 16KB.
+// It has been deprecated from version 1.83.16. Use `userScript` instead. Base64-encoded User Data text, the length limit is 16KB.
+//
+// Deprecated: It has been deprecated from version 1.83.16. Use `userScript` instead.
 func (o ClusterAttachmentWorkerConfigOutput) UserData() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterAttachmentWorkerConfig) *string { return v.UserData }).(pulumi.StringPtrOutput)
+}
+
+// A Base64-encoded user script that executes after Kubernetes components start. Users must ensure the script supports re-entrancy and retry logic. The script and its generated log files can be found in the `/data/ccs_userscript/` directory on the node. If the node should only join the scheduling pool after initialization is complete, the `unschedulable` parameter can be used; in this case, add the command `kubectl uncordon nodename --kubeconfig=/root/.kube/config` at the end of the user script to enable scheduling on the node. Note: This field may return null, indicating that no valid value is available. Example value: `#!/bin/sh echo "hello world"`.
+func (o ClusterAttachmentWorkerConfigOutput) UserScript() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterAttachmentWorkerConfig) *string { return v.UserScript }).(pulumi.StringPtrOutput)
 }
 
 type ClusterAttachmentWorkerConfigPtrOutput struct{ *pulumi.OutputState }
@@ -247,7 +262,7 @@ func (o ClusterAttachmentWorkerConfigPtrOutput) DesiredPodNum() pulumi.IntPtrOut
 	}).(pulumi.IntPtrOutput)
 }
 
-// Docker graph path. Default is `/var/lib/docker`.
+// Docker graph path. Default is determined by the platform (currently /var/lib/containerd for containerd-based nodes).
 func (o ClusterAttachmentWorkerConfigPtrOutput) DockerGraphPath() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ClusterAttachmentWorkerConfig) *string {
 		if v == nil {
@@ -319,13 +334,25 @@ func (o ClusterAttachmentWorkerConfigPtrOutput) Taints() ClusterAttachmentWorker
 	}).(ClusterAttachmentWorkerConfigTaintArrayOutput)
 }
 
-// Base64-encoded User Data text, the length limit is 16KB.
+// It has been deprecated from version 1.83.16. Use `userScript` instead. Base64-encoded User Data text, the length limit is 16KB.
+//
+// Deprecated: It has been deprecated from version 1.83.16. Use `userScript` instead.
 func (o ClusterAttachmentWorkerConfigPtrOutput) UserData() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ClusterAttachmentWorkerConfig) *string {
 		if v == nil {
 			return nil
 		}
 		return v.UserData
+	}).(pulumi.StringPtrOutput)
+}
+
+// A Base64-encoded user script that executes after Kubernetes components start. Users must ensure the script supports re-entrancy and retry logic. The script and its generated log files can be found in the `/data/ccs_userscript/` directory on the node. If the node should only join the scheduling pool after initialization is complete, the `unschedulable` parameter can be used; in this case, add the command `kubectl uncordon nodename --kubeconfig=/root/.kube/config` at the end of the user script to enable scheduling on the node. Note: This field may return null, indicating that no valid value is available. Example value: `#!/bin/sh echo "hello world"`.
+func (o ClusterAttachmentWorkerConfigPtrOutput) UserScript() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterAttachmentWorkerConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.UserScript
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -689,7 +716,7 @@ type ClusterAttachmentWorkerConfigOverrides struct {
 	DataDisks []ClusterAttachmentWorkerConfigOverridesDataDisk `pulumi:"dataDisks"`
 	// Indicate to set desired pod number in node. valid when the cluster is podCIDR.
 	DesiredPodNum *int `pulumi:"desiredPodNum"`
-	// This argument was no longer supported by TencentCloud TKE. Docker graph path. Default is `/var/lib/docker`.
+	// This argument was no longer supported by TencentCloud TKE. Docker graph path. Default is determined by the platform (currently /var/lib/containerd for containerd-based nodes).
 	//
 	// Deprecated: This argument was no longer supported by TencentCloud TKE.
 	DockerGraphPath *string `pulumi:"dockerGraphPath"`
@@ -733,7 +760,7 @@ type ClusterAttachmentWorkerConfigOverridesArgs struct {
 	DataDisks ClusterAttachmentWorkerConfigOverridesDataDiskArrayInput `pulumi:"dataDisks"`
 	// Indicate to set desired pod number in node. valid when the cluster is podCIDR.
 	DesiredPodNum pulumi.IntPtrInput `pulumi:"desiredPodNum"`
-	// This argument was no longer supported by TencentCloud TKE. Docker graph path. Default is `/var/lib/docker`.
+	// This argument was no longer supported by TencentCloud TKE. Docker graph path. Default is determined by the platform (currently /var/lib/containerd for containerd-based nodes).
 	//
 	// Deprecated: This argument was no longer supported by TencentCloud TKE.
 	DockerGraphPath pulumi.StringPtrInput `pulumi:"dockerGraphPath"`
@@ -850,7 +877,7 @@ func (o ClusterAttachmentWorkerConfigOverridesOutput) DesiredPodNum() pulumi.Int
 	return o.ApplyT(func(v ClusterAttachmentWorkerConfigOverrides) *int { return v.DesiredPodNum }).(pulumi.IntPtrOutput)
 }
 
-// This argument was no longer supported by TencentCloud TKE. Docker graph path. Default is `/var/lib/docker`.
+// This argument was no longer supported by TencentCloud TKE. Docker graph path. Default is determined by the platform (currently /var/lib/containerd for containerd-based nodes).
 //
 // Deprecated: This argument was no longer supported by TencentCloud TKE.
 func (o ClusterAttachmentWorkerConfigOverridesOutput) DockerGraphPath() pulumi.StringPtrOutput {
@@ -943,7 +970,7 @@ func (o ClusterAttachmentWorkerConfigOverridesPtrOutput) DesiredPodNum() pulumi.
 	}).(pulumi.IntPtrOutput)
 }
 
-// This argument was no longer supported by TencentCloud TKE. Docker graph path. Default is `/var/lib/docker`.
+// This argument was no longer supported by TencentCloud TKE. Docker graph path. Default is determined by the platform (currently /var/lib/containerd for containerd-based nodes).
 //
 // Deprecated: This argument was no longer supported by TencentCloud TKE.
 func (o ClusterAttachmentWorkerConfigOverridesPtrOutput) DockerGraphPath() pulumi.StringPtrOutput {
@@ -1498,9 +1525,9 @@ func (o ClusterAttachmentWorkerConfigTaintArrayOutput) Index(i pulumi.IntInput) 
 type ClusterAuthOptions struct {
 	// If set to `true`, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.
 	AutoCreateDiscoveryAnonymousAuth *bool `pulumi:"autoCreateDiscoveryAnonymousAuth"`
-	// Specify service-account-issuer. If useTkeDefault is set to `true`, please do not set this field, it will be ignored anyway.
+	// Specify service-account-issuer. If useTkeDefault is set to `true`, please do not set this field, it will be ignored anyway. This field is also computed: when useTkeDefault is `true`, TKE will auto-generate the value and it will be read back into state.
 	Issuer *string `pulumi:"issuer"`
-	// Specify service-account-jwks-uri. If useTkeDefault is set to `true`, please do not set this field, it will be ignored anyway.
+	// Specify service-account-jwks-uri. If useTkeDefault is set to `true`, please do not set this field, it will be ignored anyway. This field is also computed: when useTkeDefault is `true`, TKE will auto-generate the value and it will be read back into state.
 	JwksUri *string `pulumi:"jwksUri"`
 	// If set to `true`, the issuer and jwksUri will be generated automatically by tke, please do not set issuer and jwks_uri, and they will be ignored.
 	UseTkeDefault *bool `pulumi:"useTkeDefault"`
@@ -1520,9 +1547,9 @@ type ClusterAuthOptionsInput interface {
 type ClusterAuthOptionsArgs struct {
 	// If set to `true`, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.
 	AutoCreateDiscoveryAnonymousAuth pulumi.BoolPtrInput `pulumi:"autoCreateDiscoveryAnonymousAuth"`
-	// Specify service-account-issuer. If useTkeDefault is set to `true`, please do not set this field, it will be ignored anyway.
+	// Specify service-account-issuer. If useTkeDefault is set to `true`, please do not set this field, it will be ignored anyway. This field is also computed: when useTkeDefault is `true`, TKE will auto-generate the value and it will be read back into state.
 	Issuer pulumi.StringPtrInput `pulumi:"issuer"`
-	// Specify service-account-jwks-uri. If useTkeDefault is set to `true`, please do not set this field, it will be ignored anyway.
+	// Specify service-account-jwks-uri. If useTkeDefault is set to `true`, please do not set this field, it will be ignored anyway. This field is also computed: when useTkeDefault is `true`, TKE will auto-generate the value and it will be read back into state.
 	JwksUri pulumi.StringPtrInput `pulumi:"jwksUri"`
 	// If set to `true`, the issuer and jwksUri will be generated automatically by tke, please do not set issuer and jwks_uri, and they will be ignored.
 	UseTkeDefault pulumi.BoolPtrInput `pulumi:"useTkeDefault"`
@@ -1610,12 +1637,12 @@ func (o ClusterAuthOptionsOutput) AutoCreateDiscoveryAnonymousAuth() pulumi.Bool
 	return o.ApplyT(func(v ClusterAuthOptions) *bool { return v.AutoCreateDiscoveryAnonymousAuth }).(pulumi.BoolPtrOutput)
 }
 
-// Specify service-account-issuer. If useTkeDefault is set to `true`, please do not set this field, it will be ignored anyway.
+// Specify service-account-issuer. If useTkeDefault is set to `true`, please do not set this field, it will be ignored anyway. This field is also computed: when useTkeDefault is `true`, TKE will auto-generate the value and it will be read back into state.
 func (o ClusterAuthOptionsOutput) Issuer() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterAuthOptions) *string { return v.Issuer }).(pulumi.StringPtrOutput)
 }
 
-// Specify service-account-jwks-uri. If useTkeDefault is set to `true`, please do not set this field, it will be ignored anyway.
+// Specify service-account-jwks-uri. If useTkeDefault is set to `true`, please do not set this field, it will be ignored anyway. This field is also computed: when useTkeDefault is `true`, TKE will auto-generate the value and it will be read back into state.
 func (o ClusterAuthOptionsOutput) JwksUri() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterAuthOptions) *string { return v.JwksUri }).(pulumi.StringPtrOutput)
 }
@@ -1659,7 +1686,7 @@ func (o ClusterAuthOptionsPtrOutput) AutoCreateDiscoveryAnonymousAuth() pulumi.B
 	}).(pulumi.BoolPtrOutput)
 }
 
-// Specify service-account-issuer. If useTkeDefault is set to `true`, please do not set this field, it will be ignored anyway.
+// Specify service-account-issuer. If useTkeDefault is set to `true`, please do not set this field, it will be ignored anyway. This field is also computed: when useTkeDefault is `true`, TKE will auto-generate the value and it will be read back into state.
 func (o ClusterAuthOptionsPtrOutput) Issuer() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ClusterAuthOptions) *string {
 		if v == nil {
@@ -1669,7 +1696,7 @@ func (o ClusterAuthOptionsPtrOutput) Issuer() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-// Specify service-account-jwks-uri. If useTkeDefault is set to `true`, please do not set this field, it will be ignored anyway.
+// Specify service-account-jwks-uri. If useTkeDefault is set to `true`, please do not set this field, it will be ignored anyway. This field is also computed: when useTkeDefault is `true`, TKE will auto-generate the value and it will be read back into state.
 func (o ClusterAuthOptionsPtrOutput) JwksUri() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ClusterAuthOptions) *string {
 		if v == nil {
@@ -4003,6 +4030,130 @@ func (o ClusterLogAgentPtrOutput) KubeletRootDir() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+type ClusterMaintenanceWindowAndExclusionExclusion struct {
+	// Maintenance exclusion end time.
+	EndAt string `pulumi:"endAt"`
+	// ID of the resource.
+	Id *int `pulumi:"id"`
+	// Maintenance exclusion name.
+	Name string `pulumi:"name"`
+	// Maintenance exclusion start time.
+	StartAt string `pulumi:"startAt"`
+}
+
+// ClusterMaintenanceWindowAndExclusionExclusionInput is an input type that accepts ClusterMaintenanceWindowAndExclusionExclusionArgs and ClusterMaintenanceWindowAndExclusionExclusionOutput values.
+// You can construct a concrete instance of `ClusterMaintenanceWindowAndExclusionExclusionInput` via:
+//
+//	ClusterMaintenanceWindowAndExclusionExclusionArgs{...}
+type ClusterMaintenanceWindowAndExclusionExclusionInput interface {
+	pulumi.Input
+
+	ToClusterMaintenanceWindowAndExclusionExclusionOutput() ClusterMaintenanceWindowAndExclusionExclusionOutput
+	ToClusterMaintenanceWindowAndExclusionExclusionOutputWithContext(context.Context) ClusterMaintenanceWindowAndExclusionExclusionOutput
+}
+
+type ClusterMaintenanceWindowAndExclusionExclusionArgs struct {
+	// Maintenance exclusion end time.
+	EndAt pulumi.StringInput `pulumi:"endAt"`
+	// ID of the resource.
+	Id pulumi.IntPtrInput `pulumi:"id"`
+	// Maintenance exclusion name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Maintenance exclusion start time.
+	StartAt pulumi.StringInput `pulumi:"startAt"`
+}
+
+func (ClusterMaintenanceWindowAndExclusionExclusionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterMaintenanceWindowAndExclusionExclusion)(nil)).Elem()
+}
+
+func (i ClusterMaintenanceWindowAndExclusionExclusionArgs) ToClusterMaintenanceWindowAndExclusionExclusionOutput() ClusterMaintenanceWindowAndExclusionExclusionOutput {
+	return i.ToClusterMaintenanceWindowAndExclusionExclusionOutputWithContext(context.Background())
+}
+
+func (i ClusterMaintenanceWindowAndExclusionExclusionArgs) ToClusterMaintenanceWindowAndExclusionExclusionOutputWithContext(ctx context.Context) ClusterMaintenanceWindowAndExclusionExclusionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterMaintenanceWindowAndExclusionExclusionOutput)
+}
+
+// ClusterMaintenanceWindowAndExclusionExclusionArrayInput is an input type that accepts ClusterMaintenanceWindowAndExclusionExclusionArray and ClusterMaintenanceWindowAndExclusionExclusionArrayOutput values.
+// You can construct a concrete instance of `ClusterMaintenanceWindowAndExclusionExclusionArrayInput` via:
+//
+//	ClusterMaintenanceWindowAndExclusionExclusionArray{ ClusterMaintenanceWindowAndExclusionExclusionArgs{...} }
+type ClusterMaintenanceWindowAndExclusionExclusionArrayInput interface {
+	pulumi.Input
+
+	ToClusterMaintenanceWindowAndExclusionExclusionArrayOutput() ClusterMaintenanceWindowAndExclusionExclusionArrayOutput
+	ToClusterMaintenanceWindowAndExclusionExclusionArrayOutputWithContext(context.Context) ClusterMaintenanceWindowAndExclusionExclusionArrayOutput
+}
+
+type ClusterMaintenanceWindowAndExclusionExclusionArray []ClusterMaintenanceWindowAndExclusionExclusionInput
+
+func (ClusterMaintenanceWindowAndExclusionExclusionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterMaintenanceWindowAndExclusionExclusion)(nil)).Elem()
+}
+
+func (i ClusterMaintenanceWindowAndExclusionExclusionArray) ToClusterMaintenanceWindowAndExclusionExclusionArrayOutput() ClusterMaintenanceWindowAndExclusionExclusionArrayOutput {
+	return i.ToClusterMaintenanceWindowAndExclusionExclusionArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterMaintenanceWindowAndExclusionExclusionArray) ToClusterMaintenanceWindowAndExclusionExclusionArrayOutputWithContext(ctx context.Context) ClusterMaintenanceWindowAndExclusionExclusionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterMaintenanceWindowAndExclusionExclusionArrayOutput)
+}
+
+type ClusterMaintenanceWindowAndExclusionExclusionOutput struct{ *pulumi.OutputState }
+
+func (ClusterMaintenanceWindowAndExclusionExclusionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterMaintenanceWindowAndExclusionExclusion)(nil)).Elem()
+}
+
+func (o ClusterMaintenanceWindowAndExclusionExclusionOutput) ToClusterMaintenanceWindowAndExclusionExclusionOutput() ClusterMaintenanceWindowAndExclusionExclusionOutput {
+	return o
+}
+
+func (o ClusterMaintenanceWindowAndExclusionExclusionOutput) ToClusterMaintenanceWindowAndExclusionExclusionOutputWithContext(ctx context.Context) ClusterMaintenanceWindowAndExclusionExclusionOutput {
+	return o
+}
+
+// Maintenance exclusion end time.
+func (o ClusterMaintenanceWindowAndExclusionExclusionOutput) EndAt() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterMaintenanceWindowAndExclusionExclusion) string { return v.EndAt }).(pulumi.StringOutput)
+}
+
+// ID of the resource.
+func (o ClusterMaintenanceWindowAndExclusionExclusionOutput) Id() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterMaintenanceWindowAndExclusionExclusion) *int { return v.Id }).(pulumi.IntPtrOutput)
+}
+
+// Maintenance exclusion name.
+func (o ClusterMaintenanceWindowAndExclusionExclusionOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterMaintenanceWindowAndExclusionExclusion) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Maintenance exclusion start time.
+func (o ClusterMaintenanceWindowAndExclusionExclusionOutput) StartAt() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterMaintenanceWindowAndExclusionExclusion) string { return v.StartAt }).(pulumi.StringOutput)
+}
+
+type ClusterMaintenanceWindowAndExclusionExclusionArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterMaintenanceWindowAndExclusionExclusionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterMaintenanceWindowAndExclusionExclusion)(nil)).Elem()
+}
+
+func (o ClusterMaintenanceWindowAndExclusionExclusionArrayOutput) ToClusterMaintenanceWindowAndExclusionExclusionArrayOutput() ClusterMaintenanceWindowAndExclusionExclusionArrayOutput {
+	return o
+}
+
+func (o ClusterMaintenanceWindowAndExclusionExclusionArrayOutput) ToClusterMaintenanceWindowAndExclusionExclusionArrayOutputWithContext(ctx context.Context) ClusterMaintenanceWindowAndExclusionExclusionArrayOutput {
+	return o
+}
+
+func (o ClusterMaintenanceWindowAndExclusionExclusionArrayOutput) Index(i pulumi.IntInput) ClusterMaintenanceWindowAndExclusionExclusionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterMaintenanceWindowAndExclusionExclusion {
+		return vs[0].([]ClusterMaintenanceWindowAndExclusionExclusion)[vs[1].(int)]
+	}).(ClusterMaintenanceWindowAndExclusionExclusionOutput)
+}
+
 type ClusterMasterAttachmentExtraArgs struct {
 	// etcd custom parameters. Only supports independent clusters.
 	Etcds []string `pulumi:"etcds"`
@@ -6258,6 +6409,1361 @@ func (o ClusterResourceDeleteOptionArrayOutput) Index(i pulumi.IntInput) Cluster
 	}).(ClusterResourceDeleteOptionOutput)
 }
 
+type ClusterRollOutSequenceTagConfigTag struct {
+	// Tag key.
+	Key string `pulumi:"key"`
+	// Tag value.
+	Value string `pulumi:"value"`
+}
+
+// ClusterRollOutSequenceTagConfigTagInput is an input type that accepts ClusterRollOutSequenceTagConfigTagArgs and ClusterRollOutSequenceTagConfigTagOutput values.
+// You can construct a concrete instance of `ClusterRollOutSequenceTagConfigTagInput` via:
+//
+//	ClusterRollOutSequenceTagConfigTagArgs{...}
+type ClusterRollOutSequenceTagConfigTagInput interface {
+	pulumi.Input
+
+	ToClusterRollOutSequenceTagConfigTagOutput() ClusterRollOutSequenceTagConfigTagOutput
+	ToClusterRollOutSequenceTagConfigTagOutputWithContext(context.Context) ClusterRollOutSequenceTagConfigTagOutput
+}
+
+type ClusterRollOutSequenceTagConfigTagArgs struct {
+	// Tag key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Tag value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (ClusterRollOutSequenceTagConfigTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterRollOutSequenceTagConfigTag)(nil)).Elem()
+}
+
+func (i ClusterRollOutSequenceTagConfigTagArgs) ToClusterRollOutSequenceTagConfigTagOutput() ClusterRollOutSequenceTagConfigTagOutput {
+	return i.ToClusterRollOutSequenceTagConfigTagOutputWithContext(context.Background())
+}
+
+func (i ClusterRollOutSequenceTagConfigTagArgs) ToClusterRollOutSequenceTagConfigTagOutputWithContext(ctx context.Context) ClusterRollOutSequenceTagConfigTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterRollOutSequenceTagConfigTagOutput)
+}
+
+// ClusterRollOutSequenceTagConfigTagArrayInput is an input type that accepts ClusterRollOutSequenceTagConfigTagArray and ClusterRollOutSequenceTagConfigTagArrayOutput values.
+// You can construct a concrete instance of `ClusterRollOutSequenceTagConfigTagArrayInput` via:
+//
+//	ClusterRollOutSequenceTagConfigTagArray{ ClusterRollOutSequenceTagConfigTagArgs{...} }
+type ClusterRollOutSequenceTagConfigTagArrayInput interface {
+	pulumi.Input
+
+	ToClusterRollOutSequenceTagConfigTagArrayOutput() ClusterRollOutSequenceTagConfigTagArrayOutput
+	ToClusterRollOutSequenceTagConfigTagArrayOutputWithContext(context.Context) ClusterRollOutSequenceTagConfigTagArrayOutput
+}
+
+type ClusterRollOutSequenceTagConfigTagArray []ClusterRollOutSequenceTagConfigTagInput
+
+func (ClusterRollOutSequenceTagConfigTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterRollOutSequenceTagConfigTag)(nil)).Elem()
+}
+
+func (i ClusterRollOutSequenceTagConfigTagArray) ToClusterRollOutSequenceTagConfigTagArrayOutput() ClusterRollOutSequenceTagConfigTagArrayOutput {
+	return i.ToClusterRollOutSequenceTagConfigTagArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterRollOutSequenceTagConfigTagArray) ToClusterRollOutSequenceTagConfigTagArrayOutputWithContext(ctx context.Context) ClusterRollOutSequenceTagConfigTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterRollOutSequenceTagConfigTagArrayOutput)
+}
+
+type ClusterRollOutSequenceTagConfigTagOutput struct{ *pulumi.OutputState }
+
+func (ClusterRollOutSequenceTagConfigTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterRollOutSequenceTagConfigTag)(nil)).Elem()
+}
+
+func (o ClusterRollOutSequenceTagConfigTagOutput) ToClusterRollOutSequenceTagConfigTagOutput() ClusterRollOutSequenceTagConfigTagOutput {
+	return o
+}
+
+func (o ClusterRollOutSequenceTagConfigTagOutput) ToClusterRollOutSequenceTagConfigTagOutputWithContext(ctx context.Context) ClusterRollOutSequenceTagConfigTagOutput {
+	return o
+}
+
+// Tag key.
+func (o ClusterRollOutSequenceTagConfigTagOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterRollOutSequenceTagConfigTag) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o ClusterRollOutSequenceTagConfigTagOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterRollOutSequenceTagConfigTag) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type ClusterRollOutSequenceTagConfigTagArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterRollOutSequenceTagConfigTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterRollOutSequenceTagConfigTag)(nil)).Elem()
+}
+
+func (o ClusterRollOutSequenceTagConfigTagArrayOutput) ToClusterRollOutSequenceTagConfigTagArrayOutput() ClusterRollOutSequenceTagConfigTagArrayOutput {
+	return o
+}
+
+func (o ClusterRollOutSequenceTagConfigTagArrayOutput) ToClusterRollOutSequenceTagConfigTagArrayOutputWithContext(ctx context.Context) ClusterRollOutSequenceTagConfigTagArrayOutput {
+	return o
+}
+
+func (o ClusterRollOutSequenceTagConfigTagArrayOutput) Index(i pulumi.IntInput) ClusterRollOutSequenceTagConfigTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterRollOutSequenceTagConfigTag {
+		return vs[0].([]ClusterRollOutSequenceTagConfigTag)[vs[1].(int)]
+	}).(ClusterRollOutSequenceTagConfigTagOutput)
+}
+
+type ClusterSchedulerPolicyConfigClientConnection struct {
+	// Burst request limit.
+	Burst *int `pulumi:"burst"`
+	// Maximum queries per second.
+	Qps *float64 `pulumi:"qps"`
+}
+
+// ClusterSchedulerPolicyConfigClientConnectionInput is an input type that accepts ClusterSchedulerPolicyConfigClientConnectionArgs and ClusterSchedulerPolicyConfigClientConnectionOutput values.
+// You can construct a concrete instance of `ClusterSchedulerPolicyConfigClientConnectionInput` via:
+//
+//	ClusterSchedulerPolicyConfigClientConnectionArgs{...}
+type ClusterSchedulerPolicyConfigClientConnectionInput interface {
+	pulumi.Input
+
+	ToClusterSchedulerPolicyConfigClientConnectionOutput() ClusterSchedulerPolicyConfigClientConnectionOutput
+	ToClusterSchedulerPolicyConfigClientConnectionOutputWithContext(context.Context) ClusterSchedulerPolicyConfigClientConnectionOutput
+}
+
+type ClusterSchedulerPolicyConfigClientConnectionArgs struct {
+	// Burst request limit.
+	Burst pulumi.IntPtrInput `pulumi:"burst"`
+	// Maximum queries per second.
+	Qps pulumi.Float64PtrInput `pulumi:"qps"`
+}
+
+func (ClusterSchedulerPolicyConfigClientConnectionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterSchedulerPolicyConfigClientConnection)(nil)).Elem()
+}
+
+func (i ClusterSchedulerPolicyConfigClientConnectionArgs) ToClusterSchedulerPolicyConfigClientConnectionOutput() ClusterSchedulerPolicyConfigClientConnectionOutput {
+	return i.ToClusterSchedulerPolicyConfigClientConnectionOutputWithContext(context.Background())
+}
+
+func (i ClusterSchedulerPolicyConfigClientConnectionArgs) ToClusterSchedulerPolicyConfigClientConnectionOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigClientConnectionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterSchedulerPolicyConfigClientConnectionOutput)
+}
+
+func (i ClusterSchedulerPolicyConfigClientConnectionArgs) ToClusterSchedulerPolicyConfigClientConnectionPtrOutput() ClusterSchedulerPolicyConfigClientConnectionPtrOutput {
+	return i.ToClusterSchedulerPolicyConfigClientConnectionPtrOutputWithContext(context.Background())
+}
+
+func (i ClusterSchedulerPolicyConfigClientConnectionArgs) ToClusterSchedulerPolicyConfigClientConnectionPtrOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigClientConnectionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterSchedulerPolicyConfigClientConnectionOutput).ToClusterSchedulerPolicyConfigClientConnectionPtrOutputWithContext(ctx)
+}
+
+// ClusterSchedulerPolicyConfigClientConnectionPtrInput is an input type that accepts ClusterSchedulerPolicyConfigClientConnectionArgs, ClusterSchedulerPolicyConfigClientConnectionPtr and ClusterSchedulerPolicyConfigClientConnectionPtrOutput values.
+// You can construct a concrete instance of `ClusterSchedulerPolicyConfigClientConnectionPtrInput` via:
+//
+//	        ClusterSchedulerPolicyConfigClientConnectionArgs{...}
+//
+//	or:
+//
+//	        nil
+type ClusterSchedulerPolicyConfigClientConnectionPtrInput interface {
+	pulumi.Input
+
+	ToClusterSchedulerPolicyConfigClientConnectionPtrOutput() ClusterSchedulerPolicyConfigClientConnectionPtrOutput
+	ToClusterSchedulerPolicyConfigClientConnectionPtrOutputWithContext(context.Context) ClusterSchedulerPolicyConfigClientConnectionPtrOutput
+}
+
+type clusterSchedulerPolicyConfigClientConnectionPtrType ClusterSchedulerPolicyConfigClientConnectionArgs
+
+func ClusterSchedulerPolicyConfigClientConnectionPtr(v *ClusterSchedulerPolicyConfigClientConnectionArgs) ClusterSchedulerPolicyConfigClientConnectionPtrInput {
+	return (*clusterSchedulerPolicyConfigClientConnectionPtrType)(v)
+}
+
+func (*clusterSchedulerPolicyConfigClientConnectionPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterSchedulerPolicyConfigClientConnection)(nil)).Elem()
+}
+
+func (i *clusterSchedulerPolicyConfigClientConnectionPtrType) ToClusterSchedulerPolicyConfigClientConnectionPtrOutput() ClusterSchedulerPolicyConfigClientConnectionPtrOutput {
+	return i.ToClusterSchedulerPolicyConfigClientConnectionPtrOutputWithContext(context.Background())
+}
+
+func (i *clusterSchedulerPolicyConfigClientConnectionPtrType) ToClusterSchedulerPolicyConfigClientConnectionPtrOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigClientConnectionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterSchedulerPolicyConfigClientConnectionPtrOutput)
+}
+
+type ClusterSchedulerPolicyConfigClientConnectionOutput struct{ *pulumi.OutputState }
+
+func (ClusterSchedulerPolicyConfigClientConnectionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterSchedulerPolicyConfigClientConnection)(nil)).Elem()
+}
+
+func (o ClusterSchedulerPolicyConfigClientConnectionOutput) ToClusterSchedulerPolicyConfigClientConnectionOutput() ClusterSchedulerPolicyConfigClientConnectionOutput {
+	return o
+}
+
+func (o ClusterSchedulerPolicyConfigClientConnectionOutput) ToClusterSchedulerPolicyConfigClientConnectionOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigClientConnectionOutput {
+	return o
+}
+
+func (o ClusterSchedulerPolicyConfigClientConnectionOutput) ToClusterSchedulerPolicyConfigClientConnectionPtrOutput() ClusterSchedulerPolicyConfigClientConnectionPtrOutput {
+	return o.ToClusterSchedulerPolicyConfigClientConnectionPtrOutputWithContext(context.Background())
+}
+
+func (o ClusterSchedulerPolicyConfigClientConnectionOutput) ToClusterSchedulerPolicyConfigClientConnectionPtrOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigClientConnectionPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ClusterSchedulerPolicyConfigClientConnection) *ClusterSchedulerPolicyConfigClientConnection {
+		return &v
+	}).(ClusterSchedulerPolicyConfigClientConnectionPtrOutput)
+}
+
+// Burst request limit.
+func (o ClusterSchedulerPolicyConfigClientConnectionOutput) Burst() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterSchedulerPolicyConfigClientConnection) *int { return v.Burst }).(pulumi.IntPtrOutput)
+}
+
+// Maximum queries per second.
+func (o ClusterSchedulerPolicyConfigClientConnectionOutput) Qps() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v ClusterSchedulerPolicyConfigClientConnection) *float64 { return v.Qps }).(pulumi.Float64PtrOutput)
+}
+
+type ClusterSchedulerPolicyConfigClientConnectionPtrOutput struct{ *pulumi.OutputState }
+
+func (ClusterSchedulerPolicyConfigClientConnectionPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterSchedulerPolicyConfigClientConnection)(nil)).Elem()
+}
+
+func (o ClusterSchedulerPolicyConfigClientConnectionPtrOutput) ToClusterSchedulerPolicyConfigClientConnectionPtrOutput() ClusterSchedulerPolicyConfigClientConnectionPtrOutput {
+	return o
+}
+
+func (o ClusterSchedulerPolicyConfigClientConnectionPtrOutput) ToClusterSchedulerPolicyConfigClientConnectionPtrOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigClientConnectionPtrOutput {
+	return o
+}
+
+func (o ClusterSchedulerPolicyConfigClientConnectionPtrOutput) Elem() ClusterSchedulerPolicyConfigClientConnectionOutput {
+	return o.ApplyT(func(v *ClusterSchedulerPolicyConfigClientConnection) ClusterSchedulerPolicyConfigClientConnection {
+		if v != nil {
+			return *v
+		}
+		var ret ClusterSchedulerPolicyConfigClientConnection
+		return ret
+	}).(ClusterSchedulerPolicyConfigClientConnectionOutput)
+}
+
+// Burst request limit.
+func (o ClusterSchedulerPolicyConfigClientConnectionPtrOutput) Burst() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ClusterSchedulerPolicyConfigClientConnection) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Burst
+	}).(pulumi.IntPtrOutput)
+}
+
+// Maximum queries per second.
+func (o ClusterSchedulerPolicyConfigClientConnectionPtrOutput) Qps() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v *ClusterSchedulerPolicyConfigClientConnection) *float64 {
+		if v == nil {
+			return nil
+		}
+		return v.Qps
+	}).(pulumi.Float64PtrOutput)
+}
+
+type ClusterSchedulerPolicyConfigExtender struct {
+	// Extender client configuration.
+	ExtenderClientConfig *ClusterSchedulerPolicyConfigExtenderExtenderClientConfig `pulumi:"extenderClientConfig"`
+	// Filter stage interface.
+	FilterVerb *string `pulumi:"filterVerb"`
+	// Whether node cache capability is enabled.
+	NodeCacheCapable *bool `pulumi:"nodeCacheCapable"`
+	// Preempt stage interface.
+	PreemptVerb *string `pulumi:"preemptVerb"`
+	// Prioritize stage interface.
+	PrioritizeVerb *string `pulumi:"prioritizeVerb"`
+	// Weight for prioritize stage.
+	Weight *int `pulumi:"weight"`
+}
+
+// ClusterSchedulerPolicyConfigExtenderInput is an input type that accepts ClusterSchedulerPolicyConfigExtenderArgs and ClusterSchedulerPolicyConfigExtenderOutput values.
+// You can construct a concrete instance of `ClusterSchedulerPolicyConfigExtenderInput` via:
+//
+//	ClusterSchedulerPolicyConfigExtenderArgs{...}
+type ClusterSchedulerPolicyConfigExtenderInput interface {
+	pulumi.Input
+
+	ToClusterSchedulerPolicyConfigExtenderOutput() ClusterSchedulerPolicyConfigExtenderOutput
+	ToClusterSchedulerPolicyConfigExtenderOutputWithContext(context.Context) ClusterSchedulerPolicyConfigExtenderOutput
+}
+
+type ClusterSchedulerPolicyConfigExtenderArgs struct {
+	// Extender client configuration.
+	ExtenderClientConfig ClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrInput `pulumi:"extenderClientConfig"`
+	// Filter stage interface.
+	FilterVerb pulumi.StringPtrInput `pulumi:"filterVerb"`
+	// Whether node cache capability is enabled.
+	NodeCacheCapable pulumi.BoolPtrInput `pulumi:"nodeCacheCapable"`
+	// Preempt stage interface.
+	PreemptVerb pulumi.StringPtrInput `pulumi:"preemptVerb"`
+	// Prioritize stage interface.
+	PrioritizeVerb pulumi.StringPtrInput `pulumi:"prioritizeVerb"`
+	// Weight for prioritize stage.
+	Weight pulumi.IntPtrInput `pulumi:"weight"`
+}
+
+func (ClusterSchedulerPolicyConfigExtenderArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterSchedulerPolicyConfigExtender)(nil)).Elem()
+}
+
+func (i ClusterSchedulerPolicyConfigExtenderArgs) ToClusterSchedulerPolicyConfigExtenderOutput() ClusterSchedulerPolicyConfigExtenderOutput {
+	return i.ToClusterSchedulerPolicyConfigExtenderOutputWithContext(context.Background())
+}
+
+func (i ClusterSchedulerPolicyConfigExtenderArgs) ToClusterSchedulerPolicyConfigExtenderOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigExtenderOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterSchedulerPolicyConfigExtenderOutput)
+}
+
+// ClusterSchedulerPolicyConfigExtenderArrayInput is an input type that accepts ClusterSchedulerPolicyConfigExtenderArray and ClusterSchedulerPolicyConfigExtenderArrayOutput values.
+// You can construct a concrete instance of `ClusterSchedulerPolicyConfigExtenderArrayInput` via:
+//
+//	ClusterSchedulerPolicyConfigExtenderArray{ ClusterSchedulerPolicyConfigExtenderArgs{...} }
+type ClusterSchedulerPolicyConfigExtenderArrayInput interface {
+	pulumi.Input
+
+	ToClusterSchedulerPolicyConfigExtenderArrayOutput() ClusterSchedulerPolicyConfigExtenderArrayOutput
+	ToClusterSchedulerPolicyConfigExtenderArrayOutputWithContext(context.Context) ClusterSchedulerPolicyConfigExtenderArrayOutput
+}
+
+type ClusterSchedulerPolicyConfigExtenderArray []ClusterSchedulerPolicyConfigExtenderInput
+
+func (ClusterSchedulerPolicyConfigExtenderArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterSchedulerPolicyConfigExtender)(nil)).Elem()
+}
+
+func (i ClusterSchedulerPolicyConfigExtenderArray) ToClusterSchedulerPolicyConfigExtenderArrayOutput() ClusterSchedulerPolicyConfigExtenderArrayOutput {
+	return i.ToClusterSchedulerPolicyConfigExtenderArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterSchedulerPolicyConfigExtenderArray) ToClusterSchedulerPolicyConfigExtenderArrayOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigExtenderArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterSchedulerPolicyConfigExtenderArrayOutput)
+}
+
+type ClusterSchedulerPolicyConfigExtenderOutput struct{ *pulumi.OutputState }
+
+func (ClusterSchedulerPolicyConfigExtenderOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterSchedulerPolicyConfigExtender)(nil)).Elem()
+}
+
+func (o ClusterSchedulerPolicyConfigExtenderOutput) ToClusterSchedulerPolicyConfigExtenderOutput() ClusterSchedulerPolicyConfigExtenderOutput {
+	return o
+}
+
+func (o ClusterSchedulerPolicyConfigExtenderOutput) ToClusterSchedulerPolicyConfigExtenderOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigExtenderOutput {
+	return o
+}
+
+// Extender client configuration.
+func (o ClusterSchedulerPolicyConfigExtenderOutput) ExtenderClientConfig() ClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrOutput {
+	return o.ApplyT(func(v ClusterSchedulerPolicyConfigExtender) *ClusterSchedulerPolicyConfigExtenderExtenderClientConfig {
+		return v.ExtenderClientConfig
+	}).(ClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrOutput)
+}
+
+// Filter stage interface.
+func (o ClusterSchedulerPolicyConfigExtenderOutput) FilterVerb() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterSchedulerPolicyConfigExtender) *string { return v.FilterVerb }).(pulumi.StringPtrOutput)
+}
+
+// Whether node cache capability is enabled.
+func (o ClusterSchedulerPolicyConfigExtenderOutput) NodeCacheCapable() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ClusterSchedulerPolicyConfigExtender) *bool { return v.NodeCacheCapable }).(pulumi.BoolPtrOutput)
+}
+
+// Preempt stage interface.
+func (o ClusterSchedulerPolicyConfigExtenderOutput) PreemptVerb() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterSchedulerPolicyConfigExtender) *string { return v.PreemptVerb }).(pulumi.StringPtrOutput)
+}
+
+// Prioritize stage interface.
+func (o ClusterSchedulerPolicyConfigExtenderOutput) PrioritizeVerb() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterSchedulerPolicyConfigExtender) *string { return v.PrioritizeVerb }).(pulumi.StringPtrOutput)
+}
+
+// Weight for prioritize stage.
+func (o ClusterSchedulerPolicyConfigExtenderOutput) Weight() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterSchedulerPolicyConfigExtender) *int { return v.Weight }).(pulumi.IntPtrOutput)
+}
+
+type ClusterSchedulerPolicyConfigExtenderArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterSchedulerPolicyConfigExtenderArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterSchedulerPolicyConfigExtender)(nil)).Elem()
+}
+
+func (o ClusterSchedulerPolicyConfigExtenderArrayOutput) ToClusterSchedulerPolicyConfigExtenderArrayOutput() ClusterSchedulerPolicyConfigExtenderArrayOutput {
+	return o
+}
+
+func (o ClusterSchedulerPolicyConfigExtenderArrayOutput) ToClusterSchedulerPolicyConfigExtenderArrayOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigExtenderArrayOutput {
+	return o
+}
+
+func (o ClusterSchedulerPolicyConfigExtenderArrayOutput) Index(i pulumi.IntInput) ClusterSchedulerPolicyConfigExtenderOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterSchedulerPolicyConfigExtender {
+		return vs[0].([]ClusterSchedulerPolicyConfigExtender)[vs[1].(int)]
+	}).(ClusterSchedulerPolicyConfigExtenderOutput)
+}
+
+type ClusterSchedulerPolicyConfigExtenderExtenderClientConfig struct {
+	// Service reference configuration.
+	Service *ClusterSchedulerPolicyConfigExtenderExtenderClientConfigService `pulumi:"service"`
+}
+
+// ClusterSchedulerPolicyConfigExtenderExtenderClientConfigInput is an input type that accepts ClusterSchedulerPolicyConfigExtenderExtenderClientConfigArgs and ClusterSchedulerPolicyConfigExtenderExtenderClientConfigOutput values.
+// You can construct a concrete instance of `ClusterSchedulerPolicyConfigExtenderExtenderClientConfigInput` via:
+//
+//	ClusterSchedulerPolicyConfigExtenderExtenderClientConfigArgs{...}
+type ClusterSchedulerPolicyConfigExtenderExtenderClientConfigInput interface {
+	pulumi.Input
+
+	ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigOutput() ClusterSchedulerPolicyConfigExtenderExtenderClientConfigOutput
+	ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigOutputWithContext(context.Context) ClusterSchedulerPolicyConfigExtenderExtenderClientConfigOutput
+}
+
+type ClusterSchedulerPolicyConfigExtenderExtenderClientConfigArgs struct {
+	// Service reference configuration.
+	Service ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrInput `pulumi:"service"`
+}
+
+func (ClusterSchedulerPolicyConfigExtenderExtenderClientConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterSchedulerPolicyConfigExtenderExtenderClientConfig)(nil)).Elem()
+}
+
+func (i ClusterSchedulerPolicyConfigExtenderExtenderClientConfigArgs) ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigOutput() ClusterSchedulerPolicyConfigExtenderExtenderClientConfigOutput {
+	return i.ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigOutputWithContext(context.Background())
+}
+
+func (i ClusterSchedulerPolicyConfigExtenderExtenderClientConfigArgs) ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigExtenderExtenderClientConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterSchedulerPolicyConfigExtenderExtenderClientConfigOutput)
+}
+
+func (i ClusterSchedulerPolicyConfigExtenderExtenderClientConfigArgs) ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrOutput() ClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrOutput {
+	return i.ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrOutputWithContext(context.Background())
+}
+
+func (i ClusterSchedulerPolicyConfigExtenderExtenderClientConfigArgs) ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterSchedulerPolicyConfigExtenderExtenderClientConfigOutput).ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrOutputWithContext(ctx)
+}
+
+// ClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrInput is an input type that accepts ClusterSchedulerPolicyConfigExtenderExtenderClientConfigArgs, ClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtr and ClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrOutput values.
+// You can construct a concrete instance of `ClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrInput` via:
+//
+//	        ClusterSchedulerPolicyConfigExtenderExtenderClientConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type ClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrInput interface {
+	pulumi.Input
+
+	ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrOutput() ClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrOutput
+	ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrOutputWithContext(context.Context) ClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrOutput
+}
+
+type clusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrType ClusterSchedulerPolicyConfigExtenderExtenderClientConfigArgs
+
+func ClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtr(v *ClusterSchedulerPolicyConfigExtenderExtenderClientConfigArgs) ClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrInput {
+	return (*clusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrType)(v)
+}
+
+func (*clusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterSchedulerPolicyConfigExtenderExtenderClientConfig)(nil)).Elem()
+}
+
+func (i *clusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrType) ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrOutput() ClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrOutput {
+	return i.ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *clusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrType) ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrOutput)
+}
+
+type ClusterSchedulerPolicyConfigExtenderExtenderClientConfigOutput struct{ *pulumi.OutputState }
+
+func (ClusterSchedulerPolicyConfigExtenderExtenderClientConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterSchedulerPolicyConfigExtenderExtenderClientConfig)(nil)).Elem()
+}
+
+func (o ClusterSchedulerPolicyConfigExtenderExtenderClientConfigOutput) ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigOutput() ClusterSchedulerPolicyConfigExtenderExtenderClientConfigOutput {
+	return o
+}
+
+func (o ClusterSchedulerPolicyConfigExtenderExtenderClientConfigOutput) ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigExtenderExtenderClientConfigOutput {
+	return o
+}
+
+func (o ClusterSchedulerPolicyConfigExtenderExtenderClientConfigOutput) ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrOutput() ClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrOutput {
+	return o.ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrOutputWithContext(context.Background())
+}
+
+func (o ClusterSchedulerPolicyConfigExtenderExtenderClientConfigOutput) ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ClusterSchedulerPolicyConfigExtenderExtenderClientConfig) *ClusterSchedulerPolicyConfigExtenderExtenderClientConfig {
+		return &v
+	}).(ClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrOutput)
+}
+
+// Service reference configuration.
+func (o ClusterSchedulerPolicyConfigExtenderExtenderClientConfigOutput) Service() ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutput {
+	return o.ApplyT(func(v ClusterSchedulerPolicyConfigExtenderExtenderClientConfig) *ClusterSchedulerPolicyConfigExtenderExtenderClientConfigService {
+		return v.Service
+	}).(ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutput)
+}
+
+type ClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (ClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterSchedulerPolicyConfigExtenderExtenderClientConfig)(nil)).Elem()
+}
+
+func (o ClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrOutput) ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrOutput() ClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrOutput {
+	return o
+}
+
+func (o ClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrOutput) ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrOutput {
+	return o
+}
+
+func (o ClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrOutput) Elem() ClusterSchedulerPolicyConfigExtenderExtenderClientConfigOutput {
+	return o.ApplyT(func(v *ClusterSchedulerPolicyConfigExtenderExtenderClientConfig) ClusterSchedulerPolicyConfigExtenderExtenderClientConfig {
+		if v != nil {
+			return *v
+		}
+		var ret ClusterSchedulerPolicyConfigExtenderExtenderClientConfig
+		return ret
+	}).(ClusterSchedulerPolicyConfigExtenderExtenderClientConfigOutput)
+}
+
+// Service reference configuration.
+func (o ClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrOutput) Service() ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutput {
+	return o.ApplyT(func(v *ClusterSchedulerPolicyConfigExtenderExtenderClientConfig) *ClusterSchedulerPolicyConfigExtenderExtenderClientConfigService {
+		if v == nil {
+			return nil
+		}
+		return v.Service
+	}).(ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutput)
+}
+
+type ClusterSchedulerPolicyConfigExtenderExtenderClientConfigService struct {
+	// Service name.
+	Name *string `pulumi:"name"`
+	// Service namespace.
+	Namespace *string `pulumi:"namespace"`
+	// Service path.
+	Path *string `pulumi:"path"`
+	// Service port.
+	Port *int `pulumi:"port"`
+	// Service protocol scheme (e.g. http, https).
+	Scheme *string `pulumi:"scheme"`
+}
+
+// ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceInput is an input type that accepts ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceArgs and ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceOutput values.
+// You can construct a concrete instance of `ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceInput` via:
+//
+//	ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceArgs{...}
+type ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceInput interface {
+	pulumi.Input
+
+	ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceOutput() ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceOutput
+	ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceOutputWithContext(context.Context) ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceOutput
+}
+
+type ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceArgs struct {
+	// Service name.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// Service namespace.
+	Namespace pulumi.StringPtrInput `pulumi:"namespace"`
+	// Service path.
+	Path pulumi.StringPtrInput `pulumi:"path"`
+	// Service port.
+	Port pulumi.IntPtrInput `pulumi:"port"`
+	// Service protocol scheme (e.g. http, https).
+	Scheme pulumi.StringPtrInput `pulumi:"scheme"`
+}
+
+func (ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterSchedulerPolicyConfigExtenderExtenderClientConfigService)(nil)).Elem()
+}
+
+func (i ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceArgs) ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceOutput() ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceOutput {
+	return i.ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceOutputWithContext(context.Background())
+}
+
+func (i ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceArgs) ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceOutput)
+}
+
+func (i ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceArgs) ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutput() ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutput {
+	return i.ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutputWithContext(context.Background())
+}
+
+func (i ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceArgs) ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceOutput).ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutputWithContext(ctx)
+}
+
+// ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrInput is an input type that accepts ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceArgs, ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtr and ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutput values.
+// You can construct a concrete instance of `ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrInput` via:
+//
+//	        ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceArgs{...}
+//
+//	or:
+//
+//	        nil
+type ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrInput interface {
+	pulumi.Input
+
+	ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutput() ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutput
+	ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutputWithContext(context.Context) ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutput
+}
+
+type clusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrType ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceArgs
+
+func ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtr(v *ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceArgs) ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrInput {
+	return (*clusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrType)(v)
+}
+
+func (*clusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterSchedulerPolicyConfigExtenderExtenderClientConfigService)(nil)).Elem()
+}
+
+func (i *clusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrType) ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutput() ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutput {
+	return i.ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutputWithContext(context.Background())
+}
+
+func (i *clusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrType) ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutput)
+}
+
+type ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceOutput struct{ *pulumi.OutputState }
+
+func (ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterSchedulerPolicyConfigExtenderExtenderClientConfigService)(nil)).Elem()
+}
+
+func (o ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceOutput) ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceOutput() ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceOutput {
+	return o
+}
+
+func (o ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceOutput) ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceOutput {
+	return o
+}
+
+func (o ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceOutput) ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutput() ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutput {
+	return o.ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutputWithContext(context.Background())
+}
+
+func (o ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceOutput) ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ClusterSchedulerPolicyConfigExtenderExtenderClientConfigService) *ClusterSchedulerPolicyConfigExtenderExtenderClientConfigService {
+		return &v
+	}).(ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutput)
+}
+
+// Service name.
+func (o ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterSchedulerPolicyConfigExtenderExtenderClientConfigService) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// Service namespace.
+func (o ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceOutput) Namespace() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterSchedulerPolicyConfigExtenderExtenderClientConfigService) *string { return v.Namespace }).(pulumi.StringPtrOutput)
+}
+
+// Service path.
+func (o ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceOutput) Path() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterSchedulerPolicyConfigExtenderExtenderClientConfigService) *string { return v.Path }).(pulumi.StringPtrOutput)
+}
+
+// Service port.
+func (o ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterSchedulerPolicyConfigExtenderExtenderClientConfigService) *int { return v.Port }).(pulumi.IntPtrOutput)
+}
+
+// Service protocol scheme (e.g. http, https).
+func (o ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceOutput) Scheme() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterSchedulerPolicyConfigExtenderExtenderClientConfigService) *string { return v.Scheme }).(pulumi.StringPtrOutput)
+}
+
+type ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutput struct{ *pulumi.OutputState }
+
+func (ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterSchedulerPolicyConfigExtenderExtenderClientConfigService)(nil)).Elem()
+}
+
+func (o ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutput) ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutput() ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutput {
+	return o
+}
+
+func (o ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutput) ToClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutput {
+	return o
+}
+
+func (o ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutput) Elem() ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceOutput {
+	return o.ApplyT(func(v *ClusterSchedulerPolicyConfigExtenderExtenderClientConfigService) ClusterSchedulerPolicyConfigExtenderExtenderClientConfigService {
+		if v != nil {
+			return *v
+		}
+		var ret ClusterSchedulerPolicyConfigExtenderExtenderClientConfigService
+		return ret
+	}).(ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceOutput)
+}
+
+// Service name.
+func (o ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterSchedulerPolicyConfigExtenderExtenderClientConfigService) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+// Service namespace.
+func (o ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutput) Namespace() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterSchedulerPolicyConfigExtenderExtenderClientConfigService) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Namespace
+	}).(pulumi.StringPtrOutput)
+}
+
+// Service path.
+func (o ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutput) Path() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterSchedulerPolicyConfigExtenderExtenderClientConfigService) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Path
+	}).(pulumi.StringPtrOutput)
+}
+
+// Service port.
+func (o ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ClusterSchedulerPolicyConfigExtenderExtenderClientConfigService) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Port
+	}).(pulumi.IntPtrOutput)
+}
+
+// Service protocol scheme (e.g. http, https).
+func (o ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutput) Scheme() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterSchedulerPolicyConfigExtenderExtenderClientConfigService) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Scheme
+	}).(pulumi.StringPtrOutput)
+}
+
+type ClusterSchedulerPolicyConfigSchedulerPolicyConfig struct {
+	// Scheduler plugin configuration list.
+	PluginConfigs []ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfig `pulumi:"pluginConfigs"`
+	// Plugin set configuration.
+	PluginSet *ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSet `pulumi:"pluginSet"`
+	// Scheduler name.
+	SchedulerName *string `pulumi:"schedulerName"`
+}
+
+// ClusterSchedulerPolicyConfigSchedulerPolicyConfigInput is an input type that accepts ClusterSchedulerPolicyConfigSchedulerPolicyConfigArgs and ClusterSchedulerPolicyConfigSchedulerPolicyConfigOutput values.
+// You can construct a concrete instance of `ClusterSchedulerPolicyConfigSchedulerPolicyConfigInput` via:
+//
+//	ClusterSchedulerPolicyConfigSchedulerPolicyConfigArgs{...}
+type ClusterSchedulerPolicyConfigSchedulerPolicyConfigInput interface {
+	pulumi.Input
+
+	ToClusterSchedulerPolicyConfigSchedulerPolicyConfigOutput() ClusterSchedulerPolicyConfigSchedulerPolicyConfigOutput
+	ToClusterSchedulerPolicyConfigSchedulerPolicyConfigOutputWithContext(context.Context) ClusterSchedulerPolicyConfigSchedulerPolicyConfigOutput
+}
+
+type ClusterSchedulerPolicyConfigSchedulerPolicyConfigArgs struct {
+	// Scheduler plugin configuration list.
+	PluginConfigs ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArrayInput `pulumi:"pluginConfigs"`
+	// Plugin set configuration.
+	PluginSet ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrInput `pulumi:"pluginSet"`
+	// Scheduler name.
+	SchedulerName pulumi.StringPtrInput `pulumi:"schedulerName"`
+}
+
+func (ClusterSchedulerPolicyConfigSchedulerPolicyConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterSchedulerPolicyConfigSchedulerPolicyConfig)(nil)).Elem()
+}
+
+func (i ClusterSchedulerPolicyConfigSchedulerPolicyConfigArgs) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigOutput() ClusterSchedulerPolicyConfigSchedulerPolicyConfigOutput {
+	return i.ToClusterSchedulerPolicyConfigSchedulerPolicyConfigOutputWithContext(context.Background())
+}
+
+func (i ClusterSchedulerPolicyConfigSchedulerPolicyConfigArgs) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigSchedulerPolicyConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterSchedulerPolicyConfigSchedulerPolicyConfigOutput)
+}
+
+// ClusterSchedulerPolicyConfigSchedulerPolicyConfigArrayInput is an input type that accepts ClusterSchedulerPolicyConfigSchedulerPolicyConfigArray and ClusterSchedulerPolicyConfigSchedulerPolicyConfigArrayOutput values.
+// You can construct a concrete instance of `ClusterSchedulerPolicyConfigSchedulerPolicyConfigArrayInput` via:
+//
+//	ClusterSchedulerPolicyConfigSchedulerPolicyConfigArray{ ClusterSchedulerPolicyConfigSchedulerPolicyConfigArgs{...} }
+type ClusterSchedulerPolicyConfigSchedulerPolicyConfigArrayInput interface {
+	pulumi.Input
+
+	ToClusterSchedulerPolicyConfigSchedulerPolicyConfigArrayOutput() ClusterSchedulerPolicyConfigSchedulerPolicyConfigArrayOutput
+	ToClusterSchedulerPolicyConfigSchedulerPolicyConfigArrayOutputWithContext(context.Context) ClusterSchedulerPolicyConfigSchedulerPolicyConfigArrayOutput
+}
+
+type ClusterSchedulerPolicyConfigSchedulerPolicyConfigArray []ClusterSchedulerPolicyConfigSchedulerPolicyConfigInput
+
+func (ClusterSchedulerPolicyConfigSchedulerPolicyConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterSchedulerPolicyConfigSchedulerPolicyConfig)(nil)).Elem()
+}
+
+func (i ClusterSchedulerPolicyConfigSchedulerPolicyConfigArray) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigArrayOutput() ClusterSchedulerPolicyConfigSchedulerPolicyConfigArrayOutput {
+	return i.ToClusterSchedulerPolicyConfigSchedulerPolicyConfigArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterSchedulerPolicyConfigSchedulerPolicyConfigArray) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigArrayOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigSchedulerPolicyConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterSchedulerPolicyConfigSchedulerPolicyConfigArrayOutput)
+}
+
+type ClusterSchedulerPolicyConfigSchedulerPolicyConfigOutput struct{ *pulumi.OutputState }
+
+func (ClusterSchedulerPolicyConfigSchedulerPolicyConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterSchedulerPolicyConfigSchedulerPolicyConfig)(nil)).Elem()
+}
+
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigOutput) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigOutput() ClusterSchedulerPolicyConfigSchedulerPolicyConfigOutput {
+	return o
+}
+
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigOutput) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigSchedulerPolicyConfigOutput {
+	return o
+}
+
+// Scheduler plugin configuration list.
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigOutput) PluginConfigs() ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArrayOutput {
+	return o.ApplyT(func(v ClusterSchedulerPolicyConfigSchedulerPolicyConfig) []ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfig {
+		return v.PluginConfigs
+	}).(ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArrayOutput)
+}
+
+// Plugin set configuration.
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigOutput) PluginSet() ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutput {
+	return o.ApplyT(func(v ClusterSchedulerPolicyConfigSchedulerPolicyConfig) *ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSet {
+		return v.PluginSet
+	}).(ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutput)
+}
+
+// Scheduler name.
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigOutput) SchedulerName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterSchedulerPolicyConfigSchedulerPolicyConfig) *string { return v.SchedulerName }).(pulumi.StringPtrOutput)
+}
+
+type ClusterSchedulerPolicyConfigSchedulerPolicyConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterSchedulerPolicyConfigSchedulerPolicyConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterSchedulerPolicyConfigSchedulerPolicyConfig)(nil)).Elem()
+}
+
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigArrayOutput) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigArrayOutput() ClusterSchedulerPolicyConfigSchedulerPolicyConfigArrayOutput {
+	return o
+}
+
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigArrayOutput) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigArrayOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigSchedulerPolicyConfigArrayOutput {
+	return o
+}
+
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigArrayOutput) Index(i pulumi.IntInput) ClusterSchedulerPolicyConfigSchedulerPolicyConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterSchedulerPolicyConfigSchedulerPolicyConfig {
+		return vs[0].([]ClusterSchedulerPolicyConfigSchedulerPolicyConfig)[vs[1].(int)]
+	}).(ClusterSchedulerPolicyConfigSchedulerPolicyConfigOutput)
+}
+
+type ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfig struct {
+	// Plugin args in raw JSON format. Terraform will automatically base64-encode it before calling the API and decode it on read.
+	Args *string `pulumi:"args"`
+	// Plugin name.
+	Name *string `pulumi:"name"`
+}
+
+// ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigInput is an input type that accepts ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArgs and ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigOutput values.
+// You can construct a concrete instance of `ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigInput` via:
+//
+//	ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArgs{...}
+type ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigInput interface {
+	pulumi.Input
+
+	ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigOutput() ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigOutput
+	ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigOutputWithContext(context.Context) ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigOutput
+}
+
+type ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArgs struct {
+	// Plugin args in raw JSON format. Terraform will automatically base64-encode it before calling the API and decode it on read.
+	Args pulumi.StringPtrInput `pulumi:"args"`
+	// Plugin name.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+}
+
+func (ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfig)(nil)).Elem()
+}
+
+func (i ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArgs) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigOutput() ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigOutput {
+	return i.ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigOutputWithContext(context.Background())
+}
+
+func (i ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArgs) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigOutput)
+}
+
+// ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArrayInput is an input type that accepts ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArray and ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArrayOutput values.
+// You can construct a concrete instance of `ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArrayInput` via:
+//
+//	ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArray{ ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArgs{...} }
+type ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArrayInput interface {
+	pulumi.Input
+
+	ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArrayOutput() ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArrayOutput
+	ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArrayOutputWithContext(context.Context) ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArrayOutput
+}
+
+type ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArray []ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigInput
+
+func (ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfig)(nil)).Elem()
+}
+
+func (i ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArray) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArrayOutput() ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArrayOutput {
+	return i.ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArray) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArrayOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArrayOutput)
+}
+
+type ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigOutput struct{ *pulumi.OutputState }
+
+func (ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfig)(nil)).Elem()
+}
+
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigOutput) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigOutput() ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigOutput {
+	return o
+}
+
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigOutput) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigOutput {
+	return o
+}
+
+// Plugin args in raw JSON format. Terraform will automatically base64-encode it before calling the API and decode it on read.
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigOutput) Args() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfig) *string { return v.Args }).(pulumi.StringPtrOutput)
+}
+
+// Plugin name.
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfig) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+type ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfig)(nil)).Elem()
+}
+
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArrayOutput) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArrayOutput() ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArrayOutput {
+	return o
+}
+
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArrayOutput) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArrayOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArrayOutput {
+	return o
+}
+
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArrayOutput) Index(i pulumi.IntInput) ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfig {
+		return vs[0].([]ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfig)[vs[1].(int)]
+	}).(ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigOutput)
+}
+
+type ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSet struct {
+	// List of plugins to disable.
+	Disableds []ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabled `pulumi:"disableds"`
+	// List of plugins to enable.
+	Enableds []ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabled `pulumi:"enableds"`
+}
+
+// ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetInput is an input type that accepts ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetArgs and ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetOutput values.
+// You can construct a concrete instance of `ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetInput` via:
+//
+//	ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetArgs{...}
+type ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetInput interface {
+	pulumi.Input
+
+	ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetOutput() ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetOutput
+	ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetOutputWithContext(context.Context) ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetOutput
+}
+
+type ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetArgs struct {
+	// List of plugins to disable.
+	Disableds ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArrayInput `pulumi:"disableds"`
+	// List of plugins to enable.
+	Enableds ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArrayInput `pulumi:"enableds"`
+}
+
+func (ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSet)(nil)).Elem()
+}
+
+func (i ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetArgs) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetOutput() ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetOutput {
+	return i.ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetOutputWithContext(context.Background())
+}
+
+func (i ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetArgs) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetOutput)
+}
+
+func (i ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetArgs) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutput() ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutput {
+	return i.ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutputWithContext(context.Background())
+}
+
+func (i ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetArgs) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetOutput).ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutputWithContext(ctx)
+}
+
+// ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrInput is an input type that accepts ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetArgs, ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtr and ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutput values.
+// You can construct a concrete instance of `ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrInput` via:
+//
+//	        ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetArgs{...}
+//
+//	or:
+//
+//	        nil
+type ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrInput interface {
+	pulumi.Input
+
+	ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutput() ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutput
+	ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutputWithContext(context.Context) ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutput
+}
+
+type clusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrType ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetArgs
+
+func ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtr(v *ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetArgs) ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrInput {
+	return (*clusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrType)(v)
+}
+
+func (*clusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSet)(nil)).Elem()
+}
+
+func (i *clusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrType) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutput() ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutput {
+	return i.ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutputWithContext(context.Background())
+}
+
+func (i *clusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrType) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutput)
+}
+
+type ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetOutput struct{ *pulumi.OutputState }
+
+func (ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSet)(nil)).Elem()
+}
+
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetOutput) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetOutput() ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetOutput {
+	return o
+}
+
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetOutput) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetOutput {
+	return o
+}
+
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetOutput) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutput() ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutput {
+	return o.ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutputWithContext(context.Background())
+}
+
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetOutput) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSet) *ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSet {
+		return &v
+	}).(ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutput)
+}
+
+// List of plugins to disable.
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetOutput) Disableds() ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArrayOutput {
+	return o.ApplyT(func(v ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSet) []ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabled {
+		return v.Disableds
+	}).(ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArrayOutput)
+}
+
+// List of plugins to enable.
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetOutput) Enableds() ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArrayOutput {
+	return o.ApplyT(func(v ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSet) []ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabled {
+		return v.Enableds
+	}).(ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArrayOutput)
+}
+
+type ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutput struct{ *pulumi.OutputState }
+
+func (ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSet)(nil)).Elem()
+}
+
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutput) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutput() ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutput {
+	return o
+}
+
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutput) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutput {
+	return o
+}
+
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutput) Elem() ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetOutput {
+	return o.ApplyT(func(v *ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSet) ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSet {
+		if v != nil {
+			return *v
+		}
+		var ret ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSet
+		return ret
+	}).(ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetOutput)
+}
+
+// List of plugins to disable.
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutput) Disableds() ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArrayOutput {
+	return o.ApplyT(func(v *ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSet) []ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabled {
+		if v == nil {
+			return nil
+		}
+		return v.Disableds
+	}).(ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArrayOutput)
+}
+
+// List of plugins to enable.
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutput) Enableds() ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArrayOutput {
+	return o.ApplyT(func(v *ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSet) []ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabled {
+		if v == nil {
+			return nil
+		}
+		return v.Enableds
+	}).(ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArrayOutput)
+}
+
+type ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabled struct {
+	// Plugin name.
+	Name string `pulumi:"name"`
+	// Plugin weight.
+	Weight *int `pulumi:"weight"`
+}
+
+// ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledInput is an input type that accepts ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArgs and ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledOutput values.
+// You can construct a concrete instance of `ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledInput` via:
+//
+//	ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArgs{...}
+type ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledInput interface {
+	pulumi.Input
+
+	ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledOutput() ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledOutput
+	ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledOutputWithContext(context.Context) ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledOutput
+}
+
+type ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArgs struct {
+	// Plugin name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Plugin weight.
+	Weight pulumi.IntPtrInput `pulumi:"weight"`
+}
+
+func (ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabled)(nil)).Elem()
+}
+
+func (i ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArgs) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledOutput() ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledOutput {
+	return i.ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledOutputWithContext(context.Background())
+}
+
+func (i ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArgs) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledOutput)
+}
+
+// ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArrayInput is an input type that accepts ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArray and ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArrayOutput values.
+// You can construct a concrete instance of `ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArrayInput` via:
+//
+//	ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArray{ ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArgs{...} }
+type ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArrayInput interface {
+	pulumi.Input
+
+	ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArrayOutput() ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArrayOutput
+	ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArrayOutputWithContext(context.Context) ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArrayOutput
+}
+
+type ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArray []ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledInput
+
+func (ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabled)(nil)).Elem()
+}
+
+func (i ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArray) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArrayOutput() ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArrayOutput {
+	return i.ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArray) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArrayOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArrayOutput)
+}
+
+type ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledOutput struct{ *pulumi.OutputState }
+
+func (ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabled)(nil)).Elem()
+}
+
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledOutput) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledOutput() ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledOutput {
+	return o
+}
+
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledOutput) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledOutput {
+	return o
+}
+
+// Plugin name.
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabled) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Plugin weight.
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledOutput) Weight() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabled) *int { return v.Weight }).(pulumi.IntPtrOutput)
+}
+
+type ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabled)(nil)).Elem()
+}
+
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArrayOutput) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArrayOutput() ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArrayOutput {
+	return o
+}
+
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArrayOutput) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArrayOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArrayOutput {
+	return o
+}
+
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArrayOutput) Index(i pulumi.IntInput) ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabled {
+		return vs[0].([]ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabled)[vs[1].(int)]
+	}).(ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledOutput)
+}
+
+type ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabled struct {
+	// Plugin name.
+	Name string `pulumi:"name"`
+	// Plugin weight.
+	Weight *int `pulumi:"weight"`
+}
+
+// ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledInput is an input type that accepts ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArgs and ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledOutput values.
+// You can construct a concrete instance of `ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledInput` via:
+//
+//	ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArgs{...}
+type ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledInput interface {
+	pulumi.Input
+
+	ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledOutput() ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledOutput
+	ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledOutputWithContext(context.Context) ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledOutput
+}
+
+type ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArgs struct {
+	// Plugin name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Plugin weight.
+	Weight pulumi.IntPtrInput `pulumi:"weight"`
+}
+
+func (ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabled)(nil)).Elem()
+}
+
+func (i ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArgs) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledOutput() ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledOutput {
+	return i.ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledOutputWithContext(context.Background())
+}
+
+func (i ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArgs) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledOutput)
+}
+
+// ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArrayInput is an input type that accepts ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArray and ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArrayOutput values.
+// You can construct a concrete instance of `ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArrayInput` via:
+//
+//	ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArray{ ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArgs{...} }
+type ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArrayInput interface {
+	pulumi.Input
+
+	ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArrayOutput() ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArrayOutput
+	ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArrayOutputWithContext(context.Context) ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArrayOutput
+}
+
+type ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArray []ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledInput
+
+func (ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabled)(nil)).Elem()
+}
+
+func (i ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArray) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArrayOutput() ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArrayOutput {
+	return i.ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArray) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArrayOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArrayOutput)
+}
+
+type ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledOutput struct{ *pulumi.OutputState }
+
+func (ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabled)(nil)).Elem()
+}
+
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledOutput) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledOutput() ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledOutput {
+	return o
+}
+
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledOutput) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledOutput {
+	return o
+}
+
+// Plugin name.
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabled) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Plugin weight.
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledOutput) Weight() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabled) *int { return v.Weight }).(pulumi.IntPtrOutput)
+}
+
+type ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabled)(nil)).Elem()
+}
+
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArrayOutput) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArrayOutput() ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArrayOutput {
+	return o
+}
+
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArrayOutput) ToClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArrayOutputWithContext(ctx context.Context) ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArrayOutput {
+	return o
+}
+
+func (o ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArrayOutput) Index(i pulumi.IntInput) ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabled {
+		return vs[0].([]ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabled)[vs[1].(int)]
+	}).(ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledOutput)
+}
+
 type ClusterWorkerConfig struct {
 	// Indicates which availability zone will be used.
 	AvailabilityZone *string `pulumi:"availabilityZone"`
@@ -6891,10 +8397,231 @@ func (o ClusterWorkerInstancesListArrayOutput) Index(i pulumi.IntInput) ClusterW
 	}).(ClusterWorkerInstancesListOutput)
 }
 
+type ControlPlaneLogComponents struct {
+	// It has been deprecated from version 1.82.54. Log level. for components that support dynamic adjustment, you can specify this parameter when enabling logs.
+	//
+	// Deprecated: It has been deprecated from version 1.82.54.
+	LogLevel *int `pulumi:"logLevel"`
+	// Logset ID. if not specified, auto-create.
+	LogSetId *string `pulumi:"logSetId"`
+	// Component name.
+	Name string `pulumi:"name"`
+	// Log topic ID. if not specified, auto-create.
+	TopicId *string `pulumi:"topicId"`
+	// topic region. this parameter enables cross-region shipping of logs.
+	TopicRegion *string `pulumi:"topicRegion"`
+}
+
+// ControlPlaneLogComponentsInput is an input type that accepts ControlPlaneLogComponentsArgs and ControlPlaneLogComponentsOutput values.
+// You can construct a concrete instance of `ControlPlaneLogComponentsInput` via:
+//
+//	ControlPlaneLogComponentsArgs{...}
+type ControlPlaneLogComponentsInput interface {
+	pulumi.Input
+
+	ToControlPlaneLogComponentsOutput() ControlPlaneLogComponentsOutput
+	ToControlPlaneLogComponentsOutputWithContext(context.Context) ControlPlaneLogComponentsOutput
+}
+
+type ControlPlaneLogComponentsArgs struct {
+	// It has been deprecated from version 1.82.54. Log level. for components that support dynamic adjustment, you can specify this parameter when enabling logs.
+	//
+	// Deprecated: It has been deprecated from version 1.82.54.
+	LogLevel pulumi.IntPtrInput `pulumi:"logLevel"`
+	// Logset ID. if not specified, auto-create.
+	LogSetId pulumi.StringPtrInput `pulumi:"logSetId"`
+	// Component name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Log topic ID. if not specified, auto-create.
+	TopicId pulumi.StringPtrInput `pulumi:"topicId"`
+	// topic region. this parameter enables cross-region shipping of logs.
+	TopicRegion pulumi.StringPtrInput `pulumi:"topicRegion"`
+}
+
+func (ControlPlaneLogComponentsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ControlPlaneLogComponents)(nil)).Elem()
+}
+
+func (i ControlPlaneLogComponentsArgs) ToControlPlaneLogComponentsOutput() ControlPlaneLogComponentsOutput {
+	return i.ToControlPlaneLogComponentsOutputWithContext(context.Background())
+}
+
+func (i ControlPlaneLogComponentsArgs) ToControlPlaneLogComponentsOutputWithContext(ctx context.Context) ControlPlaneLogComponentsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ControlPlaneLogComponentsOutput)
+}
+
+func (i ControlPlaneLogComponentsArgs) ToControlPlaneLogComponentsPtrOutput() ControlPlaneLogComponentsPtrOutput {
+	return i.ToControlPlaneLogComponentsPtrOutputWithContext(context.Background())
+}
+
+func (i ControlPlaneLogComponentsArgs) ToControlPlaneLogComponentsPtrOutputWithContext(ctx context.Context) ControlPlaneLogComponentsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ControlPlaneLogComponentsOutput).ToControlPlaneLogComponentsPtrOutputWithContext(ctx)
+}
+
+// ControlPlaneLogComponentsPtrInput is an input type that accepts ControlPlaneLogComponentsArgs, ControlPlaneLogComponentsPtr and ControlPlaneLogComponentsPtrOutput values.
+// You can construct a concrete instance of `ControlPlaneLogComponentsPtrInput` via:
+//
+//	        ControlPlaneLogComponentsArgs{...}
+//
+//	or:
+//
+//	        nil
+type ControlPlaneLogComponentsPtrInput interface {
+	pulumi.Input
+
+	ToControlPlaneLogComponentsPtrOutput() ControlPlaneLogComponentsPtrOutput
+	ToControlPlaneLogComponentsPtrOutputWithContext(context.Context) ControlPlaneLogComponentsPtrOutput
+}
+
+type controlPlaneLogComponentsPtrType ControlPlaneLogComponentsArgs
+
+func ControlPlaneLogComponentsPtr(v *ControlPlaneLogComponentsArgs) ControlPlaneLogComponentsPtrInput {
+	return (*controlPlaneLogComponentsPtrType)(v)
+}
+
+func (*controlPlaneLogComponentsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ControlPlaneLogComponents)(nil)).Elem()
+}
+
+func (i *controlPlaneLogComponentsPtrType) ToControlPlaneLogComponentsPtrOutput() ControlPlaneLogComponentsPtrOutput {
+	return i.ToControlPlaneLogComponentsPtrOutputWithContext(context.Background())
+}
+
+func (i *controlPlaneLogComponentsPtrType) ToControlPlaneLogComponentsPtrOutputWithContext(ctx context.Context) ControlPlaneLogComponentsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ControlPlaneLogComponentsPtrOutput)
+}
+
+type ControlPlaneLogComponentsOutput struct{ *pulumi.OutputState }
+
+func (ControlPlaneLogComponentsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ControlPlaneLogComponents)(nil)).Elem()
+}
+
+func (o ControlPlaneLogComponentsOutput) ToControlPlaneLogComponentsOutput() ControlPlaneLogComponentsOutput {
+	return o
+}
+
+func (o ControlPlaneLogComponentsOutput) ToControlPlaneLogComponentsOutputWithContext(ctx context.Context) ControlPlaneLogComponentsOutput {
+	return o
+}
+
+func (o ControlPlaneLogComponentsOutput) ToControlPlaneLogComponentsPtrOutput() ControlPlaneLogComponentsPtrOutput {
+	return o.ToControlPlaneLogComponentsPtrOutputWithContext(context.Background())
+}
+
+func (o ControlPlaneLogComponentsOutput) ToControlPlaneLogComponentsPtrOutputWithContext(ctx context.Context) ControlPlaneLogComponentsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ControlPlaneLogComponents) *ControlPlaneLogComponents {
+		return &v
+	}).(ControlPlaneLogComponentsPtrOutput)
+}
+
+// It has been deprecated from version 1.82.54. Log level. for components that support dynamic adjustment, you can specify this parameter when enabling logs.
+//
+// Deprecated: It has been deprecated from version 1.82.54.
+func (o ControlPlaneLogComponentsOutput) LogLevel() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ControlPlaneLogComponents) *int { return v.LogLevel }).(pulumi.IntPtrOutput)
+}
+
+// Logset ID. if not specified, auto-create.
+func (o ControlPlaneLogComponentsOutput) LogSetId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ControlPlaneLogComponents) *string { return v.LogSetId }).(pulumi.StringPtrOutput)
+}
+
+// Component name.
+func (o ControlPlaneLogComponentsOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ControlPlaneLogComponents) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Log topic ID. if not specified, auto-create.
+func (o ControlPlaneLogComponentsOutput) TopicId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ControlPlaneLogComponents) *string { return v.TopicId }).(pulumi.StringPtrOutput)
+}
+
+// topic region. this parameter enables cross-region shipping of logs.
+func (o ControlPlaneLogComponentsOutput) TopicRegion() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ControlPlaneLogComponents) *string { return v.TopicRegion }).(pulumi.StringPtrOutput)
+}
+
+type ControlPlaneLogComponentsPtrOutput struct{ *pulumi.OutputState }
+
+func (ControlPlaneLogComponentsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ControlPlaneLogComponents)(nil)).Elem()
+}
+
+func (o ControlPlaneLogComponentsPtrOutput) ToControlPlaneLogComponentsPtrOutput() ControlPlaneLogComponentsPtrOutput {
+	return o
+}
+
+func (o ControlPlaneLogComponentsPtrOutput) ToControlPlaneLogComponentsPtrOutputWithContext(ctx context.Context) ControlPlaneLogComponentsPtrOutput {
+	return o
+}
+
+func (o ControlPlaneLogComponentsPtrOutput) Elem() ControlPlaneLogComponentsOutput {
+	return o.ApplyT(func(v *ControlPlaneLogComponents) ControlPlaneLogComponents {
+		if v != nil {
+			return *v
+		}
+		var ret ControlPlaneLogComponents
+		return ret
+	}).(ControlPlaneLogComponentsOutput)
+}
+
+// It has been deprecated from version 1.82.54. Log level. for components that support dynamic adjustment, you can specify this parameter when enabling logs.
+//
+// Deprecated: It has been deprecated from version 1.82.54.
+func (o ControlPlaneLogComponentsPtrOutput) LogLevel() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ControlPlaneLogComponents) *int {
+		if v == nil {
+			return nil
+		}
+		return v.LogLevel
+	}).(pulumi.IntPtrOutput)
+}
+
+// Logset ID. if not specified, auto-create.
+func (o ControlPlaneLogComponentsPtrOutput) LogSetId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ControlPlaneLogComponents) *string {
+		if v == nil {
+			return nil
+		}
+		return v.LogSetId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Component name.
+func (o ControlPlaneLogComponentsPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ControlPlaneLogComponents) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+// Log topic ID. if not specified, auto-create.
+func (o ControlPlaneLogComponentsPtrOutput) TopicId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ControlPlaneLogComponents) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TopicId
+	}).(pulumi.StringPtrOutput)
+}
+
+// topic region. this parameter enables cross-region shipping of logs.
+func (o ControlPlaneLogComponentsPtrOutput) TopicRegion() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ControlPlaneLogComponents) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TopicRegion
+	}).(pulumi.StringPtrOutput)
+}
+
 type EncryptionProtectionKmsConfiguration struct {
-	// kms id.
+	// Custom key: If no KeyId is specified, a default key will be generated (TKE-KMS).
 	KeyId *string `pulumi:"keyId"`
-	// kms region.
+	// Generate keys with default settings or customize key region information.
 	KmsRegion *string `pulumi:"kmsRegion"`
 }
 
@@ -6910,9 +8637,9 @@ type EncryptionProtectionKmsConfigurationInput interface {
 }
 
 type EncryptionProtectionKmsConfigurationArgs struct {
-	// kms id.
+	// Custom key: If no KeyId is specified, a default key will be generated (TKE-KMS).
 	KeyId pulumi.StringPtrInput `pulumi:"keyId"`
-	// kms region.
+	// Generate keys with default settings or customize key region information.
 	KmsRegion pulumi.StringPtrInput `pulumi:"kmsRegion"`
 }
 
@@ -6993,12 +8720,12 @@ func (o EncryptionProtectionKmsConfigurationOutput) ToEncryptionProtectionKmsCon
 	}).(EncryptionProtectionKmsConfigurationPtrOutput)
 }
 
-// kms id.
+// Custom key: If no KeyId is specified, a default key will be generated (TKE-KMS).
 func (o EncryptionProtectionKmsConfigurationOutput) KeyId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v EncryptionProtectionKmsConfiguration) *string { return v.KeyId }).(pulumi.StringPtrOutput)
 }
 
-// kms region.
+// Generate keys with default settings or customize key region information.
 func (o EncryptionProtectionKmsConfigurationOutput) KmsRegion() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v EncryptionProtectionKmsConfiguration) *string { return v.KmsRegion }).(pulumi.StringPtrOutput)
 }
@@ -7027,7 +8754,7 @@ func (o EncryptionProtectionKmsConfigurationPtrOutput) Elem() EncryptionProtecti
 	}).(EncryptionProtectionKmsConfigurationOutput)
 }
 
-// kms id.
+// Custom key: If no KeyId is specified, a default key will be generated (TKE-KMS).
 func (o EncryptionProtectionKmsConfigurationPtrOutput) KeyId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *EncryptionProtectionKmsConfiguration) *string {
 		if v == nil {
@@ -7037,7 +8764,7 @@ func (o EncryptionProtectionKmsConfigurationPtrOutput) KeyId() pulumi.StringPtrO
 	}).(pulumi.StringPtrOutput)
 }
 
-// kms region.
+// Generate keys with default settings or customize key region information.
 func (o EncryptionProtectionKmsConfigurationPtrOutput) KmsRegion() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *EncryptionProtectionKmsConfiguration) *string {
 		if v == nil {
@@ -7045,6 +8772,130 @@ func (o EncryptionProtectionKmsConfigurationPtrOutput) KmsRegion() pulumi.String
 		}
 		return v.KmsRegion
 	}).(pulumi.StringPtrOutput)
+}
+
+type GlobalMaintenanceWindowAndExclusionExclusion struct {
+	// Maintenance exclusion end time.
+	EndAt string `pulumi:"endAt"`
+	// ID of the resource.
+	Id *int `pulumi:"id"`
+	// Maintenance exclusion name.
+	Name string `pulumi:"name"`
+	// Maintenance exclusion start time.
+	StartAt string `pulumi:"startAt"`
+}
+
+// GlobalMaintenanceWindowAndExclusionExclusionInput is an input type that accepts GlobalMaintenanceWindowAndExclusionExclusionArgs and GlobalMaintenanceWindowAndExclusionExclusionOutput values.
+// You can construct a concrete instance of `GlobalMaintenanceWindowAndExclusionExclusionInput` via:
+//
+//	GlobalMaintenanceWindowAndExclusionExclusionArgs{...}
+type GlobalMaintenanceWindowAndExclusionExclusionInput interface {
+	pulumi.Input
+
+	ToGlobalMaintenanceWindowAndExclusionExclusionOutput() GlobalMaintenanceWindowAndExclusionExclusionOutput
+	ToGlobalMaintenanceWindowAndExclusionExclusionOutputWithContext(context.Context) GlobalMaintenanceWindowAndExclusionExclusionOutput
+}
+
+type GlobalMaintenanceWindowAndExclusionExclusionArgs struct {
+	// Maintenance exclusion end time.
+	EndAt pulumi.StringInput `pulumi:"endAt"`
+	// ID of the resource.
+	Id pulumi.IntPtrInput `pulumi:"id"`
+	// Maintenance exclusion name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Maintenance exclusion start time.
+	StartAt pulumi.StringInput `pulumi:"startAt"`
+}
+
+func (GlobalMaintenanceWindowAndExclusionExclusionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GlobalMaintenanceWindowAndExclusionExclusion)(nil)).Elem()
+}
+
+func (i GlobalMaintenanceWindowAndExclusionExclusionArgs) ToGlobalMaintenanceWindowAndExclusionExclusionOutput() GlobalMaintenanceWindowAndExclusionExclusionOutput {
+	return i.ToGlobalMaintenanceWindowAndExclusionExclusionOutputWithContext(context.Background())
+}
+
+func (i GlobalMaintenanceWindowAndExclusionExclusionArgs) ToGlobalMaintenanceWindowAndExclusionExclusionOutputWithContext(ctx context.Context) GlobalMaintenanceWindowAndExclusionExclusionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GlobalMaintenanceWindowAndExclusionExclusionOutput)
+}
+
+// GlobalMaintenanceWindowAndExclusionExclusionArrayInput is an input type that accepts GlobalMaintenanceWindowAndExclusionExclusionArray and GlobalMaintenanceWindowAndExclusionExclusionArrayOutput values.
+// You can construct a concrete instance of `GlobalMaintenanceWindowAndExclusionExclusionArrayInput` via:
+//
+//	GlobalMaintenanceWindowAndExclusionExclusionArray{ GlobalMaintenanceWindowAndExclusionExclusionArgs{...} }
+type GlobalMaintenanceWindowAndExclusionExclusionArrayInput interface {
+	pulumi.Input
+
+	ToGlobalMaintenanceWindowAndExclusionExclusionArrayOutput() GlobalMaintenanceWindowAndExclusionExclusionArrayOutput
+	ToGlobalMaintenanceWindowAndExclusionExclusionArrayOutputWithContext(context.Context) GlobalMaintenanceWindowAndExclusionExclusionArrayOutput
+}
+
+type GlobalMaintenanceWindowAndExclusionExclusionArray []GlobalMaintenanceWindowAndExclusionExclusionInput
+
+func (GlobalMaintenanceWindowAndExclusionExclusionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GlobalMaintenanceWindowAndExclusionExclusion)(nil)).Elem()
+}
+
+func (i GlobalMaintenanceWindowAndExclusionExclusionArray) ToGlobalMaintenanceWindowAndExclusionExclusionArrayOutput() GlobalMaintenanceWindowAndExclusionExclusionArrayOutput {
+	return i.ToGlobalMaintenanceWindowAndExclusionExclusionArrayOutputWithContext(context.Background())
+}
+
+func (i GlobalMaintenanceWindowAndExclusionExclusionArray) ToGlobalMaintenanceWindowAndExclusionExclusionArrayOutputWithContext(ctx context.Context) GlobalMaintenanceWindowAndExclusionExclusionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GlobalMaintenanceWindowAndExclusionExclusionArrayOutput)
+}
+
+type GlobalMaintenanceWindowAndExclusionExclusionOutput struct{ *pulumi.OutputState }
+
+func (GlobalMaintenanceWindowAndExclusionExclusionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GlobalMaintenanceWindowAndExclusionExclusion)(nil)).Elem()
+}
+
+func (o GlobalMaintenanceWindowAndExclusionExclusionOutput) ToGlobalMaintenanceWindowAndExclusionExclusionOutput() GlobalMaintenanceWindowAndExclusionExclusionOutput {
+	return o
+}
+
+func (o GlobalMaintenanceWindowAndExclusionExclusionOutput) ToGlobalMaintenanceWindowAndExclusionExclusionOutputWithContext(ctx context.Context) GlobalMaintenanceWindowAndExclusionExclusionOutput {
+	return o
+}
+
+// Maintenance exclusion end time.
+func (o GlobalMaintenanceWindowAndExclusionExclusionOutput) EndAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GlobalMaintenanceWindowAndExclusionExclusion) string { return v.EndAt }).(pulumi.StringOutput)
+}
+
+// ID of the resource.
+func (o GlobalMaintenanceWindowAndExclusionExclusionOutput) Id() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GlobalMaintenanceWindowAndExclusionExclusion) *int { return v.Id }).(pulumi.IntPtrOutput)
+}
+
+// Maintenance exclusion name.
+func (o GlobalMaintenanceWindowAndExclusionExclusionOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GlobalMaintenanceWindowAndExclusionExclusion) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Maintenance exclusion start time.
+func (o GlobalMaintenanceWindowAndExclusionExclusionOutput) StartAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GlobalMaintenanceWindowAndExclusionExclusion) string { return v.StartAt }).(pulumi.StringOutput)
+}
+
+type GlobalMaintenanceWindowAndExclusionExclusionArrayOutput struct{ *pulumi.OutputState }
+
+func (GlobalMaintenanceWindowAndExclusionExclusionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GlobalMaintenanceWindowAndExclusionExclusion)(nil)).Elem()
+}
+
+func (o GlobalMaintenanceWindowAndExclusionExclusionArrayOutput) ToGlobalMaintenanceWindowAndExclusionExclusionArrayOutput() GlobalMaintenanceWindowAndExclusionExclusionArrayOutput {
+	return o
+}
+
+func (o GlobalMaintenanceWindowAndExclusionExclusionArrayOutput) ToGlobalMaintenanceWindowAndExclusionExclusionArrayOutputWithContext(ctx context.Context) GlobalMaintenanceWindowAndExclusionExclusionArrayOutput {
+	return o
+}
+
+func (o GlobalMaintenanceWindowAndExclusionExclusionArrayOutput) Index(i pulumi.IntInput) GlobalMaintenanceWindowAndExclusionExclusionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GlobalMaintenanceWindowAndExclusionExclusion {
+		return vs[0].([]GlobalMaintenanceWindowAndExclusionExclusion)[vs[1].(int)]
+	}).(GlobalMaintenanceWindowAndExclusionExclusionOutput)
 }
 
 type HealthCheckPolicyRule struct {
@@ -8906,6 +10757,10 @@ type NativeNodePoolNativeSystemDisk struct {
 	DiskSize int `pulumi:"diskSize"`
 	// Cloud disk type. Valid values: `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_SSD`: cloud SSD disk, `CLOUD_BSSD`: Basic SSD, `CLOUD_HSSD`: Enhanced SSD.
 	DiskType string `pulumi:"diskType"`
+	// Encrypt System Drive. Allow value: `ENCRYPT`.
+	Encrypt *string `pulumi:"encrypt"`
+	// Kms key ID.
+	KmsKeyId *string `pulumi:"kmsKeyId"`
 }
 
 // NativeNodePoolNativeSystemDiskInput is an input type that accepts NativeNodePoolNativeSystemDiskArgs and NativeNodePoolNativeSystemDiskOutput values.
@@ -8924,6 +10779,10 @@ type NativeNodePoolNativeSystemDiskArgs struct {
 	DiskSize pulumi.IntInput `pulumi:"diskSize"`
 	// Cloud disk type. Valid values: `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_SSD`: cloud SSD disk, `CLOUD_BSSD`: Basic SSD, `CLOUD_HSSD`: Enhanced SSD.
 	DiskType pulumi.StringInput `pulumi:"diskType"`
+	// Encrypt System Drive. Allow value: `ENCRYPT`.
+	Encrypt pulumi.StringPtrInput `pulumi:"encrypt"`
+	// Kms key ID.
+	KmsKeyId pulumi.StringPtrInput `pulumi:"kmsKeyId"`
 }
 
 func (NativeNodePoolNativeSystemDiskArgs) ElementType() reflect.Type {
@@ -9013,6 +10872,16 @@ func (o NativeNodePoolNativeSystemDiskOutput) DiskType() pulumi.StringOutput {
 	return o.ApplyT(func(v NativeNodePoolNativeSystemDisk) string { return v.DiskType }).(pulumi.StringOutput)
 }
 
+// Encrypt System Drive. Allow value: `ENCRYPT`.
+func (o NativeNodePoolNativeSystemDiskOutput) Encrypt() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeNodePoolNativeSystemDisk) *string { return v.Encrypt }).(pulumi.StringPtrOutput)
+}
+
+// Kms key ID.
+func (o NativeNodePoolNativeSystemDiskOutput) KmsKeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeNodePoolNativeSystemDisk) *string { return v.KmsKeyId }).(pulumi.StringPtrOutput)
+}
+
 type NativeNodePoolNativeSystemDiskPtrOutput struct{ *pulumi.OutputState }
 
 func (NativeNodePoolNativeSystemDiskPtrOutput) ElementType() reflect.Type {
@@ -9057,8 +10926,28 @@ func (o NativeNodePoolNativeSystemDiskPtrOutput) DiskType() pulumi.StringPtrOutp
 	}).(pulumi.StringPtrOutput)
 }
 
+// Encrypt System Drive. Allow value: `ENCRYPT`.
+func (o NativeNodePoolNativeSystemDiskPtrOutput) Encrypt() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeNodePoolNativeSystemDisk) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Encrypt
+	}).(pulumi.StringPtrOutput)
+}
+
+// Kms key ID.
+func (o NativeNodePoolNativeSystemDiskPtrOutput) KmsKeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeNodePoolNativeSystemDisk) *string {
+		if v == nil {
+			return nil
+		}
+		return v.KmsKeyId
+	}).(pulumi.StringPtrOutput)
+}
+
 type NativeNodePoolTag struct {
-	// The resource type bound to the label.
+	// The resource type bound to the label. `cluster`: related to clusters; `machine`: related to node pools.
 	ResourceType *string `pulumi:"resourceType"`
 	// Tag pair list.
 	Tags []NativeNodePoolTagTag `pulumi:"tags"`
@@ -9076,7 +10965,7 @@ type NativeNodePoolTagInput interface {
 }
 
 type NativeNodePoolTagArgs struct {
-	// The resource type bound to the label.
+	// The resource type bound to the label. `cluster`: related to clusters; `machine`: related to node pools.
 	ResourceType pulumi.StringPtrInput `pulumi:"resourceType"`
 	// Tag pair list.
 	Tags NativeNodePoolTagTagArrayInput `pulumi:"tags"`
@@ -9133,7 +11022,7 @@ func (o NativeNodePoolTagOutput) ToNativeNodePoolTagOutputWithContext(ctx contex
 	return o
 }
 
-// The resource type bound to the label.
+// The resource type bound to the label. `cluster`: related to clusters; `machine`: related to node pools.
 func (o NativeNodePoolTagOutput) ResourceType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v NativeNodePoolTag) *string { return v.ResourceType }).(pulumi.StringPtrOutput)
 }
@@ -11030,6 +12919,218 @@ func (o NodePoolTaintArrayOutput) Index(i pulumi.IntInput) NodePoolTaintOutput {
 	}).(NodePoolTaintOutput)
 }
 
+type RollOutSequenceSequenceFlow struct {
+	// Wait time in seconds between steps.
+	SoakTime int `pulumi:"soakTime"`
+	// The tags for the sequence flow step.
+	Tags []RollOutSequenceSequenceFlowTag `pulumi:"tags"`
+}
+
+// RollOutSequenceSequenceFlowInput is an input type that accepts RollOutSequenceSequenceFlowArgs and RollOutSequenceSequenceFlowOutput values.
+// You can construct a concrete instance of `RollOutSequenceSequenceFlowInput` via:
+//
+//	RollOutSequenceSequenceFlowArgs{...}
+type RollOutSequenceSequenceFlowInput interface {
+	pulumi.Input
+
+	ToRollOutSequenceSequenceFlowOutput() RollOutSequenceSequenceFlowOutput
+	ToRollOutSequenceSequenceFlowOutputWithContext(context.Context) RollOutSequenceSequenceFlowOutput
+}
+
+type RollOutSequenceSequenceFlowArgs struct {
+	// Wait time in seconds between steps.
+	SoakTime pulumi.IntInput `pulumi:"soakTime"`
+	// The tags for the sequence flow step.
+	Tags RollOutSequenceSequenceFlowTagArrayInput `pulumi:"tags"`
+}
+
+func (RollOutSequenceSequenceFlowArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RollOutSequenceSequenceFlow)(nil)).Elem()
+}
+
+func (i RollOutSequenceSequenceFlowArgs) ToRollOutSequenceSequenceFlowOutput() RollOutSequenceSequenceFlowOutput {
+	return i.ToRollOutSequenceSequenceFlowOutputWithContext(context.Background())
+}
+
+func (i RollOutSequenceSequenceFlowArgs) ToRollOutSequenceSequenceFlowOutputWithContext(ctx context.Context) RollOutSequenceSequenceFlowOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RollOutSequenceSequenceFlowOutput)
+}
+
+// RollOutSequenceSequenceFlowArrayInput is an input type that accepts RollOutSequenceSequenceFlowArray and RollOutSequenceSequenceFlowArrayOutput values.
+// You can construct a concrete instance of `RollOutSequenceSequenceFlowArrayInput` via:
+//
+//	RollOutSequenceSequenceFlowArray{ RollOutSequenceSequenceFlowArgs{...} }
+type RollOutSequenceSequenceFlowArrayInput interface {
+	pulumi.Input
+
+	ToRollOutSequenceSequenceFlowArrayOutput() RollOutSequenceSequenceFlowArrayOutput
+	ToRollOutSequenceSequenceFlowArrayOutputWithContext(context.Context) RollOutSequenceSequenceFlowArrayOutput
+}
+
+type RollOutSequenceSequenceFlowArray []RollOutSequenceSequenceFlowInput
+
+func (RollOutSequenceSequenceFlowArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RollOutSequenceSequenceFlow)(nil)).Elem()
+}
+
+func (i RollOutSequenceSequenceFlowArray) ToRollOutSequenceSequenceFlowArrayOutput() RollOutSequenceSequenceFlowArrayOutput {
+	return i.ToRollOutSequenceSequenceFlowArrayOutputWithContext(context.Background())
+}
+
+func (i RollOutSequenceSequenceFlowArray) ToRollOutSequenceSequenceFlowArrayOutputWithContext(ctx context.Context) RollOutSequenceSequenceFlowArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RollOutSequenceSequenceFlowArrayOutput)
+}
+
+type RollOutSequenceSequenceFlowOutput struct{ *pulumi.OutputState }
+
+func (RollOutSequenceSequenceFlowOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RollOutSequenceSequenceFlow)(nil)).Elem()
+}
+
+func (o RollOutSequenceSequenceFlowOutput) ToRollOutSequenceSequenceFlowOutput() RollOutSequenceSequenceFlowOutput {
+	return o
+}
+
+func (o RollOutSequenceSequenceFlowOutput) ToRollOutSequenceSequenceFlowOutputWithContext(ctx context.Context) RollOutSequenceSequenceFlowOutput {
+	return o
+}
+
+// Wait time in seconds between steps.
+func (o RollOutSequenceSequenceFlowOutput) SoakTime() pulumi.IntOutput {
+	return o.ApplyT(func(v RollOutSequenceSequenceFlow) int { return v.SoakTime }).(pulumi.IntOutput)
+}
+
+// The tags for the sequence flow step.
+func (o RollOutSequenceSequenceFlowOutput) Tags() RollOutSequenceSequenceFlowTagArrayOutput {
+	return o.ApplyT(func(v RollOutSequenceSequenceFlow) []RollOutSequenceSequenceFlowTag { return v.Tags }).(RollOutSequenceSequenceFlowTagArrayOutput)
+}
+
+type RollOutSequenceSequenceFlowArrayOutput struct{ *pulumi.OutputState }
+
+func (RollOutSequenceSequenceFlowArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RollOutSequenceSequenceFlow)(nil)).Elem()
+}
+
+func (o RollOutSequenceSequenceFlowArrayOutput) ToRollOutSequenceSequenceFlowArrayOutput() RollOutSequenceSequenceFlowArrayOutput {
+	return o
+}
+
+func (o RollOutSequenceSequenceFlowArrayOutput) ToRollOutSequenceSequenceFlowArrayOutputWithContext(ctx context.Context) RollOutSequenceSequenceFlowArrayOutput {
+	return o
+}
+
+func (o RollOutSequenceSequenceFlowArrayOutput) Index(i pulumi.IntInput) RollOutSequenceSequenceFlowOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) RollOutSequenceSequenceFlow {
+		return vs[0].([]RollOutSequenceSequenceFlow)[vs[1].(int)]
+	}).(RollOutSequenceSequenceFlowOutput)
+}
+
+type RollOutSequenceSequenceFlowTag struct {
+	// Tag key.
+	Key string `pulumi:"key"`
+	// Tag values.
+	Values []string `pulumi:"values"`
+}
+
+// RollOutSequenceSequenceFlowTagInput is an input type that accepts RollOutSequenceSequenceFlowTagArgs and RollOutSequenceSequenceFlowTagOutput values.
+// You can construct a concrete instance of `RollOutSequenceSequenceFlowTagInput` via:
+//
+//	RollOutSequenceSequenceFlowTagArgs{...}
+type RollOutSequenceSequenceFlowTagInput interface {
+	pulumi.Input
+
+	ToRollOutSequenceSequenceFlowTagOutput() RollOutSequenceSequenceFlowTagOutput
+	ToRollOutSequenceSequenceFlowTagOutputWithContext(context.Context) RollOutSequenceSequenceFlowTagOutput
+}
+
+type RollOutSequenceSequenceFlowTagArgs struct {
+	// Tag key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Tag values.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (RollOutSequenceSequenceFlowTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RollOutSequenceSequenceFlowTag)(nil)).Elem()
+}
+
+func (i RollOutSequenceSequenceFlowTagArgs) ToRollOutSequenceSequenceFlowTagOutput() RollOutSequenceSequenceFlowTagOutput {
+	return i.ToRollOutSequenceSequenceFlowTagOutputWithContext(context.Background())
+}
+
+func (i RollOutSequenceSequenceFlowTagArgs) ToRollOutSequenceSequenceFlowTagOutputWithContext(ctx context.Context) RollOutSequenceSequenceFlowTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RollOutSequenceSequenceFlowTagOutput)
+}
+
+// RollOutSequenceSequenceFlowTagArrayInput is an input type that accepts RollOutSequenceSequenceFlowTagArray and RollOutSequenceSequenceFlowTagArrayOutput values.
+// You can construct a concrete instance of `RollOutSequenceSequenceFlowTagArrayInput` via:
+//
+//	RollOutSequenceSequenceFlowTagArray{ RollOutSequenceSequenceFlowTagArgs{...} }
+type RollOutSequenceSequenceFlowTagArrayInput interface {
+	pulumi.Input
+
+	ToRollOutSequenceSequenceFlowTagArrayOutput() RollOutSequenceSequenceFlowTagArrayOutput
+	ToRollOutSequenceSequenceFlowTagArrayOutputWithContext(context.Context) RollOutSequenceSequenceFlowTagArrayOutput
+}
+
+type RollOutSequenceSequenceFlowTagArray []RollOutSequenceSequenceFlowTagInput
+
+func (RollOutSequenceSequenceFlowTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RollOutSequenceSequenceFlowTag)(nil)).Elem()
+}
+
+func (i RollOutSequenceSequenceFlowTagArray) ToRollOutSequenceSequenceFlowTagArrayOutput() RollOutSequenceSequenceFlowTagArrayOutput {
+	return i.ToRollOutSequenceSequenceFlowTagArrayOutputWithContext(context.Background())
+}
+
+func (i RollOutSequenceSequenceFlowTagArray) ToRollOutSequenceSequenceFlowTagArrayOutputWithContext(ctx context.Context) RollOutSequenceSequenceFlowTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RollOutSequenceSequenceFlowTagArrayOutput)
+}
+
+type RollOutSequenceSequenceFlowTagOutput struct{ *pulumi.OutputState }
+
+func (RollOutSequenceSequenceFlowTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RollOutSequenceSequenceFlowTag)(nil)).Elem()
+}
+
+func (o RollOutSequenceSequenceFlowTagOutput) ToRollOutSequenceSequenceFlowTagOutput() RollOutSequenceSequenceFlowTagOutput {
+	return o
+}
+
+func (o RollOutSequenceSequenceFlowTagOutput) ToRollOutSequenceSequenceFlowTagOutputWithContext(ctx context.Context) RollOutSequenceSequenceFlowTagOutput {
+	return o
+}
+
+// Tag key.
+func (o RollOutSequenceSequenceFlowTagOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v RollOutSequenceSequenceFlowTag) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Tag values.
+func (o RollOutSequenceSequenceFlowTagOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v RollOutSequenceSequenceFlowTag) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type RollOutSequenceSequenceFlowTagArrayOutput struct{ *pulumi.OutputState }
+
+func (RollOutSequenceSequenceFlowTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RollOutSequenceSequenceFlowTag)(nil)).Elem()
+}
+
+func (o RollOutSequenceSequenceFlowTagArrayOutput) ToRollOutSequenceSequenceFlowTagArrayOutput() RollOutSequenceSequenceFlowTagArrayOutput {
+	return o
+}
+
+func (o RollOutSequenceSequenceFlowTagArrayOutput) ToRollOutSequenceSequenceFlowTagArrayOutputWithContext(ctx context.Context) RollOutSequenceSequenceFlowTagArrayOutput {
+	return o
+}
+
+func (o RollOutSequenceSequenceFlowTagArrayOutput) Index(i pulumi.IntInput) RollOutSequenceSequenceFlowTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) RollOutSequenceSequenceFlowTag {
+		return vs[0].([]RollOutSequenceSequenceFlowTag)[vs[1].(int)]
+	}).(RollOutSequenceSequenceFlowTagOutput)
+}
+
 type ScaleWorkerDataDisk struct {
 	// Indicate whether to auto format and mount or not. Default is `false`.
 	AutoFormatAndMount *bool `pulumi:"autoFormatAndMount"`
@@ -11516,7 +13617,7 @@ type ScaleWorkerWorkerConfig struct {
 	// Indicate to set desired pod number in node. valid when enable_customized_pod_cidr=true, and it override `[globe_]desired_pod_num` for current node. Either all the fields `desiredPodNum` or none.
 	DesiredPodNum *int `pulumi:"desiredPodNum"`
 	// Disaster recover groups to which a CVM instance belongs. Only support maximum 1.
-	DisasterRecoverGroupIds *string `pulumi:"disasterRecoverGroupIds"`
+	DisasterRecoverGroupIds []string `pulumi:"disasterRecoverGroupIds"`
 	// To specify whether to enable cloud monitor service. Default is TRUE.
 	EnhancedMonitorService *bool `pulumi:"enhancedMonitorService"`
 	// To specify whether to enable cloud security service. Default is TRUE.
@@ -11588,7 +13689,7 @@ type ScaleWorkerWorkerConfigArgs struct {
 	// Indicate to set desired pod number in node. valid when enable_customized_pod_cidr=true, and it override `[globe_]desired_pod_num` for current node. Either all the fields `desiredPodNum` or none.
 	DesiredPodNum pulumi.IntPtrInput `pulumi:"desiredPodNum"`
 	// Disaster recover groups to which a CVM instance belongs. Only support maximum 1.
-	DisasterRecoverGroupIds pulumi.StringPtrInput `pulumi:"disasterRecoverGroupIds"`
+	DisasterRecoverGroupIds pulumi.StringArrayInput `pulumi:"disasterRecoverGroupIds"`
 	// To specify whether to enable cloud monitor service. Default is TRUE.
 	EnhancedMonitorService pulumi.BoolPtrInput `pulumi:"enhancedMonitorService"`
 	// To specify whether to enable cloud security service. Default is TRUE.
@@ -11746,8 +13847,8 @@ func (o ScaleWorkerWorkerConfigOutput) DesiredPodNum() pulumi.IntPtrOutput {
 }
 
 // Disaster recover groups to which a CVM instance belongs. Only support maximum 1.
-func (o ScaleWorkerWorkerConfigOutput) DisasterRecoverGroupIds() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ScaleWorkerWorkerConfig) *string { return v.DisasterRecoverGroupIds }).(pulumi.StringPtrOutput)
+func (o ScaleWorkerWorkerConfigOutput) DisasterRecoverGroupIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ScaleWorkerWorkerConfig) []string { return v.DisasterRecoverGroupIds }).(pulumi.StringArrayOutput)
 }
 
 // To specify whether to enable cloud monitor service. Default is TRUE.
@@ -11950,13 +14051,13 @@ func (o ScaleWorkerWorkerConfigPtrOutput) DesiredPodNum() pulumi.IntPtrOutput {
 }
 
 // Disaster recover groups to which a CVM instance belongs. Only support maximum 1.
-func (o ScaleWorkerWorkerConfigPtrOutput) DisasterRecoverGroupIds() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ScaleWorkerWorkerConfig) *string {
+func (o ScaleWorkerWorkerConfigPtrOutput) DisasterRecoverGroupIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ScaleWorkerWorkerConfig) []string {
 		if v == nil {
 			return nil
 		}
 		return v.DisasterRecoverGroupIds
-	}).(pulumi.StringPtrOutput)
+	}).(pulumi.StringArrayOutput)
 }
 
 // To specify whether to enable cloud monitor service. Default is TRUE.
@@ -12822,11 +14923,147 @@ func (o ServerlessNodePoolTaintArrayOutput) Index(i pulumi.IntInput) ServerlessN
 	}).(ServerlessNodePoolTaintOutput)
 }
 
+type UserPermissionsPermission struct {
+	// Cluster ID.
+	ClusterId string `pulumi:"clusterId"`
+	// Whether it is a custom role, default false.
+	IsCustom *bool `pulumi:"isCustom"`
+	// Namespace. Required when RoleType is namespace.
+	Namespace *string `pulumi:"namespace"`
+	// Role name. Predefined roles include: tke:admin (cluster administrator), tke:ops (operations personnel), tke:dev (developer), tke:ro (read-only user), tke:ns:dev (namespace developer), tke:ns:ro (namespace read-only user), others are user-defined roles.
+	RoleName string `pulumi:"roleName"`
+	// Authorization type. Enum values: cluster (cluster-level permissions, corresponding to ClusterRoleBinding), namespace (namespace-level permissions, corresponding to RoleBinding).
+	RoleType string `pulumi:"roleType"`
+}
+
+// UserPermissionsPermissionInput is an input type that accepts UserPermissionsPermissionArgs and UserPermissionsPermissionOutput values.
+// You can construct a concrete instance of `UserPermissionsPermissionInput` via:
+//
+//	UserPermissionsPermissionArgs{...}
+type UserPermissionsPermissionInput interface {
+	pulumi.Input
+
+	ToUserPermissionsPermissionOutput() UserPermissionsPermissionOutput
+	ToUserPermissionsPermissionOutputWithContext(context.Context) UserPermissionsPermissionOutput
+}
+
+type UserPermissionsPermissionArgs struct {
+	// Cluster ID.
+	ClusterId pulumi.StringInput `pulumi:"clusterId"`
+	// Whether it is a custom role, default false.
+	IsCustom pulumi.BoolPtrInput `pulumi:"isCustom"`
+	// Namespace. Required when RoleType is namespace.
+	Namespace pulumi.StringPtrInput `pulumi:"namespace"`
+	// Role name. Predefined roles include: tke:admin (cluster administrator), tke:ops (operations personnel), tke:dev (developer), tke:ro (read-only user), tke:ns:dev (namespace developer), tke:ns:ro (namespace read-only user), others are user-defined roles.
+	RoleName pulumi.StringInput `pulumi:"roleName"`
+	// Authorization type. Enum values: cluster (cluster-level permissions, corresponding to ClusterRoleBinding), namespace (namespace-level permissions, corresponding to RoleBinding).
+	RoleType pulumi.StringInput `pulumi:"roleType"`
+}
+
+func (UserPermissionsPermissionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*UserPermissionsPermission)(nil)).Elem()
+}
+
+func (i UserPermissionsPermissionArgs) ToUserPermissionsPermissionOutput() UserPermissionsPermissionOutput {
+	return i.ToUserPermissionsPermissionOutputWithContext(context.Background())
+}
+
+func (i UserPermissionsPermissionArgs) ToUserPermissionsPermissionOutputWithContext(ctx context.Context) UserPermissionsPermissionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(UserPermissionsPermissionOutput)
+}
+
+// UserPermissionsPermissionArrayInput is an input type that accepts UserPermissionsPermissionArray and UserPermissionsPermissionArrayOutput values.
+// You can construct a concrete instance of `UserPermissionsPermissionArrayInput` via:
+//
+//	UserPermissionsPermissionArray{ UserPermissionsPermissionArgs{...} }
+type UserPermissionsPermissionArrayInput interface {
+	pulumi.Input
+
+	ToUserPermissionsPermissionArrayOutput() UserPermissionsPermissionArrayOutput
+	ToUserPermissionsPermissionArrayOutputWithContext(context.Context) UserPermissionsPermissionArrayOutput
+}
+
+type UserPermissionsPermissionArray []UserPermissionsPermissionInput
+
+func (UserPermissionsPermissionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]UserPermissionsPermission)(nil)).Elem()
+}
+
+func (i UserPermissionsPermissionArray) ToUserPermissionsPermissionArrayOutput() UserPermissionsPermissionArrayOutput {
+	return i.ToUserPermissionsPermissionArrayOutputWithContext(context.Background())
+}
+
+func (i UserPermissionsPermissionArray) ToUserPermissionsPermissionArrayOutputWithContext(ctx context.Context) UserPermissionsPermissionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(UserPermissionsPermissionArrayOutput)
+}
+
+type UserPermissionsPermissionOutput struct{ *pulumi.OutputState }
+
+func (UserPermissionsPermissionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*UserPermissionsPermission)(nil)).Elem()
+}
+
+func (o UserPermissionsPermissionOutput) ToUserPermissionsPermissionOutput() UserPermissionsPermissionOutput {
+	return o
+}
+
+func (o UserPermissionsPermissionOutput) ToUserPermissionsPermissionOutputWithContext(ctx context.Context) UserPermissionsPermissionOutput {
+	return o
+}
+
+// Cluster ID.
+func (o UserPermissionsPermissionOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v UserPermissionsPermission) string { return v.ClusterId }).(pulumi.StringOutput)
+}
+
+// Whether it is a custom role, default false.
+func (o UserPermissionsPermissionOutput) IsCustom() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v UserPermissionsPermission) *bool { return v.IsCustom }).(pulumi.BoolPtrOutput)
+}
+
+// Namespace. Required when RoleType is namespace.
+func (o UserPermissionsPermissionOutput) Namespace() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v UserPermissionsPermission) *string { return v.Namespace }).(pulumi.StringPtrOutput)
+}
+
+// Role name. Predefined roles include: tke:admin (cluster administrator), tke:ops (operations personnel), tke:dev (developer), tke:ro (read-only user), tke:ns:dev (namespace developer), tke:ns:ro (namespace read-only user), others are user-defined roles.
+func (o UserPermissionsPermissionOutput) RoleName() pulumi.StringOutput {
+	return o.ApplyT(func(v UserPermissionsPermission) string { return v.RoleName }).(pulumi.StringOutput)
+}
+
+// Authorization type. Enum values: cluster (cluster-level permissions, corresponding to ClusterRoleBinding), namespace (namespace-level permissions, corresponding to RoleBinding).
+func (o UserPermissionsPermissionOutput) RoleType() pulumi.StringOutput {
+	return o.ApplyT(func(v UserPermissionsPermission) string { return v.RoleType }).(pulumi.StringOutput)
+}
+
+type UserPermissionsPermissionArrayOutput struct{ *pulumi.OutputState }
+
+func (UserPermissionsPermissionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]UserPermissionsPermission)(nil)).Elem()
+}
+
+func (o UserPermissionsPermissionArrayOutput) ToUserPermissionsPermissionArrayOutput() UserPermissionsPermissionArrayOutput {
+	return o
+}
+
+func (o UserPermissionsPermissionArrayOutput) ToUserPermissionsPermissionArrayOutputWithContext(ctx context.Context) UserPermissionsPermissionArrayOutput {
+	return o
+}
+
+func (o UserPermissionsPermissionArrayOutput) Index(i pulumi.IntInput) UserPermissionsPermissionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) UserPermissionsPermission {
+		return vs[0].([]UserPermissionsPermission)[vs[1].(int)]
+	}).(UserPermissionsPermissionOutput)
+}
+
 type GetAddonsAddon struct {
 	// Add-on name (all add-ons in the cluster are returned if this parameter is not specified).
 	AddonName string `pulumi:"addonName"`
 	// Add-on version.
 	AddonVersion string `pulumi:"addonVersion"`
+	// Decoded add-on parameters (base64 decoded from raw_values).
+	// Note: This field may return empty string if rawValues is null or invalid base64.
+	DecodeValues string `pulumi:"decodeValues"`
 	// Add-on status
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Phase string `pulumi:"phase"`
@@ -12854,6 +15091,9 @@ type GetAddonsAddonArgs struct {
 	AddonName pulumi.StringInput `pulumi:"addonName"`
 	// Add-on version.
 	AddonVersion pulumi.StringInput `pulumi:"addonVersion"`
+	// Decoded add-on parameters (base64 decoded from raw_values).
+	// Note: This field may return empty string if rawValues is null or invalid base64.
+	DecodeValues pulumi.StringInput `pulumi:"decodeValues"`
 	// Add-on status
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Phase pulumi.StringInput `pulumi:"phase"`
@@ -12924,6 +15164,12 @@ func (o GetAddonsAddonOutput) AddonName() pulumi.StringOutput {
 // Add-on version.
 func (o GetAddonsAddonOutput) AddonVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v GetAddonsAddon) string { return v.AddonVersion }).(pulumi.StringOutput)
+}
+
+// Decoded add-on parameters (base64 decoded from raw_values).
+// Note: This field may return empty string if rawValues is null or invalid base64.
+func (o GetAddonsAddonOutput) DecodeValues() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAddonsAddon) string { return v.DecodeValues }).(pulumi.StringOutput)
 }
 
 // Add-on status
@@ -13422,6 +15668,670 @@ func (o GetClusterAuthenticationOptionsServiceAccountArrayOutput) Index(i pulumi
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterAuthenticationOptionsServiceAccount {
 		return vs[0].([]GetClusterAuthenticationOptionsServiceAccount)[vs[1].(int)]
 	}).(GetClusterAuthenticationOptionsServiceAccountOutput)
+}
+
+type GetClusterAvailableExtraArgsAvailableExtraArg struct {
+	// Available custom arguments for kube-apiserver.
+	KubeApiservers []GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserver `pulumi:"kubeApiservers"`
+	// Available custom arguments for kube-controller-manager.
+	KubeControllerManagers []GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManager `pulumi:"kubeControllerManagers"`
+	// Available custom arguments for kube-scheduler.
+	KubeSchedulers []GetClusterAvailableExtraArgsAvailableExtraArgKubeScheduler `pulumi:"kubeSchedulers"`
+	// Available custom arguments for kubelet.
+	Kubelets []GetClusterAvailableExtraArgsAvailableExtraArgKubelet `pulumi:"kubelets"`
+}
+
+// GetClusterAvailableExtraArgsAvailableExtraArgInput is an input type that accepts GetClusterAvailableExtraArgsAvailableExtraArgArgs and GetClusterAvailableExtraArgsAvailableExtraArgOutput values.
+// You can construct a concrete instance of `GetClusterAvailableExtraArgsAvailableExtraArgInput` via:
+//
+//	GetClusterAvailableExtraArgsAvailableExtraArgArgs{...}
+type GetClusterAvailableExtraArgsAvailableExtraArgInput interface {
+	pulumi.Input
+
+	ToGetClusterAvailableExtraArgsAvailableExtraArgOutput() GetClusterAvailableExtraArgsAvailableExtraArgOutput
+	ToGetClusterAvailableExtraArgsAvailableExtraArgOutputWithContext(context.Context) GetClusterAvailableExtraArgsAvailableExtraArgOutput
+}
+
+type GetClusterAvailableExtraArgsAvailableExtraArgArgs struct {
+	// Available custom arguments for kube-apiserver.
+	KubeApiservers GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArrayInput `pulumi:"kubeApiservers"`
+	// Available custom arguments for kube-controller-manager.
+	KubeControllerManagers GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArrayInput `pulumi:"kubeControllerManagers"`
+	// Available custom arguments for kube-scheduler.
+	KubeSchedulers GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArrayInput `pulumi:"kubeSchedulers"`
+	// Available custom arguments for kubelet.
+	Kubelets GetClusterAvailableExtraArgsAvailableExtraArgKubeletArrayInput `pulumi:"kubelets"`
+}
+
+func (GetClusterAvailableExtraArgsAvailableExtraArgArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterAvailableExtraArgsAvailableExtraArg)(nil)).Elem()
+}
+
+func (i GetClusterAvailableExtraArgsAvailableExtraArgArgs) ToGetClusterAvailableExtraArgsAvailableExtraArgOutput() GetClusterAvailableExtraArgsAvailableExtraArgOutput {
+	return i.ToGetClusterAvailableExtraArgsAvailableExtraArgOutputWithContext(context.Background())
+}
+
+func (i GetClusterAvailableExtraArgsAvailableExtraArgArgs) ToGetClusterAvailableExtraArgsAvailableExtraArgOutputWithContext(ctx context.Context) GetClusterAvailableExtraArgsAvailableExtraArgOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterAvailableExtraArgsAvailableExtraArgOutput)
+}
+
+// GetClusterAvailableExtraArgsAvailableExtraArgArrayInput is an input type that accepts GetClusterAvailableExtraArgsAvailableExtraArgArray and GetClusterAvailableExtraArgsAvailableExtraArgArrayOutput values.
+// You can construct a concrete instance of `GetClusterAvailableExtraArgsAvailableExtraArgArrayInput` via:
+//
+//	GetClusterAvailableExtraArgsAvailableExtraArgArray{ GetClusterAvailableExtraArgsAvailableExtraArgArgs{...} }
+type GetClusterAvailableExtraArgsAvailableExtraArgArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterAvailableExtraArgsAvailableExtraArgArrayOutput() GetClusterAvailableExtraArgsAvailableExtraArgArrayOutput
+	ToGetClusterAvailableExtraArgsAvailableExtraArgArrayOutputWithContext(context.Context) GetClusterAvailableExtraArgsAvailableExtraArgArrayOutput
+}
+
+type GetClusterAvailableExtraArgsAvailableExtraArgArray []GetClusterAvailableExtraArgsAvailableExtraArgInput
+
+func (GetClusterAvailableExtraArgsAvailableExtraArgArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterAvailableExtraArgsAvailableExtraArg)(nil)).Elem()
+}
+
+func (i GetClusterAvailableExtraArgsAvailableExtraArgArray) ToGetClusterAvailableExtraArgsAvailableExtraArgArrayOutput() GetClusterAvailableExtraArgsAvailableExtraArgArrayOutput {
+	return i.ToGetClusterAvailableExtraArgsAvailableExtraArgArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterAvailableExtraArgsAvailableExtraArgArray) ToGetClusterAvailableExtraArgsAvailableExtraArgArrayOutputWithContext(ctx context.Context) GetClusterAvailableExtraArgsAvailableExtraArgArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterAvailableExtraArgsAvailableExtraArgArrayOutput)
+}
+
+type GetClusterAvailableExtraArgsAvailableExtraArgOutput struct{ *pulumi.OutputState }
+
+func (GetClusterAvailableExtraArgsAvailableExtraArgOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterAvailableExtraArgsAvailableExtraArg)(nil)).Elem()
+}
+
+func (o GetClusterAvailableExtraArgsAvailableExtraArgOutput) ToGetClusterAvailableExtraArgsAvailableExtraArgOutput() GetClusterAvailableExtraArgsAvailableExtraArgOutput {
+	return o
+}
+
+func (o GetClusterAvailableExtraArgsAvailableExtraArgOutput) ToGetClusterAvailableExtraArgsAvailableExtraArgOutputWithContext(ctx context.Context) GetClusterAvailableExtraArgsAvailableExtraArgOutput {
+	return o
+}
+
+// Available custom arguments for kube-apiserver.
+func (o GetClusterAvailableExtraArgsAvailableExtraArgOutput) KubeApiservers() GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArrayOutput {
+	return o.ApplyT(func(v GetClusterAvailableExtraArgsAvailableExtraArg) []GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserver {
+		return v.KubeApiservers
+	}).(GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArrayOutput)
+}
+
+// Available custom arguments for kube-controller-manager.
+func (o GetClusterAvailableExtraArgsAvailableExtraArgOutput) KubeControllerManagers() GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArrayOutput {
+	return o.ApplyT(func(v GetClusterAvailableExtraArgsAvailableExtraArg) []GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManager {
+		return v.KubeControllerManagers
+	}).(GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArrayOutput)
+}
+
+// Available custom arguments for kube-scheduler.
+func (o GetClusterAvailableExtraArgsAvailableExtraArgOutput) KubeSchedulers() GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArrayOutput {
+	return o.ApplyT(func(v GetClusterAvailableExtraArgsAvailableExtraArg) []GetClusterAvailableExtraArgsAvailableExtraArgKubeScheduler {
+		return v.KubeSchedulers
+	}).(GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArrayOutput)
+}
+
+// Available custom arguments for kubelet.
+func (o GetClusterAvailableExtraArgsAvailableExtraArgOutput) Kubelets() GetClusterAvailableExtraArgsAvailableExtraArgKubeletArrayOutput {
+	return o.ApplyT(func(v GetClusterAvailableExtraArgsAvailableExtraArg) []GetClusterAvailableExtraArgsAvailableExtraArgKubelet {
+		return v.Kubelets
+	}).(GetClusterAvailableExtraArgsAvailableExtraArgKubeletArrayOutput)
+}
+
+type GetClusterAvailableExtraArgsAvailableExtraArgArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterAvailableExtraArgsAvailableExtraArgArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterAvailableExtraArgsAvailableExtraArg)(nil)).Elem()
+}
+
+func (o GetClusterAvailableExtraArgsAvailableExtraArgArrayOutput) ToGetClusterAvailableExtraArgsAvailableExtraArgArrayOutput() GetClusterAvailableExtraArgsAvailableExtraArgArrayOutput {
+	return o
+}
+
+func (o GetClusterAvailableExtraArgsAvailableExtraArgArrayOutput) ToGetClusterAvailableExtraArgsAvailableExtraArgArrayOutputWithContext(ctx context.Context) GetClusterAvailableExtraArgsAvailableExtraArgArrayOutput {
+	return o
+}
+
+func (o GetClusterAvailableExtraArgsAvailableExtraArgArrayOutput) Index(i pulumi.IntInput) GetClusterAvailableExtraArgsAvailableExtraArgOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterAvailableExtraArgsAvailableExtraArg {
+		return vs[0].([]GetClusterAvailableExtraArgsAvailableExtraArg)[vs[1].(int)]
+	}).(GetClusterAvailableExtraArgsAvailableExtraArgOutput)
+}
+
+type GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserver struct {
+	// Valid range or allowed values of the argument.
+	Constraint string `pulumi:"constraint"`
+	// Default value of the argument.
+	Default string `pulumi:"default"`
+	// Argument name.
+	Name string `pulumi:"name"`
+	// Argument type.
+	Type string `pulumi:"type"`
+	// Argument description.
+	Usage string `pulumi:"usage"`
+}
+
+// GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverInput is an input type that accepts GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArgs and GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverOutput values.
+// You can construct a concrete instance of `GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverInput` via:
+//
+//	GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArgs{...}
+type GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverInput interface {
+	pulumi.Input
+
+	ToGetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverOutput() GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverOutput
+	ToGetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverOutputWithContext(context.Context) GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverOutput
+}
+
+type GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArgs struct {
+	// Valid range or allowed values of the argument.
+	Constraint pulumi.StringInput `pulumi:"constraint"`
+	// Default value of the argument.
+	Default pulumi.StringInput `pulumi:"default"`
+	// Argument name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Argument type.
+	Type pulumi.StringInput `pulumi:"type"`
+	// Argument description.
+	Usage pulumi.StringInput `pulumi:"usage"`
+}
+
+func (GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserver)(nil)).Elem()
+}
+
+func (i GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArgs) ToGetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverOutput() GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverOutput {
+	return i.ToGetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverOutputWithContext(context.Background())
+}
+
+func (i GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArgs) ToGetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverOutputWithContext(ctx context.Context) GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverOutput)
+}
+
+// GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArrayInput is an input type that accepts GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArray and GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArrayOutput values.
+// You can construct a concrete instance of `GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArrayInput` via:
+//
+//	GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArray{ GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArgs{...} }
+type GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArrayOutput() GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArrayOutput
+	ToGetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArrayOutputWithContext(context.Context) GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArrayOutput
+}
+
+type GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArray []GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverInput
+
+func (GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserver)(nil)).Elem()
+}
+
+func (i GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArray) ToGetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArrayOutput() GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArrayOutput {
+	return i.ToGetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArray) ToGetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArrayOutputWithContext(ctx context.Context) GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArrayOutput)
+}
+
+type GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverOutput struct{ *pulumi.OutputState }
+
+func (GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserver)(nil)).Elem()
+}
+
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverOutput) ToGetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverOutput() GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverOutput {
+	return o
+}
+
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverOutput) ToGetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverOutputWithContext(ctx context.Context) GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverOutput {
+	return o
+}
+
+// Valid range or allowed values of the argument.
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverOutput) Constraint() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserver) string { return v.Constraint }).(pulumi.StringOutput)
+}
+
+// Default value of the argument.
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverOutput) Default() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserver) string { return v.Default }).(pulumi.StringOutput)
+}
+
+// Argument name.
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserver) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Argument type.
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserver) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// Argument description.
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverOutput) Usage() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserver) string { return v.Usage }).(pulumi.StringOutput)
+}
+
+type GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserver)(nil)).Elem()
+}
+
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArrayOutput) ToGetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArrayOutput() GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArrayOutput {
+	return o
+}
+
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArrayOutput) ToGetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArrayOutputWithContext(ctx context.Context) GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArrayOutput {
+	return o
+}
+
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArrayOutput) Index(i pulumi.IntInput) GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserver {
+		return vs[0].([]GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserver)[vs[1].(int)]
+	}).(GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverOutput)
+}
+
+type GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManager struct {
+	// Valid range or allowed values of the argument.
+	Constraint string `pulumi:"constraint"`
+	// Default value of the argument.
+	Default string `pulumi:"default"`
+	// Argument name.
+	Name string `pulumi:"name"`
+	// Argument type.
+	Type string `pulumi:"type"`
+	// Argument description.
+	Usage string `pulumi:"usage"`
+}
+
+// GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerInput is an input type that accepts GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArgs and GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerOutput values.
+// You can construct a concrete instance of `GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerInput` via:
+//
+//	GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArgs{...}
+type GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerInput interface {
+	pulumi.Input
+
+	ToGetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerOutput() GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerOutput
+	ToGetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerOutputWithContext(context.Context) GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerOutput
+}
+
+type GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArgs struct {
+	// Valid range or allowed values of the argument.
+	Constraint pulumi.StringInput `pulumi:"constraint"`
+	// Default value of the argument.
+	Default pulumi.StringInput `pulumi:"default"`
+	// Argument name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Argument type.
+	Type pulumi.StringInput `pulumi:"type"`
+	// Argument description.
+	Usage pulumi.StringInput `pulumi:"usage"`
+}
+
+func (GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManager)(nil)).Elem()
+}
+
+func (i GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArgs) ToGetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerOutput() GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerOutput {
+	return i.ToGetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerOutputWithContext(context.Background())
+}
+
+func (i GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArgs) ToGetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerOutputWithContext(ctx context.Context) GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerOutput)
+}
+
+// GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArrayInput is an input type that accepts GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArray and GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArrayOutput values.
+// You can construct a concrete instance of `GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArrayInput` via:
+//
+//	GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArray{ GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArgs{...} }
+type GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArrayOutput() GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArrayOutput
+	ToGetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArrayOutputWithContext(context.Context) GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArrayOutput
+}
+
+type GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArray []GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerInput
+
+func (GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManager)(nil)).Elem()
+}
+
+func (i GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArray) ToGetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArrayOutput() GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArrayOutput {
+	return i.ToGetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArray) ToGetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArrayOutputWithContext(ctx context.Context) GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArrayOutput)
+}
+
+type GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerOutput struct{ *pulumi.OutputState }
+
+func (GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManager)(nil)).Elem()
+}
+
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerOutput) ToGetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerOutput() GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerOutput {
+	return o
+}
+
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerOutput) ToGetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerOutputWithContext(ctx context.Context) GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerOutput {
+	return o
+}
+
+// Valid range or allowed values of the argument.
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerOutput) Constraint() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManager) string { return v.Constraint }).(pulumi.StringOutput)
+}
+
+// Default value of the argument.
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerOutput) Default() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManager) string { return v.Default }).(pulumi.StringOutput)
+}
+
+// Argument name.
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManager) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Argument type.
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManager) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// Argument description.
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerOutput) Usage() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManager) string { return v.Usage }).(pulumi.StringOutput)
+}
+
+type GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManager)(nil)).Elem()
+}
+
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArrayOutput) ToGetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArrayOutput() GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArrayOutput {
+	return o
+}
+
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArrayOutput) ToGetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArrayOutputWithContext(ctx context.Context) GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArrayOutput {
+	return o
+}
+
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArrayOutput) Index(i pulumi.IntInput) GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManager {
+		return vs[0].([]GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManager)[vs[1].(int)]
+	}).(GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerOutput)
+}
+
+type GetClusterAvailableExtraArgsAvailableExtraArgKubeScheduler struct {
+	// Valid range or allowed values of the argument.
+	Constraint string `pulumi:"constraint"`
+	// Default value of the argument.
+	Default string `pulumi:"default"`
+	// Argument name.
+	Name string `pulumi:"name"`
+	// Argument type.
+	Type string `pulumi:"type"`
+	// Argument description.
+	Usage string `pulumi:"usage"`
+}
+
+// GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerInput is an input type that accepts GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArgs and GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerOutput values.
+// You can construct a concrete instance of `GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerInput` via:
+//
+//	GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArgs{...}
+type GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerInput interface {
+	pulumi.Input
+
+	ToGetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerOutput() GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerOutput
+	ToGetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerOutputWithContext(context.Context) GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerOutput
+}
+
+type GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArgs struct {
+	// Valid range or allowed values of the argument.
+	Constraint pulumi.StringInput `pulumi:"constraint"`
+	// Default value of the argument.
+	Default pulumi.StringInput `pulumi:"default"`
+	// Argument name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Argument type.
+	Type pulumi.StringInput `pulumi:"type"`
+	// Argument description.
+	Usage pulumi.StringInput `pulumi:"usage"`
+}
+
+func (GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterAvailableExtraArgsAvailableExtraArgKubeScheduler)(nil)).Elem()
+}
+
+func (i GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArgs) ToGetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerOutput() GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerOutput {
+	return i.ToGetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerOutputWithContext(context.Background())
+}
+
+func (i GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArgs) ToGetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerOutputWithContext(ctx context.Context) GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerOutput)
+}
+
+// GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArrayInput is an input type that accepts GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArray and GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArrayOutput values.
+// You can construct a concrete instance of `GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArrayInput` via:
+//
+//	GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArray{ GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArgs{...} }
+type GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArrayOutput() GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArrayOutput
+	ToGetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArrayOutputWithContext(context.Context) GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArrayOutput
+}
+
+type GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArray []GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerInput
+
+func (GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterAvailableExtraArgsAvailableExtraArgKubeScheduler)(nil)).Elem()
+}
+
+func (i GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArray) ToGetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArrayOutput() GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArrayOutput {
+	return i.ToGetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArray) ToGetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArrayOutputWithContext(ctx context.Context) GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArrayOutput)
+}
+
+type GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerOutput struct{ *pulumi.OutputState }
+
+func (GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterAvailableExtraArgsAvailableExtraArgKubeScheduler)(nil)).Elem()
+}
+
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerOutput) ToGetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerOutput() GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerOutput {
+	return o
+}
+
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerOutput) ToGetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerOutputWithContext(ctx context.Context) GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerOutput {
+	return o
+}
+
+// Valid range or allowed values of the argument.
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerOutput) Constraint() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterAvailableExtraArgsAvailableExtraArgKubeScheduler) string { return v.Constraint }).(pulumi.StringOutput)
+}
+
+// Default value of the argument.
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerOutput) Default() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterAvailableExtraArgsAvailableExtraArgKubeScheduler) string { return v.Default }).(pulumi.StringOutput)
+}
+
+// Argument name.
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterAvailableExtraArgsAvailableExtraArgKubeScheduler) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Argument type.
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterAvailableExtraArgsAvailableExtraArgKubeScheduler) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// Argument description.
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerOutput) Usage() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterAvailableExtraArgsAvailableExtraArgKubeScheduler) string { return v.Usage }).(pulumi.StringOutput)
+}
+
+type GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterAvailableExtraArgsAvailableExtraArgKubeScheduler)(nil)).Elem()
+}
+
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArrayOutput) ToGetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArrayOutput() GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArrayOutput {
+	return o
+}
+
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArrayOutput) ToGetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArrayOutputWithContext(ctx context.Context) GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArrayOutput {
+	return o
+}
+
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArrayOutput) Index(i pulumi.IntInput) GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterAvailableExtraArgsAvailableExtraArgKubeScheduler {
+		return vs[0].([]GetClusterAvailableExtraArgsAvailableExtraArgKubeScheduler)[vs[1].(int)]
+	}).(GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerOutput)
+}
+
+type GetClusterAvailableExtraArgsAvailableExtraArgKubelet struct {
+	// Valid range or allowed values of the argument.
+	Constraint string `pulumi:"constraint"`
+	// Default value of the argument.
+	Default string `pulumi:"default"`
+	// Argument name.
+	Name string `pulumi:"name"`
+	// Argument type.
+	Type string `pulumi:"type"`
+	// Argument description.
+	Usage string `pulumi:"usage"`
+}
+
+// GetClusterAvailableExtraArgsAvailableExtraArgKubeletInput is an input type that accepts GetClusterAvailableExtraArgsAvailableExtraArgKubeletArgs and GetClusterAvailableExtraArgsAvailableExtraArgKubeletOutput values.
+// You can construct a concrete instance of `GetClusterAvailableExtraArgsAvailableExtraArgKubeletInput` via:
+//
+//	GetClusterAvailableExtraArgsAvailableExtraArgKubeletArgs{...}
+type GetClusterAvailableExtraArgsAvailableExtraArgKubeletInput interface {
+	pulumi.Input
+
+	ToGetClusterAvailableExtraArgsAvailableExtraArgKubeletOutput() GetClusterAvailableExtraArgsAvailableExtraArgKubeletOutput
+	ToGetClusterAvailableExtraArgsAvailableExtraArgKubeletOutputWithContext(context.Context) GetClusterAvailableExtraArgsAvailableExtraArgKubeletOutput
+}
+
+type GetClusterAvailableExtraArgsAvailableExtraArgKubeletArgs struct {
+	// Valid range or allowed values of the argument.
+	Constraint pulumi.StringInput `pulumi:"constraint"`
+	// Default value of the argument.
+	Default pulumi.StringInput `pulumi:"default"`
+	// Argument name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Argument type.
+	Type pulumi.StringInput `pulumi:"type"`
+	// Argument description.
+	Usage pulumi.StringInput `pulumi:"usage"`
+}
+
+func (GetClusterAvailableExtraArgsAvailableExtraArgKubeletArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterAvailableExtraArgsAvailableExtraArgKubelet)(nil)).Elem()
+}
+
+func (i GetClusterAvailableExtraArgsAvailableExtraArgKubeletArgs) ToGetClusterAvailableExtraArgsAvailableExtraArgKubeletOutput() GetClusterAvailableExtraArgsAvailableExtraArgKubeletOutput {
+	return i.ToGetClusterAvailableExtraArgsAvailableExtraArgKubeletOutputWithContext(context.Background())
+}
+
+func (i GetClusterAvailableExtraArgsAvailableExtraArgKubeletArgs) ToGetClusterAvailableExtraArgsAvailableExtraArgKubeletOutputWithContext(ctx context.Context) GetClusterAvailableExtraArgsAvailableExtraArgKubeletOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterAvailableExtraArgsAvailableExtraArgKubeletOutput)
+}
+
+// GetClusterAvailableExtraArgsAvailableExtraArgKubeletArrayInput is an input type that accepts GetClusterAvailableExtraArgsAvailableExtraArgKubeletArray and GetClusterAvailableExtraArgsAvailableExtraArgKubeletArrayOutput values.
+// You can construct a concrete instance of `GetClusterAvailableExtraArgsAvailableExtraArgKubeletArrayInput` via:
+//
+//	GetClusterAvailableExtraArgsAvailableExtraArgKubeletArray{ GetClusterAvailableExtraArgsAvailableExtraArgKubeletArgs{...} }
+type GetClusterAvailableExtraArgsAvailableExtraArgKubeletArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterAvailableExtraArgsAvailableExtraArgKubeletArrayOutput() GetClusterAvailableExtraArgsAvailableExtraArgKubeletArrayOutput
+	ToGetClusterAvailableExtraArgsAvailableExtraArgKubeletArrayOutputWithContext(context.Context) GetClusterAvailableExtraArgsAvailableExtraArgKubeletArrayOutput
+}
+
+type GetClusterAvailableExtraArgsAvailableExtraArgKubeletArray []GetClusterAvailableExtraArgsAvailableExtraArgKubeletInput
+
+func (GetClusterAvailableExtraArgsAvailableExtraArgKubeletArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterAvailableExtraArgsAvailableExtraArgKubelet)(nil)).Elem()
+}
+
+func (i GetClusterAvailableExtraArgsAvailableExtraArgKubeletArray) ToGetClusterAvailableExtraArgsAvailableExtraArgKubeletArrayOutput() GetClusterAvailableExtraArgsAvailableExtraArgKubeletArrayOutput {
+	return i.ToGetClusterAvailableExtraArgsAvailableExtraArgKubeletArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterAvailableExtraArgsAvailableExtraArgKubeletArray) ToGetClusterAvailableExtraArgsAvailableExtraArgKubeletArrayOutputWithContext(ctx context.Context) GetClusterAvailableExtraArgsAvailableExtraArgKubeletArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterAvailableExtraArgsAvailableExtraArgKubeletArrayOutput)
+}
+
+type GetClusterAvailableExtraArgsAvailableExtraArgKubeletOutput struct{ *pulumi.OutputState }
+
+func (GetClusterAvailableExtraArgsAvailableExtraArgKubeletOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterAvailableExtraArgsAvailableExtraArgKubelet)(nil)).Elem()
+}
+
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeletOutput) ToGetClusterAvailableExtraArgsAvailableExtraArgKubeletOutput() GetClusterAvailableExtraArgsAvailableExtraArgKubeletOutput {
+	return o
+}
+
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeletOutput) ToGetClusterAvailableExtraArgsAvailableExtraArgKubeletOutputWithContext(ctx context.Context) GetClusterAvailableExtraArgsAvailableExtraArgKubeletOutput {
+	return o
+}
+
+// Valid range or allowed values of the argument.
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeletOutput) Constraint() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterAvailableExtraArgsAvailableExtraArgKubelet) string { return v.Constraint }).(pulumi.StringOutput)
+}
+
+// Default value of the argument.
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeletOutput) Default() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterAvailableExtraArgsAvailableExtraArgKubelet) string { return v.Default }).(pulumi.StringOutput)
+}
+
+// Argument name.
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeletOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterAvailableExtraArgsAvailableExtraArgKubelet) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Argument type.
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeletOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterAvailableExtraArgsAvailableExtraArgKubelet) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// Argument description.
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeletOutput) Usage() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterAvailableExtraArgsAvailableExtraArgKubelet) string { return v.Usage }).(pulumi.StringOutput)
+}
+
+type GetClusterAvailableExtraArgsAvailableExtraArgKubeletArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterAvailableExtraArgsAvailableExtraArgKubeletArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterAvailableExtraArgsAvailableExtraArgKubelet)(nil)).Elem()
+}
+
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeletArrayOutput) ToGetClusterAvailableExtraArgsAvailableExtraArgKubeletArrayOutput() GetClusterAvailableExtraArgsAvailableExtraArgKubeletArrayOutput {
+	return o
+}
+
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeletArrayOutput) ToGetClusterAvailableExtraArgsAvailableExtraArgKubeletArrayOutputWithContext(ctx context.Context) GetClusterAvailableExtraArgsAvailableExtraArgKubeletArrayOutput {
+	return o
+}
+
+func (o GetClusterAvailableExtraArgsAvailableExtraArgKubeletArrayOutput) Index(i pulumi.IntInput) GetClusterAvailableExtraArgsAvailableExtraArgKubeletOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterAvailableExtraArgsAvailableExtraArgKubelet {
+		return vs[0].([]GetClusterAvailableExtraArgsAvailableExtraArgKubelet)[vs[1].(int)]
+	}).(GetClusterAvailableExtraArgsAvailableExtraArgKubeletOutput)
 }
 
 type GetClusterCommonNamesList struct {
@@ -19813,6 +22723,326 @@ func (o GetClustersListWorkerInstancesListArrayOutput) Index(i pulumi.IntInput) 
 	}).(GetClustersListWorkerInstancesListOutput)
 }
 
+type GetUpgradeTaskDetailUpgradePlan struct {
+	// Cluster ID.
+	ClusterId string `pulumi:"clusterId"`
+	// Cluster name.
+	ClusterName string `pulumi:"clusterName"`
+	// Upgrade plan ID.
+	Id int `pulumi:"id"`
+	// Planned start time.
+	PlanedStartAt string `pulumi:"planedStartAt"`
+	// Reason.
+	Reason string `pulumi:"reason"`
+	// Cluster region.
+	Region string `pulumi:"region"`
+	// Upgrade status.
+	Status string `pulumi:"status"`
+	// Upgrade end time.
+	UpgradeEndAt string `pulumi:"upgradeEndAt"`
+	// Upgrade start time.
+	UpgradeStartAt string `pulumi:"upgradeStartAt"`
+}
+
+// GetUpgradeTaskDetailUpgradePlanInput is an input type that accepts GetUpgradeTaskDetailUpgradePlanArgs and GetUpgradeTaskDetailUpgradePlanOutput values.
+// You can construct a concrete instance of `GetUpgradeTaskDetailUpgradePlanInput` via:
+//
+//	GetUpgradeTaskDetailUpgradePlanArgs{...}
+type GetUpgradeTaskDetailUpgradePlanInput interface {
+	pulumi.Input
+
+	ToGetUpgradeTaskDetailUpgradePlanOutput() GetUpgradeTaskDetailUpgradePlanOutput
+	ToGetUpgradeTaskDetailUpgradePlanOutputWithContext(context.Context) GetUpgradeTaskDetailUpgradePlanOutput
+}
+
+type GetUpgradeTaskDetailUpgradePlanArgs struct {
+	// Cluster ID.
+	ClusterId pulumi.StringInput `pulumi:"clusterId"`
+	// Cluster name.
+	ClusterName pulumi.StringInput `pulumi:"clusterName"`
+	// Upgrade plan ID.
+	Id pulumi.IntInput `pulumi:"id"`
+	// Planned start time.
+	PlanedStartAt pulumi.StringInput `pulumi:"planedStartAt"`
+	// Reason.
+	Reason pulumi.StringInput `pulumi:"reason"`
+	// Cluster region.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Upgrade status.
+	Status pulumi.StringInput `pulumi:"status"`
+	// Upgrade end time.
+	UpgradeEndAt pulumi.StringInput `pulumi:"upgradeEndAt"`
+	// Upgrade start time.
+	UpgradeStartAt pulumi.StringInput `pulumi:"upgradeStartAt"`
+}
+
+func (GetUpgradeTaskDetailUpgradePlanArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetUpgradeTaskDetailUpgradePlan)(nil)).Elem()
+}
+
+func (i GetUpgradeTaskDetailUpgradePlanArgs) ToGetUpgradeTaskDetailUpgradePlanOutput() GetUpgradeTaskDetailUpgradePlanOutput {
+	return i.ToGetUpgradeTaskDetailUpgradePlanOutputWithContext(context.Background())
+}
+
+func (i GetUpgradeTaskDetailUpgradePlanArgs) ToGetUpgradeTaskDetailUpgradePlanOutputWithContext(ctx context.Context) GetUpgradeTaskDetailUpgradePlanOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetUpgradeTaskDetailUpgradePlanOutput)
+}
+
+// GetUpgradeTaskDetailUpgradePlanArrayInput is an input type that accepts GetUpgradeTaskDetailUpgradePlanArray and GetUpgradeTaskDetailUpgradePlanArrayOutput values.
+// You can construct a concrete instance of `GetUpgradeTaskDetailUpgradePlanArrayInput` via:
+//
+//	GetUpgradeTaskDetailUpgradePlanArray{ GetUpgradeTaskDetailUpgradePlanArgs{...} }
+type GetUpgradeTaskDetailUpgradePlanArrayInput interface {
+	pulumi.Input
+
+	ToGetUpgradeTaskDetailUpgradePlanArrayOutput() GetUpgradeTaskDetailUpgradePlanArrayOutput
+	ToGetUpgradeTaskDetailUpgradePlanArrayOutputWithContext(context.Context) GetUpgradeTaskDetailUpgradePlanArrayOutput
+}
+
+type GetUpgradeTaskDetailUpgradePlanArray []GetUpgradeTaskDetailUpgradePlanInput
+
+func (GetUpgradeTaskDetailUpgradePlanArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetUpgradeTaskDetailUpgradePlan)(nil)).Elem()
+}
+
+func (i GetUpgradeTaskDetailUpgradePlanArray) ToGetUpgradeTaskDetailUpgradePlanArrayOutput() GetUpgradeTaskDetailUpgradePlanArrayOutput {
+	return i.ToGetUpgradeTaskDetailUpgradePlanArrayOutputWithContext(context.Background())
+}
+
+func (i GetUpgradeTaskDetailUpgradePlanArray) ToGetUpgradeTaskDetailUpgradePlanArrayOutputWithContext(ctx context.Context) GetUpgradeTaskDetailUpgradePlanArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetUpgradeTaskDetailUpgradePlanArrayOutput)
+}
+
+type GetUpgradeTaskDetailUpgradePlanOutput struct{ *pulumi.OutputState }
+
+func (GetUpgradeTaskDetailUpgradePlanOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetUpgradeTaskDetailUpgradePlan)(nil)).Elem()
+}
+
+func (o GetUpgradeTaskDetailUpgradePlanOutput) ToGetUpgradeTaskDetailUpgradePlanOutput() GetUpgradeTaskDetailUpgradePlanOutput {
+	return o
+}
+
+func (o GetUpgradeTaskDetailUpgradePlanOutput) ToGetUpgradeTaskDetailUpgradePlanOutputWithContext(ctx context.Context) GetUpgradeTaskDetailUpgradePlanOutput {
+	return o
+}
+
+// Cluster ID.
+func (o GetUpgradeTaskDetailUpgradePlanOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUpgradeTaskDetailUpgradePlan) string { return v.ClusterId }).(pulumi.StringOutput)
+}
+
+// Cluster name.
+func (o GetUpgradeTaskDetailUpgradePlanOutput) ClusterName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUpgradeTaskDetailUpgradePlan) string { return v.ClusterName }).(pulumi.StringOutput)
+}
+
+// Upgrade plan ID.
+func (o GetUpgradeTaskDetailUpgradePlanOutput) Id() pulumi.IntOutput {
+	return o.ApplyT(func(v GetUpgradeTaskDetailUpgradePlan) int { return v.Id }).(pulumi.IntOutput)
+}
+
+// Planned start time.
+func (o GetUpgradeTaskDetailUpgradePlanOutput) PlanedStartAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUpgradeTaskDetailUpgradePlan) string { return v.PlanedStartAt }).(pulumi.StringOutput)
+}
+
+// Reason.
+func (o GetUpgradeTaskDetailUpgradePlanOutput) Reason() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUpgradeTaskDetailUpgradePlan) string { return v.Reason }).(pulumi.StringOutput)
+}
+
+// Cluster region.
+func (o GetUpgradeTaskDetailUpgradePlanOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUpgradeTaskDetailUpgradePlan) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Upgrade status.
+func (o GetUpgradeTaskDetailUpgradePlanOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUpgradeTaskDetailUpgradePlan) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// Upgrade end time.
+func (o GetUpgradeTaskDetailUpgradePlanOutput) UpgradeEndAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUpgradeTaskDetailUpgradePlan) string { return v.UpgradeEndAt }).(pulumi.StringOutput)
+}
+
+// Upgrade start time.
+func (o GetUpgradeTaskDetailUpgradePlanOutput) UpgradeStartAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUpgradeTaskDetailUpgradePlan) string { return v.UpgradeStartAt }).(pulumi.StringOutput)
+}
+
+type GetUpgradeTaskDetailUpgradePlanArrayOutput struct{ *pulumi.OutputState }
+
+func (GetUpgradeTaskDetailUpgradePlanArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetUpgradeTaskDetailUpgradePlan)(nil)).Elem()
+}
+
+func (o GetUpgradeTaskDetailUpgradePlanArrayOutput) ToGetUpgradeTaskDetailUpgradePlanArrayOutput() GetUpgradeTaskDetailUpgradePlanArrayOutput {
+	return o
+}
+
+func (o GetUpgradeTaskDetailUpgradePlanArrayOutput) ToGetUpgradeTaskDetailUpgradePlanArrayOutputWithContext(ctx context.Context) GetUpgradeTaskDetailUpgradePlanArrayOutput {
+	return o
+}
+
+func (o GetUpgradeTaskDetailUpgradePlanArrayOutput) Index(i pulumi.IntInput) GetUpgradeTaskDetailUpgradePlanOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetUpgradeTaskDetailUpgradePlan {
+		return vs[0].([]GetUpgradeTaskDetailUpgradePlan)[vs[1].(int)]
+	}).(GetUpgradeTaskDetailUpgradePlanOutput)
+}
+
+type GetUpgradeTasksUpgradeTask struct {
+	// Component name.
+	Component string `pulumi:"component"`
+	// Creation time.
+	CreatedAt string `pulumi:"createdAt"`
+	// Task ID.
+	Id int `pulumi:"id"`
+	// Task name.
+	Name string `pulumi:"name"`
+	// Planned start time.
+	PlanedStartAt string `pulumi:"planedStartAt"`
+	// Related resources.
+	RelatedResources []string `pulumi:"relatedResources"`
+	// Upgrade impact.
+	UpgradeImpact string `pulumi:"upgradeImpact"`
+}
+
+// GetUpgradeTasksUpgradeTaskInput is an input type that accepts GetUpgradeTasksUpgradeTaskArgs and GetUpgradeTasksUpgradeTaskOutput values.
+// You can construct a concrete instance of `GetUpgradeTasksUpgradeTaskInput` via:
+//
+//	GetUpgradeTasksUpgradeTaskArgs{...}
+type GetUpgradeTasksUpgradeTaskInput interface {
+	pulumi.Input
+
+	ToGetUpgradeTasksUpgradeTaskOutput() GetUpgradeTasksUpgradeTaskOutput
+	ToGetUpgradeTasksUpgradeTaskOutputWithContext(context.Context) GetUpgradeTasksUpgradeTaskOutput
+}
+
+type GetUpgradeTasksUpgradeTaskArgs struct {
+	// Component name.
+	Component pulumi.StringInput `pulumi:"component"`
+	// Creation time.
+	CreatedAt pulumi.StringInput `pulumi:"createdAt"`
+	// Task ID.
+	Id pulumi.IntInput `pulumi:"id"`
+	// Task name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Planned start time.
+	PlanedStartAt pulumi.StringInput `pulumi:"planedStartAt"`
+	// Related resources.
+	RelatedResources pulumi.StringArrayInput `pulumi:"relatedResources"`
+	// Upgrade impact.
+	UpgradeImpact pulumi.StringInput `pulumi:"upgradeImpact"`
+}
+
+func (GetUpgradeTasksUpgradeTaskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetUpgradeTasksUpgradeTask)(nil)).Elem()
+}
+
+func (i GetUpgradeTasksUpgradeTaskArgs) ToGetUpgradeTasksUpgradeTaskOutput() GetUpgradeTasksUpgradeTaskOutput {
+	return i.ToGetUpgradeTasksUpgradeTaskOutputWithContext(context.Background())
+}
+
+func (i GetUpgradeTasksUpgradeTaskArgs) ToGetUpgradeTasksUpgradeTaskOutputWithContext(ctx context.Context) GetUpgradeTasksUpgradeTaskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetUpgradeTasksUpgradeTaskOutput)
+}
+
+// GetUpgradeTasksUpgradeTaskArrayInput is an input type that accepts GetUpgradeTasksUpgradeTaskArray and GetUpgradeTasksUpgradeTaskArrayOutput values.
+// You can construct a concrete instance of `GetUpgradeTasksUpgradeTaskArrayInput` via:
+//
+//	GetUpgradeTasksUpgradeTaskArray{ GetUpgradeTasksUpgradeTaskArgs{...} }
+type GetUpgradeTasksUpgradeTaskArrayInput interface {
+	pulumi.Input
+
+	ToGetUpgradeTasksUpgradeTaskArrayOutput() GetUpgradeTasksUpgradeTaskArrayOutput
+	ToGetUpgradeTasksUpgradeTaskArrayOutputWithContext(context.Context) GetUpgradeTasksUpgradeTaskArrayOutput
+}
+
+type GetUpgradeTasksUpgradeTaskArray []GetUpgradeTasksUpgradeTaskInput
+
+func (GetUpgradeTasksUpgradeTaskArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetUpgradeTasksUpgradeTask)(nil)).Elem()
+}
+
+func (i GetUpgradeTasksUpgradeTaskArray) ToGetUpgradeTasksUpgradeTaskArrayOutput() GetUpgradeTasksUpgradeTaskArrayOutput {
+	return i.ToGetUpgradeTasksUpgradeTaskArrayOutputWithContext(context.Background())
+}
+
+func (i GetUpgradeTasksUpgradeTaskArray) ToGetUpgradeTasksUpgradeTaskArrayOutputWithContext(ctx context.Context) GetUpgradeTasksUpgradeTaskArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetUpgradeTasksUpgradeTaskArrayOutput)
+}
+
+type GetUpgradeTasksUpgradeTaskOutput struct{ *pulumi.OutputState }
+
+func (GetUpgradeTasksUpgradeTaskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetUpgradeTasksUpgradeTask)(nil)).Elem()
+}
+
+func (o GetUpgradeTasksUpgradeTaskOutput) ToGetUpgradeTasksUpgradeTaskOutput() GetUpgradeTasksUpgradeTaskOutput {
+	return o
+}
+
+func (o GetUpgradeTasksUpgradeTaskOutput) ToGetUpgradeTasksUpgradeTaskOutputWithContext(ctx context.Context) GetUpgradeTasksUpgradeTaskOutput {
+	return o
+}
+
+// Component name.
+func (o GetUpgradeTasksUpgradeTaskOutput) Component() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUpgradeTasksUpgradeTask) string { return v.Component }).(pulumi.StringOutput)
+}
+
+// Creation time.
+func (o GetUpgradeTasksUpgradeTaskOutput) CreatedAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUpgradeTasksUpgradeTask) string { return v.CreatedAt }).(pulumi.StringOutput)
+}
+
+// Task ID.
+func (o GetUpgradeTasksUpgradeTaskOutput) Id() pulumi.IntOutput {
+	return o.ApplyT(func(v GetUpgradeTasksUpgradeTask) int { return v.Id }).(pulumi.IntOutput)
+}
+
+// Task name.
+func (o GetUpgradeTasksUpgradeTaskOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUpgradeTasksUpgradeTask) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Planned start time.
+func (o GetUpgradeTasksUpgradeTaskOutput) PlanedStartAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUpgradeTasksUpgradeTask) string { return v.PlanedStartAt }).(pulumi.StringOutput)
+}
+
+// Related resources.
+func (o GetUpgradeTasksUpgradeTaskOutput) RelatedResources() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetUpgradeTasksUpgradeTask) []string { return v.RelatedResources }).(pulumi.StringArrayOutput)
+}
+
+// Upgrade impact.
+func (o GetUpgradeTasksUpgradeTaskOutput) UpgradeImpact() pulumi.StringOutput {
+	return o.ApplyT(func(v GetUpgradeTasksUpgradeTask) string { return v.UpgradeImpact }).(pulumi.StringOutput)
+}
+
+type GetUpgradeTasksUpgradeTaskArrayOutput struct{ *pulumi.OutputState }
+
+func (GetUpgradeTasksUpgradeTaskArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetUpgradeTasksUpgradeTask)(nil)).Elem()
+}
+
+func (o GetUpgradeTasksUpgradeTaskArrayOutput) ToGetUpgradeTasksUpgradeTaskArrayOutput() GetUpgradeTasksUpgradeTaskArrayOutput {
+	return o
+}
+
+func (o GetUpgradeTasksUpgradeTaskArrayOutput) ToGetUpgradeTasksUpgradeTaskArrayOutputWithContext(ctx context.Context) GetUpgradeTasksUpgradeTaskArrayOutput {
+	return o
+}
+
+func (o GetUpgradeTasksUpgradeTaskArrayOutput) Index(i pulumi.IntInput) GetUpgradeTasksUpgradeTaskOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetUpgradeTasksUpgradeTask {
+		return vs[0].([]GetUpgradeTasksUpgradeTask)[vs[1].(int)]
+	}).(GetUpgradeTasksUpgradeTaskOutput)
+}
+
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterAttachmentWorkerConfigInput)(nil)).Elem(), ClusterAttachmentWorkerConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterAttachmentWorkerConfigPtrInput)(nil)).Elem(), ClusterAttachmentWorkerConfigArgs{})
@@ -19856,6 +23086,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterExtensionAddonArrayInput)(nil)).Elem(), ClusterExtensionAddonArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterLogAgentInput)(nil)).Elem(), ClusterLogAgentArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterLogAgentPtrInput)(nil)).Elem(), ClusterLogAgentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterMaintenanceWindowAndExclusionExclusionInput)(nil)).Elem(), ClusterMaintenanceWindowAndExclusionExclusionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterMaintenanceWindowAndExclusionExclusionArrayInput)(nil)).Elem(), ClusterMaintenanceWindowAndExclusionExclusionArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterMasterAttachmentExtraArgsInput)(nil)).Elem(), ClusterMasterAttachmentExtraArgsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterMasterAttachmentExtraArgsPtrInput)(nil)).Elem(), ClusterMasterAttachmentExtraArgsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterMasterAttachmentMasterConfigInput)(nil)).Elem(), ClusterMasterAttachmentMasterConfigArgs{})
@@ -19880,14 +23112,38 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterReleaseValuesPtrInput)(nil)).Elem(), ClusterReleaseValuesArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterResourceDeleteOptionInput)(nil)).Elem(), ClusterResourceDeleteOptionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterResourceDeleteOptionArrayInput)(nil)).Elem(), ClusterResourceDeleteOptionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterRollOutSequenceTagConfigTagInput)(nil)).Elem(), ClusterRollOutSequenceTagConfigTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterRollOutSequenceTagConfigTagArrayInput)(nil)).Elem(), ClusterRollOutSequenceTagConfigTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterSchedulerPolicyConfigClientConnectionInput)(nil)).Elem(), ClusterSchedulerPolicyConfigClientConnectionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterSchedulerPolicyConfigClientConnectionPtrInput)(nil)).Elem(), ClusterSchedulerPolicyConfigClientConnectionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterSchedulerPolicyConfigExtenderInput)(nil)).Elem(), ClusterSchedulerPolicyConfigExtenderArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterSchedulerPolicyConfigExtenderArrayInput)(nil)).Elem(), ClusterSchedulerPolicyConfigExtenderArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterSchedulerPolicyConfigExtenderExtenderClientConfigInput)(nil)).Elem(), ClusterSchedulerPolicyConfigExtenderExtenderClientConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrInput)(nil)).Elem(), ClusterSchedulerPolicyConfigExtenderExtenderClientConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceInput)(nil)).Elem(), ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrInput)(nil)).Elem(), ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterSchedulerPolicyConfigSchedulerPolicyConfigInput)(nil)).Elem(), ClusterSchedulerPolicyConfigSchedulerPolicyConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterSchedulerPolicyConfigSchedulerPolicyConfigArrayInput)(nil)).Elem(), ClusterSchedulerPolicyConfigSchedulerPolicyConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigInput)(nil)).Elem(), ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArrayInput)(nil)).Elem(), ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetInput)(nil)).Elem(), ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrInput)(nil)).Elem(), ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledInput)(nil)).Elem(), ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArrayInput)(nil)).Elem(), ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledInput)(nil)).Elem(), ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArrayInput)(nil)).Elem(), ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterWorkerConfigInput)(nil)).Elem(), ClusterWorkerConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterWorkerConfigArrayInput)(nil)).Elem(), ClusterWorkerConfigArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterWorkerConfigDataDiskInput)(nil)).Elem(), ClusterWorkerConfigDataDiskArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterWorkerConfigDataDiskArrayInput)(nil)).Elem(), ClusterWorkerConfigDataDiskArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterWorkerInstancesListInput)(nil)).Elem(), ClusterWorkerInstancesListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterWorkerInstancesListArrayInput)(nil)).Elem(), ClusterWorkerInstancesListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ControlPlaneLogComponentsInput)(nil)).Elem(), ControlPlaneLogComponentsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ControlPlaneLogComponentsPtrInput)(nil)).Elem(), ControlPlaneLogComponentsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*EncryptionProtectionKmsConfigurationInput)(nil)).Elem(), EncryptionProtectionKmsConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*EncryptionProtectionKmsConfigurationPtrInput)(nil)).Elem(), EncryptionProtectionKmsConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GlobalMaintenanceWindowAndExclusionExclusionInput)(nil)).Elem(), GlobalMaintenanceWindowAndExclusionExclusionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GlobalMaintenanceWindowAndExclusionExclusionArrayInput)(nil)).Elem(), GlobalMaintenanceWindowAndExclusionExclusionArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*HealthCheckPolicyRuleInput)(nil)).Elem(), HealthCheckPolicyRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*HealthCheckPolicyRuleArrayInput)(nil)).Elem(), HealthCheckPolicyRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeNodePoolAnnotationInput)(nil)).Elem(), NativeNodePoolAnnotationArgs{})
@@ -19930,6 +23186,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*NodePoolNodeConfigGpuArgsPtrInput)(nil)).Elem(), NodePoolNodeConfigGpuArgsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NodePoolTaintInput)(nil)).Elem(), NodePoolTaintArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NodePoolTaintArrayInput)(nil)).Elem(), NodePoolTaintArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RollOutSequenceSequenceFlowInput)(nil)).Elem(), RollOutSequenceSequenceFlowArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RollOutSequenceSequenceFlowArrayInput)(nil)).Elem(), RollOutSequenceSequenceFlowArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RollOutSequenceSequenceFlowTagInput)(nil)).Elem(), RollOutSequenceSequenceFlowTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RollOutSequenceSequenceFlowTagArrayInput)(nil)).Elem(), RollOutSequenceSequenceFlowTagArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScaleWorkerDataDiskInput)(nil)).Elem(), ScaleWorkerDataDiskArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScaleWorkerDataDiskArrayInput)(nil)).Elem(), ScaleWorkerDataDiskArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScaleWorkerGpuArgsInput)(nil)).Elem(), ScaleWorkerGpuArgsArgs{})
@@ -19948,6 +23208,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ServerlessNodePoolServerlessNodeArrayInput)(nil)).Elem(), ServerlessNodePoolServerlessNodeArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ServerlessNodePoolTaintInput)(nil)).Elem(), ServerlessNodePoolTaintArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ServerlessNodePoolTaintArrayInput)(nil)).Elem(), ServerlessNodePoolTaintArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UserPermissionsPermissionInput)(nil)).Elem(), UserPermissionsPermissionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*UserPermissionsPermissionArrayInput)(nil)).Elem(), UserPermissionsPermissionArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAddonsAddonInput)(nil)).Elem(), GetAddonsAddonArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAddonsAddonArrayInput)(nil)).Elem(), GetAddonsAddonArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAvailableClusterVersionsClusterInput)(nil)).Elem(), GetAvailableClusterVersionsClusterArgs{})
@@ -19958,6 +23220,16 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterAuthenticationOptionsOidcConfigArrayInput)(nil)).Elem(), GetClusterAuthenticationOptionsOidcConfigArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterAuthenticationOptionsServiceAccountInput)(nil)).Elem(), GetClusterAuthenticationOptionsServiceAccountArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterAuthenticationOptionsServiceAccountArrayInput)(nil)).Elem(), GetClusterAuthenticationOptionsServiceAccountArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterAvailableExtraArgsAvailableExtraArgInput)(nil)).Elem(), GetClusterAvailableExtraArgsAvailableExtraArgArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterAvailableExtraArgsAvailableExtraArgArrayInput)(nil)).Elem(), GetClusterAvailableExtraArgsAvailableExtraArgArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverInput)(nil)).Elem(), GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArrayInput)(nil)).Elem(), GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerInput)(nil)).Elem(), GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArrayInput)(nil)).Elem(), GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerInput)(nil)).Elem(), GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArrayInput)(nil)).Elem(), GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterAvailableExtraArgsAvailableExtraArgKubeletInput)(nil)).Elem(), GetClusterAvailableExtraArgsAvailableExtraArgKubeletArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterAvailableExtraArgsAvailableExtraArgKubeletArrayInput)(nil)).Elem(), GetClusterAvailableExtraArgsAvailableExtraArgKubeletArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterCommonNamesListInput)(nil)).Elem(), GetClusterCommonNamesListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterCommonNamesListArrayInput)(nil)).Elem(), GetClusterCommonNamesListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterInstancesFilterInput)(nil)).Elem(), GetClusterInstancesFilterArgs{})
@@ -20052,6 +23324,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClustersListClusterExtraArgArrayInput)(nil)).Elem(), GetClustersListClusterExtraArgArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClustersListWorkerInstancesListInput)(nil)).Elem(), GetClustersListWorkerInstancesListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClustersListWorkerInstancesListArrayInput)(nil)).Elem(), GetClustersListWorkerInstancesListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetUpgradeTaskDetailUpgradePlanInput)(nil)).Elem(), GetUpgradeTaskDetailUpgradePlanArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetUpgradeTaskDetailUpgradePlanArrayInput)(nil)).Elem(), GetUpgradeTaskDetailUpgradePlanArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetUpgradeTasksUpgradeTaskInput)(nil)).Elem(), GetUpgradeTasksUpgradeTaskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetUpgradeTasksUpgradeTaskArrayInput)(nil)).Elem(), GetUpgradeTasksUpgradeTaskArray{})
 	pulumi.RegisterOutputType(ClusterAttachmentWorkerConfigOutput{})
 	pulumi.RegisterOutputType(ClusterAttachmentWorkerConfigPtrOutput{})
 	pulumi.RegisterOutputType(ClusterAttachmentWorkerConfigDataDiskOutput{})
@@ -20094,6 +23370,8 @@ func init() {
 	pulumi.RegisterOutputType(ClusterExtensionAddonArrayOutput{})
 	pulumi.RegisterOutputType(ClusterLogAgentOutput{})
 	pulumi.RegisterOutputType(ClusterLogAgentPtrOutput{})
+	pulumi.RegisterOutputType(ClusterMaintenanceWindowAndExclusionExclusionOutput{})
+	pulumi.RegisterOutputType(ClusterMaintenanceWindowAndExclusionExclusionArrayOutput{})
 	pulumi.RegisterOutputType(ClusterMasterAttachmentExtraArgsOutput{})
 	pulumi.RegisterOutputType(ClusterMasterAttachmentExtraArgsPtrOutput{})
 	pulumi.RegisterOutputType(ClusterMasterAttachmentMasterConfigOutput{})
@@ -20118,14 +23396,38 @@ func init() {
 	pulumi.RegisterOutputType(ClusterReleaseValuesPtrOutput{})
 	pulumi.RegisterOutputType(ClusterResourceDeleteOptionOutput{})
 	pulumi.RegisterOutputType(ClusterResourceDeleteOptionArrayOutput{})
+	pulumi.RegisterOutputType(ClusterRollOutSequenceTagConfigTagOutput{})
+	pulumi.RegisterOutputType(ClusterRollOutSequenceTagConfigTagArrayOutput{})
+	pulumi.RegisterOutputType(ClusterSchedulerPolicyConfigClientConnectionOutput{})
+	pulumi.RegisterOutputType(ClusterSchedulerPolicyConfigClientConnectionPtrOutput{})
+	pulumi.RegisterOutputType(ClusterSchedulerPolicyConfigExtenderOutput{})
+	pulumi.RegisterOutputType(ClusterSchedulerPolicyConfigExtenderArrayOutput{})
+	pulumi.RegisterOutputType(ClusterSchedulerPolicyConfigExtenderExtenderClientConfigOutput{})
+	pulumi.RegisterOutputType(ClusterSchedulerPolicyConfigExtenderExtenderClientConfigPtrOutput{})
+	pulumi.RegisterOutputType(ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServiceOutput{})
+	pulumi.RegisterOutputType(ClusterSchedulerPolicyConfigExtenderExtenderClientConfigServicePtrOutput{})
+	pulumi.RegisterOutputType(ClusterSchedulerPolicyConfigSchedulerPolicyConfigOutput{})
+	pulumi.RegisterOutputType(ClusterSchedulerPolicyConfigSchedulerPolicyConfigArrayOutput{})
+	pulumi.RegisterOutputType(ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigOutput{})
+	pulumi.RegisterOutputType(ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginConfigArrayOutput{})
+	pulumi.RegisterOutputType(ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetOutput{})
+	pulumi.RegisterOutputType(ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetPtrOutput{})
+	pulumi.RegisterOutputType(ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledOutput{})
+	pulumi.RegisterOutputType(ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetDisabledArrayOutput{})
+	pulumi.RegisterOutputType(ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledOutput{})
+	pulumi.RegisterOutputType(ClusterSchedulerPolicyConfigSchedulerPolicyConfigPluginSetEnabledArrayOutput{})
 	pulumi.RegisterOutputType(ClusterWorkerConfigOutput{})
 	pulumi.RegisterOutputType(ClusterWorkerConfigArrayOutput{})
 	pulumi.RegisterOutputType(ClusterWorkerConfigDataDiskOutput{})
 	pulumi.RegisterOutputType(ClusterWorkerConfigDataDiskArrayOutput{})
 	pulumi.RegisterOutputType(ClusterWorkerInstancesListOutput{})
 	pulumi.RegisterOutputType(ClusterWorkerInstancesListArrayOutput{})
+	pulumi.RegisterOutputType(ControlPlaneLogComponentsOutput{})
+	pulumi.RegisterOutputType(ControlPlaneLogComponentsPtrOutput{})
 	pulumi.RegisterOutputType(EncryptionProtectionKmsConfigurationOutput{})
 	pulumi.RegisterOutputType(EncryptionProtectionKmsConfigurationPtrOutput{})
+	pulumi.RegisterOutputType(GlobalMaintenanceWindowAndExclusionExclusionOutput{})
+	pulumi.RegisterOutputType(GlobalMaintenanceWindowAndExclusionExclusionArrayOutput{})
 	pulumi.RegisterOutputType(HealthCheckPolicyRuleOutput{})
 	pulumi.RegisterOutputType(HealthCheckPolicyRuleArrayOutput{})
 	pulumi.RegisterOutputType(NativeNodePoolAnnotationOutput{})
@@ -20168,6 +23470,10 @@ func init() {
 	pulumi.RegisterOutputType(NodePoolNodeConfigGpuArgsPtrOutput{})
 	pulumi.RegisterOutputType(NodePoolTaintOutput{})
 	pulumi.RegisterOutputType(NodePoolTaintArrayOutput{})
+	pulumi.RegisterOutputType(RollOutSequenceSequenceFlowOutput{})
+	pulumi.RegisterOutputType(RollOutSequenceSequenceFlowArrayOutput{})
+	pulumi.RegisterOutputType(RollOutSequenceSequenceFlowTagOutput{})
+	pulumi.RegisterOutputType(RollOutSequenceSequenceFlowTagArrayOutput{})
 	pulumi.RegisterOutputType(ScaleWorkerDataDiskOutput{})
 	pulumi.RegisterOutputType(ScaleWorkerDataDiskArrayOutput{})
 	pulumi.RegisterOutputType(ScaleWorkerGpuArgsOutput{})
@@ -20186,6 +23492,8 @@ func init() {
 	pulumi.RegisterOutputType(ServerlessNodePoolServerlessNodeArrayOutput{})
 	pulumi.RegisterOutputType(ServerlessNodePoolTaintOutput{})
 	pulumi.RegisterOutputType(ServerlessNodePoolTaintArrayOutput{})
+	pulumi.RegisterOutputType(UserPermissionsPermissionOutput{})
+	pulumi.RegisterOutputType(UserPermissionsPermissionArrayOutput{})
 	pulumi.RegisterOutputType(GetAddonsAddonOutput{})
 	pulumi.RegisterOutputType(GetAddonsAddonArrayOutput{})
 	pulumi.RegisterOutputType(GetAvailableClusterVersionsClusterOutput{})
@@ -20196,6 +23504,16 @@ func init() {
 	pulumi.RegisterOutputType(GetClusterAuthenticationOptionsOidcConfigArrayOutput{})
 	pulumi.RegisterOutputType(GetClusterAuthenticationOptionsServiceAccountOutput{})
 	pulumi.RegisterOutputType(GetClusterAuthenticationOptionsServiceAccountArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterAvailableExtraArgsAvailableExtraArgOutput{})
+	pulumi.RegisterOutputType(GetClusterAvailableExtraArgsAvailableExtraArgArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverOutput{})
+	pulumi.RegisterOutputType(GetClusterAvailableExtraArgsAvailableExtraArgKubeApiserverArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerOutput{})
+	pulumi.RegisterOutputType(GetClusterAvailableExtraArgsAvailableExtraArgKubeControllerManagerArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerOutput{})
+	pulumi.RegisterOutputType(GetClusterAvailableExtraArgsAvailableExtraArgKubeSchedulerArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterAvailableExtraArgsAvailableExtraArgKubeletOutput{})
+	pulumi.RegisterOutputType(GetClusterAvailableExtraArgsAvailableExtraArgKubeletArrayOutput{})
 	pulumi.RegisterOutputType(GetClusterCommonNamesListOutput{})
 	pulumi.RegisterOutputType(GetClusterCommonNamesListArrayOutput{})
 	pulumi.RegisterOutputType(GetClusterInstancesFilterOutput{})
@@ -20290,4 +23608,8 @@ func init() {
 	pulumi.RegisterOutputType(GetClustersListClusterExtraArgArrayOutput{})
 	pulumi.RegisterOutputType(GetClustersListWorkerInstancesListOutput{})
 	pulumi.RegisterOutputType(GetClustersListWorkerInstancesListArrayOutput{})
+	pulumi.RegisterOutputType(GetUpgradeTaskDetailUpgradePlanOutput{})
+	pulumi.RegisterOutputType(GetUpgradeTaskDetailUpgradePlanArrayOutput{})
+	pulumi.RegisterOutputType(GetUpgradeTasksUpgradeTaskOutput{})
+	pulumi.RegisterOutputType(GetUpgradeTasksUpgradeTaskArrayOutput{})
 }

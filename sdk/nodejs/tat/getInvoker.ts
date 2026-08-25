@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const invoker = tencentcloud.Tat.getInvoker({});
+ * const invoker = tencentcloud.tat.getInvoker({});
  * ```
  */
 export function getInvoker(args?: GetInvokerArgs, opts?: pulumi.InvokeOptions): Promise<GetInvokerResult> {
@@ -86,7 +86,7 @@ export interface GetInvokerResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const invoker = tencentcloud.Tat.getInvoker({});
+ * const invoker = tencentcloud.tat.getInvoker({});
  * ```
  */
 export function getInvokerOutput(args?: GetInvokerOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInvokerResult> {
@@ -107,17 +107,17 @@ export interface GetInvokerOutputArgs {
     /**
      * Command ID.
      */
-    commandId?: pulumi.Input<string>;
+    commandId?: pulumi.Input<string | undefined>;
     /**
      * Invoker ID.
      */
-    invokerId?: pulumi.Input<string>;
+    invokerId?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Invoker type.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }

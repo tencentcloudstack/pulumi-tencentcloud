@@ -24,7 +24,6 @@ import (
 // import (
 //
 //	"encoding/json"
-//	"fmt"
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
@@ -79,7 +78,7 @@ import (
 //			}
 //			json0 := string(tmpJSON0)
 //			fooEventRule, err := eb.NewEventRule(ctx, "foo", &eb.EventRuleArgs{
-//				EventBusId:   fooEventBus.ID(),
+//				EventBusId:   fooEventBus.ID().ToIDOutput().ToStringOutput(),
 //				RuleName:     pulumi.String("tf-event_rule"),
 //				Description:  pulumi.String("event rule desc"),
 //				Enable:       pulumi.Bool(true),
@@ -92,7 +91,7 @@ import (
 //				return err
 //			}
 //			_, err = eb.NewEventTarget(ctx, "scf_target", &eb.EventTargetArgs{
-//				EventBusId: fooEventBus.ID(),
+//				EventBusId: fooEventBus.ID().ToIDOutput().ToStringOutput(),
 //				RuleId:     fooEventRule.RuleId,
 //				Type:       pulumi.String("scf"),
 //				TargetDescription: &eb.EventTargetTargetDescriptionArgs{
@@ -117,8 +116,6 @@ import (
 // package main
 //
 // import (
-//
-//	"fmt"
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
@@ -159,7 +156,7 @@ import (
 //
 // ## Import
 //
-// eb event_target can be imported using the id, e.g.
+// eb eventTarget can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Eb/eventTarget:EventTarget event_target event_target_id

@@ -84,12 +84,8 @@ type GetDescribeWorkGroupInfoResult struct {
 }
 
 func GetDescribeWorkGroupInfoOutput(ctx *pulumi.Context, args GetDescribeWorkGroupInfoOutputArgs, opts ...pulumi.InvokeOption) GetDescribeWorkGroupInfoResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDescribeWorkGroupInfoResultOutput, error) {
-			args := v.(GetDescribeWorkGroupInfoArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dlc/getDescribeWorkGroupInfo:getDescribeWorkGroupInfo", args, GetDescribeWorkGroupInfoResultOutput{}, options).(GetDescribeWorkGroupInfoResultOutput), nil
-		}).(GetDescribeWorkGroupInfoResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dlc/getDescribeWorkGroupInfo:getDescribeWorkGroupInfo", args, GetDescribeWorkGroupInfoResultOutput{}, options).(GetDescribeWorkGroupInfoResultOutput)
 }
 
 // A collection of arguments for invoking getDescribeWorkGroupInfo.

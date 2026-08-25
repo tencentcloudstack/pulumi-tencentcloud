@@ -14,6 +14,8 @@ import (
 
 // Provides a resource to create a scf triggerConfig
 //
+// > **NOTE:** Use of the current resource is no longer recommended; `Scf.Trigger` is recommended instead.
+//
 // ## Example Usage
 //
 // ```go
@@ -50,7 +52,7 @@ import (
 //
 // ## Import
 //
-// scf trigger_config can be imported using the id, e.g.
+// scf triggerConfig can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Scf/triggerConfig:TriggerConfig trigger_config functionName#namespace#triggerName

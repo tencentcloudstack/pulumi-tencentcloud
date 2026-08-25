@@ -52,5 +52,5 @@ export function getOpsAsyncJobOutput(args: GetOpsAsyncJobOutputArgs, opts?: pulu
 export interface GetOpsAsyncJobOutputArgs {
     asyncId: pulumi.Input<string>;
     projectId: pulumi.Input<string>;
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

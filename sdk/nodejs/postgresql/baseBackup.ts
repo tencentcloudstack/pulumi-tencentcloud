@@ -5,20 +5,45 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a postgresql baseBackup
+ * Provides a resource to create a PostgreSQL base backup
  *
  * ## Example Usage
+ *
+ * ### Create a PostgreSQL base backup
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const baseBackup = new tencentcloud.postgresql.BaseBackup("base_backup", {
- *     dbInstanceId: pgsqlId,
+ * const example = new tencentcloud.postgresql.BaseBackup("example", {
+ *     dbInstanceId: "postgres-ckwcgdf1",
  *     tags: {
- *         createdBy: "terraform",
+ *         createdBy: "Terraform",
  *     },
  * });
+ * ```
+ *
+ * ### Customize the expire time
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.postgresql.BaseBackup("example", {
+ *     dbInstanceId: "postgres-ckwcgdf1",
+ *     newExpireTime: "2027-04-23 20:07:36",
+ *     tags: {
+ *         createdBy: "Terraform",
+ *     },
+ * });
+ * ```
+ *
+ * ## Import
+ *
+ * PostgreSQL base backup can be imported using the dBInstanceId#baseBackupId, e.g.
+ *
+ * ```sh
+ * $ pulumi import tencentcloud:Postgresql/baseBackup:BaseBackup example postgres-ckwcgdf1#bac3d001-5160-5077-9139-49c1310e0854
  * ```
  */
 export class BaseBackup extends pulumi.CustomResource {
@@ -105,19 +130,19 @@ export interface BaseBackupState {
     /**
      * Base backup ID.
      */
-    baseBackupId?: pulumi.Input<string>;
+    baseBackupId?: pulumi.Input<string | undefined>;
     /**
      * Instance ID.
      */
-    dbInstanceId?: pulumi.Input<string>;
+    dbInstanceId?: pulumi.Input<string | undefined>;
     /**
      * New expiration time.
      */
-    newExpireTime?: pulumi.Input<string>;
+    newExpireTime?: pulumi.Input<string | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 /**
@@ -131,9 +156,9 @@ export interface BaseBackupArgs {
     /**
      * New expiration time.
      */
-    newExpireTime?: pulumi.Input<string>;
+    newExpireTime?: pulumi.Input<string | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

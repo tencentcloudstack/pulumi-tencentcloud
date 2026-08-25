@@ -79,12 +79,8 @@ type GetSignResult struct {
 }
 
 func GetSignOutput(ctx *pulumi.Context, args GetSignOutputArgs, opts ...pulumi.InvokeOption) GetSignResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSignResultOutput, error) {
-			args := v.(GetSignArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Rum/getSign:getSign", args, GetSignResultOutput{}, options).(GetSignResultOutput), nil
-		}).(GetSignResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Rum/getSign:getSign", args, GetSignResultOutput{}, options).(GetSignResultOutput)
 }
 
 // A collection of arguments for invoking getSign.

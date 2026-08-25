@@ -70,12 +70,8 @@ type LookupUpstreamsResult struct {
 }
 
 func LookupUpstreamsOutput(ctx *pulumi.Context, args LookupUpstreamsOutputArgs, opts ...pulumi.InvokeOption) LookupUpstreamsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupUpstreamsResultOutput, error) {
-			args := v.(LookupUpstreamsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:ApiGateway/getUpstreams:getUpstreams", args, LookupUpstreamsResultOutput{}, options).(LookupUpstreamsResultOutput), nil
-		}).(LookupUpstreamsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:ApiGateway/getUpstreams:getUpstreams", args, LookupUpstreamsResultOutput{}, options).(LookupUpstreamsResultOutput)
 }
 
 // A collection of arguments for invoking getUpstreams.

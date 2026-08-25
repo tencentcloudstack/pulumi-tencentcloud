@@ -67,12 +67,8 @@ type GetNacosReplicasResult struct {
 }
 
 func GetNacosReplicasOutput(ctx *pulumi.Context, args GetNacosReplicasOutputArgs, opts ...pulumi.InvokeOption) GetNacosReplicasResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetNacosReplicasResultOutput, error) {
-			args := v.(GetNacosReplicasArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tse/getNacosReplicas:getNacosReplicas", args, GetNacosReplicasResultOutput{}, options).(GetNacosReplicasResultOutput), nil
-		}).(GetNacosReplicasResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tse/getNacosReplicas:getNacosReplicas", args, GetNacosReplicasResultOutput{}, options).(GetNacosReplicasResultOutput)
 }
 
 // A collection of arguments for invoking getNacosReplicas.

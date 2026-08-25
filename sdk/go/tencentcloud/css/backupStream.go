@@ -47,7 +47,7 @@ import (
 //
 // ## Import
 //
-// css backup_stream can be imported using the id, e.g.
+// css backupStream can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Css/backupStream:BackupStream backup_stream pushDomainName#appName#streamName

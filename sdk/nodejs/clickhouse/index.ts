@@ -55,6 +55,11 @@ export const getInstanceShards: typeof import("./getInstanceShards").getInstance
 export const getInstanceShardsOutput: typeof import("./getInstanceShards").getInstanceShardsOutput = null as any;
 utilities.lazyLoad(exports, ["getInstanceShards","getInstanceShardsOutput"], () => require("./getInstanceShards"));
 
+export { GetInstancesArgs, GetInstancesResult, GetInstancesOutputArgs } from "./getInstances";
+export const getInstances: typeof import("./getInstances").getInstances = null as any;
+export const getInstancesOutput: typeof import("./getInstances").getInstancesOutput = null as any;
+utilities.lazyLoad(exports, ["getInstances","getInstancesOutput"], () => require("./getInstances"));
+
 export { GetSpecArgs, GetSpecResult, GetSpecOutputArgs } from "./getSpec";
 export const getSpec: typeof import("./getSpec").getSpec = null as any;
 export const getSpecOutput: typeof import("./getSpec").getSpecOutput = null as any;

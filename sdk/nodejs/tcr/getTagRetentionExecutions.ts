@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const tagRetentionExecutions = tencentcloud.Tcr.getTagRetentionExecutions({
+ * const tagRetentionExecutions = tencentcloud.tcr.getTagRetentionExecutions({
  *     registryId: "tcr_ins_id",
  *     retentionId: 1,
  * });
@@ -76,7 +76,7 @@ export interface GetTagRetentionExecutionsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const tagRetentionExecutions = tencentcloud.Tcr.getTagRetentionExecutions({
+ * const tagRetentionExecutions = tencentcloud.tcr.getTagRetentionExecutions({
  *     registryId: "tcr_ins_id",
  *     retentionId: 1,
  * });
@@ -102,7 +102,7 @@ export interface GetTagRetentionExecutionsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * retention id.
      */

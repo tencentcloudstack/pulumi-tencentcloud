@@ -27,7 +27,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * sqlserver restore_instance can be imported using the id, e.g.
+ * sqlserver restoreInstance can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Sqlserver/restoreInstance:RestoreInstance restore_instance mssql-qelbzgwf#3482091273#keep_pubsub_db2#restore_keep_pubsub_db2
@@ -123,19 +123,19 @@ export interface RestoreInstanceState {
     /**
      * Backup file ID, which can be obtained through the Id field in the returned value of the DescribeBackups API.
      */
-    backupId?: pulumi.Input<number>;
+    backupId?: pulumi.Input<number | undefined>;
     /**
      * TDE encryption, `enable` encrypted, `disable` unencrypted.
      */
-    encryptions?: pulumi.Input<pulumi.Input<inputs.Sqlserver.RestoreInstanceEncryption>[]>;
+    encryptions?: pulumi.Input<pulumi.Input<inputs.Sqlserver.RestoreInstanceEncryption>[] | undefined>;
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Restore the databases listed in ReNameRestoreDatabase and rename them after restoration. If this parameter is left empty, all databases will be restored and renamed in the default format.
      */
-    renameRestores?: pulumi.Input<pulumi.Input<inputs.Sqlserver.RestoreInstanceRenameRestore>[]>;
+    renameRestores?: pulumi.Input<pulumi.Input<inputs.Sqlserver.RestoreInstanceRenameRestore>[] | undefined>;
 }
 
 /**

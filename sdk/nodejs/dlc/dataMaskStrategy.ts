@@ -96,7 +96,7 @@ export interface DataMaskStrategyState {
     /**
      * The data masking strategy.
      */
-    strategy?: pulumi.Input<inputs.Dlc.DataMaskStrategyStrategy>;
+    strategy?: pulumi.Input<inputs.Dlc.DataMaskStrategyStrategy | undefined>;
 }
 
 /**
@@ -106,5 +106,5 @@ export interface DataMaskStrategyArgs {
     /**
      * The data masking strategy.
      */
-    strategy?: pulumi.Input<inputs.Dlc.DataMaskStrategyStrategy>;
+    strategy?: pulumi.Input<inputs.Dlc.DataMaskStrategyStrategy | undefined>;
 }

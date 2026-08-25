@@ -67,12 +67,8 @@ type GetInstanceShardsResult struct {
 }
 
 func GetInstanceShardsOutput(ctx *pulumi.Context, args GetInstanceShardsOutputArgs, opts ...pulumi.InvokeOption) GetInstanceShardsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstanceShardsResultOutput, error) {
-			args := v.(GetInstanceShardsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Clickhouse/getInstanceShards:getInstanceShards", args, GetInstanceShardsResultOutput{}, options).(GetInstanceShardsResultOutput), nil
-		}).(GetInstanceShardsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Clickhouse/getInstanceShards:getInstanceShards", args, GetInstanceShardsResultOutput{}, options).(GetInstanceShardsResultOutput)
 }
 
 // A collection of arguments for invoking getInstanceShards.

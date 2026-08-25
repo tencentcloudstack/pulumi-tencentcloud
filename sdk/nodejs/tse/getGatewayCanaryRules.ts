@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const gatewayCanaryRules = tencentcloud.Tse.getGatewayCanaryRules({
+ * const gatewayCanaryRules = tencentcloud.tse.getGatewayCanaryRules({
  *     gatewayId: "gateway-xxxxxx",
  *     serviceId: "451a9920-e67a-4519-af41-fccac0e72005",
  * });
@@ -76,7 +76,7 @@ export interface GetGatewayCanaryRulesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const gatewayCanaryRules = tencentcloud.Tse.getGatewayCanaryRules({
+ * const gatewayCanaryRules = tencentcloud.tse.getGatewayCanaryRules({
  *     gatewayId: "gateway-xxxxxx",
  *     serviceId: "451a9920-e67a-4519-af41-fccac0e72005",
  * });
@@ -102,7 +102,7 @@ export interface GetGatewayCanaryRulesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * service ID.
      */

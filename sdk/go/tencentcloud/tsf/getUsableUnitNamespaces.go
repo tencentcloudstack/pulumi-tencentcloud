@@ -67,12 +67,8 @@ type LookupUsableUnitNamespacesResult struct {
 }
 
 func LookupUsableUnitNamespacesOutput(ctx *pulumi.Context, args LookupUsableUnitNamespacesOutputArgs, opts ...pulumi.InvokeOption) LookupUsableUnitNamespacesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupUsableUnitNamespacesResultOutput, error) {
-			args := v.(LookupUsableUnitNamespacesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tsf/getUsableUnitNamespaces:getUsableUnitNamespaces", args, LookupUsableUnitNamespacesResultOutput{}, options).(LookupUsableUnitNamespacesResultOutput), nil
-		}).(LookupUsableUnitNamespacesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tsf/getUsableUnitNamespaces:getUsableUnitNamespaces", args, LookupUsableUnitNamespacesResultOutput{}, options).(LookupUsableUnitNamespacesResultOutput)
 }
 
 // A collection of arguments for invoking getUsableUnitNamespaces.

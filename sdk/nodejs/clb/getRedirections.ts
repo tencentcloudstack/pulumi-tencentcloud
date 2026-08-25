@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Clb.getRedirections({
+ * const foo = tencentcloud.clb.getRedirections({
  *     clbId: "lb-p7olt9e5",
  *     sourceListenerId: "lbl-jc1dx6ju",
  *     targetListenerId: "lbl-asj1hzuo",
@@ -110,7 +110,7 @@ export interface GetRedirectionsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Clb.getRedirections({
+ * const foo = tencentcloud.clb.getRedirections({
  *     clbId: "lb-p7olt9e5",
  *     sourceListenerId: "lbl-jc1dx6ju",
  *     targetListenerId: "lbl-asj1hzuo",
@@ -143,7 +143,7 @@ export interface GetRedirectionsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * ID of source listener to be queried.
      */
@@ -155,9 +155,9 @@ export interface GetRedirectionsOutputArgs {
     /**
      * ID of target listener to be queried.
      */
-    targetListenerId?: pulumi.Input<string>;
+    targetListenerId?: pulumi.Input<string | undefined>;
     /**
      * Rule ID of target listener to be queried.
      */
-    targetRuleId?: pulumi.Input<string>;
+    targetRuleId?: pulumi.Input<string | undefined>;
 }

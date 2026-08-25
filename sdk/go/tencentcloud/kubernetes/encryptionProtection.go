@@ -12,7 +12,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a tke encryptionProtection
+// Provides a resource to create a TKE encryption protection
 //
 // ## Example Usage
 //
@@ -46,7 +46,7 @@ import (
 //			if param := cfg.Get("availabilityZone"); param != "" {
 //				availabilityZone = param
 //			}
-//			vpc, err := vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
+//			vpc2, err := vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
 //				IsDefault:        pulumi.BoolRef(true),
 //				AvailabilityZone: pulumi.StringRef(availabilityZone),
 //			}, nil)
@@ -54,7 +54,7 @@ import (
 //				return err
 //			}
 //			example, err := kubernetes.NewCluster(ctx, "example", &kubernetes.ClusterArgs{
-//				VpcId:                pulumi.String(vpc.InstanceLists[0].VpcId),
+//				VpcId:                pulumi.String(vpc2.InstanceLists[0].VpcId),
 //				ClusterCidr:          pulumi.String(exampleClusterCidr),
 //				ClusterMaxPodNum:     pulumi.Int(32),
 //				ClusterName:          pulumi.String("tf_example_cluster"),
@@ -75,9 +75,9 @@ import (
 //				return err
 //			}
 //			_, err = kubernetes.NewEncryptionProtection(ctx, "example", &kubernetes.EncryptionProtectionArgs{
-//				ClusterId: example.ID(),
+//				ClusterId: example.ID().ToIDOutput().ToStringOutput(),
 //				KmsConfiguration: &kubernetes.EncryptionProtectionKmsConfigurationArgs{
-//					KeyId:     exampleKey.ID(),
+//					KeyId:     exampleKey.ID().ToIDOutput().ToStringOutput(),
 //					KmsRegion: pulumi.String(exampleRegion),
 //				},
 //			})

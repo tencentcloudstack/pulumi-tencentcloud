@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const proxyGroups = tencentcloud.Gaap.getProxyGroups({
+ * const proxyGroups = tencentcloud.gaap.getProxyGroups({
  *     projectId: 0,
  *     filters: [{
  *         name: "GroupId",
@@ -88,7 +88,7 @@ export interface GetProxyGroupsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const proxyGroups = tencentcloud.Gaap.getProxyGroups({
+ * const proxyGroups = tencentcloud.gaap.getProxyGroups({
  *     projectId: 0,
  *     filters: [{
  *         name: "GroupId",
@@ -114,7 +114,7 @@ export interface GetProxyGroupsOutputArgs {
     /**
      * Filter conditions,The upper limit of Filter.Values per request is 5.RealServerRegion - String - Required: No - (filtering criteria) Filter by real server region, refer to the RegionId in the returned results of the DescribeDestRegions interface.PackageType - String - Required: No - (Filter condition) proxy group type, where &amp;#39;Thunder&amp;#39; represents the standard proxy group and &amp;#39;Accelerator&amp;#39; represents the silver acceleration proxy group.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Gaap.GetProxyGroupsFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Gaap.GetProxyGroupsFilterArgs>[] | undefined>;
     /**
      * Project ID. Value range:-1, All projects under this user0, default projectOther values, specified items.
      */
@@ -122,9 +122,9 @@ export interface GetProxyGroupsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Tag list, when this field exists, pulls the resource list under the corresponding tag.Supports a maximum of 5 labels. When there are two or more labels and any one of them is met, the proxy group will be pulled out.
      */
-    tagSets?: pulumi.Input<pulumi.Input<inputs.Gaap.GetProxyGroupsTagSetArgs>[]>;
+    tagSets?: pulumi.Input<pulumi.Input<inputs.Gaap.GetProxyGroupsTagSetArgs>[] | undefined>;
 }

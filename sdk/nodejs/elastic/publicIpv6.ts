@@ -24,7 +24,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * vpc elastic_public_ipv6 can be imported using the id, e.g.
+ * vpc elasticPublicIpv6 can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Elastic/publicIpv6:PublicIpv6 elastic_public_ipv6 elastic_public_ipv6_id
@@ -70,8 +70,8 @@ export class PublicIpv6 extends pulumi.CustomResource {
      * Elastic IPv6 type, optional values:
      * - EIPv6: Ordinary IPv6
      * - HighQualityEIPv6: Premium IPv6
-     * Note: You need to contact the product to open a premium IPv6 white list, and only some regions support premium IPv6
-     * Default value: EIPv6.
+     *   Note: You need to contact the product to open a premium IPv6 white list, and only some regions support premium IPv6
+     *   Default value: EIPv6.
      */
     declare public readonly addressType: pulumi.Output<string>;
     /**
@@ -83,15 +83,15 @@ export class PublicIpv6 extends pulumi.CustomResource {
      * - CENTER_EGRESS_1: Center Exit 1
      * - CENTER_EGRESS_2: Center Exit 2
      * - CENTER_EGRESS_3: Center Exit 3
-     * Note: Network exports corresponding to different operators or resource types need to contact the product for clarification
-     * Default value: CENTER_EGRESS_1.
+     *   Note: Network exports corresponding to different operators or resource types need to contact the product for clarification
+     *   Default value: CENTER_EGRESS_1.
      */
     declare public readonly egress: pulumi.Output<string>;
     /**
      * Elastic IPv6 charging method, optional values:
      * - BANDWIDTH_PACKAGE: Payment for Shared Bandwidth Package
      * - TRAFFIC_POSTPAID_BY_HOUR: Traffic is paid by the hour
-     * Default value: TRAFFIC_POSTPAID_BY_HOUR.
+     *   Default value: TRAFFIC_POSTPAID_BY_HOUR.
      */
     declare public readonly internetChargeType: pulumi.Output<string>;
     /**
@@ -99,7 +99,7 @@ export class PublicIpv6 extends pulumi.CustomResource {
      * The range of selectable values depends on the EIP billing method:
      * - BANDWIDTH_PACKAGE: 1 Mbps to 2000 Mbps
      * - TRAFFIC_POSTPAID_BY_HOUR: 1 Mbps to 100 Mbps
-     * Default value: 1 Mbps.
+     *   Default value: 1 Mbps.
      */
     declare public readonly internetMaxBandwidthOut: pulumi.Output<number>;
     /**
@@ -108,7 +108,7 @@ export class PublicIpv6 extends pulumi.CustomResource {
      * - CMCC: China Mobile
      * - CTCC: China Telecom
      * - CUCC: China Unicom
-     * Note: Static single-wire IP is only supported in some regions.
+     *   Note: Static single-wire IP is only supported in some regions.
      */
     declare public readonly internetServiceProvider: pulumi.Output<string>;
     /**
@@ -162,60 +162,60 @@ export interface PublicIpv6State {
     /**
      * External network IP address.
      */
-    addressIp?: pulumi.Input<string>;
+    addressIp?: pulumi.Input<string | undefined>;
     /**
      * EIP name, used to customize the personalized name of the EIP when applying for EIP. Default value: unnamed.
      */
-    addressName?: pulumi.Input<string>;
+    addressName?: pulumi.Input<string | undefined>;
     /**
      * Elastic IPv6 type, optional values:
      * - EIPv6: Ordinary IPv6
      * - HighQualityEIPv6: Premium IPv6
-     * Note: You need to contact the product to open a premium IPv6 white list, and only some regions support premium IPv6
-     * Default value: EIPv6.
+     *   Note: You need to contact the product to open a premium IPv6 white list, and only some regions support premium IPv6
+     *   Default value: EIPv6.
      */
-    addressType?: pulumi.Input<string>;
+    addressType?: pulumi.Input<string | undefined>;
     /**
      * Bandwidth packet unique ID parameter. If this parameter is set and the InternetChargeType is BANDWIDTH_PACKAGE, it means that the EIP created is added to the BGP bandwidth packet and the bandwidth packet is charged.
      */
-    bandwidthPackageId?: pulumi.Input<string>;
+    bandwidthPackageId?: pulumi.Input<string | undefined>;
     /**
      * Elastic IPv6 network exit, optional values:
      * - CENTER_EGRESS_1: Center Exit 1
      * - CENTER_EGRESS_2: Center Exit 2
      * - CENTER_EGRESS_3: Center Exit 3
-     * Note: Network exports corresponding to different operators or resource types need to contact the product for clarification
-     * Default value: CENTER_EGRESS_1.
+     *   Note: Network exports corresponding to different operators or resource types need to contact the product for clarification
+     *   Default value: CENTER_EGRESS_1.
      */
-    egress?: pulumi.Input<string>;
+    egress?: pulumi.Input<string | undefined>;
     /**
      * Elastic IPv6 charging method, optional values:
      * - BANDWIDTH_PACKAGE: Payment for Shared Bandwidth Package
      * - TRAFFIC_POSTPAID_BY_HOUR: Traffic is paid by the hour
-     * Default value: TRAFFIC_POSTPAID_BY_HOUR.
+     *   Default value: TRAFFIC_POSTPAID_BY_HOUR.
      */
-    internetChargeType?: pulumi.Input<string>;
+    internetChargeType?: pulumi.Input<string | undefined>;
     /**
      * Elastic IPv6 bandwidth limit in Mbps.
      * The range of selectable values depends on the EIP billing method:
      * - BANDWIDTH_PACKAGE: 1 Mbps to 2000 Mbps
      * - TRAFFIC_POSTPAID_BY_HOUR: 1 Mbps to 100 Mbps
-     * Default value: 1 Mbps.
+     *   Default value: 1 Mbps.
      */
-    internetMaxBandwidthOut?: pulumi.Input<number>;
+    internetMaxBandwidthOut?: pulumi.Input<number | undefined>;
     /**
      * Elastic IPv6 line type, default value: BGP.
      * For users who have activated a static single-line IP whitelist, selectable values:
      * - CMCC: China Mobile
      * - CTCC: China Telecom
      * - CUCC: China Unicom
-     * Note: Static single-wire IP is only supported in some regions.
+     *   Note: Static single-wire IP is only supported in some regions.
      */
-    internetServiceProvider?: pulumi.Input<string>;
+    internetServiceProvider?: pulumi.Input<string | undefined>;
     /**
      * Tags.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 /**
@@ -225,58 +225,58 @@ export interface PublicIpv6Args {
     /**
      * External network IP address.
      */
-    addressIp?: pulumi.Input<string>;
+    addressIp?: pulumi.Input<string | undefined>;
     /**
      * EIP name, used to customize the personalized name of the EIP when applying for EIP. Default value: unnamed.
      */
-    addressName?: pulumi.Input<string>;
+    addressName?: pulumi.Input<string | undefined>;
     /**
      * Elastic IPv6 type, optional values:
      * - EIPv6: Ordinary IPv6
      * - HighQualityEIPv6: Premium IPv6
-     * Note: You need to contact the product to open a premium IPv6 white list, and only some regions support premium IPv6
-     * Default value: EIPv6.
+     *   Note: You need to contact the product to open a premium IPv6 white list, and only some regions support premium IPv6
+     *   Default value: EIPv6.
      */
-    addressType?: pulumi.Input<string>;
+    addressType?: pulumi.Input<string | undefined>;
     /**
      * Bandwidth packet unique ID parameter. If this parameter is set and the InternetChargeType is BANDWIDTH_PACKAGE, it means that the EIP created is added to the BGP bandwidth packet and the bandwidth packet is charged.
      */
-    bandwidthPackageId?: pulumi.Input<string>;
+    bandwidthPackageId?: pulumi.Input<string | undefined>;
     /**
      * Elastic IPv6 network exit, optional values:
      * - CENTER_EGRESS_1: Center Exit 1
      * - CENTER_EGRESS_2: Center Exit 2
      * - CENTER_EGRESS_3: Center Exit 3
-     * Note: Network exports corresponding to different operators or resource types need to contact the product for clarification
-     * Default value: CENTER_EGRESS_1.
+     *   Note: Network exports corresponding to different operators or resource types need to contact the product for clarification
+     *   Default value: CENTER_EGRESS_1.
      */
-    egress?: pulumi.Input<string>;
+    egress?: pulumi.Input<string | undefined>;
     /**
      * Elastic IPv6 charging method, optional values:
      * - BANDWIDTH_PACKAGE: Payment for Shared Bandwidth Package
      * - TRAFFIC_POSTPAID_BY_HOUR: Traffic is paid by the hour
-     * Default value: TRAFFIC_POSTPAID_BY_HOUR.
+     *   Default value: TRAFFIC_POSTPAID_BY_HOUR.
      */
-    internetChargeType?: pulumi.Input<string>;
+    internetChargeType?: pulumi.Input<string | undefined>;
     /**
      * Elastic IPv6 bandwidth limit in Mbps.
      * The range of selectable values depends on the EIP billing method:
      * - BANDWIDTH_PACKAGE: 1 Mbps to 2000 Mbps
      * - TRAFFIC_POSTPAID_BY_HOUR: 1 Mbps to 100 Mbps
-     * Default value: 1 Mbps.
+     *   Default value: 1 Mbps.
      */
-    internetMaxBandwidthOut?: pulumi.Input<number>;
+    internetMaxBandwidthOut?: pulumi.Input<number | undefined>;
     /**
      * Elastic IPv6 line type, default value: BGP.
      * For users who have activated a static single-line IP whitelist, selectable values:
      * - CMCC: China Mobile
      * - CTCC: China Telecom
      * - CUCC: China Unicom
-     * Note: Static single-wire IP is only supported in some regions.
+     *   Note: Static single-wire IP is only supported in some regions.
      */
-    internetServiceProvider?: pulumi.Input<string>;
+    internetServiceProvider?: pulumi.Input<string | undefined>;
     /**
      * Tags.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

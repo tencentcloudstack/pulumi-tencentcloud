@@ -9,18 +9,20 @@ import * as utilities from "../utilities";
 /**
  * Provide a resource to create a SCF function.
  *
+ * > **NOTE:** The use of `trigger` is no longer recommended; `tencentcloud.Scf.Trigger` is recommended instead.
+ *
  * ## Example Usage
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.scf.Function("foo", {
+ * const example = new tencentcloud.scf.Function("example", {
  *     name: "ci-test-function",
  *     handler: "main.do_it",
  *     runtime: "Python3.6",
  *     cosBucketName: "scf-code-1234567890",
- *     cosObjectName: "code.zip",
+ *     cosObjectName: "/path/to/code.zip",
  *     cosBucketRegion: "ap-guangzhou",
  * });
  * ```
@@ -31,7 +33,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.scf.Function("foo", {
+ * const example = new tencentcloud.scf.Function("example", {
  *     name: "ci-test-function",
  *     handler: "first.do_it_first",
  *     runtime: "Python3.6",
@@ -55,7 +57,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.scf.Function("foo", {
+ * const example = new tencentcloud.scf.Function("example", {
  *     name: "ci-test-function",
  *     handler: "main.do_it",
  *     runtime: "Python3.6",
@@ -76,7 +78,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.scf.Function("foo", {
+ * const example = new tencentcloud.scf.Function("example", {
  *     name: "ci-test-function",
  *     handler: "first.do_it_first",
  *     runtime: "Python3.6",
@@ -113,10 +115,10 @@ import * as utilities from "../utilities";
  *
  * SCF function can be imported, e.g.
  *
- * -> __NOTE:__ function id is `<function namespace>+<function name>`
+ * > **NOTE:** function id is `<function namespace>+<function name>`
  *
  * ```sh
- * $ pulumi import tencentcloud:Scf/function:Function test default+test
+ * $ pulumi import tencentcloud:Scf/function:Function example default+test
  * ```
  */
 export class Function extends pulumi.CustomResource {
@@ -244,6 +246,10 @@ export class Function extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly installDependency: pulumi.Output<boolean>;
     /**
+     * Instance concurrency configuration for the function.
+     */
+    declare public readonly instanceConcurrencyConfig: pulumi.Output<outputs.Scf.FunctionInstanceConcurrencyConfig | undefined>;
+    /**
      * Intranet access configuration.
      */
     declare public readonly intranetConfig: pulumi.Output<outputs.Scf.FunctionIntranetConfig>;
@@ -357,6 +363,7 @@ export class Function extends pulumi.CustomResource {
             resourceInputs["host"] = state?.host;
             resourceInputs["imageConfigs"] = state?.imageConfigs;
             resourceInputs["installDependency"] = state?.installDependency;
+            resourceInputs["instanceConcurrencyConfig"] = state?.instanceConcurrencyConfig;
             resourceInputs["intranetConfig"] = state?.intranetConfig;
             resourceInputs["l5Enable"] = state?.l5Enable;
             resourceInputs["layers"] = state?.layers;
@@ -393,6 +400,7 @@ export class Function extends pulumi.CustomResource {
             resourceInputs["funcType"] = args?.funcType;
             resourceInputs["handler"] = args?.handler;
             resourceInputs["imageConfigs"] = args?.imageConfigs;
+            resourceInputs["instanceConcurrencyConfig"] = args?.instanceConcurrencyConfig;
             resourceInputs["intranetConfig"] = args?.intranetConfig;
             resourceInputs["l5Enable"] = args?.l5Enable;
             resourceInputs["layers"] = args?.layers;
@@ -434,175 +442,179 @@ export interface FunctionState {
     /**
      * Whether SCF function asynchronous attribute is enabled. `TRUE` is open, `FALSE` is close.
      */
-    asyncRunEnable?: pulumi.Input<string>;
+    asyncRunEnable?: pulumi.Input<string | undefined>;
     /**
      * List of CFS configurations.
      */
-    cfsConfigs?: pulumi.Input<pulumi.Input<inputs.Scf.FunctionCfsConfig>[]>;
+    cfsConfigs?: pulumi.Input<pulumi.Input<inputs.Scf.FunctionCfsConfig>[] | undefined>;
     /**
      * cls logset id of the SCF function.
      */
-    clsLogsetId?: pulumi.Input<string>;
+    clsLogsetId?: pulumi.Input<string | undefined>;
     /**
      * cls topic id of the SCF function.
      */
-    clsTopicId?: pulumi.Input<string>;
+    clsTopicId?: pulumi.Input<string | undefined>;
     /**
      * SCF function code error message.
      */
-    codeError?: pulumi.Input<string>;
+    codeError?: pulumi.Input<string | undefined>;
     /**
      * SCF function code is correct.
      */
-    codeResult?: pulumi.Input<string>;
+    codeResult?: pulumi.Input<string | undefined>;
     /**
      * SCF function code size, unit is M.
      */
-    codeSize?: pulumi.Input<number>;
+    codeSize?: pulumi.Input<number | undefined>;
     /**
      * Cos bucket name of the SCF function, such as `cos-1234567890`, conflict with `zipFile`.
      */
-    cosBucketName?: pulumi.Input<string>;
+    cosBucketName?: pulumi.Input<string | undefined>;
     /**
      * Cos bucket region of the SCF function, conflict with `zipFile`.
      */
-    cosBucketRegion?: pulumi.Input<string>;
+    cosBucketRegion?: pulumi.Input<string | undefined>;
     /**
      * Cos object name of the SCF function, should have suffix `.zip` or `.jar`, conflict with `zipFile`.
      */
-    cosObjectName?: pulumi.Input<string>;
+    cosObjectName?: pulumi.Input<string | undefined>;
     /**
      * Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.
      */
-    dnsCache?: pulumi.Input<boolean>;
+    dnsCache?: pulumi.Input<boolean | undefined>;
     /**
      * Whether EIP is a fixed IP.
      */
-    eipFixed?: pulumi.Input<boolean>;
+    eipFixed?: pulumi.Input<boolean | undefined>;
     /**
      * SCF function EIP list.
      */
-    eips?: pulumi.Input<pulumi.Input<string>[]>;
+    eips?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Indicates whether EIP config set to `ENABLE` when `enablePublicNet` was true. Default `false`.
      */
-    enableEipConfig?: pulumi.Input<boolean>;
+    enableEipConfig?: pulumi.Input<boolean | undefined>;
     /**
      * Indicates whether public net config enabled. Default `false`. NOTE: only `vpcId` specified can disable public net config.
      */
-    enablePublicNet?: pulumi.Input<boolean>;
+    enablePublicNet?: pulumi.Input<boolean | undefined>;
     /**
      * Environment of the SCF function.
      */
-    environment?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    environment?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * SCF function code error code.
      */
-    errNo?: pulumi.Input<number>;
+    errNo?: pulumi.Input<number | undefined>;
     /**
      * Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
      */
-    funcType?: pulumi.Input<string>;
+    funcType?: pulumi.Input<string | undefined>;
     /**
      * function ID.
      */
-    functionId?: pulumi.Input<string>;
+    functionId?: pulumi.Input<string | undefined>;
     /**
      * Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
      */
-    handler?: pulumi.Input<string>;
+    handler?: pulumi.Input<string | undefined>;
     /**
      * SCF function domain name.
      */
-    host?: pulumi.Input<string>;
+    host?: pulumi.Input<string | undefined>;
     /**
      * Image of the SCF function, conflict with `cosBucketName`, `cosObjectName`, `cosBucketRegion`, `zipFile`.
      */
-    imageConfigs?: pulumi.Input<pulumi.Input<inputs.Scf.FunctionImageConfig>[]>;
+    imageConfigs?: pulumi.Input<pulumi.Input<inputs.Scf.FunctionImageConfig>[] | undefined>;
     /**
      * Whether to automatically install dependencies.
      */
-    installDependency?: pulumi.Input<boolean>;
+    installDependency?: pulumi.Input<boolean | undefined>;
+    /**
+     * Instance concurrency configuration for the function.
+     */
+    instanceConcurrencyConfig?: pulumi.Input<inputs.Scf.FunctionInstanceConcurrencyConfig | undefined>;
     /**
      * Intranet access configuration.
      */
-    intranetConfig?: pulumi.Input<inputs.Scf.FunctionIntranetConfig>;
+    intranetConfig?: pulumi.Input<inputs.Scf.FunctionIntranetConfig | undefined>;
     /**
      * Enable L5 for SCF function, default is `false`.
      */
-    l5Enable?: pulumi.Input<boolean>;
+    l5Enable?: pulumi.Input<boolean | undefined>;
     /**
      * The list of association layers.
      */
-    layers?: pulumi.Input<pulumi.Input<inputs.Scf.FunctionLayer>[]>;
+    layers?: pulumi.Input<pulumi.Input<inputs.Scf.FunctionLayer>[] | undefined>;
     /**
      * Memory size of the SCF function, unit is MB. The default is `128`MB. The ladder is 128M.
      */
-    memSize?: pulumi.Input<number>;
+    memSize?: pulumi.Input<number | undefined>;
     /**
      * Modify time of SCF function trigger.
      */
-    modifyTime?: pulumi.Input<string>;
+    modifyTime?: pulumi.Input<string | undefined>;
     /**
      * Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Namespace of the SCF function, default is `default`.
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
     /**
      * Role of the SCF function.
      */
-    role?: pulumi.Input<string>;
+    role?: pulumi.Input<string | undefined>;
     /**
      * Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
      */
-    runtime?: pulumi.Input<string>;
+    runtime?: pulumi.Input<string | undefined>;
     /**
      * SCF function status.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * SCF status description.
      */
-    statusDesc?: pulumi.Input<string>;
+    statusDesc?: pulumi.Input<string | undefined>;
     /**
      * Subnet ID of the SCF function.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * Tags of the SCF function.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Timeout of the SCF function, unit is second. Default `3`. Available value is 1-900.
      */
-    timeout?: pulumi.Input<number>;
+    timeout?: pulumi.Input<number | undefined>;
     /**
      * SCF trigger details list. Each element contains the following attributes:
      */
-    triggerInfos?: pulumi.Input<pulumi.Input<inputs.Scf.FunctionTriggerInfo>[]>;
+    triggerInfos?: pulumi.Input<pulumi.Input<inputs.Scf.FunctionTriggerInfo>[] | undefined>;
     /**
      * Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:
      */
-    triggers?: pulumi.Input<pulumi.Input<inputs.Scf.FunctionTrigger>[]>;
+    triggers?: pulumi.Input<pulumi.Input<inputs.Scf.FunctionTrigger>[] | undefined>;
     /**
      * SCF function vip.
      */
-    vip?: pulumi.Input<string>;
+    vip?: pulumi.Input<string | undefined>;
     /**
      * VPC ID of the SCF function.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * Zip file of the SCF function, conflict with `cosBucketName`, `cosObjectName`, `cosBucketRegion`.
      */
-    zipFile?: pulumi.Input<string>;
+    zipFile?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -612,117 +624,121 @@ export interface FunctionArgs {
     /**
      * Whether SCF function asynchronous attribute is enabled. `TRUE` is open, `FALSE` is close.
      */
-    asyncRunEnable?: pulumi.Input<string>;
+    asyncRunEnable?: pulumi.Input<string | undefined>;
     /**
      * List of CFS configurations.
      */
-    cfsConfigs?: pulumi.Input<pulumi.Input<inputs.Scf.FunctionCfsConfig>[]>;
+    cfsConfigs?: pulumi.Input<pulumi.Input<inputs.Scf.FunctionCfsConfig>[] | undefined>;
     /**
      * cls logset id of the SCF function.
      */
-    clsLogsetId?: pulumi.Input<string>;
+    clsLogsetId?: pulumi.Input<string | undefined>;
     /**
      * cls topic id of the SCF function.
      */
-    clsTopicId?: pulumi.Input<string>;
+    clsTopicId?: pulumi.Input<string | undefined>;
     /**
      * Cos bucket name of the SCF function, such as `cos-1234567890`, conflict with `zipFile`.
      */
-    cosBucketName?: pulumi.Input<string>;
+    cosBucketName?: pulumi.Input<string | undefined>;
     /**
      * Cos bucket region of the SCF function, conflict with `zipFile`.
      */
-    cosBucketRegion?: pulumi.Input<string>;
+    cosBucketRegion?: pulumi.Input<string | undefined>;
     /**
      * Cos object name of the SCF function, should have suffix `.zip` or `.jar`, conflict with `zipFile`.
      */
-    cosObjectName?: pulumi.Input<string>;
+    cosObjectName?: pulumi.Input<string | undefined>;
     /**
      * Description of the SCF function. Description supports English letters, numbers, spaces, commas, newlines, periods and Chinese, the maximum length is 1000.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable Dns caching capability, only the EVENT function is supported. Default is false.
      */
-    dnsCache?: pulumi.Input<boolean>;
+    dnsCache?: pulumi.Input<boolean | undefined>;
     /**
      * Indicates whether EIP config set to `ENABLE` when `enablePublicNet` was true. Default `false`.
      */
-    enableEipConfig?: pulumi.Input<boolean>;
+    enableEipConfig?: pulumi.Input<boolean | undefined>;
     /**
      * Indicates whether public net config enabled. Default `false`. NOTE: only `vpcId` specified can disable public net config.
      */
-    enablePublicNet?: pulumi.Input<boolean>;
+    enablePublicNet?: pulumi.Input<boolean | undefined>;
     /**
      * Environment of the SCF function.
      */
-    environment?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    environment?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Function type. The default value is Event. Enter Event if you need to create a trigger function. Enter HTTP if you need to create an HTTP function service.
      */
-    funcType?: pulumi.Input<string>;
+    funcType?: pulumi.Input<string | undefined>;
     /**
      * Handler of the SCF function. The format of name is `<filename>.<method_name>`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
      */
-    handler?: pulumi.Input<string>;
+    handler?: pulumi.Input<string | undefined>;
     /**
      * Image of the SCF function, conflict with `cosBucketName`, `cosObjectName`, `cosBucketRegion`, `zipFile`.
      */
-    imageConfigs?: pulumi.Input<pulumi.Input<inputs.Scf.FunctionImageConfig>[]>;
+    imageConfigs?: pulumi.Input<pulumi.Input<inputs.Scf.FunctionImageConfig>[] | undefined>;
+    /**
+     * Instance concurrency configuration for the function.
+     */
+    instanceConcurrencyConfig?: pulumi.Input<inputs.Scf.FunctionInstanceConcurrencyConfig | undefined>;
     /**
      * Intranet access configuration.
      */
-    intranetConfig?: pulumi.Input<inputs.Scf.FunctionIntranetConfig>;
+    intranetConfig?: pulumi.Input<inputs.Scf.FunctionIntranetConfig | undefined>;
     /**
      * Enable L5 for SCF function, default is `false`.
      */
-    l5Enable?: pulumi.Input<boolean>;
+    l5Enable?: pulumi.Input<boolean | undefined>;
     /**
      * The list of association layers.
      */
-    layers?: pulumi.Input<pulumi.Input<inputs.Scf.FunctionLayer>[]>;
+    layers?: pulumi.Input<pulumi.Input<inputs.Scf.FunctionLayer>[] | undefined>;
     /**
      * Memory size of the SCF function, unit is MB. The default is `128`MB. The ladder is 128M.
      */
-    memSize?: pulumi.Input<number>;
+    memSize?: pulumi.Input<number | undefined>;
     /**
      * Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Namespace of the SCF function, default is `default`.
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
     /**
      * Role of the SCF function.
      */
-    role?: pulumi.Input<string>;
+    role?: pulumi.Input<string | undefined>;
     /**
      * Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
      */
-    runtime?: pulumi.Input<string>;
+    runtime?: pulumi.Input<string | undefined>;
     /**
      * Subnet ID of the SCF function.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * Tags of the SCF function.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Timeout of the SCF function, unit is second. Default `3`. Available value is 1-900.
      */
-    timeout?: pulumi.Input<number>;
+    timeout?: pulumi.Input<number | undefined>;
     /**
      * Trigger list of the SCF function, note that if you modify the trigger list, all existing triggers will be deleted, and then create triggers in the new list. Each element contains the following attributes:
      */
-    triggers?: pulumi.Input<pulumi.Input<inputs.Scf.FunctionTrigger>[]>;
+    triggers?: pulumi.Input<pulumi.Input<inputs.Scf.FunctionTrigger>[] | undefined>;
     /**
      * VPC ID of the SCF function.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * Zip file of the SCF function, conflict with `cosBucketName`, `cosObjectName`, `cosBucketRegion`.
      */
-    zipFile?: pulumi.Input<string>;
+    zipFile?: pulumi.Input<string | undefined>;
 }

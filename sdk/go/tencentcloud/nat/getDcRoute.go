@@ -71,12 +71,8 @@ type GetDcRouteResult struct {
 }
 
 func GetDcRouteOutput(ctx *pulumi.Context, args GetDcRouteOutputArgs, opts ...pulumi.InvokeOption) GetDcRouteResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDcRouteResultOutput, error) {
-			args := v.(GetDcRouteArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Nat/getDcRoute:getDcRoute", args, GetDcRouteResultOutput{}, options).(GetDcRouteResultOutput), nil
-		}).(GetDcRouteResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Nat/getDcRoute:getDcRoute", args, GetDcRouteResultOutput{}, options).(GetDcRouteResultOutput)
 }
 
 // A collection of arguments for invoking getDcRoute.

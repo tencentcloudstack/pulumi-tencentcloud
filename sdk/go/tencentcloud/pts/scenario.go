@@ -124,7 +124,6 @@ import (
 // ## Import
 //
 // pts scenario can be imported using the id, e.g.
-//
 // ```sh
 // $ pulumi import tencentcloud:Pts/scenario:Scenario scenario scenario_id
 // ```

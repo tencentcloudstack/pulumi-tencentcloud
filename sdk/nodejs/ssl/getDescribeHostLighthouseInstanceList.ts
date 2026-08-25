@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const describeHostLighthouseInstanceList = tencentcloud.Ssl.getDescribeHostLighthouseInstanceList({
+ * const describeHostLighthouseInstanceList = tencentcloud.ssl.getDescribeHostLighthouseInstanceList({
  *     certificateId: "8tvMCvGF",
  *     resourceType: "lighthouse",
  * });
@@ -85,7 +85,7 @@ export interface GetDescribeHostLighthouseInstanceListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const describeHostLighthouseInstanceList = tencentcloud.Ssl.getDescribeHostLighthouseInstanceList({
+ * const describeHostLighthouseInstanceList = tencentcloud.ssl.getDescribeHostLighthouseInstanceList({
  *     certificateId: "8tvMCvGF",
  *     resourceType: "lighthouse",
  * });
@@ -113,11 +113,11 @@ export interface GetDescribeHostLighthouseInstanceListOutputArgs {
     /**
      * List of filter parameters.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Ssl.GetDescribeHostLighthouseInstanceListFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Ssl.GetDescribeHostLighthouseInstanceListFilterArgs>[] | undefined>;
     /**
      * Whether to query the cache, 1: Yes; 0: No, the default is the query cache, the cache is half an hour.
      */
-    isCache?: pulumi.Input<number>;
+    isCache?: pulumi.Input<number | undefined>;
     /**
      * Deploy resource type Lighthous.
      */
@@ -125,5 +125,5 @@ export interface GetDescribeHostLighthouseInstanceListOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

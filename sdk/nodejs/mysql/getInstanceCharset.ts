@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instanceCharset = tencentcloud.Mysql.getInstanceCharset({
+ * const instanceCharset = tencentcloud.mysql.getInstanceCharset({
  *     instanceId: "",
  * });
  * ```
@@ -64,7 +64,7 @@ export interface GetInstanceCharsetResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instanceCharset = tencentcloud.Mysql.getInstanceCharset({
+ * const instanceCharset = tencentcloud.mysql.getInstanceCharset({
  *     instanceId: "",
  * });
  * ```
@@ -88,5 +88,5 @@ export interface GetInstanceCharsetOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

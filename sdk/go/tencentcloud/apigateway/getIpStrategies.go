@@ -41,7 +41,7 @@ import (
 //				return err
 //			}
 //			test, err := apigateway.NewIpStrategy(ctx, "test", &apigateway.IpStrategyArgs{
-//				ServiceId:    service.ID(),
+//				ServiceId:    service.ID().ToIDOutput().ToStringOutput(),
 //				StrategyName: pulumi.String("tf_test"),
 //				StrategyType: pulumi.String("BLACK"),
 //				StrategyData: pulumi.String("9.9.9.9"),
@@ -95,12 +95,8 @@ type GetIpStrategiesResult struct {
 }
 
 func GetIpStrategiesOutput(ctx *pulumi.Context, args GetIpStrategiesOutputArgs, opts ...pulumi.InvokeOption) GetIpStrategiesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetIpStrategiesResultOutput, error) {
-			args := v.(GetIpStrategiesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:ApiGateway/getIpStrategies:getIpStrategies", args, GetIpStrategiesResultOutput{}, options).(GetIpStrategiesResultOutput), nil
-		}).(GetIpStrategiesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:ApiGateway/getIpStrategies:getIpStrategies", args, GetIpStrategiesResultOutput{}, options).(GetIpStrategiesResultOutput)
 }
 
 // A collection of arguments for invoking getIpStrategies.

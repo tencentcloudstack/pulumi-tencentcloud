@@ -21,6 +21,8 @@ import (
 //
 // import (
 //
+//	"strconv"
+//
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dasb"
 //
@@ -38,7 +40,7 @@ import (
 //				return err
 //			}
 //			_, err = dasb.NewDeviceAccount(ctx, "example", &dasb.DeviceAccountArgs{
-//				DeviceId: example.ID(),
+//				DeviceId: example.ID().ToIDOutput().ApplyT(func(id pulumi.ID) (int, error) { return strconv.Atoi(string(id)) }).(pulumi.IntOutput),
 //				Account:  pulumi.String("root"),
 //			})
 //			if err != nil {
@@ -52,7 +54,7 @@ import (
 //
 // ## Import
 //
-// dasb device_account can be imported using the id, e.g.
+// dasb deviceAccount can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Dasb/deviceAccount:DeviceAccount example 11

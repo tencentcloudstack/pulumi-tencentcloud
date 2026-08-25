@@ -18,7 +18,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * ssl deploy_certificate_record_retry can be imported using the id, e.g.
+ * ssl deployCertificateRecordRetry can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Ssl/deployCertificateRecordRetryOperation:DeployCertificateRecordRetryOperation deploy_certificate_record_retry deploy_certificate_record_retry_id
@@ -93,11 +93,11 @@ export interface DeployCertificateRecordRetryOperationState {
     /**
      * Deployment record details ID to be retried.
      */
-    deployRecordDetailId?: pulumi.Input<number>;
+    deployRecordDetailId?: pulumi.Input<number | undefined>;
     /**
      * Deployment record ID to be retried.
      */
-    deployRecordId?: pulumi.Input<number>;
+    deployRecordId?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -107,9 +107,9 @@ export interface DeployCertificateRecordRetryOperationArgs {
     /**
      * Deployment record details ID to be retried.
      */
-    deployRecordDetailId?: pulumi.Input<number>;
+    deployRecordDetailId?: pulumi.Input<number | undefined>;
     /**
      * Deployment record ID to be retried.
      */
-    deployRecordId?: pulumi.Input<number>;
+    deployRecordId?: pulumi.Input<number | undefined>;
 }

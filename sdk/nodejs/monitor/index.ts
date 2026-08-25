@@ -25,6 +25,11 @@ export type BindingReceiver = import("./bindingReceiver").BindingReceiver;
 export const BindingReceiver: typeof import("./bindingReceiver").BindingReceiver = null as any;
 utilities.lazyLoad(exports, ["BindingReceiver"], () => require("./bindingReceiver"));
 
+export { ExternalClusterArgs, ExternalClusterState } from "./externalCluster";
+export type ExternalCluster = import("./externalCluster").ExternalCluster;
+export const ExternalCluster: typeof import("./externalCluster").ExternalCluster = null as any;
+utilities.lazyLoad(exports, ["ExternalCluster"], () => require("./externalCluster"));
+
 export { GetAlarmAllNamespacesArgs, GetAlarmAllNamespacesResult, GetAlarmAllNamespacesOutputArgs } from "./getAlarmAllNamespaces";
 export const getAlarmAllNamespaces: typeof import("./getAlarmAllNamespaces").getAlarmAllNamespaces = null as any;
 export const getAlarmAllNamespacesOutput: typeof import("./getAlarmAllNamespaces").getAlarmAllNamespacesOutput = null as any;
@@ -85,10 +90,20 @@ export const getData: typeof import("./getData").getData = null as any;
 export const getDataOutput: typeof import("./getData").getDataOutput = null as any;
 utilities.lazyLoad(exports, ["getData","getDataOutput"], () => require("./getData"));
 
+export { GetExternalClusterRegisterCommandArgs, GetExternalClusterRegisterCommandResult, GetExternalClusterRegisterCommandOutputArgs } from "./getExternalClusterRegisterCommand";
+export const getExternalClusterRegisterCommand: typeof import("./getExternalClusterRegisterCommand").getExternalClusterRegisterCommand = null as any;
+export const getExternalClusterRegisterCommandOutput: typeof import("./getExternalClusterRegisterCommand").getExternalClusterRegisterCommandOutput = null as any;
+utilities.lazyLoad(exports, ["getExternalClusterRegisterCommand","getExternalClusterRegisterCommandOutput"], () => require("./getExternalClusterRegisterCommand"));
+
 export { GetGrafanaPluginOverviewsArgs, GetGrafanaPluginOverviewsResult, GetGrafanaPluginOverviewsOutputArgs } from "./getGrafanaPluginOverviews";
 export const getGrafanaPluginOverviews: typeof import("./getGrafanaPluginOverviews").getGrafanaPluginOverviews = null as any;
 export const getGrafanaPluginOverviewsOutput: typeof import("./getGrafanaPluginOverviews").getGrafanaPluginOverviewsOutput = null as any;
 utilities.lazyLoad(exports, ["getGrafanaPluginOverviews","getGrafanaPluginOverviewsOutput"], () => require("./getGrafanaPluginOverviews"));
+
+export { GetNoticeContentTmplsArgs, GetNoticeContentTmplsResult, GetNoticeContentTmplsOutputArgs } from "./getNoticeContentTmpls";
+export const getNoticeContentTmpls: typeof import("./getNoticeContentTmpls").getNoticeContentTmpls = null as any;
+export const getNoticeContentTmplsOutput: typeof import("./getNoticeContentTmpls").getNoticeContentTmplsOutput = null as any;
+utilities.lazyLoad(exports, ["getNoticeContentTmpls","getNoticeContentTmplsOutput"], () => require("./getNoticeContentTmpls"));
 
 export { GetPolicyConditionsArgs, GetPolicyConditionsResult, GetPolicyConditionsOutputArgs } from "./getPolicyConditions";
 export const getPolicyConditions: typeof import("./getPolicyConditions").getPolicyConditions = null as any;
@@ -179,6 +194,11 @@ export { GrafanaWhitelistConfigArgs, GrafanaWhitelistConfigState } from "./grafa
 export type GrafanaWhitelistConfig = import("./grafanaWhitelistConfig").GrafanaWhitelistConfig;
 export const GrafanaWhitelistConfig: typeof import("./grafanaWhitelistConfig").GrafanaWhitelistConfig = null as any;
 utilities.lazyLoad(exports, ["GrafanaWhitelistConfig"], () => require("./grafanaWhitelistConfig"));
+
+export { NoticeContentTmplArgs, NoticeContentTmplState } from "./noticeContentTmpl";
+export type NoticeContentTmpl = import("./noticeContentTmpl").NoticeContentTmpl;
+export const NoticeContentTmpl: typeof import("./noticeContentTmpl").NoticeContentTmpl = null as any;
+utilities.lazyLoad(exports, ["NoticeContentTmpl"], () => require("./noticeContentTmpl"));
 
 export { PolicyBindingObjectArgs, PolicyBindingObjectState } from "./policyBindingObject";
 export type PolicyBindingObject = import("./policyBindingObject").PolicyBindingObject;
@@ -288,6 +308,8 @@ const _module = {
                 return new AlarmPolicySetDefault(name, <any>undefined, { urn })
             case "tencentcloud:Monitor/bindingReceiver:BindingReceiver":
                 return new BindingReceiver(name, <any>undefined, { urn })
+            case "tencentcloud:Monitor/externalCluster:ExternalCluster":
+                return new ExternalCluster(name, <any>undefined, { urn })
             case "tencentcloud:Monitor/grafanaDnsConfig:GrafanaDnsConfig":
                 return new GrafanaDnsConfig(name, <any>undefined, { urn })
             case "tencentcloud:Monitor/grafanaEnvConfig:GrafanaEnvConfig":
@@ -310,6 +332,8 @@ const _module = {
                 return new GrafanaVersionUpgrade(name, <any>undefined, { urn })
             case "tencentcloud:Monitor/grafanaWhitelistConfig:GrafanaWhitelistConfig":
                 return new GrafanaWhitelistConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Monitor/noticeContentTmpl:NoticeContentTmpl":
+                return new NoticeContentTmpl(name, <any>undefined, { urn })
             case "tencentcloud:Monitor/policyBindingObject:PolicyBindingObject":
                 return new PolicyBindingObject(name, <any>undefined, { urn })
             case "tencentcloud:Monitor/tmpAlertGroup:TmpAlertGroup":
@@ -357,6 +381,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/alarmNotice", _mo
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/alarmPolicy", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/alarmPolicySetDefault", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/bindingReceiver", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/externalCluster", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/grafanaDnsConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/grafanaEnvConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/grafanaInstance", _module)
@@ -368,6 +393,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/grafanaSsoCamConf
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/grafanaSsoConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/grafanaVersionUpgrade", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/grafanaWhitelistConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/noticeContentTmpl", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/policyBindingObject", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/tmpAlertGroup", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/tmpAlertRule", _module)

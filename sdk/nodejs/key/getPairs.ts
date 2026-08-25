@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const keyId = tencentcloud.Key.getPairs({
+ * const keyId = tencentcloud.key.getPairs({
  *     keyId: "skey-ie97i3ml",
  * });
  * ```
@@ -28,7 +28,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const keyName = tencentcloud.Key.getPairs({
+ * const keyName = tencentcloud.key.getPairs({
  *     keyName: "^test$",
  * });
  * ```
@@ -103,7 +103,7 @@ export interface GetPairsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const keyId = tencentcloud.Key.getPairs({
+ * const keyId = tencentcloud.key.getPairs({
  *     keyId: "skey-ie97i3ml",
  * });
  * ```
@@ -114,7 +114,7 @@ export interface GetPairsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const keyName = tencentcloud.Key.getPairs({
+ * const keyName = tencentcloud.key.getPairs({
  *     keyName: "^test$",
  * });
  * ```
@@ -137,17 +137,17 @@ export interface GetPairsOutputArgs {
     /**
      * ID of the key pair to be queried.
      */
-    keyId?: pulumi.Input<string>;
+    keyId?: pulumi.Input<string | undefined>;
     /**
      * Name of the key pair to be queried. Support regular expression search, only `^` and `$` are supported.
      */
-    keyName?: pulumi.Input<string>;
+    keyName?: pulumi.Input<string | undefined>;
     /**
      * Project ID of the key pair to be queried.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

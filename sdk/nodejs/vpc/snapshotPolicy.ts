@@ -45,7 +45,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * vpc snapshot_policy can be imported using the id, e.g.
+ * vpc snapshotPolicy can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Vpc/snapshotPolicy:SnapshotPolicy snapshot_policy snapshot_policy_id
@@ -186,43 +186,43 @@ export interface SnapshotPolicyState {
     /**
      * Time backup strategy. Note: This field may return null, indicating that no valid value can be obtained.
      */
-    backupPolicies?: pulumi.Input<pulumi.Input<inputs.Vpc.SnapshotPolicyBackupPolicy>[]>;
+    backupPolicies?: pulumi.Input<pulumi.Input<inputs.Vpc.SnapshotPolicyBackupPolicy>[] | undefined>;
     /**
      * Backup strategy type, `operate`: operate backup, `time`: schedule backup.
      */
-    backupType?: pulumi.Input<string>;
+    backupType?: pulumi.Input<string | undefined>;
     /**
      * cos bucket.
      */
-    cosBucket?: pulumi.Input<string>;
+    cosBucket?: pulumi.Input<string | undefined>;
     /**
      * The region where the cos bucket is located.
      */
-    cosRegion?: pulumi.Input<string>;
+    cosRegion?: pulumi.Input<string | undefined>;
     /**
      * Whether to create a new cos bucket, the default is False.Note: This field may return null, indicating that no valid value can be obtained.
      */
-    createNewCos?: pulumi.Input<boolean>;
+    createNewCos?: pulumi.Input<boolean | undefined>;
     /**
      * Creation time.Note: This field may return null, indicating that no valid value can be obtained.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Enabled state, True-enabled, False-disabled, the default is True.
      */
-    enable?: pulumi.Input<boolean>;
+    enable?: pulumi.Input<boolean | undefined>;
     /**
      * The retention time supports 1 to 365 days.
      */
-    keepTime?: pulumi.Input<number>;
+    keepTime?: pulumi.Input<number | undefined>;
     /**
      * Snapshot policy Id.
      */
-    snapshotPolicyId?: pulumi.Input<string>;
+    snapshotPolicyId?: pulumi.Input<string | undefined>;
     /**
      * Snapshot policy name.
      */
-    snapshotPolicyName?: pulumi.Input<string>;
+    snapshotPolicyName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -232,7 +232,7 @@ export interface SnapshotPolicyArgs {
     /**
      * Time backup strategy. Note: This field may return null, indicating that no valid value can be obtained.
      */
-    backupPolicies?: pulumi.Input<pulumi.Input<inputs.Vpc.SnapshotPolicyBackupPolicy>[]>;
+    backupPolicies?: pulumi.Input<pulumi.Input<inputs.Vpc.SnapshotPolicyBackupPolicy>[] | undefined>;
     /**
      * Backup strategy type, `operate`: operate backup, `time`: schedule backup.
      */

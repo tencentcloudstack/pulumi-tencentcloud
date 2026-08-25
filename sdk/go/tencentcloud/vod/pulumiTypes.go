@@ -7840,6 +7840,175 @@ func (o GetSnapshotByTimeOffsetTemplatesTemplateListArrayOutput) Index(i pulumi.
 	}).(GetSnapshotByTimeOffsetTemplatesTemplateListOutput)
 }
 
+type GetSubApplicationsSubApplicationInfoSet struct {
+	// Creation time in ISO 8601 format.
+	CreateTime string `pulumi:"createTime"`
+	// Sub-application description.
+	Description string `pulumi:"description"`
+	// Application mode. Valid values: fileid, fileid+path.
+	Mode string `pulumi:"mode"`
+	// Application name for exact match filtering.
+	Name string `pulumi:"name"`
+	// Application status. Valid values: On, Off, Destroying, Destroyed.
+	Status string `pulumi:"status"`
+	// List of enabled storage regions.
+	StorageRegions []string `pulumi:"storageRegions"`
+	// Sub-application ID.
+	SubAppId int `pulumi:"subAppId"`
+	// Sub-application name.
+	SubAppIdName string `pulumi:"subAppIdName"`
+	// Tag key-value pairs for filtering applications. Applications matching all specified tags will be returned.
+	Tags map[string]string `pulumi:"tags"`
+}
+
+// GetSubApplicationsSubApplicationInfoSetInput is an input type that accepts GetSubApplicationsSubApplicationInfoSetArgs and GetSubApplicationsSubApplicationInfoSetOutput values.
+// You can construct a concrete instance of `GetSubApplicationsSubApplicationInfoSetInput` via:
+//
+//	GetSubApplicationsSubApplicationInfoSetArgs{...}
+type GetSubApplicationsSubApplicationInfoSetInput interface {
+	pulumi.Input
+
+	ToGetSubApplicationsSubApplicationInfoSetOutput() GetSubApplicationsSubApplicationInfoSetOutput
+	ToGetSubApplicationsSubApplicationInfoSetOutputWithContext(context.Context) GetSubApplicationsSubApplicationInfoSetOutput
+}
+
+type GetSubApplicationsSubApplicationInfoSetArgs struct {
+	// Creation time in ISO 8601 format.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Sub-application description.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Application mode. Valid values: fileid, fileid+path.
+	Mode pulumi.StringInput `pulumi:"mode"`
+	// Application name for exact match filtering.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Application status. Valid values: On, Off, Destroying, Destroyed.
+	Status pulumi.StringInput `pulumi:"status"`
+	// List of enabled storage regions.
+	StorageRegions pulumi.StringArrayInput `pulumi:"storageRegions"`
+	// Sub-application ID.
+	SubAppId pulumi.IntInput `pulumi:"subAppId"`
+	// Sub-application name.
+	SubAppIdName pulumi.StringInput `pulumi:"subAppIdName"`
+	// Tag key-value pairs for filtering applications. Applications matching all specified tags will be returned.
+	Tags pulumi.StringMapInput `pulumi:"tags"`
+}
+
+func (GetSubApplicationsSubApplicationInfoSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSubApplicationsSubApplicationInfoSet)(nil)).Elem()
+}
+
+func (i GetSubApplicationsSubApplicationInfoSetArgs) ToGetSubApplicationsSubApplicationInfoSetOutput() GetSubApplicationsSubApplicationInfoSetOutput {
+	return i.ToGetSubApplicationsSubApplicationInfoSetOutputWithContext(context.Background())
+}
+
+func (i GetSubApplicationsSubApplicationInfoSetArgs) ToGetSubApplicationsSubApplicationInfoSetOutputWithContext(ctx context.Context) GetSubApplicationsSubApplicationInfoSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSubApplicationsSubApplicationInfoSetOutput)
+}
+
+// GetSubApplicationsSubApplicationInfoSetArrayInput is an input type that accepts GetSubApplicationsSubApplicationInfoSetArray and GetSubApplicationsSubApplicationInfoSetArrayOutput values.
+// You can construct a concrete instance of `GetSubApplicationsSubApplicationInfoSetArrayInput` via:
+//
+//	GetSubApplicationsSubApplicationInfoSetArray{ GetSubApplicationsSubApplicationInfoSetArgs{...} }
+type GetSubApplicationsSubApplicationInfoSetArrayInput interface {
+	pulumi.Input
+
+	ToGetSubApplicationsSubApplicationInfoSetArrayOutput() GetSubApplicationsSubApplicationInfoSetArrayOutput
+	ToGetSubApplicationsSubApplicationInfoSetArrayOutputWithContext(context.Context) GetSubApplicationsSubApplicationInfoSetArrayOutput
+}
+
+type GetSubApplicationsSubApplicationInfoSetArray []GetSubApplicationsSubApplicationInfoSetInput
+
+func (GetSubApplicationsSubApplicationInfoSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSubApplicationsSubApplicationInfoSet)(nil)).Elem()
+}
+
+func (i GetSubApplicationsSubApplicationInfoSetArray) ToGetSubApplicationsSubApplicationInfoSetArrayOutput() GetSubApplicationsSubApplicationInfoSetArrayOutput {
+	return i.ToGetSubApplicationsSubApplicationInfoSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetSubApplicationsSubApplicationInfoSetArray) ToGetSubApplicationsSubApplicationInfoSetArrayOutputWithContext(ctx context.Context) GetSubApplicationsSubApplicationInfoSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSubApplicationsSubApplicationInfoSetArrayOutput)
+}
+
+type GetSubApplicationsSubApplicationInfoSetOutput struct{ *pulumi.OutputState }
+
+func (GetSubApplicationsSubApplicationInfoSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSubApplicationsSubApplicationInfoSet)(nil)).Elem()
+}
+
+func (o GetSubApplicationsSubApplicationInfoSetOutput) ToGetSubApplicationsSubApplicationInfoSetOutput() GetSubApplicationsSubApplicationInfoSetOutput {
+	return o
+}
+
+func (o GetSubApplicationsSubApplicationInfoSetOutput) ToGetSubApplicationsSubApplicationInfoSetOutputWithContext(ctx context.Context) GetSubApplicationsSubApplicationInfoSetOutput {
+	return o
+}
+
+// Creation time in ISO 8601 format.
+func (o GetSubApplicationsSubApplicationInfoSetOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSubApplicationsSubApplicationInfoSet) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Sub-application description.
+func (o GetSubApplicationsSubApplicationInfoSetOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSubApplicationsSubApplicationInfoSet) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Application mode. Valid values: fileid, fileid+path.
+func (o GetSubApplicationsSubApplicationInfoSetOutput) Mode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSubApplicationsSubApplicationInfoSet) string { return v.Mode }).(pulumi.StringOutput)
+}
+
+// Application name for exact match filtering.
+func (o GetSubApplicationsSubApplicationInfoSetOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSubApplicationsSubApplicationInfoSet) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Application status. Valid values: On, Off, Destroying, Destroyed.
+func (o GetSubApplicationsSubApplicationInfoSetOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSubApplicationsSubApplicationInfoSet) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// List of enabled storage regions.
+func (o GetSubApplicationsSubApplicationInfoSetOutput) StorageRegions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetSubApplicationsSubApplicationInfoSet) []string { return v.StorageRegions }).(pulumi.StringArrayOutput)
+}
+
+// Sub-application ID.
+func (o GetSubApplicationsSubApplicationInfoSetOutput) SubAppId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSubApplicationsSubApplicationInfoSet) int { return v.SubAppId }).(pulumi.IntOutput)
+}
+
+// Sub-application name.
+func (o GetSubApplicationsSubApplicationInfoSetOutput) SubAppIdName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSubApplicationsSubApplicationInfoSet) string { return v.SubAppIdName }).(pulumi.StringOutput)
+}
+
+// Tag key-value pairs for filtering applications. Applications matching all specified tags will be returned.
+func (o GetSubApplicationsSubApplicationInfoSetOutput) Tags() pulumi.StringMapOutput {
+	return o.ApplyT(func(v GetSubApplicationsSubApplicationInfoSet) map[string]string { return v.Tags }).(pulumi.StringMapOutput)
+}
+
+type GetSubApplicationsSubApplicationInfoSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSubApplicationsSubApplicationInfoSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSubApplicationsSubApplicationInfoSet)(nil)).Elem()
+}
+
+func (o GetSubApplicationsSubApplicationInfoSetArrayOutput) ToGetSubApplicationsSubApplicationInfoSetArrayOutput() GetSubApplicationsSubApplicationInfoSetArrayOutput {
+	return o
+}
+
+func (o GetSubApplicationsSubApplicationInfoSetArrayOutput) ToGetSubApplicationsSubApplicationInfoSetArrayOutputWithContext(ctx context.Context) GetSubApplicationsSubApplicationInfoSetArrayOutput {
+	return o
+}
+
+func (o GetSubApplicationsSubApplicationInfoSetArrayOutput) Index(i pulumi.IntInput) GetSubApplicationsSubApplicationInfoSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSubApplicationsSubApplicationInfoSet {
+		return vs[0].([]GetSubApplicationsSubApplicationInfoSet)[vs[1].(int)]
+	}).(GetSubApplicationsSubApplicationInfoSetOutput)
+}
+
 type GetSuperPlayerConfigsConfigList struct {
 	// ID of the unencrypted adaptive bitrate streaming template that allows output, which is required if `drmSwitch` is `false`.
 	AdaptiveDynamicStreamingDefinition string `pulumi:"adaptiveDynamicStreamingDefinition"`
@@ -8348,6 +8517,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListArrayInput)(nil)).Elem(), GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSnapshotByTimeOffsetTemplatesTemplateListInput)(nil)).Elem(), GetSnapshotByTimeOffsetTemplatesTemplateListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSnapshotByTimeOffsetTemplatesTemplateListArrayInput)(nil)).Elem(), GetSnapshotByTimeOffsetTemplatesTemplateListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSubApplicationsSubApplicationInfoSetInput)(nil)).Elem(), GetSubApplicationsSubApplicationInfoSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSubApplicationsSubApplicationInfoSetArrayInput)(nil)).Elem(), GetSubApplicationsSubApplicationInfoSetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSuperPlayerConfigsConfigListInput)(nil)).Elem(), GetSuperPlayerConfigsConfigListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSuperPlayerConfigsConfigListArrayInput)(nil)).Elem(), GetSuperPlayerConfigsConfigListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSuperPlayerConfigsConfigListDrmStreamingInfoInput)(nil)).Elem(), GetSuperPlayerConfigsConfigListDrmStreamingInfoArgs{})
@@ -8458,6 +8629,8 @@ func init() {
 	pulumi.RegisterOutputType(GetProcedureTemplatesTemplateListMediaProcessTaskTranscodeTaskListWatermarkListArrayOutput{})
 	pulumi.RegisterOutputType(GetSnapshotByTimeOffsetTemplatesTemplateListOutput{})
 	pulumi.RegisterOutputType(GetSnapshotByTimeOffsetTemplatesTemplateListArrayOutput{})
+	pulumi.RegisterOutputType(GetSubApplicationsSubApplicationInfoSetOutput{})
+	pulumi.RegisterOutputType(GetSubApplicationsSubApplicationInfoSetArrayOutput{})
 	pulumi.RegisterOutputType(GetSuperPlayerConfigsConfigListOutput{})
 	pulumi.RegisterOutputType(GetSuperPlayerConfigsConfigListArrayOutput{})
 	pulumi.RegisterOutputType(GetSuperPlayerConfigsConfigListDrmStreamingInfoOutput{})

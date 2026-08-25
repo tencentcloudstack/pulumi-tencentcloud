@@ -67,7 +67,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * ci media_concat_template can be imported using the bucket#templateId, e.g.
+ * ci mediaConcatTemplate can be imported using the bucket#templateId, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Ci/mediaConcatTemplate:MediaConcatTemplate media_concat_template id=terraform-ci-xxxxxx#t1cb115dfa1fcc414284f83b7c69bcedcf
@@ -154,15 +154,15 @@ export interface MediaConcatTemplateState {
     /**
      * bucket name.
      */
-    bucket?: pulumi.Input<string>;
+    bucket?: pulumi.Input<string | undefined>;
     /**
      * stitching template.
      */
-    concatTemplate?: pulumi.Input<inputs.Ci.MediaConcatTemplateConcatTemplate>;
+    concatTemplate?: pulumi.Input<inputs.Ci.MediaConcatTemplateConcatTemplate | undefined>;
     /**
      * The template name only supports `Chinese`, `English`, `numbers`, `_`, `-` and `*`.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -180,5 +180,5 @@ export interface MediaConcatTemplateArgs {
     /**
      * The template name only supports `Chinese`, `English`, `numbers`, `_`, `-` and `*`.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }

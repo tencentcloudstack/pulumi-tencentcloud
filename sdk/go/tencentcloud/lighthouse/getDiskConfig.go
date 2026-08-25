@@ -74,12 +74,8 @@ type GetDiskConfigResult struct {
 }
 
 func GetDiskConfigOutput(ctx *pulumi.Context, args GetDiskConfigOutputArgs, opts ...pulumi.InvokeOption) GetDiskConfigResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDiskConfigResultOutput, error) {
-			args := v.(GetDiskConfigArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Lighthouse/getDiskConfig:getDiskConfig", args, GetDiskConfigResultOutput{}, options).(GetDiskConfigResultOutput), nil
-		}).(GetDiskConfigResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Lighthouse/getDiskConfig:getDiskConfig", args, GetDiskConfigResultOutput{}, options).(GetDiskConfigResultOutput)
 }
 
 // A collection of arguments for invoking getDiskConfig.

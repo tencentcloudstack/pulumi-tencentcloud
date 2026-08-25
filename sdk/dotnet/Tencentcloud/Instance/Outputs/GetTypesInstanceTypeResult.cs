@@ -27,29 +27,89 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance.Outputs
         /// </summary>
         public readonly int CpuCoreCount;
         /// <summary>
+        /// Processor model.
+        /// </summary>
+        public readonly string CpuType;
+        /// <summary>
+        /// Extended attributes.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetTypesInstanceTypeExternalResult> Externals;
+        /// <summary>
         /// Type series of the instance.
         /// </summary>
         public readonly string Family;
+        /// <summary>
+        /// Number of FPGA cores.
+        /// </summary>
+        public readonly int Fpga;
+        /// <summary>
+        /// CPU frequency information.
+        /// </summary>
+        public readonly string Frequency;
         /// <summary>
         /// The number of GPU cores of the instance.
         /// </summary>
         public readonly int GpuCoreCount;
         /// <summary>
+        /// Physical GPU card count mapped to instance. vGPU type is less than 1, direct-attach GPU type is greater than or equal to 1.
+        /// </summary>
+        public readonly double GpuCount;
+        /// <summary>
+        /// Internal network bandwidth, unit: Gbps.
+        /// </summary>
+        public readonly double InstanceBandwidth;
+        /// <summary>
         /// Charge type of the instance.
         /// </summary>
         public readonly string InstanceChargeType;
+        /// <summary>
+        /// Network packet forwarding capacity, unit: 10K PPS.
+        /// </summary>
+        public readonly int InstancePps;
         /// <summary>
         /// Type of the instance.
         /// </summary>
         public readonly string InstanceType;
         /// <summary>
+        /// List of local disk specifications. Empty if instance type does not support local disks.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetTypesInstanceTypeLocalDiskTypeListResult> LocalDiskTypeLists;
+        /// <summary>
         /// Instance memory capacity, unit in GB.
         /// </summary>
         public readonly int MemorySize;
         /// <summary>
+        /// Network card type, for example: 25 represents 25G network card.
+        /// </summary>
+        public readonly int NetworkCard;
+        /// <summary>
+        /// Instance pricing information.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetTypesInstanceTypePriceResult> Prices;
+        /// <summary>
+        /// Instance remark information.
+        /// </summary>
+        public readonly string Remark;
+        /// <summary>
+        /// Reason for sold out status.
+        /// </summary>
+        public readonly string SoldOutReason;
+        /// <summary>
         /// Sell status of the instance.
         /// </summary>
         public readonly string Status;
+        /// <summary>
+        /// Stock status category. Valid values: EnoughStock, NormalStock, UnderStock, WithoutStock.
+        /// </summary>
+        public readonly string StatusCategory;
+        /// <summary>
+        /// Number of local storage blocks.
+        /// </summary>
+        public readonly int StorageBlockAmount;
+        /// <summary>
+        /// Instance type display name.
+        /// </summary>
+        public readonly string TypeName;
 
         [OutputConstructor]
         private GetTypesInstanceTypeResult(
@@ -59,27 +119,72 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance.Outputs
 
             int cpuCoreCount,
 
+            string cpuType,
+
+            ImmutableArray<Outputs.GetTypesInstanceTypeExternalResult> externals,
+
             string family,
+
+            int fpga,
+
+            string frequency,
 
             int gpuCoreCount,
 
+            double gpuCount,
+
+            double instanceBandwidth,
+
             string instanceChargeType,
+
+            int instancePps,
 
             string instanceType,
 
+            ImmutableArray<Outputs.GetTypesInstanceTypeLocalDiskTypeListResult> localDiskTypeLists,
+
             int memorySize,
 
-            string status)
+            int networkCard,
+
+            ImmutableArray<Outputs.GetTypesInstanceTypePriceResult> prices,
+
+            string remark,
+
+            string soldOutReason,
+
+            string status,
+
+            string statusCategory,
+
+            int storageBlockAmount,
+
+            string typeName)
         {
             AvailabilityZone = availabilityZone;
             CbsConfigs = cbsConfigs;
             CpuCoreCount = cpuCoreCount;
+            CpuType = cpuType;
+            Externals = externals;
             Family = family;
+            Fpga = fpga;
+            Frequency = frequency;
             GpuCoreCount = gpuCoreCount;
+            GpuCount = gpuCount;
+            InstanceBandwidth = instanceBandwidth;
             InstanceChargeType = instanceChargeType;
+            InstancePps = instancePps;
             InstanceType = instanceType;
+            LocalDiskTypeLists = localDiskTypeLists;
             MemorySize = memorySize;
+            NetworkCard = networkCard;
+            Prices = prices;
+            Remark = remark;
+            SoldOutReason = soldOutReason;
             Status = status;
+            StatusCategory = statusCategory;
+            StorageBlockAmount = storageBlockAmount;
+            TypeName = typeName;
         }
     }
 }

@@ -12,7 +12,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a teo originGroup
+// Provides a resource to create a TEO originGroup
 //
 // > **NOTE:** Please note that `Teo.OriginGroup` had to undergo incompatible changes in version v1.81.96.
 //
@@ -62,15 +62,7 @@ import (
 //
 // ## Import
 //
-// teo origin_group can be imported using the zone_id#originGroup_id, e.g.
-//
-// `
-//
-// ```sh
-// $ pulumi import tencentcloud:Teo/originGroup:OriginGroup origin_group zone-297z8rf93cfw#origin-4f8a30b2-3720-11ed-b66b-525400dceb86
-// ```
-//
-// `
+// teo originGroup can be imported using the zone_id#originGroup_id, e.g.
 type OriginGroup struct {
 	pulumi.CustomResourceState
 

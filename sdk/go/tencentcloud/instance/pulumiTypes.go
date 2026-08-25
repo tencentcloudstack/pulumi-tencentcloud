@@ -13,6 +13,162 @@ import (
 
 var _ = internal.GetEnvOrDefault
 
+type InstanceCpuTopology struct {
+	// Number of enabled CPU physical cores.
+	CoreCount *int `pulumi:"coreCount"`
+	// Threads per core. 1 means hyper-threading is off, 2 means hyper-threading is on.
+	ThreadPerCore *int `pulumi:"threadPerCore"`
+}
+
+// InstanceCpuTopologyInput is an input type that accepts InstanceCpuTopologyArgs and InstanceCpuTopologyOutput values.
+// You can construct a concrete instance of `InstanceCpuTopologyInput` via:
+//
+//	InstanceCpuTopologyArgs{...}
+type InstanceCpuTopologyInput interface {
+	pulumi.Input
+
+	ToInstanceCpuTopologyOutput() InstanceCpuTopologyOutput
+	ToInstanceCpuTopologyOutputWithContext(context.Context) InstanceCpuTopologyOutput
+}
+
+type InstanceCpuTopologyArgs struct {
+	// Number of enabled CPU physical cores.
+	CoreCount pulumi.IntPtrInput `pulumi:"coreCount"`
+	// Threads per core. 1 means hyper-threading is off, 2 means hyper-threading is on.
+	ThreadPerCore pulumi.IntPtrInput `pulumi:"threadPerCore"`
+}
+
+func (InstanceCpuTopologyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*InstanceCpuTopology)(nil)).Elem()
+}
+
+func (i InstanceCpuTopologyArgs) ToInstanceCpuTopologyOutput() InstanceCpuTopologyOutput {
+	return i.ToInstanceCpuTopologyOutputWithContext(context.Background())
+}
+
+func (i InstanceCpuTopologyArgs) ToInstanceCpuTopologyOutputWithContext(ctx context.Context) InstanceCpuTopologyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstanceCpuTopologyOutput)
+}
+
+func (i InstanceCpuTopologyArgs) ToInstanceCpuTopologyPtrOutput() InstanceCpuTopologyPtrOutput {
+	return i.ToInstanceCpuTopologyPtrOutputWithContext(context.Background())
+}
+
+func (i InstanceCpuTopologyArgs) ToInstanceCpuTopologyPtrOutputWithContext(ctx context.Context) InstanceCpuTopologyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstanceCpuTopologyOutput).ToInstanceCpuTopologyPtrOutputWithContext(ctx)
+}
+
+// InstanceCpuTopologyPtrInput is an input type that accepts InstanceCpuTopologyArgs, InstanceCpuTopologyPtr and InstanceCpuTopologyPtrOutput values.
+// You can construct a concrete instance of `InstanceCpuTopologyPtrInput` via:
+//
+//	        InstanceCpuTopologyArgs{...}
+//
+//	or:
+//
+//	        nil
+type InstanceCpuTopologyPtrInput interface {
+	pulumi.Input
+
+	ToInstanceCpuTopologyPtrOutput() InstanceCpuTopologyPtrOutput
+	ToInstanceCpuTopologyPtrOutputWithContext(context.Context) InstanceCpuTopologyPtrOutput
+}
+
+type instanceCpuTopologyPtrType InstanceCpuTopologyArgs
+
+func InstanceCpuTopologyPtr(v *InstanceCpuTopologyArgs) InstanceCpuTopologyPtrInput {
+	return (*instanceCpuTopologyPtrType)(v)
+}
+
+func (*instanceCpuTopologyPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**InstanceCpuTopology)(nil)).Elem()
+}
+
+func (i *instanceCpuTopologyPtrType) ToInstanceCpuTopologyPtrOutput() InstanceCpuTopologyPtrOutput {
+	return i.ToInstanceCpuTopologyPtrOutputWithContext(context.Background())
+}
+
+func (i *instanceCpuTopologyPtrType) ToInstanceCpuTopologyPtrOutputWithContext(ctx context.Context) InstanceCpuTopologyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstanceCpuTopologyPtrOutput)
+}
+
+type InstanceCpuTopologyOutput struct{ *pulumi.OutputState }
+
+func (InstanceCpuTopologyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*InstanceCpuTopology)(nil)).Elem()
+}
+
+func (o InstanceCpuTopologyOutput) ToInstanceCpuTopologyOutput() InstanceCpuTopologyOutput {
+	return o
+}
+
+func (o InstanceCpuTopologyOutput) ToInstanceCpuTopologyOutputWithContext(ctx context.Context) InstanceCpuTopologyOutput {
+	return o
+}
+
+func (o InstanceCpuTopologyOutput) ToInstanceCpuTopologyPtrOutput() InstanceCpuTopologyPtrOutput {
+	return o.ToInstanceCpuTopologyPtrOutputWithContext(context.Background())
+}
+
+func (o InstanceCpuTopologyOutput) ToInstanceCpuTopologyPtrOutputWithContext(ctx context.Context) InstanceCpuTopologyPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v InstanceCpuTopology) *InstanceCpuTopology {
+		return &v
+	}).(InstanceCpuTopologyPtrOutput)
+}
+
+// Number of enabled CPU physical cores.
+func (o InstanceCpuTopologyOutput) CoreCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v InstanceCpuTopology) *int { return v.CoreCount }).(pulumi.IntPtrOutput)
+}
+
+// Threads per core. 1 means hyper-threading is off, 2 means hyper-threading is on.
+func (o InstanceCpuTopologyOutput) ThreadPerCore() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v InstanceCpuTopology) *int { return v.ThreadPerCore }).(pulumi.IntPtrOutput)
+}
+
+type InstanceCpuTopologyPtrOutput struct{ *pulumi.OutputState }
+
+func (InstanceCpuTopologyPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**InstanceCpuTopology)(nil)).Elem()
+}
+
+func (o InstanceCpuTopologyPtrOutput) ToInstanceCpuTopologyPtrOutput() InstanceCpuTopologyPtrOutput {
+	return o
+}
+
+func (o InstanceCpuTopologyPtrOutput) ToInstanceCpuTopologyPtrOutputWithContext(ctx context.Context) InstanceCpuTopologyPtrOutput {
+	return o
+}
+
+func (o InstanceCpuTopologyPtrOutput) Elem() InstanceCpuTopologyOutput {
+	return o.ApplyT(func(v *InstanceCpuTopology) InstanceCpuTopology {
+		if v != nil {
+			return *v
+		}
+		var ret InstanceCpuTopology
+		return ret
+	}).(InstanceCpuTopologyOutput)
+}
+
+// Number of enabled CPU physical cores.
+func (o InstanceCpuTopologyPtrOutput) CoreCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *InstanceCpuTopology) *int {
+		if v == nil {
+			return nil
+		}
+		return v.CoreCount
+	}).(pulumi.IntPtrOutput)
+}
+
+// Threads per core. 1 means hyper-threading is off, 2 means hyper-threading is on.
+func (o InstanceCpuTopologyPtrOutput) ThreadPerCore() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *InstanceCpuTopology) *int {
+		if v == nil {
+			return nil
+		}
+		return v.ThreadPerCore
+	}).(pulumi.IntPtrOutput)
+}
+
 type InstanceDataDisk struct {
 	// Data disk ID used to initialize the data disk. When data disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
 	DataDiskId *string `pulumi:"dataDiskId"`
@@ -399,7 +555,7 @@ func (o GetTypesCbsFilterPtrOutput) DiskUsage() pulumi.StringPtrOutput {
 }
 
 type GetTypesFilter struct {
-	// The filter name. Valid values: `zone`, `instance-family` and `instance-charge-type`.
+	// The filter name. Valid values: `zone`, `instance-family`, `instance-type`, `instance-charge-type` and `sort-keys`.
 	Name string `pulumi:"name"`
 	// The filter values.
 	Values []string `pulumi:"values"`
@@ -417,7 +573,7 @@ type GetTypesFilterInput interface {
 }
 
 type GetTypesFilterArgs struct {
-	// The filter name. Valid values: `zone`, `instance-family` and `instance-charge-type`.
+	// The filter name. Valid values: `zone`, `instance-family`, `instance-type`, `instance-charge-type` and `sort-keys`.
 	Name pulumi.StringInput `pulumi:"name"`
 	// The filter values.
 	Values pulumi.StringArrayInput `pulumi:"values"`
@@ -474,7 +630,7 @@ func (o GetTypesFilterOutput) ToGetTypesFilterOutputWithContext(ctx context.Cont
 	return o
 }
 
-// The filter name. Valid values: `zone`, `instance-family` and `instance-charge-type`.
+// The filter name. Valid values: `zone`, `instance-family`, `instance-type`, `instance-charge-type` and `sort-keys`.
 func (o GetTypesFilterOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v GetTypesFilter) string { return v.Name }).(pulumi.StringOutput)
 }
@@ -511,18 +667,48 @@ type GetTypesInstanceType struct {
 	CbsConfigs []GetTypesInstanceTypeCbsConfig `pulumi:"cbsConfigs"`
 	// The number of CPU cores of the instance.
 	CpuCoreCount int `pulumi:"cpuCoreCount"`
+	// Processor model.
+	CpuType string `pulumi:"cpuType"`
+	// Extended attributes.
+	Externals []GetTypesInstanceTypeExternal `pulumi:"externals"`
 	// Type series of the instance.
 	Family string `pulumi:"family"`
+	// Number of FPGA cores.
+	Fpga int `pulumi:"fpga"`
+	// CPU frequency information.
+	Frequency string `pulumi:"frequency"`
 	// The number of GPU cores of the instance.
 	GpuCoreCount int `pulumi:"gpuCoreCount"`
+	// Physical GPU card count mapped to instance. vGPU type is less than 1, direct-attach GPU type is greater than or equal to 1.
+	GpuCount float64 `pulumi:"gpuCount"`
+	// Internal network bandwidth, unit: Gbps.
+	InstanceBandwidth float64 `pulumi:"instanceBandwidth"`
 	// Charge type of the instance.
 	InstanceChargeType string `pulumi:"instanceChargeType"`
+	// Network packet forwarding capacity, unit: 10K PPS.
+	InstancePps int `pulumi:"instancePps"`
 	// Type of the instance.
 	InstanceType string `pulumi:"instanceType"`
+	// List of local disk specifications. Empty if instance type does not support local disks.
+	LocalDiskTypeLists []GetTypesInstanceTypeLocalDiskTypeList `pulumi:"localDiskTypeLists"`
 	// Instance memory capacity, unit in GB.
 	MemorySize int `pulumi:"memorySize"`
+	// Network card type, for example: 25 represents 25G network card.
+	NetworkCard int `pulumi:"networkCard"`
+	// Instance pricing information.
+	Prices []GetTypesInstanceTypePrice `pulumi:"prices"`
+	// Instance remark information.
+	Remark string `pulumi:"remark"`
+	// Reason for sold out status.
+	SoldOutReason string `pulumi:"soldOutReason"`
 	// Sell status of the instance.
 	Status string `pulumi:"status"`
+	// Stock status category. Valid values: EnoughStock, NormalStock, UnderStock, WithoutStock.
+	StatusCategory string `pulumi:"statusCategory"`
+	// Number of local storage blocks.
+	StorageBlockAmount int `pulumi:"storageBlockAmount"`
+	// Instance type display name.
+	TypeName string `pulumi:"typeName"`
 }
 
 // GetTypesInstanceTypeInput is an input type that accepts GetTypesInstanceTypeArgs and GetTypesInstanceTypeOutput values.
@@ -543,18 +729,48 @@ type GetTypesInstanceTypeArgs struct {
 	CbsConfigs GetTypesInstanceTypeCbsConfigArrayInput `pulumi:"cbsConfigs"`
 	// The number of CPU cores of the instance.
 	CpuCoreCount pulumi.IntInput `pulumi:"cpuCoreCount"`
+	// Processor model.
+	CpuType pulumi.StringInput `pulumi:"cpuType"`
+	// Extended attributes.
+	Externals GetTypesInstanceTypeExternalArrayInput `pulumi:"externals"`
 	// Type series of the instance.
 	Family pulumi.StringInput `pulumi:"family"`
+	// Number of FPGA cores.
+	Fpga pulumi.IntInput `pulumi:"fpga"`
+	// CPU frequency information.
+	Frequency pulumi.StringInput `pulumi:"frequency"`
 	// The number of GPU cores of the instance.
 	GpuCoreCount pulumi.IntInput `pulumi:"gpuCoreCount"`
+	// Physical GPU card count mapped to instance. vGPU type is less than 1, direct-attach GPU type is greater than or equal to 1.
+	GpuCount pulumi.Float64Input `pulumi:"gpuCount"`
+	// Internal network bandwidth, unit: Gbps.
+	InstanceBandwidth pulumi.Float64Input `pulumi:"instanceBandwidth"`
 	// Charge type of the instance.
 	InstanceChargeType pulumi.StringInput `pulumi:"instanceChargeType"`
+	// Network packet forwarding capacity, unit: 10K PPS.
+	InstancePps pulumi.IntInput `pulumi:"instancePps"`
 	// Type of the instance.
 	InstanceType pulumi.StringInput `pulumi:"instanceType"`
+	// List of local disk specifications. Empty if instance type does not support local disks.
+	LocalDiskTypeLists GetTypesInstanceTypeLocalDiskTypeListArrayInput `pulumi:"localDiskTypeLists"`
 	// Instance memory capacity, unit in GB.
 	MemorySize pulumi.IntInput `pulumi:"memorySize"`
+	// Network card type, for example: 25 represents 25G network card.
+	NetworkCard pulumi.IntInput `pulumi:"networkCard"`
+	// Instance pricing information.
+	Prices GetTypesInstanceTypePriceArrayInput `pulumi:"prices"`
+	// Instance remark information.
+	Remark pulumi.StringInput `pulumi:"remark"`
+	// Reason for sold out status.
+	SoldOutReason pulumi.StringInput `pulumi:"soldOutReason"`
 	// Sell status of the instance.
 	Status pulumi.StringInput `pulumi:"status"`
+	// Stock status category. Valid values: EnoughStock, NormalStock, UnderStock, WithoutStock.
+	StatusCategory pulumi.StringInput `pulumi:"statusCategory"`
+	// Number of local storage blocks.
+	StorageBlockAmount pulumi.IntInput `pulumi:"storageBlockAmount"`
+	// Instance type display name.
+	TypeName pulumi.StringInput `pulumi:"typeName"`
 }
 
 func (GetTypesInstanceTypeArgs) ElementType() reflect.Type {
@@ -623,9 +839,29 @@ func (o GetTypesInstanceTypeOutput) CpuCoreCount() pulumi.IntOutput {
 	return o.ApplyT(func(v GetTypesInstanceType) int { return v.CpuCoreCount }).(pulumi.IntOutput)
 }
 
+// Processor model.
+func (o GetTypesInstanceTypeOutput) CpuType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTypesInstanceType) string { return v.CpuType }).(pulumi.StringOutput)
+}
+
+// Extended attributes.
+func (o GetTypesInstanceTypeOutput) Externals() GetTypesInstanceTypeExternalArrayOutput {
+	return o.ApplyT(func(v GetTypesInstanceType) []GetTypesInstanceTypeExternal { return v.Externals }).(GetTypesInstanceTypeExternalArrayOutput)
+}
+
 // Type series of the instance.
 func (o GetTypesInstanceTypeOutput) Family() pulumi.StringOutput {
 	return o.ApplyT(func(v GetTypesInstanceType) string { return v.Family }).(pulumi.StringOutput)
+}
+
+// Number of FPGA cores.
+func (o GetTypesInstanceTypeOutput) Fpga() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTypesInstanceType) int { return v.Fpga }).(pulumi.IntOutput)
+}
+
+// CPU frequency information.
+func (o GetTypesInstanceTypeOutput) Frequency() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTypesInstanceType) string { return v.Frequency }).(pulumi.StringOutput)
 }
 
 // The number of GPU cores of the instance.
@@ -633,9 +869,24 @@ func (o GetTypesInstanceTypeOutput) GpuCoreCount() pulumi.IntOutput {
 	return o.ApplyT(func(v GetTypesInstanceType) int { return v.GpuCoreCount }).(pulumi.IntOutput)
 }
 
+// Physical GPU card count mapped to instance. vGPU type is less than 1, direct-attach GPU type is greater than or equal to 1.
+func (o GetTypesInstanceTypeOutput) GpuCount() pulumi.Float64Output {
+	return o.ApplyT(func(v GetTypesInstanceType) float64 { return v.GpuCount }).(pulumi.Float64Output)
+}
+
+// Internal network bandwidth, unit: Gbps.
+func (o GetTypesInstanceTypeOutput) InstanceBandwidth() pulumi.Float64Output {
+	return o.ApplyT(func(v GetTypesInstanceType) float64 { return v.InstanceBandwidth }).(pulumi.Float64Output)
+}
+
 // Charge type of the instance.
 func (o GetTypesInstanceTypeOutput) InstanceChargeType() pulumi.StringOutput {
 	return o.ApplyT(func(v GetTypesInstanceType) string { return v.InstanceChargeType }).(pulumi.StringOutput)
+}
+
+// Network packet forwarding capacity, unit: 10K PPS.
+func (o GetTypesInstanceTypeOutput) InstancePps() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTypesInstanceType) int { return v.InstancePps }).(pulumi.IntOutput)
 }
 
 // Type of the instance.
@@ -643,14 +894,54 @@ func (o GetTypesInstanceTypeOutput) InstanceType() pulumi.StringOutput {
 	return o.ApplyT(func(v GetTypesInstanceType) string { return v.InstanceType }).(pulumi.StringOutput)
 }
 
+// List of local disk specifications. Empty if instance type does not support local disks.
+func (o GetTypesInstanceTypeOutput) LocalDiskTypeLists() GetTypesInstanceTypeLocalDiskTypeListArrayOutput {
+	return o.ApplyT(func(v GetTypesInstanceType) []GetTypesInstanceTypeLocalDiskTypeList { return v.LocalDiskTypeLists }).(GetTypesInstanceTypeLocalDiskTypeListArrayOutput)
+}
+
 // Instance memory capacity, unit in GB.
 func (o GetTypesInstanceTypeOutput) MemorySize() pulumi.IntOutput {
 	return o.ApplyT(func(v GetTypesInstanceType) int { return v.MemorySize }).(pulumi.IntOutput)
 }
 
+// Network card type, for example: 25 represents 25G network card.
+func (o GetTypesInstanceTypeOutput) NetworkCard() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTypesInstanceType) int { return v.NetworkCard }).(pulumi.IntOutput)
+}
+
+// Instance pricing information.
+func (o GetTypesInstanceTypeOutput) Prices() GetTypesInstanceTypePriceArrayOutput {
+	return o.ApplyT(func(v GetTypesInstanceType) []GetTypesInstanceTypePrice { return v.Prices }).(GetTypesInstanceTypePriceArrayOutput)
+}
+
+// Instance remark information.
+func (o GetTypesInstanceTypeOutput) Remark() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTypesInstanceType) string { return v.Remark }).(pulumi.StringOutput)
+}
+
+// Reason for sold out status.
+func (o GetTypesInstanceTypeOutput) SoldOutReason() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTypesInstanceType) string { return v.SoldOutReason }).(pulumi.StringOutput)
+}
+
 // Sell status of the instance.
 func (o GetTypesInstanceTypeOutput) Status() pulumi.StringOutput {
 	return o.ApplyT(func(v GetTypesInstanceType) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// Stock status category. Valid values: EnoughStock, NormalStock, UnderStock, WithoutStock.
+func (o GetTypesInstanceTypeOutput) StatusCategory() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTypesInstanceType) string { return v.StatusCategory }).(pulumi.StringOutput)
+}
+
+// Number of local storage blocks.
+func (o GetTypesInstanceTypeOutput) StorageBlockAmount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTypesInstanceType) int { return v.StorageBlockAmount }).(pulumi.IntOutput)
+}
+
+// Instance type display name.
+func (o GetTypesInstanceTypeOutput) TypeName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTypesInstanceType) string { return v.TypeName }).(pulumi.StringOutput)
 }
 
 type GetTypesInstanceTypeArrayOutput struct{ *pulumi.OutputState }
@@ -884,7 +1175,552 @@ func (o GetTypesInstanceTypeCbsConfigArrayOutput) Index(i pulumi.IntInput) GetTy
 	}).(GetTypesInstanceTypeCbsConfigOutput)
 }
 
+type GetTypesInstanceTypeExternal struct {
+	// Whether to release address.
+	ReleaseAddress bool `pulumi:"releaseAddress"`
+	// HDD local storage attributes.
+	StorageBlockAttrs []GetTypesInstanceTypeExternalStorageBlockAttr `pulumi:"storageBlockAttrs"`
+	// Unsupported network types. Valid values: BASIC (basic network), VPC1.0 (VPC 1.0).
+	UnsupportNetworks []string `pulumi:"unsupportNetworks"`
+}
+
+// GetTypesInstanceTypeExternalInput is an input type that accepts GetTypesInstanceTypeExternalArgs and GetTypesInstanceTypeExternalOutput values.
+// You can construct a concrete instance of `GetTypesInstanceTypeExternalInput` via:
+//
+//	GetTypesInstanceTypeExternalArgs{...}
+type GetTypesInstanceTypeExternalInput interface {
+	pulumi.Input
+
+	ToGetTypesInstanceTypeExternalOutput() GetTypesInstanceTypeExternalOutput
+	ToGetTypesInstanceTypeExternalOutputWithContext(context.Context) GetTypesInstanceTypeExternalOutput
+}
+
+type GetTypesInstanceTypeExternalArgs struct {
+	// Whether to release address.
+	ReleaseAddress pulumi.BoolInput `pulumi:"releaseAddress"`
+	// HDD local storage attributes.
+	StorageBlockAttrs GetTypesInstanceTypeExternalStorageBlockAttrArrayInput `pulumi:"storageBlockAttrs"`
+	// Unsupported network types. Valid values: BASIC (basic network), VPC1.0 (VPC 1.0).
+	UnsupportNetworks pulumi.StringArrayInput `pulumi:"unsupportNetworks"`
+}
+
+func (GetTypesInstanceTypeExternalArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTypesInstanceTypeExternal)(nil)).Elem()
+}
+
+func (i GetTypesInstanceTypeExternalArgs) ToGetTypesInstanceTypeExternalOutput() GetTypesInstanceTypeExternalOutput {
+	return i.ToGetTypesInstanceTypeExternalOutputWithContext(context.Background())
+}
+
+func (i GetTypesInstanceTypeExternalArgs) ToGetTypesInstanceTypeExternalOutputWithContext(ctx context.Context) GetTypesInstanceTypeExternalOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTypesInstanceTypeExternalOutput)
+}
+
+// GetTypesInstanceTypeExternalArrayInput is an input type that accepts GetTypesInstanceTypeExternalArray and GetTypesInstanceTypeExternalArrayOutput values.
+// You can construct a concrete instance of `GetTypesInstanceTypeExternalArrayInput` via:
+//
+//	GetTypesInstanceTypeExternalArray{ GetTypesInstanceTypeExternalArgs{...} }
+type GetTypesInstanceTypeExternalArrayInput interface {
+	pulumi.Input
+
+	ToGetTypesInstanceTypeExternalArrayOutput() GetTypesInstanceTypeExternalArrayOutput
+	ToGetTypesInstanceTypeExternalArrayOutputWithContext(context.Context) GetTypesInstanceTypeExternalArrayOutput
+}
+
+type GetTypesInstanceTypeExternalArray []GetTypesInstanceTypeExternalInput
+
+func (GetTypesInstanceTypeExternalArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTypesInstanceTypeExternal)(nil)).Elem()
+}
+
+func (i GetTypesInstanceTypeExternalArray) ToGetTypesInstanceTypeExternalArrayOutput() GetTypesInstanceTypeExternalArrayOutput {
+	return i.ToGetTypesInstanceTypeExternalArrayOutputWithContext(context.Background())
+}
+
+func (i GetTypesInstanceTypeExternalArray) ToGetTypesInstanceTypeExternalArrayOutputWithContext(ctx context.Context) GetTypesInstanceTypeExternalArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTypesInstanceTypeExternalArrayOutput)
+}
+
+type GetTypesInstanceTypeExternalOutput struct{ *pulumi.OutputState }
+
+func (GetTypesInstanceTypeExternalOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTypesInstanceTypeExternal)(nil)).Elem()
+}
+
+func (o GetTypesInstanceTypeExternalOutput) ToGetTypesInstanceTypeExternalOutput() GetTypesInstanceTypeExternalOutput {
+	return o
+}
+
+func (o GetTypesInstanceTypeExternalOutput) ToGetTypesInstanceTypeExternalOutputWithContext(ctx context.Context) GetTypesInstanceTypeExternalOutput {
+	return o
+}
+
+// Whether to release address.
+func (o GetTypesInstanceTypeExternalOutput) ReleaseAddress() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetTypesInstanceTypeExternal) bool { return v.ReleaseAddress }).(pulumi.BoolOutput)
+}
+
+// HDD local storage attributes.
+func (o GetTypesInstanceTypeExternalOutput) StorageBlockAttrs() GetTypesInstanceTypeExternalStorageBlockAttrArrayOutput {
+	return o.ApplyT(func(v GetTypesInstanceTypeExternal) []GetTypesInstanceTypeExternalStorageBlockAttr {
+		return v.StorageBlockAttrs
+	}).(GetTypesInstanceTypeExternalStorageBlockAttrArrayOutput)
+}
+
+// Unsupported network types. Valid values: BASIC (basic network), VPC1.0 (VPC 1.0).
+func (o GetTypesInstanceTypeExternalOutput) UnsupportNetworks() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetTypesInstanceTypeExternal) []string { return v.UnsupportNetworks }).(pulumi.StringArrayOutput)
+}
+
+type GetTypesInstanceTypeExternalArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTypesInstanceTypeExternalArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTypesInstanceTypeExternal)(nil)).Elem()
+}
+
+func (o GetTypesInstanceTypeExternalArrayOutput) ToGetTypesInstanceTypeExternalArrayOutput() GetTypesInstanceTypeExternalArrayOutput {
+	return o
+}
+
+func (o GetTypesInstanceTypeExternalArrayOutput) ToGetTypesInstanceTypeExternalArrayOutputWithContext(ctx context.Context) GetTypesInstanceTypeExternalArrayOutput {
+	return o
+}
+
+func (o GetTypesInstanceTypeExternalArrayOutput) Index(i pulumi.IntInput) GetTypesInstanceTypeExternalOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTypesInstanceTypeExternal {
+		return vs[0].([]GetTypesInstanceTypeExternal)[vs[1].(int)]
+	}).(GetTypesInstanceTypeExternalOutput)
+}
+
+type GetTypesInstanceTypeExternalStorageBlockAttr struct {
+	// Maximum size of local disk, in GB.
+	MaxSize int `pulumi:"maxSize"`
+	// Minimum size of local disk, in GB.
+	MinSize int `pulumi:"minSize"`
+	// Local disk type.
+	Type string `pulumi:"type"`
+}
+
+// GetTypesInstanceTypeExternalStorageBlockAttrInput is an input type that accepts GetTypesInstanceTypeExternalStorageBlockAttrArgs and GetTypesInstanceTypeExternalStorageBlockAttrOutput values.
+// You can construct a concrete instance of `GetTypesInstanceTypeExternalStorageBlockAttrInput` via:
+//
+//	GetTypesInstanceTypeExternalStorageBlockAttrArgs{...}
+type GetTypesInstanceTypeExternalStorageBlockAttrInput interface {
+	pulumi.Input
+
+	ToGetTypesInstanceTypeExternalStorageBlockAttrOutput() GetTypesInstanceTypeExternalStorageBlockAttrOutput
+	ToGetTypesInstanceTypeExternalStorageBlockAttrOutputWithContext(context.Context) GetTypesInstanceTypeExternalStorageBlockAttrOutput
+}
+
+type GetTypesInstanceTypeExternalStorageBlockAttrArgs struct {
+	// Maximum size of local disk, in GB.
+	MaxSize pulumi.IntInput `pulumi:"maxSize"`
+	// Minimum size of local disk, in GB.
+	MinSize pulumi.IntInput `pulumi:"minSize"`
+	// Local disk type.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (GetTypesInstanceTypeExternalStorageBlockAttrArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTypesInstanceTypeExternalStorageBlockAttr)(nil)).Elem()
+}
+
+func (i GetTypesInstanceTypeExternalStorageBlockAttrArgs) ToGetTypesInstanceTypeExternalStorageBlockAttrOutput() GetTypesInstanceTypeExternalStorageBlockAttrOutput {
+	return i.ToGetTypesInstanceTypeExternalStorageBlockAttrOutputWithContext(context.Background())
+}
+
+func (i GetTypesInstanceTypeExternalStorageBlockAttrArgs) ToGetTypesInstanceTypeExternalStorageBlockAttrOutputWithContext(ctx context.Context) GetTypesInstanceTypeExternalStorageBlockAttrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTypesInstanceTypeExternalStorageBlockAttrOutput)
+}
+
+// GetTypesInstanceTypeExternalStorageBlockAttrArrayInput is an input type that accepts GetTypesInstanceTypeExternalStorageBlockAttrArray and GetTypesInstanceTypeExternalStorageBlockAttrArrayOutput values.
+// You can construct a concrete instance of `GetTypesInstanceTypeExternalStorageBlockAttrArrayInput` via:
+//
+//	GetTypesInstanceTypeExternalStorageBlockAttrArray{ GetTypesInstanceTypeExternalStorageBlockAttrArgs{...} }
+type GetTypesInstanceTypeExternalStorageBlockAttrArrayInput interface {
+	pulumi.Input
+
+	ToGetTypesInstanceTypeExternalStorageBlockAttrArrayOutput() GetTypesInstanceTypeExternalStorageBlockAttrArrayOutput
+	ToGetTypesInstanceTypeExternalStorageBlockAttrArrayOutputWithContext(context.Context) GetTypesInstanceTypeExternalStorageBlockAttrArrayOutput
+}
+
+type GetTypesInstanceTypeExternalStorageBlockAttrArray []GetTypesInstanceTypeExternalStorageBlockAttrInput
+
+func (GetTypesInstanceTypeExternalStorageBlockAttrArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTypesInstanceTypeExternalStorageBlockAttr)(nil)).Elem()
+}
+
+func (i GetTypesInstanceTypeExternalStorageBlockAttrArray) ToGetTypesInstanceTypeExternalStorageBlockAttrArrayOutput() GetTypesInstanceTypeExternalStorageBlockAttrArrayOutput {
+	return i.ToGetTypesInstanceTypeExternalStorageBlockAttrArrayOutputWithContext(context.Background())
+}
+
+func (i GetTypesInstanceTypeExternalStorageBlockAttrArray) ToGetTypesInstanceTypeExternalStorageBlockAttrArrayOutputWithContext(ctx context.Context) GetTypesInstanceTypeExternalStorageBlockAttrArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTypesInstanceTypeExternalStorageBlockAttrArrayOutput)
+}
+
+type GetTypesInstanceTypeExternalStorageBlockAttrOutput struct{ *pulumi.OutputState }
+
+func (GetTypesInstanceTypeExternalStorageBlockAttrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTypesInstanceTypeExternalStorageBlockAttr)(nil)).Elem()
+}
+
+func (o GetTypesInstanceTypeExternalStorageBlockAttrOutput) ToGetTypesInstanceTypeExternalStorageBlockAttrOutput() GetTypesInstanceTypeExternalStorageBlockAttrOutput {
+	return o
+}
+
+func (o GetTypesInstanceTypeExternalStorageBlockAttrOutput) ToGetTypesInstanceTypeExternalStorageBlockAttrOutputWithContext(ctx context.Context) GetTypesInstanceTypeExternalStorageBlockAttrOutput {
+	return o
+}
+
+// Maximum size of local disk, in GB.
+func (o GetTypesInstanceTypeExternalStorageBlockAttrOutput) MaxSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTypesInstanceTypeExternalStorageBlockAttr) int { return v.MaxSize }).(pulumi.IntOutput)
+}
+
+// Minimum size of local disk, in GB.
+func (o GetTypesInstanceTypeExternalStorageBlockAttrOutput) MinSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTypesInstanceTypeExternalStorageBlockAttr) int { return v.MinSize }).(pulumi.IntOutput)
+}
+
+// Local disk type.
+func (o GetTypesInstanceTypeExternalStorageBlockAttrOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTypesInstanceTypeExternalStorageBlockAttr) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type GetTypesInstanceTypeExternalStorageBlockAttrArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTypesInstanceTypeExternalStorageBlockAttrArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTypesInstanceTypeExternalStorageBlockAttr)(nil)).Elem()
+}
+
+func (o GetTypesInstanceTypeExternalStorageBlockAttrArrayOutput) ToGetTypesInstanceTypeExternalStorageBlockAttrArrayOutput() GetTypesInstanceTypeExternalStorageBlockAttrArrayOutput {
+	return o
+}
+
+func (o GetTypesInstanceTypeExternalStorageBlockAttrArrayOutput) ToGetTypesInstanceTypeExternalStorageBlockAttrArrayOutputWithContext(ctx context.Context) GetTypesInstanceTypeExternalStorageBlockAttrArrayOutput {
+	return o
+}
+
+func (o GetTypesInstanceTypeExternalStorageBlockAttrArrayOutput) Index(i pulumi.IntInput) GetTypesInstanceTypeExternalStorageBlockAttrOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTypesInstanceTypeExternalStorageBlockAttr {
+		return vs[0].([]GetTypesInstanceTypeExternalStorageBlockAttr)[vs[1].(int)]
+	}).(GetTypesInstanceTypeExternalStorageBlockAttrOutput)
+}
+
+type GetTypesInstanceTypeLocalDiskTypeList struct {
+	// Maximum size of local disk, in GB.
+	MaxSize int `pulumi:"maxSize"`
+	// Minimum size of local disk, in GB.
+	MinSize int `pulumi:"minSize"`
+	// Local disk partition type.
+	PartitionType string `pulumi:"partitionType"`
+	// Whether local disk is required when purchasing. Valid values: REQUIRED, OPTIONAL.
+	Required string `pulumi:"required"`
+	// Local disk type.
+	Type string `pulumi:"type"`
+}
+
+// GetTypesInstanceTypeLocalDiskTypeListInput is an input type that accepts GetTypesInstanceTypeLocalDiskTypeListArgs and GetTypesInstanceTypeLocalDiskTypeListOutput values.
+// You can construct a concrete instance of `GetTypesInstanceTypeLocalDiskTypeListInput` via:
+//
+//	GetTypesInstanceTypeLocalDiskTypeListArgs{...}
+type GetTypesInstanceTypeLocalDiskTypeListInput interface {
+	pulumi.Input
+
+	ToGetTypesInstanceTypeLocalDiskTypeListOutput() GetTypesInstanceTypeLocalDiskTypeListOutput
+	ToGetTypesInstanceTypeLocalDiskTypeListOutputWithContext(context.Context) GetTypesInstanceTypeLocalDiskTypeListOutput
+}
+
+type GetTypesInstanceTypeLocalDiskTypeListArgs struct {
+	// Maximum size of local disk, in GB.
+	MaxSize pulumi.IntInput `pulumi:"maxSize"`
+	// Minimum size of local disk, in GB.
+	MinSize pulumi.IntInput `pulumi:"minSize"`
+	// Local disk partition type.
+	PartitionType pulumi.StringInput `pulumi:"partitionType"`
+	// Whether local disk is required when purchasing. Valid values: REQUIRED, OPTIONAL.
+	Required pulumi.StringInput `pulumi:"required"`
+	// Local disk type.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (GetTypesInstanceTypeLocalDiskTypeListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTypesInstanceTypeLocalDiskTypeList)(nil)).Elem()
+}
+
+func (i GetTypesInstanceTypeLocalDiskTypeListArgs) ToGetTypesInstanceTypeLocalDiskTypeListOutput() GetTypesInstanceTypeLocalDiskTypeListOutput {
+	return i.ToGetTypesInstanceTypeLocalDiskTypeListOutputWithContext(context.Background())
+}
+
+func (i GetTypesInstanceTypeLocalDiskTypeListArgs) ToGetTypesInstanceTypeLocalDiskTypeListOutputWithContext(ctx context.Context) GetTypesInstanceTypeLocalDiskTypeListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTypesInstanceTypeLocalDiskTypeListOutput)
+}
+
+// GetTypesInstanceTypeLocalDiskTypeListArrayInput is an input type that accepts GetTypesInstanceTypeLocalDiskTypeListArray and GetTypesInstanceTypeLocalDiskTypeListArrayOutput values.
+// You can construct a concrete instance of `GetTypesInstanceTypeLocalDiskTypeListArrayInput` via:
+//
+//	GetTypesInstanceTypeLocalDiskTypeListArray{ GetTypesInstanceTypeLocalDiskTypeListArgs{...} }
+type GetTypesInstanceTypeLocalDiskTypeListArrayInput interface {
+	pulumi.Input
+
+	ToGetTypesInstanceTypeLocalDiskTypeListArrayOutput() GetTypesInstanceTypeLocalDiskTypeListArrayOutput
+	ToGetTypesInstanceTypeLocalDiskTypeListArrayOutputWithContext(context.Context) GetTypesInstanceTypeLocalDiskTypeListArrayOutput
+}
+
+type GetTypesInstanceTypeLocalDiskTypeListArray []GetTypesInstanceTypeLocalDiskTypeListInput
+
+func (GetTypesInstanceTypeLocalDiskTypeListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTypesInstanceTypeLocalDiskTypeList)(nil)).Elem()
+}
+
+func (i GetTypesInstanceTypeLocalDiskTypeListArray) ToGetTypesInstanceTypeLocalDiskTypeListArrayOutput() GetTypesInstanceTypeLocalDiskTypeListArrayOutput {
+	return i.ToGetTypesInstanceTypeLocalDiskTypeListArrayOutputWithContext(context.Background())
+}
+
+func (i GetTypesInstanceTypeLocalDiskTypeListArray) ToGetTypesInstanceTypeLocalDiskTypeListArrayOutputWithContext(ctx context.Context) GetTypesInstanceTypeLocalDiskTypeListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTypesInstanceTypeLocalDiskTypeListArrayOutput)
+}
+
+type GetTypesInstanceTypeLocalDiskTypeListOutput struct{ *pulumi.OutputState }
+
+func (GetTypesInstanceTypeLocalDiskTypeListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTypesInstanceTypeLocalDiskTypeList)(nil)).Elem()
+}
+
+func (o GetTypesInstanceTypeLocalDiskTypeListOutput) ToGetTypesInstanceTypeLocalDiskTypeListOutput() GetTypesInstanceTypeLocalDiskTypeListOutput {
+	return o
+}
+
+func (o GetTypesInstanceTypeLocalDiskTypeListOutput) ToGetTypesInstanceTypeLocalDiskTypeListOutputWithContext(ctx context.Context) GetTypesInstanceTypeLocalDiskTypeListOutput {
+	return o
+}
+
+// Maximum size of local disk, in GB.
+func (o GetTypesInstanceTypeLocalDiskTypeListOutput) MaxSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTypesInstanceTypeLocalDiskTypeList) int { return v.MaxSize }).(pulumi.IntOutput)
+}
+
+// Minimum size of local disk, in GB.
+func (o GetTypesInstanceTypeLocalDiskTypeListOutput) MinSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTypesInstanceTypeLocalDiskTypeList) int { return v.MinSize }).(pulumi.IntOutput)
+}
+
+// Local disk partition type.
+func (o GetTypesInstanceTypeLocalDiskTypeListOutput) PartitionType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTypesInstanceTypeLocalDiskTypeList) string { return v.PartitionType }).(pulumi.StringOutput)
+}
+
+// Whether local disk is required when purchasing. Valid values: REQUIRED, OPTIONAL.
+func (o GetTypesInstanceTypeLocalDiskTypeListOutput) Required() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTypesInstanceTypeLocalDiskTypeList) string { return v.Required }).(pulumi.StringOutput)
+}
+
+// Local disk type.
+func (o GetTypesInstanceTypeLocalDiskTypeListOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTypesInstanceTypeLocalDiskTypeList) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type GetTypesInstanceTypeLocalDiskTypeListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTypesInstanceTypeLocalDiskTypeListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTypesInstanceTypeLocalDiskTypeList)(nil)).Elem()
+}
+
+func (o GetTypesInstanceTypeLocalDiskTypeListArrayOutput) ToGetTypesInstanceTypeLocalDiskTypeListArrayOutput() GetTypesInstanceTypeLocalDiskTypeListArrayOutput {
+	return o
+}
+
+func (o GetTypesInstanceTypeLocalDiskTypeListArrayOutput) ToGetTypesInstanceTypeLocalDiskTypeListArrayOutputWithContext(ctx context.Context) GetTypesInstanceTypeLocalDiskTypeListArrayOutput {
+	return o
+}
+
+func (o GetTypesInstanceTypeLocalDiskTypeListArrayOutput) Index(i pulumi.IntInput) GetTypesInstanceTypeLocalDiskTypeListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTypesInstanceTypeLocalDiskTypeList {
+		return vs[0].([]GetTypesInstanceTypeLocalDiskTypeList)[vs[1].(int)]
+	}).(GetTypesInstanceTypeLocalDiskTypeListOutput)
+}
+
+type GetTypesInstanceTypePrice struct {
+	// Subsequent billing unit. Valid values: HOUR, GB.
+	ChargeUnit string `pulumi:"chargeUnit"`
+	// Discount rate. For example, 20.0 means 20% off.
+	Discount float64 `pulumi:"discount"`
+	// Discount price for prepaid mode, unit: CNY.
+	DiscountPrice float64 `pulumi:"discountPrice"`
+	// Original price for prepaid mode, unit: CNY.
+	OriginalPrice float64 `pulumi:"originalPrice"`
+	// Subsequent unit price, used in postpaid mode, unit: CNY.
+	UnitPrice float64 `pulumi:"unitPrice"`
+	// Subsequent discount unit price, used in postpaid mode, unit: CNY.
+	UnitPriceDiscount float64 `pulumi:"unitPriceDiscount"`
+	// Subsequent discount unit price for time range (96, 360) hours in postpaid mode, unit: CNY.
+	UnitPriceDiscountSecondStep float64 `pulumi:"unitPriceDiscountSecondStep"`
+	// Discounted price of subsequent total cost for usage time interval exceeding 360 hr in postpaid billing mode. measurement unit: usd.
+	UnitPriceDiscountThirdStep float64 `pulumi:"unitPriceDiscountThirdStep"`
+	// Subsequent unit price for time range (96, 360) hours in postpaid mode, unit: CNY.
+	UnitPriceSecondStep float64 `pulumi:"unitPriceSecondStep"`
+	// Specifies the original price of subsequent total costs with a usage time interval exceeding 360 hr in postpaid billing mode. measurement unit: usd.
+	UnitPriceThirdStep float64 `pulumi:"unitPriceThirdStep"`
+}
+
+// GetTypesInstanceTypePriceInput is an input type that accepts GetTypesInstanceTypePriceArgs and GetTypesInstanceTypePriceOutput values.
+// You can construct a concrete instance of `GetTypesInstanceTypePriceInput` via:
+//
+//	GetTypesInstanceTypePriceArgs{...}
+type GetTypesInstanceTypePriceInput interface {
+	pulumi.Input
+
+	ToGetTypesInstanceTypePriceOutput() GetTypesInstanceTypePriceOutput
+	ToGetTypesInstanceTypePriceOutputWithContext(context.Context) GetTypesInstanceTypePriceOutput
+}
+
+type GetTypesInstanceTypePriceArgs struct {
+	// Subsequent billing unit. Valid values: HOUR, GB.
+	ChargeUnit pulumi.StringInput `pulumi:"chargeUnit"`
+	// Discount rate. For example, 20.0 means 20% off.
+	Discount pulumi.Float64Input `pulumi:"discount"`
+	// Discount price for prepaid mode, unit: CNY.
+	DiscountPrice pulumi.Float64Input `pulumi:"discountPrice"`
+	// Original price for prepaid mode, unit: CNY.
+	OriginalPrice pulumi.Float64Input `pulumi:"originalPrice"`
+	// Subsequent unit price, used in postpaid mode, unit: CNY.
+	UnitPrice pulumi.Float64Input `pulumi:"unitPrice"`
+	// Subsequent discount unit price, used in postpaid mode, unit: CNY.
+	UnitPriceDiscount pulumi.Float64Input `pulumi:"unitPriceDiscount"`
+	// Subsequent discount unit price for time range (96, 360) hours in postpaid mode, unit: CNY.
+	UnitPriceDiscountSecondStep pulumi.Float64Input `pulumi:"unitPriceDiscountSecondStep"`
+	// Discounted price of subsequent total cost for usage time interval exceeding 360 hr in postpaid billing mode. measurement unit: usd.
+	UnitPriceDiscountThirdStep pulumi.Float64Input `pulumi:"unitPriceDiscountThirdStep"`
+	// Subsequent unit price for time range (96, 360) hours in postpaid mode, unit: CNY.
+	UnitPriceSecondStep pulumi.Float64Input `pulumi:"unitPriceSecondStep"`
+	// Specifies the original price of subsequent total costs with a usage time interval exceeding 360 hr in postpaid billing mode. measurement unit: usd.
+	UnitPriceThirdStep pulumi.Float64Input `pulumi:"unitPriceThirdStep"`
+}
+
+func (GetTypesInstanceTypePriceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTypesInstanceTypePrice)(nil)).Elem()
+}
+
+func (i GetTypesInstanceTypePriceArgs) ToGetTypesInstanceTypePriceOutput() GetTypesInstanceTypePriceOutput {
+	return i.ToGetTypesInstanceTypePriceOutputWithContext(context.Background())
+}
+
+func (i GetTypesInstanceTypePriceArgs) ToGetTypesInstanceTypePriceOutputWithContext(ctx context.Context) GetTypesInstanceTypePriceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTypesInstanceTypePriceOutput)
+}
+
+// GetTypesInstanceTypePriceArrayInput is an input type that accepts GetTypesInstanceTypePriceArray and GetTypesInstanceTypePriceArrayOutput values.
+// You can construct a concrete instance of `GetTypesInstanceTypePriceArrayInput` via:
+//
+//	GetTypesInstanceTypePriceArray{ GetTypesInstanceTypePriceArgs{...} }
+type GetTypesInstanceTypePriceArrayInput interface {
+	pulumi.Input
+
+	ToGetTypesInstanceTypePriceArrayOutput() GetTypesInstanceTypePriceArrayOutput
+	ToGetTypesInstanceTypePriceArrayOutputWithContext(context.Context) GetTypesInstanceTypePriceArrayOutput
+}
+
+type GetTypesInstanceTypePriceArray []GetTypesInstanceTypePriceInput
+
+func (GetTypesInstanceTypePriceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTypesInstanceTypePrice)(nil)).Elem()
+}
+
+func (i GetTypesInstanceTypePriceArray) ToGetTypesInstanceTypePriceArrayOutput() GetTypesInstanceTypePriceArrayOutput {
+	return i.ToGetTypesInstanceTypePriceArrayOutputWithContext(context.Background())
+}
+
+func (i GetTypesInstanceTypePriceArray) ToGetTypesInstanceTypePriceArrayOutputWithContext(ctx context.Context) GetTypesInstanceTypePriceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTypesInstanceTypePriceArrayOutput)
+}
+
+type GetTypesInstanceTypePriceOutput struct{ *pulumi.OutputState }
+
+func (GetTypesInstanceTypePriceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTypesInstanceTypePrice)(nil)).Elem()
+}
+
+func (o GetTypesInstanceTypePriceOutput) ToGetTypesInstanceTypePriceOutput() GetTypesInstanceTypePriceOutput {
+	return o
+}
+
+func (o GetTypesInstanceTypePriceOutput) ToGetTypesInstanceTypePriceOutputWithContext(ctx context.Context) GetTypesInstanceTypePriceOutput {
+	return o
+}
+
+// Subsequent billing unit. Valid values: HOUR, GB.
+func (o GetTypesInstanceTypePriceOutput) ChargeUnit() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTypesInstanceTypePrice) string { return v.ChargeUnit }).(pulumi.StringOutput)
+}
+
+// Discount rate. For example, 20.0 means 20% off.
+func (o GetTypesInstanceTypePriceOutput) Discount() pulumi.Float64Output {
+	return o.ApplyT(func(v GetTypesInstanceTypePrice) float64 { return v.Discount }).(pulumi.Float64Output)
+}
+
+// Discount price for prepaid mode, unit: CNY.
+func (o GetTypesInstanceTypePriceOutput) DiscountPrice() pulumi.Float64Output {
+	return o.ApplyT(func(v GetTypesInstanceTypePrice) float64 { return v.DiscountPrice }).(pulumi.Float64Output)
+}
+
+// Original price for prepaid mode, unit: CNY.
+func (o GetTypesInstanceTypePriceOutput) OriginalPrice() pulumi.Float64Output {
+	return o.ApplyT(func(v GetTypesInstanceTypePrice) float64 { return v.OriginalPrice }).(pulumi.Float64Output)
+}
+
+// Subsequent unit price, used in postpaid mode, unit: CNY.
+func (o GetTypesInstanceTypePriceOutput) UnitPrice() pulumi.Float64Output {
+	return o.ApplyT(func(v GetTypesInstanceTypePrice) float64 { return v.UnitPrice }).(pulumi.Float64Output)
+}
+
+// Subsequent discount unit price, used in postpaid mode, unit: CNY.
+func (o GetTypesInstanceTypePriceOutput) UnitPriceDiscount() pulumi.Float64Output {
+	return o.ApplyT(func(v GetTypesInstanceTypePrice) float64 { return v.UnitPriceDiscount }).(pulumi.Float64Output)
+}
+
+// Subsequent discount unit price for time range (96, 360) hours in postpaid mode, unit: CNY.
+func (o GetTypesInstanceTypePriceOutput) UnitPriceDiscountSecondStep() pulumi.Float64Output {
+	return o.ApplyT(func(v GetTypesInstanceTypePrice) float64 { return v.UnitPriceDiscountSecondStep }).(pulumi.Float64Output)
+}
+
+// Discounted price of subsequent total cost for usage time interval exceeding 360 hr in postpaid billing mode. measurement unit: usd.
+func (o GetTypesInstanceTypePriceOutput) UnitPriceDiscountThirdStep() pulumi.Float64Output {
+	return o.ApplyT(func(v GetTypesInstanceTypePrice) float64 { return v.UnitPriceDiscountThirdStep }).(pulumi.Float64Output)
+}
+
+// Subsequent unit price for time range (96, 360) hours in postpaid mode, unit: CNY.
+func (o GetTypesInstanceTypePriceOutput) UnitPriceSecondStep() pulumi.Float64Output {
+	return o.ApplyT(func(v GetTypesInstanceTypePrice) float64 { return v.UnitPriceSecondStep }).(pulumi.Float64Output)
+}
+
+// Specifies the original price of subsequent total costs with a usage time interval exceeding 360 hr in postpaid billing mode. measurement unit: usd.
+func (o GetTypesInstanceTypePriceOutput) UnitPriceThirdStep() pulumi.Float64Output {
+	return o.ApplyT(func(v GetTypesInstanceTypePrice) float64 { return v.UnitPriceThirdStep }).(pulumi.Float64Output)
+}
+
+type GetTypesInstanceTypePriceArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTypesInstanceTypePriceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTypesInstanceTypePrice)(nil)).Elem()
+}
+
+func (o GetTypesInstanceTypePriceArrayOutput) ToGetTypesInstanceTypePriceArrayOutput() GetTypesInstanceTypePriceArrayOutput {
+	return o
+}
+
+func (o GetTypesInstanceTypePriceArrayOutput) ToGetTypesInstanceTypePriceArrayOutputWithContext(ctx context.Context) GetTypesInstanceTypePriceArrayOutput {
+	return o
+}
+
+func (o GetTypesInstanceTypePriceArrayOutput) Index(i pulumi.IntInput) GetTypesInstanceTypePriceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTypesInstanceTypePrice {
+		return vs[0].([]GetTypesInstanceTypePrice)[vs[1].(int)]
+	}).(GetTypesInstanceTypePriceOutput)
+}
+
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*InstanceCpuTopologyInput)(nil)).Elem(), InstanceCpuTopologyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*InstanceCpuTopologyPtrInput)(nil)).Elem(), InstanceCpuTopologyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceDataDiskInput)(nil)).Elem(), InstanceDataDiskArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceDataDiskArrayInput)(nil)).Elem(), InstanceDataDiskArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTypesCbsFilterInput)(nil)).Elem(), GetTypesCbsFilterArgs{})
@@ -895,6 +1731,16 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTypesInstanceTypeArrayInput)(nil)).Elem(), GetTypesInstanceTypeArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTypesInstanceTypeCbsConfigInput)(nil)).Elem(), GetTypesInstanceTypeCbsConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTypesInstanceTypeCbsConfigArrayInput)(nil)).Elem(), GetTypesInstanceTypeCbsConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTypesInstanceTypeExternalInput)(nil)).Elem(), GetTypesInstanceTypeExternalArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTypesInstanceTypeExternalArrayInput)(nil)).Elem(), GetTypesInstanceTypeExternalArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTypesInstanceTypeExternalStorageBlockAttrInput)(nil)).Elem(), GetTypesInstanceTypeExternalStorageBlockAttrArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTypesInstanceTypeExternalStorageBlockAttrArrayInput)(nil)).Elem(), GetTypesInstanceTypeExternalStorageBlockAttrArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTypesInstanceTypeLocalDiskTypeListInput)(nil)).Elem(), GetTypesInstanceTypeLocalDiskTypeListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTypesInstanceTypeLocalDiskTypeListArrayInput)(nil)).Elem(), GetTypesInstanceTypeLocalDiskTypeListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTypesInstanceTypePriceInput)(nil)).Elem(), GetTypesInstanceTypePriceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTypesInstanceTypePriceArrayInput)(nil)).Elem(), GetTypesInstanceTypePriceArray{})
+	pulumi.RegisterOutputType(InstanceCpuTopologyOutput{})
+	pulumi.RegisterOutputType(InstanceCpuTopologyPtrOutput{})
 	pulumi.RegisterOutputType(InstanceDataDiskOutput{})
 	pulumi.RegisterOutputType(InstanceDataDiskArrayOutput{})
 	pulumi.RegisterOutputType(GetTypesCbsFilterOutput{})
@@ -905,4 +1751,12 @@ func init() {
 	pulumi.RegisterOutputType(GetTypesInstanceTypeArrayOutput{})
 	pulumi.RegisterOutputType(GetTypesInstanceTypeCbsConfigOutput{})
 	pulumi.RegisterOutputType(GetTypesInstanceTypeCbsConfigArrayOutput{})
+	pulumi.RegisterOutputType(GetTypesInstanceTypeExternalOutput{})
+	pulumi.RegisterOutputType(GetTypesInstanceTypeExternalArrayOutput{})
+	pulumi.RegisterOutputType(GetTypesInstanceTypeExternalStorageBlockAttrOutput{})
+	pulumi.RegisterOutputType(GetTypesInstanceTypeExternalStorageBlockAttrArrayOutput{})
+	pulumi.RegisterOutputType(GetTypesInstanceTypeLocalDiskTypeListOutput{})
+	pulumi.RegisterOutputType(GetTypesInstanceTypeLocalDiskTypeListArrayOutput{})
+	pulumi.RegisterOutputType(GetTypesInstanceTypePriceOutput{})
+	pulumi.RegisterOutputType(GetTypesInstanceTypePriceArrayOutput{})
 }

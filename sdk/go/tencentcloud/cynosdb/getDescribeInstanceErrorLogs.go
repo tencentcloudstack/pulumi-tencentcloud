@@ -96,12 +96,8 @@ type GetDescribeInstanceErrorLogsResult struct {
 }
 
 func GetDescribeInstanceErrorLogsOutput(ctx *pulumi.Context, args GetDescribeInstanceErrorLogsOutputArgs, opts ...pulumi.InvokeOption) GetDescribeInstanceErrorLogsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDescribeInstanceErrorLogsResultOutput, error) {
-			args := v.(GetDescribeInstanceErrorLogsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cynosdb/getDescribeInstanceErrorLogs:getDescribeInstanceErrorLogs", args, GetDescribeInstanceErrorLogsResultOutput{}, options).(GetDescribeInstanceErrorLogsResultOutput), nil
-		}).(GetDescribeInstanceErrorLogsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cynosdb/getDescribeInstanceErrorLogs:getDescribeInstanceErrorLogs", args, GetDescribeInstanceErrorLogsResultOutput{}, options).(GetDescribeInstanceErrorLogsResultOutput)
 }
 
 // A collection of arguments for invoking getDescribeInstanceErrorLogs.

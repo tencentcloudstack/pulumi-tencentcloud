@@ -12,81 +12,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
 {
     public static class GetBackups
     {
-        /// <summary>
-        /// Use this data source to query the list of SQL Server backups.
-        /// 
-        /// ## Example Usage
-        /// 
-        /// ```csharp
-        /// using System.Collections.Generic;
-        /// using System.Linq;
-        /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
-        /// 
-        /// return await Deployment.RunAsync(() =&gt; 
-        /// {
-        ///     var foo = Tencentcloud.Sqlserver.GetBackups.Invoke(new()
-        ///     {
-        ///         InstanceId = "mssql-3cdq7kx5",
-        ///         StartTime = "2020-06-17 00:00:00",
-        ///         EndTime = "2020-06-22 00:00:00",
-        ///     });
-        /// 
-        /// });
-        /// ```
-        /// </summary>
         public static Task<GetBackupsResult> InvokeAsync(GetBackupsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetBackupsResult>("tencentcloud:Sqlserver/getBackups:getBackups", args ?? new GetBackupsArgs(), options.WithDefaults());
 
-        /// <summary>
-        /// Use this data source to query the list of SQL Server backups.
-        /// 
-        /// ## Example Usage
-        /// 
-        /// ```csharp
-        /// using System.Collections.Generic;
-        /// using System.Linq;
-        /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
-        /// 
-        /// return await Deployment.RunAsync(() =&gt; 
-        /// {
-        ///     var foo = Tencentcloud.Sqlserver.GetBackups.Invoke(new()
-        ///     {
-        ///         InstanceId = "mssql-3cdq7kx5",
-        ///         StartTime = "2020-06-17 00:00:00",
-        ///         EndTime = "2020-06-22 00:00:00",
-        ///     });
-        /// 
-        /// });
-        /// ```
-        /// </summary>
         public static Output<GetBackupsResult> Invoke(GetBackupsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetBackupsResult>("tencentcloud:Sqlserver/getBackups:getBackups", args ?? new GetBackupsInvokeArgs(), options.WithDefaults());
 
-        /// <summary>
-        /// Use this data source to query the list of SQL Server backups.
-        /// 
-        /// ## Example Usage
-        /// 
-        /// ```csharp
-        /// using System.Collections.Generic;
-        /// using System.Linq;
-        /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
-        /// 
-        /// return await Deployment.RunAsync(() =&gt; 
-        /// {
-        ///     var foo = Tencentcloud.Sqlserver.GetBackups.Invoke(new()
-        ///     {
-        ///         InstanceId = "mssql-3cdq7kx5",
-        ///         StartTime = "2020-06-17 00:00:00",
-        ///         EndTime = "2020-06-22 00:00:00",
-        ///     });
-        /// 
-        /// });
-        /// ```
-        /// </summary>
         public static Output<GetBackupsResult> Invoke(GetBackupsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetBackupsResult>("tencentcloud:Sqlserver/getBackups:getBackups", args ?? new GetBackupsInvokeArgs(), options.WithDefaults());
     }
@@ -97,27 +28,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         [Input("backupName")]
         public string? BackupName { get; set; }
 
-        /// <summary>
-        /// End time of the instance list, like yyyy-MM-dd HH:mm:ss.
-        /// </summary>
         [Input("endTime", required: true)]
         public string EndTime { get; set; } = null!;
 
-        /// <summary>
-        /// Instance ID.
-        /// </summary>
         [Input("instanceId", required: true)]
         public string InstanceId { get; set; } = null!;
 
-        /// <summary>
-        /// Used to store results.
-        /// </summary>
         [Input("resultOutputFile")]
         public string? ResultOutputFile { get; set; }
 
-        /// <summary>
-        /// Start time of the instance list, like yyyy-MM-dd HH:mm:ss.
-        /// </summary>
         [Input("startTime", required: true)]
         public string StartTime { get; set; } = null!;
 
@@ -132,27 +51,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         [Input("backupName")]
         public Input<string>? BackupName { get; set; }
 
-        /// <summary>
-        /// End time of the instance list, like yyyy-MM-dd HH:mm:ss.
-        /// </summary>
         [Input("endTime", required: true)]
         public Input<string> EndTime { get; set; } = null!;
 
-        /// <summary>
-        /// Instance ID.
-        /// </summary>
         [Input("instanceId", required: true)]
         public Input<string> InstanceId { get; set; } = null!;
 
-        /// <summary>
-        /// Used to store results.
-        /// </summary>
         [Input("resultOutputFile")]
         public Input<string>? ResultOutputFile { get; set; }
 
-        /// <summary>
-        /// Start time of the instance list, like yyyy-MM-dd HH:mm:ss.
-        /// </summary>
         [Input("startTime", required: true)]
         public Input<string> StartTime { get; set; } = null!;
 
@@ -167,26 +74,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     public sealed class GetBackupsResult
     {
         public readonly string? BackupName;
-        /// <summary>
-        /// End time of the backup.
-        /// </summary>
         public readonly string EndTime;
         /// <summary>
         /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
-        /// <summary>
-        /// Instance ID.
-        /// </summary>
         public readonly string InstanceId;
-        /// <summary>
-        /// A list of SQL Server backup. Each element contains the following attributes:
-        /// </summary>
         public readonly ImmutableArray<Outputs.GetBackupsListResult> Lists;
         public readonly string? ResultOutputFile;
-        /// <summary>
-        /// Start time of the backup.
-        /// </summary>
         public readonly string StartTime;
 
         [OutputConstructor]

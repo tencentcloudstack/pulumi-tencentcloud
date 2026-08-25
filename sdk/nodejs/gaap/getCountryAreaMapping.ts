@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const countryAreaMapping = tencentcloud.Gaap.getCountryAreaMapping({});
+ * const countryAreaMapping = tencentcloud.gaap.getCountryAreaMapping({});
  * ```
  */
 export function getCountryAreaMapping(args?: GetCountryAreaMappingArgs, opts?: pulumi.InvokeOptions): Promise<GetCountryAreaMappingResult> {
@@ -59,7 +59,7 @@ export interface GetCountryAreaMappingResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const countryAreaMapping = tencentcloud.Gaap.getCountryAreaMapping({});
+ * const countryAreaMapping = tencentcloud.gaap.getCountryAreaMapping({});
  * ```
  */
 export function getCountryAreaMappingOutput(args?: GetCountryAreaMappingOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCountryAreaMappingResult> {
@@ -77,5 +77,5 @@ export interface GetCountryAreaMappingOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

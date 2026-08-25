@@ -82,12 +82,8 @@ type GetVipsResult struct {
 }
 
 func GetVipsOutput(ctx *pulumi.Context, args GetVipsOutputArgs, opts ...pulumi.InvokeOption) GetVipsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetVipsResultOutput, error) {
-			args := v.(GetVipsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ha/getVips:getVips", args, GetVipsResultOutput{}, options).(GetVipsResultOutput), nil
-		}).(GetVipsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ha/getVips:getVips", args, GetVipsResultOutput{}, options).(GetVipsResultOutput)
 }
 
 // A collection of arguments for invoking getVips.

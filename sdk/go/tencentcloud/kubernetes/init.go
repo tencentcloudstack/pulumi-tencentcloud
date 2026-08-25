@@ -29,18 +29,32 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &AuthAttachment{}
 	case "tencentcloud:Kubernetes/backupStorageLocation:BackupStorageLocation":
 		r = &BackupStorageLocation{}
+	case "tencentcloud:Kubernetes/cancelUpgradePlanOperation:CancelUpgradePlanOperation":
+		r = &CancelUpgradePlanOperation{}
 	case "tencentcloud:Kubernetes/cluster:Cluster":
 		r = &Cluster{}
 	case "tencentcloud:Kubernetes/clusterAttachment:ClusterAttachment":
 		r = &ClusterAttachment{}
 	case "tencentcloud:Kubernetes/clusterEndpoint:ClusterEndpoint":
 		r = &ClusterEndpoint{}
+	case "tencentcloud:Kubernetes/clusterExtraArgsConfig:ClusterExtraArgsConfig":
+		r = &ClusterExtraArgsConfig{}
+	case "tencentcloud:Kubernetes/clusterMaintenanceWindowAndExclusion:ClusterMaintenanceWindowAndExclusion":
+		r = &ClusterMaintenanceWindowAndExclusion{}
 	case "tencentcloud:Kubernetes/clusterMasterAttachment:ClusterMasterAttachment":
 		r = &ClusterMasterAttachment{}
 	case "tencentcloud:Kubernetes/clusterRelease:ClusterRelease":
 		r = &ClusterRelease{}
+	case "tencentcloud:Kubernetes/clusterRollOutSequenceTagConfig:ClusterRollOutSequenceTagConfig":
+		r = &ClusterRollOutSequenceTagConfig{}
+	case "tencentcloud:Kubernetes/clusterSchedulerPolicyConfig:ClusterSchedulerPolicyConfig":
+		r = &ClusterSchedulerPolicyConfig{}
+	case "tencentcloud:Kubernetes/controlPlaneLog:ControlPlaneLog":
+		r = &ControlPlaneLog{}
 	case "tencentcloud:Kubernetes/encryptionProtection:EncryptionProtection":
 		r = &EncryptionProtection{}
+	case "tencentcloud:Kubernetes/globalMaintenanceWindowAndExclusion:GlobalMaintenanceWindowAndExclusion":
+		r = &GlobalMaintenanceWindowAndExclusion{}
 	case "tencentcloud:Kubernetes/healthCheckPolicy:HealthCheckPolicy":
 		r = &HealthCheckPolicy{}
 	case "tencentcloud:Kubernetes/logConfig:LogConfig":
@@ -49,10 +63,14 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &NativeNodePool{}
 	case "tencentcloud:Kubernetes/nodePool:NodePool":
 		r = &NodePool{}
+	case "tencentcloud:Kubernetes/rollOutSequence:RollOutSequence":
+		r = &RollOutSequence{}
 	case "tencentcloud:Kubernetes/scaleWorker:ScaleWorker":
 		r = &ScaleWorker{}
 	case "tencentcloud:Kubernetes/serverlessNodePool:ServerlessNodePool":
 		r = &ServerlessNodePool{}
+	case "tencentcloud:Kubernetes/userPermissions:UserPermissions":
+		r = &UserPermissions{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -88,6 +106,11 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Kubernetes/cancelUpgradePlanOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Kubernetes/cluster",
 		&module{version},
 	)
@@ -103,6 +126,16 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Kubernetes/clusterExtraArgsConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Kubernetes/clusterMaintenanceWindowAndExclusion",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Kubernetes/clusterMasterAttachment",
 		&module{version},
 	)
@@ -113,7 +146,27 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Kubernetes/clusterRollOutSequenceTagConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Kubernetes/clusterSchedulerPolicyConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Kubernetes/controlPlaneLog",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Kubernetes/encryptionProtection",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Kubernetes/globalMaintenanceWindowAndExclusion",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -138,12 +191,22 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Kubernetes/rollOutSequence",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Kubernetes/scaleWorker",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Kubernetes/serverlessNodePool",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Kubernetes/userPermissions",
 		&module{version},
 	)
 }

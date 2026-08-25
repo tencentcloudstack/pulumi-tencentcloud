@@ -39,7 +39,7 @@ import (
 //				availabilityZone = param
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("vpc"),
 //			})
@@ -47,8 +47,8 @@ import (
 //				return err
 //			}
 //			// create subnet
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("subnet"),
 //				CidrBlock:        pulumi.String("10.0.1.0/24"),
@@ -64,8 +64,8 @@ import (
 //				SkuCode:      pulumi.String("basic_2k"),
 //				Remark:       pulumi.String("remarks."),
 //				VpcList: &mqtt.InstanceVpcListArgs{
-//					VpcId:    vpc.ID(),
-//					SubnetId: subnet.ID(),
+//					VpcId:    vpc2.ID().ToIDOutput().ToStringOutput(),
+//					SubnetId: subnet2.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				PayMode: pulumi.Int(0),
 //				Tags: pulumi.StringMap{
@@ -77,7 +77,7 @@ import (
 //			}
 //			// create public endpoint
 //			_, err = mqtt.NewInstancePublicEndpoint(ctx, "example", &mqtt.InstancePublicEndpointArgs{
-//				InstanceId: example.ID(),
+//				InstanceId: example.ID().ToIDOutput().ToStringOutput(),
 //				Bandwidth:  pulumi.Int(100),
 //				Rules: mqtt.InstancePublicEndpointRuleArray{
 //					&mqtt.InstancePublicEndpointRuleArgs{

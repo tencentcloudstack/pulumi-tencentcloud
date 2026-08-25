@@ -85,12 +85,8 @@ type GetUploadBackupInfoResult struct {
 }
 
 func GetUploadBackupInfoOutput(ctx *pulumi.Context, args GetUploadBackupInfoOutputArgs, opts ...pulumi.InvokeOption) GetUploadBackupInfoResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetUploadBackupInfoResultOutput, error) {
-			args := v.(GetUploadBackupInfoArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Sqlserver/getUploadBackupInfo:getUploadBackupInfo", args, GetUploadBackupInfoResultOutput{}, options).(GetUploadBackupInfoResultOutput), nil
-		}).(GetUploadBackupInfoResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Sqlserver/getUploadBackupInfo:getUploadBackupInfo", args, GetUploadBackupInfoResultOutput{}, options).(GetUploadBackupInfoResultOutput)
 }
 
 // A collection of arguments for invoking getUploadBackupInfo.

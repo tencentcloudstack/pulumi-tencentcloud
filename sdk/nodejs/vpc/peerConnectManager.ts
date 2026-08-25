@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const info = tencentcloud.User.getInfo({});
+ * const info = tencentcloud.user.getInfo({});
  * const ownerUin = info.then(info => info.ownerUin);
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
  *     name: "tf-example-pcx",
@@ -34,7 +34,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * vpc peer_connect_manager can be imported using the id, e.g.
+ * vpc peerConnectManager can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Vpc/peerConnectManager:PeerConnectManager peer_connect_manager peer_connect_manager_id
@@ -166,39 +166,39 @@ export interface PeerConnectManagerState {
     /**
      * Bandwidth upper limit, unit Mbps.
      */
-    bandwidth?: pulumi.Input<number>;
+    bandwidth?: pulumi.Input<number | undefined>;
     /**
      * Billing mode, daily peak value POSTPAID_BY_DAY_MAX, monthly value 95 POSTPAID_BY_MONTH_95.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
     /**
      * Peer region.
      */
-    destinationRegion?: pulumi.Input<string>;
+    destinationRegion?: pulumi.Input<string | undefined>;
     /**
      * Peer user UIN.
      */
-    destinationUin?: pulumi.Input<string>;
+    destinationUin?: pulumi.Input<string | undefined>;
     /**
      * The unique ID of the peer VPC.
      */
-    destinationVpcId?: pulumi.Input<string>;
+    destinationVpcId?: pulumi.Input<string | undefined>;
     /**
      * Peer connection name.
      */
-    peeringConnectionName?: pulumi.Input<string>;
+    peeringConnectionName?: pulumi.Input<string | undefined>;
     /**
      * Service classification PT, AU, AG.
      */
-    qosLevel?: pulumi.Input<string>;
+    qosLevel?: pulumi.Input<string | undefined>;
     /**
      * The unique ID of the local VPC.
      */
-    sourceVpcId?: pulumi.Input<string>;
+    sourceVpcId?: pulumi.Input<string | undefined>;
     /**
      * Interworking type, VPC_PEER interworking between VPCs; VPC_BM_PEER interworking between VPC and BM Network.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -208,11 +208,11 @@ export interface PeerConnectManagerArgs {
     /**
      * Bandwidth upper limit, unit Mbps.
      */
-    bandwidth?: pulumi.Input<number>;
+    bandwidth?: pulumi.Input<number | undefined>;
     /**
      * Billing mode, daily peak value POSTPAID_BY_DAY_MAX, monthly value 95 POSTPAID_BY_MONTH_95.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
     /**
      * Peer region.
      */
@@ -232,7 +232,7 @@ export interface PeerConnectManagerArgs {
     /**
      * Service classification PT, AU, AG.
      */
-    qosLevel?: pulumi.Input<string>;
+    qosLevel?: pulumi.Input<string | undefined>;
     /**
      * The unique ID of the local VPC.
      */
@@ -240,5 +240,5 @@ export interface PeerConnectManagerArgs {
     /**
      * Interworking type, VPC_PEER interworking between VPCs; VPC_BM_PEER interworking between VPC and BM Network.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }

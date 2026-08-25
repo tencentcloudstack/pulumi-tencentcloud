@@ -49,7 +49,7 @@ import (
 //				return err
 //			}
 //			exampleApi, err := apigateway.NewApi(ctx, "example", &apigateway.ApiArgs{
-//				ServiceId:           exampleService.ID(),
+//				ServiceId:           exampleService.ID().ToIDOutput().ToStringOutput(),
 //				ApiName:             pulumi.String("tf_example_api"),
 //				ApiDesc:             pulumi.String("desc."),
 //				AuthType:            pulumi.String("APP"),
@@ -89,10 +89,10 @@ import (
 //				return err
 //			}
 //			_, err = apigateway.NewApiAppAttachment(ctx, "example", &apigateway.ApiAppAttachmentArgs{
-//				ApiAppId:    example.ID(),
+//				ApiAppId:    example.ID().ToIDOutput().ToStringOutput(),
 //				Environment: pulumi.String("test"),
-//				ServiceId:   exampleService.ID(),
-//				ApiId:       exampleApi.ID(),
+//				ServiceId:   exampleService.ID().ToIDOutput().ToStringOutput(),
+//				ApiId:       exampleApi.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err
@@ -105,7 +105,7 @@ import (
 //
 // ## Import
 //
-// apigateway api_app_attachment can be imported using the id, e.g.
+// apigateway apiAppAttachment can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:ApiGateway/apiAppAttachment:ApiAppAttachment example app-f2dxx0lv#test#service-h0trno8e#api-grsomg0w

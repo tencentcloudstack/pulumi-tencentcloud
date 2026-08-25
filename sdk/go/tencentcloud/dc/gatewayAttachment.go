@@ -44,7 +44,7 @@ import (
 //
 // ## Import
 //
-// dc_gateway_attachment can be imported using the id, e.g.
+// dcGatewayAttachment can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Dc/gatewayAttachment:GatewayAttachment dc_gateway_attachment vpcId#dcgId#ngId

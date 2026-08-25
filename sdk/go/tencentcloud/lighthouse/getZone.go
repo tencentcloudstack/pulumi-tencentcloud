@@ -77,12 +77,8 @@ type GetZoneResult struct {
 }
 
 func GetZoneOutput(ctx *pulumi.Context, args GetZoneOutputArgs, opts ...pulumi.InvokeOption) GetZoneResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetZoneResultOutput, error) {
-			args := v.(GetZoneArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Lighthouse/getZone:getZone", args, GetZoneResultOutput{}, options).(GetZoneResultOutput), nil
-		}).(GetZoneResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Lighthouse/getZone:getZone", args, GetZoneResultOutput{}, options).(GetZoneResultOutput)
 }
 
 // A collection of arguments for invoking getZone.

@@ -19,6 +19,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Outputs
         /// </summary>
         public readonly bool EnableTag;
         /// <summary>
+        /// JSON format for delivery. Valid values:
+        /// </summary>
+        public readonly int? JsonType;
+        /// <summary>
         /// metadata info list.
         /// </summary>
         public readonly ImmutableArray<string> MetaFields;
@@ -35,6 +39,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Outputs
         private CkafkaConsumerContent(
             bool enableTag,
 
+            int? jsonType,
+
             ImmutableArray<string> metaFields,
 
             bool? tagJsonNotTiled,
@@ -42,6 +48,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Outputs
             int? timestampAccuracy)
         {
             EnableTag = enableTag;
+            JsonType = jsonType;
             MetaFields = metaFields;
             TagJsonNotTiled = tagJsonNotTiled;
             TimestampAccuracy = timestampAccuracy;

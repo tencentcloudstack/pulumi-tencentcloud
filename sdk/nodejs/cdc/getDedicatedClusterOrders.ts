@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const orders = tencentcloud.Cdc.getDedicatedClusterOrders({});
+ * const orders = tencentcloud.cdc.getDedicatedClusterOrders({});
  * ```
  *
  * ### Query orders by filter
@@ -26,10 +26,10 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const orders1 = tencentcloud.Cdc.getDedicatedClusterOrders({
+ * const orders1 = tencentcloud.cdc.getDedicatedClusterOrders({
  *     dedicatedClusterIds: ["cluster-262n63e8"],
  * });
- * const orders3 = tencentcloud.Cdc.getDedicatedClusterOrders({
+ * const orders3 = tencentcloud.cdc.getDedicatedClusterOrders({
  *     status: "PENDING",
  *     actionType: "CREATE",
  * });
@@ -96,7 +96,7 @@ export interface GetDedicatedClusterOrdersResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const orders = tencentcloud.Cdc.getDedicatedClusterOrders({});
+ * const orders = tencentcloud.cdc.getDedicatedClusterOrders({});
  * ```
  *
  * ### Query orders by filter
@@ -105,10 +105,10 @@ export interface GetDedicatedClusterOrdersResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const orders1 = tencentcloud.Cdc.getDedicatedClusterOrders({
+ * const orders1 = tencentcloud.cdc.getDedicatedClusterOrders({
  *     dedicatedClusterIds: ["cluster-262n63e8"],
  * });
- * const orders3 = tencentcloud.Cdc.getDedicatedClusterOrders({
+ * const orders3 = tencentcloud.cdc.getDedicatedClusterOrders({
  *     status: "PENDING",
  *     actionType: "CREATE",
  * });
@@ -132,17 +132,17 @@ export interface GetDedicatedClusterOrdersOutputArgs {
     /**
      * Filter by Dedicated Cluster Order Action Type. Allow filter value: CREATE, EXTEND.
      */
-    actionType?: pulumi.Input<string>;
+    actionType?: pulumi.Input<string | undefined>;
     /**
      * Filter by Dedicated Cluster ID.
      */
-    dedicatedClusterIds?: pulumi.Input<pulumi.Input<string>[]>;
+    dedicatedClusterIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Filter by Dedicated Cluster Order Status. Allow filter value: PENDING, INCONSTRUCTION, DELIVERING, DELIVERED, EXPIRED, CANCELLED, OFFLINE.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
 }

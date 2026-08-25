@@ -80,12 +80,8 @@ type GetDescribeHostTeoInstanceListResult struct {
 }
 
 func GetDescribeHostTeoInstanceListOutput(ctx *pulumi.Context, args GetDescribeHostTeoInstanceListOutputArgs, opts ...pulumi.InvokeOption) GetDescribeHostTeoInstanceListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDescribeHostTeoInstanceListResultOutput, error) {
-			args := v.(GetDescribeHostTeoInstanceListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ssl/getDescribeHostTeoInstanceList:getDescribeHostTeoInstanceList", args, GetDescribeHostTeoInstanceListResultOutput{}, options).(GetDescribeHostTeoInstanceListResultOutput), nil
-		}).(GetDescribeHostTeoInstanceListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ssl/getDescribeHostTeoInstanceList:getDescribeHostTeoInstanceList", args, GetDescribeHostTeoInstanceListResultOutput{}, options).(GetDescribeHostTeoInstanceListResultOutput)
 }
 
 // A collection of arguments for invoking getDescribeHostTeoInstanceList.

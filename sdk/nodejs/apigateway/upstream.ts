@@ -17,14 +17,14 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "cvm",
  * });
- * const images = tencentcloud.Images.getInstance({
+ * const images = tencentcloud.images.getInstance({
  *     imageTypes: ["PUBLIC_IMAGE"],
  *     imageNameRegex: "Final",
  * });
- * const instanceTypes = tencentcloud.Instance.getTypes({
+ * const instanceTypes = tencentcloud.instance.getTypes({
  *     filters: [{
  *         name: "instance-family",
  *         values: ["S5"],
@@ -270,51 +270,51 @@ export interface UpstreamState {
     /**
      * Load balancing algorithm, value range: ROUND-ROBIN.
      */
-    algorithm?: pulumi.Input<string>;
+    algorithm?: pulumi.Input<string | undefined>;
     /**
      * Health check configuration, currently only supports VPC channels.
      */
-    healthChecker?: pulumi.Input<inputs.ApiGateway.UpstreamHealthChecker>;
+    healthChecker?: pulumi.Input<inputs.ApiGateway.UpstreamHealthChecker | undefined>;
     /**
      * Configuration of K8S container service.
      */
-    k8sServices?: pulumi.Input<pulumi.Input<inputs.ApiGateway.UpstreamK8sService>[]>;
+    k8sServices?: pulumi.Input<pulumi.Input<inputs.ApiGateway.UpstreamK8sService>[] | undefined>;
     /**
      * Backend nodes.
      */
-    nodes?: pulumi.Input<pulumi.Input<inputs.ApiGateway.UpstreamNode>[]>;
+    nodes?: pulumi.Input<pulumi.Input<inputs.ApiGateway.UpstreamNode>[] | undefined>;
     /**
      * Request retry count, default to 3 times.
      */
-    retries?: pulumi.Input<number>;
+    retries?: pulumi.Input<number | undefined>;
     /**
      * Backend protocol, value range: HTTP, HTTPS, gRPC, gRPCs.
      */
-    scheme?: pulumi.Input<string>;
+    scheme?: pulumi.Input<string | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * VPC Unique ID.
      */
-    uniqVpcId?: pulumi.Input<string>;
+    uniqVpcId?: pulumi.Input<string | undefined>;
     /**
      * Backend channel description.
      */
-    upstreamDescription?: pulumi.Input<string>;
+    upstreamDescription?: pulumi.Input<string | undefined>;
     /**
      * Host request header forwarded by gateway to backend.
      */
-    upstreamHost?: pulumi.Input<string>;
+    upstreamHost?: pulumi.Input<string | undefined>;
     /**
      * Backend channel name.
      */
-    upstreamName?: pulumi.Input<string>;
+    upstreamName?: pulumi.Input<string | undefined>;
     /**
      * Backend access type, value range: IP_PORT, K8S.
      */
-    upstreamType?: pulumi.Input<string>;
+    upstreamType?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -328,19 +328,19 @@ export interface UpstreamArgs {
     /**
      * Health check configuration, currently only supports VPC channels.
      */
-    healthChecker?: pulumi.Input<inputs.ApiGateway.UpstreamHealthChecker>;
+    healthChecker?: pulumi.Input<inputs.ApiGateway.UpstreamHealthChecker | undefined>;
     /**
      * Configuration of K8S container service.
      */
-    k8sServices?: pulumi.Input<pulumi.Input<inputs.ApiGateway.UpstreamK8sService>[]>;
+    k8sServices?: pulumi.Input<pulumi.Input<inputs.ApiGateway.UpstreamK8sService>[] | undefined>;
     /**
      * Backend nodes.
      */
-    nodes?: pulumi.Input<pulumi.Input<inputs.ApiGateway.UpstreamNode>[]>;
+    nodes?: pulumi.Input<pulumi.Input<inputs.ApiGateway.UpstreamNode>[] | undefined>;
     /**
      * Request retry count, default to 3 times.
      */
-    retries?: pulumi.Input<number>;
+    retries?: pulumi.Input<number | undefined>;
     /**
      * Backend protocol, value range: HTTP, HTTPS, gRPC, gRPCs.
      */
@@ -348,7 +348,7 @@ export interface UpstreamArgs {
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * VPC Unique ID.
      */
@@ -356,17 +356,17 @@ export interface UpstreamArgs {
     /**
      * Backend channel description.
      */
-    upstreamDescription?: pulumi.Input<string>;
+    upstreamDescription?: pulumi.Input<string | undefined>;
     /**
      * Host request header forwarded by gateway to backend.
      */
-    upstreamHost?: pulumi.Input<string>;
+    upstreamHost?: pulumi.Input<string | undefined>;
     /**
      * Backend channel name.
      */
-    upstreamName?: pulumi.Input<string>;
+    upstreamName?: pulumi.Input<string | undefined>;
     /**
      * Backend access type, value range: IP_PORT, K8S.
      */
-    upstreamType?: pulumi.Input<string>;
+    upstreamType?: pulumi.Input<string | undefined>;
 }

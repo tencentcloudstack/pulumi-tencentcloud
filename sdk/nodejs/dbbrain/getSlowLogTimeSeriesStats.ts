@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const test = tencentcloud.Dbbrain.getSlowLogTimeSeriesStats({
+ * const test = tencentcloud.dbbrain.getSlowLogTimeSeriesStats({
  *     instanceId: "%s",
  *     startTime: "%s",
  *     endTime: "%s",
@@ -95,7 +95,7 @@ export interface GetSlowLogTimeSeriesStatsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const test = tencentcloud.Dbbrain.getSlowLogTimeSeriesStats({
+ * const test = tencentcloud.dbbrain.getSlowLogTimeSeriesStats({
  *     instanceId: "%s",
  *     startTime: "%s",
  *     endTime: "%s",
@@ -129,11 +129,11 @@ export interface GetSlowLogTimeSeriesStatsOutputArgs {
     /**
      * Service product type, supported values include: `mysql` - cloud database MySQL, `cynosdb` - cloud database CynosDB for MySQL, the default is `mysql`.
      */
-    product?: pulumi.Input<string>;
+    product?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Start time, such as `2019-09-10 12:13:14`.
      */

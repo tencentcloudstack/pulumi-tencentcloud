@@ -43,7 +43,7 @@ import (
 //
 // ## Import
 //
-// oceanus work_space can be imported using the id, e.g.
+// oceanus workSpace can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Oceanus/workSpace:WorkSpace example space-0dan3yux#tf_example

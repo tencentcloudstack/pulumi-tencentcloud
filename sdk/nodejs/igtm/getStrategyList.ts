@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Igtm.getStrategyList({
+ * const example = tencentcloud.igtm.getStrategyList({
  *     instanceId: "gtm-uukztqtoaru",
  *     filters: [{
  *         name: "StrategyName",
@@ -80,7 +80,7 @@ export interface GetStrategyListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Igtm.getStrategyList({
+ * const example = tencentcloud.igtm.getStrategyList({
  *     instanceId: "gtm-uukztqtoaru",
  *     filters: [{
  *         name: "StrategyName",
@@ -106,7 +106,7 @@ export interface GetStrategyListOutputArgs {
     /**
      * Strategy filter conditions: StrategyName: strategy name.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Igtm.GetStrategyListFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Igtm.GetStrategyListFilterArgs>[] | undefined>;
     /**
      * Instance ID.
      */
@@ -114,5 +114,5 @@ export interface GetStrategyListOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

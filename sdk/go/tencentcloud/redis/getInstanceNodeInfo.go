@@ -73,12 +73,8 @@ type GetInstanceNodeInfoResult struct {
 }
 
 func GetInstanceNodeInfoOutput(ctx *pulumi.Context, args GetInstanceNodeInfoOutputArgs, opts ...pulumi.InvokeOption) GetInstanceNodeInfoResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstanceNodeInfoResultOutput, error) {
-			args := v.(GetInstanceNodeInfoArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Redis/getInstanceNodeInfo:getInstanceNodeInfo", args, GetInstanceNodeInfoResultOutput{}, options).(GetInstanceNodeInfoResultOutput), nil
-		}).(GetInstanceNodeInfoResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Redis/getInstanceNodeInfo:getInstanceNodeInfo", args, GetInstanceNodeInfoResultOutput{}, options).(GetInstanceNodeInfoResultOutput)
 }
 
 // A collection of arguments for invoking getInstanceNodeInfo.

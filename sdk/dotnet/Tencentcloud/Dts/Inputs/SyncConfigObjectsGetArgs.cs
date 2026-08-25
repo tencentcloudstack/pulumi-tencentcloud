@@ -44,7 +44,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
         public Input<string>? Mode { get; set; }
 
         /// <summary>
-        /// OnlineDDL type. Note: This field may return null, indicating that no valid value can be obtained.
+        /// It has been deprecated from version 1.83.20. OnlineDDL type. Note: This field may return null, indicating that no valid value can be obtained.
         /// </summary>
         [Input("onlineDdl")]
         public Input<Inputs.SyncConfigObjectsOnlineDdlGetArgs>? OnlineDdl { get; set; }

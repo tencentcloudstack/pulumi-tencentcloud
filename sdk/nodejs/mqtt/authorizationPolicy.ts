@@ -226,59 +226,59 @@ export interface AuthorizationPolicyState {
     /**
      * Operation - connect: connect; pub: publish; sub: subscribe.
      */
-    actions?: pulumi.Input<string>;
+    actions?: pulumi.Input<string | undefined>;
     /**
      * Condition - Client ID, supports regular expressions.
      */
-    clientId?: pulumi.Input<string>;
+    clientId?: pulumi.Input<string | undefined>;
     /**
      * Decision: allow/deny.
      */
-    effect?: pulumi.Input<string>;
+    effect?: pulumi.Input<string | undefined>;
     /**
      * MQTT instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Condition - Client IP address, supports IP or CIDR.
      */
-    ip?: pulumi.Input<string>;
+    ip?: pulumi.Input<string | undefined>;
     /**
      * Authorization policy rule id.
      */
-    policyId?: pulumi.Input<number>;
+    policyId?: pulumi.Input<number | undefined>;
     /**
      * Policy name, cannot be empty, 3-64 characters, supports Chinese characters, letters, numbers, "-" and "_".
      */
-    policyName?: pulumi.Input<string>;
+    policyName?: pulumi.Input<string | undefined>;
     /**
      * Policy version, default is 1, currently only 1 is supported.
      */
-    policyVersion?: pulumi.Input<number>;
+    policyVersion?: pulumi.Input<number | undefined>;
     /**
      * The strategy priority, the smaller the higher the priority, cannot be repeated.
      */
-    priority?: pulumi.Input<number>;
+    priority?: pulumi.Input<number | undefined>;
     /**
      * Condition: Quality of Service 0: At most once 1: At least once 2: Exactly once.
      */
-    qos?: pulumi.Input<string>;
+    qos?: pulumi.Input<string | undefined>;
     /**
      * Remarks, up to 128 characters.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Resources, requiring matching subscriptions.
      */
-    resources?: pulumi.Input<string>;
+    resources?: pulumi.Input<string | undefined>;
     /**
      * Condition - Reserved message 1, match reserved message; 2, match unreserved message, 3. match reserved and unreserved message.
      */
-    retain?: pulumi.Input<number>;
+    retain?: pulumi.Input<number | undefined>;
     /**
      * Condition - Username.
      */
-    username?: pulumi.Input<string>;
+    username?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -292,7 +292,7 @@ export interface AuthorizationPolicyArgs {
     /**
      * Condition - Client ID, supports regular expressions.
      */
-    clientId?: pulumi.Input<string>;
+    clientId?: pulumi.Input<string | undefined>;
     /**
      * Decision: allow/deny.
      */
@@ -304,7 +304,7 @@ export interface AuthorizationPolicyArgs {
     /**
      * Condition - Client IP address, supports IP or CIDR.
      */
-    ip?: pulumi.Input<string>;
+    ip?: pulumi.Input<string | undefined>;
     /**
      * Policy name, cannot be empty, 3-64 characters, supports Chinese characters, letters, numbers, "-" and "_".
      */
@@ -324,11 +324,11 @@ export interface AuthorizationPolicyArgs {
     /**
      * Remarks, up to 128 characters.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Resources, requiring matching subscriptions.
      */
-    resources?: pulumi.Input<string>;
+    resources?: pulumi.Input<string | undefined>;
     /**
      * Condition - Reserved message 1, match reserved message; 2, match unreserved message, 3. match reserved and unreserved message.
      */
@@ -336,5 +336,5 @@ export interface AuthorizationPolicyArgs {
     /**
      * Condition - Username.
      */
-    username?: pulumi.Input<string>;
+    username?: pulumi.Input<string | undefined>;
 }

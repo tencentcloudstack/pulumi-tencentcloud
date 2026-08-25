@@ -44,7 +44,7 @@ import (
 //
 // ## Import
 //
-// css callback_rule can be imported using the id, e.g.
+// css callbackRule can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Css/callbackRuleAttachment:CallbackRuleAttachment callback_rule templateId#domainName

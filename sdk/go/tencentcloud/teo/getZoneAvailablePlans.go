@@ -62,12 +62,8 @@ type GetZoneAvailablePlansResult struct {
 }
 
 func GetZoneAvailablePlansOutput(ctx *pulumi.Context, args GetZoneAvailablePlansOutputArgs, opts ...pulumi.InvokeOption) GetZoneAvailablePlansResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetZoneAvailablePlansResultOutput, error) {
-			args := v.(GetZoneAvailablePlansArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Teo/getZoneAvailablePlans:getZoneAvailablePlans", args, GetZoneAvailablePlansResultOutput{}, options).(GetZoneAvailablePlansResultOutput), nil
-		}).(GetZoneAvailablePlansResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Teo/getZoneAvailablePlans:getZoneAvailablePlans", args, GetZoneAvailablePlansResultOutput{}, options).(GetZoneAvailablePlansResultOutput)
 }
 
 // A collection of arguments for invoking getZoneAvailablePlans.

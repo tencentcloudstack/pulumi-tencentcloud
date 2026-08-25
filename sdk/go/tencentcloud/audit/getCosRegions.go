@@ -62,12 +62,8 @@ type GetCosRegionsResult struct {
 }
 
 func GetCosRegionsOutput(ctx *pulumi.Context, args GetCosRegionsOutputArgs, opts ...pulumi.InvokeOption) GetCosRegionsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetCosRegionsResultOutput, error) {
-			args := v.(GetCosRegionsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Audit/getCosRegions:getCosRegions", args, GetCosRegionsResultOutput{}, options).(GetCosRegionsResultOutput), nil
-		}).(GetCosRegionsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Audit/getCosRegions:getCosRegions", args, GetCosRegionsResultOutput{}, options).(GetCosRegionsResultOutput)
 }
 
 // A collection of arguments for invoking getCosRegions.

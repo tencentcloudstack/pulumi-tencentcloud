@@ -25,10 +25,10 @@ import * as utilities from "../utilities";
  *     ],
  *     ipVersion: "IPv4",
  * });
- * const name = tencentcloud.ApiGateway.getServicesOutput({
+ * const name = tencentcloud.apigateway.getServicesOutput({
  *     serviceName: service.serviceName,
  * });
- * const id = tencentcloud.ApiGateway.getServicesOutput({
+ * const id = tencentcloud.apigateway.getServicesOutput({
  *     serviceId: service.id,
  * });
  * ```
@@ -102,10 +102,10 @@ export interface GetServicesResult {
  *     ],
  *     ipVersion: "IPv4",
  * });
- * const name = tencentcloud.ApiGateway.getServicesOutput({
+ * const name = tencentcloud.apigateway.getServicesOutput({
  *     serviceName: service.serviceName,
  * });
- * const id = tencentcloud.ApiGateway.getServicesOutput({
+ * const id = tencentcloud.apigateway.getServicesOutput({
  *     serviceId: service.id,
  * });
  * ```
@@ -127,13 +127,13 @@ export interface GetServicesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Service ID for query.
      */
-    serviceId?: pulumi.Input<string>;
+    serviceId?: pulumi.Input<string | undefined>;
     /**
      * Service name for query.
      */
-    serviceName?: pulumi.Input<string>;
+    serviceName?: pulumi.Input<string | undefined>;
 }

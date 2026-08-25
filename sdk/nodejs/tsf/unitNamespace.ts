@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * tsf unit_namespace can be imported using the id, e.g.
+ * tsf unitNamespace can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Tsf/unitNamespace:UnitNamespace unit_namespace gw-ins-lvdypq5k#namespace-vwgo38wy
@@ -124,23 +124,23 @@ export interface UnitNamespaceState {
     /**
      * Create time. Note: This field may return null, indicating that no valid value was found.
      */
-    createdTime?: pulumi.Input<string>;
+    createdTime?: pulumi.Input<string | undefined>;
     /**
      * gateway instance Id.
      */
-    gatewayInstanceId?: pulumi.Input<string>;
+    gatewayInstanceId?: pulumi.Input<string | undefined>;
     /**
      * namespace id.
      */
-    namespaceId?: pulumi.Input<string>;
+    namespaceId?: pulumi.Input<string | undefined>;
     /**
      * namespace name.
      */
-    namespaceName?: pulumi.Input<string>;
+    namespaceName?: pulumi.Input<string | undefined>;
     /**
      * Update time. Note: This field may return null, indicating that no valid value was found.
      */
-    updatedTime?: pulumi.Input<string>;
+    updatedTime?: pulumi.Input<string | undefined>;
 }
 
 /**

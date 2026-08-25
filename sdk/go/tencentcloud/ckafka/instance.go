@@ -41,7 +41,7 @@ import (
 //				return err
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
@@ -49,9 +49,9 @@ import (
 //				return err
 //			}
 //			// create vpc subnet
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				Name:             pulumi.String("subnet"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String("ap-guangzhou-6"),
 //				CidrBlock:        pulumi.String("10.0.20.0/28"),
 //				IsMulticast:      pulumi.Bool(false),
@@ -64,8 +64,8 @@ import (
 //				InstanceName:       pulumi.String("tf-example"),
 //				ZoneId:             pulumi.String(gz.Zones[0].Id),
 //				Period:             pulumi.Int(1),
-//				VpcId:              vpc.ID(),
-//				SubnetId:           subnet.ID(),
+//				VpcId:              vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:           subnet2.ID().ToIDOutput().ToStringOutput(),
 //				MsgRetentionTime:   pulumi.Int(1300),
 //				RenewFlag:          pulumi.Int(0),
 //				KafkaVersion:       pulumi.String("2.8.1"),
@@ -83,6 +83,7 @@ import (
 //				DynamicRetentionConfig: &ckafka.InstanceDynamicRetentionConfigArgs{
 //					Enable: pulumi.Int(1),
 //				},
+//				DeleteProtectionEnable: pulumi.Int(1),
 //			})
 //			if err != nil {
 //				return err
@@ -125,7 +126,7 @@ import (
 //				return err
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
@@ -133,9 +134,9 @@ import (
 //				return err
 //			}
 //			// create vpc subnet
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				Name:             pulumi.String("subnet"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String("ap-guangzhou-6"),
 //				CidrBlock:        pulumi.String("10.0.20.0/28"),
 //				IsMulticast:      pulumi.Bool(false),
@@ -153,8 +154,8 @@ import (
 //					pulumi.String(gz7.Zones[0].Id),
 //				},
 //				RenewFlag:          pulumi.Int(0),
-//				VpcId:              vpc.ID(),
-//				SubnetId:           subnet.ID(),
+//				VpcId:              vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:           subnet2.ID().ToIDOutput().ToStringOutput(),
 //				MsgRetentionTime:   pulumi.Int(4320),
 //				KafkaVersion:       pulumi.String("2.8.1"),
 //				DiskSize:           pulumi.Int(200),
@@ -198,9 +199,13 @@ type Instance struct {
 	ChargeType pulumi.StringPtrOutput `pulumi:"chargeType"`
 	// Instance configuration.
 	Config InstanceConfigPtrOutput `pulumi:"config"`
+	// Custom certificate ID, only effective when `specificationsType` is set to `profession`, supports custom certificate capabilities.
+	CustomSslCertId pulumi.StringPtrOutput `pulumi:"customSslCertId"`
+	// Instance delete protection switch of ckafka instance: `1` enable, `0` disable.
+	DeleteProtectionEnable pulumi.IntOutput `pulumi:"deleteProtectionEnable"`
 	// Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
 	DiskSize pulumi.IntOutput `pulumi:"diskSize"`
-	// Type of disk.
+	// Disk type for Professional Edition instances; this field is not required for Standard Edition instances. `CLOUD_SSD`: SSD Cloud Disk; `CLOUD_BASIC`: High-Performance Cloud Disk. If not specified, the default value is `CLOUD_BASIC`.
 	DiskType pulumi.StringOutput `pulumi:"diskType"`
 	// Dynamic message retention policy configuration.
 	DynamicRetentionConfig InstanceDynamicRetentionConfigOutput `pulumi:"dynamicRetentionConfig"`
@@ -298,9 +303,13 @@ type instanceState struct {
 	ChargeType *string `pulumi:"chargeType"`
 	// Instance configuration.
 	Config *InstanceConfig `pulumi:"config"`
+	// Custom certificate ID, only effective when `specificationsType` is set to `profession`, supports custom certificate capabilities.
+	CustomSslCertId *string `pulumi:"customSslCertId"`
+	// Instance delete protection switch of ckafka instance: `1` enable, `0` disable.
+	DeleteProtectionEnable *int `pulumi:"deleteProtectionEnable"`
 	// Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
 	DiskSize *int `pulumi:"diskSize"`
-	// Type of disk.
+	// Disk type for Professional Edition instances; this field is not required for Standard Edition instances. `CLOUD_SSD`: SSD Cloud Disk; `CLOUD_BASIC`: High-Performance Cloud Disk. If not specified, the default value is `CLOUD_BASIC`.
 	DiskType *string `pulumi:"diskType"`
 	// Dynamic message retention policy configuration.
 	DynamicRetentionConfig *InstanceDynamicRetentionConfig `pulumi:"dynamicRetentionConfig"`
@@ -363,9 +372,13 @@ type InstanceState struct {
 	ChargeType pulumi.StringPtrInput
 	// Instance configuration.
 	Config InstanceConfigPtrInput
+	// Custom certificate ID, only effective when `specificationsType` is set to `profession`, supports custom certificate capabilities.
+	CustomSslCertId pulumi.StringPtrInput
+	// Instance delete protection switch of ckafka instance: `1` enable, `0` disable.
+	DeleteProtectionEnable pulumi.IntPtrInput
 	// Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
 	DiskSize pulumi.IntPtrInput
-	// Type of disk.
+	// Disk type for Professional Edition instances; this field is not required for Standard Edition instances. `CLOUD_SSD`: SSD Cloud Disk; `CLOUD_BASIC`: High-Performance Cloud Disk. If not specified, the default value is `CLOUD_BASIC`.
 	DiskType pulumi.StringPtrInput
 	// Dynamic message retention policy configuration.
 	DynamicRetentionConfig InstanceDynamicRetentionConfigPtrInput
@@ -432,9 +445,13 @@ type instanceArgs struct {
 	ChargeType *string `pulumi:"chargeType"`
 	// Instance configuration.
 	Config *InstanceConfig `pulumi:"config"`
+	// Custom certificate ID, only effective when `specificationsType` is set to `profession`, supports custom certificate capabilities.
+	CustomSslCertId *string `pulumi:"customSslCertId"`
+	// Instance delete protection switch of ckafka instance: `1` enable, `0` disable.
+	DeleteProtectionEnable *int `pulumi:"deleteProtectionEnable"`
 	// Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
 	DiskSize *int `pulumi:"diskSize"`
-	// Type of disk.
+	// Disk type for Professional Edition instances; this field is not required for Standard Edition instances. `CLOUD_SSD`: SSD Cloud Disk; `CLOUD_BASIC`: High-Performance Cloud Disk. If not specified, the default value is `CLOUD_BASIC`.
 	DiskType *string `pulumi:"diskType"`
 	// Dynamic message retention policy configuration.
 	DynamicRetentionConfig *InstanceDynamicRetentionConfig `pulumi:"dynamicRetentionConfig"`
@@ -494,9 +511,13 @@ type InstanceArgs struct {
 	ChargeType pulumi.StringPtrInput
 	// Instance configuration.
 	Config InstanceConfigPtrInput
+	// Custom certificate ID, only effective when `specificationsType` is set to `profession`, supports custom certificate capabilities.
+	CustomSslCertId pulumi.StringPtrInput
+	// Instance delete protection switch of ckafka instance: `1` enable, `0` disable.
+	DeleteProtectionEnable pulumi.IntPtrInput
 	// Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
 	DiskSize pulumi.IntPtrInput
-	// Type of disk.
+	// Disk type for Professional Edition instances; this field is not required for Standard Edition instances. `CLOUD_SSD`: SSD Cloud Disk; `CLOUD_BASIC`: High-Performance Cloud Disk. If not specified, the default value is `CLOUD_BASIC`.
 	DiskType pulumi.StringPtrInput
 	// Dynamic message retention policy configuration.
 	DynamicRetentionConfig InstanceDynamicRetentionConfigPtrInput
@@ -650,12 +671,22 @@ func (o InstanceOutput) Config() InstanceConfigPtrOutput {
 	return o.ApplyT(func(v *Instance) InstanceConfigPtrOutput { return v.Config }).(InstanceConfigPtrOutput)
 }
 
+// Custom certificate ID, only effective when `specificationsType` is set to `profession`, supports custom certificate capabilities.
+func (o InstanceOutput) CustomSslCertId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.CustomSslCertId }).(pulumi.StringPtrOutput)
+}
+
+// Instance delete protection switch of ckafka instance: `1` enable, `0` disable.
+func (o InstanceOutput) DeleteProtectionEnable() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.DeleteProtectionEnable }).(pulumi.IntOutput)
+}
+
 // Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
 func (o InstanceOutput) DiskSize() pulumi.IntOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.DiskSize }).(pulumi.IntOutput)
 }
 
-// Type of disk.
+// Disk type for Professional Edition instances; this field is not required for Standard Edition instances. `CLOUD_SSD`: SSD Cloud Disk; `CLOUD_BASIC`: High-Performance Cloud Disk. If not specified, the default value is `CLOUD_BASIC`.
 func (o InstanceOutput) DiskType() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.DiskType }).(pulumi.StringOutput)
 }

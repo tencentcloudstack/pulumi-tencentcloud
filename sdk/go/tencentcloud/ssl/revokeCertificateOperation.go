@@ -42,7 +42,7 @@ import (
 //
 // ## Import
 //
-// ssl revoke_certificate can be imported using the id, e.g.
+// ssl revokeCertificate can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Ssl/revokeCertificateOperation:RevokeCertificateOperation revoke_certificate revoke_certificate_id

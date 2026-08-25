@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * mariadb backup_time can be imported using the id, e.g.
+ * mariadb backupTime can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Mariadb/backupTime:BackupTime backup_time backup_time_id
@@ -112,15 +112,15 @@ export interface BackupTimeState {
     /**
      * End time of daily backup window in the format of `mm:ss`, such as 23:59.
      */
-    endBackupTime?: pulumi.Input<string>;
+    endBackupTime?: pulumi.Input<string | undefined>;
     /**
      * instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Start time of daily backup window in the format of `mm:ss`, such as 22:00.
      */
-    startBackupTime?: pulumi.Input<string>;
+    startBackupTime?: pulumi.Input<string | undefined>;
 }
 
 /**

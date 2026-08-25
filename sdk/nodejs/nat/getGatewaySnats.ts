@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const snat = tencentcloud.Nat.getGatewaySnats({
+ * const snat = tencentcloud.nat.getGatewaySnats({
  *     natGatewayId: myNat.id,
  *     subnetId: mySubnet.id,
  *     publicIpAddrs: ["50.29.23.234"],
@@ -94,7 +94,7 @@ export interface GetGatewaySnatsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const snat = tencentcloud.Nat.getGatewaySnats({
+ * const snat = tencentcloud.nat.getGatewaySnats({
  *     natGatewayId: myNat.id,
  *     subnetId: mySubnet.id,
  *     publicIpAddrs: ["50.29.23.234"],
@@ -122,11 +122,11 @@ export interface GetGatewaySnatsOutputArgs {
     /**
      * Description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * NAT gateway ID.
      */
@@ -134,13 +134,13 @@ export interface GetGatewaySnatsOutputArgs {
     /**
      * Elastic IP address pool.
      */
-    publicIpAddrs?: pulumi.Input<pulumi.Input<string>[]>;
+    publicIpAddrs?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Subnet instance ID.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
 }

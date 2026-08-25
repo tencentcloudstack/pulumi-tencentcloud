@@ -162,51 +162,51 @@ export interface CngwNetworkState {
     /**
      * description of clb.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * gateway ID.
      */
-    gatewayId?: pulumi.Input<string>;
+    gatewayId?: pulumi.Input<string | undefined>;
     /**
      * gateway group ID.
      */
-    groupId?: pulumi.Input<string>;
+    groupId?: pulumi.Input<string | undefined>;
     /**
      * internet type. Reference value:`IPV4` (default value), `IPV6`.
      */
-    internetAddressVersion?: pulumi.Input<string>;
+    internetAddressVersion?: pulumi.Input<string | undefined>;
     /**
      * public network bandwidth.
      */
-    internetMaxBandwidthOut?: pulumi.Input<number>;
+    internetMaxBandwidthOut?: pulumi.Input<number | undefined>;
     /**
      * trade type of internet. Reference value:`BANDWIDTH` (default value), `TRAFFIC`.
      */
-    internetPayMode?: pulumi.Input<string>;
+    internetPayMode?: pulumi.Input<string | undefined>;
     /**
      * primary availability zone.
      */
-    masterZoneId?: pulumi.Input<string>;
+    masterZoneId?: pulumi.Input<string | undefined>;
     /**
      * Whether load balancing has multiple availability zones.
      */
-    multiZoneFlag?: pulumi.Input<boolean>;
+    multiZoneFlag?: pulumi.Input<boolean | undefined>;
     /**
      * network id.
      */
-    networkId?: pulumi.Input<string>;
+    networkId?: pulumi.Input<string | undefined>;
     /**
      * specification type of clb. Default `shared` type when this parameter is empty, Note: input `shared` is not supported when creating. Reference value:`clb.c2.medium`, `clb.c3.small`, `clb.c3.medium`, `clb.c4.small`, `clb.c4.medium`, `clb.c4.large`, `clb.c4.xlarge`.
      */
-    slaType?: pulumi.Input<string>;
+    slaType?: pulumi.Input<string | undefined>;
     /**
      * alternate availability zone.
      */
-    slaveZoneId?: pulumi.Input<string>;
+    slaveZoneId?: pulumi.Input<string | undefined>;
     /**
      * clb vip.
      */
-    vip?: pulumi.Input<string>;
+    vip?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -216,7 +216,7 @@ export interface CngwNetworkArgs {
     /**
      * description of clb.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * gateway ID.
      */
@@ -228,29 +228,29 @@ export interface CngwNetworkArgs {
     /**
      * internet type. Reference value:`IPV4` (default value), `IPV6`.
      */
-    internetAddressVersion?: pulumi.Input<string>;
+    internetAddressVersion?: pulumi.Input<string | undefined>;
     /**
      * public network bandwidth.
      */
-    internetMaxBandwidthOut?: pulumi.Input<number>;
+    internetMaxBandwidthOut?: pulumi.Input<number | undefined>;
     /**
      * trade type of internet. Reference value:`BANDWIDTH` (default value), `TRAFFIC`.
      */
-    internetPayMode?: pulumi.Input<string>;
+    internetPayMode?: pulumi.Input<string | undefined>;
     /**
      * primary availability zone.
      */
-    masterZoneId?: pulumi.Input<string>;
+    masterZoneId?: pulumi.Input<string | undefined>;
     /**
      * Whether load balancing has multiple availability zones.
      */
-    multiZoneFlag?: pulumi.Input<boolean>;
+    multiZoneFlag?: pulumi.Input<boolean | undefined>;
     /**
      * specification type of clb. Default `shared` type when this parameter is empty, Note: input `shared` is not supported when creating. Reference value:`clb.c2.medium`, `clb.c3.small`, `clb.c3.medium`, `clb.c4.small`, `clb.c4.medium`, `clb.c4.large`, `clb.c4.xlarge`.
      */
-    slaType?: pulumi.Input<string>;
+    slaType?: pulumi.Input<string | undefined>;
     /**
      * alternate availability zone.
      */
-    slaveZoneId?: pulumi.Input<string>;
+    slaveZoneId?: pulumi.Input<string | undefined>;
 }

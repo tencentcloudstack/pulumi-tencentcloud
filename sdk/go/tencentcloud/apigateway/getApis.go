@@ -41,7 +41,7 @@ import (
 //				return err
 //			}
 //			api, err := apigateway.NewApi(ctx, "api", &apigateway.ApiArgs{
-//				ServiceId:              service.ID(),
+//				ServiceId:              service.ID().ToIDOutput().ToStringOutput(),
 //				ApiName:                pulumi.String("hello"),
 //				ApiDesc:                pulumi.String("my hello api"),
 //				AuthType:               pulumi.String("NONE"),
@@ -62,11 +62,11 @@ import (
 //				return err
 //			}
 //			_ = apigateway.GetApisOutput(ctx, apigateway.GetApisOutputArgs{
-//				ServiceId: service.ID(),
-//				ApiId:     api.ID(),
+//				ServiceId: service.ID().ToIDOutput().ToStringOutput(),
+//				ApiId:     api.ID().ToIDOutput().ToStringOutput(),
 //			}, nil)
 //			_ = apigateway.GetApisOutput(ctx, apigateway.GetApisOutputArgs{
-//				ServiceId: service.ID(),
+//				ServiceId: service.ID().ToIDOutput().ToStringOutput(),
 //				ApiName:   api.ApiName,
 //			}, nil)
 //			return nil
@@ -111,12 +111,8 @@ type GetApisResult struct {
 }
 
 func GetApisOutput(ctx *pulumi.Context, args GetApisOutputArgs, opts ...pulumi.InvokeOption) GetApisResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetApisResultOutput, error) {
-			args := v.(GetApisArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:ApiGateway/getApis:getApis", args, GetApisResultOutput{}, options).(GetApisResultOutput), nil
-		}).(GetApisResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:ApiGateway/getApis:getApis", args, GetApisResultOutput{}, options).(GetApisResultOutput)
 }
 
 // A collection of arguments for invoking getApis.

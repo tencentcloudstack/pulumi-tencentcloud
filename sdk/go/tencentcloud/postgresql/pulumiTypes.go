@@ -1104,6 +1104,112 @@ func (o InstanceDbNodeSetArrayOutput) Index(i pulumi.IntInput) InstanceDbNodeSet
 	}).(InstanceDbNodeSetOutput)
 }
 
+type ParameterTemplateConfigModifyParamEntrySet struct {
+	// The new value to which the parameter will be modified. When this parameter is used as an input parameter, its value must be a string, such as `0.1` (decimal), `1000` (integer), and `replica` (enum).
+	ExpectedValue string `pulumi:"expectedValue"`
+	// Parameter name.
+	Name string `pulumi:"name"`
+}
+
+// ParameterTemplateConfigModifyParamEntrySetInput is an input type that accepts ParameterTemplateConfigModifyParamEntrySetArgs and ParameterTemplateConfigModifyParamEntrySetOutput values.
+// You can construct a concrete instance of `ParameterTemplateConfigModifyParamEntrySetInput` via:
+//
+//	ParameterTemplateConfigModifyParamEntrySetArgs{...}
+type ParameterTemplateConfigModifyParamEntrySetInput interface {
+	pulumi.Input
+
+	ToParameterTemplateConfigModifyParamEntrySetOutput() ParameterTemplateConfigModifyParamEntrySetOutput
+	ToParameterTemplateConfigModifyParamEntrySetOutputWithContext(context.Context) ParameterTemplateConfigModifyParamEntrySetOutput
+}
+
+type ParameterTemplateConfigModifyParamEntrySetArgs struct {
+	// The new value to which the parameter will be modified. When this parameter is used as an input parameter, its value must be a string, such as `0.1` (decimal), `1000` (integer), and `replica` (enum).
+	ExpectedValue pulumi.StringInput `pulumi:"expectedValue"`
+	// Parameter name.
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (ParameterTemplateConfigModifyParamEntrySetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ParameterTemplateConfigModifyParamEntrySet)(nil)).Elem()
+}
+
+func (i ParameterTemplateConfigModifyParamEntrySetArgs) ToParameterTemplateConfigModifyParamEntrySetOutput() ParameterTemplateConfigModifyParamEntrySetOutput {
+	return i.ToParameterTemplateConfigModifyParamEntrySetOutputWithContext(context.Background())
+}
+
+func (i ParameterTemplateConfigModifyParamEntrySetArgs) ToParameterTemplateConfigModifyParamEntrySetOutputWithContext(ctx context.Context) ParameterTemplateConfigModifyParamEntrySetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ParameterTemplateConfigModifyParamEntrySetOutput)
+}
+
+// ParameterTemplateConfigModifyParamEntrySetArrayInput is an input type that accepts ParameterTemplateConfigModifyParamEntrySetArray and ParameterTemplateConfigModifyParamEntrySetArrayOutput values.
+// You can construct a concrete instance of `ParameterTemplateConfigModifyParamEntrySetArrayInput` via:
+//
+//	ParameterTemplateConfigModifyParamEntrySetArray{ ParameterTemplateConfigModifyParamEntrySetArgs{...} }
+type ParameterTemplateConfigModifyParamEntrySetArrayInput interface {
+	pulumi.Input
+
+	ToParameterTemplateConfigModifyParamEntrySetArrayOutput() ParameterTemplateConfigModifyParamEntrySetArrayOutput
+	ToParameterTemplateConfigModifyParamEntrySetArrayOutputWithContext(context.Context) ParameterTemplateConfigModifyParamEntrySetArrayOutput
+}
+
+type ParameterTemplateConfigModifyParamEntrySetArray []ParameterTemplateConfigModifyParamEntrySetInput
+
+func (ParameterTemplateConfigModifyParamEntrySetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ParameterTemplateConfigModifyParamEntrySet)(nil)).Elem()
+}
+
+func (i ParameterTemplateConfigModifyParamEntrySetArray) ToParameterTemplateConfigModifyParamEntrySetArrayOutput() ParameterTemplateConfigModifyParamEntrySetArrayOutput {
+	return i.ToParameterTemplateConfigModifyParamEntrySetArrayOutputWithContext(context.Background())
+}
+
+func (i ParameterTemplateConfigModifyParamEntrySetArray) ToParameterTemplateConfigModifyParamEntrySetArrayOutputWithContext(ctx context.Context) ParameterTemplateConfigModifyParamEntrySetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ParameterTemplateConfigModifyParamEntrySetArrayOutput)
+}
+
+type ParameterTemplateConfigModifyParamEntrySetOutput struct{ *pulumi.OutputState }
+
+func (ParameterTemplateConfigModifyParamEntrySetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ParameterTemplateConfigModifyParamEntrySet)(nil)).Elem()
+}
+
+func (o ParameterTemplateConfigModifyParamEntrySetOutput) ToParameterTemplateConfigModifyParamEntrySetOutput() ParameterTemplateConfigModifyParamEntrySetOutput {
+	return o
+}
+
+func (o ParameterTemplateConfigModifyParamEntrySetOutput) ToParameterTemplateConfigModifyParamEntrySetOutputWithContext(ctx context.Context) ParameterTemplateConfigModifyParamEntrySetOutput {
+	return o
+}
+
+// The new value to which the parameter will be modified. When this parameter is used as an input parameter, its value must be a string, such as `0.1` (decimal), `1000` (integer), and `replica` (enum).
+func (o ParameterTemplateConfigModifyParamEntrySetOutput) ExpectedValue() pulumi.StringOutput {
+	return o.ApplyT(func(v ParameterTemplateConfigModifyParamEntrySet) string { return v.ExpectedValue }).(pulumi.StringOutput)
+}
+
+// Parameter name.
+func (o ParameterTemplateConfigModifyParamEntrySetOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ParameterTemplateConfigModifyParamEntrySet) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type ParameterTemplateConfigModifyParamEntrySetArrayOutput struct{ *pulumi.OutputState }
+
+func (ParameterTemplateConfigModifyParamEntrySetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ParameterTemplateConfigModifyParamEntrySet)(nil)).Elem()
+}
+
+func (o ParameterTemplateConfigModifyParamEntrySetArrayOutput) ToParameterTemplateConfigModifyParamEntrySetArrayOutput() ParameterTemplateConfigModifyParamEntrySetArrayOutput {
+	return o
+}
+
+func (o ParameterTemplateConfigModifyParamEntrySetArrayOutput) ToParameterTemplateConfigModifyParamEntrySetArrayOutputWithContext(ctx context.Context) ParameterTemplateConfigModifyParamEntrySetArrayOutput {
+	return o
+}
+
+func (o ParameterTemplateConfigModifyParamEntrySetArrayOutput) Index(i pulumi.IntInput) ParameterTemplateConfigModifyParamEntrySetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ParameterTemplateConfigModifyParamEntrySet {
+		return vs[0].([]ParameterTemplateConfigModifyParamEntrySet)[vs[1].(int)]
+	}).(ParameterTemplateConfigModifyParamEntrySetOutput)
+}
+
 type ParameterTemplateModifyParamEntrySet struct {
 	// Modify the parameter value. The input parameters are passed in the form of strings, for example: decimal `0.1`, integer `1000`, enumeration `replica`.
 	ExpectedValue string `pulumi:"expectedValue"`
@@ -2460,6 +2566,427 @@ func (o GetDbInstanceClassesClassInfoSetArrayOutput) Index(i pulumi.IntInput) Ge
 	}).(GetDbInstanceClassesClassInfoSetOutput)
 }
 
+type GetDbInstanceSecurityGroupsSecurityGroupSet struct {
+	// Creation time.
+	CreateTime string `pulumi:"createTime"`
+	// Inbound rule.
+	Inbounds []GetDbInstanceSecurityGroupsSecurityGroupSetInbound `pulumi:"inbounds"`
+	// Outbound rule.
+	Outbounds []GetDbInstanceSecurityGroupsSecurityGroupSetOutbound `pulumi:"outbounds"`
+	// Project ID.
+	ProjectId int `pulumi:"projectId"`
+	// Security group remark.
+	SecurityGroupDescription string `pulumi:"securityGroupDescription"`
+	// Security group ID.
+	SecurityGroupId string `pulumi:"securityGroupId"`
+	// Security group name.
+	SecurityGroupName string `pulumi:"securityGroupName"`
+}
+
+// GetDbInstanceSecurityGroupsSecurityGroupSetInput is an input type that accepts GetDbInstanceSecurityGroupsSecurityGroupSetArgs and GetDbInstanceSecurityGroupsSecurityGroupSetOutput values.
+// You can construct a concrete instance of `GetDbInstanceSecurityGroupsSecurityGroupSetInput` via:
+//
+//	GetDbInstanceSecurityGroupsSecurityGroupSetArgs{...}
+type GetDbInstanceSecurityGroupsSecurityGroupSetInput interface {
+	pulumi.Input
+
+	ToGetDbInstanceSecurityGroupsSecurityGroupSetOutput() GetDbInstanceSecurityGroupsSecurityGroupSetOutput
+	ToGetDbInstanceSecurityGroupsSecurityGroupSetOutputWithContext(context.Context) GetDbInstanceSecurityGroupsSecurityGroupSetOutput
+}
+
+type GetDbInstanceSecurityGroupsSecurityGroupSetArgs struct {
+	// Creation time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Inbound rule.
+	Inbounds GetDbInstanceSecurityGroupsSecurityGroupSetInboundArrayInput `pulumi:"inbounds"`
+	// Outbound rule.
+	Outbounds GetDbInstanceSecurityGroupsSecurityGroupSetOutboundArrayInput `pulumi:"outbounds"`
+	// Project ID.
+	ProjectId pulumi.IntInput `pulumi:"projectId"`
+	// Security group remark.
+	SecurityGroupDescription pulumi.StringInput `pulumi:"securityGroupDescription"`
+	// Security group ID.
+	SecurityGroupId pulumi.StringInput `pulumi:"securityGroupId"`
+	// Security group name.
+	SecurityGroupName pulumi.StringInput `pulumi:"securityGroupName"`
+}
+
+func (GetDbInstanceSecurityGroupsSecurityGroupSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDbInstanceSecurityGroupsSecurityGroupSet)(nil)).Elem()
+}
+
+func (i GetDbInstanceSecurityGroupsSecurityGroupSetArgs) ToGetDbInstanceSecurityGroupsSecurityGroupSetOutput() GetDbInstanceSecurityGroupsSecurityGroupSetOutput {
+	return i.ToGetDbInstanceSecurityGroupsSecurityGroupSetOutputWithContext(context.Background())
+}
+
+func (i GetDbInstanceSecurityGroupsSecurityGroupSetArgs) ToGetDbInstanceSecurityGroupsSecurityGroupSetOutputWithContext(ctx context.Context) GetDbInstanceSecurityGroupsSecurityGroupSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDbInstanceSecurityGroupsSecurityGroupSetOutput)
+}
+
+// GetDbInstanceSecurityGroupsSecurityGroupSetArrayInput is an input type that accepts GetDbInstanceSecurityGroupsSecurityGroupSetArray and GetDbInstanceSecurityGroupsSecurityGroupSetArrayOutput values.
+// You can construct a concrete instance of `GetDbInstanceSecurityGroupsSecurityGroupSetArrayInput` via:
+//
+//	GetDbInstanceSecurityGroupsSecurityGroupSetArray{ GetDbInstanceSecurityGroupsSecurityGroupSetArgs{...} }
+type GetDbInstanceSecurityGroupsSecurityGroupSetArrayInput interface {
+	pulumi.Input
+
+	ToGetDbInstanceSecurityGroupsSecurityGroupSetArrayOutput() GetDbInstanceSecurityGroupsSecurityGroupSetArrayOutput
+	ToGetDbInstanceSecurityGroupsSecurityGroupSetArrayOutputWithContext(context.Context) GetDbInstanceSecurityGroupsSecurityGroupSetArrayOutput
+}
+
+type GetDbInstanceSecurityGroupsSecurityGroupSetArray []GetDbInstanceSecurityGroupsSecurityGroupSetInput
+
+func (GetDbInstanceSecurityGroupsSecurityGroupSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDbInstanceSecurityGroupsSecurityGroupSet)(nil)).Elem()
+}
+
+func (i GetDbInstanceSecurityGroupsSecurityGroupSetArray) ToGetDbInstanceSecurityGroupsSecurityGroupSetArrayOutput() GetDbInstanceSecurityGroupsSecurityGroupSetArrayOutput {
+	return i.ToGetDbInstanceSecurityGroupsSecurityGroupSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetDbInstanceSecurityGroupsSecurityGroupSetArray) ToGetDbInstanceSecurityGroupsSecurityGroupSetArrayOutputWithContext(ctx context.Context) GetDbInstanceSecurityGroupsSecurityGroupSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDbInstanceSecurityGroupsSecurityGroupSetArrayOutput)
+}
+
+type GetDbInstanceSecurityGroupsSecurityGroupSetOutput struct{ *pulumi.OutputState }
+
+func (GetDbInstanceSecurityGroupsSecurityGroupSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDbInstanceSecurityGroupsSecurityGroupSet)(nil)).Elem()
+}
+
+func (o GetDbInstanceSecurityGroupsSecurityGroupSetOutput) ToGetDbInstanceSecurityGroupsSecurityGroupSetOutput() GetDbInstanceSecurityGroupsSecurityGroupSetOutput {
+	return o
+}
+
+func (o GetDbInstanceSecurityGroupsSecurityGroupSetOutput) ToGetDbInstanceSecurityGroupsSecurityGroupSetOutputWithContext(ctx context.Context) GetDbInstanceSecurityGroupsSecurityGroupSetOutput {
+	return o
+}
+
+// Creation time.
+func (o GetDbInstanceSecurityGroupsSecurityGroupSetOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceSecurityGroupsSecurityGroupSet) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Inbound rule.
+func (o GetDbInstanceSecurityGroupsSecurityGroupSetOutput) Inbounds() GetDbInstanceSecurityGroupsSecurityGroupSetInboundArrayOutput {
+	return o.ApplyT(func(v GetDbInstanceSecurityGroupsSecurityGroupSet) []GetDbInstanceSecurityGroupsSecurityGroupSetInbound {
+		return v.Inbounds
+	}).(GetDbInstanceSecurityGroupsSecurityGroupSetInboundArrayOutput)
+}
+
+// Outbound rule.
+func (o GetDbInstanceSecurityGroupsSecurityGroupSetOutput) Outbounds() GetDbInstanceSecurityGroupsSecurityGroupSetOutboundArrayOutput {
+	return o.ApplyT(func(v GetDbInstanceSecurityGroupsSecurityGroupSet) []GetDbInstanceSecurityGroupsSecurityGroupSetOutbound {
+		return v.Outbounds
+	}).(GetDbInstanceSecurityGroupsSecurityGroupSetOutboundArrayOutput)
+}
+
+// Project ID.
+func (o GetDbInstanceSecurityGroupsSecurityGroupSetOutput) ProjectId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDbInstanceSecurityGroupsSecurityGroupSet) int { return v.ProjectId }).(pulumi.IntOutput)
+}
+
+// Security group remark.
+func (o GetDbInstanceSecurityGroupsSecurityGroupSetOutput) SecurityGroupDescription() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceSecurityGroupsSecurityGroupSet) string { return v.SecurityGroupDescription }).(pulumi.StringOutput)
+}
+
+// Security group ID.
+func (o GetDbInstanceSecurityGroupsSecurityGroupSetOutput) SecurityGroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceSecurityGroupsSecurityGroupSet) string { return v.SecurityGroupId }).(pulumi.StringOutput)
+}
+
+// Security group name.
+func (o GetDbInstanceSecurityGroupsSecurityGroupSetOutput) SecurityGroupName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceSecurityGroupsSecurityGroupSet) string { return v.SecurityGroupName }).(pulumi.StringOutput)
+}
+
+type GetDbInstanceSecurityGroupsSecurityGroupSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDbInstanceSecurityGroupsSecurityGroupSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDbInstanceSecurityGroupsSecurityGroupSet)(nil)).Elem()
+}
+
+func (o GetDbInstanceSecurityGroupsSecurityGroupSetArrayOutput) ToGetDbInstanceSecurityGroupsSecurityGroupSetArrayOutput() GetDbInstanceSecurityGroupsSecurityGroupSetArrayOutput {
+	return o
+}
+
+func (o GetDbInstanceSecurityGroupsSecurityGroupSetArrayOutput) ToGetDbInstanceSecurityGroupsSecurityGroupSetArrayOutputWithContext(ctx context.Context) GetDbInstanceSecurityGroupsSecurityGroupSetArrayOutput {
+	return o
+}
+
+func (o GetDbInstanceSecurityGroupsSecurityGroupSetArrayOutput) Index(i pulumi.IntInput) GetDbInstanceSecurityGroupsSecurityGroupSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDbInstanceSecurityGroupsSecurityGroupSet {
+		return vs[0].([]GetDbInstanceSecurityGroupsSecurityGroupSet)[vs[1].(int)]
+	}).(GetDbInstanceSecurityGroupsSecurityGroupSetOutput)
+}
+
+type GetDbInstanceSecurityGroupsSecurityGroupSetInbound struct {
+	// Policy, ACCEPT or DROP.
+	Action string `pulumi:"action"`
+	// Source or destination IP or IP range, e.g. 172.16.0.0/12.
+	CidrIp string `pulumi:"cidrIp"`
+	// Rule description.
+	Description string `pulumi:"description"`
+	// Network protocol, supports UDP, TCP, etc.
+	IpProtocol string `pulumi:"ipProtocol"`
+	// Port.
+	PortRange string `pulumi:"portRange"`
+}
+
+// GetDbInstanceSecurityGroupsSecurityGroupSetInboundInput is an input type that accepts GetDbInstanceSecurityGroupsSecurityGroupSetInboundArgs and GetDbInstanceSecurityGroupsSecurityGroupSetInboundOutput values.
+// You can construct a concrete instance of `GetDbInstanceSecurityGroupsSecurityGroupSetInboundInput` via:
+//
+//	GetDbInstanceSecurityGroupsSecurityGroupSetInboundArgs{...}
+type GetDbInstanceSecurityGroupsSecurityGroupSetInboundInput interface {
+	pulumi.Input
+
+	ToGetDbInstanceSecurityGroupsSecurityGroupSetInboundOutput() GetDbInstanceSecurityGroupsSecurityGroupSetInboundOutput
+	ToGetDbInstanceSecurityGroupsSecurityGroupSetInboundOutputWithContext(context.Context) GetDbInstanceSecurityGroupsSecurityGroupSetInboundOutput
+}
+
+type GetDbInstanceSecurityGroupsSecurityGroupSetInboundArgs struct {
+	// Policy, ACCEPT or DROP.
+	Action pulumi.StringInput `pulumi:"action"`
+	// Source or destination IP or IP range, e.g. 172.16.0.0/12.
+	CidrIp pulumi.StringInput `pulumi:"cidrIp"`
+	// Rule description.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Network protocol, supports UDP, TCP, etc.
+	IpProtocol pulumi.StringInput `pulumi:"ipProtocol"`
+	// Port.
+	PortRange pulumi.StringInput `pulumi:"portRange"`
+}
+
+func (GetDbInstanceSecurityGroupsSecurityGroupSetInboundArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDbInstanceSecurityGroupsSecurityGroupSetInbound)(nil)).Elem()
+}
+
+func (i GetDbInstanceSecurityGroupsSecurityGroupSetInboundArgs) ToGetDbInstanceSecurityGroupsSecurityGroupSetInboundOutput() GetDbInstanceSecurityGroupsSecurityGroupSetInboundOutput {
+	return i.ToGetDbInstanceSecurityGroupsSecurityGroupSetInboundOutputWithContext(context.Background())
+}
+
+func (i GetDbInstanceSecurityGroupsSecurityGroupSetInboundArgs) ToGetDbInstanceSecurityGroupsSecurityGroupSetInboundOutputWithContext(ctx context.Context) GetDbInstanceSecurityGroupsSecurityGroupSetInboundOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDbInstanceSecurityGroupsSecurityGroupSetInboundOutput)
+}
+
+// GetDbInstanceSecurityGroupsSecurityGroupSetInboundArrayInput is an input type that accepts GetDbInstanceSecurityGroupsSecurityGroupSetInboundArray and GetDbInstanceSecurityGroupsSecurityGroupSetInboundArrayOutput values.
+// You can construct a concrete instance of `GetDbInstanceSecurityGroupsSecurityGroupSetInboundArrayInput` via:
+//
+//	GetDbInstanceSecurityGroupsSecurityGroupSetInboundArray{ GetDbInstanceSecurityGroupsSecurityGroupSetInboundArgs{...} }
+type GetDbInstanceSecurityGroupsSecurityGroupSetInboundArrayInput interface {
+	pulumi.Input
+
+	ToGetDbInstanceSecurityGroupsSecurityGroupSetInboundArrayOutput() GetDbInstanceSecurityGroupsSecurityGroupSetInboundArrayOutput
+	ToGetDbInstanceSecurityGroupsSecurityGroupSetInboundArrayOutputWithContext(context.Context) GetDbInstanceSecurityGroupsSecurityGroupSetInboundArrayOutput
+}
+
+type GetDbInstanceSecurityGroupsSecurityGroupSetInboundArray []GetDbInstanceSecurityGroupsSecurityGroupSetInboundInput
+
+func (GetDbInstanceSecurityGroupsSecurityGroupSetInboundArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDbInstanceSecurityGroupsSecurityGroupSetInbound)(nil)).Elem()
+}
+
+func (i GetDbInstanceSecurityGroupsSecurityGroupSetInboundArray) ToGetDbInstanceSecurityGroupsSecurityGroupSetInboundArrayOutput() GetDbInstanceSecurityGroupsSecurityGroupSetInboundArrayOutput {
+	return i.ToGetDbInstanceSecurityGroupsSecurityGroupSetInboundArrayOutputWithContext(context.Background())
+}
+
+func (i GetDbInstanceSecurityGroupsSecurityGroupSetInboundArray) ToGetDbInstanceSecurityGroupsSecurityGroupSetInboundArrayOutputWithContext(ctx context.Context) GetDbInstanceSecurityGroupsSecurityGroupSetInboundArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDbInstanceSecurityGroupsSecurityGroupSetInboundArrayOutput)
+}
+
+type GetDbInstanceSecurityGroupsSecurityGroupSetInboundOutput struct{ *pulumi.OutputState }
+
+func (GetDbInstanceSecurityGroupsSecurityGroupSetInboundOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDbInstanceSecurityGroupsSecurityGroupSetInbound)(nil)).Elem()
+}
+
+func (o GetDbInstanceSecurityGroupsSecurityGroupSetInboundOutput) ToGetDbInstanceSecurityGroupsSecurityGroupSetInboundOutput() GetDbInstanceSecurityGroupsSecurityGroupSetInboundOutput {
+	return o
+}
+
+func (o GetDbInstanceSecurityGroupsSecurityGroupSetInboundOutput) ToGetDbInstanceSecurityGroupsSecurityGroupSetInboundOutputWithContext(ctx context.Context) GetDbInstanceSecurityGroupsSecurityGroupSetInboundOutput {
+	return o
+}
+
+// Policy, ACCEPT or DROP.
+func (o GetDbInstanceSecurityGroupsSecurityGroupSetInboundOutput) Action() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceSecurityGroupsSecurityGroupSetInbound) string { return v.Action }).(pulumi.StringOutput)
+}
+
+// Source or destination IP or IP range, e.g. 172.16.0.0/12.
+func (o GetDbInstanceSecurityGroupsSecurityGroupSetInboundOutput) CidrIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceSecurityGroupsSecurityGroupSetInbound) string { return v.CidrIp }).(pulumi.StringOutput)
+}
+
+// Rule description.
+func (o GetDbInstanceSecurityGroupsSecurityGroupSetInboundOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceSecurityGroupsSecurityGroupSetInbound) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Network protocol, supports UDP, TCP, etc.
+func (o GetDbInstanceSecurityGroupsSecurityGroupSetInboundOutput) IpProtocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceSecurityGroupsSecurityGroupSetInbound) string { return v.IpProtocol }).(pulumi.StringOutput)
+}
+
+// Port.
+func (o GetDbInstanceSecurityGroupsSecurityGroupSetInboundOutput) PortRange() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceSecurityGroupsSecurityGroupSetInbound) string { return v.PortRange }).(pulumi.StringOutput)
+}
+
+type GetDbInstanceSecurityGroupsSecurityGroupSetInboundArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDbInstanceSecurityGroupsSecurityGroupSetInboundArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDbInstanceSecurityGroupsSecurityGroupSetInbound)(nil)).Elem()
+}
+
+func (o GetDbInstanceSecurityGroupsSecurityGroupSetInboundArrayOutput) ToGetDbInstanceSecurityGroupsSecurityGroupSetInboundArrayOutput() GetDbInstanceSecurityGroupsSecurityGroupSetInboundArrayOutput {
+	return o
+}
+
+func (o GetDbInstanceSecurityGroupsSecurityGroupSetInboundArrayOutput) ToGetDbInstanceSecurityGroupsSecurityGroupSetInboundArrayOutputWithContext(ctx context.Context) GetDbInstanceSecurityGroupsSecurityGroupSetInboundArrayOutput {
+	return o
+}
+
+func (o GetDbInstanceSecurityGroupsSecurityGroupSetInboundArrayOutput) Index(i pulumi.IntInput) GetDbInstanceSecurityGroupsSecurityGroupSetInboundOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDbInstanceSecurityGroupsSecurityGroupSetInbound {
+		return vs[0].([]GetDbInstanceSecurityGroupsSecurityGroupSetInbound)[vs[1].(int)]
+	}).(GetDbInstanceSecurityGroupsSecurityGroupSetInboundOutput)
+}
+
+type GetDbInstanceSecurityGroupsSecurityGroupSetOutbound struct {
+	// Policy, ACCEPT or DROP.
+	Action string `pulumi:"action"`
+	// Source or destination IP or IP range, e.g. 172.16.0.0/12.
+	CidrIp string `pulumi:"cidrIp"`
+	// Rule description.
+	Description string `pulumi:"description"`
+	// Network protocol, supports UDP, TCP, etc.
+	IpProtocol string `pulumi:"ipProtocol"`
+	// Port.
+	PortRange string `pulumi:"portRange"`
+}
+
+// GetDbInstanceSecurityGroupsSecurityGroupSetOutboundInput is an input type that accepts GetDbInstanceSecurityGroupsSecurityGroupSetOutboundArgs and GetDbInstanceSecurityGroupsSecurityGroupSetOutboundOutput values.
+// You can construct a concrete instance of `GetDbInstanceSecurityGroupsSecurityGroupSetOutboundInput` via:
+//
+//	GetDbInstanceSecurityGroupsSecurityGroupSetOutboundArgs{...}
+type GetDbInstanceSecurityGroupsSecurityGroupSetOutboundInput interface {
+	pulumi.Input
+
+	ToGetDbInstanceSecurityGroupsSecurityGroupSetOutboundOutput() GetDbInstanceSecurityGroupsSecurityGroupSetOutboundOutput
+	ToGetDbInstanceSecurityGroupsSecurityGroupSetOutboundOutputWithContext(context.Context) GetDbInstanceSecurityGroupsSecurityGroupSetOutboundOutput
+}
+
+type GetDbInstanceSecurityGroupsSecurityGroupSetOutboundArgs struct {
+	// Policy, ACCEPT or DROP.
+	Action pulumi.StringInput `pulumi:"action"`
+	// Source or destination IP or IP range, e.g. 172.16.0.0/12.
+	CidrIp pulumi.StringInput `pulumi:"cidrIp"`
+	// Rule description.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Network protocol, supports UDP, TCP, etc.
+	IpProtocol pulumi.StringInput `pulumi:"ipProtocol"`
+	// Port.
+	PortRange pulumi.StringInput `pulumi:"portRange"`
+}
+
+func (GetDbInstanceSecurityGroupsSecurityGroupSetOutboundArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDbInstanceSecurityGroupsSecurityGroupSetOutbound)(nil)).Elem()
+}
+
+func (i GetDbInstanceSecurityGroupsSecurityGroupSetOutboundArgs) ToGetDbInstanceSecurityGroupsSecurityGroupSetOutboundOutput() GetDbInstanceSecurityGroupsSecurityGroupSetOutboundOutput {
+	return i.ToGetDbInstanceSecurityGroupsSecurityGroupSetOutboundOutputWithContext(context.Background())
+}
+
+func (i GetDbInstanceSecurityGroupsSecurityGroupSetOutboundArgs) ToGetDbInstanceSecurityGroupsSecurityGroupSetOutboundOutputWithContext(ctx context.Context) GetDbInstanceSecurityGroupsSecurityGroupSetOutboundOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDbInstanceSecurityGroupsSecurityGroupSetOutboundOutput)
+}
+
+// GetDbInstanceSecurityGroupsSecurityGroupSetOutboundArrayInput is an input type that accepts GetDbInstanceSecurityGroupsSecurityGroupSetOutboundArray and GetDbInstanceSecurityGroupsSecurityGroupSetOutboundArrayOutput values.
+// You can construct a concrete instance of `GetDbInstanceSecurityGroupsSecurityGroupSetOutboundArrayInput` via:
+//
+//	GetDbInstanceSecurityGroupsSecurityGroupSetOutboundArray{ GetDbInstanceSecurityGroupsSecurityGroupSetOutboundArgs{...} }
+type GetDbInstanceSecurityGroupsSecurityGroupSetOutboundArrayInput interface {
+	pulumi.Input
+
+	ToGetDbInstanceSecurityGroupsSecurityGroupSetOutboundArrayOutput() GetDbInstanceSecurityGroupsSecurityGroupSetOutboundArrayOutput
+	ToGetDbInstanceSecurityGroupsSecurityGroupSetOutboundArrayOutputWithContext(context.Context) GetDbInstanceSecurityGroupsSecurityGroupSetOutboundArrayOutput
+}
+
+type GetDbInstanceSecurityGroupsSecurityGroupSetOutboundArray []GetDbInstanceSecurityGroupsSecurityGroupSetOutboundInput
+
+func (GetDbInstanceSecurityGroupsSecurityGroupSetOutboundArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDbInstanceSecurityGroupsSecurityGroupSetOutbound)(nil)).Elem()
+}
+
+func (i GetDbInstanceSecurityGroupsSecurityGroupSetOutboundArray) ToGetDbInstanceSecurityGroupsSecurityGroupSetOutboundArrayOutput() GetDbInstanceSecurityGroupsSecurityGroupSetOutboundArrayOutput {
+	return i.ToGetDbInstanceSecurityGroupsSecurityGroupSetOutboundArrayOutputWithContext(context.Background())
+}
+
+func (i GetDbInstanceSecurityGroupsSecurityGroupSetOutboundArray) ToGetDbInstanceSecurityGroupsSecurityGroupSetOutboundArrayOutputWithContext(ctx context.Context) GetDbInstanceSecurityGroupsSecurityGroupSetOutboundArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDbInstanceSecurityGroupsSecurityGroupSetOutboundArrayOutput)
+}
+
+type GetDbInstanceSecurityGroupsSecurityGroupSetOutboundOutput struct{ *pulumi.OutputState }
+
+func (GetDbInstanceSecurityGroupsSecurityGroupSetOutboundOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDbInstanceSecurityGroupsSecurityGroupSetOutbound)(nil)).Elem()
+}
+
+func (o GetDbInstanceSecurityGroupsSecurityGroupSetOutboundOutput) ToGetDbInstanceSecurityGroupsSecurityGroupSetOutboundOutput() GetDbInstanceSecurityGroupsSecurityGroupSetOutboundOutput {
+	return o
+}
+
+func (o GetDbInstanceSecurityGroupsSecurityGroupSetOutboundOutput) ToGetDbInstanceSecurityGroupsSecurityGroupSetOutboundOutputWithContext(ctx context.Context) GetDbInstanceSecurityGroupsSecurityGroupSetOutboundOutput {
+	return o
+}
+
+// Policy, ACCEPT or DROP.
+func (o GetDbInstanceSecurityGroupsSecurityGroupSetOutboundOutput) Action() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceSecurityGroupsSecurityGroupSetOutbound) string { return v.Action }).(pulumi.StringOutput)
+}
+
+// Source or destination IP or IP range, e.g. 172.16.0.0/12.
+func (o GetDbInstanceSecurityGroupsSecurityGroupSetOutboundOutput) CidrIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceSecurityGroupsSecurityGroupSetOutbound) string { return v.CidrIp }).(pulumi.StringOutput)
+}
+
+// Rule description.
+func (o GetDbInstanceSecurityGroupsSecurityGroupSetOutboundOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceSecurityGroupsSecurityGroupSetOutbound) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Network protocol, supports UDP, TCP, etc.
+func (o GetDbInstanceSecurityGroupsSecurityGroupSetOutboundOutput) IpProtocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceSecurityGroupsSecurityGroupSetOutbound) string { return v.IpProtocol }).(pulumi.StringOutput)
+}
+
+// Port.
+func (o GetDbInstanceSecurityGroupsSecurityGroupSetOutboundOutput) PortRange() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceSecurityGroupsSecurityGroupSetOutbound) string { return v.PortRange }).(pulumi.StringOutput)
+}
+
+type GetDbInstanceSecurityGroupsSecurityGroupSetOutboundArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDbInstanceSecurityGroupsSecurityGroupSetOutboundArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDbInstanceSecurityGroupsSecurityGroupSetOutbound)(nil)).Elem()
+}
+
+func (o GetDbInstanceSecurityGroupsSecurityGroupSetOutboundArrayOutput) ToGetDbInstanceSecurityGroupsSecurityGroupSetOutboundArrayOutput() GetDbInstanceSecurityGroupsSecurityGroupSetOutboundArrayOutput {
+	return o
+}
+
+func (o GetDbInstanceSecurityGroupsSecurityGroupSetOutboundArrayOutput) ToGetDbInstanceSecurityGroupsSecurityGroupSetOutboundArrayOutputWithContext(ctx context.Context) GetDbInstanceSecurityGroupsSecurityGroupSetOutboundArrayOutput {
+	return o
+}
+
+func (o GetDbInstanceSecurityGroupsSecurityGroupSetOutboundArrayOutput) Index(i pulumi.IntInput) GetDbInstanceSecurityGroupsSecurityGroupSetOutboundOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDbInstanceSecurityGroupsSecurityGroupSetOutbound {
+		return vs[0].([]GetDbInstanceSecurityGroupsSecurityGroupSetOutbound)[vs[1].(int)]
+	}).(GetDbInstanceSecurityGroupsSecurityGroupSetOutboundOutput)
+}
+
 type GetDbInstanceVersionsVersionSet struct {
 	// List of versions to which this database version (`DBKernelVersion`) can be upgraded.
 	AvailableUpgradeTargets []string `pulumi:"availableUpgradeTargets"`
@@ -3644,6 +4171,1125 @@ func (o GetDefaultParametersParamInfoSetVersionRelationSetArrayOutput) Index(i p
 	}).(GetDefaultParametersParamInfoSetVersionRelationSetOutput)
 }
 
+type GetInstancesDbInstanceSet struct {
+	// User `AppId`.
+	AppId int `pulumi:"appId"`
+	// Auto-renewal or not:
+	// <li>`0`: manual renewal</li>
+	// <li>`1`: auto-renewal</li>
+	// Default value: 0.
+	AutoRenew int `pulumi:"autoRenew"`
+	// Create time of the postgresql instance.
+	CreateTime string `pulumi:"createTime"`
+	// Instance character set, which currently supports only:
+	// <li>UTF8</li>
+	// <li>LATIN1</li>.
+	DbCharset string `pulumi:"dbCharset"`
+	// Database engine, which supports:
+	// <li>`postgresql`: tencentdb for postgresql</li>.
+	// <li>`mssqlCompatible`: specifies mssql compatible - tencentdb for PostgreSQL.</li>.
+	// Default value: `postgresql`.
+	DbEngine string `pulumi:"dbEngine"`
+	// Configuration information for the database engine, and the configuration format is as follows:.
+	// {`$key1`:`$value1`, `$key2`:`$value2`}
+	// Supported engines include:.
+	// mssqlCompatible engine:.
+	// <li>migrationMode: specifies the database mode. optional parameter. valid values: single-db (single-database schema) and multi-db (multiple database schemas). defaults to single-db.</li>.
+	// <li>defaultLocale: specifies the sorting area rule, an optional parameter that cannot be modified after initialization. default value is en_US. valid values include:.
+	// `af_ZA`, `sq_AL`, `ar_DZ`, `ar_BH`, `ar_EG`, `ar_IQ`, `ar_JO`, `ar_KW`, `ar_LB`, `ar_LY`, `ar_MA`, `ar_OM`, `ar_QA`, `ar_SA`, `ar_SY`, `ar_TN`, `ar_AE`, `ar_YE`, `hy_AM`, `az_Cyrl_AZ`, `az_Latn_AZ`, `eu_ES`, `be_BY`, `bg_BG`, `ca_ES`, `zh_HK`, `zh_MO`, `zh_CN`, `zh_SG`, `zh_TW`, `hr_HR`, `cs_CZ`, `da_DK`, `nl_BE`, `nl_NL`, `en_AU`, `en_BZ`, `en_CA`, `en_IE`, `en_JM`, `en_NZ`, `en_PH`, `en_ZA`, `en_TT`, `en_GB`, `en_US`, `en_ZW`, `et_EE`, `fo_FO`, `fa_IR`, `fi_FI`, `fr_BE`, `fr_CA`, `fr_FR`, `fr_LU`, `fr_MC`, `fr_CH`, `mk_MK`, `ka_GE`, `de_AT`, `de_DE`, `de_LI`, `de_LU`, `de_CH`, `el_GR`, `gu_IN`, `he_IL`, `hi_IN`, `hu_HU`, `is_IS`, `id_ID`, `it_IT`, `it_CH`, `ja_JP`, `kn_IN`, `kok_IN`, `ko_KR`, `ky_KG`, `lv_LV`, `lt_LT`, `ms_BN`, `ms_MY`, `mr_IN`, `mn_MN`, `nb_NO`, `nn_NO`, `pl_PL`, `pt_BR`, `pt_PT`, `pa_IN`, `ro_RO`, `ru_RU`, `sa_IN`, `sr_Cyrl_RS`, `sr_Latn_RS`, `sk_SK`, `sl_SI`, `es_AR`, `es_BO`, `es_CL`, `es_CO`, `es_CR`, `es_DO`, `es_EC`, `es_SV`, `es_GT`, `es_HN`, `es_MX`, `es_NI`, `es_PA`, `es_PY`,`es_PE`, `es_PR`, `es_ES`, `es_TRADITIONAL`, `es_UY`, `es_VE`, `sw_KE`, `sv_FI`, `sv_SE`, `tt_RU`, `te_IN`, `th_TH`, `tr_TR`, `uk_UA`, `ur_IN`, `ur_PK`, `uz_Cyrl_UZ`, `uz_Latn_UZ`, `vi_VN`.</li>
+	// <li>serverCollationName: Sorting rule name, an optional parameter, which cannot be modified after initialization, its default value is sql_latin1_general_cp1_ci_as, and its valid values include: `bbfUnicodeGeneralCiAs`, `bbfUnicodeCp1CiAs`, `bbf_unicode_CP1250_ci_as`, `bbf_unicode_CP1251_ci_as`, `bbfUnicodeCp1253CiAs`, `bbfUnicodeCp1254CiAs`, `bbfUnicodeCp1255CiAs`, `bbfUnicodeCp1256CiAs`, `bbfUnicodeCp1257CiAs`, `bbfUnicodeCp1258CiAs`, `bbfUnicodeCp874CiAs`, `sqlLatin1GeneralCp1250CiAs`, `sqlLatin1GeneralCp1251CiAs`, `sqlLatin1GeneralCp1CiAs`, `sqlLatin1GeneralCp1253CiAs`, `sqlLatin1GeneralCp1254CiAs`, `sqlLatin1GeneralCp1255CiAs`, `sqlLatin1GeneralCp1256CiAs`, `sqlLatin1GeneralCp1257CiAs`, `sqlLatin1GeneralCp1258CiAs`, `chinesePrcCiAs`, `cyrillicGeneralCiAs`, `finnishSwedishCiAs`, `frenchCiAs`, `japaneseCiAs`, `koreanWansungCiAs`, `latin1GeneralCiAs`, `modernSpanishCiAs`, `polishCiAs`, `thaiCiAs`, `traditionalSpanishCiAs`, `turkishCiAs`, `ukrainianCiAs`, and `vietnameseCiAs`.</li>.
+	DbEngineConfig string `pulumi:"dbEngineConfig"`
+	// Purchasable specification ID.
+	DbInstanceClass string `pulumi:"dbInstanceClass"`
+	// Number of assigned CPUs.
+	DbInstanceCpu int `pulumi:"dbInstanceCpu"`
+	// Instance ID.
+	DbInstanceId string `pulumi:"dbInstanceId"`
+	// Assigned instance memory size in GB.
+	DbInstanceMemory int `pulumi:"dbInstanceMemory"`
+	// Instance name.
+	DbInstanceName string `pulumi:"dbInstanceName"`
+	// Instance network connection information.
+	DbInstanceNetInfos []GetInstancesDbInstanceSetDbInstanceNetInfo `pulumi:"dbInstanceNetInfos"`
+	// Instance status, including: `applying` (applying), `init` (to be initialized), `initing` (initializing), `running` (running), `limited run` (restricted operation), `isolating` (isolating), `isolated` (isolated), `disisolating` (de-isolating), `recycling` (recycling), `recycled` (recycled), `job running` (task executing), `offline` (offline), `migrating` (migrating), `expanding` (scaling out), `waitSwitch` (waiting to switch), `switching` (switching), `readonly` (readonly), `restarting` (restarting), `network changing` (network modification in progress), `upgrading` (kernel version upgrading), `audit-switching` (audit status changing), `primary-switching` (primary-secondary switching), `offlining` (offline), `deployment changing` (modify az), `cloning` (restoring data), `parameter modifying` (parameter modification in progress), `log-switching` (log status change), `restoring` (recovering), and `expanding` (scaling out).
+	DbInstanceStatus string `pulumi:"dbInstanceStatus"`
+	// Assigned instance storage capacity in GB.
+	DbInstanceStorage int `pulumi:"dbInstanceStorage"`
+	// Storage type. Valid values: `PHYSICAL_LOCAL_SSD` (local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD).
+	DbInstanceStorageType string `pulumi:"dbInstanceStorageType"`
+	// Instance type, which includes:
+	// <li>primary: primary instance </li>
+	// <li>readonly: read-only instance</li>
+	// <li>guard: disaster recovery instance</li>
+	// <li>temp: temporary instance</li>.
+	DbInstanceType string `pulumi:"dbInstanceType"`
+	// Instance version. Valid value: `standard` (dual-server high-availability; one-primary-one-standby).
+	DbInstanceVersion string `pulumi:"dbInstanceVersion"`
+	// PostgreSQL kernel version number.
+	DbKernelVersion string `pulumi:"dbKernelVersion"`
+	// PostgreSQL major version number.
+	DbMajorVersion string `pulumi:"dbMajorVersion"`
+	// Instance node information
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DbNodeSets []GetInstancesDbInstanceSetDbNodeSet `pulumi:"dbNodeSets"`
+	// Number of the major PostgreSQL community version and minor version, such as 12.4, which can be queried by the [DescribeDBVersions](https://intl.cloud.tencent.com/document/api/409/89018?from_cn_redirect=1) API.
+	DbVersion string `pulumi:"dbVersion"`
+	// Specifies whether to enable deletion protection for the instance. valid values as follows:.
+	// -Specifies whether to enable deletion protection. valid values: true (enable deletion protection).
+	// -Specifies whether to disable deletion protection. valid values: false (disable deletion protection).
+	DeletionProtection bool `pulumi:"deletionProtection"`
+	// Number of cpu cores that have been elastically scaled out.
+	ExpandedCpu int `pulumi:"expandedCpu"`
+	// Instance expiration time.
+	ExpireTime string `pulumi:"expireTime"`
+	// Whether the instance supports TDE data encryption.
+	// <Li>0: not supported</li>.
+	// <Li>1: supported.</li>.
+	// Default value: 0
+	IsSupportTde int `pulumi:"isSupportTde"`
+	// Instance isolation time.
+	IsolatedTime string `pulumi:"isolatedTime"`
+	// Primary instance information. returned only when the instance is a read-only instance.
+	MasterDbInstanceId string `pulumi:"masterDbInstanceId"`
+	// Network access list of the instance (this field has been deprecated)
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	NetworkAccessLists []GetInstancesDbInstanceSetNetworkAccessList `pulumi:"networkAccessLists"`
+	// Decommissioning time.
+	OfflineTime string `pulumi:"offlineTime"`
+	// Billing mode:
+	// <li>prepaid: monthly subscription, prepaid</li>
+	// <li>postpaid: pay-as-you-go, postpaid</li>.
+	PayType string `pulumi:"payType"`
+	// Project ID of the postgresql instance to be query.
+	ProjectId int `pulumi:"projectId"`
+	// Specifies the number of read-only instances.
+	ReadOnlyInstanceNum int `pulumi:"readOnlyInstanceNum"`
+	// Instance region such as ap-guangzhou, which corresponds to the`Region` field in `RegionSet`.
+	Region string `pulumi:"region"`
+	// Instance root account name, default value is `root`.
+	RootUser string `pulumi:"rootUser"`
+	// Describes the state of the read-only instance in the read-only group.
+	StatusInReadonlyGroup string `pulumi:"statusInReadonlyGroup"`
+	// ID of subnet.
+	SubnetId string `pulumi:"subnetId"`
+	// Whether the instance supports IPv6:
+	// <li>`0`: no</li>
+	// <li>`1`: yes</li>
+	// Default value: 0.
+	SupportIpv6 int `pulumi:"supportIpv6"`
+	// Describes the Tag information associated with the instance.
+	TagLists []GetInstancesDbInstanceSetTagList `pulumi:"tagLists"`
+	// Machine type.
+	Type string `pulumi:"type"`
+	// Instance `Uid`.
+	Uid int `pulumi:"uid"`
+	// Last updated time of the instance attribute.
+	UpdateTime string `pulumi:"updateTime"`
+	// ID of VPC.
+	VpcId string `pulumi:"vpcId"`
+	// Instance AZ such as ap-guangzhou-3, which corresponds to the `Zone` field of `ZoneSet`.
+	Zone string `pulumi:"zone"`
+}
+
+// GetInstancesDbInstanceSetInput is an input type that accepts GetInstancesDbInstanceSetArgs and GetInstancesDbInstanceSetOutput values.
+// You can construct a concrete instance of `GetInstancesDbInstanceSetInput` via:
+//
+//	GetInstancesDbInstanceSetArgs{...}
+type GetInstancesDbInstanceSetInput interface {
+	pulumi.Input
+
+	ToGetInstancesDbInstanceSetOutput() GetInstancesDbInstanceSetOutput
+	ToGetInstancesDbInstanceSetOutputWithContext(context.Context) GetInstancesDbInstanceSetOutput
+}
+
+type GetInstancesDbInstanceSetArgs struct {
+	// User `AppId`.
+	AppId pulumi.IntInput `pulumi:"appId"`
+	// Auto-renewal or not:
+	// <li>`0`: manual renewal</li>
+	// <li>`1`: auto-renewal</li>
+	// Default value: 0.
+	AutoRenew pulumi.IntInput `pulumi:"autoRenew"`
+	// Create time of the postgresql instance.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Instance character set, which currently supports only:
+	// <li>UTF8</li>
+	// <li>LATIN1</li>.
+	DbCharset pulumi.StringInput `pulumi:"dbCharset"`
+	// Database engine, which supports:
+	// <li>`postgresql`: tencentdb for postgresql</li>.
+	// <li>`mssqlCompatible`: specifies mssql compatible - tencentdb for PostgreSQL.</li>.
+	// Default value: `postgresql`.
+	DbEngine pulumi.StringInput `pulumi:"dbEngine"`
+	// Configuration information for the database engine, and the configuration format is as follows:.
+	// {`$key1`:`$value1`, `$key2`:`$value2`}
+	// Supported engines include:.
+	// mssqlCompatible engine:.
+	// <li>migrationMode: specifies the database mode. optional parameter. valid values: single-db (single-database schema) and multi-db (multiple database schemas). defaults to single-db.</li>.
+	// <li>defaultLocale: specifies the sorting area rule, an optional parameter that cannot be modified after initialization. default value is en_US. valid values include:.
+	// `af_ZA`, `sq_AL`, `ar_DZ`, `ar_BH`, `ar_EG`, `ar_IQ`, `ar_JO`, `ar_KW`, `ar_LB`, `ar_LY`, `ar_MA`, `ar_OM`, `ar_QA`, `ar_SA`, `ar_SY`, `ar_TN`, `ar_AE`, `ar_YE`, `hy_AM`, `az_Cyrl_AZ`, `az_Latn_AZ`, `eu_ES`, `be_BY`, `bg_BG`, `ca_ES`, `zh_HK`, `zh_MO`, `zh_CN`, `zh_SG`, `zh_TW`, `hr_HR`, `cs_CZ`, `da_DK`, `nl_BE`, `nl_NL`, `en_AU`, `en_BZ`, `en_CA`, `en_IE`, `en_JM`, `en_NZ`, `en_PH`, `en_ZA`, `en_TT`, `en_GB`, `en_US`, `en_ZW`, `et_EE`, `fo_FO`, `fa_IR`, `fi_FI`, `fr_BE`, `fr_CA`, `fr_FR`, `fr_LU`, `fr_MC`, `fr_CH`, `mk_MK`, `ka_GE`, `de_AT`, `de_DE`, `de_LI`, `de_LU`, `de_CH`, `el_GR`, `gu_IN`, `he_IL`, `hi_IN`, `hu_HU`, `is_IS`, `id_ID`, `it_IT`, `it_CH`, `ja_JP`, `kn_IN`, `kok_IN`, `ko_KR`, `ky_KG`, `lv_LV`, `lt_LT`, `ms_BN`, `ms_MY`, `mr_IN`, `mn_MN`, `nb_NO`, `nn_NO`, `pl_PL`, `pt_BR`, `pt_PT`, `pa_IN`, `ro_RO`, `ru_RU`, `sa_IN`, `sr_Cyrl_RS`, `sr_Latn_RS`, `sk_SK`, `sl_SI`, `es_AR`, `es_BO`, `es_CL`, `es_CO`, `es_CR`, `es_DO`, `es_EC`, `es_SV`, `es_GT`, `es_HN`, `es_MX`, `es_NI`, `es_PA`, `es_PY`,`es_PE`, `es_PR`, `es_ES`, `es_TRADITIONAL`, `es_UY`, `es_VE`, `sw_KE`, `sv_FI`, `sv_SE`, `tt_RU`, `te_IN`, `th_TH`, `tr_TR`, `uk_UA`, `ur_IN`, `ur_PK`, `uz_Cyrl_UZ`, `uz_Latn_UZ`, `vi_VN`.</li>
+	// <li>serverCollationName: Sorting rule name, an optional parameter, which cannot be modified after initialization, its default value is sql_latin1_general_cp1_ci_as, and its valid values include: `bbfUnicodeGeneralCiAs`, `bbfUnicodeCp1CiAs`, `bbf_unicode_CP1250_ci_as`, `bbf_unicode_CP1251_ci_as`, `bbfUnicodeCp1253CiAs`, `bbfUnicodeCp1254CiAs`, `bbfUnicodeCp1255CiAs`, `bbfUnicodeCp1256CiAs`, `bbfUnicodeCp1257CiAs`, `bbfUnicodeCp1258CiAs`, `bbfUnicodeCp874CiAs`, `sqlLatin1GeneralCp1250CiAs`, `sqlLatin1GeneralCp1251CiAs`, `sqlLatin1GeneralCp1CiAs`, `sqlLatin1GeneralCp1253CiAs`, `sqlLatin1GeneralCp1254CiAs`, `sqlLatin1GeneralCp1255CiAs`, `sqlLatin1GeneralCp1256CiAs`, `sqlLatin1GeneralCp1257CiAs`, `sqlLatin1GeneralCp1258CiAs`, `chinesePrcCiAs`, `cyrillicGeneralCiAs`, `finnishSwedishCiAs`, `frenchCiAs`, `japaneseCiAs`, `koreanWansungCiAs`, `latin1GeneralCiAs`, `modernSpanishCiAs`, `polishCiAs`, `thaiCiAs`, `traditionalSpanishCiAs`, `turkishCiAs`, `ukrainianCiAs`, and `vietnameseCiAs`.</li>.
+	DbEngineConfig pulumi.StringInput `pulumi:"dbEngineConfig"`
+	// Purchasable specification ID.
+	DbInstanceClass pulumi.StringInput `pulumi:"dbInstanceClass"`
+	// Number of assigned CPUs.
+	DbInstanceCpu pulumi.IntInput `pulumi:"dbInstanceCpu"`
+	// Instance ID.
+	DbInstanceId pulumi.StringInput `pulumi:"dbInstanceId"`
+	// Assigned instance memory size in GB.
+	DbInstanceMemory pulumi.IntInput `pulumi:"dbInstanceMemory"`
+	// Instance name.
+	DbInstanceName pulumi.StringInput `pulumi:"dbInstanceName"`
+	// Instance network connection information.
+	DbInstanceNetInfos GetInstancesDbInstanceSetDbInstanceNetInfoArrayInput `pulumi:"dbInstanceNetInfos"`
+	// Instance status, including: `applying` (applying), `init` (to be initialized), `initing` (initializing), `running` (running), `limited run` (restricted operation), `isolating` (isolating), `isolated` (isolated), `disisolating` (de-isolating), `recycling` (recycling), `recycled` (recycled), `job running` (task executing), `offline` (offline), `migrating` (migrating), `expanding` (scaling out), `waitSwitch` (waiting to switch), `switching` (switching), `readonly` (readonly), `restarting` (restarting), `network changing` (network modification in progress), `upgrading` (kernel version upgrading), `audit-switching` (audit status changing), `primary-switching` (primary-secondary switching), `offlining` (offline), `deployment changing` (modify az), `cloning` (restoring data), `parameter modifying` (parameter modification in progress), `log-switching` (log status change), `restoring` (recovering), and `expanding` (scaling out).
+	DbInstanceStatus pulumi.StringInput `pulumi:"dbInstanceStatus"`
+	// Assigned instance storage capacity in GB.
+	DbInstanceStorage pulumi.IntInput `pulumi:"dbInstanceStorage"`
+	// Storage type. Valid values: `PHYSICAL_LOCAL_SSD` (local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD).
+	DbInstanceStorageType pulumi.StringInput `pulumi:"dbInstanceStorageType"`
+	// Instance type, which includes:
+	// <li>primary: primary instance </li>
+	// <li>readonly: read-only instance</li>
+	// <li>guard: disaster recovery instance</li>
+	// <li>temp: temporary instance</li>.
+	DbInstanceType pulumi.StringInput `pulumi:"dbInstanceType"`
+	// Instance version. Valid value: `standard` (dual-server high-availability; one-primary-one-standby).
+	DbInstanceVersion pulumi.StringInput `pulumi:"dbInstanceVersion"`
+	// PostgreSQL kernel version number.
+	DbKernelVersion pulumi.StringInput `pulumi:"dbKernelVersion"`
+	// PostgreSQL major version number.
+	DbMajorVersion pulumi.StringInput `pulumi:"dbMajorVersion"`
+	// Instance node information
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DbNodeSets GetInstancesDbInstanceSetDbNodeSetArrayInput `pulumi:"dbNodeSets"`
+	// Number of the major PostgreSQL community version and minor version, such as 12.4, which can be queried by the [DescribeDBVersions](https://intl.cloud.tencent.com/document/api/409/89018?from_cn_redirect=1) API.
+	DbVersion pulumi.StringInput `pulumi:"dbVersion"`
+	// Specifies whether to enable deletion protection for the instance. valid values as follows:.
+	// -Specifies whether to enable deletion protection. valid values: true (enable deletion protection).
+	// -Specifies whether to disable deletion protection. valid values: false (disable deletion protection).
+	DeletionProtection pulumi.BoolInput `pulumi:"deletionProtection"`
+	// Number of cpu cores that have been elastically scaled out.
+	ExpandedCpu pulumi.IntInput `pulumi:"expandedCpu"`
+	// Instance expiration time.
+	ExpireTime pulumi.StringInput `pulumi:"expireTime"`
+	// Whether the instance supports TDE data encryption.
+	// <Li>0: not supported</li>.
+	// <Li>1: supported.</li>.
+	// Default value: 0
+	IsSupportTde pulumi.IntInput `pulumi:"isSupportTde"`
+	// Instance isolation time.
+	IsolatedTime pulumi.StringInput `pulumi:"isolatedTime"`
+	// Primary instance information. returned only when the instance is a read-only instance.
+	MasterDbInstanceId pulumi.StringInput `pulumi:"masterDbInstanceId"`
+	// Network access list of the instance (this field has been deprecated)
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	NetworkAccessLists GetInstancesDbInstanceSetNetworkAccessListArrayInput `pulumi:"networkAccessLists"`
+	// Decommissioning time.
+	OfflineTime pulumi.StringInput `pulumi:"offlineTime"`
+	// Billing mode:
+	// <li>prepaid: monthly subscription, prepaid</li>
+	// <li>postpaid: pay-as-you-go, postpaid</li>.
+	PayType pulumi.StringInput `pulumi:"payType"`
+	// Project ID of the postgresql instance to be query.
+	ProjectId pulumi.IntInput `pulumi:"projectId"`
+	// Specifies the number of read-only instances.
+	ReadOnlyInstanceNum pulumi.IntInput `pulumi:"readOnlyInstanceNum"`
+	// Instance region such as ap-guangzhou, which corresponds to the`Region` field in `RegionSet`.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Instance root account name, default value is `root`.
+	RootUser pulumi.StringInput `pulumi:"rootUser"`
+	// Describes the state of the read-only instance in the read-only group.
+	StatusInReadonlyGroup pulumi.StringInput `pulumi:"statusInReadonlyGroup"`
+	// ID of subnet.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	// Whether the instance supports IPv6:
+	// <li>`0`: no</li>
+	// <li>`1`: yes</li>
+	// Default value: 0.
+	SupportIpv6 pulumi.IntInput `pulumi:"supportIpv6"`
+	// Describes the Tag information associated with the instance.
+	TagLists GetInstancesDbInstanceSetTagListArrayInput `pulumi:"tagLists"`
+	// Machine type.
+	Type pulumi.StringInput `pulumi:"type"`
+	// Instance `Uid`.
+	Uid pulumi.IntInput `pulumi:"uid"`
+	// Last updated time of the instance attribute.
+	UpdateTime pulumi.StringInput `pulumi:"updateTime"`
+	// ID of VPC.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+	// Instance AZ such as ap-guangzhou-3, which corresponds to the `Zone` field of `ZoneSet`.
+	Zone pulumi.StringInput `pulumi:"zone"`
+}
+
+func (GetInstancesDbInstanceSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesDbInstanceSet)(nil)).Elem()
+}
+
+func (i GetInstancesDbInstanceSetArgs) ToGetInstancesDbInstanceSetOutput() GetInstancesDbInstanceSetOutput {
+	return i.ToGetInstancesDbInstanceSetOutputWithContext(context.Background())
+}
+
+func (i GetInstancesDbInstanceSetArgs) ToGetInstancesDbInstanceSetOutputWithContext(ctx context.Context) GetInstancesDbInstanceSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesDbInstanceSetOutput)
+}
+
+// GetInstancesDbInstanceSetArrayInput is an input type that accepts GetInstancesDbInstanceSetArray and GetInstancesDbInstanceSetArrayOutput values.
+// You can construct a concrete instance of `GetInstancesDbInstanceSetArrayInput` via:
+//
+//	GetInstancesDbInstanceSetArray{ GetInstancesDbInstanceSetArgs{...} }
+type GetInstancesDbInstanceSetArrayInput interface {
+	pulumi.Input
+
+	ToGetInstancesDbInstanceSetArrayOutput() GetInstancesDbInstanceSetArrayOutput
+	ToGetInstancesDbInstanceSetArrayOutputWithContext(context.Context) GetInstancesDbInstanceSetArrayOutput
+}
+
+type GetInstancesDbInstanceSetArray []GetInstancesDbInstanceSetInput
+
+func (GetInstancesDbInstanceSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesDbInstanceSet)(nil)).Elem()
+}
+
+func (i GetInstancesDbInstanceSetArray) ToGetInstancesDbInstanceSetArrayOutput() GetInstancesDbInstanceSetArrayOutput {
+	return i.ToGetInstancesDbInstanceSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstancesDbInstanceSetArray) ToGetInstancesDbInstanceSetArrayOutputWithContext(ctx context.Context) GetInstancesDbInstanceSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesDbInstanceSetArrayOutput)
+}
+
+type GetInstancesDbInstanceSetOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesDbInstanceSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesDbInstanceSet)(nil)).Elem()
+}
+
+func (o GetInstancesDbInstanceSetOutput) ToGetInstancesDbInstanceSetOutput() GetInstancesDbInstanceSetOutput {
+	return o
+}
+
+func (o GetInstancesDbInstanceSetOutput) ToGetInstancesDbInstanceSetOutputWithContext(ctx context.Context) GetInstancesDbInstanceSetOutput {
+	return o
+}
+
+// User `AppId`.
+func (o GetInstancesDbInstanceSetOutput) AppId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) int { return v.AppId }).(pulumi.IntOutput)
+}
+
+// Auto-renewal or not:
+// <li>`0`: manual renewal</li>
+// <li>`1`: auto-renewal</li>
+// Default value: 0.
+func (o GetInstancesDbInstanceSetOutput) AutoRenew() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) int { return v.AutoRenew }).(pulumi.IntOutput)
+}
+
+// Create time of the postgresql instance.
+func (o GetInstancesDbInstanceSetOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Instance character set, which currently supports only:
+// <li>UTF8</li>
+// <li>LATIN1</li>.
+func (o GetInstancesDbInstanceSetOutput) DbCharset() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) string { return v.DbCharset }).(pulumi.StringOutput)
+}
+
+// Database engine, which supports:
+// <li>`postgresql`: tencentdb for postgresql</li>.
+// <li>`mssqlCompatible`: specifies mssql compatible - tencentdb for PostgreSQL.</li>.
+// Default value: `postgresql`.
+func (o GetInstancesDbInstanceSetOutput) DbEngine() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) string { return v.DbEngine }).(pulumi.StringOutput)
+}
+
+// Configuration information for the database engine, and the configuration format is as follows:.
+// {`$key1`:`$value1`, `$key2`:`$value2`}
+// Supported engines include:.
+// mssqlCompatible engine:.
+// <li>migrationMode: specifies the database mode. optional parameter. valid values: single-db (single-database schema) and multi-db (multiple database schemas). defaults to single-db.</li>.
+// <li>defaultLocale: specifies the sorting area rule, an optional parameter that cannot be modified after initialization. default value is en_US. valid values include:.
+// `af_ZA`, `sq_AL`, `ar_DZ`, `ar_BH`, `ar_EG`, `ar_IQ`, `ar_JO`, `ar_KW`, `ar_LB`, `ar_LY`, `ar_MA`, `ar_OM`, `ar_QA`, `ar_SA`, `ar_SY`, `ar_TN`, `ar_AE`, `ar_YE`, `hy_AM`, `az_Cyrl_AZ`, `az_Latn_AZ`, `eu_ES`, `be_BY`, `bg_BG`, `ca_ES`, `zh_HK`, `zh_MO`, `zh_CN`, `zh_SG`, `zh_TW`, `hr_HR`, `cs_CZ`, `da_DK`, `nl_BE`, `nl_NL`, `en_AU`, `en_BZ`, `en_CA`, `en_IE`, `en_JM`, `en_NZ`, `en_PH`, `en_ZA`, `en_TT`, `en_GB`, `en_US`, `en_ZW`, `et_EE`, `fo_FO`, `fa_IR`, `fi_FI`, `fr_BE`, `fr_CA`, `fr_FR`, `fr_LU`, `fr_MC`, `fr_CH`, `mk_MK`, `ka_GE`, `de_AT`, `de_DE`, `de_LI`, `de_LU`, `de_CH`, `el_GR`, `gu_IN`, `he_IL`, `hi_IN`, `hu_HU`, `is_IS`, `id_ID`, `it_IT`, `it_CH`, `ja_JP`, `kn_IN`, `kok_IN`, `ko_KR`, `ky_KG`, `lv_LV`, `lt_LT`, `ms_BN`, `ms_MY`, `mr_IN`, `mn_MN`, `nb_NO`, `nn_NO`, `pl_PL`, `pt_BR`, `pt_PT`, `pa_IN`, `ro_RO`, `ru_RU`, `sa_IN`, `sr_Cyrl_RS`, `sr_Latn_RS`, `sk_SK`, `sl_SI`, `es_AR`, `es_BO`, `es_CL`, `es_CO`, `es_CR`, `es_DO`, `es_EC`, `es_SV`, `es_GT`, `es_HN`, `es_MX`, `es_NI`, `es_PA`, `es_PY`,`es_PE`, `es_PR`, `es_ES`, `es_TRADITIONAL`, `es_UY`, `es_VE`, `sw_KE`, `sv_FI`, `sv_SE`, `tt_RU`, `te_IN`, `th_TH`, `tr_TR`, `uk_UA`, `ur_IN`, `ur_PK`, `uz_Cyrl_UZ`, `uz_Latn_UZ`, `vi_VN`.</li>
+// <li>serverCollationName: Sorting rule name, an optional parameter, which cannot be modified after initialization, its default value is sql_latin1_general_cp1_ci_as, and its valid values include: `bbfUnicodeGeneralCiAs`, `bbfUnicodeCp1CiAs`, `bbf_unicode_CP1250_ci_as`, `bbf_unicode_CP1251_ci_as`, `bbfUnicodeCp1253CiAs`, `bbfUnicodeCp1254CiAs`, `bbfUnicodeCp1255CiAs`, `bbfUnicodeCp1256CiAs`, `bbfUnicodeCp1257CiAs`, `bbfUnicodeCp1258CiAs`, `bbfUnicodeCp874CiAs`, `sqlLatin1GeneralCp1250CiAs`, `sqlLatin1GeneralCp1251CiAs`, `sqlLatin1GeneralCp1CiAs`, `sqlLatin1GeneralCp1253CiAs`, `sqlLatin1GeneralCp1254CiAs`, `sqlLatin1GeneralCp1255CiAs`, `sqlLatin1GeneralCp1256CiAs`, `sqlLatin1GeneralCp1257CiAs`, `sqlLatin1GeneralCp1258CiAs`, `chinesePrcCiAs`, `cyrillicGeneralCiAs`, `finnishSwedishCiAs`, `frenchCiAs`, `japaneseCiAs`, `koreanWansungCiAs`, `latin1GeneralCiAs`, `modernSpanishCiAs`, `polishCiAs`, `thaiCiAs`, `traditionalSpanishCiAs`, `turkishCiAs`, `ukrainianCiAs`, and `vietnameseCiAs`.</li>.
+func (o GetInstancesDbInstanceSetOutput) DbEngineConfig() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) string { return v.DbEngineConfig }).(pulumi.StringOutput)
+}
+
+// Purchasable specification ID.
+func (o GetInstancesDbInstanceSetOutput) DbInstanceClass() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) string { return v.DbInstanceClass }).(pulumi.StringOutput)
+}
+
+// Number of assigned CPUs.
+func (o GetInstancesDbInstanceSetOutput) DbInstanceCpu() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) int { return v.DbInstanceCpu }).(pulumi.IntOutput)
+}
+
+// Instance ID.
+func (o GetInstancesDbInstanceSetOutput) DbInstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) string { return v.DbInstanceId }).(pulumi.StringOutput)
+}
+
+// Assigned instance memory size in GB.
+func (o GetInstancesDbInstanceSetOutput) DbInstanceMemory() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) int { return v.DbInstanceMemory }).(pulumi.IntOutput)
+}
+
+// Instance name.
+func (o GetInstancesDbInstanceSetOutput) DbInstanceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) string { return v.DbInstanceName }).(pulumi.StringOutput)
+}
+
+// Instance network connection information.
+func (o GetInstancesDbInstanceSetOutput) DbInstanceNetInfos() GetInstancesDbInstanceSetDbInstanceNetInfoArrayOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) []GetInstancesDbInstanceSetDbInstanceNetInfo {
+		return v.DbInstanceNetInfos
+	}).(GetInstancesDbInstanceSetDbInstanceNetInfoArrayOutput)
+}
+
+// Instance status, including: `applying` (applying), `init` (to be initialized), `initing` (initializing), `running` (running), `limited run` (restricted operation), `isolating` (isolating), `isolated` (isolated), `disisolating` (de-isolating), `recycling` (recycling), `recycled` (recycled), `job running` (task executing), `offline` (offline), `migrating` (migrating), `expanding` (scaling out), `waitSwitch` (waiting to switch), `switching` (switching), `readonly` (readonly), `restarting` (restarting), `network changing` (network modification in progress), `upgrading` (kernel version upgrading), `audit-switching` (audit status changing), `primary-switching` (primary-secondary switching), `offlining` (offline), `deployment changing` (modify az), `cloning` (restoring data), `parameter modifying` (parameter modification in progress), `log-switching` (log status change), `restoring` (recovering), and `expanding` (scaling out).
+func (o GetInstancesDbInstanceSetOutput) DbInstanceStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) string { return v.DbInstanceStatus }).(pulumi.StringOutput)
+}
+
+// Assigned instance storage capacity in GB.
+func (o GetInstancesDbInstanceSetOutput) DbInstanceStorage() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) int { return v.DbInstanceStorage }).(pulumi.IntOutput)
+}
+
+// Storage type. Valid values: `PHYSICAL_LOCAL_SSD` (local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD).
+func (o GetInstancesDbInstanceSetOutput) DbInstanceStorageType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) string { return v.DbInstanceStorageType }).(pulumi.StringOutput)
+}
+
+// Instance type, which includes:
+// <li>primary: primary instance </li>
+// <li>readonly: read-only instance</li>
+// <li>guard: disaster recovery instance</li>
+// <li>temp: temporary instance</li>.
+func (o GetInstancesDbInstanceSetOutput) DbInstanceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) string { return v.DbInstanceType }).(pulumi.StringOutput)
+}
+
+// Instance version. Valid value: `standard` (dual-server high-availability; one-primary-one-standby).
+func (o GetInstancesDbInstanceSetOutput) DbInstanceVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) string { return v.DbInstanceVersion }).(pulumi.StringOutput)
+}
+
+// PostgreSQL kernel version number.
+func (o GetInstancesDbInstanceSetOutput) DbKernelVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) string { return v.DbKernelVersion }).(pulumi.StringOutput)
+}
+
+// PostgreSQL major version number.
+func (o GetInstancesDbInstanceSetOutput) DbMajorVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) string { return v.DbMajorVersion }).(pulumi.StringOutput)
+}
+
+// Instance node information
+// Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetInstancesDbInstanceSetOutput) DbNodeSets() GetInstancesDbInstanceSetDbNodeSetArrayOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) []GetInstancesDbInstanceSetDbNodeSet { return v.DbNodeSets }).(GetInstancesDbInstanceSetDbNodeSetArrayOutput)
+}
+
+// Number of the major PostgreSQL community version and minor version, such as 12.4, which can be queried by the [DescribeDBVersions](https://intl.cloud.tencent.com/document/api/409/89018?from_cn_redirect=1) API.
+func (o GetInstancesDbInstanceSetOutput) DbVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) string { return v.DbVersion }).(pulumi.StringOutput)
+}
+
+// Specifies whether to enable deletion protection for the instance. valid values as follows:.
+// -Specifies whether to enable deletion protection. valid values: true (enable deletion protection).
+// -Specifies whether to disable deletion protection. valid values: false (disable deletion protection).
+func (o GetInstancesDbInstanceSetOutput) DeletionProtection() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) bool { return v.DeletionProtection }).(pulumi.BoolOutput)
+}
+
+// Number of cpu cores that have been elastically scaled out.
+func (o GetInstancesDbInstanceSetOutput) ExpandedCpu() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) int { return v.ExpandedCpu }).(pulumi.IntOutput)
+}
+
+// Instance expiration time.
+func (o GetInstancesDbInstanceSetOutput) ExpireTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) string { return v.ExpireTime }).(pulumi.StringOutput)
+}
+
+// Whether the instance supports TDE data encryption.
+// <Li>0: not supported</li>.
+// <Li>1: supported.</li>.
+// Default value: 0
+func (o GetInstancesDbInstanceSetOutput) IsSupportTde() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) int { return v.IsSupportTde }).(pulumi.IntOutput)
+}
+
+// Instance isolation time.
+func (o GetInstancesDbInstanceSetOutput) IsolatedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) string { return v.IsolatedTime }).(pulumi.StringOutput)
+}
+
+// Primary instance information. returned only when the instance is a read-only instance.
+func (o GetInstancesDbInstanceSetOutput) MasterDbInstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) string { return v.MasterDbInstanceId }).(pulumi.StringOutput)
+}
+
+// Network access list of the instance (this field has been deprecated)
+// Note: this field may return `null`, indicating that no valid values can be obtained.
+func (o GetInstancesDbInstanceSetOutput) NetworkAccessLists() GetInstancesDbInstanceSetNetworkAccessListArrayOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) []GetInstancesDbInstanceSetNetworkAccessList {
+		return v.NetworkAccessLists
+	}).(GetInstancesDbInstanceSetNetworkAccessListArrayOutput)
+}
+
+// Decommissioning time.
+func (o GetInstancesDbInstanceSetOutput) OfflineTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) string { return v.OfflineTime }).(pulumi.StringOutput)
+}
+
+// Billing mode:
+// <li>prepaid: monthly subscription, prepaid</li>
+// <li>postpaid: pay-as-you-go, postpaid</li>.
+func (o GetInstancesDbInstanceSetOutput) PayType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) string { return v.PayType }).(pulumi.StringOutput)
+}
+
+// Project ID of the postgresql instance to be query.
+func (o GetInstancesDbInstanceSetOutput) ProjectId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) int { return v.ProjectId }).(pulumi.IntOutput)
+}
+
+// Specifies the number of read-only instances.
+func (o GetInstancesDbInstanceSetOutput) ReadOnlyInstanceNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) int { return v.ReadOnlyInstanceNum }).(pulumi.IntOutput)
+}
+
+// Instance region such as ap-guangzhou, which corresponds to the`Region` field in `RegionSet`.
+func (o GetInstancesDbInstanceSetOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Instance root account name, default value is `root`.
+func (o GetInstancesDbInstanceSetOutput) RootUser() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) string { return v.RootUser }).(pulumi.StringOutput)
+}
+
+// Describes the state of the read-only instance in the read-only group.
+func (o GetInstancesDbInstanceSetOutput) StatusInReadonlyGroup() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) string { return v.StatusInReadonlyGroup }).(pulumi.StringOutput)
+}
+
+// ID of subnet.
+func (o GetInstancesDbInstanceSetOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+// Whether the instance supports IPv6:
+// <li>`0`: no</li>
+// <li>`1`: yes</li>
+// Default value: 0.
+func (o GetInstancesDbInstanceSetOutput) SupportIpv6() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) int { return v.SupportIpv6 }).(pulumi.IntOutput)
+}
+
+// Describes the Tag information associated with the instance.
+func (o GetInstancesDbInstanceSetOutput) TagLists() GetInstancesDbInstanceSetTagListArrayOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) []GetInstancesDbInstanceSetTagList { return v.TagLists }).(GetInstancesDbInstanceSetTagListArrayOutput)
+}
+
+// Machine type.
+func (o GetInstancesDbInstanceSetOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// Instance `Uid`.
+func (o GetInstancesDbInstanceSetOutput) Uid() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) int { return v.Uid }).(pulumi.IntOutput)
+}
+
+// Last updated time of the instance attribute.
+func (o GetInstancesDbInstanceSetOutput) UpdateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) string { return v.UpdateTime }).(pulumi.StringOutput)
+}
+
+// ID of VPC.
+func (o GetInstancesDbInstanceSetOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+// Instance AZ such as ap-guangzhou-3, which corresponds to the `Zone` field of `ZoneSet`.
+func (o GetInstancesDbInstanceSetOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSet) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+type GetInstancesDbInstanceSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesDbInstanceSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesDbInstanceSet)(nil)).Elem()
+}
+
+func (o GetInstancesDbInstanceSetArrayOutput) ToGetInstancesDbInstanceSetArrayOutput() GetInstancesDbInstanceSetArrayOutput {
+	return o
+}
+
+func (o GetInstancesDbInstanceSetArrayOutput) ToGetInstancesDbInstanceSetArrayOutputWithContext(ctx context.Context) GetInstancesDbInstanceSetArrayOutput {
+	return o
+}
+
+func (o GetInstancesDbInstanceSetArrayOutput) Index(i pulumi.IntInput) GetInstancesDbInstanceSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesDbInstanceSet {
+		return vs[0].([]GetInstancesDbInstanceSet)[vs[1].(int)]
+	}).(GetInstancesDbInstanceSetOutput)
+}
+
+type GetInstancesDbInstanceSetDbInstanceNetInfo struct {
+	// DNS domain name.
+	Address string `pulumi:"address"`
+	// Ip.
+	Ip string `pulumi:"ip"`
+	// Network type. 1: inner (private network address), 2: public (public network address).
+	NetType string `pulumi:"netType"`
+	// Connection port address.
+	Port int `pulumi:"port"`
+	// Specifies the protocol type to connect to the database. currently supported: postgresql, mssql (mssql compatible syntax).
+	ProtocolType string `pulumi:"protocolType"`
+	// Network connection status. Valid values: `initing` (never enabled before), `opened` (enabled), `closed` (disabled), `opening` (enabling), `closing` (disabling).
+	Status string `pulumi:"status"`
+	// ID of subnet.
+	SubnetId string `pulumi:"subnetId"`
+	// ID of VPC.
+	VpcId string `pulumi:"vpcId"`
+}
+
+// GetInstancesDbInstanceSetDbInstanceNetInfoInput is an input type that accepts GetInstancesDbInstanceSetDbInstanceNetInfoArgs and GetInstancesDbInstanceSetDbInstanceNetInfoOutput values.
+// You can construct a concrete instance of `GetInstancesDbInstanceSetDbInstanceNetInfoInput` via:
+//
+//	GetInstancesDbInstanceSetDbInstanceNetInfoArgs{...}
+type GetInstancesDbInstanceSetDbInstanceNetInfoInput interface {
+	pulumi.Input
+
+	ToGetInstancesDbInstanceSetDbInstanceNetInfoOutput() GetInstancesDbInstanceSetDbInstanceNetInfoOutput
+	ToGetInstancesDbInstanceSetDbInstanceNetInfoOutputWithContext(context.Context) GetInstancesDbInstanceSetDbInstanceNetInfoOutput
+}
+
+type GetInstancesDbInstanceSetDbInstanceNetInfoArgs struct {
+	// DNS domain name.
+	Address pulumi.StringInput `pulumi:"address"`
+	// Ip.
+	Ip pulumi.StringInput `pulumi:"ip"`
+	// Network type. 1: inner (private network address), 2: public (public network address).
+	NetType pulumi.StringInput `pulumi:"netType"`
+	// Connection port address.
+	Port pulumi.IntInput `pulumi:"port"`
+	// Specifies the protocol type to connect to the database. currently supported: postgresql, mssql (mssql compatible syntax).
+	ProtocolType pulumi.StringInput `pulumi:"protocolType"`
+	// Network connection status. Valid values: `initing` (never enabled before), `opened` (enabled), `closed` (disabled), `opening` (enabling), `closing` (disabling).
+	Status pulumi.StringInput `pulumi:"status"`
+	// ID of subnet.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	// ID of VPC.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+}
+
+func (GetInstancesDbInstanceSetDbInstanceNetInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesDbInstanceSetDbInstanceNetInfo)(nil)).Elem()
+}
+
+func (i GetInstancesDbInstanceSetDbInstanceNetInfoArgs) ToGetInstancesDbInstanceSetDbInstanceNetInfoOutput() GetInstancesDbInstanceSetDbInstanceNetInfoOutput {
+	return i.ToGetInstancesDbInstanceSetDbInstanceNetInfoOutputWithContext(context.Background())
+}
+
+func (i GetInstancesDbInstanceSetDbInstanceNetInfoArgs) ToGetInstancesDbInstanceSetDbInstanceNetInfoOutputWithContext(ctx context.Context) GetInstancesDbInstanceSetDbInstanceNetInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesDbInstanceSetDbInstanceNetInfoOutput)
+}
+
+// GetInstancesDbInstanceSetDbInstanceNetInfoArrayInput is an input type that accepts GetInstancesDbInstanceSetDbInstanceNetInfoArray and GetInstancesDbInstanceSetDbInstanceNetInfoArrayOutput values.
+// You can construct a concrete instance of `GetInstancesDbInstanceSetDbInstanceNetInfoArrayInput` via:
+//
+//	GetInstancesDbInstanceSetDbInstanceNetInfoArray{ GetInstancesDbInstanceSetDbInstanceNetInfoArgs{...} }
+type GetInstancesDbInstanceSetDbInstanceNetInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetInstancesDbInstanceSetDbInstanceNetInfoArrayOutput() GetInstancesDbInstanceSetDbInstanceNetInfoArrayOutput
+	ToGetInstancesDbInstanceSetDbInstanceNetInfoArrayOutputWithContext(context.Context) GetInstancesDbInstanceSetDbInstanceNetInfoArrayOutput
+}
+
+type GetInstancesDbInstanceSetDbInstanceNetInfoArray []GetInstancesDbInstanceSetDbInstanceNetInfoInput
+
+func (GetInstancesDbInstanceSetDbInstanceNetInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesDbInstanceSetDbInstanceNetInfo)(nil)).Elem()
+}
+
+func (i GetInstancesDbInstanceSetDbInstanceNetInfoArray) ToGetInstancesDbInstanceSetDbInstanceNetInfoArrayOutput() GetInstancesDbInstanceSetDbInstanceNetInfoArrayOutput {
+	return i.ToGetInstancesDbInstanceSetDbInstanceNetInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstancesDbInstanceSetDbInstanceNetInfoArray) ToGetInstancesDbInstanceSetDbInstanceNetInfoArrayOutputWithContext(ctx context.Context) GetInstancesDbInstanceSetDbInstanceNetInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesDbInstanceSetDbInstanceNetInfoArrayOutput)
+}
+
+type GetInstancesDbInstanceSetDbInstanceNetInfoOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesDbInstanceSetDbInstanceNetInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesDbInstanceSetDbInstanceNetInfo)(nil)).Elem()
+}
+
+func (o GetInstancesDbInstanceSetDbInstanceNetInfoOutput) ToGetInstancesDbInstanceSetDbInstanceNetInfoOutput() GetInstancesDbInstanceSetDbInstanceNetInfoOutput {
+	return o
+}
+
+func (o GetInstancesDbInstanceSetDbInstanceNetInfoOutput) ToGetInstancesDbInstanceSetDbInstanceNetInfoOutputWithContext(ctx context.Context) GetInstancesDbInstanceSetDbInstanceNetInfoOutput {
+	return o
+}
+
+// DNS domain name.
+func (o GetInstancesDbInstanceSetDbInstanceNetInfoOutput) Address() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSetDbInstanceNetInfo) string { return v.Address }).(pulumi.StringOutput)
+}
+
+// Ip.
+func (o GetInstancesDbInstanceSetDbInstanceNetInfoOutput) Ip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSetDbInstanceNetInfo) string { return v.Ip }).(pulumi.StringOutput)
+}
+
+// Network type. 1: inner (private network address), 2: public (public network address).
+func (o GetInstancesDbInstanceSetDbInstanceNetInfoOutput) NetType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSetDbInstanceNetInfo) string { return v.NetType }).(pulumi.StringOutput)
+}
+
+// Connection port address.
+func (o GetInstancesDbInstanceSetDbInstanceNetInfoOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSetDbInstanceNetInfo) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// Specifies the protocol type to connect to the database. currently supported: postgresql, mssql (mssql compatible syntax).
+func (o GetInstancesDbInstanceSetDbInstanceNetInfoOutput) ProtocolType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSetDbInstanceNetInfo) string { return v.ProtocolType }).(pulumi.StringOutput)
+}
+
+// Network connection status. Valid values: `initing` (never enabled before), `opened` (enabled), `closed` (disabled), `opening` (enabling), `closing` (disabling).
+func (o GetInstancesDbInstanceSetDbInstanceNetInfoOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSetDbInstanceNetInfo) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// ID of subnet.
+func (o GetInstancesDbInstanceSetDbInstanceNetInfoOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSetDbInstanceNetInfo) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+// ID of VPC.
+func (o GetInstancesDbInstanceSetDbInstanceNetInfoOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSetDbInstanceNetInfo) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+type GetInstancesDbInstanceSetDbInstanceNetInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesDbInstanceSetDbInstanceNetInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesDbInstanceSetDbInstanceNetInfo)(nil)).Elem()
+}
+
+func (o GetInstancesDbInstanceSetDbInstanceNetInfoArrayOutput) ToGetInstancesDbInstanceSetDbInstanceNetInfoArrayOutput() GetInstancesDbInstanceSetDbInstanceNetInfoArrayOutput {
+	return o
+}
+
+func (o GetInstancesDbInstanceSetDbInstanceNetInfoArrayOutput) ToGetInstancesDbInstanceSetDbInstanceNetInfoArrayOutputWithContext(ctx context.Context) GetInstancesDbInstanceSetDbInstanceNetInfoArrayOutput {
+	return o
+}
+
+func (o GetInstancesDbInstanceSetDbInstanceNetInfoArrayOutput) Index(i pulumi.IntInput) GetInstancesDbInstanceSetDbInstanceNetInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesDbInstanceSetDbInstanceNetInfo {
+		return vs[0].([]GetInstancesDbInstanceSetDbInstanceNetInfo)[vs[1].(int)]
+	}).(GetInstancesDbInstanceSetDbInstanceNetInfoOutput)
+}
+
+type GetInstancesDbInstanceSetDbNodeSet struct {
+	// CDC ID.
+	DedicatedClusterId *string `pulumi:"dedicatedClusterId"`
+	// Node type. Valid values:
+	// `Primary`;
+	// `Standby`.
+	Role string `pulumi:"role"`
+	// Instance AZ such as ap-guangzhou-3, which corresponds to the `Zone` field of `ZoneSet`.
+	Zone string `pulumi:"zone"`
+}
+
+// GetInstancesDbInstanceSetDbNodeSetInput is an input type that accepts GetInstancesDbInstanceSetDbNodeSetArgs and GetInstancesDbInstanceSetDbNodeSetOutput values.
+// You can construct a concrete instance of `GetInstancesDbInstanceSetDbNodeSetInput` via:
+//
+//	GetInstancesDbInstanceSetDbNodeSetArgs{...}
+type GetInstancesDbInstanceSetDbNodeSetInput interface {
+	pulumi.Input
+
+	ToGetInstancesDbInstanceSetDbNodeSetOutput() GetInstancesDbInstanceSetDbNodeSetOutput
+	ToGetInstancesDbInstanceSetDbNodeSetOutputWithContext(context.Context) GetInstancesDbInstanceSetDbNodeSetOutput
+}
+
+type GetInstancesDbInstanceSetDbNodeSetArgs struct {
+	// CDC ID.
+	DedicatedClusterId pulumi.StringPtrInput `pulumi:"dedicatedClusterId"`
+	// Node type. Valid values:
+	// `Primary`;
+	// `Standby`.
+	Role pulumi.StringInput `pulumi:"role"`
+	// Instance AZ such as ap-guangzhou-3, which corresponds to the `Zone` field of `ZoneSet`.
+	Zone pulumi.StringInput `pulumi:"zone"`
+}
+
+func (GetInstancesDbInstanceSetDbNodeSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesDbInstanceSetDbNodeSet)(nil)).Elem()
+}
+
+func (i GetInstancesDbInstanceSetDbNodeSetArgs) ToGetInstancesDbInstanceSetDbNodeSetOutput() GetInstancesDbInstanceSetDbNodeSetOutput {
+	return i.ToGetInstancesDbInstanceSetDbNodeSetOutputWithContext(context.Background())
+}
+
+func (i GetInstancesDbInstanceSetDbNodeSetArgs) ToGetInstancesDbInstanceSetDbNodeSetOutputWithContext(ctx context.Context) GetInstancesDbInstanceSetDbNodeSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesDbInstanceSetDbNodeSetOutput)
+}
+
+// GetInstancesDbInstanceSetDbNodeSetArrayInput is an input type that accepts GetInstancesDbInstanceSetDbNodeSetArray and GetInstancesDbInstanceSetDbNodeSetArrayOutput values.
+// You can construct a concrete instance of `GetInstancesDbInstanceSetDbNodeSetArrayInput` via:
+//
+//	GetInstancesDbInstanceSetDbNodeSetArray{ GetInstancesDbInstanceSetDbNodeSetArgs{...} }
+type GetInstancesDbInstanceSetDbNodeSetArrayInput interface {
+	pulumi.Input
+
+	ToGetInstancesDbInstanceSetDbNodeSetArrayOutput() GetInstancesDbInstanceSetDbNodeSetArrayOutput
+	ToGetInstancesDbInstanceSetDbNodeSetArrayOutputWithContext(context.Context) GetInstancesDbInstanceSetDbNodeSetArrayOutput
+}
+
+type GetInstancesDbInstanceSetDbNodeSetArray []GetInstancesDbInstanceSetDbNodeSetInput
+
+func (GetInstancesDbInstanceSetDbNodeSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesDbInstanceSetDbNodeSet)(nil)).Elem()
+}
+
+func (i GetInstancesDbInstanceSetDbNodeSetArray) ToGetInstancesDbInstanceSetDbNodeSetArrayOutput() GetInstancesDbInstanceSetDbNodeSetArrayOutput {
+	return i.ToGetInstancesDbInstanceSetDbNodeSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstancesDbInstanceSetDbNodeSetArray) ToGetInstancesDbInstanceSetDbNodeSetArrayOutputWithContext(ctx context.Context) GetInstancesDbInstanceSetDbNodeSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesDbInstanceSetDbNodeSetArrayOutput)
+}
+
+type GetInstancesDbInstanceSetDbNodeSetOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesDbInstanceSetDbNodeSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesDbInstanceSetDbNodeSet)(nil)).Elem()
+}
+
+func (o GetInstancesDbInstanceSetDbNodeSetOutput) ToGetInstancesDbInstanceSetDbNodeSetOutput() GetInstancesDbInstanceSetDbNodeSetOutput {
+	return o
+}
+
+func (o GetInstancesDbInstanceSetDbNodeSetOutput) ToGetInstancesDbInstanceSetDbNodeSetOutputWithContext(ctx context.Context) GetInstancesDbInstanceSetDbNodeSetOutput {
+	return o
+}
+
+// CDC ID.
+func (o GetInstancesDbInstanceSetDbNodeSetOutput) DedicatedClusterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSetDbNodeSet) *string { return v.DedicatedClusterId }).(pulumi.StringPtrOutput)
+}
+
+// Node type. Valid values:
+// `Primary`;
+// `Standby`.
+func (o GetInstancesDbInstanceSetDbNodeSetOutput) Role() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSetDbNodeSet) string { return v.Role }).(pulumi.StringOutput)
+}
+
+// Instance AZ such as ap-guangzhou-3, which corresponds to the `Zone` field of `ZoneSet`.
+func (o GetInstancesDbInstanceSetDbNodeSetOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSetDbNodeSet) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+type GetInstancesDbInstanceSetDbNodeSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesDbInstanceSetDbNodeSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesDbInstanceSetDbNodeSet)(nil)).Elem()
+}
+
+func (o GetInstancesDbInstanceSetDbNodeSetArrayOutput) ToGetInstancesDbInstanceSetDbNodeSetArrayOutput() GetInstancesDbInstanceSetDbNodeSetArrayOutput {
+	return o
+}
+
+func (o GetInstancesDbInstanceSetDbNodeSetArrayOutput) ToGetInstancesDbInstanceSetDbNodeSetArrayOutputWithContext(ctx context.Context) GetInstancesDbInstanceSetDbNodeSetArrayOutput {
+	return o
+}
+
+func (o GetInstancesDbInstanceSetDbNodeSetArrayOutput) Index(i pulumi.IntInput) GetInstancesDbInstanceSetDbNodeSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesDbInstanceSetDbNodeSet {
+		return vs[0].([]GetInstancesDbInstanceSetDbNodeSet)[vs[1].(int)]
+	}).(GetInstancesDbInstanceSetDbNodeSetOutput)
+}
+
+type GetInstancesDbInstanceSetNetworkAccessList struct {
+	// Network resource id, instance id, or RO group id.
+	ResourceId string `pulumi:"resourceId"`
+	// Resource type. valid values: 1 (instance), 2 (RO group).
+	ResourceType int `pulumi:"resourceType"`
+	// ID of subnet.
+	SubnetId string `pulumi:"subnetId"`
+	// IPv4 Address.
+	Vip string `pulumi:"vip"`
+	// IPv6 Address.
+	Vip6 string `pulumi:"vip6"`
+	// ID of VPC.
+	VpcId string `pulumi:"vpcId"`
+	// Network status. valid values: 1-applying, 2-active, 3-deleting, 4-deleted.
+	VpcStatus int `pulumi:"vpcStatus"`
+	// Specifies the access port.
+	Vport int `pulumi:"vport"`
+}
+
+// GetInstancesDbInstanceSetNetworkAccessListInput is an input type that accepts GetInstancesDbInstanceSetNetworkAccessListArgs and GetInstancesDbInstanceSetNetworkAccessListOutput values.
+// You can construct a concrete instance of `GetInstancesDbInstanceSetNetworkAccessListInput` via:
+//
+//	GetInstancesDbInstanceSetNetworkAccessListArgs{...}
+type GetInstancesDbInstanceSetNetworkAccessListInput interface {
+	pulumi.Input
+
+	ToGetInstancesDbInstanceSetNetworkAccessListOutput() GetInstancesDbInstanceSetNetworkAccessListOutput
+	ToGetInstancesDbInstanceSetNetworkAccessListOutputWithContext(context.Context) GetInstancesDbInstanceSetNetworkAccessListOutput
+}
+
+type GetInstancesDbInstanceSetNetworkAccessListArgs struct {
+	// Network resource id, instance id, or RO group id.
+	ResourceId pulumi.StringInput `pulumi:"resourceId"`
+	// Resource type. valid values: 1 (instance), 2 (RO group).
+	ResourceType pulumi.IntInput `pulumi:"resourceType"`
+	// ID of subnet.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	// IPv4 Address.
+	Vip pulumi.StringInput `pulumi:"vip"`
+	// IPv6 Address.
+	Vip6 pulumi.StringInput `pulumi:"vip6"`
+	// ID of VPC.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+	// Network status. valid values: 1-applying, 2-active, 3-deleting, 4-deleted.
+	VpcStatus pulumi.IntInput `pulumi:"vpcStatus"`
+	// Specifies the access port.
+	Vport pulumi.IntInput `pulumi:"vport"`
+}
+
+func (GetInstancesDbInstanceSetNetworkAccessListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesDbInstanceSetNetworkAccessList)(nil)).Elem()
+}
+
+func (i GetInstancesDbInstanceSetNetworkAccessListArgs) ToGetInstancesDbInstanceSetNetworkAccessListOutput() GetInstancesDbInstanceSetNetworkAccessListOutput {
+	return i.ToGetInstancesDbInstanceSetNetworkAccessListOutputWithContext(context.Background())
+}
+
+func (i GetInstancesDbInstanceSetNetworkAccessListArgs) ToGetInstancesDbInstanceSetNetworkAccessListOutputWithContext(ctx context.Context) GetInstancesDbInstanceSetNetworkAccessListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesDbInstanceSetNetworkAccessListOutput)
+}
+
+// GetInstancesDbInstanceSetNetworkAccessListArrayInput is an input type that accepts GetInstancesDbInstanceSetNetworkAccessListArray and GetInstancesDbInstanceSetNetworkAccessListArrayOutput values.
+// You can construct a concrete instance of `GetInstancesDbInstanceSetNetworkAccessListArrayInput` via:
+//
+//	GetInstancesDbInstanceSetNetworkAccessListArray{ GetInstancesDbInstanceSetNetworkAccessListArgs{...} }
+type GetInstancesDbInstanceSetNetworkAccessListArrayInput interface {
+	pulumi.Input
+
+	ToGetInstancesDbInstanceSetNetworkAccessListArrayOutput() GetInstancesDbInstanceSetNetworkAccessListArrayOutput
+	ToGetInstancesDbInstanceSetNetworkAccessListArrayOutputWithContext(context.Context) GetInstancesDbInstanceSetNetworkAccessListArrayOutput
+}
+
+type GetInstancesDbInstanceSetNetworkAccessListArray []GetInstancesDbInstanceSetNetworkAccessListInput
+
+func (GetInstancesDbInstanceSetNetworkAccessListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesDbInstanceSetNetworkAccessList)(nil)).Elem()
+}
+
+func (i GetInstancesDbInstanceSetNetworkAccessListArray) ToGetInstancesDbInstanceSetNetworkAccessListArrayOutput() GetInstancesDbInstanceSetNetworkAccessListArrayOutput {
+	return i.ToGetInstancesDbInstanceSetNetworkAccessListArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstancesDbInstanceSetNetworkAccessListArray) ToGetInstancesDbInstanceSetNetworkAccessListArrayOutputWithContext(ctx context.Context) GetInstancesDbInstanceSetNetworkAccessListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesDbInstanceSetNetworkAccessListArrayOutput)
+}
+
+type GetInstancesDbInstanceSetNetworkAccessListOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesDbInstanceSetNetworkAccessListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesDbInstanceSetNetworkAccessList)(nil)).Elem()
+}
+
+func (o GetInstancesDbInstanceSetNetworkAccessListOutput) ToGetInstancesDbInstanceSetNetworkAccessListOutput() GetInstancesDbInstanceSetNetworkAccessListOutput {
+	return o
+}
+
+func (o GetInstancesDbInstanceSetNetworkAccessListOutput) ToGetInstancesDbInstanceSetNetworkAccessListOutputWithContext(ctx context.Context) GetInstancesDbInstanceSetNetworkAccessListOutput {
+	return o
+}
+
+// Network resource id, instance id, or RO group id.
+func (o GetInstancesDbInstanceSetNetworkAccessListOutput) ResourceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSetNetworkAccessList) string { return v.ResourceId }).(pulumi.StringOutput)
+}
+
+// Resource type. valid values: 1 (instance), 2 (RO group).
+func (o GetInstancesDbInstanceSetNetworkAccessListOutput) ResourceType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSetNetworkAccessList) int { return v.ResourceType }).(pulumi.IntOutput)
+}
+
+// ID of subnet.
+func (o GetInstancesDbInstanceSetNetworkAccessListOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSetNetworkAccessList) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+// IPv4 Address.
+func (o GetInstancesDbInstanceSetNetworkAccessListOutput) Vip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSetNetworkAccessList) string { return v.Vip }).(pulumi.StringOutput)
+}
+
+// IPv6 Address.
+func (o GetInstancesDbInstanceSetNetworkAccessListOutput) Vip6() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSetNetworkAccessList) string { return v.Vip6 }).(pulumi.StringOutput)
+}
+
+// ID of VPC.
+func (o GetInstancesDbInstanceSetNetworkAccessListOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSetNetworkAccessList) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+// Network status. valid values: 1-applying, 2-active, 3-deleting, 4-deleted.
+func (o GetInstancesDbInstanceSetNetworkAccessListOutput) VpcStatus() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSetNetworkAccessList) int { return v.VpcStatus }).(pulumi.IntOutput)
+}
+
+// Specifies the access port.
+func (o GetInstancesDbInstanceSetNetworkAccessListOutput) Vport() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSetNetworkAccessList) int { return v.Vport }).(pulumi.IntOutput)
+}
+
+type GetInstancesDbInstanceSetNetworkAccessListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesDbInstanceSetNetworkAccessListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesDbInstanceSetNetworkAccessList)(nil)).Elem()
+}
+
+func (o GetInstancesDbInstanceSetNetworkAccessListArrayOutput) ToGetInstancesDbInstanceSetNetworkAccessListArrayOutput() GetInstancesDbInstanceSetNetworkAccessListArrayOutput {
+	return o
+}
+
+func (o GetInstancesDbInstanceSetNetworkAccessListArrayOutput) ToGetInstancesDbInstanceSetNetworkAccessListArrayOutputWithContext(ctx context.Context) GetInstancesDbInstanceSetNetworkAccessListArrayOutput {
+	return o
+}
+
+func (o GetInstancesDbInstanceSetNetworkAccessListArrayOutput) Index(i pulumi.IntInput) GetInstancesDbInstanceSetNetworkAccessListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesDbInstanceSetNetworkAccessList {
+		return vs[0].([]GetInstancesDbInstanceSetNetworkAccessList)[vs[1].(int)]
+	}).(GetInstancesDbInstanceSetNetworkAccessListOutput)
+}
+
+type GetInstancesDbInstanceSetTagList struct {
+	// Tag key.
+	TagKey string `pulumi:"tagKey"`
+	// Tag value.
+	TagValue string `pulumi:"tagValue"`
+}
+
+// GetInstancesDbInstanceSetTagListInput is an input type that accepts GetInstancesDbInstanceSetTagListArgs and GetInstancesDbInstanceSetTagListOutput values.
+// You can construct a concrete instance of `GetInstancesDbInstanceSetTagListInput` via:
+//
+//	GetInstancesDbInstanceSetTagListArgs{...}
+type GetInstancesDbInstanceSetTagListInput interface {
+	pulumi.Input
+
+	ToGetInstancesDbInstanceSetTagListOutput() GetInstancesDbInstanceSetTagListOutput
+	ToGetInstancesDbInstanceSetTagListOutputWithContext(context.Context) GetInstancesDbInstanceSetTagListOutput
+}
+
+type GetInstancesDbInstanceSetTagListArgs struct {
+	// Tag key.
+	TagKey pulumi.StringInput `pulumi:"tagKey"`
+	// Tag value.
+	TagValue pulumi.StringInput `pulumi:"tagValue"`
+}
+
+func (GetInstancesDbInstanceSetTagListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesDbInstanceSetTagList)(nil)).Elem()
+}
+
+func (i GetInstancesDbInstanceSetTagListArgs) ToGetInstancesDbInstanceSetTagListOutput() GetInstancesDbInstanceSetTagListOutput {
+	return i.ToGetInstancesDbInstanceSetTagListOutputWithContext(context.Background())
+}
+
+func (i GetInstancesDbInstanceSetTagListArgs) ToGetInstancesDbInstanceSetTagListOutputWithContext(ctx context.Context) GetInstancesDbInstanceSetTagListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesDbInstanceSetTagListOutput)
+}
+
+// GetInstancesDbInstanceSetTagListArrayInput is an input type that accepts GetInstancesDbInstanceSetTagListArray and GetInstancesDbInstanceSetTagListArrayOutput values.
+// You can construct a concrete instance of `GetInstancesDbInstanceSetTagListArrayInput` via:
+//
+//	GetInstancesDbInstanceSetTagListArray{ GetInstancesDbInstanceSetTagListArgs{...} }
+type GetInstancesDbInstanceSetTagListArrayInput interface {
+	pulumi.Input
+
+	ToGetInstancesDbInstanceSetTagListArrayOutput() GetInstancesDbInstanceSetTagListArrayOutput
+	ToGetInstancesDbInstanceSetTagListArrayOutputWithContext(context.Context) GetInstancesDbInstanceSetTagListArrayOutput
+}
+
+type GetInstancesDbInstanceSetTagListArray []GetInstancesDbInstanceSetTagListInput
+
+func (GetInstancesDbInstanceSetTagListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesDbInstanceSetTagList)(nil)).Elem()
+}
+
+func (i GetInstancesDbInstanceSetTagListArray) ToGetInstancesDbInstanceSetTagListArrayOutput() GetInstancesDbInstanceSetTagListArrayOutput {
+	return i.ToGetInstancesDbInstanceSetTagListArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstancesDbInstanceSetTagListArray) ToGetInstancesDbInstanceSetTagListArrayOutputWithContext(ctx context.Context) GetInstancesDbInstanceSetTagListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesDbInstanceSetTagListArrayOutput)
+}
+
+type GetInstancesDbInstanceSetTagListOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesDbInstanceSetTagListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesDbInstanceSetTagList)(nil)).Elem()
+}
+
+func (o GetInstancesDbInstanceSetTagListOutput) ToGetInstancesDbInstanceSetTagListOutput() GetInstancesDbInstanceSetTagListOutput {
+	return o
+}
+
+func (o GetInstancesDbInstanceSetTagListOutput) ToGetInstancesDbInstanceSetTagListOutputWithContext(ctx context.Context) GetInstancesDbInstanceSetTagListOutput {
+	return o
+}
+
+// Tag key.
+func (o GetInstancesDbInstanceSetTagListOutput) TagKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSetTagList) string { return v.TagKey }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o GetInstancesDbInstanceSetTagListOutput) TagValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesDbInstanceSetTagList) string { return v.TagValue }).(pulumi.StringOutput)
+}
+
+type GetInstancesDbInstanceSetTagListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesDbInstanceSetTagListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesDbInstanceSetTagList)(nil)).Elem()
+}
+
+func (o GetInstancesDbInstanceSetTagListArrayOutput) ToGetInstancesDbInstanceSetTagListArrayOutput() GetInstancesDbInstanceSetTagListArrayOutput {
+	return o
+}
+
+func (o GetInstancesDbInstanceSetTagListArrayOutput) ToGetInstancesDbInstanceSetTagListArrayOutputWithContext(ctx context.Context) GetInstancesDbInstanceSetTagListArrayOutput {
+	return o
+}
+
+func (o GetInstancesDbInstanceSetTagListArrayOutput) Index(i pulumi.IntInput) GetInstancesDbInstanceSetTagListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesDbInstanceSetTagList {
+		return vs[0].([]GetInstancesDbInstanceSetTagList)[vs[1].(int)]
+	}).(GetInstancesDbInstanceSetTagListOutput)
+}
+
 type GetInstancesInstanceList struct {
 	// Auto renew flag.
 	AutoRenewFlag int `pulumi:"autoRenewFlag"`
@@ -3655,6 +5301,10 @@ type GetInstancesInstanceList struct {
 	Charset string `pulumi:"charset"`
 	// Create time of the postgresql instance.
 	CreateTime string `pulumi:"createTime"`
+	// PostgreSQL kernel version number.
+	DbKernelVersion string `pulumi:"dbKernelVersion"`
+	// PostgreSQL major version number.
+	DbMajorVersion string `pulumi:"dbMajorVersion"`
 	// Version of the postgresql database engine.
 	EngineVersion string `pulumi:"engineVersion"`
 	// ID of the postgresql instance to be query.
@@ -3679,6 +5329,8 @@ type GetInstancesInstanceList struct {
 	RootUser string `pulumi:"rootUser"`
 	// Volume size(in GB).
 	Storage int `pulumi:"storage"`
+	// Storage type. Valid values: `PHYSICAL_LOCAL_SSD` (local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD).
+	StorageType string `pulumi:"storageType"`
 	// ID of subnet.
 	SubnetId string `pulumi:"subnetId"`
 	// The available tags within this postgresql.
@@ -3709,6 +5361,10 @@ type GetInstancesInstanceListArgs struct {
 	Charset pulumi.StringInput `pulumi:"charset"`
 	// Create time of the postgresql instance.
 	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// PostgreSQL kernel version number.
+	DbKernelVersion pulumi.StringInput `pulumi:"dbKernelVersion"`
+	// PostgreSQL major version number.
+	DbMajorVersion pulumi.StringInput `pulumi:"dbMajorVersion"`
 	// Version of the postgresql database engine.
 	EngineVersion pulumi.StringInput `pulumi:"engineVersion"`
 	// ID of the postgresql instance to be query.
@@ -3733,6 +5389,8 @@ type GetInstancesInstanceListArgs struct {
 	RootUser pulumi.StringInput `pulumi:"rootUser"`
 	// Volume size(in GB).
 	Storage pulumi.IntInput `pulumi:"storage"`
+	// Storage type. Valid values: `PHYSICAL_LOCAL_SSD` (local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD).
+	StorageType pulumi.StringInput `pulumi:"storageType"`
 	// ID of subnet.
 	SubnetId pulumi.StringInput `pulumi:"subnetId"`
 	// The available tags within this postgresql.
@@ -3817,6 +5475,16 @@ func (o GetInstancesInstanceListOutput) CreateTime() pulumi.StringOutput {
 	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.CreateTime }).(pulumi.StringOutput)
 }
 
+// PostgreSQL kernel version number.
+func (o GetInstancesInstanceListOutput) DbKernelVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.DbKernelVersion }).(pulumi.StringOutput)
+}
+
+// PostgreSQL major version number.
+func (o GetInstancesInstanceListOutput) DbMajorVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.DbMajorVersion }).(pulumi.StringOutput)
+}
+
 // Version of the postgresql database engine.
 func (o GetInstancesInstanceListOutput) EngineVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.EngineVersion }).(pulumi.StringOutput)
@@ -3875,6 +5543,11 @@ func (o GetInstancesInstanceListOutput) RootUser() pulumi.StringOutput {
 // Volume size(in GB).
 func (o GetInstancesInstanceListOutput) Storage() pulumi.IntOutput {
 	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.Storage }).(pulumi.IntOutput)
+}
+
+// Storage type. Valid values: `PHYSICAL_LOCAL_SSD` (local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD).
+func (o GetInstancesInstanceListOutput) StorageType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.StorageType }).(pulumi.StringOutput)
 }
 
 // ID of subnet.
@@ -6714,6 +8387,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceBackupPlanPtrInput)(nil)).Elem(), InstanceBackupPlanArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceDbNodeSetInput)(nil)).Elem(), InstanceDbNodeSetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceDbNodeSetArrayInput)(nil)).Elem(), InstanceDbNodeSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ParameterTemplateConfigModifyParamEntrySetInput)(nil)).Elem(), ParameterTemplateConfigModifyParamEntrySetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ParameterTemplateConfigModifyParamEntrySetArrayInput)(nil)).Elem(), ParameterTemplateConfigModifyParamEntrySetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ParameterTemplateModifyParamEntrySetInput)(nil)).Elem(), ParameterTemplateModifyParamEntrySetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ParameterTemplateModifyParamEntrySetArrayInput)(nil)).Elem(), ParameterTemplateModifyParamEntrySetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ParametersParamListInput)(nil)).Elem(), ParametersParamListArgs{})
@@ -6734,6 +8409,12 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBaseBackupsFilterArrayInput)(nil)).Elem(), GetBaseBackupsFilterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDbInstanceClassesClassInfoSetInput)(nil)).Elem(), GetDbInstanceClassesClassInfoSetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDbInstanceClassesClassInfoSetArrayInput)(nil)).Elem(), GetDbInstanceClassesClassInfoSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDbInstanceSecurityGroupsSecurityGroupSetInput)(nil)).Elem(), GetDbInstanceSecurityGroupsSecurityGroupSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDbInstanceSecurityGroupsSecurityGroupSetArrayInput)(nil)).Elem(), GetDbInstanceSecurityGroupsSecurityGroupSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDbInstanceSecurityGroupsSecurityGroupSetInboundInput)(nil)).Elem(), GetDbInstanceSecurityGroupsSecurityGroupSetInboundArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDbInstanceSecurityGroupsSecurityGroupSetInboundArrayInput)(nil)).Elem(), GetDbInstanceSecurityGroupsSecurityGroupSetInboundArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDbInstanceSecurityGroupsSecurityGroupSetOutboundInput)(nil)).Elem(), GetDbInstanceSecurityGroupsSecurityGroupSetOutboundArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDbInstanceSecurityGroupsSecurityGroupSetOutboundArrayInput)(nil)).Elem(), GetDbInstanceSecurityGroupsSecurityGroupSetOutboundArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDbInstanceVersionsVersionSetInput)(nil)).Elem(), GetDbInstanceVersionsVersionSetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDbInstanceVersionsVersionSetArrayInput)(nil)).Elem(), GetDbInstanceVersionsVersionSetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDbVersionsVersionSetInput)(nil)).Elem(), GetDbVersionsVersionSetArgs{})
@@ -6748,6 +8429,16 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDefaultParametersParamInfoSetSpecRelationSetArrayInput)(nil)).Elem(), GetDefaultParametersParamInfoSetSpecRelationSetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDefaultParametersParamInfoSetVersionRelationSetInput)(nil)).Elem(), GetDefaultParametersParamInfoSetVersionRelationSetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDefaultParametersParamInfoSetVersionRelationSetArrayInput)(nil)).Elem(), GetDefaultParametersParamInfoSetVersionRelationSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesDbInstanceSetInput)(nil)).Elem(), GetInstancesDbInstanceSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesDbInstanceSetArrayInput)(nil)).Elem(), GetInstancesDbInstanceSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesDbInstanceSetDbInstanceNetInfoInput)(nil)).Elem(), GetInstancesDbInstanceSetDbInstanceNetInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesDbInstanceSetDbInstanceNetInfoArrayInput)(nil)).Elem(), GetInstancesDbInstanceSetDbInstanceNetInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesDbInstanceSetDbNodeSetInput)(nil)).Elem(), GetInstancesDbInstanceSetDbNodeSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesDbInstanceSetDbNodeSetArrayInput)(nil)).Elem(), GetInstancesDbInstanceSetDbNodeSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesDbInstanceSetNetworkAccessListInput)(nil)).Elem(), GetInstancesDbInstanceSetNetworkAccessListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesDbInstanceSetNetworkAccessListArrayInput)(nil)).Elem(), GetInstancesDbInstanceSetNetworkAccessListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesDbInstanceSetTagListInput)(nil)).Elem(), GetInstancesDbInstanceSetTagListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesDbInstanceSetTagListArrayInput)(nil)).Elem(), GetInstancesDbInstanceSetTagListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListInput)(nil)).Elem(), GetInstancesInstanceListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListArrayInput)(nil)).Elem(), GetInstancesInstanceListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetLogBackupsFilterInput)(nil)).Elem(), GetLogBackupsFilterArgs{})
@@ -6798,6 +8489,8 @@ func init() {
 	pulumi.RegisterOutputType(InstanceBackupPlanPtrOutput{})
 	pulumi.RegisterOutputType(InstanceDbNodeSetOutput{})
 	pulumi.RegisterOutputType(InstanceDbNodeSetArrayOutput{})
+	pulumi.RegisterOutputType(ParameterTemplateConfigModifyParamEntrySetOutput{})
+	pulumi.RegisterOutputType(ParameterTemplateConfigModifyParamEntrySetArrayOutput{})
 	pulumi.RegisterOutputType(ParameterTemplateModifyParamEntrySetOutput{})
 	pulumi.RegisterOutputType(ParameterTemplateModifyParamEntrySetArrayOutput{})
 	pulumi.RegisterOutputType(ParametersParamListOutput{})
@@ -6818,6 +8511,12 @@ func init() {
 	pulumi.RegisterOutputType(GetBaseBackupsFilterArrayOutput{})
 	pulumi.RegisterOutputType(GetDbInstanceClassesClassInfoSetOutput{})
 	pulumi.RegisterOutputType(GetDbInstanceClassesClassInfoSetArrayOutput{})
+	pulumi.RegisterOutputType(GetDbInstanceSecurityGroupsSecurityGroupSetOutput{})
+	pulumi.RegisterOutputType(GetDbInstanceSecurityGroupsSecurityGroupSetArrayOutput{})
+	pulumi.RegisterOutputType(GetDbInstanceSecurityGroupsSecurityGroupSetInboundOutput{})
+	pulumi.RegisterOutputType(GetDbInstanceSecurityGroupsSecurityGroupSetInboundArrayOutput{})
+	pulumi.RegisterOutputType(GetDbInstanceSecurityGroupsSecurityGroupSetOutboundOutput{})
+	pulumi.RegisterOutputType(GetDbInstanceSecurityGroupsSecurityGroupSetOutboundArrayOutput{})
 	pulumi.RegisterOutputType(GetDbInstanceVersionsVersionSetOutput{})
 	pulumi.RegisterOutputType(GetDbInstanceVersionsVersionSetArrayOutput{})
 	pulumi.RegisterOutputType(GetDbVersionsVersionSetOutput{})
@@ -6832,6 +8531,16 @@ func init() {
 	pulumi.RegisterOutputType(GetDefaultParametersParamInfoSetSpecRelationSetArrayOutput{})
 	pulumi.RegisterOutputType(GetDefaultParametersParamInfoSetVersionRelationSetOutput{})
 	pulumi.RegisterOutputType(GetDefaultParametersParamInfoSetVersionRelationSetArrayOutput{})
+	pulumi.RegisterOutputType(GetInstancesDbInstanceSetOutput{})
+	pulumi.RegisterOutputType(GetInstancesDbInstanceSetArrayOutput{})
+	pulumi.RegisterOutputType(GetInstancesDbInstanceSetDbInstanceNetInfoOutput{})
+	pulumi.RegisterOutputType(GetInstancesDbInstanceSetDbInstanceNetInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetInstancesDbInstanceSetDbNodeSetOutput{})
+	pulumi.RegisterOutputType(GetInstancesDbInstanceSetDbNodeSetArrayOutput{})
+	pulumi.RegisterOutputType(GetInstancesDbInstanceSetNetworkAccessListOutput{})
+	pulumi.RegisterOutputType(GetInstancesDbInstanceSetNetworkAccessListArrayOutput{})
+	pulumi.RegisterOutputType(GetInstancesDbInstanceSetTagListOutput{})
+	pulumi.RegisterOutputType(GetInstancesDbInstanceSetTagListArrayOutput{})
 	pulumi.RegisterOutputType(GetInstancesInstanceListOutput{})
 	pulumi.RegisterOutputType(GetInstancesInstanceListArrayOutput{})
 	pulumi.RegisterOutputType(GetLogBackupsFilterOutput{})

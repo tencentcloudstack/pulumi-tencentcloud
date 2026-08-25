@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
 {
     /// <summary>
-    /// Provides a resource to create a cls config
+    /// Provides a resource to create a CLS config
     /// 
     /// ## Example Usage
     /// 
@@ -23,12 +23,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var config = new Tencentcloud.Cls.Config("config", new()
+    ///     var example = new Tencentcloud.Cls.Config("example", new()
     ///     {
-    ///         Name = "config_hello",
-    ///         Output = "4d07fba0-b93e-4e0b-9a7f-d58542560bbb",
-    ///         Path = "/var/log/kubernetes",
+    ///         Name = "tf-example",
+    ///         Output = "734f50d1-d621-425c-8768-6f9a5f0412ee",
+    ///         Path = "/data/log/**/error.log",
     ///         LogType = "json_log",
+    ///         InputType = "file",
     ///         ExtractRule = new Tencentcloud.Cls.Inputs.ConfigExtractRuleArgs
     ///         {
     ///             FilterKeyRegexes = new[]
@@ -43,10 +44,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     ///                     Key = "key2",
     ///                     Regex = "value2",
     ///                 },
+    ///                 new Tencentcloud.Cls.Inputs.ConfigExtractRuleFilterKeyRegexArgs
+    ///                 {
+    ///                     Key = "ErrorCode",
+    ///                     Regex = "500",
+    ///                 },
     ///             },
+    ///             IsGbk = 0,
+    ///             JsonStandard = 1,
     ///             UnMatchUpLoadSwitch = true,
-    ///             UnMatchLogKey = "config",
-    ///             Backtracking = -1,
+    ///             UnMatchLogKey = "LogParseFailure",
+    ///             Backtracking = 0,
+    ///             MetadataType = 2,
+    ///             MetaTags = new[]
+    ///             {
+    ///                 new Tencentcloud.Cls.Inputs.ConfigExtractRuleMetaTagArgs
+    ///                 {
+    ///                     Key = "myKey",
+    ///                     Value = "myValue",
+    ///                 },
+    ///             },
     ///         },
     ///         ExcludePaths = new[]
     ///         {
@@ -68,10 +85,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// 
     /// ## Import
     /// 
-    /// cls config can be imported using the id, e.g.
+    /// CLS config can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Cls/config:Config config config_id
+    /// $ pulumi import tencentcloud:Cls/config:Config example 49611ec9-c5f2-4cc9-9e06-15dd7fa43982
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cls/config:Config")]
@@ -88,6 +105,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// </summary>
         [Output("extractRule")]
         public Output<Outputs.ConfigExtractRule> ExtractRule { get; private set; } = null!;
+
+        /// <summary>
+        /// Log input type. Valid values: file: file type collection; windows_event: Windows event collection; syslog: system log collection.
+        /// </summary>
+        [Output("inputType")]
+        public Output<string> InputType { get; private set; } = null!;
 
         /// <summary>
         /// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
@@ -185,6 +208,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public Input<Inputs.ConfigExtractRuleArgs> ExtractRule { get; set; } = null!;
 
         /// <summary>
+        /// Log input type. Valid values: file: file type collection; windows_event: Windows event collection; syslog: system log collection.
+        /// </summary>
+        [Input("inputType")]
+        public Input<string>? InputType { get; set; }
+
+        /// <summary>
         /// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.
         /// </summary>
         [Input("logType")]
@@ -239,6 +268,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// </summary>
         [Input("extractRule")]
         public Input<Inputs.ConfigExtractRuleGetArgs>? ExtractRule { get; set; }
+
+        /// <summary>
+        /// Log input type. Valid values: file: file type collection; windows_event: Windows event collection; syslog: system log collection.
+        /// </summary>
+        [Input("inputType")]
+        public Input<string>? InputType { get; set; }
 
         /// <summary>
         /// Type of the log to be collected. Valid values: json_log: log in JSON format; delimiter_log: log in delimited format; minimalist_log: minimalist log; multiline_log: log in multi-line format; fullregex_log: log in full regex format. Default value: minimalist_log.

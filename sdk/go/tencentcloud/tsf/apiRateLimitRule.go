@@ -44,7 +44,7 @@ import (
 //
 // ## Import
 //
-// tsf api_rate_limit_rule can be imported using the id, e.g.
+// tsf apiRateLimitRule can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Tsf/apiRateLimitRule:ApiRateLimitRule api_rate_limit_rule api_rate_limit_rule_id

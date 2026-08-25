@@ -97,15 +97,15 @@ export interface RestartInstanceState {
     /**
      * Instance id (e.g., "cdwpg-xxxx").
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Node ids to restart (specify nodes to reboot).
      */
-    nodeIds?: pulumi.Input<pulumi.Input<string>[]>;
+    nodeIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Node types to restart (gtm/cn/dn).
      */
-    nodeTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    nodeTypes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -119,9 +119,9 @@ export interface RestartInstanceArgs {
     /**
      * Node ids to restart (specify nodes to reboot).
      */
-    nodeIds?: pulumi.Input<pulumi.Input<string>[]>;
+    nodeIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Node types to restart (gtm/cn/dn).
      */
-    nodeTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    nodeTypes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

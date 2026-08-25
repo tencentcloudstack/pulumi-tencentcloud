@@ -76,12 +76,8 @@ type GetCenterRoleConfigurationsResult struct {
 }
 
 func GetCenterRoleConfigurationsOutput(ctx *pulumi.Context, args GetCenterRoleConfigurationsOutputArgs, opts ...pulumi.InvokeOption) GetCenterRoleConfigurationsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetCenterRoleConfigurationsResultOutput, error) {
-			args := v.(GetCenterRoleConfigurationsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Identity/getCenterRoleConfigurations:getCenterRoleConfigurations", args, GetCenterRoleConfigurationsResultOutput{}, options).(GetCenterRoleConfigurationsResultOutput), nil
-		}).(GetCenterRoleConfigurationsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Identity/getCenterRoleConfigurations:getCenterRoleConfigurations", args, GetCenterRoleConfigurationsResultOutput{}, options).(GetCenterRoleConfigurationsResultOutput)
 }
 
 // A collection of arguments for invoking getCenterRoleConfigurations.

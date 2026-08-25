@@ -15,12 +15,18 @@ var _ = internal.GetEnvOrDefault
 func GetAllowedAccountIds(ctx *pulumi.Context) string {
 	return config.Get(ctx, "tencentcloud:allowedAccountIds")
 }
+
+// The `assumeRole` block. If provided, terraform will attempt to assume this role using the supplied credentials.
 func GetAssumeRole(ctx *pulumi.Context) string {
 	return config.Get(ctx, "tencentcloud:assumeRole")
 }
+
+// The `assumeRoleWithSaml` block. If provided, terraform will attempt to assume this role using the supplied credentials.
 func GetAssumeRoleWithSaml(ctx *pulumi.Context) string {
 	return config.Get(ctx, "tencentcloud:assumeRoleWithSaml")
 }
+
+// The `assumeRoleWithWebIdentity` block. If provided, terraform will attempt to assume this role using the supplied credentials.
 func GetAssumeRoleWithWebIdentity(ctx *pulumi.Context) string {
 	return config.Get(ctx, "tencentcloud:assumeRoleWithWebIdentity")
 }
@@ -49,6 +55,8 @@ func GetEnablePodOidc(ctx *pulumi.Context) bool {
 func GetForbiddenAccountIds(ctx *pulumi.Context) string {
 	return config.Get(ctx, "tencentcloud:forbiddenAccountIds")
 }
+
+// The `mfaCertification` block. If provided, terraform will attempt to use the provided credentials for MFA authentication.
 func GetMfaCertification(ctx *pulumi.Context) string {
 	return config.Get(ctx, "tencentcloud:mfaCertification")
 }

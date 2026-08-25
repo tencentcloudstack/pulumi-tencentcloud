@@ -140,11 +140,11 @@ export interface SecurityGroupAttachmentState {
     /**
      * Array of CLB instance IDs. Only support set one security group now.
      */
-    loadBalancerIds?: pulumi.Input<string>;
+    loadBalancerIds?: pulumi.Input<string | undefined>;
     /**
      * Security group ID, such as esg-12345678.
      */
-    securityGroup?: pulumi.Input<string>;
+    securityGroup?: pulumi.Input<string | undefined>;
 }
 
 /**

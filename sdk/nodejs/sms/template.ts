@@ -126,23 +126,23 @@ export interface TemplateState {
     /**
      * Whether it is Global SMS: 0: Mainland China SMS; 1: Global SMS.
      */
-    international?: pulumi.Input<number>;
+    international?: pulumi.Input<number | undefined>;
     /**
      * Template remarks, such as reason for application and use case.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * SMS type. 0: regular SMS, 1: marketing SMS.
      */
-    smsType?: pulumi.Input<number>;
+    smsType?: pulumi.Input<number | undefined>;
     /**
      * Message Template Content.
      */
-    templateContent?: pulumi.Input<string>;
+    templateContent?: pulumi.Input<string | undefined>;
     /**
      * Message Template name, which must be unique.
      */
-    templateName?: pulumi.Input<string>;
+    templateName?: pulumi.Input<string | undefined>;
 }
 
 /**

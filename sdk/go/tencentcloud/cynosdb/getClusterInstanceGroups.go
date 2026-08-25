@@ -42,12 +42,8 @@ type GetClusterInstanceGroupsResult struct {
 }
 
 func GetClusterInstanceGroupsOutput(ctx *pulumi.Context, args GetClusterInstanceGroupsOutputArgs, opts ...pulumi.InvokeOption) GetClusterInstanceGroupsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetClusterInstanceGroupsResultOutput, error) {
-			args := v.(GetClusterInstanceGroupsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cynosdb/getClusterInstanceGroups:getClusterInstanceGroups", args, GetClusterInstanceGroupsResultOutput{}, options).(GetClusterInstanceGroupsResultOutput), nil
-		}).(GetClusterInstanceGroupsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cynosdb/getClusterInstanceGroups:getClusterInstanceGroups", args, GetClusterInstanceGroupsResultOutput{}, options).(GetClusterInstanceGroupsResultOutput)
 }
 
 // A collection of arguments for invoking getClusterInstanceGroups.

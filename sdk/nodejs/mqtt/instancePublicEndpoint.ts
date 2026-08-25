@@ -153,15 +153,15 @@ export interface InstancePublicEndpointState {
     /**
      * Bandwidth, unit: Mbps.
      */
-    bandwidth?: pulumi.Input<number>;
+    bandwidth?: pulumi.Input<number | undefined>;
     /**
      * MQTT instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * White List of Public Network Access Rules.
      */
-    rules?: pulumi.Input<pulumi.Input<inputs.Mqtt.InstancePublicEndpointRule>[]>;
+    rules?: pulumi.Input<pulumi.Input<inputs.Mqtt.InstancePublicEndpointRule>[] | undefined>;
 }
 
 /**
@@ -179,5 +179,5 @@ export interface InstancePublicEndpointArgs {
     /**
      * White List of Public Network Access Rules.
      */
-    rules?: pulumi.Input<pulumi.Input<inputs.Mqtt.InstancePublicEndpointRule>[]>;
+    rules?: pulumi.Input<pulumi.Input<inputs.Mqtt.InstancePublicEndpointRule>[] | undefined>;
 }

@@ -217,51 +217,51 @@ export interface ResourceState {
     /**
      * Automatic renewal. 1 is auto renew flag, 0 is not.
      */
-    autoRenewFlag?: pulumi.Input<number>;
+    autoRenewFlag?: pulumi.Input<number | undefined>;
     /**
      * Subnet segments that require service activation.
      */
-    cidrBlock?: pulumi.Input<string>;
+    cidrBlock?: pulumi.Input<string | undefined>;
     /**
      * Deploy region.
      */
-    deployRegion?: pulumi.Input<string>;
+    deployRegion?: pulumi.Input<string | undefined>;
     /**
      * Deploy zone.
      */
-    deployZone?: pulumi.Input<string>;
+    deployZone?: pulumi.Input<string | undefined>;
     /**
      * Number of bandwidth expansion packets (4M), The set value is an integer multiple of 4.
      */
-    packageBandwidth?: pulumi.Input<number>;
+    packageBandwidth?: pulumi.Input<number | undefined>;
     /**
      * Resource type.Value:standard/pro.
      */
-    resourceEdition?: pulumi.Input<string>;
+    resourceEdition?: pulumi.Input<string | undefined>;
     /**
      * Number of resource nodes.
      */
-    resourceNode?: pulumi.Input<number>;
+    resourceNode?: pulumi.Input<number | undefined>;
     /**
      * Deploy resource subnetId.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * Billing time. This field is mandatory, with a minimum value of 1.
      */
-    timeSpan?: pulumi.Input<number>;
+    timeSpan?: pulumi.Input<number | undefined>;
     /**
      * Billing cycle, only support m: month. This field is mandatory, fill in m.
      */
-    timeUnit?: pulumi.Input<string>;
+    timeUnit?: pulumi.Input<string | undefined>;
     /**
      * The network segment corresponding to the VPC that requires service activation.
      */
-    vpcCidrBlock?: pulumi.Input<string>;
+    vpcCidrBlock?: pulumi.Input<string | undefined>;
     /**
      * Deploy resource vpcId.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -287,7 +287,7 @@ export interface ResourceArgs {
     /**
      * Number of bandwidth expansion packets (4M), The set value is an integer multiple of 4.
      */
-    packageBandwidth?: pulumi.Input<number>;
+    packageBandwidth?: pulumi.Input<number | undefined>;
     /**
      * Resource type.Value:standard/pro.
      */
@@ -303,11 +303,11 @@ export interface ResourceArgs {
     /**
      * Billing time. This field is mandatory, with a minimum value of 1.
      */
-    timeSpan?: pulumi.Input<number>;
+    timeSpan?: pulumi.Input<number | undefined>;
     /**
      * Billing cycle, only support m: month. This field is mandatory, fill in m.
      */
-    timeUnit?: pulumi.Input<string>;
+    timeUnit?: pulumi.Input<string | undefined>;
     /**
      * The network segment corresponding to the VPC that requires service activation.
      */

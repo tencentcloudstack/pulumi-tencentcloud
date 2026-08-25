@@ -71,8 +71,7 @@ import (
 //
 // ## Import
 //
-// tdmqRocketmq environment_role can be imported using the id, e.g.
-//
+// tdmqRocketmq environmentRole can be imported using the id, e.g.
 // ```sh
 // $ pulumi import tencentcloud:Tdmq/rocketmqEnvironmentRole:RocketmqEnvironmentRole environment_role environmentRole_id
 // ```

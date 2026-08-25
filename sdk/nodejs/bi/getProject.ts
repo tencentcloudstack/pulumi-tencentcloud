@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const project = tencentcloud.Bi.getProject({
+ * const project = tencentcloud.bi.getProject({
  *     pageNo: 1,
  *     keyword: "abc",
  *     allPage: true,
@@ -96,7 +96,7 @@ export interface GetProjectResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const project = tencentcloud.Bi.getProject({
+ * const project = tencentcloud.bi.getProject({
  *     pageNo: 1,
  *     keyword: "abc",
  *     allPage: true,
@@ -123,21 +123,21 @@ export interface GetProjectOutputArgs {
     /**
      * Whether to display all, if true, ignore paging.
      */
-    allPage?: pulumi.Input<boolean>;
+    allPage?: pulumi.Input<boolean | undefined>;
     /**
      * Retrieve fuzzy fields.
      */
-    keyword?: pulumi.Input<string>;
+    keyword?: pulumi.Input<string | undefined>;
     /**
      * Role information, can be ignored.
      */
-    moduleCollection?: pulumi.Input<string>;
+    moduleCollection?: pulumi.Input<string | undefined>;
     /**
      * Page number.
      */
-    pageNo?: pulumi.Input<number>;
+    pageNo?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

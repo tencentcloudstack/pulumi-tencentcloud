@@ -96,7 +96,7 @@ import (
 //
 // ## Import
 //
-// ci media_transcode_template can be imported using the bucket#templateId, e.g.
+// ci mediaTranscodeTemplate can be imported using the bucket#templateId, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Ci/mediaTranscodeTemplate:MediaTranscodeTemplate media_transcode_template media_transcode_template_id

@@ -77,7 +77,7 @@ export class AdaptiveDynamicStreamingTemplate extends pulumi.CustomResource {
      * Segment type, valid when Format is HLS, optional values:
      * - ts: ts segment;
      * - fmp4: fmp4 segment;
-     * Default value: ts.
+     *   Default value: ts.
      */
     declare public readonly segmentType: pulumi.Output<string>;
     /**
@@ -149,50 +149,50 @@ export interface AdaptiveDynamicStreamingTemplateState {
     /**
      * Template description. Length limit: 256 characters.
      */
-    comment?: pulumi.Input<string>;
+    comment?: pulumi.Input<string | undefined>;
     /**
      * Creation time of template in ISO date format.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
      */
-    disableHigherVideoBitrate?: pulumi.Input<boolean>;
+    disableHigherVideoBitrate?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
      */
-    disableHigherVideoResolution?: pulumi.Input<boolean>;
+    disableHigherVideoResolution?: pulumi.Input<boolean | undefined>;
     /**
      * DRM scheme type. Valid values: `SimpleAES`. If this field is an empty string, DRM will not be performed on the video.
      */
-    drmType?: pulumi.Input<string>;
+    drmType?: pulumi.Input<string | undefined>;
     /**
      * Adaptive bitstream format. Valid values: `HLS`.
      */
-    format?: pulumi.Input<string>;
+    format?: pulumi.Input<string | undefined>;
     /**
      * Template name. Length limit: 64 characters.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Segment type, valid when Format is HLS, optional values:
      * - ts: ts segment;
      * - fmp4: fmp4 segment;
-     * Default value: ts.
+     *   Default value: ts.
      */
-    segmentType?: pulumi.Input<string>;
+    segmentType?: pulumi.Input<string | undefined>;
     /**
      * List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10 substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the first substream will be used as the output frame rate.
      */
-    streamInfos?: pulumi.Input<pulumi.Input<inputs.Vod.AdaptiveDynamicStreamingTemplateStreamInfo>[]>;
+    streamInfos?: pulumi.Input<pulumi.Input<inputs.Vod.AdaptiveDynamicStreamingTemplateStreamInfo>[] | undefined>;
     /**
      * The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
      */
-    subAppId?: pulumi.Input<number>;
+    subAppId?: pulumi.Input<number | undefined>;
     /**
      * Last modified time of template in ISO date format.
      */
-    updateTime?: pulumi.Input<string>;
+    updateTime?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -202,19 +202,19 @@ export interface AdaptiveDynamicStreamingTemplateArgs {
     /**
      * Template description. Length limit: 256 characters.
      */
-    comment?: pulumi.Input<string>;
+    comment?: pulumi.Input<string | undefined>;
     /**
      * Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
      */
-    disableHigherVideoBitrate?: pulumi.Input<boolean>;
+    disableHigherVideoBitrate?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to prohibit transcoding from low resolution to high resolution. Valid values: `false`,`true`. `false`: no, `true`: yes. Default value: `false`.
      */
-    disableHigherVideoResolution?: pulumi.Input<boolean>;
+    disableHigherVideoResolution?: pulumi.Input<boolean | undefined>;
     /**
      * DRM scheme type. Valid values: `SimpleAES`. If this field is an empty string, DRM will not be performed on the video.
      */
-    drmType?: pulumi.Input<string>;
+    drmType?: pulumi.Input<string | undefined>;
     /**
      * Adaptive bitstream format. Valid values: `HLS`.
      */
@@ -222,14 +222,14 @@ export interface AdaptiveDynamicStreamingTemplateArgs {
     /**
      * Template name. Length limit: 64 characters.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Segment type, valid when Format is HLS, optional values:
      * - ts: ts segment;
      * - fmp4: fmp4 segment;
-     * Default value: ts.
+     *   Default value: ts.
      */
-    segmentType?: pulumi.Input<string>;
+    segmentType?: pulumi.Input<string | undefined>;
     /**
      * List of AdaptiveStreamTemplate parameter information of output substream for adaptive bitrate streaming. Up to 10 substreams can be output. Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the first substream will be used as the output frame rate.
      */
@@ -237,5 +237,5 @@ export interface AdaptiveDynamicStreamingTemplateArgs {
     /**
      * The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
      */
-    subAppId?: pulumi.Input<number>;
+    subAppId?: pulumi.Input<number | undefined>;
 }

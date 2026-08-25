@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  *         2,
  *     ],
  * });
- * const tasks = tencentcloud.Dbbrain.getSecurityAuditLogExportTasksOutput({
+ * const tasks = tencentcloud.dbbrain.getSecurityAuditLogExportTasksOutput({
  *     secAuditGroupId: "sec_audit_group_id",
  *     product: "mysql",
  *     asyncRequestIds: [task.asyncRequestId],
@@ -102,7 +102,7 @@ export interface GetSecurityAuditLogExportTasksResult {
  *         2,
  *     ],
  * });
- * const tasks = tencentcloud.Dbbrain.getSecurityAuditLogExportTasksOutput({
+ * const tasks = tencentcloud.dbbrain.getSecurityAuditLogExportTasksOutput({
  *     secAuditGroupId: "sec_audit_group_id",
  *     product: "mysql",
  *     asyncRequestIds: [task.asyncRequestId],
@@ -126,7 +126,7 @@ export interface GetSecurityAuditLogExportTasksOutputArgs {
     /**
      * async request id list.
      */
-    asyncRequestIds?: pulumi.Input<pulumi.Input<number>[]>;
+    asyncRequestIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * product, optional value is mysql.
      */
@@ -134,7 +134,7 @@ export interface GetSecurityAuditLogExportTasksOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * security audit group id.
      */

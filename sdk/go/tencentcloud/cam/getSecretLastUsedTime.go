@@ -69,12 +69,8 @@ type GetSecretLastUsedTimeResult struct {
 }
 
 func GetSecretLastUsedTimeOutput(ctx *pulumi.Context, args GetSecretLastUsedTimeOutputArgs, opts ...pulumi.InvokeOption) GetSecretLastUsedTimeResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSecretLastUsedTimeResultOutput, error) {
-			args := v.(GetSecretLastUsedTimeArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cam/getSecretLastUsedTime:getSecretLastUsedTime", args, GetSecretLastUsedTimeResultOutput{}, options).(GetSecretLastUsedTimeResultOutput), nil
-		}).(GetSecretLastUsedTimeResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cam/getSecretLastUsedTime:getSecretLastUsedTime", args, GetSecretLastUsedTimeResultOutput{}, options).(GetSecretLastUsedTimeResultOutput)
 }
 
 // A collection of arguments for invoking getSecretLastUsedTime.

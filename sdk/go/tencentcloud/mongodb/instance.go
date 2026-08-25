@@ -14,6 +14,10 @@ import (
 
 // Provide a resource to create a Mongodb instance.
 //
+// > **NOTE:** If `availabilityZoneList` needs to be changed, attention should be paid to cascading modifications of `availableZone` or `hiddenZone`.
+//
+// > **NOTE:** The `cpu` parameter takes effect only when the configuration is changed. Changing the `cpu` triggers the `ModifyDBInstanceSpec` API to adjust the CPU specification of the running MongoDB instance in-place. The supported CPU specifications can be obtained through the `DescribeSpecInfo` API.
+//
 // ## Example Usage
 //
 // ```go
@@ -28,17 +32,94 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := mongodb.NewInstance(ctx, "mongodb", &mongodb.InstanceArgs{
-//				InstanceName:  pulumi.String("mongodb"),
+//			_, err := mongodb.NewInstance(ctx, "example", &mongodb.InstanceArgs{
+//				InstanceName:  pulumi.String("tf-example"),
 //				Memory:        pulumi.Int(4),
 //				Volume:        pulumi.Int(100),
-//				EngineVersion: pulumi.String("MONGO_36_WT"),
+//				EngineVersion: pulumi.String("MONGO_40_WT"),
 //				MachineType:   pulumi.String("HIO10G"),
-//				AvailableZone: pulumi.String("ap-guangzhou-2"),
-//				VpcId:         pulumi.String("vpc-xxxxxx"),
-//				SubnetId:      pulumi.String("subnet-xxxxxx"),
+//				AvailableZone: pulumi.String("ap-guangzhou-6"),
+//				VpcId:         pulumi.String("vpc-i5yyodl9"),
+//				SubnetId:      pulumi.String("subnet-hhi88a58"),
 //				ProjectId:     pulumi.Int(0),
-//				Password:      pulumi.String("password1234"),
+//				Password:      pulumi.String("Password@123"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Update the CPU specification of the MongoDB instance.
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/mongodb"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := mongodb.NewInstance(ctx, "example", &mongodb.InstanceArgs{
+//				InstanceName:  pulumi.String("tf-example"),
+//				Memory:        pulumi.Int(4),
+//				Volume:        pulumi.Int(100),
+//				EngineVersion: pulumi.String("MONGO_40_WT"),
+//				MachineType:   pulumi.String("HIO10G"),
+//				AvailableZone: pulumi.String("ap-guangzhou-6"),
+//				VpcId:         pulumi.String("vpc-i5yyodl9"),
+//				SubnetId:      pulumi.String("subnet-hhi88a58"),
+//				ProjectId:     pulumi.Int(0),
+//				Password:      pulumi.String("Password@123"),
+//				Cpu:           pulumi.Int(2),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Or
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/mongodb"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := mongodb.NewInstance(ctx, "example", &mongodb.InstanceArgs{
+//				InstanceName:  pulumi.String("tf-example"),
+//				Memory:        pulumi.Int(4),
+//				Volume:        pulumi.Int(100),
+//				EngineVersion: pulumi.String("MONGO_40_WT"),
+//				MachineType:   pulumi.String("HIO10G"),
+//				AvailableZone: pulumi.String("ap-guangzhou-6"),
+//				AvailabilityZoneLists: pulumi.StringArray{
+//					pulumi.String("ap-guangzhou-6"),
+//					pulumi.String("ap-guangzhou-3"),
+//					pulumi.String("ap-guangzhou-4"),
+//				},
+//				HiddenZone: pulumi.String("ap-guangzhou-4"),
+//				VpcId:      pulumi.String("vpc-i5yyodl9"),
+//				SubnetId:   pulumi.String("subnet-hhi88a58"),
+//				ProjectId:  pulumi.Int(0),
+//				Password:   pulumi.String("Password@123"),
 //			})
 //			if err != nil {
 //				return err
@@ -54,7 +135,7 @@ import (
 // Mongodb instance can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Mongodb/instance:Instance mongodb cmgo-41s6jwy4
+// $ pulumi import tencentcloud:Mongodb/instance:Instance example cmgo-41s6jwy4
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -72,6 +153,8 @@ type Instance struct {
 	AvailableZone pulumi.StringOutput `pulumi:"availableZone"`
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
 	ChargeType pulumi.StringPtrOutput `pulumi:"chargeType"`
+	// The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+	Cpu pulumi.IntOutput `pulumi:"cpu"`
 	// Creation time of the Mongodb instance.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
 	// Refers to version information. The DescribeSpecInfo API can be called to obtain detailed information about the supported versions.
@@ -81,6 +164,7 @@ type Instance struct {
 	// - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
 	// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
 	// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+	// - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
 	EngineVersion pulumi.StringOutput `pulumi:"engineVersion"`
 	// The availability zone to which the Hidden node belongs. This parameter is required in cross-AZ instance deployment.
 	HiddenZone pulumi.StringOutput `pulumi:"hiddenZone"`
@@ -199,6 +283,8 @@ type instanceState struct {
 	AvailableZone *string `pulumi:"availableZone"`
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
 	ChargeType *string `pulumi:"chargeType"`
+	// The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+	Cpu *int `pulumi:"cpu"`
 	// Creation time of the Mongodb instance.
 	CreateTime *string `pulumi:"createTime"`
 	// Refers to version information. The DescribeSpecInfo API can be called to obtain detailed information about the supported versions.
@@ -208,6 +294,7 @@ type instanceState struct {
 	// - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
 	// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
 	// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+	// - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
 	EngineVersion *string `pulumi:"engineVersion"`
 	// The availability zone to which the Hidden node belongs. This parameter is required in cross-AZ instance deployment.
 	HiddenZone *string `pulumi:"hiddenZone"`
@@ -272,6 +359,8 @@ type InstanceState struct {
 	AvailableZone pulumi.StringPtrInput
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
 	ChargeType pulumi.StringPtrInput
+	// The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+	Cpu pulumi.IntPtrInput
 	// Creation time of the Mongodb instance.
 	CreateTime pulumi.StringPtrInput
 	// Refers to version information. The DescribeSpecInfo API can be called to obtain detailed information about the supported versions.
@@ -281,6 +370,7 @@ type InstanceState struct {
 	// - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
 	// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
 	// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+	// - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
 	EngineVersion pulumi.StringPtrInput
 	// The availability zone to which the Hidden node belongs. This parameter is required in cross-AZ instance deployment.
 	HiddenZone pulumi.StringPtrInput
@@ -349,6 +439,8 @@ type instanceArgs struct {
 	AvailableZone string `pulumi:"availableZone"`
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
 	ChargeType *string `pulumi:"chargeType"`
+	// The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+	Cpu *int `pulumi:"cpu"`
 	// Refers to version information. The DescribeSpecInfo API can be called to obtain detailed information about the supported versions.
 	// - MONGO_40_WT: version of the MongoDB 4.0 WiredTiger storage engine.
 	// - MONGO_42_WT: version of the MongoDB 4.2 WiredTiger storage engine.
@@ -356,6 +448,7 @@ type instanceArgs struct {
 	// - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
 	// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
 	// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+	// - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
 	EngineVersion string `pulumi:"engineVersion"`
 	// The availability zone to which the Hidden node belongs. This parameter is required in cross-AZ instance deployment.
 	HiddenZone *string `pulumi:"hiddenZone"`
@@ -413,6 +506,8 @@ type InstanceArgs struct {
 	AvailableZone pulumi.StringInput
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
 	ChargeType pulumi.StringPtrInput
+	// The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+	Cpu pulumi.IntPtrInput
 	// Refers to version information. The DescribeSpecInfo API can be called to obtain detailed information about the supported versions.
 	// - MONGO_40_WT: version of the MongoDB 4.0 WiredTiger storage engine.
 	// - MONGO_42_WT: version of the MongoDB 4.2 WiredTiger storage engine.
@@ -420,6 +515,7 @@ type InstanceArgs struct {
 	// - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
 	// - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
 	// - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+	// - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
 	EngineVersion pulumi.StringInput
 	// The availability zone to which the Hidden node belongs. This parameter is required in cross-AZ instance deployment.
 	HiddenZone pulumi.StringPtrInput
@@ -577,6 +673,11 @@ func (o InstanceOutput) ChargeType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.ChargeType }).(pulumi.StringPtrOutput)
 }
 
+// The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+func (o InstanceOutput) Cpu() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.Cpu }).(pulumi.IntOutput)
+}
+
 // Creation time of the Mongodb instance.
 func (o InstanceOutput) CreateTime() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.CreateTime }).(pulumi.StringOutput)
@@ -589,6 +690,7 @@ func (o InstanceOutput) CreateTime() pulumi.StringOutput {
 // - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
 // - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
 // - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+// - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
 func (o InstanceOutput) EngineVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.EngineVersion }).(pulumi.StringOutput)
 }

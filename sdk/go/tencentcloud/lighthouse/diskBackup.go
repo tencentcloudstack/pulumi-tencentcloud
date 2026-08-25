@@ -43,7 +43,7 @@ import (
 //
 // ## Import
 //
-// lighthouse disk_backup can be imported using the id, e.g.
+// lighthouse diskBackup can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Lighthouse/diskBackup:DiskBackup disk_backup disk_backup_id

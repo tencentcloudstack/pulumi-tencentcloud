@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  *     networkType: "BGP",
  *     chargeType: "TOP5_POSTPAID_BY_MONTH",
  *     bandwidthPackageName: "tf-example",
- *     tags: {
+ *     tag: {
  *         createdBy: "Terraform",
  *     },
  * });
@@ -35,7 +35,7 @@ import * as utilities from "../utilities";
  *     bandwidthPackageName: "tf-example",
  *     timeSpan: 3,
  *     internetMaxBandwidth: 100,
- *     tags: {
+ *     tag: {
  *         createdBy: "Terraform",
  *     },
  * });
@@ -53,7 +53,7 @@ import * as utilities from "../utilities";
  *     bandwidthPackageName: "tf-example",
  *     internetMaxBandwidth: 400,
  *     egress: "center_egress2",
- *     tags: {
+ *     tag: {
  *         createdBy: "Terraform",
  *     },
  * });
@@ -61,8 +61,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * vpc bandwidth_package can be imported using the id, e.g.
- *
+ * vpc bandwidthPackage can be imported using the id, e.g.
  * ```sh
  * $ pulumi import tencentcloud:Vpc/bandwidthPackage:BandwidthPackage example bwp-hq8h7qpy
  * ```
@@ -118,6 +117,12 @@ export class BandwidthPackage extends pulumi.CustomResource {
     /**
      * Tag description list.
      */
+    declare public readonly tag: pulumi.Output<{[key: string]: string}>;
+    /**
+     * Use `tag` instead. Tag description list.
+     *
+     * @deprecated Use `tag` instead.
+     */
     declare public readonly tags: pulumi.Output<{[key: string]: string} | undefined>;
     /**
      * The purchase duration of the prepaid monthly bandwidth package, unit: month, value range: 1~60.
@@ -142,6 +147,7 @@ export class BandwidthPackage extends pulumi.CustomResource {
             resourceInputs["egress"] = state?.egress;
             resourceInputs["internetMaxBandwidth"] = state?.internetMaxBandwidth;
             resourceInputs["networkType"] = state?.networkType;
+            resourceInputs["tag"] = state?.tag;
             resourceInputs["tags"] = state?.tags;
             resourceInputs["timeSpan"] = state?.timeSpan;
         } else {
@@ -151,6 +157,7 @@ export class BandwidthPackage extends pulumi.CustomResource {
             resourceInputs["egress"] = args?.egress;
             resourceInputs["internetMaxBandwidth"] = args?.internetMaxBandwidth;
             resourceInputs["networkType"] = args?.networkType;
+            resourceInputs["tag"] = args?.tag;
             resourceInputs["tags"] = args?.tags;
             resourceInputs["timeSpan"] = args?.timeSpan;
         }
@@ -166,31 +173,37 @@ export interface BandwidthPackageState {
     /**
      * Bandwidth package name.
      */
-    bandwidthPackageName?: pulumi.Input<string>;
+    bandwidthPackageName?: pulumi.Input<string | undefined>;
     /**
      * Bandwidth package billing type, default: `TOP5_POSTPAID_BY_MONTH`. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
     /**
      * Network egress. It defaults to `centerEgress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
      */
-    egress?: pulumi.Input<string>;
+    egress?: pulumi.Input<string | undefined>;
     /**
      * Bandwidth packet speed limit size. Unit: Mbps, -1 means no speed limit.
      */
-    internetMaxBandwidth?: pulumi.Input<number>;
+    internetMaxBandwidth?: pulumi.Input<number | undefined>;
     /**
      * Bandwidth packet type, default: `BGP`. Optional value: `BGP`: common BGP shared bandwidth package; `HIGH_QUALITY_BGP`: High Quality BGP Shared Bandwidth Package; `SINGLEISP_CMCC`: CMCC shared bandwidth package; `SINGLEISP_CTCC:`: CTCC shared bandwidth package; `SINGLEISP_CUCC`: CUCC shared bandwidth package.
      */
-    networkType?: pulumi.Input<string>;
+    networkType?: pulumi.Input<string | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tag?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
+    /**
+     * Use `tag` instead. Tag description list.
+     *
+     * @deprecated Use `tag` instead.
+     */
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * The purchase duration of the prepaid monthly bandwidth package, unit: month, value range: 1~60.
      */
-    timeSpan?: pulumi.Input<number>;
+    timeSpan?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -200,29 +213,35 @@ export interface BandwidthPackageArgs {
     /**
      * Bandwidth package name.
      */
-    bandwidthPackageName?: pulumi.Input<string>;
+    bandwidthPackageName?: pulumi.Input<string | undefined>;
     /**
      * Bandwidth package billing type, default: `TOP5_POSTPAID_BY_MONTH`. Optional value: `TOP5_POSTPAID_BY_MONTH`: TOP5 billed by monthly postpaid; `PERCENT95_POSTPAID_BY_MONTH`: 95 billed monthly postpaid; `FIXED_PREPAID_BY_MONTH`: Monthly prepaid billing (Type FIXED_PREPAID_BY_MONTH product API capability is under construction); `BANDWIDTH_POSTPAID_BY_DAY`: bandwidth billed by daily postpaid; `ENHANCED95_POSTPAID_BY_MONTH`: enhanced 95 billed monthly postpaid.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
     /**
      * Network egress. It defaults to `centerEgress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
      */
-    egress?: pulumi.Input<string>;
+    egress?: pulumi.Input<string | undefined>;
     /**
      * Bandwidth packet speed limit size. Unit: Mbps, -1 means no speed limit.
      */
-    internetMaxBandwidth?: pulumi.Input<number>;
+    internetMaxBandwidth?: pulumi.Input<number | undefined>;
     /**
      * Bandwidth packet type, default: `BGP`. Optional value: `BGP`: common BGP shared bandwidth package; `HIGH_QUALITY_BGP`: High Quality BGP Shared Bandwidth Package; `SINGLEISP_CMCC`: CMCC shared bandwidth package; `SINGLEISP_CTCC:`: CTCC shared bandwidth package; `SINGLEISP_CUCC`: CUCC shared bandwidth package.
      */
-    networkType?: pulumi.Input<string>;
+    networkType?: pulumi.Input<string | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tag?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
+    /**
+     * Use `tag` instead. Tag description list.
+     *
+     * @deprecated Use `tag` instead.
+     */
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * The purchase duration of the prepaid monthly bandwidth package, unit: month, value range: 1~60.
      */
-    timeSpan?: pulumi.Input<number>;
+    timeSpan?: pulumi.Input<number | undefined>;
 }

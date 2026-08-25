@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const region = tencentcloud.Ckafka.getRegion({});
+ * const region = tencentcloud.ckafka.getRegion({});
  * ```
  */
 export function getRegion(args?: GetRegionArgs, opts?: pulumi.InvokeOptions): Promise<GetRegionResult> {
@@ -59,7 +59,7 @@ export interface GetRegionResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const region = tencentcloud.Ckafka.getRegion({});
+ * const region = tencentcloud.ckafka.getRegion({});
  * ```
  */
 export function getRegionOutput(args?: GetRegionOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRegionResult> {
@@ -77,5 +77,5 @@ export interface GetRegionOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

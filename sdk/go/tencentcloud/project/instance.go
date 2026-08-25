@@ -12,6 +12,10 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
+// Provides a resource to create a project
+//
+// > **NOTE:** Project can not be destroyed. If run `terraform destroy`, project will be set invisible.
+//
 // ## Example Usage
 //
 // ```go

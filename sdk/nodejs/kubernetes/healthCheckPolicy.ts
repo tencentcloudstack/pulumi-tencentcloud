@@ -122,15 +122,15 @@ export interface HealthCheckPolicyState {
     /**
      * ID of the cluster.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Health Check Policy Name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Health check policy rule list.
      */
-    rules?: pulumi.Input<pulumi.Input<inputs.Kubernetes.HealthCheckPolicyRule>[]>;
+    rules?: pulumi.Input<pulumi.Input<inputs.Kubernetes.HealthCheckPolicyRule>[] | undefined>;
 }
 
 /**
@@ -144,7 +144,7 @@ export interface HealthCheckPolicyArgs {
     /**
      * Health Check Policy Name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Health check policy rule list.
      */

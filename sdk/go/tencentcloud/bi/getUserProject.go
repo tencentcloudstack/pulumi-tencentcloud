@@ -71,12 +71,8 @@ type GetUserProjectResult struct {
 }
 
 func GetUserProjectOutput(ctx *pulumi.Context, args GetUserProjectOutputArgs, opts ...pulumi.InvokeOption) GetUserProjectResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetUserProjectResultOutput, error) {
-			args := v.(GetUserProjectArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Bi/getUserProject:getUserProject", args, GetUserProjectResultOutput{}, options).(GetUserProjectResultOutput), nil
-		}).(GetUserProjectResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Bi/getUserProject:getUserProject", args, GetUserProjectResultOutput{}, options).(GetUserProjectResultOutput)
 }
 
 // A collection of arguments for invoking getUserProject.

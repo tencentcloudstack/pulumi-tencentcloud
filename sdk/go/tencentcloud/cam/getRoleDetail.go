@@ -98,12 +98,8 @@ type GetRoleDetailResult struct {
 }
 
 func GetRoleDetailOutput(ctx *pulumi.Context, args GetRoleDetailOutputArgs, opts ...pulumi.InvokeOption) GetRoleDetailResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetRoleDetailResultOutput, error) {
-			args := v.(GetRoleDetailArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cam/getRoleDetail:getRoleDetail", args, GetRoleDetailResultOutput{}, options).(GetRoleDetailResultOutput), nil
-		}).(GetRoleDetailResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cam/getRoleDetail:getRoleDetail", args, GetRoleDetailResultOutput{}, options).(GetRoleDetailResultOutput)
 }
 
 // A collection of arguments for invoking getRoleDetail.

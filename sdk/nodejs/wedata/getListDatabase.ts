@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Wedata.getListDatabase({});
+ * const example = tencentcloud.wedata.getListDatabase({});
  * ```
  */
 export function getListDatabase(args?: GetListDatabaseArgs, opts?: pulumi.InvokeOptions): Promise<GetListDatabaseResult> {
@@ -80,7 +80,7 @@ export interface GetListDatabaseResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Wedata.getListDatabase({});
+ * const example = tencentcloud.wedata.getListDatabase({});
  * ```
  */
 export function getListDatabaseOutput(args?: GetListDatabaseOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetListDatabaseResult> {
@@ -101,17 +101,17 @@ export interface GetListDatabaseOutputArgs {
     /**
      * Catalog name.
      */
-    catalogName?: pulumi.Input<string>;
+    catalogName?: pulumi.Input<string | undefined>;
     /**
      * Data source ID.
      */
-    datasourceId?: pulumi.Input<number>;
+    datasourceId?: pulumi.Input<number | undefined>;
     /**
      * Database name search keyword.
      */
-    keyword?: pulumi.Input<string>;
+    keyword?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

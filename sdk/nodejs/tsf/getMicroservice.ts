@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const microservice = tencentcloud.Tsf.getMicroservice({
+ * const microservice = tencentcloud.tsf.getMicroservice({
  *     namespaceId: namespaceId,
  *     microserviceIdLists: ["ms-yq3jo6jd"],
  *     microserviceNameLists: ["provider-demo"],
@@ -89,7 +89,7 @@ export interface GetMicroserviceResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const microservice = tencentcloud.Tsf.getMicroservice({
+ * const microservice = tencentcloud.tsf.getMicroservice({
  *     namespaceId: namespaceId,
  *     microserviceIdLists: ["ms-yq3jo6jd"],
  *     microserviceNameLists: ["provider-demo"],
@@ -114,11 +114,11 @@ export interface GetMicroserviceOutputArgs {
     /**
      * microservice id list.
      */
-    microserviceIdLists?: pulumi.Input<pulumi.Input<string>[]>;
+    microserviceIdLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * List of service names for search.
      */
-    microserviceNameLists?: pulumi.Input<pulumi.Input<string>[]>;
+    microserviceNameLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * namespace id.
      */
@@ -126,9 +126,9 @@ export interface GetMicroserviceOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * status filter, online, offline, single_online.
      */
-    statuses?: pulumi.Input<pulumi.Input<string>[]>;
+    statuses?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

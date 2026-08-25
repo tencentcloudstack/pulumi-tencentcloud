@@ -40,7 +40,7 @@ import (
 //				return err
 //			}
 //			exampleNamespace, err := tcr.NewNamespace(ctx, "example", &tcr.NamespaceArgs{
-//				InstanceId:   example.ID(),
+//				InstanceId:   example.ID().ToIDOutput().ToStringOutput(),
 //				Name:         pulumi.String("tf_example_ns_retention"),
 //				IsPublic:     pulumi.Bool(true),
 //				IsAutoScan:   pulumi.Bool(true),
@@ -56,7 +56,7 @@ import (
 //				return err
 //			}
 //			exampleTagRetentionRule, err := tcr.NewTagRetentionRule(ctx, "example", &tcr.TagRetentionRuleArgs{
-//				RegistryId:    example.ID(),
+//				RegistryId:    example.ID().ToIDOutput().ToStringOutput(),
 //				NamespaceName: exampleNamespace.Name,
 //				RetentionRule: &tcr.TagRetentionRuleRetentionRuleArgs{
 //					Key:   pulumi.String("nDaysSinceLastPush"),

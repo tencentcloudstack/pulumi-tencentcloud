@@ -51,7 +51,7 @@ export function getCollationTimeZoneOutput(args?: GetCollationTimeZoneOutputArgs
  * A collection of arguments for invoking getCollationTimeZone.
  */
 export interface GetCollationTimeZoneOutputArgs {
-    dbVersion?: pulumi.Input<string>;
-    machineType?: pulumi.Input<string>;
-    resultOutputFile?: pulumi.Input<string>;
+    dbVersion?: pulumi.Input<string | undefined>;
+    machineType?: pulumi.Input<string | undefined>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

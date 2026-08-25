@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const orders = tencentcloud.Mariadb.getOrders({
+ * const orders = tencentcloud.mariadb.getOrders({
  *     dealName: "20230607164033835942781",
  * });
  * ```
@@ -69,7 +69,7 @@ export interface GetOrdersResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const orders = tencentcloud.Mariadb.getOrders({
+ * const orders = tencentcloud.mariadb.getOrders({
  *     dealName: "20230607164033835942781",
  * });
  * ```
@@ -93,5 +93,5 @@ export interface GetOrdersOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

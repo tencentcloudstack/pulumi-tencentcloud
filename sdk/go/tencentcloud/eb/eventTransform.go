@@ -53,7 +53,7 @@ import (
 //			}
 //			json0 := string(tmpJSON0)
 //			fooEventRule, err := eb.NewEventRule(ctx, "foo", &eb.EventRuleArgs{
-//				EventBusId:   foo.ID(),
+//				EventBusId:   foo.ID().ToIDOutput().ToStringOutput(),
 //				RuleName:     pulumi.String("tf-event_rule"),
 //				Description:  pulumi.String("event rule desc"),
 //				Enable:       pulumi.Bool(true),
@@ -77,7 +77,7 @@ import (
 //			}
 //			json1 := string(tmpJSON1)
 //			_, err = eb.NewEventTransform(ctx, "foo", &eb.EventTransformArgs{
-//				EventBusId: foo.ID(),
+//				EventBusId: foo.ID().ToIDOutput().ToStringOutput(),
 //				RuleId:     fooEventRule.RuleId,
 //				Transformations: eb.EventTransformTransformationArray{
 //					&eb.EventTransformTransformationArgs{
@@ -133,7 +133,7 @@ import (
 //
 // ## Import
 //
-// eb eb_transform can be imported using the id, e.g.
+// eb ebTransform can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Eb/eventTransform:EventTransform eb_transform eb_transform_id

@@ -82,7 +82,7 @@ import (
 //
 // ## Import
 //
-// cfw block_ignore_list can be imported using the id, e.g.
+// cfw blockIgnoreList can be imported using the id, e.g.
 //
 // # If import ip rule
 //

@@ -52,7 +52,7 @@ import (
 //
 // ## Import
 //
-// waf anti_info_leak can be imported using the id, e.g.
+// waf antiInfoLeak can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Waf/antiInfoLeak:AntiInfoLeak example 3100077499#tf.example.com

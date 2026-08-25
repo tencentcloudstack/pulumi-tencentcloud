@@ -78,11 +78,11 @@ export interface DetachUserPolicyOperationState {
     /**
      * Collection of unbound permissions.
      */
-    policySets?: pulumi.Input<pulumi.Input<inputs.Dlc.DetachUserPolicyOperationPolicySet>[]>;
+    policySets?: pulumi.Input<pulumi.Input<inputs.Dlc.DetachUserPolicyOperationPolicySet>[] | undefined>;
     /**
      * User ID, which matches Uin on the CAM side.
      */
-    userId?: pulumi.Input<string>;
+    userId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -92,7 +92,7 @@ export interface DetachUserPolicyOperationArgs {
     /**
      * Collection of unbound permissions.
      */
-    policySets?: pulumi.Input<pulumi.Input<inputs.Dlc.DetachUserPolicyOperationPolicySet>[]>;
+    policySets?: pulumi.Input<pulumi.Input<inputs.Dlc.DetachUserPolicyOperationPolicySet>[] | undefined>;
     /**
      * User ID, which matches Uin on the CAM side.
      */

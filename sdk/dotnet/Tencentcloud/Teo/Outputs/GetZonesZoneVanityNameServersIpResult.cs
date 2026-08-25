@@ -15,11 +15,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class GetZonesZoneVanityNameServersIpResult
     {
         /// <summary>
-        /// IPv4 address of the custom name server
+        /// IPv4 address of the custom name server.
         /// </summary>
         public readonly string IPv4;
         /// <summary>
-        /// Custom name of the name server
+        /// Custom name of the name server.
         /// </summary>
         public readonly string Name;
 

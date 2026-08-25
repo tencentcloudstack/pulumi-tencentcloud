@@ -251,7 +251,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// 
     /// ## Import
     /// 
-    /// waf saas_domain can be imported using the id, e.g.
+    /// waf SaasDomain can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Waf/saasDomain:SaasDomain example waf_2kxtlbky01b3wceb#tf.example.com#9647c91da0aa5f5aaa49d0ca40e2af24

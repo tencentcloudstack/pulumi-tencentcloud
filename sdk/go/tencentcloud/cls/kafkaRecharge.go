@@ -39,7 +39,7 @@ import (
 //			}
 //			topic, err := cls.NewTopic(ctx, "topic", &cls.TopicArgs{
 //				TopicName:          pulumi.String("tf-example-topic"),
-//				LogsetId:           logset.ID(),
+//				LogsetId:           logset.ID().ToIDOutput().ToStringOutput(),
 //				AutoSplit:          pulumi.Bool(false),
 //				MaxSplitPartitions: pulumi.Int(20),
 //				PartitionCount:     pulumi.Int(1),
@@ -53,7 +53,7 @@ import (
 //				return err
 //			}
 //			_, err = cls.NewKafkaRecharge(ctx, "kafka_recharge", &cls.KafkaRechargeArgs{
-//				TopicId:          topic.ID(),
+//				TopicId:          topic.ID().ToIDOutput().ToStringOutput(),
 //				Name:             pulumi.String("tf-example-recharge"),
 //				KafkaType:        pulumi.Int(0),
 //				Offset:           pulumi.Int(-2),
@@ -77,7 +77,7 @@ import (
 //
 // ## Import
 //
-// cls kafka_recharge can be imported using the id, e.g.
+// cls kafkaRecharge can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Cls/kafkaRecharge:KafkaRecharge kafka_recharge kafka_recharge_id

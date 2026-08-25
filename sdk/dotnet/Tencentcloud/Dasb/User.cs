@@ -86,7 +86,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public Output<string> RealName { get; private set; } = null!;
 
         /// <summary>
-        /// Username, 3-20 characters, must start with an English letter and cannot contain characters other than letters, numbers, '.', '_', '-'.
+        /// Username, 3-20 characters, must start with an English letter and cannot contain characters other than `Letters`, `Numbers`, `.`, `_`, `-`.
         /// </summary>
         [Output("userName")]
         public Output<string> UserName { get; private set; } = null!;
@@ -199,7 +199,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public Input<string> RealName { get; set; } = null!;
 
         /// <summary>
-        /// Username, 3-20 characters, must start with an English letter and cannot contain characters other than letters, numbers, '.', '_', '-'.
+        /// Username, 3-20 characters, must start with an English letter and cannot contain characters other than `Letters`, `Numbers`, `.`, `_`, `-`.
         /// </summary>
         [Input("userName", required: true)]
         public Input<string> UserName { get; set; } = null!;
@@ -273,7 +273,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public Input<string>? RealName { get; set; }
 
         /// <summary>
-        /// Username, 3-20 characters, must start with an English letter and cannot contain characters other than letters, numbers, '.', '_', '-'.
+        /// Username, 3-20 characters, must start with an English letter and cannot contain characters other than `Letters`, `Numbers`, `.`, `_`, `-`.
         /// </summary>
         [Input("userName")]
         public Input<string>? UserName { get; set; }

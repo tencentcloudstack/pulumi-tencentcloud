@@ -21,6 +21,8 @@ import (
 //
 // import (
 //
+//	"strconv"
+//
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dasb"
 //
@@ -38,14 +40,14 @@ import (
 //				return err
 //			}
 //			exampleDeviceAccount, err := dasb.NewDeviceAccount(ctx, "example", &dasb.DeviceAccountArgs{
-//				DeviceId: example.ID(),
+//				DeviceId: example.ID().ToIDOutput().ApplyT(func(id pulumi.ID) (int, error) { return strconv.Atoi(string(id)) }).(pulumi.IntOutput),
 //				Account:  pulumi.String("root"),
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			_, err = dasb.NewBindDeviceAccountPassword(ctx, "example", &dasb.BindDeviceAccountPasswordArgs{
-//				DeviceAccountId: exampleDeviceAccount.ID(),
+//				DeviceAccountId: exampleDeviceAccount.ID().ToIDOutput().ApplyT(func(id pulumi.ID) (int, error) { return strconv.Atoi(string(id)) }).(pulumi.IntOutput),
 //				Password:        pulumi.String("TerraformPassword"),
 //			})
 //			if err != nil {

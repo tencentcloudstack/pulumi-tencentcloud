@@ -97,6 +97,9 @@ import (
 //						CacheTime:    pulumi.Int(600),
 //						FollowOrigin: pulumi.String("on"),
 //					},
+//					NetworkErrorLogging: &teo.L7AccSettingZoneConfigNetworkErrorLoggingArgs{
+//						Switch: pulumi.String("off"),
+//					},
 //					OcspStapling: &teo.L7AccSettingZoneConfigOcspStaplingArgs{
 //						Switch: pulumi.String("off"),
 //					},
@@ -147,15 +150,7 @@ import (
 //
 // ## Import
 //
-// teo l7_acc_setting can be imported using the zone_id, e.g.
-//
-// `
-//
-// ```sh
-// $ pulumi import tencentcloud:Teo/l7AccSetting:L7AccSetting teo_l7_acc_setting zone-297z8rf93cfw
-// ```
-//
-// `
+// teo l7AccSetting can be imported using the zone_id, e.g.
 type L7AccSetting struct {
 	pulumi.CustomResourceState
 

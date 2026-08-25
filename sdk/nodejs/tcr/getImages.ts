@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const images = tencentcloud.Tcr.getImages({
+ * const images = tencentcloud.tcr.getImages({
  *     registryId: "tcr-xxx",
  *     namespaceName: "ns",
  *     repositoryName: "repo",
@@ -107,7 +107,7 @@ export interface GetImagesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const images = tencentcloud.Tcr.getImages({
+ * const images = tencentcloud.tcr.getImages({
  *     registryId: "tcr-xxx",
  *     namespaceName: "ns",
  *     repositoryName: "repo",
@@ -137,15 +137,15 @@ export interface GetImagesOutputArgs {
     /**
      * specify image digest for lookup.
      */
-    digest?: pulumi.Input<string>;
+    digest?: pulumi.Input<string | undefined>;
     /**
      * specifies whether it is an exact match, true is an exact match, and not filled is a fuzzy match.
      */
-    exactMatch?: pulumi.Input<boolean>;
+    exactMatch?: pulumi.Input<boolean | undefined>;
     /**
      * image version name, default is fuzzy match.
      */
-    imageVersion?: pulumi.Input<string>;
+    imageVersion?: pulumi.Input<string | undefined>;
     /**
      * namespace name.
      */
@@ -161,5 +161,5 @@ export interface GetImagesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

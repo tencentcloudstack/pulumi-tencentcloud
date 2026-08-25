@@ -12,7 +12,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a cwp licenseBindAttachment
+// Provides a resource to create a CWP license bind attachment
 //
 // ## Example Usage
 //
@@ -25,57 +25,59 @@ import (
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cwp"
 //
 // )
-// func main() {
-// pulumi.Run(func(ctx *pulumi.Context) error {
-// example, err := cwp.GetMachinesSimple(ctx, &cwp.GetMachinesSimpleArgs{
-// MachineType: "CVM",
-// MachineRegion: "ap-guangzhou",
-// ProjectIds: interface{}{
-// 1210293,
-// },
-// Filters: []cwp.GetMachinesSimpleFilter{
-// {
-// Name: "Version",
-// Values: []string{
-// "BASIC_VERSION",
-// },
-// ExactMatch: pulumi.BoolRef(true),
-// },
-// },
-// }, nil);
-// if err != nil {
-// return err
-// }
-// exampleLicenseOrder, err := cwp.NewLicenseOrder(ctx, "example", &cwp.LicenseOrderArgs{
-// Alias: pulumi.String("tf_example"),
-// LicenseType: pulumi.Int(0),
-// LicenseNum: pulumi.Int(1),
-// RegionId: pulumi.Int(1),
-// ProjectId: pulumi.Int(0),
-// Tags: pulumi.StringMap{
-// "createdBy": pulumi.String("terraform"),
-// },
-// })
-// if err != nil {
-// return err
-// }
-// _, err = cwp.NewLicenseBindAttachment(ctx, "example", &cwp.LicenseBindAttachmentArgs{
-// ResourceId: exampleLicenseOrder.ResourceId,
-// LicenseId: exampleLicenseOrder.LicenseId,
-// LicenseType: pulumi.Int(0),
-// Quuid: pulumi.String(example.Machines[0].Quuid),
-// })
-// if err != nil {
-// return err
-// }
-// return nil
-// })
-// }
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			example, err := cwp.GetMachinesSimple(ctx, &cwp.GetMachinesSimpleArgs{
+//				MachineType:   "CVM",
+//				MachineRegion: "ap-guangzhou",
+//				ProjectIds: []int{
+//					1210293,
+//				},
+//				Filters: []cwp.GetMachinesSimpleFilter{
+//					{
+//						Name: "Version",
+//						Values: []string{
+//							"BASIC_VERSION",
+//						},
+//						ExactMatch: pulumi.BoolRef(true),
+//					},
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			exampleLicenseOrder, err := cwp.NewLicenseOrder(ctx, "example", &cwp.LicenseOrderArgs{
+//				Alias:       pulumi.String("tf_example"),
+//				LicenseType: pulumi.Int(0),
+//				LicenseNum:  pulumi.Int(1),
+//				RegionId:    pulumi.Int(1),
+//				ProjectId:   pulumi.Int(0),
+//				Tags: pulumi.StringMap{
+//					"createdBy": pulumi.String("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = cwp.NewLicenseBindAttachment(ctx, "example", &cwp.LicenseBindAttachmentArgs{
+//				ResourceId:  exampleLicenseOrder.ResourceId,
+//				LicenseId:   exampleLicenseOrder.LicenseId,
+//				LicenseType: pulumi.Int(0),
+//				Quuid:       pulumi.String(example.Machines[0].Quuid),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
 //
-// cwp license_bind_attachment can be imported using the id, e.g.
+// CWP license bind attachment can be imported using the resourceId#licenseId#quuid#licenseType, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Cwp/licenseBindAttachment:LicenseBindAttachment example cwplic-ab3edffa#44#2c7e5cce-1cec-4456-8d18-018f160dd987#0

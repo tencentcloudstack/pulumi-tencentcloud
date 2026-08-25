@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getOwaspRuleTypes({
+ * const example = tencentcloud.waf.getOwaspRuleTypes({
  *     domain: "demo.com",
  *     filters: [{
  *         name: "RuleId",
@@ -77,7 +77,7 @@ export interface GetOwaspRuleTypesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getOwaspRuleTypes({
+ * const example = tencentcloud.waf.getOwaspRuleTypes({
  *     domain: "demo.com",
  *     filters: [{
  *         name: "RuleId",
@@ -107,9 +107,9 @@ export interface GetOwaspRuleTypesOutputArgs {
     /**
      * Filter conditions. supports RuleId, CveID, and Desc.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Waf.GetOwaspRuleTypesFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Waf.GetOwaspRuleTypesFilterArgs>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

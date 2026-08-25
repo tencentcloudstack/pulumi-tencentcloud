@@ -152,31 +152,31 @@ export interface DomainErrorPageState {
     /**
      * New response body.
      */
-    body?: pulumi.Input<string>;
+    body?: pulumi.Input<string | undefined>;
     /**
      * Response headers to be removed.
      */
-    clearHeaders?: pulumi.Input<pulumi.Input<string>[]>;
+    clearHeaders?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * HTTP domain.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Original error codes.
      */
-    errorCodes?: pulumi.Input<pulumi.Input<number>[]>;
+    errorCodes?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * ID of the layer7 listener.
      */
-    listenerId?: pulumi.Input<string>;
+    listenerId?: pulumi.Input<string | undefined>;
     /**
      * New error code.
      */
-    newErrorCode?: pulumi.Input<number>;
+    newErrorCode?: pulumi.Input<number | undefined>;
     /**
      * Response headers to be set.
      */
-    setHeaders?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    setHeaders?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 /**
@@ -190,7 +190,7 @@ export interface DomainErrorPageArgs {
     /**
      * Response headers to be removed.
      */
-    clearHeaders?: pulumi.Input<pulumi.Input<string>[]>;
+    clearHeaders?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * HTTP domain.
      */
@@ -206,9 +206,9 @@ export interface DomainErrorPageArgs {
     /**
      * New error code.
      */
-    newErrorCode?: pulumi.Input<number>;
+    newErrorCode?: pulumi.Input<number | undefined>;
     /**
      * Response headers to be set.
      */
-    setHeaders?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    setHeaders?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

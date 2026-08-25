@@ -107,11 +107,11 @@ export interface InternetAddressConfigState {
     /**
      * whether enable internet address.
      */
-    enable?: pulumi.Input<boolean>;
+    enable?: pulumi.Input<boolean | undefined>;
     /**
      * internet public address id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**

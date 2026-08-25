@@ -99,7 +99,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * Resource tencentcloud_security_group_rule_set can be imported by passing security grou id:
+ * Resource tencentcloud.Security.GroupRuleSet can be imported by passing security grou id:
  *
  * ```sh
  * $ pulumi import tencentcloud:Security/groupRuleSet:GroupRuleSet sglab_1 sg-xxxxxxxx
@@ -189,19 +189,19 @@ export interface GroupRuleSetState {
     /**
      * List of egress rule. NOTE: this block is ordered, the first rule has the highest priority.
      */
-    egresses?: pulumi.Input<pulumi.Input<inputs.Security.GroupRuleSetEgress>[]>;
+    egresses?: pulumi.Input<pulumi.Input<inputs.Security.GroupRuleSetEgress>[] | undefined>;
     /**
      * List of ingress rule. NOTE: this block is ordered, the first rule has the highest priority.
      */
-    ingresses?: pulumi.Input<pulumi.Input<inputs.Security.GroupRuleSetIngress>[]>;
+    ingresses?: pulumi.Input<pulumi.Input<inputs.Security.GroupRuleSetIngress>[] | undefined>;
     /**
      * ID of the security group to be queried.
      */
-    securityGroupId?: pulumi.Input<string>;
+    securityGroupId?: pulumi.Input<string | undefined>;
     /**
      * Security policies version, auto increment for every update.
      */
-    version?: pulumi.Input<string>;
+    version?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -211,11 +211,11 @@ export interface GroupRuleSetArgs {
     /**
      * List of egress rule. NOTE: this block is ordered, the first rule has the highest priority.
      */
-    egresses?: pulumi.Input<pulumi.Input<inputs.Security.GroupRuleSetEgress>[]>;
+    egresses?: pulumi.Input<pulumi.Input<inputs.Security.GroupRuleSetEgress>[] | undefined>;
     /**
      * List of ingress rule. NOTE: this block is ordered, the first rule has the highest priority.
      */
-    ingresses?: pulumi.Input<pulumi.Input<inputs.Security.GroupRuleSetIngress>[]>;
+    ingresses?: pulumi.Input<pulumi.Input<inputs.Security.GroupRuleSetIngress>[] | undefined>;
     /**
      * ID of the security group to be queried.
      */

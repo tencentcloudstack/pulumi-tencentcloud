@@ -180,67 +180,67 @@ export interface QueueState {
     /**
      * Dead letter queue name.
      */
-    deadLetterQueueName?: pulumi.Input<string>;
+    deadLetterQueueName?: pulumi.Input<string | undefined>;
     /**
      * First lookback interval.
      */
-    firstQueryInterval?: pulumi.Input<number>;
+    firstQueryInterval?: pulumi.Input<number | undefined>;
     /**
      * Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.
      */
-    maxMsgHeapNum?: pulumi.Input<number>;
+    maxMsgHeapNum?: pulumi.Input<number | undefined>;
     /**
      * Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.
      */
-    maxMsgSize?: pulumi.Input<number>;
+    maxMsgSize?: pulumi.Input<number | undefined>;
     /**
      * Maximum number of lookbacks.
      */
-    maxQueryCount?: pulumi.Input<number>;
+    maxQueryCount?: pulumi.Input<number | undefined>;
     /**
      * Maximum receipt times. Value range: 1-1000.
      */
-    maxReceiveCount?: pulumi.Input<number>;
+    maxReceiveCount?: pulumi.Input<number | undefined>;
     /**
      * Maximum period in seconds before an unconsumed message expires, which is required if `policy` is 1. Value range: 300-43200. This value should be smaller than `msgRetentionSeconds` (maximum message retention period).
      */
-    maxTimeToLive?: pulumi.Input<number>;
+    maxTimeToLive?: pulumi.Input<number | undefined>;
     /**
      * The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).
      */
-    msgRetentionSeconds?: pulumi.Input<number>;
+    msgRetentionSeconds?: pulumi.Input<number | undefined>;
     /**
      * Dead letter policy. 0: message has been consumed multiple times but not deleted; 1: `Time-To-Live` has elapsed.
      */
-    policy?: pulumi.Input<number>;
+    policy?: pulumi.Input<number | undefined>;
     /**
      * Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.
      */
-    pollingWaitSeconds?: pulumi.Input<number>;
+    pollingWaitSeconds?: pulumi.Input<number | undefined>;
     /**
      * Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
      */
-    queueName?: pulumi.Input<string>;
+    queueName?: pulumi.Input<string | undefined>;
     /**
      * Queue storage space configured for message rewind. Value range: 10,240-512,000 MB (if message rewind is enabled). The value `0` indicates that message rewind is not enabled.
      */
-    retentionSizeInMb?: pulumi.Input<number>;
+    retentionSizeInMb?: pulumi.Input<number | undefined>;
     /**
      * Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value `0` indicates that message rewind is not enabled.
      */
-    rewindSeconds?: pulumi.Input<number>;
+    rewindSeconds?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable message trace. true: yes; false: no. If this field is not configured, the feature will not be enabled.
      */
-    trace?: pulumi.Input<boolean>;
+    trace?: pulumi.Input<boolean | undefined>;
     /**
      * 1: transaction queue; 0: general queue.
      */
-    transaction?: pulumi.Input<number>;
+    transaction?: pulumi.Input<number | undefined>;
     /**
      * Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.
      */
-    visibilityTimeout?: pulumi.Input<number>;
+    visibilityTimeout?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -250,43 +250,43 @@ export interface QueueArgs {
     /**
      * Dead letter queue name.
      */
-    deadLetterQueueName?: pulumi.Input<string>;
+    deadLetterQueueName?: pulumi.Input<string | undefined>;
     /**
      * First lookback interval.
      */
-    firstQueryInterval?: pulumi.Input<number>;
+    firstQueryInterval?: pulumi.Input<number | undefined>;
     /**
      * Maximum number of heaped messages. The value range is 1,000,000-10,000,000 during the beta test and can be 1,000,000-1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.
      */
-    maxMsgHeapNum?: pulumi.Input<number>;
+    maxMsgHeapNum?: pulumi.Input<number | undefined>;
     /**
      * Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.
      */
-    maxMsgSize?: pulumi.Input<number>;
+    maxMsgSize?: pulumi.Input<number | undefined>;
     /**
      * Maximum number of lookbacks.
      */
-    maxQueryCount?: pulumi.Input<number>;
+    maxQueryCount?: pulumi.Input<number | undefined>;
     /**
      * Maximum receipt times. Value range: 1-1000.
      */
-    maxReceiveCount?: pulumi.Input<number>;
+    maxReceiveCount?: pulumi.Input<number | undefined>;
     /**
      * Maximum period in seconds before an unconsumed message expires, which is required if `policy` is 1. Value range: 300-43200. This value should be smaller than `msgRetentionSeconds` (maximum message retention period).
      */
-    maxTimeToLive?: pulumi.Input<number>;
+    maxTimeToLive?: pulumi.Input<number | undefined>;
     /**
      * The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).
      */
-    msgRetentionSeconds?: pulumi.Input<number>;
+    msgRetentionSeconds?: pulumi.Input<number | undefined>;
     /**
      * Dead letter policy. 0: message has been consumed multiple times but not deleted; 1: `Time-To-Live` has elapsed.
      */
-    policy?: pulumi.Input<number>;
+    policy?: pulumi.Input<number | undefined>;
     /**
      * Long polling wait time for message reception. Value range: 0-30 seconds. Default value: 0.
      */
-    pollingWaitSeconds?: pulumi.Input<number>;
+    pollingWaitSeconds?: pulumi.Input<number | undefined>;
     /**
      * Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
      */
@@ -294,21 +294,21 @@ export interface QueueArgs {
     /**
      * Queue storage space configured for message rewind. Value range: 10,240-512,000 MB (if message rewind is enabled). The value `0` indicates that message rewind is not enabled.
      */
-    retentionSizeInMb?: pulumi.Input<number>;
+    retentionSizeInMb?: pulumi.Input<number | undefined>;
     /**
      * Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value `0` indicates that message rewind is not enabled.
      */
-    rewindSeconds?: pulumi.Input<number>;
+    rewindSeconds?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable message trace. true: yes; false: no. If this field is not configured, the feature will not be enabled.
      */
-    trace?: pulumi.Input<boolean>;
+    trace?: pulumi.Input<boolean | undefined>;
     /**
      * 1: transaction queue; 0: general queue.
      */
-    transaction?: pulumi.Input<number>;
+    transaction?: pulumi.Input<number | undefined>;
     /**
      * Message visibility timeout period. Value range: 1-43200 seconds (i.e., 12 hours). Default value: 30.
      */
-    visibilityTimeout?: pulumi.Input<number>;
+    visibilityTimeout?: pulumi.Input<number | undefined>;
 }

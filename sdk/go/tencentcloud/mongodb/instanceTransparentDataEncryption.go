@@ -52,8 +52,9 @@ type InstanceTransparentDataEncryption struct {
 	pulumi.CustomResourceState
 
 	// Instance ID, for example: cmgo-p8vn ***. Currently supported general versions include: 4.4 and 5.0, but the cloud disk version is not currently supported.
-	InstanceId pulumi.StringOutput    `pulumi:"instanceId"`
-	KeyId      pulumi.StringPtrOutput `pulumi:"keyId"`
+	InstanceId pulumi.StringOutput `pulumi:"instanceId"`
+	// Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.
+	KeyId pulumi.StringPtrOutput `pulumi:"keyId"`
 	// List of bound keys.
 	KeyInfoLists InstanceTransparentDataEncryptionKeyInfoListArrayOutput `pulumi:"keyInfoLists"`
 	// The region where the Key Management Service (KMS) serves, such as ap-shanghai.
@@ -102,7 +103,8 @@ func GetInstanceTransparentDataEncryption(ctx *pulumi.Context,
 type instanceTransparentDataEncryptionState struct {
 	// Instance ID, for example: cmgo-p8vn ***. Currently supported general versions include: 4.4 and 5.0, but the cloud disk version is not currently supported.
 	InstanceId *string `pulumi:"instanceId"`
-	KeyId      *string `pulumi:"keyId"`
+	// Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.
+	KeyId *string `pulumi:"keyId"`
 	// List of bound keys.
 	KeyInfoLists []InstanceTransparentDataEncryptionKeyInfoList `pulumi:"keyInfoLists"`
 	// The region where the Key Management Service (KMS) serves, such as ap-shanghai.
@@ -116,7 +118,8 @@ type instanceTransparentDataEncryptionState struct {
 type InstanceTransparentDataEncryptionState struct {
 	// Instance ID, for example: cmgo-p8vn ***. Currently supported general versions include: 4.4 and 5.0, but the cloud disk version is not currently supported.
 	InstanceId pulumi.StringPtrInput
-	KeyId      pulumi.StringPtrInput
+	// Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.
+	KeyId pulumi.StringPtrInput
 	// List of bound keys.
 	KeyInfoLists InstanceTransparentDataEncryptionKeyInfoListArrayInput
 	// The region where the Key Management Service (KMS) serves, such as ap-shanghai.
@@ -133,8 +136,9 @@ func (InstanceTransparentDataEncryptionState) ElementType() reflect.Type {
 
 type instanceTransparentDataEncryptionArgs struct {
 	// Instance ID, for example: cmgo-p8vn ***. Currently supported general versions include: 4.4 and 5.0, but the cloud disk version is not currently supported.
-	InstanceId string  `pulumi:"instanceId"`
-	KeyId      *string `pulumi:"keyId"`
+	InstanceId string `pulumi:"instanceId"`
+	// Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.
+	KeyId *string `pulumi:"keyId"`
 	// The region where the Key Management Service (KMS) serves, such as ap-shanghai.
 	KmsRegion string `pulumi:"kmsRegion"`
 }
@@ -143,7 +147,8 @@ type instanceTransparentDataEncryptionArgs struct {
 type InstanceTransparentDataEncryptionArgs struct {
 	// Instance ID, for example: cmgo-p8vn ***. Currently supported general versions include: 4.4 and 5.0, but the cloud disk version is not currently supported.
 	InstanceId pulumi.StringInput
-	KeyId      pulumi.StringPtrInput
+	// Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.
+	KeyId pulumi.StringPtrInput
 	// The region where the Key Management Service (KMS) serves, such as ap-shanghai.
 	KmsRegion pulumi.StringInput
 }
@@ -240,6 +245,7 @@ func (o InstanceTransparentDataEncryptionOutput) InstanceId() pulumi.StringOutpu
 	return o.ApplyT(func(v *InstanceTransparentDataEncryption) pulumi.StringOutput { return v.InstanceId }).(pulumi.StringOutput)
 }
 
+// Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.
 func (o InstanceTransparentDataEncryptionOutput) KeyId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *InstanceTransparentDataEncryption) pulumi.StringPtrOutput { return v.KeyId }).(pulumi.StringPtrOutput)
 }

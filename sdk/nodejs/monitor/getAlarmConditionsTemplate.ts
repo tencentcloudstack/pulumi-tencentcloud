@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const alarmConditionsTemplate = tencentcloud.Monitor.getAlarmConditionsTemplate({
+ * const alarmConditionsTemplate = tencentcloud.monitor.getAlarmConditionsTemplate({
  *     module: "monitor",
  *     viewName: "cvm_device",
  *     groupName: "keep-template",
@@ -110,7 +110,7 @@ export interface GetAlarmConditionsTemplateResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const alarmConditionsTemplate = tencentcloud.Monitor.getAlarmConditionsTemplate({
+ * const alarmConditionsTemplate = tencentcloud.monitor.getAlarmConditionsTemplate({
  *     module: "monitor",
  *     viewName: "cvm_device",
  *     groupName: "keep-template",
@@ -140,11 +140,11 @@ export interface GetAlarmConditionsTemplateOutputArgs {
     /**
      * Filter queries based on trigger condition template ID.
      */
-    groupId?: pulumi.Input<string>;
+    groupId?: pulumi.Input<string | undefined>;
     /**
      * Filter queries based on trigger condition template names.
      */
-    groupName?: pulumi.Input<string>;
+    groupName?: pulumi.Input<string | undefined>;
     /**
      * Fixed value, as&amp;amp;#39; monitor &amp;amp;#39;.
      */
@@ -152,17 +152,17 @@ export interface GetAlarmConditionsTemplateOutputArgs {
     /**
      * Specify the sorting method based on the number of binding policies, asc=ascending, desc=descending.
      */
-    policyCountOrder?: pulumi.Input<string>;
+    policyCountOrder?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Specify the sorting method by update time, asc=ascending, desc=descending.
      */
-    updateTimeOrder?: pulumi.Input<string>;
+    updateTimeOrder?: pulumi.Input<string | undefined>;
     /**
      * View name, composed of DescribeAllNamespacesObtain. For cloud product monitoring, retrieve the QceNamespacesNew. N.ID parameter from the interface, such as cvm_ Device.
      */
-    viewName?: pulumi.Input<string>;
+    viewName?: pulumi.Input<string | undefined>;
 }

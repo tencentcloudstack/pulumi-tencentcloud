@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const gatewayCertificates = tencentcloud.Tse.getGatewayCertificates({
+ * const gatewayCertificates = tencentcloud.tse.getGatewayCertificates({
  *     gatewayId: "gateway-ddbb709b",
  *     filters: [{
  *         key: "BindDomain",
@@ -76,7 +76,7 @@ export interface GetGatewayCertificatesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const gatewayCertificates = tencentcloud.Tse.getGatewayCertificates({
+ * const gatewayCertificates = tencentcloud.tse.getGatewayCertificates({
  *     gatewayId: "gateway-ddbb709b",
  *     filters: [{
  *         key: "BindDomain",
@@ -101,7 +101,7 @@ export interface GetGatewayCertificatesOutputArgs {
     /**
      * Filter conditions, valid value: `BindDomain`, `Name`.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Tse.GetGatewayCertificatesFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Tse.GetGatewayCertificatesFilterArgs>[] | undefined>;
     /**
      * Gateway ID.
      */
@@ -109,5 +109,5 @@ export interface GetGatewayCertificatesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

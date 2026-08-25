@@ -19,14 +19,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
     ///     var groups = Tencentcloud.Cam.GetGroups.Invoke();
     /// 
-    ///     var @group = new Tencentcloud.Index.MonitorPolicyGroup("group", new()
+    ///     var @group = new Tencentcloud.MonitorPolicyGroup("group", new()
     ///     {
     ///         GroupName = "nice_group",
     ///         PolicyViewName = "cvm_device",

@@ -110,19 +110,19 @@ export interface InstanceParamState {
     /**
      * Cluster ID.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Instance parameter list.
      */
-    instanceParamLists?: pulumi.Input<pulumi.Input<inputs.Cynosdb.InstanceParamInstanceParamList>[]>;
+    instanceParamLists?: pulumi.Input<pulumi.Input<inputs.Cynosdb.InstanceParamInstanceParamList>[] | undefined>;
     /**
      * Yes: modify within the operation and maintenance time window, no: execute immediately (default value).
      */
-    isInMaintainPeriod?: pulumi.Input<string>;
+    isInMaintainPeriod?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -136,13 +136,13 @@ export interface InstanceParamArgs {
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Instance parameter list.
      */
-    instanceParamLists?: pulumi.Input<pulumi.Input<inputs.Cynosdb.InstanceParamInstanceParamList>[]>;
+    instanceParamLists?: pulumi.Input<pulumi.Input<inputs.Cynosdb.InstanceParamInstanceParamList>[] | undefined>;
     /**
      * Yes: modify within the operation and maintenance time window, no: execute immediately (default value).
      */
-    isInMaintainPeriod?: pulumi.Input<string>;
+    isInMaintainPeriod?: pulumi.Input<string | undefined>;
 }

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const classicLinkInstances = tencentcloud.Vpc.getClassicLinkInstances({
+ * const classicLinkInstances = tencentcloud.vpc.getClassicLinkInstances({
  *     filters: [{
  *         name: "vpc-id",
  *         values: ["vpc-lh4nqig9"],
@@ -70,7 +70,7 @@ export interface GetClassicLinkInstancesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const classicLinkInstances = tencentcloud.Vpc.getClassicLinkInstances({
+ * const classicLinkInstances = tencentcloud.vpc.getClassicLinkInstances({
  *     filters: [{
  *         name: "vpc-id",
  *         values: ["vpc-lh4nqig9"],
@@ -94,9 +94,9 @@ export interface GetClassicLinkInstancesOutputArgs {
     /**
      * Filter conditions.`vpc-id` - String - (Filter condition) The VPC instance ID. `vm-ip` - String - (Filter condition) The IP address of the CVM on the basic network.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Vpc.GetClassicLinkInstancesFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Vpc.GetClassicLinkInstancesFilterArgs>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

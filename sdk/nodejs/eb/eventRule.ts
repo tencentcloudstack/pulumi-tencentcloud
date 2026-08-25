@@ -39,7 +39,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * eb event_rule can be imported using the id, e.g.
+ * eb eventRule can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Eb/eventRule:EventRule event_rule event_rule_id
@@ -153,31 +153,31 @@ export interface EventRuleState {
     /**
      * Event set description, unlimited character type, description within 200 characters.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Enable switch.
      */
-    enable?: pulumi.Input<boolean>;
+    enable?: pulumi.Input<boolean | undefined>;
     /**
      * event bus Id.
      */
-    eventBusId?: pulumi.Input<string>;
+    eventBusId?: pulumi.Input<string | undefined>;
     /**
      * Reference: [Event Mode](https://cloud.tencent.com/document/product/1359/56084).
      */
-    eventPattern?: pulumi.Input<string>;
+    eventPattern?: pulumi.Input<string | undefined>;
     /**
      * event rule id.
      */
-    ruleId?: pulumi.Input<string>;
+    ruleId?: pulumi.Input<string | undefined>;
     /**
      * Event rule name, which can only contain letters, numbers, underscores, hyphens, starts with a letter and ends with a number or letter, 2~60 characters.
      */
-    ruleName?: pulumi.Input<string>;
+    ruleName?: pulumi.Input<string | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 /**
@@ -187,11 +187,11 @@ export interface EventRuleArgs {
     /**
      * Event set description, unlimited character type, description within 200 characters.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Enable switch.
      */
-    enable?: pulumi.Input<boolean>;
+    enable?: pulumi.Input<boolean | undefined>;
     /**
      * event bus Id.
      */
@@ -207,5 +207,5 @@ export interface EventRuleArgs {
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

@@ -50,6 +50,11 @@ export type FreeCertificate = import("./freeCertificate").FreeCertificate;
 export const FreeCertificate: typeof import("./freeCertificate").FreeCertificate = null as any;
 utilities.lazyLoad(exports, ["FreeCertificate"], () => require("./freeCertificate"));
 
+export { GetCertificateBindResourceTaskDetailArgs, GetCertificateBindResourceTaskDetailResult, GetCertificateBindResourceTaskDetailOutputArgs } from "./getCertificateBindResourceTaskDetail";
+export const getCertificateBindResourceTaskDetail: typeof import("./getCertificateBindResourceTaskDetail").getCertificateBindResourceTaskDetail = null as any;
+export const getCertificateBindResourceTaskDetailOutput: typeof import("./getCertificateBindResourceTaskDetail").getCertificateBindResourceTaskDetailOutput = null as any;
+utilities.lazyLoad(exports, ["getCertificateBindResourceTaskDetail","getCertificateBindResourceTaskDetailOutput"], () => require("./getCertificateBindResourceTaskDetail"));
+
 export { GetCertificatesArgs, GetCertificatesResult, GetCertificatesOutputArgs } from "./getCertificates";
 export const getCertificates: typeof import("./getCertificates").getCertificates = null as any;
 export const getCertificatesOutput: typeof import("./getCertificates").getCertificatesOutput = null as any;

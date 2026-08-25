@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * lighthouse key_pair_attachment can be imported using the id, e.g.
+ * lighthouse keyPairAttachment can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Lighthouse/keyPairAttachment:KeyPairAttachment key_pair_attachment key_pair_attachment_id
@@ -102,11 +102,11 @@ export interface KeyPairAttachmentState {
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Key pair ID.
      */
-    keyId?: pulumi.Input<string>;
+    keyId?: pulumi.Input<string | undefined>;
 }
 
 /**

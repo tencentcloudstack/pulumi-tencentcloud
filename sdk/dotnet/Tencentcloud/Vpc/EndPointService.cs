@@ -89,7 +89,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public Output<string> ServiceOwner { get; private set; } = null!;
 
         /// <summary>
-        /// Type of service instance, like `CLB`, `CDB`, `CRS`, default is `CLB`.
+        /// Type of service instance, like `CLB`, `CDB`, `CRS`, `GWLB`. default is `CLB`.
         /// </summary>
         [Output("serviceType")]
         public Output<string> ServiceType { get; private set; } = null!;
@@ -172,7 +172,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public Input<string> ServiceInstanceId { get; set; } = null!;
 
         /// <summary>
-        /// Type of service instance, like `CLB`, `CDB`, `CRS`, default is `CLB`.
+        /// Type of service instance, like `CLB`, `CDB`, `CRS`, `GWLB`. default is `CLB`.
         /// </summary>
         [Input("serviceType")]
         public Input<string>? ServiceType { get; set; }
@@ -234,7 +234,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public Input<string>? ServiceOwner { get; set; }
 
         /// <summary>
-        /// Type of service instance, like `CLB`, `CDB`, `CRS`, default is `CLB`.
+        /// Type of service instance, like `CLB`, `CDB`, `CRS`, `GWLB`. default is `CLB`.
         /// </summary>
         [Input("serviceType")]
         public Input<string>? ServiceType { get; set; }

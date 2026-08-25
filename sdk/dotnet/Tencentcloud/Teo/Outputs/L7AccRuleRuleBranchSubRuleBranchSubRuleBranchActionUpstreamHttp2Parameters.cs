@@ -15,7 +15,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class L7AccRuleRuleBranchSubRuleBranchSubRuleBranchActionUpstreamHttp2Parameters
     {
         /// <summary>
-        /// Whether to enable http2 origin-pull. valid values: on: enable; off: disable.
+        /// Whether to enable HTTP2 origin-pull. Values: on: enable; off: disable.
         /// </summary>
         public readonly string? Switch;
 

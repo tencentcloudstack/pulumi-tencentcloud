@@ -23,7 +23,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * antiddos ip_alarm_threshold_config can be imported using the id, e.g.
+ * antiddos ipAlarmThresholdConfig can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Antiddos/ipAlarmThresholdConfig:IpAlarmThresholdConfig ip_alarm_threshold_config ${instanceId}#${instanceIp}#${alarmType}
@@ -122,19 +122,19 @@ export interface IpAlarmThresholdConfigState {
     /**
      * Alarm threshold, in Mbps, with a value of&gt;=0; When used as an input parameter, setting 0 will delete the alarm threshold configuration;.
      */
-    alarmThreshold?: pulumi.Input<number>;
+    alarmThreshold?: pulumi.Input<number | undefined>;
     /**
      * Alarm threshold type, value [1 (incoming traffic alarm threshold) 2 (attack cleaning traffic alarm threshold)].
      */
-    alarmType?: pulumi.Input<number>;
+    alarmType?: pulumi.Input<number | undefined>;
     /**
      * Instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Instance ip.
      */
-    instanceIp?: pulumi.Input<string>;
+    instanceIp?: pulumi.Input<string | undefined>;
 }
 
 /**

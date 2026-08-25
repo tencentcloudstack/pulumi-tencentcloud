@@ -94,12 +94,8 @@ type GetAccessAddressResult struct {
 }
 
 func GetAccessAddressOutput(ctx *pulumi.Context, args GetAccessAddressOutputArgs, opts ...pulumi.InvokeOption) GetAccessAddressResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetAccessAddressResultOutput, error) {
-			args := v.(GetAccessAddressArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tse/getAccessAddress:getAccessAddress", args, GetAccessAddressResultOutput{}, options).(GetAccessAddressResultOutput), nil
-		}).(GetAccessAddressResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tse/getAccessAddress:getAccessAddress", args, GetAccessAddressResultOutput{}, options).(GetAccessAddressResultOutput)
 }
 
 // A collection of arguments for invoking getAccessAddress.

@@ -97,11 +97,11 @@ export interface DbconfigState {
     /**
      * Instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Node config parameters.
      */
-    nodeConfigParams?: pulumi.Input<pulumi.Input<inputs.Cdwpg.DbconfigNodeConfigParam>[]>;
+    nodeConfigParams?: pulumi.Input<pulumi.Input<inputs.Cdwpg.DbconfigNodeConfigParam>[] | undefined>;
 }
 
 /**
@@ -115,5 +115,5 @@ export interface DbconfigArgs {
     /**
      * Node config parameters.
      */
-    nodeConfigParams?: pulumi.Input<pulumi.Input<inputs.Cdwpg.DbconfigNodeConfigParam>[]>;
+    nodeConfigParams?: pulumi.Input<pulumi.Input<inputs.Cdwpg.DbconfigNodeConfigParam>[] | undefined>;
 }

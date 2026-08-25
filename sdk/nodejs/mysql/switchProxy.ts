@@ -79,11 +79,11 @@ export interface SwitchProxyState {
     /**
      * Instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Proxy group id.
      */
-    proxyGroupId?: pulumi.Input<string>;
+    proxyGroupId?: pulumi.Input<string | undefined>;
 }
 
 /**

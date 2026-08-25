@@ -5,6 +5,10 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
+ * Provides a resource to create a IGTM instance
+ *
+ * > **NOTE:** Currently, executing the `terraform destroy` command to delete this resource is not supported. If you need to destroy it, please contact Tencent Cloud IGTM through a ticket.
+ *
  * ## Example Usage
  *
  * ```typescript
@@ -177,47 +181,47 @@ export interface InstanceState {
     /**
      * Access main domain.
      */
-    accessDomain?: pulumi.Input<string>;
+    accessDomain?: pulumi.Input<string | undefined>;
     /**
      * Access subdomain.
      */
-    accessSubDomain?: pulumi.Input<string>;
+    accessSubDomain?: pulumi.Input<string | undefined>;
     /**
      * CUSTOM: Custom access domain
      * SYSTEM: System access domain.
      */
-    accessType?: pulumi.Input<string>;
+    accessType?: pulumi.Input<string | undefined>;
     /**
      * Business domain.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Resolution effective time.
      */
-    globalTtl?: pulumi.Input<number>;
+    globalTtl?: pulumi.Input<number | undefined>;
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Instance name.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * Package type
      * FREE: Free version
      * STANDARD: Standard version
      * ULTIMATE: Ultimate version.
      */
-    packageType?: pulumi.Input<string>;
+    packageType?: pulumi.Input<string | undefined>;
     /**
      * Remark.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Package resource ID.
      */
-    resourceId?: pulumi.Input<string>;
+    resourceId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -259,7 +263,7 @@ export interface InstanceArgs {
     /**
      * Remark.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Package resource ID.
      */

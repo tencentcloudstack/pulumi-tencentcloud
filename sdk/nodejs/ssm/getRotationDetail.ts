@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Ssm.getRotationDetail({
+ * const example = tencentcloud.ssm.getRotationDetail({
  *     secretName: "tf_example",
  * });
  * ```
@@ -76,7 +76,7 @@ export interface GetRotationDetailResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Ssm.getRotationDetail({
+ * const example = tencentcloud.ssm.getRotationDetail({
  *     secretName: "tf_example",
  * });
  * ```
@@ -96,7 +96,7 @@ export interface GetRotationDetailOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Secret name.
      */

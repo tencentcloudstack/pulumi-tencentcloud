@@ -42,7 +42,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// 
     /// ## Import
     /// 
-    /// mps image_sprite_template can be imported using the id, e.g.
+    /// mps ImageSpriteTemplate can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Mps/imageSpriteTemplate:ImageSpriteTemplate image_sprite_template image_sprite_template_id

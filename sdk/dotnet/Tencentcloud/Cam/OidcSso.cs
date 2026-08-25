@@ -44,7 +44,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// 
     /// ## Import
     /// 
-    /// CAM-OIDC-SSO can be imported using the client_id or any string which can identifier resource, e.g.
+    /// CAM-OIDC-SSO can be imported using the ClientId or any string which can identifier resource, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Cam/oidcSso:OidcSso foo xxxxxxxxxxx

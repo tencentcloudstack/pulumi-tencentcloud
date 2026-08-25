@@ -114,19 +114,19 @@ export interface UpgradeCacheVersionOperationState {
     /**
      * Current redis version.
      */
-    currentRedisVersion?: pulumi.Input<string>;
+    currentRedisVersion?: pulumi.Input<string | undefined>;
     /**
      * The ID of instance.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Switch mode:1 - Upgrade now0 - Maintenance window upgrade.
      */
-    instanceTypeUpgradeNow?: pulumi.Input<number>;
+    instanceTypeUpgradeNow?: pulumi.Input<number | undefined>;
     /**
      * Upgradeable redis version.
      */
-    upgradeRedisVersion?: pulumi.Input<string>;
+    upgradeRedisVersion?: pulumi.Input<string | undefined>;
 }
 
 /**

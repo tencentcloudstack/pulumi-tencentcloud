@@ -116,8 +116,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
     /// 
     /// ## Import
     /// 
-    /// pts alert_channel can be imported using the project_id#notice_id, e.g.
-    /// 
+    /// pts AlertChannel can be imported using the project_id#notice_id, e.g.
     /// ```sh
     /// $ pulumi import tencentcloud:Pts/alertChannel:AlertChannel alert_channel project-kww5v8se#notice-kl66t6y9
     /// ```

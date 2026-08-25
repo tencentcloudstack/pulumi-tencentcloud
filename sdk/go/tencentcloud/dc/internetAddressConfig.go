@@ -37,7 +37,7 @@ import (
 //				return err
 //			}
 //			_, err = dc.NewInternetAddressConfig(ctx, "example", &dc.InternetAddressConfigArgs{
-//				InstanceId: example.ID(),
+//				InstanceId: example.ID().ToIDOutput().ToStringOutput(),
 //				Enable:     pulumi.Bool(true),
 //			})
 //			if err != nil {

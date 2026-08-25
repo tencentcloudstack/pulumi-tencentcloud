@@ -25,7 +25,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * bi user_role can be imported using the id, e.g.
+ * bi userRole can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Bi/userRole:UserRole user_role user_id
@@ -142,27 +142,27 @@ export interface UserRoleState {
     /**
      * Mobile area code(Note: This field may return null, indicating that no valid value can be obtained).
      */
-    areaCode?: pulumi.Input<string>;
+    areaCode?: pulumi.Input<string | undefined>;
     /**
      * E-mail(Note: This field may return null, indicating that no valid value can be obtained).
      */
-    email?: pulumi.Input<string>;
+    email?: pulumi.Input<string | undefined>;
     /**
      * Phone number(Note: This field may return null, indicating that no valid value can be obtained).
      */
-    phoneNumber?: pulumi.Input<string>;
+    phoneNumber?: pulumi.Input<string | undefined>;
     /**
      * Role id list.
      */
-    roleIdLists?: pulumi.Input<pulumi.Input<number>[]>;
+    roleIdLists?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * User id.
      */
-    userId?: pulumi.Input<string>;
+    userId?: pulumi.Input<string | undefined>;
     /**
      * Username.
      */
-    userName?: pulumi.Input<string>;
+    userName?: pulumi.Input<string | undefined>;
 }
 
 /**

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const clblab = tencentcloud.Clb.getAttachments({
+ * const clblab = tencentcloud.clb.getAttachments({
  *     listenerId: "lbl-hh141sn9",
  *     clbId: "lb-k2zjp9lv",
  *     ruleId: "loc-4xxr2cy7",
@@ -89,7 +89,7 @@ export interface GetAttachmentsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const clblab = tencentcloud.Clb.getAttachments({
+ * const clblab = tencentcloud.clb.getAttachments({
  *     listenerId: "lbl-hh141sn9",
  *     clbId: "lb-k2zjp9lv",
  *     ruleId: "loc-4xxr2cy7",
@@ -121,9 +121,9 @@ export interface GetAttachmentsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * ID of the CLB listener rule. If the protocol of listener is `HTTP`/`HTTPS`, this para is required.
      */
-    ruleId?: pulumi.Input<string>;
+    ruleId?: pulumi.Input<string | undefined>;
 }

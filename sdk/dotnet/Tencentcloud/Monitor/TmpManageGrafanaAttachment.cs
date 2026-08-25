@@ -80,7 +80,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// 
     /// ## Import
     /// 
-    /// monitor tmp_manage_grafana_attachment can be imported using the id, e.g.
+    /// monitor TmpManageGrafanaAttachment can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Monitor/tmpManageGrafanaAttachment:TmpManageGrafanaAttachment manage_grafana_attachment prom-xxxxxxxx

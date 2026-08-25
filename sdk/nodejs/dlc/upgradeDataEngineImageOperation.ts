@@ -82,7 +82,7 @@ export interface UpgradeDataEngineImageOperationState {
     /**
      * Engine ID.
      */
-    dataEngineId?: pulumi.Input<string>;
+    dataEngineId?: pulumi.Input<string | undefined>;
 }
 
 /**

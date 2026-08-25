@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const topSpaceSchemaTimeSeries = tencentcloud.Dbbrain.getTopSpaceSchemaTimeSeries({
+ * const topSpaceSchemaTimeSeries = tencentcloud.dbbrain.getTopSpaceSchemaTimeSeries({
  *     instanceId: "%s",
  *     sortBy: "DataLength",
  *     startDate: "%s",
@@ -100,7 +100,7 @@ export interface GetTopSpaceSchemaTimeSeriesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const topSpaceSchemaTimeSeries = tencentcloud.Dbbrain.getTopSpaceSchemaTimeSeries({
+ * const topSpaceSchemaTimeSeries = tencentcloud.dbbrain.getTopSpaceSchemaTimeSeries({
  *     instanceId: "%s",
  *     sortBy: "DataLength",
  *     startDate: "%s",
@@ -129,7 +129,7 @@ export interface GetTopSpaceSchemaTimeSeriesOutputArgs {
     /**
      * The deadline, such as 2021-01-01, the earliest is the 29th day before the current day, and the default is the current day.
      */
-    endDate?: pulumi.Input<string>;
+    endDate?: pulumi.Input<string | undefined>;
     /**
      * instance id.
      */
@@ -137,21 +137,21 @@ export interface GetTopSpaceSchemaTimeSeriesOutputArgs {
     /**
      * The number of Top libraries to return, the maximum value is 100, and the default is 20.
      */
-    limit?: pulumi.Input<number>;
+    limit?: pulumi.Input<number | undefined>;
     /**
      * Service product type, supported values include: mysql - cloud database MySQL, cynosdb - cloud database CynosDB for MySQL, the default is mysql.
      */
-    product?: pulumi.Input<string>;
+    product?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * The sorting field used to filter the Top library. The optional fields include DataLength, IndexLength, TotalLength, DataFree, FragRatio, TableRows, and PhysicalFileSize (only supported by ApsaraDB for MySQL instances). The default for ApsaraDB for MySQL instances is PhysicalFileSize, and the default for other product instances is TotalLength.
      */
-    sortBy?: pulumi.Input<string>;
+    sortBy?: pulumi.Input<string | undefined>;
     /**
      * The start date, such as 2021-01-01, the earliest is the 29th day before the current day, and the default is the 6th day before the deadline.
      */
-    startDate?: pulumi.Input<string>;
+    startDate?: pulumi.Input<string | undefined>;
 }

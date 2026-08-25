@@ -68,6 +68,8 @@ type NatPolicy struct {
 	Enable pulumi.StringPtrOutput `pulumi:"enable"`
 	// Internal ID.
 	InternalUuid pulumi.IntOutput `pulumi:"internalUuid"`
+	// Execution order.
+	OrderIndex pulumi.IntOutput `pulumi:"orderIndex"`
 	// Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.
 	ParamTemplateId pulumi.StringOutput `pulumi:"paramTemplateId"`
 	// The port for the access control policy. Value: -1/-1: All ports 80: Port 80.
@@ -152,6 +154,8 @@ type natPolicyState struct {
 	Enable *string `pulumi:"enable"`
 	// Internal ID.
 	InternalUuid *int `pulumi:"internalUuid"`
+	// Execution order.
+	OrderIndex *int `pulumi:"orderIndex"`
 	// Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.
 	ParamTemplateId *string `pulumi:"paramTemplateId"`
 	// The port for the access control policy. Value: -1/-1: All ports 80: Port 80.
@@ -183,6 +187,8 @@ type NatPolicyState struct {
 	Enable pulumi.StringPtrInput
 	// Internal ID.
 	InternalUuid pulumi.IntPtrInput
+	// Execution order.
+	OrderIndex pulumi.IntPtrInput
 	// Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.
 	ParamTemplateId pulumi.StringPtrInput
 	// The port for the access control policy. Value: -1/-1: All ports 80: Port 80.
@@ -369,6 +375,11 @@ func (o NatPolicyOutput) Enable() pulumi.StringPtrOutput {
 // Internal ID.
 func (o NatPolicyOutput) InternalUuid() pulumi.IntOutput {
 	return o.ApplyT(func(v *NatPolicy) pulumi.IntOutput { return v.InternalUuid }).(pulumi.IntOutput)
+}
+
+// Execution order.
+func (o NatPolicyOutput) OrderIndex() pulumi.IntOutput {
+	return o.ApplyT(func(v *NatPolicy) pulumi.IntOutput { return v.OrderIndex }).(pulumi.IntOutput)
 }
 
 // Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.

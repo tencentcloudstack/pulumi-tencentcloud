@@ -100,11 +100,11 @@ export interface InstancesAcceptAttachState {
     /**
      * CCN Instance ID.
      */
-    ccnId?: pulumi.Input<string>;
+    ccnId?: pulumi.Input<string | undefined>;
     /**
      * Accept List Of Attachment Instances.
      */
-    instances?: pulumi.Input<pulumi.Input<inputs.Ccn.InstancesAcceptAttachInstance>[]>;
+    instances?: pulumi.Input<pulumi.Input<inputs.Ccn.InstancesAcceptAttachInstance>[] | undefined>;
 }
 
 /**

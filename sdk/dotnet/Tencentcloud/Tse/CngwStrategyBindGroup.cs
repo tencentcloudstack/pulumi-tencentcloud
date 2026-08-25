@@ -36,7 +36,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
     /// 
     /// ## Import
     /// 
-    /// tse cngw_strategy_bind_group can be imported using the id, e.g.
+    /// tse CngwStrategyBindGroup can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Tse/cngwStrategyBindGroup:CngwStrategyBindGroup cngw_strategy_bind_group cngw_strategy_bind_group_id

@@ -53,7 +53,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * monitor tmpScrapeJob can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Monitor/tmpScrapeJob:TmpScrapeJob tmpScrapeJob tmpScrapeJob_id
  * ```
@@ -139,15 +138,15 @@ export interface TmpScrapeJobState {
     /**
      * Agent id.
      */
-    agentId?: pulumi.Input<string>;
+    agentId?: pulumi.Input<string | undefined>;
     /**
      * Job content.
      */
-    config?: pulumi.Input<string>;
+    config?: pulumi.Input<string | undefined>;
     /**
      * Instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -161,7 +160,7 @@ export interface TmpScrapeJobArgs {
     /**
      * Job content.
      */
-    config?: pulumi.Input<string>;
+    config?: pulumi.Input<string | undefined>;
     /**
      * Instance id.
      */

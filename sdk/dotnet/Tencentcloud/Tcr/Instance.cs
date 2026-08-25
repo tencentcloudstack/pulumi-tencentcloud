@@ -13,6 +13,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// <summary>
     /// Use this resource to create tcr instance.
     /// 
+    /// &gt; **NOTE:**If `SecurityPolicy` needs to be configured, `OpenPublicOperation` needs to be set to true
+    /// 
     /// ## Example Usage
     /// 
     /// ### Create a basic tcr instance.
@@ -121,12 +123,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// });
     /// ```
     /// 
+    /// ### Create instance with COS bucket configuration.
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Tcr.Instance("example", new()
+    ///     {
+    ///         Name = "tf-example-tcr",
+    ///         InstanceType = "standard",
+    ///         EnableCosMaz = true,
+    ///         EnableCosVersioning = true,
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
     /// ## Import
     /// 
     /// tcr instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Tcr/instance:Instance foo instance_id
+    /// $ pulumi import tencentcloud:Tcr/instance:Instance example tcr-4detlt3v
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcr/instance:Instance")]
@@ -137,6 +164,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// </summary>
         [Output("deleteBucket")]
         public Output<bool?> DeleteBucket { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to enable Instance Deletion Protection.
+        /// </summary>
+        [Output("deletionProtection")]
+        public Output<bool> DeletionProtection { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to enable COS bucket multi-AZ feature. Default is `False`.
+        /// </summary>
+        [Output("enableCosMaz")]
+        public Output<bool> EnableCosMaz { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to enable COS bucket versioning. Advanced Edition Instances: Default is `True` (versioning enabled); Standard / Basic Edition Instances: Default is `False` (disabled).
+        /// </summary>
+        [Output("enableCosVersioning")]
+        public Output<bool> EnableCosVersioning { get; private set; } = null!;
 
         /// <summary>
         /// Instance expiration time (prepaid).
@@ -276,6 +321,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public Input<bool>? DeleteBucket { get; set; }
 
         /// <summary>
+        /// Whether to enable Instance Deletion Protection.
+        /// </summary>
+        [Input("deletionProtection")]
+        public Input<bool>? DeletionProtection { get; set; }
+
+        /// <summary>
+        /// Whether to enable COS bucket multi-AZ feature. Default is `False`.
+        /// </summary>
+        [Input("enableCosMaz")]
+        public Input<bool>? EnableCosMaz { get; set; }
+
+        /// <summary>
+        /// Whether to enable COS bucket versioning. Advanced Edition Instances: Default is `True` (versioning enabled); Standard / Basic Edition Instances: Default is `False` (disabled).
+        /// </summary>
+        [Input("enableCosVersioning")]
+        public Input<bool>? EnableCosVersioning { get; set; }
+
+        /// <summary>
         /// Length of time to purchase an instance (in month). Must set when RegistryChargeType is prepaid.
         /// </summary>
         [Input("instanceChargeTypePrepaidPeriod")]
@@ -360,6 +423,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// </summary>
         [Input("deleteBucket")]
         public Input<bool>? DeleteBucket { get; set; }
+
+        /// <summary>
+        /// Whether to enable Instance Deletion Protection.
+        /// </summary>
+        [Input("deletionProtection")]
+        public Input<bool>? DeletionProtection { get; set; }
+
+        /// <summary>
+        /// Whether to enable COS bucket multi-AZ feature. Default is `False`.
+        /// </summary>
+        [Input("enableCosMaz")]
+        public Input<bool>? EnableCosMaz { get; set; }
+
+        /// <summary>
+        /// Whether to enable COS bucket versioning. Advanced Edition Instances: Default is `True` (versioning enabled); Standard / Basic Edition Instances: Default is `False` (disabled).
+        /// </summary>
+        [Input("enableCosVersioning")]
+        public Input<bool>? EnableCosVersioning { get; set; }
 
         /// <summary>
         /// Instance expiration time (prepaid).

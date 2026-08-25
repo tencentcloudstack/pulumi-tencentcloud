@@ -4,33 +4,6 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
-/**
- * Provides a resource to create a tsf repository
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@tencentcloud_iac/pulumi";
- *
- * const repository = new tencentcloud.tsf.Repository("repository", {
- *     repositoryName: "",
- *     repositoryType: "",
- *     bucketName: "",
- *     bucketRegion: "",
- *     directory: "",
- *     repositoryDesc: "",
- * });
- * ```
- *
- * ## Import
- *
- * tsf repository can be imported using the id, e.g.
- *
- * ```sh
- * $ pulumi import tencentcloud:Tsf/repository:Repository repository repository_id
- * ```
- */
 export class Repository extends pulumi.CustomResource {
     /**
      * Get an existing Repository resource's state with the given name, ID, and optional extra
@@ -154,39 +127,39 @@ export interface RepositoryState {
     /**
      * the name of the bucket where the warehouse is located.
      */
-    bucketName?: pulumi.Input<string>;
+    bucketName?: pulumi.Input<string | undefined>;
     /**
      * Bucket region where the warehouse is located.
      */
-    bucketRegion?: pulumi.Input<string>;
+    bucketRegion?: pulumi.Input<string | undefined>;
     /**
      * warehouse creation time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * directory.
      */
-    directory?: pulumi.Input<string>;
+    directory?: pulumi.Input<string | undefined>;
     /**
      * whether the repository is in use.
      */
-    isUsed?: pulumi.Input<boolean>;
+    isUsed?: pulumi.Input<boolean | undefined>;
     /**
      * warehouse description.
      */
-    repositoryDesc?: pulumi.Input<string>;
+    repositoryDesc?: pulumi.Input<string | undefined>;
     /**
      * Warehouse ID.
      */
-    repositoryId?: pulumi.Input<string>;
+    repositoryId?: pulumi.Input<string | undefined>;
     /**
      * warehouse name.
      */
-    repositoryName?: pulumi.Input<string>;
+    repositoryName?: pulumi.Input<string | undefined>;
     /**
      * warehouse type (default warehouse: default, private warehouse: private).
      */
-    repositoryType?: pulumi.Input<string>;
+    repositoryType?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -204,11 +177,11 @@ export interface RepositoryArgs {
     /**
      * directory.
      */
-    directory?: pulumi.Input<string>;
+    directory?: pulumi.Input<string | undefined>;
     /**
      * warehouse description.
      */
-    repositoryDesc?: pulumi.Input<string>;
+    repositoryDesc?: pulumi.Input<string | undefined>;
     /**
      * warehouse name.
      */

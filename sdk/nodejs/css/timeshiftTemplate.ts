@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * css timeshift_template can be imported using the id, e.g.
+ * css timeshiftTemplate can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Css/timeshiftTemplate:TimeshiftTemplate timeshift_template templateId
@@ -137,31 +137,31 @@ export interface TimeshiftTemplateState {
     /**
      * The region.`Mainland`: The Chinese mainland.`Overseas`: Outside the Chinese mainland.Default value: `Mainland`.
      */
-    area?: pulumi.Input<string>;
+    area?: pulumi.Input<string | undefined>;
     /**
      * The template description.Only letters, numbers, underscores, and hyphens are supported.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * The time shifting duration.Unit: Second.
      */
-    duration?: pulumi.Input<number>;
+    duration?: pulumi.Input<number | undefined>;
     /**
      * The segment size.Value range: 3-10.Unit: Second.Default value: 5.
      */
-    itemDuration?: pulumi.Input<number>;
+    itemDuration?: pulumi.Input<number | undefined>;
     /**
      * Whether to remove watermarks.If you pass in `true`, the original stream will be recorded.Default value: `false`.
      */
-    removeWatermark?: pulumi.Input<boolean>;
+    removeWatermark?: pulumi.Input<boolean | undefined>;
     /**
      * The template name.Maximum length: 255 bytes.Only letters, numbers, underscores, and hyphens are supported.
      */
-    templateName?: pulumi.Input<string>;
+    templateName?: pulumi.Input<string | undefined>;
     /**
      * The transcoding template IDs.This API works only if `RemoveWatermark` is `false`.
      */
-    transcodeTemplateIds?: pulumi.Input<pulumi.Input<number>[]>;
+    transcodeTemplateIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
 }
 
 /**
@@ -171,11 +171,11 @@ export interface TimeshiftTemplateArgs {
     /**
      * The region.`Mainland`: The Chinese mainland.`Overseas`: Outside the Chinese mainland.Default value: `Mainland`.
      */
-    area?: pulumi.Input<string>;
+    area?: pulumi.Input<string | undefined>;
     /**
      * The template description.Only letters, numbers, underscores, and hyphens are supported.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * The time shifting duration.Unit: Second.
      */
@@ -183,11 +183,11 @@ export interface TimeshiftTemplateArgs {
     /**
      * The segment size.Value range: 3-10.Unit: Second.Default value: 5.
      */
-    itemDuration?: pulumi.Input<number>;
+    itemDuration?: pulumi.Input<number | undefined>;
     /**
      * Whether to remove watermarks.If you pass in `true`, the original stream will be recorded.Default value: `false`.
      */
-    removeWatermark?: pulumi.Input<boolean>;
+    removeWatermark?: pulumi.Input<boolean | undefined>;
     /**
      * The template name.Maximum length: 255 bytes.Only letters, numbers, underscores, and hyphens are supported.
      */
@@ -195,5 +195,5 @@ export interface TimeshiftTemplateArgs {
     /**
      * The transcoding template IDs.This API works only if `RemoveWatermark` is `false`.
      */
-    transcodeTemplateIds?: pulumi.Input<pulumi.Input<number>[]>;
+    transcodeTemplateIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
 }

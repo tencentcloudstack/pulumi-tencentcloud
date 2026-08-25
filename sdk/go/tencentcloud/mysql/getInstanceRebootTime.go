@@ -69,12 +69,8 @@ type GetInstanceRebootTimeResult struct {
 }
 
 func GetInstanceRebootTimeOutput(ctx *pulumi.Context, args GetInstanceRebootTimeOutputArgs, opts ...pulumi.InvokeOption) GetInstanceRebootTimeResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstanceRebootTimeResultOutput, error) {
-			args := v.(GetInstanceRebootTimeArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mysql/getInstanceRebootTime:getInstanceRebootTime", args, GetInstanceRebootTimeResultOutput{}, options).(GetInstanceRebootTimeResultOutput), nil
-		}).(GetInstanceRebootTimeResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mysql/getInstanceRebootTime:getInstanceRebootTime", args, GetInstanceRebootTimeResultOutput{}, options).(GetInstanceRebootTimeResultOutput)
 }
 
 // A collection of arguments for invoking getInstanceRebootTime.

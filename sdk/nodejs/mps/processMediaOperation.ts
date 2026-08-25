@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  *     forceClean: true,
  *     acl: "public-read",
  * });
- * const object = tencentcloud.Cos.getBucketObject({
+ * const object = tencentcloud.cos.getBucketObject({
  *     bucket: `keep-bucket-${appId}`,
  *     key: "/mps-test/test.mov",
  * });
@@ -203,59 +203,59 @@ export interface ProcessMediaOperationState {
     /**
      * Video content analysis task parameter.
      */
-    aiAnalysisTask?: pulumi.Input<inputs.Mps.ProcessMediaOperationAiAnalysisTask>;
+    aiAnalysisTask?: pulumi.Input<inputs.Mps.ProcessMediaOperationAiAnalysisTask | undefined>;
     /**
      * Type parameter of a video content audit task.
      */
-    aiContentReviewTask?: pulumi.Input<inputs.Mps.ProcessMediaOperationAiContentReviewTask>;
+    aiContentReviewTask?: pulumi.Input<inputs.Mps.ProcessMediaOperationAiContentReviewTask | undefined>;
     /**
      * The parameters of a quality control task.
      */
-    aiQualityControlTask?: pulumi.Input<inputs.Mps.ProcessMediaOperationAiQualityControlTask>;
+    aiQualityControlTask?: pulumi.Input<inputs.Mps.ProcessMediaOperationAiQualityControlTask | undefined>;
     /**
      * Type parameter of a video content recognition task.
      */
-    aiRecognitionTask?: pulumi.Input<inputs.Mps.ProcessMediaOperationAiRecognitionTask>;
+    aiRecognitionTask?: pulumi.Input<inputs.Mps.ProcessMediaOperationAiRecognitionTask | undefined>;
     /**
      * The information of the file to process.
      */
-    inputInfo?: pulumi.Input<inputs.Mps.ProcessMediaOperationInputInfo>;
+    inputInfo?: pulumi.Input<inputs.Mps.ProcessMediaOperationInputInfo | undefined>;
     /**
      * The media processing parameters to use.
      */
-    mediaProcessTask?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTask>;
+    mediaProcessTask?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTask | undefined>;
     /**
      * The directory to save the media processing output file, which must start and end with `/`, such as `/movie/201907/`.If you do not specify this parameter, the file will be saved to the directory specified in `InputInfo`.
      */
-    outputDir?: pulumi.Input<string>;
+    outputDir?: pulumi.Input<string | undefined>;
     /**
      * The storage location of the media processing output file. If this parameter is left empty, the storage location in `InputInfo` will be inherited.
      */
-    outputStorage?: pulumi.Input<inputs.Mps.ProcessMediaOperationOutputStorage>;
+    outputStorage?: pulumi.Input<inputs.Mps.ProcessMediaOperationOutputStorage | undefined>;
     /**
      * The scheme ID.Note 1: About `OutputStorage` and `OutputDir`If an output storage and directory are specified for a subtask of the scheme, those output settings will be applied.If an output storage and directory are not specified for the subtasks of a scheme, the output parameters passed in the `ProcessMedia` API will be applied.Note 2: If `TaskNotifyConfig` is specified, the specified settings will be used instead of the default callback settings of the scheme.Note 3: The trigger configured for a scheme is for automatically starting a scheme. It stops working when you manually call this API to start a scheme.
      */
-    scheduleId?: pulumi.Input<number>;
+    scheduleId?: pulumi.Input<number | undefined>;
     /**
      * The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
      */
-    sessionContext?: pulumi.Input<string>;
+    sessionContext?: pulumi.Input<string | undefined>;
     /**
      * The ID used for deduplication. If there was a request with the same ID in the last three days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
      */
-    sessionId?: pulumi.Input<string>;
+    sessionId?: pulumi.Input<string | undefined>;
     /**
      * Event notification information of a task. If this parameter is left empty, no event notifications will be obtained.
      */
-    taskNotifyConfig?: pulumi.Input<inputs.Mps.ProcessMediaOperationTaskNotifyConfig>;
+    taskNotifyConfig?: pulumi.Input<inputs.Mps.ProcessMediaOperationTaskNotifyConfig | undefined>;
     /**
      * The task type. `Online` (default): A task that is executed immediately. `Offline`: A task that is executed when the system is idle (within three days by default).
      */
-    taskType?: pulumi.Input<string>;
+    taskType?: pulumi.Input<string | undefined>;
     /**
      * Task flow priority. The higher the value, the higher the priority. Value range: [-10, 10]. If this parameter is left empty, 0 will be used.
      */
-    tasksPriority?: pulumi.Input<number>;
+    tasksPriority?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -265,19 +265,19 @@ export interface ProcessMediaOperationArgs {
     /**
      * Video content analysis task parameter.
      */
-    aiAnalysisTask?: pulumi.Input<inputs.Mps.ProcessMediaOperationAiAnalysisTask>;
+    aiAnalysisTask?: pulumi.Input<inputs.Mps.ProcessMediaOperationAiAnalysisTask | undefined>;
     /**
      * Type parameter of a video content audit task.
      */
-    aiContentReviewTask?: pulumi.Input<inputs.Mps.ProcessMediaOperationAiContentReviewTask>;
+    aiContentReviewTask?: pulumi.Input<inputs.Mps.ProcessMediaOperationAiContentReviewTask | undefined>;
     /**
      * The parameters of a quality control task.
      */
-    aiQualityControlTask?: pulumi.Input<inputs.Mps.ProcessMediaOperationAiQualityControlTask>;
+    aiQualityControlTask?: pulumi.Input<inputs.Mps.ProcessMediaOperationAiQualityControlTask | undefined>;
     /**
      * Type parameter of a video content recognition task.
      */
-    aiRecognitionTask?: pulumi.Input<inputs.Mps.ProcessMediaOperationAiRecognitionTask>;
+    aiRecognitionTask?: pulumi.Input<inputs.Mps.ProcessMediaOperationAiRecognitionTask | undefined>;
     /**
      * The information of the file to process.
      */
@@ -285,37 +285,37 @@ export interface ProcessMediaOperationArgs {
     /**
      * The media processing parameters to use.
      */
-    mediaProcessTask?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTask>;
+    mediaProcessTask?: pulumi.Input<inputs.Mps.ProcessMediaOperationMediaProcessTask | undefined>;
     /**
      * The directory to save the media processing output file, which must start and end with `/`, such as `/movie/201907/`.If you do not specify this parameter, the file will be saved to the directory specified in `InputInfo`.
      */
-    outputDir?: pulumi.Input<string>;
+    outputDir?: pulumi.Input<string | undefined>;
     /**
      * The storage location of the media processing output file. If this parameter is left empty, the storage location in `InputInfo` will be inherited.
      */
-    outputStorage?: pulumi.Input<inputs.Mps.ProcessMediaOperationOutputStorage>;
+    outputStorage?: pulumi.Input<inputs.Mps.ProcessMediaOperationOutputStorage | undefined>;
     /**
      * The scheme ID.Note 1: About `OutputStorage` and `OutputDir`If an output storage and directory are specified for a subtask of the scheme, those output settings will be applied.If an output storage and directory are not specified for the subtasks of a scheme, the output parameters passed in the `ProcessMedia` API will be applied.Note 2: If `TaskNotifyConfig` is specified, the specified settings will be used instead of the default callback settings of the scheme.Note 3: The trigger configured for a scheme is for automatically starting a scheme. It stops working when you manually call this API to start a scheme.
      */
-    scheduleId?: pulumi.Input<number>;
+    scheduleId?: pulumi.Input<number | undefined>;
     /**
      * The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
      */
-    sessionContext?: pulumi.Input<string>;
+    sessionContext?: pulumi.Input<string | undefined>;
     /**
      * The ID used for deduplication. If there was a request with the same ID in the last three days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
      */
-    sessionId?: pulumi.Input<string>;
+    sessionId?: pulumi.Input<string | undefined>;
     /**
      * Event notification information of a task. If this parameter is left empty, no event notifications will be obtained.
      */
-    taskNotifyConfig?: pulumi.Input<inputs.Mps.ProcessMediaOperationTaskNotifyConfig>;
+    taskNotifyConfig?: pulumi.Input<inputs.Mps.ProcessMediaOperationTaskNotifyConfig | undefined>;
     /**
      * The task type. `Online` (default): A task that is executed immediately. `Offline`: A task that is executed when the system is idle (within three days by default).
      */
-    taskType?: pulumi.Input<string>;
+    taskType?: pulumi.Input<string | undefined>;
     /**
      * Task flow priority. The higher the value, the higher the priority. Value range: [-10, 10]. If this parameter is left empty, 0 will be used.
      */
-    tasksPriority?: pulumi.Input<number>;
+    tasksPriority?: pulumi.Input<number | undefined>;
 }

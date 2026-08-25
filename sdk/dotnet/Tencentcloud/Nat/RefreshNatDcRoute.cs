@@ -80,7 +80,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
     /// 
     /// ## Import
     /// 
-    /// vpc refresh_nat_dc_route can be imported using the id, e.g.
+    /// vpc RefreshNatDcRoute can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Nat/refreshNatDcRoute:RefreshNatDcRoute refresh_nat_dc_route vpc_id#nat_gateway_id

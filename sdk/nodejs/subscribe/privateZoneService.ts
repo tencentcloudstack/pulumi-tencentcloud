@@ -79,7 +79,7 @@ export interface PrivateZoneServiceState {
     /**
      * Private domain resolution service activation status.
      */
-    serviceStatus?: pulumi.Input<string>;
+    serviceStatus?: pulumi.Input<string | undefined>;
 }
 
 /**

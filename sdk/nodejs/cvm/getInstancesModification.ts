@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Cvm.getInstancesModification({
+ * const foo = tencentcloud.cvm.getInstancesModification({
  *     instanceIds: ["ins-xxxxxxx"],
  * });
  * ```
@@ -73,7 +73,7 @@ export interface GetInstancesModificationResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Cvm.getInstancesModification({
+ * const foo = tencentcloud.cvm.getInstancesModification({
  *     instanceIds: ["ins-xxxxxxx"],
  * });
  * ```
@@ -95,13 +95,13 @@ export interface GetInstancesModificationOutputArgs {
     /**
      * The upper limit of Filters for each request is 10 and the upper limit for Filter.Values is 2.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Cvm.GetInstancesModificationFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Cvm.GetInstancesModificationFilterArgs>[] | undefined>;
     /**
      * One or more instance ID to be queried. It can be obtained from the InstanceId in the returned value of API DescribeInstances. The maximum number of instances in batch for each request is 20.
      */
-    instanceIds?: pulumi.Input<pulumi.Input<string>[]>;
+    instanceIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

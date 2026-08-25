@@ -42,15 +42,15 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("tf_redis_vpc"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String(zone.Lists[0].Zone),
 //				Name:             pulumi.String("tf_redis_subnet"),
 //				CidrBlock:        pulumi.String("10.0.1.0/24"),
@@ -67,8 +67,8 @@ import (
 //				RedisReplicasNum: pulumi.Int(zone.Lists[0].RedisReplicasNums[0]),
 //				Name:             pulumi.String("tf-example"),
 //				Port:             pulumi.Int(6379),
-//				VpcId:            vpc.ID(),
-//				SubnetId:         subnet.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err
@@ -105,15 +105,15 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("tf_redis_vpc"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String(zone.Lists[1].Zone),
 //				Name:             pulumi.String("tf_redis_subnet"),
 //				CidrBlock:        pulumi.String("10.0.1.0/24"),
@@ -152,10 +152,10 @@ import (
 //				RedisReplicasNum: pulumi.Int(zone.Lists[0].RedisReplicasNums[0]),
 //				Name:             pulumi.String("tf-example"),
 //				Port:             pulumi.Int(6379),
-//				VpcId:            vpc.ID(),
-//				SubnetId:         subnet.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 //				SecurityGroups: pulumi.StringArray{
-//					securityGroup.ID(),
+//					securityGroup.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				ChargeType:    pulumi.String("PREPAID"),
 //				PrepaidPeriod: pulumi.Int(1),
@@ -196,22 +196,22 @@ import (
 //				return err
 //			}
 //			cfg := config.New(ctx, "")
-//			replicaZoneIds := []float64{
+//			replicaZoneIds := []int{
 //				100004,
 //				100006,
 //			}
 //			if param := cfg.GetObject("replicaZoneIds"); param != nil {
 //				replicaZoneIds = param
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("tf_redis_vpc"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String(zone.Lists[2].Zone),
 //				Name:             pulumi.String("tf_redis_subnet"),
 //				CidrBlock:        pulumi.String("10.0.1.0/24"),
@@ -251,10 +251,10 @@ import (
 //				ReplicaZoneIds:   pulumi.Any(replicaZoneIds),
 //				Name:             pulumi.String("tf-example"),
 //				Port:             pulumi.Int(6379),
-//				VpcId:            vpc.ID(),
-//				SubnetId:         subnet.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 //				SecurityGroups: pulumi.StringArray{
-//					securityGroup.ID(),
+//					securityGroup.ID().ToIDOutput().ToStringOutput(),
 //				},
 //			})
 //			if err != nil {
@@ -292,22 +292,22 @@ import (
 //				return err
 //			}
 //			cfg := config.New(ctx, "")
-//			replicaZoneIds := []float64{
+//			replicaZoneIds := []int{
 //				100004,
 //				100006,
 //			}
 //			if param := cfg.GetObject("replicaZoneIds"); param != nil {
 //				replicaZoneIds = param
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("tf_redis_vpc"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String(zone.Lists[2].Zone),
 //				Name:             pulumi.String("tf_redis_subnet"),
 //				CidrBlock:        pulumi.String("10.0.1.0/24"),
@@ -322,7 +322,7 @@ import (
 //				return err
 //			}
 //			_, err = security.NewGroupRuleSet(ctx, "sg_rule", &security.GroupRuleSetArgs{
-//				SecurityGroupId: securityGroup.ID(),
+//				SecurityGroupId: securityGroup.ID().ToIDOutput().ToStringOutput(),
 //				Ingresses: security.GroupRuleSetIngressArray{
 //					&security.GroupRuleSetIngressArgs{
 //						Action:      pulumi.String("ACCEPT"),
@@ -367,10 +367,10 @@ import (
 //				ReplicaZoneIds:   pulumi.Any(replicaZoneIds),
 //				Name:             pulumi.String("tf-example"),
 //				Port:             pulumi.Int(6379),
-//				VpcId:            vpc.ID(),
-//				SubnetId:         subnet.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 //				SecurityGroups: pulumi.StringArray{
-//					securityGroup.ID(),
+//					securityGroup.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				ForceDelete: pulumi.Bool(true),
 //			})
@@ -474,7 +474,7 @@ type Instance struct {
 	AutoRenewFlag pulumi.IntPtrOutput `pulumi:"autoRenewFlag"`
 	// The available zone of an instance to be created, like `ap-beijing-7`, please refer to `tencentcloud_redis_zone_config.list`.
 	AvailabilityZone pulumi.StringOutput `pulumi:"availabilityZone"`
-	// The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create new with new charge type.
+	// The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`.
 	ChargeType pulumi.StringPtrOutput `pulumi:"chargeType"`
 	// The time when the instance was created.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
@@ -589,7 +589,7 @@ type instanceState struct {
 	AutoRenewFlag *int `pulumi:"autoRenewFlag"`
 	// The available zone of an instance to be created, like `ap-beijing-7`, please refer to `tencentcloud_redis_zone_config.list`.
 	AvailabilityZone *string `pulumi:"availabilityZone"`
-	// The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create new with new charge type.
+	// The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`.
 	ChargeType *string `pulumi:"chargeType"`
 	// The time when the instance was created.
 	CreateTime *string `pulumi:"createTime"`
@@ -662,7 +662,7 @@ type InstanceState struct {
 	AutoRenewFlag pulumi.IntPtrInput
 	// The available zone of an instance to be created, like `ap-beijing-7`, please refer to `tencentcloud_redis_zone_config.list`.
 	AvailabilityZone pulumi.StringPtrInput
-	// The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create new with new charge type.
+	// The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`.
 	ChargeType pulumi.StringPtrInput
 	// The time when the instance was created.
 	CreateTime pulumi.StringPtrInput
@@ -739,7 +739,7 @@ type instanceArgs struct {
 	AutoRenewFlag *int `pulumi:"autoRenewFlag"`
 	// The available zone of an instance to be created, like `ap-beijing-7`, please refer to `tencentcloud_redis_zone_config.list`.
 	AvailabilityZone string `pulumi:"availabilityZone"`
-	// The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create new with new charge type.
+	// The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`.
 	ChargeType *string `pulumi:"chargeType"`
 	// Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
 	ForceDelete *bool `pulumi:"forceDelete"`
@@ -803,7 +803,7 @@ type InstanceArgs struct {
 	AutoRenewFlag pulumi.IntPtrInput
 	// The available zone of an instance to be created, like `ap-beijing-7`, please refer to `tencentcloud_redis_zone_config.list`.
 	AvailabilityZone pulumi.StringInput
-	// The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create new with new charge type.
+	// The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`.
 	ChargeType pulumi.StringPtrInput
 	// Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
 	ForceDelete pulumi.BoolPtrInput
@@ -958,7 +958,7 @@ func (o InstanceOutput) AvailabilityZone() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.AvailabilityZone }).(pulumi.StringOutput)
 }
 
-// The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create new with new charge type.
+// The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`.
 func (o InstanceOutput) ChargeType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.ChargeType }).(pulumi.StringPtrOutput)
 }

@@ -49,12 +49,8 @@ type GetTablegroupsResult struct {
 }
 
 func GetTablegroupsOutput(ctx *pulumi.Context, args GetTablegroupsOutputArgs, opts ...pulumi.InvokeOption) GetTablegroupsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetTablegroupsResultOutput, error) {
-			args := v.(GetTablegroupsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tcaplus/getTablegroups:getTablegroups", args, GetTablegroupsResultOutput{}, options).(GetTablegroupsResultOutput), nil
-		}).(GetTablegroupsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tcaplus/getTablegroups:getTablegroups", args, GetTablegroupsResultOutput{}, options).(GetTablegroupsResultOutput)
 }
 
 // A collection of arguments for invoking getTablegroups.

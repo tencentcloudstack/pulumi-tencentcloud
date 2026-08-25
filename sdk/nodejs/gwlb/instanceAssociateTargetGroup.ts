@@ -131,11 +131,11 @@ export interface InstanceAssociateTargetGroupState {
     /**
      * GWLB instance ID.
      */
-    loadBalancerId?: pulumi.Input<string>;
+    loadBalancerId?: pulumi.Input<string | undefined>;
     /**
      * Target group ID.
      */
-    targetGroupId?: pulumi.Input<string>;
+    targetGroupId?: pulumi.Input<string | undefined>;
 }
 
 /**

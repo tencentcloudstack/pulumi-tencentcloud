@@ -76,12 +76,8 @@ type LookupGatewayCertificatesResult struct {
 }
 
 func LookupGatewayCertificatesOutput(ctx *pulumi.Context, args LookupGatewayCertificatesOutputArgs, opts ...pulumi.InvokeOption) LookupGatewayCertificatesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupGatewayCertificatesResultOutput, error) {
-			args := v.(LookupGatewayCertificatesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tse/getGatewayCertificates:getGatewayCertificates", args, LookupGatewayCertificatesResultOutput{}, options).(LookupGatewayCertificatesResultOutput), nil
-		}).(LookupGatewayCertificatesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tse/getGatewayCertificates:getGatewayCertificates", args, LookupGatewayCertificatesResultOutput{}, options).(LookupGatewayCertificatesResultOutput)
 }
 
 // A collection of arguments for invoking getGatewayCertificates.

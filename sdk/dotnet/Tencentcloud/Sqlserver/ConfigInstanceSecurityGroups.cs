@@ -10,40 +10,6 @@ using Pulumi;
 
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
 {
-    /// <summary>
-    /// Provides a resource to create a sqlserver ConfigInstanceSecurityGroups
-    /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using System.Collections.Generic;
-    /// using System.Linq;
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// return await Deployment.RunAsync(() =&gt; 
-    /// {
-    ///     var configInstanceSecurityGroups = new Tencentcloud.Sqlserver.ConfigInstanceSecurityGroups("config_instance_security_groups", new()
-    ///     {
-    ///         InstanceId = "mssql-qelbzgwf",
-    ///         SecurityGroupIdSets = new[]
-    ///         {
-    ///             "sg-mayqdlt1",
-    ///             "sg-5aubsf8n",
-    ///         },
-    ///     });
-    /// 
-    /// });
-    /// ```
-    /// 
-    /// ## Import
-    /// 
-    /// sqlserver config_instance_security_groups can be imported using the id, e.g.
-    /// 
-    /// ```sh
-    /// $ pulumi import tencentcloud:Sqlserver/configInstanceSecurityGroups:ConfigInstanceSecurityGroups config_instance_security_groups config_instance_security_groups_id
-    /// ```
-    /// </summary>
     [TencentcloudResourceType("tencentcloud:Sqlserver/configInstanceSecurityGroups:ConfigInstanceSecurityGroups")]
     public partial class ConfigInstanceSecurityGroups : global::Pulumi.CustomResource
     {

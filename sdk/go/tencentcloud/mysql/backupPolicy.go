@@ -12,6 +12,10 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
+// Provides a mysql policy resource to create a backup policy.
+//
+// > **NOTE:** This attribute `backupModel` only support 'physical' in Terraform TencentCloud provider version 1.16.2
+//
 // ## Example Usage
 //
 // ```go
@@ -36,17 +40,17 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc-mysql"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String(zones.Zones[0].Name),
 //				Name:             pulumi.String("subnet-mysql"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("10.0.0.0/16"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -71,11 +75,11 @@ import (
 //				InstanceName:     pulumi.String("tf-example-mysql"),
 //				MemSize:          pulumi.Int(4000),
 //				VolumeSize:       pulumi.Int(200),
-//				VpcId:            vpc.ID(),
-//				SubnetId:         subnet.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 //				IntranetPort:     pulumi.Int(3306),
 //				SecurityGroups: pulumi.StringArray{
-//					securityGroup.ID(),
+//					securityGroup.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				Tags: pulumi.StringMap{
 //					"name": pulumi.String("test"),
@@ -89,7 +93,7 @@ import (
 //				return err
 //			}
 //			_, err = mysql.NewBackupPolicy(ctx, "example", &mysql.BackupPolicyArgs{
-//				MysqlId:             example.ID(),
+//				MysqlId:             example.ID().ToIDOutput().ToStringOutput(),
 //				RetentionPeriod:     pulumi.Int(7),
 //				BackupModel:         pulumi.String("physical"),
 //				BackupTime:          pulumi.String("22:00-02:00"),

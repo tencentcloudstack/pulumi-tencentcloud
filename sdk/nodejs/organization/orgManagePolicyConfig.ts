@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * organization org_manage_policy_config can be imported using the id, e.g.
+ * organization orgManagePolicyConfig can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Organization/orgManagePolicyConfig:OrgManagePolicyConfig org_manage_policy_config organization_id#policy_type
@@ -102,14 +102,14 @@ export interface OrgManagePolicyConfigState {
     /**
      * Organization ID.
      */
-    organizationId?: pulumi.Input<number>;
+    organizationId?: pulumi.Input<number | undefined>;
     /**
      * Policy type. Default value is SERVICE_CONTROL_POLICY.
      * Valid values:
      * - `SERVICE_CONTROL_POLICY`: Service control policy.
      * - `TAG_POLICY`: Tag policy.
      */
-    policyType?: pulumi.Input<string>;
+    policyType?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -126,5 +126,5 @@ export interface OrgManagePolicyConfigArgs {
      * - `SERVICE_CONTROL_POLICY`: Service control policy.
      * - `TAG_POLICY`: Tag policy.
      */
-    policyType?: pulumi.Input<string>;
+    policyType?: pulumi.Input<string | undefined>;
 }

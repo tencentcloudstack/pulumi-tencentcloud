@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  *     rules: [
  *         {
  *             descriptions: ["1"],
- *             ruleName: "网站加速",
+ *             ruleName: "Web Acceleration",
  *             branches: [{
  *                 condition: "${http.request.host} in ['aaa.makn.cn']",
  *                 actions: [
@@ -83,7 +83,7 @@ import * as utilities from "../utilities";
  *         },
  *         {
  *             descriptions: ["2"],
- *             ruleName: "音视频直播",
+ *             ruleName: "Live Video Streaming",
  *             branches: [{
  *                 condition: "${http.request.host} in ['aaa.makn.cn']",
  *                 subRules: [{
@@ -135,7 +135,7 @@ import * as utilities from "../utilities";
  *         },
  *         {
  *             descriptions: ["3"],
- *             ruleName: "大文件下载",
+ *             ruleName: "Large File Download",
  *             branches: [{
  *                 condition: "${http.request.host} in ['aaa.makn.cn']",
  *                 actions: [
@@ -187,7 +187,7 @@ import * as utilities from "../utilities";
  *         },
  *         {
  *             descriptions: ["4"],
- *             ruleName: "音视频点播",
+ *             ruleName: "Video On Demand",
  *             branches: [{
  *                 condition: "${http.request.host} in ['aaa.makn.cn']",
  *                 actions: [
@@ -239,7 +239,7 @@ import * as utilities from "../utilities";
  *         },
  *         {
  *             descriptions: ["5"],
- *             ruleName: "API 加速",
+ *             ruleName: "API Acceleration",
  *             branches: [{
  *                 condition: "${http.request.host} in ['aaa.makn.cn']",
  *                 actions: [
@@ -262,7 +262,7 @@ import * as utilities from "../utilities";
  *         },
  *         {
  *             descriptions: ["6"],
- *             ruleName: "WordPress 建站",
+ *             ruleName: "WordPress Site",
  *             branches: [{
  *                 condition: "${http.request.host} in ['aaa.makn.cn']",
  *                 subRules: [{
@@ -339,14 +339,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * TEO l7 acc rule can be imported using the zone_id, e.g.
- *
- * `
- *
- * ```sh
- * $ pulumi import tencentcloud:Teo/l7AccRule:L7AccRule example zone-36bjhygh1bxe
- * ```
- *
- * `
  */
 export class L7AccRule extends pulumi.CustomResource {
     /**
@@ -420,11 +412,11 @@ export interface L7AccRuleState {
     /**
      * Rules content.
      */
-    rules?: pulumi.Input<pulumi.Input<inputs.Teo.L7AccRuleRule>[]>;
+    rules?: pulumi.Input<pulumi.Input<inputs.Teo.L7AccRuleRule>[] | undefined>;
     /**
      * Zone id.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -434,7 +426,7 @@ export interface L7AccRuleArgs {
     /**
      * Rules content.
      */
-    rules?: pulumi.Input<pulumi.Input<inputs.Teo.L7AccRuleRule>[]>;
+    rules?: pulumi.Input<pulumi.Input<inputs.Teo.L7AccRuleRule>[] | undefined>;
     /**
      * Zone id.
      */

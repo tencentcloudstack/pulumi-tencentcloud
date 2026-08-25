@@ -15,6 +15,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
     /// 
     /// ## Example Usage
     /// 
+    /// ### Basic Configuration
+    /// 
     /// ```csharp
     /// using System.Collections.Generic;
     /// using System.Linq;
@@ -27,16 +29,98 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
     ///     {
     ///         LocalAddresses = new[]
     ///         {
-    ///             "10.0.0.0/17",
+    ///             "10.0.200.0/24",
     ///         },
-    ///         RemoteAddress = "11.0.0.0/16",
+    ///         RemoteAddress = "192.168.100.0/24",
     ///         SslVpnServerName = "helloworld",
-    ///         VpnGatewayId = "vpngw-335lwf7d",
-    ///         SslVpnProtocol = "UDP",
-    ///         SslVpnPort = 1194,
-    ///         IntegrityAlgorithm = "MD5",
-    ///         EncryptAlgorithm = "AES-128-CBC",
-    ///         Compress = true,
+    ///         VpnGatewayId = "vpngw-6lq9ayur",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### With Tags and DNS Configuration
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Vpn.SslServer("example", new()
+    ///     {
+    ///         LocalAddresses = new[]
+    ///         {
+    ///             "10.0.200.0/24",
+    ///         },
+    ///         RemoteAddress = "192.168.100.0/24",
+    ///         SslVpnServerName = "helloworld",
+    ///         VpnGatewayId = "vpngw-6lq9ayur",
+    ///         Tags = 
+    ///         {
+    ///             { "Environment", "production" },
+    ///             { "Owner", "team-a" },
+    ///         },
+    ///         DnsServers = new Tencentcloud.Vpn.Inputs.SslServerDnsServersArgs
+    ///         {
+    ///             PrimaryDns = "8.8.8.8",
+    ///             SecondaryDns = "8.8.4.4",
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### With SSO Authentication (Requires Whitelist)
+    /// 
+    /// **Note:** SSO authentication feature requires whitelist approval from TencentCloud. Please contact TencentCloud support to apply for whitelist access before enabling this feature.
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Vpn.SslServer("example", new()
+    ///     {
+    ///         LocalAddresses = new[]
+    ///         {
+    ///             "10.0.200.0/24",
+    ///         },
+    ///         RemoteAddress = "192.168.100.0/24",
+    ///         SslVpnServerName = "helloworld",
+    ///         VpnGatewayId = "vpngw-6lq9ayur",
+    ///         SsoEnabled = true,
+    ///         SamlData = "&lt;SAML configuration data&gt;",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### parameter only controls the feature switch. Detailed access policies must be configured through the TencentCloud console or other resources.
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Vpn.SslServer("example", new()
+    ///     {
+    ///         LocalAddresses = new[]
+    ///         {
+    ///             "10.0.200.0/24",
+    ///         },
+    ///         RemoteAddress = "192.168.100.0/24",
+    ///         SslVpnServerName = "helloworld",
+    ///         VpnGatewayId = "vpngw-6lq9ayur",
+    ///         AccessPolicyEnabled = true,
     ///     });
     /// 
     /// });
@@ -54,22 +138,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
     public partial class SslServer : global::Pulumi.CustomResource
     {
         /// <summary>
+        /// Enable access policy control. Default: false.
+        /// </summary>
+        [Output("accessPolicyEnabled")]
+        public Output<bool> AccessPolicyEnabled { get; private set; } = null!;
+
+        /// <summary>
         /// Need compressed. Currently is not supports compress. Default value: False.
         /// </summary>
         [Output("compress")]
         public Output<bool?> Compress { get; private set; } = null!;
 
         /// <summary>
+        /// DNS server configuration.
+        /// </summary>
+        [Output("dnsServers")]
+        public Output<Outputs.SslServerDnsServers> DnsServers { get; private set; } = null!;
+
+        /// <summary>
         /// The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC.Default value: AES-128-CBC.
         /// </summary>
         [Output("encryptAlgorithm")]
-        public Output<string?> EncryptAlgorithm { get; private set; } = null!;
+        public Output<string> EncryptAlgorithm { get; private set; } = null!;
 
         /// <summary>
         /// The integrity algorithm. Valid values: SHA1. Default value: SHA1.
         /// </summary>
         [Output("integrityAlgorithm")]
-        public Output<string?> IntegrityAlgorithm { get; private set; } = null!;
+        public Output<string> IntegrityAlgorithm { get; private set; } = null!;
 
         /// <summary>
         /// List of local CIDR.
@@ -84,22 +180,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public Output<string> RemoteAddress { get; private set; } = null!;
 
         /// <summary>
+        /// SAML-DATA. Required when SsoEnabled is true.
+        /// </summary>
+        [Output("samlData")]
+        public Output<string?> SamlData { get; private set; } = null!;
+
+        /// <summary>
         /// The port of ssl vpn. Currently only supports UDP. Default value: 1194.
         /// </summary>
         [Output("sslVpnPort")]
-        public Output<int?> SslVpnPort { get; private set; } = null!;
+        public Output<int> SslVpnPort { get; private set; } = null!;
 
         /// <summary>
         /// The protocol of ssl vpn. Default value: UDP.
         /// </summary>
         [Output("sslVpnProtocol")]
-        public Output<string?> SslVpnProtocol { get; private set; } = null!;
+        public Output<string> SslVpnProtocol { get; private set; } = null!;
 
         /// <summary>
         /// The name of ssl vpn server to be created.
         /// </summary>
         [Output("sslVpnServerName")]
         public Output<string> SslVpnServerName { get; private set; } = null!;
+
+        /// <summary>
+        /// Enable SSO authentication. Default: false. This feature requires whitelist approval.
+        /// </summary>
+        [Output("ssoEnabled")]
+        public Output<bool> SsoEnabled { get; private set; } = null!;
+
+        /// <summary>
+        /// Tags for resource management.
+        /// </summary>
+        [Output("tags")]
+        public Output<ImmutableDictionary<string, string>?> Tags { get; private set; } = null!;
 
         /// <summary>
         /// VPN gateway ID.
@@ -155,10 +269,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
     public sealed class SslServerArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Enable access policy control. Default: false.
+        /// </summary>
+        [Input("accessPolicyEnabled")]
+        public Input<bool>? AccessPolicyEnabled { get; set; }
+
+        /// <summary>
         /// Need compressed. Currently is not supports compress. Default value: False.
         /// </summary>
         [Input("compress")]
         public Input<bool>? Compress { get; set; }
+
+        /// <summary>
+        /// DNS server configuration.
+        /// </summary>
+        [Input("dnsServers")]
+        public Input<Inputs.SslServerDnsServersArgs>? DnsServers { get; set; }
 
         /// <summary>
         /// The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC.Default value: AES-128-CBC.
@@ -191,6 +317,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public Input<string> RemoteAddress { get; set; } = null!;
 
         /// <summary>
+        /// SAML-DATA. Required when SsoEnabled is true.
+        /// </summary>
+        [Input("samlData")]
+        public Input<string>? SamlData { get; set; }
+
+        /// <summary>
         /// The port of ssl vpn. Currently only supports UDP. Default value: 1194.
         /// </summary>
         [Input("sslVpnPort")]
@@ -209,6 +341,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public Input<string> SslVpnServerName { get; set; } = null!;
 
         /// <summary>
+        /// Enable SSO authentication. Default: false. This feature requires whitelist approval.
+        /// </summary>
+        [Input("ssoEnabled")]
+        public Input<bool>? SsoEnabled { get; set; }
+
+        [Input("tags")]
+        private InputMap<string>? _tags;
+
+        /// <summary>
+        /// Tags for resource management.
+        /// </summary>
+        public InputMap<string> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<string>());
+            set => _tags = value;
+        }
+
+        /// <summary>
         /// VPN gateway ID.
         /// </summary>
         [Input("vpnGatewayId", required: true)]
@@ -223,10 +373,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
     public sealed class SslServerState : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Enable access policy control. Default: false.
+        /// </summary>
+        [Input("accessPolicyEnabled")]
+        public Input<bool>? AccessPolicyEnabled { get; set; }
+
+        /// <summary>
         /// Need compressed. Currently is not supports compress. Default value: False.
         /// </summary>
         [Input("compress")]
         public Input<bool>? Compress { get; set; }
+
+        /// <summary>
+        /// DNS server configuration.
+        /// </summary>
+        [Input("dnsServers")]
+        public Input<Inputs.SslServerDnsServersGetArgs>? DnsServers { get; set; }
 
         /// <summary>
         /// The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC.Default value: AES-128-CBC.
@@ -259,6 +421,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public Input<string>? RemoteAddress { get; set; }
 
         /// <summary>
+        /// SAML-DATA. Required when SsoEnabled is true.
+        /// </summary>
+        [Input("samlData")]
+        public Input<string>? SamlData { get; set; }
+
+        /// <summary>
         /// The port of ssl vpn. Currently only supports UDP. Default value: 1194.
         /// </summary>
         [Input("sslVpnPort")]
@@ -275,6 +443,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         /// </summary>
         [Input("sslVpnServerName")]
         public Input<string>? SslVpnServerName { get; set; }
+
+        /// <summary>
+        /// Enable SSO authentication. Default: false. This feature requires whitelist approval.
+        /// </summary>
+        [Input("ssoEnabled")]
+        public Input<bool>? SsoEnabled { get; set; }
+
+        [Input("tags")]
+        private InputMap<string>? _tags;
+
+        /// <summary>
+        /// Tags for resource management.
+        /// </summary>
+        public InputMap<string> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<string>());
+            set => _tags = value;
+        }
 
         /// <summary>
         /// VPN gateway ID.

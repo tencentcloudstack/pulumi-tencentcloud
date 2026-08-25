@@ -45,7 +45,7 @@ import (
 //
 // ## Import
 //
-// waf auto_deny_rules can be imported using the id, e.g.
+// waf autoDenyRules can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Waf/autoDenyRules:AutoDenyRules example demo.waf.com

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const scene = tencentcloud.Lighthouse.getAllScene({
+ * const scene = tencentcloud.lighthouse.getAllScene({
  *     offset: 0,
  *     limit: 20,
  * });
@@ -80,7 +80,7 @@ export interface GetAllSceneResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const scene = tencentcloud.Lighthouse.getAllScene({
+ * const scene = tencentcloud.lighthouse.getAllScene({
  *     offset: 0,
  *     limit: 20,
  * });
@@ -104,17 +104,17 @@ export interface GetAllSceneOutputArgs {
     /**
      * Number of returned results. Default value is 20. Maximum value is 100.
      */
-    limit?: pulumi.Input<number>;
+    limit?: pulumi.Input<number | undefined>;
     /**
      * Offset. Default value is 0.
      */
-    offset?: pulumi.Input<number>;
+    offset?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * List of scene IDs.
      */
-    sceneIds?: pulumi.Input<pulumi.Input<string>[]>;
+    sceneIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

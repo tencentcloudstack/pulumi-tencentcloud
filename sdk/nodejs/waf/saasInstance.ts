@@ -212,63 +212,63 @@ export interface SaasInstanceState {
     /**
      * Whether to purchase API Security, 1: yes, 0: no. Default is 0.
      */
-    apiSecurity?: pulumi.Input<number>;
+    apiSecurity?: pulumi.Input<number | undefined>;
     /**
      * Auto renew flag, 1: enable, 0: disable.
      */
-    autoRenewFlag?: pulumi.Input<number>;
+    autoRenewFlag?: pulumi.Input<number | undefined>;
     /**
      * waf instance start time.
      */
-    beginTime?: pulumi.Input<string>;
+    beginTime?: pulumi.Input<string | undefined>;
     /**
      * Whether to purchase Bot management, 1: yes, 0: no. Default is 0.
      */
-    botManagement?: pulumi.Input<number>;
+    botManagement?: pulumi.Input<number | undefined>;
     /**
      * waf instance edition, clb or saas.
      */
-    edition?: pulumi.Input<string>;
+    edition?: pulumi.Input<string | undefined>;
     /**
      * Is elastic billing enabled, 1: enable, 0: disable.
      */
-    elasticMode?: pulumi.Input<number>;
+    elasticMode?: pulumi.Input<number | undefined>;
     /**
      * Billing order parameters. support premium_saas, enterprise_saas, ultimate_saas.
      */
-    goodsCategory?: pulumi.Input<string>;
+    goodsCategory?: pulumi.Input<string | undefined>;
     /**
      * waf instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Waf instance name.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * QPS Limit, Minimum setting 10000. Only `elasticMode` is 1, can be set.
      */
-    qpsLimit?: pulumi.Input<number>;
+    qpsLimit?: pulumi.Input<number | undefined>;
     /**
      * region. If Region is `ap-guangzhou`, support: gz, sh, bj, cd (Means: GuangZhou, ShangHai, BeiJing, ChengDu); If Region is `ap-seoul`, support: hk, sg, th, kr, in, de, ca, use, sao, usw, jkt (Means: HongKong, Singapore, Bandkok, Seoul, Mumbai, Frankfurt, Toronto, Virginia, SaoPaulo, SiliconValley, Jakarta).
      */
-    realRegion?: pulumi.Input<string>;
+    realRegion?: pulumi.Input<string | undefined>;
     /**
      * waf instance status.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * Time interval.
      */
-    timeSpan?: pulumi.Input<number>;
+    timeSpan?: pulumi.Input<number | undefined>;
     /**
      * Time unit, support d, m, y. d: day, m: month, y: year.
      */
-    timeUnit?: pulumi.Input<string>;
+    timeUnit?: pulumi.Input<string | undefined>;
     /**
      * waf instance valid time.
      */
-    validTime?: pulumi.Input<string>;
+    validTime?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -278,19 +278,19 @@ export interface SaasInstanceArgs {
     /**
      * Whether to purchase API Security, 1: yes, 0: no. Default is 0.
      */
-    apiSecurity?: pulumi.Input<number>;
+    apiSecurity?: pulumi.Input<number | undefined>;
     /**
      * Auto renew flag, 1: enable, 0: disable.
      */
-    autoRenewFlag?: pulumi.Input<number>;
+    autoRenewFlag?: pulumi.Input<number | undefined>;
     /**
      * Whether to purchase Bot management, 1: yes, 0: no. Default is 0.
      */
-    botManagement?: pulumi.Input<number>;
+    botManagement?: pulumi.Input<number | undefined>;
     /**
      * Is elastic billing enabled, 1: enable, 0: disable.
      */
-    elasticMode?: pulumi.Input<number>;
+    elasticMode?: pulumi.Input<number | undefined>;
     /**
      * Billing order parameters. support premium_saas, enterprise_saas, ultimate_saas.
      */
@@ -298,21 +298,21 @@ export interface SaasInstanceArgs {
     /**
      * Waf instance name.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * QPS Limit, Minimum setting 10000. Only `elasticMode` is 1, can be set.
      */
-    qpsLimit?: pulumi.Input<number>;
+    qpsLimit?: pulumi.Input<number | undefined>;
     /**
      * region. If Region is `ap-guangzhou`, support: gz, sh, bj, cd (Means: GuangZhou, ShangHai, BeiJing, ChengDu); If Region is `ap-seoul`, support: hk, sg, th, kr, in, de, ca, use, sao, usw, jkt (Means: HongKong, Singapore, Bandkok, Seoul, Mumbai, Frankfurt, Toronto, Virginia, SaoPaulo, SiliconValley, Jakarta).
      */
-    realRegion?: pulumi.Input<string>;
+    realRegion?: pulumi.Input<string | undefined>;
     /**
      * Time interval.
      */
-    timeSpan?: pulumi.Input<number>;
+    timeSpan?: pulumi.Input<number | undefined>;
     /**
      * Time unit, support d, m, y. d: day, m: month, y: year.
      */
-    timeUnit?: pulumi.Input<string>;
+    timeUnit?: pulumi.Input<string | undefined>;
 }

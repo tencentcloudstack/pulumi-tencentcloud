@@ -32,7 +32,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * pts file can be imported using the project_id#file_id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Pts/file:File file project-45vw7v82#file-de2dbaf8
  * ```
@@ -181,51 +180,51 @@ export interface FileState {
     /**
      * File id.
      */
-    fileId?: pulumi.Input<string>;
+    fileId?: pulumi.Input<string | undefined>;
     /**
      * Files in a folder.
      */
-    fileInfos?: pulumi.Input<pulumi.Input<inputs.Pts.FileFileInfo>[]>;
+    fileInfos?: pulumi.Input<pulumi.Input<inputs.Pts.FileFileInfo>[] | undefined>;
     /**
      * The first few lines of data.
      */
-    headLines?: pulumi.Input<pulumi.Input<string>[]>;
+    headLines?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Meter head.
      */
-    headerColumns?: pulumi.Input<pulumi.Input<string>[]>;
+    headerColumns?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Whether the header is in the file.
      */
-    headerInFile?: pulumi.Input<boolean>;
+    headerInFile?: pulumi.Input<boolean | undefined>;
     /**
      * File kind, parameter file-1, protocol file-2, request file-3.
      */
-    kind?: pulumi.Input<number>;
+    kind?: pulumi.Input<number | undefined>;
     /**
      * Line count.
      */
-    lineCount?: pulumi.Input<number>;
+    lineCount?: pulumi.Input<number | undefined>;
     /**
      * File name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Project id.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * File size.
      */
-    size?: pulumi.Input<number>;
+    size?: pulumi.Input<number | undefined>;
     /**
      * The last few lines of data.
      */
-    tailLines?: pulumi.Input<pulumi.Input<string>[]>;
+    tailLines?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * File type, folder-folder.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -239,19 +238,19 @@ export interface FileArgs {
     /**
      * Files in a folder.
      */
-    fileInfos?: pulumi.Input<pulumi.Input<inputs.Pts.FileFileInfo>[]>;
+    fileInfos?: pulumi.Input<pulumi.Input<inputs.Pts.FileFileInfo>[] | undefined>;
     /**
      * The first few lines of data.
      */
-    headLines?: pulumi.Input<pulumi.Input<string>[]>;
+    headLines?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Meter head.
      */
-    headerColumns?: pulumi.Input<pulumi.Input<string>[]>;
+    headerColumns?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Whether the header is in the file.
      */
-    headerInFile?: pulumi.Input<boolean>;
+    headerInFile?: pulumi.Input<boolean | undefined>;
     /**
      * File kind, parameter file-1, protocol file-2, request file-3.
      */
@@ -259,11 +258,11 @@ export interface FileArgs {
     /**
      * Line count.
      */
-    lineCount?: pulumi.Input<number>;
+    lineCount?: pulumi.Input<number | undefined>;
     /**
      * File name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Project id.
      */
@@ -275,7 +274,7 @@ export interface FileArgs {
     /**
      * The last few lines of data.
      */
-    tailLines?: pulumi.Input<pulumi.Input<string>[]>;
+    tailLines?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * File type, folder-folder.
      */

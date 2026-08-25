@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const apiGroup = tencentcloud.Tsf.getApiGroup({
+ * const apiGroup = tencentcloud.tsf.getApiGroup({
  *     searchWord: "xxx01",
  *     groupType: "ms",
  *     authType: "none",
@@ -121,7 +121,7 @@ export interface GetApiGroupResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const apiGroup = tencentcloud.Tsf.getApiGroup({
+ * const apiGroup = tencentcloud.tsf.getApiGroup({
  *     searchWord: "xxx01",
  *     groupType: "ms",
  *     authType: "none",
@@ -154,33 +154,33 @@ export interface GetApiGroupOutputArgs {
     /**
      * Authentication type. secret: Secret key authentication; none: No authentication.
      */
-    authType?: pulumi.Input<string>;
+    authType?: pulumi.Input<string | undefined>;
     /**
      * Gateway Instance Id.
      */
-    gatewayInstanceId?: pulumi.Input<string>;
+    gatewayInstanceId?: pulumi.Input<string | undefined>;
     /**
      * Group type. ms: Microservice group; external: External API group.
      */
-    groupType?: pulumi.Input<string>;
+    groupType?: pulumi.Input<string | undefined>;
     /**
      * Sorting field: createdTime or group_context.
      */
-    orderBy?: pulumi.Input<string>;
+    orderBy?: pulumi.Input<string | undefined>;
     /**
      * Sorting type: 0 (ASC) or 1 (DESC).
      */
-    orderType?: pulumi.Input<number>;
+    orderType?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * search word.
      */
-    searchWord?: pulumi.Input<string>;
+    searchWord?: pulumi.Input<string | undefined>;
     /**
      * Publishing status. drafted: Not published. released: Published.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
 }

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Dlc.getDescribeUserRoles({
+ * const example = tencentcloud.dlc.getDescribeUserRoles({
  *     fuzzy: "1",
  *     sortBy: "modify-time",
  *     sorting: "desc",
@@ -81,7 +81,7 @@ export interface GetDescribeUserRolesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Dlc.getDescribeUserRoles({
+ * const example = tencentcloud.dlc.getDescribeUserRoles({
  *     fuzzy: "1",
  *     sortBy: "modify-time",
  *     sorting: "desc",
@@ -106,17 +106,17 @@ export interface GetDescribeUserRolesOutputArgs {
     /**
      * Fuzzy enumeration by arn.
      */
-    fuzzy?: pulumi.Input<string>;
+    fuzzy?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * The field for sorting the returned results.
      */
-    sortBy?: pulumi.Input<string>;
+    sortBy?: pulumi.Input<string | undefined>;
     /**
      * The sorting order, descending or ascending, such as `desc`.
      */
-    sorting?: pulumi.Input<string>;
+    sorting?: pulumi.Input<string | undefined>;
 }

@@ -69,12 +69,8 @@ type GetListenerRealServersResult struct {
 }
 
 func GetListenerRealServersOutput(ctx *pulumi.Context, args GetListenerRealServersOutputArgs, opts ...pulumi.InvokeOption) GetListenerRealServersResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetListenerRealServersResultOutput, error) {
-			args := v.(GetListenerRealServersArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Gaap/getListenerRealServers:getListenerRealServers", args, GetListenerRealServersResultOutput{}, options).(GetListenerRealServersResultOutput), nil
-		}).(GetListenerRealServersResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Gaap/getListenerRealServers:getListenerRealServers", args, GetListenerRealServersResultOutput{}, options).(GetListenerRealServersResultOutput)
 }
 
 // A collection of arguments for invoking getListenerRealServers.

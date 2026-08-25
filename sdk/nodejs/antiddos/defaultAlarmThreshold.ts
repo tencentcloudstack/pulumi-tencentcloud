@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * antiddos default_alarm_threshold can be imported using the id, e.g.
+ * antiddos defaultAlarmThreshold can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Antiddos/defaultAlarmThreshold:DefaultAlarmThreshold default_alarm_threshold ${instanceType}
@@ -107,11 +107,11 @@ export interface DefaultAlarmThresholdState {
     /**
      * Alarm threshold configuration.
      */
-    defaultAlarmConfig?: pulumi.Input<inputs.Antiddos.DefaultAlarmThresholdDefaultAlarmConfig>;
+    defaultAlarmConfig?: pulumi.Input<inputs.Antiddos.DefaultAlarmThresholdDefaultAlarmConfig | undefined>;
     /**
      * Product type, value [bgp (represents advanced defense package product) bgpip (represents advanced defense IP product)].
      */
-    instanceType?: pulumi.Input<string>;
+    instanceType?: pulumi.Input<string | undefined>;
 }
 
 /**

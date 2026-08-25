@@ -10,7 +10,8 @@ import * as utilities from "../utilities";
  * Provide a resource to create a SnatIp of CLB instance.
  *
  * > **NOTE:** Target CLB instance must enable `snatPro` before creating snat ips.
- * **NOTE:** Dynamic allocate IP doesn't support for now.
+ *
+ * > **NOTE:** Dynamic allocate IP doesn't support for now.
  *
  * ## Example Usage
  *
@@ -18,20 +19,15 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const snatTest = new tencentcloud.clb.Instance("snat_test", {
- *     networkType: "OPEN",
- *     clbName: "tf-clb-snat-test",
- * });
- * const foo = new tencentcloud.clb.SnatIp("foo", {
- *     clbId: snatTest.id,
+ * const example = new tencentcloud.clb.SnatIp("example", {
+ *     clbId: "lb-jnx618r2",
  *     ips: [
  *         {
- *             subnetId: "subnet-12345678",
- *             ip: "172.16.0.1",
+ *             subnetId: "subnet-hhi88a58",
+ *             ip: "10.0.30.10",
  *         },
  *         {
- *             subnetId: "subnet-12345678",
- *             ip: "172.16.0.2",
+ *             subnetId: "subnet-d4umunpy",
  *         },
  *     ],
  * });
@@ -39,10 +35,10 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * ClbSnatIp instance can be imported by clb instance id, e.g.
+ * Clb instance snat ip can be imported by clb instance id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Clb/snatIp:SnatIp test clb_id
+ * $ pulumi import tencentcloud:Clb/snatIp:SnatIp example lb-jnx618r2
  * ```
  */
 export class SnatIp extends pulumi.CustomResource {
@@ -117,11 +113,11 @@ export interface SnatIpState {
     /**
      * CLB instance ID.
      */
-    clbId?: pulumi.Input<string>;
+    clbId?: pulumi.Input<string | undefined>;
     /**
      * Snat IP address config.
      */
-    ips?: pulumi.Input<pulumi.Input<inputs.Clb.SnatIpIp>[]>;
+    ips?: pulumi.Input<pulumi.Input<inputs.Clb.SnatIpIp>[] | undefined>;
 }
 
 /**
@@ -135,5 +131,5 @@ export interface SnatIpArgs {
     /**
      * Snat IP address config.
      */
-    ips?: pulumi.Input<pulumi.Input<inputs.Clb.SnatIpIp>[]>;
+    ips?: pulumi.Input<pulumi.Input<inputs.Clb.SnatIpIp>[] | undefined>;
 }

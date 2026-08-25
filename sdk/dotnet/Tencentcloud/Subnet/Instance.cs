@@ -13,6 +13,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Subnet
     /// <summary>
     /// Provide a resource to create a VPC subnet.
     /// 
+    /// &gt; **NOTE:** In accordance with VPC business requirements, the default value for `IsMulticast` has been updated to `False`(previously `True`) in version `v1.82.93` of the provider. If you wish to utilize this feature, you must first contact the VPC product team to have your account added to the whitelist, and then set the `IsMulticast` field to `True`.
+    /// 
     /// ## Example Usage
     /// 
     /// ## Import
@@ -63,10 +65,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Subnet
         public Output<bool> IsDefault { get; private set; } = null!;
 
         /// <summary>
-        /// Indicates whether multicast is enabled. The default value is 'true'.
+        /// Indicates whether multicast is enabled. The default value is `False`. We recommend disabling these features if they are not applicable to your environment.
         /// </summary>
         [Output("isMulticast")]
-        public Output<bool?> IsMulticast { get; private set; } = null!;
+        public Output<bool> IsMulticast { get; private set; } = null!;
 
         /// <summary>
         /// The name of subnet to be created.
@@ -158,7 +160,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Subnet
         public Input<string> CidrBlock { get; set; } = null!;
 
         /// <summary>
-        /// Indicates whether multicast is enabled. The default value is 'true'.
+        /// Indicates whether multicast is enabled. The default value is `False`. We recommend disabling these features if they are not applicable to your environment.
         /// </summary>
         [Input("isMulticast")]
         public Input<bool>? IsMulticast { get; set; }
@@ -238,7 +240,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Subnet
         public Input<bool>? IsDefault { get; set; }
 
         /// <summary>
-        /// Indicates whether multicast is enabled. The default value is 'true'.
+        /// Indicates whether multicast is enabled. The default value is `False`. We recommend disabling these features if they are not applicable to your environment.
         /// </summary>
         [Input("isMulticast")]
         public Input<bool>? IsMulticast { get; set; }

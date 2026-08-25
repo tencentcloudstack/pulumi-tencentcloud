@@ -62,12 +62,8 @@ type GetInstanceSpecsResult struct {
 }
 
 func GetInstanceSpecsOutput(ctx *pulumi.Context, args GetInstanceSpecsOutputArgs, opts ...pulumi.InvokeOption) GetInstanceSpecsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstanceSpecsResultOutput, error) {
-			args := v.(GetInstanceSpecsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mariadb/getInstanceSpecs:getInstanceSpecs", args, GetInstanceSpecsResultOutput{}, options).(GetInstanceSpecsResultOutput), nil
-		}).(GetInstanceSpecsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mariadb/getInstanceSpecs:getInstanceSpecs", args, GetInstanceSpecsResultOutput{}, options).(GetInstanceSpecsResultOutput)
 }
 
 // A collection of arguments for invoking getInstanceSpecs.

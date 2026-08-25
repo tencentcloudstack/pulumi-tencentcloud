@@ -140,43 +140,43 @@ export interface WatermarkTemplateState {
     /**
      * Template description. Length limit: 256 characters.
      */
-    comment?: pulumi.Input<string>;
+    comment?: pulumi.Input<string | undefined>;
     /**
      * Origin position. Valid values: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text; TopRight: the origin of coordinates is in the top-right corner of the video, and the origin of the watermark is in the top-right corner of the image or text; BottomLeft: the origin of coordinates is in the bottom-left corner of the video, and the origin of the watermark is in the bottom-left corner of the image or text; BottomRight: the origin of coordinates is in the bottom-right corner of the video, and the origin of the watermark is in the bottom-right corner of the image or text.Default value: TopLeft.
      */
-    coordinateOrigin?: pulumi.Input<string>;
+    coordinateOrigin?: pulumi.Input<string | undefined>;
     /**
      * Image watermarking template. This field is required when `Type` is `image` and is invalid when `Type` is `text`.
      */
-    imageTemplate?: pulumi.Input<inputs.Vod.WatermarkTemplateImageTemplate>;
+    imageTemplate?: pulumi.Input<inputs.Vod.WatermarkTemplateImageTemplate | undefined>;
     /**
      * Watermarking template name. Length limit: 64 characters.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
      */
-    subAppId?: pulumi.Input<number>;
+    subAppId?: pulumi.Input<number | undefined>;
     /**
      * SVG watermarking template. This field is required when `Type` is `svg` and is invalid when `Type` is `image` or `text`.
      */
-    svgTemplate?: pulumi.Input<inputs.Vod.WatermarkTemplateSvgTemplate>;
+    svgTemplate?: pulumi.Input<inputs.Vod.WatermarkTemplateSvgTemplate | undefined>;
     /**
      * Text watermarking template. This field is required when `Type` is `text` and is invalid when `Type` is `image`.
      */
-    textTemplate?: pulumi.Input<inputs.Vod.WatermarkTemplateTextTemplate>;
+    textTemplate?: pulumi.Input<inputs.Vod.WatermarkTemplateTextTemplate | undefined>;
     /**
      * Watermarking type. Valid values: image: image watermark; text: text watermark; svg: SVG watermark.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
     /**
      * The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the `XPos` of the watermark will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width; If the string ends in px, the `XPos` of the watermark will be the specified px; for example, `100px` means that `XPos` is 100 px.Default value: 0 px.
      */
-    xPos?: pulumi.Input<string>;
+    xPos?: pulumi.Input<string | undefined>;
     /**
      * The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the `YPos` of the watermark will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height; If the string ends in px, the `YPos` of the watermark will be the specified px; for example, `100px` means that `YPos` is 100 px.Default value: 0 px.
      */
-    yPos?: pulumi.Input<string>;
+    yPos?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -186,19 +186,19 @@ export interface WatermarkTemplateArgs {
     /**
      * Template description. Length limit: 256 characters.
      */
-    comment?: pulumi.Input<string>;
+    comment?: pulumi.Input<string | undefined>;
     /**
      * Origin position. Valid values: TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text; TopRight: the origin of coordinates is in the top-right corner of the video, and the origin of the watermark is in the top-right corner of the image or text; BottomLeft: the origin of coordinates is in the bottom-left corner of the video, and the origin of the watermark is in the bottom-left corner of the image or text; BottomRight: the origin of coordinates is in the bottom-right corner of the video, and the origin of the watermark is in the bottom-right corner of the image or text.Default value: TopLeft.
      */
-    coordinateOrigin?: pulumi.Input<string>;
+    coordinateOrigin?: pulumi.Input<string | undefined>;
     /**
      * Image watermarking template. This field is required when `Type` is `image` and is invalid when `Type` is `text`.
      */
-    imageTemplate?: pulumi.Input<inputs.Vod.WatermarkTemplateImageTemplate>;
+    imageTemplate?: pulumi.Input<inputs.Vod.WatermarkTemplateImageTemplate | undefined>;
     /**
      * Watermarking template name. Length limit: 64 characters.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
      */
@@ -206,11 +206,11 @@ export interface WatermarkTemplateArgs {
     /**
      * SVG watermarking template. This field is required when `Type` is `svg` and is invalid when `Type` is `image` or `text`.
      */
-    svgTemplate?: pulumi.Input<inputs.Vod.WatermarkTemplateSvgTemplate>;
+    svgTemplate?: pulumi.Input<inputs.Vod.WatermarkTemplateSvgTemplate | undefined>;
     /**
      * Text watermarking template. This field is required when `Type` is `text` and is invalid when `Type` is `image`.
      */
-    textTemplate?: pulumi.Input<inputs.Vod.WatermarkTemplateTextTemplate>;
+    textTemplate?: pulumi.Input<inputs.Vod.WatermarkTemplateTextTemplate | undefined>;
     /**
      * Watermarking type. Valid values: image: image watermark; text: text watermark; svg: SVG watermark.
      */
@@ -218,9 +218,9 @@ export interface WatermarkTemplateArgs {
     /**
      * The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the `XPos` of the watermark will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width; If the string ends in px, the `XPos` of the watermark will be the specified px; for example, `100px` means that `XPos` is 100 px.Default value: 0 px.
      */
-    xPos?: pulumi.Input<string>;
+    xPos?: pulumi.Input<string | undefined>;
     /**
      * The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported: If the string ends in %, the `YPos` of the watermark will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height; If the string ends in px, the `YPos` of the watermark will be the specified px; for example, `100px` means that `YPos` is 100 px.Default value: 0 px.
      */
-    yPos?: pulumi.Input<string>;
+    yPos?: pulumi.Input<string | undefined>;
 }

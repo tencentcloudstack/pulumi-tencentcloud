@@ -72,7 +72,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
     /// ## Import
     /// 
     /// SSM secret version can be imported using the secretName#versionId, e.g.
-    /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Ssm/secretVersion:SecretVersion v1 test#v1
     /// ```
@@ -81,25 +80,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
     public partial class SecretVersion : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// The base64-encoded binary secret. SecretBinary and SecretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
+        /// Binary credential information, encoded using Base64. You must set exactly one of SecretBinary or SecretString.
         /// </summary>
         [Output("secretBinary")]
         public Output<string?> SecretBinary { get; private set; } = null!;
 
         /// <summary>
-        /// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+        /// Specifies the name of the credential to which the new version is to be added.
         /// </summary>
         [Output("secretName")]
         public Output<string> SecretName { get; private set; } = null!;
 
         /// <summary>
-        /// The string text of secret. SecretBinary and SecretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
+        /// Text-based credential information in plaintext (Base64 encoding is not required). You must set exactly one of SecretBinary or SecretString.
         /// </summary>
         [Output("secretString")]
         public Output<string?> SecretString { get; private set; } = null!;
 
         /// <summary>
-        /// Version of secret. The maximum length is 64 bytes. The VersionId can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+        /// Specifies the version ID for the newly added version. It can be up to 64 bytes in length and must consist of a combination of letters, numbers, and the characters `-`, `_`, or `.`, starting with a letter or a number.
         /// </summary>
         [Output("versionId")]
         public Output<string> VersionId { get; private set; } = null!;
@@ -152,25 +151,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
     public sealed class SecretVersionArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The base64-encoded binary secret. SecretBinary and SecretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
+        /// Binary credential information, encoded using Base64. You must set exactly one of SecretBinary or SecretString.
         /// </summary>
         [Input("secretBinary")]
         public Input<string>? SecretBinary { get; set; }
 
         /// <summary>
-        /// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+        /// Specifies the name of the credential to which the new version is to be added.
         /// </summary>
         [Input("secretName", required: true)]
         public Input<string> SecretName { get; set; } = null!;
 
         /// <summary>
-        /// The string text of secret. SecretBinary and SecretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
+        /// Text-based credential information in plaintext (Base64 encoding is not required). You must set exactly one of SecretBinary or SecretString.
         /// </summary>
         [Input("secretString")]
         public Input<string>? SecretString { get; set; }
 
         /// <summary>
-        /// Version of secret. The maximum length is 64 bytes. The VersionId can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+        /// Specifies the version ID for the newly added version. It can be up to 64 bytes in length and must consist of a combination of letters, numbers, and the characters `-`, `_`, or `.`, starting with a letter or a number.
         /// </summary>
         [Input("versionId", required: true)]
         public Input<string> VersionId { get; set; } = null!;
@@ -184,25 +183,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
     public sealed class SecretVersionState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The base64-encoded binary secret. SecretBinary and SecretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
+        /// Binary credential information, encoded using Base64. You must set exactly one of SecretBinary or SecretString.
         /// </summary>
         [Input("secretBinary")]
         public Input<string>? SecretBinary { get; set; }
 
         /// <summary>
-        /// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+        /// Specifies the name of the credential to which the new version is to be added.
         /// </summary>
         [Input("secretName")]
         public Input<string>? SecretName { get; set; }
 
         /// <summary>
-        /// The string text of secret. SecretBinary and SecretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
+        /// Text-based credential information in plaintext (Base64 encoding is not required). You must set exactly one of SecretBinary or SecretString.
         /// </summary>
         [Input("secretString")]
         public Input<string>? SecretString { get; set; }
 
         /// <summary>
-        /// Version of secret. The maximum length is 64 bytes. The VersionId can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+        /// Specifies the version ID for the newly added version. It can be up to 64 bytes in length and must consist of a combination of letters, numbers, and the characters `-`, `_`, or `.`, starting with a letter or a number.
         /// </summary>
         [Input("versionId")]
         public Input<string>? VersionId { get; set; }

@@ -71,12 +71,8 @@ type GetUpstreamTasksResult struct {
 }
 
 func GetUpstreamTasksOutput(ctx *pulumi.Context, args GetUpstreamTasksOutputArgs, opts ...pulumi.InvokeOption) GetUpstreamTasksResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetUpstreamTasksResultOutput, error) {
-			args := v.(GetUpstreamTasksArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Wedata/getUpstreamTasks:getUpstreamTasks", args, GetUpstreamTasksResultOutput{}, options).(GetUpstreamTasksResultOutput), nil
-		}).(GetUpstreamTasksResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Wedata/getUpstreamTasks:getUpstreamTasks", args, GetUpstreamTasksResultOutput{}, options).(GetUpstreamTasksResultOutput)
 }
 
 // A collection of arguments for invoking getUpstreamTasks.

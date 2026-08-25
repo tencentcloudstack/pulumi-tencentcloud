@@ -75,12 +75,8 @@ type GetBackupSummariesResult struct {
 }
 
 func GetBackupSummariesOutput(ctx *pulumi.Context, args GetBackupSummariesOutputArgs, opts ...pulumi.InvokeOption) GetBackupSummariesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetBackupSummariesResultOutput, error) {
-			args := v.(GetBackupSummariesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mysql/getBackupSummaries:getBackupSummaries", args, GetBackupSummariesResultOutput{}, options).(GetBackupSummariesResultOutput), nil
-		}).(GetBackupSummariesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mysql/getBackupSummaries:getBackupSummaries", args, GetBackupSummariesResultOutput{}, options).(GetBackupSummariesResultOutput)
 }
 
 // A collection of arguments for invoking getBackupSummaries.

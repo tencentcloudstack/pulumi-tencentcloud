@@ -13,6 +13,247 @@ import (
 
 var _ = internal.GetEnvOrDefault
 
+type OriginStreamInfoCustomizationRule struct {
+	// Cache duration in s, range: 0~31536000.
+	Cache *int `pulumi:"cache"`
+	// Status code cache list.
+	CacheStatusCodes []string `pulumi:"cacheStatusCodes"`
+	// Custom cache follow origin. `0`: disabled. `1`: enabled.
+	CustomizationCacheFollowOrigin *int `pulumi:"customizationCacheFollowOrigin"`
+	// Custom headers list.
+	HttpHeaders []string `pulumi:"httpHeaders"`
+	// Cache HTTP header key list.
+	KeepHttpHeaders []string `pulumi:"keepHttpHeaders"`
+	// Cache key list.
+	KeepParams []string `pulumi:"keepParams"`
+	// Match rule. Valid values: `.m3u8`, `.mpd`, `.ts`, `.mp4`, `.m4s`, `.m4a`, `.m4i`, `.m4v`, `.m4f`, `.aac`, `.webm`.
+	MatchRule string `pulumi:"matchRule"`
+	// OPTIONS support. Valid values: `on`, `off`.
+	OptionsRequest *string `pulumi:"optionsRequest"`
+	// Origin address type. `1`: IP. `2`: domain name.
+	OriginAddressType int `pulumi:"originAddressType"`
+	// Origin address list.
+	OriginAddresses []string `pulumi:"originAddresses"`
+	// Origin host.
+	OriginHost *string `pulumi:"originHost"`
+	// Retry count, range: 1~10.
+	OriginRetryTimes *int `pulumi:"originRetryTimes"`
+	// Back-to-origin timeout in ms, range: 1~60000, default: 10000.
+	OriginTimeout *int `pulumi:"originTimeout"`
+	// Whether to pass through HTTP headers. Valid values: `on`, `off`.
+	PassThroughHttpHeader *string `pulumi:"passThroughHttpHeader"`
+	// Whether to pass through parameters. Valid values: `on`, `off`.
+	PassThroughParam *string `pulumi:"passThroughParam"`
+	// Whether to pass through response. Valid values: `on`, `off`.
+	PassThroughResponse *string `pulumi:"passThroughResponse"`
+	// URL rewrite rules.
+	UrlReplaceRules []string `pulumi:"urlReplaceRules"`
+}
+
+// OriginStreamInfoCustomizationRuleInput is an input type that accepts OriginStreamInfoCustomizationRuleArgs and OriginStreamInfoCustomizationRuleOutput values.
+// You can construct a concrete instance of `OriginStreamInfoCustomizationRuleInput` via:
+//
+//	OriginStreamInfoCustomizationRuleArgs{...}
+type OriginStreamInfoCustomizationRuleInput interface {
+	pulumi.Input
+
+	ToOriginStreamInfoCustomizationRuleOutput() OriginStreamInfoCustomizationRuleOutput
+	ToOriginStreamInfoCustomizationRuleOutputWithContext(context.Context) OriginStreamInfoCustomizationRuleOutput
+}
+
+type OriginStreamInfoCustomizationRuleArgs struct {
+	// Cache duration in s, range: 0~31536000.
+	Cache pulumi.IntPtrInput `pulumi:"cache"`
+	// Status code cache list.
+	CacheStatusCodes pulumi.StringArrayInput `pulumi:"cacheStatusCodes"`
+	// Custom cache follow origin. `0`: disabled. `1`: enabled.
+	CustomizationCacheFollowOrigin pulumi.IntPtrInput `pulumi:"customizationCacheFollowOrigin"`
+	// Custom headers list.
+	HttpHeaders pulumi.StringArrayInput `pulumi:"httpHeaders"`
+	// Cache HTTP header key list.
+	KeepHttpHeaders pulumi.StringArrayInput `pulumi:"keepHttpHeaders"`
+	// Cache key list.
+	KeepParams pulumi.StringArrayInput `pulumi:"keepParams"`
+	// Match rule. Valid values: `.m3u8`, `.mpd`, `.ts`, `.mp4`, `.m4s`, `.m4a`, `.m4i`, `.m4v`, `.m4f`, `.aac`, `.webm`.
+	MatchRule pulumi.StringInput `pulumi:"matchRule"`
+	// OPTIONS support. Valid values: `on`, `off`.
+	OptionsRequest pulumi.StringPtrInput `pulumi:"optionsRequest"`
+	// Origin address type. `1`: IP. `2`: domain name.
+	OriginAddressType pulumi.IntInput `pulumi:"originAddressType"`
+	// Origin address list.
+	OriginAddresses pulumi.StringArrayInput `pulumi:"originAddresses"`
+	// Origin host.
+	OriginHost pulumi.StringPtrInput `pulumi:"originHost"`
+	// Retry count, range: 1~10.
+	OriginRetryTimes pulumi.IntPtrInput `pulumi:"originRetryTimes"`
+	// Back-to-origin timeout in ms, range: 1~60000, default: 10000.
+	OriginTimeout pulumi.IntPtrInput `pulumi:"originTimeout"`
+	// Whether to pass through HTTP headers. Valid values: `on`, `off`.
+	PassThroughHttpHeader pulumi.StringPtrInput `pulumi:"passThroughHttpHeader"`
+	// Whether to pass through parameters. Valid values: `on`, `off`.
+	PassThroughParam pulumi.StringPtrInput `pulumi:"passThroughParam"`
+	// Whether to pass through response. Valid values: `on`, `off`.
+	PassThroughResponse pulumi.StringPtrInput `pulumi:"passThroughResponse"`
+	// URL rewrite rules.
+	UrlReplaceRules pulumi.StringArrayInput `pulumi:"urlReplaceRules"`
+}
+
+func (OriginStreamInfoCustomizationRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*OriginStreamInfoCustomizationRule)(nil)).Elem()
+}
+
+func (i OriginStreamInfoCustomizationRuleArgs) ToOriginStreamInfoCustomizationRuleOutput() OriginStreamInfoCustomizationRuleOutput {
+	return i.ToOriginStreamInfoCustomizationRuleOutputWithContext(context.Background())
+}
+
+func (i OriginStreamInfoCustomizationRuleArgs) ToOriginStreamInfoCustomizationRuleOutputWithContext(ctx context.Context) OriginStreamInfoCustomizationRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(OriginStreamInfoCustomizationRuleOutput)
+}
+
+// OriginStreamInfoCustomizationRuleArrayInput is an input type that accepts OriginStreamInfoCustomizationRuleArray and OriginStreamInfoCustomizationRuleArrayOutput values.
+// You can construct a concrete instance of `OriginStreamInfoCustomizationRuleArrayInput` via:
+//
+//	OriginStreamInfoCustomizationRuleArray{ OriginStreamInfoCustomizationRuleArgs{...} }
+type OriginStreamInfoCustomizationRuleArrayInput interface {
+	pulumi.Input
+
+	ToOriginStreamInfoCustomizationRuleArrayOutput() OriginStreamInfoCustomizationRuleArrayOutput
+	ToOriginStreamInfoCustomizationRuleArrayOutputWithContext(context.Context) OriginStreamInfoCustomizationRuleArrayOutput
+}
+
+type OriginStreamInfoCustomizationRuleArray []OriginStreamInfoCustomizationRuleInput
+
+func (OriginStreamInfoCustomizationRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]OriginStreamInfoCustomizationRule)(nil)).Elem()
+}
+
+func (i OriginStreamInfoCustomizationRuleArray) ToOriginStreamInfoCustomizationRuleArrayOutput() OriginStreamInfoCustomizationRuleArrayOutput {
+	return i.ToOriginStreamInfoCustomizationRuleArrayOutputWithContext(context.Background())
+}
+
+func (i OriginStreamInfoCustomizationRuleArray) ToOriginStreamInfoCustomizationRuleArrayOutputWithContext(ctx context.Context) OriginStreamInfoCustomizationRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(OriginStreamInfoCustomizationRuleArrayOutput)
+}
+
+type OriginStreamInfoCustomizationRuleOutput struct{ *pulumi.OutputState }
+
+func (OriginStreamInfoCustomizationRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*OriginStreamInfoCustomizationRule)(nil)).Elem()
+}
+
+func (o OriginStreamInfoCustomizationRuleOutput) ToOriginStreamInfoCustomizationRuleOutput() OriginStreamInfoCustomizationRuleOutput {
+	return o
+}
+
+func (o OriginStreamInfoCustomizationRuleOutput) ToOriginStreamInfoCustomizationRuleOutputWithContext(ctx context.Context) OriginStreamInfoCustomizationRuleOutput {
+	return o
+}
+
+// Cache duration in s, range: 0~31536000.
+func (o OriginStreamInfoCustomizationRuleOutput) Cache() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v OriginStreamInfoCustomizationRule) *int { return v.Cache }).(pulumi.IntPtrOutput)
+}
+
+// Status code cache list.
+func (o OriginStreamInfoCustomizationRuleOutput) CacheStatusCodes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v OriginStreamInfoCustomizationRule) []string { return v.CacheStatusCodes }).(pulumi.StringArrayOutput)
+}
+
+// Custom cache follow origin. `0`: disabled. `1`: enabled.
+func (o OriginStreamInfoCustomizationRuleOutput) CustomizationCacheFollowOrigin() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v OriginStreamInfoCustomizationRule) *int { return v.CustomizationCacheFollowOrigin }).(pulumi.IntPtrOutput)
+}
+
+// Custom headers list.
+func (o OriginStreamInfoCustomizationRuleOutput) HttpHeaders() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v OriginStreamInfoCustomizationRule) []string { return v.HttpHeaders }).(pulumi.StringArrayOutput)
+}
+
+// Cache HTTP header key list.
+func (o OriginStreamInfoCustomizationRuleOutput) KeepHttpHeaders() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v OriginStreamInfoCustomizationRule) []string { return v.KeepHttpHeaders }).(pulumi.StringArrayOutput)
+}
+
+// Cache key list.
+func (o OriginStreamInfoCustomizationRuleOutput) KeepParams() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v OriginStreamInfoCustomizationRule) []string { return v.KeepParams }).(pulumi.StringArrayOutput)
+}
+
+// Match rule. Valid values: `.m3u8`, `.mpd`, `.ts`, `.mp4`, `.m4s`, `.m4a`, `.m4i`, `.m4v`, `.m4f`, `.aac`, `.webm`.
+func (o OriginStreamInfoCustomizationRuleOutput) MatchRule() pulumi.StringOutput {
+	return o.ApplyT(func(v OriginStreamInfoCustomizationRule) string { return v.MatchRule }).(pulumi.StringOutput)
+}
+
+// OPTIONS support. Valid values: `on`, `off`.
+func (o OriginStreamInfoCustomizationRuleOutput) OptionsRequest() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v OriginStreamInfoCustomizationRule) *string { return v.OptionsRequest }).(pulumi.StringPtrOutput)
+}
+
+// Origin address type. `1`: IP. `2`: domain name.
+func (o OriginStreamInfoCustomizationRuleOutput) OriginAddressType() pulumi.IntOutput {
+	return o.ApplyT(func(v OriginStreamInfoCustomizationRule) int { return v.OriginAddressType }).(pulumi.IntOutput)
+}
+
+// Origin address list.
+func (o OriginStreamInfoCustomizationRuleOutput) OriginAddresses() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v OriginStreamInfoCustomizationRule) []string { return v.OriginAddresses }).(pulumi.StringArrayOutput)
+}
+
+// Origin host.
+func (o OriginStreamInfoCustomizationRuleOutput) OriginHost() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v OriginStreamInfoCustomizationRule) *string { return v.OriginHost }).(pulumi.StringPtrOutput)
+}
+
+// Retry count, range: 1~10.
+func (o OriginStreamInfoCustomizationRuleOutput) OriginRetryTimes() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v OriginStreamInfoCustomizationRule) *int { return v.OriginRetryTimes }).(pulumi.IntPtrOutput)
+}
+
+// Back-to-origin timeout in ms, range: 1~60000, default: 10000.
+func (o OriginStreamInfoCustomizationRuleOutput) OriginTimeout() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v OriginStreamInfoCustomizationRule) *int { return v.OriginTimeout }).(pulumi.IntPtrOutput)
+}
+
+// Whether to pass through HTTP headers. Valid values: `on`, `off`.
+func (o OriginStreamInfoCustomizationRuleOutput) PassThroughHttpHeader() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v OriginStreamInfoCustomizationRule) *string { return v.PassThroughHttpHeader }).(pulumi.StringPtrOutput)
+}
+
+// Whether to pass through parameters. Valid values: `on`, `off`.
+func (o OriginStreamInfoCustomizationRuleOutput) PassThroughParam() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v OriginStreamInfoCustomizationRule) *string { return v.PassThroughParam }).(pulumi.StringPtrOutput)
+}
+
+// Whether to pass through response. Valid values: `on`, `off`.
+func (o OriginStreamInfoCustomizationRuleOutput) PassThroughResponse() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v OriginStreamInfoCustomizationRule) *string { return v.PassThroughResponse }).(pulumi.StringPtrOutput)
+}
+
+// URL rewrite rules.
+func (o OriginStreamInfoCustomizationRuleOutput) UrlReplaceRules() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v OriginStreamInfoCustomizationRule) []string { return v.UrlReplaceRules }).(pulumi.StringArrayOutput)
+}
+
+type OriginStreamInfoCustomizationRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (OriginStreamInfoCustomizationRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]OriginStreamInfoCustomizationRule)(nil)).Elem()
+}
+
+func (o OriginStreamInfoCustomizationRuleArrayOutput) ToOriginStreamInfoCustomizationRuleArrayOutput() OriginStreamInfoCustomizationRuleArrayOutput {
+	return o
+}
+
+func (o OriginStreamInfoCustomizationRuleArrayOutput) ToOriginStreamInfoCustomizationRuleArrayOutputWithContext(ctx context.Context) OriginStreamInfoCustomizationRuleArrayOutput {
+	return o
+}
+
+func (o OriginStreamInfoCustomizationRuleArrayOutput) Index(i pulumi.IntInput) OriginStreamInfoCustomizationRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) OriginStreamInfoCustomizationRule {
+		return vs[0].([]OriginStreamInfoCustomizationRule)[vs[1].(int)]
+	}).(OriginStreamInfoCustomizationRuleOutput)
+}
+
 type PlayDomainCertAttachmentDomainInfo struct {
 	// domain name.
 	DomainName string `pulumi:"domainName"`
@@ -4842,6 +5083,8 @@ func (o GetXp2pDetailInfoListDataInfoListArrayOutput) Index(i pulumi.IntInput) G
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*OriginStreamInfoCustomizationRuleInput)(nil)).Elem(), OriginStreamInfoCustomizationRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*OriginStreamInfoCustomizationRuleArrayInput)(nil)).Elem(), OriginStreamInfoCustomizationRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PlayDomainCertAttachmentDomainInfoInput)(nil)).Elem(), PlayDomainCertAttachmentDomainInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PlayDomainCertAttachmentDomainInfoPtrInput)(nil)).Elem(), PlayDomainCertAttachmentDomainInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PullStreamTaskWatermarkListInput)(nil)).Elem(), PullStreamTaskWatermarkListArgs{})
@@ -4898,6 +5141,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetWatermarksWatermarkListArrayInput)(nil)).Elem(), GetWatermarksWatermarkListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetXp2pDetailInfoListDataInfoListInput)(nil)).Elem(), GetXp2pDetailInfoListDataInfoListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetXp2pDetailInfoListDataInfoListArrayInput)(nil)).Elem(), GetXp2pDetailInfoListDataInfoListArray{})
+	pulumi.RegisterOutputType(OriginStreamInfoCustomizationRuleOutput{})
+	pulumi.RegisterOutputType(OriginStreamInfoCustomizationRuleArrayOutput{})
 	pulumi.RegisterOutputType(PlayDomainCertAttachmentDomainInfoOutput{})
 	pulumi.RegisterOutputType(PlayDomainCertAttachmentDomainInfoPtrOutput{})
 	pulumi.RegisterOutputType(PullStreamTaskWatermarkListOutput{})

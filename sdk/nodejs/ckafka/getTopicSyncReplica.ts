@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const topicSyncReplica = tencentcloud.Ckafka.getTopicSyncReplica({
+ * const topicSyncReplica = tencentcloud.ckafka.getTopicSyncReplica({
  *     instanceId: "ckafka-xxxxxx",
  *     topicName: "xxxxxx",
  * });
@@ -79,7 +79,7 @@ export interface GetTopicSyncReplicaResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const topicSyncReplica = tencentcloud.Ckafka.getTopicSyncReplica({
+ * const topicSyncReplica = tencentcloud.ckafka.getTopicSyncReplica({
  *     instanceId: "ckafka-xxxxxx",
  *     topicName: "xxxxxx",
  * });
@@ -106,11 +106,11 @@ export interface GetTopicSyncReplicaOutputArgs {
     /**
      * Filter only unsynced replicas.
      */
-    outOfSyncReplicaOnly?: pulumi.Input<boolean>;
+    outOfSyncReplicaOnly?: pulumi.Input<boolean | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * TopicName.
      */

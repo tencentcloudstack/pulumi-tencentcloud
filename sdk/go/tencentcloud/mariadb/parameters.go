@@ -28,8 +28,8 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := mariadb.NewParameters(ctx, "parameters", &mariadb.ParametersArgs{
-//				InstanceId: pulumi.String("tdsql-4pzs5b67"),
+//			_, err := mariadb.NewParameters(ctx, "example", &mariadb.ParametersArgs{
+//				InstanceId: pulumi.String("tdsql-5n00ev40zl"),
 //				Params: mariadb.ParametersParamArray{
 //					&mariadb.ParametersParamArgs{
 //						Param: pulumi.String("auto_increment_increment"),
@@ -42,6 +42,14 @@ import (
 //					&mariadb.ParametersParamArgs{
 //						Param: pulumi.String("autocommit"),
 //						Value: pulumi.String("ON"),
+//					},
+//					&mariadb.ParametersParamArgs{
+//						Param: pulumi.String("binlog_transaction_dependency_history_size"),
+//						Value: pulumi.String("25000"),
+//					},
+//					&mariadb.ParametersParamArgs{
+//						Param: pulumi.String("binlog_write_threshold"),
+//						Value: pulumi.String("1610612736"),
 //					},
 //					&mariadb.ParametersParamArgs{
 //						Param: pulumi.String("character_set_server"),
@@ -65,7 +73,7 @@ import (
 //					},
 //					&mariadb.ParametersParamArgs{
 //						Param: pulumi.String("default_collation_for_utf8mb4"),
-//						Value: pulumi.String("utf8mb4_general_ci"),
+//						Value: pulumi.String("utf8mb4_0900_ai_ci"),
 //					},
 //					&mariadb.ParametersParamArgs{
 //						Param: pulumi.String("default_week_format"),
@@ -96,12 +104,32 @@ import (
 //						Value: pulumi.String("ON"),
 //					},
 //					&mariadb.ParametersParamArgs{
+//						Param: pulumi.String("explicit_defaults_for_timestamp"),
+//						Value: pulumi.String("ON"),
+//					},
+//					&mariadb.ParametersParamArgs{
 //						Param: pulumi.String("group_concat_max_len"),
 //						Value: pulumi.String("1024"),
 //					},
 //					&mariadb.ParametersParamArgs{
+//						Param: pulumi.String("innodb_autoinc_lock_mode"),
+//						Value: pulumi.String("2"),
+//					},
+//					&mariadb.ParametersParamArgs{
+//						Param: pulumi.String("innodb_backquery_enable"),
+//						Value: pulumi.String("OFF"),
+//					},
+//					&mariadb.ParametersParamArgs{
+//						Param: pulumi.String("innodb_backquery_window"),
+//						Value: pulumi.String("86400"),
+//					},
+//					&mariadb.ParametersParamArgs{
 //						Param: pulumi.String("innodb_concurrency_tickets"),
 //						Value: pulumi.String("5000"),
+//					},
+//					&mariadb.ParametersParamArgs{
+//						Param: pulumi.String("innodb_encryption_algorithm"),
+//						Value: pulumi.String("AES"),
 //					},
 //					&mariadb.ParametersParamArgs{
 //						Param: pulumi.String("innodb_flush_log_at_trx_commit"),
@@ -114,6 +142,10 @@ import (
 //					&mariadb.ParametersParamArgs{
 //						Param: pulumi.String("innodb_max_dirty_pages_pct"),
 //						Value: pulumi.String("70.000000"),
+//					},
+//					&mariadb.ParametersParamArgs{
+//						Param: pulumi.String("innodb_max_undo_log_size"),
+//						Value: pulumi.String("1073741824"),
 //					},
 //					&mariadb.ParametersParamArgs{
 //						Param: pulumi.String("innodb_old_blocks_pct"),
@@ -141,7 +173,7 @@ import (
 //					},
 //					&mariadb.ParametersParamArgs{
 //						Param: pulumi.String("innodb_strict_mode"),
-//						Value: pulumi.String("OFF"),
+//						Value: pulumi.String("ON"),
 //					},
 //					&mariadb.ParametersParamArgs{
 //						Param: pulumi.String("innodb_table_locks"),
@@ -154,6 +186,10 @@ import (
 //					&mariadb.ParametersParamArgs{
 //						Param: pulumi.String("interactive_timeout"),
 //						Value: pulumi.String("28800"),
+//					},
+//					&mariadb.ParametersParamArgs{
+//						Param: pulumi.String("join_buffer_size"),
+//						Value: pulumi.String("2097152"),
 //					},
 //					&mariadb.ParametersParamArgs{
 //						Param: pulumi.String("key_cache_age_threshold"),
@@ -186,6 +222,10 @@ import (
 //					&mariadb.ParametersParamArgs{
 //						Param: pulumi.String("low_priority_updates"),
 //						Value: pulumi.String("OFF"),
+//					},
+//					&mariadb.ParametersParamArgs{
+//						Param: pulumi.String("lower_case_table_names"),
+//						Value: pulumi.String("1"),
 //					},
 //					&mariadb.ParametersParamArgs{
 //						Param: pulumi.String("max_allowed_packet"),
@@ -232,12 +272,24 @@ import (
 //						Value: pulumi.String("300"),
 //					},
 //					&mariadb.ParametersParamArgs{
+//						Param: pulumi.String("optimizer_switch"),
+//						Value: pulumi.String("batched_key_access=off,block_nested_loop=on,condition_fanout_filter=on,csi_prefer_first_match_semi_join=on,csi_prefer_hash_group_by=on,csi_prefer_no_ref_access=on,csi_route_prefer=on,derived_condition_pushdown=on,derived_merge=on,duplicateweedout=on,engine_condition_pushdown=on,firstmatch=on,group_by_no_tmptable_for_csi=on,hash_join=on,hypergraph_optimizer=off,index_condition_pushdown=on,index_merge=on,index_merge_intersection=on,index_merge_sort_union=on,index_merge_union=on,loosescan=on,materialization=on,mrr=on,mrr_cost_based=on,prefer_ordering_index=on,semijoin=on,skip_scan=on,sort_merge_join=off,subquery_materialization_cost_based=on,subquery_to_derived=off,use_index_extensions=on,use_invisible_indexes=off,winmagic=off"),
+//					},
+//					&mariadb.ParametersParamArgs{
+//						Param: pulumi.String("performance_schema"),
+//						Value: pulumi.String("ON"),
+//					},
+//					&mariadb.ParametersParamArgs{
 //						Param: pulumi.String("query_alloc_block_size"),
 //						Value: pulumi.String("16384"),
 //					},
 //					&mariadb.ParametersParamArgs{
 //						Param: pulumi.String("query_prealloc_size"),
 //						Value: pulumi.String("24576"),
+//					},
+//					&mariadb.ParametersParamArgs{
+//						Param: pulumi.String("reject_table_no_pk"),
+//						Value: pulumi.String("1"),
 //					},
 //					&mariadb.ParametersParamArgs{
 //						Param: pulumi.String("slow_launch_time"),
@@ -276,6 +328,14 @@ import (
 //						Value: pulumi.String("20480"),
 //					},
 //					&mariadb.ParametersParamArgs{
+//						Param: pulumi.String("thread_pool_oversubscribe"),
+//						Value: pulumi.String("30"),
+//					},
+//					&mariadb.ParametersParamArgs{
+//						Param: pulumi.String("thread_pool_size"),
+//						Value: pulumi.String("24"),
+//					},
+//					&mariadb.ParametersParamArgs{
 //						Param: pulumi.String("time_zone"),
 //						Value: pulumi.String("+08:00"),
 //					},
@@ -305,9 +365,8 @@ import (
 // ## Import
 //
 // mariadb parameters can be imported using the id, e.g.
-//
 // ```sh
-// $ pulumi import tencentcloud:Mariadb/parameters:Parameters parameters tdsql-4pzs5b67
+// $ pulumi import tencentcloud:Mariadb/parameters:Parameters example tdsql-4pzs5b67
 // ```
 type Parameters struct {
 	pulumi.CustomResourceState

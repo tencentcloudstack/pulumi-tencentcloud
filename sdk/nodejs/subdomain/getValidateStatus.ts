@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const subdomainValidateStatus = tencentcloud.Subdomain.getValidateStatus({
+ * const subdomainValidateStatus = tencentcloud.subdomain.getValidateStatus({
  *     domainZone: "www.iac-tf.cloud",
  * });
  * ```
@@ -64,7 +64,7 @@ export interface GetValidateStatusResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const subdomainValidateStatus = tencentcloud.Subdomain.getValidateStatus({
+ * const subdomainValidateStatus = tencentcloud.subdomain.getValidateStatus({
  *     domainZone: "www.iac-tf.cloud",
  * });
  * ```
@@ -88,5 +88,5 @@ export interface GetValidateStatusOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const redislab = tencentcloud.Redis.getZoneConfig({
+ * const redislab = tencentcloud.redis.getZoneConfig({
  *     region: "ap-hongkong",
  *     resultOutputFile: "/temp/mytestpath",
  * });
@@ -77,7 +77,7 @@ export interface GetZoneConfigResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const redislab = tencentcloud.Redis.getZoneConfig({
+ * const redislab = tencentcloud.redis.getZoneConfig({
  *     region: "ap-hongkong",
  *     resultOutputFile: "/temp/mytestpath",
  * });
@@ -100,13 +100,13 @@ export interface GetZoneConfigOutputArgs {
     /**
      * Name of a region. If this value is not set, the current region getting from provider's configuration will be used.
      */
-    region?: pulumi.Input<string>;
+    region?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Instance type ID.
      */
-    typeId?: pulumi.Input<number>;
+    typeId?: pulumi.Input<number | undefined>;
 }

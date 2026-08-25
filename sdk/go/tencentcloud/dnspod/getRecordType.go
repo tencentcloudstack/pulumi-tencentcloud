@@ -67,12 +67,8 @@ type GetRecordTypeResult struct {
 }
 
 func GetRecordTypeOutput(ctx *pulumi.Context, args GetRecordTypeOutputArgs, opts ...pulumi.InvokeOption) GetRecordTypeResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetRecordTypeResultOutput, error) {
-			args := v.(GetRecordTypeArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dnspod/getRecordType:getRecordType", args, GetRecordTypeResultOutput{}, options).(GetRecordTypeResultOutput), nil
-		}).(GetRecordTypeResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dnspod/getRecordType:getRecordType", args, GetRecordTypeResultOutput{}, options).(GetRecordTypeResultOutput)
 }
 
 // A collection of arguments for invoking getRecordType.

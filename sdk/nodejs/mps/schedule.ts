@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const object = tencentcloud.Cos.getBucketObject({
+ * const object = tencentcloud.cos.getBucketObject({
  *     bucket: `keep-bucket-${appId}`,
  *     key: "/mps-test/test.mov",
  * });
@@ -266,31 +266,31 @@ export interface ScheduleState {
     /**
      * The subtasks of the scheme.
      */
-    activities?: pulumi.Input<pulumi.Input<inputs.Mps.ScheduleActivity>[]>;
+    activities?: pulumi.Input<pulumi.Input<inputs.Mps.ScheduleActivity>[] | undefined>;
     /**
      * The directory to save the media processing output file, which must start and end with `/`, such as `/movie/201907/`.If you do not specify this, the file will be saved to the trigger directory.
      */
-    outputDir?: pulumi.Input<string>;
+    outputDir?: pulumi.Input<string | undefined>;
     /**
      * The bucket to save the output file. If you do not specify this parameter, the bucket in `Trigger` will be used.
      */
-    outputStorage?: pulumi.Input<inputs.Mps.ScheduleOutputStorage>;
+    outputStorage?: pulumi.Input<inputs.Mps.ScheduleOutputStorage | undefined>;
     /**
      * Resource ID, you need to ensure that the corresponding resource is open. The default is the account main resource ID.
      */
-    resourceId?: pulumi.Input<string>;
+    resourceId?: pulumi.Input<string | undefined>;
     /**
      * The scheme name (max 128 characters). This name should be unique across your account.
      */
-    scheduleName?: pulumi.Input<string>;
+    scheduleName?: pulumi.Input<string | undefined>;
     /**
      * The notification configuration. If you do not specify this parameter, notifications will not be sent.
      */
-    taskNotifyConfig?: pulumi.Input<inputs.Mps.ScheduleTaskNotifyConfig>;
+    taskNotifyConfig?: pulumi.Input<inputs.Mps.ScheduleTaskNotifyConfig | undefined>;
     /**
      * The trigger of the scheme. If a file is uploaded to the specified bucket, the scheme will be triggered.
      */
-    trigger?: pulumi.Input<inputs.Mps.ScheduleTrigger>;
+    trigger?: pulumi.Input<inputs.Mps.ScheduleTrigger | undefined>;
 }
 
 /**
@@ -304,15 +304,15 @@ export interface ScheduleArgs {
     /**
      * The directory to save the media processing output file, which must start and end with `/`, such as `/movie/201907/`.If you do not specify this, the file will be saved to the trigger directory.
      */
-    outputDir?: pulumi.Input<string>;
+    outputDir?: pulumi.Input<string | undefined>;
     /**
      * The bucket to save the output file. If you do not specify this parameter, the bucket in `Trigger` will be used.
      */
-    outputStorage?: pulumi.Input<inputs.Mps.ScheduleOutputStorage>;
+    outputStorage?: pulumi.Input<inputs.Mps.ScheduleOutputStorage | undefined>;
     /**
      * Resource ID, you need to ensure that the corresponding resource is open. The default is the account main resource ID.
      */
-    resourceId?: pulumi.Input<string>;
+    resourceId?: pulumi.Input<string | undefined>;
     /**
      * The scheme name (max 128 characters). This name should be unique across your account.
      */
@@ -320,7 +320,7 @@ export interface ScheduleArgs {
     /**
      * The notification configuration. If you do not specify this parameter, notifications will not be sent.
      */
-    taskNotifyConfig?: pulumi.Input<inputs.Mps.ScheduleTaskNotifyConfig>;
+    taskNotifyConfig?: pulumi.Input<inputs.Mps.ScheduleTaskNotifyConfig | undefined>;
     /**
      * The trigger of the scheme. If a file is uploaded to the specified bucket, the scheme will be triggered.
      */

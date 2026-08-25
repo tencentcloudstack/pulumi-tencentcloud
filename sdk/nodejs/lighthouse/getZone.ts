@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zone = tencentcloud.Lighthouse.getZone({
+ * const zone = tencentcloud.lighthouse.getZone({
  *     orderField: "ZONE",
  *     order: "ASC",
  * });
@@ -39,14 +39,14 @@ export interface GetZoneArgs {
      * Specifies how availability zones are listed. Valid values:
      * - ASC: Ascending sort.
      * - DESC: Descending sort.
-     * The default value is ASC.
+     *   The default value is ASC.
      */
     order?: string;
     /**
      * Sorting field. Valid values:
      * - ZONE: Sort by the availability zone.
      * - INSTANCE_DISPLAY_LABEL: Sort by visibility labels (HIDDEN, NORMAL and SELECTED). Default: [HIDDEN, NORMAL, SELECTED].
-     * Sort by availability zone by default.
+     *   Sort by availability zone by default.
      */
     orderField?: string;
     /**
@@ -80,7 +80,7 @@ export interface GetZoneResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zone = tencentcloud.Lighthouse.getZone({
+ * const zone = tencentcloud.lighthouse.getZone({
  *     orderField: "ZONE",
  *     order: "ASC",
  * });
@@ -104,18 +104,18 @@ export interface GetZoneOutputArgs {
      * Specifies how availability zones are listed. Valid values:
      * - ASC: Ascending sort.
      * - DESC: Descending sort.
-     * The default value is ASC.
+     *   The default value is ASC.
      */
-    order?: pulumi.Input<string>;
+    order?: pulumi.Input<string | undefined>;
     /**
      * Sorting field. Valid values:
      * - ZONE: Sort by the availability zone.
      * - INSTANCE_DISPLAY_LABEL: Sort by visibility labels (HIDDEN, NORMAL and SELECTED). Default: [HIDDEN, NORMAL, SELECTED].
-     * Sort by availability zone by default.
+     *   Sort by availability zone by default.
      */
-    orderField?: pulumi.Input<string>;
+    orderField?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

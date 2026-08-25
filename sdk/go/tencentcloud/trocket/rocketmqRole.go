@@ -44,7 +44,7 @@ import (
 //				return err
 //			}
 //			rocketmqRole, err := trocket.NewRocketmqRole(ctx, "rocketmq_role", &trocket.RocketmqRoleArgs{
-//				InstanceId: rocketmqInstance.ID(),
+//				InstanceId: rocketmqInstance.ID().ToIDOutput().ToStringOutput(),
 //				Role:       pulumi.String("test_role"),
 //				Remark:     pulumi.String("test for terraform"),
 //				PermWrite:  pulumi.Bool(false),
@@ -63,7 +63,7 @@ import (
 //
 // ## Import
 //
-// trocket rocketmq_role can be imported using the id, e.g.
+// trocket rocketmqRole can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Trocket/rocketmqRole:RocketmqRole rocketmq_role instanceId#role

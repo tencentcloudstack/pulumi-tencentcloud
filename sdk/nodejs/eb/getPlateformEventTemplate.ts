@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const plateformEventTemplate = tencentcloud.Eb.getPlateformEventTemplate({
+ * const plateformEventTemplate = tencentcloud.eb.getPlateformEventTemplate({
  *     eventType: "eb_platform_test:TEST:ALL",
  * });
  * ```
@@ -64,7 +64,7 @@ export interface GetPlateformEventTemplateResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const plateformEventTemplate = tencentcloud.Eb.getPlateformEventTemplate({
+ * const plateformEventTemplate = tencentcloud.eb.getPlateformEventTemplate({
  *     eventType: "eb_platform_test:TEST:ALL",
  * });
  * ```
@@ -88,5 +88,5 @@ export interface GetPlateformEventTemplateOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

@@ -38,13 +38,13 @@ import * as utilities from "../utilities";
  *     domainName: example.domainName,
  *     appName: example.appName,
  *     streamName: example.streamName,
- *     templateId: exampleWatermark.id,
+ *     templateId: exampleWatermark.id.apply(x =>Number(x)),
  * });
  * ```
  *
  * ## Import
  *
- * css watermark_rule_attachment can be imported using the id, e.g.
+ * css watermarkRuleAttachment can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Css/watermarkRuleAttachment:WatermarkRuleAttachment watermark_rule domain_name#app_name#stream_name#template_id
@@ -155,27 +155,27 @@ export interface WatermarkRuleAttachmentState {
     /**
      * rule app name.
      */
-    appName?: pulumi.Input<string>;
+    appName?: pulumi.Input<string | undefined>;
     /**
      * create time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * rule domain name.
      */
-    domainName?: pulumi.Input<string>;
+    domainName?: pulumi.Input<string | undefined>;
     /**
      * rule stream name.
      */
-    streamName?: pulumi.Input<string>;
+    streamName?: pulumi.Input<string | undefined>;
     /**
      * The template Id can be acquired by the Id of `tencentcloud.Css.Watermark`.
      */
-    templateId?: pulumi.Input<number>;
+    templateId?: pulumi.Input<number | undefined>;
     /**
      * update time.
      */
-    updateTime?: pulumi.Input<string>;
+    updateTime?: pulumi.Input<string | undefined>;
 }
 
 /**

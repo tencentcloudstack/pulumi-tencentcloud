@@ -18,29 +18,29 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// CNAME, when there is no domain name access, the information required for DNS resolution verification is used. For details, refer to [Site/Domain Ownership Verification
         /// ](https://intl.cloud.tencent.com/document/product/1552/70789?from_cn_redirect=1#7af6ecf8-afca-4e35-8811-b5797ed1bde5). Note: This field may return null, which indicates a failure to obtain a valid value.
         /// </summary>
-        public readonly Outputs.GetZonesZoneOwnershipVerificationDnsVerificationResult DnsVerification;
+        public readonly ImmutableArray<Outputs.GetZonesZoneOwnershipVerificationDnsVerificationResult> DnsVerifications;
         /// <summary>
         /// CNAME, when there is no domain name access, the information required for file verification is used. For details, refer to [Site/Domain Ownership Verification
         /// ](https://intl.cloud.tencent.com/document/product/1552/70789?from_cn_redirect=1#7af6ecf8-afca-4e35-8811-b5797ed1bde5). Note: This field may return null, which indicates a failure to obtain a valid value.
         /// </summary>
-        public readonly Outputs.GetZonesZoneOwnershipVerificationFileVerificationResult FileVerification;
+        public readonly ImmutableArray<Outputs.GetZonesZoneOwnershipVerificationFileVerificationResult> FileVerifications;
         /// <summary>
-        /// u200cInformation required for switching DNS servers. It's applicable to sites connected via NSs. For details, see [Modifying DNS Server](https://intl.cloud.tencent.com/document/product/1552/90452?from_cn_redirect=1).
-        /// Note: This field may return·null, indicating that no valid values can be obtained.
+        /// Information required for switching DNS servers. It's applicable to sites connected via NSs. For details, see [Modifying DNS Server](https://intl.cloud.tencent.com/document/product/1552/90452?from_cn_redirect=1).
+        /// Note: This field may return null, indicating that no valid values can be obtained.
         /// </summary>
-        public readonly Outputs.GetZonesZoneOwnershipVerificationNsVerificationResult NsVerification;
+        public readonly ImmutableArray<Outputs.GetZonesZoneOwnershipVerificationNsVerificationResult> NsVerifications;
 
         [OutputConstructor]
         private GetZonesZoneOwnershipVerificationResult(
-            Outputs.GetZonesZoneOwnershipVerificationDnsVerificationResult dnsVerification,
+            ImmutableArray<Outputs.GetZonesZoneOwnershipVerificationDnsVerificationResult> dnsVerifications,
 
-            Outputs.GetZonesZoneOwnershipVerificationFileVerificationResult fileVerification,
+            ImmutableArray<Outputs.GetZonesZoneOwnershipVerificationFileVerificationResult> fileVerifications,
 
-            Outputs.GetZonesZoneOwnershipVerificationNsVerificationResult nsVerification)
+            ImmutableArray<Outputs.GetZonesZoneOwnershipVerificationNsVerificationResult> nsVerifications)
         {
-            DnsVerification = dnsVerification;
-            FileVerification = fileVerification;
-            NsVerification = nsVerification;
+            DnsVerifications = dnsVerifications;
+            FileVerifications = fileVerifications;
+            NsVerifications = nsVerifications;
         }
     }
 }

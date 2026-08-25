@@ -48,7 +48,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
     /// ## Import
     /// 
     /// tem appConfig can be imported using the id, e.g.
-    /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Tem/appConfig:AppConfig appConfig environmentId#name
     /// ```

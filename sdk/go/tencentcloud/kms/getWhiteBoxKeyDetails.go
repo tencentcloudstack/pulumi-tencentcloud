@@ -67,12 +67,8 @@ type GetWhiteBoxKeyDetailsResult struct {
 }
 
 func GetWhiteBoxKeyDetailsOutput(ctx *pulumi.Context, args GetWhiteBoxKeyDetailsOutputArgs, opts ...pulumi.InvokeOption) GetWhiteBoxKeyDetailsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetWhiteBoxKeyDetailsResultOutput, error) {
-			args := v.(GetWhiteBoxKeyDetailsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Kms/getWhiteBoxKeyDetails:getWhiteBoxKeyDetails", args, GetWhiteBoxKeyDetailsResultOutput{}, options).(GetWhiteBoxKeyDetailsResultOutput), nil
-		}).(GetWhiteBoxKeyDetailsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Kms/getWhiteBoxKeyDetails:getWhiteBoxKeyDetails", args, GetWhiteBoxKeyDetailsResultOutput{}, options).(GetWhiteBoxKeyDetailsResultOutput)
 }
 
 // A collection of arguments for invoking getWhiteBoxKeyDetails.

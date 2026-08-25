@@ -37,7 +37,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * gwlb gwlb_target_group can be imported using the id, e.g.
+ * gwlb gwlbTargetGroup can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Gwlb/targetGroup:TargetGroup gwlb_target_group gwlb_target_group_id
@@ -82,7 +82,7 @@ export class TargetGroup extends pulumi.CustomResource {
     /**
      * Default port of the target group, which can be used when servers are added later. Either 'Port' or 'TargetGroupInstances.N.port' must be filled in.
      */
-    declare public readonly port: pulumi.Output<number | undefined>;
+    declare public readonly port: pulumi.Output<number>;
     /**
      * GWLB target group protocol.
      * - TENCENT_GENEVE: GENEVE standard protocol;
@@ -151,38 +151,38 @@ export interface TargetGroupState {
     /**
      * Whether "All Dead, All Alive" is supported. It is supported by default.
      */
-    allDeadToAlive?: pulumi.Input<boolean>;
+    allDeadToAlive?: pulumi.Input<boolean | undefined>;
     /**
      * Health check settings.
      */
-    healthCheck?: pulumi.Input<inputs.Gwlb.TargetGroupHealthCheck>;
+    healthCheck?: pulumi.Input<inputs.Gwlb.TargetGroupHealthCheck | undefined>;
     /**
      * Default port of the target group, which can be used when servers are added later. Either 'Port' or 'TargetGroupInstances.N.port' must be filled in.
      */
-    port?: pulumi.Input<number>;
+    port?: pulumi.Input<number | undefined>;
     /**
      * GWLB target group protocol.
      * - TENCENT_GENEVE: GENEVE standard protocol;
      * - AWS_GENEVE: GENEVE compatibility protocol (a ticket is required for allowlisting).
      */
-    protocol?: pulumi.Input<string>;
+    protocol?: pulumi.Input<string | undefined>;
     /**
      * Load balancing algorithm.
      * - IP_HASH_3_ELASTIC: elastic hashing.
      */
-    scheduleAlgorithm?: pulumi.Input<string>;
+    scheduleAlgorithm?: pulumi.Input<string | undefined>;
     /**
      * Real server bound to a target group.
      */
-    targetGroupInstances?: pulumi.Input<pulumi.Input<inputs.Gwlb.TargetGroupTargetGroupInstance>[]>;
+    targetGroupInstances?: pulumi.Input<pulumi.Input<inputs.Gwlb.TargetGroupTargetGroupInstance>[] | undefined>;
     /**
      * Target group name, limited to 60 characters.
      */
-    targetGroupName?: pulumi.Input<string>;
+    targetGroupName?: pulumi.Input<string | undefined>;
     /**
      * VPCID attribute of target group. If this parameter is left blank, the default VPC will be used.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -192,32 +192,32 @@ export interface TargetGroupArgs {
     /**
      * Whether "All Dead, All Alive" is supported. It is supported by default.
      */
-    allDeadToAlive?: pulumi.Input<boolean>;
+    allDeadToAlive?: pulumi.Input<boolean | undefined>;
     /**
      * Health check settings.
      */
-    healthCheck?: pulumi.Input<inputs.Gwlb.TargetGroupHealthCheck>;
+    healthCheck?: pulumi.Input<inputs.Gwlb.TargetGroupHealthCheck | undefined>;
     /**
      * Default port of the target group, which can be used when servers are added later. Either 'Port' or 'TargetGroupInstances.N.port' must be filled in.
      */
-    port?: pulumi.Input<number>;
+    port?: pulumi.Input<number | undefined>;
     /**
      * GWLB target group protocol.
      * - TENCENT_GENEVE: GENEVE standard protocol;
      * - AWS_GENEVE: GENEVE compatibility protocol (a ticket is required for allowlisting).
      */
-    protocol?: pulumi.Input<string>;
+    protocol?: pulumi.Input<string | undefined>;
     /**
      * Load balancing algorithm.
      * - IP_HASH_3_ELASTIC: elastic hashing.
      */
-    scheduleAlgorithm?: pulumi.Input<string>;
+    scheduleAlgorithm?: pulumi.Input<string | undefined>;
     /**
      * Target group name, limited to 60 characters.
      */
-    targetGroupName?: pulumi.Input<string>;
+    targetGroupName?: pulumi.Input<string | undefined>;
     /**
      * VPCID attribute of target group. If this parameter is left blank, the default VPC will be used.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }

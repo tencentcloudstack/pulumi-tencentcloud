@@ -46,78 +46,86 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
     /// 
     /// });
     /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// DTS sync job can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    /// $ pulumi import tencentcloud:Dts/syncJob:SyncJob example sync-hpb214ua
+    /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dts/syncJob:SyncJob")]
     public partial class SyncJob : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// auto renew.
+        /// Auto-renewal flag. Only takes effect when `PayMode` is `PrePay`. Valid values: `1` (enable auto-renewal), `0` (disable auto-renewal, default).
         /// </summary>
         [Output("autoRenew")]
         public Output<int> AutoRenew { get; private set; } = null!;
 
         /// <summary>
-        /// destination database type.
+        /// Destination database type, such as `Mysql`, `Mariadb`, `Percona`, `Cynosdbmysql` (TDSQL-C MySQL), `Tdpg` (TDSQL for PostgreSQL), `Tdsqlmysql`, `Kafka`, `Tdstore` (TDSQL TDStore), etc.
         /// </summary>
         [Output("dstDatabaseType")]
         public Output<string> DstDatabaseType { get; private set; } = null!;
 
         /// <summary>
-        /// destination region.
+        /// The region where the destination database resides, such as `ap-guangzhou`.
         /// </summary>
         [Output("dstRegion")]
         public Output<string> DstRegion { get; private set; } = null!;
 
         /// <summary>
-        /// existed job id.
+        /// The existing sync job ID used to create a similar job.
         /// </summary>
         [Output("existedJobId")]
         public Output<string> ExistedJobId { get; private set; } = null!;
 
         /// <summary>
-        /// instance class.
+        /// Sync link specification, such as `Micro`, `Small`, `Medium`, `Large`. Default is `Medium`.
         /// </summary>
         [Output("instanceClass")]
         public Output<string> InstanceClass { get; private set; } = null!;
 
         /// <summary>
-        /// job id.
+        /// Sync job ID.
         /// </summary>
         [Output("jobId")]
         public Output<string> JobId { get; private set; } = null!;
 
         /// <summary>
-        /// job name.
+        /// Sync job name.
         /// </summary>
         [Output("jobName")]
         public Output<string> JobName { get; private set; } = null!;
 
         /// <summary>
-        /// pay mode, optional value is PrePay or PostPay.
+        /// Billing type. Valid values: `PrePay` (subscription, monthly/yearly billing), `PostPay` (pay-as-you-go).
         /// </summary>
         [Output("payMode")]
         public Output<string> PayMode { get; private set; } = null!;
 
         /// <summary>
-        /// specification.
+        /// Sync job specification. `Standard` indicates the standard edition; currently only `Standard` is supported.
         /// </summary>
         [Output("specification")]
         public Output<string> Specification { get; private set; } = null!;
 
         /// <summary>
-        /// source database type.
+        /// Source database type, such as `Mysql`, `Mariadb`, `Percona`, `Postgresql`, `Cynosdbmysql` (TDSQL-C MySQL), `Tdpg` (TDSQL for PostgreSQL), `Tdsqlmysql`, `Tdstore` (TDSQL TDStore), etc.
         /// </summary>
         [Output("srcDatabaseType")]
         public Output<string> SrcDatabaseType { get; private set; } = null!;
 
         /// <summary>
-        /// source region.
+        /// The region where the source database resides, such as `ap-guangzhou`.
         /// </summary>
         [Output("srcRegion")]
         public Output<string> SrcRegion { get; private set; } = null!;
 
         /// <summary>
-        /// tags.
+        /// Tag information.
         /// </summary>
         [Output("tags")]
         public Output<ImmutableArray<Outputs.SyncJobTag>> Tags { get; private set; } = null!;
@@ -170,61 +178,61 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
     public sealed class SyncJobArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// auto renew.
+        /// Auto-renewal flag. Only takes effect when `PayMode` is `PrePay`. Valid values: `1` (enable auto-renewal), `0` (disable auto-renewal, default).
         /// </summary>
         [Input("autoRenew")]
         public Input<int>? AutoRenew { get; set; }
 
         /// <summary>
-        /// destination database type.
+        /// Destination database type, such as `Mysql`, `Mariadb`, `Percona`, `Cynosdbmysql` (TDSQL-C MySQL), `Tdpg` (TDSQL for PostgreSQL), `Tdsqlmysql`, `Kafka`, `Tdstore` (TDSQL TDStore), etc.
         /// </summary>
         [Input("dstDatabaseType", required: true)]
         public Input<string> DstDatabaseType { get; set; } = null!;
 
         /// <summary>
-        /// destination region.
+        /// The region where the destination database resides, such as `ap-guangzhou`.
         /// </summary>
         [Input("dstRegion", required: true)]
         public Input<string> DstRegion { get; set; } = null!;
 
         /// <summary>
-        /// existed job id.
+        /// The existing sync job ID used to create a similar job.
         /// </summary>
         [Input("existedJobId")]
         public Input<string>? ExistedJobId { get; set; }
 
         /// <summary>
-        /// instance class.
+        /// Sync link specification, such as `Micro`, `Small`, `Medium`, `Large`. Default is `Medium`.
         /// </summary>
         [Input("instanceClass")]
         public Input<string>? InstanceClass { get; set; }
 
         /// <summary>
-        /// job name.
+        /// Sync job name.
         /// </summary>
         [Input("jobName")]
         public Input<string>? JobName { get; set; }
 
         /// <summary>
-        /// pay mode, optional value is PrePay or PostPay.
+        /// Billing type. Valid values: `PrePay` (subscription, monthly/yearly billing), `PostPay` (pay-as-you-go).
         /// </summary>
         [Input("payMode", required: true)]
         public Input<string> PayMode { get; set; } = null!;
 
         /// <summary>
-        /// specification.
+        /// Sync job specification. `Standard` indicates the standard edition; currently only `Standard` is supported.
         /// </summary>
         [Input("specification")]
         public Input<string>? Specification { get; set; }
 
         /// <summary>
-        /// source database type.
+        /// Source database type, such as `Mysql`, `Mariadb`, `Percona`, `Postgresql`, `Cynosdbmysql` (TDSQL-C MySQL), `Tdpg` (TDSQL for PostgreSQL), `Tdsqlmysql`, `Tdstore` (TDSQL TDStore), etc.
         /// </summary>
         [Input("srcDatabaseType", required: true)]
         public Input<string> SrcDatabaseType { get; set; } = null!;
 
         /// <summary>
-        /// source region.
+        /// The region where the source database resides, such as `ap-guangzhou`.
         /// </summary>
         [Input("srcRegion", required: true)]
         public Input<string> SrcRegion { get; set; } = null!;
@@ -233,7 +241,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         private InputList<Inputs.SyncJobTagArgs>? _tags;
 
         /// <summary>
-        /// tags.
+        /// Tag information.
         /// </summary>
         public InputList<Inputs.SyncJobTagArgs> Tags
         {
@@ -250,67 +258,67 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
     public sealed class SyncJobState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// auto renew.
+        /// Auto-renewal flag. Only takes effect when `PayMode` is `PrePay`. Valid values: `1` (enable auto-renewal), `0` (disable auto-renewal, default).
         /// </summary>
         [Input("autoRenew")]
         public Input<int>? AutoRenew { get; set; }
 
         /// <summary>
-        /// destination database type.
+        /// Destination database type, such as `Mysql`, `Mariadb`, `Percona`, `Cynosdbmysql` (TDSQL-C MySQL), `Tdpg` (TDSQL for PostgreSQL), `Tdsqlmysql`, `Kafka`, `Tdstore` (TDSQL TDStore), etc.
         /// </summary>
         [Input("dstDatabaseType")]
         public Input<string>? DstDatabaseType { get; set; }
 
         /// <summary>
-        /// destination region.
+        /// The region where the destination database resides, such as `ap-guangzhou`.
         /// </summary>
         [Input("dstRegion")]
         public Input<string>? DstRegion { get; set; }
 
         /// <summary>
-        /// existed job id.
+        /// The existing sync job ID used to create a similar job.
         /// </summary>
         [Input("existedJobId")]
         public Input<string>? ExistedJobId { get; set; }
 
         /// <summary>
-        /// instance class.
+        /// Sync link specification, such as `Micro`, `Small`, `Medium`, `Large`. Default is `Medium`.
         /// </summary>
         [Input("instanceClass")]
         public Input<string>? InstanceClass { get; set; }
 
         /// <summary>
-        /// job id.
+        /// Sync job ID.
         /// </summary>
         [Input("jobId")]
         public Input<string>? JobId { get; set; }
 
         /// <summary>
-        /// job name.
+        /// Sync job name.
         /// </summary>
         [Input("jobName")]
         public Input<string>? JobName { get; set; }
 
         /// <summary>
-        /// pay mode, optional value is PrePay or PostPay.
+        /// Billing type. Valid values: `PrePay` (subscription, monthly/yearly billing), `PostPay` (pay-as-you-go).
         /// </summary>
         [Input("payMode")]
         public Input<string>? PayMode { get; set; }
 
         /// <summary>
-        /// specification.
+        /// Sync job specification. `Standard` indicates the standard edition; currently only `Standard` is supported.
         /// </summary>
         [Input("specification")]
         public Input<string>? Specification { get; set; }
 
         /// <summary>
-        /// source database type.
+        /// Source database type, such as `Mysql`, `Mariadb`, `Percona`, `Postgresql`, `Cynosdbmysql` (TDSQL-C MySQL), `Tdpg` (TDSQL for PostgreSQL), `Tdsqlmysql`, `Tdstore` (TDSQL TDStore), etc.
         /// </summary>
         [Input("srcDatabaseType")]
         public Input<string>? SrcDatabaseType { get; set; }
 
         /// <summary>
-        /// source region.
+        /// The region where the source database resides, such as `ap-guangzhou`.
         /// </summary>
         [Input("srcRegion")]
         public Input<string>? SrcRegion { get; set; }
@@ -319,7 +327,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         private InputList<Inputs.SyncJobTagGetArgs>? _tags;
 
         /// <summary>
-        /// tags.
+        /// Tag information.
         /// </summary>
         public InputList<Inputs.SyncJobTagGetArgs> Tags
         {

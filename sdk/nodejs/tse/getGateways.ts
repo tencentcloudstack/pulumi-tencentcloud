@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const gateways = tencentcloud.Tse.getGateways({
+ * const gateways = tencentcloud.tse.getGateways({
  *     filters: [{
  *         name: "GatewayId",
  *         values: ["gateway-ddbb709b"],
@@ -70,7 +70,7 @@ export interface GetGatewaysResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const gateways = tencentcloud.Tse.getGateways({
+ * const gateways = tencentcloud.tse.getGateways({
  *     filters: [{
  *         name: "GatewayId",
  *         values: ["gateway-ddbb709b"],
@@ -94,9 +94,9 @@ export interface GetGatewaysOutputArgs {
     /**
      * filter conditions, valid value:Type,Name,GatewayId,Tag,TradeType,InternetPaymode,Region.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Tse.GetGatewaysFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Tse.GetGatewaysFilterArgs>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

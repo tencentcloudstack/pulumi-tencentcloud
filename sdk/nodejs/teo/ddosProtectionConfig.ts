@@ -138,11 +138,11 @@ export interface DdosProtectionConfigState {
     /**
      * Specifies the exclusive Anti-DDoS configuration.
      */
-    ddosProtection?: pulumi.Input<inputs.Teo.DdosProtectionConfigDdosProtection>;
+    ddosProtection?: pulumi.Input<inputs.Teo.DdosProtectionConfigDdosProtection | undefined>;
     /**
      * Zone ID.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**

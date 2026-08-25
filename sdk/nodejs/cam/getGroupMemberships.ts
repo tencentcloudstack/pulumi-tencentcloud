@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Cam.getGroupMemberships({
+ * const foo = tencentcloud.cam.getGroupMemberships({
  *     groupId: fooTencentcloudCamGroup.id,
  * });
  * ```
@@ -70,7 +70,7 @@ export interface GetGroupMembershipsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Cam.getGroupMemberships({
+ * const foo = tencentcloud.cam.getGroupMemberships({
  *     groupId: fooTencentcloudCamGroup.id,
  * });
  * ```
@@ -91,9 +91,9 @@ export interface GetGroupMembershipsOutputArgs {
     /**
      * ID of CAM group to be queried.
      */
-    groupId?: pulumi.Input<string>;
+    groupId?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

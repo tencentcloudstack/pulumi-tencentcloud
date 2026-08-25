@@ -85,12 +85,8 @@ type GetErrorLogResult struct {
 }
 
 func GetErrorLogOutput(ctx *pulumi.Context, args GetErrorLogOutputArgs, opts ...pulumi.InvokeOption) GetErrorLogResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetErrorLogResultOutput, error) {
-			args := v.(GetErrorLogArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mysql/getErrorLog:getErrorLog", args, GetErrorLogResultOutput{}, options).(GetErrorLogResultOutput), nil
-		}).(GetErrorLogResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mysql/getErrorLog:getErrorLog", args, GetErrorLogResultOutput{}, options).(GetErrorLogResultOutput)
 }
 
 // A collection of arguments for invoking getErrorLog.

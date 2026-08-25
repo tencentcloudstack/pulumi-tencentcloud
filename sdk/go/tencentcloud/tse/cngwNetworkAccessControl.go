@@ -50,7 +50,7 @@ import (
 //
 // ## Import
 //
-// tse cngw_route_rate_limit can be imported using the id, e.g.
+// tse cngwRouteRateLimit can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Tse/cngwNetworkAccessControl:CngwNetworkAccessControl cngw_network_access_control gatewayId#groupId#networkId

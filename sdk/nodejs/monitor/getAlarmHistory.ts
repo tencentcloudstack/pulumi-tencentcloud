@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const alarmHistory = tencentcloud.Monitor.getAlarmHistory({
+ * const alarmHistory = tencentcloud.monitor.getAlarmHistory({
  *     module: "monitor",
  *     order: "DESC",
  *     startTime: 1696608000,
@@ -192,7 +192,7 @@ export interface GetAlarmHistoryResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const alarmHistory = tencentcloud.Monitor.getAlarmHistory({
+ * const alarmHistory = tencentcloud.monitor.getAlarmHistory({
  *     module: "monitor",
  *     order: "DESC",
  *     startTime: 1696608000,
@@ -240,31 +240,31 @@ export interface GetAlarmHistoryOutputArgs {
     /**
      * Alarm levels.
      */
-    alarmLevels?: pulumi.Input<pulumi.Input<string>[]>;
+    alarmLevels?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Filter by alarm object. Fuzzy search with string is supported.
      */
-    alarmObject?: pulumi.Input<string>;
+    alarmObject?: pulumi.Input<string | undefined>;
     /**
      * Filter by alarm status. Valid values: ALARM (not resolved), OK (resolved), NO_CONF (expired), NO_DATA (insufficient data). If this parameter is left empty, all will be queried by default.
      */
-    alarmStatuses?: pulumi.Input<pulumi.Input<string>[]>;
+    alarmStatuses?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Fuzzy search by alarm content.
      */
-    content?: pulumi.Input<string>;
+    content?: pulumi.Input<string | undefined>;
     /**
      * End time, which is the current timestamp and the time when the alarm FirstOccurTime first occurs. An alarm record can be searched only if its FirstOccurTime is earlier than the EndTime.
      */
-    endTime?: pulumi.Input<number>;
+    endTime?: pulumi.Input<number | undefined>;
     /**
      * Filter by instance group ID.
      */
-    instanceGroupIds?: pulumi.Input<pulumi.Input<number>[]>;
+    instanceGroupIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Filter by metric name.
      */
-    metricNames?: pulumi.Input<pulumi.Input<string>[]>;
+    metricNames?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Value fixed at monitor.
      */
@@ -272,41 +272,41 @@ export interface GetAlarmHistoryOutputArgs {
     /**
      * Filter by monitor type. Valid values: MT_QCE (Tencent Cloud service monitoring), MT_TAW (application performance monitoring), MT_RUM (frontend performance monitoring), MT_PROBE (cloud automated testing). If this parameter is left empty, all types will be queried by default.
      */
-    monitorTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    monitorTypes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Filter by policy type. Monitoring type and policy type are first-level and second-level filters respectively and both need to be passed in. For example, [{MonitorType: MT_QCE, Namespace: cvm_device}].
      */
-    namespaces?: pulumi.Input<pulumi.Input<inputs.Monitor.GetAlarmHistoryNamespaceArgs>[]>;
+    namespaces?: pulumi.Input<pulumi.Input<inputs.Monitor.GetAlarmHistoryNamespaceArgs>[] | undefined>;
     /**
      * Sort by the first occurrence time in descending order by default. Valid values: ASC (ascending), DESC (descending).
      */
-    order?: pulumi.Input<string>;
+    order?: pulumi.Input<string | undefined>;
     /**
      * Search by alarm policy ID list.
      */
-    policyIds?: pulumi.Input<pulumi.Input<string>[]>;
+    policyIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Fuzzy search by policy name.
      */
-    policyName?: pulumi.Input<string>;
+    policyName?: pulumi.Input<string | undefined>;
     /**
      * Filter by project ID. Valid values: -1 (no project), 0 (default project).
      */
-    projectIds?: pulumi.Input<pulumi.Input<number>[]>;
+    projectIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Search by recipient group.
      */
-    receiverGroups?: pulumi.Input<pulumi.Input<number>[]>;
+    receiverGroups?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Search by recipient.
      */
-    receiverUids?: pulumi.Input<pulumi.Input<number>[]>;
+    receiverUids?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Start time, which is the timestamp one day ago by default and the time when the alarm FirstOccurTime first occurs. An alarm record can be searched only if its FirstOccurTime is later than the StartTime.
      */
-    startTime?: pulumi.Input<number>;
+    startTime?: pulumi.Input<number | undefined>;
 }

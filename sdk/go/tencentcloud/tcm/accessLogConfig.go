@@ -93,8 +93,7 @@ import (
 //
 // ## Import
 //
-// tcm access_log_config can be imported using the mesh_id(mesh_name), e.g.
-//
+// tcm accessLogConfig can be imported using the mesh_id(mesh_name), e.g.
 // ```sh
 // $ pulumi import tencentcloud:Tcm/accessLogConfig:AccessLogConfig access_log_config mesh-rofjmxxx
 // ```

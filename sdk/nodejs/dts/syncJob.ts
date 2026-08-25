@@ -31,6 +31,14 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## Import
+ *
+ * DTS sync job can be imported using the id, e.g.
+ *
+ * ```sh
+ * $ pulumi import tencentcloud:Dts/syncJob:SyncJob example sync-hpb214ua
+ * ```
  */
 export class SyncJob extends pulumi.CustomResource {
     /**
@@ -61,51 +69,51 @@ export class SyncJob extends pulumi.CustomResource {
     }
 
     /**
-     * auto renew.
+     * Auto-renewal flag. Only takes effect when `payMode` is `PrePay`. Valid values: `1` (enable auto-renewal), `0` (disable auto-renewal, default).
      */
     declare public readonly autoRenew: pulumi.Output<number>;
     /**
-     * destination database type.
+     * Destination database type, such as `mysql`, `mariadb`, `percona`, `cynosdbmysql` (TDSQL-C MySQL), `tdpg` (TDSQL for PostgreSQL), `tdsqlmysql`, `kafka`, `tdstore` (TDSQL TDStore), etc.
      */
     declare public readonly dstDatabaseType: pulumi.Output<string>;
     /**
-     * destination region.
+     * The region where the destination database resides, such as `ap-guangzhou`.
      */
     declare public readonly dstRegion: pulumi.Output<string>;
     /**
-     * existed job id.
+     * The existing sync job ID used to create a similar job.
      */
     declare public readonly existedJobId: pulumi.Output<string>;
     /**
-     * instance class.
+     * Sync link specification, such as `micro`, `small`, `medium`, `large`. Default is `medium`.
      */
     declare public readonly instanceClass: pulumi.Output<string>;
     /**
-     * job id.
+     * Sync job ID.
      */
     declare public /*out*/ readonly jobId: pulumi.Output<string>;
     /**
-     * job name.
+     * Sync job name.
      */
     declare public readonly jobName: pulumi.Output<string>;
     /**
-     * pay mode, optional value is PrePay or PostPay.
+     * Billing type. Valid values: `PrePay` (subscription, monthly/yearly billing), `PostPay` (pay-as-you-go).
      */
     declare public readonly payMode: pulumi.Output<string>;
     /**
-     * specification.
+     * Sync job specification. `Standard` indicates the standard edition; currently only `Standard` is supported.
      */
     declare public readonly specification: pulumi.Output<string>;
     /**
-     * source database type.
+     * Source database type, such as `mysql`, `mariadb`, `percona`, `postgresql`, `cynosdbmysql` (TDSQL-C MySQL), `tdpg` (TDSQL for PostgreSQL), `tdsqlmysql`, `tdstore` (TDSQL TDStore), etc.
      */
     declare public readonly srcDatabaseType: pulumi.Output<string>;
     /**
-     * source region.
+     * The region where the source database resides, such as `ap-guangzhou`.
      */
     declare public readonly srcRegion: pulumi.Output<string>;
     /**
-     * tags.
+     * Tag information.
      */
     declare public readonly tags: pulumi.Output<outputs.Dts.SyncJobTag[]>;
 
@@ -174,53 +182,53 @@ export class SyncJob extends pulumi.CustomResource {
  */
 export interface SyncJobState {
     /**
-     * auto renew.
+     * Auto-renewal flag. Only takes effect when `payMode` is `PrePay`. Valid values: `1` (enable auto-renewal), `0` (disable auto-renewal, default).
      */
-    autoRenew?: pulumi.Input<number>;
+    autoRenew?: pulumi.Input<number | undefined>;
     /**
-     * destination database type.
+     * Destination database type, such as `mysql`, `mariadb`, `percona`, `cynosdbmysql` (TDSQL-C MySQL), `tdpg` (TDSQL for PostgreSQL), `tdsqlmysql`, `kafka`, `tdstore` (TDSQL TDStore), etc.
      */
-    dstDatabaseType?: pulumi.Input<string>;
+    dstDatabaseType?: pulumi.Input<string | undefined>;
     /**
-     * destination region.
+     * The region where the destination database resides, such as `ap-guangzhou`.
      */
-    dstRegion?: pulumi.Input<string>;
+    dstRegion?: pulumi.Input<string | undefined>;
     /**
-     * existed job id.
+     * The existing sync job ID used to create a similar job.
      */
-    existedJobId?: pulumi.Input<string>;
+    existedJobId?: pulumi.Input<string | undefined>;
     /**
-     * instance class.
+     * Sync link specification, such as `micro`, `small`, `medium`, `large`. Default is `medium`.
      */
-    instanceClass?: pulumi.Input<string>;
+    instanceClass?: pulumi.Input<string | undefined>;
     /**
-     * job id.
+     * Sync job ID.
      */
-    jobId?: pulumi.Input<string>;
+    jobId?: pulumi.Input<string | undefined>;
     /**
-     * job name.
+     * Sync job name.
      */
-    jobName?: pulumi.Input<string>;
+    jobName?: pulumi.Input<string | undefined>;
     /**
-     * pay mode, optional value is PrePay or PostPay.
+     * Billing type. Valid values: `PrePay` (subscription, monthly/yearly billing), `PostPay` (pay-as-you-go).
      */
-    payMode?: pulumi.Input<string>;
+    payMode?: pulumi.Input<string | undefined>;
     /**
-     * specification.
+     * Sync job specification. `Standard` indicates the standard edition; currently only `Standard` is supported.
      */
-    specification?: pulumi.Input<string>;
+    specification?: pulumi.Input<string | undefined>;
     /**
-     * source database type.
+     * Source database type, such as `mysql`, `mariadb`, `percona`, `postgresql`, `cynosdbmysql` (TDSQL-C MySQL), `tdpg` (TDSQL for PostgreSQL), `tdsqlmysql`, `tdstore` (TDSQL TDStore), etc.
      */
-    srcDatabaseType?: pulumi.Input<string>;
+    srcDatabaseType?: pulumi.Input<string | undefined>;
     /**
-     * source region.
+     * The region where the source database resides, such as `ap-guangzhou`.
      */
-    srcRegion?: pulumi.Input<string>;
+    srcRegion?: pulumi.Input<string | undefined>;
     /**
-     * tags.
+     * Tag information.
      */
-    tags?: pulumi.Input<pulumi.Input<inputs.Dts.SyncJobTag>[]>;
+    tags?: pulumi.Input<pulumi.Input<inputs.Dts.SyncJobTag>[] | undefined>;
 }
 
 /**
@@ -228,47 +236,47 @@ export interface SyncJobState {
  */
 export interface SyncJobArgs {
     /**
-     * auto renew.
+     * Auto-renewal flag. Only takes effect when `payMode` is `PrePay`. Valid values: `1` (enable auto-renewal), `0` (disable auto-renewal, default).
      */
-    autoRenew?: pulumi.Input<number>;
+    autoRenew?: pulumi.Input<number | undefined>;
     /**
-     * destination database type.
+     * Destination database type, such as `mysql`, `mariadb`, `percona`, `cynosdbmysql` (TDSQL-C MySQL), `tdpg` (TDSQL for PostgreSQL), `tdsqlmysql`, `kafka`, `tdstore` (TDSQL TDStore), etc.
      */
     dstDatabaseType: pulumi.Input<string>;
     /**
-     * destination region.
+     * The region where the destination database resides, such as `ap-guangzhou`.
      */
     dstRegion: pulumi.Input<string>;
     /**
-     * existed job id.
+     * The existing sync job ID used to create a similar job.
      */
-    existedJobId?: pulumi.Input<string>;
+    existedJobId?: pulumi.Input<string | undefined>;
     /**
-     * instance class.
+     * Sync link specification, such as `micro`, `small`, `medium`, `large`. Default is `medium`.
      */
-    instanceClass?: pulumi.Input<string>;
+    instanceClass?: pulumi.Input<string | undefined>;
     /**
-     * job name.
+     * Sync job name.
      */
-    jobName?: pulumi.Input<string>;
+    jobName?: pulumi.Input<string | undefined>;
     /**
-     * pay mode, optional value is PrePay or PostPay.
+     * Billing type. Valid values: `PrePay` (subscription, monthly/yearly billing), `PostPay` (pay-as-you-go).
      */
     payMode: pulumi.Input<string>;
     /**
-     * specification.
+     * Sync job specification. `Standard` indicates the standard edition; currently only `Standard` is supported.
      */
-    specification?: pulumi.Input<string>;
+    specification?: pulumi.Input<string | undefined>;
     /**
-     * source database type.
+     * Source database type, such as `mysql`, `mariadb`, `percona`, `postgresql`, `cynosdbmysql` (TDSQL-C MySQL), `tdpg` (TDSQL for PostgreSQL), `tdsqlmysql`, `tdstore` (TDSQL TDStore), etc.
      */
     srcDatabaseType: pulumi.Input<string>;
     /**
-     * source region.
+     * The region where the source database resides, such as `ap-guangzhou`.
      */
     srcRegion: pulumi.Input<string>;
     /**
-     * tags.
+     * Tag information.
      */
-    tags?: pulumi.Input<pulumi.Input<inputs.Dts.SyncJobTag>[]>;
+    tags?: pulumi.Input<pulumi.Input<inputs.Dts.SyncJobTag>[] | undefined>;
 }

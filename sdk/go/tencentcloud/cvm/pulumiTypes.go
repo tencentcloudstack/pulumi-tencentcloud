@@ -7465,6 +7465,993 @@ func (o RenewInstanceInstanceChargePrepaidPtrOutput) RenewFlag() pulumi.StringPt
 	}).(pulumi.StringPtrOutput)
 }
 
+type SyncImageImageSet struct {
+	// Image ID. The specified image must meet the following requirement: the images must be in the `NORMAL` state.
+	ImageId *string `pulumi:"imageId"`
+	// Region of the image.
+	Region *string `pulumi:"region"`
+}
+
+// SyncImageImageSetInput is an input type that accepts SyncImageImageSetArgs and SyncImageImageSetOutput values.
+// You can construct a concrete instance of `SyncImageImageSetInput` via:
+//
+//	SyncImageImageSetArgs{...}
+type SyncImageImageSetInput interface {
+	pulumi.Input
+
+	ToSyncImageImageSetOutput() SyncImageImageSetOutput
+	ToSyncImageImageSetOutputWithContext(context.Context) SyncImageImageSetOutput
+}
+
+type SyncImageImageSetArgs struct {
+	// Image ID. The specified image must meet the following requirement: the images must be in the `NORMAL` state.
+	ImageId pulumi.StringPtrInput `pulumi:"imageId"`
+	// Region of the image.
+	Region pulumi.StringPtrInput `pulumi:"region"`
+}
+
+func (SyncImageImageSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncImageImageSet)(nil)).Elem()
+}
+
+func (i SyncImageImageSetArgs) ToSyncImageImageSetOutput() SyncImageImageSetOutput {
+	return i.ToSyncImageImageSetOutputWithContext(context.Background())
+}
+
+func (i SyncImageImageSetArgs) ToSyncImageImageSetOutputWithContext(ctx context.Context) SyncImageImageSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncImageImageSetOutput)
+}
+
+// SyncImageImageSetArrayInput is an input type that accepts SyncImageImageSetArray and SyncImageImageSetArrayOutput values.
+// You can construct a concrete instance of `SyncImageImageSetArrayInput` via:
+//
+//	SyncImageImageSetArray{ SyncImageImageSetArgs{...} }
+type SyncImageImageSetArrayInput interface {
+	pulumi.Input
+
+	ToSyncImageImageSetArrayOutput() SyncImageImageSetArrayOutput
+	ToSyncImageImageSetArrayOutputWithContext(context.Context) SyncImageImageSetArrayOutput
+}
+
+type SyncImageImageSetArray []SyncImageImageSetInput
+
+func (SyncImageImageSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncImageImageSet)(nil)).Elem()
+}
+
+func (i SyncImageImageSetArray) ToSyncImageImageSetArrayOutput() SyncImageImageSetArrayOutput {
+	return i.ToSyncImageImageSetArrayOutputWithContext(context.Background())
+}
+
+func (i SyncImageImageSetArray) ToSyncImageImageSetArrayOutputWithContext(ctx context.Context) SyncImageImageSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncImageImageSetArrayOutput)
+}
+
+type SyncImageImageSetOutput struct{ *pulumi.OutputState }
+
+func (SyncImageImageSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncImageImageSet)(nil)).Elem()
+}
+
+func (o SyncImageImageSetOutput) ToSyncImageImageSetOutput() SyncImageImageSetOutput {
+	return o
+}
+
+func (o SyncImageImageSetOutput) ToSyncImageImageSetOutputWithContext(ctx context.Context) SyncImageImageSetOutput {
+	return o
+}
+
+// Image ID. The specified image must meet the following requirement: the images must be in the `NORMAL` state.
+func (o SyncImageImageSetOutput) ImageId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncImageImageSet) *string { return v.ImageId }).(pulumi.StringPtrOutput)
+}
+
+// Region of the image.
+func (o SyncImageImageSetOutput) Region() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncImageImageSet) *string { return v.Region }).(pulumi.StringPtrOutput)
+}
+
+type SyncImageImageSetArrayOutput struct{ *pulumi.OutputState }
+
+func (SyncImageImageSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncImageImageSet)(nil)).Elem()
+}
+
+func (o SyncImageImageSetArrayOutput) ToSyncImageImageSetArrayOutput() SyncImageImageSetArrayOutput {
+	return o
+}
+
+func (o SyncImageImageSetArrayOutput) ToSyncImageImageSetArrayOutputWithContext(ctx context.Context) SyncImageImageSetArrayOutput {
+	return o
+}
+
+func (o SyncImageImageSetArrayOutput) Index(i pulumi.IntInput) SyncImageImageSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SyncImageImageSet {
+		return vs[0].([]SyncImageImageSet)[vs[1].(int)]
+	}).(SyncImageImageSetOutput)
+}
+
+type GetAccountQuotaAccountQuotaOverview struct {
+	// Account quota details.
+	AccountQuotas []GetAccountQuotaAccountQuotaOverviewAccountQuota `pulumi:"accountQuotas"`
+	// Region.
+	Region string `pulumi:"region"`
+}
+
+// GetAccountQuotaAccountQuotaOverviewInput is an input type that accepts GetAccountQuotaAccountQuotaOverviewArgs and GetAccountQuotaAccountQuotaOverviewOutput values.
+// You can construct a concrete instance of `GetAccountQuotaAccountQuotaOverviewInput` via:
+//
+//	GetAccountQuotaAccountQuotaOverviewArgs{...}
+type GetAccountQuotaAccountQuotaOverviewInput interface {
+	pulumi.Input
+
+	ToGetAccountQuotaAccountQuotaOverviewOutput() GetAccountQuotaAccountQuotaOverviewOutput
+	ToGetAccountQuotaAccountQuotaOverviewOutputWithContext(context.Context) GetAccountQuotaAccountQuotaOverviewOutput
+}
+
+type GetAccountQuotaAccountQuotaOverviewArgs struct {
+	// Account quota details.
+	AccountQuotas GetAccountQuotaAccountQuotaOverviewAccountQuotaArrayInput `pulumi:"accountQuotas"`
+	// Region.
+	Region pulumi.StringInput `pulumi:"region"`
+}
+
+func (GetAccountQuotaAccountQuotaOverviewArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountQuotaAccountQuotaOverview)(nil)).Elem()
+}
+
+func (i GetAccountQuotaAccountQuotaOverviewArgs) ToGetAccountQuotaAccountQuotaOverviewOutput() GetAccountQuotaAccountQuotaOverviewOutput {
+	return i.ToGetAccountQuotaAccountQuotaOverviewOutputWithContext(context.Background())
+}
+
+func (i GetAccountQuotaAccountQuotaOverviewArgs) ToGetAccountQuotaAccountQuotaOverviewOutputWithContext(ctx context.Context) GetAccountQuotaAccountQuotaOverviewOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountQuotaAccountQuotaOverviewOutput)
+}
+
+// GetAccountQuotaAccountQuotaOverviewArrayInput is an input type that accepts GetAccountQuotaAccountQuotaOverviewArray and GetAccountQuotaAccountQuotaOverviewArrayOutput values.
+// You can construct a concrete instance of `GetAccountQuotaAccountQuotaOverviewArrayInput` via:
+//
+//	GetAccountQuotaAccountQuotaOverviewArray{ GetAccountQuotaAccountQuotaOverviewArgs{...} }
+type GetAccountQuotaAccountQuotaOverviewArrayInput interface {
+	pulumi.Input
+
+	ToGetAccountQuotaAccountQuotaOverviewArrayOutput() GetAccountQuotaAccountQuotaOverviewArrayOutput
+	ToGetAccountQuotaAccountQuotaOverviewArrayOutputWithContext(context.Context) GetAccountQuotaAccountQuotaOverviewArrayOutput
+}
+
+type GetAccountQuotaAccountQuotaOverviewArray []GetAccountQuotaAccountQuotaOverviewInput
+
+func (GetAccountQuotaAccountQuotaOverviewArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountQuotaAccountQuotaOverview)(nil)).Elem()
+}
+
+func (i GetAccountQuotaAccountQuotaOverviewArray) ToGetAccountQuotaAccountQuotaOverviewArrayOutput() GetAccountQuotaAccountQuotaOverviewArrayOutput {
+	return i.ToGetAccountQuotaAccountQuotaOverviewArrayOutputWithContext(context.Background())
+}
+
+func (i GetAccountQuotaAccountQuotaOverviewArray) ToGetAccountQuotaAccountQuotaOverviewArrayOutputWithContext(ctx context.Context) GetAccountQuotaAccountQuotaOverviewArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountQuotaAccountQuotaOverviewArrayOutput)
+}
+
+type GetAccountQuotaAccountQuotaOverviewOutput struct{ *pulumi.OutputState }
+
+func (GetAccountQuotaAccountQuotaOverviewOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountQuotaAccountQuotaOverview)(nil)).Elem()
+}
+
+func (o GetAccountQuotaAccountQuotaOverviewOutput) ToGetAccountQuotaAccountQuotaOverviewOutput() GetAccountQuotaAccountQuotaOverviewOutput {
+	return o
+}
+
+func (o GetAccountQuotaAccountQuotaOverviewOutput) ToGetAccountQuotaAccountQuotaOverviewOutputWithContext(ctx context.Context) GetAccountQuotaAccountQuotaOverviewOutput {
+	return o
+}
+
+// Account quota details.
+func (o GetAccountQuotaAccountQuotaOverviewOutput) AccountQuotas() GetAccountQuotaAccountQuotaOverviewAccountQuotaArrayOutput {
+	return o.ApplyT(func(v GetAccountQuotaAccountQuotaOverview) []GetAccountQuotaAccountQuotaOverviewAccountQuota {
+		return v.AccountQuotas
+	}).(GetAccountQuotaAccountQuotaOverviewAccountQuotaArrayOutput)
+}
+
+// Region.
+func (o GetAccountQuotaAccountQuotaOverviewOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccountQuotaAccountQuotaOverview) string { return v.Region }).(pulumi.StringOutput)
+}
+
+type GetAccountQuotaAccountQuotaOverviewArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAccountQuotaAccountQuotaOverviewArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountQuotaAccountQuotaOverview)(nil)).Elem()
+}
+
+func (o GetAccountQuotaAccountQuotaOverviewArrayOutput) ToGetAccountQuotaAccountQuotaOverviewArrayOutput() GetAccountQuotaAccountQuotaOverviewArrayOutput {
+	return o
+}
+
+func (o GetAccountQuotaAccountQuotaOverviewArrayOutput) ToGetAccountQuotaAccountQuotaOverviewArrayOutputWithContext(ctx context.Context) GetAccountQuotaAccountQuotaOverviewArrayOutput {
+	return o
+}
+
+func (o GetAccountQuotaAccountQuotaOverviewArrayOutput) Index(i pulumi.IntInput) GetAccountQuotaAccountQuotaOverviewOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAccountQuotaAccountQuotaOverview {
+		return vs[0].([]GetAccountQuotaAccountQuotaOverview)[vs[1].(int)]
+	}).(GetAccountQuotaAccountQuotaOverviewOutput)
+}
+
+type GetAccountQuotaAccountQuotaOverviewAccountQuota struct {
+	// Disaster recover group quota list.
+	DisasterRecoverGroupQuotaSets []GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSet `pulumi:"disasterRecoverGroupQuotaSets"`
+	// Image quota list.
+	ImageQuotaSets []GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSet `pulumi:"imageQuotaSets"`
+	// Post-paid quota list.
+	PostPaidQuotaSets []GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSet `pulumi:"postPaidQuotaSets"`
+	// Pre-paid quota list.
+	PrePaidQuotaSets []GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSet `pulumi:"prePaidQuotaSets"`
+	// Spot instance quota list.
+	SpotPaidQuotaSets []GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSet `pulumi:"spotPaidQuotaSets"`
+}
+
+// GetAccountQuotaAccountQuotaOverviewAccountQuotaInput is an input type that accepts GetAccountQuotaAccountQuotaOverviewAccountQuotaArgs and GetAccountQuotaAccountQuotaOverviewAccountQuotaOutput values.
+// You can construct a concrete instance of `GetAccountQuotaAccountQuotaOverviewAccountQuotaInput` via:
+//
+//	GetAccountQuotaAccountQuotaOverviewAccountQuotaArgs{...}
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaInput interface {
+	pulumi.Input
+
+	ToGetAccountQuotaAccountQuotaOverviewAccountQuotaOutput() GetAccountQuotaAccountQuotaOverviewAccountQuotaOutput
+	ToGetAccountQuotaAccountQuotaOverviewAccountQuotaOutputWithContext(context.Context) GetAccountQuotaAccountQuotaOverviewAccountQuotaOutput
+}
+
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaArgs struct {
+	// Disaster recover group quota list.
+	DisasterRecoverGroupQuotaSets GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArrayInput `pulumi:"disasterRecoverGroupQuotaSets"`
+	// Image quota list.
+	ImageQuotaSets GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArrayInput `pulumi:"imageQuotaSets"`
+	// Post-paid quota list.
+	PostPaidQuotaSets GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArrayInput `pulumi:"postPaidQuotaSets"`
+	// Pre-paid quota list.
+	PrePaidQuotaSets GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArrayInput `pulumi:"prePaidQuotaSets"`
+	// Spot instance quota list.
+	SpotPaidQuotaSets GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArrayInput `pulumi:"spotPaidQuotaSets"`
+}
+
+func (GetAccountQuotaAccountQuotaOverviewAccountQuotaArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountQuotaAccountQuotaOverviewAccountQuota)(nil)).Elem()
+}
+
+func (i GetAccountQuotaAccountQuotaOverviewAccountQuotaArgs) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaOutput() GetAccountQuotaAccountQuotaOverviewAccountQuotaOutput {
+	return i.ToGetAccountQuotaAccountQuotaOverviewAccountQuotaOutputWithContext(context.Background())
+}
+
+func (i GetAccountQuotaAccountQuotaOverviewAccountQuotaArgs) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaOutputWithContext(ctx context.Context) GetAccountQuotaAccountQuotaOverviewAccountQuotaOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountQuotaAccountQuotaOverviewAccountQuotaOutput)
+}
+
+// GetAccountQuotaAccountQuotaOverviewAccountQuotaArrayInput is an input type that accepts GetAccountQuotaAccountQuotaOverviewAccountQuotaArray and GetAccountQuotaAccountQuotaOverviewAccountQuotaArrayOutput values.
+// You can construct a concrete instance of `GetAccountQuotaAccountQuotaOverviewAccountQuotaArrayInput` via:
+//
+//	GetAccountQuotaAccountQuotaOverviewAccountQuotaArray{ GetAccountQuotaAccountQuotaOverviewAccountQuotaArgs{...} }
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaArrayInput interface {
+	pulumi.Input
+
+	ToGetAccountQuotaAccountQuotaOverviewAccountQuotaArrayOutput() GetAccountQuotaAccountQuotaOverviewAccountQuotaArrayOutput
+	ToGetAccountQuotaAccountQuotaOverviewAccountQuotaArrayOutputWithContext(context.Context) GetAccountQuotaAccountQuotaOverviewAccountQuotaArrayOutput
+}
+
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaArray []GetAccountQuotaAccountQuotaOverviewAccountQuotaInput
+
+func (GetAccountQuotaAccountQuotaOverviewAccountQuotaArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountQuotaAccountQuotaOverviewAccountQuota)(nil)).Elem()
+}
+
+func (i GetAccountQuotaAccountQuotaOverviewAccountQuotaArray) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaArrayOutput() GetAccountQuotaAccountQuotaOverviewAccountQuotaArrayOutput {
+	return i.ToGetAccountQuotaAccountQuotaOverviewAccountQuotaArrayOutputWithContext(context.Background())
+}
+
+func (i GetAccountQuotaAccountQuotaOverviewAccountQuotaArray) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaArrayOutputWithContext(ctx context.Context) GetAccountQuotaAccountQuotaOverviewAccountQuotaArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountQuotaAccountQuotaOverviewAccountQuotaArrayOutput)
+}
+
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaOutput struct{ *pulumi.OutputState }
+
+func (GetAccountQuotaAccountQuotaOverviewAccountQuotaOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountQuotaAccountQuotaOverviewAccountQuota)(nil)).Elem()
+}
+
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaOutput) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaOutput() GetAccountQuotaAccountQuotaOverviewAccountQuotaOutput {
+	return o
+}
+
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaOutput) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaOutputWithContext(ctx context.Context) GetAccountQuotaAccountQuotaOverviewAccountQuotaOutput {
+	return o
+}
+
+// Disaster recover group quota list.
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaOutput) DisasterRecoverGroupQuotaSets() GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArrayOutput {
+	return o.ApplyT(func(v GetAccountQuotaAccountQuotaOverviewAccountQuota) []GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSet {
+		return v.DisasterRecoverGroupQuotaSets
+	}).(GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArrayOutput)
+}
+
+// Image quota list.
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaOutput) ImageQuotaSets() GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArrayOutput {
+	return o.ApplyT(func(v GetAccountQuotaAccountQuotaOverviewAccountQuota) []GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSet {
+		return v.ImageQuotaSets
+	}).(GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArrayOutput)
+}
+
+// Post-paid quota list.
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaOutput) PostPaidQuotaSets() GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArrayOutput {
+	return o.ApplyT(func(v GetAccountQuotaAccountQuotaOverviewAccountQuota) []GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSet {
+		return v.PostPaidQuotaSets
+	}).(GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArrayOutput)
+}
+
+// Pre-paid quota list.
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaOutput) PrePaidQuotaSets() GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArrayOutput {
+	return o.ApplyT(func(v GetAccountQuotaAccountQuotaOverviewAccountQuota) []GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSet {
+		return v.PrePaidQuotaSets
+	}).(GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArrayOutput)
+}
+
+// Spot instance quota list.
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaOutput) SpotPaidQuotaSets() GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArrayOutput {
+	return o.ApplyT(func(v GetAccountQuotaAccountQuotaOverviewAccountQuota) []GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSet {
+		return v.SpotPaidQuotaSets
+	}).(GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArrayOutput)
+}
+
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAccountQuotaAccountQuotaOverviewAccountQuotaArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountQuotaAccountQuotaOverviewAccountQuota)(nil)).Elem()
+}
+
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaArrayOutput) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaArrayOutput() GetAccountQuotaAccountQuotaOverviewAccountQuotaArrayOutput {
+	return o
+}
+
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaArrayOutput) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaArrayOutputWithContext(ctx context.Context) GetAccountQuotaAccountQuotaOverviewAccountQuotaArrayOutput {
+	return o
+}
+
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaArrayOutput) Index(i pulumi.IntInput) GetAccountQuotaAccountQuotaOverviewAccountQuotaOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAccountQuotaAccountQuotaOverviewAccountQuota {
+		return vs[0].([]GetAccountQuotaAccountQuotaOverviewAccountQuota)[vs[1].(int)]
+	}).(GetAccountQuotaAccountQuotaOverviewAccountQuotaOutput)
+}
+
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSet struct {
+	// Current number of groups.
+	CurrentNum int `pulumi:"currentNum"`
+	// Maximum instances in host group.
+	CvmInHostGroupQuota int `pulumi:"cvmInHostGroupQuota"`
+	// Maximum instances in rack group.
+	CvmInRackGroupQuota int `pulumi:"cvmInRackGroupQuota"`
+	// Maximum instances in switch group.
+	CvmInSwitchGroupQuota int `pulumi:"cvmInSwitchGroupQuota"`
+	// Group quota.
+	GroupQuota int `pulumi:"groupQuota"`
+}
+
+// GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetInput is an input type that accepts GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArgs and GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetOutput values.
+// You can construct a concrete instance of `GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetInput` via:
+//
+//	GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArgs{...}
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetInput interface {
+	pulumi.Input
+
+	ToGetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetOutput() GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetOutput
+	ToGetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetOutputWithContext(context.Context) GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetOutput
+}
+
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArgs struct {
+	// Current number of groups.
+	CurrentNum pulumi.IntInput `pulumi:"currentNum"`
+	// Maximum instances in host group.
+	CvmInHostGroupQuota pulumi.IntInput `pulumi:"cvmInHostGroupQuota"`
+	// Maximum instances in rack group.
+	CvmInRackGroupQuota pulumi.IntInput `pulumi:"cvmInRackGroupQuota"`
+	// Maximum instances in switch group.
+	CvmInSwitchGroupQuota pulumi.IntInput `pulumi:"cvmInSwitchGroupQuota"`
+	// Group quota.
+	GroupQuota pulumi.IntInput `pulumi:"groupQuota"`
+}
+
+func (GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSet)(nil)).Elem()
+}
+
+func (i GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArgs) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetOutput() GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetOutput {
+	return i.ToGetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetOutputWithContext(context.Background())
+}
+
+func (i GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArgs) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetOutputWithContext(ctx context.Context) GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetOutput)
+}
+
+// GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArrayInput is an input type that accepts GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArray and GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArrayOutput values.
+// You can construct a concrete instance of `GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArrayInput` via:
+//
+//	GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArray{ GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArgs{...} }
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArrayInput interface {
+	pulumi.Input
+
+	ToGetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArrayOutput() GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArrayOutput
+	ToGetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArrayOutputWithContext(context.Context) GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArrayOutput
+}
+
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArray []GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetInput
+
+func (GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSet)(nil)).Elem()
+}
+
+func (i GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArray) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArrayOutput() GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArrayOutput {
+	return i.ToGetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArray) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArrayOutputWithContext(ctx context.Context) GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArrayOutput)
+}
+
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetOutput struct{ *pulumi.OutputState }
+
+func (GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSet)(nil)).Elem()
+}
+
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetOutput) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetOutput() GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetOutput {
+	return o
+}
+
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetOutput) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetOutputWithContext(ctx context.Context) GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetOutput {
+	return o
+}
+
+// Current number of groups.
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetOutput) CurrentNum() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSet) int {
+		return v.CurrentNum
+	}).(pulumi.IntOutput)
+}
+
+// Maximum instances in host group.
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetOutput) CvmInHostGroupQuota() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSet) int {
+		return v.CvmInHostGroupQuota
+	}).(pulumi.IntOutput)
+}
+
+// Maximum instances in rack group.
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetOutput) CvmInRackGroupQuota() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSet) int {
+		return v.CvmInRackGroupQuota
+	}).(pulumi.IntOutput)
+}
+
+// Maximum instances in switch group.
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetOutput) CvmInSwitchGroupQuota() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSet) int {
+		return v.CvmInSwitchGroupQuota
+	}).(pulumi.IntOutput)
+}
+
+// Group quota.
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetOutput) GroupQuota() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSet) int {
+		return v.GroupQuota
+	}).(pulumi.IntOutput)
+}
+
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSet)(nil)).Elem()
+}
+
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArrayOutput) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArrayOutput() GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArrayOutput {
+	return o
+}
+
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArrayOutput) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArrayOutputWithContext(ctx context.Context) GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArrayOutput {
+	return o
+}
+
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArrayOutput) Index(i pulumi.IntInput) GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSet {
+		return vs[0].([]GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSet)[vs[1].(int)]
+	}).(GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetOutput)
+}
+
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSet struct {
+	// Total quota.
+	TotalQuota int `pulumi:"totalQuota"`
+	// Used quota.
+	UsedQuota int `pulumi:"usedQuota"`
+}
+
+// GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetInput is an input type that accepts GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArgs and GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetOutput values.
+// You can construct a concrete instance of `GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetInput` via:
+//
+//	GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArgs{...}
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetInput interface {
+	pulumi.Input
+
+	ToGetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetOutput() GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetOutput
+	ToGetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetOutputWithContext(context.Context) GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetOutput
+}
+
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArgs struct {
+	// Total quota.
+	TotalQuota pulumi.IntInput `pulumi:"totalQuota"`
+	// Used quota.
+	UsedQuota pulumi.IntInput `pulumi:"usedQuota"`
+}
+
+func (GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSet)(nil)).Elem()
+}
+
+func (i GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArgs) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetOutput() GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetOutput {
+	return i.ToGetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetOutputWithContext(context.Background())
+}
+
+func (i GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArgs) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetOutputWithContext(ctx context.Context) GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetOutput)
+}
+
+// GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArrayInput is an input type that accepts GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArray and GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArrayOutput values.
+// You can construct a concrete instance of `GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArrayInput` via:
+//
+//	GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArray{ GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArgs{...} }
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArrayInput interface {
+	pulumi.Input
+
+	ToGetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArrayOutput() GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArrayOutput
+	ToGetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArrayOutputWithContext(context.Context) GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArrayOutput
+}
+
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArray []GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetInput
+
+func (GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSet)(nil)).Elem()
+}
+
+func (i GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArray) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArrayOutput() GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArrayOutput {
+	return i.ToGetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArray) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArrayOutputWithContext(ctx context.Context) GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArrayOutput)
+}
+
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetOutput struct{ *pulumi.OutputState }
+
+func (GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSet)(nil)).Elem()
+}
+
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetOutput) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetOutput() GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetOutput {
+	return o
+}
+
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetOutput) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetOutputWithContext(ctx context.Context) GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetOutput {
+	return o
+}
+
+// Total quota.
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetOutput) TotalQuota() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSet) int { return v.TotalQuota }).(pulumi.IntOutput)
+}
+
+// Used quota.
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetOutput) UsedQuota() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSet) int { return v.UsedQuota }).(pulumi.IntOutput)
+}
+
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSet)(nil)).Elem()
+}
+
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArrayOutput) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArrayOutput() GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArrayOutput {
+	return o
+}
+
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArrayOutput) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArrayOutputWithContext(ctx context.Context) GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArrayOutput {
+	return o
+}
+
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArrayOutput) Index(i pulumi.IntInput) GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSet {
+		return vs[0].([]GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSet)[vs[1].(int)]
+	}).(GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetOutput)
+}
+
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSet struct {
+	// Remaining quota.
+	RemainingQuota int `pulumi:"remainingQuota"`
+	// Total quota.
+	TotalQuota int `pulumi:"totalQuota"`
+	// Used quota.
+	UsedQuota int `pulumi:"usedQuota"`
+	// Filter by availability zone, such as ap-guangzhou-3.
+	Zone string `pulumi:"zone"`
+}
+
+// GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetInput is an input type that accepts GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArgs and GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetOutput values.
+// You can construct a concrete instance of `GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetInput` via:
+//
+//	GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArgs{...}
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetInput interface {
+	pulumi.Input
+
+	ToGetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetOutput() GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetOutput
+	ToGetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetOutputWithContext(context.Context) GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetOutput
+}
+
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArgs struct {
+	// Remaining quota.
+	RemainingQuota pulumi.IntInput `pulumi:"remainingQuota"`
+	// Total quota.
+	TotalQuota pulumi.IntInput `pulumi:"totalQuota"`
+	// Used quota.
+	UsedQuota pulumi.IntInput `pulumi:"usedQuota"`
+	// Filter by availability zone, such as ap-guangzhou-3.
+	Zone pulumi.StringInput `pulumi:"zone"`
+}
+
+func (GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSet)(nil)).Elem()
+}
+
+func (i GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArgs) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetOutput() GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetOutput {
+	return i.ToGetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetOutputWithContext(context.Background())
+}
+
+func (i GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArgs) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetOutputWithContext(ctx context.Context) GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetOutput)
+}
+
+// GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArrayInput is an input type that accepts GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArray and GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArrayOutput values.
+// You can construct a concrete instance of `GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArrayInput` via:
+//
+//	GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArray{ GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArgs{...} }
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArrayInput interface {
+	pulumi.Input
+
+	ToGetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArrayOutput() GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArrayOutput
+	ToGetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArrayOutputWithContext(context.Context) GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArrayOutput
+}
+
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArray []GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetInput
+
+func (GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSet)(nil)).Elem()
+}
+
+func (i GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArray) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArrayOutput() GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArrayOutput {
+	return i.ToGetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArray) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArrayOutputWithContext(ctx context.Context) GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArrayOutput)
+}
+
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetOutput struct{ *pulumi.OutputState }
+
+func (GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSet)(nil)).Elem()
+}
+
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetOutput) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetOutput() GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetOutput {
+	return o
+}
+
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetOutput) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetOutputWithContext(ctx context.Context) GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetOutput {
+	return o
+}
+
+// Remaining quota.
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetOutput) RemainingQuota() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSet) int { return v.RemainingQuota }).(pulumi.IntOutput)
+}
+
+// Total quota.
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetOutput) TotalQuota() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSet) int { return v.TotalQuota }).(pulumi.IntOutput)
+}
+
+// Used quota.
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetOutput) UsedQuota() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSet) int { return v.UsedQuota }).(pulumi.IntOutput)
+}
+
+// Filter by availability zone, such as ap-guangzhou-3.
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSet) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSet)(nil)).Elem()
+}
+
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArrayOutput) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArrayOutput() GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArrayOutput {
+	return o
+}
+
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArrayOutput) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArrayOutputWithContext(ctx context.Context) GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArrayOutput {
+	return o
+}
+
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArrayOutput) Index(i pulumi.IntInput) GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSet {
+		return vs[0].([]GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSet)[vs[1].(int)]
+	}).(GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetOutput)
+}
+
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSet struct {
+	// Single purchase quota.
+	OnceQuota int `pulumi:"onceQuota"`
+	// Remaining quota.
+	RemainingQuota int `pulumi:"remainingQuota"`
+	// Total quota.
+	TotalQuota int `pulumi:"totalQuota"`
+	// Used quota.
+	UsedQuota int `pulumi:"usedQuota"`
+	// Filter by availability zone, such as ap-guangzhou-3.
+	Zone string `pulumi:"zone"`
+}
+
+// GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetInput is an input type that accepts GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArgs and GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetOutput values.
+// You can construct a concrete instance of `GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetInput` via:
+//
+//	GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArgs{...}
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetInput interface {
+	pulumi.Input
+
+	ToGetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetOutput() GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetOutput
+	ToGetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetOutputWithContext(context.Context) GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetOutput
+}
+
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArgs struct {
+	// Single purchase quota.
+	OnceQuota pulumi.IntInput `pulumi:"onceQuota"`
+	// Remaining quota.
+	RemainingQuota pulumi.IntInput `pulumi:"remainingQuota"`
+	// Total quota.
+	TotalQuota pulumi.IntInput `pulumi:"totalQuota"`
+	// Used quota.
+	UsedQuota pulumi.IntInput `pulumi:"usedQuota"`
+	// Filter by availability zone, such as ap-guangzhou-3.
+	Zone pulumi.StringInput `pulumi:"zone"`
+}
+
+func (GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSet)(nil)).Elem()
+}
+
+func (i GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArgs) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetOutput() GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetOutput {
+	return i.ToGetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetOutputWithContext(context.Background())
+}
+
+func (i GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArgs) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetOutputWithContext(ctx context.Context) GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetOutput)
+}
+
+// GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArrayInput is an input type that accepts GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArray and GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArrayOutput values.
+// You can construct a concrete instance of `GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArrayInput` via:
+//
+//	GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArray{ GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArgs{...} }
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArrayInput interface {
+	pulumi.Input
+
+	ToGetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArrayOutput() GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArrayOutput
+	ToGetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArrayOutputWithContext(context.Context) GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArrayOutput
+}
+
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArray []GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetInput
+
+func (GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSet)(nil)).Elem()
+}
+
+func (i GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArray) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArrayOutput() GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArrayOutput {
+	return i.ToGetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArray) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArrayOutputWithContext(ctx context.Context) GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArrayOutput)
+}
+
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetOutput struct{ *pulumi.OutputState }
+
+func (GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSet)(nil)).Elem()
+}
+
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetOutput) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetOutput() GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetOutput {
+	return o
+}
+
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetOutput) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetOutputWithContext(ctx context.Context) GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetOutput {
+	return o
+}
+
+// Single purchase quota.
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetOutput) OnceQuota() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSet) int { return v.OnceQuota }).(pulumi.IntOutput)
+}
+
+// Remaining quota.
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetOutput) RemainingQuota() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSet) int { return v.RemainingQuota }).(pulumi.IntOutput)
+}
+
+// Total quota.
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetOutput) TotalQuota() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSet) int { return v.TotalQuota }).(pulumi.IntOutput)
+}
+
+// Used quota.
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetOutput) UsedQuota() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSet) int { return v.UsedQuota }).(pulumi.IntOutput)
+}
+
+// Filter by availability zone, such as ap-guangzhou-3.
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSet) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSet)(nil)).Elem()
+}
+
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArrayOutput) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArrayOutput() GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArrayOutput {
+	return o
+}
+
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArrayOutput) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArrayOutputWithContext(ctx context.Context) GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArrayOutput {
+	return o
+}
+
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArrayOutput) Index(i pulumi.IntInput) GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSet {
+		return vs[0].([]GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSet)[vs[1].(int)]
+	}).(GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetOutput)
+}
+
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSet struct {
+	// Remaining quota.
+	RemainingQuota int `pulumi:"remainingQuota"`
+	// Total quota.
+	TotalQuota int `pulumi:"totalQuota"`
+	// Used quota.
+	UsedQuota int `pulumi:"usedQuota"`
+	// Filter by availability zone, such as ap-guangzhou-3.
+	Zone string `pulumi:"zone"`
+}
+
+// GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetInput is an input type that accepts GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArgs and GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetOutput values.
+// You can construct a concrete instance of `GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetInput` via:
+//
+//	GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArgs{...}
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetInput interface {
+	pulumi.Input
+
+	ToGetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetOutput() GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetOutput
+	ToGetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetOutputWithContext(context.Context) GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetOutput
+}
+
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArgs struct {
+	// Remaining quota.
+	RemainingQuota pulumi.IntInput `pulumi:"remainingQuota"`
+	// Total quota.
+	TotalQuota pulumi.IntInput `pulumi:"totalQuota"`
+	// Used quota.
+	UsedQuota pulumi.IntInput `pulumi:"usedQuota"`
+	// Filter by availability zone, such as ap-guangzhou-3.
+	Zone pulumi.StringInput `pulumi:"zone"`
+}
+
+func (GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSet)(nil)).Elem()
+}
+
+func (i GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArgs) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetOutput() GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetOutput {
+	return i.ToGetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetOutputWithContext(context.Background())
+}
+
+func (i GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArgs) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetOutputWithContext(ctx context.Context) GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetOutput)
+}
+
+// GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArrayInput is an input type that accepts GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArray and GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArrayOutput values.
+// You can construct a concrete instance of `GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArrayInput` via:
+//
+//	GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArray{ GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArgs{...} }
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArrayInput interface {
+	pulumi.Input
+
+	ToGetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArrayOutput() GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArrayOutput
+	ToGetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArrayOutputWithContext(context.Context) GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArrayOutput
+}
+
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArray []GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetInput
+
+func (GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSet)(nil)).Elem()
+}
+
+func (i GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArray) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArrayOutput() GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArrayOutput {
+	return i.ToGetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArray) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArrayOutputWithContext(ctx context.Context) GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArrayOutput)
+}
+
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetOutput struct{ *pulumi.OutputState }
+
+func (GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSet)(nil)).Elem()
+}
+
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetOutput) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetOutput() GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetOutput {
+	return o
+}
+
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetOutput) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetOutputWithContext(ctx context.Context) GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetOutput {
+	return o
+}
+
+// Remaining quota.
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetOutput) RemainingQuota() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSet) int { return v.RemainingQuota }).(pulumi.IntOutput)
+}
+
+// Total quota.
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetOutput) TotalQuota() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSet) int { return v.TotalQuota }).(pulumi.IntOutput)
+}
+
+// Used quota.
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetOutput) UsedQuota() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSet) int { return v.UsedQuota }).(pulumi.IntOutput)
+}
+
+// Filter by availability zone, such as ap-guangzhou-3.
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSet) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+type GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSet)(nil)).Elem()
+}
+
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArrayOutput) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArrayOutput() GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArrayOutput {
+	return o
+}
+
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArrayOutput) ToGetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArrayOutputWithContext(ctx context.Context) GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArrayOutput {
+	return o
+}
+
+func (o GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArrayOutput) Index(i pulumi.IntInput) GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSet {
+		return vs[0].([]GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSet)[vs[1].(int)]
+	}).(GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetOutput)
+}
+
 type GetChcDeniedActionsChcHostDeniedActionSet struct {
 	// CHC instance ID.
 	ChcId string `pulumi:"chcId"`
@@ -9077,6 +10064,310 @@ func (o GetInstancesModificationInstanceTypeConfigStatusListInstanceTypeConfigAr
 	}).(GetInstancesModificationInstanceTypeConfigStatusListInstanceTypeConfigOutput)
 }
 
+type GetRepairTasksRepairTaskList struct {
+	// Instance name (alias).
+	Alias string `pulumi:"alias"`
+	// Authorization source.
+	AuthSource int `pulumi:"authSource"`
+	// Task authorization time.
+	AuthTime string `pulumi:"authTime"`
+	// Authorization type.
+	AuthType int `pulumi:"authType"`
+	// Task creation time.
+	CreateTime string `pulumi:"createTime"`
+	// Device status.
+	DeviceStatus int `pulumi:"deviceStatus"`
+	// Task end time.
+	EndTime string `pulumi:"endTime"`
+	// Instance ID.
+	InstanceId string `pulumi:"instanceId"`
+	// Private IP address.
+	LanIp string `pulumi:"lanIp"`
+	// Operation status.
+	OperateStatus int `pulumi:"operateStatus"`
+	// Product type, optional values: CVM (Cloud Virtual Machine), CDH (Cloud Dedicated Host), CPM2.0 (Cloud Physical Machine 2.0).
+	Product string `pulumi:"product"`
+	// Region.
+	Region string `pulumi:"region"`
+	// Subnet ID.
+	SubnetId string `pulumi:"subnetId"`
+	// Subnet name.
+	SubnetName string `pulumi:"subnetName"`
+	// Task detail description.
+	TaskDetail string `pulumi:"taskDetail"`
+	// Task ID.
+	TaskId string `pulumi:"taskId"`
+	// Task status list. Valid values: 1 (pending authorization), 2 (processing), 3 (ended), 4 (scheduled), 5 (cancelled), 6 (avoided).
+	TaskStatus int `pulumi:"taskStatus"`
+	// Task sub-type.
+	TaskSubType string `pulumi:"taskSubType"`
+	// Task type ID.
+	TaskTypeId int `pulumi:"taskTypeId"`
+	// Task type name.
+	TaskTypeName string `pulumi:"taskTypeName"`
+	// VPC ID.
+	VpcId string `pulumi:"vpcId"`
+	// VPC name.
+	VpcName string `pulumi:"vpcName"`
+	// Public IP address.
+	WanIp string `pulumi:"wanIp"`
+	// Availability zone.
+	Zone string `pulumi:"zone"`
+}
+
+// GetRepairTasksRepairTaskListInput is an input type that accepts GetRepairTasksRepairTaskListArgs and GetRepairTasksRepairTaskListOutput values.
+// You can construct a concrete instance of `GetRepairTasksRepairTaskListInput` via:
+//
+//	GetRepairTasksRepairTaskListArgs{...}
+type GetRepairTasksRepairTaskListInput interface {
+	pulumi.Input
+
+	ToGetRepairTasksRepairTaskListOutput() GetRepairTasksRepairTaskListOutput
+	ToGetRepairTasksRepairTaskListOutputWithContext(context.Context) GetRepairTasksRepairTaskListOutput
+}
+
+type GetRepairTasksRepairTaskListArgs struct {
+	// Instance name (alias).
+	Alias pulumi.StringInput `pulumi:"alias"`
+	// Authorization source.
+	AuthSource pulumi.IntInput `pulumi:"authSource"`
+	// Task authorization time.
+	AuthTime pulumi.StringInput `pulumi:"authTime"`
+	// Authorization type.
+	AuthType pulumi.IntInput `pulumi:"authType"`
+	// Task creation time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Device status.
+	DeviceStatus pulumi.IntInput `pulumi:"deviceStatus"`
+	// Task end time.
+	EndTime pulumi.StringInput `pulumi:"endTime"`
+	// Instance ID.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Private IP address.
+	LanIp pulumi.StringInput `pulumi:"lanIp"`
+	// Operation status.
+	OperateStatus pulumi.IntInput `pulumi:"operateStatus"`
+	// Product type, optional values: CVM (Cloud Virtual Machine), CDH (Cloud Dedicated Host), CPM2.0 (Cloud Physical Machine 2.0).
+	Product pulumi.StringInput `pulumi:"product"`
+	// Region.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Subnet ID.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	// Subnet name.
+	SubnetName pulumi.StringInput `pulumi:"subnetName"`
+	// Task detail description.
+	TaskDetail pulumi.StringInput `pulumi:"taskDetail"`
+	// Task ID.
+	TaskId pulumi.StringInput `pulumi:"taskId"`
+	// Task status list. Valid values: 1 (pending authorization), 2 (processing), 3 (ended), 4 (scheduled), 5 (cancelled), 6 (avoided).
+	TaskStatus pulumi.IntInput `pulumi:"taskStatus"`
+	// Task sub-type.
+	TaskSubType pulumi.StringInput `pulumi:"taskSubType"`
+	// Task type ID.
+	TaskTypeId pulumi.IntInput `pulumi:"taskTypeId"`
+	// Task type name.
+	TaskTypeName pulumi.StringInput `pulumi:"taskTypeName"`
+	// VPC ID.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+	// VPC name.
+	VpcName pulumi.StringInput `pulumi:"vpcName"`
+	// Public IP address.
+	WanIp pulumi.StringInput `pulumi:"wanIp"`
+	// Availability zone.
+	Zone pulumi.StringInput `pulumi:"zone"`
+}
+
+func (GetRepairTasksRepairTaskListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRepairTasksRepairTaskList)(nil)).Elem()
+}
+
+func (i GetRepairTasksRepairTaskListArgs) ToGetRepairTasksRepairTaskListOutput() GetRepairTasksRepairTaskListOutput {
+	return i.ToGetRepairTasksRepairTaskListOutputWithContext(context.Background())
+}
+
+func (i GetRepairTasksRepairTaskListArgs) ToGetRepairTasksRepairTaskListOutputWithContext(ctx context.Context) GetRepairTasksRepairTaskListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRepairTasksRepairTaskListOutput)
+}
+
+// GetRepairTasksRepairTaskListArrayInput is an input type that accepts GetRepairTasksRepairTaskListArray and GetRepairTasksRepairTaskListArrayOutput values.
+// You can construct a concrete instance of `GetRepairTasksRepairTaskListArrayInput` via:
+//
+//	GetRepairTasksRepairTaskListArray{ GetRepairTasksRepairTaskListArgs{...} }
+type GetRepairTasksRepairTaskListArrayInput interface {
+	pulumi.Input
+
+	ToGetRepairTasksRepairTaskListArrayOutput() GetRepairTasksRepairTaskListArrayOutput
+	ToGetRepairTasksRepairTaskListArrayOutputWithContext(context.Context) GetRepairTasksRepairTaskListArrayOutput
+}
+
+type GetRepairTasksRepairTaskListArray []GetRepairTasksRepairTaskListInput
+
+func (GetRepairTasksRepairTaskListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRepairTasksRepairTaskList)(nil)).Elem()
+}
+
+func (i GetRepairTasksRepairTaskListArray) ToGetRepairTasksRepairTaskListArrayOutput() GetRepairTasksRepairTaskListArrayOutput {
+	return i.ToGetRepairTasksRepairTaskListArrayOutputWithContext(context.Background())
+}
+
+func (i GetRepairTasksRepairTaskListArray) ToGetRepairTasksRepairTaskListArrayOutputWithContext(ctx context.Context) GetRepairTasksRepairTaskListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetRepairTasksRepairTaskListArrayOutput)
+}
+
+type GetRepairTasksRepairTaskListOutput struct{ *pulumi.OutputState }
+
+func (GetRepairTasksRepairTaskListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetRepairTasksRepairTaskList)(nil)).Elem()
+}
+
+func (o GetRepairTasksRepairTaskListOutput) ToGetRepairTasksRepairTaskListOutput() GetRepairTasksRepairTaskListOutput {
+	return o
+}
+
+func (o GetRepairTasksRepairTaskListOutput) ToGetRepairTasksRepairTaskListOutputWithContext(ctx context.Context) GetRepairTasksRepairTaskListOutput {
+	return o
+}
+
+// Instance name (alias).
+func (o GetRepairTasksRepairTaskListOutput) Alias() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRepairTasksRepairTaskList) string { return v.Alias }).(pulumi.StringOutput)
+}
+
+// Authorization source.
+func (o GetRepairTasksRepairTaskListOutput) AuthSource() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRepairTasksRepairTaskList) int { return v.AuthSource }).(pulumi.IntOutput)
+}
+
+// Task authorization time.
+func (o GetRepairTasksRepairTaskListOutput) AuthTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRepairTasksRepairTaskList) string { return v.AuthTime }).(pulumi.StringOutput)
+}
+
+// Authorization type.
+func (o GetRepairTasksRepairTaskListOutput) AuthType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRepairTasksRepairTaskList) int { return v.AuthType }).(pulumi.IntOutput)
+}
+
+// Task creation time.
+func (o GetRepairTasksRepairTaskListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRepairTasksRepairTaskList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Device status.
+func (o GetRepairTasksRepairTaskListOutput) DeviceStatus() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRepairTasksRepairTaskList) int { return v.DeviceStatus }).(pulumi.IntOutput)
+}
+
+// Task end time.
+func (o GetRepairTasksRepairTaskListOutput) EndTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRepairTasksRepairTaskList) string { return v.EndTime }).(pulumi.StringOutput)
+}
+
+// Instance ID.
+func (o GetRepairTasksRepairTaskListOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRepairTasksRepairTaskList) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Private IP address.
+func (o GetRepairTasksRepairTaskListOutput) LanIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRepairTasksRepairTaskList) string { return v.LanIp }).(pulumi.StringOutput)
+}
+
+// Operation status.
+func (o GetRepairTasksRepairTaskListOutput) OperateStatus() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRepairTasksRepairTaskList) int { return v.OperateStatus }).(pulumi.IntOutput)
+}
+
+// Product type, optional values: CVM (Cloud Virtual Machine), CDH (Cloud Dedicated Host), CPM2.0 (Cloud Physical Machine 2.0).
+func (o GetRepairTasksRepairTaskListOutput) Product() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRepairTasksRepairTaskList) string { return v.Product }).(pulumi.StringOutput)
+}
+
+// Region.
+func (o GetRepairTasksRepairTaskListOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRepairTasksRepairTaskList) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Subnet ID.
+func (o GetRepairTasksRepairTaskListOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRepairTasksRepairTaskList) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+// Subnet name.
+func (o GetRepairTasksRepairTaskListOutput) SubnetName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRepairTasksRepairTaskList) string { return v.SubnetName }).(pulumi.StringOutput)
+}
+
+// Task detail description.
+func (o GetRepairTasksRepairTaskListOutput) TaskDetail() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRepairTasksRepairTaskList) string { return v.TaskDetail }).(pulumi.StringOutput)
+}
+
+// Task ID.
+func (o GetRepairTasksRepairTaskListOutput) TaskId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRepairTasksRepairTaskList) string { return v.TaskId }).(pulumi.StringOutput)
+}
+
+// Task status list. Valid values: 1 (pending authorization), 2 (processing), 3 (ended), 4 (scheduled), 5 (cancelled), 6 (avoided).
+func (o GetRepairTasksRepairTaskListOutput) TaskStatus() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRepairTasksRepairTaskList) int { return v.TaskStatus }).(pulumi.IntOutput)
+}
+
+// Task sub-type.
+func (o GetRepairTasksRepairTaskListOutput) TaskSubType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRepairTasksRepairTaskList) string { return v.TaskSubType }).(pulumi.StringOutput)
+}
+
+// Task type ID.
+func (o GetRepairTasksRepairTaskListOutput) TaskTypeId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRepairTasksRepairTaskList) int { return v.TaskTypeId }).(pulumi.IntOutput)
+}
+
+// Task type name.
+func (o GetRepairTasksRepairTaskListOutput) TaskTypeName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRepairTasksRepairTaskList) string { return v.TaskTypeName }).(pulumi.StringOutput)
+}
+
+// VPC ID.
+func (o GetRepairTasksRepairTaskListOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRepairTasksRepairTaskList) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+// VPC name.
+func (o GetRepairTasksRepairTaskListOutput) VpcName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRepairTasksRepairTaskList) string { return v.VpcName }).(pulumi.StringOutput)
+}
+
+// Public IP address.
+func (o GetRepairTasksRepairTaskListOutput) WanIp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRepairTasksRepairTaskList) string { return v.WanIp }).(pulumi.StringOutput)
+}
+
+// Availability zone.
+func (o GetRepairTasksRepairTaskListOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetRepairTasksRepairTaskList) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+type GetRepairTasksRepairTaskListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetRepairTasksRepairTaskListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetRepairTasksRepairTaskList)(nil)).Elem()
+}
+
+func (o GetRepairTasksRepairTaskListArrayOutput) ToGetRepairTasksRepairTaskListArrayOutput() GetRepairTasksRepairTaskListArrayOutput {
+	return o
+}
+
+func (o GetRepairTasksRepairTaskListArrayOutput) ToGetRepairTasksRepairTaskListArrayOutputWithContext(ctx context.Context) GetRepairTasksRepairTaskListArrayOutput {
+	return o
+}
+
+func (o GetRepairTasksRepairTaskListArrayOutput) Index(i pulumi.IntInput) GetRepairTasksRepairTaskListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetRepairTasksRepairTaskList {
+		return vs[0].([]GetRepairTasksRepairTaskList)[vs[1].(int)]
+	}).(GetRepairTasksRepairTaskListOutput)
+}
+
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ActionTimerActionTimerInput)(nil)).Elem(), ActionTimerActionTimerArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ActionTimerActionTimerPtrInput)(nil)).Elem(), ActionTimerActionTimerArgs{})
@@ -9168,6 +10459,22 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*RenewHostHostChargePrepaidPtrInput)(nil)).Elem(), RenewHostHostChargePrepaidArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RenewInstanceInstanceChargePrepaidInput)(nil)).Elem(), RenewInstanceInstanceChargePrepaidArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RenewInstanceInstanceChargePrepaidPtrInput)(nil)).Elem(), RenewInstanceInstanceChargePrepaidArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncImageImageSetInput)(nil)).Elem(), SyncImageImageSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncImageImageSetArrayInput)(nil)).Elem(), SyncImageImageSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountQuotaAccountQuotaOverviewInput)(nil)).Elem(), GetAccountQuotaAccountQuotaOverviewArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountQuotaAccountQuotaOverviewArrayInput)(nil)).Elem(), GetAccountQuotaAccountQuotaOverviewArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountQuotaAccountQuotaOverviewAccountQuotaInput)(nil)).Elem(), GetAccountQuotaAccountQuotaOverviewAccountQuotaArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountQuotaAccountQuotaOverviewAccountQuotaArrayInput)(nil)).Elem(), GetAccountQuotaAccountQuotaOverviewAccountQuotaArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetInput)(nil)).Elem(), GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArrayInput)(nil)).Elem(), GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetInput)(nil)).Elem(), GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArrayInput)(nil)).Elem(), GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetInput)(nil)).Elem(), GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArrayInput)(nil)).Elem(), GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetInput)(nil)).Elem(), GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArrayInput)(nil)).Elem(), GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetInput)(nil)).Elem(), GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArrayInput)(nil)).Elem(), GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetChcDeniedActionsChcHostDeniedActionSetInput)(nil)).Elem(), GetChcDeniedActionsChcHostDeniedActionSetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetChcDeniedActionsChcHostDeniedActionSetArrayInput)(nil)).Elem(), GetChcDeniedActionsChcHostDeniedActionSetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetChcHostsChcHostSetInput)(nil)).Elem(), GetChcHostsChcHostSetArgs{})
@@ -9192,6 +10499,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesModificationInstanceTypeConfigStatusListArrayInput)(nil)).Elem(), GetInstancesModificationInstanceTypeConfigStatusListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesModificationInstanceTypeConfigStatusListInstanceTypeConfigInput)(nil)).Elem(), GetInstancesModificationInstanceTypeConfigStatusListInstanceTypeConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesModificationInstanceTypeConfigStatusListInstanceTypeConfigArrayInput)(nil)).Elem(), GetInstancesModificationInstanceTypeConfigStatusListInstanceTypeConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRepairTasksRepairTaskListInput)(nil)).Elem(), GetRepairTasksRepairTaskListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetRepairTasksRepairTaskListArrayInput)(nil)).Elem(), GetRepairTasksRepairTaskListArray{})
 	pulumi.RegisterOutputType(ActionTimerActionTimerOutput{})
 	pulumi.RegisterOutputType(ActionTimerActionTimerPtrOutput{})
 	pulumi.RegisterOutputType(ChcConfigBmcVirtualPrivateCloudOutput{})
@@ -9282,6 +10591,22 @@ func init() {
 	pulumi.RegisterOutputType(RenewHostHostChargePrepaidPtrOutput{})
 	pulumi.RegisterOutputType(RenewInstanceInstanceChargePrepaidOutput{})
 	pulumi.RegisterOutputType(RenewInstanceInstanceChargePrepaidPtrOutput{})
+	pulumi.RegisterOutputType(SyncImageImageSetOutput{})
+	pulumi.RegisterOutputType(SyncImageImageSetArrayOutput{})
+	pulumi.RegisterOutputType(GetAccountQuotaAccountQuotaOverviewOutput{})
+	pulumi.RegisterOutputType(GetAccountQuotaAccountQuotaOverviewArrayOutput{})
+	pulumi.RegisterOutputType(GetAccountQuotaAccountQuotaOverviewAccountQuotaOutput{})
+	pulumi.RegisterOutputType(GetAccountQuotaAccountQuotaOverviewAccountQuotaArrayOutput{})
+	pulumi.RegisterOutputType(GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetOutput{})
+	pulumi.RegisterOutputType(GetAccountQuotaAccountQuotaOverviewAccountQuotaDisasterRecoverGroupQuotaSetArrayOutput{})
+	pulumi.RegisterOutputType(GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetOutput{})
+	pulumi.RegisterOutputType(GetAccountQuotaAccountQuotaOverviewAccountQuotaImageQuotaSetArrayOutput{})
+	pulumi.RegisterOutputType(GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetOutput{})
+	pulumi.RegisterOutputType(GetAccountQuotaAccountQuotaOverviewAccountQuotaPostPaidQuotaSetArrayOutput{})
+	pulumi.RegisterOutputType(GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetOutput{})
+	pulumi.RegisterOutputType(GetAccountQuotaAccountQuotaOverviewAccountQuotaPrePaidQuotaSetArrayOutput{})
+	pulumi.RegisterOutputType(GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetOutput{})
+	pulumi.RegisterOutputType(GetAccountQuotaAccountQuotaOverviewAccountQuotaSpotPaidQuotaSetArrayOutput{})
 	pulumi.RegisterOutputType(GetChcDeniedActionsChcHostDeniedActionSetOutput{})
 	pulumi.RegisterOutputType(GetChcDeniedActionsChcHostDeniedActionSetArrayOutput{})
 	pulumi.RegisterOutputType(GetChcHostsChcHostSetOutput{})
@@ -9306,4 +10631,6 @@ func init() {
 	pulumi.RegisterOutputType(GetInstancesModificationInstanceTypeConfigStatusListArrayOutput{})
 	pulumi.RegisterOutputType(GetInstancesModificationInstanceTypeConfigStatusListInstanceTypeConfigOutput{})
 	pulumi.RegisterOutputType(GetInstancesModificationInstanceTypeConfigStatusListInstanceTypeConfigArrayOutput{})
+	pulumi.RegisterOutputType(GetRepairTasksRepairTaskListOutput{})
+	pulumi.RegisterOutputType(GetRepairTasksRepairTaskListArrayOutput{})
 }

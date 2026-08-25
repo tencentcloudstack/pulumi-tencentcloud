@@ -68,12 +68,8 @@ type GetOrgShareAreaResult struct {
 }
 
 func GetOrgShareAreaOutput(ctx *pulumi.Context, args GetOrgShareAreaOutputArgs, opts ...pulumi.InvokeOption) GetOrgShareAreaResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetOrgShareAreaResultOutput, error) {
-			args := v.(GetOrgShareAreaArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Organization/getOrgShareArea:getOrgShareArea", args, GetOrgShareAreaResultOutput{}, options).(GetOrgShareAreaResultOutput), nil
-		}).(GetOrgShareAreaResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Organization/getOrgShareArea:getOrgShareArea", args, GetOrgShareAreaResultOutput{}, options).(GetOrgShareAreaResultOutput)
 }
 
 // A collection of arguments for invoking getOrgShareArea.

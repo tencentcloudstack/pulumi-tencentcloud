@@ -11,37 +11,6 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Use this data source to query detailed information of rum logExport
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/rum"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := rum.GetLogExport(ctx, &rum.GetLogExportArgs{
-//				Name:      "log",
-//				StartTime: "1692594840000",
-//				Query:     "id:123 AND type: \"log\"",
-//				EndTime:   "1692609240000",
-//				ProjectId: 1,
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
-// ```
 func GetLogExport(ctx *pulumi.Context, args *GetLogExportArgs, opts ...pulumi.InvokeOption) (*GetLogExportResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetLogExportResult
@@ -54,20 +23,13 @@ func GetLogExport(ctx *pulumi.Context, args *GetLogExportArgs, opts ...pulumi.In
 
 // A collection of arguments for invoking getLogExport.
 type GetLogExportArgs struct {
-	// End timestamp, in milliseconds.
-	EndTime string `pulumi:"endTime"`
-	// Log fields.
-	Fields []string `pulumi:"fields"`
-	// Export flag name.
-	Name string `pulumi:"name"`
-	// Project ID.
-	ProjectId int `pulumi:"projectId"`
-	// Log Query syntax statement.
-	Query string `pulumi:"query"`
-	// Used to save results.
-	ResultOutputFile *string `pulumi:"resultOutputFile"`
-	// Start timestamp, in milliseconds.
-	StartTime string `pulumi:"startTime"`
+	EndTime          string   `pulumi:"endTime"`
+	Fields           []string `pulumi:"fields"`
+	Name             string   `pulumi:"name"`
+	ProjectId        int      `pulumi:"projectId"`
+	Query            string   `pulumi:"query"`
+	ResultOutputFile *string  `pulumi:"resultOutputFile"`
+	StartTime        string   `pulumi:"startTime"`
 }
 
 // A collection of values returned by getLogExport.
@@ -75,41 +37,29 @@ type GetLogExportResult struct {
 	EndTime string   `pulumi:"endTime"`
 	Fields  []string `pulumi:"fields"`
 	// The provider-assigned unique ID for this managed resource.
-	Id        string `pulumi:"id"`
-	Name      string `pulumi:"name"`
-	ProjectId int    `pulumi:"projectId"`
-	Query     string `pulumi:"query"`
-	// Return result.
+	Id               string  `pulumi:"id"`
+	Name             string  `pulumi:"name"`
+	ProjectId        int     `pulumi:"projectId"`
+	Query            string  `pulumi:"query"`
 	Result           string  `pulumi:"result"`
 	ResultOutputFile *string `pulumi:"resultOutputFile"`
 	StartTime        string  `pulumi:"startTime"`
 }
 
 func GetLogExportOutput(ctx *pulumi.Context, args GetLogExportOutputArgs, opts ...pulumi.InvokeOption) GetLogExportResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetLogExportResultOutput, error) {
-			args := v.(GetLogExportArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Rum/getLogExport:getLogExport", args, GetLogExportResultOutput{}, options).(GetLogExportResultOutput), nil
-		}).(GetLogExportResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Rum/getLogExport:getLogExport", args, GetLogExportResultOutput{}, options).(GetLogExportResultOutput)
 }
 
 // A collection of arguments for invoking getLogExport.
 type GetLogExportOutputArgs struct {
-	// End timestamp, in milliseconds.
-	EndTime pulumi.StringInput `pulumi:"endTime"`
-	// Log fields.
-	Fields pulumi.StringArrayInput `pulumi:"fields"`
-	// Export flag name.
-	Name pulumi.StringInput `pulumi:"name"`
-	// Project ID.
-	ProjectId pulumi.IntInput `pulumi:"projectId"`
-	// Log Query syntax statement.
-	Query pulumi.StringInput `pulumi:"query"`
-	// Used to save results.
-	ResultOutputFile pulumi.StringPtrInput `pulumi:"resultOutputFile"`
-	// Start timestamp, in milliseconds.
-	StartTime pulumi.StringInput `pulumi:"startTime"`
+	EndTime          pulumi.StringInput      `pulumi:"endTime"`
+	Fields           pulumi.StringArrayInput `pulumi:"fields"`
+	Name             pulumi.StringInput      `pulumi:"name"`
+	ProjectId        pulumi.IntInput         `pulumi:"projectId"`
+	Query            pulumi.StringInput      `pulumi:"query"`
+	ResultOutputFile pulumi.StringPtrInput   `pulumi:"resultOutputFile"`
+	StartTime        pulumi.StringInput      `pulumi:"startTime"`
 }
 
 func (GetLogExportOutputArgs) ElementType() reflect.Type {
@@ -156,7 +106,6 @@ func (o GetLogExportResultOutput) Query() pulumi.StringOutput {
 	return o.ApplyT(func(v GetLogExportResult) string { return v.Query }).(pulumi.StringOutput)
 }
 
-// Return result.
 func (o GetLogExportResultOutput) Result() pulumi.StringOutput {
 	return o.ApplyT(func(v GetLogExportResult) string { return v.Result }).(pulumi.StringOutput)
 }

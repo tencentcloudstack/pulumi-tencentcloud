@@ -75,12 +75,8 @@ type GetDescribeUserRolesResult struct {
 }
 
 func GetDescribeUserRolesOutput(ctx *pulumi.Context, args GetDescribeUserRolesOutputArgs, opts ...pulumi.InvokeOption) GetDescribeUserRolesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDescribeUserRolesResultOutput, error) {
-			args := v.(GetDescribeUserRolesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dlc/getDescribeUserRoles:getDescribeUserRoles", args, GetDescribeUserRolesResultOutput{}, options).(GetDescribeUserRolesResultOutput), nil
-		}).(GetDescribeUserRolesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dlc/getDescribeUserRoles:getDescribeUserRoles", args, GetDescribeUserRolesResultOutput{}, options).(GetDescribeUserRolesResultOutput)
 }
 
 // A collection of arguments for invoking getDescribeUserRoles.

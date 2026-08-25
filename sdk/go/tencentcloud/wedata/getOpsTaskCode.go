@@ -71,12 +71,8 @@ type GetOpsTaskCodeResult struct {
 }
 
 func GetOpsTaskCodeOutput(ctx *pulumi.Context, args GetOpsTaskCodeOutputArgs, opts ...pulumi.InvokeOption) GetOpsTaskCodeResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetOpsTaskCodeResultOutput, error) {
-			args := v.(GetOpsTaskCodeArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Wedata/getOpsTaskCode:getOpsTaskCode", args, GetOpsTaskCodeResultOutput{}, options).(GetOpsTaskCodeResultOutput), nil
-		}).(GetOpsTaskCodeResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Wedata/getOpsTaskCode:getOpsTaskCode", args, GetOpsTaskCodeResultOutput{}, options).(GetOpsTaskCodeResultOutput)
 }
 
 // A collection of arguments for invoking getOpsTaskCode.

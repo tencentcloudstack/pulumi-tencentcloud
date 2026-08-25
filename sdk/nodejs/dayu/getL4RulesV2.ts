@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const tencentcloudDayuL4RulesV2 = tencentcloud.Dayu.getL4RulesV2({
+ * const tencentcloudDayuL4RulesV2 = tencentcloud.dayu.getL4RulesV2({
  *     business: "bgpip",
  * });
  * ```
@@ -84,7 +84,7 @@ export interface GetL4RulesV2Result {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const tencentcloudDayuL4RulesV2 = tencentcloud.Dayu.getL4RulesV2({
+ * const tencentcloudDayuL4RulesV2 = tencentcloud.dayu.getL4RulesV2({
  *     business: "bgpip",
  * });
  * ```
@@ -110,13 +110,13 @@ export interface GetL4RulesV2OutputArgs {
     /**
      * Ip of the resource.
      */
-    ip?: pulumi.Input<string>;
+    ip?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Virtual port of resource.
      */
-    virtualPort?: pulumi.Input<number>;
+    virtualPort?: pulumi.Input<number | undefined>;
 }

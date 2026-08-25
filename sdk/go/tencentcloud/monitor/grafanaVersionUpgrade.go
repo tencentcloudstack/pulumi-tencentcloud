@@ -43,7 +43,7 @@ import (
 //
 // ## Import
 //
-// monitor grafana_version_upgrade can be imported using the id, e.g.
+// monitor grafanaVersionUpgrade can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Monitor/grafanaVersionUpgrade:GrafanaVersionUpgrade grafana_version_upgrade instance_id

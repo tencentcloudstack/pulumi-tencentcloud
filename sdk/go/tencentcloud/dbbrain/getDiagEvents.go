@@ -11,9 +11,11 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Use this data source to query detailed information of dbbrain diagEvents
+// Use this data source to query detailed information of DBbrain diag events
 //
 // ## Example Usage
+//
+// ### Query events only by time
 //
 // ```go
 // package main
@@ -24,26 +26,58 @@ import (
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dbbrain"
 //
 // )
-// func main() {
-// pulumi.Run(func(ctx *pulumi.Context) error {
-// _, err := dbbrain.GetDiagEvents(ctx, &dbbrain.GetDiagEventsArgs{
-// InstanceIds: []string{
-// "%s",
-// },
-// StartTime: "%s",
-// EndTime: "%s",
-// Severities: interface{}{
-// 1,
-// 4,
-// 5,
-// },
-// }, nil);
-// if err != nil {
-// return err
-// }
-// return nil
-// })
-// }
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := dbbrain.GetDiagEvents(ctx, &dbbrain.GetDiagEventsArgs{
+//				StartTime: "2025-01-01T00:00:00+08:00",
+//				EndTime:   "2026-12-31T00:00:00+08:00",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Or add another filters
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dbbrain"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := dbbrain.GetDiagEvents(ctx, &dbbrain.GetDiagEventsArgs{
+//				StartTime: "2026-01-01T00:00:00+08:00",
+//				EndTime:   "2026-12-31T00:00:00+08:00",
+//				InstanceIds: []string{
+//					"crs-kpyy0txj",
+//				},
+//				Product: pulumi.StringRef("redis"),
+//				Severities: []int{
+//					1,
+//					2,
+//					3,
+//					4,
+//					5,
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetDiagEvents(ctx *pulumi.Context, args *GetDiagEventsArgs, opts ...pulumi.InvokeOption) (*GetDiagEventsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
@@ -57,53 +91,54 @@ func GetDiagEvents(ctx *pulumi.Context, args *GetDiagEventsArgs, opts ...pulumi.
 
 // A collection of arguments for invoking getDiagEvents.
 type GetDiagEventsArgs struct {
-	// end time.
+	// End time.
 	EndTime string `pulumi:"endTime"`
-	// instance id list.
+	// Instance ID list.
 	InstanceIds []string `pulumi:"instanceIds"`
+	// Service product type; supported values include: `mysql` - Cloud Database MySQL, `redis` - Cloud Database Redis, `mariadb` - MariaDB database. The default is `mysql`.
+	Product *string `pulumi:"product"`
 	// Used to save results.
 	ResultOutputFile *string `pulumi:"resultOutputFile"`
-	// severity list, optional value is 1-fatal, 2-severity, 3-warning, 4-tips, 5-health.
+	// Severity list, optional value is 1-fatal, 2-severity, 3-warning, 4-tips, 5-health.
 	Severities []int `pulumi:"severities"`
-	// start time.
+	// Start time.
 	StartTime string `pulumi:"startTime"`
 }
 
 // A collection of values returned by getDiagEvents.
 type GetDiagEventsResult struct {
-	// end time.
+	// End time.
 	EndTime string `pulumi:"endTime"`
 	// The provider-assigned unique ID for this managed resource.
 	Id          string   `pulumi:"id"`
 	InstanceIds []string `pulumi:"instanceIds"`
-	// diag event list.
+	// Diag event list.
 	Lists            []GetDiagEventsList `pulumi:"lists"`
+	Product          *string             `pulumi:"product"`
 	ResultOutputFile *string             `pulumi:"resultOutputFile"`
 	Severities       []int               `pulumi:"severities"`
-	// start time.
+	// Start time.
 	StartTime string `pulumi:"startTime"`
 }
 
 func GetDiagEventsOutput(ctx *pulumi.Context, args GetDiagEventsOutputArgs, opts ...pulumi.InvokeOption) GetDiagEventsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDiagEventsResultOutput, error) {
-			args := v.(GetDiagEventsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dbbrain/getDiagEvents:getDiagEvents", args, GetDiagEventsResultOutput{}, options).(GetDiagEventsResultOutput), nil
-		}).(GetDiagEventsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dbbrain/getDiagEvents:getDiagEvents", args, GetDiagEventsResultOutput{}, options).(GetDiagEventsResultOutput)
 }
 
 // A collection of arguments for invoking getDiagEvents.
 type GetDiagEventsOutputArgs struct {
-	// end time.
+	// End time.
 	EndTime pulumi.StringInput `pulumi:"endTime"`
-	// instance id list.
+	// Instance ID list.
 	InstanceIds pulumi.StringArrayInput `pulumi:"instanceIds"`
+	// Service product type; supported values include: `mysql` - Cloud Database MySQL, `redis` - Cloud Database Redis, `mariadb` - MariaDB database. The default is `mysql`.
+	Product pulumi.StringPtrInput `pulumi:"product"`
 	// Used to save results.
 	ResultOutputFile pulumi.StringPtrInput `pulumi:"resultOutputFile"`
-	// severity list, optional value is 1-fatal, 2-severity, 3-warning, 4-tips, 5-health.
+	// Severity list, optional value is 1-fatal, 2-severity, 3-warning, 4-tips, 5-health.
 	Severities pulumi.IntArrayInput `pulumi:"severities"`
-	// start time.
+	// Start time.
 	StartTime pulumi.StringInput `pulumi:"startTime"`
 }
 
@@ -126,7 +161,7 @@ func (o GetDiagEventsResultOutput) ToGetDiagEventsResultOutputWithContext(ctx co
 	return o
 }
 
-// end time.
+// End time.
 func (o GetDiagEventsResultOutput) EndTime() pulumi.StringOutput {
 	return o.ApplyT(func(v GetDiagEventsResult) string { return v.EndTime }).(pulumi.StringOutput)
 }
@@ -140,9 +175,13 @@ func (o GetDiagEventsResultOutput) InstanceIds() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetDiagEventsResult) []string { return v.InstanceIds }).(pulumi.StringArrayOutput)
 }
 
-// diag event list.
+// Diag event list.
 func (o GetDiagEventsResultOutput) Lists() GetDiagEventsListArrayOutput {
 	return o.ApplyT(func(v GetDiagEventsResult) []GetDiagEventsList { return v.Lists }).(GetDiagEventsListArrayOutput)
+}
+
+func (o GetDiagEventsResultOutput) Product() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetDiagEventsResult) *string { return v.Product }).(pulumi.StringPtrOutput)
 }
 
 func (o GetDiagEventsResultOutput) ResultOutputFile() pulumi.StringPtrOutput {
@@ -153,7 +192,7 @@ func (o GetDiagEventsResultOutput) Severities() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v GetDiagEventsResult) []int { return v.Severities }).(pulumi.IntArrayOutput)
 }
 
-// start time.
+// Start time.
 func (o GetDiagEventsResultOutput) StartTime() pulumi.StringOutput {
 	return o.ApplyT(func(v GetDiagEventsResult) string { return v.StartTime }).(pulumi.StringOutput)
 }

@@ -154,11 +154,11 @@ export interface RouteTableSelectionPoliciesState {
     /**
      * CCN Instance ID.
      */
-    ccnId?: pulumi.Input<string>;
+    ccnId?: pulumi.Input<string | undefined>;
     /**
      * Select strategy information set.
      */
-    selectionPolicies?: pulumi.Input<pulumi.Input<inputs.Ccn.RouteTableSelectionPoliciesSelectionPolicy>[]>;
+    selectionPolicies?: pulumi.Input<pulumi.Input<inputs.Ccn.RouteTableSelectionPoliciesSelectionPolicy>[] | undefined>;
 }
 
 /**

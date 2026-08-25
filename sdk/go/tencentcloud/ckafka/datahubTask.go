@@ -64,7 +64,7 @@ import (
 //
 // ## Import
 //
-// ckafka datahub_task can be imported using the id, e.g.
+// ckafka datahubTask can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Ckafka/datahubTask:DatahubTask datahub_task datahub_task_id

@@ -12,7 +12,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a monitor Exporter Integration
+// Provides a resource to create a Monitor Exporter Integration
 //
 // > **NOTE:** If you only want to upgrade the exporter version with same config, you can set `version` under `instanceSpec` with any value to trigger the change.
 //
@@ -35,7 +35,7 @@ import (
 //			_, err := monitor.NewTmpExporterIntegrationV2(ctx, "example", &monitor.TmpExporterIntegrationV2Args{
 //				InstanceId: pulumi.String("prom-gzg3f1em"),
 //				Kind:       pulumi.String("qcloud-exporter"),
-//				Content:    pulumi.String("{\"name\":\"test\",\"kind\":\"qcloud-exporter\",\"spec\":{\"scrapeSpec\":{\"interval\":\"1m\",\"timeout\":\"1m\",\"relabelConfigs\":\"#metricRelabelings:\\n#- action: labeldrop\\n#  regex: tmp_test_label\\n\"},\"instanceSpec\":{\"region\":\"Guangzhou\",\"role\":\"CM_QCSLinkedRoleInTMP\",\"useRole\":true,\"authProvider\":{\"method\":1,\"presetRole\":\"CM_QCSLinkedRoleInTMP\"},\"rateLimit\":1000,\"delaySeconds\":0,\"rangeSeconds\":0,\"reload_interval_minutes\":10,\"uin\":\"100023201586\",\"tag_key_operation\":\"ToUnderLineAndLower\"},\"exporterSpec\":{\"cvm\":false,\"cbs\":true,\"imageRegistry\":\"ccr.ccs.tencentyun.com\",\"cpu\":\"0.25\",\"memory\":\"0.5Gi\"}},\"status\":{}}"),
+//				Content:    pulumi.String("{\"name\":\"tf-example\",\"kind\":\"qcloud-exporter\",\"spec\":{\"scrapeSpec\":{\"interval\":\"1m\",\"timeout\":\"1m\",\"relabelConfigs\":\"#metricRelabelings:\\n#- action: labeldrop\\n#  regex: tmp_test_label\\n\"},\"instanceSpec\":{\"region\":\"Guangzhou\",\"role\":\"CM_QCSLinkedRoleInTMP\",\"useRole\":true,\"authProvider\":{\"method\":1,\"presetRole\":\"CM_QCSLinkedRoleInTMP\"},\"rateLimit\":1000,\"delaySeconds\":0,\"rangeSeconds\":0,\"reload_interval_minutes\":10,\"uin\":\"100023201586\",\"tag_key_operation\":\"ToUnderLineAndLower\"},\"exporterSpec\":{\"cvm\":false,\"cbs\":true,\"imageRegistry\":\"ccr.ccs.tencentyun.com\",\"cpu\":\"0.25\",\"memory\":\"0.5Gi\"}},\"status\":{}}"),
 //			})
 //			if err != nil {
 //				return err
@@ -70,11 +70,11 @@ import (
 //						"user":     "root",
 //						"password": "Password@123",
 //						"url":      "http://127.0.0.1:8080",
-//						"labels": map[string]interface{}{
+//						"labels": map[string]string{
 //							"labelKey": "labelValue",
 //						},
 //					},
-//					"exporterSpec": map[string]interface{}{
+//					"exporterSpec": map[string]bool{
 //						"all":             true,
 //						"indices":         true,
 //						"indicesSettings": true,
@@ -120,15 +120,15 @@ import (
 // )
 // func main() {
 // pulumi.Run(func(ctx *pulumi.Context) error {
-// vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+// vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 // Name: pulumi.String("vpc"),
 // CidrBlock: pulumi.String("10.2.0.0/16"),
 // })
 // if err != nil {
 // return err
 // }
-// subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-// VpcId: vpc.ID(),
+// subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+// VpcId: vpc2.ID().ToIDOutput().ToStringOutput(),
 // Name: pulumi.String("subnet"),
 // CidrBlock: pulumi.String("10.2.11.0/24"),
 // AvailabilityZone: pulumi.String("ap-guangzhou-6"),
@@ -138,8 +138,8 @@ import (
 // }
 // example, err := monitor.NewTmpInstance(ctx, "example", &monitor.TmpInstanceArgs{
 // InstanceName: pulumi.String("tf-example"),
-// VpcId: vpc.ID(),
-// SubnetId: subnet.ID(),
+// VpcId: vpc2.ID().ToIDOutput().ToStringOutput(),
+// SubnetId: subnet2.ID().ToIDOutput().ToStringOutput(),
 // DataRetentionTime: pulumi.Int(15),
 // Zone: pulumi.String("ap-guangzhou-6"),
 // Tags: pulumi.StringMap{
@@ -162,13 +162,59 @@ import (
 // })
 // }
 // ```
+//
+// ### With clusterId
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/monitor"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := monitor.NewTmpExporterIntegrationV2(ctx, "example", &monitor.TmpExporterIntegrationV2Args{
+//				InstanceId: pulumi.String("prom-gzg3f1em"),
+//				Kind:       pulumi.String("external-node-exporter"),
+//				Content:    pulumi.String("{\"kind\":\"external-node-exporter\",\"name\":\"tf-example\",\"spec\":{\"instanceSpec\":{\"interval\":30,\"path\":\"/metrics\",\"servers\":[\"1.1.1.1:9100\"]}}}"),
+//				KubeType:   pulumi.Int(3),
+//				ClusterId:  pulumi.String("cls-csxm4phu"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// Monitor Exporter Integration can be imported using the id, e.g.
+//
+// ```sh
+// $ pulumi import tencentcloud:Monitor/tmpExporterIntegrationV2:TmpExporterIntegrationV2 example tf-example#prom-gzg3f1em#qcloud-exporter
+// ```
+//
+// with clusterId
+//
+// ```sh
+// $ pulumi import tencentcloud:Monitor/tmpExporterIntegrationV2:TmpExporterIntegrationV2 example tf-example#prom-gzg3f1em#3#cls-csxm4phu#external-node-exporter
+// ```
 type TmpExporterIntegrationV2 struct {
 	pulumi.CustomResourceState
 
 	// Cluster ID.
 	ClusterId pulumi.StringPtrOutput `pulumi:"clusterId"`
-	// Integration config.
+	// Integration config. For more details, please refer to [Cloud Monitoring](https://www.tencentcloud.com/document/product/248/63002?lang=en&pg=). PS: `spec.instanceSpec.restart` is used in Terraform to restart integration or update integration version. It is an integer, and the value can be a timestamp in seconds, optional.
 	Content pulumi.StringOutput `pulumi:"content"`
+	// Integration is disabled when the value is true. Default is false.
+	Disable pulumi.BoolOutput `pulumi:"disable"`
 	// Instance ID.
 	InstanceId pulumi.StringOutput `pulumi:"instanceId"`
 	// Type.
@@ -218,8 +264,10 @@ func GetTmpExporterIntegrationV2(ctx *pulumi.Context,
 type tmpExporterIntegrationV2State struct {
 	// Cluster ID.
 	ClusterId *string `pulumi:"clusterId"`
-	// Integration config.
+	// Integration config. For more details, please refer to [Cloud Monitoring](https://www.tencentcloud.com/document/product/248/63002?lang=en&pg=). PS: `spec.instanceSpec.restart` is used in Terraform to restart integration or update integration version. It is an integer, and the value can be a timestamp in seconds, optional.
 	Content *string `pulumi:"content"`
+	// Integration is disabled when the value is true. Default is false.
+	Disable *bool `pulumi:"disable"`
 	// Instance ID.
 	InstanceId *string `pulumi:"instanceId"`
 	// Type.
@@ -231,8 +279,10 @@ type tmpExporterIntegrationV2State struct {
 type TmpExporterIntegrationV2State struct {
 	// Cluster ID.
 	ClusterId pulumi.StringPtrInput
-	// Integration config.
+	// Integration config. For more details, please refer to [Cloud Monitoring](https://www.tencentcloud.com/document/product/248/63002?lang=en&pg=). PS: `spec.instanceSpec.restart` is used in Terraform to restart integration or update integration version. It is an integer, and the value can be a timestamp in seconds, optional.
 	Content pulumi.StringPtrInput
+	// Integration is disabled when the value is true. Default is false.
+	Disable pulumi.BoolPtrInput
 	// Instance ID.
 	InstanceId pulumi.StringPtrInput
 	// Type.
@@ -248,8 +298,10 @@ func (TmpExporterIntegrationV2State) ElementType() reflect.Type {
 type tmpExporterIntegrationV2Args struct {
 	// Cluster ID.
 	ClusterId *string `pulumi:"clusterId"`
-	// Integration config.
+	// Integration config. For more details, please refer to [Cloud Monitoring](https://www.tencentcloud.com/document/product/248/63002?lang=en&pg=). PS: `spec.instanceSpec.restart` is used in Terraform to restart integration or update integration version. It is an integer, and the value can be a timestamp in seconds, optional.
 	Content string `pulumi:"content"`
+	// Integration is disabled when the value is true. Default is false.
+	Disable *bool `pulumi:"disable"`
 	// Instance ID.
 	InstanceId string `pulumi:"instanceId"`
 	// Type.
@@ -262,8 +314,10 @@ type tmpExporterIntegrationV2Args struct {
 type TmpExporterIntegrationV2Args struct {
 	// Cluster ID.
 	ClusterId pulumi.StringPtrInput
-	// Integration config.
+	// Integration config. For more details, please refer to [Cloud Monitoring](https://www.tencentcloud.com/document/product/248/63002?lang=en&pg=). PS: `spec.instanceSpec.restart` is used in Terraform to restart integration or update integration version. It is an integer, and the value can be a timestamp in seconds, optional.
 	Content pulumi.StringInput
+	// Integration is disabled when the value is true. Default is false.
+	Disable pulumi.BoolPtrInput
 	// Instance ID.
 	InstanceId pulumi.StringInput
 	// Type.
@@ -364,9 +418,14 @@ func (o TmpExporterIntegrationV2Output) ClusterId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *TmpExporterIntegrationV2) pulumi.StringPtrOutput { return v.ClusterId }).(pulumi.StringPtrOutput)
 }
 
-// Integration config.
+// Integration config. For more details, please refer to [Cloud Monitoring](https://www.tencentcloud.com/document/product/248/63002?lang=en&pg=). PS: `spec.instanceSpec.restart` is used in Terraform to restart integration or update integration version. It is an integer, and the value can be a timestamp in seconds, optional.
 func (o TmpExporterIntegrationV2Output) Content() pulumi.StringOutput {
 	return o.ApplyT(func(v *TmpExporterIntegrationV2) pulumi.StringOutput { return v.Content }).(pulumi.StringOutput)
+}
+
+// Integration is disabled when the value is true. Default is false.
+func (o TmpExporterIntegrationV2Output) Disable() pulumi.BoolOutput {
+	return o.ApplyT(func(v *TmpExporterIntegrationV2) pulumi.BoolOutput { return v.Disable }).(pulumi.BoolOutput)
 }
 
 // Instance ID.

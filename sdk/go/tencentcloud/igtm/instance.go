@@ -12,6 +12,10 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
+// Provides a resource to create a IGTM instance
+//
+// > **NOTE:** Currently, executing the `terraform destroy` command to delete this resource is not supported. If you need to destroy it, please contact Tencent Cloud IGTM through a ticket.
+//
 // ## Example Usage
 //
 // ```go

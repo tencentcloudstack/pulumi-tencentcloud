@@ -262,69 +262,69 @@ export interface InstanceState {
     /**
      * ID of the Lighthouse image.
      */
-    blueprintId?: pulumi.Input<string>;
+    blueprintId?: pulumi.Input<string | undefined>;
     /**
      * ID of the Lighthouse package.
      */
-    bundleId?: pulumi.Input<string>;
+    bundleId?: pulumi.Input<string | undefined>;
     /**
      * A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.
      */
-    clientToken?: pulumi.Input<string>;
+    clientToken?: pulumi.Input<string | undefined>;
     /**
      * Configuration of the containers to create.
      */
-    containers?: pulumi.Input<pulumi.Input<inputs.Lighthouse.InstanceContainer>[]>;
+    containers?: pulumi.Input<pulumi.Input<inputs.Lighthouse.InstanceContainer>[] | undefined>;
     /**
      * Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.
      */
-    dryRun?: pulumi.Input<boolean>;
+    dryRun?: pulumi.Input<boolean | undefined>;
     /**
      * Firewall template ID. If this parameter is not specified, the default firewall policy is used.
      */
-    firewallTemplateId?: pulumi.Input<string>;
+    firewallTemplateId?: pulumi.Input<string | undefined>;
     /**
      * The display name of the Lighthouse instance.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * Whether the voucher is deducted automatically when update bundle id. Value range: `true`: indicates automatic deduction of vouchers, `false`: does not automatically deduct vouchers. Default value: `false`.
      */
-    isUpdateBundleIdAutoVoucher?: pulumi.Input<boolean>;
+    isUpdateBundleIdAutoVoucher?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to return the mounted data disk. `true`: returns both the instance and the mounted data disk; `false`: returns the instance and no longer returns its mounted data disk. Default: `true`.
      */
-    isolateDataDisk?: pulumi.Input<boolean>;
+    isolateDataDisk?: pulumi.Input<boolean | undefined>;
     /**
      * Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.
      */
-    loginConfiguration?: pulumi.Input<inputs.Lighthouse.InstanceLoginConfiguration>;
+    loginConfiguration?: pulumi.Input<inputs.Lighthouse.InstanceLoginConfiguration | undefined>;
     /**
      * Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * It has been deprecated from version v1.81.8. Use `tencentcloud.Lighthouse.KeyPairAttachment` manage key pair. Whether to allow login using the default key pair. `YES`: allow login; `NO`: disable login. Default: `YES`.
      *
      * @deprecated It has been deprecated from version v1.81.8. Use `tencentcloud.Lighthouse.KeyPairAttachment` manage key pair.
      */
-    permitDefaultKeyPairLogin?: pulumi.Input<string>;
+    permitDefaultKeyPairLogin?: pulumi.Input<string | undefined>;
     /**
      * Private addresses.
      */
-    privateAddresses?: pulumi.Input<pulumi.Input<string>[]>;
+    privateAddresses?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Public addresses.
      */
-    publicAddresses?: pulumi.Input<pulumi.Input<string>[]>;
+    publicAddresses?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.
      */
-    renewFlag?: pulumi.Input<string>;
+    renewFlag?: pulumi.Input<string | undefined>;
     /**
      * List of availability zones. A random AZ is selected by default.
      */
-    zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -342,19 +342,19 @@ export interface InstanceArgs {
     /**
      * A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.
      */
-    clientToken?: pulumi.Input<string>;
+    clientToken?: pulumi.Input<string | undefined>;
     /**
      * Configuration of the containers to create.
      */
-    containers?: pulumi.Input<pulumi.Input<inputs.Lighthouse.InstanceContainer>[]>;
+    containers?: pulumi.Input<pulumi.Input<inputs.Lighthouse.InstanceContainer>[] | undefined>;
     /**
      * Whether the request is a dry run only.true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available. If the dry run fails, the corresponding error code will be returned.If the dry run succeeds, the RequestId will be returned.false (default value): send a normal request and create instance(s) if all the requirements are met.
      */
-    dryRun?: pulumi.Input<boolean>;
+    dryRun?: pulumi.Input<boolean | undefined>;
     /**
      * Firewall template ID. If this parameter is not specified, the default firewall policy is used.
      */
-    firewallTemplateId?: pulumi.Input<string>;
+    firewallTemplateId?: pulumi.Input<string | undefined>;
     /**
      * The display name of the Lighthouse instance.
      */
@@ -362,25 +362,25 @@ export interface InstanceArgs {
     /**
      * Whether the voucher is deducted automatically when update bundle id. Value range: `true`: indicates automatic deduction of vouchers, `false`: does not automatically deduct vouchers. Default value: `false`.
      */
-    isUpdateBundleIdAutoVoucher?: pulumi.Input<boolean>;
+    isUpdateBundleIdAutoVoucher?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to return the mounted data disk. `true`: returns both the instance and the mounted data disk; `false`: returns the instance and no longer returns its mounted data disk. Default: `true`.
      */
-    isolateDataDisk?: pulumi.Input<boolean>;
+    isolateDataDisk?: pulumi.Input<boolean | undefined>;
     /**
      * Login password of the instance. It is only available for Windows instances. If it is not specified, it means that the user choose to set the login password after the instance creation.
      */
-    loginConfiguration?: pulumi.Input<inputs.Lighthouse.InstanceLoginConfiguration>;
+    loginConfiguration?: pulumi.Input<inputs.Lighthouse.InstanceLoginConfiguration | undefined>;
     /**
      * Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * It has been deprecated from version v1.81.8. Use `tencentcloud.Lighthouse.KeyPairAttachment` manage key pair. Whether to allow login using the default key pair. `YES`: allow login; `NO`: disable login. Default: `YES`.
      *
      * @deprecated It has been deprecated from version v1.81.8. Use `tencentcloud.Lighthouse.KeyPairAttachment` manage key pair.
      */
-    permitDefaultKeyPairLogin?: pulumi.Input<string>;
+    permitDefaultKeyPairLogin?: pulumi.Input<string | undefined>;
     /**
      * Auto-Renewal flag. Valid values: NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically; NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically. Default value: NOTIFY_AND_MANUAL_RENEW.
      */
@@ -388,5 +388,5 @@ export interface InstanceArgs {
     /**
      * List of availability zones. A random AZ is selected by default.
      */
-    zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string | undefined>;
 }

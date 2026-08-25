@@ -48,7 +48,6 @@ import (
 // ## Import
 //
 // mariadb account can be imported using the instance_id#user_name#host, e.g.
-//
 // ```sh
 // $ pulumi import tencentcloud:Mariadb/account:Account account tdsql-4pzs5b67#account-test#10.101.202.22
 // ```

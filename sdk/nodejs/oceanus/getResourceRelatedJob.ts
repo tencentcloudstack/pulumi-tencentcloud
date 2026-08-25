@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Oceanus.getResourceRelatedJob({
+ * const example = tencentcloud.oceanus.getResourceRelatedJob({
  *     resourceId: "resource-8y9lzcuz",
  *     descByJobConfigCreateTime: 0,
  *     resourceConfigVersion: 1,
@@ -87,7 +87,7 @@ export interface GetResourceRelatedJobResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Oceanus.getResourceRelatedJob({
+ * const example = tencentcloud.oceanus.getResourceRelatedJob({
  *     resourceId: "resource-8y9lzcuz",
  *     descByJobConfigCreateTime: 0,
  *     resourceConfigVersion: 1,
@@ -113,11 +113,11 @@ export interface GetResourceRelatedJobOutputArgs {
     /**
      * Default:0; 1:sort by job version creation time in descending order.
      */
-    descByJobConfigCreateTime?: pulumi.Input<number>;
+    descByJobConfigCreateTime?: pulumi.Input<number | undefined>;
     /**
      * Resource version number.
      */
-    resourceConfigVersion?: pulumi.Input<number>;
+    resourceConfigVersion?: pulumi.Input<number | undefined>;
     /**
      * Resource ID.
      */
@@ -125,9 +125,9 @@ export interface GetResourceRelatedJobOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Workspace SerialId.
      */
-    workSpaceId?: pulumi.Input<string>;
+    workSpaceId?: pulumi.Input<string | undefined>;
 }

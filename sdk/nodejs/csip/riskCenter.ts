@@ -234,43 +234,43 @@ export interface RiskCenterState {
     /**
      * Scan the asset information list.
      */
-    assets?: pulumi.Input<pulumi.Input<inputs.Csip.RiskCenterAsset>[]>;
+    assets?: pulumi.Input<pulumi.Input<inputs.Csip.RiskCenterAsset>[] | undefined>;
     /**
      * 0- Full scan, 1- Specify asset scan, 2- Exclude asset scan, 3- Manually fill in the scan. If 1 and 2 are required while taskMode not 1, the Assets field is required. If 3 is required, SelfDefiningAssets is required.
      */
-    scanAssetType?: pulumi.Input<number>;
+    scanAssetType?: pulumi.Input<number | undefined>;
     /**
      * Request origin.
      */
-    scanFrom?: pulumi.Input<string>;
+    scanFrom?: pulumi.Input<string | undefined>;
     /**
      * Scan Project. Example: port/poc/weakpass/webcontent/configrisk/exposedserver.
      */
-    scanItems?: pulumi.Input<pulumi.Input<string>[]>;
+    scanItems?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Scan plan details.
      */
-    scanPlanContent?: pulumi.Input<string>;
+    scanPlanContent?: pulumi.Input<string | undefined>;
     /**
      * 0- Periodic task, 1- immediate scan, 2- periodic scan, 3- Custom; 0, 2 and 3 are required for scan_plan_content.
      */
-    scanPlanType?: pulumi.Input<number>;
+    scanPlanType?: pulumi.Input<number | undefined>;
     /**
      * Ip/domain/url array.
      */
-    selfDefiningAssets?: pulumi.Input<pulumi.Input<string>[]>;
+    selfDefiningAssets?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Advanced configuration.
      */
-    taskAdvanceCfg?: pulumi.Input<inputs.Csip.RiskCenterTaskAdvanceCfg>;
+    taskAdvanceCfg?: pulumi.Input<inputs.Csip.RiskCenterTaskAdvanceCfg | undefined>;
     /**
      * Physical examination mode, 0-standard mode, 1-fast mode, 2-advanced mode, default standard mode.
      */
-    taskMode?: pulumi.Input<number>;
+    taskMode?: pulumi.Input<number | undefined>;
     /**
      * Task Name.
      */
-    taskName?: pulumi.Input<string>;
+    taskName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -280,7 +280,7 @@ export interface RiskCenterArgs {
     /**
      * Scan the asset information list.
      */
-    assets?: pulumi.Input<pulumi.Input<inputs.Csip.RiskCenterAsset>[]>;
+    assets?: pulumi.Input<pulumi.Input<inputs.Csip.RiskCenterAsset>[] | undefined>;
     /**
      * 0- Full scan, 1- Specify asset scan, 2- Exclude asset scan, 3- Manually fill in the scan. If 1 and 2 are required while taskMode not 1, the Assets field is required. If 3 is required, SelfDefiningAssets is required.
      */
@@ -292,7 +292,7 @@ export interface RiskCenterArgs {
     /**
      * Scan plan details.
      */
-    scanPlanContent?: pulumi.Input<string>;
+    scanPlanContent?: pulumi.Input<string | undefined>;
     /**
      * 0- Periodic task, 1- immediate scan, 2- periodic scan, 3- Custom; 0, 2 and 3 are required for scan_plan_content.
      */
@@ -300,15 +300,15 @@ export interface RiskCenterArgs {
     /**
      * Ip/domain/url array.
      */
-    selfDefiningAssets?: pulumi.Input<pulumi.Input<string>[]>;
+    selfDefiningAssets?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Advanced configuration.
      */
-    taskAdvanceCfg?: pulumi.Input<inputs.Csip.RiskCenterTaskAdvanceCfg>;
+    taskAdvanceCfg?: pulumi.Input<inputs.Csip.RiskCenterTaskAdvanceCfg | undefined>;
     /**
      * Physical examination mode, 0-standard mode, 1-fast mode, 2-advanced mode, default standard mode.
      */
-    taskMode?: pulumi.Input<number>;
+    taskMode?: pulumi.Input<number | undefined>;
     /**
      * Task Name.
      */

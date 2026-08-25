@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const message = tencentcloud.Tdmq.getRocketmqMessages({
+ * const message = tencentcloud.tdmq.getRocketmqMessages({
  *     clusterId: "rocketmq-rkrbm52djmro",
  *     environmentId: "keep_ns",
  *     topicName: "keep-topic",
@@ -114,7 +114,7 @@ export interface GetRocketmqMessagesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const message = tencentcloud.Tdmq.getRocketmqMessages({
+ * const message = tencentcloud.tdmq.getRocketmqMessages({
  *     clusterId: "rocketmq-rkrbm52djmro",
  *     environmentId: "keep_ns",
  *     topicName: "keep-topic",
@@ -154,11 +154,11 @@ export interface GetRocketmqMessagesOutputArgs {
     /**
      * The value is true when querying dead letters, only valid for Rocketmq.
      */
-    queryDlqMsg?: pulumi.Input<boolean>;
+    queryDlqMsg?: pulumi.Input<boolean | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Topic, groupId is passed when querying dead letters.
      */

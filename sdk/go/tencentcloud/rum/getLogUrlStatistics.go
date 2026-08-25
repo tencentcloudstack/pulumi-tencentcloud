@@ -130,12 +130,8 @@ type GetLogUrlStatisticsResult struct {
 }
 
 func GetLogUrlStatisticsOutput(ctx *pulumi.Context, args GetLogUrlStatisticsOutputArgs, opts ...pulumi.InvokeOption) GetLogUrlStatisticsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetLogUrlStatisticsResultOutput, error) {
-			args := v.(GetLogUrlStatisticsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Rum/getLogUrlStatistics:getLogUrlStatistics", args, GetLogUrlStatisticsResultOutput{}, options).(GetLogUrlStatisticsResultOutput), nil
-		}).(GetLogUrlStatisticsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Rum/getLogUrlStatistics:getLogUrlStatistics", args, GetLogUrlStatisticsResultOutput{}, options).(GetLogUrlStatisticsResultOutput)
 }
 
 // A collection of arguments for invoking getLogUrlStatistics.

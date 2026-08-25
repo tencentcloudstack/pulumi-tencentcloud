@@ -59,7 +59,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * PrivateDns zone vpc attachment can be imported using the id, e.g.
+ * PrivateDns zone vpc attachment can be imported using the zoneId#uniqVpcId, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:PrivateDns/zoneVpcAttachment:ZoneVpcAttachment example zone-6t11lof0#vpc-jdx11z0t
@@ -143,15 +143,15 @@ export interface ZoneVpcAttachmentState {
     /**
      * New add account vpc info.
      */
-    accountVpcSet?: pulumi.Input<inputs.PrivateDns.ZoneVpcAttachmentAccountVpcSet>;
+    accountVpcSet?: pulumi.Input<inputs.PrivateDns.ZoneVpcAttachmentAccountVpcSet | undefined>;
     /**
      * New add vpc info.
      */
-    vpcSet?: pulumi.Input<inputs.PrivateDns.ZoneVpcAttachmentVpcSet>;
+    vpcSet?: pulumi.Input<inputs.PrivateDns.ZoneVpcAttachmentVpcSet | undefined>;
     /**
      * PrivateZone ID.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -161,11 +161,11 @@ export interface ZoneVpcAttachmentArgs {
     /**
      * New add account vpc info.
      */
-    accountVpcSet?: pulumi.Input<inputs.PrivateDns.ZoneVpcAttachmentAccountVpcSet>;
+    accountVpcSet?: pulumi.Input<inputs.PrivateDns.ZoneVpcAttachmentAccountVpcSet | undefined>;
     /**
      * New add vpc info.
      */
-    vpcSet?: pulumi.Input<inputs.PrivateDns.ZoneVpcAttachmentVpcSet>;
+    vpcSet?: pulumi.Input<inputs.PrivateDns.ZoneVpcAttachmentVpcSet | undefined>;
     /**
      * PrivateZone ID.
      */

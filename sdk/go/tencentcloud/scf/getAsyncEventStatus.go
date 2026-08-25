@@ -68,12 +68,8 @@ type LookupAsyncEventStatusResult struct {
 }
 
 func LookupAsyncEventStatusOutput(ctx *pulumi.Context, args LookupAsyncEventStatusOutputArgs, opts ...pulumi.InvokeOption) LookupAsyncEventStatusResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupAsyncEventStatusResultOutput, error) {
-			args := v.(LookupAsyncEventStatusArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Scf/getAsyncEventStatus:getAsyncEventStatus", args, LookupAsyncEventStatusResultOutput{}, options).(LookupAsyncEventStatusResultOutput), nil
-		}).(LookupAsyncEventStatusResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Scf/getAsyncEventStatus:getAsyncEventStatus", args, LookupAsyncEventStatusResultOutput{}, options).(LookupAsyncEventStatusResultOutput)
 }
 
 // A collection of arguments for invoking getAsyncEventStatus.

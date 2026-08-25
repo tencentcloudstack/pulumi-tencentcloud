@@ -101,12 +101,8 @@ type GetMysqlProcessListResult struct {
 }
 
 func GetMysqlProcessListOutput(ctx *pulumi.Context, args GetMysqlProcessListOutputArgs, opts ...pulumi.InvokeOption) GetMysqlProcessListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetMysqlProcessListResultOutput, error) {
-			args := v.(GetMysqlProcessListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dbbrain/getMysqlProcessList:getMysqlProcessList", args, GetMysqlProcessListResultOutput{}, options).(GetMysqlProcessListResultOutput), nil
-		}).(GetMysqlProcessListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dbbrain/getMysqlProcessList:getMysqlProcessList", args, GetMysqlProcessListResultOutput{}, options).(GetMysqlProcessListResultOutput)
 }
 
 // A collection of arguments for invoking getMysqlProcessList.

@@ -86,7 +86,7 @@ import (
 //
 // ## Import
 //
-// cfw vpc_firewall_switch can be imported using the id, e.g.
+// cfw vpcFirewallSwitch can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Cfw/vpcFirewallSwitch:VpcFirewallSwitch example cfwg-c8c2de41#cfws-f2c63ded84

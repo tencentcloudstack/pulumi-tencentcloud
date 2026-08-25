@@ -80,12 +80,8 @@ type GetDescribeHostVodInstanceListResult struct {
 }
 
 func GetDescribeHostVodInstanceListOutput(ctx *pulumi.Context, args GetDescribeHostVodInstanceListOutputArgs, opts ...pulumi.InvokeOption) GetDescribeHostVodInstanceListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDescribeHostVodInstanceListResultOutput, error) {
-			args := v.(GetDescribeHostVodInstanceListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ssl/getDescribeHostVodInstanceList:getDescribeHostVodInstanceList", args, GetDescribeHostVodInstanceListResultOutput{}, options).(GetDescribeHostVodInstanceListResultOutput), nil
-		}).(GetDescribeHostVodInstanceListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ssl/getDescribeHostVodInstanceList:getDescribeHostVodInstanceList", args, GetDescribeHostVodInstanceListResultOutput{}, options).(GetDescribeHostVodInstanceListResultOutput)
 }
 
 // A collection of arguments for invoking getDescribeHostVodInstanceList.

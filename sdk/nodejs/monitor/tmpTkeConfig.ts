@@ -20,13 +20,13 @@ import * as utilities from "../utilities";
  * const availabilityZoneFirst = config.get("availabilityZoneFirst") || "ap-guangzhou-3";
  * const availabilityZoneSecond = config.get("availabilityZoneSecond") || "ap-guangzhou-4";
  * const exampleClusterCidr = config.get("exampleClusterCidr") || "10.31.0.0/16";
- * const vpcOne = tencentcloud.Vpc.getSubnets({
+ * const vpcOne = tencentcloud.vpc.getSubnets({
  *     isDefault: true,
  *     availabilityZone: availabilityZoneFirst,
  * });
  * const firstVpcId = vpcOne.then(vpcOne => vpcOne.instanceLists?.[0]?.vpcId);
  * const firstSubnetId = vpcOne.then(vpcOne => vpcOne.instanceLists?.[0]?.subnetId);
- * const vpcTwo = tencentcloud.Vpc.getSubnets({
+ * const vpcTwo = tencentcloud.vpc.getSubnets({
  *     isDefault: true,
  *     availabilityZone: availabilityZoneSecond,
  * });
@@ -34,7 +34,7 @@ import * as utilities from "../utilities";
  * const secondSubnetId = vpcTwo.then(vpcTwo => vpcTwo.instanceLists?.[0]?.subnetId);
  * const sg = new tencentcloud.security.Group("sg", {name: "tf-example-sg"});
  * const sgId = sg.id;
- * const _default = tencentcloud.Images.getInstance({
+ * const _default = tencentcloud.images.getInstance({
  *     imageTypes: ["PUBLIC_IMAGE"],
  *     imageNameRegex: "Final",
  * });
@@ -265,31 +265,31 @@ export interface TmpTkeConfigState {
     /**
      * ID of cluster.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Type of cluster.
      */
-    clusterType?: pulumi.Input<string>;
+    clusterType?: pulumi.Input<string | undefined>;
     /**
      * Global configuration.
      */
-    config?: pulumi.Input<string>;
+    config?: pulumi.Input<string | undefined>;
     /**
      * ID of instance.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Configuration of the pod monitors.
      */
-    podMonitors?: pulumi.Input<pulumi.Input<inputs.Monitor.TmpTkeConfigPodMonitor>[]>;
+    podMonitors?: pulumi.Input<pulumi.Input<inputs.Monitor.TmpTkeConfigPodMonitor>[] | undefined>;
     /**
      * Configuration of the native prometheus job.
      */
-    rawJobs?: pulumi.Input<pulumi.Input<inputs.Monitor.TmpTkeConfigRawJob>[]>;
+    rawJobs?: pulumi.Input<pulumi.Input<inputs.Monitor.TmpTkeConfigRawJob>[] | undefined>;
     /**
      * Configuration of the service monitors.
      */
-    serviceMonitors?: pulumi.Input<pulumi.Input<inputs.Monitor.TmpTkeConfigServiceMonitor>[]>;
+    serviceMonitors?: pulumi.Input<pulumi.Input<inputs.Monitor.TmpTkeConfigServiceMonitor>[] | undefined>;
 }
 
 /**
@@ -311,13 +311,13 @@ export interface TmpTkeConfigArgs {
     /**
      * Configuration of the pod monitors.
      */
-    podMonitors?: pulumi.Input<pulumi.Input<inputs.Monitor.TmpTkeConfigPodMonitor>[]>;
+    podMonitors?: pulumi.Input<pulumi.Input<inputs.Monitor.TmpTkeConfigPodMonitor>[] | undefined>;
     /**
      * Configuration of the native prometheus job.
      */
-    rawJobs?: pulumi.Input<pulumi.Input<inputs.Monitor.TmpTkeConfigRawJob>[]>;
+    rawJobs?: pulumi.Input<pulumi.Input<inputs.Monitor.TmpTkeConfigRawJob>[] | undefined>;
     /**
      * Configuration of the service monitors.
      */
-    serviceMonitors?: pulumi.Input<pulumi.Input<inputs.Monitor.TmpTkeConfigServiceMonitor>[]>;
+    serviceMonitors?: pulumi.Input<pulumi.Input<inputs.Monitor.TmpTkeConfigServiceMonitor>[] | undefined>;
 }

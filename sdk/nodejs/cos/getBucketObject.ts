@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const mycos = tencentcloud.Cos.getBucketObject({
+ * const mycos = tencentcloud.cos.getBucketObject({
  *     bucket: "mycos-test-1258798060",
  *     key: "hello-world.py",
  *     resultOutputFile: "TFresults",
@@ -96,7 +96,7 @@ export interface GetBucketObjectResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const mycos = tencentcloud.Cos.getBucketObject({
+ * const mycos = tencentcloud.cos.getBucketObject({
  *     bucket: "mycos-test-1258798060",
  *     key: "hello-world.py",
  *     resultOutputFile: "TFresults",
@@ -127,5 +127,5 @@ export interface GetBucketObjectOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

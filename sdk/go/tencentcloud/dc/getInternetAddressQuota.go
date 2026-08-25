@@ -70,12 +70,8 @@ type GetInternetAddressQuotaResult struct {
 }
 
 func GetInternetAddressQuotaOutput(ctx *pulumi.Context, args GetInternetAddressQuotaOutputArgs, opts ...pulumi.InvokeOption) GetInternetAddressQuotaResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInternetAddressQuotaResultOutput, error) {
-			args := v.(GetInternetAddressQuotaArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dc/getInternetAddressQuota:getInternetAddressQuota", args, GetInternetAddressQuotaResultOutput{}, options).(GetInternetAddressQuotaResultOutput), nil
-		}).(GetInternetAddressQuotaResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dc/getInternetAddressQuota:getInternetAddressQuota", args, GetInternetAddressQuotaResultOutput{}, options).(GetInternetAddressQuotaResultOutput)
 }
 
 // A collection of arguments for invoking getInternetAddressQuota.

@@ -94,11 +94,11 @@ export interface SwitchDataEngineImageOperationState {
     /**
      * Engine ID.
      */
-    dataEngineId?: pulumi.Input<string>;
+    dataEngineId?: pulumi.Input<string | undefined>;
     /**
      * New image version ID.
      */
-    newImageVersionId?: pulumi.Input<string>;
+    newImageVersionId?: pulumi.Input<string | undefined>;
 }
 
 /**

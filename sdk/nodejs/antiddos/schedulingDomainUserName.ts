@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * antiddos scheduling_domain_user_name can be imported using the id, e.g.
+ * antiddos schedulingDomainUserName can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Antiddos/schedulingDomainUserName:SchedulingDomainUserName scheduling_domain_user_name ${domainName}
@@ -102,11 +102,11 @@ export interface SchedulingDomainUserNameState {
     /**
      * user cname.
      */
-    domainName?: pulumi.Input<string>;
+    domainName?: pulumi.Input<string | undefined>;
     /**
      * domain name.
      */
-    domainUserName?: pulumi.Input<string>;
+    domainUserName?: pulumi.Input<string | undefined>;
 }
 
 /**

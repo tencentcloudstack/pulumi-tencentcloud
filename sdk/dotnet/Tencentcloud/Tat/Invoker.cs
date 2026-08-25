@@ -46,7 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
     /// ## Import
     /// 
     /// tat invoker can be imported using the id, e.g.
-    /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Tat/invoker:Invoker invoker ivk-gwb4ztk5
     /// ```

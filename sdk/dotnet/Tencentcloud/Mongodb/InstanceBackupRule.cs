@@ -47,19 +47,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
     public partial class InstanceBackupRule : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Which days of the week to backup, 0-6, comma separated. Only effective for advanced backup.
+        /// Specify the specific dates for automatic backups to be performed each week. Format: Enter a number between 0 and 6 to represent Sunday through Saturday (e.g., 1 represents Monday). Separate multiple dates with commas (,). Example: Entering 1,3,5 means the system will perform backups on Mondays, Wednesdays, and Fridays every week. Default: If not set, the default is a full cycle (0,1,2,3,4,5,6), meaning backups will be performed daily.
         /// </summary>
         [Output("activeWeekdays")]
         public Output<string?> ActiveWeekdays { get; private set; } = null!;
 
         /// <summary>
-        /// Alert threshold. Range: 50-300.
+        /// Sets the alarm threshold for backup dataset storage space usage. Unit: %. Default value: 100. Value range: [50, 300].
         /// </summary>
         [Output("alarmWaterLevel")]
         public Output<int?> AlarmWaterLevel { get; private set; } = null!;
 
         /// <summary>
-        /// Automatic backup frequency, for internal display, default value is 24h.
+        /// Specify the daily automatic backup frequency. 12: Back up twice a day, approximately 12 hours apart; 24: Back up once a day (default), approximately 24 hours apart.
         /// </summary>
         [Output("backupFrequency")]
         public Output<int?> BackupFrequency { get; private set; } = null!;
@@ -74,7 +74,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public Output<int> BackupMethod { get; private set; } = null!;
 
         /// <summary>
-        /// Specify the number of days to save backup data. The default is 7 days, and the support settings are 7, 30, 90, 180, 365.
+        /// Specifies the retention period for backup data. Unit: days, default is 7 days. Value range: [7, 365].
         /// </summary>
         [Output("backupRetentionPeriod")]
         public Output<int> BackupRetentionPeriod { get; private set; } = null!;
@@ -98,19 +98,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public Output<string> InstanceId { get; private set; } = null!;
 
         /// <summary>
-        /// Which days to retain long-term, week 0-6, month 1-31, comma separated.
+        /// Specify the specific backup dates to be retained long-term. This setting only takes effect when LongTermUnit is set to weekly or monthly. Weekly Retention: Enter a number between 0 and 6 to represent Sunday through Saturday. Separate multiple dates with commas. Monthly Retention: Enter a number between 1 and 31 to represent specific dates within the month. Separate multiple dates with commas.
         /// </summary>
         [Output("longTermActiveDays")]
         public Output<string?> LongTermActiveDays { get; private set; } = null!;
 
         /// <summary>
-        /// How many days to retain long-term backups.
+        /// Long-term backup retention period. Value range [30, 1075].
         /// </summary>
         [Output("longTermExpiredDays")]
         public Output<int?> LongTermExpiredDays { get; private set; } = null!;
 
         /// <summary>
-        /// Long-term retention cycle, weekly, monthly, empty means not enabled.
+        /// Long-term retention period. Supports selecting specific dates for backups on a weekly or monthly basis (e.g., backup data for the 1st and 15th of each month) to retain for a longer period. Disabled (default): Long-term retention is disabled. Weekly retention: Specify `Weekly`. Monthly retention: Specify `Monthly`.
         /// </summary>
         [Output("longTermUnit")]
         public Output<string?> LongTermUnit { get; private set; } = null!;
@@ -124,7 +124,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public Output<bool?> Notify { get; private set; } = null!;
 
         /// <summary>
-        /// How many days to retain incremental backups.
+        /// Incremental backup retention period. Unit: days. Default value: 7 days. Value range: [7,365].
         /// </summary>
         [Output("oplogExpiredDays")]
         public Output<int?> OplogExpiredDays { get; private set; } = null!;
@@ -177,19 +177,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
     public sealed class InstanceBackupRuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Which days of the week to backup, 0-6, comma separated. Only effective for advanced backup.
+        /// Specify the specific dates for automatic backups to be performed each week. Format: Enter a number between 0 and 6 to represent Sunday through Saturday (e.g., 1 represents Monday). Separate multiple dates with commas (,). Example: Entering 1,3,5 means the system will perform backups on Mondays, Wednesdays, and Fridays every week. Default: If not set, the default is a full cycle (0,1,2,3,4,5,6), meaning backups will be performed daily.
         /// </summary>
         [Input("activeWeekdays")]
         public Input<string>? ActiveWeekdays { get; set; }
 
         /// <summary>
-        /// Alert threshold. Range: 50-300.
+        /// Sets the alarm threshold for backup dataset storage space usage. Unit: %. Default value: 100. Value range: [50, 300].
         /// </summary>
         [Input("alarmWaterLevel")]
         public Input<int>? AlarmWaterLevel { get; set; }
 
         /// <summary>
-        /// Automatic backup frequency, for internal display, default value is 24h.
+        /// Specify the daily automatic backup frequency. 12: Back up twice a day, approximately 12 hours apart; 24: Back up once a day (default), approximately 24 hours apart.
         /// </summary>
         [Input("backupFrequency")]
         public Input<int>? BackupFrequency { get; set; }
@@ -204,7 +204,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public Input<int> BackupMethod { get; set; } = null!;
 
         /// <summary>
-        /// Specify the number of days to save backup data. The default is 7 days, and the support settings are 7, 30, 90, 180, 365.
+        /// Specifies the retention period for backup data. Unit: days, default is 7 days. Value range: [7, 365].
         /// </summary>
         [Input("backupRetentionPeriod")]
         public Input<int>? BackupRetentionPeriod { get; set; }
@@ -228,19 +228,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public Input<string> InstanceId { get; set; } = null!;
 
         /// <summary>
-        /// Which days to retain long-term, week 0-6, month 1-31, comma separated.
+        /// Specify the specific backup dates to be retained long-term. This setting only takes effect when LongTermUnit is set to weekly or monthly. Weekly Retention: Enter a number between 0 and 6 to represent Sunday through Saturday. Separate multiple dates with commas. Monthly Retention: Enter a number between 1 and 31 to represent specific dates within the month. Separate multiple dates with commas.
         /// </summary>
         [Input("longTermActiveDays")]
         public Input<string>? LongTermActiveDays { get; set; }
 
         /// <summary>
-        /// How many days to retain long-term backups.
+        /// Long-term backup retention period. Value range [30, 1075].
         /// </summary>
         [Input("longTermExpiredDays")]
         public Input<int>? LongTermExpiredDays { get; set; }
 
         /// <summary>
-        /// Long-term retention cycle, weekly, monthly, empty means not enabled.
+        /// Long-term retention period. Supports selecting specific dates for backups on a weekly or monthly basis (e.g., backup data for the 1st and 15th of each month) to retain for a longer period. Disabled (default): Long-term retention is disabled. Weekly retention: Specify `Weekly`. Monthly retention: Specify `Monthly`.
         /// </summary>
         [Input("longTermUnit")]
         public Input<string>? LongTermUnit { get; set; }
@@ -254,7 +254,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public Input<bool>? Notify { get; set; }
 
         /// <summary>
-        /// How many days to retain incremental backups.
+        /// Incremental backup retention period. Unit: days. Default value: 7 days. Value range: [7,365].
         /// </summary>
         [Input("oplogExpiredDays")]
         public Input<int>? OplogExpiredDays { get; set; }
@@ -268,19 +268,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
     public sealed class InstanceBackupRuleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Which days of the week to backup, 0-6, comma separated. Only effective for advanced backup.
+        /// Specify the specific dates for automatic backups to be performed each week. Format: Enter a number between 0 and 6 to represent Sunday through Saturday (e.g., 1 represents Monday). Separate multiple dates with commas (,). Example: Entering 1,3,5 means the system will perform backups on Mondays, Wednesdays, and Fridays every week. Default: If not set, the default is a full cycle (0,1,2,3,4,5,6), meaning backups will be performed daily.
         /// </summary>
         [Input("activeWeekdays")]
         public Input<string>? ActiveWeekdays { get; set; }
 
         /// <summary>
-        /// Alert threshold. Range: 50-300.
+        /// Sets the alarm threshold for backup dataset storage space usage. Unit: %. Default value: 100. Value range: [50, 300].
         /// </summary>
         [Input("alarmWaterLevel")]
         public Input<int>? AlarmWaterLevel { get; set; }
 
         /// <summary>
-        /// Automatic backup frequency, for internal display, default value is 24h.
+        /// Specify the daily automatic backup frequency. 12: Back up twice a day, approximately 12 hours apart; 24: Back up once a day (default), approximately 24 hours apart.
         /// </summary>
         [Input("backupFrequency")]
         public Input<int>? BackupFrequency { get; set; }
@@ -295,7 +295,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public Input<int>? BackupMethod { get; set; }
 
         /// <summary>
-        /// Specify the number of days to save backup data. The default is 7 days, and the support settings are 7, 30, 90, 180, 365.
+        /// Specifies the retention period for backup data. Unit: days, default is 7 days. Value range: [7, 365].
         /// </summary>
         [Input("backupRetentionPeriod")]
         public Input<int>? BackupRetentionPeriod { get; set; }
@@ -319,19 +319,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public Input<string>? InstanceId { get; set; }
 
         /// <summary>
-        /// Which days to retain long-term, week 0-6, month 1-31, comma separated.
+        /// Specify the specific backup dates to be retained long-term. This setting only takes effect when LongTermUnit is set to weekly or monthly. Weekly Retention: Enter a number between 0 and 6 to represent Sunday through Saturday. Separate multiple dates with commas. Monthly Retention: Enter a number between 1 and 31 to represent specific dates within the month. Separate multiple dates with commas.
         /// </summary>
         [Input("longTermActiveDays")]
         public Input<string>? LongTermActiveDays { get; set; }
 
         /// <summary>
-        /// How many days to retain long-term backups.
+        /// Long-term backup retention period. Value range [30, 1075].
         /// </summary>
         [Input("longTermExpiredDays")]
         public Input<int>? LongTermExpiredDays { get; set; }
 
         /// <summary>
-        /// Long-term retention cycle, weekly, monthly, empty means not enabled.
+        /// Long-term retention period. Supports selecting specific dates for backups on a weekly or monthly basis (e.g., backup data for the 1st and 15th of each month) to retain for a longer period. Disabled (default): Long-term retention is disabled. Weekly retention: Specify `Weekly`. Monthly retention: Specify `Monthly`.
         /// </summary>
         [Input("longTermUnit")]
         public Input<string>? LongTermUnit { get; set; }
@@ -345,7 +345,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public Input<bool>? Notify { get; set; }
 
         /// <summary>
-        /// How many days to retain incremental backups.
+        /// Incremental backup retention period. Unit: days. Default value: 7 days. Value range: [7,365].
         /// </summary>
         [Input("oplogExpiredDays")]
         public Input<int>? OplogExpiredDays { get; set; }

@@ -550,6 +550,258 @@ func (o AlarmCallBackPtrOutput) Headers() pulumi.StringArrayOutput {
 	}).(pulumi.StringArrayOutput)
 }
 
+type AlarmMonitorNotice struct {
+	// List of monitor notice rules.
+	Notices []AlarmMonitorNoticeNotice `pulumi:"notices"`
+}
+
+// AlarmMonitorNoticeInput is an input type that accepts AlarmMonitorNoticeArgs and AlarmMonitorNoticeOutput values.
+// You can construct a concrete instance of `AlarmMonitorNoticeInput` via:
+//
+//	AlarmMonitorNoticeArgs{...}
+type AlarmMonitorNoticeInput interface {
+	pulumi.Input
+
+	ToAlarmMonitorNoticeOutput() AlarmMonitorNoticeOutput
+	ToAlarmMonitorNoticeOutputWithContext(context.Context) AlarmMonitorNoticeOutput
+}
+
+type AlarmMonitorNoticeArgs struct {
+	// List of monitor notice rules.
+	Notices AlarmMonitorNoticeNoticeArrayInput `pulumi:"notices"`
+}
+
+func (AlarmMonitorNoticeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmMonitorNotice)(nil)).Elem()
+}
+
+func (i AlarmMonitorNoticeArgs) ToAlarmMonitorNoticeOutput() AlarmMonitorNoticeOutput {
+	return i.ToAlarmMonitorNoticeOutputWithContext(context.Background())
+}
+
+func (i AlarmMonitorNoticeArgs) ToAlarmMonitorNoticeOutputWithContext(ctx context.Context) AlarmMonitorNoticeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmMonitorNoticeOutput)
+}
+
+func (i AlarmMonitorNoticeArgs) ToAlarmMonitorNoticePtrOutput() AlarmMonitorNoticePtrOutput {
+	return i.ToAlarmMonitorNoticePtrOutputWithContext(context.Background())
+}
+
+func (i AlarmMonitorNoticeArgs) ToAlarmMonitorNoticePtrOutputWithContext(ctx context.Context) AlarmMonitorNoticePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmMonitorNoticeOutput).ToAlarmMonitorNoticePtrOutputWithContext(ctx)
+}
+
+// AlarmMonitorNoticePtrInput is an input type that accepts AlarmMonitorNoticeArgs, AlarmMonitorNoticePtr and AlarmMonitorNoticePtrOutput values.
+// You can construct a concrete instance of `AlarmMonitorNoticePtrInput` via:
+//
+//	        AlarmMonitorNoticeArgs{...}
+//
+//	or:
+//
+//	        nil
+type AlarmMonitorNoticePtrInput interface {
+	pulumi.Input
+
+	ToAlarmMonitorNoticePtrOutput() AlarmMonitorNoticePtrOutput
+	ToAlarmMonitorNoticePtrOutputWithContext(context.Context) AlarmMonitorNoticePtrOutput
+}
+
+type alarmMonitorNoticePtrType AlarmMonitorNoticeArgs
+
+func AlarmMonitorNoticePtr(v *AlarmMonitorNoticeArgs) AlarmMonitorNoticePtrInput {
+	return (*alarmMonitorNoticePtrType)(v)
+}
+
+func (*alarmMonitorNoticePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**AlarmMonitorNotice)(nil)).Elem()
+}
+
+func (i *alarmMonitorNoticePtrType) ToAlarmMonitorNoticePtrOutput() AlarmMonitorNoticePtrOutput {
+	return i.ToAlarmMonitorNoticePtrOutputWithContext(context.Background())
+}
+
+func (i *alarmMonitorNoticePtrType) ToAlarmMonitorNoticePtrOutputWithContext(ctx context.Context) AlarmMonitorNoticePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmMonitorNoticePtrOutput)
+}
+
+type AlarmMonitorNoticeOutput struct{ *pulumi.OutputState }
+
+func (AlarmMonitorNoticeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmMonitorNotice)(nil)).Elem()
+}
+
+func (o AlarmMonitorNoticeOutput) ToAlarmMonitorNoticeOutput() AlarmMonitorNoticeOutput {
+	return o
+}
+
+func (o AlarmMonitorNoticeOutput) ToAlarmMonitorNoticeOutputWithContext(ctx context.Context) AlarmMonitorNoticeOutput {
+	return o
+}
+
+func (o AlarmMonitorNoticeOutput) ToAlarmMonitorNoticePtrOutput() AlarmMonitorNoticePtrOutput {
+	return o.ToAlarmMonitorNoticePtrOutputWithContext(context.Background())
+}
+
+func (o AlarmMonitorNoticeOutput) ToAlarmMonitorNoticePtrOutputWithContext(ctx context.Context) AlarmMonitorNoticePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v AlarmMonitorNotice) *AlarmMonitorNotice {
+		return &v
+	}).(AlarmMonitorNoticePtrOutput)
+}
+
+// List of monitor notice rules.
+func (o AlarmMonitorNoticeOutput) Notices() AlarmMonitorNoticeNoticeArrayOutput {
+	return o.ApplyT(func(v AlarmMonitorNotice) []AlarmMonitorNoticeNotice { return v.Notices }).(AlarmMonitorNoticeNoticeArrayOutput)
+}
+
+type AlarmMonitorNoticePtrOutput struct{ *pulumi.OutputState }
+
+func (AlarmMonitorNoticePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**AlarmMonitorNotice)(nil)).Elem()
+}
+
+func (o AlarmMonitorNoticePtrOutput) ToAlarmMonitorNoticePtrOutput() AlarmMonitorNoticePtrOutput {
+	return o
+}
+
+func (o AlarmMonitorNoticePtrOutput) ToAlarmMonitorNoticePtrOutputWithContext(ctx context.Context) AlarmMonitorNoticePtrOutput {
+	return o
+}
+
+func (o AlarmMonitorNoticePtrOutput) Elem() AlarmMonitorNoticeOutput {
+	return o.ApplyT(func(v *AlarmMonitorNotice) AlarmMonitorNotice {
+		if v != nil {
+			return *v
+		}
+		var ret AlarmMonitorNotice
+		return ret
+	}).(AlarmMonitorNoticeOutput)
+}
+
+// List of monitor notice rules.
+func (o AlarmMonitorNoticePtrOutput) Notices() AlarmMonitorNoticeNoticeArrayOutput {
+	return o.ApplyT(func(v *AlarmMonitorNotice) []AlarmMonitorNoticeNotice {
+		if v == nil {
+			return nil
+		}
+		return v.Notices
+	}).(AlarmMonitorNoticeNoticeArrayOutput)
+}
+
+type AlarmMonitorNoticeNotice struct {
+	// Alarm levels. 0: Warning; 1: Info; 2: Critical.
+	AlarmLevels []int `pulumi:"alarmLevels"`
+	// Observable platform content template ID. If empty, use default content template.
+	ContentTmplId *string `pulumi:"contentTmplId"`
+	// Observable platform notification template ID.
+	NoticeId string `pulumi:"noticeId"`
+}
+
+// AlarmMonitorNoticeNoticeInput is an input type that accepts AlarmMonitorNoticeNoticeArgs and AlarmMonitorNoticeNoticeOutput values.
+// You can construct a concrete instance of `AlarmMonitorNoticeNoticeInput` via:
+//
+//	AlarmMonitorNoticeNoticeArgs{...}
+type AlarmMonitorNoticeNoticeInput interface {
+	pulumi.Input
+
+	ToAlarmMonitorNoticeNoticeOutput() AlarmMonitorNoticeNoticeOutput
+	ToAlarmMonitorNoticeNoticeOutputWithContext(context.Context) AlarmMonitorNoticeNoticeOutput
+}
+
+type AlarmMonitorNoticeNoticeArgs struct {
+	// Alarm levels. 0: Warning; 1: Info; 2: Critical.
+	AlarmLevels pulumi.IntArrayInput `pulumi:"alarmLevels"`
+	// Observable platform content template ID. If empty, use default content template.
+	ContentTmplId pulumi.StringPtrInput `pulumi:"contentTmplId"`
+	// Observable platform notification template ID.
+	NoticeId pulumi.StringInput `pulumi:"noticeId"`
+}
+
+func (AlarmMonitorNoticeNoticeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmMonitorNoticeNotice)(nil)).Elem()
+}
+
+func (i AlarmMonitorNoticeNoticeArgs) ToAlarmMonitorNoticeNoticeOutput() AlarmMonitorNoticeNoticeOutput {
+	return i.ToAlarmMonitorNoticeNoticeOutputWithContext(context.Background())
+}
+
+func (i AlarmMonitorNoticeNoticeArgs) ToAlarmMonitorNoticeNoticeOutputWithContext(ctx context.Context) AlarmMonitorNoticeNoticeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmMonitorNoticeNoticeOutput)
+}
+
+// AlarmMonitorNoticeNoticeArrayInput is an input type that accepts AlarmMonitorNoticeNoticeArray and AlarmMonitorNoticeNoticeArrayOutput values.
+// You can construct a concrete instance of `AlarmMonitorNoticeNoticeArrayInput` via:
+//
+//	AlarmMonitorNoticeNoticeArray{ AlarmMonitorNoticeNoticeArgs{...} }
+type AlarmMonitorNoticeNoticeArrayInput interface {
+	pulumi.Input
+
+	ToAlarmMonitorNoticeNoticeArrayOutput() AlarmMonitorNoticeNoticeArrayOutput
+	ToAlarmMonitorNoticeNoticeArrayOutputWithContext(context.Context) AlarmMonitorNoticeNoticeArrayOutput
+}
+
+type AlarmMonitorNoticeNoticeArray []AlarmMonitorNoticeNoticeInput
+
+func (AlarmMonitorNoticeNoticeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AlarmMonitorNoticeNotice)(nil)).Elem()
+}
+
+func (i AlarmMonitorNoticeNoticeArray) ToAlarmMonitorNoticeNoticeArrayOutput() AlarmMonitorNoticeNoticeArrayOutput {
+	return i.ToAlarmMonitorNoticeNoticeArrayOutputWithContext(context.Background())
+}
+
+func (i AlarmMonitorNoticeNoticeArray) ToAlarmMonitorNoticeNoticeArrayOutputWithContext(ctx context.Context) AlarmMonitorNoticeNoticeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmMonitorNoticeNoticeArrayOutput)
+}
+
+type AlarmMonitorNoticeNoticeOutput struct{ *pulumi.OutputState }
+
+func (AlarmMonitorNoticeNoticeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmMonitorNoticeNotice)(nil)).Elem()
+}
+
+func (o AlarmMonitorNoticeNoticeOutput) ToAlarmMonitorNoticeNoticeOutput() AlarmMonitorNoticeNoticeOutput {
+	return o
+}
+
+func (o AlarmMonitorNoticeNoticeOutput) ToAlarmMonitorNoticeNoticeOutputWithContext(ctx context.Context) AlarmMonitorNoticeNoticeOutput {
+	return o
+}
+
+// Alarm levels. 0: Warning; 1: Info; 2: Critical.
+func (o AlarmMonitorNoticeNoticeOutput) AlarmLevels() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v AlarmMonitorNoticeNotice) []int { return v.AlarmLevels }).(pulumi.IntArrayOutput)
+}
+
+// Observable platform content template ID. If empty, use default content template.
+func (o AlarmMonitorNoticeNoticeOutput) ContentTmplId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AlarmMonitorNoticeNotice) *string { return v.ContentTmplId }).(pulumi.StringPtrOutput)
+}
+
+// Observable platform notification template ID.
+func (o AlarmMonitorNoticeNoticeOutput) NoticeId() pulumi.StringOutput {
+	return o.ApplyT(func(v AlarmMonitorNoticeNotice) string { return v.NoticeId }).(pulumi.StringOutput)
+}
+
+type AlarmMonitorNoticeNoticeArrayOutput struct{ *pulumi.OutputState }
+
+func (AlarmMonitorNoticeNoticeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AlarmMonitorNoticeNotice)(nil)).Elem()
+}
+
+func (o AlarmMonitorNoticeNoticeArrayOutput) ToAlarmMonitorNoticeNoticeArrayOutput() AlarmMonitorNoticeNoticeArrayOutput {
+	return o
+}
+
+func (o AlarmMonitorNoticeNoticeArrayOutput) ToAlarmMonitorNoticeNoticeArrayOutputWithContext(ctx context.Context) AlarmMonitorNoticeNoticeArrayOutput {
+	return o
+}
+
+func (o AlarmMonitorNoticeNoticeArrayOutput) Index(i pulumi.IntInput) AlarmMonitorNoticeNoticeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AlarmMonitorNoticeNotice {
+		return vs[0].([]AlarmMonitorNoticeNotice)[vs[1].(int)]
+	}).(AlarmMonitorNoticeNoticeOutput)
+}
+
 type AlarmMonitorTime struct {
 	// time period or point in time.
 	Time int `pulumi:"time"`
@@ -812,6 +1064,181 @@ func (o AlarmMultiConditionArrayOutput) Index(i pulumi.IntInput) AlarmMultiCondi
 	}).(AlarmMultiConditionOutput)
 }
 
+type AlarmNoticeDeliverConfig struct {
+	// Region of the target log topic. e.g. ap-guangzhou.
+	Region string `pulumi:"region"`
+	// Deliver data scope. 0: all logs (default); 1: only alarm trigger and recovery logs.
+	Scope *int `pulumi:"scope"`
+	// Target log topic ID.
+	TopicId string `pulumi:"topicId"`
+}
+
+// AlarmNoticeDeliverConfigInput is an input type that accepts AlarmNoticeDeliverConfigArgs and AlarmNoticeDeliverConfigOutput values.
+// You can construct a concrete instance of `AlarmNoticeDeliverConfigInput` via:
+//
+//	AlarmNoticeDeliverConfigArgs{...}
+type AlarmNoticeDeliverConfigInput interface {
+	pulumi.Input
+
+	ToAlarmNoticeDeliverConfigOutput() AlarmNoticeDeliverConfigOutput
+	ToAlarmNoticeDeliverConfigOutputWithContext(context.Context) AlarmNoticeDeliverConfigOutput
+}
+
+type AlarmNoticeDeliverConfigArgs struct {
+	// Region of the target log topic. e.g. ap-guangzhou.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Deliver data scope. 0: all logs (default); 1: only alarm trigger and recovery logs.
+	Scope pulumi.IntPtrInput `pulumi:"scope"`
+	// Target log topic ID.
+	TopicId pulumi.StringInput `pulumi:"topicId"`
+}
+
+func (AlarmNoticeDeliverConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmNoticeDeliverConfig)(nil)).Elem()
+}
+
+func (i AlarmNoticeDeliverConfigArgs) ToAlarmNoticeDeliverConfigOutput() AlarmNoticeDeliverConfigOutput {
+	return i.ToAlarmNoticeDeliverConfigOutputWithContext(context.Background())
+}
+
+func (i AlarmNoticeDeliverConfigArgs) ToAlarmNoticeDeliverConfigOutputWithContext(ctx context.Context) AlarmNoticeDeliverConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmNoticeDeliverConfigOutput)
+}
+
+func (i AlarmNoticeDeliverConfigArgs) ToAlarmNoticeDeliverConfigPtrOutput() AlarmNoticeDeliverConfigPtrOutput {
+	return i.ToAlarmNoticeDeliverConfigPtrOutputWithContext(context.Background())
+}
+
+func (i AlarmNoticeDeliverConfigArgs) ToAlarmNoticeDeliverConfigPtrOutputWithContext(ctx context.Context) AlarmNoticeDeliverConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmNoticeDeliverConfigOutput).ToAlarmNoticeDeliverConfigPtrOutputWithContext(ctx)
+}
+
+// AlarmNoticeDeliverConfigPtrInput is an input type that accepts AlarmNoticeDeliverConfigArgs, AlarmNoticeDeliverConfigPtr and AlarmNoticeDeliverConfigPtrOutput values.
+// You can construct a concrete instance of `AlarmNoticeDeliverConfigPtrInput` via:
+//
+//	        AlarmNoticeDeliverConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type AlarmNoticeDeliverConfigPtrInput interface {
+	pulumi.Input
+
+	ToAlarmNoticeDeliverConfigPtrOutput() AlarmNoticeDeliverConfigPtrOutput
+	ToAlarmNoticeDeliverConfigPtrOutputWithContext(context.Context) AlarmNoticeDeliverConfigPtrOutput
+}
+
+type alarmNoticeDeliverConfigPtrType AlarmNoticeDeliverConfigArgs
+
+func AlarmNoticeDeliverConfigPtr(v *AlarmNoticeDeliverConfigArgs) AlarmNoticeDeliverConfigPtrInput {
+	return (*alarmNoticeDeliverConfigPtrType)(v)
+}
+
+func (*alarmNoticeDeliverConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**AlarmNoticeDeliverConfig)(nil)).Elem()
+}
+
+func (i *alarmNoticeDeliverConfigPtrType) ToAlarmNoticeDeliverConfigPtrOutput() AlarmNoticeDeliverConfigPtrOutput {
+	return i.ToAlarmNoticeDeliverConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *alarmNoticeDeliverConfigPtrType) ToAlarmNoticeDeliverConfigPtrOutputWithContext(ctx context.Context) AlarmNoticeDeliverConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmNoticeDeliverConfigPtrOutput)
+}
+
+type AlarmNoticeDeliverConfigOutput struct{ *pulumi.OutputState }
+
+func (AlarmNoticeDeliverConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmNoticeDeliverConfig)(nil)).Elem()
+}
+
+func (o AlarmNoticeDeliverConfigOutput) ToAlarmNoticeDeliverConfigOutput() AlarmNoticeDeliverConfigOutput {
+	return o
+}
+
+func (o AlarmNoticeDeliverConfigOutput) ToAlarmNoticeDeliverConfigOutputWithContext(ctx context.Context) AlarmNoticeDeliverConfigOutput {
+	return o
+}
+
+func (o AlarmNoticeDeliverConfigOutput) ToAlarmNoticeDeliverConfigPtrOutput() AlarmNoticeDeliverConfigPtrOutput {
+	return o.ToAlarmNoticeDeliverConfigPtrOutputWithContext(context.Background())
+}
+
+func (o AlarmNoticeDeliverConfigOutput) ToAlarmNoticeDeliverConfigPtrOutputWithContext(ctx context.Context) AlarmNoticeDeliverConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v AlarmNoticeDeliverConfig) *AlarmNoticeDeliverConfig {
+		return &v
+	}).(AlarmNoticeDeliverConfigPtrOutput)
+}
+
+// Region of the target log topic. e.g. ap-guangzhou.
+func (o AlarmNoticeDeliverConfigOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v AlarmNoticeDeliverConfig) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Deliver data scope. 0: all logs (default); 1: only alarm trigger and recovery logs.
+func (o AlarmNoticeDeliverConfigOutput) Scope() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeDeliverConfig) *int { return v.Scope }).(pulumi.IntPtrOutput)
+}
+
+// Target log topic ID.
+func (o AlarmNoticeDeliverConfigOutput) TopicId() pulumi.StringOutput {
+	return o.ApplyT(func(v AlarmNoticeDeliverConfig) string { return v.TopicId }).(pulumi.StringOutput)
+}
+
+type AlarmNoticeDeliverConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (AlarmNoticeDeliverConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**AlarmNoticeDeliverConfig)(nil)).Elem()
+}
+
+func (o AlarmNoticeDeliverConfigPtrOutput) ToAlarmNoticeDeliverConfigPtrOutput() AlarmNoticeDeliverConfigPtrOutput {
+	return o
+}
+
+func (o AlarmNoticeDeliverConfigPtrOutput) ToAlarmNoticeDeliverConfigPtrOutputWithContext(ctx context.Context) AlarmNoticeDeliverConfigPtrOutput {
+	return o
+}
+
+func (o AlarmNoticeDeliverConfigPtrOutput) Elem() AlarmNoticeDeliverConfigOutput {
+	return o.ApplyT(func(v *AlarmNoticeDeliverConfig) AlarmNoticeDeliverConfig {
+		if v != nil {
+			return *v
+		}
+		var ret AlarmNoticeDeliverConfig
+		return ret
+	}).(AlarmNoticeDeliverConfigOutput)
+}
+
+// Region of the target log topic. e.g. ap-guangzhou.
+func (o AlarmNoticeDeliverConfigPtrOutput) Region() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AlarmNoticeDeliverConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Region
+	}).(pulumi.StringPtrOutput)
+}
+
+// Deliver data scope. 0: all logs (default); 1: only alarm trigger and recovery logs.
+func (o AlarmNoticeDeliverConfigPtrOutput) Scope() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *AlarmNoticeDeliverConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Scope
+	}).(pulumi.IntPtrOutput)
+}
+
+// Target log topic ID.
+func (o AlarmNoticeDeliverConfigPtrOutput) TopicId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AlarmNoticeDeliverConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TopicId
+	}).(pulumi.StringPtrOutput)
+}
+
 type AlarmNoticeNoticeReceiver struct {
 	// End time allowed to receive messages.
 	EndTime *string `pulumi:"endTime"`
@@ -961,6 +1388,994 @@ func (o AlarmNoticeNoticeReceiverArrayOutput) Index(i pulumi.IntInput) AlarmNoti
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AlarmNoticeNoticeReceiver {
 		return vs[0].([]AlarmNoticeNoticeReceiver)[vs[1].(int)]
 	}).(AlarmNoticeNoticeReceiverOutput)
+}
+
+type AlarmNoticeNoticeRule struct {
+	// Alarm escalate switch. true: enable; false: disable (default).
+	Escalate *bool `pulumi:"escalate"`
+	// Alarm escalate notice chain, ordered from level 1 to level 5 (max). Each element represents the next escalation level.
+	EscalateNotices []AlarmNoticeNoticeRuleEscalateNotice `pulumi:"escalateNotices"`
+	// Alarm escalate interval in minutes. Range: [1, 14400].
+	Interval *int `pulumi:"interval"`
+	// Notice receivers for this rule.
+	NoticeReceivers []AlarmNoticeNoticeRuleNoticeReceiver `pulumi:"noticeReceivers"`
+	// Matching rule JSON string.
+	Rule *string `pulumi:"rule"`
+	// Alarm escalate condition. 1: unclaimed and unresolved (default); 2: unresolved.
+	Type *int `pulumi:"type"`
+	// Web callbacks for this rule.
+	WebCallbacks []AlarmNoticeNoticeRuleWebCallback `pulumi:"webCallbacks"`
+}
+
+// AlarmNoticeNoticeRuleInput is an input type that accepts AlarmNoticeNoticeRuleArgs and AlarmNoticeNoticeRuleOutput values.
+// You can construct a concrete instance of `AlarmNoticeNoticeRuleInput` via:
+//
+//	AlarmNoticeNoticeRuleArgs{...}
+type AlarmNoticeNoticeRuleInput interface {
+	pulumi.Input
+
+	ToAlarmNoticeNoticeRuleOutput() AlarmNoticeNoticeRuleOutput
+	ToAlarmNoticeNoticeRuleOutputWithContext(context.Context) AlarmNoticeNoticeRuleOutput
+}
+
+type AlarmNoticeNoticeRuleArgs struct {
+	// Alarm escalate switch. true: enable; false: disable (default).
+	Escalate pulumi.BoolPtrInput `pulumi:"escalate"`
+	// Alarm escalate notice chain, ordered from level 1 to level 5 (max). Each element represents the next escalation level.
+	EscalateNotices AlarmNoticeNoticeRuleEscalateNoticeArrayInput `pulumi:"escalateNotices"`
+	// Alarm escalate interval in minutes. Range: [1, 14400].
+	Interval pulumi.IntPtrInput `pulumi:"interval"`
+	// Notice receivers for this rule.
+	NoticeReceivers AlarmNoticeNoticeRuleNoticeReceiverArrayInput `pulumi:"noticeReceivers"`
+	// Matching rule JSON string.
+	Rule pulumi.StringPtrInput `pulumi:"rule"`
+	// Alarm escalate condition. 1: unclaimed and unresolved (default); 2: unresolved.
+	Type pulumi.IntPtrInput `pulumi:"type"`
+	// Web callbacks for this rule.
+	WebCallbacks AlarmNoticeNoticeRuleWebCallbackArrayInput `pulumi:"webCallbacks"`
+}
+
+func (AlarmNoticeNoticeRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmNoticeNoticeRule)(nil)).Elem()
+}
+
+func (i AlarmNoticeNoticeRuleArgs) ToAlarmNoticeNoticeRuleOutput() AlarmNoticeNoticeRuleOutput {
+	return i.ToAlarmNoticeNoticeRuleOutputWithContext(context.Background())
+}
+
+func (i AlarmNoticeNoticeRuleArgs) ToAlarmNoticeNoticeRuleOutputWithContext(ctx context.Context) AlarmNoticeNoticeRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmNoticeNoticeRuleOutput)
+}
+
+// AlarmNoticeNoticeRuleArrayInput is an input type that accepts AlarmNoticeNoticeRuleArray and AlarmNoticeNoticeRuleArrayOutput values.
+// You can construct a concrete instance of `AlarmNoticeNoticeRuleArrayInput` via:
+//
+//	AlarmNoticeNoticeRuleArray{ AlarmNoticeNoticeRuleArgs{...} }
+type AlarmNoticeNoticeRuleArrayInput interface {
+	pulumi.Input
+
+	ToAlarmNoticeNoticeRuleArrayOutput() AlarmNoticeNoticeRuleArrayOutput
+	ToAlarmNoticeNoticeRuleArrayOutputWithContext(context.Context) AlarmNoticeNoticeRuleArrayOutput
+}
+
+type AlarmNoticeNoticeRuleArray []AlarmNoticeNoticeRuleInput
+
+func (AlarmNoticeNoticeRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AlarmNoticeNoticeRule)(nil)).Elem()
+}
+
+func (i AlarmNoticeNoticeRuleArray) ToAlarmNoticeNoticeRuleArrayOutput() AlarmNoticeNoticeRuleArrayOutput {
+	return i.ToAlarmNoticeNoticeRuleArrayOutputWithContext(context.Background())
+}
+
+func (i AlarmNoticeNoticeRuleArray) ToAlarmNoticeNoticeRuleArrayOutputWithContext(ctx context.Context) AlarmNoticeNoticeRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmNoticeNoticeRuleArrayOutput)
+}
+
+type AlarmNoticeNoticeRuleOutput struct{ *pulumi.OutputState }
+
+func (AlarmNoticeNoticeRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmNoticeNoticeRule)(nil)).Elem()
+}
+
+func (o AlarmNoticeNoticeRuleOutput) ToAlarmNoticeNoticeRuleOutput() AlarmNoticeNoticeRuleOutput {
+	return o
+}
+
+func (o AlarmNoticeNoticeRuleOutput) ToAlarmNoticeNoticeRuleOutputWithContext(ctx context.Context) AlarmNoticeNoticeRuleOutput {
+	return o
+}
+
+// Alarm escalate switch. true: enable; false: disable (default).
+func (o AlarmNoticeNoticeRuleOutput) Escalate() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRule) *bool { return v.Escalate }).(pulumi.BoolPtrOutput)
+}
+
+// Alarm escalate notice chain, ordered from level 1 to level 5 (max). Each element represents the next escalation level.
+func (o AlarmNoticeNoticeRuleOutput) EscalateNotices() AlarmNoticeNoticeRuleEscalateNoticeArrayOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRule) []AlarmNoticeNoticeRuleEscalateNotice { return v.EscalateNotices }).(AlarmNoticeNoticeRuleEscalateNoticeArrayOutput)
+}
+
+// Alarm escalate interval in minutes. Range: [1, 14400].
+func (o AlarmNoticeNoticeRuleOutput) Interval() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRule) *int { return v.Interval }).(pulumi.IntPtrOutput)
+}
+
+// Notice receivers for this rule.
+func (o AlarmNoticeNoticeRuleOutput) NoticeReceivers() AlarmNoticeNoticeRuleNoticeReceiverArrayOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRule) []AlarmNoticeNoticeRuleNoticeReceiver { return v.NoticeReceivers }).(AlarmNoticeNoticeRuleNoticeReceiverArrayOutput)
+}
+
+// Matching rule JSON string.
+func (o AlarmNoticeNoticeRuleOutput) Rule() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRule) *string { return v.Rule }).(pulumi.StringPtrOutput)
+}
+
+// Alarm escalate condition. 1: unclaimed and unresolved (default); 2: unresolved.
+func (o AlarmNoticeNoticeRuleOutput) Type() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRule) *int { return v.Type }).(pulumi.IntPtrOutput)
+}
+
+// Web callbacks for this rule.
+func (o AlarmNoticeNoticeRuleOutput) WebCallbacks() AlarmNoticeNoticeRuleWebCallbackArrayOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRule) []AlarmNoticeNoticeRuleWebCallback { return v.WebCallbacks }).(AlarmNoticeNoticeRuleWebCallbackArrayOutput)
+}
+
+type AlarmNoticeNoticeRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (AlarmNoticeNoticeRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AlarmNoticeNoticeRule)(nil)).Elem()
+}
+
+func (o AlarmNoticeNoticeRuleArrayOutput) ToAlarmNoticeNoticeRuleArrayOutput() AlarmNoticeNoticeRuleArrayOutput {
+	return o
+}
+
+func (o AlarmNoticeNoticeRuleArrayOutput) ToAlarmNoticeNoticeRuleArrayOutputWithContext(ctx context.Context) AlarmNoticeNoticeRuleArrayOutput {
+	return o
+}
+
+func (o AlarmNoticeNoticeRuleArrayOutput) Index(i pulumi.IntInput) AlarmNoticeNoticeRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AlarmNoticeNoticeRule {
+		return vs[0].([]AlarmNoticeNoticeRule)[vs[1].(int)]
+	}).(AlarmNoticeNoticeRuleOutput)
+}
+
+type AlarmNoticeNoticeRuleEscalateNotice struct {
+	// Whether to continue escalating from this level. true: enable; false: disable.
+	Escalate *bool `pulumi:"escalate"`
+	// Escalate interval in minutes. Range: [1, 14400].
+	Interval *int `pulumi:"interval"`
+	// Notice receivers for this escalation level.
+	NoticeReceivers []AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiver `pulumi:"noticeReceivers"`
+	// Escalate condition. 1: unclaimed and unresolved (default); 2: unresolved.
+	Type *int `pulumi:"type"`
+	// Web callbacks for this escalation level.
+	WebCallbacks []AlarmNoticeNoticeRuleEscalateNoticeWebCallback `pulumi:"webCallbacks"`
+}
+
+// AlarmNoticeNoticeRuleEscalateNoticeInput is an input type that accepts AlarmNoticeNoticeRuleEscalateNoticeArgs and AlarmNoticeNoticeRuleEscalateNoticeOutput values.
+// You can construct a concrete instance of `AlarmNoticeNoticeRuleEscalateNoticeInput` via:
+//
+//	AlarmNoticeNoticeRuleEscalateNoticeArgs{...}
+type AlarmNoticeNoticeRuleEscalateNoticeInput interface {
+	pulumi.Input
+
+	ToAlarmNoticeNoticeRuleEscalateNoticeOutput() AlarmNoticeNoticeRuleEscalateNoticeOutput
+	ToAlarmNoticeNoticeRuleEscalateNoticeOutputWithContext(context.Context) AlarmNoticeNoticeRuleEscalateNoticeOutput
+}
+
+type AlarmNoticeNoticeRuleEscalateNoticeArgs struct {
+	// Whether to continue escalating from this level. true: enable; false: disable.
+	Escalate pulumi.BoolPtrInput `pulumi:"escalate"`
+	// Escalate interval in minutes. Range: [1, 14400].
+	Interval pulumi.IntPtrInput `pulumi:"interval"`
+	// Notice receivers for this escalation level.
+	NoticeReceivers AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArrayInput `pulumi:"noticeReceivers"`
+	// Escalate condition. 1: unclaimed and unresolved (default); 2: unresolved.
+	Type pulumi.IntPtrInput `pulumi:"type"`
+	// Web callbacks for this escalation level.
+	WebCallbacks AlarmNoticeNoticeRuleEscalateNoticeWebCallbackArrayInput `pulumi:"webCallbacks"`
+}
+
+func (AlarmNoticeNoticeRuleEscalateNoticeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmNoticeNoticeRuleEscalateNotice)(nil)).Elem()
+}
+
+func (i AlarmNoticeNoticeRuleEscalateNoticeArgs) ToAlarmNoticeNoticeRuleEscalateNoticeOutput() AlarmNoticeNoticeRuleEscalateNoticeOutput {
+	return i.ToAlarmNoticeNoticeRuleEscalateNoticeOutputWithContext(context.Background())
+}
+
+func (i AlarmNoticeNoticeRuleEscalateNoticeArgs) ToAlarmNoticeNoticeRuleEscalateNoticeOutputWithContext(ctx context.Context) AlarmNoticeNoticeRuleEscalateNoticeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmNoticeNoticeRuleEscalateNoticeOutput)
+}
+
+// AlarmNoticeNoticeRuleEscalateNoticeArrayInput is an input type that accepts AlarmNoticeNoticeRuleEscalateNoticeArray and AlarmNoticeNoticeRuleEscalateNoticeArrayOutput values.
+// You can construct a concrete instance of `AlarmNoticeNoticeRuleEscalateNoticeArrayInput` via:
+//
+//	AlarmNoticeNoticeRuleEscalateNoticeArray{ AlarmNoticeNoticeRuleEscalateNoticeArgs{...} }
+type AlarmNoticeNoticeRuleEscalateNoticeArrayInput interface {
+	pulumi.Input
+
+	ToAlarmNoticeNoticeRuleEscalateNoticeArrayOutput() AlarmNoticeNoticeRuleEscalateNoticeArrayOutput
+	ToAlarmNoticeNoticeRuleEscalateNoticeArrayOutputWithContext(context.Context) AlarmNoticeNoticeRuleEscalateNoticeArrayOutput
+}
+
+type AlarmNoticeNoticeRuleEscalateNoticeArray []AlarmNoticeNoticeRuleEscalateNoticeInput
+
+func (AlarmNoticeNoticeRuleEscalateNoticeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AlarmNoticeNoticeRuleEscalateNotice)(nil)).Elem()
+}
+
+func (i AlarmNoticeNoticeRuleEscalateNoticeArray) ToAlarmNoticeNoticeRuleEscalateNoticeArrayOutput() AlarmNoticeNoticeRuleEscalateNoticeArrayOutput {
+	return i.ToAlarmNoticeNoticeRuleEscalateNoticeArrayOutputWithContext(context.Background())
+}
+
+func (i AlarmNoticeNoticeRuleEscalateNoticeArray) ToAlarmNoticeNoticeRuleEscalateNoticeArrayOutputWithContext(ctx context.Context) AlarmNoticeNoticeRuleEscalateNoticeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmNoticeNoticeRuleEscalateNoticeArrayOutput)
+}
+
+type AlarmNoticeNoticeRuleEscalateNoticeOutput struct{ *pulumi.OutputState }
+
+func (AlarmNoticeNoticeRuleEscalateNoticeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmNoticeNoticeRuleEscalateNotice)(nil)).Elem()
+}
+
+func (o AlarmNoticeNoticeRuleEscalateNoticeOutput) ToAlarmNoticeNoticeRuleEscalateNoticeOutput() AlarmNoticeNoticeRuleEscalateNoticeOutput {
+	return o
+}
+
+func (o AlarmNoticeNoticeRuleEscalateNoticeOutput) ToAlarmNoticeNoticeRuleEscalateNoticeOutputWithContext(ctx context.Context) AlarmNoticeNoticeRuleEscalateNoticeOutput {
+	return o
+}
+
+// Whether to continue escalating from this level. true: enable; false: disable.
+func (o AlarmNoticeNoticeRuleEscalateNoticeOutput) Escalate() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleEscalateNotice) *bool { return v.Escalate }).(pulumi.BoolPtrOutput)
+}
+
+// Escalate interval in minutes. Range: [1, 14400].
+func (o AlarmNoticeNoticeRuleEscalateNoticeOutput) Interval() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleEscalateNotice) *int { return v.Interval }).(pulumi.IntPtrOutput)
+}
+
+// Notice receivers for this escalation level.
+func (o AlarmNoticeNoticeRuleEscalateNoticeOutput) NoticeReceivers() AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArrayOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleEscalateNotice) []AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiver {
+		return v.NoticeReceivers
+	}).(AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArrayOutput)
+}
+
+// Escalate condition. 1: unclaimed and unresolved (default); 2: unresolved.
+func (o AlarmNoticeNoticeRuleEscalateNoticeOutput) Type() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleEscalateNotice) *int { return v.Type }).(pulumi.IntPtrOutput)
+}
+
+// Web callbacks for this escalation level.
+func (o AlarmNoticeNoticeRuleEscalateNoticeOutput) WebCallbacks() AlarmNoticeNoticeRuleEscalateNoticeWebCallbackArrayOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleEscalateNotice) []AlarmNoticeNoticeRuleEscalateNoticeWebCallback {
+		return v.WebCallbacks
+	}).(AlarmNoticeNoticeRuleEscalateNoticeWebCallbackArrayOutput)
+}
+
+type AlarmNoticeNoticeRuleEscalateNoticeArrayOutput struct{ *pulumi.OutputState }
+
+func (AlarmNoticeNoticeRuleEscalateNoticeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AlarmNoticeNoticeRuleEscalateNotice)(nil)).Elem()
+}
+
+func (o AlarmNoticeNoticeRuleEscalateNoticeArrayOutput) ToAlarmNoticeNoticeRuleEscalateNoticeArrayOutput() AlarmNoticeNoticeRuleEscalateNoticeArrayOutput {
+	return o
+}
+
+func (o AlarmNoticeNoticeRuleEscalateNoticeArrayOutput) ToAlarmNoticeNoticeRuleEscalateNoticeArrayOutputWithContext(ctx context.Context) AlarmNoticeNoticeRuleEscalateNoticeArrayOutput {
+	return o
+}
+
+func (o AlarmNoticeNoticeRuleEscalateNoticeArrayOutput) Index(i pulumi.IntInput) AlarmNoticeNoticeRuleEscalateNoticeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AlarmNoticeNoticeRuleEscalateNotice {
+		return vs[0].([]AlarmNoticeNoticeRuleEscalateNotice)[vs[1].(int)]
+	}).(AlarmNoticeNoticeRuleEscalateNoticeOutput)
+}
+
+type AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiver struct {
+	// End time allowed to receive messages.
+	EndTime *string `pulumi:"endTime"`
+	// Index. The input parameter is invalid, but the output parameter is valid.
+	Index *int `pulumi:"index"`
+	// Notice content ID.
+	NoticeContentId *string `pulumi:"noticeContentId"`
+	// Receiver channels, Value: Email, Sms, WeChat, Phone.
+	ReceiverChannels []string `pulumi:"receiverChannels"`
+	// Receiver id list.
+	ReceiverIds []int `pulumi:"receiverIds"`
+	// Receiver type, Uin or Group.
+	ReceiverType string `pulumi:"receiverType"`
+	// Start time allowed to receive messages.
+	StartTime *string `pulumi:"startTime"`
+}
+
+// AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverInput is an input type that accepts AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArgs and AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverOutput values.
+// You can construct a concrete instance of `AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverInput` via:
+//
+//	AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArgs{...}
+type AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverInput interface {
+	pulumi.Input
+
+	ToAlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverOutput() AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverOutput
+	ToAlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverOutputWithContext(context.Context) AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverOutput
+}
+
+type AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArgs struct {
+	// End time allowed to receive messages.
+	EndTime pulumi.StringPtrInput `pulumi:"endTime"`
+	// Index. The input parameter is invalid, but the output parameter is valid.
+	Index pulumi.IntPtrInput `pulumi:"index"`
+	// Notice content ID.
+	NoticeContentId pulumi.StringPtrInput `pulumi:"noticeContentId"`
+	// Receiver channels, Value: Email, Sms, WeChat, Phone.
+	ReceiverChannels pulumi.StringArrayInput `pulumi:"receiverChannels"`
+	// Receiver id list.
+	ReceiverIds pulumi.IntArrayInput `pulumi:"receiverIds"`
+	// Receiver type, Uin or Group.
+	ReceiverType pulumi.StringInput `pulumi:"receiverType"`
+	// Start time allowed to receive messages.
+	StartTime pulumi.StringPtrInput `pulumi:"startTime"`
+}
+
+func (AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiver)(nil)).Elem()
+}
+
+func (i AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArgs) ToAlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverOutput() AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverOutput {
+	return i.ToAlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverOutputWithContext(context.Background())
+}
+
+func (i AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArgs) ToAlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverOutputWithContext(ctx context.Context) AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverOutput)
+}
+
+// AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArrayInput is an input type that accepts AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArray and AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArrayOutput values.
+// You can construct a concrete instance of `AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArrayInput` via:
+//
+//	AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArray{ AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArgs{...} }
+type AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArrayInput interface {
+	pulumi.Input
+
+	ToAlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArrayOutput() AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArrayOutput
+	ToAlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArrayOutputWithContext(context.Context) AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArrayOutput
+}
+
+type AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArray []AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverInput
+
+func (AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiver)(nil)).Elem()
+}
+
+func (i AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArray) ToAlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArrayOutput() AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArrayOutput {
+	return i.ToAlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArrayOutputWithContext(context.Background())
+}
+
+func (i AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArray) ToAlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArrayOutputWithContext(ctx context.Context) AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArrayOutput)
+}
+
+type AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverOutput struct{ *pulumi.OutputState }
+
+func (AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiver)(nil)).Elem()
+}
+
+func (o AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverOutput) ToAlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverOutput() AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverOutput {
+	return o
+}
+
+func (o AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverOutput) ToAlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverOutputWithContext(ctx context.Context) AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverOutput {
+	return o
+}
+
+// End time allowed to receive messages.
+func (o AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverOutput) EndTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiver) *string { return v.EndTime }).(pulumi.StringPtrOutput)
+}
+
+// Index. The input parameter is invalid, but the output parameter is valid.
+func (o AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverOutput) Index() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiver) *int { return v.Index }).(pulumi.IntPtrOutput)
+}
+
+// Notice content ID.
+func (o AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverOutput) NoticeContentId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiver) *string { return v.NoticeContentId }).(pulumi.StringPtrOutput)
+}
+
+// Receiver channels, Value: Email, Sms, WeChat, Phone.
+func (o AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverOutput) ReceiverChannels() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiver) []string { return v.ReceiverChannels }).(pulumi.StringArrayOutput)
+}
+
+// Receiver id list.
+func (o AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverOutput) ReceiverIds() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiver) []int { return v.ReceiverIds }).(pulumi.IntArrayOutput)
+}
+
+// Receiver type, Uin or Group.
+func (o AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverOutput) ReceiverType() pulumi.StringOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiver) string { return v.ReceiverType }).(pulumi.StringOutput)
+}
+
+// Start time allowed to receive messages.
+func (o AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverOutput) StartTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiver) *string { return v.StartTime }).(pulumi.StringPtrOutput)
+}
+
+type AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArrayOutput struct{ *pulumi.OutputState }
+
+func (AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiver)(nil)).Elem()
+}
+
+func (o AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArrayOutput) ToAlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArrayOutput() AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArrayOutput {
+	return o
+}
+
+func (o AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArrayOutput) ToAlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArrayOutputWithContext(ctx context.Context) AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArrayOutput {
+	return o
+}
+
+func (o AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArrayOutput) Index(i pulumi.IntInput) AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiver {
+		return vs[0].([]AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiver)[vs[1].(int)]
+	}).(AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverOutput)
+}
+
+type AlarmNoticeNoticeRuleEscalateNoticeWebCallback struct {
+	// This parameter is deprecated. Please use `noticeContentId`. Request body.
+	//
+	// Deprecated: This parameter is deprecated. Please use `noticeContentId`.
+	Body *string `pulumi:"body"`
+	// Callback type, Values: Http, WeCom, DingTalk, Lark.
+	CallbackType string `pulumi:"callbackType"`
+	// This parameter is deprecated. Please use `noticeContentId`. Request headers.
+	//
+	// Deprecated: This parameter is deprecated. Please use `noticeContentId`.
+	Headers []string `pulumi:"headers"`
+	// Index. The input parameter is invalid, but the output parameter is valid.
+	Index *int `pulumi:"index"`
+	// Method, POST or PUT.
+	Method *string `pulumi:"method"`
+	// Telephone list.
+	Mobiles []string `pulumi:"mobiles"`
+	// Notice content ID.
+	NoticeContentId *string `pulumi:"noticeContentId"`
+	// Remind type. 0: Do not remind; 1: Specified person; 2: Everyone.
+	RemindType *int `pulumi:"remindType"`
+	// Callback url.
+	Url string `pulumi:"url"`
+	// User ID list.
+	UserIds []string `pulumi:"userIds"`
+	// Integration configuration ID.
+	WebCallbackId *string `pulumi:"webCallbackId"`
+}
+
+// AlarmNoticeNoticeRuleEscalateNoticeWebCallbackInput is an input type that accepts AlarmNoticeNoticeRuleEscalateNoticeWebCallbackArgs and AlarmNoticeNoticeRuleEscalateNoticeWebCallbackOutput values.
+// You can construct a concrete instance of `AlarmNoticeNoticeRuleEscalateNoticeWebCallbackInput` via:
+//
+//	AlarmNoticeNoticeRuleEscalateNoticeWebCallbackArgs{...}
+type AlarmNoticeNoticeRuleEscalateNoticeWebCallbackInput interface {
+	pulumi.Input
+
+	ToAlarmNoticeNoticeRuleEscalateNoticeWebCallbackOutput() AlarmNoticeNoticeRuleEscalateNoticeWebCallbackOutput
+	ToAlarmNoticeNoticeRuleEscalateNoticeWebCallbackOutputWithContext(context.Context) AlarmNoticeNoticeRuleEscalateNoticeWebCallbackOutput
+}
+
+type AlarmNoticeNoticeRuleEscalateNoticeWebCallbackArgs struct {
+	// This parameter is deprecated. Please use `noticeContentId`. Request body.
+	//
+	// Deprecated: This parameter is deprecated. Please use `noticeContentId`.
+	Body pulumi.StringPtrInput `pulumi:"body"`
+	// Callback type, Values: Http, WeCom, DingTalk, Lark.
+	CallbackType pulumi.StringInput `pulumi:"callbackType"`
+	// This parameter is deprecated. Please use `noticeContentId`. Request headers.
+	//
+	// Deprecated: This parameter is deprecated. Please use `noticeContentId`.
+	Headers pulumi.StringArrayInput `pulumi:"headers"`
+	// Index. The input parameter is invalid, but the output parameter is valid.
+	Index pulumi.IntPtrInput `pulumi:"index"`
+	// Method, POST or PUT.
+	Method pulumi.StringPtrInput `pulumi:"method"`
+	// Telephone list.
+	Mobiles pulumi.StringArrayInput `pulumi:"mobiles"`
+	// Notice content ID.
+	NoticeContentId pulumi.StringPtrInput `pulumi:"noticeContentId"`
+	// Remind type. 0: Do not remind; 1: Specified person; 2: Everyone.
+	RemindType pulumi.IntPtrInput `pulumi:"remindType"`
+	// Callback url.
+	Url pulumi.StringInput `pulumi:"url"`
+	// User ID list.
+	UserIds pulumi.StringArrayInput `pulumi:"userIds"`
+	// Integration configuration ID.
+	WebCallbackId pulumi.StringPtrInput `pulumi:"webCallbackId"`
+}
+
+func (AlarmNoticeNoticeRuleEscalateNoticeWebCallbackArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmNoticeNoticeRuleEscalateNoticeWebCallback)(nil)).Elem()
+}
+
+func (i AlarmNoticeNoticeRuleEscalateNoticeWebCallbackArgs) ToAlarmNoticeNoticeRuleEscalateNoticeWebCallbackOutput() AlarmNoticeNoticeRuleEscalateNoticeWebCallbackOutput {
+	return i.ToAlarmNoticeNoticeRuleEscalateNoticeWebCallbackOutputWithContext(context.Background())
+}
+
+func (i AlarmNoticeNoticeRuleEscalateNoticeWebCallbackArgs) ToAlarmNoticeNoticeRuleEscalateNoticeWebCallbackOutputWithContext(ctx context.Context) AlarmNoticeNoticeRuleEscalateNoticeWebCallbackOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmNoticeNoticeRuleEscalateNoticeWebCallbackOutput)
+}
+
+// AlarmNoticeNoticeRuleEscalateNoticeWebCallbackArrayInput is an input type that accepts AlarmNoticeNoticeRuleEscalateNoticeWebCallbackArray and AlarmNoticeNoticeRuleEscalateNoticeWebCallbackArrayOutput values.
+// You can construct a concrete instance of `AlarmNoticeNoticeRuleEscalateNoticeWebCallbackArrayInput` via:
+//
+//	AlarmNoticeNoticeRuleEscalateNoticeWebCallbackArray{ AlarmNoticeNoticeRuleEscalateNoticeWebCallbackArgs{...} }
+type AlarmNoticeNoticeRuleEscalateNoticeWebCallbackArrayInput interface {
+	pulumi.Input
+
+	ToAlarmNoticeNoticeRuleEscalateNoticeWebCallbackArrayOutput() AlarmNoticeNoticeRuleEscalateNoticeWebCallbackArrayOutput
+	ToAlarmNoticeNoticeRuleEscalateNoticeWebCallbackArrayOutputWithContext(context.Context) AlarmNoticeNoticeRuleEscalateNoticeWebCallbackArrayOutput
+}
+
+type AlarmNoticeNoticeRuleEscalateNoticeWebCallbackArray []AlarmNoticeNoticeRuleEscalateNoticeWebCallbackInput
+
+func (AlarmNoticeNoticeRuleEscalateNoticeWebCallbackArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AlarmNoticeNoticeRuleEscalateNoticeWebCallback)(nil)).Elem()
+}
+
+func (i AlarmNoticeNoticeRuleEscalateNoticeWebCallbackArray) ToAlarmNoticeNoticeRuleEscalateNoticeWebCallbackArrayOutput() AlarmNoticeNoticeRuleEscalateNoticeWebCallbackArrayOutput {
+	return i.ToAlarmNoticeNoticeRuleEscalateNoticeWebCallbackArrayOutputWithContext(context.Background())
+}
+
+func (i AlarmNoticeNoticeRuleEscalateNoticeWebCallbackArray) ToAlarmNoticeNoticeRuleEscalateNoticeWebCallbackArrayOutputWithContext(ctx context.Context) AlarmNoticeNoticeRuleEscalateNoticeWebCallbackArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmNoticeNoticeRuleEscalateNoticeWebCallbackArrayOutput)
+}
+
+type AlarmNoticeNoticeRuleEscalateNoticeWebCallbackOutput struct{ *pulumi.OutputState }
+
+func (AlarmNoticeNoticeRuleEscalateNoticeWebCallbackOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmNoticeNoticeRuleEscalateNoticeWebCallback)(nil)).Elem()
+}
+
+func (o AlarmNoticeNoticeRuleEscalateNoticeWebCallbackOutput) ToAlarmNoticeNoticeRuleEscalateNoticeWebCallbackOutput() AlarmNoticeNoticeRuleEscalateNoticeWebCallbackOutput {
+	return o
+}
+
+func (o AlarmNoticeNoticeRuleEscalateNoticeWebCallbackOutput) ToAlarmNoticeNoticeRuleEscalateNoticeWebCallbackOutputWithContext(ctx context.Context) AlarmNoticeNoticeRuleEscalateNoticeWebCallbackOutput {
+	return o
+}
+
+// This parameter is deprecated. Please use `noticeContentId`. Request body.
+//
+// Deprecated: This parameter is deprecated. Please use `noticeContentId`.
+func (o AlarmNoticeNoticeRuleEscalateNoticeWebCallbackOutput) Body() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleEscalateNoticeWebCallback) *string { return v.Body }).(pulumi.StringPtrOutput)
+}
+
+// Callback type, Values: Http, WeCom, DingTalk, Lark.
+func (o AlarmNoticeNoticeRuleEscalateNoticeWebCallbackOutput) CallbackType() pulumi.StringOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleEscalateNoticeWebCallback) string { return v.CallbackType }).(pulumi.StringOutput)
+}
+
+// This parameter is deprecated. Please use `noticeContentId`. Request headers.
+//
+// Deprecated: This parameter is deprecated. Please use `noticeContentId`.
+func (o AlarmNoticeNoticeRuleEscalateNoticeWebCallbackOutput) Headers() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleEscalateNoticeWebCallback) []string { return v.Headers }).(pulumi.StringArrayOutput)
+}
+
+// Index. The input parameter is invalid, but the output parameter is valid.
+func (o AlarmNoticeNoticeRuleEscalateNoticeWebCallbackOutput) Index() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleEscalateNoticeWebCallback) *int { return v.Index }).(pulumi.IntPtrOutput)
+}
+
+// Method, POST or PUT.
+func (o AlarmNoticeNoticeRuleEscalateNoticeWebCallbackOutput) Method() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleEscalateNoticeWebCallback) *string { return v.Method }).(pulumi.StringPtrOutput)
+}
+
+// Telephone list.
+func (o AlarmNoticeNoticeRuleEscalateNoticeWebCallbackOutput) Mobiles() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleEscalateNoticeWebCallback) []string { return v.Mobiles }).(pulumi.StringArrayOutput)
+}
+
+// Notice content ID.
+func (o AlarmNoticeNoticeRuleEscalateNoticeWebCallbackOutput) NoticeContentId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleEscalateNoticeWebCallback) *string { return v.NoticeContentId }).(pulumi.StringPtrOutput)
+}
+
+// Remind type. 0: Do not remind; 1: Specified person; 2: Everyone.
+func (o AlarmNoticeNoticeRuleEscalateNoticeWebCallbackOutput) RemindType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleEscalateNoticeWebCallback) *int { return v.RemindType }).(pulumi.IntPtrOutput)
+}
+
+// Callback url.
+func (o AlarmNoticeNoticeRuleEscalateNoticeWebCallbackOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleEscalateNoticeWebCallback) string { return v.Url }).(pulumi.StringOutput)
+}
+
+// User ID list.
+func (o AlarmNoticeNoticeRuleEscalateNoticeWebCallbackOutput) UserIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleEscalateNoticeWebCallback) []string { return v.UserIds }).(pulumi.StringArrayOutput)
+}
+
+// Integration configuration ID.
+func (o AlarmNoticeNoticeRuleEscalateNoticeWebCallbackOutput) WebCallbackId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleEscalateNoticeWebCallback) *string { return v.WebCallbackId }).(pulumi.StringPtrOutput)
+}
+
+type AlarmNoticeNoticeRuleEscalateNoticeWebCallbackArrayOutput struct{ *pulumi.OutputState }
+
+func (AlarmNoticeNoticeRuleEscalateNoticeWebCallbackArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AlarmNoticeNoticeRuleEscalateNoticeWebCallback)(nil)).Elem()
+}
+
+func (o AlarmNoticeNoticeRuleEscalateNoticeWebCallbackArrayOutput) ToAlarmNoticeNoticeRuleEscalateNoticeWebCallbackArrayOutput() AlarmNoticeNoticeRuleEscalateNoticeWebCallbackArrayOutput {
+	return o
+}
+
+func (o AlarmNoticeNoticeRuleEscalateNoticeWebCallbackArrayOutput) ToAlarmNoticeNoticeRuleEscalateNoticeWebCallbackArrayOutputWithContext(ctx context.Context) AlarmNoticeNoticeRuleEscalateNoticeWebCallbackArrayOutput {
+	return o
+}
+
+func (o AlarmNoticeNoticeRuleEscalateNoticeWebCallbackArrayOutput) Index(i pulumi.IntInput) AlarmNoticeNoticeRuleEscalateNoticeWebCallbackOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AlarmNoticeNoticeRuleEscalateNoticeWebCallback {
+		return vs[0].([]AlarmNoticeNoticeRuleEscalateNoticeWebCallback)[vs[1].(int)]
+	}).(AlarmNoticeNoticeRuleEscalateNoticeWebCallbackOutput)
+}
+
+type AlarmNoticeNoticeRuleNoticeReceiver struct {
+	// End time allowed to receive messages.
+	EndTime *string `pulumi:"endTime"`
+	// Index. The input parameter is invalid, but the output parameter is valid.
+	Index *int `pulumi:"index"`
+	// Notice content ID.
+	NoticeContentId *string `pulumi:"noticeContentId"`
+	// Receiver channels, Value: Email, Sms, WeChat, Phone.
+	ReceiverChannels []string `pulumi:"receiverChannels"`
+	// Receiver id list.
+	ReceiverIds []int `pulumi:"receiverIds"`
+	// Receiver type, Uin or Group.
+	ReceiverType string `pulumi:"receiverType"`
+	// Start time allowed to receive messages.
+	StartTime *string `pulumi:"startTime"`
+}
+
+// AlarmNoticeNoticeRuleNoticeReceiverInput is an input type that accepts AlarmNoticeNoticeRuleNoticeReceiverArgs and AlarmNoticeNoticeRuleNoticeReceiverOutput values.
+// You can construct a concrete instance of `AlarmNoticeNoticeRuleNoticeReceiverInput` via:
+//
+//	AlarmNoticeNoticeRuleNoticeReceiverArgs{...}
+type AlarmNoticeNoticeRuleNoticeReceiverInput interface {
+	pulumi.Input
+
+	ToAlarmNoticeNoticeRuleNoticeReceiverOutput() AlarmNoticeNoticeRuleNoticeReceiverOutput
+	ToAlarmNoticeNoticeRuleNoticeReceiverOutputWithContext(context.Context) AlarmNoticeNoticeRuleNoticeReceiverOutput
+}
+
+type AlarmNoticeNoticeRuleNoticeReceiverArgs struct {
+	// End time allowed to receive messages.
+	EndTime pulumi.StringPtrInput `pulumi:"endTime"`
+	// Index. The input parameter is invalid, but the output parameter is valid.
+	Index pulumi.IntPtrInput `pulumi:"index"`
+	// Notice content ID.
+	NoticeContentId pulumi.StringPtrInput `pulumi:"noticeContentId"`
+	// Receiver channels, Value: Email, Sms, WeChat, Phone.
+	ReceiverChannels pulumi.StringArrayInput `pulumi:"receiverChannels"`
+	// Receiver id list.
+	ReceiverIds pulumi.IntArrayInput `pulumi:"receiverIds"`
+	// Receiver type, Uin or Group.
+	ReceiverType pulumi.StringInput `pulumi:"receiverType"`
+	// Start time allowed to receive messages.
+	StartTime pulumi.StringPtrInput `pulumi:"startTime"`
+}
+
+func (AlarmNoticeNoticeRuleNoticeReceiverArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmNoticeNoticeRuleNoticeReceiver)(nil)).Elem()
+}
+
+func (i AlarmNoticeNoticeRuleNoticeReceiverArgs) ToAlarmNoticeNoticeRuleNoticeReceiverOutput() AlarmNoticeNoticeRuleNoticeReceiverOutput {
+	return i.ToAlarmNoticeNoticeRuleNoticeReceiverOutputWithContext(context.Background())
+}
+
+func (i AlarmNoticeNoticeRuleNoticeReceiverArgs) ToAlarmNoticeNoticeRuleNoticeReceiverOutputWithContext(ctx context.Context) AlarmNoticeNoticeRuleNoticeReceiverOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmNoticeNoticeRuleNoticeReceiverOutput)
+}
+
+// AlarmNoticeNoticeRuleNoticeReceiverArrayInput is an input type that accepts AlarmNoticeNoticeRuleNoticeReceiverArray and AlarmNoticeNoticeRuleNoticeReceiverArrayOutput values.
+// You can construct a concrete instance of `AlarmNoticeNoticeRuleNoticeReceiverArrayInput` via:
+//
+//	AlarmNoticeNoticeRuleNoticeReceiverArray{ AlarmNoticeNoticeRuleNoticeReceiverArgs{...} }
+type AlarmNoticeNoticeRuleNoticeReceiverArrayInput interface {
+	pulumi.Input
+
+	ToAlarmNoticeNoticeRuleNoticeReceiverArrayOutput() AlarmNoticeNoticeRuleNoticeReceiverArrayOutput
+	ToAlarmNoticeNoticeRuleNoticeReceiverArrayOutputWithContext(context.Context) AlarmNoticeNoticeRuleNoticeReceiverArrayOutput
+}
+
+type AlarmNoticeNoticeRuleNoticeReceiverArray []AlarmNoticeNoticeRuleNoticeReceiverInput
+
+func (AlarmNoticeNoticeRuleNoticeReceiverArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AlarmNoticeNoticeRuleNoticeReceiver)(nil)).Elem()
+}
+
+func (i AlarmNoticeNoticeRuleNoticeReceiverArray) ToAlarmNoticeNoticeRuleNoticeReceiverArrayOutput() AlarmNoticeNoticeRuleNoticeReceiverArrayOutput {
+	return i.ToAlarmNoticeNoticeRuleNoticeReceiverArrayOutputWithContext(context.Background())
+}
+
+func (i AlarmNoticeNoticeRuleNoticeReceiverArray) ToAlarmNoticeNoticeRuleNoticeReceiverArrayOutputWithContext(ctx context.Context) AlarmNoticeNoticeRuleNoticeReceiverArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmNoticeNoticeRuleNoticeReceiverArrayOutput)
+}
+
+type AlarmNoticeNoticeRuleNoticeReceiverOutput struct{ *pulumi.OutputState }
+
+func (AlarmNoticeNoticeRuleNoticeReceiverOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmNoticeNoticeRuleNoticeReceiver)(nil)).Elem()
+}
+
+func (o AlarmNoticeNoticeRuleNoticeReceiverOutput) ToAlarmNoticeNoticeRuleNoticeReceiverOutput() AlarmNoticeNoticeRuleNoticeReceiverOutput {
+	return o
+}
+
+func (o AlarmNoticeNoticeRuleNoticeReceiverOutput) ToAlarmNoticeNoticeRuleNoticeReceiverOutputWithContext(ctx context.Context) AlarmNoticeNoticeRuleNoticeReceiverOutput {
+	return o
+}
+
+// End time allowed to receive messages.
+func (o AlarmNoticeNoticeRuleNoticeReceiverOutput) EndTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleNoticeReceiver) *string { return v.EndTime }).(pulumi.StringPtrOutput)
+}
+
+// Index. The input parameter is invalid, but the output parameter is valid.
+func (o AlarmNoticeNoticeRuleNoticeReceiverOutput) Index() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleNoticeReceiver) *int { return v.Index }).(pulumi.IntPtrOutput)
+}
+
+// Notice content ID.
+func (o AlarmNoticeNoticeRuleNoticeReceiverOutput) NoticeContentId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleNoticeReceiver) *string { return v.NoticeContentId }).(pulumi.StringPtrOutput)
+}
+
+// Receiver channels, Value: Email, Sms, WeChat, Phone.
+func (o AlarmNoticeNoticeRuleNoticeReceiverOutput) ReceiverChannels() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleNoticeReceiver) []string { return v.ReceiverChannels }).(pulumi.StringArrayOutput)
+}
+
+// Receiver id list.
+func (o AlarmNoticeNoticeRuleNoticeReceiverOutput) ReceiverIds() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleNoticeReceiver) []int { return v.ReceiverIds }).(pulumi.IntArrayOutput)
+}
+
+// Receiver type, Uin or Group.
+func (o AlarmNoticeNoticeRuleNoticeReceiverOutput) ReceiverType() pulumi.StringOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleNoticeReceiver) string { return v.ReceiverType }).(pulumi.StringOutput)
+}
+
+// Start time allowed to receive messages.
+func (o AlarmNoticeNoticeRuleNoticeReceiverOutput) StartTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleNoticeReceiver) *string { return v.StartTime }).(pulumi.StringPtrOutput)
+}
+
+type AlarmNoticeNoticeRuleNoticeReceiverArrayOutput struct{ *pulumi.OutputState }
+
+func (AlarmNoticeNoticeRuleNoticeReceiverArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AlarmNoticeNoticeRuleNoticeReceiver)(nil)).Elem()
+}
+
+func (o AlarmNoticeNoticeRuleNoticeReceiverArrayOutput) ToAlarmNoticeNoticeRuleNoticeReceiverArrayOutput() AlarmNoticeNoticeRuleNoticeReceiverArrayOutput {
+	return o
+}
+
+func (o AlarmNoticeNoticeRuleNoticeReceiverArrayOutput) ToAlarmNoticeNoticeRuleNoticeReceiverArrayOutputWithContext(ctx context.Context) AlarmNoticeNoticeRuleNoticeReceiverArrayOutput {
+	return o
+}
+
+func (o AlarmNoticeNoticeRuleNoticeReceiverArrayOutput) Index(i pulumi.IntInput) AlarmNoticeNoticeRuleNoticeReceiverOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AlarmNoticeNoticeRuleNoticeReceiver {
+		return vs[0].([]AlarmNoticeNoticeRuleNoticeReceiver)[vs[1].(int)]
+	}).(AlarmNoticeNoticeRuleNoticeReceiverOutput)
+}
+
+type AlarmNoticeNoticeRuleWebCallback struct {
+	// This parameter is deprecated. Please use `noticeContentId`. Request body.
+	//
+	// Deprecated: This parameter is deprecated. Please use `noticeContentId`.
+	Body *string `pulumi:"body"`
+	// Callback type, Values: Http, WeCom, DingTalk, Lark.
+	CallbackType string `pulumi:"callbackType"`
+	// This parameter is deprecated. Please use `noticeContentId`. Request headers.
+	//
+	// Deprecated: This parameter is deprecated. Please use `noticeContentId`.
+	Headers []string `pulumi:"headers"`
+	// Index. The input parameter is invalid, but the output parameter is valid.
+	Index *int `pulumi:"index"`
+	// Method, POST or PUT.
+	Method *string `pulumi:"method"`
+	// Telephone list.
+	Mobiles []string `pulumi:"mobiles"`
+	// Notice content ID.
+	NoticeContentId *string `pulumi:"noticeContentId"`
+	// Remind type. 0: Do not remind; 1: Specified person; 2: Everyone.
+	RemindType *int `pulumi:"remindType"`
+	// Callback url.
+	Url string `pulumi:"url"`
+	// User ID list.
+	UserIds []string `pulumi:"userIds"`
+	// Integration configuration ID.
+	WebCallbackId *string `pulumi:"webCallbackId"`
+}
+
+// AlarmNoticeNoticeRuleWebCallbackInput is an input type that accepts AlarmNoticeNoticeRuleWebCallbackArgs and AlarmNoticeNoticeRuleWebCallbackOutput values.
+// You can construct a concrete instance of `AlarmNoticeNoticeRuleWebCallbackInput` via:
+//
+//	AlarmNoticeNoticeRuleWebCallbackArgs{...}
+type AlarmNoticeNoticeRuleWebCallbackInput interface {
+	pulumi.Input
+
+	ToAlarmNoticeNoticeRuleWebCallbackOutput() AlarmNoticeNoticeRuleWebCallbackOutput
+	ToAlarmNoticeNoticeRuleWebCallbackOutputWithContext(context.Context) AlarmNoticeNoticeRuleWebCallbackOutput
+}
+
+type AlarmNoticeNoticeRuleWebCallbackArgs struct {
+	// This parameter is deprecated. Please use `noticeContentId`. Request body.
+	//
+	// Deprecated: This parameter is deprecated. Please use `noticeContentId`.
+	Body pulumi.StringPtrInput `pulumi:"body"`
+	// Callback type, Values: Http, WeCom, DingTalk, Lark.
+	CallbackType pulumi.StringInput `pulumi:"callbackType"`
+	// This parameter is deprecated. Please use `noticeContentId`. Request headers.
+	//
+	// Deprecated: This parameter is deprecated. Please use `noticeContentId`.
+	Headers pulumi.StringArrayInput `pulumi:"headers"`
+	// Index. The input parameter is invalid, but the output parameter is valid.
+	Index pulumi.IntPtrInput `pulumi:"index"`
+	// Method, POST or PUT.
+	Method pulumi.StringPtrInput `pulumi:"method"`
+	// Telephone list.
+	Mobiles pulumi.StringArrayInput `pulumi:"mobiles"`
+	// Notice content ID.
+	NoticeContentId pulumi.StringPtrInput `pulumi:"noticeContentId"`
+	// Remind type. 0: Do not remind; 1: Specified person; 2: Everyone.
+	RemindType pulumi.IntPtrInput `pulumi:"remindType"`
+	// Callback url.
+	Url pulumi.StringInput `pulumi:"url"`
+	// User ID list.
+	UserIds pulumi.StringArrayInput `pulumi:"userIds"`
+	// Integration configuration ID.
+	WebCallbackId pulumi.StringPtrInput `pulumi:"webCallbackId"`
+}
+
+func (AlarmNoticeNoticeRuleWebCallbackArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmNoticeNoticeRuleWebCallback)(nil)).Elem()
+}
+
+func (i AlarmNoticeNoticeRuleWebCallbackArgs) ToAlarmNoticeNoticeRuleWebCallbackOutput() AlarmNoticeNoticeRuleWebCallbackOutput {
+	return i.ToAlarmNoticeNoticeRuleWebCallbackOutputWithContext(context.Background())
+}
+
+func (i AlarmNoticeNoticeRuleWebCallbackArgs) ToAlarmNoticeNoticeRuleWebCallbackOutputWithContext(ctx context.Context) AlarmNoticeNoticeRuleWebCallbackOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmNoticeNoticeRuleWebCallbackOutput)
+}
+
+// AlarmNoticeNoticeRuleWebCallbackArrayInput is an input type that accepts AlarmNoticeNoticeRuleWebCallbackArray and AlarmNoticeNoticeRuleWebCallbackArrayOutput values.
+// You can construct a concrete instance of `AlarmNoticeNoticeRuleWebCallbackArrayInput` via:
+//
+//	AlarmNoticeNoticeRuleWebCallbackArray{ AlarmNoticeNoticeRuleWebCallbackArgs{...} }
+type AlarmNoticeNoticeRuleWebCallbackArrayInput interface {
+	pulumi.Input
+
+	ToAlarmNoticeNoticeRuleWebCallbackArrayOutput() AlarmNoticeNoticeRuleWebCallbackArrayOutput
+	ToAlarmNoticeNoticeRuleWebCallbackArrayOutputWithContext(context.Context) AlarmNoticeNoticeRuleWebCallbackArrayOutput
+}
+
+type AlarmNoticeNoticeRuleWebCallbackArray []AlarmNoticeNoticeRuleWebCallbackInput
+
+func (AlarmNoticeNoticeRuleWebCallbackArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AlarmNoticeNoticeRuleWebCallback)(nil)).Elem()
+}
+
+func (i AlarmNoticeNoticeRuleWebCallbackArray) ToAlarmNoticeNoticeRuleWebCallbackArrayOutput() AlarmNoticeNoticeRuleWebCallbackArrayOutput {
+	return i.ToAlarmNoticeNoticeRuleWebCallbackArrayOutputWithContext(context.Background())
+}
+
+func (i AlarmNoticeNoticeRuleWebCallbackArray) ToAlarmNoticeNoticeRuleWebCallbackArrayOutputWithContext(ctx context.Context) AlarmNoticeNoticeRuleWebCallbackArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmNoticeNoticeRuleWebCallbackArrayOutput)
+}
+
+type AlarmNoticeNoticeRuleWebCallbackOutput struct{ *pulumi.OutputState }
+
+func (AlarmNoticeNoticeRuleWebCallbackOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmNoticeNoticeRuleWebCallback)(nil)).Elem()
+}
+
+func (o AlarmNoticeNoticeRuleWebCallbackOutput) ToAlarmNoticeNoticeRuleWebCallbackOutput() AlarmNoticeNoticeRuleWebCallbackOutput {
+	return o
+}
+
+func (o AlarmNoticeNoticeRuleWebCallbackOutput) ToAlarmNoticeNoticeRuleWebCallbackOutputWithContext(ctx context.Context) AlarmNoticeNoticeRuleWebCallbackOutput {
+	return o
+}
+
+// This parameter is deprecated. Please use `noticeContentId`. Request body.
+//
+// Deprecated: This parameter is deprecated. Please use `noticeContentId`.
+func (o AlarmNoticeNoticeRuleWebCallbackOutput) Body() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleWebCallback) *string { return v.Body }).(pulumi.StringPtrOutput)
+}
+
+// Callback type, Values: Http, WeCom, DingTalk, Lark.
+func (o AlarmNoticeNoticeRuleWebCallbackOutput) CallbackType() pulumi.StringOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleWebCallback) string { return v.CallbackType }).(pulumi.StringOutput)
+}
+
+// This parameter is deprecated. Please use `noticeContentId`. Request headers.
+//
+// Deprecated: This parameter is deprecated. Please use `noticeContentId`.
+func (o AlarmNoticeNoticeRuleWebCallbackOutput) Headers() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleWebCallback) []string { return v.Headers }).(pulumi.StringArrayOutput)
+}
+
+// Index. The input parameter is invalid, but the output parameter is valid.
+func (o AlarmNoticeNoticeRuleWebCallbackOutput) Index() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleWebCallback) *int { return v.Index }).(pulumi.IntPtrOutput)
+}
+
+// Method, POST or PUT.
+func (o AlarmNoticeNoticeRuleWebCallbackOutput) Method() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleWebCallback) *string { return v.Method }).(pulumi.StringPtrOutput)
+}
+
+// Telephone list.
+func (o AlarmNoticeNoticeRuleWebCallbackOutput) Mobiles() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleWebCallback) []string { return v.Mobiles }).(pulumi.StringArrayOutput)
+}
+
+// Notice content ID.
+func (o AlarmNoticeNoticeRuleWebCallbackOutput) NoticeContentId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleWebCallback) *string { return v.NoticeContentId }).(pulumi.StringPtrOutput)
+}
+
+// Remind type. 0: Do not remind; 1: Specified person; 2: Everyone.
+func (o AlarmNoticeNoticeRuleWebCallbackOutput) RemindType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleWebCallback) *int { return v.RemindType }).(pulumi.IntPtrOutput)
+}
+
+// Callback url.
+func (o AlarmNoticeNoticeRuleWebCallbackOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleWebCallback) string { return v.Url }).(pulumi.StringOutput)
+}
+
+// User ID list.
+func (o AlarmNoticeNoticeRuleWebCallbackOutput) UserIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleWebCallback) []string { return v.UserIds }).(pulumi.StringArrayOutput)
+}
+
+// Integration configuration ID.
+func (o AlarmNoticeNoticeRuleWebCallbackOutput) WebCallbackId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AlarmNoticeNoticeRuleWebCallback) *string { return v.WebCallbackId }).(pulumi.StringPtrOutput)
+}
+
+type AlarmNoticeNoticeRuleWebCallbackArrayOutput struct{ *pulumi.OutputState }
+
+func (AlarmNoticeNoticeRuleWebCallbackArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AlarmNoticeNoticeRuleWebCallback)(nil)).Elem()
+}
+
+func (o AlarmNoticeNoticeRuleWebCallbackArrayOutput) ToAlarmNoticeNoticeRuleWebCallbackArrayOutput() AlarmNoticeNoticeRuleWebCallbackArrayOutput {
+	return o
+}
+
+func (o AlarmNoticeNoticeRuleWebCallbackArrayOutput) ToAlarmNoticeNoticeRuleWebCallbackArrayOutputWithContext(ctx context.Context) AlarmNoticeNoticeRuleWebCallbackArrayOutput {
+	return o
+}
+
+func (o AlarmNoticeNoticeRuleWebCallbackArrayOutput) Index(i pulumi.IntInput) AlarmNoticeNoticeRuleWebCallbackOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AlarmNoticeNoticeRuleWebCallback {
+		return vs[0].([]AlarmNoticeNoticeRuleWebCallback)[vs[1].(int)]
+	}).(AlarmNoticeNoticeRuleWebCallbackOutput)
 }
 
 type AlarmNoticeWebCallback struct {
@@ -1397,6 +2812,8 @@ func (o CkafkaConsumerCkafkaPtrOutput) Vport() pulumi.StringPtrOutput {
 type CkafkaConsumerContent struct {
 	// whether to deliver the TAG info.
 	EnableTag bool `pulumi:"enableTag"`
+	// JSON format for delivery. Valid values:
+	JsonType *int `pulumi:"jsonType"`
 	// metadata info list.
 	MetaFields []string `pulumi:"metaFields"`
 	// whether to tiling tag json.
@@ -1419,6 +2836,8 @@ type CkafkaConsumerContentInput interface {
 type CkafkaConsumerContentArgs struct {
 	// whether to deliver the TAG info.
 	EnableTag pulumi.BoolInput `pulumi:"enableTag"`
+	// JSON format for delivery. Valid values:
+	JsonType pulumi.IntPtrInput `pulumi:"jsonType"`
 	// metadata info list.
 	MetaFields pulumi.StringArrayInput `pulumi:"metaFields"`
 	// whether to tiling tag json.
@@ -1509,6 +2928,11 @@ func (o CkafkaConsumerContentOutput) EnableTag() pulumi.BoolOutput {
 	return o.ApplyT(func(v CkafkaConsumerContent) bool { return v.EnableTag }).(pulumi.BoolOutput)
 }
 
+// JSON format for delivery. Valid values:
+func (o CkafkaConsumerContentOutput) JsonType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v CkafkaConsumerContent) *int { return v.JsonType }).(pulumi.IntPtrOutput)
+}
+
 // metadata info list.
 func (o CkafkaConsumerContentOutput) MetaFields() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v CkafkaConsumerContent) []string { return v.MetaFields }).(pulumi.StringArrayOutput)
@@ -1556,6 +2980,16 @@ func (o CkafkaConsumerContentPtrOutput) EnableTag() pulumi.BoolPtrOutput {
 		}
 		return &v.EnableTag
 	}).(pulumi.BoolPtrOutput)
+}
+
+// JSON format for delivery. Valid values:
+func (o CkafkaConsumerContentPtrOutput) JsonType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *CkafkaConsumerContent) *int {
+		if v == nil {
+			return nil
+		}
+		return v.JsonType
+	}).(pulumi.IntPtrOutput)
 }
 
 // metadata info list.
@@ -3881,6 +5315,631 @@ func (o ConfigExtractRuleMetaTagArrayOutput) Index(i pulumi.IntInput) ConfigExtr
 	}).(ConfigExtractRuleMetaTagOutput)
 }
 
+type ConsoleAccessControlRule struct {
+	// Access mode for the rule. Valid values: `public`, `internal`.
+	AccessMode *string `pulumi:"accessMode"`
+	// Rule action. Valid values: `ACCEPT`, `DROP`.
+	Action *string `pulumi:"action"`
+	// CIDR blocks or IPs, supporting IPv4 or IPv6.
+	CidrBlocks []string `pulumi:"cidrBlocks"`
+}
+
+// ConsoleAccessControlRuleInput is an input type that accepts ConsoleAccessControlRuleArgs and ConsoleAccessControlRuleOutput values.
+// You can construct a concrete instance of `ConsoleAccessControlRuleInput` via:
+//
+//	ConsoleAccessControlRuleArgs{...}
+type ConsoleAccessControlRuleInput interface {
+	pulumi.Input
+
+	ToConsoleAccessControlRuleOutput() ConsoleAccessControlRuleOutput
+	ToConsoleAccessControlRuleOutputWithContext(context.Context) ConsoleAccessControlRuleOutput
+}
+
+type ConsoleAccessControlRuleArgs struct {
+	// Access mode for the rule. Valid values: `public`, `internal`.
+	AccessMode pulumi.StringPtrInput `pulumi:"accessMode"`
+	// Rule action. Valid values: `ACCEPT`, `DROP`.
+	Action pulumi.StringPtrInput `pulumi:"action"`
+	// CIDR blocks or IPs, supporting IPv4 or IPv6.
+	CidrBlocks pulumi.StringArrayInput `pulumi:"cidrBlocks"`
+}
+
+func (ConsoleAccessControlRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConsoleAccessControlRule)(nil)).Elem()
+}
+
+func (i ConsoleAccessControlRuleArgs) ToConsoleAccessControlRuleOutput() ConsoleAccessControlRuleOutput {
+	return i.ToConsoleAccessControlRuleOutputWithContext(context.Background())
+}
+
+func (i ConsoleAccessControlRuleArgs) ToConsoleAccessControlRuleOutputWithContext(ctx context.Context) ConsoleAccessControlRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConsoleAccessControlRuleOutput)
+}
+
+// ConsoleAccessControlRuleArrayInput is an input type that accepts ConsoleAccessControlRuleArray and ConsoleAccessControlRuleArrayOutput values.
+// You can construct a concrete instance of `ConsoleAccessControlRuleArrayInput` via:
+//
+//	ConsoleAccessControlRuleArray{ ConsoleAccessControlRuleArgs{...} }
+type ConsoleAccessControlRuleArrayInput interface {
+	pulumi.Input
+
+	ToConsoleAccessControlRuleArrayOutput() ConsoleAccessControlRuleArrayOutput
+	ToConsoleAccessControlRuleArrayOutputWithContext(context.Context) ConsoleAccessControlRuleArrayOutput
+}
+
+type ConsoleAccessControlRuleArray []ConsoleAccessControlRuleInput
+
+func (ConsoleAccessControlRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ConsoleAccessControlRule)(nil)).Elem()
+}
+
+func (i ConsoleAccessControlRuleArray) ToConsoleAccessControlRuleArrayOutput() ConsoleAccessControlRuleArrayOutput {
+	return i.ToConsoleAccessControlRuleArrayOutputWithContext(context.Background())
+}
+
+func (i ConsoleAccessControlRuleArray) ToConsoleAccessControlRuleArrayOutputWithContext(ctx context.Context) ConsoleAccessControlRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConsoleAccessControlRuleArrayOutput)
+}
+
+type ConsoleAccessControlRuleOutput struct{ *pulumi.OutputState }
+
+func (ConsoleAccessControlRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConsoleAccessControlRule)(nil)).Elem()
+}
+
+func (o ConsoleAccessControlRuleOutput) ToConsoleAccessControlRuleOutput() ConsoleAccessControlRuleOutput {
+	return o
+}
+
+func (o ConsoleAccessControlRuleOutput) ToConsoleAccessControlRuleOutputWithContext(ctx context.Context) ConsoleAccessControlRuleOutput {
+	return o
+}
+
+// Access mode for the rule. Valid values: `public`, `internal`.
+func (o ConsoleAccessControlRuleOutput) AccessMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConsoleAccessControlRule) *string { return v.AccessMode }).(pulumi.StringPtrOutput)
+}
+
+// Rule action. Valid values: `ACCEPT`, `DROP`.
+func (o ConsoleAccessControlRuleOutput) Action() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConsoleAccessControlRule) *string { return v.Action }).(pulumi.StringPtrOutput)
+}
+
+// CIDR blocks or IPs, supporting IPv4 or IPv6.
+func (o ConsoleAccessControlRuleOutput) CidrBlocks() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ConsoleAccessControlRule) []string { return v.CidrBlocks }).(pulumi.StringArrayOutput)
+}
+
+type ConsoleAccessControlRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (ConsoleAccessControlRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ConsoleAccessControlRule)(nil)).Elem()
+}
+
+func (o ConsoleAccessControlRuleArrayOutput) ToConsoleAccessControlRuleArrayOutput() ConsoleAccessControlRuleArrayOutput {
+	return o
+}
+
+func (o ConsoleAccessControlRuleArrayOutput) ToConsoleAccessControlRuleArrayOutputWithContext(ctx context.Context) ConsoleAccessControlRuleArrayOutput {
+	return o
+}
+
+func (o ConsoleAccessControlRuleArrayOutput) Index(i pulumi.IntInput) ConsoleAccessControlRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ConsoleAccessControlRule {
+		return vs[0].([]ConsoleAccessControlRule)[vs[1].(int)]
+	}).(ConsoleAccessControlRuleOutput)
+}
+
+type ConsoleAccount struct {
+	// Email address used to send verification codes.
+	Email *string `pulumi:"email"`
+	// User password.
+	Password *string `pulumi:"password"`
+	// Tencent Cloud account SecretId.
+	SecretId *string `pulumi:"secretId"`
+	// Tencent Cloud account SecretKey.
+	SecretKey *string `pulumi:"secretKey"`
+	// User name.
+	UserName *string `pulumi:"userName"`
+}
+
+// ConsoleAccountInput is an input type that accepts ConsoleAccountArgs and ConsoleAccountOutput values.
+// You can construct a concrete instance of `ConsoleAccountInput` via:
+//
+//	ConsoleAccountArgs{...}
+type ConsoleAccountInput interface {
+	pulumi.Input
+
+	ToConsoleAccountOutput() ConsoleAccountOutput
+	ToConsoleAccountOutputWithContext(context.Context) ConsoleAccountOutput
+}
+
+type ConsoleAccountArgs struct {
+	// Email address used to send verification codes.
+	Email pulumi.StringPtrInput `pulumi:"email"`
+	// User password.
+	Password pulumi.StringPtrInput `pulumi:"password"`
+	// Tencent Cloud account SecretId.
+	SecretId pulumi.StringPtrInput `pulumi:"secretId"`
+	// Tencent Cloud account SecretKey.
+	SecretKey pulumi.StringPtrInput `pulumi:"secretKey"`
+	// User name.
+	UserName pulumi.StringPtrInput `pulumi:"userName"`
+}
+
+func (ConsoleAccountArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConsoleAccount)(nil)).Elem()
+}
+
+func (i ConsoleAccountArgs) ToConsoleAccountOutput() ConsoleAccountOutput {
+	return i.ToConsoleAccountOutputWithContext(context.Background())
+}
+
+func (i ConsoleAccountArgs) ToConsoleAccountOutputWithContext(ctx context.Context) ConsoleAccountOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConsoleAccountOutput)
+}
+
+// ConsoleAccountArrayInput is an input type that accepts ConsoleAccountArray and ConsoleAccountArrayOutput values.
+// You can construct a concrete instance of `ConsoleAccountArrayInput` via:
+//
+//	ConsoleAccountArray{ ConsoleAccountArgs{...} }
+type ConsoleAccountArrayInput interface {
+	pulumi.Input
+
+	ToConsoleAccountArrayOutput() ConsoleAccountArrayOutput
+	ToConsoleAccountArrayOutputWithContext(context.Context) ConsoleAccountArrayOutput
+}
+
+type ConsoleAccountArray []ConsoleAccountInput
+
+func (ConsoleAccountArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ConsoleAccount)(nil)).Elem()
+}
+
+func (i ConsoleAccountArray) ToConsoleAccountArrayOutput() ConsoleAccountArrayOutput {
+	return i.ToConsoleAccountArrayOutputWithContext(context.Background())
+}
+
+func (i ConsoleAccountArray) ToConsoleAccountArrayOutputWithContext(ctx context.Context) ConsoleAccountArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConsoleAccountArrayOutput)
+}
+
+type ConsoleAccountOutput struct{ *pulumi.OutputState }
+
+func (ConsoleAccountOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConsoleAccount)(nil)).Elem()
+}
+
+func (o ConsoleAccountOutput) ToConsoleAccountOutput() ConsoleAccountOutput {
+	return o
+}
+
+func (o ConsoleAccountOutput) ToConsoleAccountOutputWithContext(ctx context.Context) ConsoleAccountOutput {
+	return o
+}
+
+// Email address used to send verification codes.
+func (o ConsoleAccountOutput) Email() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConsoleAccount) *string { return v.Email }).(pulumi.StringPtrOutput)
+}
+
+// User password.
+func (o ConsoleAccountOutput) Password() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConsoleAccount) *string { return v.Password }).(pulumi.StringPtrOutput)
+}
+
+// Tencent Cloud account SecretId.
+func (o ConsoleAccountOutput) SecretId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConsoleAccount) *string { return v.SecretId }).(pulumi.StringPtrOutput)
+}
+
+// Tencent Cloud account SecretKey.
+func (o ConsoleAccountOutput) SecretKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConsoleAccount) *string { return v.SecretKey }).(pulumi.StringPtrOutput)
+}
+
+// User name.
+func (o ConsoleAccountOutput) UserName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConsoleAccount) *string { return v.UserName }).(pulumi.StringPtrOutput)
+}
+
+type ConsoleAccountArrayOutput struct{ *pulumi.OutputState }
+
+func (ConsoleAccountArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ConsoleAccount)(nil)).Elem()
+}
+
+func (o ConsoleAccountArrayOutput) ToConsoleAccountArrayOutput() ConsoleAccountArrayOutput {
+	return o
+}
+
+func (o ConsoleAccountArrayOutput) ToConsoleAccountArrayOutputWithContext(ctx context.Context) ConsoleAccountArrayOutput {
+	return o
+}
+
+func (o ConsoleAccountArrayOutput) Index(i pulumi.IntInput) ConsoleAccountOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ConsoleAccount {
+		return vs[0].([]ConsoleAccount)[vs[1].(int)]
+	}).(ConsoleAccountOutput)
+}
+
+type ConsoleAnonymousLogin struct {
+	// Anonymous login account SecretId.
+	SecretId *string `pulumi:"secretId"`
+	// Anonymous login account SecretKey.
+	SecretKey *string `pulumi:"secretKey"`
+}
+
+// ConsoleAnonymousLoginInput is an input type that accepts ConsoleAnonymousLoginArgs and ConsoleAnonymousLoginOutput values.
+// You can construct a concrete instance of `ConsoleAnonymousLoginInput` via:
+//
+//	ConsoleAnonymousLoginArgs{...}
+type ConsoleAnonymousLoginInput interface {
+	pulumi.Input
+
+	ToConsoleAnonymousLoginOutput() ConsoleAnonymousLoginOutput
+	ToConsoleAnonymousLoginOutputWithContext(context.Context) ConsoleAnonymousLoginOutput
+}
+
+type ConsoleAnonymousLoginArgs struct {
+	// Anonymous login account SecretId.
+	SecretId pulumi.StringPtrInput `pulumi:"secretId"`
+	// Anonymous login account SecretKey.
+	SecretKey pulumi.StringPtrInput `pulumi:"secretKey"`
+}
+
+func (ConsoleAnonymousLoginArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConsoleAnonymousLogin)(nil)).Elem()
+}
+
+func (i ConsoleAnonymousLoginArgs) ToConsoleAnonymousLoginOutput() ConsoleAnonymousLoginOutput {
+	return i.ToConsoleAnonymousLoginOutputWithContext(context.Background())
+}
+
+func (i ConsoleAnonymousLoginArgs) ToConsoleAnonymousLoginOutputWithContext(ctx context.Context) ConsoleAnonymousLoginOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConsoleAnonymousLoginOutput)
+}
+
+func (i ConsoleAnonymousLoginArgs) ToConsoleAnonymousLoginPtrOutput() ConsoleAnonymousLoginPtrOutput {
+	return i.ToConsoleAnonymousLoginPtrOutputWithContext(context.Background())
+}
+
+func (i ConsoleAnonymousLoginArgs) ToConsoleAnonymousLoginPtrOutputWithContext(ctx context.Context) ConsoleAnonymousLoginPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConsoleAnonymousLoginOutput).ToConsoleAnonymousLoginPtrOutputWithContext(ctx)
+}
+
+// ConsoleAnonymousLoginPtrInput is an input type that accepts ConsoleAnonymousLoginArgs, ConsoleAnonymousLoginPtr and ConsoleAnonymousLoginPtrOutput values.
+// You can construct a concrete instance of `ConsoleAnonymousLoginPtrInput` via:
+//
+//	        ConsoleAnonymousLoginArgs{...}
+//
+//	or:
+//
+//	        nil
+type ConsoleAnonymousLoginPtrInput interface {
+	pulumi.Input
+
+	ToConsoleAnonymousLoginPtrOutput() ConsoleAnonymousLoginPtrOutput
+	ToConsoleAnonymousLoginPtrOutputWithContext(context.Context) ConsoleAnonymousLoginPtrOutput
+}
+
+type consoleAnonymousLoginPtrType ConsoleAnonymousLoginArgs
+
+func ConsoleAnonymousLoginPtr(v *ConsoleAnonymousLoginArgs) ConsoleAnonymousLoginPtrInput {
+	return (*consoleAnonymousLoginPtrType)(v)
+}
+
+func (*consoleAnonymousLoginPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConsoleAnonymousLogin)(nil)).Elem()
+}
+
+func (i *consoleAnonymousLoginPtrType) ToConsoleAnonymousLoginPtrOutput() ConsoleAnonymousLoginPtrOutput {
+	return i.ToConsoleAnonymousLoginPtrOutputWithContext(context.Background())
+}
+
+func (i *consoleAnonymousLoginPtrType) ToConsoleAnonymousLoginPtrOutputWithContext(ctx context.Context) ConsoleAnonymousLoginPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConsoleAnonymousLoginPtrOutput)
+}
+
+type ConsoleAnonymousLoginOutput struct{ *pulumi.OutputState }
+
+func (ConsoleAnonymousLoginOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConsoleAnonymousLogin)(nil)).Elem()
+}
+
+func (o ConsoleAnonymousLoginOutput) ToConsoleAnonymousLoginOutput() ConsoleAnonymousLoginOutput {
+	return o
+}
+
+func (o ConsoleAnonymousLoginOutput) ToConsoleAnonymousLoginOutputWithContext(ctx context.Context) ConsoleAnonymousLoginOutput {
+	return o
+}
+
+func (o ConsoleAnonymousLoginOutput) ToConsoleAnonymousLoginPtrOutput() ConsoleAnonymousLoginPtrOutput {
+	return o.ToConsoleAnonymousLoginPtrOutputWithContext(context.Background())
+}
+
+func (o ConsoleAnonymousLoginOutput) ToConsoleAnonymousLoginPtrOutputWithContext(ctx context.Context) ConsoleAnonymousLoginPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ConsoleAnonymousLogin) *ConsoleAnonymousLogin {
+		return &v
+	}).(ConsoleAnonymousLoginPtrOutput)
+}
+
+// Anonymous login account SecretId.
+func (o ConsoleAnonymousLoginOutput) SecretId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConsoleAnonymousLogin) *string { return v.SecretId }).(pulumi.StringPtrOutput)
+}
+
+// Anonymous login account SecretKey.
+func (o ConsoleAnonymousLoginOutput) SecretKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConsoleAnonymousLogin) *string { return v.SecretKey }).(pulumi.StringPtrOutput)
+}
+
+type ConsoleAnonymousLoginPtrOutput struct{ *pulumi.OutputState }
+
+func (ConsoleAnonymousLoginPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ConsoleAnonymousLogin)(nil)).Elem()
+}
+
+func (o ConsoleAnonymousLoginPtrOutput) ToConsoleAnonymousLoginPtrOutput() ConsoleAnonymousLoginPtrOutput {
+	return o
+}
+
+func (o ConsoleAnonymousLoginPtrOutput) ToConsoleAnonymousLoginPtrOutputWithContext(ctx context.Context) ConsoleAnonymousLoginPtrOutput {
+	return o
+}
+
+func (o ConsoleAnonymousLoginPtrOutput) Elem() ConsoleAnonymousLoginOutput {
+	return o.ApplyT(func(v *ConsoleAnonymousLogin) ConsoleAnonymousLogin {
+		if v != nil {
+			return *v
+		}
+		var ret ConsoleAnonymousLogin
+		return ret
+	}).(ConsoleAnonymousLoginOutput)
+}
+
+// Anonymous login account SecretId.
+func (o ConsoleAnonymousLoginPtrOutput) SecretId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConsoleAnonymousLogin) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SecretId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Anonymous login account SecretKey.
+func (o ConsoleAnonymousLoginPtrOutput) SecretKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ConsoleAnonymousLogin) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SecretKey
+	}).(pulumi.StringPtrOutput)
+}
+
+type ConsoleAuthRole struct {
+	// Auth role name.
+	RoleName *string `pulumi:"roleName"`
+	// SecretId for the auth role permission.
+	SecretId *string `pulumi:"secretId"`
+	// SecretKey for the auth role permission.
+	SecretKey *string `pulumi:"secretKey"`
+}
+
+// ConsoleAuthRoleInput is an input type that accepts ConsoleAuthRoleArgs and ConsoleAuthRoleOutput values.
+// You can construct a concrete instance of `ConsoleAuthRoleInput` via:
+//
+//	ConsoleAuthRoleArgs{...}
+type ConsoleAuthRoleInput interface {
+	pulumi.Input
+
+	ToConsoleAuthRoleOutput() ConsoleAuthRoleOutput
+	ToConsoleAuthRoleOutputWithContext(context.Context) ConsoleAuthRoleOutput
+}
+
+type ConsoleAuthRoleArgs struct {
+	// Auth role name.
+	RoleName pulumi.StringPtrInput `pulumi:"roleName"`
+	// SecretId for the auth role permission.
+	SecretId pulumi.StringPtrInput `pulumi:"secretId"`
+	// SecretKey for the auth role permission.
+	SecretKey pulumi.StringPtrInput `pulumi:"secretKey"`
+}
+
+func (ConsoleAuthRoleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConsoleAuthRole)(nil)).Elem()
+}
+
+func (i ConsoleAuthRoleArgs) ToConsoleAuthRoleOutput() ConsoleAuthRoleOutput {
+	return i.ToConsoleAuthRoleOutputWithContext(context.Background())
+}
+
+func (i ConsoleAuthRoleArgs) ToConsoleAuthRoleOutputWithContext(ctx context.Context) ConsoleAuthRoleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConsoleAuthRoleOutput)
+}
+
+// ConsoleAuthRoleArrayInput is an input type that accepts ConsoleAuthRoleArray and ConsoleAuthRoleArrayOutput values.
+// You can construct a concrete instance of `ConsoleAuthRoleArrayInput` via:
+//
+//	ConsoleAuthRoleArray{ ConsoleAuthRoleArgs{...} }
+type ConsoleAuthRoleArrayInput interface {
+	pulumi.Input
+
+	ToConsoleAuthRoleArrayOutput() ConsoleAuthRoleArrayOutput
+	ToConsoleAuthRoleArrayOutputWithContext(context.Context) ConsoleAuthRoleArrayOutput
+}
+
+type ConsoleAuthRoleArray []ConsoleAuthRoleInput
+
+func (ConsoleAuthRoleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ConsoleAuthRole)(nil)).Elem()
+}
+
+func (i ConsoleAuthRoleArray) ToConsoleAuthRoleArrayOutput() ConsoleAuthRoleArrayOutput {
+	return i.ToConsoleAuthRoleArrayOutputWithContext(context.Background())
+}
+
+func (i ConsoleAuthRoleArray) ToConsoleAuthRoleArrayOutputWithContext(ctx context.Context) ConsoleAuthRoleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConsoleAuthRoleArrayOutput)
+}
+
+type ConsoleAuthRoleOutput struct{ *pulumi.OutputState }
+
+func (ConsoleAuthRoleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConsoleAuthRole)(nil)).Elem()
+}
+
+func (o ConsoleAuthRoleOutput) ToConsoleAuthRoleOutput() ConsoleAuthRoleOutput {
+	return o
+}
+
+func (o ConsoleAuthRoleOutput) ToConsoleAuthRoleOutputWithContext(ctx context.Context) ConsoleAuthRoleOutput {
+	return o
+}
+
+// Auth role name.
+func (o ConsoleAuthRoleOutput) RoleName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConsoleAuthRole) *string { return v.RoleName }).(pulumi.StringPtrOutput)
+}
+
+// SecretId for the auth role permission.
+func (o ConsoleAuthRoleOutput) SecretId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConsoleAuthRole) *string { return v.SecretId }).(pulumi.StringPtrOutput)
+}
+
+// SecretKey for the auth role permission.
+func (o ConsoleAuthRoleOutput) SecretKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ConsoleAuthRole) *string { return v.SecretKey }).(pulumi.StringPtrOutput)
+}
+
+type ConsoleAuthRoleArrayOutput struct{ *pulumi.OutputState }
+
+func (ConsoleAuthRoleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ConsoleAuthRole)(nil)).Elem()
+}
+
+func (o ConsoleAuthRoleArrayOutput) ToConsoleAuthRoleArrayOutput() ConsoleAuthRoleArrayOutput {
+	return o
+}
+
+func (o ConsoleAuthRoleArrayOutput) ToConsoleAuthRoleArrayOutputWithContext(ctx context.Context) ConsoleAuthRoleArrayOutput {
+	return o
+}
+
+func (o ConsoleAuthRoleArrayOutput) Index(i pulumi.IntInput) ConsoleAuthRoleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ConsoleAuthRole {
+		return vs[0].([]ConsoleAuthRole)[vs[1].(int)]
+	}).(ConsoleAuthRoleOutput)
+}
+
+type ConsoleTag struct {
+	// Tag key.
+	Key string `pulumi:"key"`
+	// Tag value.
+	Value string `pulumi:"value"`
+}
+
+// ConsoleTagInput is an input type that accepts ConsoleTagArgs and ConsoleTagOutput values.
+// You can construct a concrete instance of `ConsoleTagInput` via:
+//
+//	ConsoleTagArgs{...}
+type ConsoleTagInput interface {
+	pulumi.Input
+
+	ToConsoleTagOutput() ConsoleTagOutput
+	ToConsoleTagOutputWithContext(context.Context) ConsoleTagOutput
+}
+
+type ConsoleTagArgs struct {
+	// Tag key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Tag value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (ConsoleTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConsoleTag)(nil)).Elem()
+}
+
+func (i ConsoleTagArgs) ToConsoleTagOutput() ConsoleTagOutput {
+	return i.ToConsoleTagOutputWithContext(context.Background())
+}
+
+func (i ConsoleTagArgs) ToConsoleTagOutputWithContext(ctx context.Context) ConsoleTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConsoleTagOutput)
+}
+
+// ConsoleTagArrayInput is an input type that accepts ConsoleTagArray and ConsoleTagArrayOutput values.
+// You can construct a concrete instance of `ConsoleTagArrayInput` via:
+//
+//	ConsoleTagArray{ ConsoleTagArgs{...} }
+type ConsoleTagArrayInput interface {
+	pulumi.Input
+
+	ToConsoleTagArrayOutput() ConsoleTagArrayOutput
+	ToConsoleTagArrayOutputWithContext(context.Context) ConsoleTagArrayOutput
+}
+
+type ConsoleTagArray []ConsoleTagInput
+
+func (ConsoleTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ConsoleTag)(nil)).Elem()
+}
+
+func (i ConsoleTagArray) ToConsoleTagArrayOutput() ConsoleTagArrayOutput {
+	return i.ToConsoleTagArrayOutputWithContext(context.Background())
+}
+
+func (i ConsoleTagArray) ToConsoleTagArrayOutputWithContext(ctx context.Context) ConsoleTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ConsoleTagArrayOutput)
+}
+
+type ConsoleTagOutput struct{ *pulumi.OutputState }
+
+func (ConsoleTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ConsoleTag)(nil)).Elem()
+}
+
+func (o ConsoleTagOutput) ToConsoleTagOutput() ConsoleTagOutput {
+	return o
+}
+
+func (o ConsoleTagOutput) ToConsoleTagOutputWithContext(ctx context.Context) ConsoleTagOutput {
+	return o
+}
+
+// Tag key.
+func (o ConsoleTagOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v ConsoleTag) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o ConsoleTagOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v ConsoleTag) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type ConsoleTagArrayOutput struct{ *pulumi.OutputState }
+
+func (ConsoleTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ConsoleTag)(nil)).Elem()
+}
+
+func (o ConsoleTagArrayOutput) ToConsoleTagArrayOutput() ConsoleTagArrayOutput {
+	return o
+}
+
+func (o ConsoleTagArrayOutput) ToConsoleTagArrayOutputWithContext(ctx context.Context) ConsoleTagArrayOutput {
+	return o
+}
+
+func (o ConsoleTagArrayOutput) Index(i pulumi.IntInput) ConsoleTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ConsoleTag {
+		return vs[0].([]ConsoleTag)[vs[1].(int)]
+	}).(ConsoleTagOutput)
+}
+
 type CosRechargeExtractRuleInfo struct {
 	// syslog address.
 	Address *string `pulumi:"address"`
@@ -4695,10 +6754,12 @@ func (o CosShipperCompressPtrOutput) Format() pulumi.StringPtrOutput {
 type CosShipperContent struct {
 	// CSV format content description.Note: this field may return null, indicating that no valid values can be obtained.
 	Csv *CosShipperContentCsv `pulumi:"csv"`
-	// Content format. Valid values: json, csv.
+	// Content format. Valid values: json, csv, parquet.
 	Format string `pulumi:"format"`
 	// JSON format content description.Note: this field may return null, indicating that no valid values can be obtained.
 	Json *CosShipperContentJson `pulumi:"json"`
+	// Parquet format content description.Note: this field may return null, indicating that no valid values can be obtained.
+	Parquet *CosShipperContentParquet `pulumi:"parquet"`
 }
 
 // CosShipperContentInput is an input type that accepts CosShipperContentArgs and CosShipperContentOutput values.
@@ -4715,10 +6776,12 @@ type CosShipperContentInput interface {
 type CosShipperContentArgs struct {
 	// CSV format content description.Note: this field may return null, indicating that no valid values can be obtained.
 	Csv CosShipperContentCsvPtrInput `pulumi:"csv"`
-	// Content format. Valid values: json, csv.
+	// Content format. Valid values: json, csv, parquet.
 	Format pulumi.StringInput `pulumi:"format"`
 	// JSON format content description.Note: this field may return null, indicating that no valid values can be obtained.
 	Json CosShipperContentJsonPtrInput `pulumi:"json"`
+	// Parquet format content description.Note: this field may return null, indicating that no valid values can be obtained.
+	Parquet CosShipperContentParquetPtrInput `pulumi:"parquet"`
 }
 
 func (CosShipperContentArgs) ElementType() reflect.Type {
@@ -4803,7 +6866,7 @@ func (o CosShipperContentOutput) Csv() CosShipperContentCsvPtrOutput {
 	return o.ApplyT(func(v CosShipperContent) *CosShipperContentCsv { return v.Csv }).(CosShipperContentCsvPtrOutput)
 }
 
-// Content format. Valid values: json, csv.
+// Content format. Valid values: json, csv, parquet.
 func (o CosShipperContentOutput) Format() pulumi.StringOutput {
 	return o.ApplyT(func(v CosShipperContent) string { return v.Format }).(pulumi.StringOutput)
 }
@@ -4811,6 +6874,11 @@ func (o CosShipperContentOutput) Format() pulumi.StringOutput {
 // JSON format content description.Note: this field may return null, indicating that no valid values can be obtained.
 func (o CosShipperContentOutput) Json() CosShipperContentJsonPtrOutput {
 	return o.ApplyT(func(v CosShipperContent) *CosShipperContentJson { return v.Json }).(CosShipperContentJsonPtrOutput)
+}
+
+// Parquet format content description.Note: this field may return null, indicating that no valid values can be obtained.
+func (o CosShipperContentOutput) Parquet() CosShipperContentParquetPtrOutput {
+	return o.ApplyT(func(v CosShipperContent) *CosShipperContentParquet { return v.Parquet }).(CosShipperContentParquetPtrOutput)
 }
 
 type CosShipperContentPtrOutput struct{ *pulumi.OutputState }
@@ -4847,7 +6915,7 @@ func (o CosShipperContentPtrOutput) Csv() CosShipperContentCsvPtrOutput {
 	}).(CosShipperContentCsvPtrOutput)
 }
 
-// Content format. Valid values: json, csv.
+// Content format. Valid values: json, csv, parquet.
 func (o CosShipperContentPtrOutput) Format() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CosShipperContent) *string {
 		if v == nil {
@@ -4865,6 +6933,16 @@ func (o CosShipperContentPtrOutput) Json() CosShipperContentJsonPtrOutput {
 		}
 		return v.Json
 	}).(CosShipperContentJsonPtrOutput)
+}
+
+// Parquet format content description.Note: this field may return null, indicating that no valid values can be obtained.
+func (o CosShipperContentPtrOutput) Parquet() CosShipperContentParquetPtrOutput {
+	return o.ApplyT(func(v *CosShipperContent) *CosShipperContentParquet {
+		if v == nil {
+			return nil
+		}
+		return v.Parquet
+	}).(CosShipperContentParquetPtrOutput)
 }
 
 type CosShipperContentCsv struct {
@@ -5240,6 +7318,258 @@ func (o CosShipperContentJsonPtrOutput) MetaFields() pulumi.StringArrayOutput {
 	}).(pulumi.StringArrayOutput)
 }
 
+type CosShipperContentParquet struct {
+	// Array of Parquet column definitions.
+	ParquetKeyInfos []CosShipperContentParquetParquetKeyInfo `pulumi:"parquetKeyInfos"`
+}
+
+// CosShipperContentParquetInput is an input type that accepts CosShipperContentParquetArgs and CosShipperContentParquetOutput values.
+// You can construct a concrete instance of `CosShipperContentParquetInput` via:
+//
+//	CosShipperContentParquetArgs{...}
+type CosShipperContentParquetInput interface {
+	pulumi.Input
+
+	ToCosShipperContentParquetOutput() CosShipperContentParquetOutput
+	ToCosShipperContentParquetOutputWithContext(context.Context) CosShipperContentParquetOutput
+}
+
+type CosShipperContentParquetArgs struct {
+	// Array of Parquet column definitions.
+	ParquetKeyInfos CosShipperContentParquetParquetKeyInfoArrayInput `pulumi:"parquetKeyInfos"`
+}
+
+func (CosShipperContentParquetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CosShipperContentParquet)(nil)).Elem()
+}
+
+func (i CosShipperContentParquetArgs) ToCosShipperContentParquetOutput() CosShipperContentParquetOutput {
+	return i.ToCosShipperContentParquetOutputWithContext(context.Background())
+}
+
+func (i CosShipperContentParquetArgs) ToCosShipperContentParquetOutputWithContext(ctx context.Context) CosShipperContentParquetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CosShipperContentParquetOutput)
+}
+
+func (i CosShipperContentParquetArgs) ToCosShipperContentParquetPtrOutput() CosShipperContentParquetPtrOutput {
+	return i.ToCosShipperContentParquetPtrOutputWithContext(context.Background())
+}
+
+func (i CosShipperContentParquetArgs) ToCosShipperContentParquetPtrOutputWithContext(ctx context.Context) CosShipperContentParquetPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CosShipperContentParquetOutput).ToCosShipperContentParquetPtrOutputWithContext(ctx)
+}
+
+// CosShipperContentParquetPtrInput is an input type that accepts CosShipperContentParquetArgs, CosShipperContentParquetPtr and CosShipperContentParquetPtrOutput values.
+// You can construct a concrete instance of `CosShipperContentParquetPtrInput` via:
+//
+//	        CosShipperContentParquetArgs{...}
+//
+//	or:
+//
+//	        nil
+type CosShipperContentParquetPtrInput interface {
+	pulumi.Input
+
+	ToCosShipperContentParquetPtrOutput() CosShipperContentParquetPtrOutput
+	ToCosShipperContentParquetPtrOutputWithContext(context.Context) CosShipperContentParquetPtrOutput
+}
+
+type cosShipperContentParquetPtrType CosShipperContentParquetArgs
+
+func CosShipperContentParquetPtr(v *CosShipperContentParquetArgs) CosShipperContentParquetPtrInput {
+	return (*cosShipperContentParquetPtrType)(v)
+}
+
+func (*cosShipperContentParquetPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CosShipperContentParquet)(nil)).Elem()
+}
+
+func (i *cosShipperContentParquetPtrType) ToCosShipperContentParquetPtrOutput() CosShipperContentParquetPtrOutput {
+	return i.ToCosShipperContentParquetPtrOutputWithContext(context.Background())
+}
+
+func (i *cosShipperContentParquetPtrType) ToCosShipperContentParquetPtrOutputWithContext(ctx context.Context) CosShipperContentParquetPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CosShipperContentParquetPtrOutput)
+}
+
+type CosShipperContentParquetOutput struct{ *pulumi.OutputState }
+
+func (CosShipperContentParquetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CosShipperContentParquet)(nil)).Elem()
+}
+
+func (o CosShipperContentParquetOutput) ToCosShipperContentParquetOutput() CosShipperContentParquetOutput {
+	return o
+}
+
+func (o CosShipperContentParquetOutput) ToCosShipperContentParquetOutputWithContext(ctx context.Context) CosShipperContentParquetOutput {
+	return o
+}
+
+func (o CosShipperContentParquetOutput) ToCosShipperContentParquetPtrOutput() CosShipperContentParquetPtrOutput {
+	return o.ToCosShipperContentParquetPtrOutputWithContext(context.Background())
+}
+
+func (o CosShipperContentParquetOutput) ToCosShipperContentParquetPtrOutputWithContext(ctx context.Context) CosShipperContentParquetPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CosShipperContentParquet) *CosShipperContentParquet {
+		return &v
+	}).(CosShipperContentParquetPtrOutput)
+}
+
+// Array of Parquet column definitions.
+func (o CosShipperContentParquetOutput) ParquetKeyInfos() CosShipperContentParquetParquetKeyInfoArrayOutput {
+	return o.ApplyT(func(v CosShipperContentParquet) []CosShipperContentParquetParquetKeyInfo { return v.ParquetKeyInfos }).(CosShipperContentParquetParquetKeyInfoArrayOutput)
+}
+
+type CosShipperContentParquetPtrOutput struct{ *pulumi.OutputState }
+
+func (CosShipperContentParquetPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CosShipperContentParquet)(nil)).Elem()
+}
+
+func (o CosShipperContentParquetPtrOutput) ToCosShipperContentParquetPtrOutput() CosShipperContentParquetPtrOutput {
+	return o
+}
+
+func (o CosShipperContentParquetPtrOutput) ToCosShipperContentParquetPtrOutputWithContext(ctx context.Context) CosShipperContentParquetPtrOutput {
+	return o
+}
+
+func (o CosShipperContentParquetPtrOutput) Elem() CosShipperContentParquetOutput {
+	return o.ApplyT(func(v *CosShipperContentParquet) CosShipperContentParquet {
+		if v != nil {
+			return *v
+		}
+		var ret CosShipperContentParquet
+		return ret
+	}).(CosShipperContentParquetOutput)
+}
+
+// Array of Parquet column definitions.
+func (o CosShipperContentParquetPtrOutput) ParquetKeyInfos() CosShipperContentParquetParquetKeyInfoArrayOutput {
+	return o.ApplyT(func(v *CosShipperContentParquet) []CosShipperContentParquetParquetKeyInfo {
+		if v == nil {
+			return nil
+		}
+		return v.ParquetKeyInfos
+	}).(CosShipperContentParquetParquetKeyInfoArrayOutput)
+}
+
+type CosShipperContentParquetParquetKeyInfo struct {
+	// Column name in the Parquet file.
+	KeyName string `pulumi:"keyName"`
+	// Value to assign when the field does not exist or parsing fails.
+	KeyNonExistingField *string `pulumi:"keyNonExistingField"`
+	// Data type of the column. Valid values: string, boolean, int32, int64, float, double.
+	KeyType string `pulumi:"keyType"`
+}
+
+// CosShipperContentParquetParquetKeyInfoInput is an input type that accepts CosShipperContentParquetParquetKeyInfoArgs and CosShipperContentParquetParquetKeyInfoOutput values.
+// You can construct a concrete instance of `CosShipperContentParquetParquetKeyInfoInput` via:
+//
+//	CosShipperContentParquetParquetKeyInfoArgs{...}
+type CosShipperContentParquetParquetKeyInfoInput interface {
+	pulumi.Input
+
+	ToCosShipperContentParquetParquetKeyInfoOutput() CosShipperContentParquetParquetKeyInfoOutput
+	ToCosShipperContentParquetParquetKeyInfoOutputWithContext(context.Context) CosShipperContentParquetParquetKeyInfoOutput
+}
+
+type CosShipperContentParquetParquetKeyInfoArgs struct {
+	// Column name in the Parquet file.
+	KeyName pulumi.StringInput `pulumi:"keyName"`
+	// Value to assign when the field does not exist or parsing fails.
+	KeyNonExistingField pulumi.StringPtrInput `pulumi:"keyNonExistingField"`
+	// Data type of the column. Valid values: string, boolean, int32, int64, float, double.
+	KeyType pulumi.StringInput `pulumi:"keyType"`
+}
+
+func (CosShipperContentParquetParquetKeyInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CosShipperContentParquetParquetKeyInfo)(nil)).Elem()
+}
+
+func (i CosShipperContentParquetParquetKeyInfoArgs) ToCosShipperContentParquetParquetKeyInfoOutput() CosShipperContentParquetParquetKeyInfoOutput {
+	return i.ToCosShipperContentParquetParquetKeyInfoOutputWithContext(context.Background())
+}
+
+func (i CosShipperContentParquetParquetKeyInfoArgs) ToCosShipperContentParquetParquetKeyInfoOutputWithContext(ctx context.Context) CosShipperContentParquetParquetKeyInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CosShipperContentParquetParquetKeyInfoOutput)
+}
+
+// CosShipperContentParquetParquetKeyInfoArrayInput is an input type that accepts CosShipperContentParquetParquetKeyInfoArray and CosShipperContentParquetParquetKeyInfoArrayOutput values.
+// You can construct a concrete instance of `CosShipperContentParquetParquetKeyInfoArrayInput` via:
+//
+//	CosShipperContentParquetParquetKeyInfoArray{ CosShipperContentParquetParquetKeyInfoArgs{...} }
+type CosShipperContentParquetParquetKeyInfoArrayInput interface {
+	pulumi.Input
+
+	ToCosShipperContentParquetParquetKeyInfoArrayOutput() CosShipperContentParquetParquetKeyInfoArrayOutput
+	ToCosShipperContentParquetParquetKeyInfoArrayOutputWithContext(context.Context) CosShipperContentParquetParquetKeyInfoArrayOutput
+}
+
+type CosShipperContentParquetParquetKeyInfoArray []CosShipperContentParquetParquetKeyInfoInput
+
+func (CosShipperContentParquetParquetKeyInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CosShipperContentParquetParquetKeyInfo)(nil)).Elem()
+}
+
+func (i CosShipperContentParquetParquetKeyInfoArray) ToCosShipperContentParquetParquetKeyInfoArrayOutput() CosShipperContentParquetParquetKeyInfoArrayOutput {
+	return i.ToCosShipperContentParquetParquetKeyInfoArrayOutputWithContext(context.Background())
+}
+
+func (i CosShipperContentParquetParquetKeyInfoArray) ToCosShipperContentParquetParquetKeyInfoArrayOutputWithContext(ctx context.Context) CosShipperContentParquetParquetKeyInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CosShipperContentParquetParquetKeyInfoArrayOutput)
+}
+
+type CosShipperContentParquetParquetKeyInfoOutput struct{ *pulumi.OutputState }
+
+func (CosShipperContentParquetParquetKeyInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CosShipperContentParquetParquetKeyInfo)(nil)).Elem()
+}
+
+func (o CosShipperContentParquetParquetKeyInfoOutput) ToCosShipperContentParquetParquetKeyInfoOutput() CosShipperContentParquetParquetKeyInfoOutput {
+	return o
+}
+
+func (o CosShipperContentParquetParquetKeyInfoOutput) ToCosShipperContentParquetParquetKeyInfoOutputWithContext(ctx context.Context) CosShipperContentParquetParquetKeyInfoOutput {
+	return o
+}
+
+// Column name in the Parquet file.
+func (o CosShipperContentParquetParquetKeyInfoOutput) KeyName() pulumi.StringOutput {
+	return o.ApplyT(func(v CosShipperContentParquetParquetKeyInfo) string { return v.KeyName }).(pulumi.StringOutput)
+}
+
+// Value to assign when the field does not exist or parsing fails.
+func (o CosShipperContentParquetParquetKeyInfoOutput) KeyNonExistingField() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CosShipperContentParquetParquetKeyInfo) *string { return v.KeyNonExistingField }).(pulumi.StringPtrOutput)
+}
+
+// Data type of the column. Valid values: string, boolean, int32, int64, float, double.
+func (o CosShipperContentParquetParquetKeyInfoOutput) KeyType() pulumi.StringOutput {
+	return o.ApplyT(func(v CosShipperContentParquetParquetKeyInfo) string { return v.KeyType }).(pulumi.StringOutput)
+}
+
+type CosShipperContentParquetParquetKeyInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (CosShipperContentParquetParquetKeyInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CosShipperContentParquetParquetKeyInfo)(nil)).Elem()
+}
+
+func (o CosShipperContentParquetParquetKeyInfoArrayOutput) ToCosShipperContentParquetParquetKeyInfoArrayOutput() CosShipperContentParquetParquetKeyInfoArrayOutput {
+	return o
+}
+
+func (o CosShipperContentParquetParquetKeyInfoArrayOutput) ToCosShipperContentParquetParquetKeyInfoArrayOutputWithContext(ctx context.Context) CosShipperContentParquetParquetKeyInfoArrayOutput {
+	return o
+}
+
+func (o CosShipperContentParquetParquetKeyInfoArrayOutput) Index(i pulumi.IntInput) CosShipperContentParquetParquetKeyInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CosShipperContentParquetParquetKeyInfo {
+		return vs[0].([]CosShipperContentParquetParquetKeyInfo)[vs[1].(int)]
+	}).(CosShipperContentParquetParquetKeyInfoOutput)
+}
+
 type CosShipperFilterRule struct {
 	// Filter rule key.
 	Key string `pulumi:"key"`
@@ -5355,6 +7685,148 @@ func (o CosShipperFilterRuleArrayOutput) Index(i pulumi.IntInput) CosShipperFilt
 	}).(CosShipperFilterRuleOutput)
 }
 
+type DataTransformDataTransformSqlDataSource struct {
+	// Alias. Used in data transform statements.
+	AliasName string `pulumi:"aliasName"`
+	// Data source type. `1`: MySQL; `2`: Self-built MySQL; `3`: PostgreSQL.
+	DataSource int `pulumi:"dataSource"`
+	// Instance ID. When DataSource is `1`, it represents the cloud database MySQL instance ID, such as: cdb-zxcvbnm.
+	InstanceId string `pulumi:"instanceId"`
+	// MySQL access password.
+	Password string `pulumi:"password"`
+	// InstanceId region. For example: ap-guangzhou.
+	Region string `pulumi:"region"`
+	// MySQL access username.
+	User string `pulumi:"user"`
+}
+
+// DataTransformDataTransformSqlDataSourceInput is an input type that accepts DataTransformDataTransformSqlDataSourceArgs and DataTransformDataTransformSqlDataSourceOutput values.
+// You can construct a concrete instance of `DataTransformDataTransformSqlDataSourceInput` via:
+//
+//	DataTransformDataTransformSqlDataSourceArgs{...}
+type DataTransformDataTransformSqlDataSourceInput interface {
+	pulumi.Input
+
+	ToDataTransformDataTransformSqlDataSourceOutput() DataTransformDataTransformSqlDataSourceOutput
+	ToDataTransformDataTransformSqlDataSourceOutputWithContext(context.Context) DataTransformDataTransformSqlDataSourceOutput
+}
+
+type DataTransformDataTransformSqlDataSourceArgs struct {
+	// Alias. Used in data transform statements.
+	AliasName pulumi.StringInput `pulumi:"aliasName"`
+	// Data source type. `1`: MySQL; `2`: Self-built MySQL; `3`: PostgreSQL.
+	DataSource pulumi.IntInput `pulumi:"dataSource"`
+	// Instance ID. When DataSource is `1`, it represents the cloud database MySQL instance ID, such as: cdb-zxcvbnm.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// MySQL access password.
+	Password pulumi.StringInput `pulumi:"password"`
+	// InstanceId region. For example: ap-guangzhou.
+	Region pulumi.StringInput `pulumi:"region"`
+	// MySQL access username.
+	User pulumi.StringInput `pulumi:"user"`
+}
+
+func (DataTransformDataTransformSqlDataSourceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DataTransformDataTransformSqlDataSource)(nil)).Elem()
+}
+
+func (i DataTransformDataTransformSqlDataSourceArgs) ToDataTransformDataTransformSqlDataSourceOutput() DataTransformDataTransformSqlDataSourceOutput {
+	return i.ToDataTransformDataTransformSqlDataSourceOutputWithContext(context.Background())
+}
+
+func (i DataTransformDataTransformSqlDataSourceArgs) ToDataTransformDataTransformSqlDataSourceOutputWithContext(ctx context.Context) DataTransformDataTransformSqlDataSourceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DataTransformDataTransformSqlDataSourceOutput)
+}
+
+// DataTransformDataTransformSqlDataSourceArrayInput is an input type that accepts DataTransformDataTransformSqlDataSourceArray and DataTransformDataTransformSqlDataSourceArrayOutput values.
+// You can construct a concrete instance of `DataTransformDataTransformSqlDataSourceArrayInput` via:
+//
+//	DataTransformDataTransformSqlDataSourceArray{ DataTransformDataTransformSqlDataSourceArgs{...} }
+type DataTransformDataTransformSqlDataSourceArrayInput interface {
+	pulumi.Input
+
+	ToDataTransformDataTransformSqlDataSourceArrayOutput() DataTransformDataTransformSqlDataSourceArrayOutput
+	ToDataTransformDataTransformSqlDataSourceArrayOutputWithContext(context.Context) DataTransformDataTransformSqlDataSourceArrayOutput
+}
+
+type DataTransformDataTransformSqlDataSourceArray []DataTransformDataTransformSqlDataSourceInput
+
+func (DataTransformDataTransformSqlDataSourceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DataTransformDataTransformSqlDataSource)(nil)).Elem()
+}
+
+func (i DataTransformDataTransformSqlDataSourceArray) ToDataTransformDataTransformSqlDataSourceArrayOutput() DataTransformDataTransformSqlDataSourceArrayOutput {
+	return i.ToDataTransformDataTransformSqlDataSourceArrayOutputWithContext(context.Background())
+}
+
+func (i DataTransformDataTransformSqlDataSourceArray) ToDataTransformDataTransformSqlDataSourceArrayOutputWithContext(ctx context.Context) DataTransformDataTransformSqlDataSourceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DataTransformDataTransformSqlDataSourceArrayOutput)
+}
+
+type DataTransformDataTransformSqlDataSourceOutput struct{ *pulumi.OutputState }
+
+func (DataTransformDataTransformSqlDataSourceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DataTransformDataTransformSqlDataSource)(nil)).Elem()
+}
+
+func (o DataTransformDataTransformSqlDataSourceOutput) ToDataTransformDataTransformSqlDataSourceOutput() DataTransformDataTransformSqlDataSourceOutput {
+	return o
+}
+
+func (o DataTransformDataTransformSqlDataSourceOutput) ToDataTransformDataTransformSqlDataSourceOutputWithContext(ctx context.Context) DataTransformDataTransformSqlDataSourceOutput {
+	return o
+}
+
+// Alias. Used in data transform statements.
+func (o DataTransformDataTransformSqlDataSourceOutput) AliasName() pulumi.StringOutput {
+	return o.ApplyT(func(v DataTransformDataTransformSqlDataSource) string { return v.AliasName }).(pulumi.StringOutput)
+}
+
+// Data source type. `1`: MySQL; `2`: Self-built MySQL; `3`: PostgreSQL.
+func (o DataTransformDataTransformSqlDataSourceOutput) DataSource() pulumi.IntOutput {
+	return o.ApplyT(func(v DataTransformDataTransformSqlDataSource) int { return v.DataSource }).(pulumi.IntOutput)
+}
+
+// Instance ID. When DataSource is `1`, it represents the cloud database MySQL instance ID, such as: cdb-zxcvbnm.
+func (o DataTransformDataTransformSqlDataSourceOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v DataTransformDataTransformSqlDataSource) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// MySQL access password.
+func (o DataTransformDataTransformSqlDataSourceOutput) Password() pulumi.StringOutput {
+	return o.ApplyT(func(v DataTransformDataTransformSqlDataSource) string { return v.Password }).(pulumi.StringOutput)
+}
+
+// InstanceId region. For example: ap-guangzhou.
+func (o DataTransformDataTransformSqlDataSourceOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v DataTransformDataTransformSqlDataSource) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// MySQL access username.
+func (o DataTransformDataTransformSqlDataSourceOutput) User() pulumi.StringOutput {
+	return o.ApplyT(func(v DataTransformDataTransformSqlDataSource) string { return v.User }).(pulumi.StringOutput)
+}
+
+type DataTransformDataTransformSqlDataSourceArrayOutput struct{ *pulumi.OutputState }
+
+func (DataTransformDataTransformSqlDataSourceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DataTransformDataTransformSqlDataSource)(nil)).Elem()
+}
+
+func (o DataTransformDataTransformSqlDataSourceArrayOutput) ToDataTransformDataTransformSqlDataSourceArrayOutput() DataTransformDataTransformSqlDataSourceArrayOutput {
+	return o
+}
+
+func (o DataTransformDataTransformSqlDataSourceArrayOutput) ToDataTransformDataTransformSqlDataSourceArrayOutputWithContext(ctx context.Context) DataTransformDataTransformSqlDataSourceArrayOutput {
+	return o
+}
+
+func (o DataTransformDataTransformSqlDataSourceArrayOutput) Index(i pulumi.IntInput) DataTransformDataTransformSqlDataSourceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DataTransformDataTransformSqlDataSource {
+		return vs[0].([]DataTransformDataTransformSqlDataSource)[vs[1].(int)]
+	}).(DataTransformDataTransformSqlDataSourceOutput)
+}
+
 type DataTransformDstResource struct {
 	// Alias.
 	Alias string `pulumi:"alias"`
@@ -5459,6 +7931,885 @@ func (o DataTransformDstResourceArrayOutput) Index(i pulumi.IntInput) DataTransf
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DataTransformDstResource {
 		return vs[0].([]DataTransformDstResource)[vs[1].(int)]
 	}).(DataTransformDstResourceOutput)
+}
+
+type DataTransformEnvInfo struct {
+	// Environment variable name.
+	Key string `pulumi:"key"`
+	// Environment variable value.
+	Value string `pulumi:"value"`
+}
+
+// DataTransformEnvInfoInput is an input type that accepts DataTransformEnvInfoArgs and DataTransformEnvInfoOutput values.
+// You can construct a concrete instance of `DataTransformEnvInfoInput` via:
+//
+//	DataTransformEnvInfoArgs{...}
+type DataTransformEnvInfoInput interface {
+	pulumi.Input
+
+	ToDataTransformEnvInfoOutput() DataTransformEnvInfoOutput
+	ToDataTransformEnvInfoOutputWithContext(context.Context) DataTransformEnvInfoOutput
+}
+
+type DataTransformEnvInfoArgs struct {
+	// Environment variable name.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Environment variable value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (DataTransformEnvInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DataTransformEnvInfo)(nil)).Elem()
+}
+
+func (i DataTransformEnvInfoArgs) ToDataTransformEnvInfoOutput() DataTransformEnvInfoOutput {
+	return i.ToDataTransformEnvInfoOutputWithContext(context.Background())
+}
+
+func (i DataTransformEnvInfoArgs) ToDataTransformEnvInfoOutputWithContext(ctx context.Context) DataTransformEnvInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DataTransformEnvInfoOutput)
+}
+
+// DataTransformEnvInfoArrayInput is an input type that accepts DataTransformEnvInfoArray and DataTransformEnvInfoArrayOutput values.
+// You can construct a concrete instance of `DataTransformEnvInfoArrayInput` via:
+//
+//	DataTransformEnvInfoArray{ DataTransformEnvInfoArgs{...} }
+type DataTransformEnvInfoArrayInput interface {
+	pulumi.Input
+
+	ToDataTransformEnvInfoArrayOutput() DataTransformEnvInfoArrayOutput
+	ToDataTransformEnvInfoArrayOutputWithContext(context.Context) DataTransformEnvInfoArrayOutput
+}
+
+type DataTransformEnvInfoArray []DataTransformEnvInfoInput
+
+func (DataTransformEnvInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DataTransformEnvInfo)(nil)).Elem()
+}
+
+func (i DataTransformEnvInfoArray) ToDataTransformEnvInfoArrayOutput() DataTransformEnvInfoArrayOutput {
+	return i.ToDataTransformEnvInfoArrayOutputWithContext(context.Background())
+}
+
+func (i DataTransformEnvInfoArray) ToDataTransformEnvInfoArrayOutputWithContext(ctx context.Context) DataTransformEnvInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DataTransformEnvInfoArrayOutput)
+}
+
+type DataTransformEnvInfoOutput struct{ *pulumi.OutputState }
+
+func (DataTransformEnvInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DataTransformEnvInfo)(nil)).Elem()
+}
+
+func (o DataTransformEnvInfoOutput) ToDataTransformEnvInfoOutput() DataTransformEnvInfoOutput {
+	return o
+}
+
+func (o DataTransformEnvInfoOutput) ToDataTransformEnvInfoOutputWithContext(ctx context.Context) DataTransformEnvInfoOutput {
+	return o
+}
+
+// Environment variable name.
+func (o DataTransformEnvInfoOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v DataTransformEnvInfo) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Environment variable value.
+func (o DataTransformEnvInfoOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v DataTransformEnvInfo) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type DataTransformEnvInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (DataTransformEnvInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DataTransformEnvInfo)(nil)).Elem()
+}
+
+func (o DataTransformEnvInfoArrayOutput) ToDataTransformEnvInfoArrayOutput() DataTransformEnvInfoArrayOutput {
+	return o
+}
+
+func (o DataTransformEnvInfoArrayOutput) ToDataTransformEnvInfoArrayOutputWithContext(ctx context.Context) DataTransformEnvInfoArrayOutput {
+	return o
+}
+
+func (o DataTransformEnvInfoArrayOutput) Index(i pulumi.IntInput) DataTransformEnvInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DataTransformEnvInfo {
+		return vs[0].([]DataTransformEnvInfo)[vs[1].(int)]
+	}).(DataTransformEnvInfoOutput)
+}
+
+type DlcDeliverDlcInfo struct {
+	// DLC data field information.
+	FieldInfos []DlcDeliverDlcInfoFieldInfo `pulumi:"fieldInfos"`
+	// DLC partition extra information.
+	PartitionExtra *DlcDeliverDlcInfoPartitionExtra `pulumi:"partitionExtra"`
+	// DLC partition information.
+	PartitionInfos []DlcDeliverDlcInfoPartitionInfo `pulumi:"partitionInfos"`
+	// DLC table information.
+	TableInfo DlcDeliverDlcInfoTableInfo `pulumi:"tableInfo"`
+}
+
+// DlcDeliverDlcInfoInput is an input type that accepts DlcDeliverDlcInfoArgs and DlcDeliverDlcInfoOutput values.
+// You can construct a concrete instance of `DlcDeliverDlcInfoInput` via:
+//
+//	DlcDeliverDlcInfoArgs{...}
+type DlcDeliverDlcInfoInput interface {
+	pulumi.Input
+
+	ToDlcDeliverDlcInfoOutput() DlcDeliverDlcInfoOutput
+	ToDlcDeliverDlcInfoOutputWithContext(context.Context) DlcDeliverDlcInfoOutput
+}
+
+type DlcDeliverDlcInfoArgs struct {
+	// DLC data field information.
+	FieldInfos DlcDeliverDlcInfoFieldInfoArrayInput `pulumi:"fieldInfos"`
+	// DLC partition extra information.
+	PartitionExtra DlcDeliverDlcInfoPartitionExtraPtrInput `pulumi:"partitionExtra"`
+	// DLC partition information.
+	PartitionInfos DlcDeliverDlcInfoPartitionInfoArrayInput `pulumi:"partitionInfos"`
+	// DLC table information.
+	TableInfo DlcDeliverDlcInfoTableInfoInput `pulumi:"tableInfo"`
+}
+
+func (DlcDeliverDlcInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DlcDeliverDlcInfo)(nil)).Elem()
+}
+
+func (i DlcDeliverDlcInfoArgs) ToDlcDeliverDlcInfoOutput() DlcDeliverDlcInfoOutput {
+	return i.ToDlcDeliverDlcInfoOutputWithContext(context.Background())
+}
+
+func (i DlcDeliverDlcInfoArgs) ToDlcDeliverDlcInfoOutputWithContext(ctx context.Context) DlcDeliverDlcInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DlcDeliverDlcInfoOutput)
+}
+
+func (i DlcDeliverDlcInfoArgs) ToDlcDeliverDlcInfoPtrOutput() DlcDeliverDlcInfoPtrOutput {
+	return i.ToDlcDeliverDlcInfoPtrOutputWithContext(context.Background())
+}
+
+func (i DlcDeliverDlcInfoArgs) ToDlcDeliverDlcInfoPtrOutputWithContext(ctx context.Context) DlcDeliverDlcInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DlcDeliverDlcInfoOutput).ToDlcDeliverDlcInfoPtrOutputWithContext(ctx)
+}
+
+// DlcDeliverDlcInfoPtrInput is an input type that accepts DlcDeliverDlcInfoArgs, DlcDeliverDlcInfoPtr and DlcDeliverDlcInfoPtrOutput values.
+// You can construct a concrete instance of `DlcDeliverDlcInfoPtrInput` via:
+//
+//	        DlcDeliverDlcInfoArgs{...}
+//
+//	or:
+//
+//	        nil
+type DlcDeliverDlcInfoPtrInput interface {
+	pulumi.Input
+
+	ToDlcDeliverDlcInfoPtrOutput() DlcDeliverDlcInfoPtrOutput
+	ToDlcDeliverDlcInfoPtrOutputWithContext(context.Context) DlcDeliverDlcInfoPtrOutput
+}
+
+type dlcDeliverDlcInfoPtrType DlcDeliverDlcInfoArgs
+
+func DlcDeliverDlcInfoPtr(v *DlcDeliverDlcInfoArgs) DlcDeliverDlcInfoPtrInput {
+	return (*dlcDeliverDlcInfoPtrType)(v)
+}
+
+func (*dlcDeliverDlcInfoPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DlcDeliverDlcInfo)(nil)).Elem()
+}
+
+func (i *dlcDeliverDlcInfoPtrType) ToDlcDeliverDlcInfoPtrOutput() DlcDeliverDlcInfoPtrOutput {
+	return i.ToDlcDeliverDlcInfoPtrOutputWithContext(context.Background())
+}
+
+func (i *dlcDeliverDlcInfoPtrType) ToDlcDeliverDlcInfoPtrOutputWithContext(ctx context.Context) DlcDeliverDlcInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DlcDeliverDlcInfoPtrOutput)
+}
+
+type DlcDeliverDlcInfoOutput struct{ *pulumi.OutputState }
+
+func (DlcDeliverDlcInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DlcDeliverDlcInfo)(nil)).Elem()
+}
+
+func (o DlcDeliverDlcInfoOutput) ToDlcDeliverDlcInfoOutput() DlcDeliverDlcInfoOutput {
+	return o
+}
+
+func (o DlcDeliverDlcInfoOutput) ToDlcDeliverDlcInfoOutputWithContext(ctx context.Context) DlcDeliverDlcInfoOutput {
+	return o
+}
+
+func (o DlcDeliverDlcInfoOutput) ToDlcDeliverDlcInfoPtrOutput() DlcDeliverDlcInfoPtrOutput {
+	return o.ToDlcDeliverDlcInfoPtrOutputWithContext(context.Background())
+}
+
+func (o DlcDeliverDlcInfoOutput) ToDlcDeliverDlcInfoPtrOutputWithContext(ctx context.Context) DlcDeliverDlcInfoPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DlcDeliverDlcInfo) *DlcDeliverDlcInfo {
+		return &v
+	}).(DlcDeliverDlcInfoPtrOutput)
+}
+
+// DLC data field information.
+func (o DlcDeliverDlcInfoOutput) FieldInfos() DlcDeliverDlcInfoFieldInfoArrayOutput {
+	return o.ApplyT(func(v DlcDeliverDlcInfo) []DlcDeliverDlcInfoFieldInfo { return v.FieldInfos }).(DlcDeliverDlcInfoFieldInfoArrayOutput)
+}
+
+// DLC partition extra information.
+func (o DlcDeliverDlcInfoOutput) PartitionExtra() DlcDeliverDlcInfoPartitionExtraPtrOutput {
+	return o.ApplyT(func(v DlcDeliverDlcInfo) *DlcDeliverDlcInfoPartitionExtra { return v.PartitionExtra }).(DlcDeliverDlcInfoPartitionExtraPtrOutput)
+}
+
+// DLC partition information.
+func (o DlcDeliverDlcInfoOutput) PartitionInfos() DlcDeliverDlcInfoPartitionInfoArrayOutput {
+	return o.ApplyT(func(v DlcDeliverDlcInfo) []DlcDeliverDlcInfoPartitionInfo { return v.PartitionInfos }).(DlcDeliverDlcInfoPartitionInfoArrayOutput)
+}
+
+// DLC table information.
+func (o DlcDeliverDlcInfoOutput) TableInfo() DlcDeliverDlcInfoTableInfoOutput {
+	return o.ApplyT(func(v DlcDeliverDlcInfo) DlcDeliverDlcInfoTableInfo { return v.TableInfo }).(DlcDeliverDlcInfoTableInfoOutput)
+}
+
+type DlcDeliverDlcInfoPtrOutput struct{ *pulumi.OutputState }
+
+func (DlcDeliverDlcInfoPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DlcDeliverDlcInfo)(nil)).Elem()
+}
+
+func (o DlcDeliverDlcInfoPtrOutput) ToDlcDeliverDlcInfoPtrOutput() DlcDeliverDlcInfoPtrOutput {
+	return o
+}
+
+func (o DlcDeliverDlcInfoPtrOutput) ToDlcDeliverDlcInfoPtrOutputWithContext(ctx context.Context) DlcDeliverDlcInfoPtrOutput {
+	return o
+}
+
+func (o DlcDeliverDlcInfoPtrOutput) Elem() DlcDeliverDlcInfoOutput {
+	return o.ApplyT(func(v *DlcDeliverDlcInfo) DlcDeliverDlcInfo {
+		if v != nil {
+			return *v
+		}
+		var ret DlcDeliverDlcInfo
+		return ret
+	}).(DlcDeliverDlcInfoOutput)
+}
+
+// DLC data field information.
+func (o DlcDeliverDlcInfoPtrOutput) FieldInfos() DlcDeliverDlcInfoFieldInfoArrayOutput {
+	return o.ApplyT(func(v *DlcDeliverDlcInfo) []DlcDeliverDlcInfoFieldInfo {
+		if v == nil {
+			return nil
+		}
+		return v.FieldInfos
+	}).(DlcDeliverDlcInfoFieldInfoArrayOutput)
+}
+
+// DLC partition extra information.
+func (o DlcDeliverDlcInfoPtrOutput) PartitionExtra() DlcDeliverDlcInfoPartitionExtraPtrOutput {
+	return o.ApplyT(func(v *DlcDeliverDlcInfo) *DlcDeliverDlcInfoPartitionExtra {
+		if v == nil {
+			return nil
+		}
+		return v.PartitionExtra
+	}).(DlcDeliverDlcInfoPartitionExtraPtrOutput)
+}
+
+// DLC partition information.
+func (o DlcDeliverDlcInfoPtrOutput) PartitionInfos() DlcDeliverDlcInfoPartitionInfoArrayOutput {
+	return o.ApplyT(func(v *DlcDeliverDlcInfo) []DlcDeliverDlcInfoPartitionInfo {
+		if v == nil {
+			return nil
+		}
+		return v.PartitionInfos
+	}).(DlcDeliverDlcInfoPartitionInfoArrayOutput)
+}
+
+// DLC table information.
+func (o DlcDeliverDlcInfoPtrOutput) TableInfo() DlcDeliverDlcInfoTableInfoPtrOutput {
+	return o.ApplyT(func(v *DlcDeliverDlcInfo) *DlcDeliverDlcInfoTableInfo {
+		if v == nil {
+			return nil
+		}
+		return &v.TableInfo
+	}).(DlcDeliverDlcInfoTableInfoPtrOutput)
+}
+
+type DlcDeliverDlcInfoFieldInfo struct {
+	// Field name in CLS log.
+	ClsField string `pulumi:"clsField"`
+	// Whether to disable this field.
+	Disable *bool `pulumi:"disable"`
+	// Column name in DLC table.
+	DlcField string `pulumi:"dlcField"`
+	// DLC field type, e.g. `string`, `int`, `struct`.
+	DlcFieldType string `pulumi:"dlcFieldType"`
+	// Fill field when parsing fails.
+	FillField *string `pulumi:"fillField"`
+}
+
+// DlcDeliverDlcInfoFieldInfoInput is an input type that accepts DlcDeliverDlcInfoFieldInfoArgs and DlcDeliverDlcInfoFieldInfoOutput values.
+// You can construct a concrete instance of `DlcDeliverDlcInfoFieldInfoInput` via:
+//
+//	DlcDeliverDlcInfoFieldInfoArgs{...}
+type DlcDeliverDlcInfoFieldInfoInput interface {
+	pulumi.Input
+
+	ToDlcDeliverDlcInfoFieldInfoOutput() DlcDeliverDlcInfoFieldInfoOutput
+	ToDlcDeliverDlcInfoFieldInfoOutputWithContext(context.Context) DlcDeliverDlcInfoFieldInfoOutput
+}
+
+type DlcDeliverDlcInfoFieldInfoArgs struct {
+	// Field name in CLS log.
+	ClsField pulumi.StringInput `pulumi:"clsField"`
+	// Whether to disable this field.
+	Disable pulumi.BoolPtrInput `pulumi:"disable"`
+	// Column name in DLC table.
+	DlcField pulumi.StringInput `pulumi:"dlcField"`
+	// DLC field type, e.g. `string`, `int`, `struct`.
+	DlcFieldType pulumi.StringInput `pulumi:"dlcFieldType"`
+	// Fill field when parsing fails.
+	FillField pulumi.StringPtrInput `pulumi:"fillField"`
+}
+
+func (DlcDeliverDlcInfoFieldInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DlcDeliverDlcInfoFieldInfo)(nil)).Elem()
+}
+
+func (i DlcDeliverDlcInfoFieldInfoArgs) ToDlcDeliverDlcInfoFieldInfoOutput() DlcDeliverDlcInfoFieldInfoOutput {
+	return i.ToDlcDeliverDlcInfoFieldInfoOutputWithContext(context.Background())
+}
+
+func (i DlcDeliverDlcInfoFieldInfoArgs) ToDlcDeliverDlcInfoFieldInfoOutputWithContext(ctx context.Context) DlcDeliverDlcInfoFieldInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DlcDeliverDlcInfoFieldInfoOutput)
+}
+
+// DlcDeliverDlcInfoFieldInfoArrayInput is an input type that accepts DlcDeliverDlcInfoFieldInfoArray and DlcDeliverDlcInfoFieldInfoArrayOutput values.
+// You can construct a concrete instance of `DlcDeliverDlcInfoFieldInfoArrayInput` via:
+//
+//	DlcDeliverDlcInfoFieldInfoArray{ DlcDeliverDlcInfoFieldInfoArgs{...} }
+type DlcDeliverDlcInfoFieldInfoArrayInput interface {
+	pulumi.Input
+
+	ToDlcDeliverDlcInfoFieldInfoArrayOutput() DlcDeliverDlcInfoFieldInfoArrayOutput
+	ToDlcDeliverDlcInfoFieldInfoArrayOutputWithContext(context.Context) DlcDeliverDlcInfoFieldInfoArrayOutput
+}
+
+type DlcDeliverDlcInfoFieldInfoArray []DlcDeliverDlcInfoFieldInfoInput
+
+func (DlcDeliverDlcInfoFieldInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DlcDeliverDlcInfoFieldInfo)(nil)).Elem()
+}
+
+func (i DlcDeliverDlcInfoFieldInfoArray) ToDlcDeliverDlcInfoFieldInfoArrayOutput() DlcDeliverDlcInfoFieldInfoArrayOutput {
+	return i.ToDlcDeliverDlcInfoFieldInfoArrayOutputWithContext(context.Background())
+}
+
+func (i DlcDeliverDlcInfoFieldInfoArray) ToDlcDeliverDlcInfoFieldInfoArrayOutputWithContext(ctx context.Context) DlcDeliverDlcInfoFieldInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DlcDeliverDlcInfoFieldInfoArrayOutput)
+}
+
+type DlcDeliverDlcInfoFieldInfoOutput struct{ *pulumi.OutputState }
+
+func (DlcDeliverDlcInfoFieldInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DlcDeliverDlcInfoFieldInfo)(nil)).Elem()
+}
+
+func (o DlcDeliverDlcInfoFieldInfoOutput) ToDlcDeliverDlcInfoFieldInfoOutput() DlcDeliverDlcInfoFieldInfoOutput {
+	return o
+}
+
+func (o DlcDeliverDlcInfoFieldInfoOutput) ToDlcDeliverDlcInfoFieldInfoOutputWithContext(ctx context.Context) DlcDeliverDlcInfoFieldInfoOutput {
+	return o
+}
+
+// Field name in CLS log.
+func (o DlcDeliverDlcInfoFieldInfoOutput) ClsField() pulumi.StringOutput {
+	return o.ApplyT(func(v DlcDeliverDlcInfoFieldInfo) string { return v.ClsField }).(pulumi.StringOutput)
+}
+
+// Whether to disable this field.
+func (o DlcDeliverDlcInfoFieldInfoOutput) Disable() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v DlcDeliverDlcInfoFieldInfo) *bool { return v.Disable }).(pulumi.BoolPtrOutput)
+}
+
+// Column name in DLC table.
+func (o DlcDeliverDlcInfoFieldInfoOutput) DlcField() pulumi.StringOutput {
+	return o.ApplyT(func(v DlcDeliverDlcInfoFieldInfo) string { return v.DlcField }).(pulumi.StringOutput)
+}
+
+// DLC field type, e.g. `string`, `int`, `struct`.
+func (o DlcDeliverDlcInfoFieldInfoOutput) DlcFieldType() pulumi.StringOutput {
+	return o.ApplyT(func(v DlcDeliverDlcInfoFieldInfo) string { return v.DlcFieldType }).(pulumi.StringOutput)
+}
+
+// Fill field when parsing fails.
+func (o DlcDeliverDlcInfoFieldInfoOutput) FillField() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DlcDeliverDlcInfoFieldInfo) *string { return v.FillField }).(pulumi.StringPtrOutput)
+}
+
+type DlcDeliverDlcInfoFieldInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (DlcDeliverDlcInfoFieldInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DlcDeliverDlcInfoFieldInfo)(nil)).Elem()
+}
+
+func (o DlcDeliverDlcInfoFieldInfoArrayOutput) ToDlcDeliverDlcInfoFieldInfoArrayOutput() DlcDeliverDlcInfoFieldInfoArrayOutput {
+	return o
+}
+
+func (o DlcDeliverDlcInfoFieldInfoArrayOutput) ToDlcDeliverDlcInfoFieldInfoArrayOutputWithContext(ctx context.Context) DlcDeliverDlcInfoFieldInfoArrayOutput {
+	return o
+}
+
+func (o DlcDeliverDlcInfoFieldInfoArrayOutput) Index(i pulumi.IntInput) DlcDeliverDlcInfoFieldInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DlcDeliverDlcInfoFieldInfo {
+		return vs[0].([]DlcDeliverDlcInfoFieldInfo)[vs[1].(int)]
+	}).(DlcDeliverDlcInfoFieldInfoOutput)
+}
+
+type DlcDeliverDlcInfoPartitionExtra struct {
+	// Time format, e.g. `/%Y/%m/%d/%H`.
+	TimeFormat *string `pulumi:"timeFormat"`
+	// Time zone, e.g. `UTC+08:00`.
+	TimeZone *string `pulumi:"timeZone"`
+}
+
+// DlcDeliverDlcInfoPartitionExtraInput is an input type that accepts DlcDeliverDlcInfoPartitionExtraArgs and DlcDeliverDlcInfoPartitionExtraOutput values.
+// You can construct a concrete instance of `DlcDeliverDlcInfoPartitionExtraInput` via:
+//
+//	DlcDeliverDlcInfoPartitionExtraArgs{...}
+type DlcDeliverDlcInfoPartitionExtraInput interface {
+	pulumi.Input
+
+	ToDlcDeliverDlcInfoPartitionExtraOutput() DlcDeliverDlcInfoPartitionExtraOutput
+	ToDlcDeliverDlcInfoPartitionExtraOutputWithContext(context.Context) DlcDeliverDlcInfoPartitionExtraOutput
+}
+
+type DlcDeliverDlcInfoPartitionExtraArgs struct {
+	// Time format, e.g. `/%Y/%m/%d/%H`.
+	TimeFormat pulumi.StringPtrInput `pulumi:"timeFormat"`
+	// Time zone, e.g. `UTC+08:00`.
+	TimeZone pulumi.StringPtrInput `pulumi:"timeZone"`
+}
+
+func (DlcDeliverDlcInfoPartitionExtraArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DlcDeliverDlcInfoPartitionExtra)(nil)).Elem()
+}
+
+func (i DlcDeliverDlcInfoPartitionExtraArgs) ToDlcDeliverDlcInfoPartitionExtraOutput() DlcDeliverDlcInfoPartitionExtraOutput {
+	return i.ToDlcDeliverDlcInfoPartitionExtraOutputWithContext(context.Background())
+}
+
+func (i DlcDeliverDlcInfoPartitionExtraArgs) ToDlcDeliverDlcInfoPartitionExtraOutputWithContext(ctx context.Context) DlcDeliverDlcInfoPartitionExtraOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DlcDeliverDlcInfoPartitionExtraOutput)
+}
+
+func (i DlcDeliverDlcInfoPartitionExtraArgs) ToDlcDeliverDlcInfoPartitionExtraPtrOutput() DlcDeliverDlcInfoPartitionExtraPtrOutput {
+	return i.ToDlcDeliverDlcInfoPartitionExtraPtrOutputWithContext(context.Background())
+}
+
+func (i DlcDeliverDlcInfoPartitionExtraArgs) ToDlcDeliverDlcInfoPartitionExtraPtrOutputWithContext(ctx context.Context) DlcDeliverDlcInfoPartitionExtraPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DlcDeliverDlcInfoPartitionExtraOutput).ToDlcDeliverDlcInfoPartitionExtraPtrOutputWithContext(ctx)
+}
+
+// DlcDeliverDlcInfoPartitionExtraPtrInput is an input type that accepts DlcDeliverDlcInfoPartitionExtraArgs, DlcDeliverDlcInfoPartitionExtraPtr and DlcDeliverDlcInfoPartitionExtraPtrOutput values.
+// You can construct a concrete instance of `DlcDeliverDlcInfoPartitionExtraPtrInput` via:
+//
+//	        DlcDeliverDlcInfoPartitionExtraArgs{...}
+//
+//	or:
+//
+//	        nil
+type DlcDeliverDlcInfoPartitionExtraPtrInput interface {
+	pulumi.Input
+
+	ToDlcDeliverDlcInfoPartitionExtraPtrOutput() DlcDeliverDlcInfoPartitionExtraPtrOutput
+	ToDlcDeliverDlcInfoPartitionExtraPtrOutputWithContext(context.Context) DlcDeliverDlcInfoPartitionExtraPtrOutput
+}
+
+type dlcDeliverDlcInfoPartitionExtraPtrType DlcDeliverDlcInfoPartitionExtraArgs
+
+func DlcDeliverDlcInfoPartitionExtraPtr(v *DlcDeliverDlcInfoPartitionExtraArgs) DlcDeliverDlcInfoPartitionExtraPtrInput {
+	return (*dlcDeliverDlcInfoPartitionExtraPtrType)(v)
+}
+
+func (*dlcDeliverDlcInfoPartitionExtraPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DlcDeliverDlcInfoPartitionExtra)(nil)).Elem()
+}
+
+func (i *dlcDeliverDlcInfoPartitionExtraPtrType) ToDlcDeliverDlcInfoPartitionExtraPtrOutput() DlcDeliverDlcInfoPartitionExtraPtrOutput {
+	return i.ToDlcDeliverDlcInfoPartitionExtraPtrOutputWithContext(context.Background())
+}
+
+func (i *dlcDeliverDlcInfoPartitionExtraPtrType) ToDlcDeliverDlcInfoPartitionExtraPtrOutputWithContext(ctx context.Context) DlcDeliverDlcInfoPartitionExtraPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DlcDeliverDlcInfoPartitionExtraPtrOutput)
+}
+
+type DlcDeliverDlcInfoPartitionExtraOutput struct{ *pulumi.OutputState }
+
+func (DlcDeliverDlcInfoPartitionExtraOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DlcDeliverDlcInfoPartitionExtra)(nil)).Elem()
+}
+
+func (o DlcDeliverDlcInfoPartitionExtraOutput) ToDlcDeliverDlcInfoPartitionExtraOutput() DlcDeliverDlcInfoPartitionExtraOutput {
+	return o
+}
+
+func (o DlcDeliverDlcInfoPartitionExtraOutput) ToDlcDeliverDlcInfoPartitionExtraOutputWithContext(ctx context.Context) DlcDeliverDlcInfoPartitionExtraOutput {
+	return o
+}
+
+func (o DlcDeliverDlcInfoPartitionExtraOutput) ToDlcDeliverDlcInfoPartitionExtraPtrOutput() DlcDeliverDlcInfoPartitionExtraPtrOutput {
+	return o.ToDlcDeliverDlcInfoPartitionExtraPtrOutputWithContext(context.Background())
+}
+
+func (o DlcDeliverDlcInfoPartitionExtraOutput) ToDlcDeliverDlcInfoPartitionExtraPtrOutputWithContext(ctx context.Context) DlcDeliverDlcInfoPartitionExtraPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DlcDeliverDlcInfoPartitionExtra) *DlcDeliverDlcInfoPartitionExtra {
+		return &v
+	}).(DlcDeliverDlcInfoPartitionExtraPtrOutput)
+}
+
+// Time format, e.g. `/%Y/%m/%d/%H`.
+func (o DlcDeliverDlcInfoPartitionExtraOutput) TimeFormat() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DlcDeliverDlcInfoPartitionExtra) *string { return v.TimeFormat }).(pulumi.StringPtrOutput)
+}
+
+// Time zone, e.g. `UTC+08:00`.
+func (o DlcDeliverDlcInfoPartitionExtraOutput) TimeZone() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DlcDeliverDlcInfoPartitionExtra) *string { return v.TimeZone }).(pulumi.StringPtrOutput)
+}
+
+type DlcDeliverDlcInfoPartitionExtraPtrOutput struct{ *pulumi.OutputState }
+
+func (DlcDeliverDlcInfoPartitionExtraPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DlcDeliverDlcInfoPartitionExtra)(nil)).Elem()
+}
+
+func (o DlcDeliverDlcInfoPartitionExtraPtrOutput) ToDlcDeliverDlcInfoPartitionExtraPtrOutput() DlcDeliverDlcInfoPartitionExtraPtrOutput {
+	return o
+}
+
+func (o DlcDeliverDlcInfoPartitionExtraPtrOutput) ToDlcDeliverDlcInfoPartitionExtraPtrOutputWithContext(ctx context.Context) DlcDeliverDlcInfoPartitionExtraPtrOutput {
+	return o
+}
+
+func (o DlcDeliverDlcInfoPartitionExtraPtrOutput) Elem() DlcDeliverDlcInfoPartitionExtraOutput {
+	return o.ApplyT(func(v *DlcDeliverDlcInfoPartitionExtra) DlcDeliverDlcInfoPartitionExtra {
+		if v != nil {
+			return *v
+		}
+		var ret DlcDeliverDlcInfoPartitionExtra
+		return ret
+	}).(DlcDeliverDlcInfoPartitionExtraOutput)
+}
+
+// Time format, e.g. `/%Y/%m/%d/%H`.
+func (o DlcDeliverDlcInfoPartitionExtraPtrOutput) TimeFormat() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DlcDeliverDlcInfoPartitionExtra) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TimeFormat
+	}).(pulumi.StringPtrOutput)
+}
+
+// Time zone, e.g. `UTC+08:00`.
+func (o DlcDeliverDlcInfoPartitionExtraPtrOutput) TimeZone() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DlcDeliverDlcInfoPartitionExtra) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TimeZone
+	}).(pulumi.StringPtrOutput)
+}
+
+type DlcDeliverDlcInfoPartitionInfo struct {
+	// Field name in CLS log.
+	ClsField string `pulumi:"clsField"`
+	// Column name in DLC table.
+	DlcField string `pulumi:"dlcField"`
+	// DLC field type.
+	DlcFieldType string `pulumi:"dlcFieldType"`
+}
+
+// DlcDeliverDlcInfoPartitionInfoInput is an input type that accepts DlcDeliverDlcInfoPartitionInfoArgs and DlcDeliverDlcInfoPartitionInfoOutput values.
+// You can construct a concrete instance of `DlcDeliverDlcInfoPartitionInfoInput` via:
+//
+//	DlcDeliverDlcInfoPartitionInfoArgs{...}
+type DlcDeliverDlcInfoPartitionInfoInput interface {
+	pulumi.Input
+
+	ToDlcDeliverDlcInfoPartitionInfoOutput() DlcDeliverDlcInfoPartitionInfoOutput
+	ToDlcDeliverDlcInfoPartitionInfoOutputWithContext(context.Context) DlcDeliverDlcInfoPartitionInfoOutput
+}
+
+type DlcDeliverDlcInfoPartitionInfoArgs struct {
+	// Field name in CLS log.
+	ClsField pulumi.StringInput `pulumi:"clsField"`
+	// Column name in DLC table.
+	DlcField pulumi.StringInput `pulumi:"dlcField"`
+	// DLC field type.
+	DlcFieldType pulumi.StringInput `pulumi:"dlcFieldType"`
+}
+
+func (DlcDeliverDlcInfoPartitionInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DlcDeliverDlcInfoPartitionInfo)(nil)).Elem()
+}
+
+func (i DlcDeliverDlcInfoPartitionInfoArgs) ToDlcDeliverDlcInfoPartitionInfoOutput() DlcDeliverDlcInfoPartitionInfoOutput {
+	return i.ToDlcDeliverDlcInfoPartitionInfoOutputWithContext(context.Background())
+}
+
+func (i DlcDeliverDlcInfoPartitionInfoArgs) ToDlcDeliverDlcInfoPartitionInfoOutputWithContext(ctx context.Context) DlcDeliverDlcInfoPartitionInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DlcDeliverDlcInfoPartitionInfoOutput)
+}
+
+// DlcDeliverDlcInfoPartitionInfoArrayInput is an input type that accepts DlcDeliverDlcInfoPartitionInfoArray and DlcDeliverDlcInfoPartitionInfoArrayOutput values.
+// You can construct a concrete instance of `DlcDeliverDlcInfoPartitionInfoArrayInput` via:
+//
+//	DlcDeliverDlcInfoPartitionInfoArray{ DlcDeliverDlcInfoPartitionInfoArgs{...} }
+type DlcDeliverDlcInfoPartitionInfoArrayInput interface {
+	pulumi.Input
+
+	ToDlcDeliverDlcInfoPartitionInfoArrayOutput() DlcDeliverDlcInfoPartitionInfoArrayOutput
+	ToDlcDeliverDlcInfoPartitionInfoArrayOutputWithContext(context.Context) DlcDeliverDlcInfoPartitionInfoArrayOutput
+}
+
+type DlcDeliverDlcInfoPartitionInfoArray []DlcDeliverDlcInfoPartitionInfoInput
+
+func (DlcDeliverDlcInfoPartitionInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DlcDeliverDlcInfoPartitionInfo)(nil)).Elem()
+}
+
+func (i DlcDeliverDlcInfoPartitionInfoArray) ToDlcDeliverDlcInfoPartitionInfoArrayOutput() DlcDeliverDlcInfoPartitionInfoArrayOutput {
+	return i.ToDlcDeliverDlcInfoPartitionInfoArrayOutputWithContext(context.Background())
+}
+
+func (i DlcDeliverDlcInfoPartitionInfoArray) ToDlcDeliverDlcInfoPartitionInfoArrayOutputWithContext(ctx context.Context) DlcDeliverDlcInfoPartitionInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DlcDeliverDlcInfoPartitionInfoArrayOutput)
+}
+
+type DlcDeliverDlcInfoPartitionInfoOutput struct{ *pulumi.OutputState }
+
+func (DlcDeliverDlcInfoPartitionInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DlcDeliverDlcInfoPartitionInfo)(nil)).Elem()
+}
+
+func (o DlcDeliverDlcInfoPartitionInfoOutput) ToDlcDeliverDlcInfoPartitionInfoOutput() DlcDeliverDlcInfoPartitionInfoOutput {
+	return o
+}
+
+func (o DlcDeliverDlcInfoPartitionInfoOutput) ToDlcDeliverDlcInfoPartitionInfoOutputWithContext(ctx context.Context) DlcDeliverDlcInfoPartitionInfoOutput {
+	return o
+}
+
+// Field name in CLS log.
+func (o DlcDeliverDlcInfoPartitionInfoOutput) ClsField() pulumi.StringOutput {
+	return o.ApplyT(func(v DlcDeliverDlcInfoPartitionInfo) string { return v.ClsField }).(pulumi.StringOutput)
+}
+
+// Column name in DLC table.
+func (o DlcDeliverDlcInfoPartitionInfoOutput) DlcField() pulumi.StringOutput {
+	return o.ApplyT(func(v DlcDeliverDlcInfoPartitionInfo) string { return v.DlcField }).(pulumi.StringOutput)
+}
+
+// DLC field type.
+func (o DlcDeliverDlcInfoPartitionInfoOutput) DlcFieldType() pulumi.StringOutput {
+	return o.ApplyT(func(v DlcDeliverDlcInfoPartitionInfo) string { return v.DlcFieldType }).(pulumi.StringOutput)
+}
+
+type DlcDeliverDlcInfoPartitionInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (DlcDeliverDlcInfoPartitionInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DlcDeliverDlcInfoPartitionInfo)(nil)).Elem()
+}
+
+func (o DlcDeliverDlcInfoPartitionInfoArrayOutput) ToDlcDeliverDlcInfoPartitionInfoArrayOutput() DlcDeliverDlcInfoPartitionInfoArrayOutput {
+	return o
+}
+
+func (o DlcDeliverDlcInfoPartitionInfoArrayOutput) ToDlcDeliverDlcInfoPartitionInfoArrayOutputWithContext(ctx context.Context) DlcDeliverDlcInfoPartitionInfoArrayOutput {
+	return o
+}
+
+func (o DlcDeliverDlcInfoPartitionInfoArrayOutput) Index(i pulumi.IntInput) DlcDeliverDlcInfoPartitionInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DlcDeliverDlcInfoPartitionInfo {
+		return vs[0].([]DlcDeliverDlcInfoPartitionInfo)[vs[1].(int)]
+	}).(DlcDeliverDlcInfoPartitionInfoOutput)
+}
+
+type DlcDeliverDlcInfoTableInfo struct {
+	// Data directory.
+	DataDirectory string `pulumi:"dataDirectory"`
+	// Database name.
+	DatabaseName string `pulumi:"databaseName"`
+	// Table name.
+	TableName string `pulumi:"tableName"`
+}
+
+// DlcDeliverDlcInfoTableInfoInput is an input type that accepts DlcDeliverDlcInfoTableInfoArgs and DlcDeliverDlcInfoTableInfoOutput values.
+// You can construct a concrete instance of `DlcDeliverDlcInfoTableInfoInput` via:
+//
+//	DlcDeliverDlcInfoTableInfoArgs{...}
+type DlcDeliverDlcInfoTableInfoInput interface {
+	pulumi.Input
+
+	ToDlcDeliverDlcInfoTableInfoOutput() DlcDeliverDlcInfoTableInfoOutput
+	ToDlcDeliverDlcInfoTableInfoOutputWithContext(context.Context) DlcDeliverDlcInfoTableInfoOutput
+}
+
+type DlcDeliverDlcInfoTableInfoArgs struct {
+	// Data directory.
+	DataDirectory pulumi.StringInput `pulumi:"dataDirectory"`
+	// Database name.
+	DatabaseName pulumi.StringInput `pulumi:"databaseName"`
+	// Table name.
+	TableName pulumi.StringInput `pulumi:"tableName"`
+}
+
+func (DlcDeliverDlcInfoTableInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DlcDeliverDlcInfoTableInfo)(nil)).Elem()
+}
+
+func (i DlcDeliverDlcInfoTableInfoArgs) ToDlcDeliverDlcInfoTableInfoOutput() DlcDeliverDlcInfoTableInfoOutput {
+	return i.ToDlcDeliverDlcInfoTableInfoOutputWithContext(context.Background())
+}
+
+func (i DlcDeliverDlcInfoTableInfoArgs) ToDlcDeliverDlcInfoTableInfoOutputWithContext(ctx context.Context) DlcDeliverDlcInfoTableInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DlcDeliverDlcInfoTableInfoOutput)
+}
+
+func (i DlcDeliverDlcInfoTableInfoArgs) ToDlcDeliverDlcInfoTableInfoPtrOutput() DlcDeliverDlcInfoTableInfoPtrOutput {
+	return i.ToDlcDeliverDlcInfoTableInfoPtrOutputWithContext(context.Background())
+}
+
+func (i DlcDeliverDlcInfoTableInfoArgs) ToDlcDeliverDlcInfoTableInfoPtrOutputWithContext(ctx context.Context) DlcDeliverDlcInfoTableInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DlcDeliverDlcInfoTableInfoOutput).ToDlcDeliverDlcInfoTableInfoPtrOutputWithContext(ctx)
+}
+
+// DlcDeliverDlcInfoTableInfoPtrInput is an input type that accepts DlcDeliverDlcInfoTableInfoArgs, DlcDeliverDlcInfoTableInfoPtr and DlcDeliverDlcInfoTableInfoPtrOutput values.
+// You can construct a concrete instance of `DlcDeliverDlcInfoTableInfoPtrInput` via:
+//
+//	        DlcDeliverDlcInfoTableInfoArgs{...}
+//
+//	or:
+//
+//	        nil
+type DlcDeliverDlcInfoTableInfoPtrInput interface {
+	pulumi.Input
+
+	ToDlcDeliverDlcInfoTableInfoPtrOutput() DlcDeliverDlcInfoTableInfoPtrOutput
+	ToDlcDeliverDlcInfoTableInfoPtrOutputWithContext(context.Context) DlcDeliverDlcInfoTableInfoPtrOutput
+}
+
+type dlcDeliverDlcInfoTableInfoPtrType DlcDeliverDlcInfoTableInfoArgs
+
+func DlcDeliverDlcInfoTableInfoPtr(v *DlcDeliverDlcInfoTableInfoArgs) DlcDeliverDlcInfoTableInfoPtrInput {
+	return (*dlcDeliverDlcInfoTableInfoPtrType)(v)
+}
+
+func (*dlcDeliverDlcInfoTableInfoPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DlcDeliverDlcInfoTableInfo)(nil)).Elem()
+}
+
+func (i *dlcDeliverDlcInfoTableInfoPtrType) ToDlcDeliverDlcInfoTableInfoPtrOutput() DlcDeliverDlcInfoTableInfoPtrOutput {
+	return i.ToDlcDeliverDlcInfoTableInfoPtrOutputWithContext(context.Background())
+}
+
+func (i *dlcDeliverDlcInfoTableInfoPtrType) ToDlcDeliverDlcInfoTableInfoPtrOutputWithContext(ctx context.Context) DlcDeliverDlcInfoTableInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DlcDeliverDlcInfoTableInfoPtrOutput)
+}
+
+type DlcDeliverDlcInfoTableInfoOutput struct{ *pulumi.OutputState }
+
+func (DlcDeliverDlcInfoTableInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DlcDeliverDlcInfoTableInfo)(nil)).Elem()
+}
+
+func (o DlcDeliverDlcInfoTableInfoOutput) ToDlcDeliverDlcInfoTableInfoOutput() DlcDeliverDlcInfoTableInfoOutput {
+	return o
+}
+
+func (o DlcDeliverDlcInfoTableInfoOutput) ToDlcDeliverDlcInfoTableInfoOutputWithContext(ctx context.Context) DlcDeliverDlcInfoTableInfoOutput {
+	return o
+}
+
+func (o DlcDeliverDlcInfoTableInfoOutput) ToDlcDeliverDlcInfoTableInfoPtrOutput() DlcDeliverDlcInfoTableInfoPtrOutput {
+	return o.ToDlcDeliverDlcInfoTableInfoPtrOutputWithContext(context.Background())
+}
+
+func (o DlcDeliverDlcInfoTableInfoOutput) ToDlcDeliverDlcInfoTableInfoPtrOutputWithContext(ctx context.Context) DlcDeliverDlcInfoTableInfoPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DlcDeliverDlcInfoTableInfo) *DlcDeliverDlcInfoTableInfo {
+		return &v
+	}).(DlcDeliverDlcInfoTableInfoPtrOutput)
+}
+
+// Data directory.
+func (o DlcDeliverDlcInfoTableInfoOutput) DataDirectory() pulumi.StringOutput {
+	return o.ApplyT(func(v DlcDeliverDlcInfoTableInfo) string { return v.DataDirectory }).(pulumi.StringOutput)
+}
+
+// Database name.
+func (o DlcDeliverDlcInfoTableInfoOutput) DatabaseName() pulumi.StringOutput {
+	return o.ApplyT(func(v DlcDeliverDlcInfoTableInfo) string { return v.DatabaseName }).(pulumi.StringOutput)
+}
+
+// Table name.
+func (o DlcDeliverDlcInfoTableInfoOutput) TableName() pulumi.StringOutput {
+	return o.ApplyT(func(v DlcDeliverDlcInfoTableInfo) string { return v.TableName }).(pulumi.StringOutput)
+}
+
+type DlcDeliverDlcInfoTableInfoPtrOutput struct{ *pulumi.OutputState }
+
+func (DlcDeliverDlcInfoTableInfoPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DlcDeliverDlcInfoTableInfo)(nil)).Elem()
+}
+
+func (o DlcDeliverDlcInfoTableInfoPtrOutput) ToDlcDeliverDlcInfoTableInfoPtrOutput() DlcDeliverDlcInfoTableInfoPtrOutput {
+	return o
+}
+
+func (o DlcDeliverDlcInfoTableInfoPtrOutput) ToDlcDeliverDlcInfoTableInfoPtrOutputWithContext(ctx context.Context) DlcDeliverDlcInfoTableInfoPtrOutput {
+	return o
+}
+
+func (o DlcDeliverDlcInfoTableInfoPtrOutput) Elem() DlcDeliverDlcInfoTableInfoOutput {
+	return o.ApplyT(func(v *DlcDeliverDlcInfoTableInfo) DlcDeliverDlcInfoTableInfo {
+		if v != nil {
+			return *v
+		}
+		var ret DlcDeliverDlcInfoTableInfo
+		return ret
+	}).(DlcDeliverDlcInfoTableInfoOutput)
+}
+
+// Data directory.
+func (o DlcDeliverDlcInfoTableInfoPtrOutput) DataDirectory() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DlcDeliverDlcInfoTableInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.DataDirectory
+	}).(pulumi.StringPtrOutput)
+}
+
+// Database name.
+func (o DlcDeliverDlcInfoTableInfoPtrOutput) DatabaseName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DlcDeliverDlcInfoTableInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.DatabaseName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Table name.
+func (o DlcDeliverDlcInfoTableInfoPtrOutput) TableName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DlcDeliverDlcInfoTableInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TableName
+	}).(pulumi.StringPtrOutput)
 }
 
 type IndexRule struct {
@@ -6230,8 +9581,14 @@ func (o IndexRuleKeyValueKeyValueArrayOutput) Index(i pulumi.IntInput) IndexRule
 }
 
 type IndexRuleKeyValueKeyValueValue struct {
+	// Field alias.
+	Alias *string `pulumi:"alias"`
+	// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+	ChildNodes []IndexRuleKeyValueKeyValueValueChildNode `pulumi:"childNodes"`
 	// Whether Chinese characters are contained.
 	ContainZH *bool `pulumi:"containZH"`
+	// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+	OpenIndexForChildOnly *bool `pulumi:"openIndexForChildOnly"`
 	// Whether the analysis feature is enabled for the field.
 	SqlFlag *bool `pulumi:"sqlFlag"`
 	// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
@@ -6252,8 +9609,14 @@ type IndexRuleKeyValueKeyValueValueInput interface {
 }
 
 type IndexRuleKeyValueKeyValueValueArgs struct {
+	// Field alias.
+	Alias pulumi.StringPtrInput `pulumi:"alias"`
+	// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+	ChildNodes IndexRuleKeyValueKeyValueValueChildNodeArrayInput `pulumi:"childNodes"`
 	// Whether Chinese characters are contained.
 	ContainZH pulumi.BoolPtrInput `pulumi:"containZH"`
+	// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+	OpenIndexForChildOnly pulumi.BoolPtrInput `pulumi:"openIndexForChildOnly"`
 	// Whether the analysis feature is enabled for the field.
 	SqlFlag pulumi.BoolPtrInput `pulumi:"sqlFlag"`
 	// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
@@ -6339,9 +9702,24 @@ func (o IndexRuleKeyValueKeyValueValueOutput) ToIndexRuleKeyValueKeyValueValuePt
 	}).(IndexRuleKeyValueKeyValueValuePtrOutput)
 }
 
+// Field alias.
+func (o IndexRuleKeyValueKeyValueValueOutput) Alias() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValue) *string { return v.Alias }).(pulumi.StringPtrOutput)
+}
+
+// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+func (o IndexRuleKeyValueKeyValueValueOutput) ChildNodes() IndexRuleKeyValueKeyValueValueChildNodeArrayOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValue) []IndexRuleKeyValueKeyValueValueChildNode { return v.ChildNodes }).(IndexRuleKeyValueKeyValueValueChildNodeArrayOutput)
+}
+
 // Whether Chinese characters are contained.
 func (o IndexRuleKeyValueKeyValueValueOutput) ContainZH() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValue) *bool { return v.ContainZH }).(pulumi.BoolPtrOutput)
+}
+
+// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+func (o IndexRuleKeyValueKeyValueValueOutput) OpenIndexForChildOnly() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValue) *bool { return v.OpenIndexForChildOnly }).(pulumi.BoolPtrOutput)
 }
 
 // Whether the analysis feature is enabled for the field.
@@ -6383,6 +9761,26 @@ func (o IndexRuleKeyValueKeyValueValuePtrOutput) Elem() IndexRuleKeyValueKeyValu
 	}).(IndexRuleKeyValueKeyValueValueOutput)
 }
 
+// Field alias.
+func (o IndexRuleKeyValueKeyValueValuePtrOutput) Alias() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Alias
+	}).(pulumi.StringPtrOutput)
+}
+
+// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+func (o IndexRuleKeyValueKeyValueValuePtrOutput) ChildNodes() IndexRuleKeyValueKeyValueValueChildNodeArrayOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValue) []IndexRuleKeyValueKeyValueValueChildNode {
+		if v == nil {
+			return nil
+		}
+		return v.ChildNodes
+	}).(IndexRuleKeyValueKeyValueValueChildNodeArrayOutput)
+}
+
 // Whether Chinese characters are contained.
 func (o IndexRuleKeyValueKeyValueValuePtrOutput) ContainZH() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValue) *bool {
@@ -6390,6 +9788,16 @@ func (o IndexRuleKeyValueKeyValueValuePtrOutput) ContainZH() pulumi.BoolPtrOutpu
 			return nil
 		}
 		return v.ContainZH
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+func (o IndexRuleKeyValueKeyValueValuePtrOutput) OpenIndexForChildOnly() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.OpenIndexForChildOnly
 	}).(pulumi.BoolPtrOutput)
 }
 
@@ -6416,6 +9824,1830 @@ func (o IndexRuleKeyValueKeyValueValuePtrOutput) Tokenizer() pulumi.StringPtrOut
 // Field type. Valid values: long, text, double.
 func (o IndexRuleKeyValueKeyValueValuePtrOutput) Type() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValue) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
+type IndexRuleKeyValueKeyValueValueChildNode struct {
+	// Field name of the json child node.
+	Key *string `pulumi:"key"`
+	// Field index description information of the json child node.
+	Value *IndexRuleKeyValueKeyValueValueChildNodeValue `pulumi:"value"`
+}
+
+// IndexRuleKeyValueKeyValueValueChildNodeInput is an input type that accepts IndexRuleKeyValueKeyValueValueChildNodeArgs and IndexRuleKeyValueKeyValueValueChildNodeOutput values.
+// You can construct a concrete instance of `IndexRuleKeyValueKeyValueValueChildNodeInput` via:
+//
+//	IndexRuleKeyValueKeyValueValueChildNodeArgs{...}
+type IndexRuleKeyValueKeyValueValueChildNodeInput interface {
+	pulumi.Input
+
+	ToIndexRuleKeyValueKeyValueValueChildNodeOutput() IndexRuleKeyValueKeyValueValueChildNodeOutput
+	ToIndexRuleKeyValueKeyValueValueChildNodeOutputWithContext(context.Context) IndexRuleKeyValueKeyValueValueChildNodeOutput
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeArgs struct {
+	// Field name of the json child node.
+	Key pulumi.StringPtrInput `pulumi:"key"`
+	// Field index description information of the json child node.
+	Value IndexRuleKeyValueKeyValueValueChildNodeValuePtrInput `pulumi:"value"`
+}
+
+func (IndexRuleKeyValueKeyValueValueChildNodeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNode)(nil)).Elem()
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeArgs) ToIndexRuleKeyValueKeyValueValueChildNodeOutput() IndexRuleKeyValueKeyValueValueChildNodeOutput {
+	return i.ToIndexRuleKeyValueKeyValueValueChildNodeOutputWithContext(context.Background())
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeArgs) ToIndexRuleKeyValueKeyValueValueChildNodeOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueKeyValueValueChildNodeOutput)
+}
+
+// IndexRuleKeyValueKeyValueValueChildNodeArrayInput is an input type that accepts IndexRuleKeyValueKeyValueValueChildNodeArray and IndexRuleKeyValueKeyValueValueChildNodeArrayOutput values.
+// You can construct a concrete instance of `IndexRuleKeyValueKeyValueValueChildNodeArrayInput` via:
+//
+//	IndexRuleKeyValueKeyValueValueChildNodeArray{ IndexRuleKeyValueKeyValueValueChildNodeArgs{...} }
+type IndexRuleKeyValueKeyValueValueChildNodeArrayInput interface {
+	pulumi.Input
+
+	ToIndexRuleKeyValueKeyValueValueChildNodeArrayOutput() IndexRuleKeyValueKeyValueValueChildNodeArrayOutput
+	ToIndexRuleKeyValueKeyValueValueChildNodeArrayOutputWithContext(context.Context) IndexRuleKeyValueKeyValueValueChildNodeArrayOutput
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeArray []IndexRuleKeyValueKeyValueValueChildNodeInput
+
+func (IndexRuleKeyValueKeyValueValueChildNodeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]IndexRuleKeyValueKeyValueValueChildNode)(nil)).Elem()
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeArray) ToIndexRuleKeyValueKeyValueValueChildNodeArrayOutput() IndexRuleKeyValueKeyValueValueChildNodeArrayOutput {
+	return i.ToIndexRuleKeyValueKeyValueValueChildNodeArrayOutputWithContext(context.Background())
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeArray) ToIndexRuleKeyValueKeyValueValueChildNodeArrayOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueKeyValueValueChildNodeArrayOutput)
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleKeyValueKeyValueValueChildNodeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNode)(nil)).Elem()
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeOutput) ToIndexRuleKeyValueKeyValueValueChildNodeOutput() IndexRuleKeyValueKeyValueValueChildNodeOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeOutput) ToIndexRuleKeyValueKeyValueValueChildNodeOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeOutput {
+	return o
+}
+
+// Field name of the json child node.
+func (o IndexRuleKeyValueKeyValueValueChildNodeOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNode) *string { return v.Key }).(pulumi.StringPtrOutput)
+}
+
+// Field index description information of the json child node.
+func (o IndexRuleKeyValueKeyValueValueChildNodeOutput) Value() IndexRuleKeyValueKeyValueValueChildNodeValuePtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNode) *IndexRuleKeyValueKeyValueValueChildNodeValue {
+		return v.Value
+	}).(IndexRuleKeyValueKeyValueValueChildNodeValuePtrOutput)
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeArrayOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleKeyValueKeyValueValueChildNodeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]IndexRuleKeyValueKeyValueValueChildNode)(nil)).Elem()
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeArrayOutput) ToIndexRuleKeyValueKeyValueValueChildNodeArrayOutput() IndexRuleKeyValueKeyValueValueChildNodeArrayOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeArrayOutput) ToIndexRuleKeyValueKeyValueValueChildNodeArrayOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeArrayOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeArrayOutput) Index(i pulumi.IntInput) IndexRuleKeyValueKeyValueValueChildNodeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) IndexRuleKeyValueKeyValueValueChildNode {
+		return vs[0].([]IndexRuleKeyValueKeyValueValueChildNode)[vs[1].(int)]
+	}).(IndexRuleKeyValueKeyValueValueChildNodeOutput)
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValue struct {
+	// Field alias.
+	Alias *string `pulumi:"alias"`
+	// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+	ChildNodes []IndexRuleKeyValueKeyValueValueChildNodeValueChildNode `pulumi:"childNodes"`
+	// Whether Chinese characters are contained.
+	ContainZH *bool `pulumi:"containZH"`
+	// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+	OpenIndexForChildOnly *bool `pulumi:"openIndexForChildOnly"`
+	// Whether the analysis feature is enabled for the field.
+	SqlFlag *bool `pulumi:"sqlFlag"`
+	// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+	Tokenizer *string `pulumi:"tokenizer"`
+	// Field type. Valid values: long, text, double.
+	Type string `pulumi:"type"`
+}
+
+// IndexRuleKeyValueKeyValueValueChildNodeValueInput is an input type that accepts IndexRuleKeyValueKeyValueValueChildNodeValueArgs and IndexRuleKeyValueKeyValueValueChildNodeValueOutput values.
+// You can construct a concrete instance of `IndexRuleKeyValueKeyValueValueChildNodeValueInput` via:
+//
+//	IndexRuleKeyValueKeyValueValueChildNodeValueArgs{...}
+type IndexRuleKeyValueKeyValueValueChildNodeValueInput interface {
+	pulumi.Input
+
+	ToIndexRuleKeyValueKeyValueValueChildNodeValueOutput() IndexRuleKeyValueKeyValueValueChildNodeValueOutput
+	ToIndexRuleKeyValueKeyValueValueChildNodeValueOutputWithContext(context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueOutput
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueArgs struct {
+	// Field alias.
+	Alias pulumi.StringPtrInput `pulumi:"alias"`
+	// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+	ChildNodes IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArrayInput `pulumi:"childNodes"`
+	// Whether Chinese characters are contained.
+	ContainZH pulumi.BoolPtrInput `pulumi:"containZH"`
+	// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+	OpenIndexForChildOnly pulumi.BoolPtrInput `pulumi:"openIndexForChildOnly"`
+	// Whether the analysis feature is enabled for the field.
+	SqlFlag pulumi.BoolPtrInput `pulumi:"sqlFlag"`
+	// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+	Tokenizer pulumi.StringPtrInput `pulumi:"tokenizer"`
+	// Field type. Valid values: long, text, double.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (IndexRuleKeyValueKeyValueValueChildNodeValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeValue)(nil)).Elem()
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeValueArgs) ToIndexRuleKeyValueKeyValueValueChildNodeValueOutput() IndexRuleKeyValueKeyValueValueChildNodeValueOutput {
+	return i.ToIndexRuleKeyValueKeyValueValueChildNodeValueOutputWithContext(context.Background())
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeValueArgs) ToIndexRuleKeyValueKeyValueValueChildNodeValueOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueKeyValueValueChildNodeValueOutput)
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeValueArgs) ToIndexRuleKeyValueKeyValueValueChildNodeValuePtrOutput() IndexRuleKeyValueKeyValueValueChildNodeValuePtrOutput {
+	return i.ToIndexRuleKeyValueKeyValueValueChildNodeValuePtrOutputWithContext(context.Background())
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeValueArgs) ToIndexRuleKeyValueKeyValueValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueKeyValueValueChildNodeValueOutput).ToIndexRuleKeyValueKeyValueValueChildNodeValuePtrOutputWithContext(ctx)
+}
+
+// IndexRuleKeyValueKeyValueValueChildNodeValuePtrInput is an input type that accepts IndexRuleKeyValueKeyValueValueChildNodeValueArgs, IndexRuleKeyValueKeyValueValueChildNodeValuePtr and IndexRuleKeyValueKeyValueValueChildNodeValuePtrOutput values.
+// You can construct a concrete instance of `IndexRuleKeyValueKeyValueValueChildNodeValuePtrInput` via:
+//
+//	        IndexRuleKeyValueKeyValueValueChildNodeValueArgs{...}
+//
+//	or:
+//
+//	        nil
+type IndexRuleKeyValueKeyValueValueChildNodeValuePtrInput interface {
+	pulumi.Input
+
+	ToIndexRuleKeyValueKeyValueValueChildNodeValuePtrOutput() IndexRuleKeyValueKeyValueValueChildNodeValuePtrOutput
+	ToIndexRuleKeyValueKeyValueValueChildNodeValuePtrOutputWithContext(context.Context) IndexRuleKeyValueKeyValueValueChildNodeValuePtrOutput
+}
+
+type indexRuleKeyValueKeyValueValueChildNodeValuePtrType IndexRuleKeyValueKeyValueValueChildNodeValueArgs
+
+func IndexRuleKeyValueKeyValueValueChildNodeValuePtr(v *IndexRuleKeyValueKeyValueValueChildNodeValueArgs) IndexRuleKeyValueKeyValueValueChildNodeValuePtrInput {
+	return (*indexRuleKeyValueKeyValueValueChildNodeValuePtrType)(v)
+}
+
+func (*indexRuleKeyValueKeyValueValueChildNodeValuePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleKeyValueKeyValueValueChildNodeValue)(nil)).Elem()
+}
+
+func (i *indexRuleKeyValueKeyValueValueChildNodeValuePtrType) ToIndexRuleKeyValueKeyValueValueChildNodeValuePtrOutput() IndexRuleKeyValueKeyValueValueChildNodeValuePtrOutput {
+	return i.ToIndexRuleKeyValueKeyValueValueChildNodeValuePtrOutputWithContext(context.Background())
+}
+
+func (i *indexRuleKeyValueKeyValueValueChildNodeValuePtrType) ToIndexRuleKeyValueKeyValueValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueKeyValueValueChildNodeValuePtrOutput)
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleKeyValueKeyValueValueChildNodeValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeValue)(nil)).Elem()
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueOutput() IndexRuleKeyValueKeyValueValueChildNodeValueOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValuePtrOutput() IndexRuleKeyValueKeyValueValueChildNodeValuePtrOutput {
+	return o.ToIndexRuleKeyValueKeyValueValueChildNodeValuePtrOutputWithContext(context.Background())
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValuePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v IndexRuleKeyValueKeyValueValueChildNodeValue) *IndexRuleKeyValueKeyValueValueChildNodeValue {
+		return &v
+	}).(IndexRuleKeyValueKeyValueValueChildNodeValuePtrOutput)
+}
+
+// Field alias.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueOutput) Alias() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValue) *string { return v.Alias }).(pulumi.StringPtrOutput)
+}
+
+// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueOutput) ChildNodes() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArrayOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValue) []IndexRuleKeyValueKeyValueValueChildNodeValueChildNode {
+		return v.ChildNodes
+	}).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArrayOutput)
+}
+
+// Whether Chinese characters are contained.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueOutput) ContainZH() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValue) *bool { return v.ContainZH }).(pulumi.BoolPtrOutput)
+}
+
+// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueOutput) OpenIndexForChildOnly() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValue) *bool { return v.OpenIndexForChildOnly }).(pulumi.BoolPtrOutput)
+}
+
+// Whether the analysis feature is enabled for the field.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueOutput) SqlFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValue) *bool { return v.SqlFlag }).(pulumi.BoolPtrOutput)
+}
+
+// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueOutput) Tokenizer() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValue) *string { return v.Tokenizer }).(pulumi.StringPtrOutput)
+}
+
+// Field type. Valid values: long, text, double.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValue) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValuePtrOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleKeyValueKeyValueValueChildNodeValuePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleKeyValueKeyValueValueChildNodeValue)(nil)).Elem()
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValuePtrOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValuePtrOutput() IndexRuleKeyValueKeyValueValueChildNodeValuePtrOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValuePtrOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValuePtrOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValuePtrOutput) Elem() IndexRuleKeyValueKeyValueValueChildNodeValueOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValue) IndexRuleKeyValueKeyValueValueChildNodeValue {
+		if v != nil {
+			return *v
+		}
+		var ret IndexRuleKeyValueKeyValueValueChildNodeValue
+		return ret
+	}).(IndexRuleKeyValueKeyValueValueChildNodeValueOutput)
+}
+
+// Field alias.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValuePtrOutput) Alias() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Alias
+	}).(pulumi.StringPtrOutput)
+}
+
+// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValuePtrOutput) ChildNodes() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArrayOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValue) []IndexRuleKeyValueKeyValueValueChildNodeValueChildNode {
+		if v == nil {
+			return nil
+		}
+		return v.ChildNodes
+	}).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArrayOutput)
+}
+
+// Whether Chinese characters are contained.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValuePtrOutput) ContainZH() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.ContainZH
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValuePtrOutput) OpenIndexForChildOnly() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.OpenIndexForChildOnly
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether the analysis feature is enabled for the field.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValuePtrOutput) SqlFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.SqlFlag
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValuePtrOutput) Tokenizer() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Tokenizer
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field type. Valid values: long, text, double.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValuePtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValue) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNode struct {
+	// Field name of the json child node.
+	Key *string `pulumi:"key"`
+	// Field index description information of the json child node.
+	Value *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValue `pulumi:"value"`
+}
+
+// IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeInput is an input type that accepts IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArgs and IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeOutput values.
+// You can construct a concrete instance of `IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeInput` via:
+//
+//	IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArgs{...}
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeInput interface {
+	pulumi.Input
+
+	ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeOutput
+	ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeOutputWithContext(context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeOutput
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArgs struct {
+	// Field name of the json child node.
+	Key pulumi.StringPtrInput `pulumi:"key"`
+	// Field index description information of the json child node.
+	Value IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrInput `pulumi:"value"`
+}
+
+func (IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeValueChildNode)(nil)).Elem()
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArgs) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeOutput {
+	return i.ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeOutputWithContext(context.Background())
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArgs) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeOutput)
+}
+
+// IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArrayInput is an input type that accepts IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArray and IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArrayOutput values.
+// You can construct a concrete instance of `IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArrayInput` via:
+//
+//	IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArray{ IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArgs{...} }
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArrayInput interface {
+	pulumi.Input
+
+	ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArrayOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArrayOutput
+	ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArrayOutputWithContext(context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArrayOutput
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArray []IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeInput
+
+func (IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]IndexRuleKeyValueKeyValueValueChildNodeValueChildNode)(nil)).Elem()
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArray) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArrayOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArrayOutput {
+	return i.ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArrayOutputWithContext(context.Background())
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArray) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArrayOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArrayOutput)
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeValueChildNode)(nil)).Elem()
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeOutput {
+	return o
+}
+
+// Field name of the json child node.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValueChildNode) *string { return v.Key }).(pulumi.StringPtrOutput)
+}
+
+// Field index description information of the json child node.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeOutput) Value() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValueChildNode) *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValue {
+		return v.Value
+	}).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutput)
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArrayOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]IndexRuleKeyValueKeyValueValueChildNodeValueChildNode)(nil)).Elem()
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArrayOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArrayOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArrayOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArrayOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArrayOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArrayOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArrayOutput) Index(i pulumi.IntInput) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) IndexRuleKeyValueKeyValueValueChildNodeValueChildNode {
+		return vs[0].([]IndexRuleKeyValueKeyValueValueChildNodeValueChildNode)[vs[1].(int)]
+	}).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeOutput)
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValue struct {
+	// Field alias.
+	Alias *string `pulumi:"alias"`
+	// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+	ChildNodes []IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNode `pulumi:"childNodes"`
+	// Whether Chinese characters are contained.
+	ContainZH *bool `pulumi:"containZH"`
+	// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+	OpenIndexForChildOnly *bool `pulumi:"openIndexForChildOnly"`
+	// Whether the analysis feature is enabled for the field.
+	SqlFlag *bool `pulumi:"sqlFlag"`
+	// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+	Tokenizer *string `pulumi:"tokenizer"`
+	// Field type. Valid values: long, text, double.
+	Type string `pulumi:"type"`
+}
+
+// IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueInput is an input type that accepts IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueArgs and IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueOutput values.
+// You can construct a concrete instance of `IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueInput` via:
+//
+//	IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueArgs{...}
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueInput interface {
+	pulumi.Input
+
+	ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueOutput
+	ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueOutputWithContext(context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueOutput
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueArgs struct {
+	// Field alias.
+	Alias pulumi.StringPtrInput `pulumi:"alias"`
+	// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+	ChildNodes IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArrayInput `pulumi:"childNodes"`
+	// Whether Chinese characters are contained.
+	ContainZH pulumi.BoolPtrInput `pulumi:"containZH"`
+	// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+	OpenIndexForChildOnly pulumi.BoolPtrInput `pulumi:"openIndexForChildOnly"`
+	// Whether the analysis feature is enabled for the field.
+	SqlFlag pulumi.BoolPtrInput `pulumi:"sqlFlag"`
+	// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+	Tokenizer pulumi.StringPtrInput `pulumi:"tokenizer"`
+	// Field type. Valid values: long, text, double.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValue)(nil)).Elem()
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueArgs) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueOutput {
+	return i.ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueOutputWithContext(context.Background())
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueArgs) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueOutput)
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueArgs) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutput {
+	return i.ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutputWithContext(context.Background())
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueArgs) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueOutput).ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx)
+}
+
+// IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrInput is an input type that accepts IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueArgs, IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtr and IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutput values.
+// You can construct a concrete instance of `IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrInput` via:
+//
+//	        IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueArgs{...}
+//
+//	or:
+//
+//	        nil
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrInput interface {
+	pulumi.Input
+
+	ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutput
+	ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutputWithContext(context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutput
+}
+
+type indexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrType IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueArgs
+
+func IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtr(v *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueArgs) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrInput {
+	return (*indexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrType)(v)
+}
+
+func (*indexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValue)(nil)).Elem()
+}
+
+func (i *indexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrType) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutput {
+	return i.ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutputWithContext(context.Background())
+}
+
+func (i *indexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrType) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutput)
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValue)(nil)).Elem()
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutput {
+	return o.ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutputWithContext(context.Background())
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValue) *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValue {
+		return &v
+	}).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutput)
+}
+
+// Field alias.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueOutput) Alias() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValue) *string { return v.Alias }).(pulumi.StringPtrOutput)
+}
+
+// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueOutput) ChildNodes() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValue) []IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNode {
+		return v.ChildNodes
+	}).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput)
+}
+
+// Whether Chinese characters are contained.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueOutput) ContainZH() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValue) *bool { return v.ContainZH }).(pulumi.BoolPtrOutput)
+}
+
+// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueOutput) OpenIndexForChildOnly() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValue) *bool {
+		return v.OpenIndexForChildOnly
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether the analysis feature is enabled for the field.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueOutput) SqlFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValue) *bool { return v.SqlFlag }).(pulumi.BoolPtrOutput)
+}
+
+// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueOutput) Tokenizer() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValue) *string { return v.Tokenizer }).(pulumi.StringPtrOutput)
+}
+
+// Field type. Valid values: long, text, double.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValue) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValue)(nil)).Elem()
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutput) Elem() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValue) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValue {
+		if v != nil {
+			return *v
+		}
+		var ret IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValue
+		return ret
+	}).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueOutput)
+}
+
+// Field alias.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutput) Alias() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Alias
+	}).(pulumi.StringPtrOutput)
+}
+
+// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutput) ChildNodes() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValue) []IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNode {
+		if v == nil {
+			return nil
+		}
+		return v.ChildNodes
+	}).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput)
+}
+
+// Whether Chinese characters are contained.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutput) ContainZH() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.ContainZH
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutput) OpenIndexForChildOnly() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.OpenIndexForChildOnly
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether the analysis feature is enabled for the field.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutput) SqlFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.SqlFlag
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutput) Tokenizer() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Tokenizer
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field type. Valid values: long, text, double.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValue) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNode struct {
+	// Field name of the json child node.
+	Key *string `pulumi:"key"`
+	// Field index description information of the json child node.
+	Value *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValue `pulumi:"value"`
+}
+
+// IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeInput is an input type that accepts IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArgs and IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeOutput values.
+// You can construct a concrete instance of `IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeInput` via:
+//
+//	IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArgs{...}
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeInput interface {
+	pulumi.Input
+
+	ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeOutput
+	ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeOutputWithContext(context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeOutput
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArgs struct {
+	// Field name of the json child node.
+	Key pulumi.StringPtrInput `pulumi:"key"`
+	// Field index description information of the json child node.
+	Value IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrInput `pulumi:"value"`
+}
+
+func (IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNode)(nil)).Elem()
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArgs) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeOutput {
+	return i.ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeOutputWithContext(context.Background())
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArgs) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeOutput)
+}
+
+// IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArrayInput is an input type that accepts IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArray and IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput values.
+// You can construct a concrete instance of `IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArrayInput` via:
+//
+//	IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArray{ IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArgs{...} }
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArrayInput interface {
+	pulumi.Input
+
+	ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput
+	ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutputWithContext(context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArray []IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeInput
+
+func (IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNode)(nil)).Elem()
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArray) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput {
+	return i.ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutputWithContext(context.Background())
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArray) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput)
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNode)(nil)).Elem()
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeOutput {
+	return o
+}
+
+// Field name of the json child node.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNode) *string { return v.Key }).(pulumi.StringPtrOutput)
+}
+
+// Field index description information of the json child node.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeOutput) Value() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNode) *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValue {
+		return v.Value
+	}).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput)
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNode)(nil)).Elem()
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput) Index(i pulumi.IntInput) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNode {
+		return vs[0].([]IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNode)[vs[1].(int)]
+	}).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeOutput)
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValue struct {
+	// Field alias.
+	Alias *string `pulumi:"alias"`
+	// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+	ChildNodes []IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNode `pulumi:"childNodes"`
+	// Whether Chinese characters are contained.
+	ContainZH *bool `pulumi:"containZH"`
+	// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+	OpenIndexForChildOnly *bool `pulumi:"openIndexForChildOnly"`
+	// Whether the analysis feature is enabled for the field.
+	SqlFlag *bool `pulumi:"sqlFlag"`
+	// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+	Tokenizer *string `pulumi:"tokenizer"`
+	// Field type. Valid values: long, text, double.
+	Type string `pulumi:"type"`
+}
+
+// IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueInput is an input type that accepts IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueArgs and IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput values.
+// You can construct a concrete instance of `IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueInput` via:
+//
+//	IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueArgs{...}
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueInput interface {
+	pulumi.Input
+
+	ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput
+	ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutputWithContext(context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueArgs struct {
+	// Field alias.
+	Alias pulumi.StringPtrInput `pulumi:"alias"`
+	// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+	ChildNodes IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayInput `pulumi:"childNodes"`
+	// Whether Chinese characters are contained.
+	ContainZH pulumi.BoolPtrInput `pulumi:"containZH"`
+	// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+	OpenIndexForChildOnly pulumi.BoolPtrInput `pulumi:"openIndexForChildOnly"`
+	// Whether the analysis feature is enabled for the field.
+	SqlFlag pulumi.BoolPtrInput `pulumi:"sqlFlag"`
+	// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+	Tokenizer pulumi.StringPtrInput `pulumi:"tokenizer"`
+	// Field type. Valid values: long, text, double.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValue)(nil)).Elem()
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueArgs) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput {
+	return i.ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutputWithContext(context.Background())
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueArgs) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput)
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueArgs) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return i.ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(context.Background())
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueArgs) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput).ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx)
+}
+
+// IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrInput is an input type that accepts IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueArgs, IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtr and IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput values.
+// You can construct a concrete instance of `IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrInput` via:
+//
+//	        IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueArgs{...}
+//
+//	or:
+//
+//	        nil
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrInput interface {
+	pulumi.Input
+
+	ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput
+	ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput
+}
+
+type indexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrType IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueArgs
+
+func IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtr(v *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueArgs) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrInput {
+	return (*indexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrType)(v)
+}
+
+func (*indexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValue)(nil)).Elem()
+}
+
+func (i *indexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrType) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return i.ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(context.Background())
+}
+
+func (i *indexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrType) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput)
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValue)(nil)).Elem()
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return o.ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(context.Background())
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValue) *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValue {
+		return &v
+	}).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput)
+}
+
+// Field alias.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput) Alias() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValue) *string {
+		return v.Alias
+	}).(pulumi.StringPtrOutput)
+}
+
+// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput) ChildNodes() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValue) []IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNode {
+		return v.ChildNodes
+	}).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput)
+}
+
+// Whether Chinese characters are contained.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput) ContainZH() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValue) *bool {
+		return v.ContainZH
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput) OpenIndexForChildOnly() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValue) *bool {
+		return v.OpenIndexForChildOnly
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether the analysis feature is enabled for the field.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput) SqlFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValue) *bool {
+		return v.SqlFlag
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput) Tokenizer() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValue) *string {
+		return v.Tokenizer
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field type. Valid values: long, text, double.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValue) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValue)(nil)).Elem()
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) Elem() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValue) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValue {
+		if v != nil {
+			return *v
+		}
+		var ret IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValue
+		return ret
+	}).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput)
+}
+
+// Field alias.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) Alias() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Alias
+	}).(pulumi.StringPtrOutput)
+}
+
+// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) ChildNodes() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValue) []IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNode {
+		if v == nil {
+			return nil
+		}
+		return v.ChildNodes
+	}).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput)
+}
+
+// Whether Chinese characters are contained.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) ContainZH() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.ContainZH
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) OpenIndexForChildOnly() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.OpenIndexForChildOnly
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether the analysis feature is enabled for the field.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) SqlFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.SqlFlag
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) Tokenizer() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Tokenizer
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field type. Valid values: long, text, double.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValue) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNode struct {
+	// Field name of the json child node.
+	Key *string `pulumi:"key"`
+	// Field index description information of the json child node.
+	Value *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue `pulumi:"value"`
+}
+
+// IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeInput is an input type that accepts IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArgs and IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput values.
+// You can construct a concrete instance of `IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeInput` via:
+//
+//	IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArgs{...}
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeInput interface {
+	pulumi.Input
+
+	ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput
+	ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutputWithContext(context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArgs struct {
+	// Field name of the json child node.
+	Key pulumi.StringPtrInput `pulumi:"key"`
+	// Field index description information of the json child node.
+	Value IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrInput `pulumi:"value"`
+}
+
+func (IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNode)(nil)).Elem()
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArgs) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput {
+	return i.ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutputWithContext(context.Background())
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArgs) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput)
+}
+
+// IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayInput is an input type that accepts IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArray and IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput values.
+// You can construct a concrete instance of `IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayInput` via:
+//
+//	IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArray{ IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArgs{...} }
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayInput interface {
+	pulumi.Input
+
+	ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput
+	ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutputWithContext(context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArray []IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeInput
+
+func (IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNode)(nil)).Elem()
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArray) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput {
+	return i.ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutputWithContext(context.Background())
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArray) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput)
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNode)(nil)).Elem()
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput {
+	return o
+}
+
+// Field name of the json child node.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNode) *string {
+		return v.Key
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field index description information of the json child node.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput) Value() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNode) *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue {
+		return v.Value
+	}).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput)
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNode)(nil)).Elem()
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput) Index(i pulumi.IntInput) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNode {
+		return vs[0].([]IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNode)[vs[1].(int)]
+	}).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput)
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue struct {
+	// Field alias.
+	Alias *string `pulumi:"alias"`
+	// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+	ChildNodes []IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNode `pulumi:"childNodes"`
+	// Whether Chinese characters are contained.
+	ContainZH *bool `pulumi:"containZH"`
+	// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+	OpenIndexForChildOnly *bool `pulumi:"openIndexForChildOnly"`
+	// Whether the analysis feature is enabled for the field.
+	SqlFlag *bool `pulumi:"sqlFlag"`
+	// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+	Tokenizer *string `pulumi:"tokenizer"`
+	// Field type. Valid values: long, text, double.
+	Type string `pulumi:"type"`
+}
+
+// IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueInput is an input type that accepts IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs and IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput values.
+// You can construct a concrete instance of `IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueInput` via:
+//
+//	IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs{...}
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueInput interface {
+	pulumi.Input
+
+	ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput
+	ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutputWithContext(context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs struct {
+	// Field alias.
+	Alias pulumi.StringPtrInput `pulumi:"alias"`
+	// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+	ChildNodes IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayInput `pulumi:"childNodes"`
+	// Whether Chinese characters are contained.
+	ContainZH pulumi.BoolPtrInput `pulumi:"containZH"`
+	// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+	OpenIndexForChildOnly pulumi.BoolPtrInput `pulumi:"openIndexForChildOnly"`
+	// Whether the analysis feature is enabled for the field.
+	SqlFlag pulumi.BoolPtrInput `pulumi:"sqlFlag"`
+	// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+	Tokenizer pulumi.StringPtrInput `pulumi:"tokenizer"`
+	// Field type. Valid values: long, text, double.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue)(nil)).Elem()
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput {
+	return i.ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutputWithContext(context.Background())
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput)
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return i.ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(context.Background())
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput).ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx)
+}
+
+// IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrInput is an input type that accepts IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs, IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtr and IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput values.
+// You can construct a concrete instance of `IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrInput` via:
+//
+//	        IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs{...}
+//
+//	or:
+//
+//	        nil
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrInput interface {
+	pulumi.Input
+
+	ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput
+	ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput
+}
+
+type indexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrType IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs
+
+func IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtr(v *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrInput {
+	return (*indexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrType)(v)
+}
+
+func (*indexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue)(nil)).Elem()
+}
+
+func (i *indexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrType) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return i.ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(context.Background())
+}
+
+func (i *indexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrType) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput)
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue)(nil)).Elem()
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return o.ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(context.Background())
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue {
+		return &v
+	}).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput)
+}
+
+// Field alias.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) Alias() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *string {
+		return v.Alias
+	}).(pulumi.StringPtrOutput)
+}
+
+// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) ChildNodes() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) []IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNode {
+		return v.ChildNodes
+	}).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput)
+}
+
+// Whether Chinese characters are contained.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) ContainZH() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *bool {
+		return v.ContainZH
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) OpenIndexForChildOnly() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *bool {
+		return v.OpenIndexForChildOnly
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether the analysis feature is enabled for the field.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) SqlFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *bool {
+		return v.SqlFlag
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) Tokenizer() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *string {
+		return v.Tokenizer
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field type. Valid values: long, text, double.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) string {
+		return v.Type
+	}).(pulumi.StringOutput)
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue)(nil)).Elem()
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) Elem() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue {
+		if v != nil {
+			return *v
+		}
+		var ret IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue
+		return ret
+	}).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput)
+}
+
+// Field alias.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) Alias() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Alias
+	}).(pulumi.StringPtrOutput)
+}
+
+// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) ChildNodes() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) []IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNode {
+		if v == nil {
+			return nil
+		}
+		return v.ChildNodes
+	}).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput)
+}
+
+// Whether Chinese characters are contained.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) ContainZH() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.ContainZH
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) OpenIndexForChildOnly() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.OpenIndexForChildOnly
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether the analysis feature is enabled for the field.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) SqlFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.SqlFlag
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) Tokenizer() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Tokenizer
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field type. Valid values: long, text, double.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNode struct {
+	// Field name of the json child node.
+	Key *string `pulumi:"key"`
+	// Field index description information of the json child node.
+	Value *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue `pulumi:"value"`
+}
+
+// IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeInput is an input type that accepts IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArgs and IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput values.
+// You can construct a concrete instance of `IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeInput` via:
+//
+//	IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArgs{...}
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeInput interface {
+	pulumi.Input
+
+	ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput
+	ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutputWithContext(context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArgs struct {
+	// Field name of the json child node.
+	Key pulumi.StringPtrInput `pulumi:"key"`
+	// Field index description information of the json child node.
+	Value IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrInput `pulumi:"value"`
+}
+
+func (IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNode)(nil)).Elem()
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArgs) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput {
+	return i.ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutputWithContext(context.Background())
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArgs) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput)
+}
+
+// IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayInput is an input type that accepts IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArray and IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput values.
+// You can construct a concrete instance of `IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayInput` via:
+//
+//	IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArray{ IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArgs{...} }
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayInput interface {
+	pulumi.Input
+
+	ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput
+	ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutputWithContext(context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArray []IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeInput
+
+func (IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNode)(nil)).Elem()
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArray) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput {
+	return i.ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutputWithContext(context.Background())
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArray) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput)
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNode)(nil)).Elem()
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput {
+	return o
+}
+
+// Field name of the json child node.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNode) *string {
+		return v.Key
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field index description information of the json child node.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput) Value() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNode) *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue {
+		return v.Value
+	}).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput)
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNode)(nil)).Elem()
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput) Index(i pulumi.IntInput) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNode {
+		return vs[0].([]IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNode)[vs[1].(int)]
+	}).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput)
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue struct {
+	// Field alias.
+	Alias *string `pulumi:"alias"`
+	// Whether Chinese characters are contained.
+	ContainZH *bool `pulumi:"containZH"`
+	// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+	OpenIndexForChildOnly *bool `pulumi:"openIndexForChildOnly"`
+	// Whether the analysis feature is enabled for the field.
+	SqlFlag *bool `pulumi:"sqlFlag"`
+	// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+	Tokenizer *string `pulumi:"tokenizer"`
+	// Field type. Valid values: long, text, double.
+	Type string `pulumi:"type"`
+}
+
+// IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueInput is an input type that accepts IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs and IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput values.
+// You can construct a concrete instance of `IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueInput` via:
+//
+//	IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs{...}
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueInput interface {
+	pulumi.Input
+
+	ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput
+	ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutputWithContext(context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs struct {
+	// Field alias.
+	Alias pulumi.StringPtrInput `pulumi:"alias"`
+	// Whether Chinese characters are contained.
+	ContainZH pulumi.BoolPtrInput `pulumi:"containZH"`
+	// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+	OpenIndexForChildOnly pulumi.BoolPtrInput `pulumi:"openIndexForChildOnly"`
+	// Whether the analysis feature is enabled for the field.
+	SqlFlag pulumi.BoolPtrInput `pulumi:"sqlFlag"`
+	// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+	Tokenizer pulumi.StringPtrInput `pulumi:"tokenizer"`
+	// Field type. Valid values: long, text, double.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue)(nil)).Elem()
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput {
+	return i.ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutputWithContext(context.Background())
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput)
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return i.ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(context.Background())
+}
+
+func (i IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput).ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx)
+}
+
+// IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrInput is an input type that accepts IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs, IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtr and IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput values.
+// You can construct a concrete instance of `IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrInput` via:
+//
+//	        IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs{...}
+//
+//	or:
+//
+//	        nil
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrInput interface {
+	pulumi.Input
+
+	ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput
+	ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput
+}
+
+type indexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrType IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs
+
+func IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtr(v *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrInput {
+	return (*indexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrType)(v)
+}
+
+func (*indexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue)(nil)).Elem()
+}
+
+func (i *indexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrType) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return i.ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(context.Background())
+}
+
+func (i *indexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrType) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput)
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue)(nil)).Elem()
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return o.ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(context.Background())
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue {
+		return &v
+	}).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput)
+}
+
+// Field alias.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) Alias() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *string {
+		return v.Alias
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether Chinese characters are contained.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) ContainZH() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *bool {
+		return v.ContainZH
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) OpenIndexForChildOnly() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *bool {
+		return v.OpenIndexForChildOnly
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether the analysis feature is enabled for the field.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) SqlFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *bool {
+		return v.SqlFlag
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) Tokenizer() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *string {
+		return v.Tokenizer
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field type. Valid values: long, text, double.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) string {
+		return v.Type
+	}).(pulumi.StringOutput)
+}
+
+type IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue)(nil)).Elem()
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) ToIndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return o
+}
+
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) Elem() IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue {
+		if v != nil {
+			return *v
+		}
+		var ret IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue
+		return ret
+	}).(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput)
+}
+
+// Field alias.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) Alias() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Alias
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether Chinese characters are contained.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) ContainZH() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.ContainZH
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) OpenIndexForChildOnly() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.OpenIndexForChildOnly
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether the analysis feature is enabled for the field.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) SqlFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.SqlFlag
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) Tokenizer() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Tokenizer
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field type. Valid values: long, text, double.
+func (o IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *string {
 		if v == nil {
 			return nil
 		}
@@ -6686,8 +11918,14 @@ func (o IndexRuleTagKeyValueArrayOutput) Index(i pulumi.IntInput) IndexRuleTagKe
 }
 
 type IndexRuleTagKeyValueValue struct {
+	// Field alias.
+	Alias *string `pulumi:"alias"`
+	// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+	ChildNodes []IndexRuleTagKeyValueValueChildNode `pulumi:"childNodes"`
 	// Whether Chinese characters are contained.
 	ContainZH *bool `pulumi:"containZH"`
+	// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+	OpenIndexForChildOnly *bool `pulumi:"openIndexForChildOnly"`
 	// Whether the analysis feature is enabled for the field.
 	SqlFlag *bool `pulumi:"sqlFlag"`
 	// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
@@ -6708,8 +11946,14 @@ type IndexRuleTagKeyValueValueInput interface {
 }
 
 type IndexRuleTagKeyValueValueArgs struct {
+	// Field alias.
+	Alias pulumi.StringPtrInput `pulumi:"alias"`
+	// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+	ChildNodes IndexRuleTagKeyValueValueChildNodeArrayInput `pulumi:"childNodes"`
 	// Whether Chinese characters are contained.
 	ContainZH pulumi.BoolPtrInput `pulumi:"containZH"`
+	// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+	OpenIndexForChildOnly pulumi.BoolPtrInput `pulumi:"openIndexForChildOnly"`
 	// Whether the analysis feature is enabled for the field.
 	SqlFlag pulumi.BoolPtrInput `pulumi:"sqlFlag"`
 	// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
@@ -6795,9 +12039,24 @@ func (o IndexRuleTagKeyValueValueOutput) ToIndexRuleTagKeyValueValuePtrOutputWit
 	}).(IndexRuleTagKeyValueValuePtrOutput)
 }
 
+// Field alias.
+func (o IndexRuleTagKeyValueValueOutput) Alias() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValue) *string { return v.Alias }).(pulumi.StringPtrOutput)
+}
+
+// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+func (o IndexRuleTagKeyValueValueOutput) ChildNodes() IndexRuleTagKeyValueValueChildNodeArrayOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValue) []IndexRuleTagKeyValueValueChildNode { return v.ChildNodes }).(IndexRuleTagKeyValueValueChildNodeArrayOutput)
+}
+
 // Whether Chinese characters are contained.
 func (o IndexRuleTagKeyValueValueOutput) ContainZH() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v IndexRuleTagKeyValueValue) *bool { return v.ContainZH }).(pulumi.BoolPtrOutput)
+}
+
+// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+func (o IndexRuleTagKeyValueValueOutput) OpenIndexForChildOnly() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValue) *bool { return v.OpenIndexForChildOnly }).(pulumi.BoolPtrOutput)
 }
 
 // Whether the analysis feature is enabled for the field.
@@ -6839,6 +12098,26 @@ func (o IndexRuleTagKeyValueValuePtrOutput) Elem() IndexRuleTagKeyValueValueOutp
 	}).(IndexRuleTagKeyValueValueOutput)
 }
 
+// Field alias.
+func (o IndexRuleTagKeyValueValuePtrOutput) Alias() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Alias
+	}).(pulumi.StringPtrOutput)
+}
+
+// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+func (o IndexRuleTagKeyValueValuePtrOutput) ChildNodes() IndexRuleTagKeyValueValueChildNodeArrayOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValue) []IndexRuleTagKeyValueValueChildNode {
+		if v == nil {
+			return nil
+		}
+		return v.ChildNodes
+	}).(IndexRuleTagKeyValueValueChildNodeArrayOutput)
+}
+
 // Whether Chinese characters are contained.
 func (o IndexRuleTagKeyValueValuePtrOutput) ContainZH() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *IndexRuleTagKeyValueValue) *bool {
@@ -6846,6 +12125,16 @@ func (o IndexRuleTagKeyValueValuePtrOutput) ContainZH() pulumi.BoolPtrOutput {
 			return nil
 		}
 		return v.ContainZH
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+func (o IndexRuleTagKeyValueValuePtrOutput) OpenIndexForChildOnly() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.OpenIndexForChildOnly
 	}).(pulumi.BoolPtrOutput)
 }
 
@@ -6877,6 +12166,2033 @@ func (o IndexRuleTagKeyValueValuePtrOutput) Type() pulumi.StringPtrOutput {
 		}
 		return &v.Type
 	}).(pulumi.StringPtrOutput)
+}
+
+type IndexRuleTagKeyValueValueChildNode struct {
+	// Field name of the json child node.
+	Key *string `pulumi:"key"`
+	// Field index description information of the json child node.
+	Value *IndexRuleTagKeyValueValueChildNodeValue `pulumi:"value"`
+}
+
+// IndexRuleTagKeyValueValueChildNodeInput is an input type that accepts IndexRuleTagKeyValueValueChildNodeArgs and IndexRuleTagKeyValueValueChildNodeOutput values.
+// You can construct a concrete instance of `IndexRuleTagKeyValueValueChildNodeInput` via:
+//
+//	IndexRuleTagKeyValueValueChildNodeArgs{...}
+type IndexRuleTagKeyValueValueChildNodeInput interface {
+	pulumi.Input
+
+	ToIndexRuleTagKeyValueValueChildNodeOutput() IndexRuleTagKeyValueValueChildNodeOutput
+	ToIndexRuleTagKeyValueValueChildNodeOutputWithContext(context.Context) IndexRuleTagKeyValueValueChildNodeOutput
+}
+
+type IndexRuleTagKeyValueValueChildNodeArgs struct {
+	// Field name of the json child node.
+	Key pulumi.StringPtrInput `pulumi:"key"`
+	// Field index description information of the json child node.
+	Value IndexRuleTagKeyValueValueChildNodeValuePtrInput `pulumi:"value"`
+}
+
+func (IndexRuleTagKeyValueValueChildNodeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleTagKeyValueValueChildNode)(nil)).Elem()
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeArgs) ToIndexRuleTagKeyValueValueChildNodeOutput() IndexRuleTagKeyValueValueChildNodeOutput {
+	return i.ToIndexRuleTagKeyValueValueChildNodeOutputWithContext(context.Background())
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeArgs) ToIndexRuleTagKeyValueValueChildNodeOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagKeyValueValueChildNodeOutput)
+}
+
+// IndexRuleTagKeyValueValueChildNodeArrayInput is an input type that accepts IndexRuleTagKeyValueValueChildNodeArray and IndexRuleTagKeyValueValueChildNodeArrayOutput values.
+// You can construct a concrete instance of `IndexRuleTagKeyValueValueChildNodeArrayInput` via:
+//
+//	IndexRuleTagKeyValueValueChildNodeArray{ IndexRuleTagKeyValueValueChildNodeArgs{...} }
+type IndexRuleTagKeyValueValueChildNodeArrayInput interface {
+	pulumi.Input
+
+	ToIndexRuleTagKeyValueValueChildNodeArrayOutput() IndexRuleTagKeyValueValueChildNodeArrayOutput
+	ToIndexRuleTagKeyValueValueChildNodeArrayOutputWithContext(context.Context) IndexRuleTagKeyValueValueChildNodeArrayOutput
+}
+
+type IndexRuleTagKeyValueValueChildNodeArray []IndexRuleTagKeyValueValueChildNodeInput
+
+func (IndexRuleTagKeyValueValueChildNodeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]IndexRuleTagKeyValueValueChildNode)(nil)).Elem()
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeArray) ToIndexRuleTagKeyValueValueChildNodeArrayOutput() IndexRuleTagKeyValueValueChildNodeArrayOutput {
+	return i.ToIndexRuleTagKeyValueValueChildNodeArrayOutputWithContext(context.Background())
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeArray) ToIndexRuleTagKeyValueValueChildNodeArrayOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagKeyValueValueChildNodeArrayOutput)
+}
+
+type IndexRuleTagKeyValueValueChildNodeOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleTagKeyValueValueChildNodeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleTagKeyValueValueChildNode)(nil)).Elem()
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeOutput) ToIndexRuleTagKeyValueValueChildNodeOutput() IndexRuleTagKeyValueValueChildNodeOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeOutput) ToIndexRuleTagKeyValueValueChildNodeOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeOutput {
+	return o
+}
+
+// Field name of the json child node.
+func (o IndexRuleTagKeyValueValueChildNodeOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNode) *string { return v.Key }).(pulumi.StringPtrOutput)
+}
+
+// Field index description information of the json child node.
+func (o IndexRuleTagKeyValueValueChildNodeOutput) Value() IndexRuleTagKeyValueValueChildNodeValuePtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNode) *IndexRuleTagKeyValueValueChildNodeValue { return v.Value }).(IndexRuleTagKeyValueValueChildNodeValuePtrOutput)
+}
+
+type IndexRuleTagKeyValueValueChildNodeArrayOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleTagKeyValueValueChildNodeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]IndexRuleTagKeyValueValueChildNode)(nil)).Elem()
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeArrayOutput) ToIndexRuleTagKeyValueValueChildNodeArrayOutput() IndexRuleTagKeyValueValueChildNodeArrayOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeArrayOutput) ToIndexRuleTagKeyValueValueChildNodeArrayOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeArrayOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeArrayOutput) Index(i pulumi.IntInput) IndexRuleTagKeyValueValueChildNodeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) IndexRuleTagKeyValueValueChildNode {
+		return vs[0].([]IndexRuleTagKeyValueValueChildNode)[vs[1].(int)]
+	}).(IndexRuleTagKeyValueValueChildNodeOutput)
+}
+
+type IndexRuleTagKeyValueValueChildNodeValue struct {
+	// Field alias.
+	Alias *string `pulumi:"alias"`
+	// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+	ChildNodes []IndexRuleTagKeyValueValueChildNodeValueChildNode `pulumi:"childNodes"`
+	// Whether Chinese characters are contained.
+	ContainZH *bool `pulumi:"containZH"`
+	// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+	OpenIndexForChildOnly *bool `pulumi:"openIndexForChildOnly"`
+	// Whether the analysis feature is enabled for the field.
+	SqlFlag *bool `pulumi:"sqlFlag"`
+	// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+	Tokenizer *string `pulumi:"tokenizer"`
+	// Field type. Valid values: long, text, double.
+	Type string `pulumi:"type"`
+}
+
+// IndexRuleTagKeyValueValueChildNodeValueInput is an input type that accepts IndexRuleTagKeyValueValueChildNodeValueArgs and IndexRuleTagKeyValueValueChildNodeValueOutput values.
+// You can construct a concrete instance of `IndexRuleTagKeyValueValueChildNodeValueInput` via:
+//
+//	IndexRuleTagKeyValueValueChildNodeValueArgs{...}
+type IndexRuleTagKeyValueValueChildNodeValueInput interface {
+	pulumi.Input
+
+	ToIndexRuleTagKeyValueValueChildNodeValueOutput() IndexRuleTagKeyValueValueChildNodeValueOutput
+	ToIndexRuleTagKeyValueValueChildNodeValueOutputWithContext(context.Context) IndexRuleTagKeyValueValueChildNodeValueOutput
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueArgs struct {
+	// Field alias.
+	Alias pulumi.StringPtrInput `pulumi:"alias"`
+	// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+	ChildNodes IndexRuleTagKeyValueValueChildNodeValueChildNodeArrayInput `pulumi:"childNodes"`
+	// Whether Chinese characters are contained.
+	ContainZH pulumi.BoolPtrInput `pulumi:"containZH"`
+	// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+	OpenIndexForChildOnly pulumi.BoolPtrInput `pulumi:"openIndexForChildOnly"`
+	// Whether the analysis feature is enabled for the field.
+	SqlFlag pulumi.BoolPtrInput `pulumi:"sqlFlag"`
+	// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+	Tokenizer pulumi.StringPtrInput `pulumi:"tokenizer"`
+	// Field type. Valid values: long, text, double.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (IndexRuleTagKeyValueValueChildNodeValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeValue)(nil)).Elem()
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeValueArgs) ToIndexRuleTagKeyValueValueChildNodeValueOutput() IndexRuleTagKeyValueValueChildNodeValueOutput {
+	return i.ToIndexRuleTagKeyValueValueChildNodeValueOutputWithContext(context.Background())
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeValueArgs) ToIndexRuleTagKeyValueValueChildNodeValueOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagKeyValueValueChildNodeValueOutput)
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeValueArgs) ToIndexRuleTagKeyValueValueChildNodeValuePtrOutput() IndexRuleTagKeyValueValueChildNodeValuePtrOutput {
+	return i.ToIndexRuleTagKeyValueValueChildNodeValuePtrOutputWithContext(context.Background())
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeValueArgs) ToIndexRuleTagKeyValueValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagKeyValueValueChildNodeValueOutput).ToIndexRuleTagKeyValueValueChildNodeValuePtrOutputWithContext(ctx)
+}
+
+// IndexRuleTagKeyValueValueChildNodeValuePtrInput is an input type that accepts IndexRuleTagKeyValueValueChildNodeValueArgs, IndexRuleTagKeyValueValueChildNodeValuePtr and IndexRuleTagKeyValueValueChildNodeValuePtrOutput values.
+// You can construct a concrete instance of `IndexRuleTagKeyValueValueChildNodeValuePtrInput` via:
+//
+//	        IndexRuleTagKeyValueValueChildNodeValueArgs{...}
+//
+//	or:
+//
+//	        nil
+type IndexRuleTagKeyValueValueChildNodeValuePtrInput interface {
+	pulumi.Input
+
+	ToIndexRuleTagKeyValueValueChildNodeValuePtrOutput() IndexRuleTagKeyValueValueChildNodeValuePtrOutput
+	ToIndexRuleTagKeyValueValueChildNodeValuePtrOutputWithContext(context.Context) IndexRuleTagKeyValueValueChildNodeValuePtrOutput
+}
+
+type indexRuleTagKeyValueValueChildNodeValuePtrType IndexRuleTagKeyValueValueChildNodeValueArgs
+
+func IndexRuleTagKeyValueValueChildNodeValuePtr(v *IndexRuleTagKeyValueValueChildNodeValueArgs) IndexRuleTagKeyValueValueChildNodeValuePtrInput {
+	return (*indexRuleTagKeyValueValueChildNodeValuePtrType)(v)
+}
+
+func (*indexRuleTagKeyValueValueChildNodeValuePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleTagKeyValueValueChildNodeValue)(nil)).Elem()
+}
+
+func (i *indexRuleTagKeyValueValueChildNodeValuePtrType) ToIndexRuleTagKeyValueValueChildNodeValuePtrOutput() IndexRuleTagKeyValueValueChildNodeValuePtrOutput {
+	return i.ToIndexRuleTagKeyValueValueChildNodeValuePtrOutputWithContext(context.Background())
+}
+
+func (i *indexRuleTagKeyValueValueChildNodeValuePtrType) ToIndexRuleTagKeyValueValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagKeyValueValueChildNodeValuePtrOutput)
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleTagKeyValueValueChildNodeValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeValue)(nil)).Elem()
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueOutput) ToIndexRuleTagKeyValueValueChildNodeValueOutput() IndexRuleTagKeyValueValueChildNodeValueOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueOutput) ToIndexRuleTagKeyValueValueChildNodeValueOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueOutput) ToIndexRuleTagKeyValueValueChildNodeValuePtrOutput() IndexRuleTagKeyValueValueChildNodeValuePtrOutput {
+	return o.ToIndexRuleTagKeyValueValueChildNodeValuePtrOutputWithContext(context.Background())
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueOutput) ToIndexRuleTagKeyValueValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValuePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v IndexRuleTagKeyValueValueChildNodeValue) *IndexRuleTagKeyValueValueChildNodeValue {
+		return &v
+	}).(IndexRuleTagKeyValueValueChildNodeValuePtrOutput)
+}
+
+// Field alias.
+func (o IndexRuleTagKeyValueValueChildNodeValueOutput) Alias() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValue) *string { return v.Alias }).(pulumi.StringPtrOutput)
+}
+
+// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+func (o IndexRuleTagKeyValueValueChildNodeValueOutput) ChildNodes() IndexRuleTagKeyValueValueChildNodeValueChildNodeArrayOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValue) []IndexRuleTagKeyValueValueChildNodeValueChildNode {
+		return v.ChildNodes
+	}).(IndexRuleTagKeyValueValueChildNodeValueChildNodeArrayOutput)
+}
+
+// Whether Chinese characters are contained.
+func (o IndexRuleTagKeyValueValueChildNodeValueOutput) ContainZH() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValue) *bool { return v.ContainZH }).(pulumi.BoolPtrOutput)
+}
+
+// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+func (o IndexRuleTagKeyValueValueChildNodeValueOutput) OpenIndexForChildOnly() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValue) *bool { return v.OpenIndexForChildOnly }).(pulumi.BoolPtrOutput)
+}
+
+// Whether the analysis feature is enabled for the field.
+func (o IndexRuleTagKeyValueValueChildNodeValueOutput) SqlFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValue) *bool { return v.SqlFlag }).(pulumi.BoolPtrOutput)
+}
+
+// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+func (o IndexRuleTagKeyValueValueChildNodeValueOutput) Tokenizer() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValue) *string { return v.Tokenizer }).(pulumi.StringPtrOutput)
+}
+
+// Field type. Valid values: long, text, double.
+func (o IndexRuleTagKeyValueValueChildNodeValueOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValue) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type IndexRuleTagKeyValueValueChildNodeValuePtrOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleTagKeyValueValueChildNodeValuePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleTagKeyValueValueChildNodeValue)(nil)).Elem()
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValuePtrOutput) ToIndexRuleTagKeyValueValueChildNodeValuePtrOutput() IndexRuleTagKeyValueValueChildNodeValuePtrOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValuePtrOutput) ToIndexRuleTagKeyValueValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValuePtrOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValuePtrOutput) Elem() IndexRuleTagKeyValueValueChildNodeValueOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValue) IndexRuleTagKeyValueValueChildNodeValue {
+		if v != nil {
+			return *v
+		}
+		var ret IndexRuleTagKeyValueValueChildNodeValue
+		return ret
+	}).(IndexRuleTagKeyValueValueChildNodeValueOutput)
+}
+
+// Field alias.
+func (o IndexRuleTagKeyValueValueChildNodeValuePtrOutput) Alias() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Alias
+	}).(pulumi.StringPtrOutput)
+}
+
+// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+func (o IndexRuleTagKeyValueValueChildNodeValuePtrOutput) ChildNodes() IndexRuleTagKeyValueValueChildNodeValueChildNodeArrayOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValue) []IndexRuleTagKeyValueValueChildNodeValueChildNode {
+		if v == nil {
+			return nil
+		}
+		return v.ChildNodes
+	}).(IndexRuleTagKeyValueValueChildNodeValueChildNodeArrayOutput)
+}
+
+// Whether Chinese characters are contained.
+func (o IndexRuleTagKeyValueValueChildNodeValuePtrOutput) ContainZH() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.ContainZH
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+func (o IndexRuleTagKeyValueValueChildNodeValuePtrOutput) OpenIndexForChildOnly() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.OpenIndexForChildOnly
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether the analysis feature is enabled for the field.
+func (o IndexRuleTagKeyValueValueChildNodeValuePtrOutput) SqlFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.SqlFlag
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+func (o IndexRuleTagKeyValueValueChildNodeValuePtrOutput) Tokenizer() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Tokenizer
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field type. Valid values: long, text, double.
+func (o IndexRuleTagKeyValueValueChildNodeValuePtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValue) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueChildNode struct {
+	// Field name of the json child node.
+	Key *string `pulumi:"key"`
+	// Field index description information of the json child node.
+	Value *IndexRuleTagKeyValueValueChildNodeValueChildNodeValue `pulumi:"value"`
+}
+
+// IndexRuleTagKeyValueValueChildNodeValueChildNodeInput is an input type that accepts IndexRuleTagKeyValueValueChildNodeValueChildNodeArgs and IndexRuleTagKeyValueValueChildNodeValueChildNodeOutput values.
+// You can construct a concrete instance of `IndexRuleTagKeyValueValueChildNodeValueChildNodeInput` via:
+//
+//	IndexRuleTagKeyValueValueChildNodeValueChildNodeArgs{...}
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeInput interface {
+	pulumi.Input
+
+	ToIndexRuleTagKeyValueValueChildNodeValueChildNodeOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeOutput
+	ToIndexRuleTagKeyValueValueChildNodeValueChildNodeOutputWithContext(context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeOutput
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeArgs struct {
+	// Field name of the json child node.
+	Key pulumi.StringPtrInput `pulumi:"key"`
+	// Field index description information of the json child node.
+	Value IndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrInput `pulumi:"value"`
+}
+
+func (IndexRuleTagKeyValueValueChildNodeValueChildNodeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeValueChildNode)(nil)).Elem()
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeValueChildNodeArgs) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeOutput {
+	return i.ToIndexRuleTagKeyValueValueChildNodeValueChildNodeOutputWithContext(context.Background())
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeValueChildNodeArgs) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagKeyValueValueChildNodeValueChildNodeOutput)
+}
+
+// IndexRuleTagKeyValueValueChildNodeValueChildNodeArrayInput is an input type that accepts IndexRuleTagKeyValueValueChildNodeValueChildNodeArray and IndexRuleTagKeyValueValueChildNodeValueChildNodeArrayOutput values.
+// You can construct a concrete instance of `IndexRuleTagKeyValueValueChildNodeValueChildNodeArrayInput` via:
+//
+//	IndexRuleTagKeyValueValueChildNodeValueChildNodeArray{ IndexRuleTagKeyValueValueChildNodeValueChildNodeArgs{...} }
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeArrayInput interface {
+	pulumi.Input
+
+	ToIndexRuleTagKeyValueValueChildNodeValueChildNodeArrayOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeArrayOutput
+	ToIndexRuleTagKeyValueValueChildNodeValueChildNodeArrayOutputWithContext(context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeArrayOutput
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeArray []IndexRuleTagKeyValueValueChildNodeValueChildNodeInput
+
+func (IndexRuleTagKeyValueValueChildNodeValueChildNodeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]IndexRuleTagKeyValueValueChildNodeValueChildNode)(nil)).Elem()
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeValueChildNodeArray) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeArrayOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeArrayOutput {
+	return i.ToIndexRuleTagKeyValueValueChildNodeValueChildNodeArrayOutputWithContext(context.Background())
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeValueChildNodeArray) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeArrayOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagKeyValueValueChildNodeValueChildNodeArrayOutput)
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleTagKeyValueValueChildNodeValueChildNodeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeValueChildNode)(nil)).Elem()
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeOutput {
+	return o
+}
+
+// Field name of the json child node.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValueChildNode) *string { return v.Key }).(pulumi.StringPtrOutput)
+}
+
+// Field index description information of the json child node.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeOutput) Value() IndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValueChildNode) *IndexRuleTagKeyValueValueChildNodeValueChildNodeValue {
+		return v.Value
+	}).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutput)
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeArrayOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleTagKeyValueValueChildNodeValueChildNodeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]IndexRuleTagKeyValueValueChildNodeValueChildNode)(nil)).Elem()
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeArrayOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeArrayOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeArrayOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeArrayOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeArrayOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeArrayOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeArrayOutput) Index(i pulumi.IntInput) IndexRuleTagKeyValueValueChildNodeValueChildNodeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) IndexRuleTagKeyValueValueChildNodeValueChildNode {
+		return vs[0].([]IndexRuleTagKeyValueValueChildNodeValueChildNode)[vs[1].(int)]
+	}).(IndexRuleTagKeyValueValueChildNodeValueChildNodeOutput)
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValue struct {
+	// Field alias.
+	Alias *string `pulumi:"alias"`
+	// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+	ChildNodes []IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNode `pulumi:"childNodes"`
+	// Whether Chinese characters are contained.
+	ContainZH *bool `pulumi:"containZH"`
+	// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+	OpenIndexForChildOnly *bool `pulumi:"openIndexForChildOnly"`
+	// Whether the analysis feature is enabled for the field.
+	SqlFlag *bool `pulumi:"sqlFlag"`
+	// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+	Tokenizer *string `pulumi:"tokenizer"`
+	// Field type. Valid values: long, text, double.
+	Type string `pulumi:"type"`
+}
+
+// IndexRuleTagKeyValueValueChildNodeValueChildNodeValueInput is an input type that accepts IndexRuleTagKeyValueValueChildNodeValueChildNodeValueArgs and IndexRuleTagKeyValueValueChildNodeValueChildNodeValueOutput values.
+// You can construct a concrete instance of `IndexRuleTagKeyValueValueChildNodeValueChildNodeValueInput` via:
+//
+//	IndexRuleTagKeyValueValueChildNodeValueChildNodeValueArgs{...}
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueInput interface {
+	pulumi.Input
+
+	ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueOutput
+	ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueOutputWithContext(context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueOutput
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueArgs struct {
+	// Field alias.
+	Alias pulumi.StringPtrInput `pulumi:"alias"`
+	// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+	ChildNodes IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArrayInput `pulumi:"childNodes"`
+	// Whether Chinese characters are contained.
+	ContainZH pulumi.BoolPtrInput `pulumi:"containZH"`
+	// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+	OpenIndexForChildOnly pulumi.BoolPtrInput `pulumi:"openIndexForChildOnly"`
+	// Whether the analysis feature is enabled for the field.
+	SqlFlag pulumi.BoolPtrInput `pulumi:"sqlFlag"`
+	// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+	Tokenizer pulumi.StringPtrInput `pulumi:"tokenizer"`
+	// Field type. Valid values: long, text, double.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (IndexRuleTagKeyValueValueChildNodeValueChildNodeValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeValueChildNodeValue)(nil)).Elem()
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeValueChildNodeValueArgs) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueOutput {
+	return i.ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueOutputWithContext(context.Background())
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeValueChildNodeValueArgs) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueOutput)
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeValueChildNodeValueArgs) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutput {
+	return i.ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutputWithContext(context.Background())
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeValueChildNodeValueArgs) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueOutput).ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx)
+}
+
+// IndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrInput is an input type that accepts IndexRuleTagKeyValueValueChildNodeValueChildNodeValueArgs, IndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtr and IndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutput values.
+// You can construct a concrete instance of `IndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrInput` via:
+//
+//	        IndexRuleTagKeyValueValueChildNodeValueChildNodeValueArgs{...}
+//
+//	or:
+//
+//	        nil
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrInput interface {
+	pulumi.Input
+
+	ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutput
+	ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutputWithContext(context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutput
+}
+
+type indexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrType IndexRuleTagKeyValueValueChildNodeValueChildNodeValueArgs
+
+func IndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtr(v *IndexRuleTagKeyValueValueChildNodeValueChildNodeValueArgs) IndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrInput {
+	return (*indexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrType)(v)
+}
+
+func (*indexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleTagKeyValueValueChildNodeValueChildNodeValue)(nil)).Elem()
+}
+
+func (i *indexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrType) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutput {
+	return i.ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutputWithContext(context.Background())
+}
+
+func (i *indexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrType) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutput)
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleTagKeyValueValueChildNodeValueChildNodeValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeValueChildNodeValue)(nil)).Elem()
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutput {
+	return o.ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutputWithContext(context.Background())
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v IndexRuleTagKeyValueValueChildNodeValueChildNodeValue) *IndexRuleTagKeyValueValueChildNodeValueChildNodeValue {
+		return &v
+	}).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutput)
+}
+
+// Field alias.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueOutput) Alias() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValueChildNodeValue) *string { return v.Alias }).(pulumi.StringPtrOutput)
+}
+
+// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueOutput) ChildNodes() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValueChildNodeValue) []IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNode {
+		return v.ChildNodes
+	}).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput)
+}
+
+// Whether Chinese characters are contained.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueOutput) ContainZH() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValueChildNodeValue) *bool { return v.ContainZH }).(pulumi.BoolPtrOutput)
+}
+
+// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueOutput) OpenIndexForChildOnly() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValueChildNodeValue) *bool { return v.OpenIndexForChildOnly }).(pulumi.BoolPtrOutput)
+}
+
+// Whether the analysis feature is enabled for the field.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueOutput) SqlFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValueChildNodeValue) *bool { return v.SqlFlag }).(pulumi.BoolPtrOutput)
+}
+
+// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueOutput) Tokenizer() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValueChildNodeValue) *string { return v.Tokenizer }).(pulumi.StringPtrOutput)
+}
+
+// Field type. Valid values: long, text, double.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValueChildNodeValue) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleTagKeyValueValueChildNodeValueChildNodeValue)(nil)).Elem()
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutput) Elem() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValueChildNodeValue) IndexRuleTagKeyValueValueChildNodeValueChildNodeValue {
+		if v != nil {
+			return *v
+		}
+		var ret IndexRuleTagKeyValueValueChildNodeValueChildNodeValue
+		return ret
+	}).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueOutput)
+}
+
+// Field alias.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutput) Alias() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValueChildNodeValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Alias
+	}).(pulumi.StringPtrOutput)
+}
+
+// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutput) ChildNodes() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValueChildNodeValue) []IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNode {
+		if v == nil {
+			return nil
+		}
+		return v.ChildNodes
+	}).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput)
+}
+
+// Whether Chinese characters are contained.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutput) ContainZH() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValueChildNodeValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.ContainZH
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutput) OpenIndexForChildOnly() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValueChildNodeValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.OpenIndexForChildOnly
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether the analysis feature is enabled for the field.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutput) SqlFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValueChildNodeValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.SqlFlag
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutput) Tokenizer() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValueChildNodeValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Tokenizer
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field type. Valid values: long, text, double.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValueChildNodeValue) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNode struct {
+	// Field name of the json child node.
+	Key *string `pulumi:"key"`
+	// Field index description information of the json child node.
+	Value *IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValue `pulumi:"value"`
+}
+
+// IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeInput is an input type that accepts IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArgs and IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeOutput values.
+// You can construct a concrete instance of `IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeInput` via:
+//
+//	IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArgs{...}
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeInput interface {
+	pulumi.Input
+
+	ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeOutput
+	ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeOutputWithContext(context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeOutput
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArgs struct {
+	// Field name of the json child node.
+	Key pulumi.StringPtrInput `pulumi:"key"`
+	// Field index description information of the json child node.
+	Value IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrInput `pulumi:"value"`
+}
+
+func (IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNode)(nil)).Elem()
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArgs) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeOutput {
+	return i.ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeOutputWithContext(context.Background())
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArgs) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeOutput)
+}
+
+// IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArrayInput is an input type that accepts IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArray and IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput values.
+// You can construct a concrete instance of `IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArrayInput` via:
+//
+//	IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArray{ IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArgs{...} }
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArrayInput interface {
+	pulumi.Input
+
+	ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput
+	ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutputWithContext(context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArray []IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeInput
+
+func (IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNode)(nil)).Elem()
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArray) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput {
+	return i.ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutputWithContext(context.Background())
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArray) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput)
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNode)(nil)).Elem()
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeOutput {
+	return o
+}
+
+// Field name of the json child node.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNode) *string { return v.Key }).(pulumi.StringPtrOutput)
+}
+
+// Field index description information of the json child node.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeOutput) Value() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNode) *IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValue {
+		return v.Value
+	}).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput)
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNode)(nil)).Elem()
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput) Index(i pulumi.IntInput) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNode {
+		return vs[0].([]IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNode)[vs[1].(int)]
+	}).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeOutput)
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValue struct {
+	// Field alias.
+	Alias *string `pulumi:"alias"`
+	// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+	ChildNodes []IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNode `pulumi:"childNodes"`
+	// Whether Chinese characters are contained.
+	ContainZH *bool `pulumi:"containZH"`
+	// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+	OpenIndexForChildOnly *bool `pulumi:"openIndexForChildOnly"`
+	// Whether the analysis feature is enabled for the field.
+	SqlFlag *bool `pulumi:"sqlFlag"`
+	// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+	Tokenizer *string `pulumi:"tokenizer"`
+	// Field type. Valid values: long, text, double.
+	Type string `pulumi:"type"`
+}
+
+// IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueInput is an input type that accepts IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueArgs and IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput values.
+// You can construct a concrete instance of `IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueInput` via:
+//
+//	IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueArgs{...}
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueInput interface {
+	pulumi.Input
+
+	ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput
+	ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutputWithContext(context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueArgs struct {
+	// Field alias.
+	Alias pulumi.StringPtrInput `pulumi:"alias"`
+	// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+	ChildNodes IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayInput `pulumi:"childNodes"`
+	// Whether Chinese characters are contained.
+	ContainZH pulumi.BoolPtrInput `pulumi:"containZH"`
+	// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+	OpenIndexForChildOnly pulumi.BoolPtrInput `pulumi:"openIndexForChildOnly"`
+	// Whether the analysis feature is enabled for the field.
+	SqlFlag pulumi.BoolPtrInput `pulumi:"sqlFlag"`
+	// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+	Tokenizer pulumi.StringPtrInput `pulumi:"tokenizer"`
+	// Field type. Valid values: long, text, double.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValue)(nil)).Elem()
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueArgs) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput {
+	return i.ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutputWithContext(context.Background())
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueArgs) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput)
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueArgs) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return i.ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(context.Background())
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueArgs) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput).ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx)
+}
+
+// IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrInput is an input type that accepts IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueArgs, IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtr and IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput values.
+// You can construct a concrete instance of `IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrInput` via:
+//
+//	        IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueArgs{...}
+//
+//	or:
+//
+//	        nil
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrInput interface {
+	pulumi.Input
+
+	ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput
+	ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput
+}
+
+type indexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrType IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueArgs
+
+func IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtr(v *IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueArgs) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrInput {
+	return (*indexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrType)(v)
+}
+
+func (*indexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValue)(nil)).Elem()
+}
+
+func (i *indexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrType) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return i.ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(context.Background())
+}
+
+func (i *indexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrType) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput)
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValue)(nil)).Elem()
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return o.ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(context.Background())
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValue) *IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValue {
+		return &v
+	}).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput)
+}
+
+// Field alias.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput) Alias() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValue) *string { return v.Alias }).(pulumi.StringPtrOutput)
+}
+
+// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput) ChildNodes() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValue) []IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNode {
+		return v.ChildNodes
+	}).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput)
+}
+
+// Whether Chinese characters are contained.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput) ContainZH() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValue) *bool { return v.ContainZH }).(pulumi.BoolPtrOutput)
+}
+
+// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput) OpenIndexForChildOnly() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValue) *bool {
+		return v.OpenIndexForChildOnly
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether the analysis feature is enabled for the field.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput) SqlFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValue) *bool { return v.SqlFlag }).(pulumi.BoolPtrOutput)
+}
+
+// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput) Tokenizer() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValue) *string {
+		return v.Tokenizer
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field type. Valid values: long, text, double.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValue) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValue)(nil)).Elem()
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) Elem() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValue) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValue {
+		if v != nil {
+			return *v
+		}
+		var ret IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValue
+		return ret
+	}).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput)
+}
+
+// Field alias.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) Alias() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Alias
+	}).(pulumi.StringPtrOutput)
+}
+
+// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) ChildNodes() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValue) []IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNode {
+		if v == nil {
+			return nil
+		}
+		return v.ChildNodes
+	}).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput)
+}
+
+// Whether Chinese characters are contained.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) ContainZH() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.ContainZH
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) OpenIndexForChildOnly() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.OpenIndexForChildOnly
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether the analysis feature is enabled for the field.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) SqlFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.SqlFlag
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) Tokenizer() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Tokenizer
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field type. Valid values: long, text, double.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValue) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNode struct {
+	// Field name of the json child node.
+	Key *string `pulumi:"key"`
+	// Field index description information of the json child node.
+	Value *IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue `pulumi:"value"`
+}
+
+// IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeInput is an input type that accepts IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArgs and IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput values.
+// You can construct a concrete instance of `IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeInput` via:
+//
+//	IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArgs{...}
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeInput interface {
+	pulumi.Input
+
+	ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput
+	ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutputWithContext(context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArgs struct {
+	// Field name of the json child node.
+	Key pulumi.StringPtrInput `pulumi:"key"`
+	// Field index description information of the json child node.
+	Value IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrInput `pulumi:"value"`
+}
+
+func (IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNode)(nil)).Elem()
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArgs) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput {
+	return i.ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutputWithContext(context.Background())
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArgs) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput)
+}
+
+// IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayInput is an input type that accepts IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArray and IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput values.
+// You can construct a concrete instance of `IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayInput` via:
+//
+//	IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArray{ IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArgs{...} }
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayInput interface {
+	pulumi.Input
+
+	ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput
+	ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutputWithContext(context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArray []IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeInput
+
+func (IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNode)(nil)).Elem()
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArray) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput {
+	return i.ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutputWithContext(context.Background())
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArray) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput)
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNode)(nil)).Elem()
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput {
+	return o
+}
+
+// Field name of the json child node.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNode) *string {
+		return v.Key
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field index description information of the json child node.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput) Value() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNode) *IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue {
+		return v.Value
+	}).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput)
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNode)(nil)).Elem()
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput) Index(i pulumi.IntInput) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNode {
+		return vs[0].([]IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNode)[vs[1].(int)]
+	}).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput)
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue struct {
+	// Field alias.
+	Alias *string `pulumi:"alias"`
+	// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+	ChildNodes []IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNode `pulumi:"childNodes"`
+	// Whether Chinese characters are contained.
+	ContainZH *bool `pulumi:"containZH"`
+	// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+	OpenIndexForChildOnly *bool `pulumi:"openIndexForChildOnly"`
+	// Whether the analysis feature is enabled for the field.
+	SqlFlag *bool `pulumi:"sqlFlag"`
+	// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+	Tokenizer *string `pulumi:"tokenizer"`
+	// Field type. Valid values: long, text, double.
+	Type string `pulumi:"type"`
+}
+
+// IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueInput is an input type that accepts IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs and IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput values.
+// You can construct a concrete instance of `IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueInput` via:
+//
+//	IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs{...}
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueInput interface {
+	pulumi.Input
+
+	ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput
+	ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutputWithContext(context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs struct {
+	// Field alias.
+	Alias pulumi.StringPtrInput `pulumi:"alias"`
+	// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+	ChildNodes IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayInput `pulumi:"childNodes"`
+	// Whether Chinese characters are contained.
+	ContainZH pulumi.BoolPtrInput `pulumi:"containZH"`
+	// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+	OpenIndexForChildOnly pulumi.BoolPtrInput `pulumi:"openIndexForChildOnly"`
+	// Whether the analysis feature is enabled for the field.
+	SqlFlag pulumi.BoolPtrInput `pulumi:"sqlFlag"`
+	// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+	Tokenizer pulumi.StringPtrInput `pulumi:"tokenizer"`
+	// Field type. Valid values: long, text, double.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue)(nil)).Elem()
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput {
+	return i.ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutputWithContext(context.Background())
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput)
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return i.ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(context.Background())
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput).ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx)
+}
+
+// IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrInput is an input type that accepts IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs, IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtr and IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput values.
+// You can construct a concrete instance of `IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrInput` via:
+//
+//	        IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs{...}
+//
+//	or:
+//
+//	        nil
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrInput interface {
+	pulumi.Input
+
+	ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput
+	ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput
+}
+
+type indexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrType IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs
+
+func IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtr(v *IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrInput {
+	return (*indexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrType)(v)
+}
+
+func (*indexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue)(nil)).Elem()
+}
+
+func (i *indexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrType) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return i.ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(context.Background())
+}
+
+func (i *indexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrType) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput)
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue)(nil)).Elem()
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return o.ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(context.Background())
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue {
+		return &v
+	}).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput)
+}
+
+// Field alias.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) Alias() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *string {
+		return v.Alias
+	}).(pulumi.StringPtrOutput)
+}
+
+// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) ChildNodes() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) []IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNode {
+		return v.ChildNodes
+	}).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput)
+}
+
+// Whether Chinese characters are contained.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) ContainZH() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *bool {
+		return v.ContainZH
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) OpenIndexForChildOnly() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *bool {
+		return v.OpenIndexForChildOnly
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether the analysis feature is enabled for the field.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) SqlFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *bool {
+		return v.SqlFlag
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) Tokenizer() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *string {
+		return v.Tokenizer
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field type. Valid values: long, text, double.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) string {
+		return v.Type
+	}).(pulumi.StringOutput)
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue)(nil)).Elem()
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) Elem() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue {
+		if v != nil {
+			return *v
+		}
+		var ret IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue
+		return ret
+	}).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput)
+}
+
+// Field alias.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) Alias() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Alias
+	}).(pulumi.StringPtrOutput)
+}
+
+// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) ChildNodes() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) []IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNode {
+		if v == nil {
+			return nil
+		}
+		return v.ChildNodes
+	}).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput)
+}
+
+// Whether Chinese characters are contained.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) ContainZH() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.ContainZH
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) OpenIndexForChildOnly() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.OpenIndexForChildOnly
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether the analysis feature is enabled for the field.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) SqlFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.SqlFlag
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) Tokenizer() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Tokenizer
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field type. Valid values: long, text, double.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNode struct {
+	// Field name of the json child node.
+	Key *string `pulumi:"key"`
+	// Field index description information of the json child node.
+	Value *IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue `pulumi:"value"`
+}
+
+// IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeInput is an input type that accepts IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArgs and IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput values.
+// You can construct a concrete instance of `IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeInput` via:
+//
+//	IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArgs{...}
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeInput interface {
+	pulumi.Input
+
+	ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput
+	ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutputWithContext(context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArgs struct {
+	// Field name of the json child node.
+	Key pulumi.StringPtrInput `pulumi:"key"`
+	// Field index description information of the json child node.
+	Value IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrInput `pulumi:"value"`
+}
+
+func (IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNode)(nil)).Elem()
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArgs) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput {
+	return i.ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutputWithContext(context.Background())
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArgs) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput)
+}
+
+// IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayInput is an input type that accepts IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArray and IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput values.
+// You can construct a concrete instance of `IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayInput` via:
+//
+//	IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArray{ IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArgs{...} }
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayInput interface {
+	pulumi.Input
+
+	ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput
+	ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutputWithContext(context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArray []IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeInput
+
+func (IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNode)(nil)).Elem()
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArray) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput {
+	return i.ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutputWithContext(context.Background())
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArray) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput)
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNode)(nil)).Elem()
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput {
+	return o
+}
+
+// Field name of the json child node.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNode) *string {
+		return v.Key
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field index description information of the json child node.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput) Value() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNode) *IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue {
+		return v.Value
+	}).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput)
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNode)(nil)).Elem()
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput) Index(i pulumi.IntInput) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNode {
+		return vs[0].([]IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNode)[vs[1].(int)]
+	}).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput)
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue struct {
+	// Field alias.
+	Alias *string `pulumi:"alias"`
+	// Whether Chinese characters are contained.
+	ContainZH *bool `pulumi:"containZH"`
+	// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+	OpenIndexForChildOnly *bool `pulumi:"openIndexForChildOnly"`
+	// Whether the analysis feature is enabled for the field.
+	SqlFlag *bool `pulumi:"sqlFlag"`
+	// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+	Tokenizer *string `pulumi:"tokenizer"`
+	// Field type. Valid values: long, text, double.
+	Type string `pulumi:"type"`
+}
+
+// IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueInput is an input type that accepts IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs and IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput values.
+// You can construct a concrete instance of `IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueInput` via:
+//
+//	IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs{...}
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueInput interface {
+	pulumi.Input
+
+	ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput
+	ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutputWithContext(context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs struct {
+	// Field alias.
+	Alias pulumi.StringPtrInput `pulumi:"alias"`
+	// Whether Chinese characters are contained.
+	ContainZH pulumi.BoolPtrInput `pulumi:"containZH"`
+	// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+	OpenIndexForChildOnly pulumi.BoolPtrInput `pulumi:"openIndexForChildOnly"`
+	// Whether the analysis feature is enabled for the field.
+	SqlFlag pulumi.BoolPtrInput `pulumi:"sqlFlag"`
+	// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+	Tokenizer pulumi.StringPtrInput `pulumi:"tokenizer"`
+	// Field type. Valid values: long, text, double.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue)(nil)).Elem()
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput {
+	return i.ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutputWithContext(context.Background())
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput)
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return i.ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(context.Background())
+}
+
+func (i IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput).ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx)
+}
+
+// IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrInput is an input type that accepts IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs, IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtr and IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput values.
+// You can construct a concrete instance of `IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrInput` via:
+//
+//	        IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs{...}
+//
+//	or:
+//
+//	        nil
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrInput interface {
+	pulumi.Input
+
+	ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput
+	ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput
+}
+
+type indexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrType IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs
+
+func IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtr(v *IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrInput {
+	return (*indexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrType)(v)
+}
+
+func (*indexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue)(nil)).Elem()
+}
+
+func (i *indexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrType) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return i.ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(context.Background())
+}
+
+func (i *indexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrType) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput)
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue)(nil)).Elem()
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return o.ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(context.Background())
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue {
+		return &v
+	}).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput)
+}
+
+// Field alias.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) Alias() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *string {
+		return v.Alias
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether Chinese characters are contained.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) ContainZH() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *bool {
+		return v.ContainZH
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) OpenIndexForChildOnly() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *bool {
+		return v.OpenIndexForChildOnly
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether the analysis feature is enabled for the field.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) SqlFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *bool {
+		return v.SqlFlag
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) Tokenizer() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *string {
+		return v.Tokenizer
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field type. Valid values: long, text, double.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) string {
+		return v.Type
+	}).(pulumi.StringOutput)
+}
+
+type IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput struct{ *pulumi.OutputState }
+
+func (IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue)(nil)).Elem()
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) ToIndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutputWithContext(ctx context.Context) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput {
+	return o
+}
+
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) Elem() IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue {
+		if v != nil {
+			return *v
+		}
+		var ret IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue
+		return ret
+	}).(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput)
+}
+
+// Field alias.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) Alias() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Alias
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether Chinese characters are contained.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) ContainZH() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.ContainZH
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) OpenIndexForChildOnly() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.OpenIndexForChildOnly
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether the analysis feature is enabled for the field.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) SqlFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.SqlFlag
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Field delimiter, which is meaningful only if the field type is text. Each character in the entered string represents a delimiter.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) Tokenizer() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Tokenizer
+	}).(pulumi.StringPtrOutput)
+}
+
+// Field type. Valid values: long, text, double.
+func (o IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValue) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
+type KafkaConsumerConsumerContent struct {
+	// Whether to deliver TAG information.
+	EnableTag *bool `pulumi:"enableTag"`
+	// Content format: 0-original content, 1-JSON.
+	Format *int `pulumi:"format"`
+	// Consumption data JSON format: 1-not escaped, 2-escaped.
+	JsonType *int `pulumi:"jsonType"`
+	// Metadata field list.
+	MetaFields []string `pulumi:"metaFields"`
+	// Tag data processing method: 1-not flattened, 2-flattened.
+	TagTransaction *int `pulumi:"tagTransaction"`
+}
+
+// KafkaConsumerConsumerContentInput is an input type that accepts KafkaConsumerConsumerContentArgs and KafkaConsumerConsumerContentOutput values.
+// You can construct a concrete instance of `KafkaConsumerConsumerContentInput` via:
+//
+//	KafkaConsumerConsumerContentArgs{...}
+type KafkaConsumerConsumerContentInput interface {
+	pulumi.Input
+
+	ToKafkaConsumerConsumerContentOutput() KafkaConsumerConsumerContentOutput
+	ToKafkaConsumerConsumerContentOutputWithContext(context.Context) KafkaConsumerConsumerContentOutput
+}
+
+type KafkaConsumerConsumerContentArgs struct {
+	// Whether to deliver TAG information.
+	EnableTag pulumi.BoolPtrInput `pulumi:"enableTag"`
+	// Content format: 0-original content, 1-JSON.
+	Format pulumi.IntPtrInput `pulumi:"format"`
+	// Consumption data JSON format: 1-not escaped, 2-escaped.
+	JsonType pulumi.IntPtrInput `pulumi:"jsonType"`
+	// Metadata field list.
+	MetaFields pulumi.StringArrayInput `pulumi:"metaFields"`
+	// Tag data processing method: 1-not flattened, 2-flattened.
+	TagTransaction pulumi.IntPtrInput `pulumi:"tagTransaction"`
+}
+
+func (KafkaConsumerConsumerContentArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*KafkaConsumerConsumerContent)(nil)).Elem()
+}
+
+func (i KafkaConsumerConsumerContentArgs) ToKafkaConsumerConsumerContentOutput() KafkaConsumerConsumerContentOutput {
+	return i.ToKafkaConsumerConsumerContentOutputWithContext(context.Background())
+}
+
+func (i KafkaConsumerConsumerContentArgs) ToKafkaConsumerConsumerContentOutputWithContext(ctx context.Context) KafkaConsumerConsumerContentOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(KafkaConsumerConsumerContentOutput)
+}
+
+func (i KafkaConsumerConsumerContentArgs) ToKafkaConsumerConsumerContentPtrOutput() KafkaConsumerConsumerContentPtrOutput {
+	return i.ToKafkaConsumerConsumerContentPtrOutputWithContext(context.Background())
+}
+
+func (i KafkaConsumerConsumerContentArgs) ToKafkaConsumerConsumerContentPtrOutputWithContext(ctx context.Context) KafkaConsumerConsumerContentPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(KafkaConsumerConsumerContentOutput).ToKafkaConsumerConsumerContentPtrOutputWithContext(ctx)
+}
+
+// KafkaConsumerConsumerContentPtrInput is an input type that accepts KafkaConsumerConsumerContentArgs, KafkaConsumerConsumerContentPtr and KafkaConsumerConsumerContentPtrOutput values.
+// You can construct a concrete instance of `KafkaConsumerConsumerContentPtrInput` via:
+//
+//	        KafkaConsumerConsumerContentArgs{...}
+//
+//	or:
+//
+//	        nil
+type KafkaConsumerConsumerContentPtrInput interface {
+	pulumi.Input
+
+	ToKafkaConsumerConsumerContentPtrOutput() KafkaConsumerConsumerContentPtrOutput
+	ToKafkaConsumerConsumerContentPtrOutputWithContext(context.Context) KafkaConsumerConsumerContentPtrOutput
+}
+
+type kafkaConsumerConsumerContentPtrType KafkaConsumerConsumerContentArgs
+
+func KafkaConsumerConsumerContentPtr(v *KafkaConsumerConsumerContentArgs) KafkaConsumerConsumerContentPtrInput {
+	return (*kafkaConsumerConsumerContentPtrType)(v)
+}
+
+func (*kafkaConsumerConsumerContentPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**KafkaConsumerConsumerContent)(nil)).Elem()
+}
+
+func (i *kafkaConsumerConsumerContentPtrType) ToKafkaConsumerConsumerContentPtrOutput() KafkaConsumerConsumerContentPtrOutput {
+	return i.ToKafkaConsumerConsumerContentPtrOutputWithContext(context.Background())
+}
+
+func (i *kafkaConsumerConsumerContentPtrType) ToKafkaConsumerConsumerContentPtrOutputWithContext(ctx context.Context) KafkaConsumerConsumerContentPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(KafkaConsumerConsumerContentPtrOutput)
+}
+
+type KafkaConsumerConsumerContentOutput struct{ *pulumi.OutputState }
+
+func (KafkaConsumerConsumerContentOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*KafkaConsumerConsumerContent)(nil)).Elem()
+}
+
+func (o KafkaConsumerConsumerContentOutput) ToKafkaConsumerConsumerContentOutput() KafkaConsumerConsumerContentOutput {
+	return o
+}
+
+func (o KafkaConsumerConsumerContentOutput) ToKafkaConsumerConsumerContentOutputWithContext(ctx context.Context) KafkaConsumerConsumerContentOutput {
+	return o
+}
+
+func (o KafkaConsumerConsumerContentOutput) ToKafkaConsumerConsumerContentPtrOutput() KafkaConsumerConsumerContentPtrOutput {
+	return o.ToKafkaConsumerConsumerContentPtrOutputWithContext(context.Background())
+}
+
+func (o KafkaConsumerConsumerContentOutput) ToKafkaConsumerConsumerContentPtrOutputWithContext(ctx context.Context) KafkaConsumerConsumerContentPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v KafkaConsumerConsumerContent) *KafkaConsumerConsumerContent {
+		return &v
+	}).(KafkaConsumerConsumerContentPtrOutput)
+}
+
+// Whether to deliver TAG information.
+func (o KafkaConsumerConsumerContentOutput) EnableTag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v KafkaConsumerConsumerContent) *bool { return v.EnableTag }).(pulumi.BoolPtrOutput)
+}
+
+// Content format: 0-original content, 1-JSON.
+func (o KafkaConsumerConsumerContentOutput) Format() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v KafkaConsumerConsumerContent) *int { return v.Format }).(pulumi.IntPtrOutput)
+}
+
+// Consumption data JSON format: 1-not escaped, 2-escaped.
+func (o KafkaConsumerConsumerContentOutput) JsonType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v KafkaConsumerConsumerContent) *int { return v.JsonType }).(pulumi.IntPtrOutput)
+}
+
+// Metadata field list.
+func (o KafkaConsumerConsumerContentOutput) MetaFields() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v KafkaConsumerConsumerContent) []string { return v.MetaFields }).(pulumi.StringArrayOutput)
+}
+
+// Tag data processing method: 1-not flattened, 2-flattened.
+func (o KafkaConsumerConsumerContentOutput) TagTransaction() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v KafkaConsumerConsumerContent) *int { return v.TagTransaction }).(pulumi.IntPtrOutput)
+}
+
+type KafkaConsumerConsumerContentPtrOutput struct{ *pulumi.OutputState }
+
+func (KafkaConsumerConsumerContentPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**KafkaConsumerConsumerContent)(nil)).Elem()
+}
+
+func (o KafkaConsumerConsumerContentPtrOutput) ToKafkaConsumerConsumerContentPtrOutput() KafkaConsumerConsumerContentPtrOutput {
+	return o
+}
+
+func (o KafkaConsumerConsumerContentPtrOutput) ToKafkaConsumerConsumerContentPtrOutputWithContext(ctx context.Context) KafkaConsumerConsumerContentPtrOutput {
+	return o
+}
+
+func (o KafkaConsumerConsumerContentPtrOutput) Elem() KafkaConsumerConsumerContentOutput {
+	return o.ApplyT(func(v *KafkaConsumerConsumerContent) KafkaConsumerConsumerContent {
+		if v != nil {
+			return *v
+		}
+		var ret KafkaConsumerConsumerContent
+		return ret
+	}).(KafkaConsumerConsumerContentOutput)
+}
+
+// Whether to deliver TAG information.
+func (o KafkaConsumerConsumerContentPtrOutput) EnableTag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *KafkaConsumerConsumerContent) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.EnableTag
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Content format: 0-original content, 1-JSON.
+func (o KafkaConsumerConsumerContentPtrOutput) Format() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *KafkaConsumerConsumerContent) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Format
+	}).(pulumi.IntPtrOutput)
+}
+
+// Consumption data JSON format: 1-not escaped, 2-escaped.
+func (o KafkaConsumerConsumerContentPtrOutput) JsonType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *KafkaConsumerConsumerContent) *int {
+		if v == nil {
+			return nil
+		}
+		return v.JsonType
+	}).(pulumi.IntPtrOutput)
+}
+
+// Metadata field list.
+func (o KafkaConsumerConsumerContentPtrOutput) MetaFields() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *KafkaConsumerConsumerContent) []string {
+		if v == nil {
+			return nil
+		}
+		return v.MetaFields
+	}).(pulumi.StringArrayOutput)
+}
+
+// Tag data processing method: 1-not flattened, 2-flattened.
+func (o KafkaConsumerConsumerContentPtrOutput) TagTransaction() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *KafkaConsumerConsumerContent) *int {
+		if v == nil {
+			return nil
+		}
+		return v.TagTransaction
+	}).(pulumi.IntPtrOutput)
 }
 
 type KafkaRechargeLogRechargeRule struct {
@@ -7613,6 +14929,480 @@ func (o MachineGroupMachineGroupTypePtrOutput) Values() pulumi.StringArrayOutput
 	}).(pulumi.StringArrayOutput)
 }
 
+type MetricSubscribeInstanceInfo struct {
+	// Instance dimension.
+	InstanceDimensions []string `pulumi:"instanceDimensions"`
+	// Instance value list.
+	Instances []MetricSubscribeInstanceInfoInstance `pulumi:"instances"`
+}
+
+// MetricSubscribeInstanceInfoInput is an input type that accepts MetricSubscribeInstanceInfoArgs and MetricSubscribeInstanceInfoOutput values.
+// You can construct a concrete instance of `MetricSubscribeInstanceInfoInput` via:
+//
+//	MetricSubscribeInstanceInfoArgs{...}
+type MetricSubscribeInstanceInfoInput interface {
+	pulumi.Input
+
+	ToMetricSubscribeInstanceInfoOutput() MetricSubscribeInstanceInfoOutput
+	ToMetricSubscribeInstanceInfoOutputWithContext(context.Context) MetricSubscribeInstanceInfoOutput
+}
+
+type MetricSubscribeInstanceInfoArgs struct {
+	// Instance dimension.
+	InstanceDimensions pulumi.StringArrayInput `pulumi:"instanceDimensions"`
+	// Instance value list.
+	Instances MetricSubscribeInstanceInfoInstanceArrayInput `pulumi:"instances"`
+}
+
+func (MetricSubscribeInstanceInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetricSubscribeInstanceInfo)(nil)).Elem()
+}
+
+func (i MetricSubscribeInstanceInfoArgs) ToMetricSubscribeInstanceInfoOutput() MetricSubscribeInstanceInfoOutput {
+	return i.ToMetricSubscribeInstanceInfoOutputWithContext(context.Background())
+}
+
+func (i MetricSubscribeInstanceInfoArgs) ToMetricSubscribeInstanceInfoOutputWithContext(ctx context.Context) MetricSubscribeInstanceInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetricSubscribeInstanceInfoOutput)
+}
+
+func (i MetricSubscribeInstanceInfoArgs) ToMetricSubscribeInstanceInfoPtrOutput() MetricSubscribeInstanceInfoPtrOutput {
+	return i.ToMetricSubscribeInstanceInfoPtrOutputWithContext(context.Background())
+}
+
+func (i MetricSubscribeInstanceInfoArgs) ToMetricSubscribeInstanceInfoPtrOutputWithContext(ctx context.Context) MetricSubscribeInstanceInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetricSubscribeInstanceInfoOutput).ToMetricSubscribeInstanceInfoPtrOutputWithContext(ctx)
+}
+
+// MetricSubscribeInstanceInfoPtrInput is an input type that accepts MetricSubscribeInstanceInfoArgs, MetricSubscribeInstanceInfoPtr and MetricSubscribeInstanceInfoPtrOutput values.
+// You can construct a concrete instance of `MetricSubscribeInstanceInfoPtrInput` via:
+//
+//	        MetricSubscribeInstanceInfoArgs{...}
+//
+//	or:
+//
+//	        nil
+type MetricSubscribeInstanceInfoPtrInput interface {
+	pulumi.Input
+
+	ToMetricSubscribeInstanceInfoPtrOutput() MetricSubscribeInstanceInfoPtrOutput
+	ToMetricSubscribeInstanceInfoPtrOutputWithContext(context.Context) MetricSubscribeInstanceInfoPtrOutput
+}
+
+type metricSubscribeInstanceInfoPtrType MetricSubscribeInstanceInfoArgs
+
+func MetricSubscribeInstanceInfoPtr(v *MetricSubscribeInstanceInfoArgs) MetricSubscribeInstanceInfoPtrInput {
+	return (*metricSubscribeInstanceInfoPtrType)(v)
+}
+
+func (*metricSubscribeInstanceInfoPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**MetricSubscribeInstanceInfo)(nil)).Elem()
+}
+
+func (i *metricSubscribeInstanceInfoPtrType) ToMetricSubscribeInstanceInfoPtrOutput() MetricSubscribeInstanceInfoPtrOutput {
+	return i.ToMetricSubscribeInstanceInfoPtrOutputWithContext(context.Background())
+}
+
+func (i *metricSubscribeInstanceInfoPtrType) ToMetricSubscribeInstanceInfoPtrOutputWithContext(ctx context.Context) MetricSubscribeInstanceInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetricSubscribeInstanceInfoPtrOutput)
+}
+
+type MetricSubscribeInstanceInfoOutput struct{ *pulumi.OutputState }
+
+func (MetricSubscribeInstanceInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetricSubscribeInstanceInfo)(nil)).Elem()
+}
+
+func (o MetricSubscribeInstanceInfoOutput) ToMetricSubscribeInstanceInfoOutput() MetricSubscribeInstanceInfoOutput {
+	return o
+}
+
+func (o MetricSubscribeInstanceInfoOutput) ToMetricSubscribeInstanceInfoOutputWithContext(ctx context.Context) MetricSubscribeInstanceInfoOutput {
+	return o
+}
+
+func (o MetricSubscribeInstanceInfoOutput) ToMetricSubscribeInstanceInfoPtrOutput() MetricSubscribeInstanceInfoPtrOutput {
+	return o.ToMetricSubscribeInstanceInfoPtrOutputWithContext(context.Background())
+}
+
+func (o MetricSubscribeInstanceInfoOutput) ToMetricSubscribeInstanceInfoPtrOutputWithContext(ctx context.Context) MetricSubscribeInstanceInfoPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v MetricSubscribeInstanceInfo) *MetricSubscribeInstanceInfo {
+		return &v
+	}).(MetricSubscribeInstanceInfoPtrOutput)
+}
+
+// Instance dimension.
+func (o MetricSubscribeInstanceInfoOutput) InstanceDimensions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v MetricSubscribeInstanceInfo) []string { return v.InstanceDimensions }).(pulumi.StringArrayOutput)
+}
+
+// Instance value list.
+func (o MetricSubscribeInstanceInfoOutput) Instances() MetricSubscribeInstanceInfoInstanceArrayOutput {
+	return o.ApplyT(func(v MetricSubscribeInstanceInfo) []MetricSubscribeInstanceInfoInstance { return v.Instances }).(MetricSubscribeInstanceInfoInstanceArrayOutput)
+}
+
+type MetricSubscribeInstanceInfoPtrOutput struct{ *pulumi.OutputState }
+
+func (MetricSubscribeInstanceInfoPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**MetricSubscribeInstanceInfo)(nil)).Elem()
+}
+
+func (o MetricSubscribeInstanceInfoPtrOutput) ToMetricSubscribeInstanceInfoPtrOutput() MetricSubscribeInstanceInfoPtrOutput {
+	return o
+}
+
+func (o MetricSubscribeInstanceInfoPtrOutput) ToMetricSubscribeInstanceInfoPtrOutputWithContext(ctx context.Context) MetricSubscribeInstanceInfoPtrOutput {
+	return o
+}
+
+func (o MetricSubscribeInstanceInfoPtrOutput) Elem() MetricSubscribeInstanceInfoOutput {
+	return o.ApplyT(func(v *MetricSubscribeInstanceInfo) MetricSubscribeInstanceInfo {
+		if v != nil {
+			return *v
+		}
+		var ret MetricSubscribeInstanceInfo
+		return ret
+	}).(MetricSubscribeInstanceInfoOutput)
+}
+
+// Instance dimension.
+func (o MetricSubscribeInstanceInfoPtrOutput) InstanceDimensions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *MetricSubscribeInstanceInfo) []string {
+		if v == nil {
+			return nil
+		}
+		return v.InstanceDimensions
+	}).(pulumi.StringArrayOutput)
+}
+
+// Instance value list.
+func (o MetricSubscribeInstanceInfoPtrOutput) Instances() MetricSubscribeInstanceInfoInstanceArrayOutput {
+	return o.ApplyT(func(v *MetricSubscribeInstanceInfo) []MetricSubscribeInstanceInfoInstance {
+		if v == nil {
+			return nil
+		}
+		return v.Instances
+	}).(MetricSubscribeInstanceInfoInstanceArrayOutput)
+}
+
+type MetricSubscribeInstanceInfoInstance struct {
+	// Instance info value list.
+	Values []string `pulumi:"values"`
+}
+
+// MetricSubscribeInstanceInfoInstanceInput is an input type that accepts MetricSubscribeInstanceInfoInstanceArgs and MetricSubscribeInstanceInfoInstanceOutput values.
+// You can construct a concrete instance of `MetricSubscribeInstanceInfoInstanceInput` via:
+//
+//	MetricSubscribeInstanceInfoInstanceArgs{...}
+type MetricSubscribeInstanceInfoInstanceInput interface {
+	pulumi.Input
+
+	ToMetricSubscribeInstanceInfoInstanceOutput() MetricSubscribeInstanceInfoInstanceOutput
+	ToMetricSubscribeInstanceInfoInstanceOutputWithContext(context.Context) MetricSubscribeInstanceInfoInstanceOutput
+}
+
+type MetricSubscribeInstanceInfoInstanceArgs struct {
+	// Instance info value list.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (MetricSubscribeInstanceInfoInstanceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetricSubscribeInstanceInfoInstance)(nil)).Elem()
+}
+
+func (i MetricSubscribeInstanceInfoInstanceArgs) ToMetricSubscribeInstanceInfoInstanceOutput() MetricSubscribeInstanceInfoInstanceOutput {
+	return i.ToMetricSubscribeInstanceInfoInstanceOutputWithContext(context.Background())
+}
+
+func (i MetricSubscribeInstanceInfoInstanceArgs) ToMetricSubscribeInstanceInfoInstanceOutputWithContext(ctx context.Context) MetricSubscribeInstanceInfoInstanceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetricSubscribeInstanceInfoInstanceOutput)
+}
+
+// MetricSubscribeInstanceInfoInstanceArrayInput is an input type that accepts MetricSubscribeInstanceInfoInstanceArray and MetricSubscribeInstanceInfoInstanceArrayOutput values.
+// You can construct a concrete instance of `MetricSubscribeInstanceInfoInstanceArrayInput` via:
+//
+//	MetricSubscribeInstanceInfoInstanceArray{ MetricSubscribeInstanceInfoInstanceArgs{...} }
+type MetricSubscribeInstanceInfoInstanceArrayInput interface {
+	pulumi.Input
+
+	ToMetricSubscribeInstanceInfoInstanceArrayOutput() MetricSubscribeInstanceInfoInstanceArrayOutput
+	ToMetricSubscribeInstanceInfoInstanceArrayOutputWithContext(context.Context) MetricSubscribeInstanceInfoInstanceArrayOutput
+}
+
+type MetricSubscribeInstanceInfoInstanceArray []MetricSubscribeInstanceInfoInstanceInput
+
+func (MetricSubscribeInstanceInfoInstanceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]MetricSubscribeInstanceInfoInstance)(nil)).Elem()
+}
+
+func (i MetricSubscribeInstanceInfoInstanceArray) ToMetricSubscribeInstanceInfoInstanceArrayOutput() MetricSubscribeInstanceInfoInstanceArrayOutput {
+	return i.ToMetricSubscribeInstanceInfoInstanceArrayOutputWithContext(context.Background())
+}
+
+func (i MetricSubscribeInstanceInfoInstanceArray) ToMetricSubscribeInstanceInfoInstanceArrayOutputWithContext(ctx context.Context) MetricSubscribeInstanceInfoInstanceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetricSubscribeInstanceInfoInstanceArrayOutput)
+}
+
+type MetricSubscribeInstanceInfoInstanceOutput struct{ *pulumi.OutputState }
+
+func (MetricSubscribeInstanceInfoInstanceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetricSubscribeInstanceInfoInstance)(nil)).Elem()
+}
+
+func (o MetricSubscribeInstanceInfoInstanceOutput) ToMetricSubscribeInstanceInfoInstanceOutput() MetricSubscribeInstanceInfoInstanceOutput {
+	return o
+}
+
+func (o MetricSubscribeInstanceInfoInstanceOutput) ToMetricSubscribeInstanceInfoInstanceOutputWithContext(ctx context.Context) MetricSubscribeInstanceInfoInstanceOutput {
+	return o
+}
+
+// Instance info value list.
+func (o MetricSubscribeInstanceInfoInstanceOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v MetricSubscribeInstanceInfoInstance) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type MetricSubscribeInstanceInfoInstanceArrayOutput struct{ *pulumi.OutputState }
+
+func (MetricSubscribeInstanceInfoInstanceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]MetricSubscribeInstanceInfoInstance)(nil)).Elem()
+}
+
+func (o MetricSubscribeInstanceInfoInstanceArrayOutput) ToMetricSubscribeInstanceInfoInstanceArrayOutput() MetricSubscribeInstanceInfoInstanceArrayOutput {
+	return o
+}
+
+func (o MetricSubscribeInstanceInfoInstanceArrayOutput) ToMetricSubscribeInstanceInfoInstanceArrayOutputWithContext(ctx context.Context) MetricSubscribeInstanceInfoInstanceArrayOutput {
+	return o
+}
+
+func (o MetricSubscribeInstanceInfoInstanceArrayOutput) Index(i pulumi.IntInput) MetricSubscribeInstanceInfoInstanceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) MetricSubscribeInstanceInfoInstance {
+		return vs[0].([]MetricSubscribeInstanceInfoInstance)[vs[1].(int)]
+	}).(MetricSubscribeInstanceInfoInstanceOutput)
+}
+
+type MetricSubscribeMetric struct {
+	// Custom metric labels.
+	MetricLabels []MetricSubscribeMetricMetricLabel `pulumi:"metricLabels"`
+	// Metric name.
+	MetricName string `pulumi:"metricName"`
+	// Statistical period, unit: second(s).
+	Periods []int `pulumi:"periods"`
+}
+
+// MetricSubscribeMetricInput is an input type that accepts MetricSubscribeMetricArgs and MetricSubscribeMetricOutput values.
+// You can construct a concrete instance of `MetricSubscribeMetricInput` via:
+//
+//	MetricSubscribeMetricArgs{...}
+type MetricSubscribeMetricInput interface {
+	pulumi.Input
+
+	ToMetricSubscribeMetricOutput() MetricSubscribeMetricOutput
+	ToMetricSubscribeMetricOutputWithContext(context.Context) MetricSubscribeMetricOutput
+}
+
+type MetricSubscribeMetricArgs struct {
+	// Custom metric labels.
+	MetricLabels MetricSubscribeMetricMetricLabelArrayInput `pulumi:"metricLabels"`
+	// Metric name.
+	MetricName pulumi.StringInput `pulumi:"metricName"`
+	// Statistical period, unit: second(s).
+	Periods pulumi.IntArrayInput `pulumi:"periods"`
+}
+
+func (MetricSubscribeMetricArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetricSubscribeMetric)(nil)).Elem()
+}
+
+func (i MetricSubscribeMetricArgs) ToMetricSubscribeMetricOutput() MetricSubscribeMetricOutput {
+	return i.ToMetricSubscribeMetricOutputWithContext(context.Background())
+}
+
+func (i MetricSubscribeMetricArgs) ToMetricSubscribeMetricOutputWithContext(ctx context.Context) MetricSubscribeMetricOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetricSubscribeMetricOutput)
+}
+
+// MetricSubscribeMetricArrayInput is an input type that accepts MetricSubscribeMetricArray and MetricSubscribeMetricArrayOutput values.
+// You can construct a concrete instance of `MetricSubscribeMetricArrayInput` via:
+//
+//	MetricSubscribeMetricArray{ MetricSubscribeMetricArgs{...} }
+type MetricSubscribeMetricArrayInput interface {
+	pulumi.Input
+
+	ToMetricSubscribeMetricArrayOutput() MetricSubscribeMetricArrayOutput
+	ToMetricSubscribeMetricArrayOutputWithContext(context.Context) MetricSubscribeMetricArrayOutput
+}
+
+type MetricSubscribeMetricArray []MetricSubscribeMetricInput
+
+func (MetricSubscribeMetricArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]MetricSubscribeMetric)(nil)).Elem()
+}
+
+func (i MetricSubscribeMetricArray) ToMetricSubscribeMetricArrayOutput() MetricSubscribeMetricArrayOutput {
+	return i.ToMetricSubscribeMetricArrayOutputWithContext(context.Background())
+}
+
+func (i MetricSubscribeMetricArray) ToMetricSubscribeMetricArrayOutputWithContext(ctx context.Context) MetricSubscribeMetricArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetricSubscribeMetricArrayOutput)
+}
+
+type MetricSubscribeMetricOutput struct{ *pulumi.OutputState }
+
+func (MetricSubscribeMetricOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetricSubscribeMetric)(nil)).Elem()
+}
+
+func (o MetricSubscribeMetricOutput) ToMetricSubscribeMetricOutput() MetricSubscribeMetricOutput {
+	return o
+}
+
+func (o MetricSubscribeMetricOutput) ToMetricSubscribeMetricOutputWithContext(ctx context.Context) MetricSubscribeMetricOutput {
+	return o
+}
+
+// Custom metric labels.
+func (o MetricSubscribeMetricOutput) MetricLabels() MetricSubscribeMetricMetricLabelArrayOutput {
+	return o.ApplyT(func(v MetricSubscribeMetric) []MetricSubscribeMetricMetricLabel { return v.MetricLabels }).(MetricSubscribeMetricMetricLabelArrayOutput)
+}
+
+// Metric name.
+func (o MetricSubscribeMetricOutput) MetricName() pulumi.StringOutput {
+	return o.ApplyT(func(v MetricSubscribeMetric) string { return v.MetricName }).(pulumi.StringOutput)
+}
+
+// Statistical period, unit: second(s).
+func (o MetricSubscribeMetricOutput) Periods() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v MetricSubscribeMetric) []int { return v.Periods }).(pulumi.IntArrayOutput)
+}
+
+type MetricSubscribeMetricArrayOutput struct{ *pulumi.OutputState }
+
+func (MetricSubscribeMetricArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]MetricSubscribeMetric)(nil)).Elem()
+}
+
+func (o MetricSubscribeMetricArrayOutput) ToMetricSubscribeMetricArrayOutput() MetricSubscribeMetricArrayOutput {
+	return o
+}
+
+func (o MetricSubscribeMetricArrayOutput) ToMetricSubscribeMetricArrayOutputWithContext(ctx context.Context) MetricSubscribeMetricArrayOutput {
+	return o
+}
+
+func (o MetricSubscribeMetricArrayOutput) Index(i pulumi.IntInput) MetricSubscribeMetricOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) MetricSubscribeMetric {
+		return vs[0].([]MetricSubscribeMetric)[vs[1].(int)]
+	}).(MetricSubscribeMetricOutput)
+}
+
+type MetricSubscribeMetricMetricLabel struct {
+	// Metric label name.
+	Key string `pulumi:"key"`
+	// Metric label content.
+	Value string `pulumi:"value"`
+}
+
+// MetricSubscribeMetricMetricLabelInput is an input type that accepts MetricSubscribeMetricMetricLabelArgs and MetricSubscribeMetricMetricLabelOutput values.
+// You can construct a concrete instance of `MetricSubscribeMetricMetricLabelInput` via:
+//
+//	MetricSubscribeMetricMetricLabelArgs{...}
+type MetricSubscribeMetricMetricLabelInput interface {
+	pulumi.Input
+
+	ToMetricSubscribeMetricMetricLabelOutput() MetricSubscribeMetricMetricLabelOutput
+	ToMetricSubscribeMetricMetricLabelOutputWithContext(context.Context) MetricSubscribeMetricMetricLabelOutput
+}
+
+type MetricSubscribeMetricMetricLabelArgs struct {
+	// Metric label name.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Metric label content.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (MetricSubscribeMetricMetricLabelArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetricSubscribeMetricMetricLabel)(nil)).Elem()
+}
+
+func (i MetricSubscribeMetricMetricLabelArgs) ToMetricSubscribeMetricMetricLabelOutput() MetricSubscribeMetricMetricLabelOutput {
+	return i.ToMetricSubscribeMetricMetricLabelOutputWithContext(context.Background())
+}
+
+func (i MetricSubscribeMetricMetricLabelArgs) ToMetricSubscribeMetricMetricLabelOutputWithContext(ctx context.Context) MetricSubscribeMetricMetricLabelOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetricSubscribeMetricMetricLabelOutput)
+}
+
+// MetricSubscribeMetricMetricLabelArrayInput is an input type that accepts MetricSubscribeMetricMetricLabelArray and MetricSubscribeMetricMetricLabelArrayOutput values.
+// You can construct a concrete instance of `MetricSubscribeMetricMetricLabelArrayInput` via:
+//
+//	MetricSubscribeMetricMetricLabelArray{ MetricSubscribeMetricMetricLabelArgs{...} }
+type MetricSubscribeMetricMetricLabelArrayInput interface {
+	pulumi.Input
+
+	ToMetricSubscribeMetricMetricLabelArrayOutput() MetricSubscribeMetricMetricLabelArrayOutput
+	ToMetricSubscribeMetricMetricLabelArrayOutputWithContext(context.Context) MetricSubscribeMetricMetricLabelArrayOutput
+}
+
+type MetricSubscribeMetricMetricLabelArray []MetricSubscribeMetricMetricLabelInput
+
+func (MetricSubscribeMetricMetricLabelArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]MetricSubscribeMetricMetricLabel)(nil)).Elem()
+}
+
+func (i MetricSubscribeMetricMetricLabelArray) ToMetricSubscribeMetricMetricLabelArrayOutput() MetricSubscribeMetricMetricLabelArrayOutput {
+	return i.ToMetricSubscribeMetricMetricLabelArrayOutputWithContext(context.Background())
+}
+
+func (i MetricSubscribeMetricMetricLabelArray) ToMetricSubscribeMetricMetricLabelArrayOutputWithContext(ctx context.Context) MetricSubscribeMetricMetricLabelArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MetricSubscribeMetricMetricLabelArrayOutput)
+}
+
+type MetricSubscribeMetricMetricLabelOutput struct{ *pulumi.OutputState }
+
+func (MetricSubscribeMetricMetricLabelOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*MetricSubscribeMetricMetricLabel)(nil)).Elem()
+}
+
+func (o MetricSubscribeMetricMetricLabelOutput) ToMetricSubscribeMetricMetricLabelOutput() MetricSubscribeMetricMetricLabelOutput {
+	return o
+}
+
+func (o MetricSubscribeMetricMetricLabelOutput) ToMetricSubscribeMetricMetricLabelOutputWithContext(ctx context.Context) MetricSubscribeMetricMetricLabelOutput {
+	return o
+}
+
+// Metric label name.
+func (o MetricSubscribeMetricMetricLabelOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v MetricSubscribeMetricMetricLabel) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Metric label content.
+func (o MetricSubscribeMetricMetricLabelOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v MetricSubscribeMetricMetricLabel) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type MetricSubscribeMetricMetricLabelArrayOutput struct{ *pulumi.OutputState }
+
+func (MetricSubscribeMetricMetricLabelArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]MetricSubscribeMetricMetricLabel)(nil)).Elem()
+}
+
+func (o MetricSubscribeMetricMetricLabelArrayOutput) ToMetricSubscribeMetricMetricLabelArrayOutput() MetricSubscribeMetricMetricLabelArrayOutput {
+	return o
+}
+
+func (o MetricSubscribeMetricMetricLabelArrayOutput) ToMetricSubscribeMetricMetricLabelArrayOutputWithContext(ctx context.Context) MetricSubscribeMetricMetricLabelArrayOutput {
+	return o
+}
+
+func (o MetricSubscribeMetricMetricLabelArrayOutput) Index(i pulumi.IntInput) MetricSubscribeMetricMetricLabelOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) MetricSubscribeMetricMetricLabel {
+		return vs[0].([]MetricSubscribeMetricMetricLabel)[vs[1].(int)]
+	}).(MetricSubscribeMetricMetricLabelOutput)
+}
+
 type NoticeContentNoticeContents struct {
 	// Template for Alarm Recovery Notification Content.
 	RecoveryContent *NoticeContentNoticeContentsRecoveryContent `pulumi:"recoveryContent"`
@@ -8336,6 +16126,162 @@ func (o ScheduledSqlDstResourcePtrOutput) TopicId() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+type TopicCustomKmsInfo struct {
+	// KMS key ID.
+	KmsKeyId string `pulumi:"kmsKeyId"`
+	// KMS region. Refer to Tencent Cloud KMS documentation for supported regions. Format: `ap-guangzhou`.
+	KmsRegion string `pulumi:"kmsRegion"`
+}
+
+// TopicCustomKmsInfoInput is an input type that accepts TopicCustomKmsInfoArgs and TopicCustomKmsInfoOutput values.
+// You can construct a concrete instance of `TopicCustomKmsInfoInput` via:
+//
+//	TopicCustomKmsInfoArgs{...}
+type TopicCustomKmsInfoInput interface {
+	pulumi.Input
+
+	ToTopicCustomKmsInfoOutput() TopicCustomKmsInfoOutput
+	ToTopicCustomKmsInfoOutputWithContext(context.Context) TopicCustomKmsInfoOutput
+}
+
+type TopicCustomKmsInfoArgs struct {
+	// KMS key ID.
+	KmsKeyId pulumi.StringInput `pulumi:"kmsKeyId"`
+	// KMS region. Refer to Tencent Cloud KMS documentation for supported regions. Format: `ap-guangzhou`.
+	KmsRegion pulumi.StringInput `pulumi:"kmsRegion"`
+}
+
+func (TopicCustomKmsInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TopicCustomKmsInfo)(nil)).Elem()
+}
+
+func (i TopicCustomKmsInfoArgs) ToTopicCustomKmsInfoOutput() TopicCustomKmsInfoOutput {
+	return i.ToTopicCustomKmsInfoOutputWithContext(context.Background())
+}
+
+func (i TopicCustomKmsInfoArgs) ToTopicCustomKmsInfoOutputWithContext(ctx context.Context) TopicCustomKmsInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TopicCustomKmsInfoOutput)
+}
+
+func (i TopicCustomKmsInfoArgs) ToTopicCustomKmsInfoPtrOutput() TopicCustomKmsInfoPtrOutput {
+	return i.ToTopicCustomKmsInfoPtrOutputWithContext(context.Background())
+}
+
+func (i TopicCustomKmsInfoArgs) ToTopicCustomKmsInfoPtrOutputWithContext(ctx context.Context) TopicCustomKmsInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TopicCustomKmsInfoOutput).ToTopicCustomKmsInfoPtrOutputWithContext(ctx)
+}
+
+// TopicCustomKmsInfoPtrInput is an input type that accepts TopicCustomKmsInfoArgs, TopicCustomKmsInfoPtr and TopicCustomKmsInfoPtrOutput values.
+// You can construct a concrete instance of `TopicCustomKmsInfoPtrInput` via:
+//
+//	        TopicCustomKmsInfoArgs{...}
+//
+//	or:
+//
+//	        nil
+type TopicCustomKmsInfoPtrInput interface {
+	pulumi.Input
+
+	ToTopicCustomKmsInfoPtrOutput() TopicCustomKmsInfoPtrOutput
+	ToTopicCustomKmsInfoPtrOutputWithContext(context.Context) TopicCustomKmsInfoPtrOutput
+}
+
+type topicCustomKmsInfoPtrType TopicCustomKmsInfoArgs
+
+func TopicCustomKmsInfoPtr(v *TopicCustomKmsInfoArgs) TopicCustomKmsInfoPtrInput {
+	return (*topicCustomKmsInfoPtrType)(v)
+}
+
+func (*topicCustomKmsInfoPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**TopicCustomKmsInfo)(nil)).Elem()
+}
+
+func (i *topicCustomKmsInfoPtrType) ToTopicCustomKmsInfoPtrOutput() TopicCustomKmsInfoPtrOutput {
+	return i.ToTopicCustomKmsInfoPtrOutputWithContext(context.Background())
+}
+
+func (i *topicCustomKmsInfoPtrType) ToTopicCustomKmsInfoPtrOutputWithContext(ctx context.Context) TopicCustomKmsInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TopicCustomKmsInfoPtrOutput)
+}
+
+type TopicCustomKmsInfoOutput struct{ *pulumi.OutputState }
+
+func (TopicCustomKmsInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TopicCustomKmsInfo)(nil)).Elem()
+}
+
+func (o TopicCustomKmsInfoOutput) ToTopicCustomKmsInfoOutput() TopicCustomKmsInfoOutput {
+	return o
+}
+
+func (o TopicCustomKmsInfoOutput) ToTopicCustomKmsInfoOutputWithContext(ctx context.Context) TopicCustomKmsInfoOutput {
+	return o
+}
+
+func (o TopicCustomKmsInfoOutput) ToTopicCustomKmsInfoPtrOutput() TopicCustomKmsInfoPtrOutput {
+	return o.ToTopicCustomKmsInfoPtrOutputWithContext(context.Background())
+}
+
+func (o TopicCustomKmsInfoOutput) ToTopicCustomKmsInfoPtrOutputWithContext(ctx context.Context) TopicCustomKmsInfoPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v TopicCustomKmsInfo) *TopicCustomKmsInfo {
+		return &v
+	}).(TopicCustomKmsInfoPtrOutput)
+}
+
+// KMS key ID.
+func (o TopicCustomKmsInfoOutput) KmsKeyId() pulumi.StringOutput {
+	return o.ApplyT(func(v TopicCustomKmsInfo) string { return v.KmsKeyId }).(pulumi.StringOutput)
+}
+
+// KMS region. Refer to Tencent Cloud KMS documentation for supported regions. Format: `ap-guangzhou`.
+func (o TopicCustomKmsInfoOutput) KmsRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v TopicCustomKmsInfo) string { return v.KmsRegion }).(pulumi.StringOutput)
+}
+
+type TopicCustomKmsInfoPtrOutput struct{ *pulumi.OutputState }
+
+func (TopicCustomKmsInfoPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**TopicCustomKmsInfo)(nil)).Elem()
+}
+
+func (o TopicCustomKmsInfoPtrOutput) ToTopicCustomKmsInfoPtrOutput() TopicCustomKmsInfoPtrOutput {
+	return o
+}
+
+func (o TopicCustomKmsInfoPtrOutput) ToTopicCustomKmsInfoPtrOutputWithContext(ctx context.Context) TopicCustomKmsInfoPtrOutput {
+	return o
+}
+
+func (o TopicCustomKmsInfoPtrOutput) Elem() TopicCustomKmsInfoOutput {
+	return o.ApplyT(func(v *TopicCustomKmsInfo) TopicCustomKmsInfo {
+		if v != nil {
+			return *v
+		}
+		var ret TopicCustomKmsInfo
+		return ret
+	}).(TopicCustomKmsInfoOutput)
+}
+
+// KMS key ID.
+func (o TopicCustomKmsInfoPtrOutput) KmsKeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TopicCustomKmsInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.KmsKeyId
+	}).(pulumi.StringPtrOutput)
+}
+
+// KMS region. Refer to Tencent Cloud KMS documentation for supported regions. Format: `ap-guangzhou`.
+func (o TopicCustomKmsInfoPtrOutput) KmsRegion() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TopicCustomKmsInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.KmsRegion
+	}).(pulumi.StringPtrOutput)
+}
+
 type TopicExtends struct {
 	// Log topic authentication free configuration information.
 	AnonymousAccess *TopicExtendsAnonymousAccess `pulumi:"anonymousAccess"`
@@ -8742,6 +16688,1274 @@ func (o TopicExtendsAnonymousAccessConditionArrayOutput) Index(i pulumi.IntInput
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TopicExtendsAnonymousAccessCondition {
 		return vs[0].([]TopicExtendsAnonymousAccessCondition)[vs[1].(int)]
 	}).(TopicExtendsAnonymousAccessConditionOutput)
+}
+
+type GetAlarmNoticesAlarmNotice struct {
+	// Alarm notice ID.
+	AlarmNoticeId string `pulumi:"alarmNoticeId"`
+	// Alarm shield count statistics.
+	AlarmShieldCounts []GetAlarmNoticesAlarmNoticeAlarmShieldCount `pulumi:"alarmShieldCounts"`
+	// Alarm shield status (0: not shielded, 1: shielded).
+	AlarmShieldStatus int `pulumi:"alarmShieldStatus"`
+	// Whether webhook callback takes priority.
+	CallbackPrioritize bool `pulumi:"callbackPrioritize"`
+	// Creation time.
+	CreateTime string `pulumi:"createTime"`
+	// Delivery flag (1: not enabled, 2: enabled, 3: abnormal).
+	DeliverFlag int `pulumi:"deliverFlag"`
+	// Delivery status (0: delivered, 1: not delivered).
+	DeliverStatus int `pulumi:"deliverStatus"`
+	// Jump domain.
+	JumpDomain string `pulumi:"jumpDomain"`
+	// Alarm notice name.
+	Name string `pulumi:"name"`
+	// Notice receivers for this rule.
+	NoticeReceivers []GetAlarmNoticesAlarmNoticeNoticeReceiver `pulumi:"noticeReceivers"`
+	// List of notice rules.
+	NoticeRules []GetAlarmNoticesAlarmNoticeNoticeRule `pulumi:"noticeRules"`
+	// Tag list.
+	Tags []GetAlarmNoticesAlarmNoticeTag `pulumi:"tags"`
+	// Last update time.
+	UpdateTime string `pulumi:"updateTime"`
+	// List of webhook callbacks.
+	WebCallbacks []GetAlarmNoticesAlarmNoticeWebCallback `pulumi:"webCallbacks"`
+}
+
+// GetAlarmNoticesAlarmNoticeInput is an input type that accepts GetAlarmNoticesAlarmNoticeArgs and GetAlarmNoticesAlarmNoticeOutput values.
+// You can construct a concrete instance of `GetAlarmNoticesAlarmNoticeInput` via:
+//
+//	GetAlarmNoticesAlarmNoticeArgs{...}
+type GetAlarmNoticesAlarmNoticeInput interface {
+	pulumi.Input
+
+	ToGetAlarmNoticesAlarmNoticeOutput() GetAlarmNoticesAlarmNoticeOutput
+	ToGetAlarmNoticesAlarmNoticeOutputWithContext(context.Context) GetAlarmNoticesAlarmNoticeOutput
+}
+
+type GetAlarmNoticesAlarmNoticeArgs struct {
+	// Alarm notice ID.
+	AlarmNoticeId pulumi.StringInput `pulumi:"alarmNoticeId"`
+	// Alarm shield count statistics.
+	AlarmShieldCounts GetAlarmNoticesAlarmNoticeAlarmShieldCountArrayInput `pulumi:"alarmShieldCounts"`
+	// Alarm shield status (0: not shielded, 1: shielded).
+	AlarmShieldStatus pulumi.IntInput `pulumi:"alarmShieldStatus"`
+	// Whether webhook callback takes priority.
+	CallbackPrioritize pulumi.BoolInput `pulumi:"callbackPrioritize"`
+	// Creation time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Delivery flag (1: not enabled, 2: enabled, 3: abnormal).
+	DeliverFlag pulumi.IntInput `pulumi:"deliverFlag"`
+	// Delivery status (0: delivered, 1: not delivered).
+	DeliverStatus pulumi.IntInput `pulumi:"deliverStatus"`
+	// Jump domain.
+	JumpDomain pulumi.StringInput `pulumi:"jumpDomain"`
+	// Alarm notice name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Notice receivers for this rule.
+	NoticeReceivers GetAlarmNoticesAlarmNoticeNoticeReceiverArrayInput `pulumi:"noticeReceivers"`
+	// List of notice rules.
+	NoticeRules GetAlarmNoticesAlarmNoticeNoticeRuleArrayInput `pulumi:"noticeRules"`
+	// Tag list.
+	Tags GetAlarmNoticesAlarmNoticeTagArrayInput `pulumi:"tags"`
+	// Last update time.
+	UpdateTime pulumi.StringInput `pulumi:"updateTime"`
+	// List of webhook callbacks.
+	WebCallbacks GetAlarmNoticesAlarmNoticeWebCallbackArrayInput `pulumi:"webCallbacks"`
+}
+
+func (GetAlarmNoticesAlarmNoticeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAlarmNoticesAlarmNotice)(nil)).Elem()
+}
+
+func (i GetAlarmNoticesAlarmNoticeArgs) ToGetAlarmNoticesAlarmNoticeOutput() GetAlarmNoticesAlarmNoticeOutput {
+	return i.ToGetAlarmNoticesAlarmNoticeOutputWithContext(context.Background())
+}
+
+func (i GetAlarmNoticesAlarmNoticeArgs) ToGetAlarmNoticesAlarmNoticeOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAlarmNoticesAlarmNoticeOutput)
+}
+
+// GetAlarmNoticesAlarmNoticeArrayInput is an input type that accepts GetAlarmNoticesAlarmNoticeArray and GetAlarmNoticesAlarmNoticeArrayOutput values.
+// You can construct a concrete instance of `GetAlarmNoticesAlarmNoticeArrayInput` via:
+//
+//	GetAlarmNoticesAlarmNoticeArray{ GetAlarmNoticesAlarmNoticeArgs{...} }
+type GetAlarmNoticesAlarmNoticeArrayInput interface {
+	pulumi.Input
+
+	ToGetAlarmNoticesAlarmNoticeArrayOutput() GetAlarmNoticesAlarmNoticeArrayOutput
+	ToGetAlarmNoticesAlarmNoticeArrayOutputWithContext(context.Context) GetAlarmNoticesAlarmNoticeArrayOutput
+}
+
+type GetAlarmNoticesAlarmNoticeArray []GetAlarmNoticesAlarmNoticeInput
+
+func (GetAlarmNoticesAlarmNoticeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAlarmNoticesAlarmNotice)(nil)).Elem()
+}
+
+func (i GetAlarmNoticesAlarmNoticeArray) ToGetAlarmNoticesAlarmNoticeArrayOutput() GetAlarmNoticesAlarmNoticeArrayOutput {
+	return i.ToGetAlarmNoticesAlarmNoticeArrayOutputWithContext(context.Background())
+}
+
+func (i GetAlarmNoticesAlarmNoticeArray) ToGetAlarmNoticesAlarmNoticeArrayOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAlarmNoticesAlarmNoticeArrayOutput)
+}
+
+type GetAlarmNoticesAlarmNoticeOutput struct{ *pulumi.OutputState }
+
+func (GetAlarmNoticesAlarmNoticeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAlarmNoticesAlarmNotice)(nil)).Elem()
+}
+
+func (o GetAlarmNoticesAlarmNoticeOutput) ToGetAlarmNoticesAlarmNoticeOutput() GetAlarmNoticesAlarmNoticeOutput {
+	return o
+}
+
+func (o GetAlarmNoticesAlarmNoticeOutput) ToGetAlarmNoticesAlarmNoticeOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeOutput {
+	return o
+}
+
+// Alarm notice ID.
+func (o GetAlarmNoticesAlarmNoticeOutput) AlarmNoticeId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNotice) string { return v.AlarmNoticeId }).(pulumi.StringOutput)
+}
+
+// Alarm shield count statistics.
+func (o GetAlarmNoticesAlarmNoticeOutput) AlarmShieldCounts() GetAlarmNoticesAlarmNoticeAlarmShieldCountArrayOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNotice) []GetAlarmNoticesAlarmNoticeAlarmShieldCount {
+		return v.AlarmShieldCounts
+	}).(GetAlarmNoticesAlarmNoticeAlarmShieldCountArrayOutput)
+}
+
+// Alarm shield status (0: not shielded, 1: shielded).
+func (o GetAlarmNoticesAlarmNoticeOutput) AlarmShieldStatus() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNotice) int { return v.AlarmShieldStatus }).(pulumi.IntOutput)
+}
+
+// Whether webhook callback takes priority.
+func (o GetAlarmNoticesAlarmNoticeOutput) CallbackPrioritize() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNotice) bool { return v.CallbackPrioritize }).(pulumi.BoolOutput)
+}
+
+// Creation time.
+func (o GetAlarmNoticesAlarmNoticeOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNotice) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Delivery flag (1: not enabled, 2: enabled, 3: abnormal).
+func (o GetAlarmNoticesAlarmNoticeOutput) DeliverFlag() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNotice) int { return v.DeliverFlag }).(pulumi.IntOutput)
+}
+
+// Delivery status (0: delivered, 1: not delivered).
+func (o GetAlarmNoticesAlarmNoticeOutput) DeliverStatus() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNotice) int { return v.DeliverStatus }).(pulumi.IntOutput)
+}
+
+// Jump domain.
+func (o GetAlarmNoticesAlarmNoticeOutput) JumpDomain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNotice) string { return v.JumpDomain }).(pulumi.StringOutput)
+}
+
+// Alarm notice name.
+func (o GetAlarmNoticesAlarmNoticeOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNotice) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Notice receivers for this rule.
+func (o GetAlarmNoticesAlarmNoticeOutput) NoticeReceivers() GetAlarmNoticesAlarmNoticeNoticeReceiverArrayOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNotice) []GetAlarmNoticesAlarmNoticeNoticeReceiver {
+		return v.NoticeReceivers
+	}).(GetAlarmNoticesAlarmNoticeNoticeReceiverArrayOutput)
+}
+
+// List of notice rules.
+func (o GetAlarmNoticesAlarmNoticeOutput) NoticeRules() GetAlarmNoticesAlarmNoticeNoticeRuleArrayOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNotice) []GetAlarmNoticesAlarmNoticeNoticeRule { return v.NoticeRules }).(GetAlarmNoticesAlarmNoticeNoticeRuleArrayOutput)
+}
+
+// Tag list.
+func (o GetAlarmNoticesAlarmNoticeOutput) Tags() GetAlarmNoticesAlarmNoticeTagArrayOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNotice) []GetAlarmNoticesAlarmNoticeTag { return v.Tags }).(GetAlarmNoticesAlarmNoticeTagArrayOutput)
+}
+
+// Last update time.
+func (o GetAlarmNoticesAlarmNoticeOutput) UpdateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNotice) string { return v.UpdateTime }).(pulumi.StringOutput)
+}
+
+// List of webhook callbacks.
+func (o GetAlarmNoticesAlarmNoticeOutput) WebCallbacks() GetAlarmNoticesAlarmNoticeWebCallbackArrayOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNotice) []GetAlarmNoticesAlarmNoticeWebCallback { return v.WebCallbacks }).(GetAlarmNoticesAlarmNoticeWebCallbackArrayOutput)
+}
+
+type GetAlarmNoticesAlarmNoticeArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAlarmNoticesAlarmNoticeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAlarmNoticesAlarmNotice)(nil)).Elem()
+}
+
+func (o GetAlarmNoticesAlarmNoticeArrayOutput) ToGetAlarmNoticesAlarmNoticeArrayOutput() GetAlarmNoticesAlarmNoticeArrayOutput {
+	return o
+}
+
+func (o GetAlarmNoticesAlarmNoticeArrayOutput) ToGetAlarmNoticesAlarmNoticeArrayOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeArrayOutput {
+	return o
+}
+
+func (o GetAlarmNoticesAlarmNoticeArrayOutput) Index(i pulumi.IntInput) GetAlarmNoticesAlarmNoticeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAlarmNoticesAlarmNotice {
+		return vs[0].([]GetAlarmNoticesAlarmNotice)[vs[1].(int)]
+	}).(GetAlarmNoticesAlarmNoticeOutput)
+}
+
+type GetAlarmNoticesAlarmNoticeAlarmShieldCount struct {
+	// Total count of shielded alarms.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetAlarmNoticesAlarmNoticeAlarmShieldCountInput is an input type that accepts GetAlarmNoticesAlarmNoticeAlarmShieldCountArgs and GetAlarmNoticesAlarmNoticeAlarmShieldCountOutput values.
+// You can construct a concrete instance of `GetAlarmNoticesAlarmNoticeAlarmShieldCountInput` via:
+//
+//	GetAlarmNoticesAlarmNoticeAlarmShieldCountArgs{...}
+type GetAlarmNoticesAlarmNoticeAlarmShieldCountInput interface {
+	pulumi.Input
+
+	ToGetAlarmNoticesAlarmNoticeAlarmShieldCountOutput() GetAlarmNoticesAlarmNoticeAlarmShieldCountOutput
+	ToGetAlarmNoticesAlarmNoticeAlarmShieldCountOutputWithContext(context.Context) GetAlarmNoticesAlarmNoticeAlarmShieldCountOutput
+}
+
+type GetAlarmNoticesAlarmNoticeAlarmShieldCountArgs struct {
+	// Total count of shielded alarms.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetAlarmNoticesAlarmNoticeAlarmShieldCountArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAlarmNoticesAlarmNoticeAlarmShieldCount)(nil)).Elem()
+}
+
+func (i GetAlarmNoticesAlarmNoticeAlarmShieldCountArgs) ToGetAlarmNoticesAlarmNoticeAlarmShieldCountOutput() GetAlarmNoticesAlarmNoticeAlarmShieldCountOutput {
+	return i.ToGetAlarmNoticesAlarmNoticeAlarmShieldCountOutputWithContext(context.Background())
+}
+
+func (i GetAlarmNoticesAlarmNoticeAlarmShieldCountArgs) ToGetAlarmNoticesAlarmNoticeAlarmShieldCountOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeAlarmShieldCountOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAlarmNoticesAlarmNoticeAlarmShieldCountOutput)
+}
+
+// GetAlarmNoticesAlarmNoticeAlarmShieldCountArrayInput is an input type that accepts GetAlarmNoticesAlarmNoticeAlarmShieldCountArray and GetAlarmNoticesAlarmNoticeAlarmShieldCountArrayOutput values.
+// You can construct a concrete instance of `GetAlarmNoticesAlarmNoticeAlarmShieldCountArrayInput` via:
+//
+//	GetAlarmNoticesAlarmNoticeAlarmShieldCountArray{ GetAlarmNoticesAlarmNoticeAlarmShieldCountArgs{...} }
+type GetAlarmNoticesAlarmNoticeAlarmShieldCountArrayInput interface {
+	pulumi.Input
+
+	ToGetAlarmNoticesAlarmNoticeAlarmShieldCountArrayOutput() GetAlarmNoticesAlarmNoticeAlarmShieldCountArrayOutput
+	ToGetAlarmNoticesAlarmNoticeAlarmShieldCountArrayOutputWithContext(context.Context) GetAlarmNoticesAlarmNoticeAlarmShieldCountArrayOutput
+}
+
+type GetAlarmNoticesAlarmNoticeAlarmShieldCountArray []GetAlarmNoticesAlarmNoticeAlarmShieldCountInput
+
+func (GetAlarmNoticesAlarmNoticeAlarmShieldCountArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAlarmNoticesAlarmNoticeAlarmShieldCount)(nil)).Elem()
+}
+
+func (i GetAlarmNoticesAlarmNoticeAlarmShieldCountArray) ToGetAlarmNoticesAlarmNoticeAlarmShieldCountArrayOutput() GetAlarmNoticesAlarmNoticeAlarmShieldCountArrayOutput {
+	return i.ToGetAlarmNoticesAlarmNoticeAlarmShieldCountArrayOutputWithContext(context.Background())
+}
+
+func (i GetAlarmNoticesAlarmNoticeAlarmShieldCountArray) ToGetAlarmNoticesAlarmNoticeAlarmShieldCountArrayOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeAlarmShieldCountArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAlarmNoticesAlarmNoticeAlarmShieldCountArrayOutput)
+}
+
+type GetAlarmNoticesAlarmNoticeAlarmShieldCountOutput struct{ *pulumi.OutputState }
+
+func (GetAlarmNoticesAlarmNoticeAlarmShieldCountOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAlarmNoticesAlarmNoticeAlarmShieldCount)(nil)).Elem()
+}
+
+func (o GetAlarmNoticesAlarmNoticeAlarmShieldCountOutput) ToGetAlarmNoticesAlarmNoticeAlarmShieldCountOutput() GetAlarmNoticesAlarmNoticeAlarmShieldCountOutput {
+	return o
+}
+
+func (o GetAlarmNoticesAlarmNoticeAlarmShieldCountOutput) ToGetAlarmNoticesAlarmNoticeAlarmShieldCountOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeAlarmShieldCountOutput {
+	return o
+}
+
+// Total count of shielded alarms.
+func (o GetAlarmNoticesAlarmNoticeAlarmShieldCountOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeAlarmShieldCount) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetAlarmNoticesAlarmNoticeAlarmShieldCountArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAlarmNoticesAlarmNoticeAlarmShieldCountArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAlarmNoticesAlarmNoticeAlarmShieldCount)(nil)).Elem()
+}
+
+func (o GetAlarmNoticesAlarmNoticeAlarmShieldCountArrayOutput) ToGetAlarmNoticesAlarmNoticeAlarmShieldCountArrayOutput() GetAlarmNoticesAlarmNoticeAlarmShieldCountArrayOutput {
+	return o
+}
+
+func (o GetAlarmNoticesAlarmNoticeAlarmShieldCountArrayOutput) ToGetAlarmNoticesAlarmNoticeAlarmShieldCountArrayOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeAlarmShieldCountArrayOutput {
+	return o
+}
+
+func (o GetAlarmNoticesAlarmNoticeAlarmShieldCountArrayOutput) Index(i pulumi.IntInput) GetAlarmNoticesAlarmNoticeAlarmShieldCountOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAlarmNoticesAlarmNoticeAlarmShieldCount {
+		return vs[0].([]GetAlarmNoticesAlarmNoticeAlarmShieldCount)[vs[1].(int)]
+	}).(GetAlarmNoticesAlarmNoticeAlarmShieldCountOutput)
+}
+
+type GetAlarmNoticesAlarmNoticeNoticeReceiver struct {
+	// End time.
+	EndTime string `pulumi:"endTime"`
+	// Index order.
+	Index int `pulumi:"index"`
+	// Notification channels.
+	ReceiverChannels []string `pulumi:"receiverChannels"`
+	// Receiver IDs.
+	ReceiverIds []int `pulumi:"receiverIds"`
+	// Receiver type.
+	ReceiverType string `pulumi:"receiverType"`
+	// Start time.
+	StartTime string `pulumi:"startTime"`
+}
+
+// GetAlarmNoticesAlarmNoticeNoticeReceiverInput is an input type that accepts GetAlarmNoticesAlarmNoticeNoticeReceiverArgs and GetAlarmNoticesAlarmNoticeNoticeReceiverOutput values.
+// You can construct a concrete instance of `GetAlarmNoticesAlarmNoticeNoticeReceiverInput` via:
+//
+//	GetAlarmNoticesAlarmNoticeNoticeReceiverArgs{...}
+type GetAlarmNoticesAlarmNoticeNoticeReceiverInput interface {
+	pulumi.Input
+
+	ToGetAlarmNoticesAlarmNoticeNoticeReceiverOutput() GetAlarmNoticesAlarmNoticeNoticeReceiverOutput
+	ToGetAlarmNoticesAlarmNoticeNoticeReceiverOutputWithContext(context.Context) GetAlarmNoticesAlarmNoticeNoticeReceiverOutput
+}
+
+type GetAlarmNoticesAlarmNoticeNoticeReceiverArgs struct {
+	// End time.
+	EndTime pulumi.StringInput `pulumi:"endTime"`
+	// Index order.
+	Index pulumi.IntInput `pulumi:"index"`
+	// Notification channels.
+	ReceiverChannels pulumi.StringArrayInput `pulumi:"receiverChannels"`
+	// Receiver IDs.
+	ReceiverIds pulumi.IntArrayInput `pulumi:"receiverIds"`
+	// Receiver type.
+	ReceiverType pulumi.StringInput `pulumi:"receiverType"`
+	// Start time.
+	StartTime pulumi.StringInput `pulumi:"startTime"`
+}
+
+func (GetAlarmNoticesAlarmNoticeNoticeReceiverArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAlarmNoticesAlarmNoticeNoticeReceiver)(nil)).Elem()
+}
+
+func (i GetAlarmNoticesAlarmNoticeNoticeReceiverArgs) ToGetAlarmNoticesAlarmNoticeNoticeReceiverOutput() GetAlarmNoticesAlarmNoticeNoticeReceiverOutput {
+	return i.ToGetAlarmNoticesAlarmNoticeNoticeReceiverOutputWithContext(context.Background())
+}
+
+func (i GetAlarmNoticesAlarmNoticeNoticeReceiverArgs) ToGetAlarmNoticesAlarmNoticeNoticeReceiverOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeNoticeReceiverOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAlarmNoticesAlarmNoticeNoticeReceiverOutput)
+}
+
+// GetAlarmNoticesAlarmNoticeNoticeReceiverArrayInput is an input type that accepts GetAlarmNoticesAlarmNoticeNoticeReceiverArray and GetAlarmNoticesAlarmNoticeNoticeReceiverArrayOutput values.
+// You can construct a concrete instance of `GetAlarmNoticesAlarmNoticeNoticeReceiverArrayInput` via:
+//
+//	GetAlarmNoticesAlarmNoticeNoticeReceiverArray{ GetAlarmNoticesAlarmNoticeNoticeReceiverArgs{...} }
+type GetAlarmNoticesAlarmNoticeNoticeReceiverArrayInput interface {
+	pulumi.Input
+
+	ToGetAlarmNoticesAlarmNoticeNoticeReceiverArrayOutput() GetAlarmNoticesAlarmNoticeNoticeReceiverArrayOutput
+	ToGetAlarmNoticesAlarmNoticeNoticeReceiverArrayOutputWithContext(context.Context) GetAlarmNoticesAlarmNoticeNoticeReceiverArrayOutput
+}
+
+type GetAlarmNoticesAlarmNoticeNoticeReceiverArray []GetAlarmNoticesAlarmNoticeNoticeReceiverInput
+
+func (GetAlarmNoticesAlarmNoticeNoticeReceiverArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAlarmNoticesAlarmNoticeNoticeReceiver)(nil)).Elem()
+}
+
+func (i GetAlarmNoticesAlarmNoticeNoticeReceiverArray) ToGetAlarmNoticesAlarmNoticeNoticeReceiverArrayOutput() GetAlarmNoticesAlarmNoticeNoticeReceiverArrayOutput {
+	return i.ToGetAlarmNoticesAlarmNoticeNoticeReceiverArrayOutputWithContext(context.Background())
+}
+
+func (i GetAlarmNoticesAlarmNoticeNoticeReceiverArray) ToGetAlarmNoticesAlarmNoticeNoticeReceiverArrayOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeNoticeReceiverArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAlarmNoticesAlarmNoticeNoticeReceiverArrayOutput)
+}
+
+type GetAlarmNoticesAlarmNoticeNoticeReceiverOutput struct{ *pulumi.OutputState }
+
+func (GetAlarmNoticesAlarmNoticeNoticeReceiverOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAlarmNoticesAlarmNoticeNoticeReceiver)(nil)).Elem()
+}
+
+func (o GetAlarmNoticesAlarmNoticeNoticeReceiverOutput) ToGetAlarmNoticesAlarmNoticeNoticeReceiverOutput() GetAlarmNoticesAlarmNoticeNoticeReceiverOutput {
+	return o
+}
+
+func (o GetAlarmNoticesAlarmNoticeNoticeReceiverOutput) ToGetAlarmNoticesAlarmNoticeNoticeReceiverOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeNoticeReceiverOutput {
+	return o
+}
+
+// End time.
+func (o GetAlarmNoticesAlarmNoticeNoticeReceiverOutput) EndTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeNoticeReceiver) string { return v.EndTime }).(pulumi.StringOutput)
+}
+
+// Index order.
+func (o GetAlarmNoticesAlarmNoticeNoticeReceiverOutput) Index() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeNoticeReceiver) int { return v.Index }).(pulumi.IntOutput)
+}
+
+// Notification channels.
+func (o GetAlarmNoticesAlarmNoticeNoticeReceiverOutput) ReceiverChannels() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeNoticeReceiver) []string { return v.ReceiverChannels }).(pulumi.StringArrayOutput)
+}
+
+// Receiver IDs.
+func (o GetAlarmNoticesAlarmNoticeNoticeReceiverOutput) ReceiverIds() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeNoticeReceiver) []int { return v.ReceiverIds }).(pulumi.IntArrayOutput)
+}
+
+// Receiver type.
+func (o GetAlarmNoticesAlarmNoticeNoticeReceiverOutput) ReceiverType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeNoticeReceiver) string { return v.ReceiverType }).(pulumi.StringOutput)
+}
+
+// Start time.
+func (o GetAlarmNoticesAlarmNoticeNoticeReceiverOutput) StartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeNoticeReceiver) string { return v.StartTime }).(pulumi.StringOutput)
+}
+
+type GetAlarmNoticesAlarmNoticeNoticeReceiverArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAlarmNoticesAlarmNoticeNoticeReceiverArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAlarmNoticesAlarmNoticeNoticeReceiver)(nil)).Elem()
+}
+
+func (o GetAlarmNoticesAlarmNoticeNoticeReceiverArrayOutput) ToGetAlarmNoticesAlarmNoticeNoticeReceiverArrayOutput() GetAlarmNoticesAlarmNoticeNoticeReceiverArrayOutput {
+	return o
+}
+
+func (o GetAlarmNoticesAlarmNoticeNoticeReceiverArrayOutput) ToGetAlarmNoticesAlarmNoticeNoticeReceiverArrayOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeNoticeReceiverArrayOutput {
+	return o
+}
+
+func (o GetAlarmNoticesAlarmNoticeNoticeReceiverArrayOutput) Index(i pulumi.IntInput) GetAlarmNoticesAlarmNoticeNoticeReceiverOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAlarmNoticesAlarmNoticeNoticeReceiver {
+		return vs[0].([]GetAlarmNoticesAlarmNoticeNoticeReceiver)[vs[1].(int)]
+	}).(GetAlarmNoticesAlarmNoticeNoticeReceiverOutput)
+}
+
+type GetAlarmNoticesAlarmNoticeNoticeRule struct {
+	// Days of week (0-6, 0 is Sunday).
+	DayOfWeeks []int `pulumi:"dayOfWeeks"`
+	// Jump domain.
+	JumpDomain string `pulumi:"jumpDomain"`
+	// Notice receivers for this rule.
+	NoticeReceivers []GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiver `pulumi:"noticeReceivers"`
+	// Notification ways.
+	NotifyWays []string `pulumi:"notifyWays"`
+	// Receiver type.
+	ReceiverType string `pulumi:"receiverType"`
+	// Repeat interval in minutes.
+	RepeatInterval int `pulumi:"repeatInterval"`
+	// Effective end time (24-hour format HH:mm:ss).
+	TimeRangeEnd string `pulumi:"timeRangeEnd"`
+	// Effective start time (24-hour format HH:mm:ss).
+	TimeRangeStart string `pulumi:"timeRangeStart"`
+	// List of webhook callbacks.
+	WebCallbacks []GetAlarmNoticesAlarmNoticeNoticeRuleWebCallback `pulumi:"webCallbacks"`
+}
+
+// GetAlarmNoticesAlarmNoticeNoticeRuleInput is an input type that accepts GetAlarmNoticesAlarmNoticeNoticeRuleArgs and GetAlarmNoticesAlarmNoticeNoticeRuleOutput values.
+// You can construct a concrete instance of `GetAlarmNoticesAlarmNoticeNoticeRuleInput` via:
+//
+//	GetAlarmNoticesAlarmNoticeNoticeRuleArgs{...}
+type GetAlarmNoticesAlarmNoticeNoticeRuleInput interface {
+	pulumi.Input
+
+	ToGetAlarmNoticesAlarmNoticeNoticeRuleOutput() GetAlarmNoticesAlarmNoticeNoticeRuleOutput
+	ToGetAlarmNoticesAlarmNoticeNoticeRuleOutputWithContext(context.Context) GetAlarmNoticesAlarmNoticeNoticeRuleOutput
+}
+
+type GetAlarmNoticesAlarmNoticeNoticeRuleArgs struct {
+	// Days of week (0-6, 0 is Sunday).
+	DayOfWeeks pulumi.IntArrayInput `pulumi:"dayOfWeeks"`
+	// Jump domain.
+	JumpDomain pulumi.StringInput `pulumi:"jumpDomain"`
+	// Notice receivers for this rule.
+	NoticeReceivers GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArrayInput `pulumi:"noticeReceivers"`
+	// Notification ways.
+	NotifyWays pulumi.StringArrayInput `pulumi:"notifyWays"`
+	// Receiver type.
+	ReceiverType pulumi.StringInput `pulumi:"receiverType"`
+	// Repeat interval in minutes.
+	RepeatInterval pulumi.IntInput `pulumi:"repeatInterval"`
+	// Effective end time (24-hour format HH:mm:ss).
+	TimeRangeEnd pulumi.StringInput `pulumi:"timeRangeEnd"`
+	// Effective start time (24-hour format HH:mm:ss).
+	TimeRangeStart pulumi.StringInput `pulumi:"timeRangeStart"`
+	// List of webhook callbacks.
+	WebCallbacks GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArrayInput `pulumi:"webCallbacks"`
+}
+
+func (GetAlarmNoticesAlarmNoticeNoticeRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAlarmNoticesAlarmNoticeNoticeRule)(nil)).Elem()
+}
+
+func (i GetAlarmNoticesAlarmNoticeNoticeRuleArgs) ToGetAlarmNoticesAlarmNoticeNoticeRuleOutput() GetAlarmNoticesAlarmNoticeNoticeRuleOutput {
+	return i.ToGetAlarmNoticesAlarmNoticeNoticeRuleOutputWithContext(context.Background())
+}
+
+func (i GetAlarmNoticesAlarmNoticeNoticeRuleArgs) ToGetAlarmNoticesAlarmNoticeNoticeRuleOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeNoticeRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAlarmNoticesAlarmNoticeNoticeRuleOutput)
+}
+
+// GetAlarmNoticesAlarmNoticeNoticeRuleArrayInput is an input type that accepts GetAlarmNoticesAlarmNoticeNoticeRuleArray and GetAlarmNoticesAlarmNoticeNoticeRuleArrayOutput values.
+// You can construct a concrete instance of `GetAlarmNoticesAlarmNoticeNoticeRuleArrayInput` via:
+//
+//	GetAlarmNoticesAlarmNoticeNoticeRuleArray{ GetAlarmNoticesAlarmNoticeNoticeRuleArgs{...} }
+type GetAlarmNoticesAlarmNoticeNoticeRuleArrayInput interface {
+	pulumi.Input
+
+	ToGetAlarmNoticesAlarmNoticeNoticeRuleArrayOutput() GetAlarmNoticesAlarmNoticeNoticeRuleArrayOutput
+	ToGetAlarmNoticesAlarmNoticeNoticeRuleArrayOutputWithContext(context.Context) GetAlarmNoticesAlarmNoticeNoticeRuleArrayOutput
+}
+
+type GetAlarmNoticesAlarmNoticeNoticeRuleArray []GetAlarmNoticesAlarmNoticeNoticeRuleInput
+
+func (GetAlarmNoticesAlarmNoticeNoticeRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAlarmNoticesAlarmNoticeNoticeRule)(nil)).Elem()
+}
+
+func (i GetAlarmNoticesAlarmNoticeNoticeRuleArray) ToGetAlarmNoticesAlarmNoticeNoticeRuleArrayOutput() GetAlarmNoticesAlarmNoticeNoticeRuleArrayOutput {
+	return i.ToGetAlarmNoticesAlarmNoticeNoticeRuleArrayOutputWithContext(context.Background())
+}
+
+func (i GetAlarmNoticesAlarmNoticeNoticeRuleArray) ToGetAlarmNoticesAlarmNoticeNoticeRuleArrayOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeNoticeRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAlarmNoticesAlarmNoticeNoticeRuleArrayOutput)
+}
+
+type GetAlarmNoticesAlarmNoticeNoticeRuleOutput struct{ *pulumi.OutputState }
+
+func (GetAlarmNoticesAlarmNoticeNoticeRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAlarmNoticesAlarmNoticeNoticeRule)(nil)).Elem()
+}
+
+func (o GetAlarmNoticesAlarmNoticeNoticeRuleOutput) ToGetAlarmNoticesAlarmNoticeNoticeRuleOutput() GetAlarmNoticesAlarmNoticeNoticeRuleOutput {
+	return o
+}
+
+func (o GetAlarmNoticesAlarmNoticeNoticeRuleOutput) ToGetAlarmNoticesAlarmNoticeNoticeRuleOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeNoticeRuleOutput {
+	return o
+}
+
+// Days of week (0-6, 0 is Sunday).
+func (o GetAlarmNoticesAlarmNoticeNoticeRuleOutput) DayOfWeeks() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeNoticeRule) []int { return v.DayOfWeeks }).(pulumi.IntArrayOutput)
+}
+
+// Jump domain.
+func (o GetAlarmNoticesAlarmNoticeNoticeRuleOutput) JumpDomain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeNoticeRule) string { return v.JumpDomain }).(pulumi.StringOutput)
+}
+
+// Notice receivers for this rule.
+func (o GetAlarmNoticesAlarmNoticeNoticeRuleOutput) NoticeReceivers() GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArrayOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeNoticeRule) []GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiver {
+		return v.NoticeReceivers
+	}).(GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArrayOutput)
+}
+
+// Notification ways.
+func (o GetAlarmNoticesAlarmNoticeNoticeRuleOutput) NotifyWays() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeNoticeRule) []string { return v.NotifyWays }).(pulumi.StringArrayOutput)
+}
+
+// Receiver type.
+func (o GetAlarmNoticesAlarmNoticeNoticeRuleOutput) ReceiverType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeNoticeRule) string { return v.ReceiverType }).(pulumi.StringOutput)
+}
+
+// Repeat interval in minutes.
+func (o GetAlarmNoticesAlarmNoticeNoticeRuleOutput) RepeatInterval() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeNoticeRule) int { return v.RepeatInterval }).(pulumi.IntOutput)
+}
+
+// Effective end time (24-hour format HH:mm:ss).
+func (o GetAlarmNoticesAlarmNoticeNoticeRuleOutput) TimeRangeEnd() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeNoticeRule) string { return v.TimeRangeEnd }).(pulumi.StringOutput)
+}
+
+// Effective start time (24-hour format HH:mm:ss).
+func (o GetAlarmNoticesAlarmNoticeNoticeRuleOutput) TimeRangeStart() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeNoticeRule) string { return v.TimeRangeStart }).(pulumi.StringOutput)
+}
+
+// List of webhook callbacks.
+func (o GetAlarmNoticesAlarmNoticeNoticeRuleOutput) WebCallbacks() GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArrayOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeNoticeRule) []GetAlarmNoticesAlarmNoticeNoticeRuleWebCallback {
+		return v.WebCallbacks
+	}).(GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArrayOutput)
+}
+
+type GetAlarmNoticesAlarmNoticeNoticeRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAlarmNoticesAlarmNoticeNoticeRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAlarmNoticesAlarmNoticeNoticeRule)(nil)).Elem()
+}
+
+func (o GetAlarmNoticesAlarmNoticeNoticeRuleArrayOutput) ToGetAlarmNoticesAlarmNoticeNoticeRuleArrayOutput() GetAlarmNoticesAlarmNoticeNoticeRuleArrayOutput {
+	return o
+}
+
+func (o GetAlarmNoticesAlarmNoticeNoticeRuleArrayOutput) ToGetAlarmNoticesAlarmNoticeNoticeRuleArrayOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeNoticeRuleArrayOutput {
+	return o
+}
+
+func (o GetAlarmNoticesAlarmNoticeNoticeRuleArrayOutput) Index(i pulumi.IntInput) GetAlarmNoticesAlarmNoticeNoticeRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAlarmNoticesAlarmNoticeNoticeRule {
+		return vs[0].([]GetAlarmNoticesAlarmNoticeNoticeRule)[vs[1].(int)]
+	}).(GetAlarmNoticesAlarmNoticeNoticeRuleOutput)
+}
+
+type GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiver struct {
+	// End time.
+	EndTime string `pulumi:"endTime"`
+	// Index order.
+	Index int `pulumi:"index"`
+	// Notification channels.
+	ReceiverChannels []string `pulumi:"receiverChannels"`
+	// Receiver IDs.
+	ReceiverIds []int `pulumi:"receiverIds"`
+	// Receiver type.
+	ReceiverType string `pulumi:"receiverType"`
+	// Start time.
+	StartTime string `pulumi:"startTime"`
+}
+
+// GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverInput is an input type that accepts GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArgs and GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverOutput values.
+// You can construct a concrete instance of `GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverInput` via:
+//
+//	GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArgs{...}
+type GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverInput interface {
+	pulumi.Input
+
+	ToGetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverOutput() GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverOutput
+	ToGetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverOutputWithContext(context.Context) GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverOutput
+}
+
+type GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArgs struct {
+	// End time.
+	EndTime pulumi.StringInput `pulumi:"endTime"`
+	// Index order.
+	Index pulumi.IntInput `pulumi:"index"`
+	// Notification channels.
+	ReceiverChannels pulumi.StringArrayInput `pulumi:"receiverChannels"`
+	// Receiver IDs.
+	ReceiverIds pulumi.IntArrayInput `pulumi:"receiverIds"`
+	// Receiver type.
+	ReceiverType pulumi.StringInput `pulumi:"receiverType"`
+	// Start time.
+	StartTime pulumi.StringInput `pulumi:"startTime"`
+}
+
+func (GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiver)(nil)).Elem()
+}
+
+func (i GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArgs) ToGetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverOutput() GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverOutput {
+	return i.ToGetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverOutputWithContext(context.Background())
+}
+
+func (i GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArgs) ToGetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverOutput)
+}
+
+// GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArrayInput is an input type that accepts GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArray and GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArrayOutput values.
+// You can construct a concrete instance of `GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArrayInput` via:
+//
+//	GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArray{ GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArgs{...} }
+type GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArrayInput interface {
+	pulumi.Input
+
+	ToGetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArrayOutput() GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArrayOutput
+	ToGetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArrayOutputWithContext(context.Context) GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArrayOutput
+}
+
+type GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArray []GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverInput
+
+func (GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiver)(nil)).Elem()
+}
+
+func (i GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArray) ToGetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArrayOutput() GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArrayOutput {
+	return i.ToGetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArrayOutputWithContext(context.Background())
+}
+
+func (i GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArray) ToGetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArrayOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArrayOutput)
+}
+
+type GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverOutput struct{ *pulumi.OutputState }
+
+func (GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiver)(nil)).Elem()
+}
+
+func (o GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverOutput) ToGetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverOutput() GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverOutput {
+	return o
+}
+
+func (o GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverOutput) ToGetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverOutput {
+	return o
+}
+
+// End time.
+func (o GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverOutput) EndTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiver) string { return v.EndTime }).(pulumi.StringOutput)
+}
+
+// Index order.
+func (o GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverOutput) Index() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiver) int { return v.Index }).(pulumi.IntOutput)
+}
+
+// Notification channels.
+func (o GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverOutput) ReceiverChannels() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiver) []string { return v.ReceiverChannels }).(pulumi.StringArrayOutput)
+}
+
+// Receiver IDs.
+func (o GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverOutput) ReceiverIds() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiver) []int { return v.ReceiverIds }).(pulumi.IntArrayOutput)
+}
+
+// Receiver type.
+func (o GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverOutput) ReceiverType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiver) string { return v.ReceiverType }).(pulumi.StringOutput)
+}
+
+// Start time.
+func (o GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverOutput) StartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiver) string { return v.StartTime }).(pulumi.StringOutput)
+}
+
+type GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiver)(nil)).Elem()
+}
+
+func (o GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArrayOutput) ToGetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArrayOutput() GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArrayOutput {
+	return o
+}
+
+func (o GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArrayOutput) ToGetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArrayOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArrayOutput {
+	return o
+}
+
+func (o GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArrayOutput) Index(i pulumi.IntInput) GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiver {
+		return vs[0].([]GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiver)[vs[1].(int)]
+	}).(GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverOutput)
+}
+
+type GetAlarmNoticesAlarmNoticeNoticeRuleWebCallback struct {
+	// Request body.
+	Body string `pulumi:"body"`
+	// Callback type. WeCom or Http or DingTalk or Lark or Webhook.
+	CallbackType string `pulumi:"callbackType"`
+	// Request headers.
+	Headers []string `pulumi:"headers"`
+	// Index order.
+	Index int `pulumi:"index"`
+	// HTTP method. GET or POST.
+	Method string `pulumi:"method"`
+	// Callback URL.
+	Url string `pulumi:"url"`
+}
+
+// GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackInput is an input type that accepts GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArgs and GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackOutput values.
+// You can construct a concrete instance of `GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackInput` via:
+//
+//	GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArgs{...}
+type GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackInput interface {
+	pulumi.Input
+
+	ToGetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackOutput() GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackOutput
+	ToGetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackOutputWithContext(context.Context) GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackOutput
+}
+
+type GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArgs struct {
+	// Request body.
+	Body pulumi.StringInput `pulumi:"body"`
+	// Callback type. WeCom or Http or DingTalk or Lark or Webhook.
+	CallbackType pulumi.StringInput `pulumi:"callbackType"`
+	// Request headers.
+	Headers pulumi.StringArrayInput `pulumi:"headers"`
+	// Index order.
+	Index pulumi.IntInput `pulumi:"index"`
+	// HTTP method. GET or POST.
+	Method pulumi.StringInput `pulumi:"method"`
+	// Callback URL.
+	Url pulumi.StringInput `pulumi:"url"`
+}
+
+func (GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAlarmNoticesAlarmNoticeNoticeRuleWebCallback)(nil)).Elem()
+}
+
+func (i GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArgs) ToGetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackOutput() GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackOutput {
+	return i.ToGetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackOutputWithContext(context.Background())
+}
+
+func (i GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArgs) ToGetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackOutput)
+}
+
+// GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArrayInput is an input type that accepts GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArray and GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArrayOutput values.
+// You can construct a concrete instance of `GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArrayInput` via:
+//
+//	GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArray{ GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArgs{...} }
+type GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArrayInput interface {
+	pulumi.Input
+
+	ToGetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArrayOutput() GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArrayOutput
+	ToGetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArrayOutputWithContext(context.Context) GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArrayOutput
+}
+
+type GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArray []GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackInput
+
+func (GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAlarmNoticesAlarmNoticeNoticeRuleWebCallback)(nil)).Elem()
+}
+
+func (i GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArray) ToGetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArrayOutput() GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArrayOutput {
+	return i.ToGetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArrayOutputWithContext(context.Background())
+}
+
+func (i GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArray) ToGetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArrayOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArrayOutput)
+}
+
+type GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackOutput struct{ *pulumi.OutputState }
+
+func (GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAlarmNoticesAlarmNoticeNoticeRuleWebCallback)(nil)).Elem()
+}
+
+func (o GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackOutput) ToGetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackOutput() GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackOutput {
+	return o
+}
+
+func (o GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackOutput) ToGetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackOutput {
+	return o
+}
+
+// Request body.
+func (o GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackOutput) Body() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeNoticeRuleWebCallback) string { return v.Body }).(pulumi.StringOutput)
+}
+
+// Callback type. WeCom or Http or DingTalk or Lark or Webhook.
+func (o GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackOutput) CallbackType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeNoticeRuleWebCallback) string { return v.CallbackType }).(pulumi.StringOutput)
+}
+
+// Request headers.
+func (o GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackOutput) Headers() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeNoticeRuleWebCallback) []string { return v.Headers }).(pulumi.StringArrayOutput)
+}
+
+// Index order.
+func (o GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackOutput) Index() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeNoticeRuleWebCallback) int { return v.Index }).(pulumi.IntOutput)
+}
+
+// HTTP method. GET or POST.
+func (o GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackOutput) Method() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeNoticeRuleWebCallback) string { return v.Method }).(pulumi.StringOutput)
+}
+
+// Callback URL.
+func (o GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeNoticeRuleWebCallback) string { return v.Url }).(pulumi.StringOutput)
+}
+
+type GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAlarmNoticesAlarmNoticeNoticeRuleWebCallback)(nil)).Elem()
+}
+
+func (o GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArrayOutput) ToGetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArrayOutput() GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArrayOutput {
+	return o
+}
+
+func (o GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArrayOutput) ToGetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArrayOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArrayOutput {
+	return o
+}
+
+func (o GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArrayOutput) Index(i pulumi.IntInput) GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAlarmNoticesAlarmNoticeNoticeRuleWebCallback {
+		return vs[0].([]GetAlarmNoticesAlarmNoticeNoticeRuleWebCallback)[vs[1].(int)]
+	}).(GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackOutput)
+}
+
+type GetAlarmNoticesAlarmNoticeTag struct {
+	// Tag key.
+	Key string `pulumi:"key"`
+	// Tag value.
+	Value string `pulumi:"value"`
+}
+
+// GetAlarmNoticesAlarmNoticeTagInput is an input type that accepts GetAlarmNoticesAlarmNoticeTagArgs and GetAlarmNoticesAlarmNoticeTagOutput values.
+// You can construct a concrete instance of `GetAlarmNoticesAlarmNoticeTagInput` via:
+//
+//	GetAlarmNoticesAlarmNoticeTagArgs{...}
+type GetAlarmNoticesAlarmNoticeTagInput interface {
+	pulumi.Input
+
+	ToGetAlarmNoticesAlarmNoticeTagOutput() GetAlarmNoticesAlarmNoticeTagOutput
+	ToGetAlarmNoticesAlarmNoticeTagOutputWithContext(context.Context) GetAlarmNoticesAlarmNoticeTagOutput
+}
+
+type GetAlarmNoticesAlarmNoticeTagArgs struct {
+	// Tag key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Tag value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetAlarmNoticesAlarmNoticeTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAlarmNoticesAlarmNoticeTag)(nil)).Elem()
+}
+
+func (i GetAlarmNoticesAlarmNoticeTagArgs) ToGetAlarmNoticesAlarmNoticeTagOutput() GetAlarmNoticesAlarmNoticeTagOutput {
+	return i.ToGetAlarmNoticesAlarmNoticeTagOutputWithContext(context.Background())
+}
+
+func (i GetAlarmNoticesAlarmNoticeTagArgs) ToGetAlarmNoticesAlarmNoticeTagOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAlarmNoticesAlarmNoticeTagOutput)
+}
+
+// GetAlarmNoticesAlarmNoticeTagArrayInput is an input type that accepts GetAlarmNoticesAlarmNoticeTagArray and GetAlarmNoticesAlarmNoticeTagArrayOutput values.
+// You can construct a concrete instance of `GetAlarmNoticesAlarmNoticeTagArrayInput` via:
+//
+//	GetAlarmNoticesAlarmNoticeTagArray{ GetAlarmNoticesAlarmNoticeTagArgs{...} }
+type GetAlarmNoticesAlarmNoticeTagArrayInput interface {
+	pulumi.Input
+
+	ToGetAlarmNoticesAlarmNoticeTagArrayOutput() GetAlarmNoticesAlarmNoticeTagArrayOutput
+	ToGetAlarmNoticesAlarmNoticeTagArrayOutputWithContext(context.Context) GetAlarmNoticesAlarmNoticeTagArrayOutput
+}
+
+type GetAlarmNoticesAlarmNoticeTagArray []GetAlarmNoticesAlarmNoticeTagInput
+
+func (GetAlarmNoticesAlarmNoticeTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAlarmNoticesAlarmNoticeTag)(nil)).Elem()
+}
+
+func (i GetAlarmNoticesAlarmNoticeTagArray) ToGetAlarmNoticesAlarmNoticeTagArrayOutput() GetAlarmNoticesAlarmNoticeTagArrayOutput {
+	return i.ToGetAlarmNoticesAlarmNoticeTagArrayOutputWithContext(context.Background())
+}
+
+func (i GetAlarmNoticesAlarmNoticeTagArray) ToGetAlarmNoticesAlarmNoticeTagArrayOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAlarmNoticesAlarmNoticeTagArrayOutput)
+}
+
+type GetAlarmNoticesAlarmNoticeTagOutput struct{ *pulumi.OutputState }
+
+func (GetAlarmNoticesAlarmNoticeTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAlarmNoticesAlarmNoticeTag)(nil)).Elem()
+}
+
+func (o GetAlarmNoticesAlarmNoticeTagOutput) ToGetAlarmNoticesAlarmNoticeTagOutput() GetAlarmNoticesAlarmNoticeTagOutput {
+	return o
+}
+
+func (o GetAlarmNoticesAlarmNoticeTagOutput) ToGetAlarmNoticesAlarmNoticeTagOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeTagOutput {
+	return o
+}
+
+// Tag key.
+func (o GetAlarmNoticesAlarmNoticeTagOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeTag) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o GetAlarmNoticesAlarmNoticeTagOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeTag) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetAlarmNoticesAlarmNoticeTagArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAlarmNoticesAlarmNoticeTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAlarmNoticesAlarmNoticeTag)(nil)).Elem()
+}
+
+func (o GetAlarmNoticesAlarmNoticeTagArrayOutput) ToGetAlarmNoticesAlarmNoticeTagArrayOutput() GetAlarmNoticesAlarmNoticeTagArrayOutput {
+	return o
+}
+
+func (o GetAlarmNoticesAlarmNoticeTagArrayOutput) ToGetAlarmNoticesAlarmNoticeTagArrayOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeTagArrayOutput {
+	return o
+}
+
+func (o GetAlarmNoticesAlarmNoticeTagArrayOutput) Index(i pulumi.IntInput) GetAlarmNoticesAlarmNoticeTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAlarmNoticesAlarmNoticeTag {
+		return vs[0].([]GetAlarmNoticesAlarmNoticeTag)[vs[1].(int)]
+	}).(GetAlarmNoticesAlarmNoticeTagOutput)
+}
+
+type GetAlarmNoticesAlarmNoticeWebCallback struct {
+	// Request body.
+	Body string `pulumi:"body"`
+	// Callback type. WeCom or Http or DingTalk or Lark or Webhook.
+	CallbackType string `pulumi:"callbackType"`
+	// Request headers.
+	Headers []string `pulumi:"headers"`
+	// Index order.
+	Index int `pulumi:"index"`
+	// HTTP method. GET or POST.
+	Method string `pulumi:"method"`
+	// Callback URL.
+	Url string `pulumi:"url"`
+}
+
+// GetAlarmNoticesAlarmNoticeWebCallbackInput is an input type that accepts GetAlarmNoticesAlarmNoticeWebCallbackArgs and GetAlarmNoticesAlarmNoticeWebCallbackOutput values.
+// You can construct a concrete instance of `GetAlarmNoticesAlarmNoticeWebCallbackInput` via:
+//
+//	GetAlarmNoticesAlarmNoticeWebCallbackArgs{...}
+type GetAlarmNoticesAlarmNoticeWebCallbackInput interface {
+	pulumi.Input
+
+	ToGetAlarmNoticesAlarmNoticeWebCallbackOutput() GetAlarmNoticesAlarmNoticeWebCallbackOutput
+	ToGetAlarmNoticesAlarmNoticeWebCallbackOutputWithContext(context.Context) GetAlarmNoticesAlarmNoticeWebCallbackOutput
+}
+
+type GetAlarmNoticesAlarmNoticeWebCallbackArgs struct {
+	// Request body.
+	Body pulumi.StringInput `pulumi:"body"`
+	// Callback type. WeCom or Http or DingTalk or Lark or Webhook.
+	CallbackType pulumi.StringInput `pulumi:"callbackType"`
+	// Request headers.
+	Headers pulumi.StringArrayInput `pulumi:"headers"`
+	// Index order.
+	Index pulumi.IntInput `pulumi:"index"`
+	// HTTP method. GET or POST.
+	Method pulumi.StringInput `pulumi:"method"`
+	// Callback URL.
+	Url pulumi.StringInput `pulumi:"url"`
+}
+
+func (GetAlarmNoticesAlarmNoticeWebCallbackArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAlarmNoticesAlarmNoticeWebCallback)(nil)).Elem()
+}
+
+func (i GetAlarmNoticesAlarmNoticeWebCallbackArgs) ToGetAlarmNoticesAlarmNoticeWebCallbackOutput() GetAlarmNoticesAlarmNoticeWebCallbackOutput {
+	return i.ToGetAlarmNoticesAlarmNoticeWebCallbackOutputWithContext(context.Background())
+}
+
+func (i GetAlarmNoticesAlarmNoticeWebCallbackArgs) ToGetAlarmNoticesAlarmNoticeWebCallbackOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeWebCallbackOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAlarmNoticesAlarmNoticeWebCallbackOutput)
+}
+
+// GetAlarmNoticesAlarmNoticeWebCallbackArrayInput is an input type that accepts GetAlarmNoticesAlarmNoticeWebCallbackArray and GetAlarmNoticesAlarmNoticeWebCallbackArrayOutput values.
+// You can construct a concrete instance of `GetAlarmNoticesAlarmNoticeWebCallbackArrayInput` via:
+//
+//	GetAlarmNoticesAlarmNoticeWebCallbackArray{ GetAlarmNoticesAlarmNoticeWebCallbackArgs{...} }
+type GetAlarmNoticesAlarmNoticeWebCallbackArrayInput interface {
+	pulumi.Input
+
+	ToGetAlarmNoticesAlarmNoticeWebCallbackArrayOutput() GetAlarmNoticesAlarmNoticeWebCallbackArrayOutput
+	ToGetAlarmNoticesAlarmNoticeWebCallbackArrayOutputWithContext(context.Context) GetAlarmNoticesAlarmNoticeWebCallbackArrayOutput
+}
+
+type GetAlarmNoticesAlarmNoticeWebCallbackArray []GetAlarmNoticesAlarmNoticeWebCallbackInput
+
+func (GetAlarmNoticesAlarmNoticeWebCallbackArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAlarmNoticesAlarmNoticeWebCallback)(nil)).Elem()
+}
+
+func (i GetAlarmNoticesAlarmNoticeWebCallbackArray) ToGetAlarmNoticesAlarmNoticeWebCallbackArrayOutput() GetAlarmNoticesAlarmNoticeWebCallbackArrayOutput {
+	return i.ToGetAlarmNoticesAlarmNoticeWebCallbackArrayOutputWithContext(context.Background())
+}
+
+func (i GetAlarmNoticesAlarmNoticeWebCallbackArray) ToGetAlarmNoticesAlarmNoticeWebCallbackArrayOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeWebCallbackArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAlarmNoticesAlarmNoticeWebCallbackArrayOutput)
+}
+
+type GetAlarmNoticesAlarmNoticeWebCallbackOutput struct{ *pulumi.OutputState }
+
+func (GetAlarmNoticesAlarmNoticeWebCallbackOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAlarmNoticesAlarmNoticeWebCallback)(nil)).Elem()
+}
+
+func (o GetAlarmNoticesAlarmNoticeWebCallbackOutput) ToGetAlarmNoticesAlarmNoticeWebCallbackOutput() GetAlarmNoticesAlarmNoticeWebCallbackOutput {
+	return o
+}
+
+func (o GetAlarmNoticesAlarmNoticeWebCallbackOutput) ToGetAlarmNoticesAlarmNoticeWebCallbackOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeWebCallbackOutput {
+	return o
+}
+
+// Request body.
+func (o GetAlarmNoticesAlarmNoticeWebCallbackOutput) Body() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeWebCallback) string { return v.Body }).(pulumi.StringOutput)
+}
+
+// Callback type. WeCom or Http or DingTalk or Lark or Webhook.
+func (o GetAlarmNoticesAlarmNoticeWebCallbackOutput) CallbackType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeWebCallback) string { return v.CallbackType }).(pulumi.StringOutput)
+}
+
+// Request headers.
+func (o GetAlarmNoticesAlarmNoticeWebCallbackOutput) Headers() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeWebCallback) []string { return v.Headers }).(pulumi.StringArrayOutput)
+}
+
+// Index order.
+func (o GetAlarmNoticesAlarmNoticeWebCallbackOutput) Index() pulumi.IntOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeWebCallback) int { return v.Index }).(pulumi.IntOutput)
+}
+
+// HTTP method. GET or POST.
+func (o GetAlarmNoticesAlarmNoticeWebCallbackOutput) Method() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeWebCallback) string { return v.Method }).(pulumi.StringOutput)
+}
+
+// Callback URL.
+func (o GetAlarmNoticesAlarmNoticeWebCallbackOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesAlarmNoticeWebCallback) string { return v.Url }).(pulumi.StringOutput)
+}
+
+type GetAlarmNoticesAlarmNoticeWebCallbackArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAlarmNoticesAlarmNoticeWebCallbackArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAlarmNoticesAlarmNoticeWebCallback)(nil)).Elem()
+}
+
+func (o GetAlarmNoticesAlarmNoticeWebCallbackArrayOutput) ToGetAlarmNoticesAlarmNoticeWebCallbackArrayOutput() GetAlarmNoticesAlarmNoticeWebCallbackArrayOutput {
+	return o
+}
+
+func (o GetAlarmNoticesAlarmNoticeWebCallbackArrayOutput) ToGetAlarmNoticesAlarmNoticeWebCallbackArrayOutputWithContext(ctx context.Context) GetAlarmNoticesAlarmNoticeWebCallbackArrayOutput {
+	return o
+}
+
+func (o GetAlarmNoticesAlarmNoticeWebCallbackArrayOutput) Index(i pulumi.IntInput) GetAlarmNoticesAlarmNoticeWebCallbackOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAlarmNoticesAlarmNoticeWebCallback {
+		return vs[0].([]GetAlarmNoticesAlarmNoticeWebCallback)[vs[1].(int)]
+	}).(GetAlarmNoticesAlarmNoticeWebCallbackOutput)
+}
+
+type GetAlarmNoticesFilter struct {
+	// Filter field name. Supported values: `name` (alarm notice group name), `alarmNoticeId` (alarm notice ID), `uid` (receiver user ID), `groupId` (receiver user group ID), `deliverFlag` (delivery status: 1-not enabled, 2-enabled, 3-abnormal).
+	Key string `pulumi:"key"`
+	// Filter field values.
+	Values []string `pulumi:"values"`
+}
+
+// GetAlarmNoticesFilterInput is an input type that accepts GetAlarmNoticesFilterArgs and GetAlarmNoticesFilterOutput values.
+// You can construct a concrete instance of `GetAlarmNoticesFilterInput` via:
+//
+//	GetAlarmNoticesFilterArgs{...}
+type GetAlarmNoticesFilterInput interface {
+	pulumi.Input
+
+	ToGetAlarmNoticesFilterOutput() GetAlarmNoticesFilterOutput
+	ToGetAlarmNoticesFilterOutputWithContext(context.Context) GetAlarmNoticesFilterOutput
+}
+
+type GetAlarmNoticesFilterArgs struct {
+	// Filter field name. Supported values: `name` (alarm notice group name), `alarmNoticeId` (alarm notice ID), `uid` (receiver user ID), `groupId` (receiver user group ID), `deliverFlag` (delivery status: 1-not enabled, 2-enabled, 3-abnormal).
+	Key pulumi.StringInput `pulumi:"key"`
+	// Filter field values.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetAlarmNoticesFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAlarmNoticesFilter)(nil)).Elem()
+}
+
+func (i GetAlarmNoticesFilterArgs) ToGetAlarmNoticesFilterOutput() GetAlarmNoticesFilterOutput {
+	return i.ToGetAlarmNoticesFilterOutputWithContext(context.Background())
+}
+
+func (i GetAlarmNoticesFilterArgs) ToGetAlarmNoticesFilterOutputWithContext(ctx context.Context) GetAlarmNoticesFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAlarmNoticesFilterOutput)
+}
+
+// GetAlarmNoticesFilterArrayInput is an input type that accepts GetAlarmNoticesFilterArray and GetAlarmNoticesFilterArrayOutput values.
+// You can construct a concrete instance of `GetAlarmNoticesFilterArrayInput` via:
+//
+//	GetAlarmNoticesFilterArray{ GetAlarmNoticesFilterArgs{...} }
+type GetAlarmNoticesFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetAlarmNoticesFilterArrayOutput() GetAlarmNoticesFilterArrayOutput
+	ToGetAlarmNoticesFilterArrayOutputWithContext(context.Context) GetAlarmNoticesFilterArrayOutput
+}
+
+type GetAlarmNoticesFilterArray []GetAlarmNoticesFilterInput
+
+func (GetAlarmNoticesFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAlarmNoticesFilter)(nil)).Elem()
+}
+
+func (i GetAlarmNoticesFilterArray) ToGetAlarmNoticesFilterArrayOutput() GetAlarmNoticesFilterArrayOutput {
+	return i.ToGetAlarmNoticesFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetAlarmNoticesFilterArray) ToGetAlarmNoticesFilterArrayOutputWithContext(ctx context.Context) GetAlarmNoticesFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAlarmNoticesFilterArrayOutput)
+}
+
+type GetAlarmNoticesFilterOutput struct{ *pulumi.OutputState }
+
+func (GetAlarmNoticesFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAlarmNoticesFilter)(nil)).Elem()
+}
+
+func (o GetAlarmNoticesFilterOutput) ToGetAlarmNoticesFilterOutput() GetAlarmNoticesFilterOutput {
+	return o
+}
+
+func (o GetAlarmNoticesFilterOutput) ToGetAlarmNoticesFilterOutputWithContext(ctx context.Context) GetAlarmNoticesFilterOutput {
+	return o
+}
+
+// Filter field name. Supported values: `name` (alarm notice group name), `alarmNoticeId` (alarm notice ID), `uid` (receiver user ID), `groupId` (receiver user group ID), `deliverFlag` (delivery status: 1-not enabled, 2-enabled, 3-abnormal).
+func (o GetAlarmNoticesFilterOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAlarmNoticesFilter) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Filter field values.
+func (o GetAlarmNoticesFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetAlarmNoticesFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetAlarmNoticesFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAlarmNoticesFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAlarmNoticesFilter)(nil)).Elem()
+}
+
+func (o GetAlarmNoticesFilterArrayOutput) ToGetAlarmNoticesFilterArrayOutput() GetAlarmNoticesFilterArrayOutput {
+	return o
+}
+
+func (o GetAlarmNoticesFilterArrayOutput) ToGetAlarmNoticesFilterArrayOutputWithContext(ctx context.Context) GetAlarmNoticesFilterArrayOutput {
+	return o
+}
+
+func (o GetAlarmNoticesFilterArrayOutput) Index(i pulumi.IntInput) GetAlarmNoticesFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAlarmNoticesFilter {
+		return vs[0].([]GetAlarmNoticesFilter)[vs[1].(int)]
+	}).(GetAlarmNoticesFilterOutput)
 }
 
 type GetLogsetsFilter struct {
@@ -9866,6 +19080,628 @@ func (o GetMachineGroupConfigsConfigExtractRuleMetaTagArrayOutput) Index(i pulum
 	}).(GetMachineGroupConfigsConfigExtractRuleMetaTagOutput)
 }
 
+type GetMachineGroupsFilter struct {
+	// Filter field name.
+	Name string `pulumi:"name"`
+	// Filter field values.
+	Values []string `pulumi:"values"`
+}
+
+// GetMachineGroupsFilterInput is an input type that accepts GetMachineGroupsFilterArgs and GetMachineGroupsFilterOutput values.
+// You can construct a concrete instance of `GetMachineGroupsFilterInput` via:
+//
+//	GetMachineGroupsFilterArgs{...}
+type GetMachineGroupsFilterInput interface {
+	pulumi.Input
+
+	ToGetMachineGroupsFilterOutput() GetMachineGroupsFilterOutput
+	ToGetMachineGroupsFilterOutputWithContext(context.Context) GetMachineGroupsFilterOutput
+}
+
+type GetMachineGroupsFilterArgs struct {
+	// Filter field name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Filter field values.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetMachineGroupsFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMachineGroupsFilter)(nil)).Elem()
+}
+
+func (i GetMachineGroupsFilterArgs) ToGetMachineGroupsFilterOutput() GetMachineGroupsFilterOutput {
+	return i.ToGetMachineGroupsFilterOutputWithContext(context.Background())
+}
+
+func (i GetMachineGroupsFilterArgs) ToGetMachineGroupsFilterOutputWithContext(ctx context.Context) GetMachineGroupsFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMachineGroupsFilterOutput)
+}
+
+// GetMachineGroupsFilterArrayInput is an input type that accepts GetMachineGroupsFilterArray and GetMachineGroupsFilterArrayOutput values.
+// You can construct a concrete instance of `GetMachineGroupsFilterArrayInput` via:
+//
+//	GetMachineGroupsFilterArray{ GetMachineGroupsFilterArgs{...} }
+type GetMachineGroupsFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetMachineGroupsFilterArrayOutput() GetMachineGroupsFilterArrayOutput
+	ToGetMachineGroupsFilterArrayOutputWithContext(context.Context) GetMachineGroupsFilterArrayOutput
+}
+
+type GetMachineGroupsFilterArray []GetMachineGroupsFilterInput
+
+func (GetMachineGroupsFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMachineGroupsFilter)(nil)).Elem()
+}
+
+func (i GetMachineGroupsFilterArray) ToGetMachineGroupsFilterArrayOutput() GetMachineGroupsFilterArrayOutput {
+	return i.ToGetMachineGroupsFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetMachineGroupsFilterArray) ToGetMachineGroupsFilterArrayOutputWithContext(ctx context.Context) GetMachineGroupsFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMachineGroupsFilterArrayOutput)
+}
+
+type GetMachineGroupsFilterOutput struct{ *pulumi.OutputState }
+
+func (GetMachineGroupsFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMachineGroupsFilter)(nil)).Elem()
+}
+
+func (o GetMachineGroupsFilterOutput) ToGetMachineGroupsFilterOutput() GetMachineGroupsFilterOutput {
+	return o
+}
+
+func (o GetMachineGroupsFilterOutput) ToGetMachineGroupsFilterOutputWithContext(ctx context.Context) GetMachineGroupsFilterOutput {
+	return o
+}
+
+// Filter field name.
+func (o GetMachineGroupsFilterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupsFilter) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Filter field values.
+func (o GetMachineGroupsFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetMachineGroupsFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetMachineGroupsFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetMachineGroupsFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMachineGroupsFilter)(nil)).Elem()
+}
+
+func (o GetMachineGroupsFilterArrayOutput) ToGetMachineGroupsFilterArrayOutput() GetMachineGroupsFilterArrayOutput {
+	return o
+}
+
+func (o GetMachineGroupsFilterArrayOutput) ToGetMachineGroupsFilterArrayOutputWithContext(ctx context.Context) GetMachineGroupsFilterArrayOutput {
+	return o
+}
+
+func (o GetMachineGroupsFilterArrayOutput) Index(i pulumi.IntInput) GetMachineGroupsFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetMachineGroupsFilter {
+		return vs[0].([]GetMachineGroupsFilter)[vs[1].(int)]
+	}).(GetMachineGroupsFilterOutput)
+}
+
+type GetMachineGroupsMachineGroup struct {
+	// Whether machine group auto update is enabled.
+	AutoUpdate string `pulumi:"autoUpdate"`
+	// Creation time.
+	CreateTime string `pulumi:"createTime"`
+	// Machine offline periodic cleanup time, in days.
+	DelayCleanupTime int `pulumi:"delayCleanupTime"`
+	// Machine group ID.
+	GroupId string `pulumi:"groupId"`
+	// Machine group name.
+	GroupName string `pulumi:"groupName"`
+	// Machine group type.
+	MachineGroupTypes []GetMachineGroupsMachineGroupMachineGroupType `pulumi:"machineGroupTypes"`
+	// Machine group metadata tag list.
+	MetaTags []GetMachineGroupsMachineGroupMetaTag `pulumi:"metaTags"`
+	// Operating system type. 0: Linux, 1: Windows.
+	OsType int `pulumi:"osType"`
+	// Whether service logging is enabled.
+	ServiceLogging bool `pulumi:"serviceLogging"`
+	// Tag list.
+	Tags []GetMachineGroupsMachineGroupTag `pulumi:"tags"`
+	// Upgrade end time.
+	UpdateEndTime string `pulumi:"updateEndTime"`
+	// Upgrade start time.
+	UpdateStartTime string `pulumi:"updateStartTime"`
+}
+
+// GetMachineGroupsMachineGroupInput is an input type that accepts GetMachineGroupsMachineGroupArgs and GetMachineGroupsMachineGroupOutput values.
+// You can construct a concrete instance of `GetMachineGroupsMachineGroupInput` via:
+//
+//	GetMachineGroupsMachineGroupArgs{...}
+type GetMachineGroupsMachineGroupInput interface {
+	pulumi.Input
+
+	ToGetMachineGroupsMachineGroupOutput() GetMachineGroupsMachineGroupOutput
+	ToGetMachineGroupsMachineGroupOutputWithContext(context.Context) GetMachineGroupsMachineGroupOutput
+}
+
+type GetMachineGroupsMachineGroupArgs struct {
+	// Whether machine group auto update is enabled.
+	AutoUpdate pulumi.StringInput `pulumi:"autoUpdate"`
+	// Creation time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Machine offline periodic cleanup time, in days.
+	DelayCleanupTime pulumi.IntInput `pulumi:"delayCleanupTime"`
+	// Machine group ID.
+	GroupId pulumi.StringInput `pulumi:"groupId"`
+	// Machine group name.
+	GroupName pulumi.StringInput `pulumi:"groupName"`
+	// Machine group type.
+	MachineGroupTypes GetMachineGroupsMachineGroupMachineGroupTypeArrayInput `pulumi:"machineGroupTypes"`
+	// Machine group metadata tag list.
+	MetaTags GetMachineGroupsMachineGroupMetaTagArrayInput `pulumi:"metaTags"`
+	// Operating system type. 0: Linux, 1: Windows.
+	OsType pulumi.IntInput `pulumi:"osType"`
+	// Whether service logging is enabled.
+	ServiceLogging pulumi.BoolInput `pulumi:"serviceLogging"`
+	// Tag list.
+	Tags GetMachineGroupsMachineGroupTagArrayInput `pulumi:"tags"`
+	// Upgrade end time.
+	UpdateEndTime pulumi.StringInput `pulumi:"updateEndTime"`
+	// Upgrade start time.
+	UpdateStartTime pulumi.StringInput `pulumi:"updateStartTime"`
+}
+
+func (GetMachineGroupsMachineGroupArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMachineGroupsMachineGroup)(nil)).Elem()
+}
+
+func (i GetMachineGroupsMachineGroupArgs) ToGetMachineGroupsMachineGroupOutput() GetMachineGroupsMachineGroupOutput {
+	return i.ToGetMachineGroupsMachineGroupOutputWithContext(context.Background())
+}
+
+func (i GetMachineGroupsMachineGroupArgs) ToGetMachineGroupsMachineGroupOutputWithContext(ctx context.Context) GetMachineGroupsMachineGroupOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMachineGroupsMachineGroupOutput)
+}
+
+// GetMachineGroupsMachineGroupArrayInput is an input type that accepts GetMachineGroupsMachineGroupArray and GetMachineGroupsMachineGroupArrayOutput values.
+// You can construct a concrete instance of `GetMachineGroupsMachineGroupArrayInput` via:
+//
+//	GetMachineGroupsMachineGroupArray{ GetMachineGroupsMachineGroupArgs{...} }
+type GetMachineGroupsMachineGroupArrayInput interface {
+	pulumi.Input
+
+	ToGetMachineGroupsMachineGroupArrayOutput() GetMachineGroupsMachineGroupArrayOutput
+	ToGetMachineGroupsMachineGroupArrayOutputWithContext(context.Context) GetMachineGroupsMachineGroupArrayOutput
+}
+
+type GetMachineGroupsMachineGroupArray []GetMachineGroupsMachineGroupInput
+
+func (GetMachineGroupsMachineGroupArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMachineGroupsMachineGroup)(nil)).Elem()
+}
+
+func (i GetMachineGroupsMachineGroupArray) ToGetMachineGroupsMachineGroupArrayOutput() GetMachineGroupsMachineGroupArrayOutput {
+	return i.ToGetMachineGroupsMachineGroupArrayOutputWithContext(context.Background())
+}
+
+func (i GetMachineGroupsMachineGroupArray) ToGetMachineGroupsMachineGroupArrayOutputWithContext(ctx context.Context) GetMachineGroupsMachineGroupArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMachineGroupsMachineGroupArrayOutput)
+}
+
+type GetMachineGroupsMachineGroupOutput struct{ *pulumi.OutputState }
+
+func (GetMachineGroupsMachineGroupOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMachineGroupsMachineGroup)(nil)).Elem()
+}
+
+func (o GetMachineGroupsMachineGroupOutput) ToGetMachineGroupsMachineGroupOutput() GetMachineGroupsMachineGroupOutput {
+	return o
+}
+
+func (o GetMachineGroupsMachineGroupOutput) ToGetMachineGroupsMachineGroupOutputWithContext(ctx context.Context) GetMachineGroupsMachineGroupOutput {
+	return o
+}
+
+// Whether machine group auto update is enabled.
+func (o GetMachineGroupsMachineGroupOutput) AutoUpdate() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupsMachineGroup) string { return v.AutoUpdate }).(pulumi.StringOutput)
+}
+
+// Creation time.
+func (o GetMachineGroupsMachineGroupOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupsMachineGroup) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Machine offline periodic cleanup time, in days.
+func (o GetMachineGroupsMachineGroupOutput) DelayCleanupTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetMachineGroupsMachineGroup) int { return v.DelayCleanupTime }).(pulumi.IntOutput)
+}
+
+// Machine group ID.
+func (o GetMachineGroupsMachineGroupOutput) GroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupsMachineGroup) string { return v.GroupId }).(pulumi.StringOutput)
+}
+
+// Machine group name.
+func (o GetMachineGroupsMachineGroupOutput) GroupName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupsMachineGroup) string { return v.GroupName }).(pulumi.StringOutput)
+}
+
+// Machine group type.
+func (o GetMachineGroupsMachineGroupOutput) MachineGroupTypes() GetMachineGroupsMachineGroupMachineGroupTypeArrayOutput {
+	return o.ApplyT(func(v GetMachineGroupsMachineGroup) []GetMachineGroupsMachineGroupMachineGroupType {
+		return v.MachineGroupTypes
+	}).(GetMachineGroupsMachineGroupMachineGroupTypeArrayOutput)
+}
+
+// Machine group metadata tag list.
+func (o GetMachineGroupsMachineGroupOutput) MetaTags() GetMachineGroupsMachineGroupMetaTagArrayOutput {
+	return o.ApplyT(func(v GetMachineGroupsMachineGroup) []GetMachineGroupsMachineGroupMetaTag { return v.MetaTags }).(GetMachineGroupsMachineGroupMetaTagArrayOutput)
+}
+
+// Operating system type. 0: Linux, 1: Windows.
+func (o GetMachineGroupsMachineGroupOutput) OsType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetMachineGroupsMachineGroup) int { return v.OsType }).(pulumi.IntOutput)
+}
+
+// Whether service logging is enabled.
+func (o GetMachineGroupsMachineGroupOutput) ServiceLogging() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetMachineGroupsMachineGroup) bool { return v.ServiceLogging }).(pulumi.BoolOutput)
+}
+
+// Tag list.
+func (o GetMachineGroupsMachineGroupOutput) Tags() GetMachineGroupsMachineGroupTagArrayOutput {
+	return o.ApplyT(func(v GetMachineGroupsMachineGroup) []GetMachineGroupsMachineGroupTag { return v.Tags }).(GetMachineGroupsMachineGroupTagArrayOutput)
+}
+
+// Upgrade end time.
+func (o GetMachineGroupsMachineGroupOutput) UpdateEndTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupsMachineGroup) string { return v.UpdateEndTime }).(pulumi.StringOutput)
+}
+
+// Upgrade start time.
+func (o GetMachineGroupsMachineGroupOutput) UpdateStartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupsMachineGroup) string { return v.UpdateStartTime }).(pulumi.StringOutput)
+}
+
+type GetMachineGroupsMachineGroupArrayOutput struct{ *pulumi.OutputState }
+
+func (GetMachineGroupsMachineGroupArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMachineGroupsMachineGroup)(nil)).Elem()
+}
+
+func (o GetMachineGroupsMachineGroupArrayOutput) ToGetMachineGroupsMachineGroupArrayOutput() GetMachineGroupsMachineGroupArrayOutput {
+	return o
+}
+
+func (o GetMachineGroupsMachineGroupArrayOutput) ToGetMachineGroupsMachineGroupArrayOutputWithContext(ctx context.Context) GetMachineGroupsMachineGroupArrayOutput {
+	return o
+}
+
+func (o GetMachineGroupsMachineGroupArrayOutput) Index(i pulumi.IntInput) GetMachineGroupsMachineGroupOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetMachineGroupsMachineGroup {
+		return vs[0].([]GetMachineGroupsMachineGroup)[vs[1].(int)]
+	}).(GetMachineGroupsMachineGroupOutput)
+}
+
+type GetMachineGroupsMachineGroupMachineGroupType struct {
+	// Machine group type. Valid values: `ip`, `label`.
+	Type string `pulumi:"type"`
+	// Machine description list.
+	Values []string `pulumi:"values"`
+}
+
+// GetMachineGroupsMachineGroupMachineGroupTypeInput is an input type that accepts GetMachineGroupsMachineGroupMachineGroupTypeArgs and GetMachineGroupsMachineGroupMachineGroupTypeOutput values.
+// You can construct a concrete instance of `GetMachineGroupsMachineGroupMachineGroupTypeInput` via:
+//
+//	GetMachineGroupsMachineGroupMachineGroupTypeArgs{...}
+type GetMachineGroupsMachineGroupMachineGroupTypeInput interface {
+	pulumi.Input
+
+	ToGetMachineGroupsMachineGroupMachineGroupTypeOutput() GetMachineGroupsMachineGroupMachineGroupTypeOutput
+	ToGetMachineGroupsMachineGroupMachineGroupTypeOutputWithContext(context.Context) GetMachineGroupsMachineGroupMachineGroupTypeOutput
+}
+
+type GetMachineGroupsMachineGroupMachineGroupTypeArgs struct {
+	// Machine group type. Valid values: `ip`, `label`.
+	Type pulumi.StringInput `pulumi:"type"`
+	// Machine description list.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetMachineGroupsMachineGroupMachineGroupTypeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMachineGroupsMachineGroupMachineGroupType)(nil)).Elem()
+}
+
+func (i GetMachineGroupsMachineGroupMachineGroupTypeArgs) ToGetMachineGroupsMachineGroupMachineGroupTypeOutput() GetMachineGroupsMachineGroupMachineGroupTypeOutput {
+	return i.ToGetMachineGroupsMachineGroupMachineGroupTypeOutputWithContext(context.Background())
+}
+
+func (i GetMachineGroupsMachineGroupMachineGroupTypeArgs) ToGetMachineGroupsMachineGroupMachineGroupTypeOutputWithContext(ctx context.Context) GetMachineGroupsMachineGroupMachineGroupTypeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMachineGroupsMachineGroupMachineGroupTypeOutput)
+}
+
+// GetMachineGroupsMachineGroupMachineGroupTypeArrayInput is an input type that accepts GetMachineGroupsMachineGroupMachineGroupTypeArray and GetMachineGroupsMachineGroupMachineGroupTypeArrayOutput values.
+// You can construct a concrete instance of `GetMachineGroupsMachineGroupMachineGroupTypeArrayInput` via:
+//
+//	GetMachineGroupsMachineGroupMachineGroupTypeArray{ GetMachineGroupsMachineGroupMachineGroupTypeArgs{...} }
+type GetMachineGroupsMachineGroupMachineGroupTypeArrayInput interface {
+	pulumi.Input
+
+	ToGetMachineGroupsMachineGroupMachineGroupTypeArrayOutput() GetMachineGroupsMachineGroupMachineGroupTypeArrayOutput
+	ToGetMachineGroupsMachineGroupMachineGroupTypeArrayOutputWithContext(context.Context) GetMachineGroupsMachineGroupMachineGroupTypeArrayOutput
+}
+
+type GetMachineGroupsMachineGroupMachineGroupTypeArray []GetMachineGroupsMachineGroupMachineGroupTypeInput
+
+func (GetMachineGroupsMachineGroupMachineGroupTypeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMachineGroupsMachineGroupMachineGroupType)(nil)).Elem()
+}
+
+func (i GetMachineGroupsMachineGroupMachineGroupTypeArray) ToGetMachineGroupsMachineGroupMachineGroupTypeArrayOutput() GetMachineGroupsMachineGroupMachineGroupTypeArrayOutput {
+	return i.ToGetMachineGroupsMachineGroupMachineGroupTypeArrayOutputWithContext(context.Background())
+}
+
+func (i GetMachineGroupsMachineGroupMachineGroupTypeArray) ToGetMachineGroupsMachineGroupMachineGroupTypeArrayOutputWithContext(ctx context.Context) GetMachineGroupsMachineGroupMachineGroupTypeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMachineGroupsMachineGroupMachineGroupTypeArrayOutput)
+}
+
+type GetMachineGroupsMachineGroupMachineGroupTypeOutput struct{ *pulumi.OutputState }
+
+func (GetMachineGroupsMachineGroupMachineGroupTypeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMachineGroupsMachineGroupMachineGroupType)(nil)).Elem()
+}
+
+func (o GetMachineGroupsMachineGroupMachineGroupTypeOutput) ToGetMachineGroupsMachineGroupMachineGroupTypeOutput() GetMachineGroupsMachineGroupMachineGroupTypeOutput {
+	return o
+}
+
+func (o GetMachineGroupsMachineGroupMachineGroupTypeOutput) ToGetMachineGroupsMachineGroupMachineGroupTypeOutputWithContext(ctx context.Context) GetMachineGroupsMachineGroupMachineGroupTypeOutput {
+	return o
+}
+
+// Machine group type. Valid values: `ip`, `label`.
+func (o GetMachineGroupsMachineGroupMachineGroupTypeOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupsMachineGroupMachineGroupType) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// Machine description list.
+func (o GetMachineGroupsMachineGroupMachineGroupTypeOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetMachineGroupsMachineGroupMachineGroupType) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetMachineGroupsMachineGroupMachineGroupTypeArrayOutput struct{ *pulumi.OutputState }
+
+func (GetMachineGroupsMachineGroupMachineGroupTypeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMachineGroupsMachineGroupMachineGroupType)(nil)).Elem()
+}
+
+func (o GetMachineGroupsMachineGroupMachineGroupTypeArrayOutput) ToGetMachineGroupsMachineGroupMachineGroupTypeArrayOutput() GetMachineGroupsMachineGroupMachineGroupTypeArrayOutput {
+	return o
+}
+
+func (o GetMachineGroupsMachineGroupMachineGroupTypeArrayOutput) ToGetMachineGroupsMachineGroupMachineGroupTypeArrayOutputWithContext(ctx context.Context) GetMachineGroupsMachineGroupMachineGroupTypeArrayOutput {
+	return o
+}
+
+func (o GetMachineGroupsMachineGroupMachineGroupTypeArrayOutput) Index(i pulumi.IntInput) GetMachineGroupsMachineGroupMachineGroupTypeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetMachineGroupsMachineGroupMachineGroupType {
+		return vs[0].([]GetMachineGroupsMachineGroupMachineGroupType)[vs[1].(int)]
+	}).(GetMachineGroupsMachineGroupMachineGroupTypeOutput)
+}
+
+type GetMachineGroupsMachineGroupMetaTag struct {
+	// Tag key.
+	Key string `pulumi:"key"`
+	// Tag value.
+	Value string `pulumi:"value"`
+}
+
+// GetMachineGroupsMachineGroupMetaTagInput is an input type that accepts GetMachineGroupsMachineGroupMetaTagArgs and GetMachineGroupsMachineGroupMetaTagOutput values.
+// You can construct a concrete instance of `GetMachineGroupsMachineGroupMetaTagInput` via:
+//
+//	GetMachineGroupsMachineGroupMetaTagArgs{...}
+type GetMachineGroupsMachineGroupMetaTagInput interface {
+	pulumi.Input
+
+	ToGetMachineGroupsMachineGroupMetaTagOutput() GetMachineGroupsMachineGroupMetaTagOutput
+	ToGetMachineGroupsMachineGroupMetaTagOutputWithContext(context.Context) GetMachineGroupsMachineGroupMetaTagOutput
+}
+
+type GetMachineGroupsMachineGroupMetaTagArgs struct {
+	// Tag key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Tag value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetMachineGroupsMachineGroupMetaTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMachineGroupsMachineGroupMetaTag)(nil)).Elem()
+}
+
+func (i GetMachineGroupsMachineGroupMetaTagArgs) ToGetMachineGroupsMachineGroupMetaTagOutput() GetMachineGroupsMachineGroupMetaTagOutput {
+	return i.ToGetMachineGroupsMachineGroupMetaTagOutputWithContext(context.Background())
+}
+
+func (i GetMachineGroupsMachineGroupMetaTagArgs) ToGetMachineGroupsMachineGroupMetaTagOutputWithContext(ctx context.Context) GetMachineGroupsMachineGroupMetaTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMachineGroupsMachineGroupMetaTagOutput)
+}
+
+// GetMachineGroupsMachineGroupMetaTagArrayInput is an input type that accepts GetMachineGroupsMachineGroupMetaTagArray and GetMachineGroupsMachineGroupMetaTagArrayOutput values.
+// You can construct a concrete instance of `GetMachineGroupsMachineGroupMetaTagArrayInput` via:
+//
+//	GetMachineGroupsMachineGroupMetaTagArray{ GetMachineGroupsMachineGroupMetaTagArgs{...} }
+type GetMachineGroupsMachineGroupMetaTagArrayInput interface {
+	pulumi.Input
+
+	ToGetMachineGroupsMachineGroupMetaTagArrayOutput() GetMachineGroupsMachineGroupMetaTagArrayOutput
+	ToGetMachineGroupsMachineGroupMetaTagArrayOutputWithContext(context.Context) GetMachineGroupsMachineGroupMetaTagArrayOutput
+}
+
+type GetMachineGroupsMachineGroupMetaTagArray []GetMachineGroupsMachineGroupMetaTagInput
+
+func (GetMachineGroupsMachineGroupMetaTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMachineGroupsMachineGroupMetaTag)(nil)).Elem()
+}
+
+func (i GetMachineGroupsMachineGroupMetaTagArray) ToGetMachineGroupsMachineGroupMetaTagArrayOutput() GetMachineGroupsMachineGroupMetaTagArrayOutput {
+	return i.ToGetMachineGroupsMachineGroupMetaTagArrayOutputWithContext(context.Background())
+}
+
+func (i GetMachineGroupsMachineGroupMetaTagArray) ToGetMachineGroupsMachineGroupMetaTagArrayOutputWithContext(ctx context.Context) GetMachineGroupsMachineGroupMetaTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMachineGroupsMachineGroupMetaTagArrayOutput)
+}
+
+type GetMachineGroupsMachineGroupMetaTagOutput struct{ *pulumi.OutputState }
+
+func (GetMachineGroupsMachineGroupMetaTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMachineGroupsMachineGroupMetaTag)(nil)).Elem()
+}
+
+func (o GetMachineGroupsMachineGroupMetaTagOutput) ToGetMachineGroupsMachineGroupMetaTagOutput() GetMachineGroupsMachineGroupMetaTagOutput {
+	return o
+}
+
+func (o GetMachineGroupsMachineGroupMetaTagOutput) ToGetMachineGroupsMachineGroupMetaTagOutputWithContext(ctx context.Context) GetMachineGroupsMachineGroupMetaTagOutput {
+	return o
+}
+
+// Tag key.
+func (o GetMachineGroupsMachineGroupMetaTagOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupsMachineGroupMetaTag) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o GetMachineGroupsMachineGroupMetaTagOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupsMachineGroupMetaTag) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetMachineGroupsMachineGroupMetaTagArrayOutput struct{ *pulumi.OutputState }
+
+func (GetMachineGroupsMachineGroupMetaTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMachineGroupsMachineGroupMetaTag)(nil)).Elem()
+}
+
+func (o GetMachineGroupsMachineGroupMetaTagArrayOutput) ToGetMachineGroupsMachineGroupMetaTagArrayOutput() GetMachineGroupsMachineGroupMetaTagArrayOutput {
+	return o
+}
+
+func (o GetMachineGroupsMachineGroupMetaTagArrayOutput) ToGetMachineGroupsMachineGroupMetaTagArrayOutputWithContext(ctx context.Context) GetMachineGroupsMachineGroupMetaTagArrayOutput {
+	return o
+}
+
+func (o GetMachineGroupsMachineGroupMetaTagArrayOutput) Index(i pulumi.IntInput) GetMachineGroupsMachineGroupMetaTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetMachineGroupsMachineGroupMetaTag {
+		return vs[0].([]GetMachineGroupsMachineGroupMetaTag)[vs[1].(int)]
+	}).(GetMachineGroupsMachineGroupMetaTagOutput)
+}
+
+type GetMachineGroupsMachineGroupTag struct {
+	// Tag key.
+	Key string `pulumi:"key"`
+	// Tag value.
+	Value string `pulumi:"value"`
+}
+
+// GetMachineGroupsMachineGroupTagInput is an input type that accepts GetMachineGroupsMachineGroupTagArgs and GetMachineGroupsMachineGroupTagOutput values.
+// You can construct a concrete instance of `GetMachineGroupsMachineGroupTagInput` via:
+//
+//	GetMachineGroupsMachineGroupTagArgs{...}
+type GetMachineGroupsMachineGroupTagInput interface {
+	pulumi.Input
+
+	ToGetMachineGroupsMachineGroupTagOutput() GetMachineGroupsMachineGroupTagOutput
+	ToGetMachineGroupsMachineGroupTagOutputWithContext(context.Context) GetMachineGroupsMachineGroupTagOutput
+}
+
+type GetMachineGroupsMachineGroupTagArgs struct {
+	// Tag key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Tag value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetMachineGroupsMachineGroupTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMachineGroupsMachineGroupTag)(nil)).Elem()
+}
+
+func (i GetMachineGroupsMachineGroupTagArgs) ToGetMachineGroupsMachineGroupTagOutput() GetMachineGroupsMachineGroupTagOutput {
+	return i.ToGetMachineGroupsMachineGroupTagOutputWithContext(context.Background())
+}
+
+func (i GetMachineGroupsMachineGroupTagArgs) ToGetMachineGroupsMachineGroupTagOutputWithContext(ctx context.Context) GetMachineGroupsMachineGroupTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMachineGroupsMachineGroupTagOutput)
+}
+
+// GetMachineGroupsMachineGroupTagArrayInput is an input type that accepts GetMachineGroupsMachineGroupTagArray and GetMachineGroupsMachineGroupTagArrayOutput values.
+// You can construct a concrete instance of `GetMachineGroupsMachineGroupTagArrayInput` via:
+//
+//	GetMachineGroupsMachineGroupTagArray{ GetMachineGroupsMachineGroupTagArgs{...} }
+type GetMachineGroupsMachineGroupTagArrayInput interface {
+	pulumi.Input
+
+	ToGetMachineGroupsMachineGroupTagArrayOutput() GetMachineGroupsMachineGroupTagArrayOutput
+	ToGetMachineGroupsMachineGroupTagArrayOutputWithContext(context.Context) GetMachineGroupsMachineGroupTagArrayOutput
+}
+
+type GetMachineGroupsMachineGroupTagArray []GetMachineGroupsMachineGroupTagInput
+
+func (GetMachineGroupsMachineGroupTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMachineGroupsMachineGroupTag)(nil)).Elem()
+}
+
+func (i GetMachineGroupsMachineGroupTagArray) ToGetMachineGroupsMachineGroupTagArrayOutput() GetMachineGroupsMachineGroupTagArrayOutput {
+	return i.ToGetMachineGroupsMachineGroupTagArrayOutputWithContext(context.Background())
+}
+
+func (i GetMachineGroupsMachineGroupTagArray) ToGetMachineGroupsMachineGroupTagArrayOutputWithContext(ctx context.Context) GetMachineGroupsMachineGroupTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetMachineGroupsMachineGroupTagArrayOutput)
+}
+
+type GetMachineGroupsMachineGroupTagOutput struct{ *pulumi.OutputState }
+
+func (GetMachineGroupsMachineGroupTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetMachineGroupsMachineGroupTag)(nil)).Elem()
+}
+
+func (o GetMachineGroupsMachineGroupTagOutput) ToGetMachineGroupsMachineGroupTagOutput() GetMachineGroupsMachineGroupTagOutput {
+	return o
+}
+
+func (o GetMachineGroupsMachineGroupTagOutput) ToGetMachineGroupsMachineGroupTagOutputWithContext(ctx context.Context) GetMachineGroupsMachineGroupTagOutput {
+	return o
+}
+
+// Tag key.
+func (o GetMachineGroupsMachineGroupTagOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupsMachineGroupTag) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o GetMachineGroupsMachineGroupTagOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetMachineGroupsMachineGroupTag) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetMachineGroupsMachineGroupTagArrayOutput struct{ *pulumi.OutputState }
+
+func (GetMachineGroupsMachineGroupTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetMachineGroupsMachineGroupTag)(nil)).Elem()
+}
+
+func (o GetMachineGroupsMachineGroupTagArrayOutput) ToGetMachineGroupsMachineGroupTagArrayOutput() GetMachineGroupsMachineGroupTagArrayOutput {
+	return o
+}
+
+func (o GetMachineGroupsMachineGroupTagArrayOutput) ToGetMachineGroupsMachineGroupTagArrayOutputWithContext(ctx context.Context) GetMachineGroupsMachineGroupTagArrayOutput {
+	return o
+}
+
+func (o GetMachineGroupsMachineGroupTagArrayOutput) Index(i pulumi.IntInput) GetMachineGroupsMachineGroupTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetMachineGroupsMachineGroupTag {
+		return vs[0].([]GetMachineGroupsMachineGroupTag)[vs[1].(int)]
+	}).(GetMachineGroupsMachineGroupTagOutput)
+}
+
 type GetMachinesMachine struct {
 	// if open auto update flag.
 	AutoUpdate int `pulumi:"autoUpdate"`
@@ -10024,6 +19860,632 @@ func (o GetMachinesMachineArrayOutput) Index(i pulumi.IntInput) GetMachinesMachi
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetMachinesMachine {
 		return vs[0].([]GetMachinesMachine)[vs[1].(int)]
 	}).(GetMachinesMachineOutput)
+}
+
+type GetNoticeContentsFilter struct {
+	// Filter field name. Valid values: name, noticeContentId.
+	Key string `pulumi:"key"`
+	// Filter field values.
+	Values []string `pulumi:"values"`
+}
+
+// GetNoticeContentsFilterInput is an input type that accepts GetNoticeContentsFilterArgs and GetNoticeContentsFilterOutput values.
+// You can construct a concrete instance of `GetNoticeContentsFilterInput` via:
+//
+//	GetNoticeContentsFilterArgs{...}
+type GetNoticeContentsFilterInput interface {
+	pulumi.Input
+
+	ToGetNoticeContentsFilterOutput() GetNoticeContentsFilterOutput
+	ToGetNoticeContentsFilterOutputWithContext(context.Context) GetNoticeContentsFilterOutput
+}
+
+type GetNoticeContentsFilterArgs struct {
+	// Filter field name. Valid values: name, noticeContentId.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Filter field values.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetNoticeContentsFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNoticeContentsFilter)(nil)).Elem()
+}
+
+func (i GetNoticeContentsFilterArgs) ToGetNoticeContentsFilterOutput() GetNoticeContentsFilterOutput {
+	return i.ToGetNoticeContentsFilterOutputWithContext(context.Background())
+}
+
+func (i GetNoticeContentsFilterArgs) ToGetNoticeContentsFilterOutputWithContext(ctx context.Context) GetNoticeContentsFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNoticeContentsFilterOutput)
+}
+
+// GetNoticeContentsFilterArrayInput is an input type that accepts GetNoticeContentsFilterArray and GetNoticeContentsFilterArrayOutput values.
+// You can construct a concrete instance of `GetNoticeContentsFilterArrayInput` via:
+//
+//	GetNoticeContentsFilterArray{ GetNoticeContentsFilterArgs{...} }
+type GetNoticeContentsFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetNoticeContentsFilterArrayOutput() GetNoticeContentsFilterArrayOutput
+	ToGetNoticeContentsFilterArrayOutputWithContext(context.Context) GetNoticeContentsFilterArrayOutput
+}
+
+type GetNoticeContentsFilterArray []GetNoticeContentsFilterInput
+
+func (GetNoticeContentsFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNoticeContentsFilter)(nil)).Elem()
+}
+
+func (i GetNoticeContentsFilterArray) ToGetNoticeContentsFilterArrayOutput() GetNoticeContentsFilterArrayOutput {
+	return i.ToGetNoticeContentsFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetNoticeContentsFilterArray) ToGetNoticeContentsFilterArrayOutputWithContext(ctx context.Context) GetNoticeContentsFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNoticeContentsFilterArrayOutput)
+}
+
+type GetNoticeContentsFilterOutput struct{ *pulumi.OutputState }
+
+func (GetNoticeContentsFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNoticeContentsFilter)(nil)).Elem()
+}
+
+func (o GetNoticeContentsFilterOutput) ToGetNoticeContentsFilterOutput() GetNoticeContentsFilterOutput {
+	return o
+}
+
+func (o GetNoticeContentsFilterOutput) ToGetNoticeContentsFilterOutputWithContext(ctx context.Context) GetNoticeContentsFilterOutput {
+	return o
+}
+
+// Filter field name. Valid values: name, noticeContentId.
+func (o GetNoticeContentsFilterOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNoticeContentsFilter) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Filter field values.
+func (o GetNoticeContentsFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetNoticeContentsFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetNoticeContentsFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetNoticeContentsFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNoticeContentsFilter)(nil)).Elem()
+}
+
+func (o GetNoticeContentsFilterArrayOutput) ToGetNoticeContentsFilterArrayOutput() GetNoticeContentsFilterArrayOutput {
+	return o
+}
+
+func (o GetNoticeContentsFilterArrayOutput) ToGetNoticeContentsFilterArrayOutputWithContext(ctx context.Context) GetNoticeContentsFilterArrayOutput {
+	return o
+}
+
+func (o GetNoticeContentsFilterArrayOutput) Index(i pulumi.IntInput) GetNoticeContentsFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetNoticeContentsFilter {
+		return vs[0].([]GetNoticeContentsFilter)[vs[1].(int)]
+	}).(GetNoticeContentsFilterOutput)
+}
+
+type GetNoticeContentsNoticeContentList struct {
+	// Creation time (Unix timestamp in seconds).
+	CreateTime int `pulumi:"createTime"`
+	// Template flag. 0: user-defined, 1: system built-in.
+	Flag int `pulumi:"flag"`
+	// Notice content template name.
+	Name string `pulumi:"name"`
+	// Notice content template ID.
+	NoticeContentId string `pulumi:"noticeContentId"`
+	// Notice content template details.
+	NoticeContents []GetNoticeContentsNoticeContentListNoticeContent `pulumi:"noticeContents"`
+	// Creator/modifier sub-account ID.
+	SubUin int `pulumi:"subUin"`
+	// Language type. 0: Chinese, 1: English.
+	Type int `pulumi:"type"`
+	// Creator primary account ID.
+	Uin int `pulumi:"uin"`
+	// Update time (Unix timestamp in seconds).
+	UpdateTime int `pulumi:"updateTime"`
+}
+
+// GetNoticeContentsNoticeContentListInput is an input type that accepts GetNoticeContentsNoticeContentListArgs and GetNoticeContentsNoticeContentListOutput values.
+// You can construct a concrete instance of `GetNoticeContentsNoticeContentListInput` via:
+//
+//	GetNoticeContentsNoticeContentListArgs{...}
+type GetNoticeContentsNoticeContentListInput interface {
+	pulumi.Input
+
+	ToGetNoticeContentsNoticeContentListOutput() GetNoticeContentsNoticeContentListOutput
+	ToGetNoticeContentsNoticeContentListOutputWithContext(context.Context) GetNoticeContentsNoticeContentListOutput
+}
+
+type GetNoticeContentsNoticeContentListArgs struct {
+	// Creation time (Unix timestamp in seconds).
+	CreateTime pulumi.IntInput `pulumi:"createTime"`
+	// Template flag. 0: user-defined, 1: system built-in.
+	Flag pulumi.IntInput `pulumi:"flag"`
+	// Notice content template name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Notice content template ID.
+	NoticeContentId pulumi.StringInput `pulumi:"noticeContentId"`
+	// Notice content template details.
+	NoticeContents GetNoticeContentsNoticeContentListNoticeContentArrayInput `pulumi:"noticeContents"`
+	// Creator/modifier sub-account ID.
+	SubUin pulumi.IntInput `pulumi:"subUin"`
+	// Language type. 0: Chinese, 1: English.
+	Type pulumi.IntInput `pulumi:"type"`
+	// Creator primary account ID.
+	Uin pulumi.IntInput `pulumi:"uin"`
+	// Update time (Unix timestamp in seconds).
+	UpdateTime pulumi.IntInput `pulumi:"updateTime"`
+}
+
+func (GetNoticeContentsNoticeContentListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNoticeContentsNoticeContentList)(nil)).Elem()
+}
+
+func (i GetNoticeContentsNoticeContentListArgs) ToGetNoticeContentsNoticeContentListOutput() GetNoticeContentsNoticeContentListOutput {
+	return i.ToGetNoticeContentsNoticeContentListOutputWithContext(context.Background())
+}
+
+func (i GetNoticeContentsNoticeContentListArgs) ToGetNoticeContentsNoticeContentListOutputWithContext(ctx context.Context) GetNoticeContentsNoticeContentListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNoticeContentsNoticeContentListOutput)
+}
+
+// GetNoticeContentsNoticeContentListArrayInput is an input type that accepts GetNoticeContentsNoticeContentListArray and GetNoticeContentsNoticeContentListArrayOutput values.
+// You can construct a concrete instance of `GetNoticeContentsNoticeContentListArrayInput` via:
+//
+//	GetNoticeContentsNoticeContentListArray{ GetNoticeContentsNoticeContentListArgs{...} }
+type GetNoticeContentsNoticeContentListArrayInput interface {
+	pulumi.Input
+
+	ToGetNoticeContentsNoticeContentListArrayOutput() GetNoticeContentsNoticeContentListArrayOutput
+	ToGetNoticeContentsNoticeContentListArrayOutputWithContext(context.Context) GetNoticeContentsNoticeContentListArrayOutput
+}
+
+type GetNoticeContentsNoticeContentListArray []GetNoticeContentsNoticeContentListInput
+
+func (GetNoticeContentsNoticeContentListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNoticeContentsNoticeContentList)(nil)).Elem()
+}
+
+func (i GetNoticeContentsNoticeContentListArray) ToGetNoticeContentsNoticeContentListArrayOutput() GetNoticeContentsNoticeContentListArrayOutput {
+	return i.ToGetNoticeContentsNoticeContentListArrayOutputWithContext(context.Background())
+}
+
+func (i GetNoticeContentsNoticeContentListArray) ToGetNoticeContentsNoticeContentListArrayOutputWithContext(ctx context.Context) GetNoticeContentsNoticeContentListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNoticeContentsNoticeContentListArrayOutput)
+}
+
+type GetNoticeContentsNoticeContentListOutput struct{ *pulumi.OutputState }
+
+func (GetNoticeContentsNoticeContentListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNoticeContentsNoticeContentList)(nil)).Elem()
+}
+
+func (o GetNoticeContentsNoticeContentListOutput) ToGetNoticeContentsNoticeContentListOutput() GetNoticeContentsNoticeContentListOutput {
+	return o
+}
+
+func (o GetNoticeContentsNoticeContentListOutput) ToGetNoticeContentsNoticeContentListOutputWithContext(ctx context.Context) GetNoticeContentsNoticeContentListOutput {
+	return o
+}
+
+// Creation time (Unix timestamp in seconds).
+func (o GetNoticeContentsNoticeContentListOutput) CreateTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNoticeContentsNoticeContentList) int { return v.CreateTime }).(pulumi.IntOutput)
+}
+
+// Template flag. 0: user-defined, 1: system built-in.
+func (o GetNoticeContentsNoticeContentListOutput) Flag() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNoticeContentsNoticeContentList) int { return v.Flag }).(pulumi.IntOutput)
+}
+
+// Notice content template name.
+func (o GetNoticeContentsNoticeContentListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNoticeContentsNoticeContentList) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Notice content template ID.
+func (o GetNoticeContentsNoticeContentListOutput) NoticeContentId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNoticeContentsNoticeContentList) string { return v.NoticeContentId }).(pulumi.StringOutput)
+}
+
+// Notice content template details.
+func (o GetNoticeContentsNoticeContentListOutput) NoticeContents() GetNoticeContentsNoticeContentListNoticeContentArrayOutput {
+	return o.ApplyT(func(v GetNoticeContentsNoticeContentList) []GetNoticeContentsNoticeContentListNoticeContent {
+		return v.NoticeContents
+	}).(GetNoticeContentsNoticeContentListNoticeContentArrayOutput)
+}
+
+// Creator/modifier sub-account ID.
+func (o GetNoticeContentsNoticeContentListOutput) SubUin() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNoticeContentsNoticeContentList) int { return v.SubUin }).(pulumi.IntOutput)
+}
+
+// Language type. 0: Chinese, 1: English.
+func (o GetNoticeContentsNoticeContentListOutput) Type() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNoticeContentsNoticeContentList) int { return v.Type }).(pulumi.IntOutput)
+}
+
+// Creator primary account ID.
+func (o GetNoticeContentsNoticeContentListOutput) Uin() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNoticeContentsNoticeContentList) int { return v.Uin }).(pulumi.IntOutput)
+}
+
+// Update time (Unix timestamp in seconds).
+func (o GetNoticeContentsNoticeContentListOutput) UpdateTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNoticeContentsNoticeContentList) int { return v.UpdateTime }).(pulumi.IntOutput)
+}
+
+type GetNoticeContentsNoticeContentListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetNoticeContentsNoticeContentListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNoticeContentsNoticeContentList)(nil)).Elem()
+}
+
+func (o GetNoticeContentsNoticeContentListArrayOutput) ToGetNoticeContentsNoticeContentListArrayOutput() GetNoticeContentsNoticeContentListArrayOutput {
+	return o
+}
+
+func (o GetNoticeContentsNoticeContentListArrayOutput) ToGetNoticeContentsNoticeContentListArrayOutputWithContext(ctx context.Context) GetNoticeContentsNoticeContentListArrayOutput {
+	return o
+}
+
+func (o GetNoticeContentsNoticeContentListArrayOutput) Index(i pulumi.IntInput) GetNoticeContentsNoticeContentListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetNoticeContentsNoticeContentList {
+		return vs[0].([]GetNoticeContentsNoticeContentList)[vs[1].(int)]
+	}).(GetNoticeContentsNoticeContentListOutput)
+}
+
+type GetNoticeContentsNoticeContentListNoticeContent struct {
+	// Alarm recovery notification content template.
+	RecoveryContents []GetNoticeContentsNoticeContentListNoticeContentRecoveryContent `pulumi:"recoveryContents"`
+	// Alarm trigger notification content template.
+	TriggerContents []GetNoticeContentsNoticeContentListNoticeContentTriggerContent `pulumi:"triggerContents"`
+	// Language type. 0: Chinese, 1: English.
+	Type string `pulumi:"type"`
+}
+
+// GetNoticeContentsNoticeContentListNoticeContentInput is an input type that accepts GetNoticeContentsNoticeContentListNoticeContentArgs and GetNoticeContentsNoticeContentListNoticeContentOutput values.
+// You can construct a concrete instance of `GetNoticeContentsNoticeContentListNoticeContentInput` via:
+//
+//	GetNoticeContentsNoticeContentListNoticeContentArgs{...}
+type GetNoticeContentsNoticeContentListNoticeContentInput interface {
+	pulumi.Input
+
+	ToGetNoticeContentsNoticeContentListNoticeContentOutput() GetNoticeContentsNoticeContentListNoticeContentOutput
+	ToGetNoticeContentsNoticeContentListNoticeContentOutputWithContext(context.Context) GetNoticeContentsNoticeContentListNoticeContentOutput
+}
+
+type GetNoticeContentsNoticeContentListNoticeContentArgs struct {
+	// Alarm recovery notification content template.
+	RecoveryContents GetNoticeContentsNoticeContentListNoticeContentRecoveryContentArrayInput `pulumi:"recoveryContents"`
+	// Alarm trigger notification content template.
+	TriggerContents GetNoticeContentsNoticeContentListNoticeContentTriggerContentArrayInput `pulumi:"triggerContents"`
+	// Language type. 0: Chinese, 1: English.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (GetNoticeContentsNoticeContentListNoticeContentArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNoticeContentsNoticeContentListNoticeContent)(nil)).Elem()
+}
+
+func (i GetNoticeContentsNoticeContentListNoticeContentArgs) ToGetNoticeContentsNoticeContentListNoticeContentOutput() GetNoticeContentsNoticeContentListNoticeContentOutput {
+	return i.ToGetNoticeContentsNoticeContentListNoticeContentOutputWithContext(context.Background())
+}
+
+func (i GetNoticeContentsNoticeContentListNoticeContentArgs) ToGetNoticeContentsNoticeContentListNoticeContentOutputWithContext(ctx context.Context) GetNoticeContentsNoticeContentListNoticeContentOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNoticeContentsNoticeContentListNoticeContentOutput)
+}
+
+// GetNoticeContentsNoticeContentListNoticeContentArrayInput is an input type that accepts GetNoticeContentsNoticeContentListNoticeContentArray and GetNoticeContentsNoticeContentListNoticeContentArrayOutput values.
+// You can construct a concrete instance of `GetNoticeContentsNoticeContentListNoticeContentArrayInput` via:
+//
+//	GetNoticeContentsNoticeContentListNoticeContentArray{ GetNoticeContentsNoticeContentListNoticeContentArgs{...} }
+type GetNoticeContentsNoticeContentListNoticeContentArrayInput interface {
+	pulumi.Input
+
+	ToGetNoticeContentsNoticeContentListNoticeContentArrayOutput() GetNoticeContentsNoticeContentListNoticeContentArrayOutput
+	ToGetNoticeContentsNoticeContentListNoticeContentArrayOutputWithContext(context.Context) GetNoticeContentsNoticeContentListNoticeContentArrayOutput
+}
+
+type GetNoticeContentsNoticeContentListNoticeContentArray []GetNoticeContentsNoticeContentListNoticeContentInput
+
+func (GetNoticeContentsNoticeContentListNoticeContentArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNoticeContentsNoticeContentListNoticeContent)(nil)).Elem()
+}
+
+func (i GetNoticeContentsNoticeContentListNoticeContentArray) ToGetNoticeContentsNoticeContentListNoticeContentArrayOutput() GetNoticeContentsNoticeContentListNoticeContentArrayOutput {
+	return i.ToGetNoticeContentsNoticeContentListNoticeContentArrayOutputWithContext(context.Background())
+}
+
+func (i GetNoticeContentsNoticeContentListNoticeContentArray) ToGetNoticeContentsNoticeContentListNoticeContentArrayOutputWithContext(ctx context.Context) GetNoticeContentsNoticeContentListNoticeContentArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNoticeContentsNoticeContentListNoticeContentArrayOutput)
+}
+
+type GetNoticeContentsNoticeContentListNoticeContentOutput struct{ *pulumi.OutputState }
+
+func (GetNoticeContentsNoticeContentListNoticeContentOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNoticeContentsNoticeContentListNoticeContent)(nil)).Elem()
+}
+
+func (o GetNoticeContentsNoticeContentListNoticeContentOutput) ToGetNoticeContentsNoticeContentListNoticeContentOutput() GetNoticeContentsNoticeContentListNoticeContentOutput {
+	return o
+}
+
+func (o GetNoticeContentsNoticeContentListNoticeContentOutput) ToGetNoticeContentsNoticeContentListNoticeContentOutputWithContext(ctx context.Context) GetNoticeContentsNoticeContentListNoticeContentOutput {
+	return o
+}
+
+// Alarm recovery notification content template.
+func (o GetNoticeContentsNoticeContentListNoticeContentOutput) RecoveryContents() GetNoticeContentsNoticeContentListNoticeContentRecoveryContentArrayOutput {
+	return o.ApplyT(func(v GetNoticeContentsNoticeContentListNoticeContent) []GetNoticeContentsNoticeContentListNoticeContentRecoveryContent {
+		return v.RecoveryContents
+	}).(GetNoticeContentsNoticeContentListNoticeContentRecoveryContentArrayOutput)
+}
+
+// Alarm trigger notification content template.
+func (o GetNoticeContentsNoticeContentListNoticeContentOutput) TriggerContents() GetNoticeContentsNoticeContentListNoticeContentTriggerContentArrayOutput {
+	return o.ApplyT(func(v GetNoticeContentsNoticeContentListNoticeContent) []GetNoticeContentsNoticeContentListNoticeContentTriggerContent {
+		return v.TriggerContents
+	}).(GetNoticeContentsNoticeContentListNoticeContentTriggerContentArrayOutput)
+}
+
+// Language type. 0: Chinese, 1: English.
+func (o GetNoticeContentsNoticeContentListNoticeContentOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNoticeContentsNoticeContentListNoticeContent) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type GetNoticeContentsNoticeContentListNoticeContentArrayOutput struct{ *pulumi.OutputState }
+
+func (GetNoticeContentsNoticeContentListNoticeContentArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNoticeContentsNoticeContentListNoticeContent)(nil)).Elem()
+}
+
+func (o GetNoticeContentsNoticeContentListNoticeContentArrayOutput) ToGetNoticeContentsNoticeContentListNoticeContentArrayOutput() GetNoticeContentsNoticeContentListNoticeContentArrayOutput {
+	return o
+}
+
+func (o GetNoticeContentsNoticeContentListNoticeContentArrayOutput) ToGetNoticeContentsNoticeContentListNoticeContentArrayOutputWithContext(ctx context.Context) GetNoticeContentsNoticeContentListNoticeContentArrayOutput {
+	return o
+}
+
+func (o GetNoticeContentsNoticeContentListNoticeContentArrayOutput) Index(i pulumi.IntInput) GetNoticeContentsNoticeContentListNoticeContentOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetNoticeContentsNoticeContentListNoticeContent {
+		return vs[0].([]GetNoticeContentsNoticeContentListNoticeContent)[vs[1].(int)]
+	}).(GetNoticeContentsNoticeContentListNoticeContentOutput)
+}
+
+type GetNoticeContentsNoticeContentListNoticeContentRecoveryContent struct {
+	// Notification content template body.
+	Content string `pulumi:"content"`
+	// Request headers (only for custom callback channel).
+	Headers []string `pulumi:"headers"`
+	// Notification content template title.
+	Title string `pulumi:"title"`
+}
+
+// GetNoticeContentsNoticeContentListNoticeContentRecoveryContentInput is an input type that accepts GetNoticeContentsNoticeContentListNoticeContentRecoveryContentArgs and GetNoticeContentsNoticeContentListNoticeContentRecoveryContentOutput values.
+// You can construct a concrete instance of `GetNoticeContentsNoticeContentListNoticeContentRecoveryContentInput` via:
+//
+//	GetNoticeContentsNoticeContentListNoticeContentRecoveryContentArgs{...}
+type GetNoticeContentsNoticeContentListNoticeContentRecoveryContentInput interface {
+	pulumi.Input
+
+	ToGetNoticeContentsNoticeContentListNoticeContentRecoveryContentOutput() GetNoticeContentsNoticeContentListNoticeContentRecoveryContentOutput
+	ToGetNoticeContentsNoticeContentListNoticeContentRecoveryContentOutputWithContext(context.Context) GetNoticeContentsNoticeContentListNoticeContentRecoveryContentOutput
+}
+
+type GetNoticeContentsNoticeContentListNoticeContentRecoveryContentArgs struct {
+	// Notification content template body.
+	Content pulumi.StringInput `pulumi:"content"`
+	// Request headers (only for custom callback channel).
+	Headers pulumi.StringArrayInput `pulumi:"headers"`
+	// Notification content template title.
+	Title pulumi.StringInput `pulumi:"title"`
+}
+
+func (GetNoticeContentsNoticeContentListNoticeContentRecoveryContentArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNoticeContentsNoticeContentListNoticeContentRecoveryContent)(nil)).Elem()
+}
+
+func (i GetNoticeContentsNoticeContentListNoticeContentRecoveryContentArgs) ToGetNoticeContentsNoticeContentListNoticeContentRecoveryContentOutput() GetNoticeContentsNoticeContentListNoticeContentRecoveryContentOutput {
+	return i.ToGetNoticeContentsNoticeContentListNoticeContentRecoveryContentOutputWithContext(context.Background())
+}
+
+func (i GetNoticeContentsNoticeContentListNoticeContentRecoveryContentArgs) ToGetNoticeContentsNoticeContentListNoticeContentRecoveryContentOutputWithContext(ctx context.Context) GetNoticeContentsNoticeContentListNoticeContentRecoveryContentOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNoticeContentsNoticeContentListNoticeContentRecoveryContentOutput)
+}
+
+// GetNoticeContentsNoticeContentListNoticeContentRecoveryContentArrayInput is an input type that accepts GetNoticeContentsNoticeContentListNoticeContentRecoveryContentArray and GetNoticeContentsNoticeContentListNoticeContentRecoveryContentArrayOutput values.
+// You can construct a concrete instance of `GetNoticeContentsNoticeContentListNoticeContentRecoveryContentArrayInput` via:
+//
+//	GetNoticeContentsNoticeContentListNoticeContentRecoveryContentArray{ GetNoticeContentsNoticeContentListNoticeContentRecoveryContentArgs{...} }
+type GetNoticeContentsNoticeContentListNoticeContentRecoveryContentArrayInput interface {
+	pulumi.Input
+
+	ToGetNoticeContentsNoticeContentListNoticeContentRecoveryContentArrayOutput() GetNoticeContentsNoticeContentListNoticeContentRecoveryContentArrayOutput
+	ToGetNoticeContentsNoticeContentListNoticeContentRecoveryContentArrayOutputWithContext(context.Context) GetNoticeContentsNoticeContentListNoticeContentRecoveryContentArrayOutput
+}
+
+type GetNoticeContentsNoticeContentListNoticeContentRecoveryContentArray []GetNoticeContentsNoticeContentListNoticeContentRecoveryContentInput
+
+func (GetNoticeContentsNoticeContentListNoticeContentRecoveryContentArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNoticeContentsNoticeContentListNoticeContentRecoveryContent)(nil)).Elem()
+}
+
+func (i GetNoticeContentsNoticeContentListNoticeContentRecoveryContentArray) ToGetNoticeContentsNoticeContentListNoticeContentRecoveryContentArrayOutput() GetNoticeContentsNoticeContentListNoticeContentRecoveryContentArrayOutput {
+	return i.ToGetNoticeContentsNoticeContentListNoticeContentRecoveryContentArrayOutputWithContext(context.Background())
+}
+
+func (i GetNoticeContentsNoticeContentListNoticeContentRecoveryContentArray) ToGetNoticeContentsNoticeContentListNoticeContentRecoveryContentArrayOutputWithContext(ctx context.Context) GetNoticeContentsNoticeContentListNoticeContentRecoveryContentArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNoticeContentsNoticeContentListNoticeContentRecoveryContentArrayOutput)
+}
+
+type GetNoticeContentsNoticeContentListNoticeContentRecoveryContentOutput struct{ *pulumi.OutputState }
+
+func (GetNoticeContentsNoticeContentListNoticeContentRecoveryContentOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNoticeContentsNoticeContentListNoticeContentRecoveryContent)(nil)).Elem()
+}
+
+func (o GetNoticeContentsNoticeContentListNoticeContentRecoveryContentOutput) ToGetNoticeContentsNoticeContentListNoticeContentRecoveryContentOutput() GetNoticeContentsNoticeContentListNoticeContentRecoveryContentOutput {
+	return o
+}
+
+func (o GetNoticeContentsNoticeContentListNoticeContentRecoveryContentOutput) ToGetNoticeContentsNoticeContentListNoticeContentRecoveryContentOutputWithContext(ctx context.Context) GetNoticeContentsNoticeContentListNoticeContentRecoveryContentOutput {
+	return o
+}
+
+// Notification content template body.
+func (o GetNoticeContentsNoticeContentListNoticeContentRecoveryContentOutput) Content() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNoticeContentsNoticeContentListNoticeContentRecoveryContent) string { return v.Content }).(pulumi.StringOutput)
+}
+
+// Request headers (only for custom callback channel).
+func (o GetNoticeContentsNoticeContentListNoticeContentRecoveryContentOutput) Headers() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetNoticeContentsNoticeContentListNoticeContentRecoveryContent) []string { return v.Headers }).(pulumi.StringArrayOutput)
+}
+
+// Notification content template title.
+func (o GetNoticeContentsNoticeContentListNoticeContentRecoveryContentOutput) Title() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNoticeContentsNoticeContentListNoticeContentRecoveryContent) string { return v.Title }).(pulumi.StringOutput)
+}
+
+type GetNoticeContentsNoticeContentListNoticeContentRecoveryContentArrayOutput struct{ *pulumi.OutputState }
+
+func (GetNoticeContentsNoticeContentListNoticeContentRecoveryContentArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNoticeContentsNoticeContentListNoticeContentRecoveryContent)(nil)).Elem()
+}
+
+func (o GetNoticeContentsNoticeContentListNoticeContentRecoveryContentArrayOutput) ToGetNoticeContentsNoticeContentListNoticeContentRecoveryContentArrayOutput() GetNoticeContentsNoticeContentListNoticeContentRecoveryContentArrayOutput {
+	return o
+}
+
+func (o GetNoticeContentsNoticeContentListNoticeContentRecoveryContentArrayOutput) ToGetNoticeContentsNoticeContentListNoticeContentRecoveryContentArrayOutputWithContext(ctx context.Context) GetNoticeContentsNoticeContentListNoticeContentRecoveryContentArrayOutput {
+	return o
+}
+
+func (o GetNoticeContentsNoticeContentListNoticeContentRecoveryContentArrayOutput) Index(i pulumi.IntInput) GetNoticeContentsNoticeContentListNoticeContentRecoveryContentOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetNoticeContentsNoticeContentListNoticeContentRecoveryContent {
+		return vs[0].([]GetNoticeContentsNoticeContentListNoticeContentRecoveryContent)[vs[1].(int)]
+	}).(GetNoticeContentsNoticeContentListNoticeContentRecoveryContentOutput)
+}
+
+type GetNoticeContentsNoticeContentListNoticeContentTriggerContent struct {
+	// Notification content template body.
+	Content string `pulumi:"content"`
+	// Request headers (only for custom callback channel).
+	Headers []string `pulumi:"headers"`
+	// Notification content template title.
+	Title string `pulumi:"title"`
+}
+
+// GetNoticeContentsNoticeContentListNoticeContentTriggerContentInput is an input type that accepts GetNoticeContentsNoticeContentListNoticeContentTriggerContentArgs and GetNoticeContentsNoticeContentListNoticeContentTriggerContentOutput values.
+// You can construct a concrete instance of `GetNoticeContentsNoticeContentListNoticeContentTriggerContentInput` via:
+//
+//	GetNoticeContentsNoticeContentListNoticeContentTriggerContentArgs{...}
+type GetNoticeContentsNoticeContentListNoticeContentTriggerContentInput interface {
+	pulumi.Input
+
+	ToGetNoticeContentsNoticeContentListNoticeContentTriggerContentOutput() GetNoticeContentsNoticeContentListNoticeContentTriggerContentOutput
+	ToGetNoticeContentsNoticeContentListNoticeContentTriggerContentOutputWithContext(context.Context) GetNoticeContentsNoticeContentListNoticeContentTriggerContentOutput
+}
+
+type GetNoticeContentsNoticeContentListNoticeContentTriggerContentArgs struct {
+	// Notification content template body.
+	Content pulumi.StringInput `pulumi:"content"`
+	// Request headers (only for custom callback channel).
+	Headers pulumi.StringArrayInput `pulumi:"headers"`
+	// Notification content template title.
+	Title pulumi.StringInput `pulumi:"title"`
+}
+
+func (GetNoticeContentsNoticeContentListNoticeContentTriggerContentArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNoticeContentsNoticeContentListNoticeContentTriggerContent)(nil)).Elem()
+}
+
+func (i GetNoticeContentsNoticeContentListNoticeContentTriggerContentArgs) ToGetNoticeContentsNoticeContentListNoticeContentTriggerContentOutput() GetNoticeContentsNoticeContentListNoticeContentTriggerContentOutput {
+	return i.ToGetNoticeContentsNoticeContentListNoticeContentTriggerContentOutputWithContext(context.Background())
+}
+
+func (i GetNoticeContentsNoticeContentListNoticeContentTriggerContentArgs) ToGetNoticeContentsNoticeContentListNoticeContentTriggerContentOutputWithContext(ctx context.Context) GetNoticeContentsNoticeContentListNoticeContentTriggerContentOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNoticeContentsNoticeContentListNoticeContentTriggerContentOutput)
+}
+
+// GetNoticeContentsNoticeContentListNoticeContentTriggerContentArrayInput is an input type that accepts GetNoticeContentsNoticeContentListNoticeContentTriggerContentArray and GetNoticeContentsNoticeContentListNoticeContentTriggerContentArrayOutput values.
+// You can construct a concrete instance of `GetNoticeContentsNoticeContentListNoticeContentTriggerContentArrayInput` via:
+//
+//	GetNoticeContentsNoticeContentListNoticeContentTriggerContentArray{ GetNoticeContentsNoticeContentListNoticeContentTriggerContentArgs{...} }
+type GetNoticeContentsNoticeContentListNoticeContentTriggerContentArrayInput interface {
+	pulumi.Input
+
+	ToGetNoticeContentsNoticeContentListNoticeContentTriggerContentArrayOutput() GetNoticeContentsNoticeContentListNoticeContentTriggerContentArrayOutput
+	ToGetNoticeContentsNoticeContentListNoticeContentTriggerContentArrayOutputWithContext(context.Context) GetNoticeContentsNoticeContentListNoticeContentTriggerContentArrayOutput
+}
+
+type GetNoticeContentsNoticeContentListNoticeContentTriggerContentArray []GetNoticeContentsNoticeContentListNoticeContentTriggerContentInput
+
+func (GetNoticeContentsNoticeContentListNoticeContentTriggerContentArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNoticeContentsNoticeContentListNoticeContentTriggerContent)(nil)).Elem()
+}
+
+func (i GetNoticeContentsNoticeContentListNoticeContentTriggerContentArray) ToGetNoticeContentsNoticeContentListNoticeContentTriggerContentArrayOutput() GetNoticeContentsNoticeContentListNoticeContentTriggerContentArrayOutput {
+	return i.ToGetNoticeContentsNoticeContentListNoticeContentTriggerContentArrayOutputWithContext(context.Background())
+}
+
+func (i GetNoticeContentsNoticeContentListNoticeContentTriggerContentArray) ToGetNoticeContentsNoticeContentListNoticeContentTriggerContentArrayOutputWithContext(ctx context.Context) GetNoticeContentsNoticeContentListNoticeContentTriggerContentArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNoticeContentsNoticeContentListNoticeContentTriggerContentArrayOutput)
+}
+
+type GetNoticeContentsNoticeContentListNoticeContentTriggerContentOutput struct{ *pulumi.OutputState }
+
+func (GetNoticeContentsNoticeContentListNoticeContentTriggerContentOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNoticeContentsNoticeContentListNoticeContentTriggerContent)(nil)).Elem()
+}
+
+func (o GetNoticeContentsNoticeContentListNoticeContentTriggerContentOutput) ToGetNoticeContentsNoticeContentListNoticeContentTriggerContentOutput() GetNoticeContentsNoticeContentListNoticeContentTriggerContentOutput {
+	return o
+}
+
+func (o GetNoticeContentsNoticeContentListNoticeContentTriggerContentOutput) ToGetNoticeContentsNoticeContentListNoticeContentTriggerContentOutputWithContext(ctx context.Context) GetNoticeContentsNoticeContentListNoticeContentTriggerContentOutput {
+	return o
+}
+
+// Notification content template body.
+func (o GetNoticeContentsNoticeContentListNoticeContentTriggerContentOutput) Content() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNoticeContentsNoticeContentListNoticeContentTriggerContent) string { return v.Content }).(pulumi.StringOutput)
+}
+
+// Request headers (only for custom callback channel).
+func (o GetNoticeContentsNoticeContentListNoticeContentTriggerContentOutput) Headers() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetNoticeContentsNoticeContentListNoticeContentTriggerContent) []string { return v.Headers }).(pulumi.StringArrayOutput)
+}
+
+// Notification content template title.
+func (o GetNoticeContentsNoticeContentListNoticeContentTriggerContentOutput) Title() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNoticeContentsNoticeContentListNoticeContentTriggerContent) string { return v.Title }).(pulumi.StringOutput)
+}
+
+type GetNoticeContentsNoticeContentListNoticeContentTriggerContentArrayOutput struct{ *pulumi.OutputState }
+
+func (GetNoticeContentsNoticeContentListNoticeContentTriggerContentArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNoticeContentsNoticeContentListNoticeContentTriggerContent)(nil)).Elem()
+}
+
+func (o GetNoticeContentsNoticeContentListNoticeContentTriggerContentArrayOutput) ToGetNoticeContentsNoticeContentListNoticeContentTriggerContentArrayOutput() GetNoticeContentsNoticeContentListNoticeContentTriggerContentArrayOutput {
+	return o
+}
+
+func (o GetNoticeContentsNoticeContentListNoticeContentTriggerContentArrayOutput) ToGetNoticeContentsNoticeContentListNoticeContentTriggerContentArrayOutputWithContext(ctx context.Context) GetNoticeContentsNoticeContentListNoticeContentTriggerContentArrayOutput {
+	return o
+}
+
+func (o GetNoticeContentsNoticeContentListNoticeContentTriggerContentArrayOutput) Index(i pulumi.IntInput) GetNoticeContentsNoticeContentListNoticeContentTriggerContentOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetNoticeContentsNoticeContentListNoticeContentTriggerContent {
+		return vs[0].([]GetNoticeContentsNoticeContentListNoticeContentTriggerContent)[vs[1].(int)]
+	}).(GetNoticeContentsNoticeContentListNoticeContentTriggerContentOutput)
 }
 
 type GetShipperTasksTask struct {
@@ -10696,12 +21158,30 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*AlarmAnalysisConfigInfoArrayInput)(nil)).Elem(), AlarmAnalysisConfigInfoArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AlarmCallBackInput)(nil)).Elem(), AlarmCallBackArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AlarmCallBackPtrInput)(nil)).Elem(), AlarmCallBackArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmMonitorNoticeInput)(nil)).Elem(), AlarmMonitorNoticeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmMonitorNoticePtrInput)(nil)).Elem(), AlarmMonitorNoticeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmMonitorNoticeNoticeInput)(nil)).Elem(), AlarmMonitorNoticeNoticeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmMonitorNoticeNoticeArrayInput)(nil)).Elem(), AlarmMonitorNoticeNoticeArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AlarmMonitorTimeInput)(nil)).Elem(), AlarmMonitorTimeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AlarmMonitorTimePtrInput)(nil)).Elem(), AlarmMonitorTimeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AlarmMultiConditionInput)(nil)).Elem(), AlarmMultiConditionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AlarmMultiConditionArrayInput)(nil)).Elem(), AlarmMultiConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmNoticeDeliverConfigInput)(nil)).Elem(), AlarmNoticeDeliverConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmNoticeDeliverConfigPtrInput)(nil)).Elem(), AlarmNoticeDeliverConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AlarmNoticeNoticeReceiverInput)(nil)).Elem(), AlarmNoticeNoticeReceiverArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AlarmNoticeNoticeReceiverArrayInput)(nil)).Elem(), AlarmNoticeNoticeReceiverArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmNoticeNoticeRuleInput)(nil)).Elem(), AlarmNoticeNoticeRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmNoticeNoticeRuleArrayInput)(nil)).Elem(), AlarmNoticeNoticeRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmNoticeNoticeRuleEscalateNoticeInput)(nil)).Elem(), AlarmNoticeNoticeRuleEscalateNoticeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmNoticeNoticeRuleEscalateNoticeArrayInput)(nil)).Elem(), AlarmNoticeNoticeRuleEscalateNoticeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverInput)(nil)).Elem(), AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArrayInput)(nil)).Elem(), AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmNoticeNoticeRuleEscalateNoticeWebCallbackInput)(nil)).Elem(), AlarmNoticeNoticeRuleEscalateNoticeWebCallbackArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmNoticeNoticeRuleEscalateNoticeWebCallbackArrayInput)(nil)).Elem(), AlarmNoticeNoticeRuleEscalateNoticeWebCallbackArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmNoticeNoticeRuleNoticeReceiverInput)(nil)).Elem(), AlarmNoticeNoticeRuleNoticeReceiverArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmNoticeNoticeRuleNoticeReceiverArrayInput)(nil)).Elem(), AlarmNoticeNoticeRuleNoticeReceiverArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmNoticeNoticeRuleWebCallbackInput)(nil)).Elem(), AlarmNoticeNoticeRuleWebCallbackArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmNoticeNoticeRuleWebCallbackArrayInput)(nil)).Elem(), AlarmNoticeNoticeRuleWebCallbackArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AlarmNoticeWebCallbackInput)(nil)).Elem(), AlarmNoticeWebCallbackArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AlarmNoticeWebCallbackArrayInput)(nil)).Elem(), AlarmNoticeWebCallbackArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CkafkaConsumerCkafkaInput)(nil)).Elem(), CkafkaConsumerCkafkaArgs{})
@@ -10732,6 +21212,16 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ConfigExtractRuleFilterKeyRegexArrayInput)(nil)).Elem(), ConfigExtractRuleFilterKeyRegexArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ConfigExtractRuleMetaTagInput)(nil)).Elem(), ConfigExtractRuleMetaTagArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ConfigExtractRuleMetaTagArrayInput)(nil)).Elem(), ConfigExtractRuleMetaTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConsoleAccessControlRuleInput)(nil)).Elem(), ConsoleAccessControlRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConsoleAccessControlRuleArrayInput)(nil)).Elem(), ConsoleAccessControlRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConsoleAccountInput)(nil)).Elem(), ConsoleAccountArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConsoleAccountArrayInput)(nil)).Elem(), ConsoleAccountArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConsoleAnonymousLoginInput)(nil)).Elem(), ConsoleAnonymousLoginArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConsoleAnonymousLoginPtrInput)(nil)).Elem(), ConsoleAnonymousLoginArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConsoleAuthRoleInput)(nil)).Elem(), ConsoleAuthRoleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConsoleAuthRoleArrayInput)(nil)).Elem(), ConsoleAuthRoleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConsoleTagInput)(nil)).Elem(), ConsoleTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ConsoleTagArrayInput)(nil)).Elem(), ConsoleTagArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CosRechargeExtractRuleInfoInput)(nil)).Elem(), CosRechargeExtractRuleInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CosRechargeExtractRuleInfoPtrInput)(nil)).Elem(), CosRechargeExtractRuleInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CosRechargeExtractRuleInfoFilterKeyRegexInput)(nil)).Elem(), CosRechargeExtractRuleInfoFilterKeyRegexArgs{})
@@ -10746,10 +21236,28 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*CosShipperContentCsvPtrInput)(nil)).Elem(), CosShipperContentCsvArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CosShipperContentJsonInput)(nil)).Elem(), CosShipperContentJsonArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CosShipperContentJsonPtrInput)(nil)).Elem(), CosShipperContentJsonArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CosShipperContentParquetInput)(nil)).Elem(), CosShipperContentParquetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CosShipperContentParquetPtrInput)(nil)).Elem(), CosShipperContentParquetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CosShipperContentParquetParquetKeyInfoInput)(nil)).Elem(), CosShipperContentParquetParquetKeyInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CosShipperContentParquetParquetKeyInfoArrayInput)(nil)).Elem(), CosShipperContentParquetParquetKeyInfoArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CosShipperFilterRuleInput)(nil)).Elem(), CosShipperFilterRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CosShipperFilterRuleArrayInput)(nil)).Elem(), CosShipperFilterRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DataTransformDataTransformSqlDataSourceInput)(nil)).Elem(), DataTransformDataTransformSqlDataSourceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DataTransformDataTransformSqlDataSourceArrayInput)(nil)).Elem(), DataTransformDataTransformSqlDataSourceArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DataTransformDstResourceInput)(nil)).Elem(), DataTransformDstResourceArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DataTransformDstResourceArrayInput)(nil)).Elem(), DataTransformDstResourceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DataTransformEnvInfoInput)(nil)).Elem(), DataTransformEnvInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DataTransformEnvInfoArrayInput)(nil)).Elem(), DataTransformEnvInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DlcDeliverDlcInfoInput)(nil)).Elem(), DlcDeliverDlcInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DlcDeliverDlcInfoPtrInput)(nil)).Elem(), DlcDeliverDlcInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DlcDeliverDlcInfoFieldInfoInput)(nil)).Elem(), DlcDeliverDlcInfoFieldInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DlcDeliverDlcInfoFieldInfoArrayInput)(nil)).Elem(), DlcDeliverDlcInfoFieldInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DlcDeliverDlcInfoPartitionExtraInput)(nil)).Elem(), DlcDeliverDlcInfoPartitionExtraArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DlcDeliverDlcInfoPartitionExtraPtrInput)(nil)).Elem(), DlcDeliverDlcInfoPartitionExtraArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DlcDeliverDlcInfoPartitionInfoInput)(nil)).Elem(), DlcDeliverDlcInfoPartitionInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DlcDeliverDlcInfoPartitionInfoArrayInput)(nil)).Elem(), DlcDeliverDlcInfoPartitionInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DlcDeliverDlcInfoTableInfoInput)(nil)).Elem(), DlcDeliverDlcInfoTableInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DlcDeliverDlcInfoTableInfoPtrInput)(nil)).Elem(), DlcDeliverDlcInfoTableInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleInput)(nil)).Elem(), IndexRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IndexRulePtrInput)(nil)).Elem(), IndexRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleDynamicIndexInput)(nil)).Elem(), IndexRuleDynamicIndexArgs{})
@@ -10762,18 +21270,68 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleKeyValueKeyValueArrayInput)(nil)).Elem(), IndexRuleKeyValueKeyValueArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleKeyValueKeyValueValueInput)(nil)).Elem(), IndexRuleKeyValueKeyValueValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleKeyValueKeyValueValuePtrInput)(nil)).Elem(), IndexRuleKeyValueKeyValueValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeInput)(nil)).Elem(), IndexRuleKeyValueKeyValueValueChildNodeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeArrayInput)(nil)).Elem(), IndexRuleKeyValueKeyValueValueChildNodeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeValueInput)(nil)).Elem(), IndexRuleKeyValueKeyValueValueChildNodeValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeValuePtrInput)(nil)).Elem(), IndexRuleKeyValueKeyValueValueChildNodeValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeInput)(nil)).Elem(), IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArrayInput)(nil)).Elem(), IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueInput)(nil)).Elem(), IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrInput)(nil)).Elem(), IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeInput)(nil)).Elem(), IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArrayInput)(nil)).Elem(), IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueInput)(nil)).Elem(), IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrInput)(nil)).Elem(), IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeInput)(nil)).Elem(), IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayInput)(nil)).Elem(), IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueInput)(nil)).Elem(), IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrInput)(nil)).Elem(), IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeInput)(nil)).Elem(), IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayInput)(nil)).Elem(), IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueInput)(nil)).Elem(), IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrInput)(nil)).Elem(), IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagInput)(nil)).Elem(), IndexRuleTagArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagPtrInput)(nil)).Elem(), IndexRuleTagArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagKeyValueInput)(nil)).Elem(), IndexRuleTagKeyValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagKeyValueArrayInput)(nil)).Elem(), IndexRuleTagKeyValueArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagKeyValueValueInput)(nil)).Elem(), IndexRuleTagKeyValueValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagKeyValueValuePtrInput)(nil)).Elem(), IndexRuleTagKeyValueValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeInput)(nil)).Elem(), IndexRuleTagKeyValueValueChildNodeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeArrayInput)(nil)).Elem(), IndexRuleTagKeyValueValueChildNodeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeValueInput)(nil)).Elem(), IndexRuleTagKeyValueValueChildNodeValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeValuePtrInput)(nil)).Elem(), IndexRuleTagKeyValueValueChildNodeValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeValueChildNodeInput)(nil)).Elem(), IndexRuleTagKeyValueValueChildNodeValueChildNodeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeValueChildNodeArrayInput)(nil)).Elem(), IndexRuleTagKeyValueValueChildNodeValueChildNodeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeValueChildNodeValueInput)(nil)).Elem(), IndexRuleTagKeyValueValueChildNodeValueChildNodeValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrInput)(nil)).Elem(), IndexRuleTagKeyValueValueChildNodeValueChildNodeValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeInput)(nil)).Elem(), IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArrayInput)(nil)).Elem(), IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueInput)(nil)).Elem(), IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrInput)(nil)).Elem(), IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeInput)(nil)).Elem(), IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayInput)(nil)).Elem(), IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueInput)(nil)).Elem(), IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrInput)(nil)).Elem(), IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeInput)(nil)).Elem(), IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayInput)(nil)).Elem(), IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueInput)(nil)).Elem(), IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrInput)(nil)).Elem(), IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*KafkaConsumerConsumerContentInput)(nil)).Elem(), KafkaConsumerConsumerContentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*KafkaConsumerConsumerContentPtrInput)(nil)).Elem(), KafkaConsumerConsumerContentArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*KafkaRechargeLogRechargeRuleInput)(nil)).Elem(), KafkaRechargeLogRechargeRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*KafkaRechargeLogRechargeRulePtrInput)(nil)).Elem(), KafkaRechargeLogRechargeRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*KafkaRechargeProtocolInput)(nil)).Elem(), KafkaRechargeProtocolArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*KafkaRechargeProtocolPtrInput)(nil)).Elem(), KafkaRechargeProtocolArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*MachineGroupMachineGroupTypeInput)(nil)).Elem(), MachineGroupMachineGroupTypeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*MachineGroupMachineGroupTypePtrInput)(nil)).Elem(), MachineGroupMachineGroupTypeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetricSubscribeInstanceInfoInput)(nil)).Elem(), MetricSubscribeInstanceInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetricSubscribeInstanceInfoPtrInput)(nil)).Elem(), MetricSubscribeInstanceInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetricSubscribeInstanceInfoInstanceInput)(nil)).Elem(), MetricSubscribeInstanceInfoInstanceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetricSubscribeInstanceInfoInstanceArrayInput)(nil)).Elem(), MetricSubscribeInstanceInfoInstanceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetricSubscribeMetricInput)(nil)).Elem(), MetricSubscribeMetricArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetricSubscribeMetricArrayInput)(nil)).Elem(), MetricSubscribeMetricArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetricSubscribeMetricMetricLabelInput)(nil)).Elem(), MetricSubscribeMetricMetricLabelArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MetricSubscribeMetricMetricLabelArrayInput)(nil)).Elem(), MetricSubscribeMetricMetricLabelArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentNoticeContentsInput)(nil)).Elem(), NoticeContentNoticeContentsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentNoticeContentsPtrInput)(nil)).Elem(), NoticeContentNoticeContentsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentNoticeContentsRecoveryContentInput)(nil)).Elem(), NoticeContentNoticeContentsRecoveryContentArgs{})
@@ -10782,12 +21340,32 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentNoticeContentsTriggerContentPtrInput)(nil)).Elem(), NoticeContentNoticeContentsTriggerContentArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScheduledSqlDstResourceInput)(nil)).Elem(), ScheduledSqlDstResourceArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScheduledSqlDstResourcePtrInput)(nil)).Elem(), ScheduledSqlDstResourceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TopicCustomKmsInfoInput)(nil)).Elem(), TopicCustomKmsInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TopicCustomKmsInfoPtrInput)(nil)).Elem(), TopicCustomKmsInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TopicExtendsInput)(nil)).Elem(), TopicExtendsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TopicExtendsPtrInput)(nil)).Elem(), TopicExtendsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TopicExtendsAnonymousAccessInput)(nil)).Elem(), TopicExtendsAnonymousAccessArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TopicExtendsAnonymousAccessPtrInput)(nil)).Elem(), TopicExtendsAnonymousAccessArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TopicExtendsAnonymousAccessConditionInput)(nil)).Elem(), TopicExtendsAnonymousAccessConditionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TopicExtendsAnonymousAccessConditionArrayInput)(nil)).Elem(), TopicExtendsAnonymousAccessConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAlarmNoticesAlarmNoticeInput)(nil)).Elem(), GetAlarmNoticesAlarmNoticeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAlarmNoticesAlarmNoticeArrayInput)(nil)).Elem(), GetAlarmNoticesAlarmNoticeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAlarmNoticesAlarmNoticeAlarmShieldCountInput)(nil)).Elem(), GetAlarmNoticesAlarmNoticeAlarmShieldCountArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAlarmNoticesAlarmNoticeAlarmShieldCountArrayInput)(nil)).Elem(), GetAlarmNoticesAlarmNoticeAlarmShieldCountArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAlarmNoticesAlarmNoticeNoticeReceiverInput)(nil)).Elem(), GetAlarmNoticesAlarmNoticeNoticeReceiverArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAlarmNoticesAlarmNoticeNoticeReceiverArrayInput)(nil)).Elem(), GetAlarmNoticesAlarmNoticeNoticeReceiverArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAlarmNoticesAlarmNoticeNoticeRuleInput)(nil)).Elem(), GetAlarmNoticesAlarmNoticeNoticeRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAlarmNoticesAlarmNoticeNoticeRuleArrayInput)(nil)).Elem(), GetAlarmNoticesAlarmNoticeNoticeRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverInput)(nil)).Elem(), GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArrayInput)(nil)).Elem(), GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackInput)(nil)).Elem(), GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArrayInput)(nil)).Elem(), GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAlarmNoticesAlarmNoticeTagInput)(nil)).Elem(), GetAlarmNoticesAlarmNoticeTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAlarmNoticesAlarmNoticeTagArrayInput)(nil)).Elem(), GetAlarmNoticesAlarmNoticeTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAlarmNoticesAlarmNoticeWebCallbackInput)(nil)).Elem(), GetAlarmNoticesAlarmNoticeWebCallbackArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAlarmNoticesAlarmNoticeWebCallbackArrayInput)(nil)).Elem(), GetAlarmNoticesAlarmNoticeWebCallbackArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAlarmNoticesFilterInput)(nil)).Elem(), GetAlarmNoticesFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAlarmNoticesFilterArrayInput)(nil)).Elem(), GetAlarmNoticesFilterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetLogsetsFilterInput)(nil)).Elem(), GetLogsetsFilterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetLogsetsFilterArrayInput)(nil)).Elem(), GetLogsetsFilterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetLogsetsLogsetInput)(nil)).Elem(), GetLogsetsLogsetArgs{})
@@ -10804,8 +21382,28 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArrayInput)(nil)).Elem(), GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetMachineGroupConfigsConfigExtractRuleMetaTagInput)(nil)).Elem(), GetMachineGroupConfigsConfigExtractRuleMetaTagArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetMachineGroupConfigsConfigExtractRuleMetaTagArrayInput)(nil)).Elem(), GetMachineGroupConfigsConfigExtractRuleMetaTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMachineGroupsFilterInput)(nil)).Elem(), GetMachineGroupsFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMachineGroupsFilterArrayInput)(nil)).Elem(), GetMachineGroupsFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMachineGroupsMachineGroupInput)(nil)).Elem(), GetMachineGroupsMachineGroupArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMachineGroupsMachineGroupArrayInput)(nil)).Elem(), GetMachineGroupsMachineGroupArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMachineGroupsMachineGroupMachineGroupTypeInput)(nil)).Elem(), GetMachineGroupsMachineGroupMachineGroupTypeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMachineGroupsMachineGroupMachineGroupTypeArrayInput)(nil)).Elem(), GetMachineGroupsMachineGroupMachineGroupTypeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMachineGroupsMachineGroupMetaTagInput)(nil)).Elem(), GetMachineGroupsMachineGroupMetaTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMachineGroupsMachineGroupMetaTagArrayInput)(nil)).Elem(), GetMachineGroupsMachineGroupMetaTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMachineGroupsMachineGroupTagInput)(nil)).Elem(), GetMachineGroupsMachineGroupTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetMachineGroupsMachineGroupTagArrayInput)(nil)).Elem(), GetMachineGroupsMachineGroupTagArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetMachinesMachineInput)(nil)).Elem(), GetMachinesMachineArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetMachinesMachineArrayInput)(nil)).Elem(), GetMachinesMachineArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNoticeContentsFilterInput)(nil)).Elem(), GetNoticeContentsFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNoticeContentsFilterArrayInput)(nil)).Elem(), GetNoticeContentsFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNoticeContentsNoticeContentListInput)(nil)).Elem(), GetNoticeContentsNoticeContentListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNoticeContentsNoticeContentListArrayInput)(nil)).Elem(), GetNoticeContentsNoticeContentListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNoticeContentsNoticeContentListNoticeContentInput)(nil)).Elem(), GetNoticeContentsNoticeContentListNoticeContentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNoticeContentsNoticeContentListNoticeContentArrayInput)(nil)).Elem(), GetNoticeContentsNoticeContentListNoticeContentArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNoticeContentsNoticeContentListNoticeContentRecoveryContentInput)(nil)).Elem(), GetNoticeContentsNoticeContentListNoticeContentRecoveryContentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNoticeContentsNoticeContentListNoticeContentRecoveryContentArrayInput)(nil)).Elem(), GetNoticeContentsNoticeContentListNoticeContentRecoveryContentArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNoticeContentsNoticeContentListNoticeContentTriggerContentInput)(nil)).Elem(), GetNoticeContentsNoticeContentListNoticeContentTriggerContentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNoticeContentsNoticeContentListNoticeContentTriggerContentArrayInput)(nil)).Elem(), GetNoticeContentsNoticeContentListNoticeContentTriggerContentArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetShipperTasksTaskInput)(nil)).Elem(), GetShipperTasksTaskArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetShipperTasksTaskArrayInput)(nil)).Elem(), GetShipperTasksTaskArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTopicsFilterInput)(nil)).Elem(), GetTopicsFilterArgs{})
@@ -10822,12 +21420,30 @@ func init() {
 	pulumi.RegisterOutputType(AlarmAnalysisConfigInfoArrayOutput{})
 	pulumi.RegisterOutputType(AlarmCallBackOutput{})
 	pulumi.RegisterOutputType(AlarmCallBackPtrOutput{})
+	pulumi.RegisterOutputType(AlarmMonitorNoticeOutput{})
+	pulumi.RegisterOutputType(AlarmMonitorNoticePtrOutput{})
+	pulumi.RegisterOutputType(AlarmMonitorNoticeNoticeOutput{})
+	pulumi.RegisterOutputType(AlarmMonitorNoticeNoticeArrayOutput{})
 	pulumi.RegisterOutputType(AlarmMonitorTimeOutput{})
 	pulumi.RegisterOutputType(AlarmMonitorTimePtrOutput{})
 	pulumi.RegisterOutputType(AlarmMultiConditionOutput{})
 	pulumi.RegisterOutputType(AlarmMultiConditionArrayOutput{})
+	pulumi.RegisterOutputType(AlarmNoticeDeliverConfigOutput{})
+	pulumi.RegisterOutputType(AlarmNoticeDeliverConfigPtrOutput{})
 	pulumi.RegisterOutputType(AlarmNoticeNoticeReceiverOutput{})
 	pulumi.RegisterOutputType(AlarmNoticeNoticeReceiverArrayOutput{})
+	pulumi.RegisterOutputType(AlarmNoticeNoticeRuleOutput{})
+	pulumi.RegisterOutputType(AlarmNoticeNoticeRuleArrayOutput{})
+	pulumi.RegisterOutputType(AlarmNoticeNoticeRuleEscalateNoticeOutput{})
+	pulumi.RegisterOutputType(AlarmNoticeNoticeRuleEscalateNoticeArrayOutput{})
+	pulumi.RegisterOutputType(AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverOutput{})
+	pulumi.RegisterOutputType(AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArrayOutput{})
+	pulumi.RegisterOutputType(AlarmNoticeNoticeRuleEscalateNoticeWebCallbackOutput{})
+	pulumi.RegisterOutputType(AlarmNoticeNoticeRuleEscalateNoticeWebCallbackArrayOutput{})
+	pulumi.RegisterOutputType(AlarmNoticeNoticeRuleNoticeReceiverOutput{})
+	pulumi.RegisterOutputType(AlarmNoticeNoticeRuleNoticeReceiverArrayOutput{})
+	pulumi.RegisterOutputType(AlarmNoticeNoticeRuleWebCallbackOutput{})
+	pulumi.RegisterOutputType(AlarmNoticeNoticeRuleWebCallbackArrayOutput{})
 	pulumi.RegisterOutputType(AlarmNoticeWebCallbackOutput{})
 	pulumi.RegisterOutputType(AlarmNoticeWebCallbackArrayOutput{})
 	pulumi.RegisterOutputType(CkafkaConsumerCkafkaOutput{})
@@ -10858,6 +21474,16 @@ func init() {
 	pulumi.RegisterOutputType(ConfigExtractRuleFilterKeyRegexArrayOutput{})
 	pulumi.RegisterOutputType(ConfigExtractRuleMetaTagOutput{})
 	pulumi.RegisterOutputType(ConfigExtractRuleMetaTagArrayOutput{})
+	pulumi.RegisterOutputType(ConsoleAccessControlRuleOutput{})
+	pulumi.RegisterOutputType(ConsoleAccessControlRuleArrayOutput{})
+	pulumi.RegisterOutputType(ConsoleAccountOutput{})
+	pulumi.RegisterOutputType(ConsoleAccountArrayOutput{})
+	pulumi.RegisterOutputType(ConsoleAnonymousLoginOutput{})
+	pulumi.RegisterOutputType(ConsoleAnonymousLoginPtrOutput{})
+	pulumi.RegisterOutputType(ConsoleAuthRoleOutput{})
+	pulumi.RegisterOutputType(ConsoleAuthRoleArrayOutput{})
+	pulumi.RegisterOutputType(ConsoleTagOutput{})
+	pulumi.RegisterOutputType(ConsoleTagArrayOutput{})
 	pulumi.RegisterOutputType(CosRechargeExtractRuleInfoOutput{})
 	pulumi.RegisterOutputType(CosRechargeExtractRuleInfoPtrOutput{})
 	pulumi.RegisterOutputType(CosRechargeExtractRuleInfoFilterKeyRegexOutput{})
@@ -10872,10 +21498,28 @@ func init() {
 	pulumi.RegisterOutputType(CosShipperContentCsvPtrOutput{})
 	pulumi.RegisterOutputType(CosShipperContentJsonOutput{})
 	pulumi.RegisterOutputType(CosShipperContentJsonPtrOutput{})
+	pulumi.RegisterOutputType(CosShipperContentParquetOutput{})
+	pulumi.RegisterOutputType(CosShipperContentParquetPtrOutput{})
+	pulumi.RegisterOutputType(CosShipperContentParquetParquetKeyInfoOutput{})
+	pulumi.RegisterOutputType(CosShipperContentParquetParquetKeyInfoArrayOutput{})
 	pulumi.RegisterOutputType(CosShipperFilterRuleOutput{})
 	pulumi.RegisterOutputType(CosShipperFilterRuleArrayOutput{})
+	pulumi.RegisterOutputType(DataTransformDataTransformSqlDataSourceOutput{})
+	pulumi.RegisterOutputType(DataTransformDataTransformSqlDataSourceArrayOutput{})
 	pulumi.RegisterOutputType(DataTransformDstResourceOutput{})
 	pulumi.RegisterOutputType(DataTransformDstResourceArrayOutput{})
+	pulumi.RegisterOutputType(DataTransformEnvInfoOutput{})
+	pulumi.RegisterOutputType(DataTransformEnvInfoArrayOutput{})
+	pulumi.RegisterOutputType(DlcDeliverDlcInfoOutput{})
+	pulumi.RegisterOutputType(DlcDeliverDlcInfoPtrOutput{})
+	pulumi.RegisterOutputType(DlcDeliverDlcInfoFieldInfoOutput{})
+	pulumi.RegisterOutputType(DlcDeliverDlcInfoFieldInfoArrayOutput{})
+	pulumi.RegisterOutputType(DlcDeliverDlcInfoPartitionExtraOutput{})
+	pulumi.RegisterOutputType(DlcDeliverDlcInfoPartitionExtraPtrOutput{})
+	pulumi.RegisterOutputType(DlcDeliverDlcInfoPartitionInfoOutput{})
+	pulumi.RegisterOutputType(DlcDeliverDlcInfoPartitionInfoArrayOutput{})
+	pulumi.RegisterOutputType(DlcDeliverDlcInfoTableInfoOutput{})
+	pulumi.RegisterOutputType(DlcDeliverDlcInfoTableInfoPtrOutput{})
 	pulumi.RegisterOutputType(IndexRuleOutput{})
 	pulumi.RegisterOutputType(IndexRulePtrOutput{})
 	pulumi.RegisterOutputType(IndexRuleDynamicIndexOutput{})
@@ -10888,18 +21532,68 @@ func init() {
 	pulumi.RegisterOutputType(IndexRuleKeyValueKeyValueArrayOutput{})
 	pulumi.RegisterOutputType(IndexRuleKeyValueKeyValueValueOutput{})
 	pulumi.RegisterOutputType(IndexRuleKeyValueKeyValueValuePtrOutput{})
+	pulumi.RegisterOutputType(IndexRuleKeyValueKeyValueValueChildNodeOutput{})
+	pulumi.RegisterOutputType(IndexRuleKeyValueKeyValueValueChildNodeArrayOutput{})
+	pulumi.RegisterOutputType(IndexRuleKeyValueKeyValueValueChildNodeValueOutput{})
+	pulumi.RegisterOutputType(IndexRuleKeyValueKeyValueValueChildNodeValuePtrOutput{})
+	pulumi.RegisterOutputType(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeOutput{})
+	pulumi.RegisterOutputType(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArrayOutput{})
+	pulumi.RegisterOutputType(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueOutput{})
+	pulumi.RegisterOutputType(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValuePtrOutput{})
+	pulumi.RegisterOutputType(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeOutput{})
+	pulumi.RegisterOutputType(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput{})
+	pulumi.RegisterOutputType(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput{})
+	pulumi.RegisterOutputType(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput{})
+	pulumi.RegisterOutputType(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput{})
+	pulumi.RegisterOutputType(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput{})
+	pulumi.RegisterOutputType(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput{})
+	pulumi.RegisterOutputType(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput{})
+	pulumi.RegisterOutputType(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput{})
+	pulumi.RegisterOutputType(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput{})
+	pulumi.RegisterOutputType(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput{})
+	pulumi.RegisterOutputType(IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput{})
 	pulumi.RegisterOutputType(IndexRuleTagOutput{})
 	pulumi.RegisterOutputType(IndexRuleTagPtrOutput{})
 	pulumi.RegisterOutputType(IndexRuleTagKeyValueOutput{})
 	pulumi.RegisterOutputType(IndexRuleTagKeyValueArrayOutput{})
 	pulumi.RegisterOutputType(IndexRuleTagKeyValueValueOutput{})
 	pulumi.RegisterOutputType(IndexRuleTagKeyValueValuePtrOutput{})
+	pulumi.RegisterOutputType(IndexRuleTagKeyValueValueChildNodeOutput{})
+	pulumi.RegisterOutputType(IndexRuleTagKeyValueValueChildNodeArrayOutput{})
+	pulumi.RegisterOutputType(IndexRuleTagKeyValueValueChildNodeValueOutput{})
+	pulumi.RegisterOutputType(IndexRuleTagKeyValueValueChildNodeValuePtrOutput{})
+	pulumi.RegisterOutputType(IndexRuleTagKeyValueValueChildNodeValueChildNodeOutput{})
+	pulumi.RegisterOutputType(IndexRuleTagKeyValueValueChildNodeValueChildNodeArrayOutput{})
+	pulumi.RegisterOutputType(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueOutput{})
+	pulumi.RegisterOutputType(IndexRuleTagKeyValueValueChildNodeValueChildNodeValuePtrOutput{})
+	pulumi.RegisterOutputType(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeOutput{})
+	pulumi.RegisterOutputType(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeArrayOutput{})
+	pulumi.RegisterOutputType(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueOutput{})
+	pulumi.RegisterOutputType(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValuePtrOutput{})
+	pulumi.RegisterOutputType(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput{})
+	pulumi.RegisterOutputType(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput{})
+	pulumi.RegisterOutputType(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput{})
+	pulumi.RegisterOutputType(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput{})
+	pulumi.RegisterOutputType(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeOutput{})
+	pulumi.RegisterOutputType(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeArrayOutput{})
+	pulumi.RegisterOutputType(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueOutput{})
+	pulumi.RegisterOutputType(IndexRuleTagKeyValueValueChildNodeValueChildNodeValueChildNodeValueChildNodeValueChildNodeValuePtrOutput{})
+	pulumi.RegisterOutputType(KafkaConsumerConsumerContentOutput{})
+	pulumi.RegisterOutputType(KafkaConsumerConsumerContentPtrOutput{})
 	pulumi.RegisterOutputType(KafkaRechargeLogRechargeRuleOutput{})
 	pulumi.RegisterOutputType(KafkaRechargeLogRechargeRulePtrOutput{})
 	pulumi.RegisterOutputType(KafkaRechargeProtocolOutput{})
 	pulumi.RegisterOutputType(KafkaRechargeProtocolPtrOutput{})
 	pulumi.RegisterOutputType(MachineGroupMachineGroupTypeOutput{})
 	pulumi.RegisterOutputType(MachineGroupMachineGroupTypePtrOutput{})
+	pulumi.RegisterOutputType(MetricSubscribeInstanceInfoOutput{})
+	pulumi.RegisterOutputType(MetricSubscribeInstanceInfoPtrOutput{})
+	pulumi.RegisterOutputType(MetricSubscribeInstanceInfoInstanceOutput{})
+	pulumi.RegisterOutputType(MetricSubscribeInstanceInfoInstanceArrayOutput{})
+	pulumi.RegisterOutputType(MetricSubscribeMetricOutput{})
+	pulumi.RegisterOutputType(MetricSubscribeMetricArrayOutput{})
+	pulumi.RegisterOutputType(MetricSubscribeMetricMetricLabelOutput{})
+	pulumi.RegisterOutputType(MetricSubscribeMetricMetricLabelArrayOutput{})
 	pulumi.RegisterOutputType(NoticeContentNoticeContentsOutput{})
 	pulumi.RegisterOutputType(NoticeContentNoticeContentsPtrOutput{})
 	pulumi.RegisterOutputType(NoticeContentNoticeContentsRecoveryContentOutput{})
@@ -10908,12 +21602,32 @@ func init() {
 	pulumi.RegisterOutputType(NoticeContentNoticeContentsTriggerContentPtrOutput{})
 	pulumi.RegisterOutputType(ScheduledSqlDstResourceOutput{})
 	pulumi.RegisterOutputType(ScheduledSqlDstResourcePtrOutput{})
+	pulumi.RegisterOutputType(TopicCustomKmsInfoOutput{})
+	pulumi.RegisterOutputType(TopicCustomKmsInfoPtrOutput{})
 	pulumi.RegisterOutputType(TopicExtendsOutput{})
 	pulumi.RegisterOutputType(TopicExtendsPtrOutput{})
 	pulumi.RegisterOutputType(TopicExtendsAnonymousAccessOutput{})
 	pulumi.RegisterOutputType(TopicExtendsAnonymousAccessPtrOutput{})
 	pulumi.RegisterOutputType(TopicExtendsAnonymousAccessConditionOutput{})
 	pulumi.RegisterOutputType(TopicExtendsAnonymousAccessConditionArrayOutput{})
+	pulumi.RegisterOutputType(GetAlarmNoticesAlarmNoticeOutput{})
+	pulumi.RegisterOutputType(GetAlarmNoticesAlarmNoticeArrayOutput{})
+	pulumi.RegisterOutputType(GetAlarmNoticesAlarmNoticeAlarmShieldCountOutput{})
+	pulumi.RegisterOutputType(GetAlarmNoticesAlarmNoticeAlarmShieldCountArrayOutput{})
+	pulumi.RegisterOutputType(GetAlarmNoticesAlarmNoticeNoticeReceiverOutput{})
+	pulumi.RegisterOutputType(GetAlarmNoticesAlarmNoticeNoticeReceiverArrayOutput{})
+	pulumi.RegisterOutputType(GetAlarmNoticesAlarmNoticeNoticeRuleOutput{})
+	pulumi.RegisterOutputType(GetAlarmNoticesAlarmNoticeNoticeRuleArrayOutput{})
+	pulumi.RegisterOutputType(GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverOutput{})
+	pulumi.RegisterOutputType(GetAlarmNoticesAlarmNoticeNoticeRuleNoticeReceiverArrayOutput{})
+	pulumi.RegisterOutputType(GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackOutput{})
+	pulumi.RegisterOutputType(GetAlarmNoticesAlarmNoticeNoticeRuleWebCallbackArrayOutput{})
+	pulumi.RegisterOutputType(GetAlarmNoticesAlarmNoticeTagOutput{})
+	pulumi.RegisterOutputType(GetAlarmNoticesAlarmNoticeTagArrayOutput{})
+	pulumi.RegisterOutputType(GetAlarmNoticesAlarmNoticeWebCallbackOutput{})
+	pulumi.RegisterOutputType(GetAlarmNoticesAlarmNoticeWebCallbackArrayOutput{})
+	pulumi.RegisterOutputType(GetAlarmNoticesFilterOutput{})
+	pulumi.RegisterOutputType(GetAlarmNoticesFilterArrayOutput{})
 	pulumi.RegisterOutputType(GetLogsetsFilterOutput{})
 	pulumi.RegisterOutputType(GetLogsetsFilterArrayOutput{})
 	pulumi.RegisterOutputType(GetLogsetsLogsetOutput{})
@@ -10930,8 +21644,28 @@ func init() {
 	pulumi.RegisterOutputType(GetMachineGroupConfigsConfigExtractRuleFilterKeyRegexArrayOutput{})
 	pulumi.RegisterOutputType(GetMachineGroupConfigsConfigExtractRuleMetaTagOutput{})
 	pulumi.RegisterOutputType(GetMachineGroupConfigsConfigExtractRuleMetaTagArrayOutput{})
+	pulumi.RegisterOutputType(GetMachineGroupsFilterOutput{})
+	pulumi.RegisterOutputType(GetMachineGroupsFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetMachineGroupsMachineGroupOutput{})
+	pulumi.RegisterOutputType(GetMachineGroupsMachineGroupArrayOutput{})
+	pulumi.RegisterOutputType(GetMachineGroupsMachineGroupMachineGroupTypeOutput{})
+	pulumi.RegisterOutputType(GetMachineGroupsMachineGroupMachineGroupTypeArrayOutput{})
+	pulumi.RegisterOutputType(GetMachineGroupsMachineGroupMetaTagOutput{})
+	pulumi.RegisterOutputType(GetMachineGroupsMachineGroupMetaTagArrayOutput{})
+	pulumi.RegisterOutputType(GetMachineGroupsMachineGroupTagOutput{})
+	pulumi.RegisterOutputType(GetMachineGroupsMachineGroupTagArrayOutput{})
 	pulumi.RegisterOutputType(GetMachinesMachineOutput{})
 	pulumi.RegisterOutputType(GetMachinesMachineArrayOutput{})
+	pulumi.RegisterOutputType(GetNoticeContentsFilterOutput{})
+	pulumi.RegisterOutputType(GetNoticeContentsFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetNoticeContentsNoticeContentListOutput{})
+	pulumi.RegisterOutputType(GetNoticeContentsNoticeContentListArrayOutput{})
+	pulumi.RegisterOutputType(GetNoticeContentsNoticeContentListNoticeContentOutput{})
+	pulumi.RegisterOutputType(GetNoticeContentsNoticeContentListNoticeContentArrayOutput{})
+	pulumi.RegisterOutputType(GetNoticeContentsNoticeContentListNoticeContentRecoveryContentOutput{})
+	pulumi.RegisterOutputType(GetNoticeContentsNoticeContentListNoticeContentRecoveryContentArrayOutput{})
+	pulumi.RegisterOutputType(GetNoticeContentsNoticeContentListNoticeContentTriggerContentOutput{})
+	pulumi.RegisterOutputType(GetNoticeContentsNoticeContentListNoticeContentTriggerContentArrayOutput{})
 	pulumi.RegisterOutputType(GetShipperTasksTaskOutput{})
 	pulumi.RegisterOutputType(GetShipperTasksTaskArrayOutput{})
 	pulumi.RegisterOutputType(GetTopicsFilterOutput{})

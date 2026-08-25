@@ -43,7 +43,7 @@ import (
 //
 // ## Import
 //
-// tsf bind_api_group can be imported using the id, e.g.
+// tsf bindApiGroup can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Tsf/bindApiGroup:BindApiGroup bind_api_group bind_api_group_id

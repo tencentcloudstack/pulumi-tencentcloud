@@ -63,8 +63,7 @@ import (
 //
 // ## Import
 //
-// css live_transcode_template can be imported using the id, e.g.
-//
+// css liveTranscodeTemplate can be imported using the id, e.g.
 // ```sh
 // $ pulumi import tencentcloud:Css/liveTranscodeTemplate:LiveTranscodeTemplate live_transcode_template liveTranscodeTemplate_id
 // ```

@@ -109,31 +109,31 @@ export interface DbImportJobOperationState {
     /**
      * The request ID of the asynchronous task.
      */
-    asyncRequestId?: pulumi.Input<string>;
+    asyncRequestId?: pulumi.Input<string | undefined>;
     /**
      * The name of the imported target database, if it is not passed, it means that no database is specified.
      */
-    cosUrl?: pulumi.Input<string>;
+    cosUrl?: pulumi.Input<string | undefined>;
     /**
      * The name of the imported target database, if it is not passed, it means that no database is specified.
      */
-    dbName?: pulumi.Input<string>;
+    dbName?: pulumi.Input<string | undefined>;
     /**
      * file name. This file refers to the file that the user has uploaded to Tencent Cloud, and only .sql files are supported.
      */
-    fileName?: pulumi.Input<string>;
+    fileName?: pulumi.Input<string | undefined>;
     /**
      * The instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console page.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * The password of the user account of the cloud database instance.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * The username of the cloud database.
      */
-    user?: pulumi.Input<string>;
+    user?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -143,15 +143,15 @@ export interface DbImportJobOperationArgs {
     /**
      * The name of the imported target database, if it is not passed, it means that no database is specified.
      */
-    cosUrl?: pulumi.Input<string>;
+    cosUrl?: pulumi.Input<string | undefined>;
     /**
      * The name of the imported target database, if it is not passed, it means that no database is specified.
      */
-    dbName?: pulumi.Input<string>;
+    dbName?: pulumi.Input<string | undefined>;
     /**
      * file name. This file refers to the file that the user has uploaded to Tencent Cloud, and only .sql files are supported.
      */
-    fileName?: pulumi.Input<string>;
+    fileName?: pulumi.Input<string | undefined>;
     /**
      * The instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console page.
      */
@@ -159,7 +159,7 @@ export interface DbImportJobOperationArgs {
     /**
      * The password of the user account of the cloud database instance.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * The username of the cloud database.
      */

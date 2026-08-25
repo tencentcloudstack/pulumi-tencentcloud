@@ -11,7 +11,7 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
- * ### Use single condition
+ * ### Use single condition with alarmNoticeIds
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -47,6 +47,73 @@ import * as utilities from "../utilities";
  *     monitorTime: {
  *         time: 1,
  *         type: "Period",
+ *     },
+ *     classifications: {
+ *         env: "production",
+ *         service: "api-gateway",
+ *     },
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * ```
+ *
+ * ### are mutually exclusive. You can only use one of them.
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const exampleMonitorNotice = new tencentcloud.cls.Alarm("example_monitor_notice", {
+ *     name: "tf-example-monitor-notice",
+ *     monitorNotice: {
+ *         notices: [
+ *             {
+ *                 noticeId: "notice-c2af43ee-1a4b-4c4a-ae3e-f81481280101",
+ *                 contentTmplId: "tmpl-5f7c8a9b-1234-5678-90ab-cdef12345678",
+ *                 alarmLevels: [
+ *                     1,
+ *                     2,
+ *                 ],
+ *             },
+ *             {
+ *                 noticeId: "notice-d3bf54ff-2b5c-5d5b-bf4f-f92582391202",
+ *                 contentTmplId: "tmpl-6g8d9b0c-2345-6789-01bc-def123456789",
+ *                 alarmLevels: [3],
+ *             },
+ *         ],
+ *     },
+ *     alarmPeriod: 15,
+ *     condition: "$1.errorCounts > 100",
+ *     alarmLevel: 1,
+ *     messageTemplate: "{{.Label}}",
+ *     status: true,
+ *     triggerCount: 1,
+ *     alarmTargets: [{
+ *         logsetId: "e74efb8e-f647-48b2-a725-43f11b122081",
+ *         topicId: "59cf3ec0-1612-4157-be3f-341b2e7a53cb",
+ *         query: "status:>500 | select count(*) as errorCounts",
+ *         startTimeOffset: -15,
+ *         endTimeOffset: 0,
+ *         number: 1,
+ *         syntaxRule: 1,
+ *     }],
+ *     analyses: [{
+ *         content: "__FILENAME__",
+ *         name: "terraform",
+ *         type: "field",
+ *         configInfos: [{
+ *             key: "QueryIndex",
+ *             value: "1",
+ *         }],
+ *     }],
+ *     monitorTime: {
+ *         time: 1,
+ *         type: "Period",
+ *     },
+ *     classifications: {
+ *         env: "production",
+ *         service: "data-pipeline",
  *     },
  *     tags: {
  *         createdBy: "terraform",
@@ -99,6 +166,10 @@ import * as utilities from "../utilities";
  *         time: 1,
  *         type: "Period",
  *     },
+ *     classifications: {
+ *         env: "staging",
+ *         service: "data-pipeline",
+ *     },
  *     tags: {
  *         createdBy: "terraform",
  *     },
@@ -146,9 +217,9 @@ export class Alarm extends pulumi.CustomResource {
      */
     declare public readonly alarmLevel: pulumi.Output<number>;
     /**
-     * list of alarm notice id.
+     * List of alarm notice id. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.
      */
-    declare public readonly alarmNoticeIds: pulumi.Output<string[]>;
+    declare public readonly alarmNoticeIds: pulumi.Output<string[] | undefined>;
     /**
      * alarm repeat cycle.
      */
@@ -166,6 +237,10 @@ export class Alarm extends pulumi.CustomResource {
      */
     declare public readonly callBack: pulumi.Output<outputs.Cls.AlarmCallBack>;
     /**
+     * Alarm classification information map. Key must match regex `^a-z$`, value length cannot exceed 200 characters. Maximum 20 entries.
+     */
+    declare public readonly classifications: pulumi.Output<{[key: string]: string} | undefined>;
+    /**
      * Trigger condition.
      */
     declare public readonly condition: pulumi.Output<string | undefined>;
@@ -173,6 +248,10 @@ export class Alarm extends pulumi.CustomResource {
      * user define alarm notice.
      */
     declare public readonly messageTemplate: pulumi.Output<string | undefined>;
+    /**
+     * Monitor notice configuration for observable platform. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.
+     */
+    declare public readonly monitorNotice: pulumi.Output<outputs.Cls.AlarmMonitorNotice | undefined>;
     /**
      * monitor task execution time.
      */
@@ -217,8 +296,10 @@ export class Alarm extends pulumi.CustomResource {
             resourceInputs["alarmTargets"] = state?.alarmTargets;
             resourceInputs["analyses"] = state?.analyses;
             resourceInputs["callBack"] = state?.callBack;
+            resourceInputs["classifications"] = state?.classifications;
             resourceInputs["condition"] = state?.condition;
             resourceInputs["messageTemplate"] = state?.messageTemplate;
+            resourceInputs["monitorNotice"] = state?.monitorNotice;
             resourceInputs["monitorTime"] = state?.monitorTime;
             resourceInputs["multiConditions"] = state?.multiConditions;
             resourceInputs["name"] = state?.name;
@@ -227,9 +308,6 @@ export class Alarm extends pulumi.CustomResource {
             resourceInputs["triggerCount"] = state?.triggerCount;
         } else {
             const args = argsOrState as AlarmArgs | undefined;
-            if (args?.alarmNoticeIds === undefined && !opts.urn) {
-                throw new Error("Missing required property 'alarmNoticeIds'");
-            }
             if (args?.alarmPeriod === undefined && !opts.urn) {
                 throw new Error("Missing required property 'alarmPeriod'");
             }
@@ -248,8 +326,10 @@ export class Alarm extends pulumi.CustomResource {
             resourceInputs["alarmTargets"] = args?.alarmTargets;
             resourceInputs["analyses"] = args?.analyses;
             resourceInputs["callBack"] = args?.callBack;
+            resourceInputs["classifications"] = args?.classifications;
             resourceInputs["condition"] = args?.condition;
             resourceInputs["messageTemplate"] = args?.messageTemplate;
+            resourceInputs["monitorNotice"] = args?.monitorNotice;
             resourceInputs["monitorTime"] = args?.monitorTime;
             resourceInputs["multiConditions"] = args?.multiConditions;
             resourceInputs["name"] = args?.name;
@@ -269,59 +349,67 @@ export interface AlarmState {
     /**
      * Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.
      */
-    alarmLevel?: pulumi.Input<number>;
+    alarmLevel?: pulumi.Input<number | undefined>;
     /**
-     * list of alarm notice id.
+     * List of alarm notice id. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.
      */
-    alarmNoticeIds?: pulumi.Input<pulumi.Input<string>[]>;
+    alarmNoticeIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * alarm repeat cycle.
      */
-    alarmPeriod?: pulumi.Input<number>;
+    alarmPeriod?: pulumi.Input<number | undefined>;
     /**
      * list of alarm target.
      */
-    alarmTargets?: pulumi.Input<pulumi.Input<inputs.Cls.AlarmAlarmTarget>[]>;
+    alarmTargets?: pulumi.Input<pulumi.Input<inputs.Cls.AlarmAlarmTarget>[] | undefined>;
     /**
      * multidimensional analysis.
      */
-    analyses?: pulumi.Input<pulumi.Input<inputs.Cls.AlarmAnalysis>[]>;
+    analyses?: pulumi.Input<pulumi.Input<inputs.Cls.AlarmAnalysis>[] | undefined>;
     /**
      * user define callback.
      */
-    callBack?: pulumi.Input<inputs.Cls.AlarmCallBack>;
+    callBack?: pulumi.Input<inputs.Cls.AlarmCallBack | undefined>;
+    /**
+     * Alarm classification information map. Key must match regex `^a-z$`, value length cannot exceed 200 characters. Maximum 20 entries.
+     */
+    classifications?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Trigger condition.
      */
-    condition?: pulumi.Input<string>;
+    condition?: pulumi.Input<string | undefined>;
     /**
      * user define alarm notice.
      */
-    messageTemplate?: pulumi.Input<string>;
+    messageTemplate?: pulumi.Input<string | undefined>;
+    /**
+     * Monitor notice configuration for observable platform. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.
+     */
+    monitorNotice?: pulumi.Input<inputs.Cls.AlarmMonitorNotice | undefined>;
     /**
      * monitor task execution time.
      */
-    monitorTime?: pulumi.Input<inputs.Cls.AlarmMonitorTime>;
+    monitorTime?: pulumi.Input<inputs.Cls.AlarmMonitorTime | undefined>;
     /**
      * Multiple triggering conditions.
      */
-    multiConditions?: pulumi.Input<pulumi.Input<inputs.Cls.AlarmMultiCondition>[]>;
+    multiConditions?: pulumi.Input<pulumi.Input<inputs.Cls.AlarmMultiCondition>[] | undefined>;
     /**
      * log alarm name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * whether to enable the alarm policy.
      */
-    status?: pulumi.Input<boolean>;
+    status?: pulumi.Input<boolean | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * continuous cycle.
      */
-    triggerCount?: pulumi.Input<number>;
+    triggerCount?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -331,11 +419,11 @@ export interface AlarmArgs {
     /**
      * Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.
      */
-    alarmLevel?: pulumi.Input<number>;
+    alarmLevel?: pulumi.Input<number | undefined>;
     /**
-     * list of alarm notice id.
+     * List of alarm notice id. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.
      */
-    alarmNoticeIds: pulumi.Input<pulumi.Input<string>[]>;
+    alarmNoticeIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * alarm repeat cycle.
      */
@@ -347,19 +435,27 @@ export interface AlarmArgs {
     /**
      * multidimensional analysis.
      */
-    analyses?: pulumi.Input<pulumi.Input<inputs.Cls.AlarmAnalysis>[]>;
+    analyses?: pulumi.Input<pulumi.Input<inputs.Cls.AlarmAnalysis>[] | undefined>;
     /**
      * user define callback.
      */
-    callBack?: pulumi.Input<inputs.Cls.AlarmCallBack>;
+    callBack?: pulumi.Input<inputs.Cls.AlarmCallBack | undefined>;
+    /**
+     * Alarm classification information map. Key must match regex `^a-z$`, value length cannot exceed 200 characters. Maximum 20 entries.
+     */
+    classifications?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Trigger condition.
      */
-    condition?: pulumi.Input<string>;
+    condition?: pulumi.Input<string | undefined>;
     /**
      * user define alarm notice.
      */
-    messageTemplate?: pulumi.Input<string>;
+    messageTemplate?: pulumi.Input<string | undefined>;
+    /**
+     * Monitor notice configuration for observable platform. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.
+     */
+    monitorNotice?: pulumi.Input<inputs.Cls.AlarmMonitorNotice | undefined>;
     /**
      * monitor task execution time.
      */
@@ -367,19 +463,19 @@ export interface AlarmArgs {
     /**
      * Multiple triggering conditions.
      */
-    multiConditions?: pulumi.Input<pulumi.Input<inputs.Cls.AlarmMultiCondition>[]>;
+    multiConditions?: pulumi.Input<pulumi.Input<inputs.Cls.AlarmMultiCondition>[] | undefined>;
     /**
      * log alarm name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * whether to enable the alarm policy.
      */
-    status?: pulumi.Input<boolean>;
+    status?: pulumi.Input<boolean | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * continuous cycle.
      */

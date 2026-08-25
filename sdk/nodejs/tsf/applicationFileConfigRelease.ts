@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * tsf applicationfile_config_release can be imported using the id, e.g.
+ * tsf applicationfileConfigRelease can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Tsf/applicationFileConfigRelease:ApplicationFileConfigRelease application_file_config_release application_file_config_release_id
@@ -109,15 +109,15 @@ export interface ApplicationFileConfigReleaseState {
     /**
      * File config id.
      */
-    configId?: pulumi.Input<string>;
+    configId?: pulumi.Input<string | undefined>;
     /**
      * Group Id.
      */
-    groupId?: pulumi.Input<string>;
+    groupId?: pulumi.Input<string | undefined>;
     /**
      * release Description.
      */
-    releaseDesc?: pulumi.Input<string>;
+    releaseDesc?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -135,5 +135,5 @@ export interface ApplicationFileConfigReleaseArgs {
     /**
      * release Description.
      */
-    releaseDesc?: pulumi.Input<string>;
+    releaseDesc?: pulumi.Input<string | undefined>;
 }

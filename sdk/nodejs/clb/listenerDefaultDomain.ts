@@ -120,19 +120,19 @@ export interface ListenerDefaultDomainState {
     /**
      * ID of CLB instance.
      */
-    clbId?: pulumi.Input<string>;
+    clbId?: pulumi.Input<string | undefined>;
     /**
      * Domain name of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * ID of CLB listener.
      */
-    listenerId?: pulumi.Input<string>;
+    listenerId?: pulumi.Input<string | undefined>;
     /**
      * ID of this CLB listener rule.
      */
-    ruleId?: pulumi.Input<string>;
+    ruleId?: pulumi.Input<string | undefined>;
 }
 
 /**

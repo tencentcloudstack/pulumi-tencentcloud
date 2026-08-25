@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const gatewayNodes = tencentcloud.Tse.getGatewayNodes({
+ * const gatewayNodes = tencentcloud.tse.getGatewayNodes({
  *     gatewayId: "gateway-ddbb709b",
  *     groupId: "group-013c0d8e",
  * });
@@ -76,7 +76,7 @@ export interface GetGatewayNodesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const gatewayNodes = tencentcloud.Tse.getGatewayNodes({
+ * const gatewayNodes = tencentcloud.tse.getGatewayNodes({
  *     gatewayId: "gateway-ddbb709b",
  *     groupId: "group-013c0d8e",
  * });
@@ -102,9 +102,9 @@ export interface GetGatewayNodesOutputArgs {
     /**
      * gateway group ID.
      */
-    groupId?: pulumi.Input<string>;
+    groupId?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

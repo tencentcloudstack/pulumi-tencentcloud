@@ -24,7 +24,7 @@ import * as utilities from "../utilities";
  *     proxyId: fooProxy.id,
  *     action: "ACCEPT",
  * });
- * const foo = tencentcloud.Gaap.getSecurityPoliciesOutput({
+ * const foo = tencentcloud.gaap.getSecurityPoliciesOutput({
  *     id: fooSecurityPolicy.id,
  * });
  * ```
@@ -90,7 +90,7 @@ export interface GetSecurityPoliciesResult {
  *     proxyId: fooProxy.id,
  *     action: "ACCEPT",
  * });
- * const foo = tencentcloud.Gaap.getSecurityPoliciesOutput({
+ * const foo = tencentcloud.gaap.getSecurityPoliciesOutput({
  *     id: fooSecurityPolicy.id,
  * });
  * ```
@@ -114,5 +114,5 @@ export interface GetSecurityPoliciesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

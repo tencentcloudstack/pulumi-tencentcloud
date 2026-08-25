@@ -88,13 +88,13 @@ export interface GetTablegroupsOutputArgs {
     /**
      * File for saving results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Id of the table group to be query.
      */
-    tablegroupId?: pulumi.Input<string>;
+    tablegroupId?: pulumi.Input<string | undefined>;
     /**
      * Name of the table group to be query.
      */
-    tablegroupName?: pulumi.Input<string>;
+    tablegroupName?: pulumi.Input<string | undefined>;
 }

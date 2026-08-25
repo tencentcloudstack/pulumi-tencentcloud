@@ -23,6 +23,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Outputs
         /// </summary>
         public readonly Outputs.DomainHttpsConfigForceRedirect? ForceRedirect;
         /// <summary>
+        /// HSTS configuration.
+        /// </summary>
+        public readonly Outputs.DomainHttpsConfigHsts? Hsts;
+        /// <summary>
         /// HTTP2 configuration switch. Valid values are `On` and `Off`. and default value is `Off`.
         /// </summary>
         public readonly string? Http2Switch;
@@ -57,6 +61,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Outputs
 
             Outputs.DomainHttpsConfigForceRedirect? forceRedirect,
 
+            Outputs.DomainHttpsConfigHsts? hsts,
+
             string? http2Switch,
 
             string httpsSwitch,
@@ -73,6 +79,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Outputs
         {
             ClientCertificateConfig = clientCertificateConfig;
             ForceRedirect = forceRedirect;
+            Hsts = hsts;
             Http2Switch = http2Switch;
             HttpsSwitch = httpsSwitch;
             OcspStaplingSwitch = ocspStaplingSwitch;

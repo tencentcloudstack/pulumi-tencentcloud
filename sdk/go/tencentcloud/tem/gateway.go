@@ -80,7 +80,6 @@ import (
 // ## Import
 //
 // tem gateway can be imported using the id, e.g.
-//
 // ```sh
 // $ pulumi import tencentcloud:Tem/gateway:Gateway gateway environmentId#gatewayName
 // ```

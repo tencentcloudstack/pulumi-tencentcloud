@@ -20,7 +20,7 @@ import * as utilities from "../utilities";
  *     content: "test:tx2KGdo3zJg/.",
  *     name: "test_certificate",
  * });
- * const foo = tencentcloud.Gaap.getCertificatesOutput({
+ * const foo = tencentcloud.gaap.getCertificatesOutput({
  *     id: fooCertificate.id,
  * });
  * ```
@@ -94,7 +94,7 @@ export interface GetCertificatesResult {
  *     content: "test:tx2KGdo3zJg/.",
  *     name: "test_certificate",
  * });
- * const foo = tencentcloud.Gaap.getCertificatesOutput({
+ * const foo = tencentcloud.gaap.getCertificatesOutput({
  *     id: fooCertificate.id,
  * });
  * ```
@@ -117,17 +117,17 @@ export interface GetCertificatesOutputArgs {
     /**
      * ID of the certificate to be queried.
      */
-    id?: pulumi.Input<string>;
+    id?: pulumi.Input<string | undefined>;
     /**
      * Name of the certificate to be queried.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Type of the certificate to be queried. Valid values: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver CA certificate; `PROXY` means proxy SSL certificate.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }

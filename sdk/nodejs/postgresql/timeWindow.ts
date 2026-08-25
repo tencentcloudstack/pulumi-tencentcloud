@@ -31,7 +31,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * postgres postgresql_time_window can be imported using the id, e.g.
+ * postgres postgresqlTimeWindow can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Postgresql/timeWindow:TimeWindow postgresql_time_window instance_id
@@ -121,19 +121,19 @@ export interface TimeWindowState {
     /**
      * Instance id.
      */
-    dbInstanceId?: pulumi.Input<string>;
+    dbInstanceId?: pulumi.Input<string | undefined>;
     /**
      * Maintenance duration, Unit: hours.
      */
-    maintainDuration?: pulumi.Input<number>;
+    maintainDuration?: pulumi.Input<number | undefined>;
     /**
      * Maintenance start time. Time zone is UTC+8.
      */
-    maintainStartTime?: pulumi.Input<string>;
+    maintainStartTime?: pulumi.Input<string | undefined>;
     /**
      * Maintenance cycle.
      */
-    maintainWeekDays?: pulumi.Input<pulumi.Input<string>[]>;
+    maintainWeekDays?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -147,13 +147,13 @@ export interface TimeWindowArgs {
     /**
      * Maintenance duration, Unit: hours.
      */
-    maintainDuration?: pulumi.Input<number>;
+    maintainDuration?: pulumi.Input<number | undefined>;
     /**
      * Maintenance start time. Time zone is UTC+8.
      */
-    maintainStartTime?: pulumi.Input<string>;
+    maintainStartTime?: pulumi.Input<string | undefined>;
     /**
      * Maintenance cycle.
      */
-    maintainWeekDays?: pulumi.Input<pulumi.Input<string>[]>;
+    maintainWeekDays?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * dcdb db_sync_mode_config can be imported using the id, e.g.
+ * dcdb dbSyncModeConfig can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Dcdb/dbSyncModeConfig:DbSyncModeConfig db_sync_mode_config db_sync_mode_config_id
@@ -102,11 +102,11 @@ export interface DbSyncModeConfigState {
     /**
      * ID of the instance for which to modify the sync mode. The ID is in the format of `tdsql-ow728lmc`.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Sync mode. Valid values: `0` (async), `1` (strong sync), `2` (downgradable strong sync).
      */
-    syncMode?: pulumi.Input<number>;
+    syncMode?: pulumi.Input<number | undefined>;
 }
 
 /**

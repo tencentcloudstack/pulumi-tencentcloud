@@ -9,6 +9,8 @@ import * as utilities from "../utilities";
 /**
  * Use this resource to create tcr instance.
  *
+ * > **NOTE:**If `securityPolicy` needs to be configured, `openPublicOperation` needs to be set to true
+ *
  * ## Example Usage
  *
  * ### Create a basic tcr instance.
@@ -79,12 +81,29 @@ import * as utilities from "../utilities";
  *     instanceType: "premium",
  *     replications: [
  *         {
- *             regionId: tcrRegionMap["ap-guangzhou"],
+ *             regionId: Number(tcrRegionMap["ap-guangzhou"]),
  *         },
  *         {
- *             regionId: tcrRegionMap["ap-singapore"],
+ *             regionId: Number(tcrRegionMap["ap-singapore"]),
  *         },
  *     ],
+ * });
+ * ```
+ *
+ * ### Create instance with COS bucket configuration.
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.tcr.Instance("example", {
+ *     name: "tf-example-tcr",
+ *     instanceType: "standard",
+ *     enableCosMaz: true,
+ *     enableCosVersioning: true,
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
  * });
  * ```
  *
@@ -93,7 +112,7 @@ import * as utilities from "../utilities";
  * tcr instance can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Tcr/instance:Instance foo instance_id
+ * $ pulumi import tencentcloud:Tcr/instance:Instance example tcr-4detlt3v
  * ```
  */
 export class Instance extends pulumi.CustomResource {
@@ -128,6 +147,18 @@ export class Instance extends pulumi.CustomResource {
      * Indicate to delete the COS bucket which is auto-created with the instance or not.
      */
     declare public readonly deleteBucket: pulumi.Output<boolean | undefined>;
+    /**
+     * Whether to enable Instance Deletion Protection.
+     */
+    declare public readonly deletionProtection: pulumi.Output<boolean>;
+    /**
+     * Whether to enable COS bucket multi-AZ feature. Default is `false`.
+     */
+    declare public readonly enableCosMaz: pulumi.Output<boolean>;
+    /**
+     * Whether to enable COS bucket versioning. Advanced Edition Instances: Default is `true` (versioning enabled); Standard / Basic Edition Instances: Default is `false` (disabled).
+     */
+    declare public readonly enableCosVersioning: pulumi.Output<boolean>;
     /**
      * Instance expiration time (prepaid).
      */
@@ -199,6 +230,9 @@ export class Instance extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as InstanceState | undefined;
             resourceInputs["deleteBucket"] = state?.deleteBucket;
+            resourceInputs["deletionProtection"] = state?.deletionProtection;
+            resourceInputs["enableCosMaz"] = state?.enableCosMaz;
+            resourceInputs["enableCosVersioning"] = state?.enableCosVersioning;
             resourceInputs["expiredAt"] = state?.expiredAt;
             resourceInputs["instanceChargeTypePrepaidPeriod"] = state?.instanceChargeTypePrepaidPeriod;
             resourceInputs["instanceChargeTypePrepaidRenewFlag"] = state?.instanceChargeTypePrepaidRenewFlag;
@@ -219,6 +253,9 @@ export class Instance extends pulumi.CustomResource {
                 throw new Error("Missing required property 'instanceType'");
             }
             resourceInputs["deleteBucket"] = args?.deleteBucket;
+            resourceInputs["deletionProtection"] = args?.deletionProtection;
+            resourceInputs["enableCosMaz"] = args?.enableCosMaz;
+            resourceInputs["enableCosVersioning"] = args?.enableCosVersioning;
             resourceInputs["instanceChargeTypePrepaidPeriod"] = args?.instanceChargeTypePrepaidPeriod;
             resourceInputs["instanceChargeTypePrepaidRenewFlag"] = args?.instanceChargeTypePrepaidRenewFlag;
             resourceInputs["instanceType"] = args?.instanceType;
@@ -246,63 +283,75 @@ export interface InstanceState {
     /**
      * Indicate to delete the COS bucket which is auto-created with the instance or not.
      */
-    deleteBucket?: pulumi.Input<boolean>;
+    deleteBucket?: pulumi.Input<boolean | undefined>;
+    /**
+     * Whether to enable Instance Deletion Protection.
+     */
+    deletionProtection?: pulumi.Input<boolean | undefined>;
+    /**
+     * Whether to enable COS bucket multi-AZ feature. Default is `false`.
+     */
+    enableCosMaz?: pulumi.Input<boolean | undefined>;
+    /**
+     * Whether to enable COS bucket versioning. Advanced Edition Instances: Default is `true` (versioning enabled); Standard / Basic Edition Instances: Default is `false` (disabled).
+     */
+    enableCosVersioning?: pulumi.Input<boolean | undefined>;
     /**
      * Instance expiration time (prepaid).
      */
-    expiredAt?: pulumi.Input<string>;
+    expiredAt?: pulumi.Input<string | undefined>;
     /**
      * Length of time to purchase an instance (in month). Must set when registryChargeType is prepaid.
      */
-    instanceChargeTypePrepaidPeriod?: pulumi.Input<number>;
+    instanceChargeTypePrepaidPeriod?: pulumi.Input<number | undefined>;
     /**
      * Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registryChargeType is prepaid.
      */
-    instanceChargeTypePrepaidRenewFlag?: pulumi.Input<number>;
+    instanceChargeTypePrepaidRenewFlag?: pulumi.Input<number | undefined>;
     /**
      * TCR types. Valid values are: `standard`, `basic`, `premium`.
      */
-    instanceType?: pulumi.Input<string>;
+    instanceType?: pulumi.Input<string | undefined>;
     /**
      * Internal address for access of the TCR instance.
      */
-    internalEndPoint?: pulumi.Input<string>;
+    internalEndPoint?: pulumi.Input<string | undefined>;
     /**
      * Name of the TCR instance.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Control public network access.
      */
-    openPublicOperation?: pulumi.Input<boolean>;
+    openPublicOperation?: pulumi.Input<boolean | undefined>;
     /**
      * Public address for access of the TCR instance.
      */
-    publicDomain?: pulumi.Input<string>;
+    publicDomain?: pulumi.Input<string | undefined>;
     /**
      * Status of the TCR instance public network access.
      */
-    publicStatus?: pulumi.Input<string>;
+    publicStatus?: pulumi.Input<string | undefined>;
     /**
      * Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.
      */
-    registryChargeType?: pulumi.Input<number>;
+    registryChargeType?: pulumi.Input<number | undefined>;
     /**
      * Specify List of instance Replications, premium only. The available [source region list](https://www.tencentcloud.com/document/api/1051/41101) is here.
      */
-    replications?: pulumi.Input<pulumi.Input<inputs.Tcr.InstanceReplication>[]>;
+    replications?: pulumi.Input<pulumi.Input<inputs.Tcr.InstanceReplication>[] | undefined>;
     /**
      * Public network access allowlist policies of the TCR instance. Only available when `openPublicOperation` is `true`.
      */
-    securityPolicies?: pulumi.Input<pulumi.Input<inputs.Tcr.InstanceSecurityPolicy>[]>;
+    securityPolicies?: pulumi.Input<pulumi.Input<inputs.Tcr.InstanceSecurityPolicy>[] | undefined>;
     /**
      * Status of the TCR instance.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * The available tags within this TCR instance.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 /**
@@ -312,15 +361,27 @@ export interface InstanceArgs {
     /**
      * Indicate to delete the COS bucket which is auto-created with the instance or not.
      */
-    deleteBucket?: pulumi.Input<boolean>;
+    deleteBucket?: pulumi.Input<boolean | undefined>;
+    /**
+     * Whether to enable Instance Deletion Protection.
+     */
+    deletionProtection?: pulumi.Input<boolean | undefined>;
+    /**
+     * Whether to enable COS bucket multi-AZ feature. Default is `false`.
+     */
+    enableCosMaz?: pulumi.Input<boolean | undefined>;
+    /**
+     * Whether to enable COS bucket versioning. Advanced Edition Instances: Default is `true` (versioning enabled); Standard / Basic Edition Instances: Default is `false` (disabled).
+     */
+    enableCosVersioning?: pulumi.Input<boolean | undefined>;
     /**
      * Length of time to purchase an instance (in month). Must set when registryChargeType is prepaid.
      */
-    instanceChargeTypePrepaidPeriod?: pulumi.Input<number>;
+    instanceChargeTypePrepaidPeriod?: pulumi.Input<number | undefined>;
     /**
      * Auto renewal flag. 1: manual renewal, 2: automatic renewal, 3: no renewal and no notification. Must set when registryChargeType is prepaid.
      */
-    instanceChargeTypePrepaidRenewFlag?: pulumi.Input<number>;
+    instanceChargeTypePrepaidRenewFlag?: pulumi.Input<number | undefined>;
     /**
      * TCR types. Valid values are: `standard`, `basic`, `premium`.
      */
@@ -328,25 +389,25 @@ export interface InstanceArgs {
     /**
      * Name of the TCR instance.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Control public network access.
      */
-    openPublicOperation?: pulumi.Input<boolean>;
+    openPublicOperation?: pulumi.Input<boolean | undefined>;
     /**
      * Charge type of instance. 1: postpaid; 2: prepaid. Default is postpaid.
      */
-    registryChargeType?: pulumi.Input<number>;
+    registryChargeType?: pulumi.Input<number | undefined>;
     /**
      * Specify List of instance Replications, premium only. The available [source region list](https://www.tencentcloud.com/document/api/1051/41101) is here.
      */
-    replications?: pulumi.Input<pulumi.Input<inputs.Tcr.InstanceReplication>[]>;
+    replications?: pulumi.Input<pulumi.Input<inputs.Tcr.InstanceReplication>[] | undefined>;
     /**
      * Public network access allowlist policies of the TCR instance. Only available when `openPublicOperation` is `true`.
      */
-    securityPolicies?: pulumi.Input<pulumi.Input<inputs.Tcr.InstanceSecurityPolicy>[]>;
+    securityPolicies?: pulumi.Input<pulumi.Input<inputs.Tcr.InstanceSecurityPolicy>[] | undefined>;
     /**
      * The available tags within this TCR instance.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

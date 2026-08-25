@@ -68,12 +68,8 @@ type GetLimitsResult struct {
 }
 
 func GetLimitsOutput(ctx *pulumi.Context, args GetLimitsOutputArgs, opts ...pulumi.InvokeOption) GetLimitsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetLimitsResultOutput, error) {
-			args := v.(GetLimitsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:As/getLimits:getLimits", args, GetLimitsResultOutput{}, options).(GetLimitsResultOutput), nil
-		}).(GetLimitsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:As/getLimits:getLimits", args, GetLimitsResultOutput{}, options).(GetLimitsResultOutput)
 }
 
 // A collection of arguments for invoking getLimits.

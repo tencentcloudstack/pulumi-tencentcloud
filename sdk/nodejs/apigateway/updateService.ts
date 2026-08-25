@@ -104,15 +104,15 @@ export interface UpdateServiceState {
     /**
      * The name of the environment to be switched, currently supporting three environments: test (test environment), prepub (pre release environment), and release (release environment).
      */
-    environmentName?: pulumi.Input<string>;
+    environmentName?: pulumi.Input<string | undefined>;
     /**
      * Service ID.
      */
-    serviceId?: pulumi.Input<string>;
+    serviceId?: pulumi.Input<string | undefined>;
     /**
      * The version number of the switch.
      */
-    versionName?: pulumi.Input<string>;
+    versionName?: pulumi.Input<string | undefined>;
 }
 
 /**

@@ -244,6 +244,21 @@ import * as utilities from "../utilities";
  *                 enabled: "off",
  *             }],
  *         },
+ *         botManagementLite: {
+ *             captchaPageChallenge: {
+ *                 enabled: "on",
+ *             },
+ *             aiCrawlerDetection: {
+ *                 enabled: "on",
+ *                 action: {
+ *                     name: "Deny",
+ *                     denyActionParameters: {
+ *                         blockIp: "on",
+ *                         blockIpDuration: "120s",
+ *                     },
+ *                 },
+ *             },
+ *         },
  *     },
  * });
  * ```
@@ -639,6 +654,10 @@ export class SecurityPolicyConfig extends pulumi.CustomResource {
      */
     declare public readonly host: pulumi.Output<string | undefined>;
     /**
+     * Security configuration. Classic web protection settings. Note: the DescribeSecurityPolicy API does not return SecurityConfig, so this field is write-only for state consistency. For each sub-configuration, if not specified, the existing API configuration is kept.
+     */
+    declare public readonly securityConfig: pulumi.Output<outputs.Teo.SecurityPolicyConfigSecurityConfig>;
+    /**
      * Security policy configuration. it is recommended to use for custom policies and managed rule configurations of Web protection. it supports configuring security policies with expression grammar.
      */
     declare public readonly securityPolicy: pulumi.Output<outputs.Teo.SecurityPolicyConfigSecurityPolicy | undefined>;
@@ -666,6 +685,7 @@ export class SecurityPolicyConfig extends pulumi.CustomResource {
             const state = argsOrState as SecurityPolicyConfigState | undefined;
             resourceInputs["entity"] = state?.entity;
             resourceInputs["host"] = state?.host;
+            resourceInputs["securityConfig"] = state?.securityConfig;
             resourceInputs["securityPolicy"] = state?.securityPolicy;
             resourceInputs["templateId"] = state?.templateId;
             resourceInputs["zoneId"] = state?.zoneId;
@@ -676,6 +696,7 @@ export class SecurityPolicyConfig extends pulumi.CustomResource {
             }
             resourceInputs["entity"] = args?.entity;
             resourceInputs["host"] = args?.host;
+            resourceInputs["securityConfig"] = args?.securityConfig;
             resourceInputs["securityPolicy"] = args?.securityPolicy;
             resourceInputs["templateId"] = args?.templateId;
             resourceInputs["zoneId"] = args?.zoneId;
@@ -692,23 +713,27 @@ export interface SecurityPolicyConfigState {
     /**
      * Security policy type. the following parameter values can be used: <li>ZoneDefaultPolicy: used to specify a site-level policy;</li> <li>Template: used to specify a policy Template. you need to simultaneously specify the TemplateId parameter;</li> <li>Host: used to specify a domain-level policy (note: when using a domain name to specify a dns service policy, only dns services or policy templates that have applied a domain-level policy are supported).</li>.
      */
-    entity?: pulumi.Input<string>;
+    entity?: pulumi.Input<string | undefined>;
     /**
      * Specifies the specified domain. when the Entity parameter value is Host, use the domain-level policy specified by this parameter. for example: use www.example.com to configure the domain-level policy of the domain.
      */
-    host?: pulumi.Input<string>;
+    host?: pulumi.Input<string | undefined>;
+    /**
+     * Security configuration. Classic web protection settings. Note: the DescribeSecurityPolicy API does not return SecurityConfig, so this field is write-only for state consistency. For each sub-configuration, if not specified, the existing API configuration is kept.
+     */
+    securityConfig?: pulumi.Input<inputs.Teo.SecurityPolicyConfigSecurityConfig | undefined>;
     /**
      * Security policy configuration. it is recommended to use for custom policies and managed rule configurations of Web protection. it supports configuring security policies with expression grammar.
      */
-    securityPolicy?: pulumi.Input<inputs.Teo.SecurityPolicyConfigSecurityPolicy>;
+    securityPolicy?: pulumi.Input<inputs.Teo.SecurityPolicyConfigSecurityPolicy | undefined>;
     /**
      * Specify the policy Template ID. use this parameter to specify the ID of the policy Template when the Entity parameter value is Template.
      */
-    templateId?: pulumi.Input<string>;
+    templateId?: pulumi.Input<string | undefined>;
     /**
      * Zone ID.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -718,19 +743,23 @@ export interface SecurityPolicyConfigArgs {
     /**
      * Security policy type. the following parameter values can be used: <li>ZoneDefaultPolicy: used to specify a site-level policy;</li> <li>Template: used to specify a policy Template. you need to simultaneously specify the TemplateId parameter;</li> <li>Host: used to specify a domain-level policy (note: when using a domain name to specify a dns service policy, only dns services or policy templates that have applied a domain-level policy are supported).</li>.
      */
-    entity?: pulumi.Input<string>;
+    entity?: pulumi.Input<string | undefined>;
     /**
      * Specifies the specified domain. when the Entity parameter value is Host, use the domain-level policy specified by this parameter. for example: use www.example.com to configure the domain-level policy of the domain.
      */
-    host?: pulumi.Input<string>;
+    host?: pulumi.Input<string | undefined>;
+    /**
+     * Security configuration. Classic web protection settings. Note: the DescribeSecurityPolicy API does not return SecurityConfig, so this field is write-only for state consistency. For each sub-configuration, if not specified, the existing API configuration is kept.
+     */
+    securityConfig?: pulumi.Input<inputs.Teo.SecurityPolicyConfigSecurityConfig | undefined>;
     /**
      * Security policy configuration. it is recommended to use for custom policies and managed rule configurations of Web protection. it supports configuring security policies with expression grammar.
      */
-    securityPolicy?: pulumi.Input<inputs.Teo.SecurityPolicyConfigSecurityPolicy>;
+    securityPolicy?: pulumi.Input<inputs.Teo.SecurityPolicyConfigSecurityPolicy | undefined>;
     /**
      * Specify the policy Template ID. use this parameter to specify the ID of the policy Template when the Entity parameter value is Template.
      */
-    templateId?: pulumi.Input<string>;
+    templateId?: pulumi.Input<string | undefined>;
     /**
      * Zone ID.
      */

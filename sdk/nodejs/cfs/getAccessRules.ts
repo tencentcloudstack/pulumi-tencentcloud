@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const accessRules = tencentcloud.Cfs.getAccessRules({
+ * const accessRules = tencentcloud.cfs.getAccessRules({
  *     accessGroupId: "pgroup-7nx89k7l",
  *     accessRuleId: "rule-qcndbqzj",
  * });
@@ -76,7 +76,7 @@ export interface GetAccessRulesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const accessRules = tencentcloud.Cfs.getAccessRules({
+ * const accessRules = tencentcloud.cfs.getAccessRules({
  *     accessGroupId: "pgroup-7nx89k7l",
  *     accessRuleId: "rule-qcndbqzj",
  * });
@@ -102,9 +102,9 @@ export interface GetAccessRulesOutputArgs {
     /**
      * A specified access rule ID used to query.
      */
-    accessRuleId?: pulumi.Input<string>;
+    accessRuleId?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

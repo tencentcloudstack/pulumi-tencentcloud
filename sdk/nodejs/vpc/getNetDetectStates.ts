@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const netDetectStates = tencentcloud.Vpc.getNetDetectStates({
+ * const netDetectStates = tencentcloud.vpc.getNetDetectStates({
  *     netDetectIds: ["netd-12345678"],
  * });
  * ```
@@ -73,7 +73,7 @@ export interface GetNetDetectStatesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const netDetectStates = tencentcloud.Vpc.getNetDetectStates({
+ * const netDetectStates = tencentcloud.vpc.getNetDetectStates({
  *     netDetectIds: ["netd-12345678"],
  * });
  * ```
@@ -95,13 +95,13 @@ export interface GetNetDetectStatesOutputArgs {
     /**
      * Filter conditions. `NetDetectIds` and `Filters` cannot be specified at the same time.net-detect-id - String - (Filter condition) The network detection instance ID, such as netd-12345678.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Vpc.GetNetDetectStatesFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Vpc.GetNetDetectStatesFilterArgs>[] | undefined>;
     /**
      * The array of network detection instance `IDs`, such as [`netd-12345678`].
      */
-    netDetectIds?: pulumi.Input<pulumi.Input<string>[]>;
+    netDetectIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

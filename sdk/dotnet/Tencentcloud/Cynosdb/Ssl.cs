@@ -23,7 +23,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var cynosdbSsl = new Tencentcloud.Cynosdb.Ssl("cynosdb_ssl", new()
+    ///     var example = new Tencentcloud.Cynosdb.Ssl("example", new()
     ///     {
     ///         ClusterId = "cynosdbmysql-1e0nzayx",
     ///         InstanceId = "cynosdbmysql-ins-pfsv6q1e",
@@ -35,10 +35,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// ## Import
     /// 
-    /// cynosdb ssl can be imported using the id, e.g.
+    /// cynosdb ssl can be imported using the clusterId#instanceId, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Cynosdb/ssl:Ssl cynosdb_ssl ${cluster_id}#${instance_id}
+    /// $ pulumi import tencentcloud:Cynosdb/ssl:Ssl example cynosdbmysql-1e0nzayx#cynosdbmysql-ins-pfsv6q1e
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/ssl:Ssl")]

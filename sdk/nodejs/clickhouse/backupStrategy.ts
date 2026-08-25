@@ -43,7 +43,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * clickhouse backup_strategy can be imported using the id, e.g.
+ * clickhouse backupStrategy can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Clickhouse/backupStrategy:BackupStrategy backup_strategy instance_id
@@ -130,15 +130,15 @@ export interface BackupStrategyState {
     /**
      * Data backup strategy.
      */
-    dataBackupStrategies?: pulumi.Input<pulumi.Input<inputs.Clickhouse.BackupStrategyDataBackupStrategy>[]>;
+    dataBackupStrategies?: pulumi.Input<pulumi.Input<inputs.Clickhouse.BackupStrategyDataBackupStrategy>[] | undefined>;
     /**
      * Instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Metadata backup strategy.
      */
-    metaBackupStrategies?: pulumi.Input<pulumi.Input<inputs.Clickhouse.BackupStrategyMetaBackupStrategy>[]>;
+    metaBackupStrategies?: pulumi.Input<pulumi.Input<inputs.Clickhouse.BackupStrategyMetaBackupStrategy>[] | undefined>;
 }
 
 /**
@@ -156,5 +156,5 @@ export interface BackupStrategyArgs {
     /**
      * Metadata backup strategy.
      */
-    metaBackupStrategies?: pulumi.Input<pulumi.Input<inputs.Clickhouse.BackupStrategyMetaBackupStrategy>[]>;
+    metaBackupStrategies?: pulumi.Input<pulumi.Input<inputs.Clickhouse.BackupStrategyMetaBackupStrategy>[] | undefined>;
 }

@@ -15,12 +15,12 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const domainTest = tencentcloud.Dayu.getL7Rules({
+ * const domainTest = tencentcloud.dayu.getL7Rules({
  *     resourceType: testRule.resourceType,
  *     resourceId: testRule.resourceId,
  *     domain: testRule.domain,
  * });
- * const idTest = tencentcloud.Dayu.getL7Rules({
+ * const idTest = tencentcloud.dayu.getL7Rules({
  *     resourceType: testRule.resourceType,
  *     resourceId: testRule.resourceId,
  *     ruleId: testRule.ruleId,
@@ -97,12 +97,12 @@ export interface GetL7RulesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const domainTest = tencentcloud.Dayu.getL7Rules({
+ * const domainTest = tencentcloud.dayu.getL7Rules({
  *     resourceType: testRule.resourceType,
  *     resourceId: testRule.resourceId,
  *     domain: testRule.domain,
  * });
- * const idTest = tencentcloud.Dayu.getL7Rules({
+ * const idTest = tencentcloud.dayu.getL7Rules({
  *     resourceType: testRule.resourceType,
  *     resourceId: testRule.resourceId,
  *     ruleId: testRule.ruleId,
@@ -127,7 +127,7 @@ export interface GetL7RulesOutputArgs {
     /**
      * Domain of the layer 7 rule to be queried.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Id of the resource that the layer 7 rule works for.
      */
@@ -139,9 +139,9 @@ export interface GetL7RulesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Id of the layer 7 rule to be queried.
      */
-    ruleId?: pulumi.Input<string>;
+    ruleId?: pulumi.Input<string | undefined>;
 }

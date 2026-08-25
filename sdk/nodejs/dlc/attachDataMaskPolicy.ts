@@ -98,7 +98,7 @@ export interface AttachDataMaskPolicyState {
     /**
      * A collection of data masking policy permission objects to be bound.
      */
-    dataMaskStrategyPolicySet?: pulumi.Input<inputs.Dlc.AttachDataMaskPolicyDataMaskStrategyPolicySet>;
+    dataMaskStrategyPolicySet?: pulumi.Input<inputs.Dlc.AttachDataMaskPolicyDataMaskStrategyPolicySet | undefined>;
 }
 
 /**
@@ -108,5 +108,5 @@ export interface AttachDataMaskPolicyArgs {
     /**
      * A collection of data masking policy permission objects to be bound.
      */
-    dataMaskStrategyPolicySet?: pulumi.Input<inputs.Dlc.AttachDataMaskPolicyDataMaskStrategyPolicySet>;
+    dataMaskStrategyPolicySet?: pulumi.Input<inputs.Dlc.AttachDataMaskPolicyDataMaskStrategyPolicySet | undefined>;
 }

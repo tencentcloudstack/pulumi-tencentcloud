@@ -67,12 +67,8 @@ type GetDescribeUserTypeResult struct {
 }
 
 func GetDescribeUserTypeOutput(ctx *pulumi.Context, args GetDescribeUserTypeOutputArgs, opts ...pulumi.InvokeOption) GetDescribeUserTypeResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDescribeUserTypeResultOutput, error) {
-			args := v.(GetDescribeUserTypeArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dlc/getDescribeUserType:getDescribeUserType", args, GetDescribeUserTypeResultOutput{}, options).(GetDescribeUserTypeResultOutput), nil
-		}).(GetDescribeUserTypeResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dlc/getDescribeUserType:getDescribeUserType", args, GetDescribeUserTypeResultOutput{}, options).(GetDescribeUserTypeResultOutput)
 }
 
 // A collection of arguments for invoking getDescribeUserType.

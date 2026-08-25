@@ -49,6 +49,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &RenewDisk{}
 	case "tencentcloud:Lighthouse/renewInstance:RenewInstance":
 		r = &RenewInstance{}
+	case "tencentcloud:Lighthouse/shareBlueprintAcrossAccountAttachment:ShareBlueprintAcrossAccountAttachment":
+		r = &ShareBlueprintAcrossAccountAttachment{}
 	case "tencentcloud:Lighthouse/snapshot:Snapshot":
 		r = &Snapshot{}
 	case "tencentcloud:Lighthouse/startInstance:StartInstance":
@@ -136,6 +138,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Lighthouse/renewInstance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Lighthouse/shareBlueprintAcrossAccountAttachment",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

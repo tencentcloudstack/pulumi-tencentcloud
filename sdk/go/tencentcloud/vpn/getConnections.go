@@ -59,7 +59,7 @@ import (
 //				VpnGatewayId:      pulumi.StringRef("vpngw-8ccsnclt"),
 //				VpcId:             pulumi.StringRef("vpc-6ccw0s5l"),
 //				CustomerGatewayId: pulumi.StringRef("cgw-r1g6c8fr"),
-//				Tags: map[string]interface{}{
+//				Tags: map[string]string{
 //					"createBy": "Terraform",
 //				},
 //			}, nil)
@@ -119,12 +119,8 @@ type GetConnectionsResult struct {
 }
 
 func GetConnectionsOutput(ctx *pulumi.Context, args GetConnectionsOutputArgs, opts ...pulumi.InvokeOption) GetConnectionsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetConnectionsResultOutput, error) {
-			args := v.(GetConnectionsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Vpn/getConnections:getConnections", args, GetConnectionsResultOutput{}, options).(GetConnectionsResultOutput), nil
-		}).(GetConnectionsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Vpn/getConnections:getConnections", args, GetConnectionsResultOutput{}, options).(GetConnectionsResultOutput)
 }
 
 // A collection of arguments for invoking getConnections.

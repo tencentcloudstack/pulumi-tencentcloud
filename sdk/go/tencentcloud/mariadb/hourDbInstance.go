@@ -12,9 +12,11 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a mariadb hourDbInstance
+// Provides a resource to create a MariaDB hour db instance
 //
 // ## Example Usage
+//
+// ### Create with default init params
 //
 // ```go
 // package main
@@ -28,21 +30,70 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := mariadb.NewHourDbInstance(ctx, "basic", &mariadb.HourDbInstanceArgs{
-//				DbVersionId:  pulumi.String("10.0"),
-//				InstanceName: pulumi.String("db-test-del"),
-//				Memory:       pulumi.Int(2),
+//			_, err := mariadb.NewHourDbInstance(ctx, "example", &mariadb.HourDbInstanceArgs{
+//				InstanceName: pulumi.String("tf-example"),
+//				Memory:       pulumi.Int(4),
 //				NodeCount:    pulumi.Int(2),
-//				Storage:      pulumi.Int(10),
-//				SubnetId:     pulumi.String("subnet-jdi5xn22"),
-//				VpcId:        pulumi.String("vpc-k1t8ickr"),
-//				Vip:          pulumi.String("10.0.0.197"),
+//				Storage:      pulumi.Int(100),
+//				VpcId:        pulumi.String("vpc-i5yyodl9"),
+//				SubnetId:     pulumi.String("subnet-d4umunpy"),
+//				Vip:          pulumi.String("10.0.0.8"),
 //				Zones: pulumi.StringArray{
 //					pulumi.String("ap-guangzhou-6"),
 //					pulumi.String("ap-guangzhou-7"),
 //				},
 //				Tags: pulumi.StringMap{
-//					"createdBy": pulumi.String("terraform"),
+//					"createdBy": pulumi.String("Terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Create with custom init params
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/mariadb"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := mariadb.NewHourDbInstance(ctx, "example", &mariadb.HourDbInstanceArgs{
+//				DbVersionId:  pulumi.String("5.7"),
+//				InstanceName: pulumi.String("tf-example"),
+//				Memory:       pulumi.Int(2),
+//				NodeCount:    pulumi.Int(2),
+//				Storage:      pulumi.Int(100),
+//				VpcId:        pulumi.String("vpc-i5yyodl9"),
+//				SubnetId:     pulumi.String("subnet-d4umunpy"),
+//				Vip:          pulumi.String("10.0.0.8"),
+//				Zones: pulumi.StringArray{
+//					pulumi.String("ap-guangzhou-6"),
+//					pulumi.String("ap-guangzhou-7"),
+//				},
+//				InitParams: mariadb.HourDbInstanceInitParamArray{
+//					&mariadb.HourDbInstanceInitParamArgs{
+//						Param: pulumi.String("character_set_server"),
+//						Value: pulumi.String("utf8"),
+//					},
+//					&mariadb.HourDbInstanceInitParamArgs{
+//						Param: pulumi.String("lower_case_table_names"),
+//						Value: pulumi.String("1"),
+//					},
+//				},
+//				Tags: pulumi.StringMap{
+//					"createdBy": pulumi.String("Terraform"),
 //				},
 //			})
 //			if err != nil {
@@ -56,16 +107,17 @@ import (
 //
 // ## Import
 //
-// mariadb hour_db_instance can be imported using the id, e.g.
-//
+// MariaDB hour db instance can be imported using the id, e.g.
 // ```sh
-// $ pulumi import tencentcloud:Mariadb/hourDbInstance:HourDbInstance hour_db_instance tdsql-kjqih9nn
+// $ pulumi import tencentcloud:Mariadb/hourDbInstance:HourDbInstance example tdsql-kjqih9nn
 // ```
 type HourDbInstance struct {
 	pulumi.CustomResourceState
 
 	// db engine version, default to 10.1.9.
 	DbVersionId pulumi.StringOutput `pulumi:"dbVersionId"`
+	// parameter list. This interface's optional values include: `characterSetServer` (character set, required), `lowerCaseTableNames` (table name case sensitivity, required, 0 - sensitive; 1 - insensitive), `innodbPageSize` (innodb data page, default 16K), `syncMode` (sync mode: 0 - async; 1 - strong sync; 2 - strong sync degradable, default is strong sync degradable).
+	InitParams HourDbInstanceInitParamArrayOutput `pulumi:"initParams"`
 	// name of this instance.
 	InstanceName pulumi.StringPtrOutput `pulumi:"instanceName"`
 	// instance memory.
@@ -132,6 +184,8 @@ func GetHourDbInstance(ctx *pulumi.Context,
 type hourDbInstanceState struct {
 	// db engine version, default to 10.1.9.
 	DbVersionId *string `pulumi:"dbVersionId"`
+	// parameter list. This interface's optional values include: `characterSetServer` (character set, required), `lowerCaseTableNames` (table name case sensitivity, required, 0 - sensitive; 1 - insensitive), `innodbPageSize` (innodb data page, default 16K), `syncMode` (sync mode: 0 - async; 1 - strong sync; 2 - strong sync degradable, default is strong sync degradable).
+	InitParams []HourDbInstanceInitParam `pulumi:"initParams"`
 	// name of this instance.
 	InstanceName *string `pulumi:"instanceName"`
 	// instance memory.
@@ -157,6 +211,8 @@ type hourDbInstanceState struct {
 type HourDbInstanceState struct {
 	// db engine version, default to 10.1.9.
 	DbVersionId pulumi.StringPtrInput
+	// parameter list. This interface's optional values include: `characterSetServer` (character set, required), `lowerCaseTableNames` (table name case sensitivity, required, 0 - sensitive; 1 - insensitive), `innodbPageSize` (innodb data page, default 16K), `syncMode` (sync mode: 0 - async; 1 - strong sync; 2 - strong sync degradable, default is strong sync degradable).
+	InitParams HourDbInstanceInitParamArrayInput
 	// name of this instance.
 	InstanceName pulumi.StringPtrInput
 	// instance memory.
@@ -186,6 +242,8 @@ func (HourDbInstanceState) ElementType() reflect.Type {
 type hourDbInstanceArgs struct {
 	// db engine version, default to 10.1.9.
 	DbVersionId *string `pulumi:"dbVersionId"`
+	// parameter list. This interface's optional values include: `characterSetServer` (character set, required), `lowerCaseTableNames` (table name case sensitivity, required, 0 - sensitive; 1 - insensitive), `innodbPageSize` (innodb data page, default 16K), `syncMode` (sync mode: 0 - async; 1 - strong sync; 2 - strong sync degradable, default is strong sync degradable).
+	InitParams []HourDbInstanceInitParam `pulumi:"initParams"`
 	// name of this instance.
 	InstanceName *string `pulumi:"instanceName"`
 	// instance memory.
@@ -212,6 +270,8 @@ type hourDbInstanceArgs struct {
 type HourDbInstanceArgs struct {
 	// db engine version, default to 10.1.9.
 	DbVersionId pulumi.StringPtrInput
+	// parameter list. This interface's optional values include: `characterSetServer` (character set, required), `lowerCaseTableNames` (table name case sensitivity, required, 0 - sensitive; 1 - insensitive), `innodbPageSize` (innodb data page, default 16K), `syncMode` (sync mode: 0 - async; 1 - strong sync; 2 - strong sync degradable, default is strong sync degradable).
+	InitParams HourDbInstanceInitParamArrayInput
 	// name of this instance.
 	InstanceName pulumi.StringPtrInput
 	// instance memory.
@@ -324,6 +384,11 @@ func (o HourDbInstanceOutput) ToHourDbInstanceOutputWithContext(ctx context.Cont
 // db engine version, default to 10.1.9.
 func (o HourDbInstanceOutput) DbVersionId() pulumi.StringOutput {
 	return o.ApplyT(func(v *HourDbInstance) pulumi.StringOutput { return v.DbVersionId }).(pulumi.StringOutput)
+}
+
+// parameter list. This interface's optional values include: `characterSetServer` (character set, required), `lowerCaseTableNames` (table name case sensitivity, required, 0 - sensitive; 1 - insensitive), `innodbPageSize` (innodb data page, default 16K), `syncMode` (sync mode: 0 - async; 1 - strong sync; 2 - strong sync degradable, default is strong sync degradable).
+func (o HourDbInstanceOutput) InitParams() HourDbInstanceInitParamArrayOutput {
+	return o.ApplyT(func(v *HourDbInstance) HourDbInstanceInitParamArrayOutput { return v.InitParams }).(HourDbInstanceInitParamArrayOutput)
 }
 
 // name of this instance.

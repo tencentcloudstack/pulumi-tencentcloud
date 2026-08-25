@@ -16,10 +16,10 @@ import * as utilities from "../utilities";
  * const config = new pulumi.Config();
  * const camPolicyBasic = config.get("camPolicyBasic") || "keep-cam-policy";
  * const camGroupBasic = config.get("camGroupBasic") || "keep-cam-group";
- * const groups = tencentcloud.Cam.getGroups({
+ * const groups = tencentcloud.cam.getGroups({
  *     name: camGroupBasic,
  * });
- * const policy = tencentcloud.Cam.getPolicies({
+ * const policy = tencentcloud.cam.getPolicies({
  *     name: camPolicyBasic,
  * });
  * const groupPolicyAttachmentBasic = new tencentcloud.cam.GroupPolicyAttachment("group_policy_attachment_basic", {
@@ -135,27 +135,27 @@ export interface GroupPolicyAttachmentState {
     /**
      * Mode of Creation of the CAM group policy attachment. `1` means the cam policy attachment is created by production, and the others indicate syntax strategy ways.
      */
-    createMode?: pulumi.Input<number>;
+    createMode?: pulumi.Input<number | undefined>;
     /**
      * Create time of the CAM group policy attachment.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * ID of the attached CAM group.
      */
-    groupId?: pulumi.Input<string>;
+    groupId?: pulumi.Input<string | undefined>;
     /**
      * ID of the policy.
      */
-    policyId?: pulumi.Input<string>;
+    policyId?: pulumi.Input<string | undefined>;
     /**
      * Name of the policy.
      */
-    policyName?: pulumi.Input<string>;
+    policyName?: pulumi.Input<string | undefined>;
     /**
      * Type of the policy strategy. 'Group' means customer strategy and 'QCS' means preset strategy.
      */
-    policyType?: pulumi.Input<string>;
+    policyType?: pulumi.Input<string | undefined>;
 }
 
 /**

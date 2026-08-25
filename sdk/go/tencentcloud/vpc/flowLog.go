@@ -20,7 +20,7 @@ import (
 //
 // ## Import
 //
-// vpc flow_log can be imported using the flow log Id combine vpc Id, e.g.
+// vpc flowLog can be imported using the flow log Id combine vpc Id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Vpc/flowLog:FlowLog example fl-7k59x22l#vpc-n6qjlen5

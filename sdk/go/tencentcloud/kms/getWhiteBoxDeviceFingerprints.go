@@ -67,12 +67,8 @@ type GetWhiteBoxDeviceFingerprintsResult struct {
 }
 
 func GetWhiteBoxDeviceFingerprintsOutput(ctx *pulumi.Context, args GetWhiteBoxDeviceFingerprintsOutputArgs, opts ...pulumi.InvokeOption) GetWhiteBoxDeviceFingerprintsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetWhiteBoxDeviceFingerprintsResultOutput, error) {
-			args := v.(GetWhiteBoxDeviceFingerprintsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Kms/getWhiteBoxDeviceFingerprints:getWhiteBoxDeviceFingerprints", args, GetWhiteBoxDeviceFingerprintsResultOutput{}, options).(GetWhiteBoxDeviceFingerprintsResultOutput), nil
-		}).(GetWhiteBoxDeviceFingerprintsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Kms/getWhiteBoxDeviceFingerprints:getWhiteBoxDeviceFingerprints", args, GetWhiteBoxDeviceFingerprintsResultOutput{}, options).(GetWhiteBoxDeviceFingerprintsResultOutput)
 }
 
 // A collection of arguments for invoking getWhiteBoxDeviceFingerprints.

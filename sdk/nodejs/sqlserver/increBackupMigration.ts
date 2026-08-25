@@ -23,7 +23,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * sqlserver incre_backup_migration can be imported using the id, e.g.
+ * sqlserver increBackupMigration can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Sqlserver/increBackupMigration:IncreBackupMigration incre_backup_migration incre_backup_migration_id
@@ -122,23 +122,23 @@ export interface IncreBackupMigrationState {
     /**
      * Incremental backup file. If the UploadType of a full backup file is COS_URL, fill in URL here. If the UploadType is COS_UPLOAD, fill in the name of the backup file here. Only 1 backup file is supported, but a backup file can involve multiple databases.
      */
-    backupFiles?: pulumi.Input<pulumi.Input<string>[]>;
+    backupFiles?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Backup import task ID, which is returned through the API CreateBackupMigration.
      */
-    backupMigrationId?: pulumi.Input<string>;
+    backupMigrationId?: pulumi.Input<string | undefined>;
     /**
      * Incremental import task ID.
      */
-    incrementalMigrationId?: pulumi.Input<string>;
+    incrementalMigrationId?: pulumi.Input<string | undefined>;
     /**
      * ID of imported target instance.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Whether restoration is required. No: not required. Yes: required. Not required by default.
      */
-    isRecovery?: pulumi.Input<string>;
+    isRecovery?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -148,7 +148,7 @@ export interface IncreBackupMigrationArgs {
     /**
      * Incremental backup file. If the UploadType of a full backup file is COS_URL, fill in URL here. If the UploadType is COS_UPLOAD, fill in the name of the backup file here. Only 1 backup file is supported, but a backup file can involve multiple databases.
      */
-    backupFiles?: pulumi.Input<pulumi.Input<string>[]>;
+    backupFiles?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Backup import task ID, which is returned through the API CreateBackupMigration.
      */
@@ -160,5 +160,5 @@ export interface IncreBackupMigrationArgs {
     /**
      * Whether restoration is required. No: not required. Yes: required. Not required by default.
      */
-    isRecovery?: pulumi.Input<string>;
+    isRecovery?: pulumi.Input<string | undefined>;
 }

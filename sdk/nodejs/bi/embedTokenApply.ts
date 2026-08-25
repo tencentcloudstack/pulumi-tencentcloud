@@ -140,43 +140,43 @@ export interface EmbedTokenApplyState {
     /**
      * Create the generated token.
      */
-    biToken?: pulumi.Input<string>;
+    biToken?: pulumi.Input<string | undefined>;
     /**
      * Create time.
      */
-    createAt?: pulumi.Input<string>;
+    createAt?: pulumi.Input<string | undefined>;
     /**
      * Expiration. Unit: Minutes Maximum value: 240. i.e. 4 hours Default: 240.
      */
-    expireTime?: pulumi.Input<string>;
+    expireTime?: pulumi.Input<string | undefined>;
     /**
      * Sharing page id, this is empty value 0 when embedding the board.
      */
-    pageId?: pulumi.Input<number>;
+    pageId?: pulumi.Input<number | undefined>;
     /**
      * Share project id.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Page means embedding the page, and panel means embedding the entire board.
      */
-    scope?: pulumi.Input<string>;
+    scope?: pulumi.Input<string | undefined>;
     /**
      * Access limit, the limit range is 1-99999, if it is empty, no access limit will be set.
      */
-    ticketNum?: pulumi.Input<number>;
+    ticketNum?: pulumi.Input<number | undefined>;
     /**
      * Upadte time.
      */
-    udpateAt?: pulumi.Input<string>;
+    udpateAt?: pulumi.Input<string | undefined>;
     /**
      * User enterprise ID (for multi-user only).
      */
-    userCorpId?: pulumi.Input<string>;
+    userCorpId?: pulumi.Input<string | undefined>;
     /**
      * UserId (for multi-user only).
      */
-    userId?: pulumi.Input<string>;
+    userId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -186,29 +186,29 @@ export interface EmbedTokenApplyArgs {
     /**
      * Expiration. Unit: Minutes Maximum value: 240. i.e. 4 hours Default: 240.
      */
-    expireTime?: pulumi.Input<string>;
+    expireTime?: pulumi.Input<string | undefined>;
     /**
      * Sharing page id, this is empty value 0 when embedding the board.
      */
-    pageId?: pulumi.Input<number>;
+    pageId?: pulumi.Input<number | undefined>;
     /**
      * Share project id.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Page means embedding the page, and panel means embedding the entire board.
      */
-    scope?: pulumi.Input<string>;
+    scope?: pulumi.Input<string | undefined>;
     /**
      * Access limit, the limit range is 1-99999, if it is empty, no access limit will be set.
      */
-    ticketNum?: pulumi.Input<number>;
+    ticketNum?: pulumi.Input<number | undefined>;
     /**
      * User enterprise ID (for multi-user only).
      */
-    userCorpId?: pulumi.Input<string>;
+    userCorpId?: pulumi.Input<string | undefined>;
     /**
      * UserId (for multi-user only).
      */
-    userId?: pulumi.Input<string>;
+    userId?: pulumi.Input<string | undefined>;
 }

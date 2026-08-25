@@ -63,6 +63,10 @@ export class Pair extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly createdTime: pulumi.Output<string>;
     /**
+     * Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.
+     */
+    declare public readonly forceStop: pulumi.Output<boolean>;
+    /**
      * The key pair's name. It is the only in one TencentCloud account.
      */
     declare public readonly keyName: pulumi.Output<string>;
@@ -97,6 +101,7 @@ export class Pair extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as PairState | undefined;
             resourceInputs["createdTime"] = state?.createdTime;
+            resourceInputs["forceStop"] = state?.forceStop;
             resourceInputs["keyName"] = state?.keyName;
             resourceInputs["privateKey"] = state?.privateKey;
             resourceInputs["projectId"] = state?.projectId;
@@ -107,6 +112,7 @@ export class Pair extends pulumi.CustomResource {
             if (args?.keyName === undefined && !opts.urn) {
                 throw new Error("Missing required property 'keyName'");
             }
+            resourceInputs["forceStop"] = args?.forceStop;
             resourceInputs["keyName"] = args?.keyName;
             resourceInputs["projectId"] = args?.projectId;
             resourceInputs["publicKey"] = args?.publicKey;
@@ -126,27 +132,31 @@ export interface PairState {
     /**
      * Creation time, which follows the `ISO8601` standard and uses `UTC` time in the format of `YYYY-MM-DDThh:mm:ssZ`.
      */
-    createdTime?: pulumi.Input<string>;
+    createdTime?: pulumi.Input<string | undefined>;
+    /**
+     * Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.
+     */
+    forceStop?: pulumi.Input<boolean | undefined>;
     /**
      * The key pair's name. It is the only in one TencentCloud account.
      */
-    keyName?: pulumi.Input<string>;
+    keyName?: pulumi.Input<string | undefined>;
     /**
      * Content of private key in a key pair. Tencent Cloud do not keep private keys. Please keep it properly.
      */
-    privateKey?: pulumi.Input<string>;
+    privateKey?: pulumi.Input<string | undefined>;
     /**
      * Specifys to which project the key pair belongs.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * You can import an existing public key and using TencentCloud key pair to manage it.
      */
-    publicKey?: pulumi.Input<string>;
+    publicKey?: pulumi.Input<string | undefined>;
     /**
      * Tags of the key pair.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 /**
@@ -154,19 +164,23 @@ export interface PairState {
  */
 export interface PairArgs {
     /**
+     * Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.
+     */
+    forceStop?: pulumi.Input<boolean | undefined>;
+    /**
      * The key pair's name. It is the only in one TencentCloud account.
      */
     keyName: pulumi.Input<string>;
     /**
      * Specifys to which project the key pair belongs.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * You can import an existing public key and using TencentCloud key pair to manage it.
      */
-    publicKey?: pulumi.Input<string>;
+    publicKey?: pulumi.Input<string | undefined>;
     /**
      * Tags of the key pair.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

@@ -37,7 +37,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// ## Import
     /// 
-    /// css play_auth_key_config can be imported using the id, e.g.
+    /// css PlayAuthKeyConfig can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Css/playAuthKeyConfig:PlayAuthKeyConfig play_auth_key_config play_auth_key_config_id

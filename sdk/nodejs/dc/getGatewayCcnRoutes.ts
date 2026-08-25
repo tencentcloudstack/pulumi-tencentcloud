@@ -37,7 +37,7 @@ import * as utilities from "../utilities";
  *     cidrBlock: "192.1.1.0/32",
  * });
  * // You need to sleep for a few seconds because there is a cache on the server
- * const test = tencentcloud.Dc.getGatewayCcnRoutesOutput({
+ * const test = tencentcloud.dc.getGatewayCcnRoutesOutput({
  *     dcgId: ccnMain.id,
  * });
  * ```
@@ -48,7 +48,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const test = tencentcloud.Dc.getGatewayCcnRoutes({
+ * const test = tencentcloud.dc.getGatewayCcnRoutes({
  *     dcgId: ccnMain.id,
  *     ccnRouteType: "STATIC",
  *     addressType: "IPv4",
@@ -138,7 +138,7 @@ export interface GetGatewayCcnRoutesResult {
  *     cidrBlock: "192.1.1.0/32",
  * });
  * // You need to sleep for a few seconds because there is a cache on the server
- * const test = tencentcloud.Dc.getGatewayCcnRoutesOutput({
+ * const test = tencentcloud.dc.getGatewayCcnRoutesOutput({
  *     dcgId: ccnMain.id,
  * });
  * ```
@@ -149,7 +149,7 @@ export interface GetGatewayCcnRoutesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const test = tencentcloud.Dc.getGatewayCcnRoutes({
+ * const test = tencentcloud.dc.getGatewayCcnRoutes({
  *     dcgId: ccnMain.id,
  *     ccnRouteType: "STATIC",
  *     addressType: "IPv4",
@@ -173,11 +173,11 @@ export interface GetGatewayCcnRoutesOutputArgs {
     /**
      * Address type, supports: IPv4, IPv6. Default is IPv4.
      */
-    addressType?: pulumi.Input<string>;
+    addressType?: pulumi.Input<string | undefined>;
     /**
      * Cloud networking routing learning type, optional values: BGP - Automatic Learning; STATIC - User configured. Default is STATIC.
      */
-    ccnRouteType?: pulumi.Input<string>;
+    ccnRouteType?: pulumi.Input<string | undefined>;
     /**
      * ID of the DCG to be queried.
      */
@@ -185,5 +185,5 @@ export interface GetGatewayCcnRoutesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

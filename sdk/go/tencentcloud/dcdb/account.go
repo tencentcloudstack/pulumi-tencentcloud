@@ -49,7 +49,6 @@ import (
 // ## Import
 //
 // dcdb account can be imported using the id, e.g.
-//
 // ```sh
 // $ pulumi import tencentcloud:Dcdb/account:Account account account_id
 // ```

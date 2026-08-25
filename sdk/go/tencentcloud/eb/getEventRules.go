@@ -52,7 +52,7 @@ import (
 //			}
 //			json0 := string(tmpJSON0)
 //			_, err = eb.NewEventRule(ctx, "event_rule", &eb.EventRuleArgs{
-//				EventBusId:   foo.ID(),
+//				EventBusId:   foo.ID().ToIDOutput().ToStringOutput(),
 //				RuleName:     pulumi.String("tf-event_rule"),
 //				Description:  pulumi.String("event rule desc"),
 //				Enable:       pulumi.Bool(true),
@@ -65,7 +65,7 @@ import (
 //				return err
 //			}
 //			_ = eb.GetEventRulesOutput(ctx, eb.GetEventRulesOutputArgs{
-//				EventBusId: foo.ID(),
+//				EventBusId: foo.ID().ToIDOutput().ToStringOutput(),
 //				OrderBy:    pulumi.String("AddTime"),
 //				Order:      pulumi.String("DESC"),
 //			}, nil)
@@ -110,12 +110,8 @@ type GetEventRulesResult struct {
 }
 
 func GetEventRulesOutput(ctx *pulumi.Context, args GetEventRulesOutputArgs, opts ...pulumi.InvokeOption) GetEventRulesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetEventRulesResultOutput, error) {
-			args := v.(GetEventRulesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Eb/getEventRules:getEventRules", args, GetEventRulesResultOutput{}, options).(GetEventRulesResultOutput), nil
-		}).(GetEventRulesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Eb/getEventRules:getEventRules", args, GetEventRulesResultOutput{}, options).(GetEventRulesResultOutput)
 }
 
 // A collection of arguments for invoking getEventRules.

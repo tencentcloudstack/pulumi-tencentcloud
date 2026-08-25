@@ -52,9 +52,8 @@ import (
 // ## Import
 //
 // Organization member can be imported using the id, e.g.
-//
 // ```sh
-// $ pulumi import tencentcloud:Organization/orgMember:OrgMember example id=100043985088
+// $ pulumi import tencentcloud:Organization/orgMember:OrgMember example 100043985088
 // ```
 type OrgMember struct {
 	pulumi.CustomResourceState
@@ -65,6 +64,8 @@ type OrgMember struct {
 	ForceDeleteAccount pulumi.BoolPtrOutput `pulumi:"forceDeleteAccount"`
 	// Whether to allow member to leave the organization.Valid values:- `Allow`.- `Denied`.
 	IsAllowQuit pulumi.StringOutput `pulumi:"isAllowQuit"`
+	// Whether to synchronize organization member names to their account nicknames. Values: 1 - Sync, 0 - Do not sync. This parameter takes effect only when the name field is being modified.
+	IsModifyNickName pulumi.IntPtrOutput `pulumi:"isModifyNickName"`
 	// Member Type.Valid values:- `Invite`: The member is invited.- `Create`: The member is created.
 	MemberType pulumi.StringOutput `pulumi:"memberType"`
 	// Member name.
@@ -140,6 +141,8 @@ type orgMemberState struct {
 	ForceDeleteAccount *bool `pulumi:"forceDeleteAccount"`
 	// Whether to allow member to leave the organization.Valid values:- `Allow`.- `Denied`.
 	IsAllowQuit *string `pulumi:"isAllowQuit"`
+	// Whether to synchronize organization member names to their account nicknames. Values: 1 - Sync, 0 - Do not sync. This parameter takes effect only when the name field is being modified.
+	IsModifyNickName *int `pulumi:"isModifyNickName"`
 	// Member Type.Valid values:- `Invite`: The member is invited.- `Create`: The member is created.
 	MemberType *string `pulumi:"memberType"`
 	// Member name.
@@ -177,6 +180,8 @@ type OrgMemberState struct {
 	ForceDeleteAccount pulumi.BoolPtrInput
 	// Whether to allow member to leave the organization.Valid values:- `Allow`.- `Denied`.
 	IsAllowQuit pulumi.StringPtrInput
+	// Whether to synchronize organization member names to their account nicknames. Values: 1 - Sync, 0 - Do not sync. This parameter takes effect only when the name field is being modified.
+	IsModifyNickName pulumi.IntPtrInput
 	// Member Type.Valid values:- `Invite`: The member is invited.- `Create`: The member is created.
 	MemberType pulumi.StringPtrInput
 	// Member name.
@@ -214,6 +219,8 @@ func (OrgMemberState) ElementType() reflect.Type {
 type orgMemberArgs struct {
 	// Whether to force delete the member account when deleting the organization member. It is only applicable to member accounts of the creation type, not to member accounts of the invitation type. Default is false.
 	ForceDeleteAccount *bool `pulumi:"forceDeleteAccount"`
+	// Whether to synchronize organization member names to their account nicknames. Values: 1 - Sync, 0 - Do not sync. This parameter takes effect only when the name field is being modified.
+	IsModifyNickName *int `pulumi:"isModifyNickName"`
 	// Member name.
 	Name *string `pulumi:"name"`
 	// Organization node ID.
@@ -236,6 +243,8 @@ type orgMemberArgs struct {
 type OrgMemberArgs struct {
 	// Whether to force delete the member account when deleting the organization member. It is only applicable to member accounts of the creation type, not to member accounts of the invitation type. Default is false.
 	ForceDeleteAccount pulumi.BoolPtrInput
+	// Whether to synchronize organization member names to their account nicknames. Values: 1 - Sync, 0 - Do not sync. This parameter takes effect only when the name field is being modified.
+	IsModifyNickName pulumi.IntPtrInput
 	// Member name.
 	Name pulumi.StringPtrInput
 	// Organization node ID.
@@ -354,6 +363,11 @@ func (o OrgMemberOutput) ForceDeleteAccount() pulumi.BoolPtrOutput {
 // Whether to allow member to leave the organization.Valid values:- `Allow`.- `Denied`.
 func (o OrgMemberOutput) IsAllowQuit() pulumi.StringOutput {
 	return o.ApplyT(func(v *OrgMember) pulumi.StringOutput { return v.IsAllowQuit }).(pulumi.StringOutput)
+}
+
+// Whether to synchronize organization member names to their account nicknames. Values: 1 - Sync, 0 - Do not sync. This parameter takes effect only when the name field is being modified.
+func (o OrgMemberOutput) IsModifyNickName() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *OrgMember) pulumi.IntPtrOutput { return v.IsModifyNickName }).(pulumi.IntPtrOutput)
 }
 
 // Member Type.Valid values:- `Invite`: The member is invited.- `Create`: The member is created.

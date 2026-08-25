@@ -71,12 +71,8 @@ type GetWorkflowFoldersResult struct {
 }
 
 func GetWorkflowFoldersOutput(ctx *pulumi.Context, args GetWorkflowFoldersOutputArgs, opts ...pulumi.InvokeOption) GetWorkflowFoldersResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetWorkflowFoldersResultOutput, error) {
-			args := v.(GetWorkflowFoldersArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Wedata/getWorkflowFolders:getWorkflowFolders", args, GetWorkflowFoldersResultOutput{}, options).(GetWorkflowFoldersResultOutput), nil
-		}).(GetWorkflowFoldersResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Wedata/getWorkflowFolders:getWorkflowFolders", args, GetWorkflowFoldersResultOutput{}, options).(GetWorkflowFoldersResultOutput)
 }
 
 // A collection of arguments for invoking getWorkflowFolders.

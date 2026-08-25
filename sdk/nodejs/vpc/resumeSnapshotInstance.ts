@@ -28,7 +28,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Vpc.getSnapshotFiles({
+ * const example = tencentcloud.vpc.getSnapshotFiles({
  *     businessType: "securitygroup",
  *     instanceId: "sg-902tl7t7",
  *     startDate: "2022-10-10 00:00:00",
@@ -151,15 +151,15 @@ export interface ResumeSnapshotInstanceState {
     /**
      * InstanceId.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Snapshot file Id.
      */
-    snapshotFileId?: pulumi.Input<string>;
+    snapshotFileId?: pulumi.Input<string | undefined>;
     /**
      * Snapshot policy Id.
      */
-    snapshotPolicyId?: pulumi.Input<string>;
+    snapshotPolicyId?: pulumi.Input<string | undefined>;
 }
 
 /**

@@ -16,7 +16,7 @@ import (
 //
 // ## Import
 //
-// tdmq rabbitmq_virtual_host can be imported using the id, e.g.
+// tdmq rabbitmqVirtualHost can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Tdmq/rabbitmqVirtualHost:RabbitmqVirtualHost example amqp-pbavw2wd#tf-example-vhost

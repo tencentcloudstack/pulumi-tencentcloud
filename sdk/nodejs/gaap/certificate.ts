@@ -25,7 +25,7 @@ import * as utilities from "../utilities";
  * GAAP certificate can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Gaap/certificate:Certificate  tencentcloud_gaap_certificate.foo cert-d5y6ei3b
+ *   $ pulumi import tencentcloud:Gaap/certificate:Certificate foo cert-d5y6ei3b
  * ```
  */
 export class Certificate extends pulumi.CustomResource {
@@ -147,39 +147,39 @@ export interface CertificateState {
     /**
      * Beginning time of the certificate.
      */
-    beginTime?: pulumi.Input<string>;
+    beginTime?: pulumi.Input<string | undefined>;
     /**
      * Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or `SSL`, the format is `pem`.
      */
-    content?: pulumi.Input<string>;
+    content?: pulumi.Input<string | undefined>;
     /**
      * Creation time of the certificate.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Ending time of the certificate.
      */
-    endTime?: pulumi.Input<string>;
+    endTime?: pulumi.Input<string | undefined>;
     /**
      * Issuer name of the certificate.
      */
-    issuerCn?: pulumi.Input<string>;
+    issuerCn?: pulumi.Input<string | undefined>;
     /**
      * Key of the `SSL` certificate.
      */
-    key?: pulumi.Input<string>;
+    key?: pulumi.Input<string | undefined>;
     /**
      * Name of the certificate.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Subject name of the certificate.
      */
-    subjectCn?: pulumi.Input<string>;
+    subjectCn?: pulumi.Input<string | undefined>;
     /**
      * Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver CA certificate; `PROXY` means proxy SSL certificate.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -193,11 +193,11 @@ export interface CertificateArgs {
     /**
      * Key of the `SSL` certificate.
      */
-    key?: pulumi.Input<string>;
+    key?: pulumi.Input<string | undefined>;
     /**
      * Name of the certificate.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Type of the certificate. Valid value: `BASIC`, `CLIENT`, `SERVER`, `REALSERVER` and `PROXY`. `BASIC` means basic certificate; `CLIENT` means client CA certificate; `SERVER` means server SSL certificate; `REALSERVER` means realserver CA certificate; `PROXY` means proxy SSL certificate.
      */

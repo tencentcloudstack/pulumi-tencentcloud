@@ -139,19 +139,19 @@ export interface BandwidthLimitState {
     /**
      * Limitation of bandwidth. Default is `0`.
      */
-    bandwidthLimit?: pulumi.Input<number>;
+    bandwidthLimit?: pulumi.Input<number | undefined>;
     /**
      * ID of the CCN.
      */
-    ccnId?: pulumi.Input<string>;
+    ccnId?: pulumi.Input<string | undefined>;
     /**
      * Destination area restriction. If the `CCN` rate limit type is `OUTER_REGION_LIMIT`, this value does not need to be set.
      */
-    dstRegion?: pulumi.Input<string>;
+    dstRegion?: pulumi.Input<string | undefined>;
     /**
      * Limitation of region.
      */
-    region?: pulumi.Input<string>;
+    region?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -161,7 +161,7 @@ export interface BandwidthLimitArgs {
     /**
      * Limitation of bandwidth. Default is `0`.
      */
-    bandwidthLimit?: pulumi.Input<number>;
+    bandwidthLimit?: pulumi.Input<number | undefined>;
     /**
      * ID of the CCN.
      */
@@ -169,7 +169,7 @@ export interface BandwidthLimitArgs {
     /**
      * Destination area restriction. If the `CCN` rate limit type is `OUTER_REGION_LIMIT`, this value does not need to be set.
      */
-    dstRegion?: pulumi.Input<string>;
+    dstRegion?: pulumi.Input<string | undefined>;
     /**
      * Limitation of region.
      */

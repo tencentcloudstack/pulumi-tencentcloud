@@ -96,12 +96,8 @@ type GetAsyncEventManagementResult struct {
 }
 
 func GetAsyncEventManagementOutput(ctx *pulumi.Context, args GetAsyncEventManagementOutputArgs, opts ...pulumi.InvokeOption) GetAsyncEventManagementResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetAsyncEventManagementResultOutput, error) {
-			args := v.(GetAsyncEventManagementArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Scf/getAsyncEventManagement:getAsyncEventManagement", args, GetAsyncEventManagementResultOutput{}, options).(GetAsyncEventManagementResultOutput), nil
-		}).(GetAsyncEventManagementResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Scf/getAsyncEventManagement:getAsyncEventManagement", args, GetAsyncEventManagementResultOutput{}, options).(GetAsyncEventManagementResultOutput)
 }
 
 // A collection of arguments for invoking getAsyncEventManagement.

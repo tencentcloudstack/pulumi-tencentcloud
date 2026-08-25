@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const networkInterfaceLimit = tencentcloud.Vpc.getNetworkInterfaceLimit({
+ * const networkInterfaceLimit = tencentcloud.vpc.getNetworkInterfaceLimit({
  *     instanceId: "ins-cr2rfq78",
  * });
  * ```
@@ -84,7 +84,7 @@ export interface GetNetworkInterfaceLimitResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const networkInterfaceLimit = tencentcloud.Vpc.getNetworkInterfaceLimit({
+ * const networkInterfaceLimit = tencentcloud.vpc.getNetworkInterfaceLimit({
  *     instanceId: "ins-cr2rfq78",
  * });
  * ```
@@ -108,5 +108,5 @@ export interface GetNetworkInterfaceLimitOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

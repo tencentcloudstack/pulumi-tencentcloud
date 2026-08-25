@@ -77,12 +77,8 @@ type GetOrgShareUnitResourcesResult struct {
 }
 
 func GetOrgShareUnitResourcesOutput(ctx *pulumi.Context, args GetOrgShareUnitResourcesOutputArgs, opts ...pulumi.InvokeOption) GetOrgShareUnitResourcesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetOrgShareUnitResourcesResultOutput, error) {
-			args := v.(GetOrgShareUnitResourcesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Organization/getOrgShareUnitResources:getOrgShareUnitResources", args, GetOrgShareUnitResourcesResultOutput{}, options).(GetOrgShareUnitResourcesResultOutput), nil
-		}).(GetOrgShareUnitResourcesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Organization/getOrgShareUnitResources:getOrgShareUnitResources", args, GetOrgShareUnitResourcesResultOutput{}, options).(GetOrgShareUnitResourcesResultOutput)
 }
 
 // A collection of arguments for invoking getOrgShareUnitResources.

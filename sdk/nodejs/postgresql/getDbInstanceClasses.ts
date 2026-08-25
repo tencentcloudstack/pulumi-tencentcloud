@@ -7,7 +7,7 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Use this data source to query detailed information of postgresql dbInstanceClasses
+ * Use this data source to query detailed information of PostgreSQL db instance classes
  *
  * ## Example Usage
  *
@@ -15,10 +15,11 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const dbInstanceClasses = tencentcloud.Postgresql.getDbInstanceClasses({
+ * const example = tencentcloud.postgresql.getDbInstanceClasses({
  *     zone: "ap-guangzhou-7",
  *     dbEngine: "postgresql",
  *     dbMajorVersion: "13",
+ *     storageType: "CLOUD_HSSD",
  * });
  * ```
  */
@@ -28,6 +29,7 @@ export function getDbInstanceClasses(args: GetDbInstanceClassesArgs, opts?: pulu
         "dbEngine": args.dbEngine,
         "dbMajorVersion": args.dbMajorVersion,
         "resultOutputFile": args.resultOutputFile,
+        "storageType": args.storageType,
         "zone": args.zone,
     }, opts);
 }
@@ -49,6 +51,10 @@ export interface GetDbInstanceClassesArgs {
      */
     resultOutputFile?: string;
     /**
+     * Storage type filter. Valid values: `PHYSICAL_LOCAL_SSD` (local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD).
+     */
+    storageType?: string;
+    /**
      * AZ ID, which can be obtained through the `DescribeZones` API.
      */
     zone: string;
@@ -69,10 +75,11 @@ export interface GetDbInstanceClassesResult {
      */
     readonly id: string;
     readonly resultOutputFile?: string;
+    readonly storageType?: string;
     readonly zone: string;
 }
 /**
- * Use this data source to query detailed information of postgresql dbInstanceClasses
+ * Use this data source to query detailed information of PostgreSQL db instance classes
  *
  * ## Example Usage
  *
@@ -80,10 +87,11 @@ export interface GetDbInstanceClassesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const dbInstanceClasses = tencentcloud.Postgresql.getDbInstanceClasses({
+ * const example = tencentcloud.postgresql.getDbInstanceClasses({
  *     zone: "ap-guangzhou-7",
  *     dbEngine: "postgresql",
  *     dbMajorVersion: "13",
+ *     storageType: "CLOUD_HSSD",
  * });
  * ```
  */
@@ -93,6 +101,7 @@ export function getDbInstanceClassesOutput(args: GetDbInstanceClassesOutputArgs,
         "dbEngine": args.dbEngine,
         "dbMajorVersion": args.dbMajorVersion,
         "resultOutputFile": args.resultOutputFile,
+        "storageType": args.storageType,
         "zone": args.zone,
     }, opts);
 }
@@ -112,7 +121,11 @@ export interface GetDbInstanceClassesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
+    /**
+     * Storage type filter. Valid values: `PHYSICAL_LOCAL_SSD` (local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD).
+     */
+    storageType?: pulumi.Input<string | undefined>;
     /**
      * AZ ID, which can be obtained through the `DescribeZones` API.
      */

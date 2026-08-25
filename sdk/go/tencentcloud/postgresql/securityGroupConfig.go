@@ -80,7 +80,7 @@ import (
 //					sgId,
 //					sgId2,
 //				},
-//				ReadOnlyGroupId: group.ID(),
+//				ReadOnlyGroupId: group.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err

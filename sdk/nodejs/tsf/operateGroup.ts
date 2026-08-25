@@ -94,11 +94,11 @@ export interface OperateGroupState {
     /**
      * group id.
      */
-    groupId?: pulumi.Input<string>;
+    groupId?: pulumi.Input<string | undefined>;
     /**
      * Operation, `start`- start the group, `stop`- stop the group.
      */
-    operate?: pulumi.Input<string>;
+    operate?: pulumi.Input<string | undefined>;
 }
 
 /**

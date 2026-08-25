@@ -13,6 +13,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
     /// <summary>
     /// Provides a resource to creating direct connect gateway instance.
     /// 
+    /// &gt; **NOTE:** Currently, it is not supported to set `CnnRouteType` to `BGP` simultaneously during the creation of resource `tencentcloud.Dc.Gateway`(only configuration modification is supported); This feature requires contacting the VPC product team to be added to the whitelist.
+    /// 
     /// ## Example Usage
     /// 
     /// ### If NetworkType is VPC
@@ -39,6 +41,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
     ///         NetworkInstanceId = vpc.Id,
     ///         NetworkType = "VPC",
     ///         GatewayType = "NORMAL",
+    ///         Tags = 
+    ///         {
+    ///             { "Environment", "production" },
+    ///             { "Owner", "ops-team" },
+    ///         },
     ///     });
     /// 
     /// });
@@ -75,6 +82,38 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
     ///         NetworkInstanceId = ccn.Id,
     ///         NetworkType = "CCN",
     ///         GatewayType = "NORMAL",
+    ///         Tags = 
+    ///         {
+    ///             { "Team", "networking" },
+    ///             { "Purpose", "production" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Update tags
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Dc.Gateway("example", new()
+    ///     {
+    ///         Name = "tf-example",
+    ///         NetworkInstanceId = ccn.Id,
+    ///         NetworkType = "CCN",
+    ///         GatewayType = "NORMAL",
+    ///         Tags = 
+    ///         {
+    ///             { "Environment", "staging" },
+    ///             { "Team", "devops" },
+    ///             { "CostCenter", "IT-001" },
+    ///         },
     ///     });
     /// 
     /// });
@@ -82,7 +121,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
     /// 
     /// ## Import
     /// 
-    /// Direct connect gateway instance can be imported, e.g.
+    /// Direct connect gateway instance can be imported, e.g. Tags will be imported automatically.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Dc/gateway:Gateway example dcg-dr1y0hu7
@@ -110,10 +149,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         public Output<bool> EnableBgp { get; private set; } = null!;
 
         /// <summary>
+        /// Dedicated connection gateway custom ASN, range: 45090, 64512-65534 and 4200000000-4294967294.
+        /// </summary>
+        [Output("gatewayAsn")]
+        public Output<int> GatewayAsn { get; private set; } = null!;
+
+        /// <summary>
         /// Type of the gateway. Valid value: `NORMAL` and `NAT`. Default is `NORMAL`. NOTES: CCN only supports `NORMAL` and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.
         /// </summary>
         [Output("gatewayType")]
         public Output<string?> GatewayType { get; private set; } = null!;
+
+        /// <summary>
+        /// ID of DC highly available placement group.
+        /// </summary>
+        [Output("haZoneGroupId")]
+        public Output<string?> HaZoneGroupId { get; private set; } = null!;
+
+        /// <summary>
+        /// CCN route publishing method. Valid values: standard and exquisite. This parameter is only valid for the CCN direct connect gateway.
+        /// </summary>
+        [Output("modeType")]
+        public Output<string> ModeType { get; private set; } = null!;
 
         /// <summary>
         /// Name of the DCG.
@@ -132,6 +189,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         /// </summary>
         [Output("networkType")]
         public Output<string> NetworkType { get; private set; } = null!;
+
+        /// <summary>
+        /// Tag key-value pairs for the DC gateway. Multiple tags can be set.
+        /// </summary>
+        [Output("tags")]
+        public Output<ImmutableDictionary<string, string>?> Tags { get; private set; } = null!;
+
+        /// <summary>
+        /// Availability zone where the direct connect gateway resides.
+        /// </summary>
+        [Output("zone")]
+        public Output<string> Zone { get; private set; } = null!;
 
 
         /// <summary>
@@ -181,10 +250,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
     public sealed class GatewayArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Type of CCN route. Valid value: `BGP` and `STATIC`. The property is available when the DCG type is CCN gateway and BGP enabled.
+        /// </summary>
+        [Input("cnnRouteType")]
+        public Input<string>? CnnRouteType { get; set; }
+
+        /// <summary>
+        /// Dedicated connection gateway custom ASN, range: 45090, 64512-65534 and 4200000000-4294967294.
+        /// </summary>
+        [Input("gatewayAsn")]
+        public Input<int>? GatewayAsn { get; set; }
+
+        /// <summary>
         /// Type of the gateway. Valid value: `NORMAL` and `NAT`. Default is `NORMAL`. NOTES: CCN only supports `NORMAL` and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.
         /// </summary>
         [Input("gatewayType")]
         public Input<string>? GatewayType { get; set; }
+
+        /// <summary>
+        /// ID of DC highly available placement group.
+        /// </summary>
+        [Input("haZoneGroupId")]
+        public Input<string>? HaZoneGroupId { get; set; }
+
+        /// <summary>
+        /// CCN route publishing method. Valid values: standard and exquisite. This parameter is only valid for the CCN direct connect gateway.
+        /// </summary>
+        [Input("modeType")]
+        public Input<string>? ModeType { get; set; }
 
         /// <summary>
         /// Name of the DCG.
@@ -203,6 +296,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         /// </summary>
         [Input("networkType", required: true)]
         public Input<string> NetworkType { get; set; } = null!;
+
+        [Input("tags")]
+        private InputMap<string>? _tags;
+
+        /// <summary>
+        /// Tag key-value pairs for the DC gateway. Multiple tags can be set.
+        /// </summary>
+        public InputMap<string> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<string>());
+            set => _tags = value;
+        }
+
+        /// <summary>
+        /// Availability zone where the direct connect gateway resides.
+        /// </summary>
+        [Input("zone")]
+        public Input<string>? Zone { get; set; }
 
         public GatewayArgs()
         {
@@ -231,10 +342,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         public Input<bool>? EnableBgp { get; set; }
 
         /// <summary>
+        /// Dedicated connection gateway custom ASN, range: 45090, 64512-65534 and 4200000000-4294967294.
+        /// </summary>
+        [Input("gatewayAsn")]
+        public Input<int>? GatewayAsn { get; set; }
+
+        /// <summary>
         /// Type of the gateway. Valid value: `NORMAL` and `NAT`. Default is `NORMAL`. NOTES: CCN only supports `NORMAL` and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.
         /// </summary>
         [Input("gatewayType")]
         public Input<string>? GatewayType { get; set; }
+
+        /// <summary>
+        /// ID of DC highly available placement group.
+        /// </summary>
+        [Input("haZoneGroupId")]
+        public Input<string>? HaZoneGroupId { get; set; }
+
+        /// <summary>
+        /// CCN route publishing method. Valid values: standard and exquisite. This parameter is only valid for the CCN direct connect gateway.
+        /// </summary>
+        [Input("modeType")]
+        public Input<string>? ModeType { get; set; }
 
         /// <summary>
         /// Name of the DCG.
@@ -253,6 +382,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         /// </summary>
         [Input("networkType")]
         public Input<string>? NetworkType { get; set; }
+
+        [Input("tags")]
+        private InputMap<string>? _tags;
+
+        /// <summary>
+        /// Tag key-value pairs for the DC gateway. Multiple tags can be set.
+        /// </summary>
+        public InputMap<string> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<string>());
+            set => _tags = value;
+        }
+
+        /// <summary>
+        /// Availability zone where the direct connect gateway resides.
+        /// </summary>
+        [Input("zone")]
+        public Input<string>? Zone { get; set; }
 
         public GatewayState()
         {

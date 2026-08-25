@@ -140,35 +140,35 @@ export interface ApplicationConfigState {
     /**
      * Application ID.
      */
-    applicationId?: pulumi.Input<string>;
+    applicationId?: pulumi.Input<string | undefined>;
     /**
      * configuration item name.
      */
-    configName?: pulumi.Input<string>;
+    configName?: pulumi.Input<string | undefined>;
     /**
      * configuration item value type.
      */
-    configType?: pulumi.Input<string>;
+    configType?: pulumi.Input<string | undefined>;
     /**
      * configuration item value.
      */
-    configValue?: pulumi.Input<string>;
+    configValue?: pulumi.Input<string | undefined>;
     /**
      * configuration item version.
      */
-    configVersion?: pulumi.Input<string>;
+    configVersion?: pulumi.Input<string | undefined>;
     /**
      * configuration item version description.
      */
-    configVersionDesc?: pulumi.Input<string>;
+    configVersionDesc?: pulumi.Input<string | undefined>;
     /**
      * Base64 encoded configuration items.
      */
-    encodeWithBase64?: pulumi.Input<boolean>;
+    encodeWithBase64?: pulumi.Input<boolean | undefined>;
     /**
      * Program id list.
      */
-    programIdLists?: pulumi.Input<pulumi.Input<string>[]>;
+    programIdLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -186,7 +186,7 @@ export interface ApplicationConfigArgs {
     /**
      * configuration item value type.
      */
-    configType?: pulumi.Input<string>;
+    configType?: pulumi.Input<string | undefined>;
     /**
      * configuration item value.
      */
@@ -198,13 +198,13 @@ export interface ApplicationConfigArgs {
     /**
      * configuration item version description.
      */
-    configVersionDesc?: pulumi.Input<string>;
+    configVersionDesc?: pulumi.Input<string | undefined>;
     /**
      * Base64 encoded configuration items.
      */
-    encodeWithBase64?: pulumi.Input<boolean>;
+    encodeWithBase64?: pulumi.Input<boolean | undefined>;
     /**
      * Program id list.
      */
-    programIdLists?: pulumi.Input<pulumi.Input<string>[]>;
+    programIdLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

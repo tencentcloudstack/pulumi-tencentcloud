@@ -213,39 +213,39 @@ export interface IntegrationTaskNodeState {
     /**
      * Data source type: MYSQL, POSTGRE, ORACLE, SQLSERVER, FTP, HIVE, HDFS, ICEBERG, KAFKA, HBASE, SPARK, TBASE, DB2, DM, GAUSSDB, GBASE, IMPALA, ES, S3_DATAINSIGHT, GREENPLUM, PHOENIX, SAP_HANA, SFTP, OCEANBASE, CLICKHOUSE, KUDU, VERTICA, REDIS, COS, DLC, DORIS, CKAFKA, DTS_KAFKA, S3, CDW, TDSQLC, TDSQL, MONGODB, SYBASE, REST_API, StarRocks, TCHOUSE_X.
      */
-    dataSourceType?: pulumi.Input<string>;
+    dataSourceType?: pulumi.Input<string | undefined>;
     /**
      * Node Name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Node ID.
      */
-    nodeId?: pulumi.Input<string>;
+    nodeId?: pulumi.Input<string | undefined>;
     /**
      * Node information.
      */
-    nodeInfo?: pulumi.Input<inputs.Wedata.IntegrationTaskNodeNodeInfo>;
+    nodeInfo?: pulumi.Input<inputs.Wedata.IntegrationTaskNodeNodeInfo | undefined>;
     /**
      * Node type: INPUT, OUTPUT, JOIN, FILTER, TRANSFORM.
      */
-    nodeType?: pulumi.Input<string>;
+    nodeType?: pulumi.Input<string | undefined>;
     /**
      * Project ID.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * The task id to which the node belongs.
      */
-    taskId?: pulumi.Input<string>;
+    taskId?: pulumi.Input<string | undefined>;
     /**
      * Task display mode, 0: canvas mode, 1: form mode.
      */
-    taskMode?: pulumi.Input<number>;
+    taskMode?: pulumi.Input<number | undefined>;
     /**
      * Task type, 201: real-time task, 202: offline task.
      */
-    taskType?: pulumi.Input<number>;
+    taskType?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -259,7 +259,7 @@ export interface IntegrationTaskNodeArgs {
     /**
      * Node Name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Node information.
      */

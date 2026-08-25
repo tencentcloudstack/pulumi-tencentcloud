@@ -53,6 +53,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &DatabaseTde{}
 	case "tencentcloud:Sqlserver/db:Db":
 		r = &Db{}
+	case "tencentcloud:Sqlserver/dbInstanceSslConfig:DbInstanceSslConfig":
+		r = &DbInstanceSslConfig{}
 	case "tencentcloud:Sqlserver/fullBackupMigration:FullBackupMigration":
 		r = &FullBackupMigration{}
 	case "tencentcloud:Sqlserver/generalBackup:GeneralBackup":
@@ -188,6 +190,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Sqlserver/db",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Sqlserver/dbInstanceSslConfig",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

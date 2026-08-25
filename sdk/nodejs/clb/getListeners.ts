@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Clb.getListeners({
+ * const foo = tencentcloud.clb.getListeners({
  *     clbId: "lb-k2zjp9lv",
  *     listenerId: "lbl-mwr6vbtv",
  *     protocol: "TCP",
@@ -99,7 +99,7 @@ export interface GetListenersResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Clb.getListeners({
+ * const foo = tencentcloud.clb.getListeners({
  *     clbId: "lb-k2zjp9lv",
  *     listenerId: "lbl-mwr6vbtv",
  *     protocol: "TCP",
@@ -129,17 +129,17 @@ export interface GetListenersOutputArgs {
     /**
      * Id of the listener to be queried.
      */
-    listenerId?: pulumi.Input<string>;
+    listenerId?: pulumi.Input<string | undefined>;
     /**
      * Port of the CLB listener.
      */
-    port?: pulumi.Input<number>;
+    port?: pulumi.Input<number | undefined>;
     /**
      * Type of protocol within the listener, and available values are `TCP`, `UDP`, `HTTP`, `HTTPS` and `TCP_SSL`.
      */
-    protocol?: pulumi.Input<string>;
+    protocol?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

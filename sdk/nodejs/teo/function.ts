@@ -19,7 +19,7 @@ import * as utilities from "../utilities";
  *   e.respondWith(response);
  * });
  * `,
- *     name: "aaa-zone-2qtuhspy7cr6-1310708577",
+ *     name: "aaa",
  *     remark: "test",
  *     zoneId: "zone-2qtuhspy7cr6",
  * });
@@ -27,7 +27,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * teo teo_function can be imported using the id, e.g.
+ * teo teoFunction can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Teo/function:Function teo_function zone_id#function_id
@@ -144,35 +144,35 @@ export interface FunctionState {
     /**
      * Function content, currently only supports JavaScript code, with a maximum size of 5MB.
      */
-    content?: pulumi.Input<string>;
+    content?: pulumi.Input<string | undefined>;
     /**
      * Creation time. The time is in Coordinated Universal Time (UTC) and follows the date and time format specified by the ISO 8601 standard.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * The default domain name for the function.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * ID of the Function.
      */
-    functionId?: pulumi.Input<string>;
+    functionId?: pulumi.Input<string | undefined>;
     /**
      * Function name. It can only contain lowercase letters, numbers, hyphens, must start and end with a letter or number, and can have a maximum length of 30 characters.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Function description, maximum support of 60 characters.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Modification time. The time is in Coordinated Universal Time (UTC) and follows the date and time format specified by the ISO 8601 standard.
      */
-    updateTime?: pulumi.Input<string>;
+    updateTime?: pulumi.Input<string | undefined>;
     /**
      * ID of the site.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -186,11 +186,11 @@ export interface FunctionArgs {
     /**
      * Function name. It can only contain lowercase letters, numbers, hyphens, must start and end with a letter or number, and can have a maximum length of 30 characters.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Function description, maximum support of 60 characters.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * ID of the site.
      */

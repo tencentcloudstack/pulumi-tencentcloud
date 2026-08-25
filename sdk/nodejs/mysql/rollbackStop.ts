@@ -84,7 +84,7 @@ export interface RollbackStopState {
     /**
      * Cloud database instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**

@@ -126,27 +126,27 @@ export interface ParamTemplateState {
     /**
      * Database type, optional values: NORMAL (default), SERVERLESS.
      */
-    dbMode?: pulumi.Input<string>;
+    dbMode?: pulumi.Input<string | undefined>;
     /**
      * MySQL version number.
      */
-    engineVersion?: pulumi.Input<string>;
+    engineVersion?: pulumi.Input<string | undefined>;
     /**
      * parameter list.
      */
-    paramLists?: pulumi.Input<pulumi.Input<inputs.Cynosdb.ParamTemplateParamList>[]>;
+    paramLists?: pulumi.Input<pulumi.Input<inputs.Cynosdb.ParamTemplateParamList>[] | undefined>;
     /**
      * Template Description.
      */
-    templateDescription?: pulumi.Input<string>;
+    templateDescription?: pulumi.Input<string | undefined>;
     /**
      * Optional parameter, template ID to be copied.
      */
-    templateId?: pulumi.Input<number>;
+    templateId?: pulumi.Input<number | undefined>;
     /**
      * Template Name.
      */
-    templateName?: pulumi.Input<string>;
+    templateName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -156,7 +156,7 @@ export interface ParamTemplateArgs {
     /**
      * Database type, optional values: NORMAL (default), SERVERLESS.
      */
-    dbMode?: pulumi.Input<string>;
+    dbMode?: pulumi.Input<string | undefined>;
     /**
      * MySQL version number.
      */
@@ -164,15 +164,15 @@ export interface ParamTemplateArgs {
     /**
      * parameter list.
      */
-    paramLists?: pulumi.Input<pulumi.Input<inputs.Cynosdb.ParamTemplateParamList>[]>;
+    paramLists?: pulumi.Input<pulumi.Input<inputs.Cynosdb.ParamTemplateParamList>[] | undefined>;
     /**
      * Template Description.
      */
-    templateDescription?: pulumi.Input<string>;
+    templateDescription?: pulumi.Input<string | undefined>;
     /**
      * Optional parameter, template ID to be copied.
      */
-    templateId?: pulumi.Input<number>;
+    templateId?: pulumi.Input<number | undefined>;
     /**
      * Template Name.
      */

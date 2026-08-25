@@ -41,12 +41,8 @@ type GetTawAreaResult struct {
 }
 
 func GetTawAreaOutput(ctx *pulumi.Context, args GetTawAreaOutputArgs, opts ...pulumi.InvokeOption) GetTawAreaResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetTawAreaResultOutput, error) {
-			args := v.(GetTawAreaArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Rum/getTawArea:getTawArea", args, GetTawAreaResultOutput{}, options).(GetTawAreaResultOutput), nil
-		}).(GetTawAreaResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Rum/getTawArea:getTawArea", args, GetTawAreaResultOutput{}, options).(GetTawAreaResultOutput)
 }
 
 // A collection of arguments for invoking getTawArea.

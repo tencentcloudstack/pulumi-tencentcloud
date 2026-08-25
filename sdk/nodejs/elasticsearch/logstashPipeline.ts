@@ -43,7 +43,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * elasticsearch logstash_pipeline can be imported using the id, e.g.
+ * elasticsearch logstashPipeline can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Elasticsearch/logstashPipeline:LogstashPipeline logstash_pipeline ${instance_id}#${pipeline_id}
@@ -133,15 +133,15 @@ export interface LogstashPipelineState {
     /**
      * Logstash instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Operation type. 1: save only; 2: save and deploy.
      */
-    opType?: pulumi.Input<number>;
+    opType?: pulumi.Input<number | undefined>;
     /**
      * Pipeline information.
      */
-    pipeline?: pulumi.Input<inputs.Elasticsearch.LogstashPipelinePipeline>;
+    pipeline?: pulumi.Input<inputs.Elasticsearch.LogstashPipelinePipeline | undefined>;
 }
 
 /**

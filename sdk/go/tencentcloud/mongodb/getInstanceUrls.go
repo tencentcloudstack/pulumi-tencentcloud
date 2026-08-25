@@ -67,12 +67,8 @@ type GetInstanceUrlsResult struct {
 }
 
 func GetInstanceUrlsOutput(ctx *pulumi.Context, args GetInstanceUrlsOutputArgs, opts ...pulumi.InvokeOption) GetInstanceUrlsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstanceUrlsResultOutput, error) {
-			args := v.(GetInstanceUrlsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mongodb/getInstanceUrls:getInstanceUrls", args, GetInstanceUrlsResultOutput{}, options).(GetInstanceUrlsResultOutput), nil
-		}).(GetInstanceUrlsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mongodb/getInstanceUrls:getInstanceUrls", args, GetInstanceUrlsResultOutput{}, options).(GetInstanceUrlsResultOutput)
 }
 
 // A collection of arguments for invoking getInstanceUrls.

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const availableZone = tencentcloud.Cfs.getAvailableZone({});
+ * const availableZone = tencentcloud.cfs.getAvailableZone({});
  * ```
  */
 export function getAvailableZone(args?: GetAvailableZoneArgs, opts?: pulumi.InvokeOptions): Promise<GetAvailableZoneResult> {
@@ -59,7 +59,7 @@ export interface GetAvailableZoneResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const availableZone = tencentcloud.Cfs.getAvailableZone({});
+ * const availableZone = tencentcloud.cfs.getAvailableZone({});
  * ```
  */
 export function getAvailableZoneOutput(args?: GetAvailableZoneOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAvailableZoneResult> {
@@ -77,5 +77,5 @@ export interface GetAvailableZoneOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

@@ -62,12 +62,8 @@ type GetUserDomainsResult struct {
 }
 
 func GetUserDomainsOutput(ctx *pulumi.Context, args GetUserDomainsOutputArgs, opts ...pulumi.InvokeOption) GetUserDomainsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetUserDomainsResultOutput, error) {
-			args := v.(GetUserDomainsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Waf/getUserDomains:getUserDomains", args, GetUserDomainsResultOutput{}, options).(GetUserDomainsResultOutput), nil
-		}).(GetUserDomainsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Waf/getUserDomains:getUserDomains", args, GetUserDomainsResultOutput{}, options).(GetUserDomainsResultOutput)
 }
 
 // A collection of arguments for invoking getUserDomains.

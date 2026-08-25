@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Dlc.getDescribeDataEngineImageVersions({
+ * const example = tencentcloud.dlc.getDescribeDataEngineImageVersions({
  *     engineType: "SparkBatch",
  *     sort: "UpdateTime",
  *     asc: false,
@@ -83,7 +83,7 @@ export interface GetDescribeDataEngineImageVersionsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Dlc.getDescribeDataEngineImageVersions({
+ * const example = tencentcloud.dlc.getDescribeDataEngineImageVersions({
  *     engineType: "SparkBatch",
  *     sort: "UpdateTime",
  *     asc: false,
@@ -107,7 +107,7 @@ export interface GetDescribeDataEngineImageVersionsOutputArgs {
     /**
      * Sort by: false (descending, default), true (ascending).
      */
-    asc?: pulumi.Input<boolean>;
+    asc?: pulumi.Input<boolean | undefined>;
     /**
      * Engine type only support: SparkSQL/PrestoSQL/SparkBatch.
      */
@@ -115,9 +115,9 @@ export interface GetDescribeDataEngineImageVersionsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Sort fields: InsertTime (insert time, default), UpdateTime (update time).
      */
-    sort?: pulumi.Input<string>;
+    sort?: pulumi.Input<string | undefined>;
 }

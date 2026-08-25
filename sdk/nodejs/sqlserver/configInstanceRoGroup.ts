@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "sqlserver",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -84,7 +84,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * sqlserver config_instance_ro_group can be imported using the id, e.g.
+ * sqlserver configInstanceRoGroup can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Sqlserver/configInstanceRoGroup:ConfigInstanceRoGroup example mssql-ds1xhnt9#mssqlro-o6dv2ugx#0#0
@@ -207,39 +207,39 @@ export interface ConfigInstanceRoGroupState {
     /**
      * 0-user-defined weight (adjusted according to WeightPairs), 1-system automatically assigns weight (WeightPairs is invalid), the default is 0.
      */
-    autoWeight?: pulumi.Input<number>;
+    autoWeight?: pulumi.Input<number | undefined>;
     /**
      * 0-do not rebalance the load, 1-rebalance the load, the default is 0.
      */
-    balanceWeight?: pulumi.Input<number>;
+    balanceWeight?: pulumi.Input<number | undefined>;
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable timeout culling function. 0- Disable the culling function. 1- Enable the culling function.
      */
-    isOfflineDelay?: pulumi.Input<number>;
+    isOfflineDelay?: pulumi.Input<number | undefined>;
     /**
      * After the timeout removal function is enabled, the number of read-only copies retained by the read-only group at least, if this parameter is not filled, it will not be modified.
      */
-    minReadOnlyInGroup?: pulumi.Input<number>;
+    minReadOnlyInGroup?: pulumi.Input<number | undefined>;
     /**
      * Read-only group ID.
      */
-    readOnlyGroupId?: pulumi.Input<string>;
+    readOnlyGroupId?: pulumi.Input<string | undefined>;
     /**
      * Read-only group name. If this parameter is not specified, it is not modified.
      */
-    readOnlyGroupName?: pulumi.Input<string>;
+    readOnlyGroupName?: pulumi.Input<string | undefined>;
     /**
      * After the timeout elimination function is enabled, the timeout threshold used, if this parameter is not filled, it will not be modified.
      */
-    readOnlyMaxDelayTime?: pulumi.Input<number>;
+    readOnlyMaxDelayTime?: pulumi.Input<number | undefined>;
     /**
      * Read-only group instance weight modification set, if this parameter is not filled, it will not be modified.
      */
-    weightPairs?: pulumi.Input<pulumi.Input<inputs.Sqlserver.ConfigInstanceRoGroupWeightPair>[]>;
+    weightPairs?: pulumi.Input<pulumi.Input<inputs.Sqlserver.ConfigInstanceRoGroupWeightPair>[] | undefined>;
 }
 
 /**
@@ -249,11 +249,11 @@ export interface ConfigInstanceRoGroupArgs {
     /**
      * 0-user-defined weight (adjusted according to WeightPairs), 1-system automatically assigns weight (WeightPairs is invalid), the default is 0.
      */
-    autoWeight?: pulumi.Input<number>;
+    autoWeight?: pulumi.Input<number | undefined>;
     /**
      * 0-do not rebalance the load, 1-rebalance the load, the default is 0.
      */
-    balanceWeight?: pulumi.Input<number>;
+    balanceWeight?: pulumi.Input<number | undefined>;
     /**
      * Instance ID.
      */
@@ -261,11 +261,11 @@ export interface ConfigInstanceRoGroupArgs {
     /**
      * Whether to enable timeout culling function. 0- Disable the culling function. 1- Enable the culling function.
      */
-    isOfflineDelay?: pulumi.Input<number>;
+    isOfflineDelay?: pulumi.Input<number | undefined>;
     /**
      * After the timeout removal function is enabled, the number of read-only copies retained by the read-only group at least, if this parameter is not filled, it will not be modified.
      */
-    minReadOnlyInGroup?: pulumi.Input<number>;
+    minReadOnlyInGroup?: pulumi.Input<number | undefined>;
     /**
      * Read-only group ID.
      */
@@ -273,13 +273,13 @@ export interface ConfigInstanceRoGroupArgs {
     /**
      * Read-only group name. If this parameter is not specified, it is not modified.
      */
-    readOnlyGroupName?: pulumi.Input<string>;
+    readOnlyGroupName?: pulumi.Input<string | undefined>;
     /**
      * After the timeout elimination function is enabled, the timeout threshold used, if this parameter is not filled, it will not be modified.
      */
-    readOnlyMaxDelayTime?: pulumi.Input<number>;
+    readOnlyMaxDelayTime?: pulumi.Input<number | undefined>;
     /**
      * Read-only group instance weight modification set, if this parameter is not filled, it will not be modified.
      */
-    weightPairs?: pulumi.Input<pulumi.Input<inputs.Sqlserver.ConfigInstanceRoGroupWeightPair>[]>;
+    weightPairs?: pulumi.Input<pulumi.Input<inputs.Sqlserver.ConfigInstanceRoGroupWeightPair>[] | undefined>;
 }

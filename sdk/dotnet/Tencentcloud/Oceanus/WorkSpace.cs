@@ -34,7 +34,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
     /// 
     /// ## Import
     /// 
-    /// oceanus work_space can be imported using the id, e.g.
+    /// oceanus WorkSpace can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Oceanus/workSpace:WorkSpace example space-0dan3yux#tf_example

@@ -26,6 +26,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf.Inputs
         public Input<string> ListenerName { get; set; } = null!;
 
         /// <summary>
+        /// Load-balanced domain name.
+        /// </summary>
+        [Input("loadBalancerDomain")]
+        public Input<string>? LoadBalancerDomain { get; set; }
+
+        /// <summary>
         /// LoadBalancer unique ID.
         /// </summary>
         [Input("loadBalancerId", required: true)]
@@ -42,6 +48,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf.Inputs
         /// </summary>
         [Input("loadBalancerType")]
         public Input<string>? LoadBalancerType { get; set; }
+
+        /// <summary>
+        /// The ID of the member to whom the listener belongs.
+        /// </summary>
+        [Input("memberAppId")]
+        public Input<int>? MemberAppId { get; set; }
+
+        /// <summary>
+        /// Uin of the listener member.
+        /// </summary>
+        [Input("memberUin")]
+        public Input<string>? MemberUin { get; set; }
 
         /// <summary>
         /// VPCID for load balancer, public network is -1, and internal network is filled in according to actual conditions.
@@ -64,8 +82,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf.Inputs
         /// <summary>
         /// LoadBalancer IP.
         /// </summary>
-        [Input("vip", required: true)]
-        public Input<string> Vip { get; set; } = null!;
+        [Input("vip")]
+        public Input<string>? Vip { get; set; }
 
         /// <summary>
         /// LoadBalancer port.

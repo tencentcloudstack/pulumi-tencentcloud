@@ -30,17 +30,17 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc-example"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String("ap-guangzhou-6"),
 //				Name:             pulumi.String("subnet-example"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("10.0.0.0/16"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -48,15 +48,15 @@ import (
 //				return err
 //			}
 //			example, err := vpc.NewIpv6CidrBlock(ctx, "example", &vpc.Ipv6CidrBlockArgs{
-//				VpcId: vpc.ID(),
+//				VpcId: vpc2.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			exampleIpv6SubnetCidrBlock, err := vpc.NewIpv6SubnetCidrBlock(ctx, "example", &vpc.Ipv6SubnetCidrBlockArgs{
-//				VpcId: vpc.ID(),
+//				VpcId: vpc2.ID().ToIDOutput().ToStringOutput(),
 //				Ipv6SubnetCidrBlocks: &vpc.Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksArgs{
-//					SubnetId:      subnet.ID(),
+//					SubnetId:      subnet2.ID().ToIDOutput().ToStringOutput(),
 //					Ipv6CidrBlock: pulumi.String("2402:4e00:1015:7500::/64"),
 //				},
 //			})
@@ -65,8 +65,8 @@ import (
 //			}
 //			exampleInstance, err := eni.NewInstance(ctx, "example", &eni.InstanceArgs{
 //				Name:        pulumi.String("tf-example"),
-//				VpcId:       vpc.ID(),
-//				SubnetId:    subnet.ID(),
+//				VpcId:       vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:    subnet2.ID().ToIDOutput().ToStringOutput(),
 //				Description: pulumi.String("eni description."),
 //				Ipv4Count:   pulumi.Int(1),
 //			}, pulumi.DependsOn([]pulumi.Resource{
@@ -77,7 +77,7 @@ import (
 //				return err
 //			}
 //			_, err = eni.NewIpv6Address(ctx, "example", &eni.Ipv6AddressArgs{
-//				NetworkInterfaceId: exampleInstance.ID(),
+//				NetworkInterfaceId: exampleInstance.ID().ToIDOutput().ToStringOutput(),
 //				Ipv6AddressCount:   pulumi.Int(1),
 //			})
 //			if err != nil {

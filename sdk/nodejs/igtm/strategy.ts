@@ -124,7 +124,7 @@ import * as utilities from "../utilities";
  * IGTM strategy can be imported using the instanceId#strategyId, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Igtm/strategy:Strategy igtm_strategy gtm-uukztqtoaru#7556
+ * $ pulumi import tencentcloud:Igtm/strategy:Strategy example gtm-uukztqtoaru#7556
  * ```
  */
 export class Strategy extends pulumi.CustomResource {
@@ -247,35 +247,35 @@ export interface StrategyState {
     /**
      * Fallback address pool set, only one level allowed and address pool count must be 1.
      */
-    fallbackAddressPoolSets?: pulumi.Input<pulumi.Input<inputs.Igtm.StrategyFallbackAddressPoolSet>[]>;
+    fallbackAddressPoolSets?: pulumi.Input<pulumi.Input<inputs.Igtm.StrategyFallbackAddressPoolSet>[] | undefined>;
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable policy forced retention of default lines disabled, enabled, default is disabled and only one policy can be enabled.
      */
-    keepDomainRecords?: pulumi.Input<string>;
+    keepDomainRecords?: pulumi.Input<string | undefined>;
     /**
      * Main address pool set, up to four levels allowed.
      */
-    mainAddressPoolSets?: pulumi.Input<pulumi.Input<inputs.Igtm.StrategyMainAddressPoolSet>[]>;
+    mainAddressPoolSets?: pulumi.Input<pulumi.Input<inputs.Igtm.StrategyMainAddressPoolSet>[] | undefined>;
     /**
      * Resolution lines.
      */
-    sources?: pulumi.Input<pulumi.Input<inputs.Igtm.StrategySource>[]>;
+    sources?: pulumi.Input<pulumi.Input<inputs.Igtm.StrategySource>[] | undefined>;
     /**
      * Strategy ID.
      */
-    strategyId?: pulumi.Input<number>;
+    strategyId?: pulumi.Input<number | undefined>;
     /**
      * Strategy name, cannot be duplicated.
      */
-    strategyName?: pulumi.Input<string>;
+    strategyName?: pulumi.Input<string | undefined>;
     /**
      * Policy scheduling mode: AUTO default switching; STOP only pause without switching.
      */
-    switchPoolType?: pulumi.Input<string>;
+    switchPoolType?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -293,7 +293,7 @@ export interface StrategyArgs {
     /**
      * Whether to enable policy forced retention of default lines disabled, enabled, default is disabled and only one policy can be enabled.
      */
-    keepDomainRecords?: pulumi.Input<string>;
+    keepDomainRecords?: pulumi.Input<string | undefined>;
     /**
      * Main address pool set, up to four levels allowed.
      */
@@ -309,5 +309,5 @@ export interface StrategyArgs {
     /**
      * Policy scheduling mode: AUTO default switching; STOP only pause without switching.
      */
-    switchPoolType?: pulumi.Input<string>;
+    switchPoolType?: pulumi.Input<string | undefined>;
 }

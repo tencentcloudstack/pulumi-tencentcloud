@@ -16,7 +16,7 @@ import * as utilities from "../utilities";
  * const rule1 = new tencentcloud.teo.L7AccRuleV2("rule1", {
  *     zoneId: "zone-39quuimqg8r6",
  *     descriptions: ["1"],
- *     ruleName: "网站加速1",
+ *     ruleName: "Web Acceleration 1",
  *     status: "enable",
  *     branches: [{
  *         condition: "${http.request.host} in ['aaa.makn.cn']",
@@ -77,7 +77,7 @@ import * as utilities from "../utilities";
  * const rule2 = new tencentcloud.teo.L7AccRuleV2("rule2", {
  *     zoneId: "zone-39quuimqg8r6",
  *     descriptions: ["2"],
- *     ruleName: "网站加速2",
+ *     ruleName: "Web Acceleration 2",
  *     status: "enable",
  *     branches: [{
  *         condition: "${http.request.host} in ['aaa.makn.cn']",
@@ -219,11 +219,11 @@ export interface L7AccRulePriorityOperationState {
     /**
      * Complete list of rule IDs under site ID.
      */
-    ruleIds?: pulumi.Input<pulumi.Input<string>[]>;
+    ruleIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Zone id.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**

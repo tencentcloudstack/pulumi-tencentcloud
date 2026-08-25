@@ -36,14 +36,14 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			vpc, err := vpc.GetInstances(ctx, &vpc.GetInstancesArgs{
+//			vpc2, err := vpc.GetInstances(ctx, &vpc.GetInstancesArgs{
 //				Name: pulumi.StringRef("Default-VPC"),
 //			}, nil)
 //			if err != nil {
 //				return err
 //			}
 //			subnet, err := vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
-//				VpcId: pulumi.StringRef(vpc.InstanceLists[0].VpcId),
+//				VpcId: pulumi.StringRef(vpc2.InstanceLists[0].VpcId),
 //			}, nil)
 //			if err != nil {
 //				return err
@@ -78,7 +78,7 @@ import (
 //			}
 //			dcnDcdbId := hourdbInstanceDcn.ID()
 //			_, err = dcdb.NewCancelDcnJobOperation(ctx, "cancel_operation", &dcdb.CancelDcnJobOperationArgs{
-//				InstanceId: pulumi.String(dcnDcdbId),
+//				InstanceId: dcnDcdbId.ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err

@@ -77,12 +77,8 @@ type GetTargetGroupListResult struct {
 }
 
 func GetTargetGroupListOutput(ctx *pulumi.Context, args GetTargetGroupListOutputArgs, opts ...pulumi.InvokeOption) GetTargetGroupListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetTargetGroupListResultOutput, error) {
-			args := v.(GetTargetGroupListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Clb/getTargetGroupList:getTargetGroupList", args, GetTargetGroupListResultOutput{}, options).(GetTargetGroupListResultOutput), nil
-		}).(GetTargetGroupListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Clb/getTargetGroupList:getTargetGroupList", args, GetTargetGroupListResultOutput{}, options).(GetTargetGroupListResultOutput)
 }
 
 // A collection of arguments for invoking getTargetGroupList.

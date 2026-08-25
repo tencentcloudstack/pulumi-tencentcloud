@@ -53,7 +53,7 @@ import (
 //
 // ## Import
 //
-// ckafka connect_resource can be imported using the id, e.g.
+// ckafka connectResource can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Ckafka/connectResource:ConnectResource connect_resource connect_resource_id

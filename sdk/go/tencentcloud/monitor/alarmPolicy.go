@@ -115,7 +115,7 @@ import (
 //					},
 //				},
 //				NoticeIds: pulumi.StringArray{
-//					foo.ID(),
+//					foo.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				TriggerTasks: monitor.AlarmPolicyTriggerTaskArray{
 //					&monitor.AlarmPolicyTriggerTaskArgs{
@@ -351,6 +351,73 @@ import (
 //
 // ```
 //
+// ### alarm policy with hierarchical notices
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/monitor"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := monitor.NewAlarmPolicy(ctx, "foo", &monitor.AlarmPolicyArgs{
+//				PolicyName:  pulumi.String("tf-policy"),
+//				MonitorType: pulumi.String("MT_QCE"),
+//				Enable:      pulumi.Int(1),
+//				ProjectId:   pulumi.Int(0),
+//				Namespace:   pulumi.String("cvm_device"),
+//				Conditions: &monitor.AlarmPolicyConditionsArgs{
+//					IsUnionRule: pulumi.Int(1),
+//					Rules: monitor.AlarmPolicyConditionsRuleArray{
+//						&monitor.AlarmPolicyConditionsRuleArgs{
+//							MetricName:      pulumi.String("CpuUsage"),
+//							Period:          pulumi.Int(60),
+//							Operator:        pulumi.String("ge"),
+//							Value:           pulumi.String("89.9"),
+//							ContinuePeriod:  pulumi.Int(1),
+//							NoticeFrequency: pulumi.Int(3600),
+//							IsPowerNotice:   pulumi.Int(0),
+//						},
+//					},
+//				},
+//				EventConditions: monitor.AlarmPolicyEventConditionArray{
+//					&monitor.AlarmPolicyEventConditionArgs{
+//						MetricName: pulumi.String("ping_unreachable"),
+//					},
+//				},
+//				NoticeIds: pulumi.StringArray{
+//					fooTencentcloudMonitorAlarmNotice.Id,
+//				},
+//				HierarchicalNotices: monitor.AlarmPolicyHierarchicalNoticeArray{
+//					&monitor.AlarmPolicyHierarchicalNoticeArgs{
+//						NoticeId: pulumi.Any(fooTencentcloudMonitorAlarmNotice.Id),
+//						Classifications: pulumi.StringArray{
+//							pulumi.String("Remind"),
+//							pulumi.String("Serious"),
+//						},
+//					},
+//				},
+//				NoticeContentTmplBindInfos: monitor.AlarmPolicyNoticeContentTmplBindInfoArray{
+//					&monitor.AlarmPolicyNoticeContentTmplBindInfoArgs{
+//						ContentTmplId: pulumi.String("tmpl-xxxx"),
+//						NoticeId:      pulumi.Any(fooTencentcloudMonitorAlarmNotice.Id),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
 // ## Import
 //
 // Alarm policy instance can be imported, e.g.
@@ -375,10 +442,14 @@ type AlarmPolicy struct {
 	Filter AlarmPolicyFilterPtrOutput `pulumi:"filter"`
 	// Aggregate dimension list, specify which dimension keys to use for group by.
 	GroupBies pulumi.StringArrayOutput `pulumi:"groupBies"`
+	// Alarm hierarchical notice rules configuration.
+	HierarchicalNotices AlarmPolicyHierarchicalNoticeArrayOutput `pulumi:"hierarchicalNotices"`
 	// The type of monitor.
 	MonitorType pulumi.StringOutput `pulumi:"monitorType"`
 	// The type of alarm.
 	Namespace pulumi.StringOutput `pulumi:"namespace"`
+	// Notice content template binding info.
+	NoticeContentTmplBindInfos AlarmPolicyNoticeContentTmplBindInfoArrayOutput `pulumi:"noticeContentTmplBindInfos"`
 	// List of notification rule IDs.
 	NoticeIds pulumi.StringArrayOutput `pulumi:"noticeIds"`
 	// The name of policy.
@@ -448,10 +519,14 @@ type alarmPolicyState struct {
 	Filter *AlarmPolicyFilter `pulumi:"filter"`
 	// Aggregate dimension list, specify which dimension keys to use for group by.
 	GroupBies []string `pulumi:"groupBies"`
+	// Alarm hierarchical notice rules configuration.
+	HierarchicalNotices []AlarmPolicyHierarchicalNotice `pulumi:"hierarchicalNotices"`
 	// The type of monitor.
 	MonitorType *string `pulumi:"monitorType"`
 	// The type of alarm.
 	Namespace *string `pulumi:"namespace"`
+	// Notice content template binding info.
+	NoticeContentTmplBindInfos []AlarmPolicyNoticeContentTmplBindInfo `pulumi:"noticeContentTmplBindInfos"`
 	// List of notification rule IDs.
 	NoticeIds []string `pulumi:"noticeIds"`
 	// The name of policy.
@@ -483,10 +558,14 @@ type AlarmPolicyState struct {
 	Filter AlarmPolicyFilterPtrInput
 	// Aggregate dimension list, specify which dimension keys to use for group by.
 	GroupBies pulumi.StringArrayInput
+	// Alarm hierarchical notice rules configuration.
+	HierarchicalNotices AlarmPolicyHierarchicalNoticeArrayInput
 	// The type of monitor.
 	MonitorType pulumi.StringPtrInput
 	// The type of alarm.
 	Namespace pulumi.StringPtrInput
+	// Notice content template binding info.
+	NoticeContentTmplBindInfos AlarmPolicyNoticeContentTmplBindInfoArrayInput
 	// List of notification rule IDs.
 	NoticeIds pulumi.StringArrayInput
 	// The name of policy.
@@ -520,10 +599,14 @@ type alarmPolicyArgs struct {
 	Filter *AlarmPolicyFilter `pulumi:"filter"`
 	// Aggregate dimension list, specify which dimension keys to use for group by.
 	GroupBies []string `pulumi:"groupBies"`
+	// Alarm hierarchical notice rules configuration.
+	HierarchicalNotices []AlarmPolicyHierarchicalNotice `pulumi:"hierarchicalNotices"`
 	// The type of monitor.
 	MonitorType string `pulumi:"monitorType"`
 	// The type of alarm.
 	Namespace string `pulumi:"namespace"`
+	// Notice content template binding info.
+	NoticeContentTmplBindInfos []AlarmPolicyNoticeContentTmplBindInfo `pulumi:"noticeContentTmplBindInfos"`
 	// List of notification rule IDs.
 	NoticeIds []string `pulumi:"noticeIds"`
 	// The name of policy.
@@ -552,10 +635,14 @@ type AlarmPolicyArgs struct {
 	Filter AlarmPolicyFilterPtrInput
 	// Aggregate dimension list, specify which dimension keys to use for group by.
 	GroupBies pulumi.StringArrayInput
+	// Alarm hierarchical notice rules configuration.
+	HierarchicalNotices AlarmPolicyHierarchicalNoticeArrayInput
 	// The type of monitor.
 	MonitorType pulumi.StringInput
 	// The type of alarm.
 	Namespace pulumi.StringInput
+	// Notice content template binding info.
+	NoticeContentTmplBindInfos AlarmPolicyNoticeContentTmplBindInfoArrayInput
 	// List of notification rule IDs.
 	NoticeIds pulumi.StringArrayInput
 	// The name of policy.
@@ -692,6 +779,11 @@ func (o AlarmPolicyOutput) GroupBies() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *AlarmPolicy) pulumi.StringArrayOutput { return v.GroupBies }).(pulumi.StringArrayOutput)
 }
 
+// Alarm hierarchical notice rules configuration.
+func (o AlarmPolicyOutput) HierarchicalNotices() AlarmPolicyHierarchicalNoticeArrayOutput {
+	return o.ApplyT(func(v *AlarmPolicy) AlarmPolicyHierarchicalNoticeArrayOutput { return v.HierarchicalNotices }).(AlarmPolicyHierarchicalNoticeArrayOutput)
+}
+
 // The type of monitor.
 func (o AlarmPolicyOutput) MonitorType() pulumi.StringOutput {
 	return o.ApplyT(func(v *AlarmPolicy) pulumi.StringOutput { return v.MonitorType }).(pulumi.StringOutput)
@@ -700,6 +792,13 @@ func (o AlarmPolicyOutput) MonitorType() pulumi.StringOutput {
 // The type of alarm.
 func (o AlarmPolicyOutput) Namespace() pulumi.StringOutput {
 	return o.ApplyT(func(v *AlarmPolicy) pulumi.StringOutput { return v.Namespace }).(pulumi.StringOutput)
+}
+
+// Notice content template binding info.
+func (o AlarmPolicyOutput) NoticeContentTmplBindInfos() AlarmPolicyNoticeContentTmplBindInfoArrayOutput {
+	return o.ApplyT(func(v *AlarmPolicy) AlarmPolicyNoticeContentTmplBindInfoArrayOutput {
+		return v.NoticeContentTmplBindInfos
+	}).(AlarmPolicyNoticeContentTmplBindInfoArrayOutput)
 }
 
 // List of notification rule IDs.

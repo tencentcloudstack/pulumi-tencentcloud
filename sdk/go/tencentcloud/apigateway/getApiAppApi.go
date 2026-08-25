@@ -77,12 +77,8 @@ type LookupApiAppApiResult struct {
 }
 
 func LookupApiAppApiOutput(ctx *pulumi.Context, args LookupApiAppApiOutputArgs, opts ...pulumi.InvokeOption) LookupApiAppApiResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupApiAppApiResultOutput, error) {
-			args := v.(LookupApiAppApiArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:ApiGateway/getApiAppApi:getApiAppApi", args, LookupApiAppApiResultOutput{}, options).(LookupApiAppApiResultOutput), nil
-		}).(LookupApiAppApiResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:ApiGateway/getApiAppApi:getApiAppApi", args, LookupApiAppApiResultOutput{}, options).(LookupApiAppApiResultOutput)
 }
 
 // A collection of arguments for invoking getApiAppApi.

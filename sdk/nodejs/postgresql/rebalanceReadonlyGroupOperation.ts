@@ -94,7 +94,7 @@ export interface RebalanceReadonlyGroupOperationState {
     /**
      * readonly Group ID.
      */
-    readOnlyGroupId?: pulumi.Input<string>;
+    readOnlyGroupId?: pulumi.Input<string | undefined>;
 }
 
 /**

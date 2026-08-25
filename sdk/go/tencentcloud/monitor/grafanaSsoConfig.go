@@ -43,7 +43,7 @@ import (
 //
 // ## Import
 //
-// monitor grafana_sso_config can be imported using the id, e.g.
+// monitor grafanaSsoConfig can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Monitor/grafanaSsoConfig:GrafanaSsoConfig grafana_sso_config instance_id

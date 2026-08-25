@@ -104,6 +104,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         public Output<string?> Enable { get; private set; } = null!;
 
         /// <summary>
+        /// Execution order.
+        /// </summary>
+        [Output("orderIndex")]
+        public Output<int> OrderIndex { get; private set; } = null!;
+
+        /// <summary>
         /// Parameter template id.
         /// </summary>
         [Output("paramTemplateId")]
@@ -307,6 +313,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         /// </summary>
         [Input("enable")]
         public Input<string>? Enable { get; set; }
+
+        /// <summary>
+        /// Execution order.
+        /// </summary>
+        [Input("orderIndex")]
+        public Input<int>? OrderIndex { get; set; }
 
         /// <summary>
         /// Parameter template id.

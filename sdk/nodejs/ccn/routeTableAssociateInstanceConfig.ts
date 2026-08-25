@@ -161,15 +161,15 @@ export interface RouteTableAssociateInstanceConfigState {
     /**
      * ID of the CCN.
      */
-    ccnId?: pulumi.Input<string>;
+    ccnId?: pulumi.Input<string | undefined>;
     /**
      * Instances list.
      */
-    instances?: pulumi.Input<pulumi.Input<inputs.Ccn.RouteTableAssociateInstanceConfigInstance>[]>;
+    instances?: pulumi.Input<pulumi.Input<inputs.Ccn.RouteTableAssociateInstanceConfigInstance>[] | undefined>;
     /**
      * Ccn instance route table ID.
      */
-    routeTableId?: pulumi.Input<string>;
+    routeTableId?: pulumi.Input<string | undefined>;
 }
 
 /**

@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "cdb",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -54,7 +54,7 @@ import * as utilities from "../utilities";
  *         max_connections: "1000",
  *     },
  * });
- * const example = tencentcloud.Mysql.getInstanceOutput({
+ * const example = tencentcloud.mysql.getInstanceOutput({
  *     mysqlId: exampleInstance.id,
  * });
  * const exampleReadonlyInstance = new tencentcloud.mysql.ReadonlyInstance("example", {
@@ -139,7 +139,7 @@ export interface RoGroupLoadOperationState {
     /**
      * The ID of the RO group, in the format: cdbrg-c1nl9rpv.
      */
-    roGroupId?: pulumi.Input<string>;
+    roGroupId?: pulumi.Input<string | undefined>;
 }
 
 /**

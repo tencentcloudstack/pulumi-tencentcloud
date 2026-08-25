@@ -71,12 +71,8 @@ type GetNativeSparkSessionsResult struct {
 }
 
 func GetNativeSparkSessionsOutput(ctx *pulumi.Context, args GetNativeSparkSessionsOutputArgs, opts ...pulumi.InvokeOption) GetNativeSparkSessionsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetNativeSparkSessionsResultOutput, error) {
-			args := v.(GetNativeSparkSessionsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dlc/getNativeSparkSessions:getNativeSparkSessions", args, GetNativeSparkSessionsResultOutput{}, options).(GetNativeSparkSessionsResultOutput), nil
-		}).(GetNativeSparkSessionsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dlc/getNativeSparkSessions:getNativeSparkSessions", args, GetNativeSparkSessionsResultOutput{}, options).(GetNativeSparkSessionsResultOutput)
 }
 
 // A collection of arguments for invoking getNativeSparkSessions.

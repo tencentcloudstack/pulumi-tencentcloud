@@ -15,7 +15,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class L7AccRuleV2BranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchActionClientIpCountryParameters
     {
         /// <summary>
-        /// Name of the request header that contains the client ip region. it is valid when switch=on. the default value eo-client-ipcountry is used when it is not specified.
+        /// Name of the request header that contains the client ip region. it is valid when switch=on. the default value EO-Client-IPCountry is used when it is not specified.
         /// </summary>
         public readonly string? HeaderName;
         /// <summary>

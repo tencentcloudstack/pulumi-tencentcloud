@@ -109,12 +109,8 @@ type WeDataDataSourceListResult struct {
 }
 
 func WeDataDataSourceListOutput(ctx *pulumi.Context, args WeDataDataSourceListOutputArgs, opts ...pulumi.InvokeOption) WeDataDataSourceListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (WeDataDataSourceListResultOutput, error) {
-			args := v.(WeDataDataSourceListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Wedata/weDataDataSourceList:WeDataDataSourceList", args, WeDataDataSourceListResultOutput{}, options).(WeDataDataSourceListResultOutput), nil
-		}).(WeDataDataSourceListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Wedata/weDataDataSourceList:WeDataDataSourceList", args, WeDataDataSourceListResultOutput{}, options).(WeDataDataSourceListResultOutput)
 }
 
 // A collection of arguments for invoking WeDataDataSourceList.

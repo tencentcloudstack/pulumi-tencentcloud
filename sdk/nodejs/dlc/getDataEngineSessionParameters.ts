@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Dlc.getDataEngineSessionParameters({
+ * const example = tencentcloud.dlc.getDataEngineSessionParameters({
  *     dataEngineId: "DataEngine-public-1308726196",
  * });
  * ```
@@ -72,7 +72,7 @@ export interface GetDataEngineSessionParametersResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Dlc.getDataEngineSessionParameters({
+ * const example = tencentcloud.dlc.getDataEngineSessionParameters({
  *     dataEngineId: "DataEngine-public-1308726196",
  * });
  * ```
@@ -97,9 +97,9 @@ export interface GetDataEngineSessionParametersOutputArgs {
     /**
      * Engine name. When the engine name is specified, the name is used first to obtain the configuration.
      */
-    dataEngineName?: pulumi.Input<string>;
+    dataEngineName?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

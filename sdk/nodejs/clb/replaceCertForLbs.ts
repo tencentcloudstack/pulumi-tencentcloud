@@ -31,7 +31,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Ssl.getCertificates({
+ * const foo = tencentcloud.ssl.getCertificates({
  *     name: "keep-ssl-ca",
  * });
  * const replaceCertForLbs = new tencentcloud.clb.ReplaceCertForLbs("replace_cert_for_lbs", {
@@ -143,11 +143,11 @@ export interface ReplaceCertForLbsState {
     /**
      * Information such as the content of the new certificate.
      */
-    certificate?: pulumi.Input<inputs.Clb.ReplaceCertForLbsCertificate>;
+    certificate?: pulumi.Input<inputs.Clb.ReplaceCertForLbsCertificate | undefined>;
     /**
      * ID of the certificate to be replaced, which can be a server certificate or a client certificate.
      */
-    oldCertificateId?: pulumi.Input<string>;
+    oldCertificateId?: pulumi.Input<string | undefined>;
 }
 
 /**

@@ -36,7 +36,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
     /// 
     /// ## Import
     /// 
-    /// chdfs access_group can be imported using the id, e.g.
+    /// chdfs AccessGroup can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Chdfs/accessGroup:AccessGroup access_group access_group_id

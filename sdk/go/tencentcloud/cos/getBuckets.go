@@ -55,7 +55,7 @@ import (
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := cos.GetBuckets(ctx, &cos.GetBucketsArgs{
 //				BucketPrefix: pulumi.StringRef("tf-example-prefix"),
-//				Tags: map[string]interface{}{
+//				Tags: map[string]string{
 //					"createBy": "Terraform",
 //				},
 //			}, nil)
@@ -100,12 +100,8 @@ type GetBucketsResult struct {
 }
 
 func GetBucketsOutput(ctx *pulumi.Context, args GetBucketsOutputArgs, opts ...pulumi.InvokeOption) GetBucketsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetBucketsResultOutput, error) {
-			args := v.(GetBucketsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cos/getBuckets:getBuckets", args, GetBucketsResultOutput{}, options).(GetBucketsResultOutput), nil
-		}).(GetBucketsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cos/getBuckets:getBuckets", args, GetBucketsResultOutput{}, options).(GetBucketsResultOutput)
 }
 
 // A collection of arguments for invoking getBuckets.

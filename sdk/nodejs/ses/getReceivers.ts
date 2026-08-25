@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const receivers = tencentcloud.Ses.getReceivers({
+ * const receivers = tencentcloud.ses.getReceivers({
  *     status: 3,
  *     keyWord: "keep",
  * });
@@ -74,7 +74,7 @@ export interface GetReceiversResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const receivers = tencentcloud.Ses.getReceivers({
+ * const receivers = tencentcloud.ses.getReceivers({
  *     status: 3,
  *     keyWord: "keep",
  * });
@@ -97,13 +97,13 @@ export interface GetReceiversOutputArgs {
     /**
      * Group name keyword for fuzzy query.
      */
-    keyWord?: pulumi.Input<string>;
+    keyWord?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Group status (`1`: to be uploaded; `2`: uploading; `3`: uploaded). To query groups in all states, do not pass in this parameter.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
 }

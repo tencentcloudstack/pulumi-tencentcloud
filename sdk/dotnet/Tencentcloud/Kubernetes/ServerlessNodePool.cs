@@ -21,7 +21,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -149,10 +148,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// 
     /// ## Import
     /// 
-    /// serverless node pool can be imported, e.g.
+    /// serverless node pool can be imported using the clusterId#nodePoolId, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Kubernetes/serverlessNodePool:ServerlessNodePool test cls-xxx#np-xxx
+    /// $ pulumi import tencentcloud:Kubernetes/serverlessNodePool:ServerlessNodePool example cls-62ch3v24#np-5avod190
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Kubernetes/serverlessNodePool:ServerlessNodePool")]

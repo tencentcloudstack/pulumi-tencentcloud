@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getUserClbRegions({});
+ * const example = tencentcloud.waf.getUserClbRegions({});
  * ```
  */
 export function getUserClbRegions(args?: GetUserClbRegionsArgs, opts?: pulumi.InvokeOptions): Promise<GetUserClbRegionsResult> {
@@ -63,7 +63,7 @@ export interface GetUserClbRegionsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getUserClbRegions({});
+ * const example = tencentcloud.waf.getUserClbRegions({});
  * ```
  */
 export function getUserClbRegionsOutput(args?: GetUserClbRegionsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetUserClbRegionsResult> {
@@ -81,5 +81,5 @@ export interface GetUserClbRegionsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

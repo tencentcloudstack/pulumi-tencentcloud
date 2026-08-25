@@ -50,8 +50,8 @@ import (
 //				return err
 //			}
 //			attachService, err := apigateway.NewUsagePlanAttachment(ctx, "attach_service", &apigateway.UsagePlanAttachmentArgs{
-//				UsagePlanId: plan.ID(),
-//				ServiceId:   service.ID(),
+//				UsagePlanId: plan.ID().ToIDOutput().ToStringOutput(),
+//				ServiceId:   service.ID().ToIDOutput().ToStringOutput(),
 //				Environment: pulumi.String("test"),
 //				BindType:    pulumi.String("SERVICE"),
 //			})
@@ -99,12 +99,8 @@ type GetUsagePlanEnvironmentsResult struct {
 }
 
 func GetUsagePlanEnvironmentsOutput(ctx *pulumi.Context, args GetUsagePlanEnvironmentsOutputArgs, opts ...pulumi.InvokeOption) GetUsagePlanEnvironmentsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetUsagePlanEnvironmentsResultOutput, error) {
-			args := v.(GetUsagePlanEnvironmentsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:ApiGateway/getUsagePlanEnvironments:getUsagePlanEnvironments", args, GetUsagePlanEnvironmentsResultOutput{}, options).(GetUsagePlanEnvironmentsResultOutput), nil
-		}).(GetUsagePlanEnvironmentsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:ApiGateway/getUsagePlanEnvironments:getUsagePlanEnvironments", args, GetUsagePlanEnvironmentsResultOutput{}, options).(GetUsagePlanEnvironmentsResultOutput)
 }
 
 // A collection of arguments for invoking getUsagePlanEnvironments.

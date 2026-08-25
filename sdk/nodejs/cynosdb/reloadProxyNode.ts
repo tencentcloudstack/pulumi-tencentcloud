@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * cynosdb reload_proxy_node can be imported using the id, e.g.
+ * cynosdb reloadProxyNode can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Cynosdb/reloadProxyNode:ReloadProxyNode reload_proxy_node reload_proxy_node_id
@@ -102,11 +102,11 @@ export interface ReloadProxyNodeState {
     /**
      * cluster id.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * proxy group id.
      */
-    proxyGroupId?: pulumi.Input<string>;
+    proxyGroupId?: pulumi.Input<string | undefined>;
 }
 
 /**

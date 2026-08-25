@@ -97,7 +97,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// 
     /// ## Import
     /// 
-    /// cls config_extra can be imported using the id, e.g.
+    /// cls ConfigExtra can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Cls/configExtra:ConfigExtra config_extra config_extra_id

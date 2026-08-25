@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const disks = tencentcloud.Lighthouse.getDisks({
+ * const disks = tencentcloud.lighthouse.getDisks({
  *     diskIds: ["lhdisk-xxxxxx"],
  * });
  * ```
@@ -73,7 +73,7 @@ export interface GetDisksResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const disks = tencentcloud.Lighthouse.getDisks({
+ * const disks = tencentcloud.lighthouse.getDisks({
  *     diskIds: ["lhdisk-xxxxxx"],
  * });
  * ```
@@ -95,13 +95,13 @@ export interface GetDisksOutputArgs {
     /**
      * List of disk ids.
      */
-    diskIds?: pulumi.Input<pulumi.Input<string>[]>;
+    diskIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Filter list.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Lighthouse.GetDisksFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Lighthouse.GetDisksFilterArgs>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

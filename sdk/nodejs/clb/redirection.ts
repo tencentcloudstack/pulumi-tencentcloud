@@ -15,12 +15,15 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.clb.Redirection("foo", {
- *     clbId: "lb-p7olt9e5",
- *     sourceListenerId: "lbl-jc1dx6ju",
- *     targetListenerId: "lbl-asj1hzuo",
- *     sourceRuleId: "loc-ft8fmngv",
- *     targetRuleId: "loc-4xxr2cy7",
+ * const example = new tencentcloud.clb.Redirection("example", {
+ *     clbId: "lb-ab09jtd2",
+ *     sourceListenerId: "lbl-qgtfowas",
+ *     targetListenerId: "lbl-lpwdkukk",
+ *     sourceRuleId: "loc-liz99mtg",
+ *     targetRuleId: "loc-4f53xn52",
+ *     rewriteCode: 307,
+ *     takeUrl: true,
+ *     sourceDomian: "www.demo.com",
  * });
  * ```
  *
@@ -30,20 +33,20 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.clb.Redirection("foo", {
- *     clbId: "lb-p7olt9e5",
- *     targetListenerId: "lbl-asj1hzuo",
- *     targetRuleId: "loc-4xxr2cy7",
+ * const example = new tencentcloud.clb.Redirection("example", {
+ *     clbId: "lb-ab09jtd2",
+ *     targetListenerId: "lbl-l7550kum",
+ *     targetRuleId: "loc-op7uz010",
  *     isAutoRewrite: true,
  * });
  * ```
  *
  * ## Import
  *
- * CLB redirection can be imported using the id, e.g.
+ * CLB redirection can be imported using the sourceLocId#targetLocId#sourceListenerId#targetListenerId#clbId, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Clb/redirection:Redirection foo loc-ft8fmngv#loc-4xxr2cy7#lbl-jc1dx6ju#lbl-asj1hzuo#lb-p7olt9e5
+ * $ pulumi import tencentcloud:Clb/redirection:Redirection example loc-ft8fmngv#loc-4xxr2cy7#lbl-jc1dx6ju#lbl-asj1hzuo#lb-p7olt9e5
  * ```
  */
 export class Redirection extends pulumi.CustomResource {
@@ -87,6 +90,14 @@ export class Redirection extends pulumi.CustomResource {
      */
     declare public readonly isAutoRewrite: pulumi.Output<boolean | undefined>;
     /**
+     * Redirection status codes, with possible values of `301`, `302`, `307`.
+     */
+    declare public readonly rewriteCode: pulumi.Output<number>;
+    /**
+     * The domain name for source forwarding must be the domain name corresponding to `sourceRuleId`, which is required when configuring `rewriteCode`. Only support `isAutoRewrite` is `false`.
+     */
+    declare public readonly sourceDomian: pulumi.Output<string>;
+    /**
      * ID of source listener.
      */
     declare public readonly sourceListenerId: pulumi.Output<string>;
@@ -94,6 +105,10 @@ export class Redirection extends pulumi.CustomResource {
      * Rule ID of source listener.
      */
     declare public readonly sourceRuleId: pulumi.Output<string>;
+    /**
+     * Whether the redirect carries a matching URL is required when configuring `rewriteCode`.
+     */
+    declare public readonly takeUrl: pulumi.Output<boolean>;
     /**
      * ID of source listener.
      */
@@ -119,8 +134,11 @@ export class Redirection extends pulumi.CustomResource {
             resourceInputs["clbId"] = state?.clbId;
             resourceInputs["deleteAllAutoRewrite"] = state?.deleteAllAutoRewrite;
             resourceInputs["isAutoRewrite"] = state?.isAutoRewrite;
+            resourceInputs["rewriteCode"] = state?.rewriteCode;
+            resourceInputs["sourceDomian"] = state?.sourceDomian;
             resourceInputs["sourceListenerId"] = state?.sourceListenerId;
             resourceInputs["sourceRuleId"] = state?.sourceRuleId;
+            resourceInputs["takeUrl"] = state?.takeUrl;
             resourceInputs["targetListenerId"] = state?.targetListenerId;
             resourceInputs["targetRuleId"] = state?.targetRuleId;
         } else {
@@ -137,8 +155,11 @@ export class Redirection extends pulumi.CustomResource {
             resourceInputs["clbId"] = args?.clbId;
             resourceInputs["deleteAllAutoRewrite"] = args?.deleteAllAutoRewrite;
             resourceInputs["isAutoRewrite"] = args?.isAutoRewrite;
+            resourceInputs["rewriteCode"] = args?.rewriteCode;
+            resourceInputs["sourceDomian"] = args?.sourceDomian;
             resourceInputs["sourceListenerId"] = args?.sourceListenerId;
             resourceInputs["sourceRuleId"] = args?.sourceRuleId;
+            resourceInputs["takeUrl"] = args?.takeUrl;
             resourceInputs["targetListenerId"] = args?.targetListenerId;
             resourceInputs["targetRuleId"] = args?.targetRuleId;
         }
@@ -154,31 +175,43 @@ export interface RedirectionState {
     /**
      * ID of CLB instance.
      */
-    clbId?: pulumi.Input<string>;
+    clbId?: pulumi.Input<string | undefined>;
     /**
      * Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.
      */
-    deleteAllAutoRewrite?: pulumi.Input<boolean>;
+    deleteAllAutoRewrite?: pulumi.Input<boolean | undefined>;
     /**
      * Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.
      */
-    isAutoRewrite?: pulumi.Input<boolean>;
+    isAutoRewrite?: pulumi.Input<boolean | undefined>;
+    /**
+     * Redirection status codes, with possible values of `301`, `302`, `307`.
+     */
+    rewriteCode?: pulumi.Input<number | undefined>;
+    /**
+     * The domain name for source forwarding must be the domain name corresponding to `sourceRuleId`, which is required when configuring `rewriteCode`. Only support `isAutoRewrite` is `false`.
+     */
+    sourceDomian?: pulumi.Input<string | undefined>;
     /**
      * ID of source listener.
      */
-    sourceListenerId?: pulumi.Input<string>;
+    sourceListenerId?: pulumi.Input<string | undefined>;
     /**
      * Rule ID of source listener.
      */
-    sourceRuleId?: pulumi.Input<string>;
+    sourceRuleId?: pulumi.Input<string | undefined>;
+    /**
+     * Whether the redirect carries a matching URL is required when configuring `rewriteCode`.
+     */
+    takeUrl?: pulumi.Input<boolean | undefined>;
     /**
      * ID of source listener.
      */
-    targetListenerId?: pulumi.Input<string>;
+    targetListenerId?: pulumi.Input<string | undefined>;
     /**
      * Rule ID of target listener.
      */
-    targetRuleId?: pulumi.Input<string>;
+    targetRuleId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -192,19 +225,31 @@ export interface RedirectionArgs {
     /**
      * Indicates whether delete all auto redirection. Default is `false`. It will take effect only when this redirection is auto-rewrite and this auto-rewrite auto redirected more than one rules. All the auto-rewrite relations will be deleted when this parameter set true.
      */
-    deleteAllAutoRewrite?: pulumi.Input<boolean>;
+    deleteAllAutoRewrite?: pulumi.Input<boolean | undefined>;
     /**
      * Indicates whether automatic forwarding is enable, default is `false`. If enabled, the source listener and location should be empty, the target listener must be https protocol and port is 443.
      */
-    isAutoRewrite?: pulumi.Input<boolean>;
+    isAutoRewrite?: pulumi.Input<boolean | undefined>;
+    /**
+     * Redirection status codes, with possible values of `301`, `302`, `307`.
+     */
+    rewriteCode?: pulumi.Input<number | undefined>;
+    /**
+     * The domain name for source forwarding must be the domain name corresponding to `sourceRuleId`, which is required when configuring `rewriteCode`. Only support `isAutoRewrite` is `false`.
+     */
+    sourceDomian?: pulumi.Input<string | undefined>;
     /**
      * ID of source listener.
      */
-    sourceListenerId?: pulumi.Input<string>;
+    sourceListenerId?: pulumi.Input<string | undefined>;
     /**
      * Rule ID of source listener.
      */
-    sourceRuleId?: pulumi.Input<string>;
+    sourceRuleId?: pulumi.Input<string | undefined>;
+    /**
+     * Whether the redirect carries a matching URL is required when configuring `rewriteCode`.
+     */
+    takeUrl?: pulumi.Input<boolean | undefined>;
     /**
      * ID of source listener.
      */

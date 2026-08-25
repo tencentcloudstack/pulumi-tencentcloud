@@ -72,12 +72,8 @@ type GetParameterListResult struct {
 }
 
 func GetParameterListOutput(ctx *pulumi.Context, args GetParameterListOutputArgs, opts ...pulumi.InvokeOption) GetParameterListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetParameterListResultOutput, error) {
-			args := v.(GetParameterListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mysql/getParameterList:getParameterList", args, GetParameterListResultOutput{}, options).(GetParameterListResultOutput), nil
-		}).(GetParameterListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mysql/getParameterList:getParameterList", args, GetParameterListResultOutput{}, options).(GetParameterListResultOutput)
 }
 
 // A collection of arguments for invoking getParameterList.

@@ -77,7 +77,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Events
     /// ## Import
     /// 
     /// events audit track can be imported using the id, e.g.
-    /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Events/auditTrack:AuditTrack example 24283
     /// ```
@@ -104,7 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Events
         public Output<int> Status { get; private set; } = null!;
 
         /// <summary>
-        /// Storage type of shipped data. Valid values: `Cos`, `Cls`.
+        /// Storage type of shipped data. Valid values: `Cos`, `Cls` and `Ckafka`.
         /// </summary>
         [Output("storage")]
         public Output<Outputs.AuditTrackStorage> Storage { get; private set; } = null!;
@@ -187,7 +186,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Events
         public Input<int> Status { get; set; } = null!;
 
         /// <summary>
-        /// Storage type of shipped data. Valid values: `Cos`, `Cls`.
+        /// Storage type of shipped data. Valid values: `Cos`, `Cls` and `Ckafka`.
         /// </summary>
         [Input("storage", required: true)]
         public Input<Inputs.AuditTrackStorageArgs> Storage { get; set; } = null!;
@@ -225,7 +224,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Events
         public Input<int>? Status { get; set; }
 
         /// <summary>
-        /// Storage type of shipped data. Valid values: `Cos`, `Cls`.
+        /// Storage type of shipped data. Valid values: `Cos`, `Cls` and `Ckafka`.
         /// </summary>
         [Input("storage")]
         public Input<Inputs.AuditTrackStorageGetArgs>? Storage { get; set; }

@@ -74,12 +74,8 @@ type GetMountPointsResult struct {
 }
 
 func GetMountPointsOutput(ctx *pulumi.Context, args GetMountPointsOutputArgs, opts ...pulumi.InvokeOption) GetMountPointsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetMountPointsResultOutput, error) {
-			args := v.(GetMountPointsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Chdfs/getMountPoints:getMountPoints", args, GetMountPointsResultOutput{}, options).(GetMountPointsResultOutput), nil
-		}).(GetMountPointsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Chdfs/getMountPoints:getMountPoints", args, GetMountPointsResultOutput{}, options).(GetMountPointsResultOutput)
 }
 
 // A collection of arguments for invoking getMountPoints.

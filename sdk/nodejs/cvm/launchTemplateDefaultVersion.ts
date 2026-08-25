@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * cvm launch_template_default_version can be imported using the id, e.g.
+ * cvm launchTemplateDefaultVersion can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Cvm/launchTemplateDefaultVersion:LaunchTemplateDefaultVersion launch_template_default_version launch_template_id
@@ -102,11 +102,11 @@ export interface LaunchTemplateDefaultVersionState {
     /**
      * The number of the version that you want to set as the default version.
      */
-    defaultVersion?: pulumi.Input<number>;
+    defaultVersion?: pulumi.Input<number | undefined>;
     /**
      * Instance launch template ID.
      */
-    launchTemplateId?: pulumi.Input<string>;
+    launchTemplateId?: pulumi.Input<string | undefined>;
 }
 
 /**

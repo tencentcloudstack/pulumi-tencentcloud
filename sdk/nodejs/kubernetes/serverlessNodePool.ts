@@ -20,13 +20,13 @@ import * as utilities from "../utilities";
  * const config = new pulumi.Config();
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
  * const exampleClusterCidr = config.get("exampleClusterCidr") || "10.31.0.0/16";
- * const vpc = tencentcloud.Vpc.getSubnets({
+ * const vpc = tencentcloud.vpc.getSubnets({
  *     isDefault: true,
  *     availabilityZone: availabilityZone,
  * });
  * const vpcId = vpc.then(vpc => vpc.instanceLists?.[0]?.vpcId);
  * const subnetId = vpc.then(vpc => vpc.instanceLists?.[0]?.subnetId);
- * const sg = tencentcloud.Security.getGroups({
+ * const sg = tencentcloud.security.getGroups({
  *     name: "default",
  * });
  * const sgId = sg.then(sg => sg.securityGroups?.[0]?.securityGroupId);
@@ -104,10 +104,10 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * serverless node pool can be imported, e.g.
+ * serverless node pool can be imported using the clusterId#nodePoolId, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Kubernetes/serverlessNodePool:ServerlessNodePool test cls-xxx#np-xxx
+ * $ pulumi import tencentcloud:Kubernetes/serverlessNodePool:ServerlessNodePool example cls-62ch3v24#np-5avod190
  * ```
  */
 export class ServerlessNodePool extends pulumi.CustomResource {
@@ -215,31 +215,31 @@ export interface ServerlessNodePoolState {
     /**
      * cluster id of serverless node pool.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * labels of serverless node.
      */
-    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * life state of serverless node pool.
      */
-    lifeState?: pulumi.Input<string>;
+    lifeState?: pulumi.Input<string | undefined>;
     /**
      * serverless node pool name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * security groups of serverless node pool.
      */
-    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * node list of serverless node pool.
      */
-    serverlessNodes?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ServerlessNodePoolServerlessNode>[]>;
+    serverlessNodes?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ServerlessNodePoolServerlessNode>[] | undefined>;
     /**
      * taints of serverless node.
      */
-    taints?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ServerlessNodePoolTaint>[]>;
+    taints?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ServerlessNodePoolTaint>[] | undefined>;
 }
 
 /**
@@ -253,15 +253,15 @@ export interface ServerlessNodePoolArgs {
     /**
      * labels of serverless node.
      */
-    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * serverless node pool name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * security groups of serverless node pool.
      */
-    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * node list of serverless node pool.
      */
@@ -269,5 +269,5 @@ export interface ServerlessNodePoolArgs {
     /**
      * taints of serverless node.
      */
-    taints?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ServerlessNodePoolTaint>[]>;
+    taints?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ServerlessNodePoolTaint>[] | undefined>;
 }

@@ -48,7 +48,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
     /// GAAP layer7 listener can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Gaap/layer7Listener:Layer7Listener  tencentcloud_gaap_layer7_listener.foo listener-11112222
+    ///   $ pulumi import tencentcloud:Gaap/layer7Listener:Layer7Listener foo listener-11112222
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Gaap/layer7Listener:Layer7Listener")]

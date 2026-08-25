@@ -75,12 +75,8 @@ type GetFunctionAliasesResult struct {
 }
 
 func GetFunctionAliasesOutput(ctx *pulumi.Context, args GetFunctionAliasesOutputArgs, opts ...pulumi.InvokeOption) GetFunctionAliasesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetFunctionAliasesResultOutput, error) {
-			args := v.(GetFunctionAliasesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Scf/getFunctionAliases:getFunctionAliases", args, GetFunctionAliasesResultOutput{}, options).(GetFunctionAliasesResultOutput), nil
-		}).(GetFunctionAliasesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Scf/getFunctionAliases:getFunctionAliases", args, GetFunctionAliasesResultOutput{}, options).(GetFunctionAliasesResultOutput)
 }
 
 // A collection of arguments for invoking getFunctionAliases.

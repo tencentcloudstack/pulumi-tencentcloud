@@ -12,7 +12,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a cynosdb proxyEndPoint
+// Provides a resource to create a CynosDB proxy end point
 //
 // ## Example Usage
 //
@@ -28,14 +28,16 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := cynosdb.NewProxyEndPoint(ctx, "proxy_end_point", &cynosdb.ProxyEndPointArgs{
-//				ClusterId:      pulumi.String("cynosdbmysql-bws8h88b"),
-//				UniqueVpcId:    pulumi.String("vpc-4owdpnwr"),
-//				UniqueSubnetId: pulumi.String("subnet-dwj7ipnc"),
+//			_, err := cynosdb.NewProxyEndPoint(ctx, "example", &cynosdb.ProxyEndPointArgs{
+//				ClusterId:          pulumi.String("cynosdbmysql-phxwek8d"),
+//				UniqueVpcId:        pulumi.String("vpc-i5yyodl9"),
+//				UniqueSubnetId:     pulumi.String("subnet-5rrirqyc"),
+//				OpenConnectionPool: pulumi.String("no"),
+//				RwType:             pulumi.String("READONLY"),
 //				InstanceWeights: cynosdb.ProxyEndPointInstanceWeightArray{
 //					&cynosdb.ProxyEndPointInstanceWeightArgs{
-//						InstanceId: pulumi.String("cynosdbmysql-ins-afqx1hy0"),
-//						Weight:     pulumi.Int(1),
+//						InstanceId: pulumi.String("cynosdbmysql-ins-239owfiu"),
+//						Weight:     pulumi.Int(2),
 //					},
 //				},
 //			})
@@ -60,7 +62,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := cynosdb.NewProxyEndPoint(ctx, "proxy_end_point", &cynosdb.ProxyEndPointArgs{
+//			_, err := cynosdb.NewProxyEndPoint(ctx, "example", &cynosdb.ProxyEndPointArgs{
 //				ClusterId:      pulumi.String("cynosdbmysql-bws8h88b"),
 //				UniqueVpcId:    pulumi.String("vpc-4owdpnwr"),
 //				UniqueSubnetId: pulumi.String("subnet-dwj7ipnc"),
@@ -96,7 +98,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := cynosdb.NewProxyEndPoint(ctx, "proxy_end_point", &cynosdb.ProxyEndPointArgs{
+//			_, err := cynosdb.NewProxyEndPoint(ctx, "example", &cynosdb.ProxyEndPointArgs{
 //				ClusterId:             pulumi.String("cynosdbmysql-bws8h88b"),
 //				UniqueVpcId:           pulumi.String("vpc-4owdpnwr"),
 //				UniqueSubnetId:        pulumi.String("subnet-dwj7ipnc"),
@@ -135,7 +137,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := cynosdb.NewProxyEndPoint(ctx, "proxy_end_point", &cynosdb.ProxyEndPointArgs{
+//			_, err := cynosdb.NewProxyEndPoint(ctx, "example", &cynosdb.ProxyEndPointArgs{
 //				ClusterId:          pulumi.String("cynosdbmysql-bws8h88b"),
 //				UniqueVpcId:        pulumi.String("vpc-4owdpnwr"),
 //				UniqueSubnetId:     pulumi.String("subnet-dwj7ipnc"),
@@ -170,7 +172,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := cynosdb.NewProxyEndPoint(ctx, "proxy_end_point", &cynosdb.ProxyEndPointArgs{
+//			_, err := cynosdb.NewProxyEndPoint(ctx, "example", &cynosdb.ProxyEndPointArgs{
 //				ClusterId:          pulumi.String("cynosdbmysql-bws8h88b"),
 //				UniqueVpcId:        pulumi.String("vpc-4owdpnwr"),
 //				UniqueSubnetId:     pulumi.String("subnet-dwj7ipnc"),
@@ -209,7 +211,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := cynosdb.NewProxyEndPoint(ctx, "proxy_end_point", &cynosdb.ProxyEndPointArgs{
+//			_, err := cynosdb.NewProxyEndPoint(ctx, "example", &cynosdb.ProxyEndPointArgs{
 //				ClusterId:          pulumi.String("cynosdbmysql-bws8h88b"),
 //				UniqueVpcId:        pulumi.String("vpc-4owdpnwr"),
 //				UniqueSubnetId:     pulumi.String("subnet-dwj7ipnc"),
@@ -247,7 +249,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := cynosdb.NewProxyEndPoint(ctx, "proxy_end_point", &cynosdb.ProxyEndPointArgs{
+//			_, err := cynosdb.NewProxyEndPoint(ctx, "example", &cynosdb.ProxyEndPointArgs{
 //				ClusterId:             pulumi.String("cynosdbmysql-bws8h88b"),
 //				UniqueVpcId:           pulumi.String("vpc-4owdpnwr"),
 //				UniqueSubnetId:        pulumi.String("subnet-dwj7ipnc"),

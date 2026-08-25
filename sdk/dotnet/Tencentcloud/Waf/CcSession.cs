@@ -34,6 +34,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     ///         EndOffset = "-1",
     ///         Edition = "sparta-waf",
     ///         SessionName = "terraformDemo",
+    ///         Key = "sessionId",
     ///     });
     /// 
     /// });
@@ -41,7 +42,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// 
     /// ## Import
     /// 
-    /// waf cc_session can be imported using the id, e.g.
+    /// waf CcSession can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Waf/ccSession:CcSession example www.demo.com#sparta-waf#2000000253
@@ -79,6 +80,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// </summary>
         [Output("endOffset")]
         public Output<string> EndOffset { get; private set; } = null!;
+
+        /// <summary>
+        /// Precise-match session key, configured when Category is precise matching.
+        /// </summary>
+        [Output("key")]
+        public Output<string> Key { get; private set; } = null!;
 
         /// <summary>
         /// Session identifier.
@@ -188,6 +195,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public Input<string> EndOffset { get; set; } = null!;
 
         /// <summary>
+        /// Precise-match session key, configured when Category is precise matching.
+        /// </summary>
+        [Input("key")]
+        public Input<string>? Key { get; set; }
+
+        /// <summary>
         /// Session identifier.
         /// </summary>
         [Input("keyOrStartMat", required: true)]
@@ -248,6 +261,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// </summary>
         [Input("endOffset")]
         public Input<string>? EndOffset { get; set; }
+
+        /// <summary>
+        /// Precise-match session key, configured when Category is precise matching.
+        /// </summary>
+        [Input("key")]
+        public Input<string>? Key { get; set; }
 
         /// <summary>
         /// Session identifier.

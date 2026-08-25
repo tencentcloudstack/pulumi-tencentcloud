@@ -74,12 +74,8 @@ type GetCvmInstancesResult struct {
 }
 
 func GetCvmInstancesOutput(ctx *pulumi.Context, args GetCvmInstancesOutputArgs, opts ...pulumi.InvokeOption) GetCvmInstancesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetCvmInstancesResultOutput, error) {
-			args := v.(GetCvmInstancesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Vpc/getCvmInstances:getCvmInstances", args, GetCvmInstancesResultOutput{}, options).(GetCvmInstancesResultOutput), nil
-		}).(GetCvmInstancesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Vpc/getCvmInstances:getCvmInstances", args, GetCvmInstancesResultOutput{}, options).(GetCvmInstancesResultOutput)
 }
 
 // A collection of arguments for invoking getCvmInstances.

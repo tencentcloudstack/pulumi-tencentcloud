@@ -4,24 +4,6 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
-/**
- * Use this data source to query detailed information of rum logExport
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@tencentcloud_iac/pulumi";
- *
- * const logExport = tencentcloud.Rum.getLogExport({
- *     name: "log",
- *     startTime: "1692594840000",
- *     query: "id:123 AND type: \"log\"",
- *     endTime: "1692609240000",
- *     projectId: 1,
- * });
- * ```
- */
 export function getLogExport(args: GetLogExportArgs, opts?: pulumi.InvokeOptions): Promise<GetLogExportResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Rum/getLogExport:getLogExport", {
@@ -39,33 +21,12 @@ export function getLogExport(args: GetLogExportArgs, opts?: pulumi.InvokeOptions
  * A collection of arguments for invoking getLogExport.
  */
 export interface GetLogExportArgs {
-    /**
-     * End timestamp, in milliseconds.
-     */
     endTime: string;
-    /**
-     * Log fields.
-     */
     fields?: string[];
-    /**
-     * Export flag name.
-     */
     name: string;
-    /**
-     * Project ID.
-     */
     projectId: number;
-    /**
-     * Log Query syntax statement.
-     */
     query: string;
-    /**
-     * Used to save results.
-     */
     resultOutputFile?: string;
-    /**
-     * Start timestamp, in milliseconds.
-     */
     startTime: string;
 }
 
@@ -82,31 +43,10 @@ export interface GetLogExportResult {
     readonly name: string;
     readonly projectId: number;
     readonly query: string;
-    /**
-     * Return result.
-     */
     readonly result: string;
     readonly resultOutputFile?: string;
     readonly startTime: string;
 }
-/**
- * Use this data source to query detailed information of rum logExport
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@tencentcloud_iac/pulumi";
- *
- * const logExport = tencentcloud.Rum.getLogExport({
- *     name: "log",
- *     startTime: "1692594840000",
- *     query: "id:123 AND type: \"log\"",
- *     endTime: "1692609240000",
- *     projectId: 1,
- * });
- * ```
- */
 export function getLogExportOutput(args: GetLogExportOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetLogExportResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("tencentcloud:Rum/getLogExport:getLogExport", {
@@ -124,32 +64,11 @@ export function getLogExportOutput(args: GetLogExportOutputArgs, opts?: pulumi.I
  * A collection of arguments for invoking getLogExport.
  */
 export interface GetLogExportOutputArgs {
-    /**
-     * End timestamp, in milliseconds.
-     */
     endTime: pulumi.Input<string>;
-    /**
-     * Log fields.
-     */
-    fields?: pulumi.Input<pulumi.Input<string>[]>;
-    /**
-     * Export flag name.
-     */
+    fields?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     name: pulumi.Input<string>;
-    /**
-     * Project ID.
-     */
     projectId: pulumi.Input<number>;
-    /**
-     * Log Query syntax statement.
-     */
     query: pulumi.Input<string>;
-    /**
-     * Used to save results.
-     */
-    resultOutputFile?: pulumi.Input<string>;
-    /**
-     * Start timestamp, in milliseconds.
-     */
+    resultOutputFile?: pulumi.Input<string | undefined>;
     startTime: pulumi.Input<string>;
 }

@@ -67,12 +67,8 @@ type GetValidateStatusResult struct {
 }
 
 func GetValidateStatusOutput(ctx *pulumi.Context, args GetValidateStatusOutputArgs, opts ...pulumi.InvokeOption) GetValidateStatusResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetValidateStatusResultOutput, error) {
-			args := v.(GetValidateStatusArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Subdomain/getValidateStatus:getValidateStatus", args, GetValidateStatusResultOutput{}, options).(GetValidateStatusResultOutput), nil
-		}).(GetValidateStatusResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Subdomain/getValidateStatus:getValidateStatus", args, GetValidateStatusResultOutput{}, options).(GetValidateStatusResultOutput)
 }
 
 // A collection of arguments for invoking getValidateStatus.

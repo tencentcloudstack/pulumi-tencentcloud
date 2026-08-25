@@ -243,63 +243,63 @@ export interface StorageSetState {
     /**
      * Indicates whether the CBS is mounted the CVM.
      */
-    attached?: pulumi.Input<boolean>;
+    attached?: pulumi.Input<boolean | undefined>;
     /**
      * The available zone that the CBS instance locates at.
      */
-    availabilityZone?: pulumi.Input<string>;
+    availabilityZone?: pulumi.Input<string | undefined>;
     /**
      * The charge type of CBS instance. Support `POSTPAID_BY_HOUR` and `DEDICATED_CLUSTER_PAID`. The default is `POSTPAID_BY_HOUR`.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
     /**
      * Exclusive cluster id.
      */
-    dedicatedClusterId?: pulumi.Input<string>;
+    dedicatedClusterId?: pulumi.Input<string | undefined>;
     /**
      * The number of disks to be purchased. Default 1.
      */
-    diskCount?: pulumi.Input<number>;
+    diskCount?: pulumi.Input<number | undefined>;
     /**
      * disk id list.
      */
-    diskIds?: pulumi.Input<pulumi.Input<string>[]>;
+    diskIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Indicates whether CBS is encrypted.
      */
-    encrypt?: pulumi.Input<boolean>;
+    encrypt?: pulumi.Input<boolean | undefined>;
     /**
      * Optional parameters. When purchasing an encryption disk, customize the key. When this parameter is passed in, the `encrypt` parameter need be set.
      */
-    kmsKeyId?: pulumi.Input<string>;
+    kmsKeyId?: pulumi.Input<string | undefined>;
     /**
      * ID of the project to which the instance belongs.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * ID of the snapshot. If specified, created the CBS by this snapshot.
      */
-    snapshotId?: pulumi.Input<string>;
+    snapshotId?: pulumi.Input<string | undefined>;
     /**
      * Name of CBS. The maximum length can not exceed 60 bytes.
      */
-    storageName?: pulumi.Input<string>;
+    storageName?: pulumi.Input<string | undefined>;
     /**
      * Volume of CBS, and unit is GB.
      */
-    storageSize?: pulumi.Input<number>;
+    storageSize?: pulumi.Input<number | undefined>;
     /**
      * Status of CBS. Valid values: UNATTACHED, ATTACHING, ATTACHED, DETACHING, EXPANDING, ROLLBACKING, TORECYCLE and DUMPING.
      */
-    storageStatus?: pulumi.Input<string>;
+    storageStatus?: pulumi.Input<string | undefined>;
     /**
      * Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.
      */
-    storageType?: pulumi.Input<string>;
+    storageType?: pulumi.Input<string | undefined>;
     /**
      * Add extra performance to the data disk. Only works when disk type is `CLOUD_TSSD` or `CLOUD_HSSD`.
      */
-    throughputPerformance?: pulumi.Input<number>;
+    throughputPerformance?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -313,31 +313,31 @@ export interface StorageSetArgs {
     /**
      * The charge type of CBS instance. Support `POSTPAID_BY_HOUR` and `DEDICATED_CLUSTER_PAID`. The default is `POSTPAID_BY_HOUR`.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
     /**
      * Exclusive cluster id.
      */
-    dedicatedClusterId?: pulumi.Input<string>;
+    dedicatedClusterId?: pulumi.Input<string | undefined>;
     /**
      * The number of disks to be purchased. Default 1.
      */
-    diskCount?: pulumi.Input<number>;
+    diskCount?: pulumi.Input<number | undefined>;
     /**
      * Indicates whether CBS is encrypted.
      */
-    encrypt?: pulumi.Input<boolean>;
+    encrypt?: pulumi.Input<boolean | undefined>;
     /**
      * Optional parameters. When purchasing an encryption disk, customize the key. When this parameter is passed in, the `encrypt` parameter need be set.
      */
-    kmsKeyId?: pulumi.Input<string>;
+    kmsKeyId?: pulumi.Input<string | undefined>;
     /**
      * ID of the project to which the instance belongs.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * ID of the snapshot. If specified, created the CBS by this snapshot.
      */
-    snapshotId?: pulumi.Input<string>;
+    snapshotId?: pulumi.Input<string | undefined>;
     /**
      * Name of CBS. The maximum length can not exceed 60 bytes.
      */
@@ -353,5 +353,5 @@ export interface StorageSetArgs {
     /**
      * Add extra performance to the data disk. Only works when disk type is `CLOUD_TSSD` or `CLOUD_HSSD`.
      */
-    throughputPerformance?: pulumi.Input<number>;
+    throughputPerformance?: pulumi.Input<number | undefined>;
 }

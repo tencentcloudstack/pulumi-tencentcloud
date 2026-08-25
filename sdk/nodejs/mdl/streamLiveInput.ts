@@ -24,7 +24,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * mdl stream_live_input can be imported using the id, e.g.
+ * mdl streamLiveInput can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Mdl/streamLiveInput:StreamLiveInput stream_live_input id
@@ -114,19 +114,19 @@ export interface StreamLiveInputState {
     /**
      * Input settings. For the type `RTMP_PUSH`, `RTMP_PULL`, `HLS_PULL`, or `MP4_PULL`, 1 or 2 inputs of the corresponding type can be configured.
      */
-    inputSettings?: pulumi.Input<pulumi.Input<inputs.Mdl.StreamLiveInputInputSetting>[]>;
+    inputSettings?: pulumi.Input<pulumi.Input<inputs.Mdl.StreamLiveInputInputSetting>[] | undefined>;
     /**
      * Input name, which can contain 1-32 case-sensitive letters, digits, and underscores and must be unique at the region level.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * ID of the input security group to attachYou can attach only one security group to an input.
      */
-    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Input typeValid values: `RTMP_PUSH`, `RTP_PUSH`, `UDP_PUSH`, `RTMP_PULL`, `HLS_PULL`, `MP4_PULL`.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -136,15 +136,15 @@ export interface StreamLiveInputArgs {
     /**
      * Input settings. For the type `RTMP_PUSH`, `RTMP_PULL`, `HLS_PULL`, or `MP4_PULL`, 1 or 2 inputs of the corresponding type can be configured.
      */
-    inputSettings?: pulumi.Input<pulumi.Input<inputs.Mdl.StreamLiveInputInputSetting>[]>;
+    inputSettings?: pulumi.Input<pulumi.Input<inputs.Mdl.StreamLiveInputInputSetting>[] | undefined>;
     /**
      * Input name, which can contain 1-32 case-sensitive letters, digits, and underscores and must be unique at the region level.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * ID of the input security group to attachYou can attach only one security group to an input.
      */
-    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Input typeValid values: `RTMP_PUSH`, `RTP_PUSH`, `UDP_PUSH`, `RTMP_PULL`, `HLS_PULL`, `MP4_PULL`.
      */

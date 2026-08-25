@@ -97,11 +97,11 @@ export interface RefreshTaskOperationState {
     /**
      * Cluster Id list.
      */
-    clusterIds?: pulumi.Input<pulumi.Input<string>[]>;
+    clusterIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Whether to sync list only.
      */
-    isSyncListOnly?: pulumi.Input<boolean>;
+    isSyncListOnly?: pulumi.Input<boolean | undefined>;
 }
 
 /**
@@ -111,9 +111,9 @@ export interface RefreshTaskOperationArgs {
     /**
      * Cluster Id list.
      */
-    clusterIds?: pulumi.Input<pulumi.Input<string>[]>;
+    clusterIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Whether to sync list only.
      */
-    isSyncListOnly?: pulumi.Input<boolean>;
+    isSyncListOnly?: pulumi.Input<boolean | undefined>;
 }

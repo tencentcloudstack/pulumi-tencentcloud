@@ -111,6 +111,8 @@ type NatInstance struct {
 	Name pulumi.StringOutput `pulumi:"name"`
 	// A list of nat gateways connected to the access mode, at least one of NewModeItems and NatgwList is passed.
 	NatGwLists pulumi.StringArrayOutput `pulumi:"natGwLists"`
+	// Nat instance ID.
+	NatInstanceId pulumi.StringOutput `pulumi:"natInstanceId"`
 	// New mode passing parameters are added, at least one of newModeItems and natGwList is passed.
 	NewModeItems NatInstanceNewModeItemsPtrOutput `pulumi:"newModeItems"`
 	// Bandwidth.
@@ -166,6 +168,8 @@ type natInstanceState struct {
 	Name *string `pulumi:"name"`
 	// A list of nat gateways connected to the access mode, at least one of NewModeItems and NatgwList is passed.
 	NatGwLists []string `pulumi:"natGwLists"`
+	// Nat instance ID.
+	NatInstanceId *string `pulumi:"natInstanceId"`
 	// New mode passing parameters are added, at least one of newModeItems and natGwList is passed.
 	NewModeItems *NatInstanceNewModeItems `pulumi:"newModeItems"`
 	// Bandwidth.
@@ -183,6 +187,8 @@ type NatInstanceState struct {
 	Name pulumi.StringPtrInput
 	// A list of nat gateways connected to the access mode, at least one of NewModeItems and NatgwList is passed.
 	NatGwLists pulumi.StringArrayInput
+	// Nat instance ID.
+	NatInstanceId pulumi.StringPtrInput
 	// New mode passing parameters are added, at least one of newModeItems and natGwList is passed.
 	NewModeItems NatInstanceNewModeItemsPtrInput
 	// Bandwidth.
@@ -335,6 +341,11 @@ func (o NatInstanceOutput) Name() pulumi.StringOutput {
 // A list of nat gateways connected to the access mode, at least one of NewModeItems and NatgwList is passed.
 func (o NatInstanceOutput) NatGwLists() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *NatInstance) pulumi.StringArrayOutput { return v.NatGwLists }).(pulumi.StringArrayOutput)
+}
+
+// Nat instance ID.
+func (o NatInstanceOutput) NatInstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v *NatInstance) pulumi.StringOutput { return v.NatInstanceId }).(pulumi.StringOutput)
 }
 
 // New mode passing parameters are added, at least one of newModeItems and natGwList is passed.

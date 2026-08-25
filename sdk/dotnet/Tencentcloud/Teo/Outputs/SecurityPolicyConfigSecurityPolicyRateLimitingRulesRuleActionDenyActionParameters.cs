@@ -15,15 +15,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class SecurityPolicyConfigSecurityPolicyRateLimitingRulesRuleActionDenyActionParameters
     {
         /// <summary>
-        /// Whether to extend the blocking of source IP. The possible values are:
-        /// &lt;li&gt;on: on;&lt;/li&gt;
-        /// &lt;li&gt;off: off.&lt;/li&gt;
-        /// When enabled, the client IP that triggers the rule will be blocked continuously. When this option is enabled, the BlockIpDuration parameter must be specified at the same time.
-        /// Note: This option cannot be enabled at the same time as the ReturnCustomPage or Stall options.
+        /// Whether to extend the blocking of source IP. Valid values: `On`, `Off`.
         /// </summary>
         public readonly string? BlockIp;
         /// <summary>
-        /// When BlockIP is on, the IP blocking duration.
+        /// IP blocking duration when BlockIP is on.
         /// </summary>
         public readonly string? BlockIpDuration;
         /// <summary>
@@ -35,19 +31,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly string? ResponseCode;
         /// <summary>
-        /// Whether to use custom pages. The possible values are:
-        /// &lt;li&gt;on: on;&lt;/li&gt;
-        /// &lt;li&gt;off: off.&lt;/li&gt;
-        /// After enabling, use custom page content to intercept (respond to) requests. When enabling this option, you must specify the ResponseCode and ErrorPageId parameters at the same time.
-        /// Note: This option cannot be enabled at the same time as the BlockIp or Stall options.
+        /// Whether to use custom pages. Valid values: `On`, `Off`.
         /// </summary>
         public readonly string? ReturnCustomPage;
         /// <summary>
-        /// Whether to ignore the request source suspension. The value is:
-        /// &lt;li&gt;on: Enable;&lt;/li&gt;
-        /// &lt;li&gt;off: Disable.&lt;/li&gt;
-        /// After enabling, it will no longer respond to requests in the current connection session and will not actively disconnect. It is used to fight against crawlers and consume client connection resources.
-        /// Note: This option cannot be enabled at the same time as the BlockIp or ReturnCustomPage options.
+        /// Whether to ignore the request source suspension. Valid values: `On`, `Off`.
         /// </summary>
         public readonly string? Stall;
 

@@ -67,12 +67,8 @@ type LookupDescribeCertificateResult struct {
 }
 
 func LookupDescribeCertificateOutput(ctx *pulumi.Context, args LookupDescribeCertificateOutputArgs, opts ...pulumi.InvokeOption) LookupDescribeCertificateResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupDescribeCertificateResultOutput, error) {
-			args := v.(LookupDescribeCertificateArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ssl/getDescribeCertificate:getDescribeCertificate", args, LookupDescribeCertificateResultOutput{}, options).(LookupDescribeCertificateResultOutput), nil
-		}).(LookupDescribeCertificateResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ssl/getDescribeCertificate:getDescribeCertificate", args, LookupDescribeCertificateResultOutput{}, options).(LookupDescribeCertificateResultOutput)
 }
 
 // A collection of arguments for invoking getDescribeCertificate.

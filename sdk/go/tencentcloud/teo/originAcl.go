@@ -31,7 +31,8 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := teo.NewOriginAcl(ctx, "example", &teo.OriginAclArgs{
-//				ZoneId: pulumi.String("zone-39quuimqg8r6"),
+//				ZoneId:          pulumi.String("zone-3fkff38fyw8s"),
+//				OriginAclFamily: pulumi.String("gaz"),
 //				L7Hosts: pulumi.StringArray{
 //					pulumi.String("example1.com"),
 //					pulumi.String("example2.com"),
@@ -55,15 +56,7 @@ import (
 //
 // ## Import
 //
-// TEO origin acl can be imported using the zone_id, e.g.
-//
-// `
-//
-// ```sh
-// $ pulumi import tencentcloud:Teo/originAcl:OriginAcl example zone-39quuimqg8r6
-// ```
-//
-// `
+// TEO origin acl can be imported using the id, e.g.
 type OriginAcl struct {
 	pulumi.CustomResourceState
 
@@ -71,6 +64,8 @@ type OriginAcl struct {
 	L4ProxyIds pulumi.StringArrayOutput `pulumi:"l4ProxyIds"`
 	// The list of L7 acceleration domains that require enabling the origin ACLs. This list must be empty when the request parameter L7EnableMode is set to 'all'.
 	L7Hosts pulumi.StringArrayOutput `pulumi:"l7Hosts"`
+	// Origin ACL control domain. Valid values: gaz, mlc, emc, plat-gaz, plat-mlc, plat-emc.
+	OriginAclFamily pulumi.StringOutput `pulumi:"originAclFamily"`
 	// Specifies the site ID.
 	ZoneId pulumi.StringOutput `pulumi:"zoneId"`
 }
@@ -112,6 +107,8 @@ type originAclState struct {
 	L4ProxyIds []string `pulumi:"l4ProxyIds"`
 	// The list of L7 acceleration domains that require enabling the origin ACLs. This list must be empty when the request parameter L7EnableMode is set to 'all'.
 	L7Hosts []string `pulumi:"l7Hosts"`
+	// Origin ACL control domain. Valid values: gaz, mlc, emc, plat-gaz, plat-mlc, plat-emc.
+	OriginAclFamily *string `pulumi:"originAclFamily"`
 	// Specifies the site ID.
 	ZoneId *string `pulumi:"zoneId"`
 }
@@ -121,6 +118,8 @@ type OriginAclState struct {
 	L4ProxyIds pulumi.StringArrayInput
 	// The list of L7 acceleration domains that require enabling the origin ACLs. This list must be empty when the request parameter L7EnableMode is set to 'all'.
 	L7Hosts pulumi.StringArrayInput
+	// Origin ACL control domain. Valid values: gaz, mlc, emc, plat-gaz, plat-mlc, plat-emc.
+	OriginAclFamily pulumi.StringPtrInput
 	// Specifies the site ID.
 	ZoneId pulumi.StringPtrInput
 }
@@ -134,6 +133,8 @@ type originAclArgs struct {
 	L4ProxyIds []string `pulumi:"l4ProxyIds"`
 	// The list of L7 acceleration domains that require enabling the origin ACLs. This list must be empty when the request parameter L7EnableMode is set to 'all'.
 	L7Hosts []string `pulumi:"l7Hosts"`
+	// Origin ACL control domain. Valid values: gaz, mlc, emc, plat-gaz, plat-mlc, plat-emc.
+	OriginAclFamily *string `pulumi:"originAclFamily"`
 	// Specifies the site ID.
 	ZoneId string `pulumi:"zoneId"`
 }
@@ -144,6 +145,8 @@ type OriginAclArgs struct {
 	L4ProxyIds pulumi.StringArrayInput
 	// The list of L7 acceleration domains that require enabling the origin ACLs. This list must be empty when the request parameter L7EnableMode is set to 'all'.
 	L7Hosts pulumi.StringArrayInput
+	// Origin ACL control domain. Valid values: gaz, mlc, emc, plat-gaz, plat-mlc, plat-emc.
+	OriginAclFamily pulumi.StringPtrInput
 	// Specifies the site ID.
 	ZoneId pulumi.StringInput
 }
@@ -243,6 +246,11 @@ func (o OriginAclOutput) L4ProxyIds() pulumi.StringArrayOutput {
 // The list of L7 acceleration domains that require enabling the origin ACLs. This list must be empty when the request parameter L7EnableMode is set to 'all'.
 func (o OriginAclOutput) L7Hosts() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *OriginAcl) pulumi.StringArrayOutput { return v.L7Hosts }).(pulumi.StringArrayOutput)
+}
+
+// Origin ACL control domain. Valid values: gaz, mlc, emc, plat-gaz, plat-mlc, plat-emc.
+func (o OriginAclOutput) OriginAclFamily() pulumi.StringOutput {
+	return o.ApplyT(func(v *OriginAcl) pulumi.StringOutput { return v.OriginAclFamily }).(pulumi.StringOutput)
 }
 
 // Specifies the site ID.

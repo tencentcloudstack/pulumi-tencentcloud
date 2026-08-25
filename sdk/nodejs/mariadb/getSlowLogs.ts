@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const slowLogs = tencentcloud.Mariadb.getSlowLogs({
+ * const slowLogs = tencentcloud.mariadb.getSlowLogs({
  *     instanceId: "tdsql-9vqvls95",
  *     startTime: "2023-06-01 14:55:20",
  *     orderBy: "query_time_sum",
@@ -121,7 +121,7 @@ export interface GetSlowLogsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const slowLogs = tencentcloud.Mariadb.getSlowLogs({
+ * const slowLogs = tencentcloud.mariadb.getSlowLogs({
  *     instanceId: "tdsql-9vqvls95",
  *     startTime: "2023-06-01 14:55:20",
  *     orderBy: "query_time_sum",
@@ -151,11 +151,11 @@ export interface GetSlowLogsOutputArgs {
     /**
      * Specific name of the database to be queried.
      */
-    db?: pulumi.Input<string>;
+    db?: pulumi.Input<string | undefined>;
     /**
      * Query end time in the format of 2016-08-22 14:55:20.
      */
-    endTime?: pulumi.Input<string>;
+    endTime?: pulumi.Input<string | undefined>;
     /**
      * Instance ID in the format of `tdsql-ow728lmc`.
      */
@@ -163,19 +163,19 @@ export interface GetSlowLogsOutputArgs {
     /**
      * Sorting metric. Valid values: query_time_sum, query_count.
      */
-    orderBy?: pulumi.Input<string>;
+    orderBy?: pulumi.Input<string | undefined>;
     /**
      * Sorting order. Valid values: desc, asc.
      */
-    orderByType?: pulumi.Input<string>;
+    orderByType?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Query slow queries from either the primary or the replica. Valid values: 0 (primary), 1 (replica).
      */
-    slave?: pulumi.Input<number>;
+    slave?: pulumi.Input<number | undefined>;
     /**
      * Query start time in the format of 2016-07-23 14:55:20.
      */

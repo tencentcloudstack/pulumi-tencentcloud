@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const events = tencentcloud.Audit.getEvents({
+ * const events = tencentcloud.audit.getEvents({
  *     startTime: 1727433841,
  *     endTime: 1727437441,
  *     maxResults: 50,
@@ -107,7 +107,7 @@ export interface GetEventsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const events = tencentcloud.Audit.getEvents({
+ * const events = tencentcloud.audit.getEvents({
  *     startTime: 1727433841,
  *     endTime: 1727437441,
  *     maxResults: 50,
@@ -152,19 +152,19 @@ export interface GetEventsOutputArgs {
     /**
      * Whether to return the IP location. `1`: yes, `0`: no.
      */
-    isReturnLocation?: pulumi.Input<number>;
+    isReturnLocation?: pulumi.Input<number | undefined>;
     /**
      * Search condition. Valid values: `RequestId`, `EventName`, `ActionType` (write/read), `PrincipalId` (sub-account), `ResourceType`, `ResourceName`, `AccessKeyId`, `SensitiveAction`, `ApiErrorCode`, `CamErrorCode`, and `Tags` (Format of AttributeValue: [{"key":"*","value":"*"}]).
      */
-    lookupAttributes?: pulumi.Input<pulumi.Input<inputs.Audit.GetEventsLookupAttributeArgs>[]>;
+    lookupAttributes?: pulumi.Input<pulumi.Input<inputs.Audit.GetEventsLookupAttributeArgs>[] | undefined>;
     /**
      * Max number of returned logs (up to 50).
      */
-    maxResults?: pulumi.Input<number>;
+    maxResults?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Start timestamp in seconds (cannot be 90 days after the current time).
      */

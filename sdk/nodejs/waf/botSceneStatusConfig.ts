@@ -130,27 +130,27 @@ export interface BotSceneStatusConfigState {
     /**
      * Domain.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Priority.
      */
-    priority?: pulumi.Input<number>;
+    priority?: pulumi.Input<number | undefined>;
     /**
      * Scene ID.
      */
-    sceneId?: pulumi.Input<string>;
+    sceneId?: pulumi.Input<string | undefined>;
     /**
      * Scene name.
      */
-    sceneName?: pulumi.Input<string>;
+    sceneName?: pulumi.Input<string | undefined>;
     /**
      * Bot status. true - enable; false - disable.
      */
-    status?: pulumi.Input<boolean>;
+    status?: pulumi.Input<boolean | undefined>;
     /**
      * Scene type, default: Default scenario, custom: Non default scenario.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }
 
 /**

@@ -38,7 +38,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// 
     /// ## Import
     /// 
-    /// monitor grafana_env_config can be imported using the id, e.g.
+    /// monitor GrafanaEnvConfig can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Monitor/grafanaEnvConfig:GrafanaEnvConfig grafana_env_config instance_id

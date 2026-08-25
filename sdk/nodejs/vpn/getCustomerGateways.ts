@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Vpn.getCustomerGateways({});
+ * const example = tencentcloud.vpn.getCustomerGateways({});
  * ```
  *
  * ### Query customer gateways by filters
@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Vpn.getCustomerGateways({
+ * const example = tencentcloud.vpn.getCustomerGateways({
  *     name: "tf-example",
  *     id: "cgw-r1g6c8fr",
  *     publicIpAddress: "1.1.1.1",
@@ -111,7 +111,7 @@ export interface GetCustomerGatewaysResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Vpn.getCustomerGateways({});
+ * const example = tencentcloud.vpn.getCustomerGateways({});
  * ```
  *
  * ### Query customer gateways by filters
@@ -120,7 +120,7 @@ export interface GetCustomerGatewaysResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Vpn.getCustomerGateways({
+ * const example = tencentcloud.vpn.getCustomerGateways({
  *     name: "tf-example",
  *     id: "cgw-r1g6c8fr",
  *     publicIpAddress: "1.1.1.1",
@@ -149,21 +149,21 @@ export interface GetCustomerGatewaysOutputArgs {
     /**
      * ID of the VPN customer gateway.
      */
-    id?: pulumi.Input<string>;
+    id?: pulumi.Input<string | undefined>;
     /**
      * Name of the customer gateway. The length of character is limited to 1-60.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Public ip address of the VPN customer gateway.
      */
-    publicIpAddress?: pulumi.Input<string>;
+    publicIpAddress?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Tags of the VPN customer gateway to be queried.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

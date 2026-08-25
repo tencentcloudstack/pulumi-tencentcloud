@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * tsf bind_api_group can be imported using the id, e.g.
+ * tsf bindApiGroup can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Tsf/bindApiGroup:BindApiGroup bind_api_group bind_api_group_id
@@ -102,11 +102,11 @@ export interface BindApiGroupState {
     /**
      * gateway group id.
      */
-    gatewayDeployGroupId?: pulumi.Input<string>;
+    gatewayDeployGroupId?: pulumi.Input<string | undefined>;
     /**
      * group id.
      */
-    groupId?: pulumi.Input<string>;
+    groupId?: pulumi.Input<string | undefined>;
 }
 
 /**

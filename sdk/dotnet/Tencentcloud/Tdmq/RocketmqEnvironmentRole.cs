@@ -60,8 +60,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// 
     /// ## Import
     /// 
-    /// tdmqRocketmq environment_role can be imported using the id, e.g.
-    /// 
+    /// tdmqRocketmq EnvironmentRole can be imported using the id, e.g.
     /// ```sh
     /// $ pulumi import tencentcloud:Tdmq/rocketmqEnvironmentRole:RocketmqEnvironmentRole environment_role environmentRole_id
     /// ```

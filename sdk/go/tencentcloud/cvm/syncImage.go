@@ -44,6 +44,8 @@ import (
 //					pulumi.String("ap-guangzhou"),
 //					pulumi.String("ap-shanghai"),
 //				},
+//				Encrypt:  pulumi.Bool(true),
+//				KmsKeyId: pulumi.String("f063c18b-654b-11ef-9d9f-525400d3a886"),
 //			})
 //			if err != nil {
 //				return err
@@ -60,12 +62,18 @@ type SyncImage struct {
 	DestinationRegions pulumi.StringArrayOutput `pulumi:"destinationRegions"`
 	// Checks whether image synchronization can be initiated.
 	DryRun pulumi.BoolPtrOutput `pulumi:"dryRun"`
+	// Whether to synchronize as an encrypted custom image. Default value is `false`. Synchronization to an encrypted custom image is only supported within the same region.
+	Encrypt pulumi.BoolPtrOutput `pulumi:"encrypt"`
 	// Image ID. The specified image must meet the following requirement: the images must be in the `NORMAL` state.
 	ImageId pulumi.StringOutput `pulumi:"imageId"`
 	// Destination image name.
 	ImageName pulumi.StringPtrOutput `pulumi:"imageName"`
 	// Whether to return the ID of image created in the destination region.
 	ImageSetRequired pulumi.BoolPtrOutput `pulumi:"imageSetRequired"`
+	// ID of the image created in the destination region.
+	ImageSets SyncImageImageSetArrayOutput `pulumi:"imageSets"`
+	// KMS key ID used when synchronizing to an encrypted custom image. This parameter is valid only synchronizing to an encrypted image. If KmsKeyId is not specified, the default CBS cloud product KMS key is used.
+	KmsKeyId pulumi.StringPtrOutput `pulumi:"kmsKeyId"`
 }
 
 // NewSyncImage registers a new resource with the given unique name, arguments, and options.
@@ -108,12 +116,18 @@ type syncImageState struct {
 	DestinationRegions []string `pulumi:"destinationRegions"`
 	// Checks whether image synchronization can be initiated.
 	DryRun *bool `pulumi:"dryRun"`
+	// Whether to synchronize as an encrypted custom image. Default value is `false`. Synchronization to an encrypted custom image is only supported within the same region.
+	Encrypt *bool `pulumi:"encrypt"`
 	// Image ID. The specified image must meet the following requirement: the images must be in the `NORMAL` state.
 	ImageId *string `pulumi:"imageId"`
 	// Destination image name.
 	ImageName *string `pulumi:"imageName"`
 	// Whether to return the ID of image created in the destination region.
 	ImageSetRequired *bool `pulumi:"imageSetRequired"`
+	// ID of the image created in the destination region.
+	ImageSets []SyncImageImageSet `pulumi:"imageSets"`
+	// KMS key ID used when synchronizing to an encrypted custom image. This parameter is valid only synchronizing to an encrypted image. If KmsKeyId is not specified, the default CBS cloud product KMS key is used.
+	KmsKeyId *string `pulumi:"kmsKeyId"`
 }
 
 type SyncImageState struct {
@@ -121,12 +135,18 @@ type SyncImageState struct {
 	DestinationRegions pulumi.StringArrayInput
 	// Checks whether image synchronization can be initiated.
 	DryRun pulumi.BoolPtrInput
+	// Whether to synchronize as an encrypted custom image. Default value is `false`. Synchronization to an encrypted custom image is only supported within the same region.
+	Encrypt pulumi.BoolPtrInput
 	// Image ID. The specified image must meet the following requirement: the images must be in the `NORMAL` state.
 	ImageId pulumi.StringPtrInput
 	// Destination image name.
 	ImageName pulumi.StringPtrInput
 	// Whether to return the ID of image created in the destination region.
 	ImageSetRequired pulumi.BoolPtrInput
+	// ID of the image created in the destination region.
+	ImageSets SyncImageImageSetArrayInput
+	// KMS key ID used when synchronizing to an encrypted custom image. This parameter is valid only synchronizing to an encrypted image. If KmsKeyId is not specified, the default CBS cloud product KMS key is used.
+	KmsKeyId pulumi.StringPtrInput
 }
 
 func (SyncImageState) ElementType() reflect.Type {
@@ -138,12 +158,16 @@ type syncImageArgs struct {
 	DestinationRegions []string `pulumi:"destinationRegions"`
 	// Checks whether image synchronization can be initiated.
 	DryRun *bool `pulumi:"dryRun"`
+	// Whether to synchronize as an encrypted custom image. Default value is `false`. Synchronization to an encrypted custom image is only supported within the same region.
+	Encrypt *bool `pulumi:"encrypt"`
 	// Image ID. The specified image must meet the following requirement: the images must be in the `NORMAL` state.
 	ImageId string `pulumi:"imageId"`
 	// Destination image name.
 	ImageName *string `pulumi:"imageName"`
 	// Whether to return the ID of image created in the destination region.
 	ImageSetRequired *bool `pulumi:"imageSetRequired"`
+	// KMS key ID used when synchronizing to an encrypted custom image. This parameter is valid only synchronizing to an encrypted image. If KmsKeyId is not specified, the default CBS cloud product KMS key is used.
+	KmsKeyId *string `pulumi:"kmsKeyId"`
 }
 
 // The set of arguments for constructing a SyncImage resource.
@@ -152,12 +176,16 @@ type SyncImageArgs struct {
 	DestinationRegions pulumi.StringArrayInput
 	// Checks whether image synchronization can be initiated.
 	DryRun pulumi.BoolPtrInput
+	// Whether to synchronize as an encrypted custom image. Default value is `false`. Synchronization to an encrypted custom image is only supported within the same region.
+	Encrypt pulumi.BoolPtrInput
 	// Image ID. The specified image must meet the following requirement: the images must be in the `NORMAL` state.
 	ImageId pulumi.StringInput
 	// Destination image name.
 	ImageName pulumi.StringPtrInput
 	// Whether to return the ID of image created in the destination region.
 	ImageSetRequired pulumi.BoolPtrInput
+	// KMS key ID used when synchronizing to an encrypted custom image. This parameter is valid only synchronizing to an encrypted image. If KmsKeyId is not specified, the default CBS cloud product KMS key is used.
+	KmsKeyId pulumi.StringPtrInput
 }
 
 func (SyncImageArgs) ElementType() reflect.Type {
@@ -257,6 +285,11 @@ func (o SyncImageOutput) DryRun() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *SyncImage) pulumi.BoolPtrOutput { return v.DryRun }).(pulumi.BoolPtrOutput)
 }
 
+// Whether to synchronize as an encrypted custom image. Default value is `false`. Synchronization to an encrypted custom image is only supported within the same region.
+func (o SyncImageOutput) Encrypt() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *SyncImage) pulumi.BoolPtrOutput { return v.Encrypt }).(pulumi.BoolPtrOutput)
+}
+
 // Image ID. The specified image must meet the following requirement: the images must be in the `NORMAL` state.
 func (o SyncImageOutput) ImageId() pulumi.StringOutput {
 	return o.ApplyT(func(v *SyncImage) pulumi.StringOutput { return v.ImageId }).(pulumi.StringOutput)
@@ -270,6 +303,16 @@ func (o SyncImageOutput) ImageName() pulumi.StringPtrOutput {
 // Whether to return the ID of image created in the destination region.
 func (o SyncImageOutput) ImageSetRequired() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *SyncImage) pulumi.BoolPtrOutput { return v.ImageSetRequired }).(pulumi.BoolPtrOutput)
+}
+
+// ID of the image created in the destination region.
+func (o SyncImageOutput) ImageSets() SyncImageImageSetArrayOutput {
+	return o.ApplyT(func(v *SyncImage) SyncImageImageSetArrayOutput { return v.ImageSets }).(SyncImageImageSetArrayOutput)
+}
+
+// KMS key ID used when synchronizing to an encrypted custom image. This parameter is valid only synchronizing to an encrypted image. If KmsKeyId is not specified, the default CBS cloud product KMS key is used.
+func (o SyncImageOutput) KmsKeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncImage) pulumi.StringPtrOutput { return v.KmsKeyId }).(pulumi.StringPtrOutput)
 }
 
 type SyncImageArrayOutput struct{ *pulumi.OutputState }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
 {
     /// <summary>
-    /// Provides a resource to create a postgres BackupPlanConfig
+    /// Provides a resource to create a postgres backup plan config
     /// 
     /// ## Example Usage
     /// 
@@ -23,18 +23,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var backupPlanConfig = new Tencentcloud.Postgresql.BackupPlanConfig("backup_plan_config", new()
+    ///     var example = new Tencentcloud.Postgresql.BackupPlanConfig("example", new()
     ///     {
-    ///         DbInstanceId = pgsqlId,
+    ///         DbInstanceId = "postgres-ckwcgdf1",
     ///         MinBackupStartTime = "01:00:00",
-    ///         MaxBackupStartTime = "02:00:00",
-    ///         BaseBackupRetentionPeriod = 7,
+    ///         MaxBackupStartTime = "03:00:00",
     ///         BackupPeriods = new[]
     ///         {
     ///             "monday",
+    ///             "tuesday",
     ///             "wednesday",
+    ///             "thursday",
     ///             "friday",
+    ///             "saturday",
+    ///             "sunday",
     ///         },
+    ///         BaseBackupRetentionPeriod = 7,
+    ///         LogBackupRetentionPeriod = 7,
+    ///         BackupMethod = "physical",
     ///     });
     /// 
     /// });
@@ -42,15 +48,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// ## Import
     /// 
-    /// postgres backup_plan_config can be imported using the id, e.g.
+    /// postgres backup plan config can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Postgresql/backupPlanConfig:BackupPlanConfig backup_plan_config backup_plan_config_id
+    /// $ pulumi import tencentcloud:Postgresql/backupPlanConfig:BackupPlanConfig example postgres-ckwcgdf1
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/backupPlanConfig:BackupPlanConfig")]
     public partial class BackupPlanConfig : global::Pulumi.CustomResource
     {
+        /// <summary>
+        /// Backup method. Valid values: `Physical` (physical backup), `Logical` (logical backup), `Snapshot` (snapshot backup).
+        /// </summary>
+        [Output("backupMethod")]
+        public Output<string> BackupMethod { get; private set; } = null!;
+
         /// <summary>
         /// Backup cycle, which means on which days each week the instance will be backed up. The parameter value should be the lowercase names of the days of the week.
         /// </summary>
@@ -61,7 +73,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// Backup retention period in days. Value range:7-1830.
         /// </summary>
         [Output("baseBackupRetentionPeriod")]
-        public Output<int?> BaseBackupRetentionPeriod { get; private set; } = null!;
+        public Output<int> BaseBackupRetentionPeriod { get; private set; } = null!;
 
         /// <summary>
         /// instance id.
@@ -70,16 +82,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Output<string> DbInstanceId { get; private set; } = null!;
 
         /// <summary>
+        /// Log backup retention period in days. Value range: 7-1830.
+        /// </summary>
+        [Output("logBackupRetentionPeriod")]
+        public Output<int> LogBackupRetentionPeriod { get; private set; } = null!;
+
+        /// <summary>
         /// The latest time to start a backup.
         /// </summary>
         [Output("maxBackupStartTime")]
-        public Output<string?> MaxBackupStartTime { get; private set; } = null!;
+        public Output<string> MaxBackupStartTime { get; private set; } = null!;
 
         /// <summary>
         /// The earliest time to start a backup.
         /// </summary>
         [Output("minBackupStartTime")]
-        public Output<string?> MinBackupStartTime { get; private set; } = null!;
+        public Output<string> MinBackupStartTime { get; private set; } = null!;
 
 
         /// <summary>
@@ -128,6 +146,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
 
     public sealed class BackupPlanConfigArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Backup method. Valid values: `Physical` (physical backup), `Logical` (logical backup), `Snapshot` (snapshot backup).
+        /// </summary>
+        [Input("backupMethod")]
+        public Input<string>? BackupMethod { get; set; }
+
         [Input("backupPeriods")]
         private InputList<string>? _backupPeriods;
 
@@ -153,6 +177,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Input<string> DbInstanceId { get; set; } = null!;
 
         /// <summary>
+        /// Log backup retention period in days. Value range: 7-1830.
+        /// </summary>
+        [Input("logBackupRetentionPeriod")]
+        public Input<int>? LogBackupRetentionPeriod { get; set; }
+
+        /// <summary>
         /// The latest time to start a backup.
         /// </summary>
         [Input("maxBackupStartTime")]
@@ -172,6 +202,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
 
     public sealed class BackupPlanConfigState : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Backup method. Valid values: `Physical` (physical backup), `Logical` (logical backup), `Snapshot` (snapshot backup).
+        /// </summary>
+        [Input("backupMethod")]
+        public Input<string>? BackupMethod { get; set; }
+
         [Input("backupPeriods")]
         private InputList<string>? _backupPeriods;
 
@@ -195,6 +231,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// </summary>
         [Input("dbInstanceId")]
         public Input<string>? DbInstanceId { get; set; }
+
+        /// <summary>
+        /// Log backup retention period in days. Value range: 7-1830.
+        /// </summary>
+        [Input("logBackupRetentionPeriod")]
+        public Input<int>? LogBackupRetentionPeriod { get; set; }
 
         /// <summary>
         /// The latest time to start a backup.

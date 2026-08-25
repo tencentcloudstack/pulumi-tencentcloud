@@ -49,16 +49,18 @@ import * as utilities from "../utilities";
  * const example = new tencentcloud.redis.LogDelivery("example", {
  *     instanceId: "crs-dmjj8en7",
  *     logRegion: "ap-guangzhou",
- *     logsetName: "tf-example",
- *     topicName: "tf-example",
+ *     logsetName: "tf-example132",
+ *     topicName: "tf-example132",
  *     period: 20,
  *     createIndex: true,
+ *     isDeleteTopic: true,
+ *     isDeleteLogset: true,
  * });
  * ```
  *
  * ## Import
  *
- * Redis log delivery can be imported, e.g.
+ * Redis log delivery can be imported using the instanceId, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Redis/logDelivery:LogDelivery example crs-dmjj8en7
@@ -101,6 +103,14 @@ export class LogDelivery extends pulumi.CustomResource {
      */
     declare public readonly instanceId: pulumi.Output<string>;
     /**
+     * Whether to delete the associated Logset when deleting the log delivery. Default is false.
+     */
+    declare public readonly isDeleteLogset: pulumi.Output<boolean | undefined>;
+    /**
+     * Whether to delete the associated Topic when deleting the log delivery. Default is false.
+     */
+    declare public readonly isDeleteTopic: pulumi.Output<boolean | undefined>;
+    /**
      * The region where the log set is located; if not specified, the region where the instance is located will be used by default.
      */
     declare public readonly logRegion: pulumi.Output<string>;
@@ -140,6 +150,8 @@ export class LogDelivery extends pulumi.CustomResource {
             const state = argsOrState as LogDeliveryState | undefined;
             resourceInputs["createIndex"] = state?.createIndex;
             resourceInputs["instanceId"] = state?.instanceId;
+            resourceInputs["isDeleteLogset"] = state?.isDeleteLogset;
+            resourceInputs["isDeleteTopic"] = state?.isDeleteTopic;
             resourceInputs["logRegion"] = state?.logRegion;
             resourceInputs["logsetId"] = state?.logsetId;
             resourceInputs["logsetName"] = state?.logsetName;
@@ -153,6 +165,8 @@ export class LogDelivery extends pulumi.CustomResource {
             }
             resourceInputs["createIndex"] = args?.createIndex;
             resourceInputs["instanceId"] = args?.instanceId;
+            resourceInputs["isDeleteLogset"] = args?.isDeleteLogset;
+            resourceInputs["isDeleteTopic"] = args?.isDeleteTopic;
             resourceInputs["logRegion"] = args?.logRegion;
             resourceInputs["logsetId"] = args?.logsetId;
             resourceInputs["logsetName"] = args?.logsetName;
@@ -172,35 +186,43 @@ export interface LogDeliveryState {
     /**
      * Whether to create an index when creating a log topic.
      */
-    createIndex?: pulumi.Input<boolean>;
+    createIndex?: pulumi.Input<boolean | undefined>;
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
+    /**
+     * Whether to delete the associated Logset when deleting the log delivery. Default is false.
+     */
+    isDeleteLogset?: pulumi.Input<boolean | undefined>;
+    /**
+     * Whether to delete the associated Topic when deleting the log delivery. Default is false.
+     */
+    isDeleteTopic?: pulumi.Input<boolean | undefined>;
     /**
      * The region where the log set is located; if not specified, the region where the instance is located will be used by default.
      */
-    logRegion?: pulumi.Input<string>;
+    logRegion?: pulumi.Input<string | undefined>;
     /**
      * The ID of the log set being delivered.
      */
-    logsetId?: pulumi.Input<string>;
+    logsetId?: pulumi.Input<string | undefined>;
     /**
      * Log set name. If LogsetId does not specify a specific log set ID, please configure this parameter to set the log set name, and the system will automatically create a new log set with the specified name.
      */
-    logsetName?: pulumi.Input<string>;
+    logsetName?: pulumi.Input<string | undefined>;
     /**
      * Log storage time, defaults to 30 days, with an optional range of 1-3600 days.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * The ID of the topic being delivered.
      */
-    topicId?: pulumi.Input<string>;
+    topicId?: pulumi.Input<string | undefined>;
     /**
      * Log topic name, required when TopicId is empty, a new log topic will be automatically created.
      */
-    topicName?: pulumi.Input<string>;
+    topicName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -210,33 +232,41 @@ export interface LogDeliveryArgs {
     /**
      * Whether to create an index when creating a log topic.
      */
-    createIndex?: pulumi.Input<boolean>;
+    createIndex?: pulumi.Input<boolean | undefined>;
     /**
      * Instance ID.
      */
     instanceId: pulumi.Input<string>;
     /**
+     * Whether to delete the associated Logset when deleting the log delivery. Default is false.
+     */
+    isDeleteLogset?: pulumi.Input<boolean | undefined>;
+    /**
+     * Whether to delete the associated Topic when deleting the log delivery. Default is false.
+     */
+    isDeleteTopic?: pulumi.Input<boolean | undefined>;
+    /**
      * The region where the log set is located; if not specified, the region where the instance is located will be used by default.
      */
-    logRegion?: pulumi.Input<string>;
+    logRegion?: pulumi.Input<string | undefined>;
     /**
      * The ID of the log set being delivered.
      */
-    logsetId?: pulumi.Input<string>;
+    logsetId?: pulumi.Input<string | undefined>;
     /**
      * Log set name. If LogsetId does not specify a specific log set ID, please configure this parameter to set the log set name, and the system will automatically create a new log set with the specified name.
      */
-    logsetName?: pulumi.Input<string>;
+    logsetName?: pulumi.Input<string | undefined>;
     /**
      * Log storage time, defaults to 30 days, with an optional range of 1-3600 days.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * The ID of the topic being delivered.
      */
-    topicId?: pulumi.Input<string>;
+    topicId?: pulumi.Input<string | undefined>;
     /**
      * Log topic name, required when TopicId is empty, a new log topic will be automatically created.
      */
-    topicName?: pulumi.Input<string>;
+    topicName?: pulumi.Input<string | undefined>;
 }

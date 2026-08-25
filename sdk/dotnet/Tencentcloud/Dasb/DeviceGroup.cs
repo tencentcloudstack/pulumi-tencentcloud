@@ -34,7 +34,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
     /// 
     /// ## Import
     /// 
-    /// dasb device_group can be imported using the id, e.g.
+    /// dasb DeviceGroup can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Dasb/deviceGroup:DeviceGroup example 36

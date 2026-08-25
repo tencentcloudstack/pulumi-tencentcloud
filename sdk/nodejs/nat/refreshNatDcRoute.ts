@@ -49,7 +49,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * vpc refresh_nat_dc_route can be imported using the id, e.g.
+ * vpc refreshNatDcRoute can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Nat/refreshNatDcRoute:RefreshNatDcRoute refresh_nat_dc_route vpc_id#nat_gateway_id
@@ -139,15 +139,15 @@ export interface RefreshNatDcRouteState {
     /**
      * Whether to pre-refresh, valid values: True:yes, False:no.
      */
-    dryRun?: pulumi.Input<boolean>;
+    dryRun?: pulumi.Input<boolean | undefined>;
     /**
      * Unique identifier of Nat Gateway.
      */
-    natGatewayId?: pulumi.Input<string>;
+    natGatewayId?: pulumi.Input<string | undefined>;
     /**
      * Unique identifier of Vpc.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }
 
 /**

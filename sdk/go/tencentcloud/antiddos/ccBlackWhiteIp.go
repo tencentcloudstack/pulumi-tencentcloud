@@ -50,7 +50,7 @@ import (
 //
 // ## Import
 //
-// antiddos cc_black_white_ip can be imported using the id, e.g.
+// antiddos ccBlackWhiteIp can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Antiddos/ccBlackWhiteIp:CcBlackWhiteIp cc_black_white_ip ${instanceId}#${policyId}#${instanceIp}#${domain}#${protocol}

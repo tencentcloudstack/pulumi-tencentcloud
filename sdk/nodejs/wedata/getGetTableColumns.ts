@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Wedata.getGetTableColumns({
+ * const example = tencentcloud.wedata.getGetTableColumns({
  *     tableGuid: "ktDR4ymhp2_nlfClXhwxRQ",
  * });
  * ```
@@ -66,7 +66,7 @@ export interface GetGetTableColumnsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Wedata.getGetTableColumns({
+ * const example = tencentcloud.wedata.getGetTableColumns({
  *     tableGuid: "ktDR4ymhp2_nlfClXhwxRQ",
  * });
  * ```
@@ -86,7 +86,7 @@ export interface GetGetTableColumnsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Table GUID.
      */

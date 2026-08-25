@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Ssm.getRotationHistory({
+ * const example = tencentcloud.ssm.getRotationHistory({
  *     secretName: "keep_terraform",
  * });
  * ```
@@ -64,7 +64,7 @@ export interface GetRotationHistoryResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Ssm.getRotationHistory({
+ * const example = tencentcloud.ssm.getRotationHistory({
  *     secretName: "keep_terraform",
  * });
  * ```
@@ -84,7 +84,7 @@ export interface GetRotationHistoryOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Secret name.
      */

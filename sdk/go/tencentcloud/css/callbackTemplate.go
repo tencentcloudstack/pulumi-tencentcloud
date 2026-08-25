@@ -50,7 +50,7 @@ import (
 //
 // ## Import
 //
-// css callback_template can be imported using the id, e.g.
+// css callbackTemplate can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Css/callbackTemplate:CallbackTemplate callback_template templateId

@@ -19,7 +19,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -67,7 +66,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
     ///     });
     /// 
     ///     // attachment instance
-    ///     var attachment = new Tencentcloud.Index.CcnAttachment("attachment", new()
+    ///     var attachment = new Tencentcloud.CcnAttachment("attachment", new()
     ///     {
     ///         CcnId = example.Id,
     ///         InstanceId = vpc.Id,

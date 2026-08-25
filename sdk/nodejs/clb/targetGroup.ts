@@ -9,15 +9,171 @@ import * as utilities from "../utilities";
 /**
  * Provides a resource to create a CLB target group.
  *
+ * > **NOTE:** Currently, `v1` target group is not supported set `healthCheck` anymore, Please use `v2` target group.
+ *
  * ## Example Usage
+ *
+ * ### Create V1 target group and tags
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const test = new tencentcloud.clb.TargetGroup("test", {
- *     targetGroupName: "test",
- *     port: 33,
+ *     targetGroupName: "test-v1",
+ *     port: 80,
+ *     type: "v1",
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * ```
+ *
+ * ### Create V2 TCP target group with TCP health check
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const tcpTg = new tencentcloud.clb.TargetGroup("tcp_tg", {
+ *     targetGroupName: "tcp_tg",
+ *     vpcId: "vpc-xxxxxx",
+ *     type: "v2",
+ *     protocol: "TCP",
+ *     healthCheck: {
+ *         healthSwitch: true,
+ *         protocol: "TCP",
+ *     },
+ * });
+ * ```
+ *
+ * ### Create V2 target group with advanced features
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const testV2 = new tencentcloud.clb.TargetGroup("test_v2", {
+ *     targetGroupName: "test-v2",
+ *     vpcId: "vpc-xxxxxx",
+ *     port: 80,
+ *     type: "v2",
+ *     protocol: "HTTP",
+ *     scheduleAlgorithm: "WRR",
+ *     sessionExpireTime: 1800,
+ *     keepaliveEnable: true,
+ *     weight: 50,
+ *     healthCheck: {
+ *         healthSwitch: true,
+ *         protocol: "HTTP",
+ *         port: 8080,
+ *         timeout: 5,
+ *         gapTime: 11,
+ *         goodLimit: 4,
+ *         badLimit: 4,
+ *         httpCheckPath: "/health",
+ *         httpCheckMethod: "GET",
+ *         httpCheckDomain: "test.com",
+ *         httpCode: 2,
+ *     },
+ *     tags: {
+ *         createdBy: "terraform",
+ *         env: "production",
+ *     },
+ * });
+ * ```
+ *
+ * ### Create V2 HTTP target group with IP hash scheduling
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const ipHash = new tencentcloud.clb.TargetGroup("ip_hash", {
+ *     targetGroupName: "ip-hash-tg",
+ *     vpcId: "vpc-xxxxxxx",
+ *     type: "v2",
+ *     protocol: "HTTP",
+ *     scheduleAlgorithm: "IP_HASH",
+ *     ipVersion: "IPv4",
+ *     healthCheck: {
+ *         healthSwitch: true,
+ *         protocol: "HTTP",
+ *         httpCheckDomain: "test.com",
+ *         timeout: 5,
+ *         gapTime: 11,
+ *         goodLimit: 4,
+ *         badLimit: 4,
+ *     },
+ * });
+ * ```
+ *
+ * ### Create V2 full listener target group
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const fullListener = new tencentcloud.clb.TargetGroup("full_listener", {
+ *     targetGroupName: "full-listener-tg",
+ *     vpcId: "vpc-xxxxxx",
+ *     type: "v2",
+ *     protocol: "TCP",
+ *     fullListenSwitch: true,
+ *     healthCheck: {
+ *         healthSwitch: true,
+ *         protocol: "HTTP",
+ *         httpVersion: "HTTP/1.1",
+ *         httpCheckPath: "/healthz",
+ *         httpCheckDomain: "test.com",
+ *         timeout: 5,
+ *         gapTime: 11,
+ *         goodLimit: 4,
+ *         badLimit: 4,
+ *     },
+ * });
+ * ```
+ *
+ * ### Create IPv6 target group
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const ipv6 = new tencentcloud.clb.TargetGroup("ipv6", {
+ *     targetGroupName: "ipv6-tg",
+ *     vpcId: "vpc-xxxxxx",
+ *     type: "v2",
+ *     protocol: "HTTP",
+ *     ipVersion: "IPv6",
+ *     healthCheck: {
+ *         healthSwitch: true,
+ *         protocol: "HTTP",
+ *         httpCheckDomain: "test.com",
+ *         timeout: 5,
+ *         gapTime: 11,
+ *         goodLimit: 4,
+ *         badLimit: 4,
+ *     },
+ * });
+ * ```
+ *
+ * ### Create V2 target group with SNAT enabled
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const snat = new tencentcloud.clb.TargetGroup("snat", {
+ *     targetGroupName: "snat-tg",
+ *     vpcId: "vpc-xxxxxx",
+ *     type: "v2",
+ *     protocol: "TCP",
+ *     snatEnable: true,
+ *     healthCheck: {
+ *         healthSwitch: true,
+ *         protocol: "TCP",
+ *     },
  * });
  * ```
  *
@@ -58,9 +214,45 @@ export class TargetGroup extends pulumi.CustomResource {
     }
 
     /**
+     * Whether this is a full listener target group. Only valid for v2 target groups. true: full listener target group, false: normal target group.
+     */
+    declare public readonly fullListenSwitch: pulumi.Output<boolean | undefined>;
+    /**
+     * Health check configuration.
+     */
+    declare public readonly healthCheck: pulumi.Output<outputs.Clb.TargetGroupHealthCheck>;
+    /**
+     * IP version type. Common values: IPv4, IPv6, IPv6FullChain.
+     */
+    declare public readonly ipVersion: pulumi.Output<string>;
+    /**
+     * Enable keep-alive connections. Only valid for HTTP/HTTPS target groups. true: enable, false: disable. Default: false.
+     */
+    declare public readonly keepaliveEnable: pulumi.Output<boolean | undefined>;
+    /**
      * The default port of target group, add server after can use it.
      */
     declare public readonly port: pulumi.Output<number | undefined>;
+    /**
+     * Backend forwarding protocol of the target group. this field is required for the new version (v2) target group. currently supports TCP, UDP, HTTP, HTTPS, GRPC.
+     */
+    declare public readonly protocol: pulumi.Output<string>;
+    /**
+     * Scheduling algorithm. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Valid values: WRR (weighted round robin), LEAST_CONN (least connections), IP_HASH (IP hash). Default: WRR.
+     */
+    declare public readonly scheduleAlgorithm: pulumi.Output<string>;
+    /**
+     * Session persistence time in seconds. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Range: 30-3600 or 0 (disabled). Default: 0 (disabled).
+     */
+    declare public readonly sessionExpireTime: pulumi.Output<number | undefined>;
+    /**
+     * Whether to enable SNAT (Source Network Address Translation) for the target group. true: enable, false: disable. Whether SNAT actually takes effect depends on the target group type (v1/v2) and protocol; the cloud side determines applicability.
+     */
+    declare public readonly snatEnable: pulumi.Output<boolean>;
+    /**
+     * Resource tags for the target group.
+     */
+    declare public readonly tags: pulumi.Output<{[key: string]: string} | undefined>;
     /**
      * It has been deprecated from version 1.77.3. please use `tencentcloud.Clb.TargetGroupInstanceAttachment` instead. The backend server of target group bind.
      *
@@ -72,9 +264,17 @@ export class TargetGroup extends pulumi.CustomResource {
      */
     declare public readonly targetGroupName: pulumi.Output<string | undefined>;
     /**
+     * Target group type, currently supported v1 (legacy version target group) and v2 (new version target group), defaults to v1 (legacy version target group).
+     */
+    declare public readonly type: pulumi.Output<string>;
+    /**
      * VPC ID, default is based on the network.
      */
-    declare public readonly vpcId: pulumi.Output<string | undefined>;
+    declare public readonly vpcId: pulumi.Output<string>;
+    /**
+     * Default backend server weight. Range: [0, 100]. Only valid for v2 target groups. When set, backend servers added to the target group will use this default weight if not specified.
+     */
+    declare public readonly weight: pulumi.Output<number | undefined>;
 
     /**
      * Create a TargetGroup resource with the given unique name, arguments, and options.
@@ -89,16 +289,38 @@ export class TargetGroup extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as TargetGroupState | undefined;
+            resourceInputs["fullListenSwitch"] = state?.fullListenSwitch;
+            resourceInputs["healthCheck"] = state?.healthCheck;
+            resourceInputs["ipVersion"] = state?.ipVersion;
+            resourceInputs["keepaliveEnable"] = state?.keepaliveEnable;
             resourceInputs["port"] = state?.port;
+            resourceInputs["protocol"] = state?.protocol;
+            resourceInputs["scheduleAlgorithm"] = state?.scheduleAlgorithm;
+            resourceInputs["sessionExpireTime"] = state?.sessionExpireTime;
+            resourceInputs["snatEnable"] = state?.snatEnable;
+            resourceInputs["tags"] = state?.tags;
             resourceInputs["targetGroupInstances"] = state?.targetGroupInstances;
             resourceInputs["targetGroupName"] = state?.targetGroupName;
+            resourceInputs["type"] = state?.type;
             resourceInputs["vpcId"] = state?.vpcId;
+            resourceInputs["weight"] = state?.weight;
         } else {
             const args = argsOrState as TargetGroupArgs | undefined;
+            resourceInputs["fullListenSwitch"] = args?.fullListenSwitch;
+            resourceInputs["healthCheck"] = args?.healthCheck;
+            resourceInputs["ipVersion"] = args?.ipVersion;
+            resourceInputs["keepaliveEnable"] = args?.keepaliveEnable;
             resourceInputs["port"] = args?.port;
+            resourceInputs["protocol"] = args?.protocol;
+            resourceInputs["scheduleAlgorithm"] = args?.scheduleAlgorithm;
+            resourceInputs["sessionExpireTime"] = args?.sessionExpireTime;
+            resourceInputs["snatEnable"] = args?.snatEnable;
+            resourceInputs["tags"] = args?.tags;
             resourceInputs["targetGroupInstances"] = args?.targetGroupInstances;
             resourceInputs["targetGroupName"] = args?.targetGroupName;
+            resourceInputs["type"] = args?.type;
             resourceInputs["vpcId"] = args?.vpcId;
+            resourceInputs["weight"] = args?.weight;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(TargetGroup.__pulumiType, name, resourceInputs, opts);
@@ -110,23 +332,67 @@ export class TargetGroup extends pulumi.CustomResource {
  */
 export interface TargetGroupState {
     /**
+     * Whether this is a full listener target group. Only valid for v2 target groups. true: full listener target group, false: normal target group.
+     */
+    fullListenSwitch?: pulumi.Input<boolean | undefined>;
+    /**
+     * Health check configuration.
+     */
+    healthCheck?: pulumi.Input<inputs.Clb.TargetGroupHealthCheck | undefined>;
+    /**
+     * IP version type. Common values: IPv4, IPv6, IPv6FullChain.
+     */
+    ipVersion?: pulumi.Input<string | undefined>;
+    /**
+     * Enable keep-alive connections. Only valid for HTTP/HTTPS target groups. true: enable, false: disable. Default: false.
+     */
+    keepaliveEnable?: pulumi.Input<boolean | undefined>;
+    /**
      * The default port of target group, add server after can use it.
      */
-    port?: pulumi.Input<number>;
+    port?: pulumi.Input<number | undefined>;
+    /**
+     * Backend forwarding protocol of the target group. this field is required for the new version (v2) target group. currently supports TCP, UDP, HTTP, HTTPS, GRPC.
+     */
+    protocol?: pulumi.Input<string | undefined>;
+    /**
+     * Scheduling algorithm. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Valid values: WRR (weighted round robin), LEAST_CONN (least connections), IP_HASH (IP hash). Default: WRR.
+     */
+    scheduleAlgorithm?: pulumi.Input<string | undefined>;
+    /**
+     * Session persistence time in seconds. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Range: 30-3600 or 0 (disabled). Default: 0 (disabled).
+     */
+    sessionExpireTime?: pulumi.Input<number | undefined>;
+    /**
+     * Whether to enable SNAT (Source Network Address Translation) for the target group. true: enable, false: disable. Whether SNAT actually takes effect depends on the target group type (v1/v2) and protocol; the cloud side determines applicability.
+     */
+    snatEnable?: pulumi.Input<boolean | undefined>;
+    /**
+     * Resource tags for the target group.
+     */
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * It has been deprecated from version 1.77.3. please use `tencentcloud.Clb.TargetGroupInstanceAttachment` instead. The backend server of target group bind.
      *
      * @deprecated It has been deprecated from version 1.77.3. please use `tencentcloud.Clb.TargetGroupInstanceAttachment` instead.
      */
-    targetGroupInstances?: pulumi.Input<pulumi.Input<inputs.Clb.TargetGroupTargetGroupInstance>[]>;
+    targetGroupInstances?: pulumi.Input<pulumi.Input<inputs.Clb.TargetGroupTargetGroupInstance>[] | undefined>;
     /**
      * Target group name.
      */
-    targetGroupName?: pulumi.Input<string>;
+    targetGroupName?: pulumi.Input<string | undefined>;
+    /**
+     * Target group type, currently supported v1 (legacy version target group) and v2 (new version target group), defaults to v1 (legacy version target group).
+     */
+    type?: pulumi.Input<string | undefined>;
     /**
      * VPC ID, default is based on the network.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
+    /**
+     * Default backend server weight. Range: [0, 100]. Only valid for v2 target groups. When set, backend servers added to the target group will use this default weight if not specified.
+     */
+    weight?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -134,21 +400,65 @@ export interface TargetGroupState {
  */
 export interface TargetGroupArgs {
     /**
+     * Whether this is a full listener target group. Only valid for v2 target groups. true: full listener target group, false: normal target group.
+     */
+    fullListenSwitch?: pulumi.Input<boolean | undefined>;
+    /**
+     * Health check configuration.
+     */
+    healthCheck?: pulumi.Input<inputs.Clb.TargetGroupHealthCheck | undefined>;
+    /**
+     * IP version type. Common values: IPv4, IPv6, IPv6FullChain.
+     */
+    ipVersion?: pulumi.Input<string | undefined>;
+    /**
+     * Enable keep-alive connections. Only valid for HTTP/HTTPS target groups. true: enable, false: disable. Default: false.
+     */
+    keepaliveEnable?: pulumi.Input<boolean | undefined>;
+    /**
      * The default port of target group, add server after can use it.
      */
-    port?: pulumi.Input<number>;
+    port?: pulumi.Input<number | undefined>;
+    /**
+     * Backend forwarding protocol of the target group. this field is required for the new version (v2) target group. currently supports TCP, UDP, HTTP, HTTPS, GRPC.
+     */
+    protocol?: pulumi.Input<string | undefined>;
+    /**
+     * Scheduling algorithm. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Valid values: WRR (weighted round robin), LEAST_CONN (least connections), IP_HASH (IP hash). Default: WRR.
+     */
+    scheduleAlgorithm?: pulumi.Input<string | undefined>;
+    /**
+     * Session persistence time in seconds. Only valid for v2 target groups with HTTP/HTTPS/GRPC protocols. Range: 30-3600 or 0 (disabled). Default: 0 (disabled).
+     */
+    sessionExpireTime?: pulumi.Input<number | undefined>;
+    /**
+     * Whether to enable SNAT (Source Network Address Translation) for the target group. true: enable, false: disable. Whether SNAT actually takes effect depends on the target group type (v1/v2) and protocol; the cloud side determines applicability.
+     */
+    snatEnable?: pulumi.Input<boolean | undefined>;
+    /**
+     * Resource tags for the target group.
+     */
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * It has been deprecated from version 1.77.3. please use `tencentcloud.Clb.TargetGroupInstanceAttachment` instead. The backend server of target group bind.
      *
      * @deprecated It has been deprecated from version 1.77.3. please use `tencentcloud.Clb.TargetGroupInstanceAttachment` instead.
      */
-    targetGroupInstances?: pulumi.Input<pulumi.Input<inputs.Clb.TargetGroupTargetGroupInstance>[]>;
+    targetGroupInstances?: pulumi.Input<pulumi.Input<inputs.Clb.TargetGroupTargetGroupInstance>[] | undefined>;
     /**
      * Target group name.
      */
-    targetGroupName?: pulumi.Input<string>;
+    targetGroupName?: pulumi.Input<string | undefined>;
+    /**
+     * Target group type, currently supported v1 (legacy version target group) and v2 (new version target group), defaults to v1 (legacy version target group).
+     */
+    type?: pulumi.Input<string | undefined>;
     /**
      * VPC ID, default is based on the network.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
+    /**
+     * Default backend server weight. Range: [0, 100]. Only valid for v2 target groups. When set, backend servers added to the target group will use this default weight if not specified.
+     */
+    weight?: pulumi.Input<number | undefined>;
 }

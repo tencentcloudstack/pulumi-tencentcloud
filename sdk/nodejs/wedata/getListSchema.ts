@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Wedata.getListSchema({});
+ * const example = tencentcloud.wedata.getListSchema({});
  * ```
  */
 export function getListSchema(args?: GetListSchemaArgs, opts?: pulumi.InvokeOptions): Promise<GetListSchemaResult> {
@@ -86,7 +86,7 @@ export interface GetListSchemaResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Wedata.getListSchema({});
+ * const example = tencentcloud.wedata.getListSchema({});
  * ```
  */
 export function getListSchemaOutput(args?: GetListSchemaOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetListSchemaResult> {
@@ -108,21 +108,21 @@ export interface GetListSchemaOutputArgs {
     /**
      * Catalog name.
      */
-    catalogName?: pulumi.Input<string>;
+    catalogName?: pulumi.Input<string | undefined>;
     /**
      * Database name.
      */
-    databaseName?: pulumi.Input<string>;
+    databaseName?: pulumi.Input<string | undefined>;
     /**
      * Data source ID.
      */
-    datasourceId?: pulumi.Input<number>;
+    datasourceId?: pulumi.Input<number | undefined>;
     /**
      * Database schema search keyword.
      */
-    keyword?: pulumi.Input<string>;
+    keyword?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

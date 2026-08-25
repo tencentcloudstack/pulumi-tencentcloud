@@ -120,59 +120,71 @@ export interface ProviderArgs {
     /**
      * List of allowed TencentCloud account IDs to prevent you from mistakenly using the wrong one (and potentially end up destroying a live environment). Conflicts with `forbiddenAccountIds`, If use `assumeRoleWithSaml` or `assumeRoleWithWebIdentity`, it is not supported.
      */
-    allowedAccountIds?: pulumi.Input<pulumi.Input<string>[]>;
-    assumeRole?: pulumi.Input<inputs.ProviderAssumeRole>;
-    assumeRoleWithSaml?: pulumi.Input<inputs.ProviderAssumeRoleWithSaml>;
-    assumeRoleWithWebIdentity?: pulumi.Input<inputs.ProviderAssumeRoleWithWebIdentity>;
+    allowedAccountIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
+     * The `assumeRole` block. If provided, terraform will attempt to assume this role using the supplied credentials.
+     */
+    assumeRole?: pulumi.Input<inputs.ProviderAssumeRole | undefined>;
+    /**
+     * The `assumeRoleWithSaml` block. If provided, terraform will attempt to assume this role using the supplied credentials.
+     */
+    assumeRoleWithSaml?: pulumi.Input<inputs.ProviderAssumeRoleWithSaml | undefined>;
+    /**
+     * The `assumeRoleWithWebIdentity` block. If provided, terraform will attempt to assume this role using the supplied credentials.
+     */
+    assumeRoleWithWebIdentity?: pulumi.Input<inputs.ProviderAssumeRoleWithWebIdentity | undefined>;
     /**
      * The name of the CVM instance CAM role. It can be sourced from the `TENCENTCLOUD_CAM_ROLE_NAME` environment variable.
      */
-    camRoleName?: pulumi.Input<string>;
+    camRoleName?: pulumi.Input<string | undefined>;
     /**
      * The cos domain of the API request, Default is `https://cos.{region}.myqcloud.com`, Other Examples: `https://cluster-123456.cos-cdc.ap-guangzhou.myqcloud.com`.
      */
-    cosDomain?: pulumi.Input<string>;
+    cosDomain?: pulumi.Input<string | undefined>;
     /**
      * The root domain of the API request, Default is `tencentcloudapi.com`.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable pod oidc.
      */
-    enablePodOidc?: pulumi.Input<boolean>;
+    enablePodOidc?: pulumi.Input<boolean | undefined>;
     /**
      * List of forbidden TencentCloud account IDs to prevent you from mistakenly using the wrong one (and potentially end up destroying a live environment). Conflicts with `allowedAccountIds`, If use `assumeRoleWithSaml` or `assumeRoleWithWebIdentity`, it is not supported.
      */
-    forbiddenAccountIds?: pulumi.Input<pulumi.Input<string>[]>;
-    mfaCertification?: pulumi.Input<inputs.ProviderMfaCertification>;
+    forbiddenAccountIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
+     * The `mfaCertification` block. If provided, terraform will attempt to use the provided credentials for MFA authentication.
+     */
+    mfaCertification?: pulumi.Input<inputs.ProviderMfaCertification | undefined>;
     /**
      * The profile name as set in the shared credentials. It can also be sourced from the `TENCENTCLOUD_PROFILE` environment variable. If not set, the default profile created with `tccli configure` will be used.
      */
-    profile?: pulumi.Input<string>;
+    profile?: pulumi.Input<string | undefined>;
     /**
      * The protocol of the API request. Valid values: `HTTP` and `HTTPS`. Default is `HTTPS`.
      */
-    protocol?: pulumi.Input<string>;
+    protocol?: pulumi.Input<string | undefined>;
     /**
      * This is the TencentCloud region. It can also be sourced from the `TENCENTCLOUD_REGION` environment variables. The default input value is ap-guangzhou.
      */
-    region?: pulumi.Input<string>;
+    region?: pulumi.Input<string | undefined>;
     /**
      * This is the TencentCloud access key. It can also be sourced from the `TENCENTCLOUD_SECRET_ID` environment variable.
      */
-    secretId?: pulumi.Input<string>;
+    secretId?: pulumi.Input<string | undefined>;
     /**
      * This is the TencentCloud secret key. It can also be sourced from the `TENCENTCLOUD_SECRET_KEY` environment variable.
      */
-    secretKey?: pulumi.Input<string>;
+    secretKey?: pulumi.Input<string | undefined>;
     /**
      * TencentCloud Security Token of temporary access credentials. It can be sourced from the `TENCENTCLOUD_SECURITY_TOKEN` environment variable. Notice: for supported products, please refer to: [temporary key supported products](https://intl.cloud.tencent.com/document/product/598/10588).
      */
-    securityToken?: pulumi.Input<string>;
+    securityToken?: pulumi.Input<string | undefined>;
     /**
      * The directory of the shared credentials. It can also be sourced from the `TENCENTCLOUD_SHARED_CREDENTIALS_DIR` environment variable. If not set this defaults to ~/.tccli.
      */
-    sharedCredentialsDir?: pulumi.Input<string>;
+    sharedCredentialsDir?: pulumi.Input<string | undefined>;
 }
 
 export namespace Provider {

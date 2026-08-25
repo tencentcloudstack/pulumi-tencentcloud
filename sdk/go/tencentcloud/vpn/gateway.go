@@ -11,6 +11,10 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
+// Provides a resource to create a VPN gateway.
+//
+// > **NOTE:** The prepaid VPN gateway do not support renew operation or delete operation with terraform.
+//
 // ## Example Usage
 //
 // ### VPC SSL VPN gateway

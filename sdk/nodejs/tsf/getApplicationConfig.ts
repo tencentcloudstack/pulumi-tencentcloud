@@ -106,25 +106,25 @@ export interface GetApplicationConfigOutputArgs {
     /**
      * Application ID, query all when not provided.
      */
-    applicationId?: pulumi.Input<string>;
+    applicationId?: pulumi.Input<string | undefined>;
     /**
      * Configuration ID, query all with higher priority when not provided.
      */
-    configId?: pulumi.Input<string>;
+    configId?: pulumi.Input<string | undefined>;
     /**
      * Configuration ID list, query all with lower priority when not provided.
      */
-    configIdLists?: pulumi.Input<pulumi.Input<string>[]>;
+    configIdLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Configuration name, precise query, query all when not provided.
      */
-    configName?: pulumi.Input<string>;
+    configName?: pulumi.Input<string | undefined>;
     /**
      * Configuration version, precise query, query all when not provided.
      */
-    configVersion?: pulumi.Input<string>;
+    configVersion?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

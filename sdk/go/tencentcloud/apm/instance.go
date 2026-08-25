@@ -47,6 +47,37 @@ import (
 //
 // ```
 //
+// ### CLS key-value index configuration example
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/apm"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := apm.NewInstance(ctx, "example", &apm.InstanceArgs{
+//				Name:          pulumi.String("tf-example"),
+//				Description:   pulumi.String("desc."),
+//				IsRelatedLog:  pulumi.Int(1),
+//				LogIndexType:  pulumi.Int(1),
+//				LogTraceIdKey: pulumi.String("traceId"),
+//				LogSpanIdKey:  pulumi.String("spanId"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
 // ## Import
 //
 // APM instance can be imported using the id, e.g.
@@ -57,22 +88,96 @@ import (
 type Instance struct {
 	pulumi.CustomResourceState
 
+	// List of custom display tags.
+	CustomShowTags pulumi.StringArrayOutput `pulumi:"customShowTags"`
+	// Associated dashboard id, which takes effect after the associated dashboard is enabled.
+	DashboardTopicId pulumi.StringPtrOutput `pulumi:"dashboardTopicId"`
 	// Description Of Instance.
 	Description pulumi.StringPtrOutput `pulumi:"description"`
+	// Error rate warning line. when the average error rate of the application exceeds this threshold, the system will give an abnormal note.
+	ErrRateThreshold pulumi.IntOutput `pulumi:"errRateThreshold"`
+	// Error sampling switch (0: off, 1: on).
+	ErrorSample pulumi.IntOutput `pulumi:"errorSample"`
+	// Whether it is free (0 = paid edition; 1 = tsf restricted free edition; 2 = free edition), default 0.
+	Free pulumi.IntOutput `pulumi:"free"`
+	// APM instance ID.
+	InstanceId pulumi.StringOutput `pulumi:"instanceId"`
+	// Whether to enable the detection of deleting arbitrary files. (0 - disabled; 1: enabled).
+	IsDeleteAnyFileAnalysis pulumi.IntOutput `pulumi:"isDeleteAnyFileAnalysis"`
+	// Whether to enable deserialization detection. (0 - disabled; 1 - enabled).
+	IsDeserializationAnalysis pulumi.IntOutput `pulumi:"isDeserializationAnalysis"`
+	// Whether to enable traversal detection of the directory. (0 - disabled; 1 - enabled).
+	IsDirectoryTraversalAnalysis pulumi.IntOutput `pulumi:"isDirectoryTraversalAnalysis"`
+	// Whether to enable expression injection detection. (0 - disabled; 1 - enabled).
+	IsExpressionInjectionAnalysis pulumi.IntOutput `pulumi:"isExpressionInjectionAnalysis"`
+	// Whether to enable the detection of the inclusion of arbitrary files. (0: disabled, 1: enabled).
+	IsIncludeAnyFileAnalysis pulumi.IntOutput `pulumi:"isIncludeAnyFileAnalysis"`
+	// Whether to enable component vulnerability detection (0 = no, 1 = yes).
+	IsInstrumentationVulnerabilityScan pulumi.IntOutput `pulumi:"isInstrumentationVulnerabilityScan"`
+	// Whether to enable JNDI injection detection. (0 - disabled; 1 - enabled).
+	IsJndiInjectionAnalysis pulumi.IntOutput `pulumi:"isJndiInjectionAnalysis"`
+	// Whether to enable JNI injection detection. (0 - disabled, 1 - enabled).
+	IsJniInjectionAnalysis pulumi.IntOutput `pulumi:"isJniInjectionAnalysis"`
+	// Whether to enable detection of Java webshell.
+	IsMemoryHijackingAnalysis pulumi.IntOutput `pulumi:"isMemoryHijackingAnalysis"`
+	// Whether to enable the detection of reading arbitrary files. (0 - disabled; 1 - enabled).
+	IsReadAnyFileAnalysis pulumi.IntOutput `pulumi:"isReadAnyFileAnalysis"`
+	// Whether to associate the dashboard (0 = off, 1 = on).
+	IsRelatedDashboard pulumi.IntOutput `pulumi:"isRelatedDashboard"`
+	// Log feature switch (0: off; 1: on).
+	IsRelatedLog pulumi.IntOutput `pulumi:"isRelatedLog"`
+	// Whether to enable detection of the remote command attack.
+	IsRemoteCommandExecutionAnalysis pulumi.IntOutput `pulumi:"isRemoteCommandExecutionAnalysis"`
+	// Whether to enable script engine injection detection. (0 - disabled; 1 - enabled).
+	IsScriptEngineInjectionAnalysis pulumi.IntOutput `pulumi:"isScriptEngineInjectionAnalysis"`
+	// SQL injection detection switch (0: off, 1: on).
+	IsSqlInjectionAnalysis pulumi.IntOutput `pulumi:"isSqlInjectionAnalysis"`
+	// Whether to enable template engine injection detection. (0: disabled; 1: enabled).
+	IsTemplateEngineInjectionAnalysis pulumi.IntOutput `pulumi:"isTemplateEngineInjectionAnalysis"`
+	// Whether to enable the detection of uploading arbitrary files. (0 - disabled; 1 - enabled).
+	IsUploadAnyFileAnalysis pulumi.IntOutput `pulumi:"isUploadAnyFileAnalysis"`
+	// Whether to enable Webshell backdoor detection. (0 - disabled; 1 - enabled).
+	IsWebshellBackdoorAnalysis pulumi.IntOutput `pulumi:"isWebshellBackdoorAnalysis"`
+	// CLS index type. (0 = full-text index; 1 = key-value index).
+	LogIndexType pulumi.IntOutput `pulumi:"logIndexType"`
+	// Log region, which takes effect after the log feature is enabled.
+	LogRegion pulumi.StringPtrOutput `pulumi:"logRegion"`
+	// Logset, which takes effect only after the log feature is enabled.
+	LogSet pulumi.StringPtrOutput `pulumi:"logSet"`
+	// Log source, which takes effect only after the log feature is enabled.
+	LogSource pulumi.StringPtrOutput `pulumi:"logSource"`
+	// Index key of spanId. It is valid when the CLS index type is key-value index.
+	LogSpanIdKey pulumi.StringPtrOutput `pulumi:"logSpanIdKey"`
+	// CLS log topic id, which takes effect after the log feature is enabled.
+	LogTopicId pulumi.StringPtrOutput `pulumi:"logTopicId"`
+	// Index key of traceId. It is valid when the CLS index type is key-value index.
+	LogTraceIdKey pulumi.StringPtrOutput `pulumi:"logTraceIdKey"`
 	// Name Of Instance.
 	Name pulumi.StringOutput `pulumi:"name"`
+	// Billing switch.
+	OpenBilling pulumi.BoolOutput `pulumi:"openBilling"`
 	// Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
-	PayMode pulumi.IntPtrOutput `pulumi:"payMode"`
+	PayMode pulumi.IntOutput `pulumi:"payMode"`
 	// External Network Reporting Address.
 	PublicCollectorUrl pulumi.StringOutput `pulumi:"publicCollectorUrl"`
+	// Response time warning line.
+	ResponseDurationWarningThreshold pulumi.IntOutput `pulumi:"responseDurationWarningThreshold"`
+	// Sampling rate (unit: %).
+	SampleRate pulumi.IntOutput `pulumi:"sampleRate"`
+	// Sampling slow call saving threshold (unit: ms).
+	SlowRequestSavedThreshold pulumi.IntOutput `pulumi:"slowRequestSavedThreshold"`
 	// Quota Of Instance Reporting.
-	SpanDailyCounters pulumi.IntPtrOutput `pulumi:"spanDailyCounters"`
+	SpanDailyCounters pulumi.IntOutput `pulumi:"spanDailyCounters"`
 	// Tag description list.
 	Tags pulumi.StringMapOutput `pulumi:"tags"`
 	// Business system authentication token.
 	Token pulumi.StringOutput `pulumi:"token"`
 	// Duration Of Trace Data.
 	TraceDuration pulumi.IntOutput `pulumi:"traceDuration"`
+	// Convergence threshold for URL long segments.
+	UrlLongSegmentThreshold pulumi.IntOutput `pulumi:"urlLongSegmentThreshold"`
+	// Convergence threshold for URL numerical segments.
+	UrlNumberSegmentThreshold pulumi.IntOutput `pulumi:"urlNumberSegmentThreshold"`
 }
 
 // NewInstance registers a new resource with the given unique name, arguments, and options.
@@ -105,14 +210,84 @@ func GetInstance(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Instance resources.
 type instanceState struct {
+	// List of custom display tags.
+	CustomShowTags []string `pulumi:"customShowTags"`
+	// Associated dashboard id, which takes effect after the associated dashboard is enabled.
+	DashboardTopicId *string `pulumi:"dashboardTopicId"`
 	// Description Of Instance.
 	Description *string `pulumi:"description"`
+	// Error rate warning line. when the average error rate of the application exceeds this threshold, the system will give an abnormal note.
+	ErrRateThreshold *int `pulumi:"errRateThreshold"`
+	// Error sampling switch (0: off, 1: on).
+	ErrorSample *int `pulumi:"errorSample"`
+	// Whether it is free (0 = paid edition; 1 = tsf restricted free edition; 2 = free edition), default 0.
+	Free *int `pulumi:"free"`
+	// APM instance ID.
+	InstanceId *string `pulumi:"instanceId"`
+	// Whether to enable the detection of deleting arbitrary files. (0 - disabled; 1: enabled).
+	IsDeleteAnyFileAnalysis *int `pulumi:"isDeleteAnyFileAnalysis"`
+	// Whether to enable deserialization detection. (0 - disabled; 1 - enabled).
+	IsDeserializationAnalysis *int `pulumi:"isDeserializationAnalysis"`
+	// Whether to enable traversal detection of the directory. (0 - disabled; 1 - enabled).
+	IsDirectoryTraversalAnalysis *int `pulumi:"isDirectoryTraversalAnalysis"`
+	// Whether to enable expression injection detection. (0 - disabled; 1 - enabled).
+	IsExpressionInjectionAnalysis *int `pulumi:"isExpressionInjectionAnalysis"`
+	// Whether to enable the detection of the inclusion of arbitrary files. (0: disabled, 1: enabled).
+	IsIncludeAnyFileAnalysis *int `pulumi:"isIncludeAnyFileAnalysis"`
+	// Whether to enable component vulnerability detection (0 = no, 1 = yes).
+	IsInstrumentationVulnerabilityScan *int `pulumi:"isInstrumentationVulnerabilityScan"`
+	// Whether to enable JNDI injection detection. (0 - disabled; 1 - enabled).
+	IsJndiInjectionAnalysis *int `pulumi:"isJndiInjectionAnalysis"`
+	// Whether to enable JNI injection detection. (0 - disabled, 1 - enabled).
+	IsJniInjectionAnalysis *int `pulumi:"isJniInjectionAnalysis"`
+	// Whether to enable detection of Java webshell.
+	IsMemoryHijackingAnalysis *int `pulumi:"isMemoryHijackingAnalysis"`
+	// Whether to enable the detection of reading arbitrary files. (0 - disabled; 1 - enabled).
+	IsReadAnyFileAnalysis *int `pulumi:"isReadAnyFileAnalysis"`
+	// Whether to associate the dashboard (0 = off, 1 = on).
+	IsRelatedDashboard *int `pulumi:"isRelatedDashboard"`
+	// Log feature switch (0: off; 1: on).
+	IsRelatedLog *int `pulumi:"isRelatedLog"`
+	// Whether to enable detection of the remote command attack.
+	IsRemoteCommandExecutionAnalysis *int `pulumi:"isRemoteCommandExecutionAnalysis"`
+	// Whether to enable script engine injection detection. (0 - disabled; 1 - enabled).
+	IsScriptEngineInjectionAnalysis *int `pulumi:"isScriptEngineInjectionAnalysis"`
+	// SQL injection detection switch (0: off, 1: on).
+	IsSqlInjectionAnalysis *int `pulumi:"isSqlInjectionAnalysis"`
+	// Whether to enable template engine injection detection. (0: disabled; 1: enabled).
+	IsTemplateEngineInjectionAnalysis *int `pulumi:"isTemplateEngineInjectionAnalysis"`
+	// Whether to enable the detection of uploading arbitrary files. (0 - disabled; 1 - enabled).
+	IsUploadAnyFileAnalysis *int `pulumi:"isUploadAnyFileAnalysis"`
+	// Whether to enable Webshell backdoor detection. (0 - disabled; 1 - enabled).
+	IsWebshellBackdoorAnalysis *int `pulumi:"isWebshellBackdoorAnalysis"`
+	// CLS index type. (0 = full-text index; 1 = key-value index).
+	LogIndexType *int `pulumi:"logIndexType"`
+	// Log region, which takes effect after the log feature is enabled.
+	LogRegion *string `pulumi:"logRegion"`
+	// Logset, which takes effect only after the log feature is enabled.
+	LogSet *string `pulumi:"logSet"`
+	// Log source, which takes effect only after the log feature is enabled.
+	LogSource *string `pulumi:"logSource"`
+	// Index key of spanId. It is valid when the CLS index type is key-value index.
+	LogSpanIdKey *string `pulumi:"logSpanIdKey"`
+	// CLS log topic id, which takes effect after the log feature is enabled.
+	LogTopicId *string `pulumi:"logTopicId"`
+	// Index key of traceId. It is valid when the CLS index type is key-value index.
+	LogTraceIdKey *string `pulumi:"logTraceIdKey"`
 	// Name Of Instance.
 	Name *string `pulumi:"name"`
+	// Billing switch.
+	OpenBilling *bool `pulumi:"openBilling"`
 	// Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
 	PayMode *int `pulumi:"payMode"`
 	// External Network Reporting Address.
 	PublicCollectorUrl *string `pulumi:"publicCollectorUrl"`
+	// Response time warning line.
+	ResponseDurationWarningThreshold *int `pulumi:"responseDurationWarningThreshold"`
+	// Sampling rate (unit: %).
+	SampleRate *int `pulumi:"sampleRate"`
+	// Sampling slow call saving threshold (unit: ms).
+	SlowRequestSavedThreshold *int `pulumi:"slowRequestSavedThreshold"`
 	// Quota Of Instance Reporting.
 	SpanDailyCounters *int `pulumi:"spanDailyCounters"`
 	// Tag description list.
@@ -121,17 +296,91 @@ type instanceState struct {
 	Token *string `pulumi:"token"`
 	// Duration Of Trace Data.
 	TraceDuration *int `pulumi:"traceDuration"`
+	// Convergence threshold for URL long segments.
+	UrlLongSegmentThreshold *int `pulumi:"urlLongSegmentThreshold"`
+	// Convergence threshold for URL numerical segments.
+	UrlNumberSegmentThreshold *int `pulumi:"urlNumberSegmentThreshold"`
 }
 
 type InstanceState struct {
+	// List of custom display tags.
+	CustomShowTags pulumi.StringArrayInput
+	// Associated dashboard id, which takes effect after the associated dashboard is enabled.
+	DashboardTopicId pulumi.StringPtrInput
 	// Description Of Instance.
 	Description pulumi.StringPtrInput
+	// Error rate warning line. when the average error rate of the application exceeds this threshold, the system will give an abnormal note.
+	ErrRateThreshold pulumi.IntPtrInput
+	// Error sampling switch (0: off, 1: on).
+	ErrorSample pulumi.IntPtrInput
+	// Whether it is free (0 = paid edition; 1 = tsf restricted free edition; 2 = free edition), default 0.
+	Free pulumi.IntPtrInput
+	// APM instance ID.
+	InstanceId pulumi.StringPtrInput
+	// Whether to enable the detection of deleting arbitrary files. (0 - disabled; 1: enabled).
+	IsDeleteAnyFileAnalysis pulumi.IntPtrInput
+	// Whether to enable deserialization detection. (0 - disabled; 1 - enabled).
+	IsDeserializationAnalysis pulumi.IntPtrInput
+	// Whether to enable traversal detection of the directory. (0 - disabled; 1 - enabled).
+	IsDirectoryTraversalAnalysis pulumi.IntPtrInput
+	// Whether to enable expression injection detection. (0 - disabled; 1 - enabled).
+	IsExpressionInjectionAnalysis pulumi.IntPtrInput
+	// Whether to enable the detection of the inclusion of arbitrary files. (0: disabled, 1: enabled).
+	IsIncludeAnyFileAnalysis pulumi.IntPtrInput
+	// Whether to enable component vulnerability detection (0 = no, 1 = yes).
+	IsInstrumentationVulnerabilityScan pulumi.IntPtrInput
+	// Whether to enable JNDI injection detection. (0 - disabled; 1 - enabled).
+	IsJndiInjectionAnalysis pulumi.IntPtrInput
+	// Whether to enable JNI injection detection. (0 - disabled, 1 - enabled).
+	IsJniInjectionAnalysis pulumi.IntPtrInput
+	// Whether to enable detection of Java webshell.
+	IsMemoryHijackingAnalysis pulumi.IntPtrInput
+	// Whether to enable the detection of reading arbitrary files. (0 - disabled; 1 - enabled).
+	IsReadAnyFileAnalysis pulumi.IntPtrInput
+	// Whether to associate the dashboard (0 = off, 1 = on).
+	IsRelatedDashboard pulumi.IntPtrInput
+	// Log feature switch (0: off; 1: on).
+	IsRelatedLog pulumi.IntPtrInput
+	// Whether to enable detection of the remote command attack.
+	IsRemoteCommandExecutionAnalysis pulumi.IntPtrInput
+	// Whether to enable script engine injection detection. (0 - disabled; 1 - enabled).
+	IsScriptEngineInjectionAnalysis pulumi.IntPtrInput
+	// SQL injection detection switch (0: off, 1: on).
+	IsSqlInjectionAnalysis pulumi.IntPtrInput
+	// Whether to enable template engine injection detection. (0: disabled; 1: enabled).
+	IsTemplateEngineInjectionAnalysis pulumi.IntPtrInput
+	// Whether to enable the detection of uploading arbitrary files. (0 - disabled; 1 - enabled).
+	IsUploadAnyFileAnalysis pulumi.IntPtrInput
+	// Whether to enable Webshell backdoor detection. (0 - disabled; 1 - enabled).
+	IsWebshellBackdoorAnalysis pulumi.IntPtrInput
+	// CLS index type. (0 = full-text index; 1 = key-value index).
+	LogIndexType pulumi.IntPtrInput
+	// Log region, which takes effect after the log feature is enabled.
+	LogRegion pulumi.StringPtrInput
+	// Logset, which takes effect only after the log feature is enabled.
+	LogSet pulumi.StringPtrInput
+	// Log source, which takes effect only after the log feature is enabled.
+	LogSource pulumi.StringPtrInput
+	// Index key of spanId. It is valid when the CLS index type is key-value index.
+	LogSpanIdKey pulumi.StringPtrInput
+	// CLS log topic id, which takes effect after the log feature is enabled.
+	LogTopicId pulumi.StringPtrInput
+	// Index key of traceId. It is valid when the CLS index type is key-value index.
+	LogTraceIdKey pulumi.StringPtrInput
 	// Name Of Instance.
 	Name pulumi.StringPtrInput
+	// Billing switch.
+	OpenBilling pulumi.BoolPtrInput
 	// Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
 	PayMode pulumi.IntPtrInput
 	// External Network Reporting Address.
 	PublicCollectorUrl pulumi.StringPtrInput
+	// Response time warning line.
+	ResponseDurationWarningThreshold pulumi.IntPtrInput
+	// Sampling rate (unit: %).
+	SampleRate pulumi.IntPtrInput
+	// Sampling slow call saving threshold (unit: ms).
+	SlowRequestSavedThreshold pulumi.IntPtrInput
 	// Quota Of Instance Reporting.
 	SpanDailyCounters pulumi.IntPtrInput
 	// Tag description list.
@@ -140,6 +389,10 @@ type InstanceState struct {
 	Token pulumi.StringPtrInput
 	// Duration Of Trace Data.
 	TraceDuration pulumi.IntPtrInput
+	// Convergence threshold for URL long segments.
+	UrlLongSegmentThreshold pulumi.IntPtrInput
+	// Convergence threshold for URL numerical segments.
+	UrlNumberSegmentThreshold pulumi.IntPtrInput
 }
 
 func (InstanceState) ElementType() reflect.Type {
@@ -147,34 +400,178 @@ func (InstanceState) ElementType() reflect.Type {
 }
 
 type instanceArgs struct {
+	// List of custom display tags.
+	CustomShowTags []string `pulumi:"customShowTags"`
+	// Associated dashboard id, which takes effect after the associated dashboard is enabled.
+	DashboardTopicId *string `pulumi:"dashboardTopicId"`
 	// Description Of Instance.
 	Description *string `pulumi:"description"`
+	// Error rate warning line. when the average error rate of the application exceeds this threshold, the system will give an abnormal note.
+	ErrRateThreshold *int `pulumi:"errRateThreshold"`
+	// Error sampling switch (0: off, 1: on).
+	ErrorSample *int `pulumi:"errorSample"`
+	// Whether it is free (0 = paid edition; 1 = tsf restricted free edition; 2 = free edition), default 0.
+	Free *int `pulumi:"free"`
+	// Whether to enable the detection of deleting arbitrary files. (0 - disabled; 1: enabled).
+	IsDeleteAnyFileAnalysis *int `pulumi:"isDeleteAnyFileAnalysis"`
+	// Whether to enable deserialization detection. (0 - disabled; 1 - enabled).
+	IsDeserializationAnalysis *int `pulumi:"isDeserializationAnalysis"`
+	// Whether to enable traversal detection of the directory. (0 - disabled; 1 - enabled).
+	IsDirectoryTraversalAnalysis *int `pulumi:"isDirectoryTraversalAnalysis"`
+	// Whether to enable expression injection detection. (0 - disabled; 1 - enabled).
+	IsExpressionInjectionAnalysis *int `pulumi:"isExpressionInjectionAnalysis"`
+	// Whether to enable the detection of the inclusion of arbitrary files. (0: disabled, 1: enabled).
+	IsIncludeAnyFileAnalysis *int `pulumi:"isIncludeAnyFileAnalysis"`
+	// Whether to enable component vulnerability detection (0 = no, 1 = yes).
+	IsInstrumentationVulnerabilityScan *int `pulumi:"isInstrumentationVulnerabilityScan"`
+	// Whether to enable JNDI injection detection. (0 - disabled; 1 - enabled).
+	IsJndiInjectionAnalysis *int `pulumi:"isJndiInjectionAnalysis"`
+	// Whether to enable JNI injection detection. (0 - disabled, 1 - enabled).
+	IsJniInjectionAnalysis *int `pulumi:"isJniInjectionAnalysis"`
+	// Whether to enable detection of Java webshell.
+	IsMemoryHijackingAnalysis *int `pulumi:"isMemoryHijackingAnalysis"`
+	// Whether to enable the detection of reading arbitrary files. (0 - disabled; 1 - enabled).
+	IsReadAnyFileAnalysis *int `pulumi:"isReadAnyFileAnalysis"`
+	// Whether to associate the dashboard (0 = off, 1 = on).
+	IsRelatedDashboard *int `pulumi:"isRelatedDashboard"`
+	// Log feature switch (0: off; 1: on).
+	IsRelatedLog *int `pulumi:"isRelatedLog"`
+	// Whether to enable detection of the remote command attack.
+	IsRemoteCommandExecutionAnalysis *int `pulumi:"isRemoteCommandExecutionAnalysis"`
+	// Whether to enable script engine injection detection. (0 - disabled; 1 - enabled).
+	IsScriptEngineInjectionAnalysis *int `pulumi:"isScriptEngineInjectionAnalysis"`
+	// SQL injection detection switch (0: off, 1: on).
+	IsSqlInjectionAnalysis *int `pulumi:"isSqlInjectionAnalysis"`
+	// Whether to enable template engine injection detection. (0: disabled; 1: enabled).
+	IsTemplateEngineInjectionAnalysis *int `pulumi:"isTemplateEngineInjectionAnalysis"`
+	// Whether to enable the detection of uploading arbitrary files. (0 - disabled; 1 - enabled).
+	IsUploadAnyFileAnalysis *int `pulumi:"isUploadAnyFileAnalysis"`
+	// Whether to enable Webshell backdoor detection. (0 - disabled; 1 - enabled).
+	IsWebshellBackdoorAnalysis *int `pulumi:"isWebshellBackdoorAnalysis"`
+	// CLS index type. (0 = full-text index; 1 = key-value index).
+	LogIndexType *int `pulumi:"logIndexType"`
+	// Log region, which takes effect after the log feature is enabled.
+	LogRegion *string `pulumi:"logRegion"`
+	// Logset, which takes effect only after the log feature is enabled.
+	LogSet *string `pulumi:"logSet"`
+	// Log source, which takes effect only after the log feature is enabled.
+	LogSource *string `pulumi:"logSource"`
+	// Index key of spanId. It is valid when the CLS index type is key-value index.
+	LogSpanIdKey *string `pulumi:"logSpanIdKey"`
+	// CLS log topic id, which takes effect after the log feature is enabled.
+	LogTopicId *string `pulumi:"logTopicId"`
+	// Index key of traceId. It is valid when the CLS index type is key-value index.
+	LogTraceIdKey *string `pulumi:"logTraceIdKey"`
 	// Name Of Instance.
 	Name *string `pulumi:"name"`
+	// Billing switch.
+	OpenBilling *bool `pulumi:"openBilling"`
 	// Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
 	PayMode *int `pulumi:"payMode"`
+	// Response time warning line.
+	ResponseDurationWarningThreshold *int `pulumi:"responseDurationWarningThreshold"`
+	// Sampling rate (unit: %).
+	SampleRate *int `pulumi:"sampleRate"`
+	// Sampling slow call saving threshold (unit: ms).
+	SlowRequestSavedThreshold *int `pulumi:"slowRequestSavedThreshold"`
 	// Quota Of Instance Reporting.
 	SpanDailyCounters *int `pulumi:"spanDailyCounters"`
 	// Tag description list.
 	Tags map[string]string `pulumi:"tags"`
 	// Duration Of Trace Data.
 	TraceDuration *int `pulumi:"traceDuration"`
+	// Convergence threshold for URL long segments.
+	UrlLongSegmentThreshold *int `pulumi:"urlLongSegmentThreshold"`
+	// Convergence threshold for URL numerical segments.
+	UrlNumberSegmentThreshold *int `pulumi:"urlNumberSegmentThreshold"`
 }
 
 // The set of arguments for constructing a Instance resource.
 type InstanceArgs struct {
+	// List of custom display tags.
+	CustomShowTags pulumi.StringArrayInput
+	// Associated dashboard id, which takes effect after the associated dashboard is enabled.
+	DashboardTopicId pulumi.StringPtrInput
 	// Description Of Instance.
 	Description pulumi.StringPtrInput
+	// Error rate warning line. when the average error rate of the application exceeds this threshold, the system will give an abnormal note.
+	ErrRateThreshold pulumi.IntPtrInput
+	// Error sampling switch (0: off, 1: on).
+	ErrorSample pulumi.IntPtrInput
+	// Whether it is free (0 = paid edition; 1 = tsf restricted free edition; 2 = free edition), default 0.
+	Free pulumi.IntPtrInput
+	// Whether to enable the detection of deleting arbitrary files. (0 - disabled; 1: enabled).
+	IsDeleteAnyFileAnalysis pulumi.IntPtrInput
+	// Whether to enable deserialization detection. (0 - disabled; 1 - enabled).
+	IsDeserializationAnalysis pulumi.IntPtrInput
+	// Whether to enable traversal detection of the directory. (0 - disabled; 1 - enabled).
+	IsDirectoryTraversalAnalysis pulumi.IntPtrInput
+	// Whether to enable expression injection detection. (0 - disabled; 1 - enabled).
+	IsExpressionInjectionAnalysis pulumi.IntPtrInput
+	// Whether to enable the detection of the inclusion of arbitrary files. (0: disabled, 1: enabled).
+	IsIncludeAnyFileAnalysis pulumi.IntPtrInput
+	// Whether to enable component vulnerability detection (0 = no, 1 = yes).
+	IsInstrumentationVulnerabilityScan pulumi.IntPtrInput
+	// Whether to enable JNDI injection detection. (0 - disabled; 1 - enabled).
+	IsJndiInjectionAnalysis pulumi.IntPtrInput
+	// Whether to enable JNI injection detection. (0 - disabled, 1 - enabled).
+	IsJniInjectionAnalysis pulumi.IntPtrInput
+	// Whether to enable detection of Java webshell.
+	IsMemoryHijackingAnalysis pulumi.IntPtrInput
+	// Whether to enable the detection of reading arbitrary files. (0 - disabled; 1 - enabled).
+	IsReadAnyFileAnalysis pulumi.IntPtrInput
+	// Whether to associate the dashboard (0 = off, 1 = on).
+	IsRelatedDashboard pulumi.IntPtrInput
+	// Log feature switch (0: off; 1: on).
+	IsRelatedLog pulumi.IntPtrInput
+	// Whether to enable detection of the remote command attack.
+	IsRemoteCommandExecutionAnalysis pulumi.IntPtrInput
+	// Whether to enable script engine injection detection. (0 - disabled; 1 - enabled).
+	IsScriptEngineInjectionAnalysis pulumi.IntPtrInput
+	// SQL injection detection switch (0: off, 1: on).
+	IsSqlInjectionAnalysis pulumi.IntPtrInput
+	// Whether to enable template engine injection detection. (0: disabled; 1: enabled).
+	IsTemplateEngineInjectionAnalysis pulumi.IntPtrInput
+	// Whether to enable the detection of uploading arbitrary files. (0 - disabled; 1 - enabled).
+	IsUploadAnyFileAnalysis pulumi.IntPtrInput
+	// Whether to enable Webshell backdoor detection. (0 - disabled; 1 - enabled).
+	IsWebshellBackdoorAnalysis pulumi.IntPtrInput
+	// CLS index type. (0 = full-text index; 1 = key-value index).
+	LogIndexType pulumi.IntPtrInput
+	// Log region, which takes effect after the log feature is enabled.
+	LogRegion pulumi.StringPtrInput
+	// Logset, which takes effect only after the log feature is enabled.
+	LogSet pulumi.StringPtrInput
+	// Log source, which takes effect only after the log feature is enabled.
+	LogSource pulumi.StringPtrInput
+	// Index key of spanId. It is valid when the CLS index type is key-value index.
+	LogSpanIdKey pulumi.StringPtrInput
+	// CLS log topic id, which takes effect after the log feature is enabled.
+	LogTopicId pulumi.StringPtrInput
+	// Index key of traceId. It is valid when the CLS index type is key-value index.
+	LogTraceIdKey pulumi.StringPtrInput
 	// Name Of Instance.
 	Name pulumi.StringPtrInput
+	// Billing switch.
+	OpenBilling pulumi.BoolPtrInput
 	// Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
 	PayMode pulumi.IntPtrInput
+	// Response time warning line.
+	ResponseDurationWarningThreshold pulumi.IntPtrInput
+	// Sampling rate (unit: %).
+	SampleRate pulumi.IntPtrInput
+	// Sampling slow call saving threshold (unit: ms).
+	SlowRequestSavedThreshold pulumi.IntPtrInput
 	// Quota Of Instance Reporting.
 	SpanDailyCounters pulumi.IntPtrInput
 	// Tag description list.
 	Tags pulumi.StringMapInput
 	// Duration Of Trace Data.
 	TraceDuration pulumi.IntPtrInput
+	// Convergence threshold for URL long segments.
+	UrlLongSegmentThreshold pulumi.IntPtrInput
+	// Convergence threshold for URL numerical segments.
+	UrlNumberSegmentThreshold pulumi.IntPtrInput
 }
 
 func (InstanceArgs) ElementType() reflect.Type {
@@ -264,9 +661,164 @@ func (o InstanceOutput) ToInstanceOutputWithContext(ctx context.Context) Instanc
 	return o
 }
 
+// List of custom display tags.
+func (o InstanceOutput) CustomShowTags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringArrayOutput { return v.CustomShowTags }).(pulumi.StringArrayOutput)
+}
+
+// Associated dashboard id, which takes effect after the associated dashboard is enabled.
+func (o InstanceOutput) DashboardTopicId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.DashboardTopicId }).(pulumi.StringPtrOutput)
+}
+
 // Description Of Instance.
 func (o InstanceOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// Error rate warning line. when the average error rate of the application exceeds this threshold, the system will give an abnormal note.
+func (o InstanceOutput) ErrRateThreshold() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.ErrRateThreshold }).(pulumi.IntOutput)
+}
+
+// Error sampling switch (0: off, 1: on).
+func (o InstanceOutput) ErrorSample() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.ErrorSample }).(pulumi.IntOutput)
+}
+
+// Whether it is free (0 = paid edition; 1 = tsf restricted free edition; 2 = free edition), default 0.
+func (o InstanceOutput) Free() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.Free }).(pulumi.IntOutput)
+}
+
+// APM instance ID.
+func (o InstanceOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Whether to enable the detection of deleting arbitrary files. (0 - disabled; 1: enabled).
+func (o InstanceOutput) IsDeleteAnyFileAnalysis() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.IsDeleteAnyFileAnalysis }).(pulumi.IntOutput)
+}
+
+// Whether to enable deserialization detection. (0 - disabled; 1 - enabled).
+func (o InstanceOutput) IsDeserializationAnalysis() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.IsDeserializationAnalysis }).(pulumi.IntOutput)
+}
+
+// Whether to enable traversal detection of the directory. (0 - disabled; 1 - enabled).
+func (o InstanceOutput) IsDirectoryTraversalAnalysis() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.IsDirectoryTraversalAnalysis }).(pulumi.IntOutput)
+}
+
+// Whether to enable expression injection detection. (0 - disabled; 1 - enabled).
+func (o InstanceOutput) IsExpressionInjectionAnalysis() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.IsExpressionInjectionAnalysis }).(pulumi.IntOutput)
+}
+
+// Whether to enable the detection of the inclusion of arbitrary files. (0: disabled, 1: enabled).
+func (o InstanceOutput) IsIncludeAnyFileAnalysis() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.IsIncludeAnyFileAnalysis }).(pulumi.IntOutput)
+}
+
+// Whether to enable component vulnerability detection (0 = no, 1 = yes).
+func (o InstanceOutput) IsInstrumentationVulnerabilityScan() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.IsInstrumentationVulnerabilityScan }).(pulumi.IntOutput)
+}
+
+// Whether to enable JNDI injection detection. (0 - disabled; 1 - enabled).
+func (o InstanceOutput) IsJndiInjectionAnalysis() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.IsJndiInjectionAnalysis }).(pulumi.IntOutput)
+}
+
+// Whether to enable JNI injection detection. (0 - disabled, 1 - enabled).
+func (o InstanceOutput) IsJniInjectionAnalysis() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.IsJniInjectionAnalysis }).(pulumi.IntOutput)
+}
+
+// Whether to enable detection of Java webshell.
+func (o InstanceOutput) IsMemoryHijackingAnalysis() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.IsMemoryHijackingAnalysis }).(pulumi.IntOutput)
+}
+
+// Whether to enable the detection of reading arbitrary files. (0 - disabled; 1 - enabled).
+func (o InstanceOutput) IsReadAnyFileAnalysis() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.IsReadAnyFileAnalysis }).(pulumi.IntOutput)
+}
+
+// Whether to associate the dashboard (0 = off, 1 = on).
+func (o InstanceOutput) IsRelatedDashboard() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.IsRelatedDashboard }).(pulumi.IntOutput)
+}
+
+// Log feature switch (0: off; 1: on).
+func (o InstanceOutput) IsRelatedLog() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.IsRelatedLog }).(pulumi.IntOutput)
+}
+
+// Whether to enable detection of the remote command attack.
+func (o InstanceOutput) IsRemoteCommandExecutionAnalysis() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.IsRemoteCommandExecutionAnalysis }).(pulumi.IntOutput)
+}
+
+// Whether to enable script engine injection detection. (0 - disabled; 1 - enabled).
+func (o InstanceOutput) IsScriptEngineInjectionAnalysis() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.IsScriptEngineInjectionAnalysis }).(pulumi.IntOutput)
+}
+
+// SQL injection detection switch (0: off, 1: on).
+func (o InstanceOutput) IsSqlInjectionAnalysis() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.IsSqlInjectionAnalysis }).(pulumi.IntOutput)
+}
+
+// Whether to enable template engine injection detection. (0: disabled; 1: enabled).
+func (o InstanceOutput) IsTemplateEngineInjectionAnalysis() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.IsTemplateEngineInjectionAnalysis }).(pulumi.IntOutput)
+}
+
+// Whether to enable the detection of uploading arbitrary files. (0 - disabled; 1 - enabled).
+func (o InstanceOutput) IsUploadAnyFileAnalysis() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.IsUploadAnyFileAnalysis }).(pulumi.IntOutput)
+}
+
+// Whether to enable Webshell backdoor detection. (0 - disabled; 1 - enabled).
+func (o InstanceOutput) IsWebshellBackdoorAnalysis() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.IsWebshellBackdoorAnalysis }).(pulumi.IntOutput)
+}
+
+// CLS index type. (0 = full-text index; 1 = key-value index).
+func (o InstanceOutput) LogIndexType() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.LogIndexType }).(pulumi.IntOutput)
+}
+
+// Log region, which takes effect after the log feature is enabled.
+func (o InstanceOutput) LogRegion() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.LogRegion }).(pulumi.StringPtrOutput)
+}
+
+// Logset, which takes effect only after the log feature is enabled.
+func (o InstanceOutput) LogSet() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.LogSet }).(pulumi.StringPtrOutput)
+}
+
+// Log source, which takes effect only after the log feature is enabled.
+func (o InstanceOutput) LogSource() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.LogSource }).(pulumi.StringPtrOutput)
+}
+
+// Index key of spanId. It is valid when the CLS index type is key-value index.
+func (o InstanceOutput) LogSpanIdKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.LogSpanIdKey }).(pulumi.StringPtrOutput)
+}
+
+// CLS log topic id, which takes effect after the log feature is enabled.
+func (o InstanceOutput) LogTopicId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.LogTopicId }).(pulumi.StringPtrOutput)
+}
+
+// Index key of traceId. It is valid when the CLS index type is key-value index.
+func (o InstanceOutput) LogTraceIdKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.LogTraceIdKey }).(pulumi.StringPtrOutput)
 }
 
 // Name Of Instance.
@@ -274,9 +826,14 @@ func (o InstanceOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
+// Billing switch.
+func (o InstanceOutput) OpenBilling() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Instance) pulumi.BoolOutput { return v.OpenBilling }).(pulumi.BoolOutput)
+}
+
 // Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
-func (o InstanceOutput) PayMode() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.PayMode }).(pulumi.IntPtrOutput)
+func (o InstanceOutput) PayMode() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.PayMode }).(pulumi.IntOutput)
 }
 
 // External Network Reporting Address.
@@ -284,9 +841,24 @@ func (o InstanceOutput) PublicCollectorUrl() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.PublicCollectorUrl }).(pulumi.StringOutput)
 }
 
+// Response time warning line.
+func (o InstanceOutput) ResponseDurationWarningThreshold() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.ResponseDurationWarningThreshold }).(pulumi.IntOutput)
+}
+
+// Sampling rate (unit: %).
+func (o InstanceOutput) SampleRate() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.SampleRate }).(pulumi.IntOutput)
+}
+
+// Sampling slow call saving threshold (unit: ms).
+func (o InstanceOutput) SlowRequestSavedThreshold() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.SlowRequestSavedThreshold }).(pulumi.IntOutput)
+}
+
 // Quota Of Instance Reporting.
-func (o InstanceOutput) SpanDailyCounters() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.SpanDailyCounters }).(pulumi.IntPtrOutput)
+func (o InstanceOutput) SpanDailyCounters() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.SpanDailyCounters }).(pulumi.IntOutput)
 }
 
 // Tag description list.
@@ -302,6 +874,16 @@ func (o InstanceOutput) Token() pulumi.StringOutput {
 // Duration Of Trace Data.
 func (o InstanceOutput) TraceDuration() pulumi.IntOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.TraceDuration }).(pulumi.IntOutput)
+}
+
+// Convergence threshold for URL long segments.
+func (o InstanceOutput) UrlLongSegmentThreshold() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.UrlLongSegmentThreshold }).(pulumi.IntOutput)
+}
+
+// Convergence threshold for URL numerical segments.
+func (o InstanceOutput) UrlNumberSegmentThreshold() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.UrlNumberSegmentThreshold }).(pulumi.IntOutput)
 }
 
 type InstanceArrayOutput struct{ *pulumi.OutputState }

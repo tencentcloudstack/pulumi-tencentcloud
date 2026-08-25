@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const fileSystems = tencentcloud.Cfs.getFileSystems({
+ * const fileSystems = tencentcloud.cfs.getFileSystems({
  *     fileSystemId: "cfs-6hgquxmj",
  *     name: "test",
  *     availabilityZone: "ap-guangzhou-3",
@@ -102,7 +102,7 @@ export interface GetFileSystemsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const fileSystems = tencentcloud.Cfs.getFileSystems({
+ * const fileSystems = tencentcloud.cfs.getFileSystems({
  *     fileSystemId: "cfs-6hgquxmj",
  *     name: "test",
  *     availabilityZone: "ap-guangzhou-3",
@@ -129,25 +129,25 @@ export interface GetFileSystemsOutputArgs {
     /**
      * The available zone that the file system locates at.
      */
-    availabilityZone?: pulumi.Input<string>;
+    availabilityZone?: pulumi.Input<string | undefined>;
     /**
      * A specified file system ID used to query.
      */
-    fileSystemId?: pulumi.Input<string>;
+    fileSystemId?: pulumi.Input<string | undefined>;
     /**
      * A file system name used to query.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * ID of a vpc subnet.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * ID of the vpc to be queried.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }

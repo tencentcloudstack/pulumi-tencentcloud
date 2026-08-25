@@ -40,7 +40,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Identity
     /// 
     /// ## Import
     /// 
-    /// organization identity_center_user_sync_provisioning can be imported using the id, e.g.
+    /// organization IdentityCenterUserSyncProvisioning can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Identity/centerUserSyncProvisioning:CenterUserSyncProvisioning identity_center_user_sync_provisioning ${zoneId}#${userProvisioningId}

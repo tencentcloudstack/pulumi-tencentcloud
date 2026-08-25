@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Kms.getWhiteBoxKeyDetails({
+ * const example = tencentcloud.kms.getWhiteBoxKeyDetails({
  *     keyStatus: 0,
  * });
  * ```
@@ -67,7 +67,7 @@ export interface GetWhiteBoxKeyDetailsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Kms.getWhiteBoxKeyDetails({
+ * const example = tencentcloud.kms.getWhiteBoxKeyDetails({
  *     keyStatus: 0,
  * });
  * ```
@@ -88,9 +88,9 @@ export interface GetWhiteBoxKeyDetailsOutputArgs {
     /**
      * Filter condition: status of the key, 0: disabled, 1: enabled.
      */
-    keyStatus?: pulumi.Input<number>;
+    keyStatus?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

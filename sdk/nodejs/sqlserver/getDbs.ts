@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "sqlserver",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -62,7 +62,7 @@ import * as utilities from "../utilities";
  *     charset: "Chinese_PRC_BIN",
  *     remark: "test-remark",
  * });
- * const example = tencentcloud.Sqlserver.getDbsOutput({
+ * const example = tencentcloud.sqlserver.getDbsOutput({
  *     instanceId: exampleDb.instanceId,
  * });
  * ```
@@ -116,7 +116,7 @@ export interface GetDbsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "sqlserver",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -163,7 +163,7 @@ export interface GetDbsResult {
  *     charset: "Chinese_PRC_BIN",
  *     remark: "test-remark",
  * });
- * const example = tencentcloud.Sqlserver.getDbsOutput({
+ * const example = tencentcloud.sqlserver.getDbsOutput({
  *     instanceId: exampleDb.instanceId,
  * });
  * ```
@@ -187,5 +187,5 @@ export interface GetDbsOutputArgs {
     /**
      * Used to store results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

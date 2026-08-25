@@ -72,12 +72,8 @@ type GetProjectSecurityGroupsResult struct {
 }
 
 func GetProjectSecurityGroupsOutput(ctx *pulumi.Context, args GetProjectSecurityGroupsOutputArgs, opts ...pulumi.InvokeOption) GetProjectSecurityGroupsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetProjectSecurityGroupsResultOutput, error) {
-			args := v.(GetProjectSecurityGroupsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cynosdb/getProjectSecurityGroups:getProjectSecurityGroups", args, GetProjectSecurityGroupsResultOutput{}, options).(GetProjectSecurityGroupsResultOutput), nil
-		}).(GetProjectSecurityGroupsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cynosdb/getProjectSecurityGroups:getProjectSecurityGroups", args, GetProjectSecurityGroupsResultOutput{}, options).(GetProjectSecurityGroupsResultOutput)
 }
 
 // A collection of arguments for invoking getProjectSecurityGroups.

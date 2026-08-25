@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instancePluginList = tencentcloud.Elasticsearch.getInstancePluginList({
+ * const instancePluginList = tencentcloud.elasticsearch.getInstancePluginList({
  *     instanceId: "es-xxxxxx",
  * });
  * ```
@@ -89,7 +89,7 @@ export interface GetInstancePluginListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instancePluginList = tencentcloud.Elasticsearch.getInstancePluginList({
+ * const instancePluginList = tencentcloud.elasticsearch.getInstancePluginList({
  *     instanceId: "es-xxxxxx",
  * });
  * ```
@@ -116,19 +116,19 @@ export interface GetInstancePluginListOutputArgs {
     /**
      * order field. Valid values: `pluginName`.
      */
-    orderBy?: pulumi.Input<string>;
+    orderBy?: pulumi.Input<string | undefined>;
     /**
      * Order type. Valid values:
      * - asc: Ascending asc
      * - desc: Descending Desc.
      */
-    orderByType?: pulumi.Input<string>;
+    orderByType?: pulumi.Input<string | undefined>;
     /**
      * Plugin type. Valid values: `0`: System plugin.
      */
-    pluginType?: pulumi.Input<number>;
+    pluginType?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

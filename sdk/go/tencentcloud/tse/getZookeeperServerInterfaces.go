@@ -67,12 +67,8 @@ type GetZookeeperServerInterfacesResult struct {
 }
 
 func GetZookeeperServerInterfacesOutput(ctx *pulumi.Context, args GetZookeeperServerInterfacesOutputArgs, opts ...pulumi.InvokeOption) GetZookeeperServerInterfacesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetZookeeperServerInterfacesResultOutput, error) {
-			args := v.(GetZookeeperServerInterfacesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tse/getZookeeperServerInterfaces:getZookeeperServerInterfaces", args, GetZookeeperServerInterfacesResultOutput{}, options).(GetZookeeperServerInterfacesResultOutput), nil
-		}).(GetZookeeperServerInterfacesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tse/getZookeeperServerInterfaces:getZookeeperServerInterfaces", args, GetZookeeperServerInterfacesResultOutput{}, options).(GetZookeeperServerInterfacesResultOutput)
 }
 
 // A collection of arguments for invoking getZookeeperServerInterfaces.

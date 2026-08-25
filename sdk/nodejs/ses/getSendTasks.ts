@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const sendTasks = tencentcloud.Ses.getSendTasks({
+ * const sendTasks = tencentcloud.ses.getSendTasks({
  *     status: 10,
  *     receiverId: 1063742,
  *     taskType: 1,
@@ -87,7 +87,7 @@ export interface GetSendTasksResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const sendTasks = tencentcloud.Ses.getSendTasks({
+ * const sendTasks = tencentcloud.ses.getSendTasks({
  *     status: 10,
  *     receiverId: 1063742,
  *     taskType: 1,
@@ -112,17 +112,17 @@ export interface GetSendTasksOutputArgs {
     /**
      * Recipient group ID.
      */
-    receiverId?: pulumi.Input<number>;
+    receiverId?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Task status. `1`: to start; `5`: sending; `6`: sending suspended today; `7`: sending error; `10`: sent. To query tasks in all states, do not pass in this parameter.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * Task type. `1`: immediate; `2`: scheduled; `3`: recurring. To query tasks of all types, do not pass in this parameter.
      */
-    taskType?: pulumi.Input<number>;
+    taskType?: pulumi.Input<number | undefined>;
 }

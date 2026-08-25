@@ -23,7 +23,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         private InputList<string>? _versions;
 
         /// <summary>
-        /// TLS version. at least one must be specified. if multiple versions are specified, they must be consecutive, e.g., enable tls1, 1.1, 1.2, and 1.3. it is not allowed to enable only 1 and 1.2 while disabling 1.1. valid values: tlsv1: tlsv1 version; `tlsv1.1`: tlsv1.1 version; `tlsv1.2`: tlsv1.2 version; `tlsv1.3`: tlsv1.3 version.
+        /// TLS version. at least one must be specified. if multiple versions are specified, they must be consecutive, e.g., enable TLSv1, TLSv1.1, TLSv1.2, and TLSv1.3. it is not allowed to enable only 1 and 1.2 while disabling 1.1. valid values: TLSv1: TLSv1 version; TLSv1.1: TLSv1.1 version; TLSv1.2: TLSv1.2 version; TLSv1.3: TLSv1.3 version.
         /// </summary>
         public InputList<string> Versions
         {

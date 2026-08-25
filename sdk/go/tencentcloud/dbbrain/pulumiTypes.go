@@ -1040,25 +1040,25 @@ func (o GetDiagDbInstancesItemInstanceConfArrayOutput) Index(i pulumi.IntInput) 
 }
 
 type GetDiagEventsList struct {
-	// diag item.
+	// Diag item.
 	DiagItem string `pulumi:"diagItem"`
-	// diag type.
+	// Diag type.
 	DiagType string `pulumi:"diagType"`
-	// end time.
+	// End time.
 	EndTime string `pulumi:"endTime"`
-	// event id.
+	// Event ID.
 	EventId int `pulumi:"eventId"`
-	// instance id.
+	// Instance ID.
 	InstanceId string `pulumi:"instanceId"`
-	// metric.
+	// Metric.
 	Metric string `pulumi:"metric"`
-	// outline.
+	// Outline.
 	Outline string `pulumi:"outline"`
-	// region.
+	// Region.
 	Region string `pulumi:"region"`
-	// severity.
+	// Severity.
 	Severity int `pulumi:"severity"`
-	// start time.
+	// Start time.
 	StartTime string `pulumi:"startTime"`
 }
 
@@ -1074,25 +1074,25 @@ type GetDiagEventsListInput interface {
 }
 
 type GetDiagEventsListArgs struct {
-	// diag item.
+	// Diag item.
 	DiagItem pulumi.StringInput `pulumi:"diagItem"`
-	// diag type.
+	// Diag type.
 	DiagType pulumi.StringInput `pulumi:"diagType"`
-	// end time.
+	// End time.
 	EndTime pulumi.StringInput `pulumi:"endTime"`
-	// event id.
+	// Event ID.
 	EventId pulumi.IntInput `pulumi:"eventId"`
-	// instance id.
+	// Instance ID.
 	InstanceId pulumi.StringInput `pulumi:"instanceId"`
-	// metric.
+	// Metric.
 	Metric pulumi.StringInput `pulumi:"metric"`
-	// outline.
+	// Outline.
 	Outline pulumi.StringInput `pulumi:"outline"`
-	// region.
+	// Region.
 	Region pulumi.StringInput `pulumi:"region"`
-	// severity.
+	// Severity.
 	Severity pulumi.IntInput `pulumi:"severity"`
-	// start time.
+	// Start time.
 	StartTime pulumi.StringInput `pulumi:"startTime"`
 }
 
@@ -1147,52 +1147,52 @@ func (o GetDiagEventsListOutput) ToGetDiagEventsListOutputWithContext(ctx contex
 	return o
 }
 
-// diag item.
+// Diag item.
 func (o GetDiagEventsListOutput) DiagItem() pulumi.StringOutput {
 	return o.ApplyT(func(v GetDiagEventsList) string { return v.DiagItem }).(pulumi.StringOutput)
 }
 
-// diag type.
+// Diag type.
 func (o GetDiagEventsListOutput) DiagType() pulumi.StringOutput {
 	return o.ApplyT(func(v GetDiagEventsList) string { return v.DiagType }).(pulumi.StringOutput)
 }
 
-// end time.
+// End time.
 func (o GetDiagEventsListOutput) EndTime() pulumi.StringOutput {
 	return o.ApplyT(func(v GetDiagEventsList) string { return v.EndTime }).(pulumi.StringOutput)
 }
 
-// event id.
+// Event ID.
 func (o GetDiagEventsListOutput) EventId() pulumi.IntOutput {
 	return o.ApplyT(func(v GetDiagEventsList) int { return v.EventId }).(pulumi.IntOutput)
 }
 
-// instance id.
+// Instance ID.
 func (o GetDiagEventsListOutput) InstanceId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetDiagEventsList) string { return v.InstanceId }).(pulumi.StringOutput)
 }
 
-// metric.
+// Metric.
 func (o GetDiagEventsListOutput) Metric() pulumi.StringOutput {
 	return o.ApplyT(func(v GetDiagEventsList) string { return v.Metric }).(pulumi.StringOutput)
 }
 
-// outline.
+// Outline.
 func (o GetDiagEventsListOutput) Outline() pulumi.StringOutput {
 	return o.ApplyT(func(v GetDiagEventsList) string { return v.Outline }).(pulumi.StringOutput)
 }
 
-// region.
+// Region.
 func (o GetDiagEventsListOutput) Region() pulumi.StringOutput {
 	return o.ApplyT(func(v GetDiagEventsList) string { return v.Region }).(pulumi.StringOutput)
 }
 
-// severity.
+// Severity.
 func (o GetDiagEventsListOutput) Severity() pulumi.IntOutput {
 	return o.ApplyT(func(v GetDiagEventsList) int { return v.Severity }).(pulumi.IntOutput)
 }
 
-// start time.
+// Start time.
 func (o GetDiagEventsListOutput) StartTime() pulumi.StringOutput {
 	return o.ApplyT(func(v GetDiagEventsList) string { return v.StartTime }).(pulumi.StringOutput)
 }

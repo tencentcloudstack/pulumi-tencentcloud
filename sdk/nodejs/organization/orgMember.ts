@@ -32,9 +32,8 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * Organization member can be imported using the id, e.g.
- *
  * ```sh
- * $ pulumi import tencentcloud:Organization/orgMember:OrgMember example id=100043985088
+ * $ pulumi import tencentcloud:Organization/orgMember:OrgMember example 100043985088
  * ```
  */
 export class OrgMember extends pulumi.CustomResource {
@@ -77,6 +76,10 @@ export class OrgMember extends pulumi.CustomResource {
      * Whether to allow member to leave the organization.Valid values:- `Allow`.- `Denied`.
      */
     declare public /*out*/ readonly isAllowQuit: pulumi.Output<string>;
+    /**
+     * Whether to synchronize organization member names to their account nicknames. Values: 1 - Sync, 0 - Do not sync. This parameter takes effect only when the name field is being modified.
+     */
+    declare public readonly isModifyNickName: pulumi.Output<number | undefined>;
     /**
      * Member Type.Valid values:- `Invite`: The member is invited.- `Create`: The member is created.
      */
@@ -150,6 +153,7 @@ export class OrgMember extends pulumi.CustomResource {
             resourceInputs["createTime"] = state?.createTime;
             resourceInputs["forceDeleteAccount"] = state?.forceDeleteAccount;
             resourceInputs["isAllowQuit"] = state?.isAllowQuit;
+            resourceInputs["isModifyNickName"] = state?.isModifyNickName;
             resourceInputs["memberType"] = state?.memberType;
             resourceInputs["name"] = state?.name;
             resourceInputs["nodeId"] = state?.nodeId;
@@ -176,6 +180,7 @@ export class OrgMember extends pulumi.CustomResource {
                 throw new Error("Missing required property 'policyType'");
             }
             resourceInputs["forceDeleteAccount"] = args?.forceDeleteAccount;
+            resourceInputs["isModifyNickName"] = args?.isModifyNickName;
             resourceInputs["name"] = args?.name;
             resourceInputs["nodeId"] = args?.nodeId;
             resourceInputs["payUin"] = args?.payUin;
@@ -205,71 +210,75 @@ export interface OrgMemberState {
     /**
      * Member creation time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Whether to force delete the member account when deleting the organization member. It is only applicable to member accounts of the creation type, not to member accounts of the invitation type. Default is false.
      */
-    forceDeleteAccount?: pulumi.Input<boolean>;
+    forceDeleteAccount?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to allow member to leave the organization.Valid values:- `Allow`.- `Denied`.
      */
-    isAllowQuit?: pulumi.Input<string>;
+    isAllowQuit?: pulumi.Input<string | undefined>;
+    /**
+     * Whether to synchronize organization member names to their account nicknames. Values: 1 - Sync, 0 - Do not sync. This parameter takes effect only when the name field is being modified.
+     */
+    isModifyNickName?: pulumi.Input<number | undefined>;
     /**
      * Member Type.Valid values:- `Invite`: The member is invited.- `Create`: The member is created.
      */
-    memberType?: pulumi.Input<string>;
+    memberType?: pulumi.Input<string | undefined>;
     /**
      * Member name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Organization node ID.
      */
-    nodeId?: pulumi.Input<number>;
+    nodeId?: pulumi.Input<number | undefined>;
     /**
      * Organization node name.
      */
-    nodeName?: pulumi.Input<string>;
+    nodeName?: pulumi.Input<string | undefined>;
     /**
      * Financial management permissions.
      */
-    orgPermissions?: pulumi.Input<pulumi.Input<inputs.Organization.OrgMemberOrgPermission>[]>;
+    orgPermissions?: pulumi.Input<pulumi.Input<inputs.Organization.OrgMemberOrgPermission>[] | undefined>;
     /**
      * Organization policy name.
      */
-    orgPolicyName?: pulumi.Input<string>;
+    orgPolicyName?: pulumi.Input<string | undefined>;
     /**
      * The member name which is payment account on behalf.
      */
-    payName?: pulumi.Input<string>;
+    payName?: pulumi.Input<string | undefined>;
     /**
      * The uin which is payment account on behalf.When `PermissionIds` contains 7, is required.
      */
-    payUin?: pulumi.Input<string>;
+    payUin?: pulumi.Input<string | undefined>;
     /**
      * Financial management permission IDs.Valid values:- `1`: View bill.- `2`: Check balance.- `3`: Fund transfer.- `4`: Combine bill.- `5`: Issue an invoice.- `6`: Inherit discount.- `7`: Pay on behalf.value 1,2 is required.
      */
-    permissionIds?: pulumi.Input<pulumi.Input<number>[]>;
+    permissionIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Organization policy type.- `Financial`: Financial management policy.
      */
-    policyType?: pulumi.Input<string>;
+    policyType?: pulumi.Input<string | undefined>;
     /**
      * Create member record ID.When create failed and needs to be recreated, is required.
      */
-    recordId?: pulumi.Input<number>;
+    recordId?: pulumi.Input<number | undefined>;
     /**
      * Notes.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Member update time.
      */
-    updateTime?: pulumi.Input<string>;
+    updateTime?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -279,11 +288,15 @@ export interface OrgMemberArgs {
     /**
      * Whether to force delete the member account when deleting the organization member. It is only applicable to member accounts of the creation type, not to member accounts of the invitation type. Default is false.
      */
-    forceDeleteAccount?: pulumi.Input<boolean>;
+    forceDeleteAccount?: pulumi.Input<boolean | undefined>;
+    /**
+     * Whether to synchronize organization member names to their account nicknames. Values: 1 - Sync, 0 - Do not sync. This parameter takes effect only when the name field is being modified.
+     */
+    isModifyNickName?: pulumi.Input<number | undefined>;
     /**
      * Member name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Organization node ID.
      */
@@ -291,7 +304,7 @@ export interface OrgMemberArgs {
     /**
      * The uin which is payment account on behalf.When `PermissionIds` contains 7, is required.
      */
-    payUin?: pulumi.Input<string>;
+    payUin?: pulumi.Input<string | undefined>;
     /**
      * Financial management permission IDs.Valid values:- `1`: View bill.- `2`: Check balance.- `3`: Fund transfer.- `4`: Combine bill.- `5`: Issue an invoice.- `6`: Inherit discount.- `7`: Pay on behalf.value 1,2 is required.
      */
@@ -303,13 +316,13 @@ export interface OrgMemberArgs {
     /**
      * Create member record ID.When create failed and needs to be recreated, is required.
      */
-    recordId?: pulumi.Input<number>;
+    recordId?: pulumi.Input<number | undefined>;
     /**
      * Notes.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

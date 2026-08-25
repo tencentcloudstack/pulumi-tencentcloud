@@ -61,6 +61,8 @@ type Pair struct {
 
 	// Creation time, which follows the `ISO8601` standard and uses `UTC` time in the format of `YYYY-MM-DDThh:mm:ssZ`.
 	CreatedTime pulumi.StringOutput `pulumi:"createdTime"`
+	// Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.
+	ForceStop pulumi.BoolOutput `pulumi:"forceStop"`
 	// The key pair's name. It is the only in one TencentCloud account.
 	KeyName pulumi.StringOutput `pulumi:"keyName"`
 	// Content of private key in a key pair. Tencent Cloud do not keep private keys. Please keep it properly.
@@ -108,6 +110,8 @@ func GetPair(ctx *pulumi.Context,
 type pairState struct {
 	// Creation time, which follows the `ISO8601` standard and uses `UTC` time in the format of `YYYY-MM-DDThh:mm:ssZ`.
 	CreatedTime *string `pulumi:"createdTime"`
+	// Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.
+	ForceStop *bool `pulumi:"forceStop"`
 	// The key pair's name. It is the only in one TencentCloud account.
 	KeyName *string `pulumi:"keyName"`
 	// Content of private key in a key pair. Tencent Cloud do not keep private keys. Please keep it properly.
@@ -123,6 +127,8 @@ type pairState struct {
 type PairState struct {
 	// Creation time, which follows the `ISO8601` standard and uses `UTC` time in the format of `YYYY-MM-DDThh:mm:ssZ`.
 	CreatedTime pulumi.StringPtrInput
+	// Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.
+	ForceStop pulumi.BoolPtrInput
 	// The key pair's name. It is the only in one TencentCloud account.
 	KeyName pulumi.StringPtrInput
 	// Content of private key in a key pair. Tencent Cloud do not keep private keys. Please keep it properly.
@@ -140,6 +146,8 @@ func (PairState) ElementType() reflect.Type {
 }
 
 type pairArgs struct {
+	// Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.
+	ForceStop *bool `pulumi:"forceStop"`
 	// The key pair's name. It is the only in one TencentCloud account.
 	KeyName string `pulumi:"keyName"`
 	// Specifys to which project the key pair belongs.
@@ -152,6 +160,8 @@ type pairArgs struct {
 
 // The set of arguments for constructing a Pair resource.
 type PairArgs struct {
+	// Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.
+	ForceStop pulumi.BoolPtrInput
 	// The key pair's name. It is the only in one TencentCloud account.
 	KeyName pulumi.StringInput
 	// Specifys to which project the key pair belongs.
@@ -252,6 +262,11 @@ func (o PairOutput) ToPairOutputWithContext(ctx context.Context) PairOutput {
 // Creation time, which follows the `ISO8601` standard and uses `UTC` time in the format of `YYYY-MM-DDThh:mm:ssZ`.
 func (o PairOutput) CreatedTime() pulumi.StringOutput {
 	return o.ApplyT(func(v *Pair) pulumi.StringOutput { return v.CreatedTime }).(pulumi.StringOutput)
+}
+
+// Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.
+func (o PairOutput) ForceStop() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Pair) pulumi.BoolOutput { return v.ForceStop }).(pulumi.BoolOutput)
 }
 
 // The key pair's name. It is the only in one TencentCloud account.

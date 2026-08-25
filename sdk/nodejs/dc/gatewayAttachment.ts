@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * dc_gateway_attachment can be imported using the id, e.g.
+ * dcGatewayAttachment can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Dc/gatewayAttachment:GatewayAttachment dc_gateway_attachment vpcId#dcgId#ngId
@@ -112,15 +112,15 @@ export interface GatewayAttachmentState {
     /**
      * DirectConnectGatewayId.
      */
-    directConnectGatewayId?: pulumi.Input<string>;
+    directConnectGatewayId?: pulumi.Input<string | undefined>;
     /**
      * NatGatewayId.
      */
-    natGatewayId?: pulumi.Input<string>;
+    natGatewayId?: pulumi.Input<string | undefined>;
     /**
      * vpc id.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }
 
 /**

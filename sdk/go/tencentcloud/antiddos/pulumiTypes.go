@@ -13,6 +13,907 @@ import (
 
 var _ = internal.GetEnvOrDefault
 
+type BgpInstanceEnterprisePackageConfig struct {
+	// Service bandwidth scale.
+	Bandwidth int `pulumi:"bandwidth"`
+	// Guaranteed protection bandwidth.
+	BasicProtectBandwidth int `pulumi:"basicProtectBandwidth"`
+	// Whether to enable elastic service bandwidth. The default value is false.
+	ElasticBandwidthFlag *bool `pulumi:"elasticBandwidthFlag"`
+	// Elastic bandwidth (Gbps), selectable elastic bandwidth [0, 400, 500, 600, 800, 1000], default is 0.
+	ElasticProtectBandwidth *int `pulumi:"elasticProtectBandwidth"`
+	// Number of protected IPs.
+	ProtectIpCount int `pulumi:"protectIpCount"`
+	// The region where the high-defense package was purchased.
+	Region string `pulumi:"region"`
+}
+
+// BgpInstanceEnterprisePackageConfigInput is an input type that accepts BgpInstanceEnterprisePackageConfigArgs and BgpInstanceEnterprisePackageConfigOutput values.
+// You can construct a concrete instance of `BgpInstanceEnterprisePackageConfigInput` via:
+//
+//	BgpInstanceEnterprisePackageConfigArgs{...}
+type BgpInstanceEnterprisePackageConfigInput interface {
+	pulumi.Input
+
+	ToBgpInstanceEnterprisePackageConfigOutput() BgpInstanceEnterprisePackageConfigOutput
+	ToBgpInstanceEnterprisePackageConfigOutputWithContext(context.Context) BgpInstanceEnterprisePackageConfigOutput
+}
+
+type BgpInstanceEnterprisePackageConfigArgs struct {
+	// Service bandwidth scale.
+	Bandwidth pulumi.IntInput `pulumi:"bandwidth"`
+	// Guaranteed protection bandwidth.
+	BasicProtectBandwidth pulumi.IntInput `pulumi:"basicProtectBandwidth"`
+	// Whether to enable elastic service bandwidth. The default value is false.
+	ElasticBandwidthFlag pulumi.BoolPtrInput `pulumi:"elasticBandwidthFlag"`
+	// Elastic bandwidth (Gbps), selectable elastic bandwidth [0, 400, 500, 600, 800, 1000], default is 0.
+	ElasticProtectBandwidth pulumi.IntPtrInput `pulumi:"elasticProtectBandwidth"`
+	// Number of protected IPs.
+	ProtectIpCount pulumi.IntInput `pulumi:"protectIpCount"`
+	// The region where the high-defense package was purchased.
+	Region pulumi.StringInput `pulumi:"region"`
+}
+
+func (BgpInstanceEnterprisePackageConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BgpInstanceEnterprisePackageConfig)(nil)).Elem()
+}
+
+func (i BgpInstanceEnterprisePackageConfigArgs) ToBgpInstanceEnterprisePackageConfigOutput() BgpInstanceEnterprisePackageConfigOutput {
+	return i.ToBgpInstanceEnterprisePackageConfigOutputWithContext(context.Background())
+}
+
+func (i BgpInstanceEnterprisePackageConfigArgs) ToBgpInstanceEnterprisePackageConfigOutputWithContext(ctx context.Context) BgpInstanceEnterprisePackageConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BgpInstanceEnterprisePackageConfigOutput)
+}
+
+func (i BgpInstanceEnterprisePackageConfigArgs) ToBgpInstanceEnterprisePackageConfigPtrOutput() BgpInstanceEnterprisePackageConfigPtrOutput {
+	return i.ToBgpInstanceEnterprisePackageConfigPtrOutputWithContext(context.Background())
+}
+
+func (i BgpInstanceEnterprisePackageConfigArgs) ToBgpInstanceEnterprisePackageConfigPtrOutputWithContext(ctx context.Context) BgpInstanceEnterprisePackageConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BgpInstanceEnterprisePackageConfigOutput).ToBgpInstanceEnterprisePackageConfigPtrOutputWithContext(ctx)
+}
+
+// BgpInstanceEnterprisePackageConfigPtrInput is an input type that accepts BgpInstanceEnterprisePackageConfigArgs, BgpInstanceEnterprisePackageConfigPtr and BgpInstanceEnterprisePackageConfigPtrOutput values.
+// You can construct a concrete instance of `BgpInstanceEnterprisePackageConfigPtrInput` via:
+//
+//	        BgpInstanceEnterprisePackageConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type BgpInstanceEnterprisePackageConfigPtrInput interface {
+	pulumi.Input
+
+	ToBgpInstanceEnterprisePackageConfigPtrOutput() BgpInstanceEnterprisePackageConfigPtrOutput
+	ToBgpInstanceEnterprisePackageConfigPtrOutputWithContext(context.Context) BgpInstanceEnterprisePackageConfigPtrOutput
+}
+
+type bgpInstanceEnterprisePackageConfigPtrType BgpInstanceEnterprisePackageConfigArgs
+
+func BgpInstanceEnterprisePackageConfigPtr(v *BgpInstanceEnterprisePackageConfigArgs) BgpInstanceEnterprisePackageConfigPtrInput {
+	return (*bgpInstanceEnterprisePackageConfigPtrType)(v)
+}
+
+func (*bgpInstanceEnterprisePackageConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BgpInstanceEnterprisePackageConfig)(nil)).Elem()
+}
+
+func (i *bgpInstanceEnterprisePackageConfigPtrType) ToBgpInstanceEnterprisePackageConfigPtrOutput() BgpInstanceEnterprisePackageConfigPtrOutput {
+	return i.ToBgpInstanceEnterprisePackageConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *bgpInstanceEnterprisePackageConfigPtrType) ToBgpInstanceEnterprisePackageConfigPtrOutputWithContext(ctx context.Context) BgpInstanceEnterprisePackageConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BgpInstanceEnterprisePackageConfigPtrOutput)
+}
+
+type BgpInstanceEnterprisePackageConfigOutput struct{ *pulumi.OutputState }
+
+func (BgpInstanceEnterprisePackageConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BgpInstanceEnterprisePackageConfig)(nil)).Elem()
+}
+
+func (o BgpInstanceEnterprisePackageConfigOutput) ToBgpInstanceEnterprisePackageConfigOutput() BgpInstanceEnterprisePackageConfigOutput {
+	return o
+}
+
+func (o BgpInstanceEnterprisePackageConfigOutput) ToBgpInstanceEnterprisePackageConfigOutputWithContext(ctx context.Context) BgpInstanceEnterprisePackageConfigOutput {
+	return o
+}
+
+func (o BgpInstanceEnterprisePackageConfigOutput) ToBgpInstanceEnterprisePackageConfigPtrOutput() BgpInstanceEnterprisePackageConfigPtrOutput {
+	return o.ToBgpInstanceEnterprisePackageConfigPtrOutputWithContext(context.Background())
+}
+
+func (o BgpInstanceEnterprisePackageConfigOutput) ToBgpInstanceEnterprisePackageConfigPtrOutputWithContext(ctx context.Context) BgpInstanceEnterprisePackageConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BgpInstanceEnterprisePackageConfig) *BgpInstanceEnterprisePackageConfig {
+		return &v
+	}).(BgpInstanceEnterprisePackageConfigPtrOutput)
+}
+
+// Service bandwidth scale.
+func (o BgpInstanceEnterprisePackageConfigOutput) Bandwidth() pulumi.IntOutput {
+	return o.ApplyT(func(v BgpInstanceEnterprisePackageConfig) int { return v.Bandwidth }).(pulumi.IntOutput)
+}
+
+// Guaranteed protection bandwidth.
+func (o BgpInstanceEnterprisePackageConfigOutput) BasicProtectBandwidth() pulumi.IntOutput {
+	return o.ApplyT(func(v BgpInstanceEnterprisePackageConfig) int { return v.BasicProtectBandwidth }).(pulumi.IntOutput)
+}
+
+// Whether to enable elastic service bandwidth. The default value is false.
+func (o BgpInstanceEnterprisePackageConfigOutput) ElasticBandwidthFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v BgpInstanceEnterprisePackageConfig) *bool { return v.ElasticBandwidthFlag }).(pulumi.BoolPtrOutput)
+}
+
+// Elastic bandwidth (Gbps), selectable elastic bandwidth [0, 400, 500, 600, 800, 1000], default is 0.
+func (o BgpInstanceEnterprisePackageConfigOutput) ElasticProtectBandwidth() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v BgpInstanceEnterprisePackageConfig) *int { return v.ElasticProtectBandwidth }).(pulumi.IntPtrOutput)
+}
+
+// Number of protected IPs.
+func (o BgpInstanceEnterprisePackageConfigOutput) ProtectIpCount() pulumi.IntOutput {
+	return o.ApplyT(func(v BgpInstanceEnterprisePackageConfig) int { return v.ProtectIpCount }).(pulumi.IntOutput)
+}
+
+// The region where the high-defense package was purchased.
+func (o BgpInstanceEnterprisePackageConfigOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v BgpInstanceEnterprisePackageConfig) string { return v.Region }).(pulumi.StringOutput)
+}
+
+type BgpInstanceEnterprisePackageConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (BgpInstanceEnterprisePackageConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BgpInstanceEnterprisePackageConfig)(nil)).Elem()
+}
+
+func (o BgpInstanceEnterprisePackageConfigPtrOutput) ToBgpInstanceEnterprisePackageConfigPtrOutput() BgpInstanceEnterprisePackageConfigPtrOutput {
+	return o
+}
+
+func (o BgpInstanceEnterprisePackageConfigPtrOutput) ToBgpInstanceEnterprisePackageConfigPtrOutputWithContext(ctx context.Context) BgpInstanceEnterprisePackageConfigPtrOutput {
+	return o
+}
+
+func (o BgpInstanceEnterprisePackageConfigPtrOutput) Elem() BgpInstanceEnterprisePackageConfigOutput {
+	return o.ApplyT(func(v *BgpInstanceEnterprisePackageConfig) BgpInstanceEnterprisePackageConfig {
+		if v != nil {
+			return *v
+		}
+		var ret BgpInstanceEnterprisePackageConfig
+		return ret
+	}).(BgpInstanceEnterprisePackageConfigOutput)
+}
+
+// Service bandwidth scale.
+func (o BgpInstanceEnterprisePackageConfigPtrOutput) Bandwidth() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *BgpInstanceEnterprisePackageConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.Bandwidth
+	}).(pulumi.IntPtrOutput)
+}
+
+// Guaranteed protection bandwidth.
+func (o BgpInstanceEnterprisePackageConfigPtrOutput) BasicProtectBandwidth() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *BgpInstanceEnterprisePackageConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.BasicProtectBandwidth
+	}).(pulumi.IntPtrOutput)
+}
+
+// Whether to enable elastic service bandwidth. The default value is false.
+func (o BgpInstanceEnterprisePackageConfigPtrOutput) ElasticBandwidthFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *BgpInstanceEnterprisePackageConfig) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.ElasticBandwidthFlag
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Elastic bandwidth (Gbps), selectable elastic bandwidth [0, 400, 500, 600, 800, 1000], default is 0.
+func (o BgpInstanceEnterprisePackageConfigPtrOutput) ElasticProtectBandwidth() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *BgpInstanceEnterprisePackageConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return v.ElasticProtectBandwidth
+	}).(pulumi.IntPtrOutput)
+}
+
+// Number of protected IPs.
+func (o BgpInstanceEnterprisePackageConfigPtrOutput) ProtectIpCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *BgpInstanceEnterprisePackageConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.ProtectIpCount
+	}).(pulumi.IntPtrOutput)
+}
+
+// The region where the high-defense package was purchased.
+func (o BgpInstanceEnterprisePackageConfigPtrOutput) Region() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BgpInstanceEnterprisePackageConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Region
+	}).(pulumi.StringPtrOutput)
+}
+
+type BgpInstanceInstanceChargePrepaid struct {
+	// Purchase period in months.
+	Period *int `pulumi:"period"`
+	// OTIFY_AND_MANUAL_RENEW: Notify the user of the expiration date and do not automatically renew. NOTIFY_AND_AUTO_RENEW: Notify the user of the expiration date and automatically renew. DISABLE_NOTIFY_AND_MANUAL_RENEW: Do not notify the user of the expiration date and do not automatically renew. The default is: Notify the user of the expiration date and do not automatically renew.
+	RenewFlag *string `pulumi:"renewFlag"`
+}
+
+// BgpInstanceInstanceChargePrepaidInput is an input type that accepts BgpInstanceInstanceChargePrepaidArgs and BgpInstanceInstanceChargePrepaidOutput values.
+// You can construct a concrete instance of `BgpInstanceInstanceChargePrepaidInput` via:
+//
+//	BgpInstanceInstanceChargePrepaidArgs{...}
+type BgpInstanceInstanceChargePrepaidInput interface {
+	pulumi.Input
+
+	ToBgpInstanceInstanceChargePrepaidOutput() BgpInstanceInstanceChargePrepaidOutput
+	ToBgpInstanceInstanceChargePrepaidOutputWithContext(context.Context) BgpInstanceInstanceChargePrepaidOutput
+}
+
+type BgpInstanceInstanceChargePrepaidArgs struct {
+	// Purchase period in months.
+	Period pulumi.IntPtrInput `pulumi:"period"`
+	// OTIFY_AND_MANUAL_RENEW: Notify the user of the expiration date and do not automatically renew. NOTIFY_AND_AUTO_RENEW: Notify the user of the expiration date and automatically renew. DISABLE_NOTIFY_AND_MANUAL_RENEW: Do not notify the user of the expiration date and do not automatically renew. The default is: Notify the user of the expiration date and do not automatically renew.
+	RenewFlag pulumi.StringPtrInput `pulumi:"renewFlag"`
+}
+
+func (BgpInstanceInstanceChargePrepaidArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BgpInstanceInstanceChargePrepaid)(nil)).Elem()
+}
+
+func (i BgpInstanceInstanceChargePrepaidArgs) ToBgpInstanceInstanceChargePrepaidOutput() BgpInstanceInstanceChargePrepaidOutput {
+	return i.ToBgpInstanceInstanceChargePrepaidOutputWithContext(context.Background())
+}
+
+func (i BgpInstanceInstanceChargePrepaidArgs) ToBgpInstanceInstanceChargePrepaidOutputWithContext(ctx context.Context) BgpInstanceInstanceChargePrepaidOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BgpInstanceInstanceChargePrepaidOutput)
+}
+
+func (i BgpInstanceInstanceChargePrepaidArgs) ToBgpInstanceInstanceChargePrepaidPtrOutput() BgpInstanceInstanceChargePrepaidPtrOutput {
+	return i.ToBgpInstanceInstanceChargePrepaidPtrOutputWithContext(context.Background())
+}
+
+func (i BgpInstanceInstanceChargePrepaidArgs) ToBgpInstanceInstanceChargePrepaidPtrOutputWithContext(ctx context.Context) BgpInstanceInstanceChargePrepaidPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BgpInstanceInstanceChargePrepaidOutput).ToBgpInstanceInstanceChargePrepaidPtrOutputWithContext(ctx)
+}
+
+// BgpInstanceInstanceChargePrepaidPtrInput is an input type that accepts BgpInstanceInstanceChargePrepaidArgs, BgpInstanceInstanceChargePrepaidPtr and BgpInstanceInstanceChargePrepaidPtrOutput values.
+// You can construct a concrete instance of `BgpInstanceInstanceChargePrepaidPtrInput` via:
+//
+//	        BgpInstanceInstanceChargePrepaidArgs{...}
+//
+//	or:
+//
+//	        nil
+type BgpInstanceInstanceChargePrepaidPtrInput interface {
+	pulumi.Input
+
+	ToBgpInstanceInstanceChargePrepaidPtrOutput() BgpInstanceInstanceChargePrepaidPtrOutput
+	ToBgpInstanceInstanceChargePrepaidPtrOutputWithContext(context.Context) BgpInstanceInstanceChargePrepaidPtrOutput
+}
+
+type bgpInstanceInstanceChargePrepaidPtrType BgpInstanceInstanceChargePrepaidArgs
+
+func BgpInstanceInstanceChargePrepaidPtr(v *BgpInstanceInstanceChargePrepaidArgs) BgpInstanceInstanceChargePrepaidPtrInput {
+	return (*bgpInstanceInstanceChargePrepaidPtrType)(v)
+}
+
+func (*bgpInstanceInstanceChargePrepaidPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BgpInstanceInstanceChargePrepaid)(nil)).Elem()
+}
+
+func (i *bgpInstanceInstanceChargePrepaidPtrType) ToBgpInstanceInstanceChargePrepaidPtrOutput() BgpInstanceInstanceChargePrepaidPtrOutput {
+	return i.ToBgpInstanceInstanceChargePrepaidPtrOutputWithContext(context.Background())
+}
+
+func (i *bgpInstanceInstanceChargePrepaidPtrType) ToBgpInstanceInstanceChargePrepaidPtrOutputWithContext(ctx context.Context) BgpInstanceInstanceChargePrepaidPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BgpInstanceInstanceChargePrepaidPtrOutput)
+}
+
+type BgpInstanceInstanceChargePrepaidOutput struct{ *pulumi.OutputState }
+
+func (BgpInstanceInstanceChargePrepaidOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BgpInstanceInstanceChargePrepaid)(nil)).Elem()
+}
+
+func (o BgpInstanceInstanceChargePrepaidOutput) ToBgpInstanceInstanceChargePrepaidOutput() BgpInstanceInstanceChargePrepaidOutput {
+	return o
+}
+
+func (o BgpInstanceInstanceChargePrepaidOutput) ToBgpInstanceInstanceChargePrepaidOutputWithContext(ctx context.Context) BgpInstanceInstanceChargePrepaidOutput {
+	return o
+}
+
+func (o BgpInstanceInstanceChargePrepaidOutput) ToBgpInstanceInstanceChargePrepaidPtrOutput() BgpInstanceInstanceChargePrepaidPtrOutput {
+	return o.ToBgpInstanceInstanceChargePrepaidPtrOutputWithContext(context.Background())
+}
+
+func (o BgpInstanceInstanceChargePrepaidOutput) ToBgpInstanceInstanceChargePrepaidPtrOutputWithContext(ctx context.Context) BgpInstanceInstanceChargePrepaidPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BgpInstanceInstanceChargePrepaid) *BgpInstanceInstanceChargePrepaid {
+		return &v
+	}).(BgpInstanceInstanceChargePrepaidPtrOutput)
+}
+
+// Purchase period in months.
+func (o BgpInstanceInstanceChargePrepaidOutput) Period() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v BgpInstanceInstanceChargePrepaid) *int { return v.Period }).(pulumi.IntPtrOutput)
+}
+
+// OTIFY_AND_MANUAL_RENEW: Notify the user of the expiration date and do not automatically renew. NOTIFY_AND_AUTO_RENEW: Notify the user of the expiration date and automatically renew. DISABLE_NOTIFY_AND_MANUAL_RENEW: Do not notify the user of the expiration date and do not automatically renew. The default is: Notify the user of the expiration date and do not automatically renew.
+func (o BgpInstanceInstanceChargePrepaidOutput) RenewFlag() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BgpInstanceInstanceChargePrepaid) *string { return v.RenewFlag }).(pulumi.StringPtrOutput)
+}
+
+type BgpInstanceInstanceChargePrepaidPtrOutput struct{ *pulumi.OutputState }
+
+func (BgpInstanceInstanceChargePrepaidPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BgpInstanceInstanceChargePrepaid)(nil)).Elem()
+}
+
+func (o BgpInstanceInstanceChargePrepaidPtrOutput) ToBgpInstanceInstanceChargePrepaidPtrOutput() BgpInstanceInstanceChargePrepaidPtrOutput {
+	return o
+}
+
+func (o BgpInstanceInstanceChargePrepaidPtrOutput) ToBgpInstanceInstanceChargePrepaidPtrOutputWithContext(ctx context.Context) BgpInstanceInstanceChargePrepaidPtrOutput {
+	return o
+}
+
+func (o BgpInstanceInstanceChargePrepaidPtrOutput) Elem() BgpInstanceInstanceChargePrepaidOutput {
+	return o.ApplyT(func(v *BgpInstanceInstanceChargePrepaid) BgpInstanceInstanceChargePrepaid {
+		if v != nil {
+			return *v
+		}
+		var ret BgpInstanceInstanceChargePrepaid
+		return ret
+	}).(BgpInstanceInstanceChargePrepaidOutput)
+}
+
+// Purchase period in months.
+func (o BgpInstanceInstanceChargePrepaidPtrOutput) Period() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *BgpInstanceInstanceChargePrepaid) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Period
+	}).(pulumi.IntPtrOutput)
+}
+
+// OTIFY_AND_MANUAL_RENEW: Notify the user of the expiration date and do not automatically renew. NOTIFY_AND_AUTO_RENEW: Notify the user of the expiration date and automatically renew. DISABLE_NOTIFY_AND_MANUAL_RENEW: Do not notify the user of the expiration date and do not automatically renew. The default is: Notify the user of the expiration date and do not automatically renew.
+func (o BgpInstanceInstanceChargePrepaidPtrOutput) RenewFlag() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BgpInstanceInstanceChargePrepaid) *string {
+		if v == nil {
+			return nil
+		}
+		return v.RenewFlag
+	}).(pulumi.StringPtrOutput)
+}
+
+type BgpInstanceStandardPackageConfig struct {
+	// Protected service bandwidth 50Mbps.
+	Bandwidth int `pulumi:"bandwidth"`
+	// Whether to enable elastic service bandwidth. The default value is false.
+	ElasticBandwidthFlag *bool `pulumi:"elasticBandwidthFlag"`
+	// Number of protected IPs.
+	ProtectIpCount int `pulumi:"protectIpCount"`
+	// The region where the high-defense package was purchased.
+	Region string `pulumi:"region"`
+}
+
+// BgpInstanceStandardPackageConfigInput is an input type that accepts BgpInstanceStandardPackageConfigArgs and BgpInstanceStandardPackageConfigOutput values.
+// You can construct a concrete instance of `BgpInstanceStandardPackageConfigInput` via:
+//
+//	BgpInstanceStandardPackageConfigArgs{...}
+type BgpInstanceStandardPackageConfigInput interface {
+	pulumi.Input
+
+	ToBgpInstanceStandardPackageConfigOutput() BgpInstanceStandardPackageConfigOutput
+	ToBgpInstanceStandardPackageConfigOutputWithContext(context.Context) BgpInstanceStandardPackageConfigOutput
+}
+
+type BgpInstanceStandardPackageConfigArgs struct {
+	// Protected service bandwidth 50Mbps.
+	Bandwidth pulumi.IntInput `pulumi:"bandwidth"`
+	// Whether to enable elastic service bandwidth. The default value is false.
+	ElasticBandwidthFlag pulumi.BoolPtrInput `pulumi:"elasticBandwidthFlag"`
+	// Number of protected IPs.
+	ProtectIpCount pulumi.IntInput `pulumi:"protectIpCount"`
+	// The region where the high-defense package was purchased.
+	Region pulumi.StringInput `pulumi:"region"`
+}
+
+func (BgpInstanceStandardPackageConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BgpInstanceStandardPackageConfig)(nil)).Elem()
+}
+
+func (i BgpInstanceStandardPackageConfigArgs) ToBgpInstanceStandardPackageConfigOutput() BgpInstanceStandardPackageConfigOutput {
+	return i.ToBgpInstanceStandardPackageConfigOutputWithContext(context.Background())
+}
+
+func (i BgpInstanceStandardPackageConfigArgs) ToBgpInstanceStandardPackageConfigOutputWithContext(ctx context.Context) BgpInstanceStandardPackageConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BgpInstanceStandardPackageConfigOutput)
+}
+
+func (i BgpInstanceStandardPackageConfigArgs) ToBgpInstanceStandardPackageConfigPtrOutput() BgpInstanceStandardPackageConfigPtrOutput {
+	return i.ToBgpInstanceStandardPackageConfigPtrOutputWithContext(context.Background())
+}
+
+func (i BgpInstanceStandardPackageConfigArgs) ToBgpInstanceStandardPackageConfigPtrOutputWithContext(ctx context.Context) BgpInstanceStandardPackageConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BgpInstanceStandardPackageConfigOutput).ToBgpInstanceStandardPackageConfigPtrOutputWithContext(ctx)
+}
+
+// BgpInstanceStandardPackageConfigPtrInput is an input type that accepts BgpInstanceStandardPackageConfigArgs, BgpInstanceStandardPackageConfigPtr and BgpInstanceStandardPackageConfigPtrOutput values.
+// You can construct a concrete instance of `BgpInstanceStandardPackageConfigPtrInput` via:
+//
+//	        BgpInstanceStandardPackageConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type BgpInstanceStandardPackageConfigPtrInput interface {
+	pulumi.Input
+
+	ToBgpInstanceStandardPackageConfigPtrOutput() BgpInstanceStandardPackageConfigPtrOutput
+	ToBgpInstanceStandardPackageConfigPtrOutputWithContext(context.Context) BgpInstanceStandardPackageConfigPtrOutput
+}
+
+type bgpInstanceStandardPackageConfigPtrType BgpInstanceStandardPackageConfigArgs
+
+func BgpInstanceStandardPackageConfigPtr(v *BgpInstanceStandardPackageConfigArgs) BgpInstanceStandardPackageConfigPtrInput {
+	return (*bgpInstanceStandardPackageConfigPtrType)(v)
+}
+
+func (*bgpInstanceStandardPackageConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BgpInstanceStandardPackageConfig)(nil)).Elem()
+}
+
+func (i *bgpInstanceStandardPackageConfigPtrType) ToBgpInstanceStandardPackageConfigPtrOutput() BgpInstanceStandardPackageConfigPtrOutput {
+	return i.ToBgpInstanceStandardPackageConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *bgpInstanceStandardPackageConfigPtrType) ToBgpInstanceStandardPackageConfigPtrOutputWithContext(ctx context.Context) BgpInstanceStandardPackageConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BgpInstanceStandardPackageConfigPtrOutput)
+}
+
+type BgpInstanceStandardPackageConfigOutput struct{ *pulumi.OutputState }
+
+func (BgpInstanceStandardPackageConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BgpInstanceStandardPackageConfig)(nil)).Elem()
+}
+
+func (o BgpInstanceStandardPackageConfigOutput) ToBgpInstanceStandardPackageConfigOutput() BgpInstanceStandardPackageConfigOutput {
+	return o
+}
+
+func (o BgpInstanceStandardPackageConfigOutput) ToBgpInstanceStandardPackageConfigOutputWithContext(ctx context.Context) BgpInstanceStandardPackageConfigOutput {
+	return o
+}
+
+func (o BgpInstanceStandardPackageConfigOutput) ToBgpInstanceStandardPackageConfigPtrOutput() BgpInstanceStandardPackageConfigPtrOutput {
+	return o.ToBgpInstanceStandardPackageConfigPtrOutputWithContext(context.Background())
+}
+
+func (o BgpInstanceStandardPackageConfigOutput) ToBgpInstanceStandardPackageConfigPtrOutputWithContext(ctx context.Context) BgpInstanceStandardPackageConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BgpInstanceStandardPackageConfig) *BgpInstanceStandardPackageConfig {
+		return &v
+	}).(BgpInstanceStandardPackageConfigPtrOutput)
+}
+
+// Protected service bandwidth 50Mbps.
+func (o BgpInstanceStandardPackageConfigOutput) Bandwidth() pulumi.IntOutput {
+	return o.ApplyT(func(v BgpInstanceStandardPackageConfig) int { return v.Bandwidth }).(pulumi.IntOutput)
+}
+
+// Whether to enable elastic service bandwidth. The default value is false.
+func (o BgpInstanceStandardPackageConfigOutput) ElasticBandwidthFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v BgpInstanceStandardPackageConfig) *bool { return v.ElasticBandwidthFlag }).(pulumi.BoolPtrOutput)
+}
+
+// Number of protected IPs.
+func (o BgpInstanceStandardPackageConfigOutput) ProtectIpCount() pulumi.IntOutput {
+	return o.ApplyT(func(v BgpInstanceStandardPackageConfig) int { return v.ProtectIpCount }).(pulumi.IntOutput)
+}
+
+// The region where the high-defense package was purchased.
+func (o BgpInstanceStandardPackageConfigOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v BgpInstanceStandardPackageConfig) string { return v.Region }).(pulumi.StringOutput)
+}
+
+type BgpInstanceStandardPackageConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (BgpInstanceStandardPackageConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BgpInstanceStandardPackageConfig)(nil)).Elem()
+}
+
+func (o BgpInstanceStandardPackageConfigPtrOutput) ToBgpInstanceStandardPackageConfigPtrOutput() BgpInstanceStandardPackageConfigPtrOutput {
+	return o
+}
+
+func (o BgpInstanceStandardPackageConfigPtrOutput) ToBgpInstanceStandardPackageConfigPtrOutputWithContext(ctx context.Context) BgpInstanceStandardPackageConfigPtrOutput {
+	return o
+}
+
+func (o BgpInstanceStandardPackageConfigPtrOutput) Elem() BgpInstanceStandardPackageConfigOutput {
+	return o.ApplyT(func(v *BgpInstanceStandardPackageConfig) BgpInstanceStandardPackageConfig {
+		if v != nil {
+			return *v
+		}
+		var ret BgpInstanceStandardPackageConfig
+		return ret
+	}).(BgpInstanceStandardPackageConfigOutput)
+}
+
+// Protected service bandwidth 50Mbps.
+func (o BgpInstanceStandardPackageConfigPtrOutput) Bandwidth() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *BgpInstanceStandardPackageConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.Bandwidth
+	}).(pulumi.IntPtrOutput)
+}
+
+// Whether to enable elastic service bandwidth. The default value is false.
+func (o BgpInstanceStandardPackageConfigPtrOutput) ElasticBandwidthFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *BgpInstanceStandardPackageConfig) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.ElasticBandwidthFlag
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Number of protected IPs.
+func (o BgpInstanceStandardPackageConfigPtrOutput) ProtectIpCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *BgpInstanceStandardPackageConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.ProtectIpCount
+	}).(pulumi.IntPtrOutput)
+}
+
+// The region where the high-defense package was purchased.
+func (o BgpInstanceStandardPackageConfigPtrOutput) Region() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BgpInstanceStandardPackageConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Region
+	}).(pulumi.StringPtrOutput)
+}
+
+type BgpInstanceStandardPlusPackageConfig struct {
+	// 50Mbps protected bandwidth.
+	Bandwidth int `pulumi:"bandwidth"`
+	// Whether to enable elastic service bandwidth. The default value is false.
+	ElasticBandwidthFlag *bool `pulumi:"elasticBandwidthFlag"`
+	// Protection Count: TWO_TIMES: Two full-power protections; UNLIMITED: Infinite protections.
+	ProtectCount string `pulumi:"protectCount"`
+	// Number of protected IPs.
+	ProtectIpCount int `pulumi:"protectIpCount"`
+	// The region where the high-defense package was purchased.
+	Region string `pulumi:"region"`
+}
+
+// BgpInstanceStandardPlusPackageConfigInput is an input type that accepts BgpInstanceStandardPlusPackageConfigArgs and BgpInstanceStandardPlusPackageConfigOutput values.
+// You can construct a concrete instance of `BgpInstanceStandardPlusPackageConfigInput` via:
+//
+//	BgpInstanceStandardPlusPackageConfigArgs{...}
+type BgpInstanceStandardPlusPackageConfigInput interface {
+	pulumi.Input
+
+	ToBgpInstanceStandardPlusPackageConfigOutput() BgpInstanceStandardPlusPackageConfigOutput
+	ToBgpInstanceStandardPlusPackageConfigOutputWithContext(context.Context) BgpInstanceStandardPlusPackageConfigOutput
+}
+
+type BgpInstanceStandardPlusPackageConfigArgs struct {
+	// 50Mbps protected bandwidth.
+	Bandwidth pulumi.IntInput `pulumi:"bandwidth"`
+	// Whether to enable elastic service bandwidth. The default value is false.
+	ElasticBandwidthFlag pulumi.BoolPtrInput `pulumi:"elasticBandwidthFlag"`
+	// Protection Count: TWO_TIMES: Two full-power protections; UNLIMITED: Infinite protections.
+	ProtectCount pulumi.StringInput `pulumi:"protectCount"`
+	// Number of protected IPs.
+	ProtectIpCount pulumi.IntInput `pulumi:"protectIpCount"`
+	// The region where the high-defense package was purchased.
+	Region pulumi.StringInput `pulumi:"region"`
+}
+
+func (BgpInstanceStandardPlusPackageConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BgpInstanceStandardPlusPackageConfig)(nil)).Elem()
+}
+
+func (i BgpInstanceStandardPlusPackageConfigArgs) ToBgpInstanceStandardPlusPackageConfigOutput() BgpInstanceStandardPlusPackageConfigOutput {
+	return i.ToBgpInstanceStandardPlusPackageConfigOutputWithContext(context.Background())
+}
+
+func (i BgpInstanceStandardPlusPackageConfigArgs) ToBgpInstanceStandardPlusPackageConfigOutputWithContext(ctx context.Context) BgpInstanceStandardPlusPackageConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BgpInstanceStandardPlusPackageConfigOutput)
+}
+
+func (i BgpInstanceStandardPlusPackageConfigArgs) ToBgpInstanceStandardPlusPackageConfigPtrOutput() BgpInstanceStandardPlusPackageConfigPtrOutput {
+	return i.ToBgpInstanceStandardPlusPackageConfigPtrOutputWithContext(context.Background())
+}
+
+func (i BgpInstanceStandardPlusPackageConfigArgs) ToBgpInstanceStandardPlusPackageConfigPtrOutputWithContext(ctx context.Context) BgpInstanceStandardPlusPackageConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BgpInstanceStandardPlusPackageConfigOutput).ToBgpInstanceStandardPlusPackageConfigPtrOutputWithContext(ctx)
+}
+
+// BgpInstanceStandardPlusPackageConfigPtrInput is an input type that accepts BgpInstanceStandardPlusPackageConfigArgs, BgpInstanceStandardPlusPackageConfigPtr and BgpInstanceStandardPlusPackageConfigPtrOutput values.
+// You can construct a concrete instance of `BgpInstanceStandardPlusPackageConfigPtrInput` via:
+//
+//	        BgpInstanceStandardPlusPackageConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type BgpInstanceStandardPlusPackageConfigPtrInput interface {
+	pulumi.Input
+
+	ToBgpInstanceStandardPlusPackageConfigPtrOutput() BgpInstanceStandardPlusPackageConfigPtrOutput
+	ToBgpInstanceStandardPlusPackageConfigPtrOutputWithContext(context.Context) BgpInstanceStandardPlusPackageConfigPtrOutput
+}
+
+type bgpInstanceStandardPlusPackageConfigPtrType BgpInstanceStandardPlusPackageConfigArgs
+
+func BgpInstanceStandardPlusPackageConfigPtr(v *BgpInstanceStandardPlusPackageConfigArgs) BgpInstanceStandardPlusPackageConfigPtrInput {
+	return (*bgpInstanceStandardPlusPackageConfigPtrType)(v)
+}
+
+func (*bgpInstanceStandardPlusPackageConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BgpInstanceStandardPlusPackageConfig)(nil)).Elem()
+}
+
+func (i *bgpInstanceStandardPlusPackageConfigPtrType) ToBgpInstanceStandardPlusPackageConfigPtrOutput() BgpInstanceStandardPlusPackageConfigPtrOutput {
+	return i.ToBgpInstanceStandardPlusPackageConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *bgpInstanceStandardPlusPackageConfigPtrType) ToBgpInstanceStandardPlusPackageConfigPtrOutputWithContext(ctx context.Context) BgpInstanceStandardPlusPackageConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BgpInstanceStandardPlusPackageConfigPtrOutput)
+}
+
+type BgpInstanceStandardPlusPackageConfigOutput struct{ *pulumi.OutputState }
+
+func (BgpInstanceStandardPlusPackageConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BgpInstanceStandardPlusPackageConfig)(nil)).Elem()
+}
+
+func (o BgpInstanceStandardPlusPackageConfigOutput) ToBgpInstanceStandardPlusPackageConfigOutput() BgpInstanceStandardPlusPackageConfigOutput {
+	return o
+}
+
+func (o BgpInstanceStandardPlusPackageConfigOutput) ToBgpInstanceStandardPlusPackageConfigOutputWithContext(ctx context.Context) BgpInstanceStandardPlusPackageConfigOutput {
+	return o
+}
+
+func (o BgpInstanceStandardPlusPackageConfigOutput) ToBgpInstanceStandardPlusPackageConfigPtrOutput() BgpInstanceStandardPlusPackageConfigPtrOutput {
+	return o.ToBgpInstanceStandardPlusPackageConfigPtrOutputWithContext(context.Background())
+}
+
+func (o BgpInstanceStandardPlusPackageConfigOutput) ToBgpInstanceStandardPlusPackageConfigPtrOutputWithContext(ctx context.Context) BgpInstanceStandardPlusPackageConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BgpInstanceStandardPlusPackageConfig) *BgpInstanceStandardPlusPackageConfig {
+		return &v
+	}).(BgpInstanceStandardPlusPackageConfigPtrOutput)
+}
+
+// 50Mbps protected bandwidth.
+func (o BgpInstanceStandardPlusPackageConfigOutput) Bandwidth() pulumi.IntOutput {
+	return o.ApplyT(func(v BgpInstanceStandardPlusPackageConfig) int { return v.Bandwidth }).(pulumi.IntOutput)
+}
+
+// Whether to enable elastic service bandwidth. The default value is false.
+func (o BgpInstanceStandardPlusPackageConfigOutput) ElasticBandwidthFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v BgpInstanceStandardPlusPackageConfig) *bool { return v.ElasticBandwidthFlag }).(pulumi.BoolPtrOutput)
+}
+
+// Protection Count: TWO_TIMES: Two full-power protections; UNLIMITED: Infinite protections.
+func (o BgpInstanceStandardPlusPackageConfigOutput) ProtectCount() pulumi.StringOutput {
+	return o.ApplyT(func(v BgpInstanceStandardPlusPackageConfig) string { return v.ProtectCount }).(pulumi.StringOutput)
+}
+
+// Number of protected IPs.
+func (o BgpInstanceStandardPlusPackageConfigOutput) ProtectIpCount() pulumi.IntOutput {
+	return o.ApplyT(func(v BgpInstanceStandardPlusPackageConfig) int { return v.ProtectIpCount }).(pulumi.IntOutput)
+}
+
+// The region where the high-defense package was purchased.
+func (o BgpInstanceStandardPlusPackageConfigOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v BgpInstanceStandardPlusPackageConfig) string { return v.Region }).(pulumi.StringOutput)
+}
+
+type BgpInstanceStandardPlusPackageConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (BgpInstanceStandardPlusPackageConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BgpInstanceStandardPlusPackageConfig)(nil)).Elem()
+}
+
+func (o BgpInstanceStandardPlusPackageConfigPtrOutput) ToBgpInstanceStandardPlusPackageConfigPtrOutput() BgpInstanceStandardPlusPackageConfigPtrOutput {
+	return o
+}
+
+func (o BgpInstanceStandardPlusPackageConfigPtrOutput) ToBgpInstanceStandardPlusPackageConfigPtrOutputWithContext(ctx context.Context) BgpInstanceStandardPlusPackageConfigPtrOutput {
+	return o
+}
+
+func (o BgpInstanceStandardPlusPackageConfigPtrOutput) Elem() BgpInstanceStandardPlusPackageConfigOutput {
+	return o.ApplyT(func(v *BgpInstanceStandardPlusPackageConfig) BgpInstanceStandardPlusPackageConfig {
+		if v != nil {
+			return *v
+		}
+		var ret BgpInstanceStandardPlusPackageConfig
+		return ret
+	}).(BgpInstanceStandardPlusPackageConfigOutput)
+}
+
+// 50Mbps protected bandwidth.
+func (o BgpInstanceStandardPlusPackageConfigPtrOutput) Bandwidth() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *BgpInstanceStandardPlusPackageConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.Bandwidth
+	}).(pulumi.IntPtrOutput)
+}
+
+// Whether to enable elastic service bandwidth. The default value is false.
+func (o BgpInstanceStandardPlusPackageConfigPtrOutput) ElasticBandwidthFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *BgpInstanceStandardPlusPackageConfig) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.ElasticBandwidthFlag
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Protection Count: TWO_TIMES: Two full-power protections; UNLIMITED: Infinite protections.
+func (o BgpInstanceStandardPlusPackageConfigPtrOutput) ProtectCount() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BgpInstanceStandardPlusPackageConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ProtectCount
+	}).(pulumi.StringPtrOutput)
+}
+
+// Number of protected IPs.
+func (o BgpInstanceStandardPlusPackageConfigPtrOutput) ProtectIpCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *BgpInstanceStandardPlusPackageConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.ProtectIpCount
+	}).(pulumi.IntPtrOutput)
+}
+
+// The region where the high-defense package was purchased.
+func (o BgpInstanceStandardPlusPackageConfigPtrOutput) Region() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BgpInstanceStandardPlusPackageConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Region
+	}).(pulumi.StringPtrOutput)
+}
+
+type BgpInstanceTagInfoList struct {
+	// Tag key.
+	TagKey string `pulumi:"tagKey"`
+	// Tag value.
+	TagValue string `pulumi:"tagValue"`
+}
+
+// BgpInstanceTagInfoListInput is an input type that accepts BgpInstanceTagInfoListArgs and BgpInstanceTagInfoListOutput values.
+// You can construct a concrete instance of `BgpInstanceTagInfoListInput` via:
+//
+//	BgpInstanceTagInfoListArgs{...}
+type BgpInstanceTagInfoListInput interface {
+	pulumi.Input
+
+	ToBgpInstanceTagInfoListOutput() BgpInstanceTagInfoListOutput
+	ToBgpInstanceTagInfoListOutputWithContext(context.Context) BgpInstanceTagInfoListOutput
+}
+
+type BgpInstanceTagInfoListArgs struct {
+	// Tag key.
+	TagKey pulumi.StringInput `pulumi:"tagKey"`
+	// Tag value.
+	TagValue pulumi.StringInput `pulumi:"tagValue"`
+}
+
+func (BgpInstanceTagInfoListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BgpInstanceTagInfoList)(nil)).Elem()
+}
+
+func (i BgpInstanceTagInfoListArgs) ToBgpInstanceTagInfoListOutput() BgpInstanceTagInfoListOutput {
+	return i.ToBgpInstanceTagInfoListOutputWithContext(context.Background())
+}
+
+func (i BgpInstanceTagInfoListArgs) ToBgpInstanceTagInfoListOutputWithContext(ctx context.Context) BgpInstanceTagInfoListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BgpInstanceTagInfoListOutput)
+}
+
+// BgpInstanceTagInfoListArrayInput is an input type that accepts BgpInstanceTagInfoListArray and BgpInstanceTagInfoListArrayOutput values.
+// You can construct a concrete instance of `BgpInstanceTagInfoListArrayInput` via:
+//
+//	BgpInstanceTagInfoListArray{ BgpInstanceTagInfoListArgs{...} }
+type BgpInstanceTagInfoListArrayInput interface {
+	pulumi.Input
+
+	ToBgpInstanceTagInfoListArrayOutput() BgpInstanceTagInfoListArrayOutput
+	ToBgpInstanceTagInfoListArrayOutputWithContext(context.Context) BgpInstanceTagInfoListArrayOutput
+}
+
+type BgpInstanceTagInfoListArray []BgpInstanceTagInfoListInput
+
+func (BgpInstanceTagInfoListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BgpInstanceTagInfoList)(nil)).Elem()
+}
+
+func (i BgpInstanceTagInfoListArray) ToBgpInstanceTagInfoListArrayOutput() BgpInstanceTagInfoListArrayOutput {
+	return i.ToBgpInstanceTagInfoListArrayOutputWithContext(context.Background())
+}
+
+func (i BgpInstanceTagInfoListArray) ToBgpInstanceTagInfoListArrayOutputWithContext(ctx context.Context) BgpInstanceTagInfoListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BgpInstanceTagInfoListArrayOutput)
+}
+
+type BgpInstanceTagInfoListOutput struct{ *pulumi.OutputState }
+
+func (BgpInstanceTagInfoListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BgpInstanceTagInfoList)(nil)).Elem()
+}
+
+func (o BgpInstanceTagInfoListOutput) ToBgpInstanceTagInfoListOutput() BgpInstanceTagInfoListOutput {
+	return o
+}
+
+func (o BgpInstanceTagInfoListOutput) ToBgpInstanceTagInfoListOutputWithContext(ctx context.Context) BgpInstanceTagInfoListOutput {
+	return o
+}
+
+// Tag key.
+func (o BgpInstanceTagInfoListOutput) TagKey() pulumi.StringOutput {
+	return o.ApplyT(func(v BgpInstanceTagInfoList) string { return v.TagKey }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o BgpInstanceTagInfoListOutput) TagValue() pulumi.StringOutput {
+	return o.ApplyT(func(v BgpInstanceTagInfoList) string { return v.TagValue }).(pulumi.StringOutput)
+}
+
+type BgpInstanceTagInfoListArrayOutput struct{ *pulumi.OutputState }
+
+func (BgpInstanceTagInfoListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]BgpInstanceTagInfoList)(nil)).Elem()
+}
+
+func (o BgpInstanceTagInfoListArrayOutput) ToBgpInstanceTagInfoListArrayOutput() BgpInstanceTagInfoListArrayOutput {
+	return o
+}
+
+func (o BgpInstanceTagInfoListArrayOutput) ToBgpInstanceTagInfoListArrayOutputWithContext(ctx context.Context) BgpInstanceTagInfoListArrayOutput {
+	return o
+}
+
+func (o BgpInstanceTagInfoListArrayOutput) Index(i pulumi.IntInput) BgpInstanceTagInfoListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) BgpInstanceTagInfoList {
+		return vs[0].([]BgpInstanceTagInfoList)[vs[1].(int)]
+	}).(BgpInstanceTagInfoListOutput)
+}
+
 type CcBlackWhiteIpBlackWhiteIp struct {
 	// ip address.
 	Ip string `pulumi:"ip"`
@@ -2052,6 +2953,932 @@ func (o GetBasicDeviceStatusDataArrayOutput) Index(i pulumi.IntInput) GetBasicDe
 	}).(GetBasicDeviceStatusDataOutput)
 }
 
+type GetBgpInstancesBgpInstanceList struct {
+	// Enterprise edition Anti-DDoS package configuration.
+	EnterprisePackageConfigs []GetBgpInstancesBgpInstanceListEnterprisePackageConfig `pulumi:"enterprisePackageConfigs"`
+	// Renewal period related.
+	InstanceChargePrepaids []GetBgpInstancesBgpInstanceListInstanceChargePrepaid `pulumi:"instanceChargePrepaids"`
+	// Payment method.
+	InstanceChargeType string `pulumi:"instanceChargeType"`
+	// Instance ID.
+	InstanceId string `pulumi:"instanceId"`
+	// Anti-DDoS package type.
+	PackageType string `pulumi:"packageType"`
+	// Standard edition Anti-DDoS package configuration.
+	StandardPackageConfigs []GetBgpInstancesBgpInstanceListStandardPackageConfig `pulumi:"standardPackageConfigs"`
+	// Standard edition 2.0 Anti-DDoS package configuration.
+	StandardPlusPackageConfigs []GetBgpInstancesBgpInstanceListStandardPlusPackageConfig `pulumi:"standardPlusPackageConfigs"`
+	// Tag information.
+	TagInfoLists []GetBgpInstancesBgpInstanceListTagInfoList `pulumi:"tagInfoLists"`
+}
+
+// GetBgpInstancesBgpInstanceListInput is an input type that accepts GetBgpInstancesBgpInstanceListArgs and GetBgpInstancesBgpInstanceListOutput values.
+// You can construct a concrete instance of `GetBgpInstancesBgpInstanceListInput` via:
+//
+//	GetBgpInstancesBgpInstanceListArgs{...}
+type GetBgpInstancesBgpInstanceListInput interface {
+	pulumi.Input
+
+	ToGetBgpInstancesBgpInstanceListOutput() GetBgpInstancesBgpInstanceListOutput
+	ToGetBgpInstancesBgpInstanceListOutputWithContext(context.Context) GetBgpInstancesBgpInstanceListOutput
+}
+
+type GetBgpInstancesBgpInstanceListArgs struct {
+	// Enterprise edition Anti-DDoS package configuration.
+	EnterprisePackageConfigs GetBgpInstancesBgpInstanceListEnterprisePackageConfigArrayInput `pulumi:"enterprisePackageConfigs"`
+	// Renewal period related.
+	InstanceChargePrepaids GetBgpInstancesBgpInstanceListInstanceChargePrepaidArrayInput `pulumi:"instanceChargePrepaids"`
+	// Payment method.
+	InstanceChargeType pulumi.StringInput `pulumi:"instanceChargeType"`
+	// Instance ID.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Anti-DDoS package type.
+	PackageType pulumi.StringInput `pulumi:"packageType"`
+	// Standard edition Anti-DDoS package configuration.
+	StandardPackageConfigs GetBgpInstancesBgpInstanceListStandardPackageConfigArrayInput `pulumi:"standardPackageConfigs"`
+	// Standard edition 2.0 Anti-DDoS package configuration.
+	StandardPlusPackageConfigs GetBgpInstancesBgpInstanceListStandardPlusPackageConfigArrayInput `pulumi:"standardPlusPackageConfigs"`
+	// Tag information.
+	TagInfoLists GetBgpInstancesBgpInstanceListTagInfoListArrayInput `pulumi:"tagInfoLists"`
+}
+
+func (GetBgpInstancesBgpInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBgpInstancesBgpInstanceList)(nil)).Elem()
+}
+
+func (i GetBgpInstancesBgpInstanceListArgs) ToGetBgpInstancesBgpInstanceListOutput() GetBgpInstancesBgpInstanceListOutput {
+	return i.ToGetBgpInstancesBgpInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetBgpInstancesBgpInstanceListArgs) ToGetBgpInstancesBgpInstanceListOutputWithContext(ctx context.Context) GetBgpInstancesBgpInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBgpInstancesBgpInstanceListOutput)
+}
+
+// GetBgpInstancesBgpInstanceListArrayInput is an input type that accepts GetBgpInstancesBgpInstanceListArray and GetBgpInstancesBgpInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetBgpInstancesBgpInstanceListArrayInput` via:
+//
+//	GetBgpInstancesBgpInstanceListArray{ GetBgpInstancesBgpInstanceListArgs{...} }
+type GetBgpInstancesBgpInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetBgpInstancesBgpInstanceListArrayOutput() GetBgpInstancesBgpInstanceListArrayOutput
+	ToGetBgpInstancesBgpInstanceListArrayOutputWithContext(context.Context) GetBgpInstancesBgpInstanceListArrayOutput
+}
+
+type GetBgpInstancesBgpInstanceListArray []GetBgpInstancesBgpInstanceListInput
+
+func (GetBgpInstancesBgpInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBgpInstancesBgpInstanceList)(nil)).Elem()
+}
+
+func (i GetBgpInstancesBgpInstanceListArray) ToGetBgpInstancesBgpInstanceListArrayOutput() GetBgpInstancesBgpInstanceListArrayOutput {
+	return i.ToGetBgpInstancesBgpInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetBgpInstancesBgpInstanceListArray) ToGetBgpInstancesBgpInstanceListArrayOutputWithContext(ctx context.Context) GetBgpInstancesBgpInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBgpInstancesBgpInstanceListArrayOutput)
+}
+
+type GetBgpInstancesBgpInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetBgpInstancesBgpInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBgpInstancesBgpInstanceList)(nil)).Elem()
+}
+
+func (o GetBgpInstancesBgpInstanceListOutput) ToGetBgpInstancesBgpInstanceListOutput() GetBgpInstancesBgpInstanceListOutput {
+	return o
+}
+
+func (o GetBgpInstancesBgpInstanceListOutput) ToGetBgpInstancesBgpInstanceListOutputWithContext(ctx context.Context) GetBgpInstancesBgpInstanceListOutput {
+	return o
+}
+
+// Enterprise edition Anti-DDoS package configuration.
+func (o GetBgpInstancesBgpInstanceListOutput) EnterprisePackageConfigs() GetBgpInstancesBgpInstanceListEnterprisePackageConfigArrayOutput {
+	return o.ApplyT(func(v GetBgpInstancesBgpInstanceList) []GetBgpInstancesBgpInstanceListEnterprisePackageConfig {
+		return v.EnterprisePackageConfigs
+	}).(GetBgpInstancesBgpInstanceListEnterprisePackageConfigArrayOutput)
+}
+
+// Renewal period related.
+func (o GetBgpInstancesBgpInstanceListOutput) InstanceChargePrepaids() GetBgpInstancesBgpInstanceListInstanceChargePrepaidArrayOutput {
+	return o.ApplyT(func(v GetBgpInstancesBgpInstanceList) []GetBgpInstancesBgpInstanceListInstanceChargePrepaid {
+		return v.InstanceChargePrepaids
+	}).(GetBgpInstancesBgpInstanceListInstanceChargePrepaidArrayOutput)
+}
+
+// Payment method.
+func (o GetBgpInstancesBgpInstanceListOutput) InstanceChargeType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBgpInstancesBgpInstanceList) string { return v.InstanceChargeType }).(pulumi.StringOutput)
+}
+
+// Instance ID.
+func (o GetBgpInstancesBgpInstanceListOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBgpInstancesBgpInstanceList) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Anti-DDoS package type.
+func (o GetBgpInstancesBgpInstanceListOutput) PackageType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBgpInstancesBgpInstanceList) string { return v.PackageType }).(pulumi.StringOutput)
+}
+
+// Standard edition Anti-DDoS package configuration.
+func (o GetBgpInstancesBgpInstanceListOutput) StandardPackageConfigs() GetBgpInstancesBgpInstanceListStandardPackageConfigArrayOutput {
+	return o.ApplyT(func(v GetBgpInstancesBgpInstanceList) []GetBgpInstancesBgpInstanceListStandardPackageConfig {
+		return v.StandardPackageConfigs
+	}).(GetBgpInstancesBgpInstanceListStandardPackageConfigArrayOutput)
+}
+
+// Standard edition 2.0 Anti-DDoS package configuration.
+func (o GetBgpInstancesBgpInstanceListOutput) StandardPlusPackageConfigs() GetBgpInstancesBgpInstanceListStandardPlusPackageConfigArrayOutput {
+	return o.ApplyT(func(v GetBgpInstancesBgpInstanceList) []GetBgpInstancesBgpInstanceListStandardPlusPackageConfig {
+		return v.StandardPlusPackageConfigs
+	}).(GetBgpInstancesBgpInstanceListStandardPlusPackageConfigArrayOutput)
+}
+
+// Tag information.
+func (o GetBgpInstancesBgpInstanceListOutput) TagInfoLists() GetBgpInstancesBgpInstanceListTagInfoListArrayOutput {
+	return o.ApplyT(func(v GetBgpInstancesBgpInstanceList) []GetBgpInstancesBgpInstanceListTagInfoList {
+		return v.TagInfoLists
+	}).(GetBgpInstancesBgpInstanceListTagInfoListArrayOutput)
+}
+
+type GetBgpInstancesBgpInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBgpInstancesBgpInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBgpInstancesBgpInstanceList)(nil)).Elem()
+}
+
+func (o GetBgpInstancesBgpInstanceListArrayOutput) ToGetBgpInstancesBgpInstanceListArrayOutput() GetBgpInstancesBgpInstanceListArrayOutput {
+	return o
+}
+
+func (o GetBgpInstancesBgpInstanceListArrayOutput) ToGetBgpInstancesBgpInstanceListArrayOutputWithContext(ctx context.Context) GetBgpInstancesBgpInstanceListArrayOutput {
+	return o
+}
+
+func (o GetBgpInstancesBgpInstanceListArrayOutput) Index(i pulumi.IntInput) GetBgpInstancesBgpInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBgpInstancesBgpInstanceList {
+		return vs[0].([]GetBgpInstancesBgpInstanceList)[vs[1].(int)]
+	}).(GetBgpInstancesBgpInstanceListOutput)
+}
+
+type GetBgpInstancesBgpInstanceListEnterprisePackageConfig struct {
+	// Protection bandwidth 50Mbps.
+	Bandwidth int `pulumi:"bandwidth"`
+	// Basic protection bandwidth.
+	BasicProtectBandwidth int `pulumi:"basicProtectBandwidth"`
+	// Whether to enable elastic business bandwidth.
+	// true: enable
+	// false: disable
+	// Default is disable.
+	ElasticBandwidthFlag bool `pulumi:"elasticBandwidthFlag"`
+	// Elastic bandwidth in Gbps, selectable elastic bandwidth [0,400,500,600,800,1000].
+	// Default is 0.
+	ElasticProtectBandwidth int `pulumi:"elasticProtectBandwidth"`
+	// Number of protected IPs.
+	ProtectIpCount int `pulumi:"protectIpCount"`
+	// Region where the Anti-DDoS package is purchased.
+	Region string `pulumi:"region"`
+}
+
+// GetBgpInstancesBgpInstanceListEnterprisePackageConfigInput is an input type that accepts GetBgpInstancesBgpInstanceListEnterprisePackageConfigArgs and GetBgpInstancesBgpInstanceListEnterprisePackageConfigOutput values.
+// You can construct a concrete instance of `GetBgpInstancesBgpInstanceListEnterprisePackageConfigInput` via:
+//
+//	GetBgpInstancesBgpInstanceListEnterprisePackageConfigArgs{...}
+type GetBgpInstancesBgpInstanceListEnterprisePackageConfigInput interface {
+	pulumi.Input
+
+	ToGetBgpInstancesBgpInstanceListEnterprisePackageConfigOutput() GetBgpInstancesBgpInstanceListEnterprisePackageConfigOutput
+	ToGetBgpInstancesBgpInstanceListEnterprisePackageConfigOutputWithContext(context.Context) GetBgpInstancesBgpInstanceListEnterprisePackageConfigOutput
+}
+
+type GetBgpInstancesBgpInstanceListEnterprisePackageConfigArgs struct {
+	// Protection bandwidth 50Mbps.
+	Bandwidth pulumi.IntInput `pulumi:"bandwidth"`
+	// Basic protection bandwidth.
+	BasicProtectBandwidth pulumi.IntInput `pulumi:"basicProtectBandwidth"`
+	// Whether to enable elastic business bandwidth.
+	// true: enable
+	// false: disable
+	// Default is disable.
+	ElasticBandwidthFlag pulumi.BoolInput `pulumi:"elasticBandwidthFlag"`
+	// Elastic bandwidth in Gbps, selectable elastic bandwidth [0,400,500,600,800,1000].
+	// Default is 0.
+	ElasticProtectBandwidth pulumi.IntInput `pulumi:"elasticProtectBandwidth"`
+	// Number of protected IPs.
+	ProtectIpCount pulumi.IntInput `pulumi:"protectIpCount"`
+	// Region where the Anti-DDoS package is purchased.
+	Region pulumi.StringInput `pulumi:"region"`
+}
+
+func (GetBgpInstancesBgpInstanceListEnterprisePackageConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBgpInstancesBgpInstanceListEnterprisePackageConfig)(nil)).Elem()
+}
+
+func (i GetBgpInstancesBgpInstanceListEnterprisePackageConfigArgs) ToGetBgpInstancesBgpInstanceListEnterprisePackageConfigOutput() GetBgpInstancesBgpInstanceListEnterprisePackageConfigOutput {
+	return i.ToGetBgpInstancesBgpInstanceListEnterprisePackageConfigOutputWithContext(context.Background())
+}
+
+func (i GetBgpInstancesBgpInstanceListEnterprisePackageConfigArgs) ToGetBgpInstancesBgpInstanceListEnterprisePackageConfigOutputWithContext(ctx context.Context) GetBgpInstancesBgpInstanceListEnterprisePackageConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBgpInstancesBgpInstanceListEnterprisePackageConfigOutput)
+}
+
+// GetBgpInstancesBgpInstanceListEnterprisePackageConfigArrayInput is an input type that accepts GetBgpInstancesBgpInstanceListEnterprisePackageConfigArray and GetBgpInstancesBgpInstanceListEnterprisePackageConfigArrayOutput values.
+// You can construct a concrete instance of `GetBgpInstancesBgpInstanceListEnterprisePackageConfigArrayInput` via:
+//
+//	GetBgpInstancesBgpInstanceListEnterprisePackageConfigArray{ GetBgpInstancesBgpInstanceListEnterprisePackageConfigArgs{...} }
+type GetBgpInstancesBgpInstanceListEnterprisePackageConfigArrayInput interface {
+	pulumi.Input
+
+	ToGetBgpInstancesBgpInstanceListEnterprisePackageConfigArrayOutput() GetBgpInstancesBgpInstanceListEnterprisePackageConfigArrayOutput
+	ToGetBgpInstancesBgpInstanceListEnterprisePackageConfigArrayOutputWithContext(context.Context) GetBgpInstancesBgpInstanceListEnterprisePackageConfigArrayOutput
+}
+
+type GetBgpInstancesBgpInstanceListEnterprisePackageConfigArray []GetBgpInstancesBgpInstanceListEnterprisePackageConfigInput
+
+func (GetBgpInstancesBgpInstanceListEnterprisePackageConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBgpInstancesBgpInstanceListEnterprisePackageConfig)(nil)).Elem()
+}
+
+func (i GetBgpInstancesBgpInstanceListEnterprisePackageConfigArray) ToGetBgpInstancesBgpInstanceListEnterprisePackageConfigArrayOutput() GetBgpInstancesBgpInstanceListEnterprisePackageConfigArrayOutput {
+	return i.ToGetBgpInstancesBgpInstanceListEnterprisePackageConfigArrayOutputWithContext(context.Background())
+}
+
+func (i GetBgpInstancesBgpInstanceListEnterprisePackageConfigArray) ToGetBgpInstancesBgpInstanceListEnterprisePackageConfigArrayOutputWithContext(ctx context.Context) GetBgpInstancesBgpInstanceListEnterprisePackageConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBgpInstancesBgpInstanceListEnterprisePackageConfigArrayOutput)
+}
+
+type GetBgpInstancesBgpInstanceListEnterprisePackageConfigOutput struct{ *pulumi.OutputState }
+
+func (GetBgpInstancesBgpInstanceListEnterprisePackageConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBgpInstancesBgpInstanceListEnterprisePackageConfig)(nil)).Elem()
+}
+
+func (o GetBgpInstancesBgpInstanceListEnterprisePackageConfigOutput) ToGetBgpInstancesBgpInstanceListEnterprisePackageConfigOutput() GetBgpInstancesBgpInstanceListEnterprisePackageConfigOutput {
+	return o
+}
+
+func (o GetBgpInstancesBgpInstanceListEnterprisePackageConfigOutput) ToGetBgpInstancesBgpInstanceListEnterprisePackageConfigOutputWithContext(ctx context.Context) GetBgpInstancesBgpInstanceListEnterprisePackageConfigOutput {
+	return o
+}
+
+// Protection bandwidth 50Mbps.
+func (o GetBgpInstancesBgpInstanceListEnterprisePackageConfigOutput) Bandwidth() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBgpInstancesBgpInstanceListEnterprisePackageConfig) int { return v.Bandwidth }).(pulumi.IntOutput)
+}
+
+// Basic protection bandwidth.
+func (o GetBgpInstancesBgpInstanceListEnterprisePackageConfigOutput) BasicProtectBandwidth() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBgpInstancesBgpInstanceListEnterprisePackageConfig) int { return v.BasicProtectBandwidth }).(pulumi.IntOutput)
+}
+
+// Whether to enable elastic business bandwidth.
+// true: enable
+// false: disable
+// Default is disable.
+func (o GetBgpInstancesBgpInstanceListEnterprisePackageConfigOutput) ElasticBandwidthFlag() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetBgpInstancesBgpInstanceListEnterprisePackageConfig) bool { return v.ElasticBandwidthFlag }).(pulumi.BoolOutput)
+}
+
+// Elastic bandwidth in Gbps, selectable elastic bandwidth [0,400,500,600,800,1000].
+// Default is 0.
+func (o GetBgpInstancesBgpInstanceListEnterprisePackageConfigOutput) ElasticProtectBandwidth() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBgpInstancesBgpInstanceListEnterprisePackageConfig) int { return v.ElasticProtectBandwidth }).(pulumi.IntOutput)
+}
+
+// Number of protected IPs.
+func (o GetBgpInstancesBgpInstanceListEnterprisePackageConfigOutput) ProtectIpCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBgpInstancesBgpInstanceListEnterprisePackageConfig) int { return v.ProtectIpCount }).(pulumi.IntOutput)
+}
+
+// Region where the Anti-DDoS package is purchased.
+func (o GetBgpInstancesBgpInstanceListEnterprisePackageConfigOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBgpInstancesBgpInstanceListEnterprisePackageConfig) string { return v.Region }).(pulumi.StringOutput)
+}
+
+type GetBgpInstancesBgpInstanceListEnterprisePackageConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBgpInstancesBgpInstanceListEnterprisePackageConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBgpInstancesBgpInstanceListEnterprisePackageConfig)(nil)).Elem()
+}
+
+func (o GetBgpInstancesBgpInstanceListEnterprisePackageConfigArrayOutput) ToGetBgpInstancesBgpInstanceListEnterprisePackageConfigArrayOutput() GetBgpInstancesBgpInstanceListEnterprisePackageConfigArrayOutput {
+	return o
+}
+
+func (o GetBgpInstancesBgpInstanceListEnterprisePackageConfigArrayOutput) ToGetBgpInstancesBgpInstanceListEnterprisePackageConfigArrayOutputWithContext(ctx context.Context) GetBgpInstancesBgpInstanceListEnterprisePackageConfigArrayOutput {
+	return o
+}
+
+func (o GetBgpInstancesBgpInstanceListEnterprisePackageConfigArrayOutput) Index(i pulumi.IntInput) GetBgpInstancesBgpInstanceListEnterprisePackageConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBgpInstancesBgpInstanceListEnterprisePackageConfig {
+		return vs[0].([]GetBgpInstancesBgpInstanceListEnterprisePackageConfig)[vs[1].(int)]
+	}).(GetBgpInstancesBgpInstanceListEnterprisePackageConfigOutput)
+}
+
+type GetBgpInstancesBgpInstanceListInstanceChargePrepaid struct {
+	// Purchase duration: unit in months.
+	Period int `pulumi:"period"`
+	// NOTIFY_AND_MANUAL_RENEW: Notify expiration without automatic renewal.
+	// NOTIFY_AND_AUTO_RENEW: Notify expiration and automatically renew.
+	// DISABLE_NOTIFY_AND_MANUAL_RENEW: No notification and no automatic renewal.
+	// Default: Notify expiration without automatic renewal.
+	RenewFlag string `pulumi:"renewFlag"`
+}
+
+// GetBgpInstancesBgpInstanceListInstanceChargePrepaidInput is an input type that accepts GetBgpInstancesBgpInstanceListInstanceChargePrepaidArgs and GetBgpInstancesBgpInstanceListInstanceChargePrepaidOutput values.
+// You can construct a concrete instance of `GetBgpInstancesBgpInstanceListInstanceChargePrepaidInput` via:
+//
+//	GetBgpInstancesBgpInstanceListInstanceChargePrepaidArgs{...}
+type GetBgpInstancesBgpInstanceListInstanceChargePrepaidInput interface {
+	pulumi.Input
+
+	ToGetBgpInstancesBgpInstanceListInstanceChargePrepaidOutput() GetBgpInstancesBgpInstanceListInstanceChargePrepaidOutput
+	ToGetBgpInstancesBgpInstanceListInstanceChargePrepaidOutputWithContext(context.Context) GetBgpInstancesBgpInstanceListInstanceChargePrepaidOutput
+}
+
+type GetBgpInstancesBgpInstanceListInstanceChargePrepaidArgs struct {
+	// Purchase duration: unit in months.
+	Period pulumi.IntInput `pulumi:"period"`
+	// NOTIFY_AND_MANUAL_RENEW: Notify expiration without automatic renewal.
+	// NOTIFY_AND_AUTO_RENEW: Notify expiration and automatically renew.
+	// DISABLE_NOTIFY_AND_MANUAL_RENEW: No notification and no automatic renewal.
+	// Default: Notify expiration without automatic renewal.
+	RenewFlag pulumi.StringInput `pulumi:"renewFlag"`
+}
+
+func (GetBgpInstancesBgpInstanceListInstanceChargePrepaidArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBgpInstancesBgpInstanceListInstanceChargePrepaid)(nil)).Elem()
+}
+
+func (i GetBgpInstancesBgpInstanceListInstanceChargePrepaidArgs) ToGetBgpInstancesBgpInstanceListInstanceChargePrepaidOutput() GetBgpInstancesBgpInstanceListInstanceChargePrepaidOutput {
+	return i.ToGetBgpInstancesBgpInstanceListInstanceChargePrepaidOutputWithContext(context.Background())
+}
+
+func (i GetBgpInstancesBgpInstanceListInstanceChargePrepaidArgs) ToGetBgpInstancesBgpInstanceListInstanceChargePrepaidOutputWithContext(ctx context.Context) GetBgpInstancesBgpInstanceListInstanceChargePrepaidOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBgpInstancesBgpInstanceListInstanceChargePrepaidOutput)
+}
+
+// GetBgpInstancesBgpInstanceListInstanceChargePrepaidArrayInput is an input type that accepts GetBgpInstancesBgpInstanceListInstanceChargePrepaidArray and GetBgpInstancesBgpInstanceListInstanceChargePrepaidArrayOutput values.
+// You can construct a concrete instance of `GetBgpInstancesBgpInstanceListInstanceChargePrepaidArrayInput` via:
+//
+//	GetBgpInstancesBgpInstanceListInstanceChargePrepaidArray{ GetBgpInstancesBgpInstanceListInstanceChargePrepaidArgs{...} }
+type GetBgpInstancesBgpInstanceListInstanceChargePrepaidArrayInput interface {
+	pulumi.Input
+
+	ToGetBgpInstancesBgpInstanceListInstanceChargePrepaidArrayOutput() GetBgpInstancesBgpInstanceListInstanceChargePrepaidArrayOutput
+	ToGetBgpInstancesBgpInstanceListInstanceChargePrepaidArrayOutputWithContext(context.Context) GetBgpInstancesBgpInstanceListInstanceChargePrepaidArrayOutput
+}
+
+type GetBgpInstancesBgpInstanceListInstanceChargePrepaidArray []GetBgpInstancesBgpInstanceListInstanceChargePrepaidInput
+
+func (GetBgpInstancesBgpInstanceListInstanceChargePrepaidArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBgpInstancesBgpInstanceListInstanceChargePrepaid)(nil)).Elem()
+}
+
+func (i GetBgpInstancesBgpInstanceListInstanceChargePrepaidArray) ToGetBgpInstancesBgpInstanceListInstanceChargePrepaidArrayOutput() GetBgpInstancesBgpInstanceListInstanceChargePrepaidArrayOutput {
+	return i.ToGetBgpInstancesBgpInstanceListInstanceChargePrepaidArrayOutputWithContext(context.Background())
+}
+
+func (i GetBgpInstancesBgpInstanceListInstanceChargePrepaidArray) ToGetBgpInstancesBgpInstanceListInstanceChargePrepaidArrayOutputWithContext(ctx context.Context) GetBgpInstancesBgpInstanceListInstanceChargePrepaidArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBgpInstancesBgpInstanceListInstanceChargePrepaidArrayOutput)
+}
+
+type GetBgpInstancesBgpInstanceListInstanceChargePrepaidOutput struct{ *pulumi.OutputState }
+
+func (GetBgpInstancesBgpInstanceListInstanceChargePrepaidOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBgpInstancesBgpInstanceListInstanceChargePrepaid)(nil)).Elem()
+}
+
+func (o GetBgpInstancesBgpInstanceListInstanceChargePrepaidOutput) ToGetBgpInstancesBgpInstanceListInstanceChargePrepaidOutput() GetBgpInstancesBgpInstanceListInstanceChargePrepaidOutput {
+	return o
+}
+
+func (o GetBgpInstancesBgpInstanceListInstanceChargePrepaidOutput) ToGetBgpInstancesBgpInstanceListInstanceChargePrepaidOutputWithContext(ctx context.Context) GetBgpInstancesBgpInstanceListInstanceChargePrepaidOutput {
+	return o
+}
+
+// Purchase duration: unit in months.
+func (o GetBgpInstancesBgpInstanceListInstanceChargePrepaidOutput) Period() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBgpInstancesBgpInstanceListInstanceChargePrepaid) int { return v.Period }).(pulumi.IntOutput)
+}
+
+// NOTIFY_AND_MANUAL_RENEW: Notify expiration without automatic renewal.
+// NOTIFY_AND_AUTO_RENEW: Notify expiration and automatically renew.
+// DISABLE_NOTIFY_AND_MANUAL_RENEW: No notification and no automatic renewal.
+// Default: Notify expiration without automatic renewal.
+func (o GetBgpInstancesBgpInstanceListInstanceChargePrepaidOutput) RenewFlag() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBgpInstancesBgpInstanceListInstanceChargePrepaid) string { return v.RenewFlag }).(pulumi.StringOutput)
+}
+
+type GetBgpInstancesBgpInstanceListInstanceChargePrepaidArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBgpInstancesBgpInstanceListInstanceChargePrepaidArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBgpInstancesBgpInstanceListInstanceChargePrepaid)(nil)).Elem()
+}
+
+func (o GetBgpInstancesBgpInstanceListInstanceChargePrepaidArrayOutput) ToGetBgpInstancesBgpInstanceListInstanceChargePrepaidArrayOutput() GetBgpInstancesBgpInstanceListInstanceChargePrepaidArrayOutput {
+	return o
+}
+
+func (o GetBgpInstancesBgpInstanceListInstanceChargePrepaidArrayOutput) ToGetBgpInstancesBgpInstanceListInstanceChargePrepaidArrayOutputWithContext(ctx context.Context) GetBgpInstancesBgpInstanceListInstanceChargePrepaidArrayOutput {
+	return o
+}
+
+func (o GetBgpInstancesBgpInstanceListInstanceChargePrepaidArrayOutput) Index(i pulumi.IntInput) GetBgpInstancesBgpInstanceListInstanceChargePrepaidOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBgpInstancesBgpInstanceListInstanceChargePrepaid {
+		return vs[0].([]GetBgpInstancesBgpInstanceListInstanceChargePrepaid)[vs[1].(int)]
+	}).(GetBgpInstancesBgpInstanceListInstanceChargePrepaidOutput)
+}
+
+type GetBgpInstancesBgpInstanceListStandardPackageConfig struct {
+	// Protection bandwidth 50Mbps.
+	Bandwidth int `pulumi:"bandwidth"`
+	// Whether to enable elastic business bandwidth.
+	// true: enable
+	// false: disable
+	// Default is disable.
+	ElasticBandwidthFlag bool `pulumi:"elasticBandwidthFlag"`
+	// Number of protected IPs.
+	ProtectIpCount int `pulumi:"protectIpCount"`
+	// Region where the Anti-DDoS package is purchased.
+	Region string `pulumi:"region"`
+}
+
+// GetBgpInstancesBgpInstanceListStandardPackageConfigInput is an input type that accepts GetBgpInstancesBgpInstanceListStandardPackageConfigArgs and GetBgpInstancesBgpInstanceListStandardPackageConfigOutput values.
+// You can construct a concrete instance of `GetBgpInstancesBgpInstanceListStandardPackageConfigInput` via:
+//
+//	GetBgpInstancesBgpInstanceListStandardPackageConfigArgs{...}
+type GetBgpInstancesBgpInstanceListStandardPackageConfigInput interface {
+	pulumi.Input
+
+	ToGetBgpInstancesBgpInstanceListStandardPackageConfigOutput() GetBgpInstancesBgpInstanceListStandardPackageConfigOutput
+	ToGetBgpInstancesBgpInstanceListStandardPackageConfigOutputWithContext(context.Context) GetBgpInstancesBgpInstanceListStandardPackageConfigOutput
+}
+
+type GetBgpInstancesBgpInstanceListStandardPackageConfigArgs struct {
+	// Protection bandwidth 50Mbps.
+	Bandwidth pulumi.IntInput `pulumi:"bandwidth"`
+	// Whether to enable elastic business bandwidth.
+	// true: enable
+	// false: disable
+	// Default is disable.
+	ElasticBandwidthFlag pulumi.BoolInput `pulumi:"elasticBandwidthFlag"`
+	// Number of protected IPs.
+	ProtectIpCount pulumi.IntInput `pulumi:"protectIpCount"`
+	// Region where the Anti-DDoS package is purchased.
+	Region pulumi.StringInput `pulumi:"region"`
+}
+
+func (GetBgpInstancesBgpInstanceListStandardPackageConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBgpInstancesBgpInstanceListStandardPackageConfig)(nil)).Elem()
+}
+
+func (i GetBgpInstancesBgpInstanceListStandardPackageConfigArgs) ToGetBgpInstancesBgpInstanceListStandardPackageConfigOutput() GetBgpInstancesBgpInstanceListStandardPackageConfigOutput {
+	return i.ToGetBgpInstancesBgpInstanceListStandardPackageConfigOutputWithContext(context.Background())
+}
+
+func (i GetBgpInstancesBgpInstanceListStandardPackageConfigArgs) ToGetBgpInstancesBgpInstanceListStandardPackageConfigOutputWithContext(ctx context.Context) GetBgpInstancesBgpInstanceListStandardPackageConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBgpInstancesBgpInstanceListStandardPackageConfigOutput)
+}
+
+// GetBgpInstancesBgpInstanceListStandardPackageConfigArrayInput is an input type that accepts GetBgpInstancesBgpInstanceListStandardPackageConfigArray and GetBgpInstancesBgpInstanceListStandardPackageConfigArrayOutput values.
+// You can construct a concrete instance of `GetBgpInstancesBgpInstanceListStandardPackageConfigArrayInput` via:
+//
+//	GetBgpInstancesBgpInstanceListStandardPackageConfigArray{ GetBgpInstancesBgpInstanceListStandardPackageConfigArgs{...} }
+type GetBgpInstancesBgpInstanceListStandardPackageConfigArrayInput interface {
+	pulumi.Input
+
+	ToGetBgpInstancesBgpInstanceListStandardPackageConfigArrayOutput() GetBgpInstancesBgpInstanceListStandardPackageConfigArrayOutput
+	ToGetBgpInstancesBgpInstanceListStandardPackageConfigArrayOutputWithContext(context.Context) GetBgpInstancesBgpInstanceListStandardPackageConfigArrayOutput
+}
+
+type GetBgpInstancesBgpInstanceListStandardPackageConfigArray []GetBgpInstancesBgpInstanceListStandardPackageConfigInput
+
+func (GetBgpInstancesBgpInstanceListStandardPackageConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBgpInstancesBgpInstanceListStandardPackageConfig)(nil)).Elem()
+}
+
+func (i GetBgpInstancesBgpInstanceListStandardPackageConfigArray) ToGetBgpInstancesBgpInstanceListStandardPackageConfigArrayOutput() GetBgpInstancesBgpInstanceListStandardPackageConfigArrayOutput {
+	return i.ToGetBgpInstancesBgpInstanceListStandardPackageConfigArrayOutputWithContext(context.Background())
+}
+
+func (i GetBgpInstancesBgpInstanceListStandardPackageConfigArray) ToGetBgpInstancesBgpInstanceListStandardPackageConfigArrayOutputWithContext(ctx context.Context) GetBgpInstancesBgpInstanceListStandardPackageConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBgpInstancesBgpInstanceListStandardPackageConfigArrayOutput)
+}
+
+type GetBgpInstancesBgpInstanceListStandardPackageConfigOutput struct{ *pulumi.OutputState }
+
+func (GetBgpInstancesBgpInstanceListStandardPackageConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBgpInstancesBgpInstanceListStandardPackageConfig)(nil)).Elem()
+}
+
+func (o GetBgpInstancesBgpInstanceListStandardPackageConfigOutput) ToGetBgpInstancesBgpInstanceListStandardPackageConfigOutput() GetBgpInstancesBgpInstanceListStandardPackageConfigOutput {
+	return o
+}
+
+func (o GetBgpInstancesBgpInstanceListStandardPackageConfigOutput) ToGetBgpInstancesBgpInstanceListStandardPackageConfigOutputWithContext(ctx context.Context) GetBgpInstancesBgpInstanceListStandardPackageConfigOutput {
+	return o
+}
+
+// Protection bandwidth 50Mbps.
+func (o GetBgpInstancesBgpInstanceListStandardPackageConfigOutput) Bandwidth() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBgpInstancesBgpInstanceListStandardPackageConfig) int { return v.Bandwidth }).(pulumi.IntOutput)
+}
+
+// Whether to enable elastic business bandwidth.
+// true: enable
+// false: disable
+// Default is disable.
+func (o GetBgpInstancesBgpInstanceListStandardPackageConfigOutput) ElasticBandwidthFlag() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetBgpInstancesBgpInstanceListStandardPackageConfig) bool { return v.ElasticBandwidthFlag }).(pulumi.BoolOutput)
+}
+
+// Number of protected IPs.
+func (o GetBgpInstancesBgpInstanceListStandardPackageConfigOutput) ProtectIpCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBgpInstancesBgpInstanceListStandardPackageConfig) int { return v.ProtectIpCount }).(pulumi.IntOutput)
+}
+
+// Region where the Anti-DDoS package is purchased.
+func (o GetBgpInstancesBgpInstanceListStandardPackageConfigOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBgpInstancesBgpInstanceListStandardPackageConfig) string { return v.Region }).(pulumi.StringOutput)
+}
+
+type GetBgpInstancesBgpInstanceListStandardPackageConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBgpInstancesBgpInstanceListStandardPackageConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBgpInstancesBgpInstanceListStandardPackageConfig)(nil)).Elem()
+}
+
+func (o GetBgpInstancesBgpInstanceListStandardPackageConfigArrayOutput) ToGetBgpInstancesBgpInstanceListStandardPackageConfigArrayOutput() GetBgpInstancesBgpInstanceListStandardPackageConfigArrayOutput {
+	return o
+}
+
+func (o GetBgpInstancesBgpInstanceListStandardPackageConfigArrayOutput) ToGetBgpInstancesBgpInstanceListStandardPackageConfigArrayOutputWithContext(ctx context.Context) GetBgpInstancesBgpInstanceListStandardPackageConfigArrayOutput {
+	return o
+}
+
+func (o GetBgpInstancesBgpInstanceListStandardPackageConfigArrayOutput) Index(i pulumi.IntInput) GetBgpInstancesBgpInstanceListStandardPackageConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBgpInstancesBgpInstanceListStandardPackageConfig {
+		return vs[0].([]GetBgpInstancesBgpInstanceListStandardPackageConfig)[vs[1].(int)]
+	}).(GetBgpInstancesBgpInstanceListStandardPackageConfigOutput)
+}
+
+type GetBgpInstancesBgpInstanceListStandardPlusPackageConfig struct {
+	// Protection bandwidth 50Mbps.
+	Bandwidth int `pulumi:"bandwidth"`
+	// Whether to enable elastic business bandwidth.
+	// true: enable
+	// false: disable
+	// Default is disable.
+	ElasticBandwidthFlag bool `pulumi:"elasticBandwidthFlag"`
+	// Protection count: TWO_TIMES: two full protections, UNLIMITED: unlimited protections.
+	ProtectCount string `pulumi:"protectCount"`
+	// Number of protected IPs.
+	ProtectIpCount int `pulumi:"protectIpCount"`
+	// Region where the Anti-DDoS package is purchased.
+	Region string `pulumi:"region"`
+}
+
+// GetBgpInstancesBgpInstanceListStandardPlusPackageConfigInput is an input type that accepts GetBgpInstancesBgpInstanceListStandardPlusPackageConfigArgs and GetBgpInstancesBgpInstanceListStandardPlusPackageConfigOutput values.
+// You can construct a concrete instance of `GetBgpInstancesBgpInstanceListStandardPlusPackageConfigInput` via:
+//
+//	GetBgpInstancesBgpInstanceListStandardPlusPackageConfigArgs{...}
+type GetBgpInstancesBgpInstanceListStandardPlusPackageConfigInput interface {
+	pulumi.Input
+
+	ToGetBgpInstancesBgpInstanceListStandardPlusPackageConfigOutput() GetBgpInstancesBgpInstanceListStandardPlusPackageConfigOutput
+	ToGetBgpInstancesBgpInstanceListStandardPlusPackageConfigOutputWithContext(context.Context) GetBgpInstancesBgpInstanceListStandardPlusPackageConfigOutput
+}
+
+type GetBgpInstancesBgpInstanceListStandardPlusPackageConfigArgs struct {
+	// Protection bandwidth 50Mbps.
+	Bandwidth pulumi.IntInput `pulumi:"bandwidth"`
+	// Whether to enable elastic business bandwidth.
+	// true: enable
+	// false: disable
+	// Default is disable.
+	ElasticBandwidthFlag pulumi.BoolInput `pulumi:"elasticBandwidthFlag"`
+	// Protection count: TWO_TIMES: two full protections, UNLIMITED: unlimited protections.
+	ProtectCount pulumi.StringInput `pulumi:"protectCount"`
+	// Number of protected IPs.
+	ProtectIpCount pulumi.IntInput `pulumi:"protectIpCount"`
+	// Region where the Anti-DDoS package is purchased.
+	Region pulumi.StringInput `pulumi:"region"`
+}
+
+func (GetBgpInstancesBgpInstanceListStandardPlusPackageConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBgpInstancesBgpInstanceListStandardPlusPackageConfig)(nil)).Elem()
+}
+
+func (i GetBgpInstancesBgpInstanceListStandardPlusPackageConfigArgs) ToGetBgpInstancesBgpInstanceListStandardPlusPackageConfigOutput() GetBgpInstancesBgpInstanceListStandardPlusPackageConfigOutput {
+	return i.ToGetBgpInstancesBgpInstanceListStandardPlusPackageConfigOutputWithContext(context.Background())
+}
+
+func (i GetBgpInstancesBgpInstanceListStandardPlusPackageConfigArgs) ToGetBgpInstancesBgpInstanceListStandardPlusPackageConfigOutputWithContext(ctx context.Context) GetBgpInstancesBgpInstanceListStandardPlusPackageConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBgpInstancesBgpInstanceListStandardPlusPackageConfigOutput)
+}
+
+// GetBgpInstancesBgpInstanceListStandardPlusPackageConfigArrayInput is an input type that accepts GetBgpInstancesBgpInstanceListStandardPlusPackageConfigArray and GetBgpInstancesBgpInstanceListStandardPlusPackageConfigArrayOutput values.
+// You can construct a concrete instance of `GetBgpInstancesBgpInstanceListStandardPlusPackageConfigArrayInput` via:
+//
+//	GetBgpInstancesBgpInstanceListStandardPlusPackageConfigArray{ GetBgpInstancesBgpInstanceListStandardPlusPackageConfigArgs{...} }
+type GetBgpInstancesBgpInstanceListStandardPlusPackageConfigArrayInput interface {
+	pulumi.Input
+
+	ToGetBgpInstancesBgpInstanceListStandardPlusPackageConfigArrayOutput() GetBgpInstancesBgpInstanceListStandardPlusPackageConfigArrayOutput
+	ToGetBgpInstancesBgpInstanceListStandardPlusPackageConfigArrayOutputWithContext(context.Context) GetBgpInstancesBgpInstanceListStandardPlusPackageConfigArrayOutput
+}
+
+type GetBgpInstancesBgpInstanceListStandardPlusPackageConfigArray []GetBgpInstancesBgpInstanceListStandardPlusPackageConfigInput
+
+func (GetBgpInstancesBgpInstanceListStandardPlusPackageConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBgpInstancesBgpInstanceListStandardPlusPackageConfig)(nil)).Elem()
+}
+
+func (i GetBgpInstancesBgpInstanceListStandardPlusPackageConfigArray) ToGetBgpInstancesBgpInstanceListStandardPlusPackageConfigArrayOutput() GetBgpInstancesBgpInstanceListStandardPlusPackageConfigArrayOutput {
+	return i.ToGetBgpInstancesBgpInstanceListStandardPlusPackageConfigArrayOutputWithContext(context.Background())
+}
+
+func (i GetBgpInstancesBgpInstanceListStandardPlusPackageConfigArray) ToGetBgpInstancesBgpInstanceListStandardPlusPackageConfigArrayOutputWithContext(ctx context.Context) GetBgpInstancesBgpInstanceListStandardPlusPackageConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBgpInstancesBgpInstanceListStandardPlusPackageConfigArrayOutput)
+}
+
+type GetBgpInstancesBgpInstanceListStandardPlusPackageConfigOutput struct{ *pulumi.OutputState }
+
+func (GetBgpInstancesBgpInstanceListStandardPlusPackageConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBgpInstancesBgpInstanceListStandardPlusPackageConfig)(nil)).Elem()
+}
+
+func (o GetBgpInstancesBgpInstanceListStandardPlusPackageConfigOutput) ToGetBgpInstancesBgpInstanceListStandardPlusPackageConfigOutput() GetBgpInstancesBgpInstanceListStandardPlusPackageConfigOutput {
+	return o
+}
+
+func (o GetBgpInstancesBgpInstanceListStandardPlusPackageConfigOutput) ToGetBgpInstancesBgpInstanceListStandardPlusPackageConfigOutputWithContext(ctx context.Context) GetBgpInstancesBgpInstanceListStandardPlusPackageConfigOutput {
+	return o
+}
+
+// Protection bandwidth 50Mbps.
+func (o GetBgpInstancesBgpInstanceListStandardPlusPackageConfigOutput) Bandwidth() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBgpInstancesBgpInstanceListStandardPlusPackageConfig) int { return v.Bandwidth }).(pulumi.IntOutput)
+}
+
+// Whether to enable elastic business bandwidth.
+// true: enable
+// false: disable
+// Default is disable.
+func (o GetBgpInstancesBgpInstanceListStandardPlusPackageConfigOutput) ElasticBandwidthFlag() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetBgpInstancesBgpInstanceListStandardPlusPackageConfig) bool { return v.ElasticBandwidthFlag }).(pulumi.BoolOutput)
+}
+
+// Protection count: TWO_TIMES: two full protections, UNLIMITED: unlimited protections.
+func (o GetBgpInstancesBgpInstanceListStandardPlusPackageConfigOutput) ProtectCount() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBgpInstancesBgpInstanceListStandardPlusPackageConfig) string { return v.ProtectCount }).(pulumi.StringOutput)
+}
+
+// Number of protected IPs.
+func (o GetBgpInstancesBgpInstanceListStandardPlusPackageConfigOutput) ProtectIpCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBgpInstancesBgpInstanceListStandardPlusPackageConfig) int { return v.ProtectIpCount }).(pulumi.IntOutput)
+}
+
+// Region where the Anti-DDoS package is purchased.
+func (o GetBgpInstancesBgpInstanceListStandardPlusPackageConfigOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBgpInstancesBgpInstanceListStandardPlusPackageConfig) string { return v.Region }).(pulumi.StringOutput)
+}
+
+type GetBgpInstancesBgpInstanceListStandardPlusPackageConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBgpInstancesBgpInstanceListStandardPlusPackageConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBgpInstancesBgpInstanceListStandardPlusPackageConfig)(nil)).Elem()
+}
+
+func (o GetBgpInstancesBgpInstanceListStandardPlusPackageConfigArrayOutput) ToGetBgpInstancesBgpInstanceListStandardPlusPackageConfigArrayOutput() GetBgpInstancesBgpInstanceListStandardPlusPackageConfigArrayOutput {
+	return o
+}
+
+func (o GetBgpInstancesBgpInstanceListStandardPlusPackageConfigArrayOutput) ToGetBgpInstancesBgpInstanceListStandardPlusPackageConfigArrayOutputWithContext(ctx context.Context) GetBgpInstancesBgpInstanceListStandardPlusPackageConfigArrayOutput {
+	return o
+}
+
+func (o GetBgpInstancesBgpInstanceListStandardPlusPackageConfigArrayOutput) Index(i pulumi.IntInput) GetBgpInstancesBgpInstanceListStandardPlusPackageConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBgpInstancesBgpInstanceListStandardPlusPackageConfig {
+		return vs[0].([]GetBgpInstancesBgpInstanceListStandardPlusPackageConfig)[vs[1].(int)]
+	}).(GetBgpInstancesBgpInstanceListStandardPlusPackageConfigOutput)
+}
+
+type GetBgpInstancesBgpInstanceListTagInfoList struct {
+	// Tag key.
+	TagKey string `pulumi:"tagKey"`
+	// Tag value.
+	TagValue string `pulumi:"tagValue"`
+}
+
+// GetBgpInstancesBgpInstanceListTagInfoListInput is an input type that accepts GetBgpInstancesBgpInstanceListTagInfoListArgs and GetBgpInstancesBgpInstanceListTagInfoListOutput values.
+// You can construct a concrete instance of `GetBgpInstancesBgpInstanceListTagInfoListInput` via:
+//
+//	GetBgpInstancesBgpInstanceListTagInfoListArgs{...}
+type GetBgpInstancesBgpInstanceListTagInfoListInput interface {
+	pulumi.Input
+
+	ToGetBgpInstancesBgpInstanceListTagInfoListOutput() GetBgpInstancesBgpInstanceListTagInfoListOutput
+	ToGetBgpInstancesBgpInstanceListTagInfoListOutputWithContext(context.Context) GetBgpInstancesBgpInstanceListTagInfoListOutput
+}
+
+type GetBgpInstancesBgpInstanceListTagInfoListArgs struct {
+	// Tag key.
+	TagKey pulumi.StringInput `pulumi:"tagKey"`
+	// Tag value.
+	TagValue pulumi.StringInput `pulumi:"tagValue"`
+}
+
+func (GetBgpInstancesBgpInstanceListTagInfoListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBgpInstancesBgpInstanceListTagInfoList)(nil)).Elem()
+}
+
+func (i GetBgpInstancesBgpInstanceListTagInfoListArgs) ToGetBgpInstancesBgpInstanceListTagInfoListOutput() GetBgpInstancesBgpInstanceListTagInfoListOutput {
+	return i.ToGetBgpInstancesBgpInstanceListTagInfoListOutputWithContext(context.Background())
+}
+
+func (i GetBgpInstancesBgpInstanceListTagInfoListArgs) ToGetBgpInstancesBgpInstanceListTagInfoListOutputWithContext(ctx context.Context) GetBgpInstancesBgpInstanceListTagInfoListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBgpInstancesBgpInstanceListTagInfoListOutput)
+}
+
+// GetBgpInstancesBgpInstanceListTagInfoListArrayInput is an input type that accepts GetBgpInstancesBgpInstanceListTagInfoListArray and GetBgpInstancesBgpInstanceListTagInfoListArrayOutput values.
+// You can construct a concrete instance of `GetBgpInstancesBgpInstanceListTagInfoListArrayInput` via:
+//
+//	GetBgpInstancesBgpInstanceListTagInfoListArray{ GetBgpInstancesBgpInstanceListTagInfoListArgs{...} }
+type GetBgpInstancesBgpInstanceListTagInfoListArrayInput interface {
+	pulumi.Input
+
+	ToGetBgpInstancesBgpInstanceListTagInfoListArrayOutput() GetBgpInstancesBgpInstanceListTagInfoListArrayOutput
+	ToGetBgpInstancesBgpInstanceListTagInfoListArrayOutputWithContext(context.Context) GetBgpInstancesBgpInstanceListTagInfoListArrayOutput
+}
+
+type GetBgpInstancesBgpInstanceListTagInfoListArray []GetBgpInstancesBgpInstanceListTagInfoListInput
+
+func (GetBgpInstancesBgpInstanceListTagInfoListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBgpInstancesBgpInstanceListTagInfoList)(nil)).Elem()
+}
+
+func (i GetBgpInstancesBgpInstanceListTagInfoListArray) ToGetBgpInstancesBgpInstanceListTagInfoListArrayOutput() GetBgpInstancesBgpInstanceListTagInfoListArrayOutput {
+	return i.ToGetBgpInstancesBgpInstanceListTagInfoListArrayOutputWithContext(context.Background())
+}
+
+func (i GetBgpInstancesBgpInstanceListTagInfoListArray) ToGetBgpInstancesBgpInstanceListTagInfoListArrayOutputWithContext(ctx context.Context) GetBgpInstancesBgpInstanceListTagInfoListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBgpInstancesBgpInstanceListTagInfoListArrayOutput)
+}
+
+type GetBgpInstancesBgpInstanceListTagInfoListOutput struct{ *pulumi.OutputState }
+
+func (GetBgpInstancesBgpInstanceListTagInfoListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBgpInstancesBgpInstanceListTagInfoList)(nil)).Elem()
+}
+
+func (o GetBgpInstancesBgpInstanceListTagInfoListOutput) ToGetBgpInstancesBgpInstanceListTagInfoListOutput() GetBgpInstancesBgpInstanceListTagInfoListOutput {
+	return o
+}
+
+func (o GetBgpInstancesBgpInstanceListTagInfoListOutput) ToGetBgpInstancesBgpInstanceListTagInfoListOutputWithContext(ctx context.Context) GetBgpInstancesBgpInstanceListTagInfoListOutput {
+	return o
+}
+
+// Tag key.
+func (o GetBgpInstancesBgpInstanceListTagInfoListOutput) TagKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBgpInstancesBgpInstanceListTagInfoList) string { return v.TagKey }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o GetBgpInstancesBgpInstanceListTagInfoListOutput) TagValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBgpInstancesBgpInstanceListTagInfoList) string { return v.TagValue }).(pulumi.StringOutput)
+}
+
+type GetBgpInstancesBgpInstanceListTagInfoListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBgpInstancesBgpInstanceListTagInfoListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBgpInstancesBgpInstanceListTagInfoList)(nil)).Elem()
+}
+
+func (o GetBgpInstancesBgpInstanceListTagInfoListArrayOutput) ToGetBgpInstancesBgpInstanceListTagInfoListArrayOutput() GetBgpInstancesBgpInstanceListTagInfoListArrayOutput {
+	return o
+}
+
+func (o GetBgpInstancesBgpInstanceListTagInfoListArrayOutput) ToGetBgpInstancesBgpInstanceListTagInfoListArrayOutputWithContext(ctx context.Context) GetBgpInstancesBgpInstanceListTagInfoListArrayOutput {
+	return o
+}
+
+func (o GetBgpInstancesBgpInstanceListTagInfoListArrayOutput) Index(i pulumi.IntInput) GetBgpInstancesBgpInstanceListTagInfoListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBgpInstancesBgpInstanceListTagInfoList {
+		return vs[0].([]GetBgpInstancesBgpInstanceListTagInfoList)[vs[1].(int)]
+	}).(GetBgpInstancesBgpInstanceListTagInfoListOutput)
+}
+
+type GetBgpInstancesFilterTag struct {
+	// Tag key.
+	TagKey string `pulumi:"tagKey"`
+	// Tag value.
+	TagValue string `pulumi:"tagValue"`
+}
+
+// GetBgpInstancesFilterTagInput is an input type that accepts GetBgpInstancesFilterTagArgs and GetBgpInstancesFilterTagOutput values.
+// You can construct a concrete instance of `GetBgpInstancesFilterTagInput` via:
+//
+//	GetBgpInstancesFilterTagArgs{...}
+type GetBgpInstancesFilterTagInput interface {
+	pulumi.Input
+
+	ToGetBgpInstancesFilterTagOutput() GetBgpInstancesFilterTagOutput
+	ToGetBgpInstancesFilterTagOutputWithContext(context.Context) GetBgpInstancesFilterTagOutput
+}
+
+type GetBgpInstancesFilterTagArgs struct {
+	// Tag key.
+	TagKey pulumi.StringInput `pulumi:"tagKey"`
+	// Tag value.
+	TagValue pulumi.StringInput `pulumi:"tagValue"`
+}
+
+func (GetBgpInstancesFilterTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBgpInstancesFilterTag)(nil)).Elem()
+}
+
+func (i GetBgpInstancesFilterTagArgs) ToGetBgpInstancesFilterTagOutput() GetBgpInstancesFilterTagOutput {
+	return i.ToGetBgpInstancesFilterTagOutputWithContext(context.Background())
+}
+
+func (i GetBgpInstancesFilterTagArgs) ToGetBgpInstancesFilterTagOutputWithContext(ctx context.Context) GetBgpInstancesFilterTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBgpInstancesFilterTagOutput)
+}
+
+// GetBgpInstancesFilterTagArrayInput is an input type that accepts GetBgpInstancesFilterTagArray and GetBgpInstancesFilterTagArrayOutput values.
+// You can construct a concrete instance of `GetBgpInstancesFilterTagArrayInput` via:
+//
+//	GetBgpInstancesFilterTagArray{ GetBgpInstancesFilterTagArgs{...} }
+type GetBgpInstancesFilterTagArrayInput interface {
+	pulumi.Input
+
+	ToGetBgpInstancesFilterTagArrayOutput() GetBgpInstancesFilterTagArrayOutput
+	ToGetBgpInstancesFilterTagArrayOutputWithContext(context.Context) GetBgpInstancesFilterTagArrayOutput
+}
+
+type GetBgpInstancesFilterTagArray []GetBgpInstancesFilterTagInput
+
+func (GetBgpInstancesFilterTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBgpInstancesFilterTag)(nil)).Elem()
+}
+
+func (i GetBgpInstancesFilterTagArray) ToGetBgpInstancesFilterTagArrayOutput() GetBgpInstancesFilterTagArrayOutput {
+	return i.ToGetBgpInstancesFilterTagArrayOutputWithContext(context.Background())
+}
+
+func (i GetBgpInstancesFilterTagArray) ToGetBgpInstancesFilterTagArrayOutputWithContext(ctx context.Context) GetBgpInstancesFilterTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBgpInstancesFilterTagArrayOutput)
+}
+
+type GetBgpInstancesFilterTagOutput struct{ *pulumi.OutputState }
+
+func (GetBgpInstancesFilterTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBgpInstancesFilterTag)(nil)).Elem()
+}
+
+func (o GetBgpInstancesFilterTagOutput) ToGetBgpInstancesFilterTagOutput() GetBgpInstancesFilterTagOutput {
+	return o
+}
+
+func (o GetBgpInstancesFilterTagOutput) ToGetBgpInstancesFilterTagOutputWithContext(ctx context.Context) GetBgpInstancesFilterTagOutput {
+	return o
+}
+
+// Tag key.
+func (o GetBgpInstancesFilterTagOutput) TagKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBgpInstancesFilterTag) string { return v.TagKey }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o GetBgpInstancesFilterTagOutput) TagValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBgpInstancesFilterTag) string { return v.TagValue }).(pulumi.StringOutput)
+}
+
+type GetBgpInstancesFilterTagArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBgpInstancesFilterTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBgpInstancesFilterTag)(nil)).Elem()
+}
+
+func (o GetBgpInstancesFilterTagArrayOutput) ToGetBgpInstancesFilterTagArrayOutput() GetBgpInstancesFilterTagArrayOutput {
+	return o
+}
+
+func (o GetBgpInstancesFilterTagArrayOutput) ToGetBgpInstancesFilterTagArrayOutputWithContext(ctx context.Context) GetBgpInstancesFilterTagArrayOutput {
+	return o
+}
+
+func (o GetBgpInstancesFilterTagArrayOutput) Index(i pulumi.IntInput) GetBgpInstancesFilterTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBgpInstancesFilterTag {
+		return vs[0].([]GetBgpInstancesFilterTag)[vs[1].(int)]
+	}).(GetBgpInstancesFilterTagOutput)
+}
+
 type GetListListenerLayer4Listener struct {
 	// Origin port, value 1~65535.
 	BackendPort int `pulumi:"backendPort"`
@@ -3339,6 +5166,16 @@ func (o GetOverviewDdosEventListEventListArrayOutput) Index(i pulumi.IntInput) G
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*BgpInstanceEnterprisePackageConfigInput)(nil)).Elem(), BgpInstanceEnterprisePackageConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BgpInstanceEnterprisePackageConfigPtrInput)(nil)).Elem(), BgpInstanceEnterprisePackageConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BgpInstanceInstanceChargePrepaidInput)(nil)).Elem(), BgpInstanceInstanceChargePrepaidArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BgpInstanceInstanceChargePrepaidPtrInput)(nil)).Elem(), BgpInstanceInstanceChargePrepaidArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BgpInstanceStandardPackageConfigInput)(nil)).Elem(), BgpInstanceStandardPackageConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BgpInstanceStandardPackageConfigPtrInput)(nil)).Elem(), BgpInstanceStandardPackageConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BgpInstanceStandardPlusPackageConfigInput)(nil)).Elem(), BgpInstanceStandardPlusPackageConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BgpInstanceStandardPlusPackageConfigPtrInput)(nil)).Elem(), BgpInstanceStandardPlusPackageConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BgpInstanceTagInfoListInput)(nil)).Elem(), BgpInstanceTagInfoListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BgpInstanceTagInfoListArrayInput)(nil)).Elem(), BgpInstanceTagInfoListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CcBlackWhiteIpBlackWhiteIpInput)(nil)).Elem(), CcBlackWhiteIpBlackWhiteIpArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CcBlackWhiteIpBlackWhiteIpPtrInput)(nil)).Elem(), CcBlackWhiteIpBlackWhiteIpArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CcPrecisionPolicyPolicyListInput)(nil)).Elem(), CcPrecisionPolicyPolicyListArgs{})
@@ -3361,6 +5198,20 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBasicDeviceStatusClbDataArrayInput)(nil)).Elem(), GetBasicDeviceStatusClbDataArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBasicDeviceStatusDataInput)(nil)).Elem(), GetBasicDeviceStatusDataArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBasicDeviceStatusDataArrayInput)(nil)).Elem(), GetBasicDeviceStatusDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBgpInstancesBgpInstanceListInput)(nil)).Elem(), GetBgpInstancesBgpInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBgpInstancesBgpInstanceListArrayInput)(nil)).Elem(), GetBgpInstancesBgpInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBgpInstancesBgpInstanceListEnterprisePackageConfigInput)(nil)).Elem(), GetBgpInstancesBgpInstanceListEnterprisePackageConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBgpInstancesBgpInstanceListEnterprisePackageConfigArrayInput)(nil)).Elem(), GetBgpInstancesBgpInstanceListEnterprisePackageConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBgpInstancesBgpInstanceListInstanceChargePrepaidInput)(nil)).Elem(), GetBgpInstancesBgpInstanceListInstanceChargePrepaidArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBgpInstancesBgpInstanceListInstanceChargePrepaidArrayInput)(nil)).Elem(), GetBgpInstancesBgpInstanceListInstanceChargePrepaidArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBgpInstancesBgpInstanceListStandardPackageConfigInput)(nil)).Elem(), GetBgpInstancesBgpInstanceListStandardPackageConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBgpInstancesBgpInstanceListStandardPackageConfigArrayInput)(nil)).Elem(), GetBgpInstancesBgpInstanceListStandardPackageConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBgpInstancesBgpInstanceListStandardPlusPackageConfigInput)(nil)).Elem(), GetBgpInstancesBgpInstanceListStandardPlusPackageConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBgpInstancesBgpInstanceListStandardPlusPackageConfigArrayInput)(nil)).Elem(), GetBgpInstancesBgpInstanceListStandardPlusPackageConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBgpInstancesBgpInstanceListTagInfoListInput)(nil)).Elem(), GetBgpInstancesBgpInstanceListTagInfoListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBgpInstancesBgpInstanceListTagInfoListArrayInput)(nil)).Elem(), GetBgpInstancesBgpInstanceListTagInfoListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBgpInstancesFilterTagInput)(nil)).Elem(), GetBgpInstancesFilterTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBgpInstancesFilterTagArrayInput)(nil)).Elem(), GetBgpInstancesFilterTagArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetListListenerLayer4ListenerInput)(nil)).Elem(), GetListListenerLayer4ListenerArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetListListenerLayer4ListenerArrayInput)(nil)).Elem(), GetListListenerLayer4ListenerArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetListListenerLayer4ListenerInstanceDetailInput)(nil)).Elem(), GetListListenerLayer4ListenerInstanceDetailArgs{})
@@ -3381,6 +5232,16 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetListListenerLayer7ListenerRealServerArrayInput)(nil)).Elem(), GetListListenerLayer7ListenerRealServerArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetOverviewDdosEventListEventListInput)(nil)).Elem(), GetOverviewDdosEventListEventListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetOverviewDdosEventListEventListArrayInput)(nil)).Elem(), GetOverviewDdosEventListEventListArray{})
+	pulumi.RegisterOutputType(BgpInstanceEnterprisePackageConfigOutput{})
+	pulumi.RegisterOutputType(BgpInstanceEnterprisePackageConfigPtrOutput{})
+	pulumi.RegisterOutputType(BgpInstanceInstanceChargePrepaidOutput{})
+	pulumi.RegisterOutputType(BgpInstanceInstanceChargePrepaidPtrOutput{})
+	pulumi.RegisterOutputType(BgpInstanceStandardPackageConfigOutput{})
+	pulumi.RegisterOutputType(BgpInstanceStandardPackageConfigPtrOutput{})
+	pulumi.RegisterOutputType(BgpInstanceStandardPlusPackageConfigOutput{})
+	pulumi.RegisterOutputType(BgpInstanceStandardPlusPackageConfigPtrOutput{})
+	pulumi.RegisterOutputType(BgpInstanceTagInfoListOutput{})
+	pulumi.RegisterOutputType(BgpInstanceTagInfoListArrayOutput{})
 	pulumi.RegisterOutputType(CcBlackWhiteIpBlackWhiteIpOutput{})
 	pulumi.RegisterOutputType(CcBlackWhiteIpBlackWhiteIpPtrOutput{})
 	pulumi.RegisterOutputType(CcPrecisionPolicyPolicyListOutput{})
@@ -3403,6 +5264,20 @@ func init() {
 	pulumi.RegisterOutputType(GetBasicDeviceStatusClbDataArrayOutput{})
 	pulumi.RegisterOutputType(GetBasicDeviceStatusDataOutput{})
 	pulumi.RegisterOutputType(GetBasicDeviceStatusDataArrayOutput{})
+	pulumi.RegisterOutputType(GetBgpInstancesBgpInstanceListOutput{})
+	pulumi.RegisterOutputType(GetBgpInstancesBgpInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetBgpInstancesBgpInstanceListEnterprisePackageConfigOutput{})
+	pulumi.RegisterOutputType(GetBgpInstancesBgpInstanceListEnterprisePackageConfigArrayOutput{})
+	pulumi.RegisterOutputType(GetBgpInstancesBgpInstanceListInstanceChargePrepaidOutput{})
+	pulumi.RegisterOutputType(GetBgpInstancesBgpInstanceListInstanceChargePrepaidArrayOutput{})
+	pulumi.RegisterOutputType(GetBgpInstancesBgpInstanceListStandardPackageConfigOutput{})
+	pulumi.RegisterOutputType(GetBgpInstancesBgpInstanceListStandardPackageConfigArrayOutput{})
+	pulumi.RegisterOutputType(GetBgpInstancesBgpInstanceListStandardPlusPackageConfigOutput{})
+	pulumi.RegisterOutputType(GetBgpInstancesBgpInstanceListStandardPlusPackageConfigArrayOutput{})
+	pulumi.RegisterOutputType(GetBgpInstancesBgpInstanceListTagInfoListOutput{})
+	pulumi.RegisterOutputType(GetBgpInstancesBgpInstanceListTagInfoListArrayOutput{})
+	pulumi.RegisterOutputType(GetBgpInstancesFilterTagOutput{})
+	pulumi.RegisterOutputType(GetBgpInstancesFilterTagArrayOutput{})
 	pulumi.RegisterOutputType(GetListListenerLayer4ListenerOutput{})
 	pulumi.RegisterOutputType(GetListListenerLayer4ListenerArrayOutput{})
 	pulumi.RegisterOutputType(GetListListenerLayer4ListenerInstanceDetailOutput{})

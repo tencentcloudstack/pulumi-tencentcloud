@@ -1,9 +1,14 @@
 package info
 
 import (
+	"context"
+
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	"github.com/tencentcloudstack/pulumi-tencentcloud/provider/info/transform"
 	"github.com/tencentcloudstack/terraform-provider-tencentcloud/tencentcloud"
+	"github.com/tencentcloudstack/terraform-provider-tencentcloud/tencentcloud/framework"
 )
 
 type ResourceOutput struct {
@@ -51,7 +56,43 @@ func GetResourceOutput() []*ResourceOutput {
 			CsharpAlters: transform.GetConflictFieldOfCsharpModule(k, v.Schema),
 		})
 	}
+
+	// Framework-side resources are enumerated from the Plugin Framework provider.
+	// Tokens already present on the SDKv2 side win (mirrors MuxShimWithPF semantics).
+	sdkTokens := make(map[string]struct{}, len(resourceOutputs))
+	for i := range resourceOutputs {
+		sdkTokens[resourceOutputs[i].Key] = struct{}{}
+	}
+	for _, out := range frameworkResourceOutputs() {
+		if _, dup := sdkTokens[out.Key]; dup {
+			continue
+		}
+		resourceOutputs = append(resourceOutputs, out)
+	}
 	return resourceOutputs
+}
+
+// frameworkResourceOutputs enumerates resources served by the Plugin Framework
+// side of the upstream muxed provider.
+func frameworkResourceOutputs() []*ResourceOutput {
+	pf := framework.NewProvider(tencentcloud.Provider())
+	var outputs []*ResourceOutput
+	for _, factory := range pf.Resources(context.Background()) {
+		res := factory()
+		var req resource.MetadataRequest
+		var resp resource.MetadataResponse
+		res.Metadata(context.Background(), req, &resp)
+		if resp.TypeName == "" {
+			continue
+		}
+		module, entity := transform.ResolveModuleEntity(resp.TypeName)
+		outputs = append(outputs, &ResourceOutput{
+			Key:      resp.TypeName,
+			Module:   transform.ToPascal(module),
+			Resource: transform.ToPascal(entity),
+		})
+	}
+	return outputs
 }
 
 func GetDataSourceOutput() []*DataSourceOutput {
@@ -70,7 +111,43 @@ func GetDataSourceOutput() []*DataSourceOutput {
 			CsharpAlters: transform.GetConflictFieldOfCsharpModule(k, v.Schema),
 		})
 	}
+
+	// Framework-side data sources are enumerated from the Plugin Framework provider.
+	// Tokens already present on the SDKv2 side win (mirrors MuxShimWithPF semantics).
+	sdkTokens := make(map[string]struct{}, len(dataSourceOutputs))
+	for i := range dataSourceOutputs {
+		sdkTokens[dataSourceOutputs[i].Key] = struct{}{}
+	}
+	for _, out := range frameworkDataSourceOutputs() {
+		if _, dup := sdkTokens[out.Key]; dup {
+			continue
+		}
+		dataSourceOutputs = append(dataSourceOutputs, out)
+	}
 	return dataSourceOutputs
+}
+
+// frameworkDataSourceOutputs enumerates data sources served by the Plugin
+// Framework side of the upstream muxed provider.
+func frameworkDataSourceOutputs() []*DataSourceOutput {
+	pf := framework.NewProvider(tencentcloud.Provider())
+	var outputs []*DataSourceOutput
+	for _, factory := range pf.DataSources(context.Background()) {
+		ds := factory()
+		var req datasource.MetadataRequest
+		var resp datasource.MetadataResponse
+		ds.Metadata(context.Background(), req, &resp)
+		if resp.TypeName == "" {
+			continue
+		}
+		module, entity := transform.ResolveModuleEntity(resp.TypeName)
+		outputs = append(outputs, &DataSourceOutput{
+			Key:        resp.TypeName,
+			Module:     transform.ToPascal(module),
+			DataSource: "get" + transform.ToPascal(entity),
+		})
+	}
+	return outputs
 }
 
 func GetResourceInfo(mainPkg string) map[string]*tfbridge.ResourceInfo {
@@ -85,6 +162,19 @@ func GetResourceInfo(mainPkg string) map[string]*tfbridge.ResourceInfo {
 		if item.Key == "tencentcloud_wedata_data_source" {
 			info[item.Key] = &tfbridge.ResourceInfo{
 				Tok: tfbridge.MakeResource(mainPkg, item.Module, "WeDataDataSource"),
+			}
+		} else if item.Key == "tencentcloud_waf_object" {
+			// The generated class name "Object" is a reserved built-in in
+			// TypeScript and cannot be declared when module is NodeNext
+			// (error TS2725), breaking the entire nodejs SDK build. Rename
+			// the entity to WafObject and alias the original token so
+			// existing state stays valid.
+			oldTok := mainPkg + ":Waf/object:Object"
+			info[item.Key] = &tfbridge.ResourceInfo{
+				Tok: tfbridge.MakeResource(mainPkg, item.Module, "WafObject"),
+				Aliases: []tfbridge.AliasInfo{
+					{Type: &oldTok},
+				},
 			}
 		} else {
 			info[item.Key] = &tfbridge.ResourceInfo{

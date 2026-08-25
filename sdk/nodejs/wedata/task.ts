@@ -85,7 +85,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * wedata wedata_task can be imported using the id, e.g.
+ * wedata wedataTask can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Wedata/task:Task wedata_task wedata_task_id
@@ -184,19 +184,19 @@ export interface TaskState {
     /**
      * Project ID.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * Basic task attributes.
      */
-    taskBaseAttribute?: pulumi.Input<inputs.Wedata.TaskTaskBaseAttribute>;
+    taskBaseAttribute?: pulumi.Input<inputs.Wedata.TaskTaskBaseAttribute | undefined>;
     /**
      * Task configuration.
      */
-    taskConfiguration?: pulumi.Input<inputs.Wedata.TaskTaskConfiguration>;
+    taskConfiguration?: pulumi.Input<inputs.Wedata.TaskTaskConfiguration | undefined>;
     /**
      * Task scheduling configuration.
      */
-    taskSchedulerConfiguration?: pulumi.Input<inputs.Wedata.TaskTaskSchedulerConfiguration>;
+    taskSchedulerConfiguration?: pulumi.Input<inputs.Wedata.TaskTaskSchedulerConfiguration | undefined>;
 }
 
 /**

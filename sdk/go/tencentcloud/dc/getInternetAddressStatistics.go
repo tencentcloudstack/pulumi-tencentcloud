@@ -62,12 +62,8 @@ type GetInternetAddressStatisticsResult struct {
 }
 
 func GetInternetAddressStatisticsOutput(ctx *pulumi.Context, args GetInternetAddressStatisticsOutputArgs, opts ...pulumi.InvokeOption) GetInternetAddressStatisticsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInternetAddressStatisticsResultOutput, error) {
-			args := v.(GetInternetAddressStatisticsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dc/getInternetAddressStatistics:getInternetAddressStatistics", args, GetInternetAddressStatisticsResultOutput{}, options).(GetInternetAddressStatisticsResultOutput), nil
-		}).(GetInternetAddressStatisticsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dc/getInternetAddressStatistics:getInternetAddressStatistics", args, GetInternetAddressStatisticsResultOutput{}, options).(GetInternetAddressStatisticsResultOutput)
 }
 
 // A collection of arguments for invoking getInternetAddressStatistics.

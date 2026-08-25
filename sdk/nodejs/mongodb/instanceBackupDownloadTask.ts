@@ -90,15 +90,15 @@ export interface InstanceBackupDownloadTaskState {
     /**
      * The name of the backup file to be downloaded can be obtained through the DescribeDBBackups interface.
      */
-    backupName?: pulumi.Input<string>;
+    backupName?: pulumi.Input<string | undefined>;
     /**
      * Specifies the node names of replica sets to download or a list of shard names for sharded clusters.For example, the replica set cmgo-p8vnipr5, example (fixed value): BackupSets.0=cmgo-p8vnipr5_0, the full amount of data can be downloaded.For example, the sharded cluster cmgo-p8vnipr5, for example: BackupSets.0=cmgo-p8vnipr5_0&amp;amp;BackupSets.1=cmgo-p8vnipr5_1, that is, to download the data of shard 0 and 1. If the sharded cluster needs to be downloaded in full, please pass in the example. Full slice name.
      */
-    backupSets?: pulumi.Input<pulumi.Input<inputs.Mongodb.InstanceBackupDownloadTaskBackupSet>[]>;
+    backupSets?: pulumi.Input<pulumi.Input<inputs.Mongodb.InstanceBackupDownloadTaskBackupSet>[] | undefined>;
     /**
      * Instance ID, the format is: cmgo-9d0p6umb.Same as the instance ID displayed in the cloud database console page.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**

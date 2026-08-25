@@ -24,7 +24,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * tdmqRocketmq cluster can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Tdmq/rocketmqCluster:RocketmqCluster cluster cluster_id
  * ```
@@ -155,47 +154,47 @@ export interface RocketmqClusterState {
     /**
      * Cluster ID.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Cluster name, which can contain 3-64 letters, digits, hyphens, and underscores.
      */
-    clusterName?: pulumi.Input<string>;
+    clusterName?: pulumi.Input<string | undefined>;
     /**
      * Creation time in milliseconds.
      */
-    createTime?: pulumi.Input<number>;
+    createTime?: pulumi.Input<number | undefined>;
     /**
      * Whether it is an exclusive instance.
      */
-    isVip?: pulumi.Input<boolean>;
+    isVip?: pulumi.Input<boolean | undefined>;
     /**
      * Public network access address.
      */
-    publicEndPoint?: pulumi.Input<string>;
+    publicEndPoint?: pulumi.Input<string | undefined>;
     /**
      * Region information.
      */
-    region?: pulumi.Input<string>;
+    region?: pulumi.Input<string | undefined>;
     /**
      * Cluster description (up to 128 characters).
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Rocketmq cluster identification.
      */
-    rocketMQFlag?: pulumi.Input<boolean>;
+    rocketMQFlag?: pulumi.Input<boolean | undefined>;
     /**
      * Whether the namespace access point is supported.
      */
-    supportNamespaceEndpoint?: pulumi.Input<boolean>;
+    supportNamespaceEndpoint?: pulumi.Input<boolean | undefined>;
     /**
      * VPC access address.
      */
-    vpcEndPoint?: pulumi.Input<string>;
+    vpcEndPoint?: pulumi.Input<string | undefined>;
     /**
      * Vpc list.
      */
-    vpcs?: pulumi.Input<pulumi.Input<inputs.Tdmq.RocketmqClusterVpc>[]>;
+    vpcs?: pulumi.Input<pulumi.Input<inputs.Tdmq.RocketmqClusterVpc>[] | undefined>;
 }
 
 /**
@@ -209,5 +208,5 @@ export interface RocketmqClusterArgs {
     /**
      * Cluster description (up to 128 characters).
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
 }

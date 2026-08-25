@@ -50,7 +50,7 @@ import (
 //
 // ## Import
 //
-// ci media_smart_cover_template can be imported using the bucket#templateId, e.g.
+// ci mediaSmartCoverTemplate can be imported using the bucket#templateId, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Ci/mediaSmartCoverTemplate:MediaSmartCoverTemplate media_smart_cover_template terraform-ci-xxxxxx#t1ede83acc305e423799d638044d859fb7

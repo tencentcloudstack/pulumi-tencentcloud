@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const myApiDoc = tencentcloud.ApiGateway.getApiDocs({});
+ * const myApiDoc = tencentcloud.apigateway.getApiDocs({});
  * ```
  */
 export function getApiDocs(args?: GetApiDocsArgs, opts?: pulumi.InvokeOptions): Promise<GetApiDocsResult> {
@@ -59,7 +59,7 @@ export interface GetApiDocsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const myApiDoc = tencentcloud.ApiGateway.getApiDocs({});
+ * const myApiDoc = tencentcloud.apigateway.getApiDocs({});
  * ```
  */
 export function getApiDocsOutput(args?: GetApiDocsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetApiDocsResult> {
@@ -77,5 +77,5 @@ export interface GetApiDocsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

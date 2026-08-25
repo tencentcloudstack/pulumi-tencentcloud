@@ -21,19 +21,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Std = Pulumi.Std;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var foo = Tencentcloud.Clb.GetInstances.Invoke(new()
+        ///     var example = Tencentcloud.Clb.GetInstances.Invoke(new()
         ///     {
         ///         ClbId = "lb-k2zjp9lv",
         ///         NetworkType = "OPEN",
-        ///         ClbName = "myclb",
+        ///         ClbName = "tf-example",
         ///         ProjectId = 0,
-        ///         ResultOutputFile = "mytestpath",
+        ///         ResultOutputFile = "myOutputPath",
         ///     });
         /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["exclusiveClusterInfo"] = Std.Jsondecode.Invoke(new()
+        ///         {
+        ///             Input = example.Apply(getInstancesResult =&gt; getInstancesResult.ClbLists[0]?.ExclusiveCluster),
+        ///         }).Apply(invoke =&gt; invoke.Result),
+        ///     };
         /// });
         /// ```
         /// </summary>
@@ -49,19 +57,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Std = Pulumi.Std;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var foo = Tencentcloud.Clb.GetInstances.Invoke(new()
+        ///     var example = Tencentcloud.Clb.GetInstances.Invoke(new()
         ///     {
         ///         ClbId = "lb-k2zjp9lv",
         ///         NetworkType = "OPEN",
-        ///         ClbName = "myclb",
+        ///         ClbName = "tf-example",
         ///         ProjectId = 0,
-        ///         ResultOutputFile = "mytestpath",
+        ///         ResultOutputFile = "myOutputPath",
         ///     });
         /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["exclusiveClusterInfo"] = Std.Jsondecode.Invoke(new()
+        ///         {
+        ///             Input = example.Apply(getInstancesResult =&gt; getInstancesResult.ClbLists[0]?.ExclusiveCluster),
+        ///         }).Apply(invoke =&gt; invoke.Result),
+        ///     };
         /// });
         /// ```
         /// </summary>
@@ -77,19 +93,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Std = Pulumi.Std;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var foo = Tencentcloud.Clb.GetInstances.Invoke(new()
+        ///     var example = Tencentcloud.Clb.GetInstances.Invoke(new()
         ///     {
         ///         ClbId = "lb-k2zjp9lv",
         ///         NetworkType = "OPEN",
-        ///         ClbName = "myclb",
+        ///         ClbName = "tf-example",
         ///         ProjectId = 0,
-        ///         ResultOutputFile = "mytestpath",
+        ///         ResultOutputFile = "myOutputPath",
         ///     });
         /// 
+        ///     return new Dictionary&lt;string, object?&gt;
+        ///     {
+        ///         ["exclusiveClusterInfo"] = Std.Jsondecode.Invoke(new()
+        ///         {
+        ///             Input = example.Apply(getInstancesResult =&gt; getInstancesResult.ClbLists[0]?.ExclusiveCluster),
+        ///         }).Apply(invoke =&gt; invoke.Result),
+        ///     };
         /// });
         /// ```
         /// </summary>

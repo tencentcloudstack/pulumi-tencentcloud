@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const overviewCcTrend = tencentcloud.Antiddos.getOverviewCcTrend({
+ * const overviewCcTrend = tencentcloud.antiddos.getOverviewCcTrend({
  *     period: 300,
  *     startTime: "2023-11-20 00:00:00",
  *     endTime: "2023-11-21 00:00:00",
@@ -98,7 +98,7 @@ export interface GetOverviewCcTrendResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const overviewCcTrend = tencentcloud.Antiddos.getOverviewCcTrend({
+ * const overviewCcTrend = tencentcloud.antiddos.getOverviewCcTrend({
  *     period: 300,
  *     startTime: "2023-11-20 00:00:00",
  *     endTime: "2023-11-21 00:00:00",
@@ -127,7 +127,7 @@ export interface GetOverviewCcTrendOutputArgs {
     /**
      * Dayu sub product code (bgpip represents advanced defense IP; net represents professional version of advanced defense IP).
      */
-    business?: pulumi.Input<string>;
+    business?: pulumi.Input<string | undefined>;
     /**
      * EndTime.
      */
@@ -135,7 +135,7 @@ export interface GetOverviewCcTrendOutputArgs {
     /**
      * resource id list.
      */
-    ipLists?: pulumi.Input<pulumi.Input<string>[]>;
+    ipLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Indicator, values [inqps (peak total requests, dropqps (peak attack requests)), incount (number of requests), dropcount (number of attacks)].
      */
@@ -147,7 +147,7 @@ export interface GetOverviewCcTrendOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * StartTime.
      */

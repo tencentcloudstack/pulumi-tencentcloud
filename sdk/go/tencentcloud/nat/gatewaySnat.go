@@ -32,162 +32,163 @@ import (
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
 //
 // )
-// func main() {
-// pulumi.Run(func(ctx *pulumi.Context) error {
-// zones, err := availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-// Product: "nat",
-// }, nil);
-// if err != nil {
-// return err
-// }
-// image, err := images.GetInstance(ctx, &images.GetInstanceArgs{
-// OsName: pulumi.StringRef("centos"),
-// }, nil);
-// if err != nil {
-// return err
-// }
-// instanceTypes, err := instance.GetTypes(ctx, &instance.GetTypesArgs{
-// Filters: []instance.GetTypesFilter{
-// {
-// Name: "zone",
-// Values: interface{}{
-// zones.Zones[0].Name,
-// },
-// },
-// {
-// Name: "instance-family",
-// Values: []string{
-// "S5",
-// },
-// },
-// },
-// CpuCoreCount: pulumi.IntRef(2),
-// ExcludeSoldOut: pulumi.BoolRef(true),
-// }, nil);
-// if err != nil {
-// return err
-// }
-// vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
-// Name: pulumi.String("vpc-example"),
-// CidrBlock: pulumi.String("10.0.0.0/16"),
-// })
-// if err != nil {
-// return err
-// }
-// // Create route_table and entry
-// routeTable, err := route.NewTable(ctx, "route_table", &route.TableArgs{
-// VpcId: vpc.ID(),
-// Name: pulumi.String("tf_example"),
-// })
-// if err != nil {
-// return err
-// }
-// subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-// VpcId: vpc.ID(),
-// Name: pulumi.String("subnet-example"),
-// CidrBlock: pulumi.String("10.0.0.0/16"),
-// AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-// RouteTableId: routeTable.ID(),
-// })
-// if err != nil {
-// return err
-// }
-// eipExample1, err := eip.NewInstance(ctx, "eip_example1", &eip.InstanceArgs{
-// Name: pulumi.String("eip_example1"),
-// })
-// if err != nil {
-// return err
-// }
-// eipExample2, err := eip.NewInstance(ctx, "eip_example2", &eip.InstanceArgs{
-// Name: pulumi.String("eip_example2"),
-// })
-// if err != nil {
-// return err
-// }
-// // Create NAT Gateway
-// myNat, err := nat.NewGateway(ctx, "my_nat", &nat.GatewayArgs{
-// VpcId: vpc.ID(),
-// Name: pulumi.String("tf_example_nat_gateway"),
-// MaxConcurrent: pulumi.Int(3000000),
-// Bandwidth: pulumi.Int(500),
-// AssignedEipSets: pulumi.StringArray{
-// eipExample1.PublicIp,
-// eipExample2.PublicIp,
-// },
-// })
-// if err != nil {
-// return err
-// }
-// _, err = route.NewTableEntry(ctx, "route_entry", &route.TableEntryArgs{
-// RouteTableId: routeTable.ID(),
-// DestinationCidrBlock: pulumi.String("10.0.0.0/8"),
-// NextType: pulumi.String("NAT"),
-// NextHub: myNat.ID(),
-// })
-// if err != nil {
-// return err
-// }
-// // Subnet Nat gateway snat
-// _, err = nat.NewGatewaySnat(ctx, "subnet_snat", &nat.GatewaySnatArgs{
-// NatGatewayId: myNat.ID(),
-// ResourceType: pulumi.String("SUBNET"),
-// SubnetId: subnet.ID(),
-// SubnetCidrBlock: subnet.CidrBlock,
-// Description: pulumi.String("terraform test"),
-// PublicIpAddrs: pulumi.StringArray{
-// eipExample1.PublicIp,
-// eipExample2.PublicIp,
-// },
-// })
-// if err != nil {
-// return err
-// }
-// // Create instance
-// example, err := instance.NewInstance(ctx, "example", &instance.InstanceArgs{
-// InstanceName: pulumi.String("tf_example"),
-// AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-// ImageId: pulumi.String(image.Images[0].ImageId),
-// InstanceType: pulumi.String(instanceTypes.InstanceTypes[0].InstanceType),
-// SystemDiskType: pulumi.String("CLOUD_PREMIUM"),
-// SystemDiskSize: pulumi.Int(50),
-// Hostname: pulumi.String("user"),
-// ProjectId: pulumi.Int(0),
-// VpcId: vpc.ID(),
-// SubnetId: subnet.ID(),
-// })
-// if err != nil {
-// return err
-// }
-// // NetWorkInterface Nat gateway snat
-// _, err = nat.NewGatewaySnat(ctx, "my_instance_snat", &nat.GatewaySnatArgs{
-// NatGatewayId: myNat.ID(),
-// ResourceType: pulumi.String("NETWORKINTERFACE"),
-// InstanceId: example.ID(),
-// InstancePrivateIpAddr: example.PrivateIp,
-// Description: pulumi.String("terraform test"),
-// PublicIpAddrs: pulumi.StringArray{
-// eipExample1.PublicIp,
-// },
-// })
-// if err != nil {
-// return err
-// }
-// return nil
-// })
-// }
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			zones, err := availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+//				Product: "nat",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			image, err := images.GetInstance(ctx, &images.GetInstanceArgs{
+//				OsName: pulumi.StringRef("centos"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			instanceTypes, err := instance.GetTypes(ctx, &instance.GetTypesArgs{
+//				Filters: []instance.GetTypesFilter{
+//					{
+//						Name: "zone",
+//						Values: pulumi.StringArray{
+//							zones.Zones[0].Name,
+//						},
+//					},
+//					{
+//						Name: "instance-family",
+//						Values: []string{
+//							"S5",
+//						},
+//					},
+//				},
+//				CpuCoreCount:   pulumi.IntRef(2),
+//				ExcludeSoldOut: pulumi.BoolRef(true),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//				Name:      pulumi.String("vpc-example"),
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// Create route_table and entry
+//			routeTable, err := route.NewTable(ctx, "route_table", &route.TableArgs{
+//				VpcId: vpc2.ID().ToIDOutput().ToStringOutput(),
+//				Name:  pulumi.String("tf_example"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				Name:             pulumi.String("subnet-example"),
+//				CidrBlock:        pulumi.String("10.0.0.0/16"),
+//				AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+//				RouteTableId:     routeTable.ID().ToIDOutput().ToStringOutput(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			eipExample1, err := eip.NewInstance(ctx, "eip_example1", &eip.InstanceArgs{
+//				Name: pulumi.String("eip_example1"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			eipExample2, err := eip.NewInstance(ctx, "eip_example2", &eip.InstanceArgs{
+//				Name: pulumi.String("eip_example2"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// Create NAT Gateway
+//			myNat, err := nat.NewGateway(ctx, "my_nat", &nat.GatewayArgs{
+//				VpcId:         vpc2.ID().ToIDOutput().ToStringOutput(),
+//				Name:          pulumi.String("tf_example_nat_gateway"),
+//				MaxConcurrent: pulumi.Int(3000000),
+//				Bandwidth:     pulumi.Int(500),
+//				AssignedEipSets: pulumi.StringArray{
+//					eipExample1.PublicIp,
+//					eipExample2.PublicIp,
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = route.NewTableEntry(ctx, "route_entry", &route.TableEntryArgs{
+//				RouteTableId:         routeTable.ID().ToIDOutput().ToStringOutput(),
+//				DestinationCidrBlock: pulumi.String("10.0.0.0/8"),
+//				NextType:             pulumi.String("NAT"),
+//				NextHub:              myNat.ID().ToIDOutput().ToStringOutput(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// Subnet Nat gateway snat
+//			_, err = nat.NewGatewaySnat(ctx, "subnet_snat", &nat.GatewaySnatArgs{
+//				NatGatewayId:    myNat.ID().ToIDOutput().ToStringOutput(),
+//				ResourceType:    pulumi.String("SUBNET"),
+//				SubnetId:        subnet2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetCidrBlock: subnet2.CidrBlock,
+//				Description:     pulumi.String("terraform test"),
+//				PublicIpAddrs: pulumi.StringArray{
+//					eipExample1.PublicIp,
+//					eipExample2.PublicIp,
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// Create instance
+//			example, err := instance.NewInstance(ctx, "example", &instance.InstanceArgs{
+//				InstanceName:     pulumi.String("tf_example"),
+//				AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+//				ImageId:          pulumi.String(image.Images[0].ImageId),
+//				InstanceType:     pulumi.String(instanceTypes.InstanceTypes[0].InstanceType),
+//				SystemDiskType:   pulumi.String("CLOUD_PREMIUM"),
+//				SystemDiskSize:   pulumi.Int(50),
+//				Hostname:         pulumi.String("user"),
+//				ProjectId:        pulumi.Int(0),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// NetWorkInterface Nat gateway snat
+//			_, err = nat.NewGatewaySnat(ctx, "my_instance_snat", &nat.GatewaySnatArgs{
+//				NatGatewayId:          myNat.ID().ToIDOutput().ToStringOutput(),
+//				ResourceType:          pulumi.String("NETWORKINTERFACE"),
+//				InstanceId:            example.ID().ToIDOutput().ToStringOutput(),
+//				InstancePrivateIpAddr: example.PrivateIp,
+//				Description:           pulumi.String("terraform test"),
+//				PublicIpAddrs: pulumi.StringArray{
+//					eipExample1.PublicIp,
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ## Import
 //
-// VPN gateway route can be imported using the id, the id format must be '{nat_gateway_id}#{resource_id}', resource_id range `subnet_id`, `instance_id`, e.g.
+// VPN gateway route can be imported using the id, the id format must be '{nat_gateway_id}#{resource_id}', resourceId range `subnetId`, `instanceId`, e.g.
 //
-// # SUBNET SNat
-//
+// SUBNET SNat
 // ```sh
 // $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#subnet-2ap74y35
 // ```
-// NETWORKINTERFACT SNat
 //
+// NETWORKINTERFACT SNat
 // ```sh
 // $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#ins-da412f5a
 // ```

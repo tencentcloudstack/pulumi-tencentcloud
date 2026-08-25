@@ -78,11 +78,11 @@ export interface AttachWorkGroupPolicyOperationState {
     /**
      * Collection of policies to be bound.
      */
-    policySets?: pulumi.Input<pulumi.Input<inputs.Dlc.AttachWorkGroupPolicyOperationPolicySet>[]>;
+    policySets?: pulumi.Input<pulumi.Input<inputs.Dlc.AttachWorkGroupPolicyOperationPolicySet>[] | undefined>;
     /**
      * Work group ID.
      */
-    workGroupId?: pulumi.Input<number>;
+    workGroupId?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -92,7 +92,7 @@ export interface AttachWorkGroupPolicyOperationArgs {
     /**
      * Collection of policies to be bound.
      */
-    policySets?: pulumi.Input<pulumi.Input<inputs.Dlc.AttachWorkGroupPolicyOperationPolicySet>[]>;
+    policySets?: pulumi.Input<pulumi.Input<inputs.Dlc.AttachWorkGroupPolicyOperationPolicySet>[] | undefined>;
     /**
      * Work group ID.
      */

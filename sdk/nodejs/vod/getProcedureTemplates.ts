@@ -31,7 +31,7 @@ import * as utilities from "../utilities";
  *         }],
  *     },
  * });
- * const foo = tencentcloud.Vod.getProcedureTemplatesOutput({
+ * const foo = tencentcloud.vod.getProcedureTemplatesOutput({
  *     type: "Custom",
  *     name: fooProcedureTemplate.id,
  * });
@@ -118,7 +118,7 @@ export interface GetProcedureTemplatesResult {
  *         }],
  *     },
  * });
- * const foo = tencentcloud.Vod.getProcedureTemplatesOutput({
+ * const foo = tencentcloud.vod.getProcedureTemplatesOutput({
  *     type: "Custom",
  *     name: fooProcedureTemplate.id,
  * });
@@ -142,17 +142,17 @@ export interface GetProcedureTemplatesOutputArgs {
     /**
      * Name of procedure template.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
      */
-    subAppId?: pulumi.Input<number>;
+    subAppId?: pulumi.Input<number | undefined>;
     /**
      * Template type filter. Valid values: `Preset`, `Custom`. `Preset`: preset template; `Custom`: custom template.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }

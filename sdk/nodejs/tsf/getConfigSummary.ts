@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const configSummary = tencentcloud.Tsf.getConfigSummary({
+ * const configSummary = tencentcloud.tsf.getConfigSummary({
  *     applicationId: "application-a24x29xv",
  *     searchWord: "terraform",
  *     orderBy: "last_update_time",
@@ -111,7 +111,7 @@ export interface GetConfigSummaryResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const configSummary = tencentcloud.Tsf.getConfigSummary({
+ * const configSummary = tencentcloud.tsf.getConfigSummary({
  *     applicationId: "application-a24x29xv",
  *     searchWord: "terraform",
  *     orderBy: "last_update_time",
@@ -143,33 +143,33 @@ export interface GetConfigSummaryOutputArgs {
     /**
      * Application ID. If not passed, the query will be for all.
      */
-    applicationId?: pulumi.Input<string>;
+    applicationId?: pulumi.Input<string | undefined>;
     /**
      * Config Id List.
      */
-    configIdLists?: pulumi.Input<pulumi.Input<string>[]>;
+    configIdLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * config tag list.
      */
-    configTagLists?: pulumi.Input<pulumi.Input<string>[]>;
+    configTagLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Whether to disable dataset authentication.
      */
-    disableProgramAuthCheck?: pulumi.Input<boolean>;
+    disableProgramAuthCheck?: pulumi.Input<boolean | undefined>;
     /**
      * Order term. support Sort by time: creation_time; or Sort by name: config_name.
      */
-    orderBy?: pulumi.Input<string>;
+    orderBy?: pulumi.Input<string | undefined>;
     /**
      * Pass 0 for ascending order and 1 for descending order.
      */
-    orderType?: pulumi.Input<number>;
+    orderType?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Query keyword, fuzzy query: application name, configuration item name. If not passed, the query will be for all.
      */
-    searchWord?: pulumi.Input<string>;
+    searchWord?: pulumi.Input<string | undefined>;
 }

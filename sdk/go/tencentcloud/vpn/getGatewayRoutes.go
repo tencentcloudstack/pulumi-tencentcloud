@@ -79,12 +79,8 @@ type GetGatewayRoutesResult struct {
 }
 
 func GetGatewayRoutesOutput(ctx *pulumi.Context, args GetGatewayRoutesOutputArgs, opts ...pulumi.InvokeOption) GetGatewayRoutesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetGatewayRoutesResultOutput, error) {
-			args := v.(GetGatewayRoutesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Vpn/getGatewayRoutes:getGatewayRoutes", args, GetGatewayRoutesResultOutput{}, options).(GetGatewayRoutesResultOutput), nil
-		}).(GetGatewayRoutesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Vpn/getGatewayRoutes:getGatewayRoutes", args, GetGatewayRoutesResultOutput{}, options).(GetGatewayRoutesResultOutput)
 }
 
 // A collection of arguments for invoking getGatewayRoutes.

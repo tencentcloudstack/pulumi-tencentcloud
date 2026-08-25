@@ -43,7 +43,6 @@ import (
 // ## Import
 //
 // ses domain can be imported using the id, e.g.
-//
 // ```sh
 // $ pulumi import tencentcloud:Ses/domain:Domain domain iac.cloud
 // ```

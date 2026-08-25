@@ -23,7 +23,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * vpc flow_log_config can be imported using the id, e.g.
+ * vpc flowLogConfig can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Vpc/flowLogConfig:FlowLogConfig flow_log_config flow_log_id
@@ -104,11 +104,11 @@ export interface FlowLogConfigState {
     /**
      * If enable snapshot policy.
      */
-    enable?: pulumi.Input<boolean>;
+    enable?: pulumi.Input<boolean | undefined>;
     /**
      * Flow log ID.
      */
-    flowLogId?: pulumi.Input<string>;
+    flowLogId?: pulumi.Input<string | undefined>;
 }
 
 /**

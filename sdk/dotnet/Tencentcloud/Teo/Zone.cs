@@ -15,6 +15,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// 
     /// ## Example Usage
     /// 
+    /// ### Basic Usage
+    /// 
     /// ```csharp
     /// using System.Collections.Generic;
     /// using System.Linq;
@@ -40,10 +42,49 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// });
     /// ```
     /// 
+    /// ### Enable Version Control Mode
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var zoneWithVersionControl = new Tencentcloud.Teo.Zone("zone_with_version_control", new()
+    ///     {
+    ///         ZoneName = "tf-teo-version.com",
+    ///         Type = "partial",
+    ///         Area = "overseas",
+    ///         AliasZoneName = "teo-version-test",
+    ///         Paused = false,
+    ///         PlanId = "edgeone-2kfv1h391n6w",
+    ///         WorkModeInfos = new[]
+    ///         {
+    ///             new Tencentcloud.Teo.Inputs.ZoneWorkModeInfoArgs
+    ///             {
+    ///                 ConfigGroupType = "l7_acceleration",
+    ///                 WorkMode = "immediate_effect",
+    ///             },
+    ///             new Tencentcloud.Teo.Inputs.ZoneWorkModeInfoArgs
+    ///             {
+    ///                 ConfigGroupType = "edge_functions",
+    ///                 WorkMode = "immediate_effect",
+    ///             },
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
     /// ## Import
     /// 
     /// teo zone can be imported using the id, e.g.
-    /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Teo/zone:Zone zone zone_id
     /// ```
@@ -103,10 +144,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Output<ImmutableDictionary<string, string>?> Tags { get; private set; } = null!;
 
         /// <summary>
-        /// Site access type. The value of this parameter is as follows, and the default is partial if not filled in:partial: CNAME access; full: NS access; noDomainAccess: No domain access.
+        /// Site Access Type. The possible values for this parameter are as follows; if left unspecified, the default value is `Partial`:
         /// </summary>
         [Output("type")]
         public Output<string> Type { get; private set; } = null!;
+
+        /// <summary>
+        /// Configuration group work mode. Each configuration module of the site can enable version control mode or immediate effect mode according to the configuration group dimension. For details, please refer to [Version Management](https://cloud.tencent.com/document/product/1552/113690).
+        /// </summary>
+        [Output("workModeInfos")]
+        public Output<ImmutableArray<Outputs.ZoneWorkModeInfo>> WorkModeInfos { get; private set; } = null!;
+
+        /// <summary>
+        /// Site ID.
+        /// </summary>
+        [Output("zoneId")]
+        public Output<string> ZoneId { get; private set; } = null!;
 
         /// <summary>
         /// Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.
@@ -201,10 +254,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         }
 
         /// <summary>
-        /// Site access type. The value of this parameter is as follows, and the default is partial if not filled in:partial: CNAME access; full: NS access; noDomainAccess: No domain access.
+        /// Site Access Type. The possible values for this parameter are as follows; if left unspecified, the default value is `Partial`:
         /// </summary>
         [Input("type", required: true)]
         public Input<string> Type { get; set; } = null!;
+
+        [Input("workModeInfos")]
+        private InputList<Inputs.ZoneWorkModeInfoArgs>? _workModeInfos;
+
+        /// <summary>
+        /// Configuration group work mode. Each configuration module of the site can enable version control mode or immediate effect mode according to the configuration group dimension. For details, please refer to [Version Management](https://cloud.tencent.com/document/product/1552/113690).
+        /// </summary>
+        public InputList<Inputs.ZoneWorkModeInfoArgs> WorkModeInfos
+        {
+            get => _workModeInfos ?? (_workModeInfos = new InputList<Inputs.ZoneWorkModeInfoArgs>());
+            set => _workModeInfos = value;
+        }
 
         /// <summary>
         /// Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.
@@ -290,10 +355,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         }
 
         /// <summary>
-        /// Site access type. The value of this parameter is as follows, and the default is partial if not filled in:partial: CNAME access; full: NS access; noDomainAccess: No domain access.
+        /// Site Access Type. The possible values for this parameter are as follows; if left unspecified, the default value is `Partial`:
         /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }
+
+        [Input("workModeInfos")]
+        private InputList<Inputs.ZoneWorkModeInfoGetArgs>? _workModeInfos;
+
+        /// <summary>
+        /// Configuration group work mode. Each configuration module of the site can enable version control mode or immediate effect mode according to the configuration group dimension. For details, please refer to [Version Management](https://cloud.tencent.com/document/product/1552/113690).
+        /// </summary>
+        public InputList<Inputs.ZoneWorkModeInfoGetArgs> WorkModeInfos
+        {
+            get => _workModeInfos ?? (_workModeInfos = new InputList<Inputs.ZoneWorkModeInfoGetArgs>());
+            set => _workModeInfos = value;
+        }
+
+        /// <summary>
+        /// Site ID.
+        /// </summary>
+        [Input("zoneId")]
+        public Input<string>? ZoneId { get; set; }
 
         /// <summary>
         /// Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.

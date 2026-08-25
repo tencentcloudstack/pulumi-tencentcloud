@@ -129,27 +129,27 @@ export interface BackupStorageLocationState {
     /**
      * Name of the bucket.
      */
-    bucket?: pulumi.Input<string>;
+    bucket?: pulumi.Input<string | undefined>;
     /**
      * Message of the backup storage location.
      */
-    message?: pulumi.Input<string>;
+    message?: pulumi.Input<string | undefined>;
     /**
      * Name of the backup storage location.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Prefix of the bucket.
      */
-    path?: pulumi.Input<string>;
+    path?: pulumi.Input<string | undefined>;
     /**
      * State of the backup storage location.
      */
-    state?: pulumi.Input<string>;
+    state?: pulumi.Input<string | undefined>;
     /**
      * Region of the storage.
      */
-    storageRegion?: pulumi.Input<string>;
+    storageRegion?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -163,11 +163,11 @@ export interface BackupStorageLocationArgs {
     /**
      * Name of the backup storage location.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Prefix of the bucket.
      */
-    path?: pulumi.Input<string>;
+    path?: pulumi.Input<string | undefined>;
     /**
      * Region of the storage.
      */

@@ -2163,6 +2163,1490 @@ func (o GetInstanceNodesInstanceNodesListNodeGroupArrayOutput) Index(i pulumi.In
 	}).(GetInstanceNodesInstanceNodesListNodeGroupOutput)
 }
 
+type GetInstancesInstanceList struct {
+	// Access address, such as `10.0.0.1:9000`.
+	AccessInfo string `pulumi:"accessInfo"`
+	// Whether CBS can be attached.
+	CanAttachCbs bool `pulumi:"canAttachCbs"`
+	// Whether CBS LVM can be attached.
+	CanAttachCbsLvm bool `pulumi:"canAttachCbsLvm"`
+	// Whether COS can be attached.
+	CanAttachCos bool `pulumi:"canAttachCos"`
+	// CHProxy VIP address.
+	ChProxyVip string `pulumi:"chProxyVip"`
+	// CLS log set ID.
+	ClsLogSetId string `pulumi:"clsLogSetId"`
+	// CLS topic ID.
+	ClsTopicId string `pulumi:"clsTopicId"`
+	// Common node summary information.
+	CommonSummaries []GetInstancesInstanceListCommonSummary `pulumi:"commonSummaries"`
+	// Component list.
+	Components []GetInstancesInstanceListComponent `pulumi:"components"`
+	// COS bucket name.
+	CosBucketName string `pulumi:"cosBucketName"`
+	// Creation time.
+	CreateTime string `pulumi:"createTime"`
+	// Elastic IP address.
+	Eip string `pulumi:"eip"`
+	// Whether XML configuration is supported.
+	EnableXmlConfig int `pulumi:"enableXmlConfig"`
+	// Expiration time.
+	ExpireTime string `pulumi:"expireTime"`
+	// Workflow message.
+	FlowMsg string `pulumi:"flowMsg"`
+	// High availability: `true` or `false`.
+	Ha string `pulumi:"ha"`
+	// ZooKeeper high availability.
+	HaZk bool `pulumi:"haZk"`
+	// Whether CLS topic is enabled.
+	HasClsTopic bool `pulumi:"hasClsTopic"`
+	// Search by instance ID, support exact matching.
+	InstanceId string `pulumi:"instanceId"`
+	// Search by instance name, support fuzzy matching.
+	InstanceName string `pulumi:"instanceName"`
+	// Instance state details.
+	InstanceStateInfos []GetInstancesInstanceListInstanceStateInfo `pulumi:"instanceStateInfos"`
+	// Whether it is an elastic instance.
+	IsElastic bool `pulumi:"isElastic"`
+	// Instance type: `external`, `local`, or `yunti`.
+	Kind string `pulumi:"kind"`
+	// Master node summary information.
+	MasterSummaries []GetInstancesInstanceListMasterSummary `pulumi:"masterSummaries"`
+	// Monitoring information.
+	Monitor string `pulumi:"monitor"`
+	// Payment mode: `hour` or `prepay`.
+	PayMode string `pulumi:"payMode"`
+	// Region, such as `ap-guangzhou`.
+	Region string `pulumi:"region"`
+	// Region description.
+	RegionDesc string `pulumi:"regionDesc"`
+	// Region ID.
+	RegionId int `pulumi:"regionId"`
+	// Auto-renewal flag.
+	RenewFlag bool `pulumi:"renewFlag"`
+	// Instance status: Init, Serving, Deleted, Deleting, Modify.
+	Status string `pulumi:"status"`
+	// Status description.
+	StatusDesc string `pulumi:"statusDesc"`
+	// Subnet ID.
+	SubnetId string `pulumi:"subnetId"`
+	// Tag filter, multiple tags must be matched at the same time.
+	Tags []GetInstancesInstanceListTag `pulumi:"tags"`
+	// Upgradeable versions.
+	UpgradeVersions string `pulumi:"upgradeVersions"`
+	// Instance version.
+	Version string `pulumi:"version"`
+	// VPC ID.
+	VpcId string `pulumi:"vpcId"`
+	// Availability zone, such as `ap-guangzhou-3`.
+	Zone string `pulumi:"zone"`
+	// Zone description.
+	ZoneDesc string `pulumi:"zoneDesc"`
+}
+
+// GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListInput` via:
+//
+//	GetInstancesInstanceListArgs{...}
+type GetInstancesInstanceListInput interface {
+	pulumi.Input
+
+	ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput
+	ToGetInstancesInstanceListOutputWithContext(context.Context) GetInstancesInstanceListOutput
+}
+
+type GetInstancesInstanceListArgs struct {
+	// Access address, such as `10.0.0.1:9000`.
+	AccessInfo pulumi.StringInput `pulumi:"accessInfo"`
+	// Whether CBS can be attached.
+	CanAttachCbs pulumi.BoolInput `pulumi:"canAttachCbs"`
+	// Whether CBS LVM can be attached.
+	CanAttachCbsLvm pulumi.BoolInput `pulumi:"canAttachCbsLvm"`
+	// Whether COS can be attached.
+	CanAttachCos pulumi.BoolInput `pulumi:"canAttachCos"`
+	// CHProxy VIP address.
+	ChProxyVip pulumi.StringInput `pulumi:"chProxyVip"`
+	// CLS log set ID.
+	ClsLogSetId pulumi.StringInput `pulumi:"clsLogSetId"`
+	// CLS topic ID.
+	ClsTopicId pulumi.StringInput `pulumi:"clsTopicId"`
+	// Common node summary information.
+	CommonSummaries GetInstancesInstanceListCommonSummaryArrayInput `pulumi:"commonSummaries"`
+	// Component list.
+	Components GetInstancesInstanceListComponentArrayInput `pulumi:"components"`
+	// COS bucket name.
+	CosBucketName pulumi.StringInput `pulumi:"cosBucketName"`
+	// Creation time.
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Elastic IP address.
+	Eip pulumi.StringInput `pulumi:"eip"`
+	// Whether XML configuration is supported.
+	EnableXmlConfig pulumi.IntInput `pulumi:"enableXmlConfig"`
+	// Expiration time.
+	ExpireTime pulumi.StringInput `pulumi:"expireTime"`
+	// Workflow message.
+	FlowMsg pulumi.StringInput `pulumi:"flowMsg"`
+	// High availability: `true` or `false`.
+	Ha pulumi.StringInput `pulumi:"ha"`
+	// ZooKeeper high availability.
+	HaZk pulumi.BoolInput `pulumi:"haZk"`
+	// Whether CLS topic is enabled.
+	HasClsTopic pulumi.BoolInput `pulumi:"hasClsTopic"`
+	// Search by instance ID, support exact matching.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Search by instance name, support fuzzy matching.
+	InstanceName pulumi.StringInput `pulumi:"instanceName"`
+	// Instance state details.
+	InstanceStateInfos GetInstancesInstanceListInstanceStateInfoArrayInput `pulumi:"instanceStateInfos"`
+	// Whether it is an elastic instance.
+	IsElastic pulumi.BoolInput `pulumi:"isElastic"`
+	// Instance type: `external`, `local`, or `yunti`.
+	Kind pulumi.StringInput `pulumi:"kind"`
+	// Master node summary information.
+	MasterSummaries GetInstancesInstanceListMasterSummaryArrayInput `pulumi:"masterSummaries"`
+	// Monitoring information.
+	Monitor pulumi.StringInput `pulumi:"monitor"`
+	// Payment mode: `hour` or `prepay`.
+	PayMode pulumi.StringInput `pulumi:"payMode"`
+	// Region, such as `ap-guangzhou`.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Region description.
+	RegionDesc pulumi.StringInput `pulumi:"regionDesc"`
+	// Region ID.
+	RegionId pulumi.IntInput `pulumi:"regionId"`
+	// Auto-renewal flag.
+	RenewFlag pulumi.BoolInput `pulumi:"renewFlag"`
+	// Instance status: Init, Serving, Deleted, Deleting, Modify.
+	Status pulumi.StringInput `pulumi:"status"`
+	// Status description.
+	StatusDesc pulumi.StringInput `pulumi:"statusDesc"`
+	// Subnet ID.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	// Tag filter, multiple tags must be matched at the same time.
+	Tags GetInstancesInstanceListTagArrayInput `pulumi:"tags"`
+	// Upgradeable versions.
+	UpgradeVersions pulumi.StringInput `pulumi:"upgradeVersions"`
+	// Instance version.
+	Version pulumi.StringInput `pulumi:"version"`
+	// VPC ID.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+	// Availability zone, such as `ap-guangzhou-3`.
+	Zone pulumi.StringInput `pulumi:"zone"`
+	// Zone description.
+	ZoneDesc pulumi.StringInput `pulumi:"zoneDesc"`
+}
+
+func (GetInstancesInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceList)(nil)).Elem()
+}
+
+func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput {
+	return i.ToGetInstancesInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContext(ctx context.Context) GetInstancesInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListOutput)
+}
+
+// GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
+//
+//	GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+type GetInstancesInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput
+	ToGetInstancesInstanceListArrayOutputWithContext(context.Context) GetInstancesInstanceListArrayOutput
+}
+
+type GetInstancesInstanceListArray []GetInstancesInstanceListInput
+
+func (GetInstancesInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceList)(nil)).Elem()
+}
+
+func (i GetInstancesInstanceListArray) ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput {
+	return i.ToGetInstancesInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstancesInstanceListArray) ToGetInstancesInstanceListArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListArrayOutput)
+}
+
+type GetInstancesInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceList)(nil)).Elem()
+}
+
+func (o GetInstancesInstanceListOutput) ToGetInstancesInstanceListOutput() GetInstancesInstanceListOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListOutput) ToGetInstancesInstanceListOutputWithContext(ctx context.Context) GetInstancesInstanceListOutput {
+	return o
+}
+
+// Access address, such as `10.0.0.1:9000`.
+func (o GetInstancesInstanceListOutput) AccessInfo() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.AccessInfo }).(pulumi.StringOutput)
+}
+
+// Whether CBS can be attached.
+func (o GetInstancesInstanceListOutput) CanAttachCbs() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) bool { return v.CanAttachCbs }).(pulumi.BoolOutput)
+}
+
+// Whether CBS LVM can be attached.
+func (o GetInstancesInstanceListOutput) CanAttachCbsLvm() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) bool { return v.CanAttachCbsLvm }).(pulumi.BoolOutput)
+}
+
+// Whether COS can be attached.
+func (o GetInstancesInstanceListOutput) CanAttachCos() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) bool { return v.CanAttachCos }).(pulumi.BoolOutput)
+}
+
+// CHProxy VIP address.
+func (o GetInstancesInstanceListOutput) ChProxyVip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.ChProxyVip }).(pulumi.StringOutput)
+}
+
+// CLS log set ID.
+func (o GetInstancesInstanceListOutput) ClsLogSetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.ClsLogSetId }).(pulumi.StringOutput)
+}
+
+// CLS topic ID.
+func (o GetInstancesInstanceListOutput) ClsTopicId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.ClsTopicId }).(pulumi.StringOutput)
+}
+
+// Common node summary information.
+func (o GetInstancesInstanceListOutput) CommonSummaries() GetInstancesInstanceListCommonSummaryArrayOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) []GetInstancesInstanceListCommonSummary { return v.CommonSummaries }).(GetInstancesInstanceListCommonSummaryArrayOutput)
+}
+
+// Component list.
+func (o GetInstancesInstanceListOutput) Components() GetInstancesInstanceListComponentArrayOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) []GetInstancesInstanceListComponent { return v.Components }).(GetInstancesInstanceListComponentArrayOutput)
+}
+
+// COS bucket name.
+func (o GetInstancesInstanceListOutput) CosBucketName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.CosBucketName }).(pulumi.StringOutput)
+}
+
+// Creation time.
+func (o GetInstancesInstanceListOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Elastic IP address.
+func (o GetInstancesInstanceListOutput) Eip() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.Eip }).(pulumi.StringOutput)
+}
+
+// Whether XML configuration is supported.
+func (o GetInstancesInstanceListOutput) EnableXmlConfig() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.EnableXmlConfig }).(pulumi.IntOutput)
+}
+
+// Expiration time.
+func (o GetInstancesInstanceListOutput) ExpireTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.ExpireTime }).(pulumi.StringOutput)
+}
+
+// Workflow message.
+func (o GetInstancesInstanceListOutput) FlowMsg() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.FlowMsg }).(pulumi.StringOutput)
+}
+
+// High availability: `true` or `false`.
+func (o GetInstancesInstanceListOutput) Ha() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.Ha }).(pulumi.StringOutput)
+}
+
+// ZooKeeper high availability.
+func (o GetInstancesInstanceListOutput) HaZk() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) bool { return v.HaZk }).(pulumi.BoolOutput)
+}
+
+// Whether CLS topic is enabled.
+func (o GetInstancesInstanceListOutput) HasClsTopic() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) bool { return v.HasClsTopic }).(pulumi.BoolOutput)
+}
+
+// Search by instance ID, support exact matching.
+func (o GetInstancesInstanceListOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Search by instance name, support fuzzy matching.
+func (o GetInstancesInstanceListOutput) InstanceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.InstanceName }).(pulumi.StringOutput)
+}
+
+// Instance state details.
+func (o GetInstancesInstanceListOutput) InstanceStateInfos() GetInstancesInstanceListInstanceStateInfoArrayOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) []GetInstancesInstanceListInstanceStateInfo {
+		return v.InstanceStateInfos
+	}).(GetInstancesInstanceListInstanceStateInfoArrayOutput)
+}
+
+// Whether it is an elastic instance.
+func (o GetInstancesInstanceListOutput) IsElastic() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) bool { return v.IsElastic }).(pulumi.BoolOutput)
+}
+
+// Instance type: `external`, `local`, or `yunti`.
+func (o GetInstancesInstanceListOutput) Kind() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.Kind }).(pulumi.StringOutput)
+}
+
+// Master node summary information.
+func (o GetInstancesInstanceListOutput) MasterSummaries() GetInstancesInstanceListMasterSummaryArrayOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) []GetInstancesInstanceListMasterSummary { return v.MasterSummaries }).(GetInstancesInstanceListMasterSummaryArrayOutput)
+}
+
+// Monitoring information.
+func (o GetInstancesInstanceListOutput) Monitor() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.Monitor }).(pulumi.StringOutput)
+}
+
+// Payment mode: `hour` or `prepay`.
+func (o GetInstancesInstanceListOutput) PayMode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.PayMode }).(pulumi.StringOutput)
+}
+
+// Region, such as `ap-guangzhou`.
+func (o GetInstancesInstanceListOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Region description.
+func (o GetInstancesInstanceListOutput) RegionDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.RegionDesc }).(pulumi.StringOutput)
+}
+
+// Region ID.
+func (o GetInstancesInstanceListOutput) RegionId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) int { return v.RegionId }).(pulumi.IntOutput)
+}
+
+// Auto-renewal flag.
+func (o GetInstancesInstanceListOutput) RenewFlag() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) bool { return v.RenewFlag }).(pulumi.BoolOutput)
+}
+
+// Instance status: Init, Serving, Deleted, Deleting, Modify.
+func (o GetInstancesInstanceListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// Status description.
+func (o GetInstancesInstanceListOutput) StatusDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.StatusDesc }).(pulumi.StringOutput)
+}
+
+// Subnet ID.
+func (o GetInstancesInstanceListOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+// Tag filter, multiple tags must be matched at the same time.
+func (o GetInstancesInstanceListOutput) Tags() GetInstancesInstanceListTagArrayOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) []GetInstancesInstanceListTag { return v.Tags }).(GetInstancesInstanceListTagArrayOutput)
+}
+
+// Upgradeable versions.
+func (o GetInstancesInstanceListOutput) UpgradeVersions() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.UpgradeVersions }).(pulumi.StringOutput)
+}
+
+// Instance version.
+func (o GetInstancesInstanceListOutput) Version() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.Version }).(pulumi.StringOutput)
+}
+
+// VPC ID.
+func (o GetInstancesInstanceListOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+// Availability zone, such as `ap-guangzhou-3`.
+func (o GetInstancesInstanceListOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+// Zone description.
+func (o GetInstancesInstanceListOutput) ZoneDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceList) string { return v.ZoneDesc }).(pulumi.StringOutput)
+}
+
+type GetInstancesInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceList)(nil)).Elem()
+}
+
+func (o GetInstancesInstanceListArrayOutput) ToGetInstancesInstanceListArrayOutput() GetInstancesInstanceListArrayOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListArrayOutput) ToGetInstancesInstanceListArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListArrayOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListArrayOutput) Index(i pulumi.IntInput) GetInstancesInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesInstanceList {
+		return vs[0].([]GetInstancesInstanceList)[vs[1].(int)]
+	}).(GetInstancesInstanceListOutput)
+}
+
+type GetInstancesInstanceListCommonSummary struct {
+	// Attached CBS specification.
+	AttachCbsSpecs []GetInstancesInstanceListCommonSummaryAttachCbsSpec `pulumi:"attachCbsSpecs"`
+	// CPU cores.
+	Core int `pulumi:"core"`
+	// Disk size in GB.
+	Disk int `pulumi:"disk"`
+	// Number of disks.
+	DiskCount int `pulumi:"diskCount"`
+	// Disk description.
+	DiskDesc string `pulumi:"diskDesc"`
+	// Disk type.
+	DiskType string `pulumi:"diskType"`
+	// Encryption status.
+	Encrypt int `pulumi:"encrypt"`
+	// Maximum disk size.
+	MaxDiskSize int `pulumi:"maxDiskSize"`
+	// Memory size in GB.
+	Memory int `pulumi:"memory"`
+	// Number of nodes.
+	NodeSize int `pulumi:"nodeSize"`
+	// Specification name.
+	Spec string `pulumi:"spec"`
+	// Specification CPU cores.
+	SpecCore int `pulumi:"specCore"`
+	// Specification memory.
+	SpecMemory int `pulumi:"specMemory"`
+	// Sub-product type.
+	SubProductType string `pulumi:"subProductType"`
+}
+
+// GetInstancesInstanceListCommonSummaryInput is an input type that accepts GetInstancesInstanceListCommonSummaryArgs and GetInstancesInstanceListCommonSummaryOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListCommonSummaryInput` via:
+//
+//	GetInstancesInstanceListCommonSummaryArgs{...}
+type GetInstancesInstanceListCommonSummaryInput interface {
+	pulumi.Input
+
+	ToGetInstancesInstanceListCommonSummaryOutput() GetInstancesInstanceListCommonSummaryOutput
+	ToGetInstancesInstanceListCommonSummaryOutputWithContext(context.Context) GetInstancesInstanceListCommonSummaryOutput
+}
+
+type GetInstancesInstanceListCommonSummaryArgs struct {
+	// Attached CBS specification.
+	AttachCbsSpecs GetInstancesInstanceListCommonSummaryAttachCbsSpecArrayInput `pulumi:"attachCbsSpecs"`
+	// CPU cores.
+	Core pulumi.IntInput `pulumi:"core"`
+	// Disk size in GB.
+	Disk pulumi.IntInput `pulumi:"disk"`
+	// Number of disks.
+	DiskCount pulumi.IntInput `pulumi:"diskCount"`
+	// Disk description.
+	DiskDesc pulumi.StringInput `pulumi:"diskDesc"`
+	// Disk type.
+	DiskType pulumi.StringInput `pulumi:"diskType"`
+	// Encryption status.
+	Encrypt pulumi.IntInput `pulumi:"encrypt"`
+	// Maximum disk size.
+	MaxDiskSize pulumi.IntInput `pulumi:"maxDiskSize"`
+	// Memory size in GB.
+	Memory pulumi.IntInput `pulumi:"memory"`
+	// Number of nodes.
+	NodeSize pulumi.IntInput `pulumi:"nodeSize"`
+	// Specification name.
+	Spec pulumi.StringInput `pulumi:"spec"`
+	// Specification CPU cores.
+	SpecCore pulumi.IntInput `pulumi:"specCore"`
+	// Specification memory.
+	SpecMemory pulumi.IntInput `pulumi:"specMemory"`
+	// Sub-product type.
+	SubProductType pulumi.StringInput `pulumi:"subProductType"`
+}
+
+func (GetInstancesInstanceListCommonSummaryArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceListCommonSummary)(nil)).Elem()
+}
+
+func (i GetInstancesInstanceListCommonSummaryArgs) ToGetInstancesInstanceListCommonSummaryOutput() GetInstancesInstanceListCommonSummaryOutput {
+	return i.ToGetInstancesInstanceListCommonSummaryOutputWithContext(context.Background())
+}
+
+func (i GetInstancesInstanceListCommonSummaryArgs) ToGetInstancesInstanceListCommonSummaryOutputWithContext(ctx context.Context) GetInstancesInstanceListCommonSummaryOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListCommonSummaryOutput)
+}
+
+// GetInstancesInstanceListCommonSummaryArrayInput is an input type that accepts GetInstancesInstanceListCommonSummaryArray and GetInstancesInstanceListCommonSummaryArrayOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListCommonSummaryArrayInput` via:
+//
+//	GetInstancesInstanceListCommonSummaryArray{ GetInstancesInstanceListCommonSummaryArgs{...} }
+type GetInstancesInstanceListCommonSummaryArrayInput interface {
+	pulumi.Input
+
+	ToGetInstancesInstanceListCommonSummaryArrayOutput() GetInstancesInstanceListCommonSummaryArrayOutput
+	ToGetInstancesInstanceListCommonSummaryArrayOutputWithContext(context.Context) GetInstancesInstanceListCommonSummaryArrayOutput
+}
+
+type GetInstancesInstanceListCommonSummaryArray []GetInstancesInstanceListCommonSummaryInput
+
+func (GetInstancesInstanceListCommonSummaryArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceListCommonSummary)(nil)).Elem()
+}
+
+func (i GetInstancesInstanceListCommonSummaryArray) ToGetInstancesInstanceListCommonSummaryArrayOutput() GetInstancesInstanceListCommonSummaryArrayOutput {
+	return i.ToGetInstancesInstanceListCommonSummaryArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstancesInstanceListCommonSummaryArray) ToGetInstancesInstanceListCommonSummaryArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListCommonSummaryArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListCommonSummaryArrayOutput)
+}
+
+type GetInstancesInstanceListCommonSummaryOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesInstanceListCommonSummaryOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceListCommonSummary)(nil)).Elem()
+}
+
+func (o GetInstancesInstanceListCommonSummaryOutput) ToGetInstancesInstanceListCommonSummaryOutput() GetInstancesInstanceListCommonSummaryOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListCommonSummaryOutput) ToGetInstancesInstanceListCommonSummaryOutputWithContext(ctx context.Context) GetInstancesInstanceListCommonSummaryOutput {
+	return o
+}
+
+// Attached CBS specification.
+func (o GetInstancesInstanceListCommonSummaryOutput) AttachCbsSpecs() GetInstancesInstanceListCommonSummaryAttachCbsSpecArrayOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListCommonSummary) []GetInstancesInstanceListCommonSummaryAttachCbsSpec {
+		return v.AttachCbsSpecs
+	}).(GetInstancesInstanceListCommonSummaryAttachCbsSpecArrayOutput)
+}
+
+// CPU cores.
+func (o GetInstancesInstanceListCommonSummaryOutput) Core() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListCommonSummary) int { return v.Core }).(pulumi.IntOutput)
+}
+
+// Disk size in GB.
+func (o GetInstancesInstanceListCommonSummaryOutput) Disk() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListCommonSummary) int { return v.Disk }).(pulumi.IntOutput)
+}
+
+// Number of disks.
+func (o GetInstancesInstanceListCommonSummaryOutput) DiskCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListCommonSummary) int { return v.DiskCount }).(pulumi.IntOutput)
+}
+
+// Disk description.
+func (o GetInstancesInstanceListCommonSummaryOutput) DiskDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListCommonSummary) string { return v.DiskDesc }).(pulumi.StringOutput)
+}
+
+// Disk type.
+func (o GetInstancesInstanceListCommonSummaryOutput) DiskType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListCommonSummary) string { return v.DiskType }).(pulumi.StringOutput)
+}
+
+// Encryption status.
+func (o GetInstancesInstanceListCommonSummaryOutput) Encrypt() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListCommonSummary) int { return v.Encrypt }).(pulumi.IntOutput)
+}
+
+// Maximum disk size.
+func (o GetInstancesInstanceListCommonSummaryOutput) MaxDiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListCommonSummary) int { return v.MaxDiskSize }).(pulumi.IntOutput)
+}
+
+// Memory size in GB.
+func (o GetInstancesInstanceListCommonSummaryOutput) Memory() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListCommonSummary) int { return v.Memory }).(pulumi.IntOutput)
+}
+
+// Number of nodes.
+func (o GetInstancesInstanceListCommonSummaryOutput) NodeSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListCommonSummary) int { return v.NodeSize }).(pulumi.IntOutput)
+}
+
+// Specification name.
+func (o GetInstancesInstanceListCommonSummaryOutput) Spec() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListCommonSummary) string { return v.Spec }).(pulumi.StringOutput)
+}
+
+// Specification CPU cores.
+func (o GetInstancesInstanceListCommonSummaryOutput) SpecCore() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListCommonSummary) int { return v.SpecCore }).(pulumi.IntOutput)
+}
+
+// Specification memory.
+func (o GetInstancesInstanceListCommonSummaryOutput) SpecMemory() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListCommonSummary) int { return v.SpecMemory }).(pulumi.IntOutput)
+}
+
+// Sub-product type.
+func (o GetInstancesInstanceListCommonSummaryOutput) SubProductType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListCommonSummary) string { return v.SubProductType }).(pulumi.StringOutput)
+}
+
+type GetInstancesInstanceListCommonSummaryArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesInstanceListCommonSummaryArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceListCommonSummary)(nil)).Elem()
+}
+
+func (o GetInstancesInstanceListCommonSummaryArrayOutput) ToGetInstancesInstanceListCommonSummaryArrayOutput() GetInstancesInstanceListCommonSummaryArrayOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListCommonSummaryArrayOutput) ToGetInstancesInstanceListCommonSummaryArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListCommonSummaryArrayOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListCommonSummaryArrayOutput) Index(i pulumi.IntInput) GetInstancesInstanceListCommonSummaryOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesInstanceListCommonSummary {
+		return vs[0].([]GetInstancesInstanceListCommonSummary)[vs[1].(int)]
+	}).(GetInstancesInstanceListCommonSummaryOutput)
+}
+
+type GetInstancesInstanceListCommonSummaryAttachCbsSpec struct {
+	// Number of disks.
+	DiskCount int `pulumi:"diskCount"`
+	// Disk description.
+	DiskDesc string `pulumi:"diskDesc"`
+	// Disk size in GB.
+	DiskSize int `pulumi:"diskSize"`
+	// Disk type.
+	DiskType string `pulumi:"diskType"`
+}
+
+// GetInstancesInstanceListCommonSummaryAttachCbsSpecInput is an input type that accepts GetInstancesInstanceListCommonSummaryAttachCbsSpecArgs and GetInstancesInstanceListCommonSummaryAttachCbsSpecOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListCommonSummaryAttachCbsSpecInput` via:
+//
+//	GetInstancesInstanceListCommonSummaryAttachCbsSpecArgs{...}
+type GetInstancesInstanceListCommonSummaryAttachCbsSpecInput interface {
+	pulumi.Input
+
+	ToGetInstancesInstanceListCommonSummaryAttachCbsSpecOutput() GetInstancesInstanceListCommonSummaryAttachCbsSpecOutput
+	ToGetInstancesInstanceListCommonSummaryAttachCbsSpecOutputWithContext(context.Context) GetInstancesInstanceListCommonSummaryAttachCbsSpecOutput
+}
+
+type GetInstancesInstanceListCommonSummaryAttachCbsSpecArgs struct {
+	// Number of disks.
+	DiskCount pulumi.IntInput `pulumi:"diskCount"`
+	// Disk description.
+	DiskDesc pulumi.StringInput `pulumi:"diskDesc"`
+	// Disk size in GB.
+	DiskSize pulumi.IntInput `pulumi:"diskSize"`
+	// Disk type.
+	DiskType pulumi.StringInput `pulumi:"diskType"`
+}
+
+func (GetInstancesInstanceListCommonSummaryAttachCbsSpecArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceListCommonSummaryAttachCbsSpec)(nil)).Elem()
+}
+
+func (i GetInstancesInstanceListCommonSummaryAttachCbsSpecArgs) ToGetInstancesInstanceListCommonSummaryAttachCbsSpecOutput() GetInstancesInstanceListCommonSummaryAttachCbsSpecOutput {
+	return i.ToGetInstancesInstanceListCommonSummaryAttachCbsSpecOutputWithContext(context.Background())
+}
+
+func (i GetInstancesInstanceListCommonSummaryAttachCbsSpecArgs) ToGetInstancesInstanceListCommonSummaryAttachCbsSpecOutputWithContext(ctx context.Context) GetInstancesInstanceListCommonSummaryAttachCbsSpecOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListCommonSummaryAttachCbsSpecOutput)
+}
+
+// GetInstancesInstanceListCommonSummaryAttachCbsSpecArrayInput is an input type that accepts GetInstancesInstanceListCommonSummaryAttachCbsSpecArray and GetInstancesInstanceListCommonSummaryAttachCbsSpecArrayOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListCommonSummaryAttachCbsSpecArrayInput` via:
+//
+//	GetInstancesInstanceListCommonSummaryAttachCbsSpecArray{ GetInstancesInstanceListCommonSummaryAttachCbsSpecArgs{...} }
+type GetInstancesInstanceListCommonSummaryAttachCbsSpecArrayInput interface {
+	pulumi.Input
+
+	ToGetInstancesInstanceListCommonSummaryAttachCbsSpecArrayOutput() GetInstancesInstanceListCommonSummaryAttachCbsSpecArrayOutput
+	ToGetInstancesInstanceListCommonSummaryAttachCbsSpecArrayOutputWithContext(context.Context) GetInstancesInstanceListCommonSummaryAttachCbsSpecArrayOutput
+}
+
+type GetInstancesInstanceListCommonSummaryAttachCbsSpecArray []GetInstancesInstanceListCommonSummaryAttachCbsSpecInput
+
+func (GetInstancesInstanceListCommonSummaryAttachCbsSpecArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceListCommonSummaryAttachCbsSpec)(nil)).Elem()
+}
+
+func (i GetInstancesInstanceListCommonSummaryAttachCbsSpecArray) ToGetInstancesInstanceListCommonSummaryAttachCbsSpecArrayOutput() GetInstancesInstanceListCommonSummaryAttachCbsSpecArrayOutput {
+	return i.ToGetInstancesInstanceListCommonSummaryAttachCbsSpecArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstancesInstanceListCommonSummaryAttachCbsSpecArray) ToGetInstancesInstanceListCommonSummaryAttachCbsSpecArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListCommonSummaryAttachCbsSpecArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListCommonSummaryAttachCbsSpecArrayOutput)
+}
+
+type GetInstancesInstanceListCommonSummaryAttachCbsSpecOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesInstanceListCommonSummaryAttachCbsSpecOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceListCommonSummaryAttachCbsSpec)(nil)).Elem()
+}
+
+func (o GetInstancesInstanceListCommonSummaryAttachCbsSpecOutput) ToGetInstancesInstanceListCommonSummaryAttachCbsSpecOutput() GetInstancesInstanceListCommonSummaryAttachCbsSpecOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListCommonSummaryAttachCbsSpecOutput) ToGetInstancesInstanceListCommonSummaryAttachCbsSpecOutputWithContext(ctx context.Context) GetInstancesInstanceListCommonSummaryAttachCbsSpecOutput {
+	return o
+}
+
+// Number of disks.
+func (o GetInstancesInstanceListCommonSummaryAttachCbsSpecOutput) DiskCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListCommonSummaryAttachCbsSpec) int { return v.DiskCount }).(pulumi.IntOutput)
+}
+
+// Disk description.
+func (o GetInstancesInstanceListCommonSummaryAttachCbsSpecOutput) DiskDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListCommonSummaryAttachCbsSpec) string { return v.DiskDesc }).(pulumi.StringOutput)
+}
+
+// Disk size in GB.
+func (o GetInstancesInstanceListCommonSummaryAttachCbsSpecOutput) DiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListCommonSummaryAttachCbsSpec) int { return v.DiskSize }).(pulumi.IntOutput)
+}
+
+// Disk type.
+func (o GetInstancesInstanceListCommonSummaryAttachCbsSpecOutput) DiskType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListCommonSummaryAttachCbsSpec) string { return v.DiskType }).(pulumi.StringOutput)
+}
+
+type GetInstancesInstanceListCommonSummaryAttachCbsSpecArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesInstanceListCommonSummaryAttachCbsSpecArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceListCommonSummaryAttachCbsSpec)(nil)).Elem()
+}
+
+func (o GetInstancesInstanceListCommonSummaryAttachCbsSpecArrayOutput) ToGetInstancesInstanceListCommonSummaryAttachCbsSpecArrayOutput() GetInstancesInstanceListCommonSummaryAttachCbsSpecArrayOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListCommonSummaryAttachCbsSpecArrayOutput) ToGetInstancesInstanceListCommonSummaryAttachCbsSpecArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListCommonSummaryAttachCbsSpecArrayOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListCommonSummaryAttachCbsSpecArrayOutput) Index(i pulumi.IntInput) GetInstancesInstanceListCommonSummaryAttachCbsSpecOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesInstanceListCommonSummaryAttachCbsSpec {
+		return vs[0].([]GetInstancesInstanceListCommonSummaryAttachCbsSpec)[vs[1].(int)]
+	}).(GetInstancesInstanceListCommonSummaryAttachCbsSpecOutput)
+}
+
+type GetInstancesInstanceListComponent struct {
+	// Component name.
+	Name string `pulumi:"name"`
+	// Instance version.
+	Version string `pulumi:"version"`
+}
+
+// GetInstancesInstanceListComponentInput is an input type that accepts GetInstancesInstanceListComponentArgs and GetInstancesInstanceListComponentOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListComponentInput` via:
+//
+//	GetInstancesInstanceListComponentArgs{...}
+type GetInstancesInstanceListComponentInput interface {
+	pulumi.Input
+
+	ToGetInstancesInstanceListComponentOutput() GetInstancesInstanceListComponentOutput
+	ToGetInstancesInstanceListComponentOutputWithContext(context.Context) GetInstancesInstanceListComponentOutput
+}
+
+type GetInstancesInstanceListComponentArgs struct {
+	// Component name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Instance version.
+	Version pulumi.StringInput `pulumi:"version"`
+}
+
+func (GetInstancesInstanceListComponentArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceListComponent)(nil)).Elem()
+}
+
+func (i GetInstancesInstanceListComponentArgs) ToGetInstancesInstanceListComponentOutput() GetInstancesInstanceListComponentOutput {
+	return i.ToGetInstancesInstanceListComponentOutputWithContext(context.Background())
+}
+
+func (i GetInstancesInstanceListComponentArgs) ToGetInstancesInstanceListComponentOutputWithContext(ctx context.Context) GetInstancesInstanceListComponentOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListComponentOutput)
+}
+
+// GetInstancesInstanceListComponentArrayInput is an input type that accepts GetInstancesInstanceListComponentArray and GetInstancesInstanceListComponentArrayOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListComponentArrayInput` via:
+//
+//	GetInstancesInstanceListComponentArray{ GetInstancesInstanceListComponentArgs{...} }
+type GetInstancesInstanceListComponentArrayInput interface {
+	pulumi.Input
+
+	ToGetInstancesInstanceListComponentArrayOutput() GetInstancesInstanceListComponentArrayOutput
+	ToGetInstancesInstanceListComponentArrayOutputWithContext(context.Context) GetInstancesInstanceListComponentArrayOutput
+}
+
+type GetInstancesInstanceListComponentArray []GetInstancesInstanceListComponentInput
+
+func (GetInstancesInstanceListComponentArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceListComponent)(nil)).Elem()
+}
+
+func (i GetInstancesInstanceListComponentArray) ToGetInstancesInstanceListComponentArrayOutput() GetInstancesInstanceListComponentArrayOutput {
+	return i.ToGetInstancesInstanceListComponentArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstancesInstanceListComponentArray) ToGetInstancesInstanceListComponentArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListComponentArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListComponentArrayOutput)
+}
+
+type GetInstancesInstanceListComponentOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesInstanceListComponentOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceListComponent)(nil)).Elem()
+}
+
+func (o GetInstancesInstanceListComponentOutput) ToGetInstancesInstanceListComponentOutput() GetInstancesInstanceListComponentOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListComponentOutput) ToGetInstancesInstanceListComponentOutputWithContext(ctx context.Context) GetInstancesInstanceListComponentOutput {
+	return o
+}
+
+// Component name.
+func (o GetInstancesInstanceListComponentOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListComponent) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Instance version.
+func (o GetInstancesInstanceListComponentOutput) Version() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListComponent) string { return v.Version }).(pulumi.StringOutput)
+}
+
+type GetInstancesInstanceListComponentArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesInstanceListComponentArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceListComponent)(nil)).Elem()
+}
+
+func (o GetInstancesInstanceListComponentArrayOutput) ToGetInstancesInstanceListComponentArrayOutput() GetInstancesInstanceListComponentArrayOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListComponentArrayOutput) ToGetInstancesInstanceListComponentArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListComponentArrayOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListComponentArrayOutput) Index(i pulumi.IntInput) GetInstancesInstanceListComponentOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesInstanceListComponent {
+		return vs[0].([]GetInstancesInstanceListComponent)[vs[1].(int)]
+	}).(GetInstancesInstanceListComponentOutput)
+}
+
+type GetInstancesInstanceListInstanceStateInfo struct {
+	// Workflow creation time.
+	FlowCreateTime string `pulumi:"flowCreateTime"`
+	// Workflow message.
+	FlowMsg string `pulumi:"flowMsg"`
+	// Workflow name.
+	FlowName string `pulumi:"flowName"`
+	// Workflow progress.
+	FlowProgress int `pulumi:"flowProgress"`
+	// Instance state.
+	InstanceState string `pulumi:"instanceState"`
+	// Instance state description.
+	InstanceStateDesc string `pulumi:"instanceStateDesc"`
+	// Process name.
+	ProcessName string `pulumi:"processName"`
+}
+
+// GetInstancesInstanceListInstanceStateInfoInput is an input type that accepts GetInstancesInstanceListInstanceStateInfoArgs and GetInstancesInstanceListInstanceStateInfoOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListInstanceStateInfoInput` via:
+//
+//	GetInstancesInstanceListInstanceStateInfoArgs{...}
+type GetInstancesInstanceListInstanceStateInfoInput interface {
+	pulumi.Input
+
+	ToGetInstancesInstanceListInstanceStateInfoOutput() GetInstancesInstanceListInstanceStateInfoOutput
+	ToGetInstancesInstanceListInstanceStateInfoOutputWithContext(context.Context) GetInstancesInstanceListInstanceStateInfoOutput
+}
+
+type GetInstancesInstanceListInstanceStateInfoArgs struct {
+	// Workflow creation time.
+	FlowCreateTime pulumi.StringInput `pulumi:"flowCreateTime"`
+	// Workflow message.
+	FlowMsg pulumi.StringInput `pulumi:"flowMsg"`
+	// Workflow name.
+	FlowName pulumi.StringInput `pulumi:"flowName"`
+	// Workflow progress.
+	FlowProgress pulumi.IntInput `pulumi:"flowProgress"`
+	// Instance state.
+	InstanceState pulumi.StringInput `pulumi:"instanceState"`
+	// Instance state description.
+	InstanceStateDesc pulumi.StringInput `pulumi:"instanceStateDesc"`
+	// Process name.
+	ProcessName pulumi.StringInput `pulumi:"processName"`
+}
+
+func (GetInstancesInstanceListInstanceStateInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceListInstanceStateInfo)(nil)).Elem()
+}
+
+func (i GetInstancesInstanceListInstanceStateInfoArgs) ToGetInstancesInstanceListInstanceStateInfoOutput() GetInstancesInstanceListInstanceStateInfoOutput {
+	return i.ToGetInstancesInstanceListInstanceStateInfoOutputWithContext(context.Background())
+}
+
+func (i GetInstancesInstanceListInstanceStateInfoArgs) ToGetInstancesInstanceListInstanceStateInfoOutputWithContext(ctx context.Context) GetInstancesInstanceListInstanceStateInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListInstanceStateInfoOutput)
+}
+
+// GetInstancesInstanceListInstanceStateInfoArrayInput is an input type that accepts GetInstancesInstanceListInstanceStateInfoArray and GetInstancesInstanceListInstanceStateInfoArrayOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListInstanceStateInfoArrayInput` via:
+//
+//	GetInstancesInstanceListInstanceStateInfoArray{ GetInstancesInstanceListInstanceStateInfoArgs{...} }
+type GetInstancesInstanceListInstanceStateInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetInstancesInstanceListInstanceStateInfoArrayOutput() GetInstancesInstanceListInstanceStateInfoArrayOutput
+	ToGetInstancesInstanceListInstanceStateInfoArrayOutputWithContext(context.Context) GetInstancesInstanceListInstanceStateInfoArrayOutput
+}
+
+type GetInstancesInstanceListInstanceStateInfoArray []GetInstancesInstanceListInstanceStateInfoInput
+
+func (GetInstancesInstanceListInstanceStateInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceListInstanceStateInfo)(nil)).Elem()
+}
+
+func (i GetInstancesInstanceListInstanceStateInfoArray) ToGetInstancesInstanceListInstanceStateInfoArrayOutput() GetInstancesInstanceListInstanceStateInfoArrayOutput {
+	return i.ToGetInstancesInstanceListInstanceStateInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstancesInstanceListInstanceStateInfoArray) ToGetInstancesInstanceListInstanceStateInfoArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListInstanceStateInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListInstanceStateInfoArrayOutput)
+}
+
+type GetInstancesInstanceListInstanceStateInfoOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesInstanceListInstanceStateInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceListInstanceStateInfo)(nil)).Elem()
+}
+
+func (o GetInstancesInstanceListInstanceStateInfoOutput) ToGetInstancesInstanceListInstanceStateInfoOutput() GetInstancesInstanceListInstanceStateInfoOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListInstanceStateInfoOutput) ToGetInstancesInstanceListInstanceStateInfoOutputWithContext(ctx context.Context) GetInstancesInstanceListInstanceStateInfoOutput {
+	return o
+}
+
+// Workflow creation time.
+func (o GetInstancesInstanceListInstanceStateInfoOutput) FlowCreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListInstanceStateInfo) string { return v.FlowCreateTime }).(pulumi.StringOutput)
+}
+
+// Workflow message.
+func (o GetInstancesInstanceListInstanceStateInfoOutput) FlowMsg() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListInstanceStateInfo) string { return v.FlowMsg }).(pulumi.StringOutput)
+}
+
+// Workflow name.
+func (o GetInstancesInstanceListInstanceStateInfoOutput) FlowName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListInstanceStateInfo) string { return v.FlowName }).(pulumi.StringOutput)
+}
+
+// Workflow progress.
+func (o GetInstancesInstanceListInstanceStateInfoOutput) FlowProgress() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListInstanceStateInfo) int { return v.FlowProgress }).(pulumi.IntOutput)
+}
+
+// Instance state.
+func (o GetInstancesInstanceListInstanceStateInfoOutput) InstanceState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListInstanceStateInfo) string { return v.InstanceState }).(pulumi.StringOutput)
+}
+
+// Instance state description.
+func (o GetInstancesInstanceListInstanceStateInfoOutput) InstanceStateDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListInstanceStateInfo) string { return v.InstanceStateDesc }).(pulumi.StringOutput)
+}
+
+// Process name.
+func (o GetInstancesInstanceListInstanceStateInfoOutput) ProcessName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListInstanceStateInfo) string { return v.ProcessName }).(pulumi.StringOutput)
+}
+
+type GetInstancesInstanceListInstanceStateInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesInstanceListInstanceStateInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceListInstanceStateInfo)(nil)).Elem()
+}
+
+func (o GetInstancesInstanceListInstanceStateInfoArrayOutput) ToGetInstancesInstanceListInstanceStateInfoArrayOutput() GetInstancesInstanceListInstanceStateInfoArrayOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListInstanceStateInfoArrayOutput) ToGetInstancesInstanceListInstanceStateInfoArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListInstanceStateInfoArrayOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListInstanceStateInfoArrayOutput) Index(i pulumi.IntInput) GetInstancesInstanceListInstanceStateInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesInstanceListInstanceStateInfo {
+		return vs[0].([]GetInstancesInstanceListInstanceStateInfo)[vs[1].(int)]
+	}).(GetInstancesInstanceListInstanceStateInfoOutput)
+}
+
+type GetInstancesInstanceListMasterSummary struct {
+	// Attached CBS specification.
+	AttachCbsSpecs []GetInstancesInstanceListMasterSummaryAttachCbsSpec `pulumi:"attachCbsSpecs"`
+	// CPU cores.
+	Core int `pulumi:"core"`
+	// Disk size in GB.
+	Disk int `pulumi:"disk"`
+	// Number of disks.
+	DiskCount int `pulumi:"diskCount"`
+	// Disk description.
+	DiskDesc string `pulumi:"diskDesc"`
+	// Disk type.
+	DiskType string `pulumi:"diskType"`
+	// Encryption status.
+	Encrypt int `pulumi:"encrypt"`
+	// Maximum disk size.
+	MaxDiskSize int `pulumi:"maxDiskSize"`
+	// Memory size in GB.
+	Memory int `pulumi:"memory"`
+	// Number of nodes.
+	NodeSize int `pulumi:"nodeSize"`
+	// Specification name.
+	Spec string `pulumi:"spec"`
+	// Specification CPU cores.
+	SpecCore int `pulumi:"specCore"`
+	// Specification memory.
+	SpecMemory int `pulumi:"specMemory"`
+	// Sub-product type.
+	SubProductType string `pulumi:"subProductType"`
+}
+
+// GetInstancesInstanceListMasterSummaryInput is an input type that accepts GetInstancesInstanceListMasterSummaryArgs and GetInstancesInstanceListMasterSummaryOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListMasterSummaryInput` via:
+//
+//	GetInstancesInstanceListMasterSummaryArgs{...}
+type GetInstancesInstanceListMasterSummaryInput interface {
+	pulumi.Input
+
+	ToGetInstancesInstanceListMasterSummaryOutput() GetInstancesInstanceListMasterSummaryOutput
+	ToGetInstancesInstanceListMasterSummaryOutputWithContext(context.Context) GetInstancesInstanceListMasterSummaryOutput
+}
+
+type GetInstancesInstanceListMasterSummaryArgs struct {
+	// Attached CBS specification.
+	AttachCbsSpecs GetInstancesInstanceListMasterSummaryAttachCbsSpecArrayInput `pulumi:"attachCbsSpecs"`
+	// CPU cores.
+	Core pulumi.IntInput `pulumi:"core"`
+	// Disk size in GB.
+	Disk pulumi.IntInput `pulumi:"disk"`
+	// Number of disks.
+	DiskCount pulumi.IntInput `pulumi:"diskCount"`
+	// Disk description.
+	DiskDesc pulumi.StringInput `pulumi:"diskDesc"`
+	// Disk type.
+	DiskType pulumi.StringInput `pulumi:"diskType"`
+	// Encryption status.
+	Encrypt pulumi.IntInput `pulumi:"encrypt"`
+	// Maximum disk size.
+	MaxDiskSize pulumi.IntInput `pulumi:"maxDiskSize"`
+	// Memory size in GB.
+	Memory pulumi.IntInput `pulumi:"memory"`
+	// Number of nodes.
+	NodeSize pulumi.IntInput `pulumi:"nodeSize"`
+	// Specification name.
+	Spec pulumi.StringInput `pulumi:"spec"`
+	// Specification CPU cores.
+	SpecCore pulumi.IntInput `pulumi:"specCore"`
+	// Specification memory.
+	SpecMemory pulumi.IntInput `pulumi:"specMemory"`
+	// Sub-product type.
+	SubProductType pulumi.StringInput `pulumi:"subProductType"`
+}
+
+func (GetInstancesInstanceListMasterSummaryArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceListMasterSummary)(nil)).Elem()
+}
+
+func (i GetInstancesInstanceListMasterSummaryArgs) ToGetInstancesInstanceListMasterSummaryOutput() GetInstancesInstanceListMasterSummaryOutput {
+	return i.ToGetInstancesInstanceListMasterSummaryOutputWithContext(context.Background())
+}
+
+func (i GetInstancesInstanceListMasterSummaryArgs) ToGetInstancesInstanceListMasterSummaryOutputWithContext(ctx context.Context) GetInstancesInstanceListMasterSummaryOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListMasterSummaryOutput)
+}
+
+// GetInstancesInstanceListMasterSummaryArrayInput is an input type that accepts GetInstancesInstanceListMasterSummaryArray and GetInstancesInstanceListMasterSummaryArrayOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListMasterSummaryArrayInput` via:
+//
+//	GetInstancesInstanceListMasterSummaryArray{ GetInstancesInstanceListMasterSummaryArgs{...} }
+type GetInstancesInstanceListMasterSummaryArrayInput interface {
+	pulumi.Input
+
+	ToGetInstancesInstanceListMasterSummaryArrayOutput() GetInstancesInstanceListMasterSummaryArrayOutput
+	ToGetInstancesInstanceListMasterSummaryArrayOutputWithContext(context.Context) GetInstancesInstanceListMasterSummaryArrayOutput
+}
+
+type GetInstancesInstanceListMasterSummaryArray []GetInstancesInstanceListMasterSummaryInput
+
+func (GetInstancesInstanceListMasterSummaryArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceListMasterSummary)(nil)).Elem()
+}
+
+func (i GetInstancesInstanceListMasterSummaryArray) ToGetInstancesInstanceListMasterSummaryArrayOutput() GetInstancesInstanceListMasterSummaryArrayOutput {
+	return i.ToGetInstancesInstanceListMasterSummaryArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstancesInstanceListMasterSummaryArray) ToGetInstancesInstanceListMasterSummaryArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListMasterSummaryArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListMasterSummaryArrayOutput)
+}
+
+type GetInstancesInstanceListMasterSummaryOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesInstanceListMasterSummaryOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceListMasterSummary)(nil)).Elem()
+}
+
+func (o GetInstancesInstanceListMasterSummaryOutput) ToGetInstancesInstanceListMasterSummaryOutput() GetInstancesInstanceListMasterSummaryOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListMasterSummaryOutput) ToGetInstancesInstanceListMasterSummaryOutputWithContext(ctx context.Context) GetInstancesInstanceListMasterSummaryOutput {
+	return o
+}
+
+// Attached CBS specification.
+func (o GetInstancesInstanceListMasterSummaryOutput) AttachCbsSpecs() GetInstancesInstanceListMasterSummaryAttachCbsSpecArrayOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListMasterSummary) []GetInstancesInstanceListMasterSummaryAttachCbsSpec {
+		return v.AttachCbsSpecs
+	}).(GetInstancesInstanceListMasterSummaryAttachCbsSpecArrayOutput)
+}
+
+// CPU cores.
+func (o GetInstancesInstanceListMasterSummaryOutput) Core() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListMasterSummary) int { return v.Core }).(pulumi.IntOutput)
+}
+
+// Disk size in GB.
+func (o GetInstancesInstanceListMasterSummaryOutput) Disk() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListMasterSummary) int { return v.Disk }).(pulumi.IntOutput)
+}
+
+// Number of disks.
+func (o GetInstancesInstanceListMasterSummaryOutput) DiskCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListMasterSummary) int { return v.DiskCount }).(pulumi.IntOutput)
+}
+
+// Disk description.
+func (o GetInstancesInstanceListMasterSummaryOutput) DiskDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListMasterSummary) string { return v.DiskDesc }).(pulumi.StringOutput)
+}
+
+// Disk type.
+func (o GetInstancesInstanceListMasterSummaryOutput) DiskType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListMasterSummary) string { return v.DiskType }).(pulumi.StringOutput)
+}
+
+// Encryption status.
+func (o GetInstancesInstanceListMasterSummaryOutput) Encrypt() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListMasterSummary) int { return v.Encrypt }).(pulumi.IntOutput)
+}
+
+// Maximum disk size.
+func (o GetInstancesInstanceListMasterSummaryOutput) MaxDiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListMasterSummary) int { return v.MaxDiskSize }).(pulumi.IntOutput)
+}
+
+// Memory size in GB.
+func (o GetInstancesInstanceListMasterSummaryOutput) Memory() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListMasterSummary) int { return v.Memory }).(pulumi.IntOutput)
+}
+
+// Number of nodes.
+func (o GetInstancesInstanceListMasterSummaryOutput) NodeSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListMasterSummary) int { return v.NodeSize }).(pulumi.IntOutput)
+}
+
+// Specification name.
+func (o GetInstancesInstanceListMasterSummaryOutput) Spec() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListMasterSummary) string { return v.Spec }).(pulumi.StringOutput)
+}
+
+// Specification CPU cores.
+func (o GetInstancesInstanceListMasterSummaryOutput) SpecCore() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListMasterSummary) int { return v.SpecCore }).(pulumi.IntOutput)
+}
+
+// Specification memory.
+func (o GetInstancesInstanceListMasterSummaryOutput) SpecMemory() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListMasterSummary) int { return v.SpecMemory }).(pulumi.IntOutput)
+}
+
+// Sub-product type.
+func (o GetInstancesInstanceListMasterSummaryOutput) SubProductType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListMasterSummary) string { return v.SubProductType }).(pulumi.StringOutput)
+}
+
+type GetInstancesInstanceListMasterSummaryArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesInstanceListMasterSummaryArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceListMasterSummary)(nil)).Elem()
+}
+
+func (o GetInstancesInstanceListMasterSummaryArrayOutput) ToGetInstancesInstanceListMasterSummaryArrayOutput() GetInstancesInstanceListMasterSummaryArrayOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListMasterSummaryArrayOutput) ToGetInstancesInstanceListMasterSummaryArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListMasterSummaryArrayOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListMasterSummaryArrayOutput) Index(i pulumi.IntInput) GetInstancesInstanceListMasterSummaryOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesInstanceListMasterSummary {
+		return vs[0].([]GetInstancesInstanceListMasterSummary)[vs[1].(int)]
+	}).(GetInstancesInstanceListMasterSummaryOutput)
+}
+
+type GetInstancesInstanceListMasterSummaryAttachCbsSpec struct {
+	// Number of disks.
+	DiskCount int `pulumi:"diskCount"`
+	// Disk description.
+	DiskDesc string `pulumi:"diskDesc"`
+	// Disk size in GB.
+	DiskSize int `pulumi:"diskSize"`
+	// Disk type.
+	DiskType string `pulumi:"diskType"`
+}
+
+// GetInstancesInstanceListMasterSummaryAttachCbsSpecInput is an input type that accepts GetInstancesInstanceListMasterSummaryAttachCbsSpecArgs and GetInstancesInstanceListMasterSummaryAttachCbsSpecOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListMasterSummaryAttachCbsSpecInput` via:
+//
+//	GetInstancesInstanceListMasterSummaryAttachCbsSpecArgs{...}
+type GetInstancesInstanceListMasterSummaryAttachCbsSpecInput interface {
+	pulumi.Input
+
+	ToGetInstancesInstanceListMasterSummaryAttachCbsSpecOutput() GetInstancesInstanceListMasterSummaryAttachCbsSpecOutput
+	ToGetInstancesInstanceListMasterSummaryAttachCbsSpecOutputWithContext(context.Context) GetInstancesInstanceListMasterSummaryAttachCbsSpecOutput
+}
+
+type GetInstancesInstanceListMasterSummaryAttachCbsSpecArgs struct {
+	// Number of disks.
+	DiskCount pulumi.IntInput `pulumi:"diskCount"`
+	// Disk description.
+	DiskDesc pulumi.StringInput `pulumi:"diskDesc"`
+	// Disk size in GB.
+	DiskSize pulumi.IntInput `pulumi:"diskSize"`
+	// Disk type.
+	DiskType pulumi.StringInput `pulumi:"diskType"`
+}
+
+func (GetInstancesInstanceListMasterSummaryAttachCbsSpecArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceListMasterSummaryAttachCbsSpec)(nil)).Elem()
+}
+
+func (i GetInstancesInstanceListMasterSummaryAttachCbsSpecArgs) ToGetInstancesInstanceListMasterSummaryAttachCbsSpecOutput() GetInstancesInstanceListMasterSummaryAttachCbsSpecOutput {
+	return i.ToGetInstancesInstanceListMasterSummaryAttachCbsSpecOutputWithContext(context.Background())
+}
+
+func (i GetInstancesInstanceListMasterSummaryAttachCbsSpecArgs) ToGetInstancesInstanceListMasterSummaryAttachCbsSpecOutputWithContext(ctx context.Context) GetInstancesInstanceListMasterSummaryAttachCbsSpecOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListMasterSummaryAttachCbsSpecOutput)
+}
+
+// GetInstancesInstanceListMasterSummaryAttachCbsSpecArrayInput is an input type that accepts GetInstancesInstanceListMasterSummaryAttachCbsSpecArray and GetInstancesInstanceListMasterSummaryAttachCbsSpecArrayOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListMasterSummaryAttachCbsSpecArrayInput` via:
+//
+//	GetInstancesInstanceListMasterSummaryAttachCbsSpecArray{ GetInstancesInstanceListMasterSummaryAttachCbsSpecArgs{...} }
+type GetInstancesInstanceListMasterSummaryAttachCbsSpecArrayInput interface {
+	pulumi.Input
+
+	ToGetInstancesInstanceListMasterSummaryAttachCbsSpecArrayOutput() GetInstancesInstanceListMasterSummaryAttachCbsSpecArrayOutput
+	ToGetInstancesInstanceListMasterSummaryAttachCbsSpecArrayOutputWithContext(context.Context) GetInstancesInstanceListMasterSummaryAttachCbsSpecArrayOutput
+}
+
+type GetInstancesInstanceListMasterSummaryAttachCbsSpecArray []GetInstancesInstanceListMasterSummaryAttachCbsSpecInput
+
+func (GetInstancesInstanceListMasterSummaryAttachCbsSpecArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceListMasterSummaryAttachCbsSpec)(nil)).Elem()
+}
+
+func (i GetInstancesInstanceListMasterSummaryAttachCbsSpecArray) ToGetInstancesInstanceListMasterSummaryAttachCbsSpecArrayOutput() GetInstancesInstanceListMasterSummaryAttachCbsSpecArrayOutput {
+	return i.ToGetInstancesInstanceListMasterSummaryAttachCbsSpecArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstancesInstanceListMasterSummaryAttachCbsSpecArray) ToGetInstancesInstanceListMasterSummaryAttachCbsSpecArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListMasterSummaryAttachCbsSpecArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListMasterSummaryAttachCbsSpecArrayOutput)
+}
+
+type GetInstancesInstanceListMasterSummaryAttachCbsSpecOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesInstanceListMasterSummaryAttachCbsSpecOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceListMasterSummaryAttachCbsSpec)(nil)).Elem()
+}
+
+func (o GetInstancesInstanceListMasterSummaryAttachCbsSpecOutput) ToGetInstancesInstanceListMasterSummaryAttachCbsSpecOutput() GetInstancesInstanceListMasterSummaryAttachCbsSpecOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListMasterSummaryAttachCbsSpecOutput) ToGetInstancesInstanceListMasterSummaryAttachCbsSpecOutputWithContext(ctx context.Context) GetInstancesInstanceListMasterSummaryAttachCbsSpecOutput {
+	return o
+}
+
+// Number of disks.
+func (o GetInstancesInstanceListMasterSummaryAttachCbsSpecOutput) DiskCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListMasterSummaryAttachCbsSpec) int { return v.DiskCount }).(pulumi.IntOutput)
+}
+
+// Disk description.
+func (o GetInstancesInstanceListMasterSummaryAttachCbsSpecOutput) DiskDesc() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListMasterSummaryAttachCbsSpec) string { return v.DiskDesc }).(pulumi.StringOutput)
+}
+
+// Disk size in GB.
+func (o GetInstancesInstanceListMasterSummaryAttachCbsSpecOutput) DiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListMasterSummaryAttachCbsSpec) int { return v.DiskSize }).(pulumi.IntOutput)
+}
+
+// Disk type.
+func (o GetInstancesInstanceListMasterSummaryAttachCbsSpecOutput) DiskType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListMasterSummaryAttachCbsSpec) string { return v.DiskType }).(pulumi.StringOutput)
+}
+
+type GetInstancesInstanceListMasterSummaryAttachCbsSpecArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesInstanceListMasterSummaryAttachCbsSpecArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceListMasterSummaryAttachCbsSpec)(nil)).Elem()
+}
+
+func (o GetInstancesInstanceListMasterSummaryAttachCbsSpecArrayOutput) ToGetInstancesInstanceListMasterSummaryAttachCbsSpecArrayOutput() GetInstancesInstanceListMasterSummaryAttachCbsSpecArrayOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListMasterSummaryAttachCbsSpecArrayOutput) ToGetInstancesInstanceListMasterSummaryAttachCbsSpecArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListMasterSummaryAttachCbsSpecArrayOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListMasterSummaryAttachCbsSpecArrayOutput) Index(i pulumi.IntInput) GetInstancesInstanceListMasterSummaryAttachCbsSpecOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesInstanceListMasterSummaryAttachCbsSpec {
+		return vs[0].([]GetInstancesInstanceListMasterSummaryAttachCbsSpec)[vs[1].(int)]
+	}).(GetInstancesInstanceListMasterSummaryAttachCbsSpecOutput)
+}
+
+type GetInstancesInstanceListTag struct {
+	// Tag key.
+	TagKey string `pulumi:"tagKey"`
+	// Tag value.
+	TagValue string `pulumi:"tagValue"`
+}
+
+// GetInstancesInstanceListTagInput is an input type that accepts GetInstancesInstanceListTagArgs and GetInstancesInstanceListTagOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListTagInput` via:
+//
+//	GetInstancesInstanceListTagArgs{...}
+type GetInstancesInstanceListTagInput interface {
+	pulumi.Input
+
+	ToGetInstancesInstanceListTagOutput() GetInstancesInstanceListTagOutput
+	ToGetInstancesInstanceListTagOutputWithContext(context.Context) GetInstancesInstanceListTagOutput
+}
+
+type GetInstancesInstanceListTagArgs struct {
+	// Tag key.
+	TagKey pulumi.StringInput `pulumi:"tagKey"`
+	// Tag value.
+	TagValue pulumi.StringInput `pulumi:"tagValue"`
+}
+
+func (GetInstancesInstanceListTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceListTag)(nil)).Elem()
+}
+
+func (i GetInstancesInstanceListTagArgs) ToGetInstancesInstanceListTagOutput() GetInstancesInstanceListTagOutput {
+	return i.ToGetInstancesInstanceListTagOutputWithContext(context.Background())
+}
+
+func (i GetInstancesInstanceListTagArgs) ToGetInstancesInstanceListTagOutputWithContext(ctx context.Context) GetInstancesInstanceListTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListTagOutput)
+}
+
+// GetInstancesInstanceListTagArrayInput is an input type that accepts GetInstancesInstanceListTagArray and GetInstancesInstanceListTagArrayOutput values.
+// You can construct a concrete instance of `GetInstancesInstanceListTagArrayInput` via:
+//
+//	GetInstancesInstanceListTagArray{ GetInstancesInstanceListTagArgs{...} }
+type GetInstancesInstanceListTagArrayInput interface {
+	pulumi.Input
+
+	ToGetInstancesInstanceListTagArrayOutput() GetInstancesInstanceListTagArrayOutput
+	ToGetInstancesInstanceListTagArrayOutputWithContext(context.Context) GetInstancesInstanceListTagArrayOutput
+}
+
+type GetInstancesInstanceListTagArray []GetInstancesInstanceListTagInput
+
+func (GetInstancesInstanceListTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceListTag)(nil)).Elem()
+}
+
+func (i GetInstancesInstanceListTagArray) ToGetInstancesInstanceListTagArrayOutput() GetInstancesInstanceListTagArrayOutput {
+	return i.ToGetInstancesInstanceListTagArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstancesInstanceListTagArray) ToGetInstancesInstanceListTagArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesInstanceListTagArrayOutput)
+}
+
+type GetInstancesInstanceListTagOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesInstanceListTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesInstanceListTag)(nil)).Elem()
+}
+
+func (o GetInstancesInstanceListTagOutput) ToGetInstancesInstanceListTagOutput() GetInstancesInstanceListTagOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListTagOutput) ToGetInstancesInstanceListTagOutputWithContext(ctx context.Context) GetInstancesInstanceListTagOutput {
+	return o
+}
+
+// Tag key.
+func (o GetInstancesInstanceListTagOutput) TagKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListTag) string { return v.TagKey }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o GetInstancesInstanceListTagOutput) TagValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesInstanceListTag) string { return v.TagValue }).(pulumi.StringOutput)
+}
+
+type GetInstancesInstanceListTagArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesInstanceListTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesInstanceListTag)(nil)).Elem()
+}
+
+func (o GetInstancesInstanceListTagArrayOutput) ToGetInstancesInstanceListTagArrayOutput() GetInstancesInstanceListTagArrayOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListTagArrayOutput) ToGetInstancesInstanceListTagArrayOutputWithContext(ctx context.Context) GetInstancesInstanceListTagArrayOutput {
+	return o
+}
+
+func (o GetInstancesInstanceListTagArrayOutput) Index(i pulumi.IntInput) GetInstancesInstanceListTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesInstanceListTag {
+		return vs[0].([]GetInstancesInstanceListTag)[vs[1].(int)]
+	}).(GetInstancesInstanceListTagOutput)
+}
+
 type GetSpecAttachCbsSpec struct {
 	// Number of disks.
 	DiskCount int `pulumi:"diskCount"`
@@ -3233,6 +4717,22 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceNodesInstanceNodesListArrayInput)(nil)).Elem(), GetInstanceNodesInstanceNodesListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceNodesInstanceNodesListNodeGroupInput)(nil)).Elem(), GetInstanceNodesInstanceNodesListNodeGroupArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceNodesInstanceNodesListNodeGroupArrayInput)(nil)).Elem(), GetInstanceNodesInstanceNodesListNodeGroupArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListInput)(nil)).Elem(), GetInstancesInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListArrayInput)(nil)).Elem(), GetInstancesInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListCommonSummaryInput)(nil)).Elem(), GetInstancesInstanceListCommonSummaryArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListCommonSummaryArrayInput)(nil)).Elem(), GetInstancesInstanceListCommonSummaryArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListCommonSummaryAttachCbsSpecInput)(nil)).Elem(), GetInstancesInstanceListCommonSummaryAttachCbsSpecArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListCommonSummaryAttachCbsSpecArrayInput)(nil)).Elem(), GetInstancesInstanceListCommonSummaryAttachCbsSpecArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListComponentInput)(nil)).Elem(), GetInstancesInstanceListComponentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListComponentArrayInput)(nil)).Elem(), GetInstancesInstanceListComponentArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListInstanceStateInfoInput)(nil)).Elem(), GetInstancesInstanceListInstanceStateInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListInstanceStateInfoArrayInput)(nil)).Elem(), GetInstancesInstanceListInstanceStateInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListMasterSummaryInput)(nil)).Elem(), GetInstancesInstanceListMasterSummaryArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListMasterSummaryArrayInput)(nil)).Elem(), GetInstancesInstanceListMasterSummaryArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListMasterSummaryAttachCbsSpecInput)(nil)).Elem(), GetInstancesInstanceListMasterSummaryAttachCbsSpecArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListMasterSummaryAttachCbsSpecArrayInput)(nil)).Elem(), GetInstancesInstanceListMasterSummaryAttachCbsSpecArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListTagInput)(nil)).Elem(), GetInstancesInstanceListTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListTagArrayInput)(nil)).Elem(), GetInstancesInstanceListTagArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSpecAttachCbsSpecInput)(nil)).Elem(), GetSpecAttachCbsSpecArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSpecAttachCbsSpecArrayInput)(nil)).Elem(), GetSpecAttachCbsSpecArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSpecCommonSpecInput)(nil)).Elem(), GetSpecCommonSpecArgs{})
@@ -3277,6 +4777,22 @@ func init() {
 	pulumi.RegisterOutputType(GetInstanceNodesInstanceNodesListArrayOutput{})
 	pulumi.RegisterOutputType(GetInstanceNodesInstanceNodesListNodeGroupOutput{})
 	pulumi.RegisterOutputType(GetInstanceNodesInstanceNodesListNodeGroupArrayOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListCommonSummaryOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListCommonSummaryArrayOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListCommonSummaryAttachCbsSpecOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListCommonSummaryAttachCbsSpecArrayOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListComponentOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListComponentArrayOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListInstanceStateInfoOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListInstanceStateInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListMasterSummaryOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListMasterSummaryArrayOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListMasterSummaryAttachCbsSpecOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListMasterSummaryAttachCbsSpecArrayOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListTagOutput{})
+	pulumi.RegisterOutputType(GetInstancesInstanceListTagArrayOutput{})
 	pulumi.RegisterOutputType(GetSpecAttachCbsSpecOutput{})
 	pulumi.RegisterOutputType(GetSpecAttachCbsSpecArrayOutput{})
 	pulumi.RegisterOutputType(GetSpecCommonSpecOutput{})

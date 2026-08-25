@@ -12,7 +12,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a cynosdb clusterTransparentEncrypt
+// Provides a resource to create a Cynosdb cluster transparent encrypt
 //
 // > **NOTE:** Once activated, it cannot be deactivated.
 //
@@ -32,12 +32,12 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := cynosdb.NewClusterTransparentEncrypt(ctx, "cynosdb_cluster_transparent_encrypt", &cynosdb.ClusterTransparentEncryptArgs{
+//			_, err := cynosdb.NewClusterTransparentEncrypt(ctx, "example", &cynosdb.ClusterTransparentEncryptArgs{
 //				ClusterId:              pulumi.Any(cynosdbmysql_bu6hlulf),
-//				IsOpenGlobalEncryption: pulumi.Bool(false),
 //				KeyId:                  pulumi.String("f063c18b-xxxx-xxxx-xxxx-525400d3a886"),
 //				KeyRegion:              pulumi.String("ap-guangzhou"),
 //				KeyType:                pulumi.String("custom"),
+//				IsOpenGlobalEncryption: pulumi.Bool(false),
 //			})
 //			if err != nil {
 //				return err
@@ -50,10 +50,10 @@ import (
 //
 // ## Import
 //
-// cynosdb cluster_transparent_encrypt can be imported using the id, e.g.
+// Cynosdb cluster transparent encrypt can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Cynosdb/clusterTransparentEncrypt:ClusterTransparentEncrypt cynosdb_cluster_transparent_encrypt cynosdbmysql-bu6hlulf
+// $ pulumi import tencentcloud:Cynosdb/clusterTransparentEncrypt:ClusterTransparentEncrypt example cynosdbmysql-bu6hlulf
 // ```
 type ClusterTransparentEncrypt struct {
 	pulumi.CustomResourceState

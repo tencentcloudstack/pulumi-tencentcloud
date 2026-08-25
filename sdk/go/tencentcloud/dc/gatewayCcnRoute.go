@@ -39,7 +39,7 @@ import (
 //			}
 //			ccnMain, err := dc.NewGateway(ctx, "ccn_main", &dc.GatewayArgs{
 //				Name:              pulumi.String("ci-cdg-ccn-test"),
-//				NetworkInstanceId: main.ID(),
+//				NetworkInstanceId: main.ID().ToIDOutput().ToStringOutput(),
 //				NetworkType:       pulumi.String("CCN"),
 //				GatewayType:       pulumi.String("NORMAL"),
 //			})
@@ -47,14 +47,14 @@ import (
 //				return err
 //			}
 //			_, err = dc.NewGatewayCcnRoute(ctx, "route1", &dc.GatewayCcnRouteArgs{
-//				DcgId:     ccnMain.ID(),
+//				DcgId:     ccnMain.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock: pulumi.String("10.1.1.0/32"),
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			_, err = dc.NewGatewayCcnRoute(ctx, "route2", &dc.GatewayCcnRouteArgs{
-//				DcgId:     ccnMain.ID(),
+//				DcgId:     ccnMain.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock: pulumi.String("192.1.1.0/32"),
 //			})
 //			if err != nil {

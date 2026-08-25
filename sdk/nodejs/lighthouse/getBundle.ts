@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const bundle = tencentcloud.Lighthouse.getBundle({});
+ * const bundle = tencentcloud.lighthouse.getBundle({});
  * ```
  */
 export function getBundle(args?: GetBundleArgs, opts?: pulumi.InvokeOptions): Promise<GetBundleResult> {
@@ -45,7 +45,7 @@ export interface GetBundleArgs {
      * - `support-platform-type`: filter by system type, valid values: `LINUX_UNIX`, `WINDOWS`.
      * - `bundle-type`: filter according to package type, valid values: `GENERAL_BUNDLE`, `STORAGE_BUNDLE`, `ENTERPRISE_BUNDLE`, `EXCLUSIVE_BUNDLE`, `BEFAST_BUNDLE`.
      * - `bundle-state`: filter according to package status, valid values: `ONLINE`, `OFFLINE`.
-     * NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Values is 5. Parameter does not support specifying both BundleIds and Filters.
+     *   NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Values is 5. Parameter does not support specifying both BundleIds and Filters.
      */
     filters?: inputs.Lighthouse.GetBundleFilter[];
     /**
@@ -94,7 +94,7 @@ export interface GetBundleResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const bundle = tencentcloud.Lighthouse.getBundle({});
+ * const bundle = tencentcloud.lighthouse.getBundle({});
  * ```
  */
 export function getBundleOutput(args?: GetBundleOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetBundleResult> {
@@ -117,30 +117,30 @@ export interface GetBundleOutputArgs {
     /**
      * Bundle ID list.
      */
-    bundleIds?: pulumi.Input<pulumi.Input<string>[]>;
+    bundleIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Filter list.
      * - `bundle-id`: filter by the bundle ID.
      * - `support-platform-type`: filter by system type, valid values: `LINUX_UNIX`, `WINDOWS`.
      * - `bundle-type`: filter according to package type, valid values: `GENERAL_BUNDLE`, `STORAGE_BUNDLE`, `ENTERPRISE_BUNDLE`, `EXCLUSIVE_BUNDLE`, `BEFAST_BUNDLE`.
      * - `bundle-state`: filter according to package status, valid values: `ONLINE`, `OFFLINE`.
-     * NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Values is 5. Parameter does not support specifying both BundleIds and Filters.
+     *   NOTE: The upper limit of Filters per request is 10. The upper limit of Filter.Values is 5. Parameter does not support specifying both BundleIds and Filters.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Lighthouse.GetBundleFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Lighthouse.GetBundleFilterArgs>[] | undefined>;
     /**
      * Number of returned results. Default value is 20. Maximum value is 100.
      */
-    limit?: pulumi.Input<number>;
+    limit?: pulumi.Input<number | undefined>;
     /**
      * Offset. Default value is 0.
      */
-    offset?: pulumi.Input<number>;
+    offset?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Zone list, which contains all zones by default.
      */
-    zones?: pulumi.Input<pulumi.Input<string>[]>;
+    zones?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

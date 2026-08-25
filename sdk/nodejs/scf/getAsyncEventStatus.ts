@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const asyncEventStatus = tencentcloud.Scf.getAsyncEventStatus({
+ * const asyncEventStatus = tencentcloud.scf.getAsyncEventStatus({
  *     invokeRequestId: "9de9405a-e33a-498d-bb59-e80b7bed1191",
  * });
  * ```
@@ -69,7 +69,7 @@ export interface GetAsyncEventStatusResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const asyncEventStatus = tencentcloud.Scf.getAsyncEventStatus({
+ * const asyncEventStatus = tencentcloud.scf.getAsyncEventStatus({
  *     invokeRequestId: "9de9405a-e33a-498d-bb59-e80b7bed1191",
  * });
  * ```
@@ -93,5 +93,5 @@ export interface GetAsyncEventStatusOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

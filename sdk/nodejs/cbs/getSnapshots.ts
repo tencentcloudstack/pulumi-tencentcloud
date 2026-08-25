@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const snapshots = tencentcloud.Cbs.getSnapshots({});
+ * const snapshots = tencentcloud.cbs.getSnapshots({});
  * ```
  */
 export function getSnapshots(args?: GetSnapshotsArgs, opts?: pulumi.InvokeOptions): Promise<GetSnapshotsResult> {
@@ -117,7 +117,7 @@ export interface GetSnapshotsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const snapshots = tencentcloud.Cbs.getSnapshots({});
+ * const snapshots = tencentcloud.cbs.getSnapshots({});
  * ```
  */
 export function getSnapshotsOutput(args?: GetSnapshotsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSnapshotsResult> {
@@ -141,29 +141,29 @@ export interface GetSnapshotsOutputArgs {
     /**
      * The available zone that the CBS instance locates at.
      */
-    availabilityZone?: pulumi.Input<string>;
+    availabilityZone?: pulumi.Input<string | undefined>;
     /**
      * ID of the project within the snapshot.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * ID of the snapshot to be queried.
      */
-    snapshotId?: pulumi.Input<string>;
+    snapshotId?: pulumi.Input<string | undefined>;
     /**
      * Name of the snapshot to be queried.
      */
-    snapshotName?: pulumi.Input<string>;
+    snapshotName?: pulumi.Input<string | undefined>;
     /**
      * ID of the the CBS which this snapshot created from.
      */
-    storageId?: pulumi.Input<string>;
+    storageId?: pulumi.Input<string | undefined>;
     /**
      * Types of CBS which this snapshot created from, and available values include `SYSTEM_DISK` and `DATA_DISK`.
      */
-    storageUsage?: pulumi.Input<string>;
+    storageUsage?: pulumi.Input<string | undefined>;
 }

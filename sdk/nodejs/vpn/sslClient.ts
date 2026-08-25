@@ -9,6 +9,8 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * ### Basic Configuration
+ *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
@@ -16,6 +18,22 @@ import * as utilities from "../utilities";
  * const client = new tencentcloud.vpn.SslClient("client", {
  *     sslVpnServerId: "vpns-aog5xcjj",
  *     sslVpnClientName: "hello",
+ * });
+ * ```
+ *
+ * ### With Tags
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const client = new tencentcloud.vpn.SslClient("client", {
+ *     sslVpnServerId: "vpns-aog5xcjj",
+ *     sslVpnClientName: "my-ssl-client",
+ *     tags: {
+ *         Environment: "production",
+ *         Owner: "team-a",
+ *     },
  * });
  * ```
  *
@@ -63,6 +81,10 @@ export class SslClient extends pulumi.CustomResource {
      * VPN ssl server id.
      */
     declare public readonly sslVpnServerId: pulumi.Output<string>;
+    /**
+     * Tags of the VPN SSL client.
+     */
+    declare public readonly tags: pulumi.Output<{[key: string]: string} | undefined>;
 
     /**
      * Create a SslClient resource with the given unique name, arguments, and options.
@@ -79,6 +101,7 @@ export class SslClient extends pulumi.CustomResource {
             const state = argsOrState as SslClientState | undefined;
             resourceInputs["sslVpnClientName"] = state?.sslVpnClientName;
             resourceInputs["sslVpnServerId"] = state?.sslVpnServerId;
+            resourceInputs["tags"] = state?.tags;
         } else {
             const args = argsOrState as SslClientArgs | undefined;
             if (args?.sslVpnClientName === undefined && !opts.urn) {
@@ -89,6 +112,7 @@ export class SslClient extends pulumi.CustomResource {
             }
             resourceInputs["sslVpnClientName"] = args?.sslVpnClientName;
             resourceInputs["sslVpnServerId"] = args?.sslVpnServerId;
+            resourceInputs["tags"] = args?.tags;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(SslClient.__pulumiType, name, resourceInputs, opts);
@@ -102,11 +126,15 @@ export interface SslClientState {
     /**
      * The name of ssl vpn client to be created.
      */
-    sslVpnClientName?: pulumi.Input<string>;
+    sslVpnClientName?: pulumi.Input<string | undefined>;
     /**
      * VPN ssl server id.
      */
-    sslVpnServerId?: pulumi.Input<string>;
+    sslVpnServerId?: pulumi.Input<string | undefined>;
+    /**
+     * Tags of the VPN SSL client.
+     */
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 /**
@@ -121,4 +149,8 @@ export interface SslClientArgs {
      * VPN ssl server id.
      */
     sslVpnServerId: pulumi.Input<string>;
+    /**
+     * Tags of the VPN SSL client.
+     */
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

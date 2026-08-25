@@ -71,12 +71,8 @@ type GetSessionImageVersionResult struct {
 }
 
 func GetSessionImageVersionOutput(ctx *pulumi.Context, args GetSessionImageVersionOutputArgs, opts ...pulumi.InvokeOption) GetSessionImageVersionResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSessionImageVersionResultOutput, error) {
-			args := v.(GetSessionImageVersionArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dlc/getSessionImageVersion:getSessionImageVersion", args, GetSessionImageVersionResultOutput{}, options).(GetSessionImageVersionResultOutput), nil
-		}).(GetSessionImageVersionResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dlc/getSessionImageVersion:getSessionImageVersion", args, GetSessionImageVersionResultOutput{}, options).(GetSessionImageVersionResultOutput)
 }
 
 // A collection of arguments for invoking getSessionImageVersion.

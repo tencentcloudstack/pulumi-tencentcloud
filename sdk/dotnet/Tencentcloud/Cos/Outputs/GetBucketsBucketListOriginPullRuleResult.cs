@@ -15,9 +15,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Outputs
     public sealed class GetBucketsBucketListOriginPullRuleResult
     {
         /// <summary>
+        /// Back to source mode. Allow value: Proxy, Mirror, Redirect.
+        /// </summary>
+        public readonly string BackToSourceMode;
+        /// <summary>
         /// Specifies the custom headers that you can add for COS to access your origin server.
         /// </summary>
-        public readonly ImmutableDictionary<string, string>? CustomHttpHeaders;
+        public readonly ImmutableDictionary<string, string> CustomHttpHeaders;
         /// <summary>
         /// Specifies the pass through headers when accessing the origin server.
         /// </summary>
@@ -25,11 +29,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Outputs
         /// <summary>
         /// Specifies whether to pass through COS request query string when accessing the origin server.
         /// </summary>
-        public readonly bool? FollowQueryString;
+        public readonly bool FollowQueryString;
         /// <summary>
         /// Specifies whether to follow 3XX redirect to another origin server to pull data from.
         /// </summary>
-        public readonly bool? FollowRedirection;
+        public readonly bool FollowRedirection;
         /// <summary>
         /// Allows only a domain name or IP address. You can optionally append a port number to the address.
         /// </summary>
@@ -37,7 +41,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Outputs
         /// <summary>
         /// Triggers the origin-pull rule when the requested file name matches this prefix.
         /// </summary>
-        public readonly string? Prefix;
+        public readonly string Prefix;
         /// <summary>
         /// Priority of origin-pull rules, do not set the same value for multiple rules.
         /// </summary>
@@ -45,32 +49,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Outputs
         /// <summary>
         /// the protocol used for COS to access the specified origin server. The available value include `HTTP`, `HTTPS` and `FOLLOW`.
         /// </summary>
-        public readonly string? Protocol;
+        public readonly string Protocol;
         /// <summary>
         /// If `True`, COS will not return 3XX status code when pulling data from an origin server. Currently available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.
         /// </summary>
-        public readonly bool? SyncBackToSource;
+        public readonly bool SyncBackToSource;
 
         [OutputConstructor]
         private GetBucketsBucketListOriginPullRuleResult(
-            ImmutableDictionary<string, string>? customHttpHeaders,
+            string backToSourceMode,
+
+            ImmutableDictionary<string, string> customHttpHeaders,
 
             ImmutableArray<string> followHttpHeaders,
 
-            bool? followQueryString,
+            bool followQueryString,
 
-            bool? followRedirection,
+            bool followRedirection,
 
             string host,
 
-            string? prefix,
+            string prefix,
 
             int priority,
 
-            string? protocol,
+            string protocol,
 
-            bool? syncBackToSource)
+            bool syncBackToSource)
         {
+            BackToSourceMode = backToSourceMode;
             CustomHttpHeaders = customHttpHeaders;
             FollowHttpHeaders = followHttpHeaders;
             FollowQueryString = followQueryString;

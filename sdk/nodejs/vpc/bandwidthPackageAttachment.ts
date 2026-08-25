@@ -100,23 +100,23 @@ export interface BandwidthPackageAttachmentState {
     /**
      * Bandwidth package unique ID, in the form of `bwp-xxxx`.
      */
-    bandwidthPackageId?: pulumi.Input<string>;
+    bandwidthPackageId?: pulumi.Input<string | undefined>;
     /**
      * Bandwidth packet type, currently supports `BGP` type, indicating that the internal resource is BGP IP.
      */
-    networkType?: pulumi.Input<string>;
+    networkType?: pulumi.Input<string | undefined>;
     /**
      * Bandwidth packet protocol type. Currently `ipv4` and `ipv6` protocol types are supported.
      */
-    protocol?: pulumi.Input<string>;
+    protocol?: pulumi.Input<string | undefined>;
     /**
      * The unique ID of the resource, currently supports EIP resources and LB resources, such as `eip-xxxx`, `lb-xxxx`.
      */
-    resourceId?: pulumi.Input<string>;
+    resourceId?: pulumi.Input<string | undefined>;
     /**
      * Resource types, including `Address`, `LoadBalance`.
      */
-    resourceType?: pulumi.Input<string>;
+    resourceType?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -130,11 +130,11 @@ export interface BandwidthPackageAttachmentArgs {
     /**
      * Bandwidth packet type, currently supports `BGP` type, indicating that the internal resource is BGP IP.
      */
-    networkType?: pulumi.Input<string>;
+    networkType?: pulumi.Input<string | undefined>;
     /**
      * Bandwidth packet protocol type. Currently `ipv4` and `ipv6` protocol types are supported.
      */
-    protocol?: pulumi.Input<string>;
+    protocol?: pulumi.Input<string | undefined>;
     /**
      * The unique ID of the resource, currently supports EIP resources and LB resources, such as `eip-xxxx`, `lb-xxxx`.
      */
@@ -142,5 +142,5 @@ export interface BandwidthPackageAttachmentArgs {
     /**
      * Resource types, including `Address`, `LoadBalance`.
      */
-    resourceType?: pulumi.Input<string>;
+    resourceType?: pulumi.Input<string | undefined>;
 }

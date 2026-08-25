@@ -5,6 +5,10 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
+ * Provides a resource to create a VPN gateway.
+ *
+ * > **NOTE:** The prepaid VPN gateway do not support renew operation or delete operation with terraform.
+ *
  * ## Example Usage
  *
  * ### VPC SSL VPN gateway
@@ -291,79 +295,79 @@ export interface GatewayState {
     /**
      * The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include: 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is unsupported.
      */
-    bandwidth?: pulumi.Input<number>;
+    bandwidth?: pulumi.Input<number | undefined>;
     /**
      * BGP ASN. Value range: 1 - 4294967295. Using BGP requires configuring ASN.
      */
-    bgpAsn?: pulumi.Input<number>;
+    bgpAsn?: pulumi.Input<number | undefined>;
     /**
      * CDC instance ID.
      */
-    cdcId?: pulumi.Input<string>;
+    cdcId?: pulumi.Input<string | undefined>;
     /**
      * Charge Type of the VPN gateway. Valid value: `PREPAID`, `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
     /**
      * Create time of the VPN gateway.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Expired time of the VPN gateway when charge type is `PREPAID`.
      */
-    expiredTime?: pulumi.Input<string>;
+    expiredTime?: pulumi.Input<string | undefined>;
     /**
      * Indicates whether ip address is blocked.
      */
-    isAddressBlocked?: pulumi.Input<boolean>;
+    isAddressBlocked?: pulumi.Input<boolean | undefined>;
     /**
      * Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter is only required for SSL VPN gateways.
      */
-    maxConnection?: pulumi.Input<number>;
+    maxConnection?: pulumi.Input<number | undefined>;
     /**
      * Name of the VPN gateway. The length of character is limited to 1-60.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * The plan of new purchase. Valid value: `PREPAID_TO_POSTPAID`.
      */
-    newPurchasePlan?: pulumi.Input<string>;
+    newPurchasePlan?: pulumi.Input<string | undefined>;
     /**
      * Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renewFlag para are valid, the request means to renew several months more pre-paid period. This para can only be changed on `IPSEC` vpn gateway.
      */
-    prepaidPeriod?: pulumi.Input<number>;
+    prepaidPeriod?: pulumi.Input<number | undefined>;
     /**
      * Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_AUTO_RENEW`, `NOTIFY_AND_MANUAL_RENEW`.
      */
-    prepaidRenewFlag?: pulumi.Input<string>;
+    prepaidRenewFlag?: pulumi.Input<string | undefined>;
     /**
      * Public IP of the VPN gateway.
      */
-    publicIpAddress?: pulumi.Input<string>;
+    publicIpAddress?: pulumi.Input<string | undefined>;
     /**
      * Restrict state of gateway. Valid value: `PRETECIVELY_ISOLATED`, `NORMAL`.
      */
-    restrictState?: pulumi.Input<string>;
+    restrictState?: pulumi.Input<string | undefined>;
     /**
      * State of the VPN gateway. Valid value: `PENDING`, `DELETING`, `AVAILABLE`.
      */
-    state?: pulumi.Input<string>;
+    state?: pulumi.Input<string | undefined>;
     /**
      * A list of tags used to associate different resources.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Type of gateway instance, Default is `IPSEC`. Valid value: `IPSEC`, `SSL`, `CCN` and `SSL_CCN`.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
     /**
      * ID of the VPC. Required if vpn gateway is not in `CCN` or `SSL_CCN` type, and doesn't make sense for `CCN` or `SSL_CCN` vpn gateway.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * Zone of the VPN gateway.
      */
-    zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -373,49 +377,49 @@ export interface GatewayArgs {
     /**
      * The maximum public network output bandwidth of VPN gateway (unit: Mbps), the available values include: 5,10,20,50,100,200,500,1000. Default is 5. When charge type is `PREPAID`, bandwidth degradation operation is unsupported.
      */
-    bandwidth?: pulumi.Input<number>;
+    bandwidth?: pulumi.Input<number | undefined>;
     /**
      * BGP ASN. Value range: 1 - 4294967295. Using BGP requires configuring ASN.
      */
-    bgpAsn?: pulumi.Input<number>;
+    bgpAsn?: pulumi.Input<number | undefined>;
     /**
      * CDC instance ID.
      */
-    cdcId?: pulumi.Input<string>;
+    cdcId?: pulumi.Input<string | undefined>;
     /**
      * Charge Type of the VPN gateway. Valid value: `PREPAID`, `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
     /**
      * Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter is only required for SSL VPN gateways.
      */
-    maxConnection?: pulumi.Input<number>;
+    maxConnection?: pulumi.Input<number | undefined>;
     /**
      * Name of the VPN gateway. The length of character is limited to 1-60.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Period of instance to be prepaid. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. The unit is month. Caution: when this para and renewFlag para are valid, the request means to renew several months more pre-paid period. This para can only be changed on `IPSEC` vpn gateway.
      */
-    prepaidPeriod?: pulumi.Input<number>;
+    prepaidPeriod?: pulumi.Input<number | undefined>;
     /**
      * Flag indicates whether to renew or not. Valid value: `NOTIFY_AND_AUTO_RENEW`, `NOTIFY_AND_MANUAL_RENEW`.
      */
-    prepaidRenewFlag?: pulumi.Input<string>;
+    prepaidRenewFlag?: pulumi.Input<string | undefined>;
     /**
      * A list of tags used to associate different resources.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Type of gateway instance, Default is `IPSEC`. Valid value: `IPSEC`, `SSL`, `CCN` and `SSL_CCN`.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
     /**
      * ID of the VPC. Required if vpn gateway is not in `CCN` or `SSL_CCN` type, and doesn't make sense for `CCN` or `SSL_CCN` vpn gateway.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * Zone of the VPN gateway.
      */
-    zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string | undefined>;
 }

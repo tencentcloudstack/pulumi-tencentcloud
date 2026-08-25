@@ -54,7 +54,7 @@ import (
 //
 // ## Import
 //
-// scf scf_custom_domain can be imported using the id, e.g.
+// scf scfCustomDomain can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Scf/customDomain:CustomDomain scf_custom_domain ${domain}

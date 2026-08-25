@@ -104,12 +104,8 @@ type GetInstancePackageListResult struct {
 }
 
 func GetInstancePackageListOutput(ctx *pulumi.Context, args GetInstancePackageListOutputArgs, opts ...pulumi.InvokeOption) GetInstancePackageListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstancePackageListResultOutput, error) {
-			args := v.(GetInstancePackageListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Igtm/getInstancePackageList:getInstancePackageList", args, GetInstancePackageListResultOutput{}, options).(GetInstancePackageListResultOutput), nil
-		}).(GetInstancePackageListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Igtm/getInstancePackageList:getInstancePackageList", args, GetInstancePackageListResultOutput{}, options).(GetInstancePackageListResultOutput)
 }
 
 // A collection of arguments for invoking getInstancePackageList.

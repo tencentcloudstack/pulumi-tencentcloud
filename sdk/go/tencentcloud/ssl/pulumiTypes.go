@@ -1104,6 +1104,5808 @@ func (o UpdateCertificateInstanceOperationResourceTypesRegionArrayOutput) Index(
 	}).(UpdateCertificateInstanceOperationResourceTypesRegionOutput)
 }
 
+type GetCertificateBindResourceTaskDetailApigateway struct {
+	// Query error message.
+	Error string `pulumi:"error"`
+	// WAF instance detail list.
+	InstanceLists []GetCertificateBindResourceTaskDetailApigatewayInstanceList `pulumi:"instanceLists"`
+	// Region.
+	Region string `pulumi:"region"`
+	// Total number of WAF instances in the region.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetCertificateBindResourceTaskDetailApigatewayInput is an input type that accepts GetCertificateBindResourceTaskDetailApigatewayArgs and GetCertificateBindResourceTaskDetailApigatewayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailApigatewayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailApigatewayArgs{...}
+type GetCertificateBindResourceTaskDetailApigatewayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailApigatewayOutput() GetCertificateBindResourceTaskDetailApigatewayOutput
+	ToGetCertificateBindResourceTaskDetailApigatewayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailApigatewayOutput
+}
+
+type GetCertificateBindResourceTaskDetailApigatewayArgs struct {
+	// Query error message.
+	Error pulumi.StringInput `pulumi:"error"`
+	// WAF instance detail list.
+	InstanceLists GetCertificateBindResourceTaskDetailApigatewayInstanceListArrayInput `pulumi:"instanceLists"`
+	// Region.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Total number of WAF instances in the region.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetCertificateBindResourceTaskDetailApigatewayArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailApigateway)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailApigatewayArgs) ToGetCertificateBindResourceTaskDetailApigatewayOutput() GetCertificateBindResourceTaskDetailApigatewayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailApigatewayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailApigatewayArgs) ToGetCertificateBindResourceTaskDetailApigatewayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailApigatewayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailApigatewayOutput)
+}
+
+// GetCertificateBindResourceTaskDetailApigatewayArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailApigatewayArray and GetCertificateBindResourceTaskDetailApigatewayArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailApigatewayArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailApigatewayArray{ GetCertificateBindResourceTaskDetailApigatewayArgs{...} }
+type GetCertificateBindResourceTaskDetailApigatewayArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailApigatewayArrayOutput() GetCertificateBindResourceTaskDetailApigatewayArrayOutput
+	ToGetCertificateBindResourceTaskDetailApigatewayArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailApigatewayArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailApigatewayArray []GetCertificateBindResourceTaskDetailApigatewayInput
+
+func (GetCertificateBindResourceTaskDetailApigatewayArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailApigateway)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailApigatewayArray) ToGetCertificateBindResourceTaskDetailApigatewayArrayOutput() GetCertificateBindResourceTaskDetailApigatewayArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailApigatewayArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailApigatewayArray) ToGetCertificateBindResourceTaskDetailApigatewayArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailApigatewayArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailApigatewayArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailApigatewayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailApigatewayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailApigateway)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailApigatewayOutput) ToGetCertificateBindResourceTaskDetailApigatewayOutput() GetCertificateBindResourceTaskDetailApigatewayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailApigatewayOutput) ToGetCertificateBindResourceTaskDetailApigatewayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailApigatewayOutput {
+	return o
+}
+
+// Query error message.
+func (o GetCertificateBindResourceTaskDetailApigatewayOutput) Error() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailApigateway) string { return v.Error }).(pulumi.StringOutput)
+}
+
+// WAF instance detail list.
+func (o GetCertificateBindResourceTaskDetailApigatewayOutput) InstanceLists() GetCertificateBindResourceTaskDetailApigatewayInstanceListArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailApigateway) []GetCertificateBindResourceTaskDetailApigatewayInstanceList {
+		return v.InstanceLists
+	}).(GetCertificateBindResourceTaskDetailApigatewayInstanceListArrayOutput)
+}
+
+// Region.
+func (o GetCertificateBindResourceTaskDetailApigatewayOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailApigateway) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Total number of WAF instances in the region.
+func (o GetCertificateBindResourceTaskDetailApigatewayOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailApigateway) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetCertificateBindResourceTaskDetailApigatewayArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailApigatewayArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailApigateway)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailApigatewayArrayOutput) ToGetCertificateBindResourceTaskDetailApigatewayArrayOutput() GetCertificateBindResourceTaskDetailApigatewayArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailApigatewayArrayOutput) ToGetCertificateBindResourceTaskDetailApigatewayArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailApigatewayArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailApigatewayArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailApigatewayOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailApigateway {
+		return vs[0].([]GetCertificateBindResourceTaskDetailApigateway)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailApigatewayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailApigatewayInstanceList struct {
+	// Certificate ID.
+	CertId string `pulumi:"certId"`
+	// Domain name.
+	Domain string `pulumi:"domain"`
+	// Protocol.
+	Protocol string `pulumi:"protocol"`
+	// Service ID.
+	ServiceId string `pulumi:"serviceId"`
+	// Service name.
+	ServiceName string `pulumi:"serviceName"`
+}
+
+// GetCertificateBindResourceTaskDetailApigatewayInstanceListInput is an input type that accepts GetCertificateBindResourceTaskDetailApigatewayInstanceListArgs and GetCertificateBindResourceTaskDetailApigatewayInstanceListOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailApigatewayInstanceListInput` via:
+//
+//	GetCertificateBindResourceTaskDetailApigatewayInstanceListArgs{...}
+type GetCertificateBindResourceTaskDetailApigatewayInstanceListInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailApigatewayInstanceListOutput() GetCertificateBindResourceTaskDetailApigatewayInstanceListOutput
+	ToGetCertificateBindResourceTaskDetailApigatewayInstanceListOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailApigatewayInstanceListOutput
+}
+
+type GetCertificateBindResourceTaskDetailApigatewayInstanceListArgs struct {
+	// Certificate ID.
+	CertId pulumi.StringInput `pulumi:"certId"`
+	// Domain name.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Protocol.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// Service ID.
+	ServiceId pulumi.StringInput `pulumi:"serviceId"`
+	// Service name.
+	ServiceName pulumi.StringInput `pulumi:"serviceName"`
+}
+
+func (GetCertificateBindResourceTaskDetailApigatewayInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailApigatewayInstanceList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailApigatewayInstanceListArgs) ToGetCertificateBindResourceTaskDetailApigatewayInstanceListOutput() GetCertificateBindResourceTaskDetailApigatewayInstanceListOutput {
+	return i.ToGetCertificateBindResourceTaskDetailApigatewayInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailApigatewayInstanceListArgs) ToGetCertificateBindResourceTaskDetailApigatewayInstanceListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailApigatewayInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailApigatewayInstanceListOutput)
+}
+
+// GetCertificateBindResourceTaskDetailApigatewayInstanceListArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailApigatewayInstanceListArray and GetCertificateBindResourceTaskDetailApigatewayInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailApigatewayInstanceListArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailApigatewayInstanceListArray{ GetCertificateBindResourceTaskDetailApigatewayInstanceListArgs{...} }
+type GetCertificateBindResourceTaskDetailApigatewayInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailApigatewayInstanceListArrayOutput() GetCertificateBindResourceTaskDetailApigatewayInstanceListArrayOutput
+	ToGetCertificateBindResourceTaskDetailApigatewayInstanceListArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailApigatewayInstanceListArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailApigatewayInstanceListArray []GetCertificateBindResourceTaskDetailApigatewayInstanceListInput
+
+func (GetCertificateBindResourceTaskDetailApigatewayInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailApigatewayInstanceList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailApigatewayInstanceListArray) ToGetCertificateBindResourceTaskDetailApigatewayInstanceListArrayOutput() GetCertificateBindResourceTaskDetailApigatewayInstanceListArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailApigatewayInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailApigatewayInstanceListArray) ToGetCertificateBindResourceTaskDetailApigatewayInstanceListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailApigatewayInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailApigatewayInstanceListArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailApigatewayInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailApigatewayInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailApigatewayInstanceList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailApigatewayInstanceListOutput) ToGetCertificateBindResourceTaskDetailApigatewayInstanceListOutput() GetCertificateBindResourceTaskDetailApigatewayInstanceListOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailApigatewayInstanceListOutput) ToGetCertificateBindResourceTaskDetailApigatewayInstanceListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailApigatewayInstanceListOutput {
+	return o
+}
+
+// Certificate ID.
+func (o GetCertificateBindResourceTaskDetailApigatewayInstanceListOutput) CertId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailApigatewayInstanceList) string { return v.CertId }).(pulumi.StringOutput)
+}
+
+// Domain name.
+func (o GetCertificateBindResourceTaskDetailApigatewayInstanceListOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailApigatewayInstanceList) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// Protocol.
+func (o GetCertificateBindResourceTaskDetailApigatewayInstanceListOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailApigatewayInstanceList) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+// Service ID.
+func (o GetCertificateBindResourceTaskDetailApigatewayInstanceListOutput) ServiceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailApigatewayInstanceList) string { return v.ServiceId }).(pulumi.StringOutput)
+}
+
+// Service name.
+func (o GetCertificateBindResourceTaskDetailApigatewayInstanceListOutput) ServiceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailApigatewayInstanceList) string { return v.ServiceName }).(pulumi.StringOutput)
+}
+
+type GetCertificateBindResourceTaskDetailApigatewayInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailApigatewayInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailApigatewayInstanceList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailApigatewayInstanceListArrayOutput) ToGetCertificateBindResourceTaskDetailApigatewayInstanceListArrayOutput() GetCertificateBindResourceTaskDetailApigatewayInstanceListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailApigatewayInstanceListArrayOutput) ToGetCertificateBindResourceTaskDetailApigatewayInstanceListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailApigatewayInstanceListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailApigatewayInstanceListArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailApigatewayInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailApigatewayInstanceList {
+		return vs[0].([]GetCertificateBindResourceTaskDetailApigatewayInstanceList)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailApigatewayInstanceListOutput)
+}
+
+type GetCertificateBindResourceTaskDetailCdn struct {
+	// Query error message.
+	Error string `pulumi:"error"`
+	// WAF instance detail list.
+	InstanceLists []GetCertificateBindResourceTaskDetailCdnInstanceList `pulumi:"instanceLists"`
+	// Total number of WAF instances in the region.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetCertificateBindResourceTaskDetailCdnInput is an input type that accepts GetCertificateBindResourceTaskDetailCdnArgs and GetCertificateBindResourceTaskDetailCdnOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailCdnInput` via:
+//
+//	GetCertificateBindResourceTaskDetailCdnArgs{...}
+type GetCertificateBindResourceTaskDetailCdnInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailCdnOutput() GetCertificateBindResourceTaskDetailCdnOutput
+	ToGetCertificateBindResourceTaskDetailCdnOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailCdnOutput
+}
+
+type GetCertificateBindResourceTaskDetailCdnArgs struct {
+	// Query error message.
+	Error pulumi.StringInput `pulumi:"error"`
+	// WAF instance detail list.
+	InstanceLists GetCertificateBindResourceTaskDetailCdnInstanceListArrayInput `pulumi:"instanceLists"`
+	// Total number of WAF instances in the region.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetCertificateBindResourceTaskDetailCdnArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailCdn)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailCdnArgs) ToGetCertificateBindResourceTaskDetailCdnOutput() GetCertificateBindResourceTaskDetailCdnOutput {
+	return i.ToGetCertificateBindResourceTaskDetailCdnOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailCdnArgs) ToGetCertificateBindResourceTaskDetailCdnOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailCdnOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailCdnOutput)
+}
+
+// GetCertificateBindResourceTaskDetailCdnArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailCdnArray and GetCertificateBindResourceTaskDetailCdnArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailCdnArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailCdnArray{ GetCertificateBindResourceTaskDetailCdnArgs{...} }
+type GetCertificateBindResourceTaskDetailCdnArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailCdnArrayOutput() GetCertificateBindResourceTaskDetailCdnArrayOutput
+	ToGetCertificateBindResourceTaskDetailCdnArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailCdnArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailCdnArray []GetCertificateBindResourceTaskDetailCdnInput
+
+func (GetCertificateBindResourceTaskDetailCdnArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailCdn)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailCdnArray) ToGetCertificateBindResourceTaskDetailCdnArrayOutput() GetCertificateBindResourceTaskDetailCdnArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailCdnArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailCdnArray) ToGetCertificateBindResourceTaskDetailCdnArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailCdnArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailCdnArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailCdnOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailCdnOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailCdn)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailCdnOutput) ToGetCertificateBindResourceTaskDetailCdnOutput() GetCertificateBindResourceTaskDetailCdnOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailCdnOutput) ToGetCertificateBindResourceTaskDetailCdnOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailCdnOutput {
+	return o
+}
+
+// Query error message.
+func (o GetCertificateBindResourceTaskDetailCdnOutput) Error() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailCdn) string { return v.Error }).(pulumi.StringOutput)
+}
+
+// WAF instance detail list.
+func (o GetCertificateBindResourceTaskDetailCdnOutput) InstanceLists() GetCertificateBindResourceTaskDetailCdnInstanceListArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailCdn) []GetCertificateBindResourceTaskDetailCdnInstanceList {
+		return v.InstanceLists
+	}).(GetCertificateBindResourceTaskDetailCdnInstanceListArrayOutput)
+}
+
+// Total number of WAF instances in the region.
+func (o GetCertificateBindResourceTaskDetailCdnOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailCdn) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetCertificateBindResourceTaskDetailCdnArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailCdnArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailCdn)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailCdnArrayOutput) ToGetCertificateBindResourceTaskDetailCdnArrayOutput() GetCertificateBindResourceTaskDetailCdnArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailCdnArrayOutput) ToGetCertificateBindResourceTaskDetailCdnArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailCdnArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailCdnArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailCdnOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailCdn {
+		return vs[0].([]GetCertificateBindResourceTaskDetailCdn)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailCdnOutput)
+}
+
+type GetCertificateBindResourceTaskDetailCdnInstanceList struct {
+	// Certificate ID.
+	CertId string `pulumi:"certId"`
+	// Domain name.
+	Domain string `pulumi:"domain"`
+	// Domain billing status, on means enabled, off means disabled.
+	HttpsBillingSwitch string `pulumi:"httpsBillingSwitch"`
+	// Domain status. deployed: deployed; processing: deploying; applying: applying; failed: apply failed; issued: bind failed.
+	Status string `pulumi:"status"`
+}
+
+// GetCertificateBindResourceTaskDetailCdnInstanceListInput is an input type that accepts GetCertificateBindResourceTaskDetailCdnInstanceListArgs and GetCertificateBindResourceTaskDetailCdnInstanceListOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailCdnInstanceListInput` via:
+//
+//	GetCertificateBindResourceTaskDetailCdnInstanceListArgs{...}
+type GetCertificateBindResourceTaskDetailCdnInstanceListInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailCdnInstanceListOutput() GetCertificateBindResourceTaskDetailCdnInstanceListOutput
+	ToGetCertificateBindResourceTaskDetailCdnInstanceListOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailCdnInstanceListOutput
+}
+
+type GetCertificateBindResourceTaskDetailCdnInstanceListArgs struct {
+	// Certificate ID.
+	CertId pulumi.StringInput `pulumi:"certId"`
+	// Domain name.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Domain billing status, on means enabled, off means disabled.
+	HttpsBillingSwitch pulumi.StringInput `pulumi:"httpsBillingSwitch"`
+	// Domain status. deployed: deployed; processing: deploying; applying: applying; failed: apply failed; issued: bind failed.
+	Status pulumi.StringInput `pulumi:"status"`
+}
+
+func (GetCertificateBindResourceTaskDetailCdnInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailCdnInstanceList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailCdnInstanceListArgs) ToGetCertificateBindResourceTaskDetailCdnInstanceListOutput() GetCertificateBindResourceTaskDetailCdnInstanceListOutput {
+	return i.ToGetCertificateBindResourceTaskDetailCdnInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailCdnInstanceListArgs) ToGetCertificateBindResourceTaskDetailCdnInstanceListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailCdnInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailCdnInstanceListOutput)
+}
+
+// GetCertificateBindResourceTaskDetailCdnInstanceListArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailCdnInstanceListArray and GetCertificateBindResourceTaskDetailCdnInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailCdnInstanceListArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailCdnInstanceListArray{ GetCertificateBindResourceTaskDetailCdnInstanceListArgs{...} }
+type GetCertificateBindResourceTaskDetailCdnInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailCdnInstanceListArrayOutput() GetCertificateBindResourceTaskDetailCdnInstanceListArrayOutput
+	ToGetCertificateBindResourceTaskDetailCdnInstanceListArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailCdnInstanceListArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailCdnInstanceListArray []GetCertificateBindResourceTaskDetailCdnInstanceListInput
+
+func (GetCertificateBindResourceTaskDetailCdnInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailCdnInstanceList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailCdnInstanceListArray) ToGetCertificateBindResourceTaskDetailCdnInstanceListArrayOutput() GetCertificateBindResourceTaskDetailCdnInstanceListArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailCdnInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailCdnInstanceListArray) ToGetCertificateBindResourceTaskDetailCdnInstanceListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailCdnInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailCdnInstanceListArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailCdnInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailCdnInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailCdnInstanceList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailCdnInstanceListOutput) ToGetCertificateBindResourceTaskDetailCdnInstanceListOutput() GetCertificateBindResourceTaskDetailCdnInstanceListOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailCdnInstanceListOutput) ToGetCertificateBindResourceTaskDetailCdnInstanceListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailCdnInstanceListOutput {
+	return o
+}
+
+// Certificate ID.
+func (o GetCertificateBindResourceTaskDetailCdnInstanceListOutput) CertId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailCdnInstanceList) string { return v.CertId }).(pulumi.StringOutput)
+}
+
+// Domain name.
+func (o GetCertificateBindResourceTaskDetailCdnInstanceListOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailCdnInstanceList) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// Domain billing status, on means enabled, off means disabled.
+func (o GetCertificateBindResourceTaskDetailCdnInstanceListOutput) HttpsBillingSwitch() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailCdnInstanceList) string { return v.HttpsBillingSwitch }).(pulumi.StringOutput)
+}
+
+// Domain status. deployed: deployed; processing: deploying; applying: applying; failed: apply failed; issued: bind failed.
+func (o GetCertificateBindResourceTaskDetailCdnInstanceListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailCdnInstanceList) string { return v.Status }).(pulumi.StringOutput)
+}
+
+type GetCertificateBindResourceTaskDetailCdnInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailCdnInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailCdnInstanceList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailCdnInstanceListArrayOutput) ToGetCertificateBindResourceTaskDetailCdnInstanceListArrayOutput() GetCertificateBindResourceTaskDetailCdnInstanceListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailCdnInstanceListArrayOutput) ToGetCertificateBindResourceTaskDetailCdnInstanceListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailCdnInstanceListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailCdnInstanceListArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailCdnInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailCdnInstanceList {
+		return vs[0].([]GetCertificateBindResourceTaskDetailCdnInstanceList)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailCdnInstanceListOutput)
+}
+
+type GetCertificateBindResourceTaskDetailClb struct {
+	// Query error message.
+	Error string `pulumi:"error"`
+	// WAF instance detail list.
+	InstanceLists []GetCertificateBindResourceTaskDetailClbInstanceList `pulumi:"instanceLists"`
+	// Region.
+	Region string `pulumi:"region"`
+	// Total number of WAF instances in the region.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetCertificateBindResourceTaskDetailClbInput is an input type that accepts GetCertificateBindResourceTaskDetailClbArgs and GetCertificateBindResourceTaskDetailClbOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailClbInput` via:
+//
+//	GetCertificateBindResourceTaskDetailClbArgs{...}
+type GetCertificateBindResourceTaskDetailClbInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailClbOutput() GetCertificateBindResourceTaskDetailClbOutput
+	ToGetCertificateBindResourceTaskDetailClbOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailClbOutput
+}
+
+type GetCertificateBindResourceTaskDetailClbArgs struct {
+	// Query error message.
+	Error pulumi.StringInput `pulumi:"error"`
+	// WAF instance detail list.
+	InstanceLists GetCertificateBindResourceTaskDetailClbInstanceListArrayInput `pulumi:"instanceLists"`
+	// Region.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Total number of WAF instances in the region.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetCertificateBindResourceTaskDetailClbArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailClb)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailClbArgs) ToGetCertificateBindResourceTaskDetailClbOutput() GetCertificateBindResourceTaskDetailClbOutput {
+	return i.ToGetCertificateBindResourceTaskDetailClbOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailClbArgs) ToGetCertificateBindResourceTaskDetailClbOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailClbOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailClbOutput)
+}
+
+// GetCertificateBindResourceTaskDetailClbArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailClbArray and GetCertificateBindResourceTaskDetailClbArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailClbArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailClbArray{ GetCertificateBindResourceTaskDetailClbArgs{...} }
+type GetCertificateBindResourceTaskDetailClbArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailClbArrayOutput() GetCertificateBindResourceTaskDetailClbArrayOutput
+	ToGetCertificateBindResourceTaskDetailClbArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailClbArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailClbArray []GetCertificateBindResourceTaskDetailClbInput
+
+func (GetCertificateBindResourceTaskDetailClbArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailClb)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailClbArray) ToGetCertificateBindResourceTaskDetailClbArrayOutput() GetCertificateBindResourceTaskDetailClbArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailClbArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailClbArray) ToGetCertificateBindResourceTaskDetailClbArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailClbArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailClbArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailClbOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailClbOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailClb)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailClbOutput) ToGetCertificateBindResourceTaskDetailClbOutput() GetCertificateBindResourceTaskDetailClbOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailClbOutput) ToGetCertificateBindResourceTaskDetailClbOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailClbOutput {
+	return o
+}
+
+// Query error message.
+func (o GetCertificateBindResourceTaskDetailClbOutput) Error() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailClb) string { return v.Error }).(pulumi.StringOutput)
+}
+
+// WAF instance detail list.
+func (o GetCertificateBindResourceTaskDetailClbOutput) InstanceLists() GetCertificateBindResourceTaskDetailClbInstanceListArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailClb) []GetCertificateBindResourceTaskDetailClbInstanceList {
+		return v.InstanceLists
+	}).(GetCertificateBindResourceTaskDetailClbInstanceListArrayOutput)
+}
+
+// Region.
+func (o GetCertificateBindResourceTaskDetailClbOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailClb) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Total number of WAF instances in the region.
+func (o GetCertificateBindResourceTaskDetailClbOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailClb) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetCertificateBindResourceTaskDetailClbArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailClbArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailClb)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailClbArrayOutput) ToGetCertificateBindResourceTaskDetailClbArrayOutput() GetCertificateBindResourceTaskDetailClbArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailClbArrayOutput) ToGetCertificateBindResourceTaskDetailClbArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailClbArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailClbArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailClbOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailClb {
+		return vs[0].([]GetCertificateBindResourceTaskDetailClb)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailClbOutput)
+}
+
+type GetCertificateBindResourceTaskDetailClbInstanceList struct {
+	// Load balancer type, 0 traditional load balancer; 1 application load balancer.
+	Forward int `pulumi:"forward"`
+	// CLB listener list.
+	Listeners []GetCertificateBindResourceTaskDetailClbInstanceListListener `pulumi:"listeners"`
+	// CLB instance ID.
+	LoadBalancerId string `pulumi:"loadBalancerId"`
+	// CLB instance name.
+	LoadBalancerName string `pulumi:"loadBalancerName"`
+}
+
+// GetCertificateBindResourceTaskDetailClbInstanceListInput is an input type that accepts GetCertificateBindResourceTaskDetailClbInstanceListArgs and GetCertificateBindResourceTaskDetailClbInstanceListOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailClbInstanceListInput` via:
+//
+//	GetCertificateBindResourceTaskDetailClbInstanceListArgs{...}
+type GetCertificateBindResourceTaskDetailClbInstanceListInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailClbInstanceListOutput() GetCertificateBindResourceTaskDetailClbInstanceListOutput
+	ToGetCertificateBindResourceTaskDetailClbInstanceListOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailClbInstanceListOutput
+}
+
+type GetCertificateBindResourceTaskDetailClbInstanceListArgs struct {
+	// Load balancer type, 0 traditional load balancer; 1 application load balancer.
+	Forward pulumi.IntInput `pulumi:"forward"`
+	// CLB listener list.
+	Listeners GetCertificateBindResourceTaskDetailClbInstanceListListenerArrayInput `pulumi:"listeners"`
+	// CLB instance ID.
+	LoadBalancerId pulumi.StringInput `pulumi:"loadBalancerId"`
+	// CLB instance name.
+	LoadBalancerName pulumi.StringInput `pulumi:"loadBalancerName"`
+}
+
+func (GetCertificateBindResourceTaskDetailClbInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailClbInstanceList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailClbInstanceListArgs) ToGetCertificateBindResourceTaskDetailClbInstanceListOutput() GetCertificateBindResourceTaskDetailClbInstanceListOutput {
+	return i.ToGetCertificateBindResourceTaskDetailClbInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailClbInstanceListArgs) ToGetCertificateBindResourceTaskDetailClbInstanceListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailClbInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailClbInstanceListOutput)
+}
+
+// GetCertificateBindResourceTaskDetailClbInstanceListArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailClbInstanceListArray and GetCertificateBindResourceTaskDetailClbInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailClbInstanceListArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailClbInstanceListArray{ GetCertificateBindResourceTaskDetailClbInstanceListArgs{...} }
+type GetCertificateBindResourceTaskDetailClbInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailClbInstanceListArrayOutput() GetCertificateBindResourceTaskDetailClbInstanceListArrayOutput
+	ToGetCertificateBindResourceTaskDetailClbInstanceListArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailClbInstanceListArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailClbInstanceListArray []GetCertificateBindResourceTaskDetailClbInstanceListInput
+
+func (GetCertificateBindResourceTaskDetailClbInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailClbInstanceList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailClbInstanceListArray) ToGetCertificateBindResourceTaskDetailClbInstanceListArrayOutput() GetCertificateBindResourceTaskDetailClbInstanceListArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailClbInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailClbInstanceListArray) ToGetCertificateBindResourceTaskDetailClbInstanceListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailClbInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailClbInstanceListArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailClbInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailClbInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailClbInstanceList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailClbInstanceListOutput) ToGetCertificateBindResourceTaskDetailClbInstanceListOutput() GetCertificateBindResourceTaskDetailClbInstanceListOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailClbInstanceListOutput) ToGetCertificateBindResourceTaskDetailClbInstanceListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailClbInstanceListOutput {
+	return o
+}
+
+// Load balancer type, 0 traditional load balancer; 1 application load balancer.
+func (o GetCertificateBindResourceTaskDetailClbInstanceListOutput) Forward() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailClbInstanceList) int { return v.Forward }).(pulumi.IntOutput)
+}
+
+// CLB listener list.
+func (o GetCertificateBindResourceTaskDetailClbInstanceListOutput) Listeners() GetCertificateBindResourceTaskDetailClbInstanceListListenerArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailClbInstanceList) []GetCertificateBindResourceTaskDetailClbInstanceListListener {
+		return v.Listeners
+	}).(GetCertificateBindResourceTaskDetailClbInstanceListListenerArrayOutput)
+}
+
+// CLB instance ID.
+func (o GetCertificateBindResourceTaskDetailClbInstanceListOutput) LoadBalancerId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailClbInstanceList) string { return v.LoadBalancerId }).(pulumi.StringOutput)
+}
+
+// CLB instance name.
+func (o GetCertificateBindResourceTaskDetailClbInstanceListOutput) LoadBalancerName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailClbInstanceList) string { return v.LoadBalancerName }).(pulumi.StringOutput)
+}
+
+type GetCertificateBindResourceTaskDetailClbInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailClbInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailClbInstanceList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailClbInstanceListArrayOutput) ToGetCertificateBindResourceTaskDetailClbInstanceListArrayOutput() GetCertificateBindResourceTaskDetailClbInstanceListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailClbInstanceListArrayOutput) ToGetCertificateBindResourceTaskDetailClbInstanceListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailClbInstanceListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailClbInstanceListArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailClbInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailClbInstanceList {
+		return vs[0].([]GetCertificateBindResourceTaskDetailClbInstanceList)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailClbInstanceListOutput)
+}
+
+type GetCertificateBindResourceTaskDetailClbInstanceListListener struct {
+	// Certificate data bound to the rule.
+	Certificates []GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificate `pulumi:"certificates"`
+	// Listener ID.
+	ListenerId string `pulumi:"listenerId"`
+	// Listener name.
+	ListenerName string `pulumi:"listenerName"`
+	// List of domains that do not match the new certificate.
+	NoMatchDomains []string `pulumi:"noMatchDomains"`
+	// Protocol.
+	Protocol string `pulumi:"protocol"`
+	// Listener rule list.
+	Rules []GetCertificateBindResourceTaskDetailClbInstanceListListenerRule `pulumi:"rules"`
+	// Whether to enable SNI, 1 for enable, 0 for disable.
+	SniSwitch int `pulumi:"sniSwitch"`
+}
+
+// GetCertificateBindResourceTaskDetailClbInstanceListListenerInput is an input type that accepts GetCertificateBindResourceTaskDetailClbInstanceListListenerArgs and GetCertificateBindResourceTaskDetailClbInstanceListListenerOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailClbInstanceListListenerInput` via:
+//
+//	GetCertificateBindResourceTaskDetailClbInstanceListListenerArgs{...}
+type GetCertificateBindResourceTaskDetailClbInstanceListListenerInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailClbInstanceListListenerOutput() GetCertificateBindResourceTaskDetailClbInstanceListListenerOutput
+	ToGetCertificateBindResourceTaskDetailClbInstanceListListenerOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailClbInstanceListListenerOutput
+}
+
+type GetCertificateBindResourceTaskDetailClbInstanceListListenerArgs struct {
+	// Certificate data bound to the rule.
+	Certificates GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArrayInput `pulumi:"certificates"`
+	// Listener ID.
+	ListenerId pulumi.StringInput `pulumi:"listenerId"`
+	// Listener name.
+	ListenerName pulumi.StringInput `pulumi:"listenerName"`
+	// List of domains that do not match the new certificate.
+	NoMatchDomains pulumi.StringArrayInput `pulumi:"noMatchDomains"`
+	// Protocol.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// Listener rule list.
+	Rules GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArrayInput `pulumi:"rules"`
+	// Whether to enable SNI, 1 for enable, 0 for disable.
+	SniSwitch pulumi.IntInput `pulumi:"sniSwitch"`
+}
+
+func (GetCertificateBindResourceTaskDetailClbInstanceListListenerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailClbInstanceListListener)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailClbInstanceListListenerArgs) ToGetCertificateBindResourceTaskDetailClbInstanceListListenerOutput() GetCertificateBindResourceTaskDetailClbInstanceListListenerOutput {
+	return i.ToGetCertificateBindResourceTaskDetailClbInstanceListListenerOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailClbInstanceListListenerArgs) ToGetCertificateBindResourceTaskDetailClbInstanceListListenerOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailClbInstanceListListenerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailClbInstanceListListenerOutput)
+}
+
+// GetCertificateBindResourceTaskDetailClbInstanceListListenerArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailClbInstanceListListenerArray and GetCertificateBindResourceTaskDetailClbInstanceListListenerArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailClbInstanceListListenerArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailClbInstanceListListenerArray{ GetCertificateBindResourceTaskDetailClbInstanceListListenerArgs{...} }
+type GetCertificateBindResourceTaskDetailClbInstanceListListenerArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailClbInstanceListListenerArrayOutput() GetCertificateBindResourceTaskDetailClbInstanceListListenerArrayOutput
+	ToGetCertificateBindResourceTaskDetailClbInstanceListListenerArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailClbInstanceListListenerArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailClbInstanceListListenerArray []GetCertificateBindResourceTaskDetailClbInstanceListListenerInput
+
+func (GetCertificateBindResourceTaskDetailClbInstanceListListenerArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailClbInstanceListListener)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailClbInstanceListListenerArray) ToGetCertificateBindResourceTaskDetailClbInstanceListListenerArrayOutput() GetCertificateBindResourceTaskDetailClbInstanceListListenerArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailClbInstanceListListenerArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailClbInstanceListListenerArray) ToGetCertificateBindResourceTaskDetailClbInstanceListListenerArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailClbInstanceListListenerArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailClbInstanceListListenerArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailClbInstanceListListenerOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailClbInstanceListListenerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailClbInstanceListListener)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerOutput) ToGetCertificateBindResourceTaskDetailClbInstanceListListenerOutput() GetCertificateBindResourceTaskDetailClbInstanceListListenerOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerOutput) ToGetCertificateBindResourceTaskDetailClbInstanceListListenerOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailClbInstanceListListenerOutput {
+	return o
+}
+
+// Certificate data bound to the rule.
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerOutput) Certificates() GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailClbInstanceListListener) []GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificate {
+		return v.Certificates
+	}).(GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArrayOutput)
+}
+
+// Listener ID.
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerOutput) ListenerId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailClbInstanceListListener) string { return v.ListenerId }).(pulumi.StringOutput)
+}
+
+// Listener name.
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerOutput) ListenerName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailClbInstanceListListener) string { return v.ListenerName }).(pulumi.StringOutput)
+}
+
+// List of domains that do not match the new certificate.
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerOutput) NoMatchDomains() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailClbInstanceListListener) []string { return v.NoMatchDomains }).(pulumi.StringArrayOutput)
+}
+
+// Protocol.
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailClbInstanceListListener) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+// Listener rule list.
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerOutput) Rules() GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailClbInstanceListListener) []GetCertificateBindResourceTaskDetailClbInstanceListListenerRule {
+		return v.Rules
+	}).(GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArrayOutput)
+}
+
+// Whether to enable SNI, 1 for enable, 0 for disable.
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerOutput) SniSwitch() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailClbInstanceListListener) int { return v.SniSwitch }).(pulumi.IntOutput)
+}
+
+type GetCertificateBindResourceTaskDetailClbInstanceListListenerArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailClbInstanceListListenerArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailClbInstanceListListener)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerArrayOutput) ToGetCertificateBindResourceTaskDetailClbInstanceListListenerArrayOutput() GetCertificateBindResourceTaskDetailClbInstanceListListenerArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerArrayOutput) ToGetCertificateBindResourceTaskDetailClbInstanceListListenerArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailClbInstanceListListenerArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailClbInstanceListListenerOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailClbInstanceListListener {
+		return vs[0].([]GetCertificateBindResourceTaskDetailClbInstanceListListener)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailClbInstanceListListenerOutput)
+}
+
+type GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificate struct {
+	// Root certificate ID.
+	CertCaId string `pulumi:"certCaId"`
+	// Certificate ID.
+	CertId string `pulumi:"certId"`
+	// Domain names bound to the certificate.
+	DnsNames []string `pulumi:"dnsNames"`
+	// Certificate authentication mode: UNIDIRECTIONAL one-way authentication, MUTUAL two-way authentication.
+	SslMode string `pulumi:"sslMode"`
+}
+
+// GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateInput is an input type that accepts GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArgs and GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateInput` via:
+//
+//	GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArgs{...}
+type GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateOutput() GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateOutput
+	ToGetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateOutput
+}
+
+type GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArgs struct {
+	// Root certificate ID.
+	CertCaId pulumi.StringInput `pulumi:"certCaId"`
+	// Certificate ID.
+	CertId pulumi.StringInput `pulumi:"certId"`
+	// Domain names bound to the certificate.
+	DnsNames pulumi.StringArrayInput `pulumi:"dnsNames"`
+	// Certificate authentication mode: UNIDIRECTIONAL one-way authentication, MUTUAL two-way authentication.
+	SslMode pulumi.StringInput `pulumi:"sslMode"`
+}
+
+func (GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificate)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArgs) ToGetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateOutput() GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateOutput {
+	return i.ToGetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArgs) ToGetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateOutput)
+}
+
+// GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArray and GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArray{ GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArgs{...} }
+type GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArrayOutput() GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArrayOutput
+	ToGetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArray []GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateInput
+
+func (GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificate)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArray) ToGetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArrayOutput() GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArray) ToGetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificate)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateOutput) ToGetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateOutput() GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateOutput) ToGetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateOutput {
+	return o
+}
+
+// Root certificate ID.
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateOutput) CertCaId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificate) string {
+		return v.CertCaId
+	}).(pulumi.StringOutput)
+}
+
+// Certificate ID.
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateOutput) CertId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificate) string { return v.CertId }).(pulumi.StringOutput)
+}
+
+// Domain names bound to the certificate.
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateOutput) DnsNames() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificate) []string {
+		return v.DnsNames
+	}).(pulumi.StringArrayOutput)
+}
+
+// Certificate authentication mode: UNIDIRECTIONAL one-way authentication, MUTUAL two-way authentication.
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateOutput) SslMode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificate) string {
+		return v.SslMode
+	}).(pulumi.StringOutput)
+}
+
+type GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificate)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArrayOutput) ToGetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArrayOutput() GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArrayOutput) ToGetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificate {
+		return vs[0].([]GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificate)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateOutput)
+}
+
+type GetCertificateBindResourceTaskDetailClbInstanceListListenerRule struct {
+	// Certificate data bound to the rule.
+	Certificates []GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificate `pulumi:"certificates"`
+	// Domain name.
+	Domain string `pulumi:"domain"`
+	// Whether the rule matches the domain name of the certificate to be bound.
+	IsMatch bool `pulumi:"isMatch"`
+	// Rule ID.
+	LocationId string `pulumi:"locationId"`
+	// List of domains that do not match the new certificate.
+	NoMatchDomains []string `pulumi:"noMatchDomains"`
+	// Path bound to the rule.
+	Url string `pulumi:"url"`
+}
+
+// GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleInput is an input type that accepts GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArgs and GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleInput` via:
+//
+//	GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArgs{...}
+type GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailClbInstanceListListenerRuleOutput() GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleOutput
+	ToGetCertificateBindResourceTaskDetailClbInstanceListListenerRuleOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleOutput
+}
+
+type GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArgs struct {
+	// Certificate data bound to the rule.
+	Certificates GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArrayInput `pulumi:"certificates"`
+	// Domain name.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Whether the rule matches the domain name of the certificate to be bound.
+	IsMatch pulumi.BoolInput `pulumi:"isMatch"`
+	// Rule ID.
+	LocationId pulumi.StringInput `pulumi:"locationId"`
+	// List of domains that do not match the new certificate.
+	NoMatchDomains pulumi.StringArrayInput `pulumi:"noMatchDomains"`
+	// Path bound to the rule.
+	Url pulumi.StringInput `pulumi:"url"`
+}
+
+func (GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailClbInstanceListListenerRule)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArgs) ToGetCertificateBindResourceTaskDetailClbInstanceListListenerRuleOutput() GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleOutput {
+	return i.ToGetCertificateBindResourceTaskDetailClbInstanceListListenerRuleOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArgs) ToGetCertificateBindResourceTaskDetailClbInstanceListListenerRuleOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleOutput)
+}
+
+// GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArray and GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArray{ GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArgs{...} }
+type GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArrayOutput() GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArrayOutput
+	ToGetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArray []GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleInput
+
+func (GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailClbInstanceListListenerRule)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArray) ToGetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArrayOutput() GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArray) ToGetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailClbInstanceListListenerRule)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleOutput) ToGetCertificateBindResourceTaskDetailClbInstanceListListenerRuleOutput() GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleOutput) ToGetCertificateBindResourceTaskDetailClbInstanceListListenerRuleOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleOutput {
+	return o
+}
+
+// Certificate data bound to the rule.
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleOutput) Certificates() GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailClbInstanceListListenerRule) []GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificate {
+		return v.Certificates
+	}).(GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArrayOutput)
+}
+
+// Domain name.
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailClbInstanceListListenerRule) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// Whether the rule matches the domain name of the certificate to be bound.
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleOutput) IsMatch() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailClbInstanceListListenerRule) bool { return v.IsMatch }).(pulumi.BoolOutput)
+}
+
+// Rule ID.
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleOutput) LocationId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailClbInstanceListListenerRule) string { return v.LocationId }).(pulumi.StringOutput)
+}
+
+// List of domains that do not match the new certificate.
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleOutput) NoMatchDomains() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailClbInstanceListListenerRule) []string {
+		return v.NoMatchDomains
+	}).(pulumi.StringArrayOutput)
+}
+
+// Path bound to the rule.
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailClbInstanceListListenerRule) string { return v.Url }).(pulumi.StringOutput)
+}
+
+type GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailClbInstanceListListenerRule)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArrayOutput) ToGetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArrayOutput() GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArrayOutput) ToGetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailClbInstanceListListenerRule {
+		return vs[0].([]GetCertificateBindResourceTaskDetailClbInstanceListListenerRule)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleOutput)
+}
+
+type GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificate struct {
+	// Root certificate ID.
+	CertCaId string `pulumi:"certCaId"`
+	// Certificate ID.
+	CertId string `pulumi:"certId"`
+	// Domain names bound to the certificate.
+	DnsNames []string `pulumi:"dnsNames"`
+	// Certificate authentication mode: UNIDIRECTIONAL one-way authentication, MUTUAL two-way authentication.
+	SslMode string `pulumi:"sslMode"`
+}
+
+// GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateInput is an input type that accepts GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArgs and GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateInput` via:
+//
+//	GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArgs{...}
+type GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateOutput() GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateOutput
+	ToGetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateOutput
+}
+
+type GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArgs struct {
+	// Root certificate ID.
+	CertCaId pulumi.StringInput `pulumi:"certCaId"`
+	// Certificate ID.
+	CertId pulumi.StringInput `pulumi:"certId"`
+	// Domain names bound to the certificate.
+	DnsNames pulumi.StringArrayInput `pulumi:"dnsNames"`
+	// Certificate authentication mode: UNIDIRECTIONAL one-way authentication, MUTUAL two-way authentication.
+	SslMode pulumi.StringInput `pulumi:"sslMode"`
+}
+
+func (GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificate)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArgs) ToGetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateOutput() GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateOutput {
+	return i.ToGetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArgs) ToGetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateOutput)
+}
+
+// GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArray and GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArray{ GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArgs{...} }
+type GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArrayOutput() GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArrayOutput
+	ToGetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArray []GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateInput
+
+func (GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificate)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArray) ToGetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArrayOutput() GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArray) ToGetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificate)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateOutput) ToGetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateOutput() GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateOutput) ToGetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateOutput {
+	return o
+}
+
+// Root certificate ID.
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateOutput) CertCaId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificate) string {
+		return v.CertCaId
+	}).(pulumi.StringOutput)
+}
+
+// Certificate ID.
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateOutput) CertId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificate) string {
+		return v.CertId
+	}).(pulumi.StringOutput)
+}
+
+// Domain names bound to the certificate.
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateOutput) DnsNames() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificate) []string {
+		return v.DnsNames
+	}).(pulumi.StringArrayOutput)
+}
+
+// Certificate authentication mode: UNIDIRECTIONAL one-way authentication, MUTUAL two-way authentication.
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateOutput) SslMode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificate) string {
+		return v.SslMode
+	}).(pulumi.StringOutput)
+}
+
+type GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificate)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArrayOutput) ToGetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArrayOutput() GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArrayOutput) ToGetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificate {
+		return vs[0].([]GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificate)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateOutput)
+}
+
+type GetCertificateBindResourceTaskDetailCo struct {
+	// Query error message.
+	Error string `pulumi:"error"`
+	// WAF instance detail list.
+	InstanceLists []GetCertificateBindResourceTaskDetailCoInstanceList `pulumi:"instanceLists"`
+	// Region.
+	Region string `pulumi:"region"`
+	// Total number of WAF instances in the region.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetCertificateBindResourceTaskDetailCoInput is an input type that accepts GetCertificateBindResourceTaskDetailCoArgs and GetCertificateBindResourceTaskDetailCoOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailCoInput` via:
+//
+//	GetCertificateBindResourceTaskDetailCoArgs{...}
+type GetCertificateBindResourceTaskDetailCoInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailCoOutput() GetCertificateBindResourceTaskDetailCoOutput
+	ToGetCertificateBindResourceTaskDetailCoOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailCoOutput
+}
+
+type GetCertificateBindResourceTaskDetailCoArgs struct {
+	// Query error message.
+	Error pulumi.StringInput `pulumi:"error"`
+	// WAF instance detail list.
+	InstanceLists GetCertificateBindResourceTaskDetailCoInstanceListArrayInput `pulumi:"instanceLists"`
+	// Region.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Total number of WAF instances in the region.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetCertificateBindResourceTaskDetailCoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailCo)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailCoArgs) ToGetCertificateBindResourceTaskDetailCoOutput() GetCertificateBindResourceTaskDetailCoOutput {
+	return i.ToGetCertificateBindResourceTaskDetailCoOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailCoArgs) ToGetCertificateBindResourceTaskDetailCoOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailCoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailCoOutput)
+}
+
+// GetCertificateBindResourceTaskDetailCoArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailCoArray and GetCertificateBindResourceTaskDetailCoArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailCoArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailCoArray{ GetCertificateBindResourceTaskDetailCoArgs{...} }
+type GetCertificateBindResourceTaskDetailCoArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailCoArrayOutput() GetCertificateBindResourceTaskDetailCoArrayOutput
+	ToGetCertificateBindResourceTaskDetailCoArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailCoArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailCoArray []GetCertificateBindResourceTaskDetailCoInput
+
+func (GetCertificateBindResourceTaskDetailCoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailCo)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailCoArray) ToGetCertificateBindResourceTaskDetailCoArrayOutput() GetCertificateBindResourceTaskDetailCoArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailCoArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailCoArray) ToGetCertificateBindResourceTaskDetailCoArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailCoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailCoArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailCoOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailCoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailCo)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailCoOutput) ToGetCertificateBindResourceTaskDetailCoOutput() GetCertificateBindResourceTaskDetailCoOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailCoOutput) ToGetCertificateBindResourceTaskDetailCoOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailCoOutput {
+	return o
+}
+
+// Query error message.
+func (o GetCertificateBindResourceTaskDetailCoOutput) Error() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailCo) string { return v.Error }).(pulumi.StringOutput)
+}
+
+// WAF instance detail list.
+func (o GetCertificateBindResourceTaskDetailCoOutput) InstanceLists() GetCertificateBindResourceTaskDetailCoInstanceListArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailCo) []GetCertificateBindResourceTaskDetailCoInstanceList {
+		return v.InstanceLists
+	}).(GetCertificateBindResourceTaskDetailCoInstanceListArrayOutput)
+}
+
+// Region.
+func (o GetCertificateBindResourceTaskDetailCoOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailCo) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Total number of WAF instances in the region.
+func (o GetCertificateBindResourceTaskDetailCoOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailCo) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetCertificateBindResourceTaskDetailCoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailCoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailCo)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailCoArrayOutput) ToGetCertificateBindResourceTaskDetailCoArrayOutput() GetCertificateBindResourceTaskDetailCoArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailCoArrayOutput) ToGetCertificateBindResourceTaskDetailCoArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailCoArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailCoArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailCoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailCo {
+		return vs[0].([]GetCertificateBindResourceTaskDetailCo)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailCoOutput)
+}
+
+type GetCertificateBindResourceTaskDetailCoInstanceList struct {
+	// Bucket name.
+	Bucket string `pulumi:"bucket"`
+	// Certificate ID.
+	CertId string `pulumi:"certId"`
+	// Domain name.
+	Domain string `pulumi:"domain"`
+	// Region.
+	Region string `pulumi:"region"`
+	// Domain status. deployed: deployed; processing: deploying; applying: applying; failed: apply failed; issued: bind failed.
+	Status string `pulumi:"status"`
+}
+
+// GetCertificateBindResourceTaskDetailCoInstanceListInput is an input type that accepts GetCertificateBindResourceTaskDetailCoInstanceListArgs and GetCertificateBindResourceTaskDetailCoInstanceListOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailCoInstanceListInput` via:
+//
+//	GetCertificateBindResourceTaskDetailCoInstanceListArgs{...}
+type GetCertificateBindResourceTaskDetailCoInstanceListInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailCoInstanceListOutput() GetCertificateBindResourceTaskDetailCoInstanceListOutput
+	ToGetCertificateBindResourceTaskDetailCoInstanceListOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailCoInstanceListOutput
+}
+
+type GetCertificateBindResourceTaskDetailCoInstanceListArgs struct {
+	// Bucket name.
+	Bucket pulumi.StringInput `pulumi:"bucket"`
+	// Certificate ID.
+	CertId pulumi.StringInput `pulumi:"certId"`
+	// Domain name.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Region.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Domain status. deployed: deployed; processing: deploying; applying: applying; failed: apply failed; issued: bind failed.
+	Status pulumi.StringInput `pulumi:"status"`
+}
+
+func (GetCertificateBindResourceTaskDetailCoInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailCoInstanceList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailCoInstanceListArgs) ToGetCertificateBindResourceTaskDetailCoInstanceListOutput() GetCertificateBindResourceTaskDetailCoInstanceListOutput {
+	return i.ToGetCertificateBindResourceTaskDetailCoInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailCoInstanceListArgs) ToGetCertificateBindResourceTaskDetailCoInstanceListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailCoInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailCoInstanceListOutput)
+}
+
+// GetCertificateBindResourceTaskDetailCoInstanceListArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailCoInstanceListArray and GetCertificateBindResourceTaskDetailCoInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailCoInstanceListArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailCoInstanceListArray{ GetCertificateBindResourceTaskDetailCoInstanceListArgs{...} }
+type GetCertificateBindResourceTaskDetailCoInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailCoInstanceListArrayOutput() GetCertificateBindResourceTaskDetailCoInstanceListArrayOutput
+	ToGetCertificateBindResourceTaskDetailCoInstanceListArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailCoInstanceListArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailCoInstanceListArray []GetCertificateBindResourceTaskDetailCoInstanceListInput
+
+func (GetCertificateBindResourceTaskDetailCoInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailCoInstanceList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailCoInstanceListArray) ToGetCertificateBindResourceTaskDetailCoInstanceListArrayOutput() GetCertificateBindResourceTaskDetailCoInstanceListArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailCoInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailCoInstanceListArray) ToGetCertificateBindResourceTaskDetailCoInstanceListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailCoInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailCoInstanceListArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailCoInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailCoInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailCoInstanceList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailCoInstanceListOutput) ToGetCertificateBindResourceTaskDetailCoInstanceListOutput() GetCertificateBindResourceTaskDetailCoInstanceListOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailCoInstanceListOutput) ToGetCertificateBindResourceTaskDetailCoInstanceListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailCoInstanceListOutput {
+	return o
+}
+
+// Bucket name.
+func (o GetCertificateBindResourceTaskDetailCoInstanceListOutput) Bucket() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailCoInstanceList) string { return v.Bucket }).(pulumi.StringOutput)
+}
+
+// Certificate ID.
+func (o GetCertificateBindResourceTaskDetailCoInstanceListOutput) CertId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailCoInstanceList) string { return v.CertId }).(pulumi.StringOutput)
+}
+
+// Domain name.
+func (o GetCertificateBindResourceTaskDetailCoInstanceListOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailCoInstanceList) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// Region.
+func (o GetCertificateBindResourceTaskDetailCoInstanceListOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailCoInstanceList) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Domain status. deployed: deployed; processing: deploying; applying: applying; failed: apply failed; issued: bind failed.
+func (o GetCertificateBindResourceTaskDetailCoInstanceListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailCoInstanceList) string { return v.Status }).(pulumi.StringOutput)
+}
+
+type GetCertificateBindResourceTaskDetailCoInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailCoInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailCoInstanceList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailCoInstanceListArrayOutput) ToGetCertificateBindResourceTaskDetailCoInstanceListArrayOutput() GetCertificateBindResourceTaskDetailCoInstanceListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailCoInstanceListArrayOutput) ToGetCertificateBindResourceTaskDetailCoInstanceListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailCoInstanceListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailCoInstanceListArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailCoInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailCoInstanceList {
+		return vs[0].([]GetCertificateBindResourceTaskDetailCoInstanceList)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailCoInstanceListOutput)
+}
+
+type GetCertificateBindResourceTaskDetailDdo struct {
+	// Query error message.
+	Error string `pulumi:"error"`
+	// WAF instance detail list.
+	InstanceLists []GetCertificateBindResourceTaskDetailDdoInstanceList `pulumi:"instanceLists"`
+	// Total number of WAF instances in the region.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetCertificateBindResourceTaskDetailDdoInput is an input type that accepts GetCertificateBindResourceTaskDetailDdoArgs and GetCertificateBindResourceTaskDetailDdoOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailDdoInput` via:
+//
+//	GetCertificateBindResourceTaskDetailDdoArgs{...}
+type GetCertificateBindResourceTaskDetailDdoInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailDdoOutput() GetCertificateBindResourceTaskDetailDdoOutput
+	ToGetCertificateBindResourceTaskDetailDdoOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailDdoOutput
+}
+
+type GetCertificateBindResourceTaskDetailDdoArgs struct {
+	// Query error message.
+	Error pulumi.StringInput `pulumi:"error"`
+	// WAF instance detail list.
+	InstanceLists GetCertificateBindResourceTaskDetailDdoInstanceListArrayInput `pulumi:"instanceLists"`
+	// Total number of WAF instances in the region.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetCertificateBindResourceTaskDetailDdoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailDdo)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailDdoArgs) ToGetCertificateBindResourceTaskDetailDdoOutput() GetCertificateBindResourceTaskDetailDdoOutput {
+	return i.ToGetCertificateBindResourceTaskDetailDdoOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailDdoArgs) ToGetCertificateBindResourceTaskDetailDdoOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailDdoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailDdoOutput)
+}
+
+// GetCertificateBindResourceTaskDetailDdoArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailDdoArray and GetCertificateBindResourceTaskDetailDdoArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailDdoArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailDdoArray{ GetCertificateBindResourceTaskDetailDdoArgs{...} }
+type GetCertificateBindResourceTaskDetailDdoArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailDdoArrayOutput() GetCertificateBindResourceTaskDetailDdoArrayOutput
+	ToGetCertificateBindResourceTaskDetailDdoArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailDdoArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailDdoArray []GetCertificateBindResourceTaskDetailDdoInput
+
+func (GetCertificateBindResourceTaskDetailDdoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailDdo)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailDdoArray) ToGetCertificateBindResourceTaskDetailDdoArrayOutput() GetCertificateBindResourceTaskDetailDdoArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailDdoArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailDdoArray) ToGetCertificateBindResourceTaskDetailDdoArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailDdoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailDdoArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailDdoOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailDdoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailDdo)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailDdoOutput) ToGetCertificateBindResourceTaskDetailDdoOutput() GetCertificateBindResourceTaskDetailDdoOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailDdoOutput) ToGetCertificateBindResourceTaskDetailDdoOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailDdoOutput {
+	return o
+}
+
+// Query error message.
+func (o GetCertificateBindResourceTaskDetailDdoOutput) Error() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailDdo) string { return v.Error }).(pulumi.StringOutput)
+}
+
+// WAF instance detail list.
+func (o GetCertificateBindResourceTaskDetailDdoOutput) InstanceLists() GetCertificateBindResourceTaskDetailDdoInstanceListArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailDdo) []GetCertificateBindResourceTaskDetailDdoInstanceList {
+		return v.InstanceLists
+	}).(GetCertificateBindResourceTaskDetailDdoInstanceListArrayOutput)
+}
+
+// Total number of WAF instances in the region.
+func (o GetCertificateBindResourceTaskDetailDdoOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailDdo) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetCertificateBindResourceTaskDetailDdoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailDdoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailDdo)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailDdoArrayOutput) ToGetCertificateBindResourceTaskDetailDdoArrayOutput() GetCertificateBindResourceTaskDetailDdoArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailDdoArrayOutput) ToGetCertificateBindResourceTaskDetailDdoArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailDdoArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailDdoArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailDdoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailDdo {
+		return vs[0].([]GetCertificateBindResourceTaskDetailDdo)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailDdoOutput)
+}
+
+type GetCertificateBindResourceTaskDetailDdoInstanceList struct {
+	// Certificate ID.
+	CertId string `pulumi:"certId"`
+	// Domain name.
+	Domain string `pulumi:"domain"`
+	// Instance ID.
+	InstanceId string `pulumi:"instanceId"`
+	// Protocol.
+	Protocol string `pulumi:"protocol"`
+	// Forwarding port.
+	VirtualPort string `pulumi:"virtualPort"`
+}
+
+// GetCertificateBindResourceTaskDetailDdoInstanceListInput is an input type that accepts GetCertificateBindResourceTaskDetailDdoInstanceListArgs and GetCertificateBindResourceTaskDetailDdoInstanceListOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailDdoInstanceListInput` via:
+//
+//	GetCertificateBindResourceTaskDetailDdoInstanceListArgs{...}
+type GetCertificateBindResourceTaskDetailDdoInstanceListInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailDdoInstanceListOutput() GetCertificateBindResourceTaskDetailDdoInstanceListOutput
+	ToGetCertificateBindResourceTaskDetailDdoInstanceListOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailDdoInstanceListOutput
+}
+
+type GetCertificateBindResourceTaskDetailDdoInstanceListArgs struct {
+	// Certificate ID.
+	CertId pulumi.StringInput `pulumi:"certId"`
+	// Domain name.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Instance ID.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Protocol.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// Forwarding port.
+	VirtualPort pulumi.StringInput `pulumi:"virtualPort"`
+}
+
+func (GetCertificateBindResourceTaskDetailDdoInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailDdoInstanceList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailDdoInstanceListArgs) ToGetCertificateBindResourceTaskDetailDdoInstanceListOutput() GetCertificateBindResourceTaskDetailDdoInstanceListOutput {
+	return i.ToGetCertificateBindResourceTaskDetailDdoInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailDdoInstanceListArgs) ToGetCertificateBindResourceTaskDetailDdoInstanceListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailDdoInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailDdoInstanceListOutput)
+}
+
+// GetCertificateBindResourceTaskDetailDdoInstanceListArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailDdoInstanceListArray and GetCertificateBindResourceTaskDetailDdoInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailDdoInstanceListArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailDdoInstanceListArray{ GetCertificateBindResourceTaskDetailDdoInstanceListArgs{...} }
+type GetCertificateBindResourceTaskDetailDdoInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailDdoInstanceListArrayOutput() GetCertificateBindResourceTaskDetailDdoInstanceListArrayOutput
+	ToGetCertificateBindResourceTaskDetailDdoInstanceListArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailDdoInstanceListArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailDdoInstanceListArray []GetCertificateBindResourceTaskDetailDdoInstanceListInput
+
+func (GetCertificateBindResourceTaskDetailDdoInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailDdoInstanceList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailDdoInstanceListArray) ToGetCertificateBindResourceTaskDetailDdoInstanceListArrayOutput() GetCertificateBindResourceTaskDetailDdoInstanceListArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailDdoInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailDdoInstanceListArray) ToGetCertificateBindResourceTaskDetailDdoInstanceListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailDdoInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailDdoInstanceListArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailDdoInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailDdoInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailDdoInstanceList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailDdoInstanceListOutput) ToGetCertificateBindResourceTaskDetailDdoInstanceListOutput() GetCertificateBindResourceTaskDetailDdoInstanceListOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailDdoInstanceListOutput) ToGetCertificateBindResourceTaskDetailDdoInstanceListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailDdoInstanceListOutput {
+	return o
+}
+
+// Certificate ID.
+func (o GetCertificateBindResourceTaskDetailDdoInstanceListOutput) CertId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailDdoInstanceList) string { return v.CertId }).(pulumi.StringOutput)
+}
+
+// Domain name.
+func (o GetCertificateBindResourceTaskDetailDdoInstanceListOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailDdoInstanceList) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// Instance ID.
+func (o GetCertificateBindResourceTaskDetailDdoInstanceListOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailDdoInstanceList) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Protocol.
+func (o GetCertificateBindResourceTaskDetailDdoInstanceListOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailDdoInstanceList) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+// Forwarding port.
+func (o GetCertificateBindResourceTaskDetailDdoInstanceListOutput) VirtualPort() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailDdoInstanceList) string { return v.VirtualPort }).(pulumi.StringOutput)
+}
+
+type GetCertificateBindResourceTaskDetailDdoInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailDdoInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailDdoInstanceList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailDdoInstanceListArrayOutput) ToGetCertificateBindResourceTaskDetailDdoInstanceListArrayOutput() GetCertificateBindResourceTaskDetailDdoInstanceListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailDdoInstanceListArrayOutput) ToGetCertificateBindResourceTaskDetailDdoInstanceListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailDdoInstanceListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailDdoInstanceListArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailDdoInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailDdoInstanceList {
+		return vs[0].([]GetCertificateBindResourceTaskDetailDdoInstanceList)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailDdoInstanceListOutput)
+}
+
+type GetCertificateBindResourceTaskDetailGaap struct {
+	// Query error message.
+	Error string `pulumi:"error"`
+	// WAF instance detail list.
+	InstanceLists []GetCertificateBindResourceTaskDetailGaapInstanceList `pulumi:"instanceLists"`
+	// Total number of WAF instances in the region.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetCertificateBindResourceTaskDetailGaapInput is an input type that accepts GetCertificateBindResourceTaskDetailGaapArgs and GetCertificateBindResourceTaskDetailGaapOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailGaapInput` via:
+//
+//	GetCertificateBindResourceTaskDetailGaapArgs{...}
+type GetCertificateBindResourceTaskDetailGaapInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailGaapOutput() GetCertificateBindResourceTaskDetailGaapOutput
+	ToGetCertificateBindResourceTaskDetailGaapOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailGaapOutput
+}
+
+type GetCertificateBindResourceTaskDetailGaapArgs struct {
+	// Query error message.
+	Error pulumi.StringInput `pulumi:"error"`
+	// WAF instance detail list.
+	InstanceLists GetCertificateBindResourceTaskDetailGaapInstanceListArrayInput `pulumi:"instanceLists"`
+	// Total number of WAF instances in the region.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetCertificateBindResourceTaskDetailGaapArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailGaap)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailGaapArgs) ToGetCertificateBindResourceTaskDetailGaapOutput() GetCertificateBindResourceTaskDetailGaapOutput {
+	return i.ToGetCertificateBindResourceTaskDetailGaapOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailGaapArgs) ToGetCertificateBindResourceTaskDetailGaapOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailGaapOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailGaapOutput)
+}
+
+// GetCertificateBindResourceTaskDetailGaapArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailGaapArray and GetCertificateBindResourceTaskDetailGaapArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailGaapArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailGaapArray{ GetCertificateBindResourceTaskDetailGaapArgs{...} }
+type GetCertificateBindResourceTaskDetailGaapArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailGaapArrayOutput() GetCertificateBindResourceTaskDetailGaapArrayOutput
+	ToGetCertificateBindResourceTaskDetailGaapArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailGaapArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailGaapArray []GetCertificateBindResourceTaskDetailGaapInput
+
+func (GetCertificateBindResourceTaskDetailGaapArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailGaap)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailGaapArray) ToGetCertificateBindResourceTaskDetailGaapArrayOutput() GetCertificateBindResourceTaskDetailGaapArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailGaapArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailGaapArray) ToGetCertificateBindResourceTaskDetailGaapArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailGaapArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailGaapArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailGaapOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailGaapOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailGaap)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailGaapOutput) ToGetCertificateBindResourceTaskDetailGaapOutput() GetCertificateBindResourceTaskDetailGaapOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailGaapOutput) ToGetCertificateBindResourceTaskDetailGaapOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailGaapOutput {
+	return o
+}
+
+// Query error message.
+func (o GetCertificateBindResourceTaskDetailGaapOutput) Error() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailGaap) string { return v.Error }).(pulumi.StringOutput)
+}
+
+// WAF instance detail list.
+func (o GetCertificateBindResourceTaskDetailGaapOutput) InstanceLists() GetCertificateBindResourceTaskDetailGaapInstanceListArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailGaap) []GetCertificateBindResourceTaskDetailGaapInstanceList {
+		return v.InstanceLists
+	}).(GetCertificateBindResourceTaskDetailGaapInstanceListArrayOutput)
+}
+
+// Total number of WAF instances in the region.
+func (o GetCertificateBindResourceTaskDetailGaapOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailGaap) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetCertificateBindResourceTaskDetailGaapArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailGaapArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailGaap)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailGaapArrayOutput) ToGetCertificateBindResourceTaskDetailGaapArrayOutput() GetCertificateBindResourceTaskDetailGaapArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailGaapArrayOutput) ToGetCertificateBindResourceTaskDetailGaapArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailGaapArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailGaapArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailGaapOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailGaap {
+		return vs[0].([]GetCertificateBindResourceTaskDetailGaap)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailGaapOutput)
+}
+
+type GetCertificateBindResourceTaskDetailGaapInstanceList struct {
+	// Instance ID.
+	InstanceId string `pulumi:"instanceId"`
+	// Instance name.
+	InstanceName string `pulumi:"instanceName"`
+	// Listener list.
+	ListenerLists []GetCertificateBindResourceTaskDetailGaapInstanceListListenerList `pulumi:"listenerLists"`
+}
+
+// GetCertificateBindResourceTaskDetailGaapInstanceListInput is an input type that accepts GetCertificateBindResourceTaskDetailGaapInstanceListArgs and GetCertificateBindResourceTaskDetailGaapInstanceListOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailGaapInstanceListInput` via:
+//
+//	GetCertificateBindResourceTaskDetailGaapInstanceListArgs{...}
+type GetCertificateBindResourceTaskDetailGaapInstanceListInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailGaapInstanceListOutput() GetCertificateBindResourceTaskDetailGaapInstanceListOutput
+	ToGetCertificateBindResourceTaskDetailGaapInstanceListOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailGaapInstanceListOutput
+}
+
+type GetCertificateBindResourceTaskDetailGaapInstanceListArgs struct {
+	// Instance ID.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Instance name.
+	InstanceName pulumi.StringInput `pulumi:"instanceName"`
+	// Listener list.
+	ListenerLists GetCertificateBindResourceTaskDetailGaapInstanceListListenerListArrayInput `pulumi:"listenerLists"`
+}
+
+func (GetCertificateBindResourceTaskDetailGaapInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailGaapInstanceList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailGaapInstanceListArgs) ToGetCertificateBindResourceTaskDetailGaapInstanceListOutput() GetCertificateBindResourceTaskDetailGaapInstanceListOutput {
+	return i.ToGetCertificateBindResourceTaskDetailGaapInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailGaapInstanceListArgs) ToGetCertificateBindResourceTaskDetailGaapInstanceListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailGaapInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailGaapInstanceListOutput)
+}
+
+// GetCertificateBindResourceTaskDetailGaapInstanceListArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailGaapInstanceListArray and GetCertificateBindResourceTaskDetailGaapInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailGaapInstanceListArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailGaapInstanceListArray{ GetCertificateBindResourceTaskDetailGaapInstanceListArgs{...} }
+type GetCertificateBindResourceTaskDetailGaapInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailGaapInstanceListArrayOutput() GetCertificateBindResourceTaskDetailGaapInstanceListArrayOutput
+	ToGetCertificateBindResourceTaskDetailGaapInstanceListArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailGaapInstanceListArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailGaapInstanceListArray []GetCertificateBindResourceTaskDetailGaapInstanceListInput
+
+func (GetCertificateBindResourceTaskDetailGaapInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailGaapInstanceList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailGaapInstanceListArray) ToGetCertificateBindResourceTaskDetailGaapInstanceListArrayOutput() GetCertificateBindResourceTaskDetailGaapInstanceListArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailGaapInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailGaapInstanceListArray) ToGetCertificateBindResourceTaskDetailGaapInstanceListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailGaapInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailGaapInstanceListArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailGaapInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailGaapInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailGaapInstanceList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailGaapInstanceListOutput) ToGetCertificateBindResourceTaskDetailGaapInstanceListOutput() GetCertificateBindResourceTaskDetailGaapInstanceListOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailGaapInstanceListOutput) ToGetCertificateBindResourceTaskDetailGaapInstanceListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailGaapInstanceListOutput {
+	return o
+}
+
+// Instance ID.
+func (o GetCertificateBindResourceTaskDetailGaapInstanceListOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailGaapInstanceList) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Instance name.
+func (o GetCertificateBindResourceTaskDetailGaapInstanceListOutput) InstanceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailGaapInstanceList) string { return v.InstanceName }).(pulumi.StringOutput)
+}
+
+// Listener list.
+func (o GetCertificateBindResourceTaskDetailGaapInstanceListOutput) ListenerLists() GetCertificateBindResourceTaskDetailGaapInstanceListListenerListArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailGaapInstanceList) []GetCertificateBindResourceTaskDetailGaapInstanceListListenerList {
+		return v.ListenerLists
+	}).(GetCertificateBindResourceTaskDetailGaapInstanceListListenerListArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailGaapInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailGaapInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailGaapInstanceList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailGaapInstanceListArrayOutput) ToGetCertificateBindResourceTaskDetailGaapInstanceListArrayOutput() GetCertificateBindResourceTaskDetailGaapInstanceListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailGaapInstanceListArrayOutput) ToGetCertificateBindResourceTaskDetailGaapInstanceListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailGaapInstanceListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailGaapInstanceListArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailGaapInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailGaapInstanceList {
+		return vs[0].([]GetCertificateBindResourceTaskDetailGaapInstanceList)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailGaapInstanceListOutput)
+}
+
+type GetCertificateBindResourceTaskDetailGaapInstanceListListenerList struct {
+	// Certificate ID list bound to the instance.
+	CertIdLists []string `pulumi:"certIdLists"`
+	// Listener ID.
+	ListenerId string `pulumi:"listenerId"`
+	// Listener name.
+	ListenerName string `pulumi:"listenerName"`
+	// Listener status.
+	ListenerStatus string `pulumi:"listenerStatus"`
+	// List of domains that do not match the new certificate.
+	NoMatchDomains []string `pulumi:"noMatchDomains"`
+	// Protocol.
+	Protocol string `pulumi:"protocol"`
+}
+
+// GetCertificateBindResourceTaskDetailGaapInstanceListListenerListInput is an input type that accepts GetCertificateBindResourceTaskDetailGaapInstanceListListenerListArgs and GetCertificateBindResourceTaskDetailGaapInstanceListListenerListOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailGaapInstanceListListenerListInput` via:
+//
+//	GetCertificateBindResourceTaskDetailGaapInstanceListListenerListArgs{...}
+type GetCertificateBindResourceTaskDetailGaapInstanceListListenerListInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailGaapInstanceListListenerListOutput() GetCertificateBindResourceTaskDetailGaapInstanceListListenerListOutput
+	ToGetCertificateBindResourceTaskDetailGaapInstanceListListenerListOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailGaapInstanceListListenerListOutput
+}
+
+type GetCertificateBindResourceTaskDetailGaapInstanceListListenerListArgs struct {
+	// Certificate ID list bound to the instance.
+	CertIdLists pulumi.StringArrayInput `pulumi:"certIdLists"`
+	// Listener ID.
+	ListenerId pulumi.StringInput `pulumi:"listenerId"`
+	// Listener name.
+	ListenerName pulumi.StringInput `pulumi:"listenerName"`
+	// Listener status.
+	ListenerStatus pulumi.StringInput `pulumi:"listenerStatus"`
+	// List of domains that do not match the new certificate.
+	NoMatchDomains pulumi.StringArrayInput `pulumi:"noMatchDomains"`
+	// Protocol.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+}
+
+func (GetCertificateBindResourceTaskDetailGaapInstanceListListenerListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailGaapInstanceListListenerList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailGaapInstanceListListenerListArgs) ToGetCertificateBindResourceTaskDetailGaapInstanceListListenerListOutput() GetCertificateBindResourceTaskDetailGaapInstanceListListenerListOutput {
+	return i.ToGetCertificateBindResourceTaskDetailGaapInstanceListListenerListOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailGaapInstanceListListenerListArgs) ToGetCertificateBindResourceTaskDetailGaapInstanceListListenerListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailGaapInstanceListListenerListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailGaapInstanceListListenerListOutput)
+}
+
+// GetCertificateBindResourceTaskDetailGaapInstanceListListenerListArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailGaapInstanceListListenerListArray and GetCertificateBindResourceTaskDetailGaapInstanceListListenerListArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailGaapInstanceListListenerListArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailGaapInstanceListListenerListArray{ GetCertificateBindResourceTaskDetailGaapInstanceListListenerListArgs{...} }
+type GetCertificateBindResourceTaskDetailGaapInstanceListListenerListArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailGaapInstanceListListenerListArrayOutput() GetCertificateBindResourceTaskDetailGaapInstanceListListenerListArrayOutput
+	ToGetCertificateBindResourceTaskDetailGaapInstanceListListenerListArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailGaapInstanceListListenerListArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailGaapInstanceListListenerListArray []GetCertificateBindResourceTaskDetailGaapInstanceListListenerListInput
+
+func (GetCertificateBindResourceTaskDetailGaapInstanceListListenerListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailGaapInstanceListListenerList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailGaapInstanceListListenerListArray) ToGetCertificateBindResourceTaskDetailGaapInstanceListListenerListArrayOutput() GetCertificateBindResourceTaskDetailGaapInstanceListListenerListArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailGaapInstanceListListenerListArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailGaapInstanceListListenerListArray) ToGetCertificateBindResourceTaskDetailGaapInstanceListListenerListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailGaapInstanceListListenerListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailGaapInstanceListListenerListArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailGaapInstanceListListenerListOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailGaapInstanceListListenerListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailGaapInstanceListListenerList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailGaapInstanceListListenerListOutput) ToGetCertificateBindResourceTaskDetailGaapInstanceListListenerListOutput() GetCertificateBindResourceTaskDetailGaapInstanceListListenerListOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailGaapInstanceListListenerListOutput) ToGetCertificateBindResourceTaskDetailGaapInstanceListListenerListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailGaapInstanceListListenerListOutput {
+	return o
+}
+
+// Certificate ID list bound to the instance.
+func (o GetCertificateBindResourceTaskDetailGaapInstanceListListenerListOutput) CertIdLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailGaapInstanceListListenerList) []string {
+		return v.CertIdLists
+	}).(pulumi.StringArrayOutput)
+}
+
+// Listener ID.
+func (o GetCertificateBindResourceTaskDetailGaapInstanceListListenerListOutput) ListenerId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailGaapInstanceListListenerList) string { return v.ListenerId }).(pulumi.StringOutput)
+}
+
+// Listener name.
+func (o GetCertificateBindResourceTaskDetailGaapInstanceListListenerListOutput) ListenerName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailGaapInstanceListListenerList) string { return v.ListenerName }).(pulumi.StringOutput)
+}
+
+// Listener status.
+func (o GetCertificateBindResourceTaskDetailGaapInstanceListListenerListOutput) ListenerStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailGaapInstanceListListenerList) string {
+		return v.ListenerStatus
+	}).(pulumi.StringOutput)
+}
+
+// List of domains that do not match the new certificate.
+func (o GetCertificateBindResourceTaskDetailGaapInstanceListListenerListOutput) NoMatchDomains() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailGaapInstanceListListenerList) []string {
+		return v.NoMatchDomains
+	}).(pulumi.StringArrayOutput)
+}
+
+// Protocol.
+func (o GetCertificateBindResourceTaskDetailGaapInstanceListListenerListOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailGaapInstanceListListenerList) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+type GetCertificateBindResourceTaskDetailGaapInstanceListListenerListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailGaapInstanceListListenerListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailGaapInstanceListListenerList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailGaapInstanceListListenerListArrayOutput) ToGetCertificateBindResourceTaskDetailGaapInstanceListListenerListArrayOutput() GetCertificateBindResourceTaskDetailGaapInstanceListListenerListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailGaapInstanceListListenerListArrayOutput) ToGetCertificateBindResourceTaskDetailGaapInstanceListListenerListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailGaapInstanceListListenerListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailGaapInstanceListListenerListArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailGaapInstanceListListenerListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailGaapInstanceListListenerList {
+		return vs[0].([]GetCertificateBindResourceTaskDetailGaapInstanceListListenerList)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailGaapInstanceListListenerListOutput)
+}
+
+type GetCertificateBindResourceTaskDetailLife struct {
+	// Query error message.
+	Error string `pulumi:"error"`
+	// WAF instance detail list.
+	InstanceLists []GetCertificateBindResourceTaskDetailLifeInstanceList `pulumi:"instanceLists"`
+	// Total number of WAF instances in the region.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetCertificateBindResourceTaskDetailLifeInput is an input type that accepts GetCertificateBindResourceTaskDetailLifeArgs and GetCertificateBindResourceTaskDetailLifeOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailLifeInput` via:
+//
+//	GetCertificateBindResourceTaskDetailLifeArgs{...}
+type GetCertificateBindResourceTaskDetailLifeInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailLifeOutput() GetCertificateBindResourceTaskDetailLifeOutput
+	ToGetCertificateBindResourceTaskDetailLifeOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailLifeOutput
+}
+
+type GetCertificateBindResourceTaskDetailLifeArgs struct {
+	// Query error message.
+	Error pulumi.StringInput `pulumi:"error"`
+	// WAF instance detail list.
+	InstanceLists GetCertificateBindResourceTaskDetailLifeInstanceListArrayInput `pulumi:"instanceLists"`
+	// Total number of WAF instances in the region.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetCertificateBindResourceTaskDetailLifeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailLife)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailLifeArgs) ToGetCertificateBindResourceTaskDetailLifeOutput() GetCertificateBindResourceTaskDetailLifeOutput {
+	return i.ToGetCertificateBindResourceTaskDetailLifeOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailLifeArgs) ToGetCertificateBindResourceTaskDetailLifeOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailLifeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailLifeOutput)
+}
+
+// GetCertificateBindResourceTaskDetailLifeArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailLifeArray and GetCertificateBindResourceTaskDetailLifeArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailLifeArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailLifeArray{ GetCertificateBindResourceTaskDetailLifeArgs{...} }
+type GetCertificateBindResourceTaskDetailLifeArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailLifeArrayOutput() GetCertificateBindResourceTaskDetailLifeArrayOutput
+	ToGetCertificateBindResourceTaskDetailLifeArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailLifeArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailLifeArray []GetCertificateBindResourceTaskDetailLifeInput
+
+func (GetCertificateBindResourceTaskDetailLifeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailLife)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailLifeArray) ToGetCertificateBindResourceTaskDetailLifeArrayOutput() GetCertificateBindResourceTaskDetailLifeArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailLifeArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailLifeArray) ToGetCertificateBindResourceTaskDetailLifeArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailLifeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailLifeArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailLifeOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailLifeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailLife)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailLifeOutput) ToGetCertificateBindResourceTaskDetailLifeOutput() GetCertificateBindResourceTaskDetailLifeOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailLifeOutput) ToGetCertificateBindResourceTaskDetailLifeOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailLifeOutput {
+	return o
+}
+
+// Query error message.
+func (o GetCertificateBindResourceTaskDetailLifeOutput) Error() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailLife) string { return v.Error }).(pulumi.StringOutput)
+}
+
+// WAF instance detail list.
+func (o GetCertificateBindResourceTaskDetailLifeOutput) InstanceLists() GetCertificateBindResourceTaskDetailLifeInstanceListArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailLife) []GetCertificateBindResourceTaskDetailLifeInstanceList {
+		return v.InstanceLists
+	}).(GetCertificateBindResourceTaskDetailLifeInstanceListArrayOutput)
+}
+
+// Total number of WAF instances in the region.
+func (o GetCertificateBindResourceTaskDetailLifeOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailLife) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetCertificateBindResourceTaskDetailLifeArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailLifeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailLife)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailLifeArrayOutput) ToGetCertificateBindResourceTaskDetailLifeArrayOutput() GetCertificateBindResourceTaskDetailLifeArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailLifeArrayOutput) ToGetCertificateBindResourceTaskDetailLifeArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailLifeArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailLifeArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailLifeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailLife {
+		return vs[0].([]GetCertificateBindResourceTaskDetailLife)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailLifeOutput)
+}
+
+type GetCertificateBindResourceTaskDetailLifeInstanceList struct {
+	// Certificate ID.
+	CertId string `pulumi:"certId"`
+	// Domain name.
+	Domain string `pulumi:"domain"`
+	// Domain status. deployed: deployed; processing: deploying; applying: applying; failed: apply failed; issued: bind failed.
+	Status int `pulumi:"status"`
+}
+
+// GetCertificateBindResourceTaskDetailLifeInstanceListInput is an input type that accepts GetCertificateBindResourceTaskDetailLifeInstanceListArgs and GetCertificateBindResourceTaskDetailLifeInstanceListOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailLifeInstanceListInput` via:
+//
+//	GetCertificateBindResourceTaskDetailLifeInstanceListArgs{...}
+type GetCertificateBindResourceTaskDetailLifeInstanceListInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailLifeInstanceListOutput() GetCertificateBindResourceTaskDetailLifeInstanceListOutput
+	ToGetCertificateBindResourceTaskDetailLifeInstanceListOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailLifeInstanceListOutput
+}
+
+type GetCertificateBindResourceTaskDetailLifeInstanceListArgs struct {
+	// Certificate ID.
+	CertId pulumi.StringInput `pulumi:"certId"`
+	// Domain name.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Domain status. deployed: deployed; processing: deploying; applying: applying; failed: apply failed; issued: bind failed.
+	Status pulumi.IntInput `pulumi:"status"`
+}
+
+func (GetCertificateBindResourceTaskDetailLifeInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailLifeInstanceList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailLifeInstanceListArgs) ToGetCertificateBindResourceTaskDetailLifeInstanceListOutput() GetCertificateBindResourceTaskDetailLifeInstanceListOutput {
+	return i.ToGetCertificateBindResourceTaskDetailLifeInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailLifeInstanceListArgs) ToGetCertificateBindResourceTaskDetailLifeInstanceListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailLifeInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailLifeInstanceListOutput)
+}
+
+// GetCertificateBindResourceTaskDetailLifeInstanceListArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailLifeInstanceListArray and GetCertificateBindResourceTaskDetailLifeInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailLifeInstanceListArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailLifeInstanceListArray{ GetCertificateBindResourceTaskDetailLifeInstanceListArgs{...} }
+type GetCertificateBindResourceTaskDetailLifeInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailLifeInstanceListArrayOutput() GetCertificateBindResourceTaskDetailLifeInstanceListArrayOutput
+	ToGetCertificateBindResourceTaskDetailLifeInstanceListArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailLifeInstanceListArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailLifeInstanceListArray []GetCertificateBindResourceTaskDetailLifeInstanceListInput
+
+func (GetCertificateBindResourceTaskDetailLifeInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailLifeInstanceList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailLifeInstanceListArray) ToGetCertificateBindResourceTaskDetailLifeInstanceListArrayOutput() GetCertificateBindResourceTaskDetailLifeInstanceListArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailLifeInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailLifeInstanceListArray) ToGetCertificateBindResourceTaskDetailLifeInstanceListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailLifeInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailLifeInstanceListArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailLifeInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailLifeInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailLifeInstanceList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailLifeInstanceListOutput) ToGetCertificateBindResourceTaskDetailLifeInstanceListOutput() GetCertificateBindResourceTaskDetailLifeInstanceListOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailLifeInstanceListOutput) ToGetCertificateBindResourceTaskDetailLifeInstanceListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailLifeInstanceListOutput {
+	return o
+}
+
+// Certificate ID.
+func (o GetCertificateBindResourceTaskDetailLifeInstanceListOutput) CertId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailLifeInstanceList) string { return v.CertId }).(pulumi.StringOutput)
+}
+
+// Domain name.
+func (o GetCertificateBindResourceTaskDetailLifeInstanceListOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailLifeInstanceList) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// Domain status. deployed: deployed; processing: deploying; applying: applying; failed: apply failed; issued: bind failed.
+func (o GetCertificateBindResourceTaskDetailLifeInstanceListOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailLifeInstanceList) int { return v.Status }).(pulumi.IntOutput)
+}
+
+type GetCertificateBindResourceTaskDetailLifeInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailLifeInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailLifeInstanceList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailLifeInstanceListArrayOutput) ToGetCertificateBindResourceTaskDetailLifeInstanceListArrayOutput() GetCertificateBindResourceTaskDetailLifeInstanceListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailLifeInstanceListArrayOutput) ToGetCertificateBindResourceTaskDetailLifeInstanceListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailLifeInstanceListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailLifeInstanceListArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailLifeInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailLifeInstanceList {
+		return vs[0].([]GetCertificateBindResourceTaskDetailLifeInstanceList)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailLifeInstanceListOutput)
+}
+
+type GetCertificateBindResourceTaskDetailMqtt struct {
+	// Query error message.
+	Error string `pulumi:"error"`
+	// WAF instance detail list.
+	InstanceLists []GetCertificateBindResourceTaskDetailMqttInstanceList `pulumi:"instanceLists"`
+	// Region.
+	Region string `pulumi:"region"`
+	// Total number of WAF instances in the region.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetCertificateBindResourceTaskDetailMqttInput is an input type that accepts GetCertificateBindResourceTaskDetailMqttArgs and GetCertificateBindResourceTaskDetailMqttOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailMqttInput` via:
+//
+//	GetCertificateBindResourceTaskDetailMqttArgs{...}
+type GetCertificateBindResourceTaskDetailMqttInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailMqttOutput() GetCertificateBindResourceTaskDetailMqttOutput
+	ToGetCertificateBindResourceTaskDetailMqttOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailMqttOutput
+}
+
+type GetCertificateBindResourceTaskDetailMqttArgs struct {
+	// Query error message.
+	Error pulumi.StringInput `pulumi:"error"`
+	// WAF instance detail list.
+	InstanceLists GetCertificateBindResourceTaskDetailMqttInstanceListArrayInput `pulumi:"instanceLists"`
+	// Region.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Total number of WAF instances in the region.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetCertificateBindResourceTaskDetailMqttArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailMqtt)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailMqttArgs) ToGetCertificateBindResourceTaskDetailMqttOutput() GetCertificateBindResourceTaskDetailMqttOutput {
+	return i.ToGetCertificateBindResourceTaskDetailMqttOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailMqttArgs) ToGetCertificateBindResourceTaskDetailMqttOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailMqttOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailMqttOutput)
+}
+
+// GetCertificateBindResourceTaskDetailMqttArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailMqttArray and GetCertificateBindResourceTaskDetailMqttArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailMqttArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailMqttArray{ GetCertificateBindResourceTaskDetailMqttArgs{...} }
+type GetCertificateBindResourceTaskDetailMqttArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailMqttArrayOutput() GetCertificateBindResourceTaskDetailMqttArrayOutput
+	ToGetCertificateBindResourceTaskDetailMqttArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailMqttArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailMqttArray []GetCertificateBindResourceTaskDetailMqttInput
+
+func (GetCertificateBindResourceTaskDetailMqttArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailMqtt)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailMqttArray) ToGetCertificateBindResourceTaskDetailMqttArrayOutput() GetCertificateBindResourceTaskDetailMqttArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailMqttArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailMqttArray) ToGetCertificateBindResourceTaskDetailMqttArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailMqttArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailMqttArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailMqttOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailMqttOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailMqtt)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailMqttOutput) ToGetCertificateBindResourceTaskDetailMqttOutput() GetCertificateBindResourceTaskDetailMqttOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailMqttOutput) ToGetCertificateBindResourceTaskDetailMqttOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailMqttOutput {
+	return o
+}
+
+// Query error message.
+func (o GetCertificateBindResourceTaskDetailMqttOutput) Error() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailMqtt) string { return v.Error }).(pulumi.StringOutput)
+}
+
+// WAF instance detail list.
+func (o GetCertificateBindResourceTaskDetailMqttOutput) InstanceLists() GetCertificateBindResourceTaskDetailMqttInstanceListArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailMqtt) []GetCertificateBindResourceTaskDetailMqttInstanceList {
+		return v.InstanceLists
+	}).(GetCertificateBindResourceTaskDetailMqttInstanceListArrayOutput)
+}
+
+// Region.
+func (o GetCertificateBindResourceTaskDetailMqttOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailMqtt) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Total number of WAF instances in the region.
+func (o GetCertificateBindResourceTaskDetailMqttOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailMqtt) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetCertificateBindResourceTaskDetailMqttArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailMqttArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailMqtt)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailMqttArrayOutput) ToGetCertificateBindResourceTaskDetailMqttArrayOutput() GetCertificateBindResourceTaskDetailMqttArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailMqttArrayOutput) ToGetCertificateBindResourceTaskDetailMqttArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailMqttArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailMqttArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailMqttOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailMqtt {
+		return vs[0].([]GetCertificateBindResourceTaskDetailMqtt)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailMqttOutput)
+}
+
+type GetCertificateBindResourceTaskDetailMqttInstanceList struct {
+	// CA certificate list.
+	CaCertIdLists []string `pulumi:"caCertIdLists"`
+	// Instance ID.
+	InstanceId string `pulumi:"instanceId"`
+	// Instance name.
+	InstanceName string `pulumi:"instanceName"`
+	// Instance status.
+	InstanceStatus string `pulumi:"instanceStatus"`
+	// List of domains that do not match the new certificate.
+	NoMatchDomains []string `pulumi:"noMatchDomains"`
+	// Server certificate list.
+	ServerCertIdLists []string `pulumi:"serverCertIdLists"`
+}
+
+// GetCertificateBindResourceTaskDetailMqttInstanceListInput is an input type that accepts GetCertificateBindResourceTaskDetailMqttInstanceListArgs and GetCertificateBindResourceTaskDetailMqttInstanceListOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailMqttInstanceListInput` via:
+//
+//	GetCertificateBindResourceTaskDetailMqttInstanceListArgs{...}
+type GetCertificateBindResourceTaskDetailMqttInstanceListInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailMqttInstanceListOutput() GetCertificateBindResourceTaskDetailMqttInstanceListOutput
+	ToGetCertificateBindResourceTaskDetailMqttInstanceListOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailMqttInstanceListOutput
+}
+
+type GetCertificateBindResourceTaskDetailMqttInstanceListArgs struct {
+	// CA certificate list.
+	CaCertIdLists pulumi.StringArrayInput `pulumi:"caCertIdLists"`
+	// Instance ID.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Instance name.
+	InstanceName pulumi.StringInput `pulumi:"instanceName"`
+	// Instance status.
+	InstanceStatus pulumi.StringInput `pulumi:"instanceStatus"`
+	// List of domains that do not match the new certificate.
+	NoMatchDomains pulumi.StringArrayInput `pulumi:"noMatchDomains"`
+	// Server certificate list.
+	ServerCertIdLists pulumi.StringArrayInput `pulumi:"serverCertIdLists"`
+}
+
+func (GetCertificateBindResourceTaskDetailMqttInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailMqttInstanceList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailMqttInstanceListArgs) ToGetCertificateBindResourceTaskDetailMqttInstanceListOutput() GetCertificateBindResourceTaskDetailMqttInstanceListOutput {
+	return i.ToGetCertificateBindResourceTaskDetailMqttInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailMqttInstanceListArgs) ToGetCertificateBindResourceTaskDetailMqttInstanceListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailMqttInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailMqttInstanceListOutput)
+}
+
+// GetCertificateBindResourceTaskDetailMqttInstanceListArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailMqttInstanceListArray and GetCertificateBindResourceTaskDetailMqttInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailMqttInstanceListArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailMqttInstanceListArray{ GetCertificateBindResourceTaskDetailMqttInstanceListArgs{...} }
+type GetCertificateBindResourceTaskDetailMqttInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailMqttInstanceListArrayOutput() GetCertificateBindResourceTaskDetailMqttInstanceListArrayOutput
+	ToGetCertificateBindResourceTaskDetailMqttInstanceListArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailMqttInstanceListArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailMqttInstanceListArray []GetCertificateBindResourceTaskDetailMqttInstanceListInput
+
+func (GetCertificateBindResourceTaskDetailMqttInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailMqttInstanceList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailMqttInstanceListArray) ToGetCertificateBindResourceTaskDetailMqttInstanceListArrayOutput() GetCertificateBindResourceTaskDetailMqttInstanceListArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailMqttInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailMqttInstanceListArray) ToGetCertificateBindResourceTaskDetailMqttInstanceListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailMqttInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailMqttInstanceListArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailMqttInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailMqttInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailMqttInstanceList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailMqttInstanceListOutput) ToGetCertificateBindResourceTaskDetailMqttInstanceListOutput() GetCertificateBindResourceTaskDetailMqttInstanceListOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailMqttInstanceListOutput) ToGetCertificateBindResourceTaskDetailMqttInstanceListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailMqttInstanceListOutput {
+	return o
+}
+
+// CA certificate list.
+func (o GetCertificateBindResourceTaskDetailMqttInstanceListOutput) CaCertIdLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailMqttInstanceList) []string { return v.CaCertIdLists }).(pulumi.StringArrayOutput)
+}
+
+// Instance ID.
+func (o GetCertificateBindResourceTaskDetailMqttInstanceListOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailMqttInstanceList) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Instance name.
+func (o GetCertificateBindResourceTaskDetailMqttInstanceListOutput) InstanceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailMqttInstanceList) string { return v.InstanceName }).(pulumi.StringOutput)
+}
+
+// Instance status.
+func (o GetCertificateBindResourceTaskDetailMqttInstanceListOutput) InstanceStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailMqttInstanceList) string { return v.InstanceStatus }).(pulumi.StringOutput)
+}
+
+// List of domains that do not match the new certificate.
+func (o GetCertificateBindResourceTaskDetailMqttInstanceListOutput) NoMatchDomains() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailMqttInstanceList) []string { return v.NoMatchDomains }).(pulumi.StringArrayOutput)
+}
+
+// Server certificate list.
+func (o GetCertificateBindResourceTaskDetailMqttInstanceListOutput) ServerCertIdLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailMqttInstanceList) []string { return v.ServerCertIdLists }).(pulumi.StringArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailMqttInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailMqttInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailMqttInstanceList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailMqttInstanceListArrayOutput) ToGetCertificateBindResourceTaskDetailMqttInstanceListArrayOutput() GetCertificateBindResourceTaskDetailMqttInstanceListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailMqttInstanceListArrayOutput) ToGetCertificateBindResourceTaskDetailMqttInstanceListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailMqttInstanceListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailMqttInstanceListArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailMqttInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailMqttInstanceList {
+		return vs[0].([]GetCertificateBindResourceTaskDetailMqttInstanceList)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailMqttInstanceListOutput)
+}
+
+type GetCertificateBindResourceTaskDetailScf struct {
+	// Query error message.
+	Error string `pulumi:"error"`
+	// WAF instance detail list.
+	InstanceLists []GetCertificateBindResourceTaskDetailScfInstanceList `pulumi:"instanceLists"`
+	// Region.
+	Region string `pulumi:"region"`
+	// Total number of WAF instances in the region.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetCertificateBindResourceTaskDetailScfInput is an input type that accepts GetCertificateBindResourceTaskDetailScfArgs and GetCertificateBindResourceTaskDetailScfOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailScfInput` via:
+//
+//	GetCertificateBindResourceTaskDetailScfArgs{...}
+type GetCertificateBindResourceTaskDetailScfInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailScfOutput() GetCertificateBindResourceTaskDetailScfOutput
+	ToGetCertificateBindResourceTaskDetailScfOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailScfOutput
+}
+
+type GetCertificateBindResourceTaskDetailScfArgs struct {
+	// Query error message.
+	Error pulumi.StringInput `pulumi:"error"`
+	// WAF instance detail list.
+	InstanceLists GetCertificateBindResourceTaskDetailScfInstanceListArrayInput `pulumi:"instanceLists"`
+	// Region.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Total number of WAF instances in the region.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetCertificateBindResourceTaskDetailScfArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailScf)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailScfArgs) ToGetCertificateBindResourceTaskDetailScfOutput() GetCertificateBindResourceTaskDetailScfOutput {
+	return i.ToGetCertificateBindResourceTaskDetailScfOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailScfArgs) ToGetCertificateBindResourceTaskDetailScfOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailScfOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailScfOutput)
+}
+
+// GetCertificateBindResourceTaskDetailScfArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailScfArray and GetCertificateBindResourceTaskDetailScfArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailScfArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailScfArray{ GetCertificateBindResourceTaskDetailScfArgs{...} }
+type GetCertificateBindResourceTaskDetailScfArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailScfArrayOutput() GetCertificateBindResourceTaskDetailScfArrayOutput
+	ToGetCertificateBindResourceTaskDetailScfArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailScfArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailScfArray []GetCertificateBindResourceTaskDetailScfInput
+
+func (GetCertificateBindResourceTaskDetailScfArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailScf)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailScfArray) ToGetCertificateBindResourceTaskDetailScfArrayOutput() GetCertificateBindResourceTaskDetailScfArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailScfArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailScfArray) ToGetCertificateBindResourceTaskDetailScfArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailScfArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailScfArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailScfOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailScfOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailScf)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailScfOutput) ToGetCertificateBindResourceTaskDetailScfOutput() GetCertificateBindResourceTaskDetailScfOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailScfOutput) ToGetCertificateBindResourceTaskDetailScfOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailScfOutput {
+	return o
+}
+
+// Query error message.
+func (o GetCertificateBindResourceTaskDetailScfOutput) Error() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailScf) string { return v.Error }).(pulumi.StringOutput)
+}
+
+// WAF instance detail list.
+func (o GetCertificateBindResourceTaskDetailScfOutput) InstanceLists() GetCertificateBindResourceTaskDetailScfInstanceListArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailScf) []GetCertificateBindResourceTaskDetailScfInstanceList {
+		return v.InstanceLists
+	}).(GetCertificateBindResourceTaskDetailScfInstanceListArrayOutput)
+}
+
+// Region.
+func (o GetCertificateBindResourceTaskDetailScfOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailScf) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Total number of WAF instances in the region.
+func (o GetCertificateBindResourceTaskDetailScfOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailScf) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetCertificateBindResourceTaskDetailScfArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailScfArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailScf)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailScfArrayOutput) ToGetCertificateBindResourceTaskDetailScfArrayOutput() GetCertificateBindResourceTaskDetailScfArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailScfArrayOutput) ToGetCertificateBindResourceTaskDetailScfArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailScfArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailScfArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailScfOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailScf {
+		return vs[0].([]GetCertificateBindResourceTaskDetailScf)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailScfOutput)
+}
+
+type GetCertificateBindResourceTaskDetailScfInstanceList struct {
+	// Certificate ID.
+	CertificateId string `pulumi:"certificateId"`
+	// Domain name.
+	Domain string `pulumi:"domain"`
+	// Protocol.
+	Protocol string `pulumi:"protocol"`
+	// Region.
+	Region string `pulumi:"region"`
+}
+
+// GetCertificateBindResourceTaskDetailScfInstanceListInput is an input type that accepts GetCertificateBindResourceTaskDetailScfInstanceListArgs and GetCertificateBindResourceTaskDetailScfInstanceListOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailScfInstanceListInput` via:
+//
+//	GetCertificateBindResourceTaskDetailScfInstanceListArgs{...}
+type GetCertificateBindResourceTaskDetailScfInstanceListInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailScfInstanceListOutput() GetCertificateBindResourceTaskDetailScfInstanceListOutput
+	ToGetCertificateBindResourceTaskDetailScfInstanceListOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailScfInstanceListOutput
+}
+
+type GetCertificateBindResourceTaskDetailScfInstanceListArgs struct {
+	// Certificate ID.
+	CertificateId pulumi.StringInput `pulumi:"certificateId"`
+	// Domain name.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Protocol.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// Region.
+	Region pulumi.StringInput `pulumi:"region"`
+}
+
+func (GetCertificateBindResourceTaskDetailScfInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailScfInstanceList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailScfInstanceListArgs) ToGetCertificateBindResourceTaskDetailScfInstanceListOutput() GetCertificateBindResourceTaskDetailScfInstanceListOutput {
+	return i.ToGetCertificateBindResourceTaskDetailScfInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailScfInstanceListArgs) ToGetCertificateBindResourceTaskDetailScfInstanceListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailScfInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailScfInstanceListOutput)
+}
+
+// GetCertificateBindResourceTaskDetailScfInstanceListArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailScfInstanceListArray and GetCertificateBindResourceTaskDetailScfInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailScfInstanceListArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailScfInstanceListArray{ GetCertificateBindResourceTaskDetailScfInstanceListArgs{...} }
+type GetCertificateBindResourceTaskDetailScfInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailScfInstanceListArrayOutput() GetCertificateBindResourceTaskDetailScfInstanceListArrayOutput
+	ToGetCertificateBindResourceTaskDetailScfInstanceListArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailScfInstanceListArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailScfInstanceListArray []GetCertificateBindResourceTaskDetailScfInstanceListInput
+
+func (GetCertificateBindResourceTaskDetailScfInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailScfInstanceList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailScfInstanceListArray) ToGetCertificateBindResourceTaskDetailScfInstanceListArrayOutput() GetCertificateBindResourceTaskDetailScfInstanceListArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailScfInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailScfInstanceListArray) ToGetCertificateBindResourceTaskDetailScfInstanceListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailScfInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailScfInstanceListArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailScfInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailScfInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailScfInstanceList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailScfInstanceListOutput) ToGetCertificateBindResourceTaskDetailScfInstanceListOutput() GetCertificateBindResourceTaskDetailScfInstanceListOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailScfInstanceListOutput) ToGetCertificateBindResourceTaskDetailScfInstanceListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailScfInstanceListOutput {
+	return o
+}
+
+// Certificate ID.
+func (o GetCertificateBindResourceTaskDetailScfInstanceListOutput) CertificateId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailScfInstanceList) string { return v.CertificateId }).(pulumi.StringOutput)
+}
+
+// Domain name.
+func (o GetCertificateBindResourceTaskDetailScfInstanceListOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailScfInstanceList) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// Protocol.
+func (o GetCertificateBindResourceTaskDetailScfInstanceListOutput) Protocol() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailScfInstanceList) string { return v.Protocol }).(pulumi.StringOutput)
+}
+
+// Region.
+func (o GetCertificateBindResourceTaskDetailScfInstanceListOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailScfInstanceList) string { return v.Region }).(pulumi.StringOutput)
+}
+
+type GetCertificateBindResourceTaskDetailScfInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailScfInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailScfInstanceList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailScfInstanceListArrayOutput) ToGetCertificateBindResourceTaskDetailScfInstanceListArrayOutput() GetCertificateBindResourceTaskDetailScfInstanceListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailScfInstanceListArrayOutput) ToGetCertificateBindResourceTaskDetailScfInstanceListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailScfInstanceListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailScfInstanceListArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailScfInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailScfInstanceList {
+		return vs[0].([]GetCertificateBindResourceTaskDetailScfInstanceList)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailScfInstanceListOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTcb struct {
+	// TCB environment instance detail list.
+	Environments []GetCertificateBindResourceTaskDetailTcbEnvironment `pulumi:"environments"`
+	// Query error message.
+	Error string `pulumi:"error"`
+	// Region.
+	Region string `pulumi:"region"`
+}
+
+// GetCertificateBindResourceTaskDetailTcbInput is an input type that accepts GetCertificateBindResourceTaskDetailTcbArgs and GetCertificateBindResourceTaskDetailTcbOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTcbInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTcbArgs{...}
+type GetCertificateBindResourceTaskDetailTcbInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTcbOutput() GetCertificateBindResourceTaskDetailTcbOutput
+	ToGetCertificateBindResourceTaskDetailTcbOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTcbOutput
+}
+
+type GetCertificateBindResourceTaskDetailTcbArgs struct {
+	// TCB environment instance detail list.
+	Environments GetCertificateBindResourceTaskDetailTcbEnvironmentArrayInput `pulumi:"environments"`
+	// Query error message.
+	Error pulumi.StringInput `pulumi:"error"`
+	// Region.
+	Region pulumi.StringInput `pulumi:"region"`
+}
+
+func (GetCertificateBindResourceTaskDetailTcbArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTcb)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTcbArgs) ToGetCertificateBindResourceTaskDetailTcbOutput() GetCertificateBindResourceTaskDetailTcbOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTcbOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTcbArgs) ToGetCertificateBindResourceTaskDetailTcbOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTcbOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTcbOutput)
+}
+
+// GetCertificateBindResourceTaskDetailTcbArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailTcbArray and GetCertificateBindResourceTaskDetailTcbArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTcbArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTcbArray{ GetCertificateBindResourceTaskDetailTcbArgs{...} }
+type GetCertificateBindResourceTaskDetailTcbArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTcbArrayOutput() GetCertificateBindResourceTaskDetailTcbArrayOutput
+	ToGetCertificateBindResourceTaskDetailTcbArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTcbArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailTcbArray []GetCertificateBindResourceTaskDetailTcbInput
+
+func (GetCertificateBindResourceTaskDetailTcbArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTcb)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTcbArray) ToGetCertificateBindResourceTaskDetailTcbArrayOutput() GetCertificateBindResourceTaskDetailTcbArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTcbArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTcbArray) ToGetCertificateBindResourceTaskDetailTcbArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTcbArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTcbArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTcbOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTcbOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTcb)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTcbOutput) ToGetCertificateBindResourceTaskDetailTcbOutput() GetCertificateBindResourceTaskDetailTcbOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTcbOutput) ToGetCertificateBindResourceTaskDetailTcbOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTcbOutput {
+	return o
+}
+
+// TCB environment instance detail list.
+func (o GetCertificateBindResourceTaskDetailTcbOutput) Environments() GetCertificateBindResourceTaskDetailTcbEnvironmentArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTcb) []GetCertificateBindResourceTaskDetailTcbEnvironment {
+		return v.Environments
+	}).(GetCertificateBindResourceTaskDetailTcbEnvironmentArrayOutput)
+}
+
+// Query error message.
+func (o GetCertificateBindResourceTaskDetailTcbOutput) Error() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTcb) string { return v.Error }).(pulumi.StringOutput)
+}
+
+// Region.
+func (o GetCertificateBindResourceTaskDetailTcbOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTcb) string { return v.Region }).(pulumi.StringOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTcbArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTcbArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTcb)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTcbArrayOutput) ToGetCertificateBindResourceTaskDetailTcbArrayOutput() GetCertificateBindResourceTaskDetailTcbArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTcbArrayOutput) ToGetCertificateBindResourceTaskDetailTcbArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTcbArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTcbArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailTcbOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailTcb {
+		return vs[0].([]GetCertificateBindResourceTaskDetailTcb)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailTcbOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTcbEnvironment struct {
+	// Access service.
+	AccessServices []GetCertificateBindResourceTaskDetailTcbEnvironmentAccessService `pulumi:"accessServices"`
+	// TCB environment.
+	Environments []GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironment `pulumi:"environments"`
+	// Host service.
+	HostServices []GetCertificateBindResourceTaskDetailTcbEnvironmentHostService `pulumi:"hostServices"`
+}
+
+// GetCertificateBindResourceTaskDetailTcbEnvironmentInput is an input type that accepts GetCertificateBindResourceTaskDetailTcbEnvironmentArgs and GetCertificateBindResourceTaskDetailTcbEnvironmentOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTcbEnvironmentInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTcbEnvironmentArgs{...}
+type GetCertificateBindResourceTaskDetailTcbEnvironmentInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTcbEnvironmentOutput() GetCertificateBindResourceTaskDetailTcbEnvironmentOutput
+	ToGetCertificateBindResourceTaskDetailTcbEnvironmentOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTcbEnvironmentOutput
+}
+
+type GetCertificateBindResourceTaskDetailTcbEnvironmentArgs struct {
+	// Access service.
+	AccessServices GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArrayInput `pulumi:"accessServices"`
+	// TCB environment.
+	Environments GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArrayInput `pulumi:"environments"`
+	// Host service.
+	HostServices GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArrayInput `pulumi:"hostServices"`
+}
+
+func (GetCertificateBindResourceTaskDetailTcbEnvironmentArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTcbEnvironment)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTcbEnvironmentArgs) ToGetCertificateBindResourceTaskDetailTcbEnvironmentOutput() GetCertificateBindResourceTaskDetailTcbEnvironmentOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTcbEnvironmentOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTcbEnvironmentArgs) ToGetCertificateBindResourceTaskDetailTcbEnvironmentOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTcbEnvironmentOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTcbEnvironmentOutput)
+}
+
+// GetCertificateBindResourceTaskDetailTcbEnvironmentArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailTcbEnvironmentArray and GetCertificateBindResourceTaskDetailTcbEnvironmentArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTcbEnvironmentArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTcbEnvironmentArray{ GetCertificateBindResourceTaskDetailTcbEnvironmentArgs{...} }
+type GetCertificateBindResourceTaskDetailTcbEnvironmentArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTcbEnvironmentArrayOutput() GetCertificateBindResourceTaskDetailTcbEnvironmentArrayOutput
+	ToGetCertificateBindResourceTaskDetailTcbEnvironmentArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTcbEnvironmentArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailTcbEnvironmentArray []GetCertificateBindResourceTaskDetailTcbEnvironmentInput
+
+func (GetCertificateBindResourceTaskDetailTcbEnvironmentArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTcbEnvironment)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTcbEnvironmentArray) ToGetCertificateBindResourceTaskDetailTcbEnvironmentArrayOutput() GetCertificateBindResourceTaskDetailTcbEnvironmentArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTcbEnvironmentArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTcbEnvironmentArray) ToGetCertificateBindResourceTaskDetailTcbEnvironmentArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTcbEnvironmentArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTcbEnvironmentArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTcbEnvironmentOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTcbEnvironmentOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTcbEnvironment)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentOutput) ToGetCertificateBindResourceTaskDetailTcbEnvironmentOutput() GetCertificateBindResourceTaskDetailTcbEnvironmentOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentOutput) ToGetCertificateBindResourceTaskDetailTcbEnvironmentOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTcbEnvironmentOutput {
+	return o
+}
+
+// Access service.
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentOutput) AccessServices() GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTcbEnvironment) []GetCertificateBindResourceTaskDetailTcbEnvironmentAccessService {
+		return v.AccessServices
+	}).(GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArrayOutput)
+}
+
+// TCB environment.
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentOutput) Environments() GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTcbEnvironment) []GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironment {
+		return v.Environments
+	}).(GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArrayOutput)
+}
+
+// Host service.
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentOutput) HostServices() GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTcbEnvironment) []GetCertificateBindResourceTaskDetailTcbEnvironmentHostService {
+		return v.HostServices
+	}).(GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTcbEnvironmentArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTcbEnvironmentArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTcbEnvironment)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentArrayOutput) ToGetCertificateBindResourceTaskDetailTcbEnvironmentArrayOutput() GetCertificateBindResourceTaskDetailTcbEnvironmentArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentArrayOutput) ToGetCertificateBindResourceTaskDetailTcbEnvironmentArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTcbEnvironmentArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailTcbEnvironmentOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailTcbEnvironment {
+		return vs[0].([]GetCertificateBindResourceTaskDetailTcbEnvironment)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailTcbEnvironmentOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTcbEnvironmentAccessService struct {
+	// WAF instance detail list.
+	InstanceLists []GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceList `pulumi:"instanceLists"`
+	// Total number of WAF instances in the region.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInput is an input type that accepts GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArgs and GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArgs{...}
+type GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceOutput() GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceOutput
+	ToGetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceOutput
+}
+
+type GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArgs struct {
+	// WAF instance detail list.
+	InstanceLists GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArrayInput `pulumi:"instanceLists"`
+	// Total number of WAF instances in the region.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTcbEnvironmentAccessService)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArgs) ToGetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceOutput() GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArgs) ToGetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceOutput)
+}
+
+// GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArray and GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArray{ GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArgs{...} }
+type GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArrayOutput() GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArrayOutput
+	ToGetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArray []GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInput
+
+func (GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTcbEnvironmentAccessService)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArray) ToGetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArrayOutput() GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArray) ToGetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTcbEnvironmentAccessService)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceOutput) ToGetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceOutput() GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceOutput) ToGetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceOutput {
+	return o
+}
+
+// WAF instance detail list.
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceOutput) InstanceLists() GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTcbEnvironmentAccessService) []GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceList {
+		return v.InstanceLists
+	}).(GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArrayOutput)
+}
+
+// Total number of WAF instances in the region.
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTcbEnvironmentAccessService) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTcbEnvironmentAccessService)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArrayOutput) ToGetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArrayOutput() GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArrayOutput) ToGetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailTcbEnvironmentAccessService {
+		return vs[0].([]GetCertificateBindResourceTaskDetailTcbEnvironmentAccessService)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceList struct {
+	// Domain name.
+	Domain string `pulumi:"domain"`
+	// ICP blacklist status, 0-not banned, 1-banned.
+	ICPStatus int `pulumi:"iCPStatus"`
+	// Whether preempted.
+	IsPreempted bool `pulumi:"isPreempted"`
+	// Bound certificate ID.
+	OldCertificateId string `pulumi:"oldCertificateId"`
+	// Domain status. deployed: deployed; processing: deploying; applying: applying; failed: apply failed; issued: bind failed.
+	Status int `pulumi:"status"`
+	// Unified domain status.
+	UnionStatus int `pulumi:"unionStatus"`
+}
+
+// GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListInput is an input type that accepts GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArgs and GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArgs{...}
+type GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListOutput() GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListOutput
+	ToGetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListOutput
+}
+
+type GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArgs struct {
+	// Domain name.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// ICP blacklist status, 0-not banned, 1-banned.
+	ICPStatus pulumi.IntInput `pulumi:"iCPStatus"`
+	// Whether preempted.
+	IsPreempted pulumi.BoolInput `pulumi:"isPreempted"`
+	// Bound certificate ID.
+	OldCertificateId pulumi.StringInput `pulumi:"oldCertificateId"`
+	// Domain status. deployed: deployed; processing: deploying; applying: applying; failed: apply failed; issued: bind failed.
+	Status pulumi.IntInput `pulumi:"status"`
+	// Unified domain status.
+	UnionStatus pulumi.IntInput `pulumi:"unionStatus"`
+}
+
+func (GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArgs) ToGetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListOutput() GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArgs) ToGetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListOutput)
+}
+
+// GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArray and GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArray{ GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArgs{...} }
+type GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArrayOutput() GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArrayOutput
+	ToGetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArray []GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListInput
+
+func (GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArray) ToGetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArrayOutput() GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArray) ToGetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListOutput) ToGetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListOutput() GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListOutput) ToGetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListOutput {
+	return o
+}
+
+// Domain name.
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceList) string {
+		return v.Domain
+	}).(pulumi.StringOutput)
+}
+
+// ICP blacklist status, 0-not banned, 1-banned.
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListOutput) ICPStatus() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceList) int {
+		return v.ICPStatus
+	}).(pulumi.IntOutput)
+}
+
+// Whether preempted.
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListOutput) IsPreempted() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceList) bool {
+		return v.IsPreempted
+	}).(pulumi.BoolOutput)
+}
+
+// Bound certificate ID.
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListOutput) OldCertificateId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceList) string {
+		return v.OldCertificateId
+	}).(pulumi.StringOutput)
+}
+
+// Domain status. deployed: deployed; processing: deploying; applying: applying; failed: apply failed; issued: bind failed.
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListOutput) Status() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceList) int {
+		return v.Status
+	}).(pulumi.IntOutput)
+}
+
+// Unified domain status.
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListOutput) UnionStatus() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceList) int {
+		return v.UnionStatus
+	}).(pulumi.IntOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArrayOutput) ToGetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArrayOutput() GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArrayOutput) ToGetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceList {
+		return vs[0].([]GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceList)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironment struct {
+	// Gateway certificate ID.
+	Id string `pulumi:"id"`
+	// Gateway certificate name.
+	Name string `pulumi:"name"`
+	// Source.
+	Source string `pulumi:"source"`
+	// Domain status. deployed: deployed; processing: deploying; applying: applying; failed: apply failed; issued: bind failed.
+	Status string `pulumi:"status"`
+}
+
+// GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentInput is an input type that accepts GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArgs and GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArgs{...}
+type GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentOutput() GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentOutput
+	ToGetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentOutput
+}
+
+type GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArgs struct {
+	// Gateway certificate ID.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Gateway certificate name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Source.
+	Source pulumi.StringInput `pulumi:"source"`
+	// Domain status. deployed: deployed; processing: deploying; applying: applying; failed: apply failed; issued: bind failed.
+	Status pulumi.StringInput `pulumi:"status"`
+}
+
+func (GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironment)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArgs) ToGetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentOutput() GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArgs) ToGetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentOutput)
+}
+
+// GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArray and GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArray{ GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArgs{...} }
+type GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArrayOutput() GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArrayOutput
+	ToGetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArray []GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentInput
+
+func (GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironment)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArray) ToGetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArrayOutput() GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArray) ToGetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironment)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentOutput) ToGetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentOutput() GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentOutput) ToGetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentOutput {
+	return o
+}
+
+// Gateway certificate ID.
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironment) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Gateway certificate name.
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironment) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Source.
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentOutput) Source() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironment) string { return v.Source }).(pulumi.StringOutput)
+}
+
+// Domain status. deployed: deployed; processing: deploying; applying: applying; failed: apply failed; issued: bind failed.
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironment) string { return v.Status }).(pulumi.StringOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironment)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArrayOutput) ToGetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArrayOutput() GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArrayOutput) ToGetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironment {
+		return vs[0].([]GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironment)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTcbEnvironmentHostService struct {
+	// WAF instance detail list.
+	InstanceLists []GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceList `pulumi:"instanceLists"`
+	// Total number of WAF instances in the region.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInput is an input type that accepts GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArgs and GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArgs{...}
+type GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceOutput() GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceOutput
+	ToGetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceOutput
+}
+
+type GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArgs struct {
+	// WAF instance detail list.
+	InstanceLists GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArrayInput `pulumi:"instanceLists"`
+	// Total number of WAF instances in the region.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTcbEnvironmentHostService)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArgs) ToGetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceOutput() GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArgs) ToGetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceOutput)
+}
+
+// GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArray and GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArray{ GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArgs{...} }
+type GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArrayOutput() GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArrayOutput
+	ToGetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArray []GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInput
+
+func (GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTcbEnvironmentHostService)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArray) ToGetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArrayOutput() GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArray) ToGetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTcbEnvironmentHostService)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceOutput) ToGetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceOutput() GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceOutput) ToGetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceOutput {
+	return o
+}
+
+// WAF instance detail list.
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceOutput) InstanceLists() GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTcbEnvironmentHostService) []GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceList {
+		return v.InstanceLists
+	}).(GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArrayOutput)
+}
+
+// Total number of WAF instances in the region.
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTcbEnvironmentHostService) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTcbEnvironmentHostService)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArrayOutput) ToGetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArrayOutput() GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArrayOutput) ToGetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailTcbEnvironmentHostService {
+		return vs[0].([]GetCertificateBindResourceTaskDetailTcbEnvironmentHostService)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceList struct {
+	// DNS status.
+	DNSStatus string `pulumi:"dNSStatus"`
+	// Domain name.
+	Domain string `pulumi:"domain"`
+	// Bound certificate ID.
+	OldCertificateId string `pulumi:"oldCertificateId"`
+	// Domain status. deployed: deployed; processing: deploying; applying: applying; failed: apply failed; issued: bind failed.
+	Status string `pulumi:"status"`
+}
+
+// GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListInput is an input type that accepts GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArgs and GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArgs{...}
+type GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListOutput() GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListOutput
+	ToGetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListOutput
+}
+
+type GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArgs struct {
+	// DNS status.
+	DNSStatus pulumi.StringInput `pulumi:"dNSStatus"`
+	// Domain name.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Bound certificate ID.
+	OldCertificateId pulumi.StringInput `pulumi:"oldCertificateId"`
+	// Domain status. deployed: deployed; processing: deploying; applying: applying; failed: apply failed; issued: bind failed.
+	Status pulumi.StringInput `pulumi:"status"`
+}
+
+func (GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArgs) ToGetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListOutput() GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArgs) ToGetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListOutput)
+}
+
+// GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArray and GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArray{ GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArgs{...} }
+type GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArrayOutput() GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArrayOutput
+	ToGetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArray []GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListInput
+
+func (GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArray) ToGetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArrayOutput() GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArray) ToGetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListOutput) ToGetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListOutput() GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListOutput) ToGetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListOutput {
+	return o
+}
+
+// DNS status.
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListOutput) DNSStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceList) string {
+		return v.DNSStatus
+	}).(pulumi.StringOutput)
+}
+
+// Domain name.
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceList) string {
+		return v.Domain
+	}).(pulumi.StringOutput)
+}
+
+// Bound certificate ID.
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListOutput) OldCertificateId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceList) string {
+		return v.OldCertificateId
+	}).(pulumi.StringOutput)
+}
+
+// Domain status. deployed: deployed; processing: deploying; applying: applying; failed: apply failed; issued: bind failed.
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceList) string {
+		return v.Status
+	}).(pulumi.StringOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArrayOutput) ToGetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArrayOutput() GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArrayOutput) ToGetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceList {
+		return vs[0].([]GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceList)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTdmq struct {
+	// Query error message.
+	Error string `pulumi:"error"`
+	// WAF instance detail list.
+	InstanceLists []GetCertificateBindResourceTaskDetailTdmqInstanceList `pulumi:"instanceLists"`
+	// Region.
+	Region string `pulumi:"region"`
+	// Total number of WAF instances in the region.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetCertificateBindResourceTaskDetailTdmqInput is an input type that accepts GetCertificateBindResourceTaskDetailTdmqArgs and GetCertificateBindResourceTaskDetailTdmqOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTdmqInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTdmqArgs{...}
+type GetCertificateBindResourceTaskDetailTdmqInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTdmqOutput() GetCertificateBindResourceTaskDetailTdmqOutput
+	ToGetCertificateBindResourceTaskDetailTdmqOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTdmqOutput
+}
+
+type GetCertificateBindResourceTaskDetailTdmqArgs struct {
+	// Query error message.
+	Error pulumi.StringInput `pulumi:"error"`
+	// WAF instance detail list.
+	InstanceLists GetCertificateBindResourceTaskDetailTdmqInstanceListArrayInput `pulumi:"instanceLists"`
+	// Region.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Total number of WAF instances in the region.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetCertificateBindResourceTaskDetailTdmqArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTdmq)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTdmqArgs) ToGetCertificateBindResourceTaskDetailTdmqOutput() GetCertificateBindResourceTaskDetailTdmqOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTdmqOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTdmqArgs) ToGetCertificateBindResourceTaskDetailTdmqOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTdmqOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTdmqOutput)
+}
+
+// GetCertificateBindResourceTaskDetailTdmqArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailTdmqArray and GetCertificateBindResourceTaskDetailTdmqArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTdmqArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTdmqArray{ GetCertificateBindResourceTaskDetailTdmqArgs{...} }
+type GetCertificateBindResourceTaskDetailTdmqArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTdmqArrayOutput() GetCertificateBindResourceTaskDetailTdmqArrayOutput
+	ToGetCertificateBindResourceTaskDetailTdmqArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTdmqArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailTdmqArray []GetCertificateBindResourceTaskDetailTdmqInput
+
+func (GetCertificateBindResourceTaskDetailTdmqArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTdmq)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTdmqArray) ToGetCertificateBindResourceTaskDetailTdmqArrayOutput() GetCertificateBindResourceTaskDetailTdmqArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTdmqArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTdmqArray) ToGetCertificateBindResourceTaskDetailTdmqArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTdmqArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTdmqArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTdmqOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTdmqOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTdmq)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTdmqOutput) ToGetCertificateBindResourceTaskDetailTdmqOutput() GetCertificateBindResourceTaskDetailTdmqOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTdmqOutput) ToGetCertificateBindResourceTaskDetailTdmqOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTdmqOutput {
+	return o
+}
+
+// Query error message.
+func (o GetCertificateBindResourceTaskDetailTdmqOutput) Error() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTdmq) string { return v.Error }).(pulumi.StringOutput)
+}
+
+// WAF instance detail list.
+func (o GetCertificateBindResourceTaskDetailTdmqOutput) InstanceLists() GetCertificateBindResourceTaskDetailTdmqInstanceListArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTdmq) []GetCertificateBindResourceTaskDetailTdmqInstanceList {
+		return v.InstanceLists
+	}).(GetCertificateBindResourceTaskDetailTdmqInstanceListArrayOutput)
+}
+
+// Region.
+func (o GetCertificateBindResourceTaskDetailTdmqOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTdmq) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Total number of WAF instances in the region.
+func (o GetCertificateBindResourceTaskDetailTdmqOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTdmq) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTdmqArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTdmqArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTdmq)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTdmqArrayOutput) ToGetCertificateBindResourceTaskDetailTdmqArrayOutput() GetCertificateBindResourceTaskDetailTdmqArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTdmqArrayOutput) ToGetCertificateBindResourceTaskDetailTdmqArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTdmqArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTdmqArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailTdmqOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailTdmq {
+		return vs[0].([]GetCertificateBindResourceTaskDetailTdmq)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailTdmqOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTdmqInstanceList struct {
+	// CA certificate ID.
+	CaCertId string `pulumi:"caCertId"`
+	// Certificate ID.
+	CertId string `pulumi:"certId"`
+	// Instance ID.
+	InstanceId string `pulumi:"instanceId"`
+	// Instance name.
+	InstanceName string `pulumi:"instanceName"`
+	// Instance status.
+	InstanceStatus string `pulumi:"instanceStatus"`
+	// List of domains that do not match the new certificate.
+	NoMatchDomains []string `pulumi:"noMatchDomains"`
+}
+
+// GetCertificateBindResourceTaskDetailTdmqInstanceListInput is an input type that accepts GetCertificateBindResourceTaskDetailTdmqInstanceListArgs and GetCertificateBindResourceTaskDetailTdmqInstanceListOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTdmqInstanceListInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTdmqInstanceListArgs{...}
+type GetCertificateBindResourceTaskDetailTdmqInstanceListInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTdmqInstanceListOutput() GetCertificateBindResourceTaskDetailTdmqInstanceListOutput
+	ToGetCertificateBindResourceTaskDetailTdmqInstanceListOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTdmqInstanceListOutput
+}
+
+type GetCertificateBindResourceTaskDetailTdmqInstanceListArgs struct {
+	// CA certificate ID.
+	CaCertId pulumi.StringInput `pulumi:"caCertId"`
+	// Certificate ID.
+	CertId pulumi.StringInput `pulumi:"certId"`
+	// Instance ID.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Instance name.
+	InstanceName pulumi.StringInput `pulumi:"instanceName"`
+	// Instance status.
+	InstanceStatus pulumi.StringInput `pulumi:"instanceStatus"`
+	// List of domains that do not match the new certificate.
+	NoMatchDomains pulumi.StringArrayInput `pulumi:"noMatchDomains"`
+}
+
+func (GetCertificateBindResourceTaskDetailTdmqInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTdmqInstanceList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTdmqInstanceListArgs) ToGetCertificateBindResourceTaskDetailTdmqInstanceListOutput() GetCertificateBindResourceTaskDetailTdmqInstanceListOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTdmqInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTdmqInstanceListArgs) ToGetCertificateBindResourceTaskDetailTdmqInstanceListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTdmqInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTdmqInstanceListOutput)
+}
+
+// GetCertificateBindResourceTaskDetailTdmqInstanceListArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailTdmqInstanceListArray and GetCertificateBindResourceTaskDetailTdmqInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTdmqInstanceListArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTdmqInstanceListArray{ GetCertificateBindResourceTaskDetailTdmqInstanceListArgs{...} }
+type GetCertificateBindResourceTaskDetailTdmqInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTdmqInstanceListArrayOutput() GetCertificateBindResourceTaskDetailTdmqInstanceListArrayOutput
+	ToGetCertificateBindResourceTaskDetailTdmqInstanceListArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTdmqInstanceListArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailTdmqInstanceListArray []GetCertificateBindResourceTaskDetailTdmqInstanceListInput
+
+func (GetCertificateBindResourceTaskDetailTdmqInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTdmqInstanceList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTdmqInstanceListArray) ToGetCertificateBindResourceTaskDetailTdmqInstanceListArrayOutput() GetCertificateBindResourceTaskDetailTdmqInstanceListArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTdmqInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTdmqInstanceListArray) ToGetCertificateBindResourceTaskDetailTdmqInstanceListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTdmqInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTdmqInstanceListArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTdmqInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTdmqInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTdmqInstanceList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTdmqInstanceListOutput) ToGetCertificateBindResourceTaskDetailTdmqInstanceListOutput() GetCertificateBindResourceTaskDetailTdmqInstanceListOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTdmqInstanceListOutput) ToGetCertificateBindResourceTaskDetailTdmqInstanceListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTdmqInstanceListOutput {
+	return o
+}
+
+// CA certificate ID.
+func (o GetCertificateBindResourceTaskDetailTdmqInstanceListOutput) CaCertId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTdmqInstanceList) string { return v.CaCertId }).(pulumi.StringOutput)
+}
+
+// Certificate ID.
+func (o GetCertificateBindResourceTaskDetailTdmqInstanceListOutput) CertId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTdmqInstanceList) string { return v.CertId }).(pulumi.StringOutput)
+}
+
+// Instance ID.
+func (o GetCertificateBindResourceTaskDetailTdmqInstanceListOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTdmqInstanceList) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Instance name.
+func (o GetCertificateBindResourceTaskDetailTdmqInstanceListOutput) InstanceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTdmqInstanceList) string { return v.InstanceName }).(pulumi.StringOutput)
+}
+
+// Instance status.
+func (o GetCertificateBindResourceTaskDetailTdmqInstanceListOutput) InstanceStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTdmqInstanceList) string { return v.InstanceStatus }).(pulumi.StringOutput)
+}
+
+// List of domains that do not match the new certificate.
+func (o GetCertificateBindResourceTaskDetailTdmqInstanceListOutput) NoMatchDomains() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTdmqInstanceList) []string { return v.NoMatchDomains }).(pulumi.StringArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTdmqInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTdmqInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTdmqInstanceList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTdmqInstanceListArrayOutput) ToGetCertificateBindResourceTaskDetailTdmqInstanceListArrayOutput() GetCertificateBindResourceTaskDetailTdmqInstanceListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTdmqInstanceListArrayOutput) ToGetCertificateBindResourceTaskDetailTdmqInstanceListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTdmqInstanceListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTdmqInstanceListArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailTdmqInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailTdmqInstanceList {
+		return vs[0].([]GetCertificateBindResourceTaskDetailTdmqInstanceList)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailTdmqInstanceListOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTeo struct {
+	// Query error message.
+	Error string `pulumi:"error"`
+	// WAF instance detail list.
+	InstanceLists []GetCertificateBindResourceTaskDetailTeoInstanceList `pulumi:"instanceLists"`
+	// Total number of WAF instances in the region.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetCertificateBindResourceTaskDetailTeoInput is an input type that accepts GetCertificateBindResourceTaskDetailTeoArgs and GetCertificateBindResourceTaskDetailTeoOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTeoInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTeoArgs{...}
+type GetCertificateBindResourceTaskDetailTeoInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTeoOutput() GetCertificateBindResourceTaskDetailTeoOutput
+	ToGetCertificateBindResourceTaskDetailTeoOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTeoOutput
+}
+
+type GetCertificateBindResourceTaskDetailTeoArgs struct {
+	// Query error message.
+	Error pulumi.StringInput `pulumi:"error"`
+	// WAF instance detail list.
+	InstanceLists GetCertificateBindResourceTaskDetailTeoInstanceListArrayInput `pulumi:"instanceLists"`
+	// Total number of WAF instances in the region.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetCertificateBindResourceTaskDetailTeoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTeo)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTeoArgs) ToGetCertificateBindResourceTaskDetailTeoOutput() GetCertificateBindResourceTaskDetailTeoOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTeoOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTeoArgs) ToGetCertificateBindResourceTaskDetailTeoOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTeoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTeoOutput)
+}
+
+// GetCertificateBindResourceTaskDetailTeoArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailTeoArray and GetCertificateBindResourceTaskDetailTeoArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTeoArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTeoArray{ GetCertificateBindResourceTaskDetailTeoArgs{...} }
+type GetCertificateBindResourceTaskDetailTeoArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTeoArrayOutput() GetCertificateBindResourceTaskDetailTeoArrayOutput
+	ToGetCertificateBindResourceTaskDetailTeoArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTeoArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailTeoArray []GetCertificateBindResourceTaskDetailTeoInput
+
+func (GetCertificateBindResourceTaskDetailTeoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTeo)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTeoArray) ToGetCertificateBindResourceTaskDetailTeoArrayOutput() GetCertificateBindResourceTaskDetailTeoArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTeoArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTeoArray) ToGetCertificateBindResourceTaskDetailTeoArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTeoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTeoArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTeoOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTeoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTeo)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTeoOutput) ToGetCertificateBindResourceTaskDetailTeoOutput() GetCertificateBindResourceTaskDetailTeoOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTeoOutput) ToGetCertificateBindResourceTaskDetailTeoOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTeoOutput {
+	return o
+}
+
+// Query error message.
+func (o GetCertificateBindResourceTaskDetailTeoOutput) Error() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTeo) string { return v.Error }).(pulumi.StringOutput)
+}
+
+// WAF instance detail list.
+func (o GetCertificateBindResourceTaskDetailTeoOutput) InstanceLists() GetCertificateBindResourceTaskDetailTeoInstanceListArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTeo) []GetCertificateBindResourceTaskDetailTeoInstanceList {
+		return v.InstanceLists
+	}).(GetCertificateBindResourceTaskDetailTeoInstanceListArrayOutput)
+}
+
+// Total number of WAF instances in the region.
+func (o GetCertificateBindResourceTaskDetailTeoOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTeo) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTeoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTeoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTeo)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTeoArrayOutput) ToGetCertificateBindResourceTaskDetailTeoArrayOutput() GetCertificateBindResourceTaskDetailTeoArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTeoArrayOutput) ToGetCertificateBindResourceTaskDetailTeoArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTeoArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTeoArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailTeoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailTeo {
+		return vs[0].([]GetCertificateBindResourceTaskDetailTeo)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailTeoOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTeoInstanceList struct {
+	// Certificate encryption algorithm.
+	Algorithm string `pulumi:"algorithm"`
+	// Certificate ID.
+	CertId string `pulumi:"certId"`
+	// Domain name.
+	Host string `pulumi:"host"`
+	// Domain status. deployed: deployed; processing: deploying; applying: applying; failed: apply failed; issued: bind failed.
+	Status string `pulumi:"status"`
+	// Zone ID.
+	ZoneId string `pulumi:"zoneId"`
+}
+
+// GetCertificateBindResourceTaskDetailTeoInstanceListInput is an input type that accepts GetCertificateBindResourceTaskDetailTeoInstanceListArgs and GetCertificateBindResourceTaskDetailTeoInstanceListOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTeoInstanceListInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTeoInstanceListArgs{...}
+type GetCertificateBindResourceTaskDetailTeoInstanceListInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTeoInstanceListOutput() GetCertificateBindResourceTaskDetailTeoInstanceListOutput
+	ToGetCertificateBindResourceTaskDetailTeoInstanceListOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTeoInstanceListOutput
+}
+
+type GetCertificateBindResourceTaskDetailTeoInstanceListArgs struct {
+	// Certificate encryption algorithm.
+	Algorithm pulumi.StringInput `pulumi:"algorithm"`
+	// Certificate ID.
+	CertId pulumi.StringInput `pulumi:"certId"`
+	// Domain name.
+	Host pulumi.StringInput `pulumi:"host"`
+	// Domain status. deployed: deployed; processing: deploying; applying: applying; failed: apply failed; issued: bind failed.
+	Status pulumi.StringInput `pulumi:"status"`
+	// Zone ID.
+	ZoneId pulumi.StringInput `pulumi:"zoneId"`
+}
+
+func (GetCertificateBindResourceTaskDetailTeoInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTeoInstanceList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTeoInstanceListArgs) ToGetCertificateBindResourceTaskDetailTeoInstanceListOutput() GetCertificateBindResourceTaskDetailTeoInstanceListOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTeoInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTeoInstanceListArgs) ToGetCertificateBindResourceTaskDetailTeoInstanceListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTeoInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTeoInstanceListOutput)
+}
+
+// GetCertificateBindResourceTaskDetailTeoInstanceListArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailTeoInstanceListArray and GetCertificateBindResourceTaskDetailTeoInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTeoInstanceListArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTeoInstanceListArray{ GetCertificateBindResourceTaskDetailTeoInstanceListArgs{...} }
+type GetCertificateBindResourceTaskDetailTeoInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTeoInstanceListArrayOutput() GetCertificateBindResourceTaskDetailTeoInstanceListArrayOutput
+	ToGetCertificateBindResourceTaskDetailTeoInstanceListArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTeoInstanceListArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailTeoInstanceListArray []GetCertificateBindResourceTaskDetailTeoInstanceListInput
+
+func (GetCertificateBindResourceTaskDetailTeoInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTeoInstanceList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTeoInstanceListArray) ToGetCertificateBindResourceTaskDetailTeoInstanceListArrayOutput() GetCertificateBindResourceTaskDetailTeoInstanceListArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTeoInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTeoInstanceListArray) ToGetCertificateBindResourceTaskDetailTeoInstanceListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTeoInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTeoInstanceListArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTeoInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTeoInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTeoInstanceList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTeoInstanceListOutput) ToGetCertificateBindResourceTaskDetailTeoInstanceListOutput() GetCertificateBindResourceTaskDetailTeoInstanceListOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTeoInstanceListOutput) ToGetCertificateBindResourceTaskDetailTeoInstanceListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTeoInstanceListOutput {
+	return o
+}
+
+// Certificate encryption algorithm.
+func (o GetCertificateBindResourceTaskDetailTeoInstanceListOutput) Algorithm() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTeoInstanceList) string { return v.Algorithm }).(pulumi.StringOutput)
+}
+
+// Certificate ID.
+func (o GetCertificateBindResourceTaskDetailTeoInstanceListOutput) CertId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTeoInstanceList) string { return v.CertId }).(pulumi.StringOutput)
+}
+
+// Domain name.
+func (o GetCertificateBindResourceTaskDetailTeoInstanceListOutput) Host() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTeoInstanceList) string { return v.Host }).(pulumi.StringOutput)
+}
+
+// Domain status. deployed: deployed; processing: deploying; applying: applying; failed: apply failed; issued: bind failed.
+func (o GetCertificateBindResourceTaskDetailTeoInstanceListOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTeoInstanceList) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// Zone ID.
+func (o GetCertificateBindResourceTaskDetailTeoInstanceListOutput) ZoneId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTeoInstanceList) string { return v.ZoneId }).(pulumi.StringOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTeoInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTeoInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTeoInstanceList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTeoInstanceListArrayOutput) ToGetCertificateBindResourceTaskDetailTeoInstanceListArrayOutput() GetCertificateBindResourceTaskDetailTeoInstanceListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTeoInstanceListArrayOutput) ToGetCertificateBindResourceTaskDetailTeoInstanceListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTeoInstanceListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTeoInstanceListArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailTeoInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailTeoInstanceList {
+		return vs[0].([]GetCertificateBindResourceTaskDetailTeoInstanceList)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailTeoInstanceListOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTke struct {
+	// Query error message.
+	Error string `pulumi:"error"`
+	// WAF instance detail list.
+	InstanceLists []GetCertificateBindResourceTaskDetailTkeInstanceList `pulumi:"instanceLists"`
+	// Region.
+	Region string `pulumi:"region"`
+	// Total number of WAF instances in the region.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetCertificateBindResourceTaskDetailTkeInput is an input type that accepts GetCertificateBindResourceTaskDetailTkeArgs and GetCertificateBindResourceTaskDetailTkeOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTkeInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTkeArgs{...}
+type GetCertificateBindResourceTaskDetailTkeInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTkeOutput() GetCertificateBindResourceTaskDetailTkeOutput
+	ToGetCertificateBindResourceTaskDetailTkeOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTkeOutput
+}
+
+type GetCertificateBindResourceTaskDetailTkeArgs struct {
+	// Query error message.
+	Error pulumi.StringInput `pulumi:"error"`
+	// WAF instance detail list.
+	InstanceLists GetCertificateBindResourceTaskDetailTkeInstanceListArrayInput `pulumi:"instanceLists"`
+	// Region.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Total number of WAF instances in the region.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetCertificateBindResourceTaskDetailTkeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTke)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTkeArgs) ToGetCertificateBindResourceTaskDetailTkeOutput() GetCertificateBindResourceTaskDetailTkeOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTkeOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTkeArgs) ToGetCertificateBindResourceTaskDetailTkeOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTkeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTkeOutput)
+}
+
+// GetCertificateBindResourceTaskDetailTkeArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailTkeArray and GetCertificateBindResourceTaskDetailTkeArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTkeArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTkeArray{ GetCertificateBindResourceTaskDetailTkeArgs{...} }
+type GetCertificateBindResourceTaskDetailTkeArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTkeArrayOutput() GetCertificateBindResourceTaskDetailTkeArrayOutput
+	ToGetCertificateBindResourceTaskDetailTkeArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTkeArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailTkeArray []GetCertificateBindResourceTaskDetailTkeInput
+
+func (GetCertificateBindResourceTaskDetailTkeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTke)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTkeArray) ToGetCertificateBindResourceTaskDetailTkeArrayOutput() GetCertificateBindResourceTaskDetailTkeArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTkeArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTkeArray) ToGetCertificateBindResourceTaskDetailTkeArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTkeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTkeArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTkeOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTkeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTke)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTkeOutput) ToGetCertificateBindResourceTaskDetailTkeOutput() GetCertificateBindResourceTaskDetailTkeOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTkeOutput) ToGetCertificateBindResourceTaskDetailTkeOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTkeOutput {
+	return o
+}
+
+// Query error message.
+func (o GetCertificateBindResourceTaskDetailTkeOutput) Error() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTke) string { return v.Error }).(pulumi.StringOutput)
+}
+
+// WAF instance detail list.
+func (o GetCertificateBindResourceTaskDetailTkeOutput) InstanceLists() GetCertificateBindResourceTaskDetailTkeInstanceListArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTke) []GetCertificateBindResourceTaskDetailTkeInstanceList {
+		return v.InstanceLists
+	}).(GetCertificateBindResourceTaskDetailTkeInstanceListArrayOutput)
+}
+
+// Region.
+func (o GetCertificateBindResourceTaskDetailTkeOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTke) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Total number of WAF instances in the region.
+func (o GetCertificateBindResourceTaskDetailTkeOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTke) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTkeArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTkeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTke)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTkeArrayOutput) ToGetCertificateBindResourceTaskDetailTkeArrayOutput() GetCertificateBindResourceTaskDetailTkeArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTkeArrayOutput) ToGetCertificateBindResourceTaskDetailTkeArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTkeArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTkeArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailTkeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailTke {
+		return vs[0].([]GetCertificateBindResourceTaskDetailTke)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailTkeOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTkeInstanceList struct {
+	// Cluster ID.
+	ClusterId string `pulumi:"clusterId"`
+	// Cluster name.
+	ClusterName string `pulumi:"clusterName"`
+	// Cluster type.
+	ClusterType string `pulumi:"clusterType"`
+	// Cluster version.
+	ClusterVersion string `pulumi:"clusterVersion"`
+	// Cluster namespace list.
+	NamespaceLists []GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceList `pulumi:"namespaceLists"`
+}
+
+// GetCertificateBindResourceTaskDetailTkeInstanceListInput is an input type that accepts GetCertificateBindResourceTaskDetailTkeInstanceListArgs and GetCertificateBindResourceTaskDetailTkeInstanceListOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTkeInstanceListInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTkeInstanceListArgs{...}
+type GetCertificateBindResourceTaskDetailTkeInstanceListInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTkeInstanceListOutput() GetCertificateBindResourceTaskDetailTkeInstanceListOutput
+	ToGetCertificateBindResourceTaskDetailTkeInstanceListOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTkeInstanceListOutput
+}
+
+type GetCertificateBindResourceTaskDetailTkeInstanceListArgs struct {
+	// Cluster ID.
+	ClusterId pulumi.StringInput `pulumi:"clusterId"`
+	// Cluster name.
+	ClusterName pulumi.StringInput `pulumi:"clusterName"`
+	// Cluster type.
+	ClusterType pulumi.StringInput `pulumi:"clusterType"`
+	// Cluster version.
+	ClusterVersion pulumi.StringInput `pulumi:"clusterVersion"`
+	// Cluster namespace list.
+	NamespaceLists GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArrayInput `pulumi:"namespaceLists"`
+}
+
+func (GetCertificateBindResourceTaskDetailTkeInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTkeInstanceList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTkeInstanceListArgs) ToGetCertificateBindResourceTaskDetailTkeInstanceListOutput() GetCertificateBindResourceTaskDetailTkeInstanceListOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTkeInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTkeInstanceListArgs) ToGetCertificateBindResourceTaskDetailTkeInstanceListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTkeInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTkeInstanceListOutput)
+}
+
+// GetCertificateBindResourceTaskDetailTkeInstanceListArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailTkeInstanceListArray and GetCertificateBindResourceTaskDetailTkeInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTkeInstanceListArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTkeInstanceListArray{ GetCertificateBindResourceTaskDetailTkeInstanceListArgs{...} }
+type GetCertificateBindResourceTaskDetailTkeInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTkeInstanceListArrayOutput() GetCertificateBindResourceTaskDetailTkeInstanceListArrayOutput
+	ToGetCertificateBindResourceTaskDetailTkeInstanceListArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTkeInstanceListArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailTkeInstanceListArray []GetCertificateBindResourceTaskDetailTkeInstanceListInput
+
+func (GetCertificateBindResourceTaskDetailTkeInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTkeInstanceList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTkeInstanceListArray) ToGetCertificateBindResourceTaskDetailTkeInstanceListArrayOutput() GetCertificateBindResourceTaskDetailTkeInstanceListArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTkeInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTkeInstanceListArray) ToGetCertificateBindResourceTaskDetailTkeInstanceListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTkeInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTkeInstanceListArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTkeInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTkeInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTkeInstanceList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTkeInstanceListOutput) ToGetCertificateBindResourceTaskDetailTkeInstanceListOutput() GetCertificateBindResourceTaskDetailTkeInstanceListOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTkeInstanceListOutput) ToGetCertificateBindResourceTaskDetailTkeInstanceListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTkeInstanceListOutput {
+	return o
+}
+
+// Cluster ID.
+func (o GetCertificateBindResourceTaskDetailTkeInstanceListOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTkeInstanceList) string { return v.ClusterId }).(pulumi.StringOutput)
+}
+
+// Cluster name.
+func (o GetCertificateBindResourceTaskDetailTkeInstanceListOutput) ClusterName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTkeInstanceList) string { return v.ClusterName }).(pulumi.StringOutput)
+}
+
+// Cluster type.
+func (o GetCertificateBindResourceTaskDetailTkeInstanceListOutput) ClusterType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTkeInstanceList) string { return v.ClusterType }).(pulumi.StringOutput)
+}
+
+// Cluster version.
+func (o GetCertificateBindResourceTaskDetailTkeInstanceListOutput) ClusterVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTkeInstanceList) string { return v.ClusterVersion }).(pulumi.StringOutput)
+}
+
+// Cluster namespace list.
+func (o GetCertificateBindResourceTaskDetailTkeInstanceListOutput) NamespaceLists() GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTkeInstanceList) []GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceList {
+		return v.NamespaceLists
+	}).(GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTkeInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTkeInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTkeInstanceList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTkeInstanceListArrayOutput) ToGetCertificateBindResourceTaskDetailTkeInstanceListArrayOutput() GetCertificateBindResourceTaskDetailTkeInstanceListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTkeInstanceListArrayOutput) ToGetCertificateBindResourceTaskDetailTkeInstanceListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTkeInstanceListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTkeInstanceListArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailTkeInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailTkeInstanceList {
+		return vs[0].([]GetCertificateBindResourceTaskDetailTkeInstanceList)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailTkeInstanceListOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceList struct {
+	// Gateway certificate name.
+	Name string `pulumi:"name"`
+	// Secret list.
+	SecretLists []GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretList `pulumi:"secretLists"`
+}
+
+// GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListInput is an input type that accepts GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArgs and GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArgs{...}
+type GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListOutput() GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListOutput
+	ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListOutput
+}
+
+type GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArgs struct {
+	// Gateway certificate name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Secret list.
+	SecretLists GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArrayInput `pulumi:"secretLists"`
+}
+
+func (GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArgs) ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListOutput() GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArgs) ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListOutput)
+}
+
+// GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArray and GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArray{ GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArgs{...} }
+type GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArrayOutput() GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArrayOutput
+	ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArray []GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListInput
+
+func (GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArray) ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArrayOutput() GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArray) ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListOutput) ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListOutput() GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListOutput) ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListOutput {
+	return o
+}
+
+// Gateway certificate name.
+func (o GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceList) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Secret list.
+func (o GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListOutput) SecretLists() GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceList) []GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretList {
+		return v.SecretLists
+	}).(GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArrayOutput) ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArrayOutput() GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArrayOutput) ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceList {
+		return vs[0].([]GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceList)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretList struct {
+	// Certificate ID.
+	CertId string `pulumi:"certId"`
+	// Ingress list.
+	IngressLists []GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressList `pulumi:"ingressLists"`
+	// Gateway certificate name.
+	Name string `pulumi:"name"`
+	// List of domains that do not match the new certificate.
+	NoMatchDomains []string `pulumi:"noMatchDomains"`
+}
+
+// GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListInput is an input type that accepts GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArgs and GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArgs{...}
+type GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListOutput() GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListOutput
+	ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListOutput
+}
+
+type GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArgs struct {
+	// Certificate ID.
+	CertId pulumi.StringInput `pulumi:"certId"`
+	// Ingress list.
+	IngressLists GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArrayInput `pulumi:"ingressLists"`
+	// Gateway certificate name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// List of domains that do not match the new certificate.
+	NoMatchDomains pulumi.StringArrayInput `pulumi:"noMatchDomains"`
+}
+
+func (GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArgs) ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListOutput() GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArgs) ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListOutput)
+}
+
+// GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArray and GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArray{ GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArgs{...} }
+type GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArrayOutput() GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArrayOutput
+	ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArray []GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListInput
+
+func (GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArray) ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArrayOutput() GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArray) ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListOutput) ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListOutput() GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListOutput) ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListOutput {
+	return o
+}
+
+// Certificate ID.
+func (o GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListOutput) CertId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretList) string {
+		return v.CertId
+	}).(pulumi.StringOutput)
+}
+
+// Ingress list.
+func (o GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListOutput) IngressLists() GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretList) []GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressList {
+		return v.IngressLists
+	}).(GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArrayOutput)
+}
+
+// Gateway certificate name.
+func (o GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretList) string {
+		return v.Name
+	}).(pulumi.StringOutput)
+}
+
+// List of domains that do not match the new certificate.
+func (o GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListOutput) NoMatchDomains() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretList) []string {
+		return v.NoMatchDomains
+	}).(pulumi.StringArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArrayOutput) ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArrayOutput() GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArrayOutput) ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretList {
+		return vs[0].([]GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretList)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressList struct {
+	// Ingress domain list.
+	Domains []string `pulumi:"domains"`
+	// Ingress name.
+	IngressName string `pulumi:"ingressName"`
+	// TLS domain list.
+	TlsDomains []string `pulumi:"tlsDomains"`
+}
+
+// GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListInput is an input type that accepts GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArgs and GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArgs{...}
+type GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListOutput() GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListOutput
+	ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListOutput
+}
+
+type GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArgs struct {
+	// Ingress domain list.
+	Domains pulumi.StringArrayInput `pulumi:"domains"`
+	// Ingress name.
+	IngressName pulumi.StringInput `pulumi:"ingressName"`
+	// TLS domain list.
+	TlsDomains pulumi.StringArrayInput `pulumi:"tlsDomains"`
+}
+
+func (GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArgs) ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListOutput() GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArgs) ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListOutput)
+}
+
+// GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArray and GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArray{ GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArgs{...} }
+type GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArrayOutput() GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArrayOutput
+	ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArray []GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListInput
+
+func (GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArray) ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArrayOutput() GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArray) ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListOutput) ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListOutput() GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListOutput) ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListOutput {
+	return o
+}
+
+// Ingress domain list.
+func (o GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListOutput) Domains() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressList) []string {
+		return v.Domains
+	}).(pulumi.StringArrayOutput)
+}
+
+// Ingress name.
+func (o GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListOutput) IngressName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressList) string {
+		return v.IngressName
+	}).(pulumi.StringOutput)
+}
+
+// TLS domain list.
+func (o GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListOutput) TlsDomains() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressList) []string {
+		return v.TlsDomains
+	}).(pulumi.StringArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArrayOutput) ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArrayOutput() GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArrayOutput) ToGetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressList {
+		return vs[0].([]GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressList)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTse struct {
+	// Query error message.
+	Error string `pulumi:"error"`
+	// WAF instance detail list.
+	InstanceLists []GetCertificateBindResourceTaskDetailTseInstanceList `pulumi:"instanceLists"`
+	// Region.
+	Region string `pulumi:"region"`
+	// Total number of WAF instances in the region.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetCertificateBindResourceTaskDetailTseInput is an input type that accepts GetCertificateBindResourceTaskDetailTseArgs and GetCertificateBindResourceTaskDetailTseOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTseInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTseArgs{...}
+type GetCertificateBindResourceTaskDetailTseInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTseOutput() GetCertificateBindResourceTaskDetailTseOutput
+	ToGetCertificateBindResourceTaskDetailTseOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTseOutput
+}
+
+type GetCertificateBindResourceTaskDetailTseArgs struct {
+	// Query error message.
+	Error pulumi.StringInput `pulumi:"error"`
+	// WAF instance detail list.
+	InstanceLists GetCertificateBindResourceTaskDetailTseInstanceListArrayInput `pulumi:"instanceLists"`
+	// Region.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Total number of WAF instances in the region.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetCertificateBindResourceTaskDetailTseArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTse)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTseArgs) ToGetCertificateBindResourceTaskDetailTseOutput() GetCertificateBindResourceTaskDetailTseOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTseOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTseArgs) ToGetCertificateBindResourceTaskDetailTseOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTseOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTseOutput)
+}
+
+// GetCertificateBindResourceTaskDetailTseArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailTseArray and GetCertificateBindResourceTaskDetailTseArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTseArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTseArray{ GetCertificateBindResourceTaskDetailTseArgs{...} }
+type GetCertificateBindResourceTaskDetailTseArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTseArrayOutput() GetCertificateBindResourceTaskDetailTseArrayOutput
+	ToGetCertificateBindResourceTaskDetailTseArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTseArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailTseArray []GetCertificateBindResourceTaskDetailTseInput
+
+func (GetCertificateBindResourceTaskDetailTseArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTse)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTseArray) ToGetCertificateBindResourceTaskDetailTseArrayOutput() GetCertificateBindResourceTaskDetailTseArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTseArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTseArray) ToGetCertificateBindResourceTaskDetailTseArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTseArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTseArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTseOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTseOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTse)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTseOutput) ToGetCertificateBindResourceTaskDetailTseOutput() GetCertificateBindResourceTaskDetailTseOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTseOutput) ToGetCertificateBindResourceTaskDetailTseOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTseOutput {
+	return o
+}
+
+// Query error message.
+func (o GetCertificateBindResourceTaskDetailTseOutput) Error() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTse) string { return v.Error }).(pulumi.StringOutput)
+}
+
+// WAF instance detail list.
+func (o GetCertificateBindResourceTaskDetailTseOutput) InstanceLists() GetCertificateBindResourceTaskDetailTseInstanceListArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTse) []GetCertificateBindResourceTaskDetailTseInstanceList {
+		return v.InstanceLists
+	}).(GetCertificateBindResourceTaskDetailTseInstanceListArrayOutput)
+}
+
+// Region.
+func (o GetCertificateBindResourceTaskDetailTseOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTse) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Total number of WAF instances in the region.
+func (o GetCertificateBindResourceTaskDetailTseOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTse) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTseArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTseArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTse)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTseArrayOutput) ToGetCertificateBindResourceTaskDetailTseArrayOutput() GetCertificateBindResourceTaskDetailTseArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTseArrayOutput) ToGetCertificateBindResourceTaskDetailTseArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTseArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTseArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailTseOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailTse {
+		return vs[0].([]GetCertificateBindResourceTaskDetailTse)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailTseOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTseInstanceList struct {
+	// Gateway certificate list.
+	CertificateLists []GetCertificateBindResourceTaskDetailTseInstanceListCertificateList `pulumi:"certificateLists"`
+	// Gateway ID.
+	GatewayId string `pulumi:"gatewayId"`
+	// Gateway name.
+	GatewayName string `pulumi:"gatewayName"`
+}
+
+// GetCertificateBindResourceTaskDetailTseInstanceListInput is an input type that accepts GetCertificateBindResourceTaskDetailTseInstanceListArgs and GetCertificateBindResourceTaskDetailTseInstanceListOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTseInstanceListInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTseInstanceListArgs{...}
+type GetCertificateBindResourceTaskDetailTseInstanceListInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTseInstanceListOutput() GetCertificateBindResourceTaskDetailTseInstanceListOutput
+	ToGetCertificateBindResourceTaskDetailTseInstanceListOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTseInstanceListOutput
+}
+
+type GetCertificateBindResourceTaskDetailTseInstanceListArgs struct {
+	// Gateway certificate list.
+	CertificateLists GetCertificateBindResourceTaskDetailTseInstanceListCertificateListArrayInput `pulumi:"certificateLists"`
+	// Gateway ID.
+	GatewayId pulumi.StringInput `pulumi:"gatewayId"`
+	// Gateway name.
+	GatewayName pulumi.StringInput `pulumi:"gatewayName"`
+}
+
+func (GetCertificateBindResourceTaskDetailTseInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTseInstanceList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTseInstanceListArgs) ToGetCertificateBindResourceTaskDetailTseInstanceListOutput() GetCertificateBindResourceTaskDetailTseInstanceListOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTseInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTseInstanceListArgs) ToGetCertificateBindResourceTaskDetailTseInstanceListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTseInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTseInstanceListOutput)
+}
+
+// GetCertificateBindResourceTaskDetailTseInstanceListArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailTseInstanceListArray and GetCertificateBindResourceTaskDetailTseInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTseInstanceListArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTseInstanceListArray{ GetCertificateBindResourceTaskDetailTseInstanceListArgs{...} }
+type GetCertificateBindResourceTaskDetailTseInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTseInstanceListArrayOutput() GetCertificateBindResourceTaskDetailTseInstanceListArrayOutput
+	ToGetCertificateBindResourceTaskDetailTseInstanceListArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTseInstanceListArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailTseInstanceListArray []GetCertificateBindResourceTaskDetailTseInstanceListInput
+
+func (GetCertificateBindResourceTaskDetailTseInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTseInstanceList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTseInstanceListArray) ToGetCertificateBindResourceTaskDetailTseInstanceListArrayOutput() GetCertificateBindResourceTaskDetailTseInstanceListArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTseInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTseInstanceListArray) ToGetCertificateBindResourceTaskDetailTseInstanceListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTseInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTseInstanceListArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTseInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTseInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTseInstanceList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTseInstanceListOutput) ToGetCertificateBindResourceTaskDetailTseInstanceListOutput() GetCertificateBindResourceTaskDetailTseInstanceListOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTseInstanceListOutput) ToGetCertificateBindResourceTaskDetailTseInstanceListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTseInstanceListOutput {
+	return o
+}
+
+// Gateway certificate list.
+func (o GetCertificateBindResourceTaskDetailTseInstanceListOutput) CertificateLists() GetCertificateBindResourceTaskDetailTseInstanceListCertificateListArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTseInstanceList) []GetCertificateBindResourceTaskDetailTseInstanceListCertificateList {
+		return v.CertificateLists
+	}).(GetCertificateBindResourceTaskDetailTseInstanceListCertificateListArrayOutput)
+}
+
+// Gateway ID.
+func (o GetCertificateBindResourceTaskDetailTseInstanceListOutput) GatewayId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTseInstanceList) string { return v.GatewayId }).(pulumi.StringOutput)
+}
+
+// Gateway name.
+func (o GetCertificateBindResourceTaskDetailTseInstanceListOutput) GatewayName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTseInstanceList) string { return v.GatewayName }).(pulumi.StringOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTseInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTseInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTseInstanceList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTseInstanceListArrayOutput) ToGetCertificateBindResourceTaskDetailTseInstanceListArrayOutput() GetCertificateBindResourceTaskDetailTseInstanceListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTseInstanceListArrayOutput) ToGetCertificateBindResourceTaskDetailTseInstanceListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTseInstanceListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTseInstanceListArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailTseInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailTseInstanceList {
+		return vs[0].([]GetCertificateBindResourceTaskDetailTseInstanceList)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailTseInstanceListOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTseInstanceListCertificateList struct {
+	// Bound domains.
+	BindDomains []string `pulumi:"bindDomains"`
+	// Certificate ID.
+	CertId string `pulumi:"certId"`
+	// Certificate source.
+	CertSource string `pulumi:"certSource"`
+	// Gateway certificate ID.
+	Id string `pulumi:"id"`
+	// Gateway certificate name.
+	Name string `pulumi:"name"`
+}
+
+// GetCertificateBindResourceTaskDetailTseInstanceListCertificateListInput is an input type that accepts GetCertificateBindResourceTaskDetailTseInstanceListCertificateListArgs and GetCertificateBindResourceTaskDetailTseInstanceListCertificateListOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTseInstanceListCertificateListInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTseInstanceListCertificateListArgs{...}
+type GetCertificateBindResourceTaskDetailTseInstanceListCertificateListInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTseInstanceListCertificateListOutput() GetCertificateBindResourceTaskDetailTseInstanceListCertificateListOutput
+	ToGetCertificateBindResourceTaskDetailTseInstanceListCertificateListOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTseInstanceListCertificateListOutput
+}
+
+type GetCertificateBindResourceTaskDetailTseInstanceListCertificateListArgs struct {
+	// Bound domains.
+	BindDomains pulumi.StringArrayInput `pulumi:"bindDomains"`
+	// Certificate ID.
+	CertId pulumi.StringInput `pulumi:"certId"`
+	// Certificate source.
+	CertSource pulumi.StringInput `pulumi:"certSource"`
+	// Gateway certificate ID.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Gateway certificate name.
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (GetCertificateBindResourceTaskDetailTseInstanceListCertificateListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTseInstanceListCertificateList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTseInstanceListCertificateListArgs) ToGetCertificateBindResourceTaskDetailTseInstanceListCertificateListOutput() GetCertificateBindResourceTaskDetailTseInstanceListCertificateListOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTseInstanceListCertificateListOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTseInstanceListCertificateListArgs) ToGetCertificateBindResourceTaskDetailTseInstanceListCertificateListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTseInstanceListCertificateListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTseInstanceListCertificateListOutput)
+}
+
+// GetCertificateBindResourceTaskDetailTseInstanceListCertificateListArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailTseInstanceListCertificateListArray and GetCertificateBindResourceTaskDetailTseInstanceListCertificateListArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailTseInstanceListCertificateListArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailTseInstanceListCertificateListArray{ GetCertificateBindResourceTaskDetailTseInstanceListCertificateListArgs{...} }
+type GetCertificateBindResourceTaskDetailTseInstanceListCertificateListArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailTseInstanceListCertificateListArrayOutput() GetCertificateBindResourceTaskDetailTseInstanceListCertificateListArrayOutput
+	ToGetCertificateBindResourceTaskDetailTseInstanceListCertificateListArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailTseInstanceListCertificateListArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailTseInstanceListCertificateListArray []GetCertificateBindResourceTaskDetailTseInstanceListCertificateListInput
+
+func (GetCertificateBindResourceTaskDetailTseInstanceListCertificateListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTseInstanceListCertificateList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailTseInstanceListCertificateListArray) ToGetCertificateBindResourceTaskDetailTseInstanceListCertificateListArrayOutput() GetCertificateBindResourceTaskDetailTseInstanceListCertificateListArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailTseInstanceListCertificateListArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailTseInstanceListCertificateListArray) ToGetCertificateBindResourceTaskDetailTseInstanceListCertificateListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTseInstanceListCertificateListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailTseInstanceListCertificateListArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTseInstanceListCertificateListOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTseInstanceListCertificateListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailTseInstanceListCertificateList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTseInstanceListCertificateListOutput) ToGetCertificateBindResourceTaskDetailTseInstanceListCertificateListOutput() GetCertificateBindResourceTaskDetailTseInstanceListCertificateListOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTseInstanceListCertificateListOutput) ToGetCertificateBindResourceTaskDetailTseInstanceListCertificateListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTseInstanceListCertificateListOutput {
+	return o
+}
+
+// Bound domains.
+func (o GetCertificateBindResourceTaskDetailTseInstanceListCertificateListOutput) BindDomains() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTseInstanceListCertificateList) []string {
+		return v.BindDomains
+	}).(pulumi.StringArrayOutput)
+}
+
+// Certificate ID.
+func (o GetCertificateBindResourceTaskDetailTseInstanceListCertificateListOutput) CertId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTseInstanceListCertificateList) string { return v.CertId }).(pulumi.StringOutput)
+}
+
+// Certificate source.
+func (o GetCertificateBindResourceTaskDetailTseInstanceListCertificateListOutput) CertSource() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTseInstanceListCertificateList) string { return v.CertSource }).(pulumi.StringOutput)
+}
+
+// Gateway certificate ID.
+func (o GetCertificateBindResourceTaskDetailTseInstanceListCertificateListOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTseInstanceListCertificateList) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Gateway certificate name.
+func (o GetCertificateBindResourceTaskDetailTseInstanceListCertificateListOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailTseInstanceListCertificateList) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type GetCertificateBindResourceTaskDetailTseInstanceListCertificateListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailTseInstanceListCertificateListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailTseInstanceListCertificateList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailTseInstanceListCertificateListArrayOutput) ToGetCertificateBindResourceTaskDetailTseInstanceListCertificateListArrayOutput() GetCertificateBindResourceTaskDetailTseInstanceListCertificateListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTseInstanceListCertificateListArrayOutput) ToGetCertificateBindResourceTaskDetailTseInstanceListCertificateListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailTseInstanceListCertificateListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailTseInstanceListCertificateListArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailTseInstanceListCertificateListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailTseInstanceListCertificateList {
+		return vs[0].([]GetCertificateBindResourceTaskDetailTseInstanceListCertificateList)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailTseInstanceListCertificateListOutput)
+}
+
+type GetCertificateBindResourceTaskDetailVod struct {
+	// Query error message.
+	Error string `pulumi:"error"`
+	// WAF instance detail list.
+	InstanceLists []GetCertificateBindResourceTaskDetailVodInstanceList `pulumi:"instanceLists"`
+	// Total number of WAF instances in the region.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetCertificateBindResourceTaskDetailVodInput is an input type that accepts GetCertificateBindResourceTaskDetailVodArgs and GetCertificateBindResourceTaskDetailVodOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailVodInput` via:
+//
+//	GetCertificateBindResourceTaskDetailVodArgs{...}
+type GetCertificateBindResourceTaskDetailVodInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailVodOutput() GetCertificateBindResourceTaskDetailVodOutput
+	ToGetCertificateBindResourceTaskDetailVodOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailVodOutput
+}
+
+type GetCertificateBindResourceTaskDetailVodArgs struct {
+	// Query error message.
+	Error pulumi.StringInput `pulumi:"error"`
+	// WAF instance detail list.
+	InstanceLists GetCertificateBindResourceTaskDetailVodInstanceListArrayInput `pulumi:"instanceLists"`
+	// Total number of WAF instances in the region.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetCertificateBindResourceTaskDetailVodArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailVod)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailVodArgs) ToGetCertificateBindResourceTaskDetailVodOutput() GetCertificateBindResourceTaskDetailVodOutput {
+	return i.ToGetCertificateBindResourceTaskDetailVodOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailVodArgs) ToGetCertificateBindResourceTaskDetailVodOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailVodOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailVodOutput)
+}
+
+// GetCertificateBindResourceTaskDetailVodArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailVodArray and GetCertificateBindResourceTaskDetailVodArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailVodArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailVodArray{ GetCertificateBindResourceTaskDetailVodArgs{...} }
+type GetCertificateBindResourceTaskDetailVodArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailVodArrayOutput() GetCertificateBindResourceTaskDetailVodArrayOutput
+	ToGetCertificateBindResourceTaskDetailVodArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailVodArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailVodArray []GetCertificateBindResourceTaskDetailVodInput
+
+func (GetCertificateBindResourceTaskDetailVodArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailVod)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailVodArray) ToGetCertificateBindResourceTaskDetailVodArrayOutput() GetCertificateBindResourceTaskDetailVodArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailVodArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailVodArray) ToGetCertificateBindResourceTaskDetailVodArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailVodArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailVodArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailVodOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailVodOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailVod)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailVodOutput) ToGetCertificateBindResourceTaskDetailVodOutput() GetCertificateBindResourceTaskDetailVodOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailVodOutput) ToGetCertificateBindResourceTaskDetailVodOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailVodOutput {
+	return o
+}
+
+// Query error message.
+func (o GetCertificateBindResourceTaskDetailVodOutput) Error() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailVod) string { return v.Error }).(pulumi.StringOutput)
+}
+
+// WAF instance detail list.
+func (o GetCertificateBindResourceTaskDetailVodOutput) InstanceLists() GetCertificateBindResourceTaskDetailVodInstanceListArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailVod) []GetCertificateBindResourceTaskDetailVodInstanceList {
+		return v.InstanceLists
+	}).(GetCertificateBindResourceTaskDetailVodInstanceListArrayOutput)
+}
+
+// Total number of WAF instances in the region.
+func (o GetCertificateBindResourceTaskDetailVodOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailVod) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetCertificateBindResourceTaskDetailVodArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailVodArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailVod)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailVodArrayOutput) ToGetCertificateBindResourceTaskDetailVodArrayOutput() GetCertificateBindResourceTaskDetailVodArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailVodArrayOutput) ToGetCertificateBindResourceTaskDetailVodArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailVodArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailVodArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailVodOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailVod {
+		return vs[0].([]GetCertificateBindResourceTaskDetailVod)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailVodOutput)
+}
+
+type GetCertificateBindResourceTaskDetailVodInstanceList struct {
+	// Certificate ID.
+	CertId string `pulumi:"certId"`
+	// Domain name.
+	Domain string `pulumi:"domain"`
+}
+
+// GetCertificateBindResourceTaskDetailVodInstanceListInput is an input type that accepts GetCertificateBindResourceTaskDetailVodInstanceListArgs and GetCertificateBindResourceTaskDetailVodInstanceListOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailVodInstanceListInput` via:
+//
+//	GetCertificateBindResourceTaskDetailVodInstanceListArgs{...}
+type GetCertificateBindResourceTaskDetailVodInstanceListInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailVodInstanceListOutput() GetCertificateBindResourceTaskDetailVodInstanceListOutput
+	ToGetCertificateBindResourceTaskDetailVodInstanceListOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailVodInstanceListOutput
+}
+
+type GetCertificateBindResourceTaskDetailVodInstanceListArgs struct {
+	// Certificate ID.
+	CertId pulumi.StringInput `pulumi:"certId"`
+	// Domain name.
+	Domain pulumi.StringInput `pulumi:"domain"`
+}
+
+func (GetCertificateBindResourceTaskDetailVodInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailVodInstanceList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailVodInstanceListArgs) ToGetCertificateBindResourceTaskDetailVodInstanceListOutput() GetCertificateBindResourceTaskDetailVodInstanceListOutput {
+	return i.ToGetCertificateBindResourceTaskDetailVodInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailVodInstanceListArgs) ToGetCertificateBindResourceTaskDetailVodInstanceListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailVodInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailVodInstanceListOutput)
+}
+
+// GetCertificateBindResourceTaskDetailVodInstanceListArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailVodInstanceListArray and GetCertificateBindResourceTaskDetailVodInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailVodInstanceListArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailVodInstanceListArray{ GetCertificateBindResourceTaskDetailVodInstanceListArgs{...} }
+type GetCertificateBindResourceTaskDetailVodInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailVodInstanceListArrayOutput() GetCertificateBindResourceTaskDetailVodInstanceListArrayOutput
+	ToGetCertificateBindResourceTaskDetailVodInstanceListArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailVodInstanceListArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailVodInstanceListArray []GetCertificateBindResourceTaskDetailVodInstanceListInput
+
+func (GetCertificateBindResourceTaskDetailVodInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailVodInstanceList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailVodInstanceListArray) ToGetCertificateBindResourceTaskDetailVodInstanceListArrayOutput() GetCertificateBindResourceTaskDetailVodInstanceListArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailVodInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailVodInstanceListArray) ToGetCertificateBindResourceTaskDetailVodInstanceListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailVodInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailVodInstanceListArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailVodInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailVodInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailVodInstanceList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailVodInstanceListOutput) ToGetCertificateBindResourceTaskDetailVodInstanceListOutput() GetCertificateBindResourceTaskDetailVodInstanceListOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailVodInstanceListOutput) ToGetCertificateBindResourceTaskDetailVodInstanceListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailVodInstanceListOutput {
+	return o
+}
+
+// Certificate ID.
+func (o GetCertificateBindResourceTaskDetailVodInstanceListOutput) CertId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailVodInstanceList) string { return v.CertId }).(pulumi.StringOutput)
+}
+
+// Domain name.
+func (o GetCertificateBindResourceTaskDetailVodInstanceListOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailVodInstanceList) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+type GetCertificateBindResourceTaskDetailVodInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailVodInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailVodInstanceList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailVodInstanceListArrayOutput) ToGetCertificateBindResourceTaskDetailVodInstanceListArrayOutput() GetCertificateBindResourceTaskDetailVodInstanceListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailVodInstanceListArrayOutput) ToGetCertificateBindResourceTaskDetailVodInstanceListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailVodInstanceListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailVodInstanceListArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailVodInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailVodInstanceList {
+		return vs[0].([]GetCertificateBindResourceTaskDetailVodInstanceList)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailVodInstanceListOutput)
+}
+
+type GetCertificateBindResourceTaskDetailWaf struct {
+	// Query error message.
+	Error string `pulumi:"error"`
+	// WAF instance detail list.
+	InstanceLists []GetCertificateBindResourceTaskDetailWafInstanceList `pulumi:"instanceLists"`
+	// Region.
+	Region string `pulumi:"region"`
+	// Total number of WAF instances in the region.
+	TotalCount int `pulumi:"totalCount"`
+}
+
+// GetCertificateBindResourceTaskDetailWafInput is an input type that accepts GetCertificateBindResourceTaskDetailWafArgs and GetCertificateBindResourceTaskDetailWafOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailWafInput` via:
+//
+//	GetCertificateBindResourceTaskDetailWafArgs{...}
+type GetCertificateBindResourceTaskDetailWafInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailWafOutput() GetCertificateBindResourceTaskDetailWafOutput
+	ToGetCertificateBindResourceTaskDetailWafOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailWafOutput
+}
+
+type GetCertificateBindResourceTaskDetailWafArgs struct {
+	// Query error message.
+	Error pulumi.StringInput `pulumi:"error"`
+	// WAF instance detail list.
+	InstanceLists GetCertificateBindResourceTaskDetailWafInstanceListArrayInput `pulumi:"instanceLists"`
+	// Region.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Total number of WAF instances in the region.
+	TotalCount pulumi.IntInput `pulumi:"totalCount"`
+}
+
+func (GetCertificateBindResourceTaskDetailWafArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailWaf)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailWafArgs) ToGetCertificateBindResourceTaskDetailWafOutput() GetCertificateBindResourceTaskDetailWafOutput {
+	return i.ToGetCertificateBindResourceTaskDetailWafOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailWafArgs) ToGetCertificateBindResourceTaskDetailWafOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailWafOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailWafOutput)
+}
+
+// GetCertificateBindResourceTaskDetailWafArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailWafArray and GetCertificateBindResourceTaskDetailWafArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailWafArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailWafArray{ GetCertificateBindResourceTaskDetailWafArgs{...} }
+type GetCertificateBindResourceTaskDetailWafArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailWafArrayOutput() GetCertificateBindResourceTaskDetailWafArrayOutput
+	ToGetCertificateBindResourceTaskDetailWafArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailWafArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailWafArray []GetCertificateBindResourceTaskDetailWafInput
+
+func (GetCertificateBindResourceTaskDetailWafArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailWaf)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailWafArray) ToGetCertificateBindResourceTaskDetailWafArrayOutput() GetCertificateBindResourceTaskDetailWafArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailWafArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailWafArray) ToGetCertificateBindResourceTaskDetailWafArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailWafArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailWafArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailWafOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailWafOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailWaf)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailWafOutput) ToGetCertificateBindResourceTaskDetailWafOutput() GetCertificateBindResourceTaskDetailWafOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailWafOutput) ToGetCertificateBindResourceTaskDetailWafOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailWafOutput {
+	return o
+}
+
+// Query error message.
+func (o GetCertificateBindResourceTaskDetailWafOutput) Error() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailWaf) string { return v.Error }).(pulumi.StringOutput)
+}
+
+// WAF instance detail list.
+func (o GetCertificateBindResourceTaskDetailWafOutput) InstanceLists() GetCertificateBindResourceTaskDetailWafInstanceListArrayOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailWaf) []GetCertificateBindResourceTaskDetailWafInstanceList {
+		return v.InstanceLists
+	}).(GetCertificateBindResourceTaskDetailWafInstanceListArrayOutput)
+}
+
+// Region.
+func (o GetCertificateBindResourceTaskDetailWafOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailWaf) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Total number of WAF instances in the region.
+func (o GetCertificateBindResourceTaskDetailWafOutput) TotalCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailWaf) int { return v.TotalCount }).(pulumi.IntOutput)
+}
+
+type GetCertificateBindResourceTaskDetailWafArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailWafArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailWaf)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailWafArrayOutput) ToGetCertificateBindResourceTaskDetailWafArrayOutput() GetCertificateBindResourceTaskDetailWafArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailWafArrayOutput) ToGetCertificateBindResourceTaskDetailWafArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailWafArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailWafArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailWafOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailWaf {
+		return vs[0].([]GetCertificateBindResourceTaskDetailWaf)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailWafOutput)
+}
+
+type GetCertificateBindResourceTaskDetailWafInstanceList struct {
+	// Certificate ID.
+	CertId string `pulumi:"certId"`
+	// Domain name.
+	Domain string `pulumi:"domain"`
+	// Whether to keep long connection, 1 yes, 0 no.
+	Keepalive int `pulumi:"keepalive"`
+}
+
+// GetCertificateBindResourceTaskDetailWafInstanceListInput is an input type that accepts GetCertificateBindResourceTaskDetailWafInstanceListArgs and GetCertificateBindResourceTaskDetailWafInstanceListOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailWafInstanceListInput` via:
+//
+//	GetCertificateBindResourceTaskDetailWafInstanceListArgs{...}
+type GetCertificateBindResourceTaskDetailWafInstanceListInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailWafInstanceListOutput() GetCertificateBindResourceTaskDetailWafInstanceListOutput
+	ToGetCertificateBindResourceTaskDetailWafInstanceListOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailWafInstanceListOutput
+}
+
+type GetCertificateBindResourceTaskDetailWafInstanceListArgs struct {
+	// Certificate ID.
+	CertId pulumi.StringInput `pulumi:"certId"`
+	// Domain name.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Whether to keep long connection, 1 yes, 0 no.
+	Keepalive pulumi.IntInput `pulumi:"keepalive"`
+}
+
+func (GetCertificateBindResourceTaskDetailWafInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailWafInstanceList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailWafInstanceListArgs) ToGetCertificateBindResourceTaskDetailWafInstanceListOutput() GetCertificateBindResourceTaskDetailWafInstanceListOutput {
+	return i.ToGetCertificateBindResourceTaskDetailWafInstanceListOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailWafInstanceListArgs) ToGetCertificateBindResourceTaskDetailWafInstanceListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailWafInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailWafInstanceListOutput)
+}
+
+// GetCertificateBindResourceTaskDetailWafInstanceListArrayInput is an input type that accepts GetCertificateBindResourceTaskDetailWafInstanceListArray and GetCertificateBindResourceTaskDetailWafInstanceListArrayOutput values.
+// You can construct a concrete instance of `GetCertificateBindResourceTaskDetailWafInstanceListArrayInput` via:
+//
+//	GetCertificateBindResourceTaskDetailWafInstanceListArray{ GetCertificateBindResourceTaskDetailWafInstanceListArgs{...} }
+type GetCertificateBindResourceTaskDetailWafInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToGetCertificateBindResourceTaskDetailWafInstanceListArrayOutput() GetCertificateBindResourceTaskDetailWafInstanceListArrayOutput
+	ToGetCertificateBindResourceTaskDetailWafInstanceListArrayOutputWithContext(context.Context) GetCertificateBindResourceTaskDetailWafInstanceListArrayOutput
+}
+
+type GetCertificateBindResourceTaskDetailWafInstanceListArray []GetCertificateBindResourceTaskDetailWafInstanceListInput
+
+func (GetCertificateBindResourceTaskDetailWafInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailWafInstanceList)(nil)).Elem()
+}
+
+func (i GetCertificateBindResourceTaskDetailWafInstanceListArray) ToGetCertificateBindResourceTaskDetailWafInstanceListArrayOutput() GetCertificateBindResourceTaskDetailWafInstanceListArrayOutput {
+	return i.ToGetCertificateBindResourceTaskDetailWafInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i GetCertificateBindResourceTaskDetailWafInstanceListArray) ToGetCertificateBindResourceTaskDetailWafInstanceListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailWafInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCertificateBindResourceTaskDetailWafInstanceListArrayOutput)
+}
+
+type GetCertificateBindResourceTaskDetailWafInstanceListOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailWafInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCertificateBindResourceTaskDetailWafInstanceList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailWafInstanceListOutput) ToGetCertificateBindResourceTaskDetailWafInstanceListOutput() GetCertificateBindResourceTaskDetailWafInstanceListOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailWafInstanceListOutput) ToGetCertificateBindResourceTaskDetailWafInstanceListOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailWafInstanceListOutput {
+	return o
+}
+
+// Certificate ID.
+func (o GetCertificateBindResourceTaskDetailWafInstanceListOutput) CertId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailWafInstanceList) string { return v.CertId }).(pulumi.StringOutput)
+}
+
+// Domain name.
+func (o GetCertificateBindResourceTaskDetailWafInstanceListOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailWafInstanceList) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// Whether to keep long connection, 1 yes, 0 no.
+func (o GetCertificateBindResourceTaskDetailWafInstanceListOutput) Keepalive() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCertificateBindResourceTaskDetailWafInstanceList) int { return v.Keepalive }).(pulumi.IntOutput)
+}
+
+type GetCertificateBindResourceTaskDetailWafInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCertificateBindResourceTaskDetailWafInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCertificateBindResourceTaskDetailWafInstanceList)(nil)).Elem()
+}
+
+func (o GetCertificateBindResourceTaskDetailWafInstanceListArrayOutput) ToGetCertificateBindResourceTaskDetailWafInstanceListArrayOutput() GetCertificateBindResourceTaskDetailWafInstanceListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailWafInstanceListArrayOutput) ToGetCertificateBindResourceTaskDetailWafInstanceListArrayOutputWithContext(ctx context.Context) GetCertificateBindResourceTaskDetailWafInstanceListArrayOutput {
+	return o
+}
+
+func (o GetCertificateBindResourceTaskDetailWafInstanceListArrayOutput) Index(i pulumi.IntInput) GetCertificateBindResourceTaskDetailWafInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCertificateBindResourceTaskDetailWafInstanceList {
+		return vs[0].([]GetCertificateBindResourceTaskDetailWafInstanceList)[vs[1].(int)]
+	}).(GetCertificateBindResourceTaskDetailWafInstanceListOutput)
+}
+
 type GetCertificatesCertificate struct {
 	// Beginning time of the SSL certificate.
 	BeginTime string `pulumi:"beginTime"`
@@ -7224,7 +13026,11 @@ type GetDescribeHostWafInstanceListInstanceList struct {
 	CertId string `pulumi:"certId"`
 	// domain name.
 	Domain string `pulumi:"domain"`
-	// -1: Unrelated certificate of domain name.1: The domain name HTTPS has been opened.0: The domain name HTTPS has been closed.
+	// Whether to maintain a persistent connection (1: Yes, 0: No).
+	Keepalive int `pulumi:"keepalive"`
+	// (**Deprecated**) Deprecated from version v1.82.94. -1: Unrelated certificate of domain name.1: The domain name HTTPS has been opened.0: The domain name HTTPS has been closed.
+	//
+	// Deprecated: Deprecated from version v1.82.94.
 	Status int `pulumi:"status"`
 }
 
@@ -7244,7 +13050,11 @@ type GetDescribeHostWafInstanceListInstanceListArgs struct {
 	CertId pulumi.StringInput `pulumi:"certId"`
 	// domain name.
 	Domain pulumi.StringInput `pulumi:"domain"`
-	// -1: Unrelated certificate of domain name.1: The domain name HTTPS has been opened.0: The domain name HTTPS has been closed.
+	// Whether to maintain a persistent connection (1: Yes, 0: No).
+	Keepalive pulumi.IntInput `pulumi:"keepalive"`
+	// (**Deprecated**) Deprecated from version v1.82.94. -1: Unrelated certificate of domain name.1: The domain name HTTPS has been opened.0: The domain name HTTPS has been closed.
+	//
+	// Deprecated: Deprecated from version v1.82.94.
 	Status pulumi.IntInput `pulumi:"status"`
 }
 
@@ -7309,7 +13119,14 @@ func (o GetDescribeHostWafInstanceListInstanceListOutput) Domain() pulumi.String
 	return o.ApplyT(func(v GetDescribeHostWafInstanceListInstanceList) string { return v.Domain }).(pulumi.StringOutput)
 }
 
-// -1: Unrelated certificate of domain name.1: The domain name HTTPS has been opened.0: The domain name HTTPS has been closed.
+// Whether to maintain a persistent connection (1: Yes, 0: No).
+func (o GetDescribeHostWafInstanceListInstanceListOutput) Keepalive() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDescribeHostWafInstanceListInstanceList) int { return v.Keepalive }).(pulumi.IntOutput)
+}
+
+// (**Deprecated**) Deprecated from version v1.82.94. -1: Unrelated certificate of domain name.1: The domain name HTTPS has been opened.0: The domain name HTTPS has been closed.
+//
+// Deprecated: Deprecated from version v1.82.94.
 func (o GetDescribeHostWafInstanceListInstanceListOutput) Status() pulumi.IntOutput {
 	return o.ApplyT(func(v GetDescribeHostWafInstanceListInstanceList) int { return v.Status }).(pulumi.IntOutput)
 }
@@ -7728,6 +13545,98 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*PayCertificateInformationPtrInput)(nil)).Elem(), PayCertificateInformationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*UpdateCertificateInstanceOperationResourceTypesRegionInput)(nil)).Elem(), UpdateCertificateInstanceOperationResourceTypesRegionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*UpdateCertificateInstanceOperationResourceTypesRegionArrayInput)(nil)).Elem(), UpdateCertificateInstanceOperationResourceTypesRegionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailApigatewayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailApigatewayArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailApigatewayArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailApigatewayArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailApigatewayInstanceListInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailApigatewayInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailApigatewayInstanceListArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailApigatewayInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailCdnInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailCdnArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailCdnArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailCdnArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailCdnInstanceListInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailCdnInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailCdnInstanceListArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailCdnInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailClbInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailClbArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailClbArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailClbArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailClbInstanceListInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailClbInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailClbInstanceListArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailClbInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailClbInstanceListListenerInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailClbInstanceListListenerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailClbInstanceListListenerArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailClbInstanceListListenerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailCoInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailCoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailCoArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailCoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailCoInstanceListInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailCoInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailCoInstanceListArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailCoInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailDdoInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailDdoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailDdoArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailDdoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailDdoInstanceListInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailDdoInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailDdoInstanceListArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailDdoInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailGaapInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailGaapArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailGaapArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailGaapArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailGaapInstanceListInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailGaapInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailGaapInstanceListArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailGaapInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailGaapInstanceListListenerListInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailGaapInstanceListListenerListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailGaapInstanceListListenerListArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailGaapInstanceListListenerListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailLifeInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailLifeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailLifeArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailLifeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailLifeInstanceListInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailLifeInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailLifeInstanceListArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailLifeInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailMqttInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailMqttArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailMqttArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailMqttArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailMqttInstanceListInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailMqttInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailMqttInstanceListArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailMqttInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailScfInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailScfArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailScfArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailScfArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailScfInstanceListInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailScfInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailScfInstanceListArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailScfInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTcbInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTcbArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTcbArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTcbArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTcbEnvironmentInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTcbEnvironmentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTcbEnvironmentArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTcbEnvironmentArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTdmqInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTdmqArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTdmqArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTdmqArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTdmqInstanceListInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTdmqInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTdmqInstanceListArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTdmqInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTeoInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTeoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTeoArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTeoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTeoInstanceListInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTeoInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTeoInstanceListArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTeoInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTkeInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTkeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTkeArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTkeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTkeInstanceListInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTkeInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTkeInstanceListArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTkeInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTseInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTseArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTseArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTseArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTseInstanceListInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTseInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTseInstanceListArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTseInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTseInstanceListCertificateListInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTseInstanceListCertificateListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailTseInstanceListCertificateListArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailTseInstanceListCertificateListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailVodInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailVodArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailVodArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailVodArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailVodInstanceListInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailVodInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailVodInstanceListArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailVodInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailWafInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailWafArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailWafArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailWafArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailWafInstanceListInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailWafInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificateBindResourceTaskDetailWafInstanceListArrayInput)(nil)).Elem(), GetCertificateBindResourceTaskDetailWafInstanceListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificatesCertificateInput)(nil)).Elem(), GetCertificatesCertificateArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificatesCertificateArrayInput)(nil)).Elem(), GetCertificatesCertificateArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetCertificatesCertificateDvAuthInput)(nil)).Elem(), GetCertificatesCertificateDvAuthArgs{})
@@ -7828,6 +13737,98 @@ func init() {
 	pulumi.RegisterOutputType(PayCertificateInformationPtrOutput{})
 	pulumi.RegisterOutputType(UpdateCertificateInstanceOperationResourceTypesRegionOutput{})
 	pulumi.RegisterOutputType(UpdateCertificateInstanceOperationResourceTypesRegionArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailApigatewayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailApigatewayArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailApigatewayInstanceListOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailApigatewayInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailCdnOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailCdnArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailCdnInstanceListOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailCdnInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailClbOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailClbArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailClbInstanceListOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailClbInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailClbInstanceListListenerOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailClbInstanceListListenerArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailClbInstanceListListenerCertificateArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailClbInstanceListListenerRuleCertificateArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailCoOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailCoArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailCoInstanceListOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailCoInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailDdoOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailDdoArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailDdoInstanceListOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailDdoInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailGaapOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailGaapArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailGaapInstanceListOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailGaapInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailGaapInstanceListListenerListOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailGaapInstanceListListenerListArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailLifeOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailLifeArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailLifeInstanceListOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailLifeInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailMqttOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailMqttArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailMqttInstanceListOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailMqttInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailScfOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailScfArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailScfInstanceListOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailScfInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTcbOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTcbArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTcbEnvironmentOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTcbEnvironmentArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTcbEnvironmentAccessServiceInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTcbEnvironmentEnvironmentArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTcbEnvironmentHostServiceInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTdmqOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTdmqArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTdmqInstanceListOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTdmqInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTeoOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTeoArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTeoInstanceListOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTeoInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTkeOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTkeArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTkeInstanceListOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTkeInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTkeInstanceListNamespaceListSecretListIngressListArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTseOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTseArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTseInstanceListOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTseInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTseInstanceListCertificateListOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailTseInstanceListCertificateListArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailVodOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailVodArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailVodInstanceListOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailVodInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailWafOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailWafArrayOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailWafInstanceListOutput{})
+	pulumi.RegisterOutputType(GetCertificateBindResourceTaskDetailWafInstanceListArrayOutput{})
 	pulumi.RegisterOutputType(GetCertificatesCertificateOutput{})
 	pulumi.RegisterOutputType(GetCertificatesCertificateArrayOutput{})
 	pulumi.RegisterOutputType(GetCertificatesCertificateDvAuthOutput{})

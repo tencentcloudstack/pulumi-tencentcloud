@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const cosBucketInventorys = tencentcloud.Cos.getBucketInventorys({
+ * const cosBucketInventorys = tencentcloud.cos.getBucketInventorys({
  *     bucket: "xxxxxx",
  * });
  * ```
@@ -73,7 +73,7 @@ export interface GetBucketInventorysResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const cosBucketInventorys = tencentcloud.Cos.getBucketInventorys({
+ * const cosBucketInventorys = tencentcloud.cos.getBucketInventorys({
  *     bucket: "xxxxxx",
  * });
  * ```
@@ -97,5 +97,5 @@ export interface GetBucketInventorysOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

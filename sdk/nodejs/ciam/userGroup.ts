@@ -27,7 +27,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * ciam user_group can be imported using the id, e.g.
+ * ciam userGroup can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Ciam/userGroup:UserGroup user_group userStoreId#userGroupId
@@ -114,15 +114,15 @@ export interface UserGroupState {
     /**
      * User Group Description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * User Group Name.
      */
-    displayName?: pulumi.Input<string>;
+    displayName?: pulumi.Input<string | undefined>;
     /**
      * User Store ID.
      */
-    userStoreId?: pulumi.Input<string>;
+    userStoreId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -132,7 +132,7 @@ export interface UserGroupArgs {
     /**
      * User Group Description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * User Group Name.
      */

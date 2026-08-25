@@ -74,12 +74,8 @@ type GetRouteConflictsResult struct {
 }
 
 func GetRouteConflictsOutput(ctx *pulumi.Context, args GetRouteConflictsOutputArgs, opts ...pulumi.InvokeOption) GetRouteConflictsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetRouteConflictsResultOutput, error) {
-			args := v.(GetRouteConflictsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Vpc/getRouteConflicts:getRouteConflicts", args, GetRouteConflictsResultOutput{}, options).(GetRouteConflictsResultOutput), nil
-		}).(GetRouteConflictsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Vpc/getRouteConflicts:getRouteConflicts", args, GetRouteConflictsResultOutput{}, options).(GetRouteConflictsResultOutput)
 }
 
 // A collection of arguments for invoking getRouteConflicts.

@@ -37,7 +37,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * kubernetes cluster app addons can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Kubernetes/addon:Addon example cls-k2o1ws9g#tcr
  * ```
@@ -141,27 +140,27 @@ export interface AddonState {
     /**
      * Name of addon.
      */
-    addonName?: pulumi.Input<string>;
+    addonName?: pulumi.Input<string | undefined>;
     /**
      * Version of addon. If no set, the latest version will be installed by default.
      */
-    addonVersion?: pulumi.Input<string>;
+    addonVersion?: pulumi.Input<string | undefined>;
     /**
      * ID of cluster.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Status of addon.
      */
-    phase?: pulumi.Input<string>;
+    phase?: pulumi.Input<string | undefined>;
     /**
      * Params of addon, base64 encoded json format.
      */
-    rawValues?: pulumi.Input<string>;
+    rawValues?: pulumi.Input<string | undefined>;
     /**
      * Reason of addon failed.
      */
-    reason?: pulumi.Input<string>;
+    reason?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -175,7 +174,7 @@ export interface AddonArgs {
     /**
      * Version of addon. If no set, the latest version will be installed by default.
      */
-    addonVersion?: pulumi.Input<string>;
+    addonVersion?: pulumi.Input<string | undefined>;
     /**
      * ID of cluster.
      */
@@ -183,5 +182,5 @@ export interface AddonArgs {
     /**
      * Params of addon, base64 encoded json format.
      */
-    rawValues?: pulumi.Input<string>;
+    rawValues?: pulumi.Input<string | undefined>;
 }

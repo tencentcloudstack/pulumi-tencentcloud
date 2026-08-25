@@ -5,49 +5,33 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a cynosdb cluster slave zone.
+ * Provides a resource to create a CynosDB cluster slave zone.
+ *
+ * > **NOTE:** If you use resource `tencentcloud.Cynosdb.ClusterSlaveZone` to configure `slaveZone` for `tencentcloud.Cynosdb.Cluster`, then you cannot simultaneously set the `slaveZone` field of resource `tencentcloud.Cynosdb.Cluster`.
  *
  * ## Example Usage
  *
- * ### Set a new slave zone for a cynosdb cluster.
+ * ### Set a new slave zone for a cynosdb cluster
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const gz3 = tencentcloud.Vpc.getSubnets({
- *     availabilityZone: defaultAz,
- *     isDefault: true,
- * });
- * const vpcId = gz3.then(gz3 => gz3.instanceLists?.[0]?.vpcId);
- * const subnetId = gz3.then(gz3 => gz3.instanceLists?.[0]?.subnetId);
- * const config = new pulumi.Config();
- * const fixedTags = config.getObject<any>("fixedTags") || {
- *     fixedResource: "do_not_remove",
- * };
- * const internal = tencentcloud.Security.getGroups({
- *     name: "default",
- *     tags: fixedTags,
- * });
- * const sgId = internal.then(internal => internal.securityGroups?.[0]?.securityGroupId);
- * const exclusive = tencentcloud.Security.getGroups({
- *     name: "test_preset_sg",
- * });
- * const sgId2 = exclusive.then(exclusive => exclusive.securityGroups?.[0]?.securityGroupId);
- * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
- * const newAvailabilityZone = config.get("newAvailabilityZone") || "ap-guangzhou-6";
- * const myParamTemplate = config.get("myParamTemplate") || "15765";
- * const instance = new tencentcloud.cynosdb.Cluster("instance", {
- *     availableZone: availabilityZone,
- *     vpcId: vpcId,
- *     subnetId: subnetId,
+ * const example = new tencentcloud.cynosdb.Cluster("example", {
+ *     availableZone: "ap-guangzhou-6",
+ *     vpcId: "vpc-i5yyodl9",
+ *     subnetId: "subnet-hhi88a58",
+ *     dbMode: "NORMAL",
  *     dbType: "MYSQL",
  *     dbVersion: "5.7",
- *     storageLimit: 1000,
- *     clusterName: "tf_test_cynosdb_cluster_slave_zone",
- *     password: "cynos@123",
- *     instanceMaintainDuration: 3600,
+ *     port: 3306,
+ *     clusterName: "tf-example",
+ *     password: "CynosDB@123",
+ *     instanceMaintainDuration: 7200,
  *     instanceMaintainStartTime: 10800,
+ *     instanceCpuCore: 2,
+ *     instanceMemorySize: 4,
+ *     forceDelete: true,
  *     instanceMaintainWeekdays: [
  *         "Fri",
  *         "Mon",
@@ -57,47 +41,32 @@ import * as utilities from "../utilities";
  *         "Wed",
  *         "Tue",
  *     ],
- *     instanceCpuCore: 1,
- *     instanceMemorySize: 2,
  *     paramItems: [
  *         {
  *             name: "character_set_server",
- *             currentValue: "utf8",
+ *             currentValue: "utf8mb4",
  *         },
  *         {
- *             name: "time_zone",
- *             currentValue: "+09:00",
+ *             name: "lower_case_table_names",
+ *             currentValue: "0",
  *         },
  *     ],
- *     forceDelete: true,
- *     rwGroupSgs: [sgId],
- *     roGroupSgs: [sgId],
- *     prarmTemplateId: myParamTemplate,
+ *     tags: {
+ *         createBy: "Terraform",
+ *     },
  * });
- * const clusterSlaveZone = new tencentcloud.cynosdb.ClusterSlaveZone("cluster_slave_zone", {
- *     clusterId: instance.id,
- *     slaveZone: newAvailabilityZone,
- * });
- * ```
- *
- * ### Update the slave zone with specified value.
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@tencentcloud_iac/pulumi";
- *
- * const clusterSlaveZone = new tencentcloud.cynosdb.ClusterSlaveZone("cluster_slave_zone", {
- *     clusterId: instance.id,
- *     slaveZone: availabilityZone,
+ * const exampleClusterSlaveZone = new tencentcloud.cynosdb.ClusterSlaveZone("example", {
+ *     clusterId: example.id,
+ *     slaveZone: "ap-guangzhou-7",
  * });
  * ```
  *
  * ## Import
  *
- * cynosdb cluster_slave_zone can be imported using the id, e.g.
+ * CynosDB cluster slave zone can be imported using the clusterId#slaveZone, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Cynosdb/clusterSlaveZone:ClusterSlaveZone cluster_slave_zone cluster_id#slave_zone
+ * $ pulumi import tencentcloud:Cynosdb/clusterSlaveZone:ClusterSlaveZone example cynosdbmysql-g76di9j5#ap-guangzhou-7
  * ```
  */
 export class ClusterSlaveZone extends pulumi.CustomResource {
@@ -175,11 +144,11 @@ export interface ClusterSlaveZoneState {
     /**
      * The ID of cluster.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Slave zone.
      */
-    slaveZone?: pulumi.Input<string>;
+    slaveZone?: pulumi.Input<string | undefined>;
 }
 
 /**

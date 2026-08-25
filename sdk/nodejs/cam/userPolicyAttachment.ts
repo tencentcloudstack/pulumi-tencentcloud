@@ -39,7 +39,7 @@ import * as utilities from "../utilities";
  *     }),
  *     description: "tf_test",
  * });
- * const users = tencentcloud.Cam.getUsers({
+ * const users = tencentcloud.cam.getUsers({
  *     name: camUserBasic,
  * });
  * const userPolicyAttachmentBasic = new tencentcloud.cam.UserPolicyAttachment("user_policy_attachment_basic", {
@@ -160,33 +160,33 @@ export interface UserPolicyAttachmentState {
     /**
      * Mode of Creation of the CAM user policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
      */
-    createMode?: pulumi.Input<number>;
+    createMode?: pulumi.Input<number | undefined>;
     /**
      * Create time of the CAM user policy attachment.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * ID of the policy.
      */
-    policyId?: pulumi.Input<string>;
+    policyId?: pulumi.Input<string | undefined>;
     /**
      * Name of the policy.
      */
-    policyName?: pulumi.Input<string>;
+    policyName?: pulumi.Input<string | undefined>;
     /**
      * Type of the policy strategy. `User` means customer strategy and `QCS` means preset strategy.
      */
-    policyType?: pulumi.Input<string>;
+    policyType?: pulumi.Input<string | undefined>;
     /**
      * It has been deprecated from version 1.59.5. Use `userName` instead. ID of the attached CAM user.
      *
      * @deprecated It has been deprecated from version 1.59.5. Use `userName` instead.
      */
-    userId?: pulumi.Input<string>;
+    userId?: pulumi.Input<string | undefined>;
     /**
      * Name of the attached CAM user as uniq key.
      */
-    userName?: pulumi.Input<string>;
+    userName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -202,9 +202,9 @@ export interface UserPolicyAttachmentArgs {
      *
      * @deprecated It has been deprecated from version 1.59.5. Use `userName` instead.
      */
-    userId?: pulumi.Input<string>;
+    userId?: pulumi.Input<string | undefined>;
     /**
      * Name of the attached CAM user as uniq key.
      */
-    userName?: pulumi.Input<string>;
+    userName?: pulumi.Input<string | undefined>;
 }

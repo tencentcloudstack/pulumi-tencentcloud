@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Sqlserver.getBackupUploadSize({
+ * const example = tencentcloud.sqlserver.getBackupUploadSize({
  *     instanceId: "mssql-4gmc5805",
  *     backupMigrationId: "mssql-backup-migration-9tj0sxnz",
  * });
@@ -79,7 +79,7 @@ export interface GetBackupUploadSizeResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Sqlserver.getBackupUploadSize({
+ * const example = tencentcloud.sqlserver.getBackupUploadSize({
  *     instanceId: "mssql-4gmc5805",
  *     backupMigrationId: "mssql-backup-migration-9tj0sxnz",
  * });
@@ -106,7 +106,7 @@ export interface GetBackupUploadSizeOutputArgs {
     /**
      * Incremental import task ID.
      */
-    incrementalMigrationId?: pulumi.Input<string>;
+    incrementalMigrationId?: pulumi.Input<string | undefined>;
     /**
      * ID of imported target instance.
      */
@@ -114,5 +114,5 @@ export interface GetBackupUploadSizeOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

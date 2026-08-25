@@ -12,45 +12,6 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a sqlserver configInstanceSecurityGroups
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/sqlserver"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := sqlserver.NewConfigInstanceSecurityGroups(ctx, "config_instance_security_groups", &sqlserver.ConfigInstanceSecurityGroupsArgs{
-//				InstanceId: pulumi.String("mssql-qelbzgwf"),
-//				SecurityGroupIdSets: pulumi.StringArray{
-//					pulumi.String("sg-mayqdlt1"),
-//					pulumi.String("sg-5aubsf8n"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
-// ```
-//
-// ## Import
-//
-// sqlserver config_instance_security_groups can be imported using the id, e.g.
-//
-// ```sh
-// $ pulumi import tencentcloud:Sqlserver/configInstanceSecurityGroups:ConfigInstanceSecurityGroups config_instance_security_groups config_instance_security_groups_id
-// ```
 type ConfigInstanceSecurityGroups struct {
 	pulumi.CustomResourceState
 

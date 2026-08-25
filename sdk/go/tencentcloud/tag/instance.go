@@ -12,7 +12,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a tag
+// Provides a resource to create a Tag
 //
 // ## Example Usage
 //
@@ -43,7 +43,7 @@ import (
 //
 // ## Import
 //
-// tag can be imported using the id, e.g.
+// Tag can be imported using the tagKey#tagValue, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Tag/instance:Instance example tagKey#tagValue

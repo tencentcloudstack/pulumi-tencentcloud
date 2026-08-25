@@ -122,27 +122,27 @@ export interface OpsTaskState {
     /**
      * Action. Valid values: `START`, `PAUSE`.
      */
-    action?: pulumi.Input<string>;
+    action?: pulumi.Input<string | undefined>;
     /**
      * Whether to re-record the intermediate instance from the last pause to the current one when starting. The default value is false, which means no re-recording.
      */
-    enableDataBackfill?: pulumi.Input<boolean>;
+    enableDataBackfill?: pulumi.Input<boolean | undefined>;
     /**
      * Whether required to terminate the generated instance.
      */
-    killInstance?: pulumi.Input<boolean>;
+    killInstance?: pulumi.Input<boolean | undefined>;
     /**
      * Project Id.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * Task status.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Task id.
      */
-    taskId?: pulumi.Input<string>;
+    taskId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -156,11 +156,11 @@ export interface OpsTaskArgs {
     /**
      * Whether to re-record the intermediate instance from the last pause to the current one when starting. The default value is false, which means no re-recording.
      */
-    enableDataBackfill?: pulumi.Input<boolean>;
+    enableDataBackfill?: pulumi.Input<boolean | undefined>;
     /**
      * Whether required to terminate the generated instance.
      */
-    killInstance?: pulumi.Input<boolean>;
+    killInstance?: pulumi.Input<boolean | undefined>;
     /**
      * Project Id.
      */

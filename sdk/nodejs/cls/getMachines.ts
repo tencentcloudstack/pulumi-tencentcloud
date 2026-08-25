@@ -29,7 +29,7 @@ import * as utilities from "../utilities";
  *         ],
  *     },
  * });
- * const machines = tencentcloud.Cls.getMachinesOutput({
+ * const machines = tencentcloud.cls.getMachinesOutput({
  *     groupId: group.id,
  * });
  * ```
@@ -94,7 +94,7 @@ export interface GetMachinesResult {
  *         ],
  *     },
  * });
- * const machines = tencentcloud.Cls.getMachinesOutput({
+ * const machines = tencentcloud.cls.getMachinesOutput({
  *     groupId: group.id,
  * });
  * ```
@@ -118,5 +118,5 @@ export interface GetMachinesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

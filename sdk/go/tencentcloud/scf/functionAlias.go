@@ -16,7 +16,7 @@ import (
 //
 // ## Import
 //
-// scf function_alias can be imported using the id, e.g.
+// scf functionAlias can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Scf/functionAlias:FunctionAlias function_alias namespace#functionName#name

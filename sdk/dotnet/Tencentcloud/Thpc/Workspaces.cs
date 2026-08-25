@@ -23,7 +23,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Thpc
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -146,7 +145,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Thpc
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -310,6 +308,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Thpc
         /// </summary>
         [Output("enhancedService")]
         public Output<Outputs.WorkspacesEnhancedService?> EnhancedService { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.
+        /// </summary>
+        [Output("forceStop")]
+        public Output<bool> ForceStop { get; private set; } = null!;
 
         /// <summary>
         /// The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifying will cause the instance reset.
@@ -491,6 +495,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Thpc
         public Input<Inputs.WorkspacesEnhancedServiceArgs>? EnhancedService { get; set; }
 
         /// <summary>
+        /// Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.
+        /// </summary>
+        [Input("forceStop")]
+        public Input<bool>? ForceStop { get; set; }
+
+        /// <summary>
         /// The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifying will cause the instance reset.
         /// </summary>
         [Input("hostName")]
@@ -635,6 +645,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Thpc
         /// </summary>
         [Input("enhancedService")]
         public Input<Inputs.WorkspacesEnhancedServiceGetArgs>? EnhancedService { get; set; }
+
+        /// <summary>
+        /// Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.
+        /// </summary>
+        [Input("forceStop")]
+        public Input<bool>? ForceStop { get; set; }
 
         /// <summary>
         /// The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifying will cause the instance reset.

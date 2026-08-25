@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "sqlserver",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -288,123 +288,123 @@ export interface InstanceState {
     /**
      * Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid instance.
      */
-    autoRenew?: pulumi.Input<number>;
+    autoRenew?: pulumi.Input<number | undefined>;
     /**
      * Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.
      */
-    autoVoucher?: pulumi.Input<number>;
+    autoVoucher?: pulumi.Input<number | undefined>;
     /**
      * Availability zone.
      */
-    availabilityZone?: pulumi.Input<string>;
+    availabilityZone?: pulumi.Input<string | undefined>;
     /**
      * Pay type of the SQL Server instance. Available values `PREPAID`, `POSTPAID_BY_HOUR`.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
     /**
      * Create time of the SQL Server instance.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Internet address domain name.
      */
-    dnsPodDomain?: pulumi.Input<string>;
+    dnsPodDomain?: pulumi.Input<string | undefined>;
     /**
      * Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
      */
-    engineVersion?: pulumi.Input<string>;
+    engineVersion?: pulumi.Input<string | undefined>;
     /**
      * It has been deprecated from version 1.81.136. Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
      *
      * @deprecated It has been deprecated from version 1.81.136.
      */
-    haType?: pulumi.Input<string>;
+    haType?: pulumi.Input<string | undefined>;
     /**
      * Start time of the maintenance in one day, format like `HH:mm`.
      */
-    maintenanceStartTime?: pulumi.Input<string>;
+    maintenanceStartTime?: pulumi.Input<string | undefined>;
     /**
      * The timespan of maintenance in one day, unit is hour.
      */
-    maintenanceTimeSpan?: pulumi.Input<number>;
+    maintenanceTimeSpan?: pulumi.Input<number | undefined>;
     /**
      * A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and Sunday.
      */
-    maintenanceWeekSets?: pulumi.Input<pulumi.Input<number>[]>;
+    maintenanceWeekSets?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloudSqlserverSpecinfos` provides.
      */
-    memory?: pulumi.Input<number>;
+    memory?: pulumi.Input<number | undefined>;
     /**
      * Indicate whether to deploy across availability zones.
      */
-    multiZones?: pulumi.Input<boolean>;
+    multiZones?: pulumi.Input<boolean | undefined>;
     /**
      * Name of the SQL Server instance.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Purchase instance period in month. The value does not exceed 48.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * Project ID, default value is 0.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it refers to an instance which is not read-only and has no RO group.
      */
-    roFlag?: pulumi.Input<string>;
+    roFlag?: pulumi.Input<string | undefined>;
     /**
      * Security group bound to the instance.
      */
-    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroups?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storageMin` and `storageMax` which data source `tencentcloudSqlserverSpecinfos` provides.
      */
-    storage?: pulumi.Input<number>;
+    storage?: pulumi.Input<number | undefined>;
     /**
      * ID of subnet.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * The tags of the SQL Server.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * External port number.
      */
-    tgwWanVport?: pulumi.Input<number>;
+    tgwWanVport?: pulumi.Input<number | undefined>;
     /**
      * System time zone, default: `China Standard Time`.
      */
-    timeZone?: pulumi.Input<string>;
+    timeZone?: pulumi.Input<string | undefined>;
     /**
      * IP for private access.
      */
-    vip?: pulumi.Input<string>;
+    vip?: pulumi.Input<string | undefined>;
     /**
      * An array of voucher IDs, currently only one can be used for a single order.
      */
-    voucherIds?: pulumi.Input<pulumi.Input<string>[]>;
+    voucherIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * ID of VPC.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * Port for private access.
      */
-    vport?: pulumi.Input<number>;
+    vport?: pulumi.Input<number | undefined>;
     /**
      * It has been deprecated from version 1.81.2. The way to execute the allocation. Supported values include: 0 - execute immediately, 1 - execute in maintenance window.
      *
      * @deprecated It has been deprecated from version 1.81.2.
      */
-    waitSwitch?: pulumi.Input<number>;
+    waitSwitch?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -414,41 +414,41 @@ export interface InstanceArgs {
     /**
      * Automatic renewal sign. 0 for normal renewal, 1 for automatic renewal (Default). Only valid when purchasing a prepaid instance.
      */
-    autoRenew?: pulumi.Input<number>;
+    autoRenew?: pulumi.Input<number | undefined>;
     /**
      * Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.
      */
-    autoVoucher?: pulumi.Input<number>;
+    autoVoucher?: pulumi.Input<number | undefined>;
     /**
      * Availability zone.
      */
-    availabilityZone?: pulumi.Input<string>;
+    availabilityZone?: pulumi.Input<string | undefined>;
     /**
      * Pay type of the SQL Server instance. Available values `PREPAID`, `POSTPAID_BY_HOUR`.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
     /**
      * Version of the SQL Server database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
      */
-    engineVersion?: pulumi.Input<string>;
+    engineVersion?: pulumi.Input<string | undefined>;
     /**
      * It has been deprecated from version 1.81.136. Instance type. `DUAL` (dual-server high availability), `CLUSTER` (cluster). Default is `DUAL`.
      *
      * @deprecated It has been deprecated from version 1.81.136.
      */
-    haType?: pulumi.Input<string>;
+    haType?: pulumi.Input<string | undefined>;
     /**
      * Start time of the maintenance in one day, format like `HH:mm`.
      */
-    maintenanceStartTime?: pulumi.Input<string>;
+    maintenanceStartTime?: pulumi.Input<string | undefined>;
     /**
      * The timespan of maintenance in one day, unit is hour.
      */
-    maintenanceTimeSpan?: pulumi.Input<number>;
+    maintenanceTimeSpan?: pulumi.Input<number | undefined>;
     /**
      * A list of integer indicates weekly maintenance. For example, [2,7] presents do weekly maintenance on every Tuesday and Sunday.
      */
-    maintenanceWeekSets?: pulumi.Input<pulumi.Input<number>[]>;
+    maintenanceWeekSets?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloudSqlserverSpecinfos` provides.
      */
@@ -456,23 +456,23 @@ export interface InstanceArgs {
     /**
      * Indicate whether to deploy across availability zones.
      */
-    multiZones?: pulumi.Input<boolean>;
+    multiZones?: pulumi.Input<boolean | undefined>;
     /**
      * Name of the SQL Server instance.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Purchase instance period in month. The value does not exceed 48.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * Project ID, default value is 0.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Security group bound to the instance.
      */
-    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroups?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storageMin` and `storageMax` which data source `tencentcloudSqlserverSpecinfos` provides.
      */
@@ -480,27 +480,27 @@ export interface InstanceArgs {
     /**
      * ID of subnet.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * The tags of the SQL Server.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * System time zone, default: `China Standard Time`.
      */
-    timeZone?: pulumi.Input<string>;
+    timeZone?: pulumi.Input<string | undefined>;
     /**
      * An array of voucher IDs, currently only one can be used for a single order.
      */
-    voucherIds?: pulumi.Input<pulumi.Input<string>[]>;
+    voucherIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * ID of VPC.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * It has been deprecated from version 1.81.2. The way to execute the allocation. Supported values include: 0 - execute immediately, 1 - execute in maintenance window.
      *
      * @deprecated It has been deprecated from version 1.81.2.
      */
-    waitSwitch?: pulumi.Input<number>;
+    waitSwitch?: pulumi.Input<number | undefined>;
 }

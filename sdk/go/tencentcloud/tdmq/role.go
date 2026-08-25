@@ -40,7 +40,7 @@ import (
 //			}
 //			_, err = tdmq.NewRole(ctx, "example", &tdmq.RoleArgs{
 //				RoleName:  pulumi.String("role_example"),
-//				ClusterId: example.ID(),
+//				ClusterId: example.ID().ToIDOutput().ToStringOutput(),
 //				Remark:    pulumi.String("remark."),
 //			})
 //			if err != nil {
@@ -60,6 +60,8 @@ type Role struct {
 	Remark pulumi.StringOutput `pulumi:"remark"`
 	// The name of tdmq role.
 	RoleName pulumi.StringOutput `pulumi:"roleName"`
+	// Role token. This field is returned by the API and used for authentication.
+	Token pulumi.StringOutput `pulumi:"token"`
 }
 
 // NewRole registers a new resource with the given unique name, arguments, and options.
@@ -78,6 +80,10 @@ func NewRole(ctx *pulumi.Context,
 	if args.RoleName == nil {
 		return nil, errors.New("invalid value for required argument 'RoleName'")
 	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"token",
+	})
+	opts = append(opts, secrets)
 	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Role
 	err := ctx.RegisterResource("tencentcloud:Tdmq/role:Role", name, args, &resource, opts...)
@@ -107,6 +113,8 @@ type roleState struct {
 	Remark *string `pulumi:"remark"`
 	// The name of tdmq role.
 	RoleName *string `pulumi:"roleName"`
+	// Role token. This field is returned by the API and used for authentication.
+	Token *string `pulumi:"token"`
 }
 
 type RoleState struct {
@@ -116,6 +124,8 @@ type RoleState struct {
 	Remark pulumi.StringPtrInput
 	// The name of tdmq role.
 	RoleName pulumi.StringPtrInput
+	// Role token. This field is returned by the API and used for authentication.
+	Token pulumi.StringPtrInput
 }
 
 func (RoleState) ElementType() reflect.Type {
@@ -241,6 +251,11 @@ func (o RoleOutput) Remark() pulumi.StringOutput {
 // The name of tdmq role.
 func (o RoleOutput) RoleName() pulumi.StringOutput {
 	return o.ApplyT(func(v *Role) pulumi.StringOutput { return v.RoleName }).(pulumi.StringOutput)
+}
+
+// Role token. This field is returned by the API and used for authentication.
+func (o RoleOutput) Token() pulumi.StringOutput {
+	return o.ApplyT(func(v *Role) pulumi.StringOutput { return v.Token }).(pulumi.StringOutput)
 }
 
 type RoleArrayOutput struct{ *pulumi.OutputState }

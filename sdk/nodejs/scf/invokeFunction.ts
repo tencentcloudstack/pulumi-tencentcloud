@@ -122,31 +122,31 @@ export interface InvokeFunctionState {
     /**
      * Function running parameter, which is in the JSON format. The maximum parameter size is 6 MB for synchronized invocations and 128KB for asynchronized invocations. This field corresponds to event input parameter.
      */
-    clientContext?: pulumi.Input<string>;
+    clientContext?: pulumi.Input<string | undefined>;
     /**
      * Function name.
      */
-    functionName?: pulumi.Input<string>;
+    functionName?: pulumi.Input<string | undefined>;
     /**
      * Fill in RequestResponse for synchronized invocations (default and recommended) and Event for asychronized invocations. Note that for synchronized invocations, the max timeout period is 300s. Choose asychronized invocations if the required timeout period is longer than 300 seconds. You can also use InvokeFunction for synchronized invocations.
      */
-    invocationType?: pulumi.Input<string>;
+    invocationType?: pulumi.Input<string | undefined>;
     /**
      * Null for async invocations.
      */
-    logType?: pulumi.Input<string>;
+    logType?: pulumi.Input<string | undefined>;
     /**
      * Namespace.
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
     /**
      * The version or alias of the triggered function. It defaults to $LATEST.
      */
-    qualifier?: pulumi.Input<string>;
+    qualifier?: pulumi.Input<string | undefined>;
     /**
      * Traffic routing config in json format, e.g., {k:v}. Please note that both k and v must be strings. Up to 1024 bytes allowed.
      */
-    routingKey?: pulumi.Input<string>;
+    routingKey?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -156,7 +156,7 @@ export interface InvokeFunctionArgs {
     /**
      * Function running parameter, which is in the JSON format. The maximum parameter size is 6 MB for synchronized invocations and 128KB for asynchronized invocations. This field corresponds to event input parameter.
      */
-    clientContext?: pulumi.Input<string>;
+    clientContext?: pulumi.Input<string | undefined>;
     /**
      * Function name.
      */
@@ -164,21 +164,21 @@ export interface InvokeFunctionArgs {
     /**
      * Fill in RequestResponse for synchronized invocations (default and recommended) and Event for asychronized invocations. Note that for synchronized invocations, the max timeout period is 300s. Choose asychronized invocations if the required timeout period is longer than 300 seconds. You can also use InvokeFunction for synchronized invocations.
      */
-    invocationType?: pulumi.Input<string>;
+    invocationType?: pulumi.Input<string | undefined>;
     /**
      * Null for async invocations.
      */
-    logType?: pulumi.Input<string>;
+    logType?: pulumi.Input<string | undefined>;
     /**
      * Namespace.
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
     /**
      * The version or alias of the triggered function. It defaults to $LATEST.
      */
-    qualifier?: pulumi.Input<string>;
+    qualifier?: pulumi.Input<string | undefined>;
     /**
      * Traffic routing config in json format, e.g., {k:v}. Please note that both k and v must be strings. Up to 1024 bytes allowed.
      */
-    routingKey?: pulumi.Input<string>;
+    routingKey?: pulumi.Input<string | undefined>;
 }

@@ -156,7 +156,7 @@ export class Instance extends pulumi.CustomResource {
      */
     declare public readonly tags: pulumi.Output<{[key: string]: string} | undefined>;
     /**
-     * The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP`. Default is `EIP`.
+     * The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP` and `ResidentialEIP`. Default is `EIP`.
      */
     declare public readonly type: pulumi.Output<string | undefined>;
 
@@ -220,69 +220,69 @@ export interface InstanceState {
     /**
      * ID of anti DDos package, it must set when `type` is `AntiDDoSEIP`.
      */
-    antiDdosPackageId?: pulumi.Input<string>;
+    antiDdosPackageId?: pulumi.Input<string | undefined>;
     /**
      * The zone of anycast. Valid value: `ANYCAST_ZONE_GLOBAL` and `ANYCAST_ZONE_OVERSEAS`.
      */
-    anycastZone?: pulumi.Input<string>;
+    anycastZone?: pulumi.Input<string | undefined>;
     /**
      * It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.
      *
      * @deprecated It has been deprecated from version 1.27.0.
      */
-    applicableForClb?: pulumi.Input<boolean>;
+    applicableForClb?: pulumi.Input<boolean | undefined>;
     /**
      * Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.
      */
-    autoRenewFlag?: pulumi.Input<number>;
+    autoRenewFlag?: pulumi.Input<number | undefined>;
     /**
      * ID of bandwidth package, it will set when `internetChargeType` is `BANDWIDTH_PACKAGE`.
      */
-    bandwidthPackageId?: pulumi.Input<string>;
+    bandwidthPackageId?: pulumi.Input<string | undefined>;
     /**
      * CDC Unique ID.
      */
-    cdcId?: pulumi.Input<string>;
+    cdcId?: pulumi.Input<string | undefined>;
     /**
      * Network egress. It defaults to `centerEgress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
      */
-    egress?: pulumi.Input<string>;
+    egress?: pulumi.Input<string | undefined>;
     /**
      * The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
      */
-    internetChargeType?: pulumi.Input<string>;
+    internetChargeType?: pulumi.Input<string | undefined>;
     /**
      * The bandwidth limit of EIP, unit is Mbps.
      */
-    internetMaxBandwidthOut?: pulumi.Input<number>;
+    internetMaxBandwidthOut?: pulumi.Input<number | undefined>;
     /**
      * Internet service provider of eip. Valid value: `BGP`, `CMCC`, `CTCC` and `CUCC`.
      */
-    internetServiceProvider?: pulumi.Input<string>;
+    internetServiceProvider?: pulumi.Input<string | undefined>;
     /**
      * The name of eip.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Period of instance. Default value: `1`. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. NOTES: must set when `internetChargeType` is `BANDWIDTH_PREPAID_BY_MONTH`.
      */
-    prepaidPeriod?: pulumi.Input<number>;
+    prepaidPeriod?: pulumi.Input<number | undefined>;
     /**
      * The elastic IP address.
      */
-    publicIp?: pulumi.Input<string>;
+    publicIp?: pulumi.Input<string | undefined>;
     /**
      * The EIP current status.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * The tags of eip.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
-     * The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP`. Default is `EIP`.
+     * The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP` and `ResidentialEIP`. Default is `EIP`.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -292,59 +292,59 @@ export interface InstanceArgs {
     /**
      * ID of anti DDos package, it must set when `type` is `AntiDDoSEIP`.
      */
-    antiDdosPackageId?: pulumi.Input<string>;
+    antiDdosPackageId?: pulumi.Input<string | undefined>;
     /**
      * The zone of anycast. Valid value: `ANYCAST_ZONE_GLOBAL` and `ANYCAST_ZONE_OVERSEAS`.
      */
-    anycastZone?: pulumi.Input<string>;
+    anycastZone?: pulumi.Input<string | undefined>;
     /**
      * It has been deprecated from version 1.27.0. Indicates whether the anycast eip can be associated to a CLB.
      *
      * @deprecated It has been deprecated from version 1.27.0.
      */
-    applicableForClb?: pulumi.Input<boolean>;
+    applicableForClb?: pulumi.Input<boolean | undefined>;
     /**
      * Auto renew flag.  0 - default state (manual renew); 1 - automatic renew; 2 - explicit no automatic renew. NOTES: Only supported prepaid EIP.
      */
-    autoRenewFlag?: pulumi.Input<number>;
+    autoRenewFlag?: pulumi.Input<number | undefined>;
     /**
      * ID of bandwidth package, it will set when `internetChargeType` is `BANDWIDTH_PACKAGE`.
      */
-    bandwidthPackageId?: pulumi.Input<string>;
+    bandwidthPackageId?: pulumi.Input<string | undefined>;
     /**
      * CDC Unique ID.
      */
-    cdcId?: pulumi.Input<string>;
+    cdcId?: pulumi.Input<string | undefined>;
     /**
      * Network egress. It defaults to `centerEgress1`. If you want to try the egress feature, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
      */
-    egress?: pulumi.Input<string>;
+    egress?: pulumi.Input<string | undefined>;
     /**
      * The charge type of eip. Valid values: `BANDWIDTH_PACKAGE`, `BANDWIDTH_POSTPAID_BY_HOUR`, `BANDWIDTH_PREPAID_BY_MONTH` and `TRAFFIC_POSTPAID_BY_HOUR`.
      */
-    internetChargeType?: pulumi.Input<string>;
+    internetChargeType?: pulumi.Input<string | undefined>;
     /**
      * The bandwidth limit of EIP, unit is Mbps.
      */
-    internetMaxBandwidthOut?: pulumi.Input<number>;
+    internetMaxBandwidthOut?: pulumi.Input<number | undefined>;
     /**
      * Internet service provider of eip. Valid value: `BGP`, `CMCC`, `CTCC` and `CUCC`.
      */
-    internetServiceProvider?: pulumi.Input<string>;
+    internetServiceProvider?: pulumi.Input<string | undefined>;
     /**
      * The name of eip.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Period of instance. Default value: `1`. Valid value: `1`, `2`, `3`, `4`, `6`, `7`, `8`, `9`, `12`, `24`, `36`. NOTES: must set when `internetChargeType` is `BANDWIDTH_PREPAID_BY_MONTH`.
      */
-    prepaidPeriod?: pulumi.Input<number>;
+    prepaidPeriod?: pulumi.Input<number | undefined>;
     /**
      * The tags of eip.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
-     * The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP`. Default is `EIP`.
+     * The type of eip. Valid value:  `EIP` and `AnycastEIP` and `HighQualityEIP` and `AntiDDoSEIP` and `ResidentialEIP`. Default is `EIP`.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }

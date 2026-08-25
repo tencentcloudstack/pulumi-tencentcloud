@@ -156,32 +156,32 @@ export interface IpAccessControlV2State {
     /**
      * 42: blocklist; 40: allowlist.
      */
-    actionType?: pulumi.Input<number>;
+    actionType?: pulumi.Input<number | undefined>;
     /**
      * Specific domain name, for example, test.qcloudwaf.com.
      * Global domain name, that is, global.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * IP parameter list.
      */
-    ipLists?: pulumi.Input<pulumi.Input<string>[]>;
+    ipLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Details of scheduled configuration.
      */
-    jobDateTime?: pulumi.Input<inputs.Waf.IpAccessControlV2JobDateTime>;
+    jobDateTime?: pulumi.Input<inputs.Waf.IpAccessControlV2JobDateTime | undefined>;
     /**
      * Scheduled configuration type.
      */
-    jobType?: pulumi.Input<string>;
+    jobType?: pulumi.Input<string | undefined>;
     /**
      * Remarks.
      */
-    note?: pulumi.Input<string>;
+    note?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -208,13 +208,13 @@ export interface IpAccessControlV2Args {
     /**
      * Details of scheduled configuration.
      */
-    jobDateTime?: pulumi.Input<inputs.Waf.IpAccessControlV2JobDateTime>;
+    jobDateTime?: pulumi.Input<inputs.Waf.IpAccessControlV2JobDateTime | undefined>;
     /**
      * Scheduled configuration type.
      */
-    jobType?: pulumi.Input<string>;
+    jobType?: pulumi.Input<string | undefined>;
     /**
      * Remarks.
      */
-    note?: pulumi.Input<string>;
+    note?: pulumi.Input<string | undefined>;
 }

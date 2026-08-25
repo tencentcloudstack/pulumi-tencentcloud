@@ -9,7 +9,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * vpc dhcp_ip can be imported using the id, e.g.
+ * vpc dhcpIp can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Vpc/dhcpIp:DhcpIp dhcp_ip dhcp_ip_id
@@ -99,15 +99,15 @@ export interface DhcpIpState {
     /**
      * `DhcpIp` name.
      */
-    dhcpIpName?: pulumi.Input<string>;
+    dhcpIpName?: pulumi.Input<string | undefined>;
     /**
      * Subnet `ID`.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * The private network `ID`.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }
 
 /**

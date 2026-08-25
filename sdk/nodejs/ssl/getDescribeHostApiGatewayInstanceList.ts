@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const describeHostApiGatewayInstanceList = tencentcloud.Ssl.getDescribeHostApiGatewayInstanceList({
+ * const describeHostApiGatewayInstanceList = tencentcloud.ssl.getDescribeHostApiGatewayInstanceList({
  *     certificateId: "9Bpk7XOu",
  *     resourceType: "apiGateway",
  * });
@@ -91,7 +91,7 @@ export interface GetDescribeHostApiGatewayInstanceListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const describeHostApiGatewayInstanceList = tencentcloud.Ssl.getDescribeHostApiGatewayInstanceList({
+ * const describeHostApiGatewayInstanceList = tencentcloud.ssl.getDescribeHostApiGatewayInstanceList({
  *     certificateId: "9Bpk7XOu",
  *     resourceType: "apiGateway",
  * });
@@ -120,15 +120,15 @@ export interface GetDescribeHostApiGatewayInstanceListOutputArgs {
     /**
      * List of filtering parameters; Filterkey: domainmatch.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Ssl.GetDescribeHostApiGatewayInstanceListFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Ssl.GetDescribeHostApiGatewayInstanceListFilterArgs>[] | undefined>;
     /**
      * Whether to query the cache, 1: Yes; 0: No, the default is the query cache, the cache is half an hour.
      */
-    isCache?: pulumi.Input<number>;
+    isCache?: pulumi.Input<number | undefined>;
     /**
      * Deployed certificate ID.
      */
-    oldCertificateId?: pulumi.Input<string>;
+    oldCertificateId?: pulumi.Input<string | undefined>;
     /**
      * Deploy resource type.
      */
@@ -136,5 +136,5 @@ export interface GetDescribeHostApiGatewayInstanceListOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

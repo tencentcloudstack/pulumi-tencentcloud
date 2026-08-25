@@ -7,7 +7,7 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a controlcenter batch apply account baselines
+ * Provides a resource to create a Controlcenter batch apply account baselines
  *
  * ## Example Usage
  *
@@ -102,11 +102,11 @@ export interface ApplyAccountBaselinesState {
     /**
      * List of baseline item configuration information.
      */
-    baselineConfigItems?: pulumi.Input<pulumi.Input<inputs.Batch.ApplyAccountBaselinesBaselineConfigItem>[]>;
+    baselineConfigItems?: pulumi.Input<pulumi.Input<inputs.Batch.ApplyAccountBaselinesBaselineConfigItem>[] | undefined>;
     /**
      * Member account UIN, which is also the UIN of the account to which the baseline is applied.
      */
-    memberUinLists?: pulumi.Input<pulumi.Input<number>[]>;
+    memberUinLists?: pulumi.Input<pulumi.Input<number>[] | undefined>;
 }
 
 /**

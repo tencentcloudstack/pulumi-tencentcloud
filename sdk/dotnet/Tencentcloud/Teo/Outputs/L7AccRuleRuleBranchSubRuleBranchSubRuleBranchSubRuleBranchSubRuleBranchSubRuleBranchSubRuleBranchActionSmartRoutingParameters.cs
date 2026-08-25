@@ -15,7 +15,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class L7AccRuleRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchActionSmartRoutingParameters
     {
         /// <summary>
-        /// Whether to enable smart acceleration. values: on: enable; Off: disable.
+        /// Whether to enable smart acceleration. values: on: enable; off: disable.
         /// </summary>
         public readonly string? Switch;
 

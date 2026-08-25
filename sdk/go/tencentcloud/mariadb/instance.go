@@ -12,7 +12,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a mariadb instance
+// Provides a resource to create a MariaDB instance(prepaid)
 //
 // ## Example Usage
 //
@@ -28,23 +28,20 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := mariadb.NewInstance(ctx, "instance", &mariadb.InstanceArgs{
+//			_, err := mariadb.NewInstance(ctx, "example", &mariadb.InstanceArgs{
 //				Zones: pulumi.StringArray{
-//					pulumi.String("ap-guangzhou-3"),
+//					pulumi.String("ap-guangzhou-6"),
+//					pulumi.String("ap-guangzhou-7"),
 //				},
+//				InstanceName:  pulumi.String("tf-example"),
 //				NodeCount:     pulumi.Int(2),
 //				Memory:        pulumi.Int(8),
-//				Storage:       pulumi.Int(10),
+//				Storage:       pulumi.Int(500),
 //				Period:        pulumi.Int(1),
-//				VpcId:         pulumi.String("vpc-ii1jfbhl"),
-//				SubnetId:      pulumi.String("subnet-3ku415by"),
+//				VpcId:         pulumi.String("vpc-i5yyodl9"),
+//				SubnetId:      pulumi.String("subnet-hhi88a58"),
 //				DbVersionId:   pulumi.String("8.0"),
-//				InstanceName:  pulumi.String("terraform-test"),
 //				AutoRenewFlag: pulumi.Int(1),
-//				Ipv6Flag:      pulumi.Int(0),
-//				Tags: pulumi.StringMap{
-//					"createby": pulumi.String("terrafrom-2"),
-//				},
 //				InitParams: mariadb.InstanceInitParamArray{
 //					&mariadb.InstanceInitParamArgs{
 //						Param: pulumi.String("character_set_server"),
@@ -63,8 +60,9 @@ import (
 //						Value: pulumi.String("1"),
 //					},
 //				},
-//				DcnRegion:     pulumi.String(""),
-//				DcnInstanceId: pulumi.String(""),
+//				Tags: pulumi.StringMap{
+//					"createBy": pulumi.String("Terrafrom"),
+//				},
 //			})
 //			if err != nil {
 //				return err
@@ -77,10 +75,10 @@ import (
 //
 // ## Import
 //
-// mariadb tencentcloud_mariadb_instance can be imported using the id, e.g.
+// MariaDB instance(prepaid) can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Mariadb/instance:Instance instance tdsql-4pzs5b67
+// $ pulumi import tencentcloud:Mariadb/instance:Instance example tdsql-4pzs5b67
 // ```
 type Instance struct {
 	pulumi.CustomResourceState

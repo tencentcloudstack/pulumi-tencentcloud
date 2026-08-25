@@ -26,7 +26,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * mariadb account can be imported using the instance_id#user_name#host, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Mariadb/account:Account account tdsql-4pzs5b67#account-test#10.101.202.22
  * ```
@@ -138,27 +137,27 @@ export interface AccountState {
     /**
      * account description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * host.
      */
-    host?: pulumi.Input<string>;
+    host?: pulumi.Input<string | undefined>;
     /**
      * instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * account password.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * wether account is read only, 0 means not a read only account.
      */
-    readOnly?: pulumi.Input<number>;
+    readOnly?: pulumi.Input<number | undefined>;
     /**
      * user name.
      */
-    userName?: pulumi.Input<string>;
+    userName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -168,7 +167,7 @@ export interface AccountArgs {
     /**
      * account description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * host.
      */
@@ -184,7 +183,7 @@ export interface AccountArgs {
     /**
      * wether account is read only, 0 means not a read only account.
      */
-    readOnly?: pulumi.Input<number>;
+    readOnly?: pulumi.Input<number | undefined>;
     /**
      * user name.
      */

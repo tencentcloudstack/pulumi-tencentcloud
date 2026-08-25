@@ -90,12 +90,8 @@ type GetDomainAnalyticsResult struct {
 }
 
 func GetDomainAnalyticsOutput(ctx *pulumi.Context, args GetDomainAnalyticsOutputArgs, opts ...pulumi.InvokeOption) GetDomainAnalyticsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDomainAnalyticsResultOutput, error) {
-			args := v.(GetDomainAnalyticsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dnspod/getDomainAnalytics:getDomainAnalytics", args, GetDomainAnalyticsResultOutput{}, options).(GetDomainAnalyticsResultOutput), nil
-		}).(GetDomainAnalyticsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dnspod/getDomainAnalytics:getDomainAnalytics", args, GetDomainAnalyticsResultOutput{}, options).(GetDomainAnalyticsResultOutput)
 }
 
 // A collection of arguments for invoking getDomainAnalytics.

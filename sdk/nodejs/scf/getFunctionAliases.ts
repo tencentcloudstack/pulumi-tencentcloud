@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const functionAliases = tencentcloud.Scf.getFunctionAliases({
+ * const functionAliases = tencentcloud.scf.getFunctionAliases({
  *     functionName: "keep-1676351130",
  *     namespace: "default",
  * });
@@ -82,7 +82,7 @@ export interface GetFunctionAliasesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const functionAliases = tencentcloud.Scf.getFunctionAliases({
+ * const functionAliases = tencentcloud.scf.getFunctionAliases({
  *     functionName: "keep-1676351130",
  *     namespace: "default",
  * });
@@ -109,13 +109,13 @@ export interface GetFunctionAliasesOutputArgs {
     /**
      * If this parameter is provided, only aliases associated with this function version will be returned.
      */
-    functionVersion?: pulumi.Input<string>;
+    functionVersion?: pulumi.Input<string | undefined>;
     /**
      * Function namespace.
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

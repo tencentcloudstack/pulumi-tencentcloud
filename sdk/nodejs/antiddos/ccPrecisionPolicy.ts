@@ -40,7 +40,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * antiddos cc_precision_policy can be imported using the id, e.g.
+ * antiddos ccPrecisionPolicy can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Antiddos/ccPrecisionPolicy:CcPrecisionPolicy cc_precision_policy ${instanceId}#${policyId}#${instanceIp}#${domain}#${protocol}
@@ -157,27 +157,27 @@ export interface CcPrecisionPolicyState {
     /**
      * domain.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Instance Id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Ip value.
      */
-    ip?: pulumi.Input<string>;
+    ip?: pulumi.Input<string | undefined>;
     /**
      * policy type, alg or drop.
      */
-    policyAction?: pulumi.Input<string>;
+    policyAction?: pulumi.Input<string | undefined>;
     /**
      * policy list.
      */
-    policyLists?: pulumi.Input<pulumi.Input<inputs.Antiddos.CcPrecisionPolicyPolicyList>[]>;
+    policyLists?: pulumi.Input<pulumi.Input<inputs.Antiddos.CcPrecisionPolicyPolicyList>[] | undefined>;
     /**
      * protocol http or https.
      */
-    protocol?: pulumi.Input<string>;
+    protocol?: pulumi.Input<string | undefined>;
 }
 
 /**

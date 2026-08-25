@@ -43,7 +43,7 @@ import (
 //
 // ## Import
 //
-// dnspod domain_alias can be imported using the id, e.g.
+// dnspod domainAlias can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Dnspod/domainAlias:DomainAlias domain_alias domain#domain_alias_id

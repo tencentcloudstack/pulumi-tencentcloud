@@ -102,19 +102,19 @@ export interface EmbedIntervalApplyState {
     /**
      * Token that needs to be applied for extension.
      */
-    biToken?: pulumi.Input<string>;
+    biToken?: pulumi.Input<string | undefined>;
     /**
      * Sharing page id, this is empty value 0 when embedding the board.
      */
-    pageId?: pulumi.Input<number>;
+    pageId?: pulumi.Input<number | undefined>;
     /**
      * Sharing project id, required.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Choose panel or page.
      */
-    scope?: pulumi.Input<string>;
+    scope?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -124,17 +124,17 @@ export interface EmbedIntervalApplyArgs {
     /**
      * Token that needs to be applied for extension.
      */
-    biToken?: pulumi.Input<string>;
+    biToken?: pulumi.Input<string | undefined>;
     /**
      * Sharing page id, this is empty value 0 when embedding the board.
      */
-    pageId?: pulumi.Input<number>;
+    pageId?: pulumi.Input<number | undefined>;
     /**
      * Sharing project id, required.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Choose panel or page.
      */
-    scope?: pulumi.Input<string>;
+    scope?: pulumi.Input<string | undefined>;
 }

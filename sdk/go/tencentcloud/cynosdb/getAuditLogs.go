@@ -99,12 +99,8 @@ type GetAuditLogsResult struct {
 }
 
 func GetAuditLogsOutput(ctx *pulumi.Context, args GetAuditLogsOutputArgs, opts ...pulumi.InvokeOption) GetAuditLogsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetAuditLogsResultOutput, error) {
-			args := v.(GetAuditLogsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cynosdb/getAuditLogs:getAuditLogs", args, GetAuditLogsResultOutput{}, options).(GetAuditLogsResultOutput), nil
-		}).(GetAuditLogsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cynosdb/getAuditLogs:getAuditLogs", args, GetAuditLogsResultOutput{}, options).(GetAuditLogsResultOutput)
 }
 
 // A collection of arguments for invoking getAuditLogs.

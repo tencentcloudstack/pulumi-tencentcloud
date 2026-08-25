@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
 {
     /// <summary>
-    /// Provides a resource to create a cwp LicenseBindAttachment
+    /// Provides a resource to create a CWP license bind attachment
     /// 
     /// ## Example Usage
     /// 
@@ -19,7 +19,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -72,7 +71,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
     /// 
     /// ## Import
     /// 
-    /// cwp license_bind_attachment can be imported using the id, e.g.
+    /// CWP license bind attachment can be imported using the resourceId#licenseId#quuid#licenseType, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Cwp/licenseBindAttachment:LicenseBindAttachment example cwplic-ab3edffa#44#2c7e5cce-1cec-4456-8d18-018f160dd987#0

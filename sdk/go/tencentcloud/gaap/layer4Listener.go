@@ -57,16 +57,16 @@ import (
 //				Name:           pulumi.String("ci-test-gaap-4-listener"),
 //				Port:           pulumi.Int(80),
 //				RealserverType: pulumi.String("IP"),
-//				ProxyId:        foo.ID(),
+//				ProxyId:        foo.ID().ToIDOutput().ToStringOutput(),
 //				HealthCheck:    pulumi.Bool(true),
 //				RealserverBindSets: gaap.Layer4ListenerRealserverBindSetArray{
 //					&gaap.Layer4ListenerRealserverBindSetArgs{
-//						Id:   fooRealserver.ID(),
+//						Id:   fooRealserver.ID().ToIDOutput().ToStringOutput(),
 //						Ip:   fooRealserver.Ip,
 //						Port: pulumi.Int(80),
 //					},
 //					&gaap.Layer4ListenerRealserverBindSetArgs{
-//						Id:   bar.ID(),
+//						Id:   bar.ID().ToIDOutput().ToStringOutput(),
 //						Ip:   bar.Ip,
 //						Port: pulumi.Int(80),
 //					},
@@ -86,7 +86,9 @@ import (
 // GAAP layer4 listener can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Gaap/layer4Listener:Layer4Listener  tencentcloud_gaap_layer4_listener.foo listener-11112222
+//
+//	$ pulumi import tencentcloud:Gaap/layer4Listener:Layer4Listener foo listener-11112222
+//
 // ```
 type Layer4Listener struct {
 	pulumi.CustomResourceState

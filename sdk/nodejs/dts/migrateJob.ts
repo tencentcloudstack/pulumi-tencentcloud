@@ -250,35 +250,35 @@ export interface MigrateJobState {
     /**
      * The automatic retry time period can be set from 5 to 720 minutes, with 0 indicating no retry.
      */
-    autoRetryTimeRangeMinutes?: pulumi.Input<number>;
+    autoRetryTimeRangeMinutes?: pulumi.Input<number | undefined>;
     /**
      * Target database information.
      */
-    dstInfo?: pulumi.Input<inputs.Dts.MigrateJobDstInfo>;
+    dstInfo?: pulumi.Input<inputs.Dts.MigrateJobDstInfo | undefined>;
     /**
      * Expected start time in the format of `2006-01-02 15:04:05`, which is required if RunMode is timed.
      */
-    expectRunTime?: pulumi.Input<string>;
+    expectRunTime?: pulumi.Input<string | undefined>;
     /**
      * Migration job configuration options, used to describe how the task performs migration.
      */
-    migrateOption?: pulumi.Input<inputs.Dts.MigrateJobMigrateOption>;
+    migrateOption?: pulumi.Input<inputs.Dts.MigrateJobMigrateOption | undefined>;
     /**
      * Running mode. Valid values: immediate, timed.
      */
-    runMode?: pulumi.Input<string>;
+    runMode?: pulumi.Input<string | undefined>;
     /**
      * Migrate service Id from `tencentcloud.Dts.MigrateService`.
      */
-    serviceId?: pulumi.Input<string>;
+    serviceId?: pulumi.Input<string | undefined>;
     /**
      * Source instance information.
      */
-    srcInfo?: pulumi.Input<inputs.Dts.MigrateJobSrcInfo>;
+    srcInfo?: pulumi.Input<inputs.Dts.MigrateJobSrcInfo | undefined>;
     /**
      * Task status. Valid values: created(Created), checking (Checking), checkPass (Check passed), checkNotPass (Check not passed), readyRun (Ready for running), running (Running), readyComplete (Preparation completed), success (Successful), failed (Failed), stopping (Stopping), completing (Completing), pausing (Pausing), manualPaused (Paused).
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -288,7 +288,7 @@ export interface MigrateJobArgs {
     /**
      * The automatic retry time period can be set from 5 to 720 minutes, with 0 indicating no retry.
      */
-    autoRetryTimeRangeMinutes?: pulumi.Input<number>;
+    autoRetryTimeRangeMinutes?: pulumi.Input<number | undefined>;
     /**
      * Target database information.
      */
@@ -296,7 +296,7 @@ export interface MigrateJobArgs {
     /**
      * Expected start time in the format of `2006-01-02 15:04:05`, which is required if RunMode is timed.
      */
-    expectRunTime?: pulumi.Input<string>;
+    expectRunTime?: pulumi.Input<string | undefined>;
     /**
      * Migration job configuration options, used to describe how the task performs migration.
      */

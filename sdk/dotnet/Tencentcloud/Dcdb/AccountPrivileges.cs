@@ -15,7 +15,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
     /// 
     /// ## Import
     /// 
-    /// dcdb account_privileges can be imported using the id, e.g.
+    /// dcdb AccountPrivileges can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Dcdb/accountPrivileges:AccountPrivileges account_privileges instanceId#userName#host#dbName#tabName#viewName#colName

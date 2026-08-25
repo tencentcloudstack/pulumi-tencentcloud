@@ -28,7 +28,34 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := kubernetes.GetAddons(ctx, &kubernetes.GetAddonsArgs{
-//				ClusterId: "cls-12345678",
+//				ClusterId: "cls-5yezvaxo",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Or
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/kubernetes"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := kubernetes.GetAddons(ctx, &kubernetes.GetAddonsArgs{
+//				ClusterId: "cls-5yezvaxo",
+//				AddonName: pulumi.StringRef("ip-masq-agent"),
 //			}, nil)
 //			if err != nil {
 //				return err
@@ -71,12 +98,8 @@ type GetAddonsResult struct {
 }
 
 func GetAddonsOutput(ctx *pulumi.Context, args GetAddonsOutputArgs, opts ...pulumi.InvokeOption) GetAddonsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetAddonsResultOutput, error) {
-			args := v.(GetAddonsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Kubernetes/getAddons:getAddons", args, GetAddonsResultOutput{}, options).(GetAddonsResultOutput), nil
-		}).(GetAddonsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Kubernetes/getAddons:getAddons", args, GetAddonsResultOutput{}, options).(GetAddonsResultOutput)
 }
 
 // A collection of arguments for invoking getAddons.

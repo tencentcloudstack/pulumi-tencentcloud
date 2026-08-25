@@ -493,199 +493,199 @@ export interface ApplicationConfigState {
     /**
      * Whether agent is enabled.
      */
-    agentEnable?: pulumi.Input<boolean>;
+    agentEnable?: pulumi.Input<boolean | undefined>;
     /**
      * Related configurations of the probe APIs.
      */
-    agentOperationConfigView?: pulumi.Input<inputs.Apm.ApplicationConfigAgentOperationConfigView>;
+    agentOperationConfigView?: pulumi.Input<inputs.Apm.ApplicationConfigAgentOperationConfigView | undefined>;
     /**
      * dashboard ID.
      */
-    dashboardTopicId?: pulumi.Input<string>;
+    dashboardTopicId?: pulumi.Input<string | undefined>;
     /**
      * Specifies the CPU threshold for probe fusing.
      */
-    disableCpuUsed?: pulumi.Input<number>;
+    disableCpuUsed?: pulumi.Input<number | undefined>;
     /**
      * Specifies the memory threshold for probe fusing.
      */
-    disableMemoryUsed?: pulumi.Input<number>;
+    disableMemoryUsed?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable the dashboard configuration for applications. false: disabled (consistent with the business system configuration); true: enabled (application-level configuration).
      */
-    enableDashboardConfig?: pulumi.Input<boolean>;
+    enableDashboardConfig?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to enable application log configuration.
      */
-    enableLogConfig?: pulumi.Input<boolean>;
+    enableLogConfig?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to enable application security configuration.
      */
-    enableSecurityConfig?: pulumi.Input<boolean>;
+    enableSecurityConfig?: pulumi.Input<boolean | undefined>;
     /**
      * Whether thread profiling is enabled.
      */
-    enableSnapshot?: pulumi.Input<boolean>;
+    enableSnapshot?: pulumi.Input<boolean | undefined>;
     /**
      * Error code filtering, separated by commas.
      */
-    errorCodeFilter?: pulumi.Input<string>;
+    errorCodeFilter?: pulumi.Input<string | undefined>;
     /**
      * Switch for enabling application diagnosis.
      */
-    eventEnable?: pulumi.Input<boolean>;
+    eventEnable?: pulumi.Input<boolean | undefined>;
     /**
      * Regex rules for exception filtering, separated by commas.
      */
-    exceptionFilter?: pulumi.Input<string>;
+    exceptionFilter?: pulumi.Input<string | undefined>;
     /**
      * APIs to be filtered.
      */
-    ignoreOperationName?: pulumi.Input<string>;
+    ignoreOperationName?: pulumi.Input<string | undefined>;
     /**
      * Business system ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Component List.
      */
-    instrumentLists?: pulumi.Input<pulumi.Input<inputs.Apm.ApplicationConfigInstrumentList>[]>;
+    instrumentLists?: pulumi.Input<pulumi.Input<inputs.Apm.ApplicationConfigInstrumentList>[] | undefined>;
     /**
      * Whether to enable the detection of deleting arbitrary files. (0 - disabled; 1: enabled.).
      */
-    isDeleteAnyFileAnalysis?: pulumi.Input<number>;
+    isDeleteAnyFileAnalysis?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable deserialization detection. (0 - disabled; 1 - enabled).
      */
-    isDeserializationAnalysis?: pulumi.Input<number>;
+    isDeserializationAnalysis?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable traversal detection of the directory. (0 - disabled; 1 - enabled).
      */
-    isDirectoryTraversalAnalysis?: pulumi.Input<number>;
+    isDirectoryTraversalAnalysis?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable expression injection detection. (0 - disabled; 1 - enabled.).
      */
-    isExpressionInjectionAnalysis?: pulumi.Input<number>;
+    isExpressionInjectionAnalysis?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable the detection of the inclusion of arbitrary files. (0: disabled, 1: enabled.).
      */
-    isIncludeAnyFileAnalysis?: pulumi.Input<number>;
+    isIncludeAnyFileAnalysis?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable detection of component vulnerability.
      */
-    isInstrumentationVulnerabilityScan?: pulumi.Input<number>;
+    isInstrumentationVulnerabilityScan?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable JNDI injection detection. (0 - disabled; 1 - enabled.).
      */
-    isJndiInjectionAnalysis?: pulumi.Input<number>;
+    isJndiInjectionAnalysis?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable JNI injection detection. (0 - disabled, 1 - enabled).
      */
-    isJniInjectionAnalysis?: pulumi.Input<number>;
+    isJniInjectionAnalysis?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable detection of Java webshell.
      */
-    isMemoryHijackingAnalysis?: pulumi.Input<number>;
+    isMemoryHijackingAnalysis?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable the detection of reading arbitrary files. (0 - disabled; 1 - enabled.).
      */
-    isReadAnyFileAnalysis?: pulumi.Input<number>;
+    isReadAnyFileAnalysis?: pulumi.Input<number | undefined>;
     /**
      * Whether to associate with Dashboard. 0: disabled; 1: enabled.
      */
-    isRelatedDashboard?: pulumi.Input<number>;
+    isRelatedDashboard?: pulumi.Input<number | undefined>;
     /**
      * Log switch. 0: Off; 1: On.
      */
-    isRelatedLog?: pulumi.Input<number>;
+    isRelatedLog?: pulumi.Input<number | undefined>;
     /**
      * Whether remote command detection is enabled.
      */
-    isRemoteCommandExecutionAnalysis?: pulumi.Input<number>;
+    isRemoteCommandExecutionAnalysis?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable script engine injection detection. (0 - disabled; 1 - enabled.).
      */
-    isScriptEngineInjectionAnalysis?: pulumi.Input<number>;
+    isScriptEngineInjectionAnalysis?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable SQL injection analysis.
      */
-    isSqlInjectionAnalysis?: pulumi.Input<number>;
+    isSqlInjectionAnalysis?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable template engine injection detection. (0: disabled; 1: enabled.).
      */
-    isTemplateEngineInjectionAnalysis?: pulumi.Input<number>;
+    isTemplateEngineInjectionAnalysis?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable the detection of uploading arbitrary files. (0 - disabled; 1 - enabled.).
      */
-    isUploadAnyFileAnalysis?: pulumi.Input<number>;
+    isUploadAnyFileAnalysis?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable Webshell backdoor detection. (0 - disabled; 1 - enabled).
      */
-    isWebshellBackdoorAnalysis?: pulumi.Input<number>;
+    isWebshellBackdoorAnalysis?: pulumi.Input<number | undefined>;
     /**
      * CLS index type. (0 = full-text index; 1 = key-value index).
      */
-    logIndexType?: pulumi.Input<number>;
+    logIndexType?: pulumi.Input<number | undefined>;
     /**
      * Log region.
      */
-    logRegion?: pulumi.Input<string>;
+    logRegion?: pulumi.Input<string | undefined>;
     /**
      * CLS log set/ES cluster ID.
      */
-    logSet?: pulumi.Input<string>;
+    logSet?: pulumi.Input<string | undefined>;
     /**
      * Log source: CLS or ES.
      */
-    logSource?: pulumi.Input<string>;
+    logSource?: pulumi.Input<string | undefined>;
     /**
      * Log topic ID.
      */
-    logTopicId?: pulumi.Input<string>;
+    logTopicId?: pulumi.Input<string | undefined>;
     /**
      * Index key of traceId. It is valid when the CLS index type is key-value index.
      */
-    logTraceIdKey?: pulumi.Input<string>;
+    logTraceIdKey?: pulumi.Input<string | undefined>;
     /**
      * Application name.
      */
-    serviceName?: pulumi.Input<string>;
+    serviceName?: pulumi.Input<string | undefined>;
     /**
      * Timeout threshold for thread profiling.
      */
-    snapshotTimeout?: pulumi.Input<number>;
+    snapshotTimeout?: pulumi.Input<number | undefined>;
     /**
      * Whether link compression is enabled.
      */
-    traceSquash?: pulumi.Input<boolean>;
+    traceSquash?: pulumi.Input<boolean | undefined>;
     /**
      * Automatic convergence switch for APIs. 0: disabled | 1: enabled.
      */
-    urlAutoConvergenceEnable?: pulumi.Input<boolean>;
+    urlAutoConvergenceEnable?: pulumi.Input<boolean | undefined>;
     /**
      * Regex rules for URL convergence, separated by commas.
      */
-    urlConvergence?: pulumi.Input<string>;
+    urlConvergence?: pulumi.Input<string | undefined>;
     /**
      * URL convergence switch. 0: Off; 1: On.
      */
-    urlConvergenceSwitch?: pulumi.Input<number>;
+    urlConvergenceSwitch?: pulumi.Input<number | undefined>;
     /**
      * URL convergence threshold.
      */
-    urlConvergenceThreshold?: pulumi.Input<number>;
+    urlConvergenceThreshold?: pulumi.Input<number | undefined>;
     /**
      * Regex rules for URL exclusion, separated by commas.
      */
-    urlExclude?: pulumi.Input<string>;
+    urlExclude?: pulumi.Input<string | undefined>;
     /**
      * Convergence threshold for URL long segments.
      */
-    urlLongSegmentThreshold?: pulumi.Input<number>;
+    urlLongSegmentThreshold?: pulumi.Input<number | undefined>;
     /**
      * Convergence threshold for URL numerical segments.
      */
-    urlNumberSegmentThreshold?: pulumi.Input<number>;
+    urlNumberSegmentThreshold?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -695,55 +695,55 @@ export interface ApplicationConfigArgs {
     /**
      * Whether agent is enabled.
      */
-    agentEnable?: pulumi.Input<boolean>;
+    agentEnable?: pulumi.Input<boolean | undefined>;
     /**
      * Related configurations of the probe APIs.
      */
-    agentOperationConfigView?: pulumi.Input<inputs.Apm.ApplicationConfigAgentOperationConfigView>;
+    agentOperationConfigView?: pulumi.Input<inputs.Apm.ApplicationConfigAgentOperationConfigView | undefined>;
     /**
      * dashboard ID.
      */
-    dashboardTopicId?: pulumi.Input<string>;
+    dashboardTopicId?: pulumi.Input<string | undefined>;
     /**
      * Specifies the CPU threshold for probe fusing.
      */
-    disableCpuUsed?: pulumi.Input<number>;
+    disableCpuUsed?: pulumi.Input<number | undefined>;
     /**
      * Specifies the memory threshold for probe fusing.
      */
-    disableMemoryUsed?: pulumi.Input<number>;
+    disableMemoryUsed?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable the dashboard configuration for applications. false: disabled (consistent with the business system configuration); true: enabled (application-level configuration).
      */
-    enableDashboardConfig?: pulumi.Input<boolean>;
+    enableDashboardConfig?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to enable application log configuration.
      */
-    enableLogConfig?: pulumi.Input<boolean>;
+    enableLogConfig?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to enable application security configuration.
      */
-    enableSecurityConfig?: pulumi.Input<boolean>;
+    enableSecurityConfig?: pulumi.Input<boolean | undefined>;
     /**
      * Whether thread profiling is enabled.
      */
-    enableSnapshot?: pulumi.Input<boolean>;
+    enableSnapshot?: pulumi.Input<boolean | undefined>;
     /**
      * Error code filtering, separated by commas.
      */
-    errorCodeFilter?: pulumi.Input<string>;
+    errorCodeFilter?: pulumi.Input<string | undefined>;
     /**
      * Switch for enabling application diagnosis.
      */
-    eventEnable?: pulumi.Input<boolean>;
+    eventEnable?: pulumi.Input<boolean | undefined>;
     /**
      * Regex rules for exception filtering, separated by commas.
      */
-    exceptionFilter?: pulumi.Input<string>;
+    exceptionFilter?: pulumi.Input<string | undefined>;
     /**
      * APIs to be filtered.
      */
-    ignoreOperationName?: pulumi.Input<string>;
+    ignoreOperationName?: pulumi.Input<string | undefined>;
     /**
      * Business system ID.
      */
@@ -751,103 +751,103 @@ export interface ApplicationConfigArgs {
     /**
      * Component List.
      */
-    instrumentLists?: pulumi.Input<pulumi.Input<inputs.Apm.ApplicationConfigInstrumentList>[]>;
+    instrumentLists?: pulumi.Input<pulumi.Input<inputs.Apm.ApplicationConfigInstrumentList>[] | undefined>;
     /**
      * Whether to enable the detection of deleting arbitrary files. (0 - disabled; 1: enabled.).
      */
-    isDeleteAnyFileAnalysis?: pulumi.Input<number>;
+    isDeleteAnyFileAnalysis?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable deserialization detection. (0 - disabled; 1 - enabled).
      */
-    isDeserializationAnalysis?: pulumi.Input<number>;
+    isDeserializationAnalysis?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable traversal detection of the directory. (0 - disabled; 1 - enabled).
      */
-    isDirectoryTraversalAnalysis?: pulumi.Input<number>;
+    isDirectoryTraversalAnalysis?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable expression injection detection. (0 - disabled; 1 - enabled.).
      */
-    isExpressionInjectionAnalysis?: pulumi.Input<number>;
+    isExpressionInjectionAnalysis?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable the detection of the inclusion of arbitrary files. (0: disabled, 1: enabled.).
      */
-    isIncludeAnyFileAnalysis?: pulumi.Input<number>;
+    isIncludeAnyFileAnalysis?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable detection of component vulnerability.
      */
-    isInstrumentationVulnerabilityScan?: pulumi.Input<number>;
+    isInstrumentationVulnerabilityScan?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable JNDI injection detection. (0 - disabled; 1 - enabled.).
      */
-    isJndiInjectionAnalysis?: pulumi.Input<number>;
+    isJndiInjectionAnalysis?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable JNI injection detection. (0 - disabled, 1 - enabled).
      */
-    isJniInjectionAnalysis?: pulumi.Input<number>;
+    isJniInjectionAnalysis?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable detection of Java webshell.
      */
-    isMemoryHijackingAnalysis?: pulumi.Input<number>;
+    isMemoryHijackingAnalysis?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable the detection of reading arbitrary files. (0 - disabled; 1 - enabled.).
      */
-    isReadAnyFileAnalysis?: pulumi.Input<number>;
+    isReadAnyFileAnalysis?: pulumi.Input<number | undefined>;
     /**
      * Whether to associate with Dashboard. 0: disabled; 1: enabled.
      */
-    isRelatedDashboard?: pulumi.Input<number>;
+    isRelatedDashboard?: pulumi.Input<number | undefined>;
     /**
      * Log switch. 0: Off; 1: On.
      */
-    isRelatedLog?: pulumi.Input<number>;
+    isRelatedLog?: pulumi.Input<number | undefined>;
     /**
      * Whether remote command detection is enabled.
      */
-    isRemoteCommandExecutionAnalysis?: pulumi.Input<number>;
+    isRemoteCommandExecutionAnalysis?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable script engine injection detection. (0 - disabled; 1 - enabled.).
      */
-    isScriptEngineInjectionAnalysis?: pulumi.Input<number>;
+    isScriptEngineInjectionAnalysis?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable SQL injection analysis.
      */
-    isSqlInjectionAnalysis?: pulumi.Input<number>;
+    isSqlInjectionAnalysis?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable template engine injection detection. (0: disabled; 1: enabled.).
      */
-    isTemplateEngineInjectionAnalysis?: pulumi.Input<number>;
+    isTemplateEngineInjectionAnalysis?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable the detection of uploading arbitrary files. (0 - disabled; 1 - enabled.).
      */
-    isUploadAnyFileAnalysis?: pulumi.Input<number>;
+    isUploadAnyFileAnalysis?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable Webshell backdoor detection. (0 - disabled; 1 - enabled).
      */
-    isWebshellBackdoorAnalysis?: pulumi.Input<number>;
+    isWebshellBackdoorAnalysis?: pulumi.Input<number | undefined>;
     /**
      * CLS index type. (0 = full-text index; 1 = key-value index).
      */
-    logIndexType?: pulumi.Input<number>;
+    logIndexType?: pulumi.Input<number | undefined>;
     /**
      * Log region.
      */
-    logRegion?: pulumi.Input<string>;
+    logRegion?: pulumi.Input<string | undefined>;
     /**
      * CLS log set/ES cluster ID.
      */
-    logSet?: pulumi.Input<string>;
+    logSet?: pulumi.Input<string | undefined>;
     /**
      * Log source: CLS or ES.
      */
-    logSource?: pulumi.Input<string>;
+    logSource?: pulumi.Input<string | undefined>;
     /**
      * Log topic ID.
      */
-    logTopicId?: pulumi.Input<string>;
+    logTopicId?: pulumi.Input<string | undefined>;
     /**
      * Index key of traceId. It is valid when the CLS index type is key-value index.
      */
-    logTraceIdKey?: pulumi.Input<string>;
+    logTraceIdKey?: pulumi.Input<string | undefined>;
     /**
      * Application name.
      */
@@ -855,19 +855,19 @@ export interface ApplicationConfigArgs {
     /**
      * Timeout threshold for thread profiling.
      */
-    snapshotTimeout?: pulumi.Input<number>;
+    snapshotTimeout?: pulumi.Input<number | undefined>;
     /**
      * Whether link compression is enabled.
      */
-    traceSquash?: pulumi.Input<boolean>;
+    traceSquash?: pulumi.Input<boolean | undefined>;
     /**
      * Automatic convergence switch for APIs. 0: disabled | 1: enabled.
      */
-    urlAutoConvergenceEnable?: pulumi.Input<boolean>;
+    urlAutoConvergenceEnable?: pulumi.Input<boolean | undefined>;
     /**
      * Regex rules for URL convergence, separated by commas.
      */
-    urlConvergence?: pulumi.Input<string>;
+    urlConvergence?: pulumi.Input<string | undefined>;
     /**
      * URL convergence switch. 0: Off; 1: On.
      */
@@ -875,17 +875,17 @@ export interface ApplicationConfigArgs {
     /**
      * URL convergence threshold.
      */
-    urlConvergenceThreshold?: pulumi.Input<number>;
+    urlConvergenceThreshold?: pulumi.Input<number | undefined>;
     /**
      * Regex rules for URL exclusion, separated by commas.
      */
-    urlExclude?: pulumi.Input<string>;
+    urlExclude?: pulumi.Input<string | undefined>;
     /**
      * Convergence threshold for URL long segments.
      */
-    urlLongSegmentThreshold?: pulumi.Input<number>;
+    urlLongSegmentThreshold?: pulumi.Input<number | undefined>;
     /**
      * Convergence threshold for URL numerical segments.
      */
-    urlNumberSegmentThreshold?: pulumi.Input<number>;
+    urlNumberSegmentThreshold?: pulumi.Input<number | undefined>;
 }

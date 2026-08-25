@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const addUpgradePrice = tencentcloud.Dcdb.getUpgradePrice({
+ * const addUpgradePrice = tencentcloud.dcdb.getUpgradePrice({
  *     instanceId: dcdbId,
  *     upgradeType: "ADD",
  *     addShardConfig: {
@@ -25,7 +25,7 @@ import * as utilities from "../utilities";
  *     },
  *     amountUnit: "pent",
  * });
- * const expandUpgradePrice = tencentcloud.Dcdb.getUpgradePrice({
+ * const expandUpgradePrice = tencentcloud.dcdb.getUpgradePrice({
  *     instanceId: dcdbId,
  *     upgradeType: "EXPAND",
  *     expandShardConfig: {
@@ -36,7 +36,7 @@ import * as utilities from "../utilities";
  *     },
  *     amountUnit: "pent",
  * });
- * const splitUpgradePrice = tencentcloud.Dcdb.getUpgradePrice({
+ * const splitUpgradePrice = tencentcloud.dcdb.getUpgradePrice({
  *     instanceId: dcdbId,
  *     upgradeType: "SPLIT",
  *     splitShardConfig: {
@@ -133,7 +133,7 @@ export interface GetUpgradePriceResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const addUpgradePrice = tencentcloud.Dcdb.getUpgradePrice({
+ * const addUpgradePrice = tencentcloud.dcdb.getUpgradePrice({
  *     instanceId: dcdbId,
  *     upgradeType: "ADD",
  *     addShardConfig: {
@@ -143,7 +143,7 @@ export interface GetUpgradePriceResult {
  *     },
  *     amountUnit: "pent",
  * });
- * const expandUpgradePrice = tencentcloud.Dcdb.getUpgradePrice({
+ * const expandUpgradePrice = tencentcloud.dcdb.getUpgradePrice({
  *     instanceId: dcdbId,
  *     upgradeType: "EXPAND",
  *     expandShardConfig: {
@@ -154,7 +154,7 @@ export interface GetUpgradePriceResult {
  *     },
  *     amountUnit: "pent",
  * });
- * const splitUpgradePrice = tencentcloud.Dcdb.getUpgradePrice({
+ * const splitUpgradePrice = tencentcloud.dcdb.getUpgradePrice({
  *     instanceId: dcdbId,
  *     upgradeType: "SPLIT",
  *     splitShardConfig: {
@@ -187,15 +187,15 @@ export interface GetUpgradePriceOutputArgs {
     /**
      * Config for adding new shard.
      */
-    addShardConfig?: pulumi.Input<inputs.Dcdb.GetUpgradePriceAddShardConfigArgs>;
+    addShardConfig?: pulumi.Input<inputs.Dcdb.GetUpgradePriceAddShardConfigArgs | undefined>;
     /**
      * Price unit. Valid values: `pent` (cent), `microPent` (microcent).
      */
-    amountUnit?: pulumi.Input<string>;
+    amountUnit?: pulumi.Input<string | undefined>;
     /**
      * Config for expanding existing shard.
      */
-    expandShardConfig?: pulumi.Input<inputs.Dcdb.GetUpgradePriceExpandShardConfigArgs>;
+    expandShardConfig?: pulumi.Input<inputs.Dcdb.GetUpgradePriceExpandShardConfigArgs | undefined>;
     /**
      * Instance ID.
      */
@@ -203,11 +203,11 @@ export interface GetUpgradePriceOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Config for splitting existing shard.
      */
-    splitShardConfig?: pulumi.Input<inputs.Dcdb.GetUpgradePriceSplitShardConfigArgs>;
+    splitShardConfig?: pulumi.Input<inputs.Dcdb.GetUpgradePriceSplitShardConfigArgs | undefined>;
     /**
      * Upgrade type, ADD: add new shard, EXPAND: upgrade the existing shard, SPLIT: split existing shard.
      */

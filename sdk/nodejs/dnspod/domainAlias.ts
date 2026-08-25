@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * dnspod domain_alias can be imported using the id, e.g.
+ * dnspod domainAlias can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Dnspod/domainAlias:DomainAlias domain_alias domain#domain_alias_id
@@ -108,15 +108,15 @@ export interface DomainAliasState {
     /**
      * Domain.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Domain alias.
      */
-    domainAlias?: pulumi.Input<string>;
+    domainAlias?: pulumi.Input<string | undefined>;
     /**
      * Domain alias ID.
      */
-    domainAliasId?: pulumi.Input<number>;
+    domainAliasId?: pulumi.Input<number | undefined>;
 }
 
 /**

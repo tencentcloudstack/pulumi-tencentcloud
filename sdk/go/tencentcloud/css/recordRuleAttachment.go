@@ -45,7 +45,7 @@ import (
 //
 // ## Import
 //
-// css record_rule can be imported using the id, e.g.
+// css recordRule can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Css/recordRuleAttachment:RecordRuleAttachment record_rule templateId#domainName

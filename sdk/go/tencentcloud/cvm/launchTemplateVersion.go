@@ -50,7 +50,7 @@ import (
 //
 // ## Import
 //
-// cvm launch_template_version can be imported using the id, e.g.
+// cvm launchTemplateVersion can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Cvm/launchTemplateVersion:LaunchTemplateVersion launch_template_version ${launch_template_id}#${launch_template_version}

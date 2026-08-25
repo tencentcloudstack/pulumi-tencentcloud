@@ -41,13 +41,13 @@ import * as utilities from "../utilities";
  *
  * WAF log post cls flow can be imported using the id, e.g.
  *
- * If log_type is 1
+ * If logType is 1
  *
  * ```sh
  * $ pulumi import tencentcloud:Waf/logPostClsFlow:LogPostClsFlow example 111462#1
  * ```
  *
- * If log_type is 2
+ * If logType is 2
  *
  * ```sh
  * $ pulumi import tencentcloud:Waf/logPostClsFlow:LogPostClsFlow example 111467#2
@@ -158,35 +158,35 @@ export interface LogPostClsFlowState {
     /**
      * The region where the CLS is delivered. The default value is ap-shanghai.
      */
-    clsRegion?: pulumi.Input<string>;
+    clsRegion?: pulumi.Input<string | undefined>;
     /**
      * Unique ID for post cls flow.
      */
-    flowId?: pulumi.Input<number>;
+    flowId?: pulumi.Input<number | undefined>;
     /**
      * CLS log topic ID.
      */
-    logTopicId?: pulumi.Input<string>;
+    logTopicId?: pulumi.Input<string | undefined>;
     /**
      * The name of the log subject where the submitted CLS is located. The default value is waf_post_logtopic.
      */
-    logTopicName?: pulumi.Input<string>;
+    logTopicName?: pulumi.Input<string | undefined>;
     /**
      * 1- Access log, 2- Attack log, the default is access log.
      */
-    logType?: pulumi.Input<number>;
+    logType?: pulumi.Input<number | undefined>;
     /**
      * CLS logset ID.
      */
-    logsetId?: pulumi.Input<string>;
+    logsetId?: pulumi.Input<string | undefined>;
     /**
      * The name of the log set where the delivered CLS is located. The default value is waf_post_logset.
      */
-    logsetName?: pulumi.Input<string>;
+    logsetName?: pulumi.Input<string | undefined>;
     /**
      * Status 0- Off 1- On.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -196,17 +196,17 @@ export interface LogPostClsFlowArgs {
     /**
      * The region where the CLS is delivered. The default value is ap-shanghai.
      */
-    clsRegion?: pulumi.Input<string>;
+    clsRegion?: pulumi.Input<string | undefined>;
     /**
      * The name of the log subject where the submitted CLS is located. The default value is waf_post_logtopic.
      */
-    logTopicName?: pulumi.Input<string>;
+    logTopicName?: pulumi.Input<string | undefined>;
     /**
      * 1- Access log, 2- Attack log, the default is access log.
      */
-    logType?: pulumi.Input<number>;
+    logType?: pulumi.Input<number | undefined>;
     /**
      * The name of the log set where the delivered CLS is located. The default value is waf_post_logset.
      */
-    logsetName?: pulumi.Input<string>;
+    logsetName?: pulumi.Input<string | undefined>;
 }

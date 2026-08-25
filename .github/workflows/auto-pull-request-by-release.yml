@@ -3,6 +3,20 @@ name: Auto Pull Request By Release
 on:
   repository_dispatch:
     types: [ webhook ]
+  workflow_dispatch: # allow manual trigger for testing
+
+# Required for pushing the sync branch and creating the PR with the
+# built-in GITHUB_TOKEN (default token permissions are read-only).
+# Note: pushes/PRs made with GITHUB_TOKEN do not re-trigger other
+# workflows (GitHub anti-recursion). Swap in a PAT secret if the PR
+# must trigger the pull-request checks automatically.
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: auto-pr-by-release
+  cancel-in-progress: false
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -14,7 +28,8 @@ jobs:
     steps:
       - uses: actions/setup-go@v5
         with:
-          go-version: '1.24.11'
+          # bridge v3.137+ requires go >= 1.25.11 (provider/go.mod declares it)
+          go-version: '1.25.11'
 
       - name: Install pulumictl
         uses: jaxxstorm/action-install-gh-release@v1.5.0
@@ -25,48 +40,69 @@ jobs:
       - name: Install Pulumi CLI
         uses: pulumi/action-install-pulumi-cli@v2.0.0
         with:
-          pulumi-version: 3.210.0
+          # gen-sdk subprocess invoked by tfgen needs a recent CLI;
+          # older CLIs trip "duplicate file: config/index.ts" assertions
+          pulumi-version: 3.259.0
 
       - name: Setup Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
-          node-version: 22.3.0
+          # @npmcli/arborist@9.x requires node >= 22.9
+          node-version: 22.23.2
 
       - name: Setup DotNet
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 6.0.418
 
       - name: Setup Python
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v5
         with:
-          python-version: 3.13
+          python-version: '3.13'
 
       - name: generate-code
         id: generate-code
         run: |
-          version=`curl https://api.github.com/repos/tencentcloudstack/terraform-provider-tencentcloud/releases/latest --header 'Accept: application/vnd.github+json' --header 'Authorization: Bearer ${{secrets.GITHUB_TOKEN}}' | jq .name | tr -d '"' | tr -d 'v'`
+          version=`curl -s https://api.github.com/repos/tencentcloudstack/terraform-provider-tencentcloud/releases/latest --header 'Accept: application/vnd.github+json' --header 'Authorization: Bearer ${{secrets.GITHUB_TOKEN}}' | jq -r .name | tr -d '"' | tr -d 'v'`
+          if [ -z "$version" ]; then
+            echo "failed to resolve upstream version" >&2
+            exit 1
+          fi
           echo "version=$version" >> "$GITHUB_OUTPUT"
-          
-          git clone https://hellertang:${{secrets.GITHUB_TOKEN}}@github.com/tencentcloudstack/pulumi-tencentcloud.git
-          cd pulumi-tencentcloud
-          git config --global user.email "hellertang@tencent.com"
-          git config --global user.name "hellertang"
-          git checkout -b "feat/sync_provider_v${version}"
 
-          cd provider && go get -v github.com/tencentcloudstack/terraform-provider-tencentcloud@v${version} && go mod tidy && cd -
+          git clone https://x-access-token:${GITHUB_TOKEN}@github.com/tencentcloudstack/pulumi-tencentcloud.git
+          cd pulumi-tencentcloud
+          git config user.email "hellertang@tencent.com"
+          git config user.name "hellertang"
+
+          # keep main up to date; -B resets the branch if it already exists
+          git checkout main
+          git pull origin main
+          git checkout -B "feat/sync_provider_v${version}"
+
+          cd provider && go get -v github.com/tencentcloudstack/terraform-provider-tencentcloud@v${version} && go mod tidy && cd ..
           make tfgen
-          make provider
           make build_sdks
-          cd sdk && go mod tidy && cd -
-          
-          git add .
-          git commit -sm "sync provider"
-          git push origin feat/sync_provider_v${version}
+          cd sdk && go mod tidy && cd ..
+
+          if git diff --quiet && git diff --staged --quiet; then
+            echo "nothing to sync for v${version}, skipping commit"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            git add .
+            git commit -sm "sync terraform provider v${version}"
+            git push --force-with-lease origin feat/sync_provider_v${version}
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: create pull request
+        if: ${{ steps.generate-code.outputs.changed == 'true' }}
         run: |
           cd pulumi-tencentcloud
-          gh pr create -B main -H feat/sync_provider_v${{ steps.generate-code.outputs.version }} --title "sync terraform provider v${{ steps.generate-code.outputs.version }}" --body "sync terraform provider version to v${{ steps.update-code.outputs.version }}"
+          # tolerate an already-open PR for this branch (idempotent re-runs)
+          gh pr create -B main -H "feat/sync_provider_v${{ steps.generate-code.outputs.version }}" \
+            --title "sync terraform provider v${{ steps.generate-code.outputs.version }}" \
+            --body "sync terraform provider version to v${{ steps.generate-code.outputs.version }}" \
+            || echo "PR may already exist for this branch"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

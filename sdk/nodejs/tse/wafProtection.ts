@@ -117,23 +117,23 @@ export interface WafProtectionState {
     /**
      * Gateway ID.
      */
-    gatewayId?: pulumi.Input<string>;
+    gatewayId?: pulumi.Input<string | undefined>;
     /**
      * Global protection status.
      */
-    globalStatus?: pulumi.Input<string>;
+    globalStatus?: pulumi.Input<string | undefined>;
     /**
      * Means the list of services or routes when the resource type `Type` is `Service` or `Route`.
      */
-    lists?: pulumi.Input<pulumi.Input<string>[]>;
+    lists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * `open`: open the protection, `close`: close the protection.
      */
-    operate?: pulumi.Input<string>;
+    operate?: pulumi.Input<string | undefined>;
     /**
      * The type of protection resource. Reference value: `Global`: instance, `Service`: service, `Route`: route, `Object`: obejct (This interface does not currently support this type).
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -147,7 +147,7 @@ export interface WafProtectionArgs {
     /**
      * Means the list of services or routes when the resource type `Type` is `Service` or `Route`.
      */
-    lists?: pulumi.Input<pulumi.Input<string>[]>;
+    lists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * `open`: open the protection, `close`: close the protection.
      */

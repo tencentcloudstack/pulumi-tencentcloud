@@ -31,7 +31,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * tat invoker can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Tat/invoker:Invoker invoker ivk-gwb4ztk5
  * ```
@@ -168,47 +167,47 @@ export interface InvokerState {
     /**
      * Remote command ID.
      */
-    commandId?: pulumi.Input<string>;
+    commandId?: pulumi.Input<string | undefined>;
     /**
      * Creation time.
      */
-    createdTime?: pulumi.Input<string>;
+    createdTime?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable the invoker.
      */
-    enable?: pulumi.Input<boolean>;
+    enable?: pulumi.Input<boolean | undefined>;
     /**
      * ID of the instance bound to the trigger. Up to 100 IDs are allowed.
      */
-    instanceIds?: pulumi.Input<pulumi.Input<string>[]>;
+    instanceIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Invoker ID.
      */
-    invokerId?: pulumi.Input<string>;
+    invokerId?: pulumi.Input<string | undefined>;
     /**
      * Invoker name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Custom parameters of the command.
      */
-    parameters?: pulumi.Input<string>;
+    parameters?: pulumi.Input<string | undefined>;
     /**
      * Settings required for a recurring invoker.
      */
-    scheduleSettings?: pulumi.Input<inputs.Tat.InvokerScheduleSettings>;
+    scheduleSettings?: pulumi.Input<inputs.Tat.InvokerScheduleSettings | undefined>;
     /**
      * Invoker type. It can only be `SCHEDULE` (recurring invokers).
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
     /**
      * Modification time.
      */
-    updatedTime?: pulumi.Input<string>;
+    updatedTime?: pulumi.Input<string | undefined>;
     /**
      * The user who executes the command.
      */
-    username?: pulumi.Input<string>;
+    username?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -226,15 +225,15 @@ export interface InvokerArgs {
     /**
      * Invoker name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Custom parameters of the command.
      */
-    parameters?: pulumi.Input<string>;
+    parameters?: pulumi.Input<string | undefined>;
     /**
      * Settings required for a recurring invoker.
      */
-    scheduleSettings?: pulumi.Input<inputs.Tat.InvokerScheduleSettings>;
+    scheduleSettings?: pulumi.Input<inputs.Tat.InvokerScheduleSettings | undefined>;
     /**
      * Invoker type. It can only be `SCHEDULE` (recurring invokers).
      */
@@ -242,5 +241,5 @@ export interface InvokerArgs {
     /**
      * The user who executes the command.
      */
-    username?: pulumi.Input<string>;
+    username?: pulumi.Input<string | undefined>;
 }

@@ -47,15 +47,15 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc-example"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				Name:             pulumi.String("subnet-example"),
 //				CidrBlock:        pulumi.String("10.0.0.0/16"),
 //				AvailabilityZone: pulumi.String(zones.Zones[0].Name),
@@ -81,20 +81,20 @@ import (
 //			}
 //			exampleScalingGroup, err := as.NewScalingGroup(ctx, "example", &as.ScalingGroupArgs{
 //				ScalingGroupName: pulumi.String("tf-example"),
-//				ConfigurationId:  example.ID(),
+//				ConfigurationId:  example.ID().ToIDOutput().ToStringOutput(),
 //				MaxSize:          pulumi.Int(4),
 //				MinSize:          pulumi.Int(1),
 //				DesiredCapacity:  pulumi.Int(2),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				SubnetIds: pulumi.StringArray{
-//					subnet.ID(),
+//					subnet2.ID().ToIDOutput().ToStringOutput(),
 //				},
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			exampleScalingPolicy, err := as.NewScalingPolicy(ctx, "example", &as.ScalingPolicyArgs{
-//				ScalingGroupId:     exampleScalingGroup.ID(),
+//				ScalingGroupId:     exampleScalingGroup.ID().ToIDOutput().ToStringOutput(),
 //				PolicyName:         pulumi.String("tf-as-scaling-policy"),
 //				AdjustmentType:     pulumi.String("EXACT_CAPACITY"),
 //				AdjustmentValue:    pulumi.Int(0),
@@ -110,7 +110,7 @@ import (
 //				return err
 //			}
 //			_, err = as.NewExecuteScalingPolicy(ctx, "example", &as.ExecuteScalingPolicyArgs{
-//				AutoScalingPolicyId: exampleScalingPolicy.ID(),
+//				AutoScalingPolicyId: exampleScalingPolicy.ID().ToIDOutput().ToStringOutput(),
 //				HonorCooldown:       pulumi.Bool(false),
 //				TriggerSource:       pulumi.String("API"),
 //			})
@@ -125,7 +125,7 @@ import (
 //
 // ## Import
 //
-// as execute_scaling_policy can be imported using the id, e.g.
+// as executeScalingPolicy can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:As/executeScalingPolicy:ExecuteScalingPolicy execute_scaling_policy execute_scaling_policy_id

@@ -94,11 +94,11 @@ export interface UpdateApiAppKeyState {
     /**
      * Application unique ID.
      */
-    apiAppId?: pulumi.Input<string>;
+    apiAppId?: pulumi.Input<string | undefined>;
     /**
      * Key of the application.
      */
-    apiAppKey?: pulumi.Input<string>;
+    apiAppKey?: pulumi.Input<string | undefined>;
 }
 
 /**

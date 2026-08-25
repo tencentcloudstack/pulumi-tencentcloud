@@ -70,12 +70,8 @@ type GetDescribeKeysResult struct {
 }
 
 func GetDescribeKeysOutput(ctx *pulumi.Context, args GetDescribeKeysOutputArgs, opts ...pulumi.InvokeOption) GetDescribeKeysResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDescribeKeysResultOutput, error) {
-			args := v.(GetDescribeKeysArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Kms/getDescribeKeys:getDescribeKeys", args, GetDescribeKeysResultOutput{}, options).(GetDescribeKeysResultOutput), nil
-		}).(GetDescribeKeysResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Kms/getDescribeKeys:getDescribeKeys", args, GetDescribeKeysResultOutput{}, options).(GetDescribeKeysResultOutput)
 }
 
 // A collection of arguments for invoking getDescribeKeys.

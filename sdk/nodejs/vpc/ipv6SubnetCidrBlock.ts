@@ -11,7 +11,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * vpc ipv6_subnet_cidr_block can be imported using the id, e.g.
+ * vpc ipv6SubnetCidrBlock can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Vpc/ipv6SubnetCidrBlock:Ipv6SubnetCidrBlock ipv6_subnet_cidr_block ipv6_subnet_cidr_block_id
@@ -92,11 +92,11 @@ export interface Ipv6SubnetCidrBlockState {
     /**
      * Allocate a list of `IPv6` subnets.
      */
-    ipv6SubnetCidrBlocks?: pulumi.Input<inputs.Vpc.Ipv6SubnetCidrBlockIpv6SubnetCidrBlocks>;
+    ipv6SubnetCidrBlocks?: pulumi.Input<inputs.Vpc.Ipv6SubnetCidrBlockIpv6SubnetCidrBlocks | undefined>;
     /**
      * The private network `ID` where the subnet is located. Such as:`vpc-f49l6u0z`.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }
 
 /**

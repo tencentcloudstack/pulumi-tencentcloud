@@ -76,12 +76,8 @@ type GetAutoScaleRecordsResult struct {
 }
 
 func GetAutoScaleRecordsOutput(ctx *pulumi.Context, args GetAutoScaleRecordsOutputArgs, opts ...pulumi.InvokeOption) GetAutoScaleRecordsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetAutoScaleRecordsResultOutput, error) {
-			args := v.(GetAutoScaleRecordsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Emr/getAutoScaleRecords:getAutoScaleRecords", args, GetAutoScaleRecordsResultOutput{}, options).(GetAutoScaleRecordsResultOutput), nil
-		}).(GetAutoScaleRecordsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Emr/getAutoScaleRecords:getAutoScaleRecords", args, GetAutoScaleRecordsResultOutput{}, options).(GetAutoScaleRecordsResultOutput)
 }
 
 // A collection of arguments for invoking getAutoScaleRecords.

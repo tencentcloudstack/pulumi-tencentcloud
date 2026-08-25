@@ -93,12 +93,13 @@ import * as utilities from "../utilities";
  *
  * CBS snapshot policy attachment can be imported using the id, e.g.
  *
- * If use storage_id
+ * If use storageId
  *
  * ```sh
  * $ pulumi import tencentcloud:Cbs/snapshotPolicyAttachment:SnapshotPolicyAttachment example disk-fesgc43m#asp-8abupspr
  * ```
- * If use storage_ids
+ *
+ * If use storageIds
  *
  * ```sh
  * $ pulumi import tencentcloud:Cbs/snapshotPolicyAttachment:SnapshotPolicyAttachment example disk-ghylus9y,disk-0tm61hla#asp-ng87uf4t
@@ -182,15 +183,15 @@ export interface SnapshotPolicyAttachmentState {
     /**
      * ID of CBS snapshot policy.
      */
-    snapshotPolicyId?: pulumi.Input<string>;
+    snapshotPolicyId?: pulumi.Input<string | undefined>;
     /**
      * ID of CBS.
      */
-    storageId?: pulumi.Input<string>;
+    storageId?: pulumi.Input<string | undefined>;
     /**
      * IDs of CBS.
      */
-    storageIds?: pulumi.Input<pulumi.Input<string>[]>;
+    storageIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -204,9 +205,9 @@ export interface SnapshotPolicyAttachmentArgs {
     /**
      * ID of CBS.
      */
-    storageId?: pulumi.Input<string>;
+    storageId?: pulumi.Input<string | undefined>;
     /**
      * IDs of CBS.
      */
-    storageIds?: pulumi.Input<pulumi.Input<string>[]>;
+    storageIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

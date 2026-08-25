@@ -104,15 +104,15 @@ export interface WorkflowFolderState {
     /**
      * Name of the folder to create.
      */
-    folderName?: pulumi.Input<string>;
+    folderName?: pulumi.Input<string | undefined>;
     /**
      * The absolute path of the parent folder, such as/abc/de, if it is the root directory, pass/.
      */
-    parentFolderPath?: pulumi.Input<string>;
+    parentFolderPath?: pulumi.Input<string | undefined>;
     /**
      * Project id.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
 }
 
 /**

@@ -1275,59 +1275,59 @@ export interface ClusterReleaseState {
     /**
      * Chart name (obtained from the application market) or the download URL of the chart package when installing from a third-party repo, redirect-type chart URLs are not supported, must end with *.tgz.
      */
-    chart?: pulumi.Input<string>;
+    chart?: pulumi.Input<string | undefined>;
     /**
      * Chart source, range: tke-market or other, default value: tke-market.
      */
-    chartFrom?: pulumi.Input<string>;
+    chartFrom?: pulumi.Input<string | undefined>;
     /**
      * Chart namespace, when ChartFrom is tke-market, ChartNamespace is not empty, value is the Namespace returned by the DescribeProducts interface.
      */
-    chartNamespace?: pulumi.Input<string>;
+    chartNamespace?: pulumi.Input<string | undefined>;
     /**
      * Chart repository URL address.
      */
-    chartRepoUrl?: pulumi.Input<string>;
+    chartRepoUrl?: pulumi.Input<string | undefined>;
     /**
      * Chart version.
      */
-    chartVersion?: pulumi.Input<string>;
+    chartVersion?: pulumi.Input<string | undefined>;
     /**
      * Cluster ID.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Cluster release ID.
      */
-    clusterReleaseId?: pulumi.Input<string>;
+    clusterReleaseId?: pulumi.Input<string | undefined>;
     /**
      * Cluster type, supports tke, eks, tkeedge, external (registered cluster).
      */
-    clusterType?: pulumi.Input<string>;
+    clusterType?: pulumi.Input<string | undefined>;
     /**
      * Application name, maximum 63 characters, can only contain lowercase letters, numbers, and the separator "-", and must start with a lowercase letter and end with a number or lowercase letter.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Application namespace, obtained from the cluster details namespace.
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
     /**
      * Chart access password.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * Cluster release status.
      */
-    releaseStatus?: pulumi.Input<string>;
+    releaseStatus?: pulumi.Input<string | undefined>;
     /**
      * Chart access username.
      */
-    username?: pulumi.Input<string>;
+    username?: pulumi.Input<string | undefined>;
     /**
      * Custom parameters.
      */
-    values?: pulumi.Input<inputs.Kubernetes.ClusterReleaseValues>;
+    values?: pulumi.Input<inputs.Kubernetes.ClusterReleaseValues | undefined>;
 }
 
 /**
@@ -1341,19 +1341,19 @@ export interface ClusterReleaseArgs {
     /**
      * Chart source, range: tke-market or other, default value: tke-market.
      */
-    chartFrom?: pulumi.Input<string>;
+    chartFrom?: pulumi.Input<string | undefined>;
     /**
      * Chart namespace, when ChartFrom is tke-market, ChartNamespace is not empty, value is the Namespace returned by the DescribeProducts interface.
      */
-    chartNamespace?: pulumi.Input<string>;
+    chartNamespace?: pulumi.Input<string | undefined>;
     /**
      * Chart repository URL address.
      */
-    chartRepoUrl?: pulumi.Input<string>;
+    chartRepoUrl?: pulumi.Input<string | undefined>;
     /**
      * Chart version.
      */
-    chartVersion?: pulumi.Input<string>;
+    chartVersion?: pulumi.Input<string | undefined>;
     /**
      * Cluster ID.
      */
@@ -1361,11 +1361,11 @@ export interface ClusterReleaseArgs {
     /**
      * Cluster type, supports tke, eks, tkeedge, external (registered cluster).
      */
-    clusterType?: pulumi.Input<string>;
+    clusterType?: pulumi.Input<string | undefined>;
     /**
      * Application name, maximum 63 characters, can only contain lowercase letters, numbers, and the separator "-", and must start with a lowercase letter and end with a number or lowercase letter.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Application namespace, obtained from the cluster details namespace.
      */
@@ -1373,13 +1373,13 @@ export interface ClusterReleaseArgs {
     /**
      * Chart access password.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * Chart access username.
      */
-    username?: pulumi.Input<string>;
+    username?: pulumi.Input<string | undefined>;
     /**
      * Custom parameters.
      */
-    values?: pulumi.Input<inputs.Kubernetes.ClusterReleaseValues>;
+    values?: pulumi.Input<inputs.Kubernetes.ClusterReleaseValues | undefined>;
 }

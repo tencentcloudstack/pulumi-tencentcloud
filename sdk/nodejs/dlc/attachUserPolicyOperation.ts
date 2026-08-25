@@ -78,11 +78,11 @@ export interface AttachUserPolicyOperationState {
     /**
      * Collection of authentication policies.
      */
-    policySets?: pulumi.Input<pulumi.Input<inputs.Dlc.AttachUserPolicyOperationPolicySet>[]>;
+    policySets?: pulumi.Input<pulumi.Input<inputs.Dlc.AttachUserPolicyOperationPolicySet>[] | undefined>;
     /**
      * User ID, which is the same as the sub-user UIN. The CreateUser API is needed to create a user at first. The DescribeUsers API can be used for viewing.
      */
-    userId?: pulumi.Input<string>;
+    userId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -92,7 +92,7 @@ export interface AttachUserPolicyOperationArgs {
     /**
      * Collection of authentication policies.
      */
-    policySets?: pulumi.Input<pulumi.Input<inputs.Dlc.AttachUserPolicyOperationPolicySet>[]>;
+    policySets?: pulumi.Input<pulumi.Input<inputs.Dlc.AttachUserPolicyOperationPolicySet>[] | undefined>;
     /**
      * User ID, which is the same as the sub-user UIN. The CreateUser API is needed to create a user at first. The DescribeUsers API can be used for viewing.
      */

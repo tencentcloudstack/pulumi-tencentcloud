@@ -24,23 +24,25 @@ import (
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/redis"
 //
 // )
-// func main() {
-// pulumi.Run(func(ctx *pulumi.Context) error {
-// _, err := redis.GetBackup(ctx, &redis.GetBackupArgs{
-// InstanceId: pulumi.StringRef("crs-c1nl9rpv"),
-// BeginTime: pulumi.StringRef("2023-04-07 03:57:30"),
-// EndTime: pulumi.StringRef("2023-04-07 03:57:56"),
-// Statuses: interface{}{
-// 2,
-// },
-// InstanceName: pulumi.StringRef("Keep-terraform"),
-// }, nil);
-// if err != nil {
-// return err
-// }
-// return nil
-// })
-// }
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := redis.GetBackup(ctx, &redis.GetBackupArgs{
+//				InstanceId: pulumi.StringRef("crs-c1nl9rpv"),
+//				BeginTime:  pulumi.StringRef("2023-04-07 03:57:30"),
+//				EndTime:    pulumi.StringRef("2023-04-07 03:57:56"),
+//				Statuses: []int{
+//					2,
+//				},
+//				InstanceName: pulumi.StringRef("Keep-terraform"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetBackup(ctx *pulumi.Context, args *GetBackupArgs, opts ...pulumi.InvokeOption) (*GetBackupResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
@@ -87,12 +89,8 @@ type GetBackupResult struct {
 }
 
 func GetBackupOutput(ctx *pulumi.Context, args GetBackupOutputArgs, opts ...pulumi.InvokeOption) GetBackupResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetBackupResultOutput, error) {
-			args := v.(GetBackupArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Redis/getBackup:getBackup", args, GetBackupResultOutput{}, options).(GetBackupResultOutput), nil
-		}).(GetBackupResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Redis/getBackup:getBackup", args, GetBackupResultOutput{}, options).(GetBackupResultOutput)
 }
 
 // A collection of arguments for invoking getBackup.

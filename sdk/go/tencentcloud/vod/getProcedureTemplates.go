@@ -56,7 +56,7 @@ import (
 //			}
 //			_ = vod.GetProcedureTemplatesOutput(ctx, vod.GetProcedureTemplatesOutputArgs{
 //				Type: pulumi.String("Custom"),
-//				Name: fooProcedureTemplate.ID(),
+//				Name: fooProcedureTemplate.ID().ToIDOutput().ToStringOutput(),
 //			}, nil)
 //			return nil
 //		})
@@ -100,12 +100,8 @@ type GetProcedureTemplatesResult struct {
 }
 
 func GetProcedureTemplatesOutput(ctx *pulumi.Context, args GetProcedureTemplatesOutputArgs, opts ...pulumi.InvokeOption) GetProcedureTemplatesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetProcedureTemplatesResultOutput, error) {
-			args := v.(GetProcedureTemplatesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Vod/getProcedureTemplates:getProcedureTemplates", args, GetProcedureTemplatesResultOutput{}, options).(GetProcedureTemplatesResultOutput), nil
-		}).(GetProcedureTemplatesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Vod/getProcedureTemplates:getProcedureTemplates", args, GetProcedureTemplatesResultOutput{}, options).(GetProcedureTemplatesResultOutput)
 }
 
 // A collection of arguments for invoking getProcedureTemplates.

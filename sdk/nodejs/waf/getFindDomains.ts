@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getFindDomains({});
+ * const example = tencentcloud.waf.getFindDomains({});
  * ```
  *
  * ### Find domains by filter
@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getFindDomains({
+ * const example = tencentcloud.waf.getFindDomains({
  *     key: "keyWord",
  *     isWafDomain: "1",
  *     by: "FindTime",
@@ -104,7 +104,7 @@ export interface GetFindDomainsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getFindDomains({});
+ * const example = tencentcloud.waf.getFindDomains({});
  * ```
  *
  * ### Find domains by filter
@@ -113,7 +113,7 @@ export interface GetFindDomainsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getFindDomains({
+ * const example = tencentcloud.waf.getFindDomains({
  *     key: "keyWord",
  *     isWafDomain: "1",
  *     by: "FindTime",
@@ -140,21 +140,21 @@ export interface GetFindDomainsOutputArgs {
     /**
      * Sorting parameter, eg: FindTime.
      */
-    by?: pulumi.Input<string>;
+    by?: pulumi.Input<string | undefined>;
     /**
      * Whether access to waf or not.
      */
-    isWafDomain?: pulumi.Input<string>;
+    isWafDomain?: pulumi.Input<string | undefined>;
     /**
      * Filter condition.
      */
-    key?: pulumi.Input<string>;
+    key?: pulumi.Input<string | undefined>;
     /**
      * Sorting type, eg: desc, asc.
      */
-    order?: pulumi.Input<string>;
+    order?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

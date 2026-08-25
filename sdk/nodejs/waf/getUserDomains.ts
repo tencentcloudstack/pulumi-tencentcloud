@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const userDomains = tencentcloud.Waf.getUserDomains({});
+ * const userDomains = tencentcloud.waf.getUserDomains({});
  * ```
  */
 export function getUserDomains(args?: GetUserDomainsArgs, opts?: pulumi.InvokeOptions): Promise<GetUserDomainsResult> {
@@ -59,7 +59,7 @@ export interface GetUserDomainsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const userDomains = tencentcloud.Waf.getUserDomains({});
+ * const userDomains = tencentcloud.waf.getUserDomains({});
  * ```
  */
 export function getUserDomainsOutput(args?: GetUserDomainsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetUserDomainsResult> {
@@ -77,5 +77,5 @@ export interface GetUserDomainsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

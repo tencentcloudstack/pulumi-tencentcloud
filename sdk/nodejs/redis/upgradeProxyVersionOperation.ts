@@ -114,19 +114,19 @@ export interface UpgradeProxyVersionOperationState {
     /**
      * Current proxy version.
      */
-    currentProxyVersion?: pulumi.Input<string>;
+    currentProxyVersion?: pulumi.Input<string | undefined>;
     /**
      * The ID of instance.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Switch mode:1 - Upgrade now0 - Maintenance window upgrade.
      */
-    instanceTypeUpgradeNow?: pulumi.Input<number>;
+    instanceTypeUpgradeNow?: pulumi.Input<number | undefined>;
     /**
      * Upgradeable redis proxy version.
      */
-    upgradeProxyVersion?: pulumi.Input<string>;
+    upgradeProxyVersion?: pulumi.Input<string | undefined>;
 }
 
 /**

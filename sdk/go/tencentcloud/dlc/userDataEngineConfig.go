@@ -54,7 +54,7 @@ import (
 //
 // ## Import
 //
-// dlc user_data_engine_config can be imported using the id, e.g.
+// dlc userDataEngineConfig can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Dlc/userDataEngineConfig:UserDataEngineConfig user_data_engine_config user_data_engine_config_id

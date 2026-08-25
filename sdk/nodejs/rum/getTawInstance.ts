@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const tawInstance = tencentcloud.Rum.getTawInstance({
+ * const tawInstance = tencentcloud.rum.getTawInstance({
  *     chargeStatuses: [1],
  *     chargeTypes: [1],
  *     areaIds: [1],
@@ -95,7 +95,7 @@ export interface GetTawInstanceResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const tawInstance = tencentcloud.Rum.getTawInstance({
+ * const tawInstance = tencentcloud.rum.getTawInstance({
  *     chargeStatuses: [1],
  *     chargeTypes: [1],
  *     areaIds: [1],
@@ -124,25 +124,25 @@ export interface GetTawInstanceOutputArgs {
     /**
      * Region ID.
      */
-    areaIds?: pulumi.Input<pulumi.Input<number>[]>;
+    areaIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Billing status.
      */
-    chargeStatuses?: pulumi.Input<pulumi.Input<number>[]>;
+    chargeStatuses?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Billing type.
      */
-    chargeTypes?: pulumi.Input<pulumi.Input<number>[]>;
+    chargeTypes?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Instance ID.
      */
-    instanceIds?: pulumi.Input<pulumi.Input<string>[]>;
+    instanceIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Instance status (`1`: creating; `2`: running; `3`: exceptional; `4`: restarting; `5`: stopping; `6`: stopped; `7`: terminating; `8`: terminated).
      */
-    instanceStatuses?: pulumi.Input<pulumi.Input<number>[]>;
+    instanceStatuses?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

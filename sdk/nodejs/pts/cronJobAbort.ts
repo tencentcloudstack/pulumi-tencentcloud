@@ -94,11 +94,11 @@ export interface CronJobAbortState {
     /**
      * Cron job ID.
      */
-    cronJobId?: pulumi.Input<string>;
+    cronJobId?: pulumi.Input<string | undefined>;
     /**
      * Project ID.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
 }
 
 /**

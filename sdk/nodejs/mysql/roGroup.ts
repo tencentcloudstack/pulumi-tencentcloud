@@ -127,23 +127,23 @@ export interface RoGroupState {
     /**
      * Instance ID, in the format: cdbro-3i70uj0k.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Whether to rebalance the load of RO instances in the RO group. Supported values include: 1 - rebalance load; 0 - do not rebalance load. The default value is 0. Note that when it is set to rebalance the load, the RO instance in the RO group will have a momentary disconnection of the database connection, please ensure that the application can reconnect to the database.
      */
-    isBalanceRoLoad?: pulumi.Input<number>;
+    isBalanceRoLoad?: pulumi.Input<number | undefined>;
     /**
      * The ID of the RO group.
      */
-    roGroupId?: pulumi.Input<string>;
+    roGroupId?: pulumi.Input<string | undefined>;
     /**
      * Details of the RO group.
      */
-    roGroupInfo?: pulumi.Input<inputs.Mysql.RoGroupRoGroupInfo>;
+    roGroupInfo?: pulumi.Input<inputs.Mysql.RoGroupRoGroupInfo | undefined>;
     /**
      * The weight of the instance within the RO group. If the weight mode of the RO group is changed to user-defined mode (custom), this parameter must be set, and the weight value of each RO instance needs to be set.
      */
-    roWeightValues?: pulumi.Input<pulumi.Input<inputs.Mysql.RoGroupRoWeightValue>[]>;
+    roWeightValues?: pulumi.Input<pulumi.Input<inputs.Mysql.RoGroupRoWeightValue>[] | undefined>;
 }
 
 /**
@@ -157,7 +157,7 @@ export interface RoGroupArgs {
     /**
      * Whether to rebalance the load of RO instances in the RO group. Supported values include: 1 - rebalance load; 0 - do not rebalance load. The default value is 0. Note that when it is set to rebalance the load, the RO instance in the RO group will have a momentary disconnection of the database connection, please ensure that the application can reconnect to the database.
      */
-    isBalanceRoLoad?: pulumi.Input<number>;
+    isBalanceRoLoad?: pulumi.Input<number | undefined>;
     /**
      * The ID of the RO group.
      */
@@ -165,9 +165,9 @@ export interface RoGroupArgs {
     /**
      * Details of the RO group.
      */
-    roGroupInfo?: pulumi.Input<inputs.Mysql.RoGroupRoGroupInfo>;
+    roGroupInfo?: pulumi.Input<inputs.Mysql.RoGroupRoGroupInfo | undefined>;
     /**
      * The weight of the instance within the RO group. If the weight mode of the RO group is changed to user-defined mode (custom), this parameter must be set, and the weight value of each RO instance needs to be set.
      */
-    roWeightValues?: pulumi.Input<pulumi.Input<inputs.Mysql.RoGroupRoWeightValue>[]>;
+    roWeightValues?: pulumi.Input<pulumi.Input<inputs.Mysql.RoGroupRoWeightValue>[] | undefined>;
 }

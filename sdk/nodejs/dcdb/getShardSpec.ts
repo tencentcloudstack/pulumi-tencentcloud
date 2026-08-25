@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const shardSpec = tencentcloud.Dcdb.getShardSpec({});
+ * const shardSpec = tencentcloud.dcdb.getShardSpec({});
  * ```
  */
 export function getShardSpec(args?: GetShardSpecArgs, opts?: pulumi.InvokeOptions): Promise<GetShardSpecResult> {
@@ -59,7 +59,7 @@ export interface GetShardSpecResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const shardSpec = tencentcloud.Dcdb.getShardSpec({});
+ * const shardSpec = tencentcloud.dcdb.getShardSpec({});
  * ```
  */
 export function getShardSpecOutput(args?: GetShardSpecOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetShardSpecResult> {
@@ -77,5 +77,5 @@ export interface GetShardSpecOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

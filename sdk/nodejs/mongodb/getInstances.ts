@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const mongodb = tencentcloud.Mongodb.getInstances({
+ * const mongodb = tencentcloud.mongodb.getInstances({
  *     instanceId: "cmgo-l6lwdsel",
  *     clusterType: "REPLSET",
  * });
@@ -95,7 +95,7 @@ export interface GetInstancesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const mongodb = tencentcloud.Mongodb.getInstances({
+ * const mongodb = tencentcloud.mongodb.getInstances({
  *     instanceId: "cmgo-l6lwdsel",
  *     clusterType: "REPLSET",
  * });
@@ -120,21 +120,21 @@ export interface GetInstancesOutputArgs {
     /**
      * Type of Mongodb cluster, and available values include replica set cluster(expressed with `REPLSET`), sharding cluster(expressed with `SHARD`).
      */
-    clusterType?: pulumi.Input<string>;
+    clusterType?: pulumi.Input<string | undefined>;
     /**
      * ID of the Mongodb instance to be queried.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Name prefix of the Mongodb instance.
      */
-    instanceNamePrefix?: pulumi.Input<string>;
+    instanceNamePrefix?: pulumi.Input<string | undefined>;
     /**
      * Used to store results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Tags of the Mongodb instance to be queried.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

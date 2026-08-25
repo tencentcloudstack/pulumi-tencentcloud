@@ -43,7 +43,7 @@ import (
 //
 // ## Import
 //
-// tat invoker_config can be imported using the id, e.g.
+// tat invokerConfig can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Tat/invokerConfig:InvokerConfig invoker_config invoker_config_id

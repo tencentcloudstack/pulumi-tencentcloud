@@ -83,12 +83,8 @@ type GetSlowLogTimeSeriesStatsResult struct {
 }
 
 func GetSlowLogTimeSeriesStatsOutput(ctx *pulumi.Context, args GetSlowLogTimeSeriesStatsOutputArgs, opts ...pulumi.InvokeOption) GetSlowLogTimeSeriesStatsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSlowLogTimeSeriesStatsResultOutput, error) {
-			args := v.(GetSlowLogTimeSeriesStatsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dbbrain/getSlowLogTimeSeriesStats:getSlowLogTimeSeriesStats", args, GetSlowLogTimeSeriesStatsResultOutput{}, options).(GetSlowLogTimeSeriesStatsResultOutput), nil
-		}).(GetSlowLogTimeSeriesStatsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dbbrain/getSlowLogTimeSeriesStats:getSlowLogTimeSeriesStats", args, GetSlowLogTimeSeriesStatsResultOutput{}, options).(GetSlowLogTimeSeriesStatsResultOutput)
 }
 
 // A collection of arguments for invoking getSlowLogTimeSeriesStats.

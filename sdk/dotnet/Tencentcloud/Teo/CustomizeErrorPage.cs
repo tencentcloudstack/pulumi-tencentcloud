@@ -164,6 +164,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Output<string> PageId { get; private set; } = null!;
 
         /// <summary>
+        /// List of business IDs that reference this error page.
+        /// </summary>
+        [Output("references")]
+        public Output<ImmutableArray<string>> References { get; private set; } = null!;
+
+        /// <summary>
         /// Zone ID.
         /// </summary>
         [Output("zoneId")]
@@ -283,6 +289,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// </summary>
         [Input("pageId")]
         public Input<string>? PageId { get; set; }
+
+        [Input("references")]
+        private InputList<string>? _references;
+
+        /// <summary>
+        /// List of business IDs that reference this error page.
+        /// </summary>
+        public InputList<string> References
+        {
+            get => _references ?? (_references = new InputList<string>());
+            set => _references = value;
+        }
 
         /// <summary>
         /// Zone ID.

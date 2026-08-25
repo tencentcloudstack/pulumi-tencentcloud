@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
 {
     /// <summary>
-    /// Provide a resource to create a TDMQ topic.
+    /// Provides a resource to create a TDMQ topic.
     /// 
     /// ## Example Usage
     /// 
@@ -54,6 +54,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     ///         Partitions = 6,
     ///         PulsarTopicType = 3,
     ///         Remark = "remark.",
+    ///         Tags = 
+    ///         {
+    ///             { "env", "test" },
+    ///             { "team", "backend" },
+    ///         },
     ///     });
     /// 
     /// });
@@ -97,6 +102,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// </summary>
         [Output("remark")]
         public Output<string?> Remark { get; private set; } = null!;
+
+        /// <summary>
+        /// Tag description list.
+        /// </summary>
+        [Output("tags")]
+        public Output<ImmutableArray<Outputs.TopicTag>> Tags { get; private set; } = null!;
 
         /// <summary>
         /// The name of topic to be created.
@@ -187,6 +198,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         [Input("remark")]
         public Input<string>? Remark { get; set; }
 
+        [Input("tags")]
+        private InputList<Inputs.TopicTagArgs>? _tags;
+
+        /// <summary>
+        /// Tag description list.
+        /// </summary>
+        public InputList<Inputs.TopicTagArgs> Tags
+        {
+            get => _tags ?? (_tags = new InputList<Inputs.TopicTagArgs>());
+            set => _tags = value;
+        }
+
         /// <summary>
         /// The name of topic to be created.
         /// </summary>
@@ -242,6 +265,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// </summary>
         [Input("remark")]
         public Input<string>? Remark { get; set; }
+
+        [Input("tags")]
+        private InputList<Inputs.TopicTagGetArgs>? _tags;
+
+        /// <summary>
+        /// Tag description list.
+        /// </summary>
+        public InputList<Inputs.TopicTagGetArgs> Tags
+        {
+            get => _tags ?? (_tags = new InputList<Inputs.TopicTagGetArgs>());
+            set => _tags = value;
+        }
 
         /// <summary>
         /// The name of topic to be created.

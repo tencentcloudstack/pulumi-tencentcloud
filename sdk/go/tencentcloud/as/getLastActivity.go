@@ -73,12 +73,8 @@ type GetLastActivityResult struct {
 }
 
 func GetLastActivityOutput(ctx *pulumi.Context, args GetLastActivityOutputArgs, opts ...pulumi.InvokeOption) GetLastActivityResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetLastActivityResultOutput, error) {
-			args := v.(GetLastActivityArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:As/getLastActivity:getLastActivity", args, GetLastActivityResultOutput{}, options).(GetLastActivityResultOutput), nil
-		}).(GetLastActivityResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:As/getLastActivity:getLastActivity", args, GetLastActivityResultOutput{}, options).(GetLastActivityResultOutput)
 }
 
 // A collection of arguments for invoking getLastActivity.

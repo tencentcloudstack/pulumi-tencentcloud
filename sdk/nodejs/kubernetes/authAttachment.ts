@@ -11,111 +11,31 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * ### Use TKE default issuer and jwksUri
+ *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const config = new pulumi.Config();
- * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
- * const clusterCidr = config.get("clusterCidr") || "172.16.0.0/16";
- * const defaultInstanceType = config.get("defaultInstanceType") || "S1.SMALL1";
- * const _default = tencentcloud.Images.getInstance({
- *     imageTypes: ["PUBLIC_IMAGE"],
- *     osName: "centos",
- * });
- * const vpc = tencentcloud.Vpc.getSubnets({
- *     isDefault: true,
- *     availabilityZone: availabilityZone,
- * });
- * const managedCluster = new tencentcloud.kubernetes.Cluster("managed_cluster", {
- *     vpcId: vpc.then(vpc => vpc.instanceLists?.[0]?.vpcId),
- *     clusterCidr: "10.31.0.0/16",
- *     clusterMaxPodNum: 32,
- *     clusterName: "keep",
- *     clusterDesc: "test cluster desc",
- *     clusterVersion: "1.20.6",
- *     clusterMaxServiceNum: 32,
- *     workerConfigs: [{
- *         count: 1,
- *         availabilityZone: availabilityZone,
- *         instanceType: defaultInstanceType,
- *         systemDiskType: "CLOUD_SSD",
- *         systemDiskSize: 60,
- *         internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
- *         internetMaxBandwidthOut: 100,
- *         publicIpAssigned: true,
- *         subnetId: vpc.then(vpc => vpc.instanceLists?.[0]?.subnetId),
- *         dataDisks: [{
- *             diskType: "CLOUD_PREMIUM",
- *             diskSize: 50,
- *         }],
- *         enhancedSecurityService: false,
- *         enhancedMonitorService: false,
- *         userData: "dGVzdA==",
- *         password: "ZZXXccvv1212",
- *     }],
- *     clusterDeployType: "MANAGED_CLUSTER",
- * });
  * const example = new tencentcloud.kubernetes.AuthAttachment("example", {
- *     clusterId: managedCluster.id,
- *     jwksUri: pulumi.interpolate`https://${managedCluster.id}.ccs.tencent-cloud.com/openid/v1/jwks`,
- *     issuer: pulumi.interpolate`https://${managedCluster.id}.ccs.tencent-cloud.com`,
+ *     clusterId: "cls-53c7589g",
+ *     useTkeDefault: true,
  *     autoCreateDiscoveryAnonymousAuth: true,
  * });
  * ```
  *
- * ### Use the TKE default issuer and jwksUri
+ * ### Use custom issuer and jwksUri
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const config = new pulumi.Config();
- * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
- * const clusterCidr = config.get("clusterCidr") || "172.16.0.0/16";
- * const defaultInstanceType = config.get("defaultInstanceType") || "S1.SMALL1";
- * const _default = tencentcloud.Images.getInstance({
- *     imageTypes: ["PUBLIC_IMAGE"],
- *     osName: "centos",
- * });
- * const vpc = tencentcloud.Vpc.getSubnets({
- *     isDefault: true,
- *     availabilityZone: availabilityZone,
- * });
- * const managedCluster = new tencentcloud.kubernetes.Cluster("managed_cluster", {
- *     vpcId: vpc.then(vpc => vpc.instanceLists?.[0]?.vpcId),
- *     clusterCidr: "10.31.0.0/16",
- *     clusterMaxPodNum: 32,
- *     clusterName: "keep",
- *     clusterDesc: "test cluster desc",
- *     clusterVersion: "1.20.6",
- *     clusterMaxServiceNum: 32,
- *     workerConfigs: [{
- *         count: 1,
- *         availabilityZone: availabilityZone,
- *         instanceType: defaultInstanceType,
- *         systemDiskType: "CLOUD_SSD",
- *         systemDiskSize: 60,
- *         internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
- *         internetMaxBandwidthOut: 100,
- *         publicIpAssigned: true,
- *         subnetId: vpc.then(vpc => vpc.instanceLists?.[0]?.subnetId),
- *         dataDisks: [{
- *             diskType: "CLOUD_PREMIUM",
- *             diskSize: 50,
- *         }],
- *         enhancedSecurityService: false,
- *         enhancedMonitorService: false,
- *         userData: "dGVzdA==",
- *         password: "ZZXXccvv1212",
- *     }],
- *     clusterDeployType: "MANAGED_CLUSTER",
- * });
- * // if you want to use tke default issuer and jwks_uri, please set use_tke_default to true and set issuer to empty string.
  * const example = new tencentcloud.kubernetes.AuthAttachment("example", {
- *     clusterId: managedCluster.id,
- *     autoCreateDiscoveryAnonymousAuth: true,
- *     useTkeDefault: true,
+ *     clusterId: "cls-53c7589g",
+ *     useTkeDefault: false,
+ *     jwksUri: "https://cls-53c7589g.ccs.tencent-cloud.com/openid/v1/jwks",
+ *     issuer: "https://cls-53c7589g.ccs.tencent-cloud.com",
+ *     autoCreateDiscoveryAnonymousAuth: false,
  * });
  * ```
  *
@@ -126,22 +46,21 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const example = new tencentcloud.kubernetes.AuthAttachment("example", {
- *     clusterId: managedCluster.id,
+ *     clusterId: "cls-oof3l9ks",
  *     useTkeDefault: true,
  *     autoCreateDiscoveryAnonymousAuth: true,
  *     autoCreateOidcConfig: true,
  *     autoInstallPodIdentityWebhookAddon: true,
  * });
- * const oidcConfig = tencentcloud.Cam.getOidcConfig({
- *     name: managedCluster.id,
+ * const oidcConfig = tencentcloud.cam.getOidcConfigOutput({
+ *     name: example.clusterId,
  * });
- * export const identityKey = oidcConfig.then(oidcConfig => oidcConfig.identityKey);
- * export const identityUrl = oidcConfig.then(oidcConfig => oidcConfig.identityUrl);
+ * export const identityKey = oidcConfig.identityKey;
  * ```
  *
  * ## Import
  *
- * tke cluster authentication can be imported, e.g.
+ * TKE cluster authentication can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Kubernetes/authAttachment:AuthAttachment example cls-fp5o961e
@@ -180,7 +99,7 @@ export class AuthAttachment extends pulumi.CustomResource {
      */
     declare public readonly autoCreateClientIds: pulumi.Output<string[]>;
     /**
-     * If set to `true`, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.
+     * If set to `true`, the rbac rule will be created automatically which allow anonymous user to access `/.well-known/openid-configuration` and `/openid/v1/jwks`.
      */
     declare public readonly autoCreateDiscoveryAnonymousAuth: pulumi.Output<boolean | undefined>;
     /**
@@ -196,25 +115,25 @@ export class AuthAttachment extends pulumi.CustomResource {
      */
     declare public readonly clusterId: pulumi.Output<string>;
     /**
-     * Specify service-account-issuer. If useTkeDefault is set to `true`, please do not set this field.
+     * Specify service-account-issuer. If `useTkeDefault` is set to `true`, please do not set this field.
      */
     declare public readonly issuer: pulumi.Output<string | undefined>;
     /**
-     * Specify service-account-jwks-uri. If useTkeDefault is set to `true`, please do not set this field.
+     * Specify service-account-jwks-uri. If `useTkeDefault` is set to `true`, please do not set this field.
      */
     declare public readonly jwksUri: pulumi.Output<string | undefined>;
     /**
-     * The default issuer of tke. If useTkeDefault is set to `true`, this parameter will be set to the default value.
+     * The default issuer of tke. If `useTkeDefault` is set to `true`, this parameter will be set to the default value.
      */
     declare public /*out*/ readonly tkeDefaultIssuer: pulumi.Output<string>;
     /**
-     * The default jwksUri of tke. If useTkeDefault is set to `true`, this parameter will be set to the default value.
+     * The default jwksUri of tke. If `useTkeDefault` is set to `true`, this parameter will be set to the default value.
      */
     declare public /*out*/ readonly tkeDefaultJwksUri: pulumi.Output<string>;
     /**
-     * If set to `true`, the issuer and jwksUri will be generated automatically by tke, please do not set issuer and jwks_uri.
+     * If set to `true`, the `issuer` and `jwksUri` will be generated automatically by tke, please do not set `issuer` and `jwksUri`.
      */
-    declare public readonly useTkeDefault: pulumi.Output<boolean | undefined>;
+    declare public readonly useTkeDefault: pulumi.Output<boolean>;
 
     /**
      * Create a AuthAttachment resource with the given unique name, arguments, and options.
@@ -267,43 +186,43 @@ export interface AuthAttachmentState {
     /**
      * Creating ClientId of the identity provider.
      */
-    autoCreateClientIds?: pulumi.Input<pulumi.Input<string>[]>;
+    autoCreateClientIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
-     * If set to `true`, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.
+     * If set to `true`, the rbac rule will be created automatically which allow anonymous user to access `/.well-known/openid-configuration` and `/openid/v1/jwks`.
      */
-    autoCreateDiscoveryAnonymousAuth?: pulumi.Input<boolean>;
+    autoCreateDiscoveryAnonymousAuth?: pulumi.Input<boolean | undefined>;
     /**
      * Creating an identity provider.
      */
-    autoCreateOidcConfig?: pulumi.Input<boolean>;
+    autoCreateOidcConfig?: pulumi.Input<boolean | undefined>;
     /**
      * Creating the PodIdentityWebhook component. if `autoCreateOidcConfig` is true, this field must set true.
      */
-    autoInstallPodIdentityWebhookAddon?: pulumi.Input<boolean>;
+    autoInstallPodIdentityWebhookAddon?: pulumi.Input<boolean | undefined>;
     /**
      * ID of clusters.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
-     * Specify service-account-issuer. If useTkeDefault is set to `true`, please do not set this field.
+     * Specify service-account-issuer. If `useTkeDefault` is set to `true`, please do not set this field.
      */
-    issuer?: pulumi.Input<string>;
+    issuer?: pulumi.Input<string | undefined>;
     /**
-     * Specify service-account-jwks-uri. If useTkeDefault is set to `true`, please do not set this field.
+     * Specify service-account-jwks-uri. If `useTkeDefault` is set to `true`, please do not set this field.
      */
-    jwksUri?: pulumi.Input<string>;
+    jwksUri?: pulumi.Input<string | undefined>;
     /**
-     * The default issuer of tke. If useTkeDefault is set to `true`, this parameter will be set to the default value.
+     * The default issuer of tke. If `useTkeDefault` is set to `true`, this parameter will be set to the default value.
      */
-    tkeDefaultIssuer?: pulumi.Input<string>;
+    tkeDefaultIssuer?: pulumi.Input<string | undefined>;
     /**
-     * The default jwksUri of tke. If useTkeDefault is set to `true`, this parameter will be set to the default value.
+     * The default jwksUri of tke. If `useTkeDefault` is set to `true`, this parameter will be set to the default value.
      */
-    tkeDefaultJwksUri?: pulumi.Input<string>;
+    tkeDefaultJwksUri?: pulumi.Input<string | undefined>;
     /**
-     * If set to `true`, the issuer and jwksUri will be generated automatically by tke, please do not set issuer and jwks_uri.
+     * If set to `true`, the `issuer` and `jwksUri` will be generated automatically by tke, please do not set `issuer` and `jwksUri`.
      */
-    useTkeDefault?: pulumi.Input<boolean>;
+    useTkeDefault?: pulumi.Input<boolean | undefined>;
 }
 
 /**
@@ -313,33 +232,33 @@ export interface AuthAttachmentArgs {
     /**
      * Creating ClientId of the identity provider.
      */
-    autoCreateClientIds?: pulumi.Input<pulumi.Input<string>[]>;
+    autoCreateClientIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
-     * If set to `true`, the rbac rule will be created automatically which allow anonymous user to access '/.well-known/openid-configuration' and '/openid/v1/jwks'.
+     * If set to `true`, the rbac rule will be created automatically which allow anonymous user to access `/.well-known/openid-configuration` and `/openid/v1/jwks`.
      */
-    autoCreateDiscoveryAnonymousAuth?: pulumi.Input<boolean>;
+    autoCreateDiscoveryAnonymousAuth?: pulumi.Input<boolean | undefined>;
     /**
      * Creating an identity provider.
      */
-    autoCreateOidcConfig?: pulumi.Input<boolean>;
+    autoCreateOidcConfig?: pulumi.Input<boolean | undefined>;
     /**
      * Creating the PodIdentityWebhook component. if `autoCreateOidcConfig` is true, this field must set true.
      */
-    autoInstallPodIdentityWebhookAddon?: pulumi.Input<boolean>;
+    autoInstallPodIdentityWebhookAddon?: pulumi.Input<boolean | undefined>;
     /**
      * ID of clusters.
      */
     clusterId: pulumi.Input<string>;
     /**
-     * Specify service-account-issuer. If useTkeDefault is set to `true`, please do not set this field.
+     * Specify service-account-issuer. If `useTkeDefault` is set to `true`, please do not set this field.
      */
-    issuer?: pulumi.Input<string>;
+    issuer?: pulumi.Input<string | undefined>;
     /**
-     * Specify service-account-jwks-uri. If useTkeDefault is set to `true`, please do not set this field.
+     * Specify service-account-jwks-uri. If `useTkeDefault` is set to `true`, please do not set this field.
      */
-    jwksUri?: pulumi.Input<string>;
+    jwksUri?: pulumi.Input<string | undefined>;
     /**
-     * If set to `true`, the issuer and jwksUri will be generated automatically by tke, please do not set issuer and jwks_uri.
+     * If set to `true`, the `issuer` and `jwksUri` will be generated automatically by tke, please do not set `issuer` and `jwksUri`.
      */
-    useTkeDefault?: pulumi.Input<boolean>;
+    useTkeDefault?: pulumi.Input<boolean | undefined>;
 }

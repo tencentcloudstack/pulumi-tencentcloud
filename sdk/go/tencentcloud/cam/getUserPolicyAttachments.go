@@ -97,12 +97,8 @@ type GetUserPolicyAttachmentsResult struct {
 }
 
 func GetUserPolicyAttachmentsOutput(ctx *pulumi.Context, args GetUserPolicyAttachmentsOutputArgs, opts ...pulumi.InvokeOption) GetUserPolicyAttachmentsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetUserPolicyAttachmentsResultOutput, error) {
-			args := v.(GetUserPolicyAttachmentsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cam/getUserPolicyAttachments:getUserPolicyAttachments", args, GetUserPolicyAttachmentsResultOutput{}, options).(GetUserPolicyAttachmentsResultOutput), nil
-		}).(GetUserPolicyAttachmentsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cam/getUserPolicyAttachments:getUserPolicyAttachments", args, GetUserPolicyAttachmentsResultOutput{}, options).(GetUserPolicyAttachmentsResultOutput)
 }
 
 // A collection of arguments for invoking getUserPolicyAttachments.

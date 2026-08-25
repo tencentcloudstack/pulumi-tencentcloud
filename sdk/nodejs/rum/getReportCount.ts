@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const reportCount = tencentcloud.Rum.getReportCount({
+ * const reportCount = tencentcloud.rum.getReportCount({
  *     startTime: 1625444040,
  *     endTime: 1625454840,
  *     projectId: 1,
@@ -91,7 +91,7 @@ export interface GetReportCountResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const reportCount = tencentcloud.Rum.getReportCount({
+ * const reportCount = tencentcloud.rum.getReportCount({
  *     startTime: 1625444040,
  *     endTime: 1625454840,
  *     projectId: 1,
@@ -122,7 +122,7 @@ export interface GetReportCountOutputArgs {
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Project ID.
      */
@@ -130,11 +130,11 @@ export interface GetReportCountOutputArgs {
     /**
      * Report type, empty is meaning all type count. `log`:log report count, `pv`:pv report count, `event`:event report count, `speed`:speed report count, `performance`:performance report count, `custom`:custom report count, `webvitals`:webvitals report count, `miniProgramData`:miniProgramData report count.
      */
-    reportType?: pulumi.Input<string>;
+    reportType?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Start time but is represented using a timestamp in seconds.
      */

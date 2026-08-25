@@ -29,102 +29,104 @@ import (
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
 //
 // )
-// func main() {
-// pulumi.Run(func(ctx *pulumi.Context) error {
-// zones, err := availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-// Product: "cdb",
-// }, nil);
-// if err != nil {
-// return err
-// }
-// vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
-// Name: pulumi.String("vpc-mysql"),
-// CidrBlock: pulumi.String("10.0.0.0/16"),
-// })
-// if err != nil {
-// return err
-// }
-// subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-// AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-// Name: pulumi.String("subnet-mysql"),
-// VpcId: vpc.ID(),
-// CidrBlock: pulumi.String("10.0.0.0/16"),
-// IsMulticast: pulumi.Bool(false),
-// })
-// if err != nil {
-// return err
-// }
-// securityGroup, err := security.NewGroup(ctx, "security_group", &security.GroupArgs{
-// Name: pulumi.String("sg-mysql"),
-// Description: pulumi.String("mysql test"),
-// })
-// if err != nil {
-// return err
-// }
-// exampleInstance, err := mysql.NewInstance(ctx, "example", &mysql.InstanceArgs{
-// InternetService: pulumi.Int(1),
-// EngineVersion: pulumi.String("5.7"),
-// ChargeType: pulumi.String("POSTPAID"),
-// RootPassword: pulumi.String("PassWord123"),
-// SlaveDeployMode: pulumi.Int(1),
-// AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-// FirstSlaveZone: pulumi.String(zones.Zones[1].Name),
-// SlaveSyncMode: pulumi.Int(1),
-// InstanceName: pulumi.String("tf-example-mysql"),
-// MemSize: pulumi.Int(4000),
-// VolumeSize: pulumi.Int(200),
-// VpcId: vpc.ID(),
-// SubnetId: subnet.ID(),
-// IntranetPort: pulumi.Int(3306),
-// SecurityGroups: pulumi.StringArray{
-// securityGroup.ID(),
-// },
-// Tags: pulumi.StringMap{
-// "name": pulumi.String("test"),
-// },
-// Parameters: pulumi.StringMap{
-// "character_set_server": pulumi.String("utf8"),
-// "max_connections": pulumi.String("1000"),
-// },
-// })
-// if err != nil {
-// return err
-// }
-// example := mysql.GetRollbackRangeTimeOutput(ctx, mysql.GetRollbackRangeTimeOutputArgs{
-// InstanceIds: pulumi.StringArray{
-// exampleInstance.ID(),
-// },
-// }, nil);
-// _, err = mysql.NewRollback(ctx, "example", &mysql.RollbackArgs{
-// InstanceId: exampleInstance.ID(),
-// Strategy: pulumi.String("full"),
-// RollbackTime: pulumi.String(example.ApplyT(func(example mysql.GetRollbackRangeTimeResult) (interface{}, error) {
-// return example.Item[0].Times[0].Start, nil
-// }).(pulumi.Interface{}Output)),
-// Databases: mysql.RollbackDatabaseArray{
-// &mysql.RollbackDatabaseArgs{
-// DatabaseName: pulumi.String("tf_db_bak"),
-// NewDatabaseName: pulumi.String("tf_db_bak_new"),
-// },
-// },
-// Tables: mysql.RollbackTableArray{
-// &mysql.RollbackTableArgs{
-// Database: pulumi.String("tf_db_bak1"),
-// Tables: mysql.RollbackTableTableArray{
-// &mysql.RollbackTableTableArgs{
-// TableName: pulumi.String("tf_table"),
-// NewTableName: pulumi.String("tf_table_new"),
-// },
-// },
-// },
-// },
-// })
-// if err != nil {
-// return err
-// }
-// return nil
-// })
-// }
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			zones, err := availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+//				Product: "cdb",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//				Name:      pulumi.String("vpc-mysql"),
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+//				Name:             pulumi.String("subnet-mysql"),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				CidrBlock:        pulumi.String("10.0.0.0/16"),
+//				IsMulticast:      pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			securityGroup, err := security.NewGroup(ctx, "security_group", &security.GroupArgs{
+//				Name:        pulumi.String("sg-mysql"),
+//				Description: pulumi.String("mysql test"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleInstance, err := mysql.NewInstance(ctx, "example", &mysql.InstanceArgs{
+//				InternetService:  pulumi.Int(1),
+//				EngineVersion:    pulumi.String("5.7"),
+//				ChargeType:       pulumi.String("POSTPAID"),
+//				RootPassword:     pulumi.String("PassWord123"),
+//				SlaveDeployMode:  pulumi.Int(1),
+//				AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+//				FirstSlaveZone:   pulumi.String(zones.Zones[1].Name),
+//				SlaveSyncMode:    pulumi.Int(1),
+//				InstanceName:     pulumi.String("tf-example-mysql"),
+//				MemSize:          pulumi.Int(4000),
+//				VolumeSize:       pulumi.Int(200),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
+//				IntranetPort:     pulumi.Int(3306),
+//				SecurityGroups: pulumi.StringArray{
+//					securityGroup.ID().ToIDOutput().ToStringOutput(),
+//				},
+//				Tags: pulumi.StringMap{
+//					"name": pulumi.String("test"),
+//				},
+//				Parameters: pulumi.StringMap{
+//					"character_set_server": pulumi.String("utf8"),
+//					"max_connections":      pulumi.String("1000"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			example := mysql.GetRollbackRangeTimeOutput(ctx, mysql.GetRollbackRangeTimeOutputArgs{
+//				InstanceIds: pulumi.StringArray{
+//					exampleInstance.ID().ToIDOutput().ToStringOutput(),
+//				},
+//			}, nil)
+//			_, err = mysql.NewRollback(ctx, "example", &mysql.RollbackArgs{
+//				InstanceId: exampleInstance.ID().ToIDOutput().ToStringOutput(),
+//				Strategy:   pulumi.String("full"),
+//				RollbackTime: pulumi.String(example.ApplyT(func(example mysql.GetRollbackRangeTimeResult) (interface{}, error) {
+//					return example.Item[0].Times[0].Start, nil
+//				}).(pulumi.AnyOutput)),
+//				Databases: mysql.RollbackDatabaseArray{
+//					&mysql.RollbackDatabaseArgs{
+//						DatabaseName:    pulumi.String("tf_db_bak"),
+//						NewDatabaseName: pulumi.String("tf_db_bak_new"),
+//					},
+//				},
+//				Tables: mysql.RollbackTableArray{
+//					&mysql.RollbackTableArgs{
+//						Database: pulumi.String("tf_db_bak1"),
+//						Tables: mysql.RollbackTableTableArray{
+//							&mysql.RollbackTableTableArgs{
+//								TableName:    pulumi.String("tf_table"),
+//								NewTableName: pulumi.String("tf_table_new"),
+//							},
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 type Rollback struct {
 	pulumi.CustomResourceState

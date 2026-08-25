@@ -129,15 +129,15 @@ export interface SecurityGroupConfigState {
     /**
      * Instance ID. Either this parameter or ReadOnlyGroupId must be passed in. If both parameters are passed in, ReadOnlyGroupId will be ignored.
      */
-    dbInstanceId?: pulumi.Input<string>;
+    dbInstanceId?: pulumi.Input<string | undefined>;
     /**
      * RO group ID. Either this parameter or DBInstanceId must be passed in. To query the security groups associated with the RO groups, only pass in ReadOnlyGroupId.
      */
-    readOnlyGroupId?: pulumi.Input<string>;
+    readOnlyGroupId?: pulumi.Input<string | undefined>;
     /**
      * Information of security groups in array.
      */
-    securityGroupIdSets?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupIdSets?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -147,11 +147,11 @@ export interface SecurityGroupConfigArgs {
     /**
      * Instance ID. Either this parameter or ReadOnlyGroupId must be passed in. If both parameters are passed in, ReadOnlyGroupId will be ignored.
      */
-    dbInstanceId?: pulumi.Input<string>;
+    dbInstanceId?: pulumi.Input<string | undefined>;
     /**
      * RO group ID. Either this parameter or DBInstanceId must be passed in. To query the security groups associated with the RO groups, only pass in ReadOnlyGroupId.
      */
-    readOnlyGroupId?: pulumi.Input<string>;
+    readOnlyGroupId?: pulumi.Input<string | undefined>;
     /**
      * Information of security groups in array.
      */

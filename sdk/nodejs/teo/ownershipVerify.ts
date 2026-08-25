@@ -94,15 +94,15 @@ export interface OwnershipVerifyState {
     /**
      * Verify domain name.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * When the verification result is failed, this field will return the reason.
      */
-    result?: pulumi.Input<string>;
+    result?: pulumi.Input<string | undefined>;
     /**
      * Ownership verification results. `success`: verification successful; `fail`: verification failed.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
 }
 
 /**

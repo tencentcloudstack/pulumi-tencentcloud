@@ -18,6 +18,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// ```csharp
     /// using System.Collections.Generic;
     /// using System.Linq;
+    /// using System.Text.Json;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
@@ -26,40 +27,154 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     ///     var example = new Tencentcloud.Cls.AlarmNotice("example", new()
     ///     {
     ///         Name = "tf-example",
-    ///         Type = "All",
-    ///         NoticeReceivers = new[]
+    ///         JumpDomain = "https://console.cloud.tencent.com",
+    ///         DeliverStatus = 2,
+    ///         AlarmShieldStatus = 2,
+    ///         CallbackPrioritize = true,
+    ///         NoticeRules = new[]
     ///         {
-    ///             new Tencentcloud.Cls.Inputs.AlarmNoticeNoticeReceiverArgs
+    ///             new Tencentcloud.Cls.Inputs.AlarmNoticeNoticeRuleArgs
     ///             {
-    ///                 ReceiverType = "Uin",
-    ///                 ReceiverIds = new[]
+    ///                 Escalate = true,
+    ///                 Interval = 10,
+    ///                 Rule = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
     ///                 {
-    ///                     100037718139,
-    ///                 },
-    ///                 ReceiverChannels = new[]
+    ///                     ["Children"] = new[]
+    ///                     {
+    ///                         new Dictionary&lt;string, object?&gt;
+    ///                         {
+    ///                             ["Children"] = new[]
+    ///                             {
+    ///                                 new Dictionary&lt;string, object?&gt;
+    ///                                 {
+    ///                                     ["Type"] = "Compare",
+    ///                                     ["Value"] = "In",
+    ///                                 },
+    ///                                 new Dictionary&lt;string, object?&gt;
+    ///                                 {
+    ///                                     ["Type"] = "Value",
+    ///                                     ["Value"] = JsonSerializer.Serialize(new[]
+    ///                                     {
+    ///                                         1,
+    ///                                     }),
+    ///                                 },
+    ///                             },
+    ///                             ["Type"] = "Condition",
+    ///                             ["Value"] = "NotifyType",
+    ///                         },
+    ///                         new Dictionary&lt;string, object?&gt;
+    ///                         {
+    ///                             ["Children"] = new[]
+    ///                             {
+    ///                                 new Dictionary&lt;string, object?&gt;
+    ///                                 {
+    ///                                     ["Type"] = "Compare",
+    ///                                     ["Value"] = "In",
+    ///                                 },
+    ///                                 new Dictionary&lt;string, object?&gt;
+    ///                                 {
+    ///                                     ["Type"] = "Value",
+    ///                                     ["Value"] = JsonSerializer.Serialize(new object?[]
+    ///                                     {
+    ///                                         0,
+    ///                                         2,
+    ///                                     }),
+    ///                                 },
+    ///                             },
+    ///                             ["Type"] = "Condition",
+    ///                             ["Value"] = "Level",
+    ///                         },
+    ///                     },
+    ///                     ["Type"] = "Operation",
+    ///                     ["Value"] = "AND",
+    ///                 }),
+    ///                 Type = 1,
+    ///                 EscalateNotices = new[]
     ///                 {
-    ///                     "Email",
-    ///                     "Sms",
+    ///                     new Tencentcloud.Cls.Inputs.AlarmNoticeNoticeRuleEscalateNoticeArgs
+    ///                     {
+    ///                         Escalate = true,
+    ///                         Interval = 10,
+    ///                         Type = 1,
+    ///                         NoticeReceivers = new[]
+    ///                         {
+    ///                             new Tencentcloud.Cls.Inputs.AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArgs
+    ///                             {
+    ///                                 EndTime = "23:59:59",
+    ///                                 Index = 1,
+    ///                                 NoticeContentId = "Default-zh",
+    ///                                 ReceiverChannels = new[]
+    ///                                 {
+    ///                                     "Phone",
+    ///                                     "Sms",
+    ///                                 },
+    ///                                 ReceiverIds = new[]
+    ///                                 {
+    ///                                     19284382,
+    ///                                 },
+    ///                                 ReceiverType = "Uin",
+    ///                                 StartTime = "00:00:00",
+    ///                             },
+    ///                         },
+    ///                     },
+    ///                     new Tencentcloud.Cls.Inputs.AlarmNoticeNoticeRuleEscalateNoticeArgs
+    ///                     {
+    ///                         Escalate = false,
+    ///                         Interval = 10,
+    ///                         Type = 1,
+    ///                         NoticeReceivers = new[]
+    ///                         {
+    ///                             new Tencentcloud.Cls.Inputs.AlarmNoticeNoticeRuleEscalateNoticeNoticeReceiverArgs
+    ///                             {
+    ///                                 EndTime = "23:59:59",
+    ///                                 Index = 1,
+    ///                                 NoticeContentId = "Default-en",
+    ///                                 ReceiverChannels = new[]
+    ///                                 {
+    ///                                     "Email",
+    ///                                     "Phone",
+    ///                                     "Sms",
+    ///                                 },
+    ///                                 ReceiverIds = new[]
+    ///                                 {
+    ///                                     19284382,
+    ///                                 },
+    ///                                 ReceiverType = "Uin",
+    ///                                 StartTime = "00:00:00",
+    ///                             },
+    ///                         },
+    ///                     },
     ///                 },
-    ///                 NoticeContentId = "noticetemplate-b417f32a-bdf9-46c5-933e-28c23cd7a6b7",
-    ///                 StartTime = "00:00:00",
-    ///                 EndTime = "23:59:59",
+    ///                 NoticeReceivers = new[]
+    ///                 {
+    ///                     new Tencentcloud.Cls.Inputs.AlarmNoticeNoticeRuleNoticeReceiverArgs
+    ///                     {
+    ///                         EndTime = "23:59:59",
+    ///                         Index = 1,
+    ///                         NoticeContentId = "Default-en",
+    ///                         ReceiverChannels = new[]
+    ///                         {
+    ///                             "Sms",
+    ///                         },
+    ///                         ReceiverIds = new[]
+    ///                         {
+    ///                             19284382,
+    ///                         },
+    ///                         ReceiverType = "Uin",
+    ///                         StartTime = "00:00:00",
+    ///                     },
+    ///                 },
     ///             },
     ///         },
-    ///         WebCallbacks = new[]
+    ///         DeliverConfig = new Tencentcloud.Cls.Inputs.AlarmNoticeDeliverConfigArgs
     ///         {
-    ///             new Tencentcloud.Cls.Inputs.AlarmNoticeWebCallbackArgs
-    ///             {
-    ///                 CallbackType = "Http",
-    ///                 Url = "example.com",
-    ///                 Method = "POST",
-    ///                 NoticeContentId = "noticetemplate-b417f32a-bdf9-46c5-933e-28c23cd7a6b7",
-    ///                 RemindType = 1,
-    ///             },
+    ///             Region = "ap-guangzhou",
+    ///             TopicId = "898016cf-7e17-426f-9167-9b56fcfc603e",
+    ///             Scope = 0,
     ///         },
     ///         Tags = 
     ///         {
-    ///             { "createdBy", "terraform" },
+    ///             { "createdBy", "Terraform" },
     ///         },
     ///     });
     /// 
@@ -78,6 +193,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     public partial class AlarmNotice : global::Pulumi.CustomResource
     {
         /// <summary>
+        /// Alarm shield status (no-login operation). Valid values: 1 (off), 2 (on, default).
+        /// </summary>
+        [Output("alarmShieldStatus")]
+        public Output<int> AlarmShieldStatus { get; private set; } = null!;
+
+        /// <summary>
+        /// Callback prioritize. true: use custom callback params from notice content template; false: use params from alarm policy.
+        /// </summary>
+        [Output("callbackPrioritize")]
+        public Output<bool?> CallbackPrioritize { get; private set; } = null!;
+
+        /// <summary>
+        /// Deliver log configuration. Required when DeliverStatus is 2.
+        /// </summary>
+        [Output("deliverConfig")]
+        public Output<Outputs.AlarmNoticeDeliverConfig?> DeliverConfig { get; private set; } = null!;
+
+        /// <summary>
+        /// Deliver log switch. Valid values: 1 (off, default), 2 (on). When set to 2, DeliverConfig is required.
+        /// </summary>
+        [Output("deliverStatus")]
+        public Output<int> DeliverStatus { get; private set; } = null!;
+
+        /// <summary>
+        /// Jump domain. Must start with http:// or https://, cannot end with /.
+        /// </summary>
+        [Output("jumpDomain")]
+        public Output<string?> JumpDomain { get; private set; } = null!;
+
+        /// <summary>
         /// Alarm notice name.
         /// </summary>
         [Output("name")]
@@ -88,6 +233,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// </summary>
         [Output("noticeReceivers")]
         public Output<ImmutableArray<Outputs.AlarmNoticeNoticeReceiver>> NoticeReceivers { get; private set; } = null!;
+
+        /// <summary>
+        /// Notice rules (advanced mode). Mutually exclusive with type/notice_receivers/web_callbacks (simple mode).
+        /// </summary>
+        [Output("noticeRules")]
+        public Output<ImmutableArray<Outputs.AlarmNoticeNoticeRule>> NoticeRules { get; private set; } = null!;
 
         /// <summary>
         /// Tag description list.
@@ -115,7 +266,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public AlarmNotice(string name, AlarmNoticeArgs args, CustomResourceOptions? options = null)
+        public AlarmNotice(string name, AlarmNoticeArgs? args = null, CustomResourceOptions? options = null)
             : base("tencentcloud:Cls/alarmNotice:AlarmNotice", name, args ?? new AlarmNoticeArgs(), MakeResourceOptions(options, ""))
         {
         }
@@ -155,6 +306,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     public sealed class AlarmNoticeArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Alarm shield status (no-login operation). Valid values: 1 (off), 2 (on, default).
+        /// </summary>
+        [Input("alarmShieldStatus")]
+        public Input<int>? AlarmShieldStatus { get; set; }
+
+        /// <summary>
+        /// Callback prioritize. true: use custom callback params from notice content template; false: use params from alarm policy.
+        /// </summary>
+        [Input("callbackPrioritize")]
+        public Input<bool>? CallbackPrioritize { get; set; }
+
+        /// <summary>
+        /// Deliver log configuration. Required when DeliverStatus is 2.
+        /// </summary>
+        [Input("deliverConfig")]
+        public Input<Inputs.AlarmNoticeDeliverConfigArgs>? DeliverConfig { get; set; }
+
+        /// <summary>
+        /// Deliver log switch. Valid values: 1 (off, default), 2 (on). When set to 2, DeliverConfig is required.
+        /// </summary>
+        [Input("deliverStatus")]
+        public Input<int>? DeliverStatus { get; set; }
+
+        /// <summary>
+        /// Jump domain. Must start with http:// or https://, cannot end with /.
+        /// </summary>
+        [Input("jumpDomain")]
+        public Input<string>? JumpDomain { get; set; }
+
+        /// <summary>
         /// Alarm notice name.
         /// </summary>
         [Input("name")]
@@ -172,6 +353,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
             set => _noticeReceivers = value;
         }
 
+        [Input("noticeRules")]
+        private InputList<Inputs.AlarmNoticeNoticeRuleArgs>? _noticeRules;
+
+        /// <summary>
+        /// Notice rules (advanced mode). Mutually exclusive with type/notice_receivers/web_callbacks (simple mode).
+        /// </summary>
+        public InputList<Inputs.AlarmNoticeNoticeRuleArgs> NoticeRules
+        {
+            get => _noticeRules ?? (_noticeRules = new InputList<Inputs.AlarmNoticeNoticeRuleArgs>());
+            set => _noticeRules = value;
+        }
+
         [Input("tags")]
         private InputMap<string>? _tags;
 
@@ -187,8 +380,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// <summary>
         /// Notice type. Value: Trigger, Recovery, All.
         /// </summary>
-        [Input("type", required: true)]
-        public Input<string> Type { get; set; } = null!;
+        [Input("type")]
+        public Input<string>? Type { get; set; }
 
         [Input("webCallbacks")]
         private InputList<Inputs.AlarmNoticeWebCallbackArgs>? _webCallbacks;
@@ -211,6 +404,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     public sealed class AlarmNoticeState : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Alarm shield status (no-login operation). Valid values: 1 (off), 2 (on, default).
+        /// </summary>
+        [Input("alarmShieldStatus")]
+        public Input<int>? AlarmShieldStatus { get; set; }
+
+        /// <summary>
+        /// Callback prioritize. true: use custom callback params from notice content template; false: use params from alarm policy.
+        /// </summary>
+        [Input("callbackPrioritize")]
+        public Input<bool>? CallbackPrioritize { get; set; }
+
+        /// <summary>
+        /// Deliver log configuration. Required when DeliverStatus is 2.
+        /// </summary>
+        [Input("deliverConfig")]
+        public Input<Inputs.AlarmNoticeDeliverConfigGetArgs>? DeliverConfig { get; set; }
+
+        /// <summary>
+        /// Deliver log switch. Valid values: 1 (off, default), 2 (on). When set to 2, DeliverConfig is required.
+        /// </summary>
+        [Input("deliverStatus")]
+        public Input<int>? DeliverStatus { get; set; }
+
+        /// <summary>
+        /// Jump domain. Must start with http:// or https://, cannot end with /.
+        /// </summary>
+        [Input("jumpDomain")]
+        public Input<string>? JumpDomain { get; set; }
+
+        /// <summary>
         /// Alarm notice name.
         /// </summary>
         [Input("name")]
@@ -226,6 +449,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         {
             get => _noticeReceivers ?? (_noticeReceivers = new InputList<Inputs.AlarmNoticeNoticeReceiverGetArgs>());
             set => _noticeReceivers = value;
+        }
+
+        [Input("noticeRules")]
+        private InputList<Inputs.AlarmNoticeNoticeRuleGetArgs>? _noticeRules;
+
+        /// <summary>
+        /// Notice rules (advanced mode). Mutually exclusive with type/notice_receivers/web_callbacks (simple mode).
+        /// </summary>
+        public InputList<Inputs.AlarmNoticeNoticeRuleGetArgs> NoticeRules
+        {
+            get => _noticeRules ?? (_noticeRules = new InputList<Inputs.AlarmNoticeNoticeRuleGetArgs>());
+            set => _noticeRules = value;
         }
 
         [Input("tags")]

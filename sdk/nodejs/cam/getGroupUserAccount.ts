@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const groupUserAccount = tencentcloud.Cam.getGroupUserAccount({
+ * const groupUserAccount = tencentcloud.cam.getGroupUserAccount({
  *     subUin: 100033690181,
  * });
  * ```
@@ -83,7 +83,7 @@ export interface GetGroupUserAccountResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const groupUserAccount = tencentcloud.Cam.getGroupUserAccount({
+ * const groupUserAccount = tencentcloud.cam.getGroupUserAccount({
  *     subUin: 100033690181,
  * });
  * ```
@@ -106,17 +106,17 @@ export interface GetGroupUserAccountOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Number per page. The default is 20.
      */
-    rp?: pulumi.Input<number>;
+    rp?: pulumi.Input<number | undefined>;
     /**
      * Sub-user uin.
      */
-    subUin?: pulumi.Input<number>;
+    subUin?: pulumi.Input<number | undefined>;
     /**
      * Sub-user uid.
      */
-    uid?: pulumi.Input<number>;
+    uid?: pulumi.Input<number | undefined>;
 }

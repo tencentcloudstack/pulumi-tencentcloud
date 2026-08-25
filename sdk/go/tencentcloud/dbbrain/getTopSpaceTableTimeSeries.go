@@ -86,12 +86,8 @@ type GetTopSpaceTableTimeSeriesResult struct {
 }
 
 func GetTopSpaceTableTimeSeriesOutput(ctx *pulumi.Context, args GetTopSpaceTableTimeSeriesOutputArgs, opts ...pulumi.InvokeOption) GetTopSpaceTableTimeSeriesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetTopSpaceTableTimeSeriesResultOutput, error) {
-			args := v.(GetTopSpaceTableTimeSeriesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dbbrain/getTopSpaceTableTimeSeries:getTopSpaceTableTimeSeries", args, GetTopSpaceTableTimeSeriesResultOutput{}, options).(GetTopSpaceTableTimeSeriesResultOutput), nil
-		}).(GetTopSpaceTableTimeSeriesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dbbrain/getTopSpaceTableTimeSeries:getTopSpaceTableTimeSeries", args, GetTopSpaceTableTimeSeriesResultOutput{}, options).(GetTopSpaceTableTimeSeriesResultOutput)
 }
 
 // A collection of arguments for invoking getTopSpaceTableTimeSeries.

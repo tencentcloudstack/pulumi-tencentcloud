@@ -72,12 +72,8 @@ type GetProjectRolesResult struct {
 }
 
 func GetProjectRolesOutput(ctx *pulumi.Context, args GetProjectRolesOutputArgs, opts ...pulumi.InvokeOption) GetProjectRolesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetProjectRolesResultOutput, error) {
-			args := v.(GetProjectRolesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Wedata/getProjectRoles:getProjectRoles", args, GetProjectRolesResultOutput{}, options).(GetProjectRolesResultOutput), nil
-		}).(GetProjectRolesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Wedata/getProjectRoles:getProjectRoles", args, GetProjectRolesResultOutput{}, options).(GetProjectRolesResultOutput)
 }
 
 // A collection of arguments for invoking getProjectRoles.

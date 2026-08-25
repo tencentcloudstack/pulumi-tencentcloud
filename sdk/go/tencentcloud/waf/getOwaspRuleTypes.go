@@ -79,12 +79,8 @@ type GetOwaspRuleTypesResult struct {
 }
 
 func GetOwaspRuleTypesOutput(ctx *pulumi.Context, args GetOwaspRuleTypesOutputArgs, opts ...pulumi.InvokeOption) GetOwaspRuleTypesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetOwaspRuleTypesResultOutput, error) {
-			args := v.(GetOwaspRuleTypesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Waf/getOwaspRuleTypes:getOwaspRuleTypes", args, GetOwaspRuleTypesResultOutput{}, options).(GetOwaspRuleTypesResultOutput), nil
-		}).(GetOwaspRuleTypesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Waf/getOwaspRuleTypes:getOwaspRuleTypes", args, GetOwaspRuleTypesResultOutput{}, options).(GetOwaspRuleTypesResultOutput)
 }
 
 // A collection of arguments for invoking getOwaspRuleTypes.

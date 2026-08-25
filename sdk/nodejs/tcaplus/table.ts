@@ -19,7 +19,7 @@ import * as utilities from "../utilities";
  *
  * const config = new pulumi.Config();
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
- * const vpc = tencentcloud.Vpc.getSubnets({
+ * const vpc = tencentcloud.vpc.getSubnets({
  *     isDefault: true,
  *     availabilityZone: availabilityZone,
  * });
@@ -252,59 +252,59 @@ export interface TableState {
     /**
      * ID of the TcaplusDB cluster to which the table belongs.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Create time of the TcaplusDB table.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Description of the TcaplusDB table.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Error messages for creating TcaplusDB table.
      */
-    error?: pulumi.Input<string>;
+    error?: pulumi.Input<string | undefined>;
     /**
      * ID of the IDL File.
      */
-    idlId?: pulumi.Input<string>;
+    idlId?: pulumi.Input<string | undefined>;
     /**
      * Reserved read capacity units of the TcaplusDB table.
      */
-    reservedReadCu?: pulumi.Input<number>;
+    reservedReadCu?: pulumi.Input<number | undefined>;
     /**
      * Reserved storage capacity of the TcaplusDB table (unit: GB).
      */
-    reservedVolume?: pulumi.Input<number>;
+    reservedVolume?: pulumi.Input<number | undefined>;
     /**
      * Reserved write capacity units of the TcaplusDB table.
      */
-    reservedWriteCu?: pulumi.Input<number>;
+    reservedWriteCu?: pulumi.Input<number | undefined>;
     /**
      * Status of the TcaplusDB table.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * IDL type of the TcaplusDB table. Valid values: `PROTO` and `TDR`.
      */
-    tableIdlType?: pulumi.Input<string>;
+    tableIdlType?: pulumi.Input<string | undefined>;
     /**
      * Name of the TcaplusDB table.
      */
-    tableName?: pulumi.Input<string>;
+    tableName?: pulumi.Input<string | undefined>;
     /**
      * Size of the TcaplusDB table.
      */
-    tableSize?: pulumi.Input<number>;
+    tableSize?: pulumi.Input<number | undefined>;
     /**
      * Type of the TcaplusDB table. Valid values are `GENERIC` and `LIST`.
      */
-    tableType?: pulumi.Input<string>;
+    tableType?: pulumi.Input<string | undefined>;
     /**
      * ID of the table group to which the table belongs.
      */
-    tablegroupId?: pulumi.Input<string>;
+    tablegroupId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -318,7 +318,7 @@ export interface TableArgs {
     /**
      * Description of the TcaplusDB table.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * ID of the IDL File.
      */

@@ -15,13 +15,13 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const groups = tencentcloud.Monitor.getPolicyGroups({
+ * const groups = tencentcloud.monitor.getPolicyGroups({
  *     policyViewNames: [
  *         "REDIS-CLUSTER",
  *         "cvm_device",
  *     ],
  * });
- * const name = tencentcloud.Monitor.getPolicyGroups({
+ * const name = tencentcloud.monitor.getPolicyGroups({
  *     name: "test",
  * });
  * ```
@@ -79,13 +79,13 @@ export interface GetPolicyGroupsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const groups = tencentcloud.Monitor.getPolicyGroups({
+ * const groups = tencentcloud.monitor.getPolicyGroups({
  *     policyViewNames: [
  *         "REDIS-CLUSTER",
  *         "cvm_device",
  *     ],
  * });
- * const name = tencentcloud.Monitor.getPolicyGroups({
+ * const name = tencentcloud.monitor.getPolicyGroups({
  *     name: "test",
  * });
  * ```
@@ -107,13 +107,13 @@ export interface GetPolicyGroupsOutputArgs {
     /**
      * Policy group name for query.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * The policy view for query.
      */
-    policyViewNames?: pulumi.Input<pulumi.Input<string>[]>;
+    policyViewNames?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Used to store results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

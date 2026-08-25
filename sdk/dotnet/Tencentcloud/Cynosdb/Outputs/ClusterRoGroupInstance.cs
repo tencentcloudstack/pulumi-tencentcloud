@@ -19,7 +19,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb.Outputs
         /// </summary>
         public readonly string? InstanceId;
         /// <summary>
-        /// Name of instance.
+        /// Name of instance. Only supported when modifying.
         /// </summary>
         public readonly string? InstanceName;
 

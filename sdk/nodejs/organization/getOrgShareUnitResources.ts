@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const organizationOrgShareUnitResources = tencentcloud.Organization.getOrgShareUnitResources({
+ * const organizationOrgShareUnitResources = tencentcloud.organization.getOrgShareUnitResources({
  *     area: "ap-guangzhou",
  *     unitId: "xxxxxx",
  * });
@@ -85,7 +85,7 @@ export interface GetOrgShareUnitResourcesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const organizationOrgShareUnitResources = tencentcloud.Organization.getOrgShareUnitResources({
+ * const organizationOrgShareUnitResources = tencentcloud.organization.getOrgShareUnitResources({
  *     area: "ap-guangzhou",
  *     unitId: "xxxxxx",
  * });
@@ -113,15 +113,15 @@ export interface GetOrgShareUnitResourcesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Search for keywords. Support product resource ID search.
      */
-    searchKey?: pulumi.Input<string>;
+    searchKey?: pulumi.Input<string | undefined>;
     /**
      * Shared resource type.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
     /**
      * Shared unit ID.
      */

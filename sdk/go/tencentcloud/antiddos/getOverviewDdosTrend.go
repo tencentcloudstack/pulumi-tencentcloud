@@ -86,12 +86,8 @@ type GetOverviewDdosTrendResult struct {
 }
 
 func GetOverviewDdosTrendOutput(ctx *pulumi.Context, args GetOverviewDdosTrendOutputArgs, opts ...pulumi.InvokeOption) GetOverviewDdosTrendResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetOverviewDdosTrendResultOutput, error) {
-			args := v.(GetOverviewDdosTrendArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Antiddos/getOverviewDdosTrend:getOverviewDdosTrend", args, GetOverviewDdosTrendResultOutput{}, options).(GetOverviewDdosTrendResultOutput), nil
-		}).(GetOverviewDdosTrendResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Antiddos/getOverviewDdosTrend:getOverviewDdosTrend", args, GetOverviewDdosTrendResultOutput{}, options).(GetOverviewDdosTrendResultOutput)
 }
 
 // A collection of arguments for invoking getOverviewDdosTrend.

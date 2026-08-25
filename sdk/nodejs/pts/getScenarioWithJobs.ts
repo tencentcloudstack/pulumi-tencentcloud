@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const scenarioWithJobs = tencentcloud.Pts.getScenarioWithJobs({
+ * const scenarioWithJobs = tencentcloud.pts.getScenarioWithJobs({
  *     projectIds: ["project-45vw7v82"],
  *     scenarioIds: ["scenario-koakp3h6"],
  *     scenarioName: "pts-jmeter",
@@ -126,7 +126,7 @@ export interface GetScenarioWithJobsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const scenarioWithJobs = tencentcloud.Pts.getScenarioWithJobs({
+ * const scenarioWithJobs = tencentcloud.pts.getScenarioWithJobs({
  *     projectIds: ["project-45vw7v82"],
  *     scenarioIds: ["scenario-koakp3h6"],
  *     scenarioName: "pts-jmeter",
@@ -160,23 +160,23 @@ export interface GetScenarioWithJobsOutputArgs {
     /**
      * Whether to use ascending order.
      */
-    ascend?: pulumi.Input<boolean>;
+    ascend?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to ignore the dataset.
      */
-    ignoreDataset?: pulumi.Input<boolean>;
+    ignoreDataset?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to ignore the script content.
      */
-    ignoreScript?: pulumi.Input<boolean>;
+    ignoreScript?: pulumi.Input<boolean | undefined>;
     /**
      * The field column used for ordering.
      */
-    orderBy?: pulumi.Input<string>;
+    orderBy?: pulumi.Input<string | undefined>;
     /**
      * The job owner.
      */
-    owner?: pulumi.Input<string>;
+    owner?: pulumi.Input<string | undefined>;
     /**
      * Project ID list.
      */
@@ -184,17 +184,17 @@ export interface GetScenarioWithJobsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Scenario ID list.
      */
-    scenarioIds?: pulumi.Input<pulumi.Input<string>[]>;
+    scenarioIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Scenario name.
      */
-    scenarioName?: pulumi.Input<string>;
+    scenarioName?: pulumi.Input<string | undefined>;
     /**
      * Scenario type, e.g.: pts-http, pts-js, pts-trpc, pts-jmeter.
      */
-    scenarioType?: pulumi.Input<string>;
+    scenarioType?: pulumi.Input<string | undefined>;
 }

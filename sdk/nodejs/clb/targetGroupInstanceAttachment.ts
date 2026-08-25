@@ -108,19 +108,19 @@ export interface TargetGroupInstanceAttachmentState {
     /**
      * The Intranet IP of the target group instance.
      */
-    bindIp?: pulumi.Input<string>;
+    bindIp?: pulumi.Input<string | undefined>;
     /**
      * Port of the target group instance.
      */
-    port?: pulumi.Input<number>;
+    port?: pulumi.Input<number | undefined>;
     /**
      * Target group ID.
      */
-    targetGroupId?: pulumi.Input<string>;
+    targetGroupId?: pulumi.Input<string | undefined>;
     /**
      * The weight of the target group instance.
      */
-    weight?: pulumi.Input<number>;
+    weight?: pulumi.Input<number | undefined>;
 }
 
 /**

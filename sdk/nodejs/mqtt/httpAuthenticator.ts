@@ -166,43 +166,43 @@ export interface HttpAuthenticatorState {
     /**
      * Forwarding request body.
      */
-    bodies?: pulumi.Input<pulumi.Input<inputs.Mqtt.HttpAuthenticatorBody>[]>;
+    bodies?: pulumi.Input<pulumi.Input<inputs.Mqtt.HttpAuthenticatorBody>[] | undefined>;
     /**
      * Maximum concurrent connections, default 8, range: 1-20.
      */
-    concurrency?: pulumi.Input<number>;
+    concurrency?: pulumi.Input<number | undefined>;
     /**
      * Connection timeout, unit: seconds, range: 1-30.
      */
-    connectTimeout?: pulumi.Input<number>;
+    connectTimeout?: pulumi.Input<number | undefined>;
     /**
      * JWKS endpoint.
      */
-    endpoint?: pulumi.Input<string>;
+    endpoint?: pulumi.Input<string | undefined>;
     /**
      * Forwarding request header.
      */
-    headers?: pulumi.Input<pulumi.Input<inputs.Mqtt.HttpAuthenticatorHeader>[]>;
+    headers?: pulumi.Input<pulumi.Input<inputs.Mqtt.HttpAuthenticatorHeader>[] | undefined>;
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Network request method GET or POST, default POST.
      */
-    method?: pulumi.Input<string>;
+    method?: pulumi.Input<string | undefined>;
     /**
      * Request timeout, unit: seconds, range: 1-30.
      */
-    readTimeout?: pulumi.Input<number>;
+    readTimeout?: pulumi.Input<number | undefined>;
     /**
      * Remark.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Is the authenticator enabled: open enable; Close close.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -212,15 +212,15 @@ export interface HttpAuthenticatorArgs {
     /**
      * Forwarding request body.
      */
-    bodies?: pulumi.Input<pulumi.Input<inputs.Mqtt.HttpAuthenticatorBody>[]>;
+    bodies?: pulumi.Input<pulumi.Input<inputs.Mqtt.HttpAuthenticatorBody>[] | undefined>;
     /**
      * Maximum concurrent connections, default 8, range: 1-20.
      */
-    concurrency?: pulumi.Input<number>;
+    concurrency?: pulumi.Input<number | undefined>;
     /**
      * Connection timeout, unit: seconds, range: 1-30.
      */
-    connectTimeout?: pulumi.Input<number>;
+    connectTimeout?: pulumi.Input<number | undefined>;
     /**
      * JWKS endpoint.
      */
@@ -228,7 +228,7 @@ export interface HttpAuthenticatorArgs {
     /**
      * Forwarding request header.
      */
-    headers?: pulumi.Input<pulumi.Input<inputs.Mqtt.HttpAuthenticatorHeader>[]>;
+    headers?: pulumi.Input<pulumi.Input<inputs.Mqtt.HttpAuthenticatorHeader>[] | undefined>;
     /**
      * Instance ID.
      */
@@ -236,17 +236,17 @@ export interface HttpAuthenticatorArgs {
     /**
      * Network request method GET or POST, default POST.
      */
-    method?: pulumi.Input<string>;
+    method?: pulumi.Input<string | undefined>;
     /**
      * Request timeout, unit: seconds, range: 1-30.
      */
-    readTimeout?: pulumi.Input<number>;
+    readTimeout?: pulumi.Input<number | undefined>;
     /**
      * Remark.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Is the authenticator enabled: open enable; Close close.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
 }

@@ -20,7 +20,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
     /// using System.Linq;
     /// using Pulumi;
     /// using Std = Pulumi.Std;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -51,7 +50,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
     /// 
     /// ## Import
     /// 
-    /// ckafka datahub_topic can be imported using the id, e.g.
+    /// ckafka DatahubTopic can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Ckafka/datahubTopic:DatahubTopic datahub_topic datahub_topic_name

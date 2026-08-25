@@ -269,6 +269,21 @@ import (
 //							},
 //						},
 //					},
+//					BotManagementLite: &teo.SecurityPolicyConfigSecurityPolicyBotManagementLiteArgs{
+//						CaptchaPageChallenge: &teo.SecurityPolicyConfigSecurityPolicyBotManagementLiteCaptchaPageChallengeArgs{
+//							Enabled: pulumi.String("on"),
+//						},
+//						AiCrawlerDetection: &teo.SecurityPolicyConfigSecurityPolicyBotManagementLiteAiCrawlerDetectionArgs{
+//							Enabled: pulumi.String("on"),
+//							Action: &teo.SecurityPolicyConfigSecurityPolicyBotManagementLiteAiCrawlerDetectionActionArgs{
+//								Name: pulumi.String("Deny"),
+//								DenyActionParameters: &teo.SecurityPolicyConfigSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersArgs{
+//									BlockIp:         pulumi.String("on"),
+//									BlockIpDuration: pulumi.String("120s"),
+//								},
+//							},
+//						},
+//					},
 //				},
 //			})
 //			if err != nil {
@@ -678,6 +693,8 @@ type SecurityPolicyConfig struct {
 	Entity pulumi.StringPtrOutput `pulumi:"entity"`
 	// Specifies the specified domain. when the Entity parameter value is Host, use the domain-level policy specified by this parameter. for example: use www.example.com to configure the domain-level policy of the domain.
 	Host pulumi.StringPtrOutput `pulumi:"host"`
+	// Security configuration. Classic web protection settings. Note: the DescribeSecurityPolicy API does not return SecurityConfig, so this field is write-only for state consistency. For each sub-configuration, if not specified, the existing API configuration is kept.
+	SecurityConfig SecurityPolicyConfigSecurityConfigOutput `pulumi:"securityConfig"`
 	// Security policy configuration. it is recommended to use for custom policies and managed rule configurations of Web protection. it supports configuring security policies with expression grammar.
 	SecurityPolicy SecurityPolicyConfigSecurityPolicyPtrOutput `pulumi:"securityPolicy"`
 	// Specify the policy Template ID. use this parameter to specify the ID of the policy Template when the Entity parameter value is Template.
@@ -723,6 +740,8 @@ type securityPolicyConfigState struct {
 	Entity *string `pulumi:"entity"`
 	// Specifies the specified domain. when the Entity parameter value is Host, use the domain-level policy specified by this parameter. for example: use www.example.com to configure the domain-level policy of the domain.
 	Host *string `pulumi:"host"`
+	// Security configuration. Classic web protection settings. Note: the DescribeSecurityPolicy API does not return SecurityConfig, so this field is write-only for state consistency. For each sub-configuration, if not specified, the existing API configuration is kept.
+	SecurityConfig *SecurityPolicyConfigSecurityConfig `pulumi:"securityConfig"`
 	// Security policy configuration. it is recommended to use for custom policies and managed rule configurations of Web protection. it supports configuring security policies with expression grammar.
 	SecurityPolicy *SecurityPolicyConfigSecurityPolicy `pulumi:"securityPolicy"`
 	// Specify the policy Template ID. use this parameter to specify the ID of the policy Template when the Entity parameter value is Template.
@@ -736,6 +755,8 @@ type SecurityPolicyConfigState struct {
 	Entity pulumi.StringPtrInput
 	// Specifies the specified domain. when the Entity parameter value is Host, use the domain-level policy specified by this parameter. for example: use www.example.com to configure the domain-level policy of the domain.
 	Host pulumi.StringPtrInput
+	// Security configuration. Classic web protection settings. Note: the DescribeSecurityPolicy API does not return SecurityConfig, so this field is write-only for state consistency. For each sub-configuration, if not specified, the existing API configuration is kept.
+	SecurityConfig SecurityPolicyConfigSecurityConfigPtrInput
 	// Security policy configuration. it is recommended to use for custom policies and managed rule configurations of Web protection. it supports configuring security policies with expression grammar.
 	SecurityPolicy SecurityPolicyConfigSecurityPolicyPtrInput
 	// Specify the policy Template ID. use this parameter to specify the ID of the policy Template when the Entity parameter value is Template.
@@ -753,6 +774,8 @@ type securityPolicyConfigArgs struct {
 	Entity *string `pulumi:"entity"`
 	// Specifies the specified domain. when the Entity parameter value is Host, use the domain-level policy specified by this parameter. for example: use www.example.com to configure the domain-level policy of the domain.
 	Host *string `pulumi:"host"`
+	// Security configuration. Classic web protection settings. Note: the DescribeSecurityPolicy API does not return SecurityConfig, so this field is write-only for state consistency. For each sub-configuration, if not specified, the existing API configuration is kept.
+	SecurityConfig *SecurityPolicyConfigSecurityConfig `pulumi:"securityConfig"`
 	// Security policy configuration. it is recommended to use for custom policies and managed rule configurations of Web protection. it supports configuring security policies with expression grammar.
 	SecurityPolicy *SecurityPolicyConfigSecurityPolicy `pulumi:"securityPolicy"`
 	// Specify the policy Template ID. use this parameter to specify the ID of the policy Template when the Entity parameter value is Template.
@@ -767,6 +790,8 @@ type SecurityPolicyConfigArgs struct {
 	Entity pulumi.StringPtrInput
 	// Specifies the specified domain. when the Entity parameter value is Host, use the domain-level policy specified by this parameter. for example: use www.example.com to configure the domain-level policy of the domain.
 	Host pulumi.StringPtrInput
+	// Security configuration. Classic web protection settings. Note: the DescribeSecurityPolicy API does not return SecurityConfig, so this field is write-only for state consistency. For each sub-configuration, if not specified, the existing API configuration is kept.
+	SecurityConfig SecurityPolicyConfigSecurityConfigPtrInput
 	// Security policy configuration. it is recommended to use for custom policies and managed rule configurations of Web protection. it supports configuring security policies with expression grammar.
 	SecurityPolicy SecurityPolicyConfigSecurityPolicyPtrInput
 	// Specify the policy Template ID. use this parameter to specify the ID of the policy Template when the Entity parameter value is Template.
@@ -870,6 +895,11 @@ func (o SecurityPolicyConfigOutput) Entity() pulumi.StringPtrOutput {
 // Specifies the specified domain. when the Entity parameter value is Host, use the domain-level policy specified by this parameter. for example: use www.example.com to configure the domain-level policy of the domain.
 func (o SecurityPolicyConfigOutput) Host() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecurityPolicyConfig) pulumi.StringPtrOutput { return v.Host }).(pulumi.StringPtrOutput)
+}
+
+// Security configuration. Classic web protection settings. Note: the DescribeSecurityPolicy API does not return SecurityConfig, so this field is write-only for state consistency. For each sub-configuration, if not specified, the existing API configuration is kept.
+func (o SecurityPolicyConfigOutput) SecurityConfig() SecurityPolicyConfigSecurityConfigOutput {
+	return o.ApplyT(func(v *SecurityPolicyConfig) SecurityPolicyConfigSecurityConfigOutput { return v.SecurityConfig }).(SecurityPolicyConfigSecurityConfigOutput)
 }
 
 // Security policy configuration. it is recommended to use for custom policies and managed rule configurations of Web protection. it supports configuring security policies with expression grammar.

@@ -32,13 +32,14 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := ccn.NewInstance(ctx, "example", &ccn.InstanceArgs{
-//				Name:               pulumi.String("tf-example"),
-//				Description:        pulumi.String("desc."),
-//				Qos:                pulumi.String("AG"),
-//				ChargeType:         pulumi.String("PREPAID"),
-//				BandwidthLimitType: pulumi.String("INTER_REGION_LIMIT"),
-//				RouteEcmpFlag:      pulumi.Bool(true),
-//				RouteOverlapFlag:   pulumi.Bool(true),
+//				Name:                 pulumi.String("tf-example"),
+//				Description:          pulumi.String("desc."),
+//				Qos:                  pulumi.String("AG"),
+//				ChargeType:           pulumi.String("PREPAID"),
+//				BandwidthLimitType:   pulumi.String("INTER_REGION_LIMIT"),
+//				InstanceMeteringType: pulumi.String("BANDWIDTH"),
+//				RouteEcmpFlag:        pulumi.Bool(true),
+//				RouteOverlapFlag:     pulumi.Bool(true),
 //				Tags: pulumi.StringMap{
 //					"createBy": pulumi.String("Terraform"),
 //				},
@@ -137,6 +138,8 @@ type Instance struct {
 	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// Number of attached instances.
 	InstanceCount pulumi.IntOutput `pulumi:"instanceCount"`
+	// Instance metering type. Valid values: `BANDWIDTH` (bandwidth billing), `TRAFFIC` (traffic billing). This parameter cannot be modified after creation.
+	InstanceMeteringType pulumi.StringOutput `pulumi:"instanceMeteringType"`
 	// Name of the CCN to be queried, and maximum length does not exceed 60 bytes.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// CCN service quality, 'PT': Platinum, 'AU': Gold, 'AG': Silver. The default is 'AU'.
@@ -191,6 +194,8 @@ type instanceState struct {
 	Description *string `pulumi:"description"`
 	// Number of attached instances.
 	InstanceCount *int `pulumi:"instanceCount"`
+	// Instance metering type. Valid values: `BANDWIDTH` (bandwidth billing), `TRAFFIC` (traffic billing). This parameter cannot be modified after creation.
+	InstanceMeteringType *string `pulumi:"instanceMeteringType"`
 	// Name of the CCN to be queried, and maximum length does not exceed 60 bytes.
 	Name *string `pulumi:"name"`
 	// CCN service quality, 'PT': Platinum, 'AU': Gold, 'AG': Silver. The default is 'AU'.
@@ -216,6 +221,8 @@ type InstanceState struct {
 	Description pulumi.StringPtrInput
 	// Number of attached instances.
 	InstanceCount pulumi.IntPtrInput
+	// Instance metering type. Valid values: `BANDWIDTH` (bandwidth billing), `TRAFFIC` (traffic billing). This parameter cannot be modified after creation.
+	InstanceMeteringType pulumi.StringPtrInput
 	// Name of the CCN to be queried, and maximum length does not exceed 60 bytes.
 	Name pulumi.StringPtrInput
 	// CCN service quality, 'PT': Platinum, 'AU': Gold, 'AG': Silver. The default is 'AU'.
@@ -241,6 +248,8 @@ type instanceArgs struct {
 	ChargeType *string `pulumi:"chargeType"`
 	// Description of CCN, and maximum length does not exceed 100 bytes.
 	Description *string `pulumi:"description"`
+	// Instance metering type. Valid values: `BANDWIDTH` (bandwidth billing), `TRAFFIC` (traffic billing). This parameter cannot be modified after creation.
+	InstanceMeteringType *string `pulumi:"instanceMeteringType"`
 	// Name of the CCN to be queried, and maximum length does not exceed 60 bytes.
 	Name *string `pulumi:"name"`
 	// CCN service quality, 'PT': Platinum, 'AU': Gold, 'AG': Silver. The default is 'AU'.
@@ -261,6 +270,8 @@ type InstanceArgs struct {
 	ChargeType pulumi.StringPtrInput
 	// Description of CCN, and maximum length does not exceed 100 bytes.
 	Description pulumi.StringPtrInput
+	// Instance metering type. Valid values: `BANDWIDTH` (bandwidth billing), `TRAFFIC` (traffic billing). This parameter cannot be modified after creation.
+	InstanceMeteringType pulumi.StringPtrInput
 	// Name of the CCN to be queried, and maximum length does not exceed 60 bytes.
 	Name pulumi.StringPtrInput
 	// CCN service quality, 'PT': Platinum, 'AU': Gold, 'AG': Silver. The default is 'AU'.
@@ -383,6 +394,11 @@ func (o InstanceOutput) Description() pulumi.StringPtrOutput {
 // Number of attached instances.
 func (o InstanceOutput) InstanceCount() pulumi.IntOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.InstanceCount }).(pulumi.IntOutput)
+}
+
+// Instance metering type. Valid values: `BANDWIDTH` (bandwidth billing), `TRAFFIC` (traffic billing). This parameter cannot be modified after creation.
+func (o InstanceOutput) InstanceMeteringType() pulumi.StringOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.InstanceMeteringType }).(pulumi.StringOutput)
 }
 
 // Name of the CCN to be queried, and maximum length does not exceed 60 bytes.

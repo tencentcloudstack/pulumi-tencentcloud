@@ -67,12 +67,8 @@ type GetRotationHistoryResult struct {
 }
 
 func GetRotationHistoryOutput(ctx *pulumi.Context, args GetRotationHistoryOutputArgs, opts ...pulumi.InvokeOption) GetRotationHistoryResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetRotationHistoryResultOutput, error) {
-			args := v.(GetRotationHistoryArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ssm/getRotationHistory:getRotationHistory", args, GetRotationHistoryResultOutput{}, options).(GetRotationHistoryResultOutput), nil
-		}).(GetRotationHistoryResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ssm/getRotationHistory:getRotationHistory", args, GetRotationHistoryResultOutput{}, options).(GetRotationHistoryResultOutput)
 }
 
 // A collection of arguments for invoking getRotationHistory.

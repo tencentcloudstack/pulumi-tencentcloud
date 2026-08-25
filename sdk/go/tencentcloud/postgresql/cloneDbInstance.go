@@ -31,20 +31,22 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := postgresql.NewCloneDbInstance(ctx, "example", &postgresql.CloneDbInstanceArgs{
-//				DbInstanceId:       pulumi.String("postgres-evsqpyap"),
-//				Name:               pulumi.String("tf-example-clone"),
+//				DbInstanceId:       pulumi.String("postgres-ckwcgdf1"),
+//				Name:               pulumi.String("tf-example"),
 //				SpecCode:           pulumi.String("pg.it.medium4"),
-//				Storage:            pulumi.Int(200),
+//				Storage:            pulumi.Int(100),
 //				Period:             pulumi.Int(1),
 //				AutoRenewFlag:      pulumi.Int(0),
-//				VpcId:              pulumi.String("vpc-a6zec4mf"),
-//				SubnetId:           pulumi.String("subnet-b8hintyy"),
+//				VpcId:              pulumi.String("vpc-i5yyodl9"),
+//				SubnetId:           pulumi.String("subnet-hhi88a58"),
 //				InstanceChargeType: pulumi.String("POSTPAID_BY_HOUR"),
 //				SecurityGroupIds: pulumi.StringArray{
-//					pulumi.String("sg-8stavs03"),
+//					pulumi.String("sg-rs32zv1r"),
+//					pulumi.String("sg-37tigqat"),
 //				},
 //				ProjectId:          pulumi.Int(0),
-//				RecoveryTargetTime: pulumi.String("2024-10-12 18:17:00"),
+//				RecoveryTargetTime: pulumi.String("2026-07-10 01:00:06"),
+//				DeletionProtection: pulumi.Bool(true),
 //				DbNodeSets: postgresql.CloneDbInstanceDbNodeSetArray{
 //					&postgresql.CloneDbInstanceDbNodeSetArgs{
 //						Role: pulumi.String("Primary"),
@@ -52,14 +54,11 @@ import (
 //					},
 //					&postgresql.CloneDbInstanceDbNodeSetArgs{
 //						Role: pulumi.String("Standby"),
-//						Zone: pulumi.String("ap-guangzhou-6"),
+//						Zone: pulumi.String("ap-guangzhou-7"),
 //					},
 //				},
-//				TagLists: postgresql.CloneDbInstanceTagListArray{
-//					&postgresql.CloneDbInstanceTagListArgs{
-//						TagKey:   pulumi.String("createBy"),
-//						TagValue: pulumi.String("Terraform"),
-//					},
+//				Tags: pulumi.StringMap{
+//					"tagKey": pulumi.String("tagValue"),
 //				},
 //			})
 //			if err != nil {
@@ -113,8 +112,9 @@ import (
 //				SecurityGroupIds: pulumi.StringArray{
 //					pulumi.String("sg-8stavs03"),
 //				},
-//				ProjectId:   pulumi.Int(0),
-//				BackupSetId: pulumi.String(baseBackups.BaseBackupSets[0].Id),
+//				ProjectId:          pulumi.Int(0),
+//				BackupSetId:        pulumi.String(baseBackups.BaseBackupSets[0].Id),
+//				DeletionProtection: pulumi.Bool(true),
 //				DbNodeSets: postgresql.CloneDbInstanceDbNodeSetArray{
 //					&postgresql.CloneDbInstanceDbNodeSetArgs{
 //						Role: pulumi.String("Primary"),
@@ -125,11 +125,8 @@ import (
 //						Zone: pulumi.String("ap-guangzhou-6"),
 //					},
 //				},
-//				TagLists: postgresql.CloneDbInstanceTagListArray{
-//					&postgresql.CloneDbInstanceTagListArgs{
-//						TagKey:   pulumi.String("createBy"),
-//						TagValue: pulumi.String("Terraform"),
-//					},
+//				Tags: pulumi.StringMap{
+//					"tagKey": pulumi.String("tagValue"),
 //				},
 //			})
 //			if err != nil {
@@ -170,6 +167,7 @@ import (
 //				},
 //				ProjectId:          pulumi.Int(0),
 //				RecoveryTargetTime: pulumi.String("2024-10-12 18:17:00"),
+//				DeletionProtection: pulumi.Bool(true),
 //				DbNodeSets: postgresql.CloneDbInstanceDbNodeSetArray{
 //					&postgresql.CloneDbInstanceDbNodeSetArgs{
 //						Role:               pulumi.String("Primary"),
@@ -182,11 +180,8 @@ import (
 //						DedicatedClusterId: pulumi.String("cluster-262n63e8"),
 //					},
 //				},
-//				TagLists: postgresql.CloneDbInstanceTagListArray{
-//					&postgresql.CloneDbInstanceTagListArgs{
-//						TagKey:   pulumi.String("createBy"),
-//						TagValue: pulumi.String("Terraform"),
-//					},
+//				Tags: pulumi.StringMap{
+//					"tagKey": pulumi.String("tagValue"),
 //				},
 //			})
 //			if err != nil {
@@ -204,6 +199,8 @@ type CloneDbInstance struct {
 	ActivityId pulumi.IntPtrOutput `pulumi:"activityId"`
 	// Renewal Flag:
 	AutoRenewFlag pulumi.IntOutput `pulumi:"autoRenewFlag"`
+	// Availability zone.
+	AvailabilityZone pulumi.StringOutput `pulumi:"availabilityZone"`
 	// Basic backup set ID.
 	BackupSetId pulumi.StringPtrOutput `pulumi:"backupSetId"`
 	// ID of the original instance to be cloned.
@@ -211,6 +208,8 @@ type CloneDbInstance struct {
 	// Deployment information of the instance node, which will display the information of each AZ when the instance node is deployed across multiple AZs.
 	// The information of AZ can be obtained from the `Zone` field in the return value of the [DescribeZones](https://intl.cloud.tencent.com/document/api/409/16769?from_cn_redirect=1) API.
 	DbNodeSets CloneDbInstanceDbNodeSetArrayOutput `pulumi:"dbNodeSets"`
+	// Whether deletion protection is enabled for the instance: `true` deletion protection enabled; `false` deletion protection disabled.
+	DeletionProtection pulumi.BoolPtrOutput `pulumi:"deletionProtection"`
 	// Instance billing type, which currently supports:
 	//
 	// - PREPAID: Prepaid, i.e., monthly subscription
@@ -220,12 +219,22 @@ type CloneDbInstance struct {
 	InstanceChargeType pulumi.StringPtrOutput `pulumi:"instanceChargeType"`
 	// Name of the newly purchased instance, which can contain up to 60 letters, digits, or symbols (-_). If this parameter is not specified, "Unnamed" will be displayed by default.
 	Name pulumi.StringOutput `pulumi:"name"`
+	// ID of the cloned instance.
+	NewDbInstanceId pulumi.StringOutput `pulumi:"newDbInstanceId"`
 	// Purchase duration, in months.
 	// - Prepaid: Supports `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, and `36`.
 	// - Pay-as-you-go: Only supports `1`.
 	Period pulumi.IntOutput `pulumi:"period"`
+	// IP for private access.
+	PrivateAccessIp pulumi.StringOutput `pulumi:"privateAccessIp"`
+	// Port for private access.
+	PrivateAccessPort pulumi.IntOutput `pulumi:"privateAccessPort"`
 	// Project ID.
 	ProjectId pulumi.IntPtrOutput `pulumi:"projectId"`
+	// Host for public access.
+	PublicAccessHost pulumi.StringOutput `pulumi:"publicAccessHost"`
+	// Port for public access.
+	PublicAccessPort pulumi.IntOutput `pulumi:"publicAccessPort"`
 	// Restoration point in time.
 	RecoveryTargetTime pulumi.StringPtrOutput `pulumi:"recoveryTargetTime"`
 	// Security group of the instance, which can be obtained from the `sgld` field in the return value of the [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808?from_cn_redirect=1) API. If this parameter is not specified, the default security group will be bound.
@@ -242,8 +251,12 @@ type CloneDbInstance struct {
 	// Default value for the primary instance: Semi-sync
 	// Default value for the read-only instance: Async.
 	SyncMode pulumi.StringPtrOutput `pulumi:"syncMode"`
-	// The information of tags to be bound with the instance, which is left empty by default. This parameter can be obtained from the `Tags` field in the return value of the [DescribeTags](https://intl.cloud.tencent.com/document/api/651/35316?from_cn_redirect=1) API.
+	// It has been deprecated from version 1.83.10. Use `tags` instead. The information of tags to be bound with the instance, which is left empty by default. This parameter can be obtained from the `Tags` field in the return value of the [DescribeTags](https://intl.cloud.tencent.com/document/api/651/35316?from_cn_redirect=1) API.
+	//
+	// Deprecated: It has been deprecated from version 1.83.10. Use `tags` instead.
 	TagLists CloneDbInstanceTagListArrayOutput `pulumi:"tagLists"`
+	// The available tags within this postgresql.
+	Tags pulumi.StringMapOutput `pulumi:"tags"`
 	// VPC ID in the format of `vpc-xxxxxxx`, which can be obtained in the console or from the `unVpcId` field in the return value of the [DescribeVpcEx](https://intl.cloud.tencent.com/document/api/215/1372?from_cn_redirect=1) API.
 	VpcId pulumi.StringOutput `pulumi:"vpcId"`
 }
@@ -303,6 +316,8 @@ type cloneDbInstanceState struct {
 	ActivityId *int `pulumi:"activityId"`
 	// Renewal Flag:
 	AutoRenewFlag *int `pulumi:"autoRenewFlag"`
+	// Availability zone.
+	AvailabilityZone *string `pulumi:"availabilityZone"`
 	// Basic backup set ID.
 	BackupSetId *string `pulumi:"backupSetId"`
 	// ID of the original instance to be cloned.
@@ -310,6 +325,8 @@ type cloneDbInstanceState struct {
 	// Deployment information of the instance node, which will display the information of each AZ when the instance node is deployed across multiple AZs.
 	// The information of AZ can be obtained from the `Zone` field in the return value of the [DescribeZones](https://intl.cloud.tencent.com/document/api/409/16769?from_cn_redirect=1) API.
 	DbNodeSets []CloneDbInstanceDbNodeSet `pulumi:"dbNodeSets"`
+	// Whether deletion protection is enabled for the instance: `true` deletion protection enabled; `false` deletion protection disabled.
+	DeletionProtection *bool `pulumi:"deletionProtection"`
 	// Instance billing type, which currently supports:
 	//
 	// - PREPAID: Prepaid, i.e., monthly subscription
@@ -319,12 +336,22 @@ type cloneDbInstanceState struct {
 	InstanceChargeType *string `pulumi:"instanceChargeType"`
 	// Name of the newly purchased instance, which can contain up to 60 letters, digits, or symbols (-_). If this parameter is not specified, "Unnamed" will be displayed by default.
 	Name *string `pulumi:"name"`
+	// ID of the cloned instance.
+	NewDbInstanceId *string `pulumi:"newDbInstanceId"`
 	// Purchase duration, in months.
 	// - Prepaid: Supports `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, and `36`.
 	// - Pay-as-you-go: Only supports `1`.
 	Period *int `pulumi:"period"`
+	// IP for private access.
+	PrivateAccessIp *string `pulumi:"privateAccessIp"`
+	// Port for private access.
+	PrivateAccessPort *int `pulumi:"privateAccessPort"`
 	// Project ID.
 	ProjectId *int `pulumi:"projectId"`
+	// Host for public access.
+	PublicAccessHost *string `pulumi:"publicAccessHost"`
+	// Port for public access.
+	PublicAccessPort *int `pulumi:"publicAccessPort"`
 	// Restoration point in time.
 	RecoveryTargetTime *string `pulumi:"recoveryTargetTime"`
 	// Security group of the instance, which can be obtained from the `sgld` field in the return value of the [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808?from_cn_redirect=1) API. If this parameter is not specified, the default security group will be bound.
@@ -341,8 +368,12 @@ type cloneDbInstanceState struct {
 	// Default value for the primary instance: Semi-sync
 	// Default value for the read-only instance: Async.
 	SyncMode *string `pulumi:"syncMode"`
-	// The information of tags to be bound with the instance, which is left empty by default. This parameter can be obtained from the `Tags` field in the return value of the [DescribeTags](https://intl.cloud.tencent.com/document/api/651/35316?from_cn_redirect=1) API.
+	// It has been deprecated from version 1.83.10. Use `tags` instead. The information of tags to be bound with the instance, which is left empty by default. This parameter can be obtained from the `Tags` field in the return value of the [DescribeTags](https://intl.cloud.tencent.com/document/api/651/35316?from_cn_redirect=1) API.
+	//
+	// Deprecated: It has been deprecated from version 1.83.10. Use `tags` instead.
 	TagLists []CloneDbInstanceTagList `pulumi:"tagLists"`
+	// The available tags within this postgresql.
+	Tags map[string]string `pulumi:"tags"`
 	// VPC ID in the format of `vpc-xxxxxxx`, which can be obtained in the console or from the `unVpcId` field in the return value of the [DescribeVpcEx](https://intl.cloud.tencent.com/document/api/215/1372?from_cn_redirect=1) API.
 	VpcId *string `pulumi:"vpcId"`
 }
@@ -352,6 +383,8 @@ type CloneDbInstanceState struct {
 	ActivityId pulumi.IntPtrInput
 	// Renewal Flag:
 	AutoRenewFlag pulumi.IntPtrInput
+	// Availability zone.
+	AvailabilityZone pulumi.StringPtrInput
 	// Basic backup set ID.
 	BackupSetId pulumi.StringPtrInput
 	// ID of the original instance to be cloned.
@@ -359,6 +392,8 @@ type CloneDbInstanceState struct {
 	// Deployment information of the instance node, which will display the information of each AZ when the instance node is deployed across multiple AZs.
 	// The information of AZ can be obtained from the `Zone` field in the return value of the [DescribeZones](https://intl.cloud.tencent.com/document/api/409/16769?from_cn_redirect=1) API.
 	DbNodeSets CloneDbInstanceDbNodeSetArrayInput
+	// Whether deletion protection is enabled for the instance: `true` deletion protection enabled; `false` deletion protection disabled.
+	DeletionProtection pulumi.BoolPtrInput
 	// Instance billing type, which currently supports:
 	//
 	// - PREPAID: Prepaid, i.e., monthly subscription
@@ -368,12 +403,22 @@ type CloneDbInstanceState struct {
 	InstanceChargeType pulumi.StringPtrInput
 	// Name of the newly purchased instance, which can contain up to 60 letters, digits, or symbols (-_). If this parameter is not specified, "Unnamed" will be displayed by default.
 	Name pulumi.StringPtrInput
+	// ID of the cloned instance.
+	NewDbInstanceId pulumi.StringPtrInput
 	// Purchase duration, in months.
 	// - Prepaid: Supports `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, and `36`.
 	// - Pay-as-you-go: Only supports `1`.
 	Period pulumi.IntPtrInput
+	// IP for private access.
+	PrivateAccessIp pulumi.StringPtrInput
+	// Port for private access.
+	PrivateAccessPort pulumi.IntPtrInput
 	// Project ID.
 	ProjectId pulumi.IntPtrInput
+	// Host for public access.
+	PublicAccessHost pulumi.StringPtrInput
+	// Port for public access.
+	PublicAccessPort pulumi.IntPtrInput
 	// Restoration point in time.
 	RecoveryTargetTime pulumi.StringPtrInput
 	// Security group of the instance, which can be obtained from the `sgld` field in the return value of the [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808?from_cn_redirect=1) API. If this parameter is not specified, the default security group will be bound.
@@ -390,8 +435,12 @@ type CloneDbInstanceState struct {
 	// Default value for the primary instance: Semi-sync
 	// Default value for the read-only instance: Async.
 	SyncMode pulumi.StringPtrInput
-	// The information of tags to be bound with the instance, which is left empty by default. This parameter can be obtained from the `Tags` field in the return value of the [DescribeTags](https://intl.cloud.tencent.com/document/api/651/35316?from_cn_redirect=1) API.
+	// It has been deprecated from version 1.83.10. Use `tags` instead. The information of tags to be bound with the instance, which is left empty by default. This parameter can be obtained from the `Tags` field in the return value of the [DescribeTags](https://intl.cloud.tencent.com/document/api/651/35316?from_cn_redirect=1) API.
+	//
+	// Deprecated: It has been deprecated from version 1.83.10. Use `tags` instead.
 	TagLists CloneDbInstanceTagListArrayInput
+	// The available tags within this postgresql.
+	Tags pulumi.StringMapInput
 	// VPC ID in the format of `vpc-xxxxxxx`, which can be obtained in the console or from the `unVpcId` field in the return value of the [DescribeVpcEx](https://intl.cloud.tencent.com/document/api/215/1372?from_cn_redirect=1) API.
 	VpcId pulumi.StringPtrInput
 }
@@ -412,6 +461,8 @@ type cloneDbInstanceArgs struct {
 	// Deployment information of the instance node, which will display the information of each AZ when the instance node is deployed across multiple AZs.
 	// The information of AZ can be obtained from the `Zone` field in the return value of the [DescribeZones](https://intl.cloud.tencent.com/document/api/409/16769?from_cn_redirect=1) API.
 	DbNodeSets []CloneDbInstanceDbNodeSet `pulumi:"dbNodeSets"`
+	// Whether deletion protection is enabled for the instance: `true` deletion protection enabled; `false` deletion protection disabled.
+	DeletionProtection *bool `pulumi:"deletionProtection"`
 	// Instance billing type, which currently supports:
 	//
 	// - PREPAID: Prepaid, i.e., monthly subscription
@@ -443,8 +494,12 @@ type cloneDbInstanceArgs struct {
 	// Default value for the primary instance: Semi-sync
 	// Default value for the read-only instance: Async.
 	SyncMode *string `pulumi:"syncMode"`
-	// The information of tags to be bound with the instance, which is left empty by default. This parameter can be obtained from the `Tags` field in the return value of the [DescribeTags](https://intl.cloud.tencent.com/document/api/651/35316?from_cn_redirect=1) API.
+	// It has been deprecated from version 1.83.10. Use `tags` instead. The information of tags to be bound with the instance, which is left empty by default. This parameter can be obtained from the `Tags` field in the return value of the [DescribeTags](https://intl.cloud.tencent.com/document/api/651/35316?from_cn_redirect=1) API.
+	//
+	// Deprecated: It has been deprecated from version 1.83.10. Use `tags` instead.
 	TagLists []CloneDbInstanceTagList `pulumi:"tagLists"`
+	// The available tags within this postgresql.
+	Tags map[string]string `pulumi:"tags"`
 	// VPC ID in the format of `vpc-xxxxxxx`, which can be obtained in the console or from the `unVpcId` field in the return value of the [DescribeVpcEx](https://intl.cloud.tencent.com/document/api/215/1372?from_cn_redirect=1) API.
 	VpcId string `pulumi:"vpcId"`
 }
@@ -462,6 +517,8 @@ type CloneDbInstanceArgs struct {
 	// Deployment information of the instance node, which will display the information of each AZ when the instance node is deployed across multiple AZs.
 	// The information of AZ can be obtained from the `Zone` field in the return value of the [DescribeZones](https://intl.cloud.tencent.com/document/api/409/16769?from_cn_redirect=1) API.
 	DbNodeSets CloneDbInstanceDbNodeSetArrayInput
+	// Whether deletion protection is enabled for the instance: `true` deletion protection enabled; `false` deletion protection disabled.
+	DeletionProtection pulumi.BoolPtrInput
 	// Instance billing type, which currently supports:
 	//
 	// - PREPAID: Prepaid, i.e., monthly subscription
@@ -493,8 +550,12 @@ type CloneDbInstanceArgs struct {
 	// Default value for the primary instance: Semi-sync
 	// Default value for the read-only instance: Async.
 	SyncMode pulumi.StringPtrInput
-	// The information of tags to be bound with the instance, which is left empty by default. This parameter can be obtained from the `Tags` field in the return value of the [DescribeTags](https://intl.cloud.tencent.com/document/api/651/35316?from_cn_redirect=1) API.
+	// It has been deprecated from version 1.83.10. Use `tags` instead. The information of tags to be bound with the instance, which is left empty by default. This parameter can be obtained from the `Tags` field in the return value of the [DescribeTags](https://intl.cloud.tencent.com/document/api/651/35316?from_cn_redirect=1) API.
+	//
+	// Deprecated: It has been deprecated from version 1.83.10. Use `tags` instead.
 	TagLists CloneDbInstanceTagListArrayInput
+	// The available tags within this postgresql.
+	Tags pulumi.StringMapInput
 	// VPC ID in the format of `vpc-xxxxxxx`, which can be obtained in the console or from the `unVpcId` field in the return value of the [DescribeVpcEx](https://intl.cloud.tencent.com/document/api/215/1372?from_cn_redirect=1) API.
 	VpcId pulumi.StringInput
 }
@@ -596,6 +657,11 @@ func (o CloneDbInstanceOutput) AutoRenewFlag() pulumi.IntOutput {
 	return o.ApplyT(func(v *CloneDbInstance) pulumi.IntOutput { return v.AutoRenewFlag }).(pulumi.IntOutput)
 }
 
+// Availability zone.
+func (o CloneDbInstanceOutput) AvailabilityZone() pulumi.StringOutput {
+	return o.ApplyT(func(v *CloneDbInstance) pulumi.StringOutput { return v.AvailabilityZone }).(pulumi.StringOutput)
+}
+
 // Basic backup set ID.
 func (o CloneDbInstanceOutput) BackupSetId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CloneDbInstance) pulumi.StringPtrOutput { return v.BackupSetId }).(pulumi.StringPtrOutput)
@@ -610,6 +676,11 @@ func (o CloneDbInstanceOutput) DbInstanceId() pulumi.StringOutput {
 // The information of AZ can be obtained from the `Zone` field in the return value of the [DescribeZones](https://intl.cloud.tencent.com/document/api/409/16769?from_cn_redirect=1) API.
 func (o CloneDbInstanceOutput) DbNodeSets() CloneDbInstanceDbNodeSetArrayOutput {
 	return o.ApplyT(func(v *CloneDbInstance) CloneDbInstanceDbNodeSetArrayOutput { return v.DbNodeSets }).(CloneDbInstanceDbNodeSetArrayOutput)
+}
+
+// Whether deletion protection is enabled for the instance: `true` deletion protection enabled; `false` deletion protection disabled.
+func (o CloneDbInstanceOutput) DeletionProtection() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *CloneDbInstance) pulumi.BoolPtrOutput { return v.DeletionProtection }).(pulumi.BoolPtrOutput)
 }
 
 // Instance billing type, which currently supports:
@@ -627,6 +698,11 @@ func (o CloneDbInstanceOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *CloneDbInstance) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
+// ID of the cloned instance.
+func (o CloneDbInstanceOutput) NewDbInstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v *CloneDbInstance) pulumi.StringOutput { return v.NewDbInstanceId }).(pulumi.StringOutput)
+}
+
 // Purchase duration, in months.
 // - Prepaid: Supports `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, and `36`.
 // - Pay-as-you-go: Only supports `1`.
@@ -634,9 +710,29 @@ func (o CloneDbInstanceOutput) Period() pulumi.IntOutput {
 	return o.ApplyT(func(v *CloneDbInstance) pulumi.IntOutput { return v.Period }).(pulumi.IntOutput)
 }
 
+// IP for private access.
+func (o CloneDbInstanceOutput) PrivateAccessIp() pulumi.StringOutput {
+	return o.ApplyT(func(v *CloneDbInstance) pulumi.StringOutput { return v.PrivateAccessIp }).(pulumi.StringOutput)
+}
+
+// Port for private access.
+func (o CloneDbInstanceOutput) PrivateAccessPort() pulumi.IntOutput {
+	return o.ApplyT(func(v *CloneDbInstance) pulumi.IntOutput { return v.PrivateAccessPort }).(pulumi.IntOutput)
+}
+
 // Project ID.
 func (o CloneDbInstanceOutput) ProjectId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *CloneDbInstance) pulumi.IntPtrOutput { return v.ProjectId }).(pulumi.IntPtrOutput)
+}
+
+// Host for public access.
+func (o CloneDbInstanceOutput) PublicAccessHost() pulumi.StringOutput {
+	return o.ApplyT(func(v *CloneDbInstance) pulumi.StringOutput { return v.PublicAccessHost }).(pulumi.StringOutput)
+}
+
+// Port for public access.
+func (o CloneDbInstanceOutput) PublicAccessPort() pulumi.IntOutput {
+	return o.ApplyT(func(v *CloneDbInstance) pulumi.IntOutput { return v.PublicAccessPort }).(pulumi.IntOutput)
 }
 
 // Restoration point in time.
@@ -673,9 +769,16 @@ func (o CloneDbInstanceOutput) SyncMode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CloneDbInstance) pulumi.StringPtrOutput { return v.SyncMode }).(pulumi.StringPtrOutput)
 }
 
-// The information of tags to be bound with the instance, which is left empty by default. This parameter can be obtained from the `Tags` field in the return value of the [DescribeTags](https://intl.cloud.tencent.com/document/api/651/35316?from_cn_redirect=1) API.
+// It has been deprecated from version 1.83.10. Use `tags` instead. The information of tags to be bound with the instance, which is left empty by default. This parameter can be obtained from the `Tags` field in the return value of the [DescribeTags](https://intl.cloud.tencent.com/document/api/651/35316?from_cn_redirect=1) API.
+//
+// Deprecated: It has been deprecated from version 1.83.10. Use `tags` instead.
 func (o CloneDbInstanceOutput) TagLists() CloneDbInstanceTagListArrayOutput {
 	return o.ApplyT(func(v *CloneDbInstance) CloneDbInstanceTagListArrayOutput { return v.TagLists }).(CloneDbInstanceTagListArrayOutput)
+}
+
+// The available tags within this postgresql.
+func (o CloneDbInstanceOutput) Tags() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *CloneDbInstance) pulumi.StringMapOutput { return v.Tags }).(pulumi.StringMapOutput)
 }
 
 // VPC ID in the format of `vpc-xxxxxxx`, which can be obtained in the console or from the `unVpcId` field in the return value of the [DescribeVpcEx](https://intl.cloud.tencent.com/document/api/215/1372?from_cn_redirect=1) API.

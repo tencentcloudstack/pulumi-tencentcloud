@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const describeHostUpdateRecordDetail = tencentcloud.Ssl.getDescribeHostUpdateRecordDetail({
+ * const describeHostUpdateRecordDetail = tencentcloud.ssl.getDescribeHostUpdateRecordDetail({
  *     deployRecordId: "35364",
  * });
  * ```
@@ -78,7 +78,7 @@ export interface GetDescribeHostUpdateRecordDetailResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const describeHostUpdateRecordDetail = tencentcloud.Ssl.getDescribeHostUpdateRecordDetail({
+ * const describeHostUpdateRecordDetail = tencentcloud.ssl.getDescribeHostUpdateRecordDetail({
  *     deployRecordId: "35364",
  * });
  * ```
@@ -102,5 +102,5 @@ export interface GetDescribeHostUpdateRecordDetailOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

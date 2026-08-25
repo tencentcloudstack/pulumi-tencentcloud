@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const cdwpgLog = tencentcloud.Cdwpg.getLog({
+ * const cdwpgLog = tencentcloud.cdwpg.getLog({
  *     instanceId: "cdwpg-gexy9tue",
  *     startTime: "2025-03-21 00:00:00",
  *     endTime: "2025-03-21 23:59:59",
@@ -108,7 +108,7 @@ export interface GetLogResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const cdwpgLog = tencentcloud.Cdwpg.getLog({
+ * const cdwpgLog = tencentcloud.cdwpg.getLog({
  *     instanceId: "cdwpg-gexy9tue",
  *     startTime: "2025-03-21 00:00:00",
  *     endTime: "2025-03-21 23:59:59",
@@ -136,11 +136,11 @@ export interface GetLogOutputArgs {
     /**
      * Database.
      */
-    database?: pulumi.Input<string>;
+    database?: pulumi.Input<string | undefined>;
     /**
      * Filter duration.
      */
-    duration?: pulumi.Input<number>;
+    duration?: pulumi.Input<number | undefined>;
     /**
      * End time.
      */
@@ -152,15 +152,15 @@ export interface GetLogOutputArgs {
     /**
      * Sort by.
      */
-    orderBy?: pulumi.Input<string>;
+    orderBy?: pulumi.Input<string | undefined>;
     /**
      * Ascending/Descending.
      */
-    orderByType?: pulumi.Input<string>;
+    orderByType?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Start time.
      */

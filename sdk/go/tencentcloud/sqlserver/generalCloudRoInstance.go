@@ -40,17 +40,17 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc-example"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String(zones.Zones[4].Name),
 //				Name:             pulumi.String("subnet-example"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("10.0.0.0/16"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -73,11 +73,11 @@ import (
 //				MachineType:        pulumi.String("CLOUD_HSSD"),
 //				InstanceChargeType: pulumi.String("POSTPAID"),
 //				ProjectId:          pulumi.Int(0),
-//				SubnetId:           subnet.ID(),
-//				VpcId:              vpc.ID(),
+//				SubnetId:           subnet2.ID().ToIDOutput().ToStringOutput(),
+//				VpcId:              vpc2.ID().ToIDOutput().ToStringOutput(),
 //				DbVersion:          pulumi.String("2008R2"),
 //				SecurityGroupLists: pulumi.StringArray{
-//					securityGroup.ID(),
+//					securityGroup.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				Weeklies: pulumi.IntArray{
 //					pulumi.Int(1),
@@ -102,7 +102,7 @@ import (
 //				return err
 //			}
 //			_, err = sqlserver.NewGeneralCloudRoInstance(ctx, "example", &sqlserver.GeneralCloudRoInstanceArgs{
-//				InstanceId:         example.ID(),
+//				InstanceId:         example.ID().ToIDOutput().ToStringOutput(),
 //				Zone:               pulumi.String(zones.Zones[4].Name),
 //				ReadOnlyGroupType:  pulumi.Int(1),
 //				Memory:             pulumi.Int(4),
@@ -110,10 +110,10 @@ import (
 //				Cpu:                pulumi.Int(2),
 //				MachineType:        pulumi.String("CLOUD_BSSD"),
 //				InstanceChargeType: pulumi.String("POSTPAID"),
-//				SubnetId:           subnet.ID(),
-//				VpcId:              vpc.ID(),
+//				SubnetId:           subnet2.ID().ToIDOutput().ToStringOutput(),
+//				VpcId:              vpc2.ID().ToIDOutput().ToStringOutput(),
 //				SecurityGroupLists: pulumi.StringArray{
-//					securityGroup.ID(),
+//					securityGroup.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				Collation: pulumi.String("Chinese_PRC_CI_AS"),
 //				TimeZone:  pulumi.String("China Standard Time"),

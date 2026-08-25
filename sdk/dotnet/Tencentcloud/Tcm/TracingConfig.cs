@@ -62,8 +62,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm
     /// 
     /// ## Import
     /// 
-    /// tcm tracing_config can be imported using the mesh_id, e.g.
-    /// 
+    /// tcm TracingConfig can be imported using the mesh_id, e.g.
     /// ```sh
     /// $ pulumi import tencentcloud:Tcm/tracingConfig:TracingConfig tracing_config mesh-rofjmxxx
     /// ```

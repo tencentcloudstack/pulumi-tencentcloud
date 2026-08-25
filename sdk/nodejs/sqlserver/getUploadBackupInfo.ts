@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Sqlserver.getUploadBackupInfo({
+ * const example = tencentcloud.sqlserver.getUploadBackupInfo({
  *     instanceId: "mssql-qelbzgwf",
  *     backupMigrationId: "mssql-backup-migration-8a0f3eht",
  * });
@@ -99,7 +99,7 @@ export interface GetUploadBackupInfoResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Sqlserver.getUploadBackupInfo({
+ * const example = tencentcloud.sqlserver.getUploadBackupInfo({
  *     instanceId: "mssql-qelbzgwf",
  *     backupMigrationId: "mssql-backup-migration-8a0f3eht",
  * });
@@ -129,5 +129,5 @@ export interface GetUploadBackupInfoOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

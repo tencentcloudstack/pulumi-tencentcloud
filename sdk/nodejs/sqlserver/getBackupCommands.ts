@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Sqlserver.getBackupCommands({
+ * const example = tencentcloud.sqlserver.getBackupCommands({
  *     backupFileType: "FULL",
  *     dataBaseName: "keep-publish-instance",
  *     isRecovery: "NO",
@@ -86,7 +86,7 @@ export interface GetBackupCommandsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Sqlserver.getBackupCommands({
+ * const example = tencentcloud.sqlserver.getBackupCommands({
  *     backupFileType: "FULL",
  *     dataBaseName: "keep-publish-instance",
  *     isRecovery: "NO",
@@ -123,9 +123,9 @@ export interface GetBackupCommandsOutputArgs {
     /**
      * Storage path of backup files. If this parameter is left empty, the default storage path will be D:.
      */
-    localPath?: pulumi.Input<string>;
+    localPath?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

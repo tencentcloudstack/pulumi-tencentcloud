@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "sqlserver",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -332,133 +332,133 @@ export interface ReadonlyInstanceState {
     /**
      * Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.
      */
-    autoVoucher?: pulumi.Input<number>;
+    autoVoucher?: pulumi.Input<number | undefined>;
     /**
      * Availability zone.
      */
-    availabilityZone?: pulumi.Input<string>;
+    availabilityZone?: pulumi.Input<string | undefined>;
     /**
      * Pay type of the SQL Server instance. Available values `PREPAID`, `POSTPAID_BY_HOUR`.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
     /**
      * Create time of the SQL Server instance.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Internet address domain name.
      */
-    dnsPodDomain?: pulumi.Input<string>;
+    dnsPodDomain?: pulumi.Input<string | undefined>;
     /**
      * Version of the SQL Server database engine.
      */
-    engineVersion?: pulumi.Input<string>;
+    engineVersion?: pulumi.Input<string | undefined>;
     /**
      * Indicate that the master instance upgrade or not. `true` for upgrading the master SQL Server instance to cluster type by force. Default is false. Note: this is not supported with `DUAL`(ha_type), `2017`(engine_version) master SQL Server instance, for it will cause haType of the master SQL Server instance change.
      */
-    forceUpgrade?: pulumi.Input<boolean>;
+    forceUpgrade?: pulumi.Input<boolean | undefined>;
     /**
      * Instance type.
      */
-    haType?: pulumi.Input<string>;
+    haType?: pulumi.Input<string | undefined>;
     /**
      * Indicates the master instance ID of recovery instances.
      */
-    masterInstanceId?: pulumi.Input<string>;
+    masterInstanceId?: pulumi.Input<string | undefined>;
     /**
      * Memory size (in GB). Allowed value must be larger than `memory` that data source `tencentcloudSqlserverSpecinfos` provides.
      */
-    memory?: pulumi.Input<number>;
+    memory?: pulumi.Input<number | undefined>;
     /**
      * Name of the SQL Server instance.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Purchase instance period in month. The value does not exceed 48.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * Project ID.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * ID of the readonly group that this instance belongs to. When `readonlyGroupType` set value `3`, it must be set with valid value.
      */
-    readonlyGroupId?: pulumi.Input<string>;
+    readonlyGroupId?: pulumi.Input<string | undefined>;
     /**
      * Required when `readonlyGroupType`=2, the name of the newly created read-only group.
      */
-    readonlyGroupName?: pulumi.Input<string>;
+    readonlyGroupName?: pulumi.Input<string | undefined>;
     /**
      * Type of readonly group. Valid values: `1`, `3`. `1` for one auto-assigned readonly instance per one readonly group, `2` for creating new readonly group, `3` for all exist readonly instances stay in the exist readonly group. For now, only `1` and `3` are supported.
      */
-    readonlyGroupType?: pulumi.Input<number>;
+    readonlyGroupType?: pulumi.Input<number | undefined>;
     /**
      * Required when `readonlyGroupType`=2, whether the newly created read-only group has delay elimination enabled, 1-enabled, 0-disabled. When the delay between the read-only copy and the primary instance exceeds the threshold, it is automatically removed.
      */
-    readonlyGroupsIsOfflineDelay?: pulumi.Input<number>;
+    readonlyGroupsIsOfflineDelay?: pulumi.Input<number | undefined>;
     /**
      * Required when `readonlyGroupType`=2 and `readonlyGroupsIsOfflineDelay`=1, the threshold for delayed elimination of newly created read-only groups.
      */
-    readonlyGroupsMaxDelayTime?: pulumi.Input<number>;
+    readonlyGroupsMaxDelayTime?: pulumi.Input<number | undefined>;
     /**
      * When `readonlyGroupType`=2 and `readonlyGroupsIsOfflineDelay`=1, it is required. After the newly created read-only group is delayed and removed, at least the number of read-only copies should be retained.
      */
-    readonlyGroupsMinInGroup?: pulumi.Input<number>;
+    readonlyGroupsMinInGroup?: pulumi.Input<number | undefined>;
     /**
      * Readonly flag. `RO` (read-only instance), `MASTER` (primary instance with read-only instances). If it is left empty, it refers to an instance which is not read-only and has no RO group.
      */
-    roFlag?: pulumi.Input<string>;
+    roFlag?: pulumi.Input<string | undefined>;
     /**
      * Security group bound to the instance.
      */
-    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroups?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Status of the SQL Server instance. 1 for applying, 2 for running, 3 for running with limit, 4 for isolated, 5 for recycling, 6 for recycled, 7 for running with task, 8 for off-line, 9 for expanding, 10 for migrating, 11 for readonly, 12 for rebooting.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storageMin` and `storageMax` which data source `tencentcloudSqlserverSpecinfos` provides.
      */
-    storage?: pulumi.Input<number>;
+    storage?: pulumi.Input<number | undefined>;
     /**
      * ID of subnet.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * The tags of the SQL Server.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * External port number.
      */
-    tgwWanVport?: pulumi.Input<number>;
+    tgwWanVport?: pulumi.Input<number | undefined>;
     /**
      * System time zone, default: `China Standard Time`.
      */
-    timeZone?: pulumi.Input<string>;
+    timeZone?: pulumi.Input<string | undefined>;
     /**
      * IP for private access.
      */
-    vip?: pulumi.Input<string>;
+    vip?: pulumi.Input<string | undefined>;
     /**
      * An array of voucher IDs, currently only one can be used for a single order.
      */
-    voucherIds?: pulumi.Input<pulumi.Input<string>[]>;
+    voucherIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * ID of VPC.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * Port for private access.
      */
-    vport?: pulumi.Input<number>;
+    vport?: pulumi.Input<number | undefined>;
     /**
      * It has been deprecated from version 1.81.2. The way to execute the allocation. Supported values include: 0 - execute immediately, 1 - execute in maintenance window.
      *
      * @deprecated It has been deprecated from version 1.81.2.
      */
-    waitSwitch?: pulumi.Input<number>;
+    waitSwitch?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -468,19 +468,19 @@ export interface ReadonlyInstanceArgs {
     /**
      * Whether to use the voucher automatically; 1 for yes, 0 for no, the default is 0.
      */
-    autoVoucher?: pulumi.Input<number>;
+    autoVoucher?: pulumi.Input<number | undefined>;
     /**
      * Availability zone.
      */
-    availabilityZone?: pulumi.Input<string>;
+    availabilityZone?: pulumi.Input<string | undefined>;
     /**
      * Pay type of the SQL Server instance. Available values `PREPAID`, `POSTPAID_BY_HOUR`.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
     /**
      * Indicate that the master instance upgrade or not. `true` for upgrading the master SQL Server instance to cluster type by force. Default is false. Note: this is not supported with `DUAL`(ha_type), `2017`(engine_version) master SQL Server instance, for it will cause haType of the master SQL Server instance change.
      */
-    forceUpgrade?: pulumi.Input<boolean>;
+    forceUpgrade?: pulumi.Input<boolean | undefined>;
     /**
      * Indicates the master instance ID of recovery instances.
      */
@@ -492,19 +492,19 @@ export interface ReadonlyInstanceArgs {
     /**
      * Name of the SQL Server instance.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Purchase instance period in month. The value does not exceed 48.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * ID of the readonly group that this instance belongs to. When `readonlyGroupType` set value `3`, it must be set with valid value.
      */
-    readonlyGroupId?: pulumi.Input<string>;
+    readonlyGroupId?: pulumi.Input<string | undefined>;
     /**
      * Required when `readonlyGroupType`=2, the name of the newly created read-only group.
      */
-    readonlyGroupName?: pulumi.Input<string>;
+    readonlyGroupName?: pulumi.Input<string | undefined>;
     /**
      * Type of readonly group. Valid values: `1`, `3`. `1` for one auto-assigned readonly instance per one readonly group, `2` for creating new readonly group, `3` for all exist readonly instances stay in the exist readonly group. For now, only `1` and `3` are supported.
      */
@@ -512,19 +512,19 @@ export interface ReadonlyInstanceArgs {
     /**
      * Required when `readonlyGroupType`=2, whether the newly created read-only group has delay elimination enabled, 1-enabled, 0-disabled. When the delay between the read-only copy and the primary instance exceeds the threshold, it is automatically removed.
      */
-    readonlyGroupsIsOfflineDelay?: pulumi.Input<number>;
+    readonlyGroupsIsOfflineDelay?: pulumi.Input<number | undefined>;
     /**
      * Required when `readonlyGroupType`=2 and `readonlyGroupsIsOfflineDelay`=1, the threshold for delayed elimination of newly created read-only groups.
      */
-    readonlyGroupsMaxDelayTime?: pulumi.Input<number>;
+    readonlyGroupsMaxDelayTime?: pulumi.Input<number | undefined>;
     /**
      * When `readonlyGroupType`=2 and `readonlyGroupsIsOfflineDelay`=1, it is required. After the newly created read-only group is delayed and removed, at least the number of read-only copies should be retained.
      */
-    readonlyGroupsMinInGroup?: pulumi.Input<number>;
+    readonlyGroupsMinInGroup?: pulumi.Input<number | undefined>;
     /**
      * Security group bound to the instance.
      */
-    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroups?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Disk size (in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storageMin` and `storageMax` which data source `tencentcloudSqlserverSpecinfos` provides.
      */
@@ -532,27 +532,27 @@ export interface ReadonlyInstanceArgs {
     /**
      * ID of subnet.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * The tags of the SQL Server.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * System time zone, default: `China Standard Time`.
      */
-    timeZone?: pulumi.Input<string>;
+    timeZone?: pulumi.Input<string | undefined>;
     /**
      * An array of voucher IDs, currently only one can be used for a single order.
      */
-    voucherIds?: pulumi.Input<pulumi.Input<string>[]>;
+    voucherIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * ID of VPC.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * It has been deprecated from version 1.81.2. The way to execute the allocation. Supported values include: 0 - execute immediately, 1 - execute in maintenance window.
      *
      * @deprecated It has been deprecated from version 1.81.2.
      */
-    waitSwitch?: pulumi.Input<number>;
+    waitSwitch?: pulumi.Input<number | undefined>;
 }

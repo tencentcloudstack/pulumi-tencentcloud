@@ -129,15 +129,15 @@ export interface TagRoleAttachmentState {
     /**
      * Character ID, at least one input with the character name.
      */
-    roleId?: pulumi.Input<string>;
+    roleId?: pulumi.Input<string | undefined>;
     /**
      * Character name, at least one input with the character ID.
      */
-    roleName?: pulumi.Input<string>;
+    roleName?: pulumi.Input<string | undefined>;
     /**
      * Label.
      */
-    tags?: pulumi.Input<pulumi.Input<inputs.Cam.TagRoleAttachmentTag>[]>;
+    tags?: pulumi.Input<pulumi.Input<inputs.Cam.TagRoleAttachmentTag>[] | undefined>;
 }
 
 /**
@@ -147,11 +147,11 @@ export interface TagRoleAttachmentArgs {
     /**
      * Character ID, at least one input with the character name.
      */
-    roleId?: pulumi.Input<string>;
+    roleId?: pulumi.Input<string | undefined>;
     /**
      * Character name, at least one input with the character ID.
      */
-    roleName?: pulumi.Input<string>;
+    roleName?: pulumi.Input<string | undefined>;
     /**
      * Label.
      */

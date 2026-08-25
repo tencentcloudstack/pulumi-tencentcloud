@@ -39,7 +39,7 @@ import (
 //			}
 //			topic, err := cls.NewTopic(ctx, "topic", &cls.TopicArgs{
 //				TopicName:          pulumi.String("tf-example-topic"),
-//				LogsetId:           logset.ID(),
+//				LogsetId:           logset.ID().ToIDOutput().ToStringOutput(),
 //				AutoSplit:          pulumi.Bool(false),
 //				MaxSplitPartitions: pulumi.Int(20),
 //				PartitionCount:     pulumi.Int(1),
@@ -53,11 +53,11 @@ import (
 //				return err
 //			}
 //			_, err = cls.NewScheduledSql(ctx, "scheduled_sql", &cls.ScheduledSqlArgs{
-//				SrcTopicId: topic.ID(),
+//				SrcTopicId: topic.ID().ToIDOutput().ToStringOutput(),
 //				Name:       pulumi.String("tf-example-task"),
 //				EnableFlag: pulumi.Int(1),
 //				DstResource: &cls.ScheduledSqlDstResourceArgs{
-//					TopicId:    topic.ID(),
+//					TopicId:    topic.ID().ToIDOutput().ToStringOutput(),
 //					Region:     pulumi.String("ap-guangzhou"),
 //					BizType:    pulumi.Int(0),
 //					MetricName: pulumi.String("test"),
@@ -83,7 +83,7 @@ import (
 //
 // ## Import
 //
-// cls scheduled_sql can be imported using the id, e.g.
+// cls scheduledSql can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Cls/scheduledSql:ScheduledSql scheduled_sql scheduled_sql_id

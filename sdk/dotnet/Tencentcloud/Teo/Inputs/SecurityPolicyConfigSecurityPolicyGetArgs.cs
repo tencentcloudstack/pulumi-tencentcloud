@@ -14,10 +14,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
     public sealed class SecurityPolicyConfigSecurityPolicyGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Bot management configuration.
+        /// </summary>
+        [Input("botManagement")]
+        public Input<Inputs.SecurityPolicyConfigSecurityPolicyBotManagementGetArgs>? BotManagement { get; set; }
+
+        /// <summary>
+        /// Basic Bot management configuration.
+        /// </summary>
+        [Input("botManagementLite")]
+        public Input<Inputs.SecurityPolicyConfigSecurityPolicyBotManagementLiteGetArgs>? BotManagementLite { get; set; }
+
+        /// <summary>
         /// Custom rule configuration.
         /// </summary>
         [Input("customRules")]
         public Input<Inputs.SecurityPolicyConfigSecurityPolicyCustomRulesGetArgs>? CustomRules { get; set; }
+
+        /// <summary>
+        /// Default deny action configuration. If not specified, the existing configuration is kept.
+        /// </summary>
+        [Input("defaultDenySecurityActionParameters")]
+        public Input<Inputs.SecurityPolicyConfigSecurityPolicyDefaultDenySecurityActionParametersGetArgs>? DefaultDenySecurityActionParameters { get; set; }
 
         /// <summary>
         /// Exception rule configuration.

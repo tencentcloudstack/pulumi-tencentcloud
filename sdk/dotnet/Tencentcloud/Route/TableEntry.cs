@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Route
 {
     /// <summary>
-    /// Provides a resource to create an entry of a routing table.
+    /// Provides a resource to create a Route table entry.
     /// 
     /// &gt; **NOTE:** When setting the route item switch, do not use it together with resource `tencentcloud.Route.TableEntryConfig`.
     /// 
@@ -70,7 +70,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Route
     /// 
     /// ## Import
     /// 
-    /// Route table entry can be imported using the id, e.g.
+    /// Route table entry can be imported using the routeEntryId.routeTableId, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Route/tableEntry:TableEntry example 3065857.rtb-b050fg94
@@ -104,10 +104,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Route
         public Output<string> NextHub { get; private set; } = null!;
 
         /// <summary>
-        /// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP`, `LOCAL_GATEWAY`, `INTRANAT` and `USER_CCN`.
+        /// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP`, `LOCAL_GATEWAY`, `INTRANAT`, `USER_CCN` and `GWLB_ENDPOINT`.
         /// </summary>
         [Output("nextType")]
         public Output<string> NextType { get; private set; } = null!;
+
+        /// <summary>
+        /// ID of route entry.
+        /// </summary>
+        [Output("routeEntryId")]
+        public Output<int> RouteEntryId { get; private set; } = null!;
 
         /// <summary>
         /// ID of route table entry.
@@ -193,7 +199,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Route
         public Input<string> NextHub { get; set; } = null!;
 
         /// <summary>
-        /// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP`, `LOCAL_GATEWAY`, `INTRANAT` and `USER_CCN`.
+        /// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP`, `LOCAL_GATEWAY`, `INTRANAT`, `USER_CCN` and `GWLB_ENDPOINT`.
         /// </summary>
         [Input("nextType", required: true)]
         public Input<string> NextType { get; set; } = null!;
@@ -237,10 +243,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Route
         public Input<string>? NextHub { get; set; }
 
         /// <summary>
-        /// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP`, `LOCAL_GATEWAY`, `INTRANAT` and `USER_CCN`.
+        /// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP`, `LOCAL_GATEWAY`, `INTRANAT`, `USER_CCN` and `GWLB_ENDPOINT`.
         /// </summary>
         [Input("nextType")]
         public Input<string>? NextType { get; set; }
+
+        /// <summary>
+        /// ID of route entry.
+        /// </summary>
+        [Input("routeEntryId")]
+        public Input<int>? RouteEntryId { get; set; }
 
         /// <summary>
         /// ID of route table entry.

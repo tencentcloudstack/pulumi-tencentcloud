@@ -63,8 +63,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * cat task_set can be imported using the id, e.g.
- *
+ * cat taskSet can be imported using the id, e.g.
  * ```sh
  * $ pulumi import tencentcloud:Cat/taskSet:TaskSet task_set taskSet_id
  * ```
@@ -216,51 +215,51 @@ export interface TaskSetState {
     /**
      * Batch task name address.
      */
-    batchTasks?: pulumi.Input<inputs.Cat.TaskSetBatchTasks>;
+    batchTasks?: pulumi.Input<inputs.Cat.TaskSetBatchTasks | undefined>;
     /**
      * Timer task cron expression.
      */
-    cron?: pulumi.Input<string>;
+    cron?: pulumi.Input<string | undefined>;
     /**
      * Task interval minutes in (1,5,10,15,30,60,120,240).
      */
-    interval?: pulumi.Input<number>;
+    interval?: pulumi.Input<number | undefined>;
     /**
      * `0`-Unlimit ip type, `1`-IPv4, `2`-IPv6.
      */
-    nodeIpType?: pulumi.Input<number>;
+    nodeIpType?: pulumi.Input<number | undefined>;
     /**
      * Task Nodes.
      */
-    nodes?: pulumi.Input<pulumi.Input<string>[]>;
+    nodes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The input is valid when the parameter is modified, `suspend`/`resume`, used to suspend/resume the dial test task.
      */
-    operate?: pulumi.Input<string>;
+    operate?: pulumi.Input<string | undefined>;
     /**
      * tasks parameters.
      */
-    parameters?: pulumi.Input<string>;
+    parameters?: pulumi.Input<string | undefined>;
     /**
      * Task status 1:TaskPending, 2:TaskRunning,3:TaskRunException,4:TaskSuspending 5:TaskSuspendException,6:TaskSuspendException,7:TaskSuspended,9:TaskDeleted.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Task category,1:PC,2:Mobile.
      */
-    taskCategory?: pulumi.Input<number>;
+    taskCategory?: pulumi.Input<number | undefined>;
     /**
      * Task Id.
      */
-    taskId?: pulumi.Input<string>;
+    taskId?: pulumi.Input<string | undefined>;
     /**
      * Task Type 1:Page Performance, 2:File upload,3:File Download,4:Port performance 5:Audio and video.
      */
-    taskType?: pulumi.Input<number>;
+    taskType?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -274,7 +273,7 @@ export interface TaskSetArgs {
     /**
      * Timer task cron expression.
      */
-    cron?: pulumi.Input<string>;
+    cron?: pulumi.Input<string | undefined>;
     /**
      * Task interval minutes in (1,5,10,15,30,60,120,240).
      */
@@ -282,7 +281,7 @@ export interface TaskSetArgs {
     /**
      * `0`-Unlimit ip type, `1`-IPv4, `2`-IPv6.
      */
-    nodeIpType?: pulumi.Input<number>;
+    nodeIpType?: pulumi.Input<number | undefined>;
     /**
      * Task Nodes.
      */
@@ -290,7 +289,7 @@ export interface TaskSetArgs {
     /**
      * The input is valid when the parameter is modified, `suspend`/`resume`, used to suspend/resume the dial test task.
      */
-    operate?: pulumi.Input<string>;
+    operate?: pulumi.Input<string | undefined>;
     /**
      * tasks parameters.
      */
@@ -298,7 +297,7 @@ export interface TaskSetArgs {
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Task category,1:PC,2:Mobile.
      */

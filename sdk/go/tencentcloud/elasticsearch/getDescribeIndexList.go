@@ -91,12 +91,8 @@ type GetDescribeIndexListResult struct {
 }
 
 func GetDescribeIndexListOutput(ctx *pulumi.Context, args GetDescribeIndexListOutputArgs, opts ...pulumi.InvokeOption) GetDescribeIndexListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDescribeIndexListResultOutput, error) {
-			args := v.(GetDescribeIndexListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Elasticsearch/getDescribeIndexList:getDescribeIndexList", args, GetDescribeIndexListResultOutput{}, options).(GetDescribeIndexListResultOutput), nil
-		}).(GetDescribeIndexListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Elasticsearch/getDescribeIndexList:getDescribeIndexList", args, GetDescribeIndexListResultOutput{}, options).(GetDescribeIndexListResultOutput)
 }
 
 // A collection of arguments for invoking getDescribeIndexList.

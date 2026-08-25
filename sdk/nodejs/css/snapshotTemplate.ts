@@ -28,7 +28,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * css snapshot_template can be imported using the id, e.g.
+ * css snapshotTemplate can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Css/snapshotTemplate:SnapshotTemplate snapshot_template templateId
@@ -169,47 +169,47 @@ export interface SnapshotTemplateState {
     /**
      * Cos application ID.
      */
-    cosAppId?: pulumi.Input<number>;
+    cosAppId?: pulumi.Input<number | undefined>;
     /**
      * Cos bucket name. Note: The CosBucket parameter value cannot include the - [appid] part.
      */
-    cosBucket?: pulumi.Input<string>;
+    cosBucket?: pulumi.Input<string | undefined>;
     /**
      * Cos file name. If it is empty, set according to the default value {StreamID}-screenshot-{Hour}-{Minute}-{Second}-{Width}x{Height}{Ext}.
      */
-    cosFileName?: pulumi.Input<string>;
+    cosFileName?: pulumi.Input<string | undefined>;
     /**
      * Cos Bucket folder prefix. If it is empty, set according to the default value /{Year}-{Month}-{Day}/.
      */
-    cosPrefix?: pulumi.Input<string>;
+    cosPrefix?: pulumi.Input<string | undefined>;
     /**
      * Cos region.
      */
-    cosRegion?: pulumi.Input<string>;
+    cosRegion?: pulumi.Input<string | undefined>;
     /**
      * Description information. Maximum length: 1024 bytes. Only `Chinese`, `English`, `numbers`, `_`, `-` are supported.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Screenshot height. Default: 0 (original height). Range: 0-2000.
      */
-    height?: pulumi.Input<number>;
+    height?: pulumi.Input<number | undefined>;
     /**
      * Whether porn is enabled, 0: not enabled, 1: enabled. Default: 0.
      */
-    pornFlag?: pulumi.Input<number>;
+    pornFlag?: pulumi.Input<number | undefined>;
     /**
      * Screenshot interval, unit: s, default: 10s. Range: 2s~300s.
      */
-    snapshotInterval?: pulumi.Input<number>;
+    snapshotInterval?: pulumi.Input<number | undefined>;
     /**
      * Template name. Maximum length: 255 bytes. Only Chinese, English, numbers, `_`, `-` are supported.
      */
-    templateName?: pulumi.Input<string>;
+    templateName?: pulumi.Input<string | undefined>;
     /**
      * Screenshot width. Default: 0 (original width). Range: 0-3000.
      */
-    width?: pulumi.Input<number>;
+    width?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -227,11 +227,11 @@ export interface SnapshotTemplateArgs {
     /**
      * Cos file name. If it is empty, set according to the default value {StreamID}-screenshot-{Hour}-{Minute}-{Second}-{Width}x{Height}{Ext}.
      */
-    cosFileName?: pulumi.Input<string>;
+    cosFileName?: pulumi.Input<string | undefined>;
     /**
      * Cos Bucket folder prefix. If it is empty, set according to the default value /{Year}-{Month}-{Day}/.
      */
-    cosPrefix?: pulumi.Input<string>;
+    cosPrefix?: pulumi.Input<string | undefined>;
     /**
      * Cos region.
      */
@@ -239,19 +239,19 @@ export interface SnapshotTemplateArgs {
     /**
      * Description information. Maximum length: 1024 bytes. Only `Chinese`, `English`, `numbers`, `_`, `-` are supported.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Screenshot height. Default: 0 (original height). Range: 0-2000.
      */
-    height?: pulumi.Input<number>;
+    height?: pulumi.Input<number | undefined>;
     /**
      * Whether porn is enabled, 0: not enabled, 1: enabled. Default: 0.
      */
-    pornFlag?: pulumi.Input<number>;
+    pornFlag?: pulumi.Input<number | undefined>;
     /**
      * Screenshot interval, unit: s, default: 10s. Range: 2s~300s.
      */
-    snapshotInterval?: pulumi.Input<number>;
+    snapshotInterval?: pulumi.Input<number | undefined>;
     /**
      * Template name. Maximum length: 255 bytes. Only Chinese, English, numbers, `_`, `-` are supported.
      */
@@ -259,5 +259,5 @@ export interface SnapshotTemplateArgs {
     /**
      * Screenshot width. Default: 0 (original width). Range: 0-3000.
      */
-    width?: pulumi.Input<number>;
+    width?: pulumi.Input<number | undefined>;
 }

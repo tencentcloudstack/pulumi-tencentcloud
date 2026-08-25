@@ -45,7 +45,7 @@ import (
 //				return err
 //			}
 //			_ = cls.GetMachineGroupConfigsOutput(ctx, cls.GetMachineGroupConfigsOutputArgs{
-//				GroupId: group.ID(),
+//				GroupId: group.ID().ToIDOutput().ToStringOutput(),
 //			}, nil)
 //			return nil
 //		})
@@ -81,12 +81,8 @@ type GetMachineGroupConfigsResult struct {
 }
 
 func GetMachineGroupConfigsOutput(ctx *pulumi.Context, args GetMachineGroupConfigsOutputArgs, opts ...pulumi.InvokeOption) GetMachineGroupConfigsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetMachineGroupConfigsResultOutput, error) {
-			args := v.(GetMachineGroupConfigsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cls/getMachineGroupConfigs:getMachineGroupConfigs", args, GetMachineGroupConfigsResultOutput{}, options).(GetMachineGroupConfigsResultOutput), nil
-		}).(GetMachineGroupConfigsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cls/getMachineGroupConfigs:getMachineGroupConfigs", args, GetMachineGroupConfigsResultOutput{}, options).(GetMachineGroupConfigsResultOutput)
 }
 
 // A collection of arguments for invoking getMachineGroupConfigs.

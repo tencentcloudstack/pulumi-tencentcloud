@@ -14,6 +14,8 @@ import (
 var _ = internal.GetEnvOrDefault
 
 type TrackStorage struct {
+	// Whether to compress. `1`: compress, `2`: do not compress.
+	Compress *int `pulumi:"compress"`
 	// Designated to store user ID.
 	StorageAccountId *string `pulumi:"storageAccountId"`
 	// Designated to store user appid.
@@ -24,7 +26,7 @@ type TrackStorage struct {
 	StoragePrefix string `pulumi:"storagePrefix"`
 	// Storage region.
 	StorageRegion string `pulumi:"storageRegion"`
-	// Track Storage type, optional:- `cos`- `cls`.
+	// Track Storage type, optional:- `cos`- `cls`- `ckafka`.
 	StorageType string `pulumi:"storageType"`
 }
 
@@ -40,6 +42,8 @@ type TrackStorageInput interface {
 }
 
 type TrackStorageArgs struct {
+	// Whether to compress. `1`: compress, `2`: do not compress.
+	Compress pulumi.IntPtrInput `pulumi:"compress"`
 	// Designated to store user ID.
 	StorageAccountId pulumi.StringPtrInput `pulumi:"storageAccountId"`
 	// Designated to store user appid.
@@ -50,7 +54,7 @@ type TrackStorageArgs struct {
 	StoragePrefix pulumi.StringInput `pulumi:"storagePrefix"`
 	// Storage region.
 	StorageRegion pulumi.StringInput `pulumi:"storageRegion"`
-	// Track Storage type, optional:- `cos`- `cls`.
+	// Track Storage type, optional:- `cos`- `cls`- `ckafka`.
 	StorageType pulumi.StringInput `pulumi:"storageType"`
 }
 
@@ -131,6 +135,11 @@ func (o TrackStorageOutput) ToTrackStoragePtrOutputWithContext(ctx context.Conte
 	}).(TrackStoragePtrOutput)
 }
 
+// Whether to compress. `1`: compress, `2`: do not compress.
+func (o TrackStorageOutput) Compress() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v TrackStorage) *int { return v.Compress }).(pulumi.IntPtrOutput)
+}
+
 // Designated to store user ID.
 func (o TrackStorageOutput) StorageAccountId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v TrackStorage) *string { return v.StorageAccountId }).(pulumi.StringPtrOutput)
@@ -156,7 +165,7 @@ func (o TrackStorageOutput) StorageRegion() pulumi.StringOutput {
 	return o.ApplyT(func(v TrackStorage) string { return v.StorageRegion }).(pulumi.StringOutput)
 }
 
-// Track Storage type, optional:- `cos`- `cls`.
+// Track Storage type, optional:- `cos`- `cls`- `ckafka`.
 func (o TrackStorageOutput) StorageType() pulumi.StringOutput {
 	return o.ApplyT(func(v TrackStorage) string { return v.StorageType }).(pulumi.StringOutput)
 }
@@ -183,6 +192,16 @@ func (o TrackStoragePtrOutput) Elem() TrackStorageOutput {
 		var ret TrackStorage
 		return ret
 	}).(TrackStorageOutput)
+}
+
+// Whether to compress. `1`: compress, `2`: do not compress.
+func (o TrackStoragePtrOutput) Compress() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *TrackStorage) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Compress
+	}).(pulumi.IntPtrOutput)
 }
 
 // Designated to store user ID.
@@ -235,7 +254,7 @@ func (o TrackStoragePtrOutput) StorageRegion() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-// Track Storage type, optional:- `cos`- `cls`.
+// Track Storage type, optional:- `cos`- `cls`- `ckafka`.
 func (o TrackStoragePtrOutput) StorageType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *TrackStorage) *string {
 		if v == nil {

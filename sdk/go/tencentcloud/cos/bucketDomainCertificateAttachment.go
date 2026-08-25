@@ -18,12 +18,12 @@ import (
 //
 // ## Example Usage
 //
+// ### Use certId
+//
 // ```go
 // package main
 //
 // import (
-//
-//	"fmt"
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
@@ -60,30 +60,65 @@ import (
 //				return err
 //			}
 //			_, err = cos.NewBucketDomainCertificateAttachment(ctx, "example", &cos.BucketDomainCertificateAttachmentArgs{
-//				Bucket: example.ID(),
+//				Bucket: example.ID().ToIDOutput().ToStringOutput(),
 //				DomainCertificate: &cos.BucketDomainCertificateAttachmentDomainCertificateArgs{
 //					Domain: pulumi.String(customOriginDomain),
 //					Certificate: &cos.BucketDomainCertificateAttachmentDomainCertificateCertificateArgs{
 //						CertType: pulumi.String("CustomCert"),
 //						CustomCert: &cos.BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs{
 //							CertId: pulumi.String("JG65alUy"),
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Use cert and key
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := cos.NewBucketDomainCertificateAttachment(ctx, "example", &cos.BucketDomainCertificateAttachmentArgs{
+//				Bucket: pulumi.Any(exampleTencentcloudCosBucket.Id),
+//				DomainCertificate: &cos.BucketDomainCertificateAttachmentDomainCertificateArgs{
+//					Domain: pulumi.Any(customOriginDomain),
+//					Certificate: &cos.BucketDomainCertificateAttachmentDomainCertificateCertificateArgs{
+//						CertType: pulumi.String("CustomCert"),
+//						CustomCert: &cos.BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCertArgs{
 //							Cert: pulumi.String(`-----BEGIN CERTIFICATE-----
 //
-// MIIGQjCCBSqgAwIBAgIQfTllN2vZr7vcoGF3ZTHwxjANBgkqhkiG9w0BAQsFADBA
-// ...
-// ...
-// ...
-// 9YSJrdvskqI3v/3SkVezzNiWQMuMTg==
+// MIIG1DCCBLygAwIBAgIQDpfXbVCbQpEy5NNNSXxeeDANBgkqhkiG9w0BAQsFADBb
+// ***
+// ***
+// ***
+// ynZ7SbC03yR+gKZQDeTXrNP1kk5Qhe7jSXgw+nhbspe0q/M1ZcNCz+sPxeOwdCcC
+// gJE=
 // -----END CERTIFICATE-----
 // `),
 //
 //	PrivateKey: pulumi.String(`-----BEGIN RSA PRIVATE KEY-----
 //
-// MIIEpQIBAAKCAQEAsmwAXXVh6N4fd281K0671jYBrSV2v/5+TCeewsNx6ys3kC8o
-// ...
-// ...
-// ...
-// MgbOv6byAafSQWU+5+KFfK3Nj7eezx6yfQQM0Kxl4ZPm1w3Fb6gIFBc=
+// MIIEpAIBAAKCAQEAlnWPIMF4BnVyezE7KCoL+7Y1OpJ8V76g1Q9EvwWRbHus8xSM
+// ***
+// ***
+// ***
+// Z8SK8+vMkRO9T9PBsZVMYmtQ0EtOLFtElep59iI3Mb3SdRyu+sCPmw==
 // -----END RSA PRIVATE KEY-----
 // `),
 //

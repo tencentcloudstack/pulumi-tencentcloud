@@ -44,7 +44,7 @@ import (
 //
 // ## Import
 //
-// vpc elastic_public_ipv6_attachment can be imported using the id, e.g.
+// vpc elasticPublicIpv6Attachment can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Elastic/publicIpv6Attachment:PublicIpv6Attachment elastic_public_ipv6_attachment elastic_public_ipv6_attachment_id

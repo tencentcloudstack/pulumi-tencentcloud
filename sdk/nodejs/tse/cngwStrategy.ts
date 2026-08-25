@@ -62,7 +62,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * tse cngw_strategy can be imported using the id, e.g.
+ * tse cngwStrategy can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Tse/cngwStrategy:CngwStrategy cngw_strategy gateway-cf8c99c3#strategy-a6744ff8
@@ -168,28 +168,28 @@ export interface CngwStrategyState {
     /**
      * configuration of metric scaling.
      */
-    config?: pulumi.Input<inputs.Tse.CngwStrategyConfig>;
+    config?: pulumi.Input<inputs.Tse.CngwStrategyConfig | undefined>;
     /**
      * configuration of timed scaling.
      */
-    cronConfig?: pulumi.Input<inputs.Tse.CngwStrategyCronConfig>;
+    cronConfig?: pulumi.Input<inputs.Tse.CngwStrategyCronConfig | undefined>;
     /**
      * description information, up to 120 characters.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * gateway ID.
      */
-    gatewayId?: pulumi.Input<string>;
+    gatewayId?: pulumi.Input<string | undefined>;
     /**
      * strategy ID
      * Note: This field may return null, indicating that a valid value is not available.
      */
-    strategyId?: pulumi.Input<string>;
+    strategyId?: pulumi.Input<string | undefined>;
     /**
      * strategy name, up to 20 characters.
      */
-    strategyName?: pulumi.Input<string>;
+    strategyName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -199,15 +199,15 @@ export interface CngwStrategyArgs {
     /**
      * configuration of metric scaling.
      */
-    config?: pulumi.Input<inputs.Tse.CngwStrategyConfig>;
+    config?: pulumi.Input<inputs.Tse.CngwStrategyConfig | undefined>;
     /**
      * configuration of timed scaling.
      */
-    cronConfig?: pulumi.Input<inputs.Tse.CngwStrategyCronConfig>;
+    cronConfig?: pulumi.Input<inputs.Tse.CngwStrategyCronConfig | undefined>;
     /**
      * description information, up to 120 characters.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * gateway ID.
      */

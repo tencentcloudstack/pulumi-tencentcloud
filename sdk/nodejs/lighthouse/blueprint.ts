@@ -106,15 +106,15 @@ export interface BlueprintState {
     /**
      * Blueprint name, which can contain up to 60 characters.
      */
-    blueprintName?: pulumi.Input<string>;
+    blueprintName?: pulumi.Input<string | undefined>;
     /**
      * Blueprint description, which can contain up to 60 characters.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * ID of the instance for which to make a blueprint.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -128,9 +128,9 @@ export interface BlueprintArgs {
     /**
      * Blueprint description, which can contain up to 60 characters.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * ID of the instance for which to make a blueprint.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }

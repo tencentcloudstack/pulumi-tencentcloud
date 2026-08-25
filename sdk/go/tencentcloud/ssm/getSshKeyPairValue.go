@@ -133,12 +133,8 @@ type GetSshKeyPairValueResult struct {
 }
 
 func GetSshKeyPairValueOutput(ctx *pulumi.Context, args GetSshKeyPairValueOutputArgs, opts ...pulumi.InvokeOption) GetSshKeyPairValueResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSshKeyPairValueResultOutput, error) {
-			args := v.(GetSshKeyPairValueArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ssm/getSshKeyPairValue:getSshKeyPairValue", args, GetSshKeyPairValueResultOutput{}, options).(GetSshKeyPairValueResultOutput), nil
-		}).(GetSshKeyPairValueResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ssm/getSshKeyPairValue:getSshKeyPairValue", args, GetSshKeyPairValueResultOutput{}, options).(GetSshKeyPairValueResultOutput)
 }
 
 // A collection of arguments for invoking getSshKeyPairValue.

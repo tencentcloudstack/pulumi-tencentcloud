@@ -80,17 +80,17 @@ export interface GetProxyNodeOutputArgs {
     /**
      * Search criteria, if there are multiple filters, the relationship between the filters is a logical AND relationship.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Cynosdb.GetProxyNodeFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Cynosdb.GetProxyNodeFilterArgs>[] | undefined>;
     /**
      * Sort field, value range:CREATETIME: creation time; PRIODENDTIME: expiration time.
      */
-    orderBy?: pulumi.Input<string>;
+    orderBy?: pulumi.Input<string | undefined>;
     /**
      * Sort type, value range:ASC: ascending sort; DESC: descending sort.
      */
-    orderByType?: pulumi.Input<string>;
+    orderByType?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

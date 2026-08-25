@@ -47,6 +47,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances.Outputs
         /// </summary>
         public readonly string ExpiredTime;
         /// <summary>
+        /// Instance GPU info.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetInstanceInstanceListGpuInfoResult> GpuInfos;
+        /// <summary>
         /// ID of the image.
         /// </summary>
         public readonly string ImageId;
@@ -98,6 +102,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances.Outputs
         /// Public IP of the instance.
         /// </summary>
         public readonly string PublicIp;
+        /// <summary>
+        /// The rack ID of the instance resource pool to which the instance belongs.
+        /// </summary>
+        public readonly string RackId;
         /// <summary>
         /// Security groups of the instance.
         /// </summary>
@@ -153,6 +161,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances.Outputs
 
             string expiredTime,
 
+            ImmutableArray<Outputs.GetInstanceInstanceListGpuInfoResult> gpuInfos,
+
             string imageId,
 
             string instanceChargeType,
@@ -178,6 +188,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances.Outputs
             int projectId,
 
             string publicIp,
+
+            string rackId,
 
             ImmutableArray<string> securityGroups,
 
@@ -205,6 +217,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances.Outputs
             DataDisks = dataDisks;
             DedicatedClusterId = dedicatedClusterId;
             ExpiredTime = expiredTime;
+            GpuInfos = gpuInfos;
             ImageId = imageId;
             InstanceChargeType = instanceChargeType;
             InstanceChargeTypePrepaidRenewFlag = instanceChargeTypePrepaidRenewFlag;
@@ -218,6 +231,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances.Outputs
             PrivateIp = privateIp;
             ProjectId = projectId;
             PublicIp = publicIp;
+            RackId = rackId;
             SecurityGroups = securityGroups;
             Status = status;
             SubnetId = subnetId;

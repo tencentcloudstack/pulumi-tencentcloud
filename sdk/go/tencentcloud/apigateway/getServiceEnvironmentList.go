@@ -67,12 +67,8 @@ type LookupServiceEnvironmentListResult struct {
 }
 
 func LookupServiceEnvironmentListOutput(ctx *pulumi.Context, args LookupServiceEnvironmentListOutputArgs, opts ...pulumi.InvokeOption) LookupServiceEnvironmentListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupServiceEnvironmentListResultOutput, error) {
-			args := v.(LookupServiceEnvironmentListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:ApiGateway/getServiceEnvironmentList:getServiceEnvironmentList", args, LookupServiceEnvironmentListResultOutput{}, options).(LookupServiceEnvironmentListResultOutput), nil
-		}).(LookupServiceEnvironmentListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:ApiGateway/getServiceEnvironmentList:getServiceEnvironmentList", args, LookupServiceEnvironmentListResultOutput{}, options).(LookupServiceEnvironmentListResultOutput)
 }
 
 // A collection of arguments for invoking getServiceEnvironmentList.

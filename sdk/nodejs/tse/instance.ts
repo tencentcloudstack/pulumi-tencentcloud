@@ -292,63 +292,63 @@ export interface InstanceState {
     /**
      * Client public network access, `true`: on, `false`: off, default: false.
      */
-    enableClientInternetAccess?: pulumi.Input<boolean>;
+    enableClientInternetAccess?: pulumi.Input<boolean | undefined>;
     /**
      * engien name. Reference value: nacos-test.
      */
-    engineName?: pulumi.Input<string>;
+    engineName?: pulumi.Input<string | undefined>;
     /**
      * engine node num. see EngineProductVersion.
      */
-    engineNodeNum?: pulumi.Input<number>;
+    engineNodeNum?: pulumi.Input<number | undefined>;
     /**
      * Engine product version. Reference value: `Nacos`: `TRIAL`: Development version, optional node num: `1`, optional spec list: `1C1G`; `STANDARD`: Standard versions, optional node num: `3`, `5`, `7`, optional spec list: `1C2G`, `2C4G`, `4C8G`, `8C16G`, `16C32G`. `Zookeeper`: `TRIAL`: Development version, optional node num: `1`, optional spec list: `1C1G`; `STANDARD`: Standard versions, optional node num: `3`, `5`, `7`, optional spec list: `1C2G`, `2C4G`, `4C8G`, `8C16G`, `16C32G`; `PROFESSIONAL`: professional versions, optional node num: `3`, `5`, `7`, optional spec list: `1C2G`, `2C4G`, `4C8G`, `8C16G`, `16C32G`. `Polarismesh`: `BASE`: Base version, optional node num: `1`, optional spec list: `NUM50`; `PROFESSIONAL`: Enterprise versions, optional node num: `2`, `3`, optional spec list: `NUM50`, `NUM100`, `NUM200`, `NUM500`, `NUM1000`, `NUM5000`, `NUM10000`, `NUM50000`.
      */
-    engineProductVersion?: pulumi.Input<string>;
+    engineProductVersion?: pulumi.Input<string | undefined>;
     /**
      * engine deploy region. Reference value: `China area` Reference value: `ap-guangzhou`, `ap-beijing`, `ap-chengdu`, `ap-chongqing`, `ap-nanjing`, `ap-shanghai` `ap-beijing-fsi`, `ap-shanghai-fsi`, `ap-shenzhen-fsi`. `Asia Pacific` area Reference value: `ap-hongkong`, `ap-taipei`, `ap-jakarta`, `ap-singapore`, `ap-bangkok`, `ap-seoul`, `ap-tokyo`. `North America area` Reference value: `na-toronto`, `sa-saopaulo`, `na-siliconvalley`, `na-ashburn`.
      */
-    engineRegion?: pulumi.Input<string>;
+    engineRegion?: pulumi.Input<string | undefined>;
     /**
      * Details about the regional configuration of the engine in cross-region deployment, only zookeeper professional requires the use of the EngineRegionInfos parameter.
      */
-    engineRegionInfos?: pulumi.Input<pulumi.Input<inputs.Tse.InstanceEngineRegionInfo>[]>;
+    engineRegionInfos?: pulumi.Input<pulumi.Input<inputs.Tse.InstanceEngineRegionInfo>[] | undefined>;
     /**
      * engine spec ID. see EngineProductVersion.
      */
-    engineResourceSpec?: pulumi.Input<string>;
+    engineResourceSpec?: pulumi.Input<string | undefined>;
     /**
      * engine type. Reference value: `zookeeper`, `nacos`, `polaris`.
      */
-    engineType?: pulumi.Input<string>;
+    engineType?: pulumi.Input<string | undefined>;
     /**
      * An open source version of the engine. Each engine supports different open source versions, refer to the product documentation or console purchase page.
      */
-    engineVersion?: pulumi.Input<string>;
+    engineVersion?: pulumi.Input<string | undefined>;
     /**
      * Prepaid time, in monthly units.
      */
-    prepaidPeriod?: pulumi.Input<number>;
+    prepaidPeriod?: pulumi.Input<number | undefined>;
     /**
      * Automatic renewal mark, prepaid only.  Reference value: `0`: No automatic renewal, `1`: Automatic renewal.
      */
-    prepaidRenewFlag?: pulumi.Input<number>;
+    prepaidRenewFlag?: pulumi.Input<number | undefined>;
     /**
      * subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * trade type. Reference value:- 0:postpaid- 1:Prepaid (Interface does not support the creation of prepaid instances yet).
      */
-    tradeType?: pulumi.Input<number>;
+    tradeType?: pulumi.Input<number | undefined>;
     /**
      * VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -358,7 +358,7 @@ export interface InstanceArgs {
     /**
      * Client public network access, `true`: on, `false`: off, default: false.
      */
-    enableClientInternetAccess?: pulumi.Input<boolean>;
+    enableClientInternetAccess?: pulumi.Input<boolean | undefined>;
     /**
      * engien name. Reference value: nacos-test.
      */
@@ -366,7 +366,7 @@ export interface InstanceArgs {
     /**
      * engine node num. see EngineProductVersion.
      */
-    engineNodeNum?: pulumi.Input<number>;
+    engineNodeNum?: pulumi.Input<number | undefined>;
     /**
      * Engine product version. Reference value: `Nacos`: `TRIAL`: Development version, optional node num: `1`, optional spec list: `1C1G`; `STANDARD`: Standard versions, optional node num: `3`, `5`, `7`, optional spec list: `1C2G`, `2C4G`, `4C8G`, `8C16G`, `16C32G`. `Zookeeper`: `TRIAL`: Development version, optional node num: `1`, optional spec list: `1C1G`; `STANDARD`: Standard versions, optional node num: `3`, `5`, `7`, optional spec list: `1C2G`, `2C4G`, `4C8G`, `8C16G`, `16C32G`; `PROFESSIONAL`: professional versions, optional node num: `3`, `5`, `7`, optional spec list: `1C2G`, `2C4G`, `4C8G`, `8C16G`, `16C32G`. `Polarismesh`: `BASE`: Base version, optional node num: `1`, optional spec list: `NUM50`; `PROFESSIONAL`: Enterprise versions, optional node num: `2`, `3`, optional spec list: `NUM50`, `NUM100`, `NUM200`, `NUM500`, `NUM1000`, `NUM5000`, `NUM10000`, `NUM50000`.
      */
@@ -378,11 +378,11 @@ export interface InstanceArgs {
     /**
      * Details about the regional configuration of the engine in cross-region deployment, only zookeeper professional requires the use of the EngineRegionInfos parameter.
      */
-    engineRegionInfos?: pulumi.Input<pulumi.Input<inputs.Tse.InstanceEngineRegionInfo>[]>;
+    engineRegionInfos?: pulumi.Input<pulumi.Input<inputs.Tse.InstanceEngineRegionInfo>[] | undefined>;
     /**
      * engine spec ID. see EngineProductVersion.
      */
-    engineResourceSpec?: pulumi.Input<string>;
+    engineResourceSpec?: pulumi.Input<string | undefined>;
     /**
      * engine type. Reference value: `zookeeper`, `nacos`, `polaris`.
      */
@@ -394,19 +394,19 @@ export interface InstanceArgs {
     /**
      * Prepaid time, in monthly units.
      */
-    prepaidPeriod?: pulumi.Input<number>;
+    prepaidPeriod?: pulumi.Input<number | undefined>;
     /**
      * Automatic renewal mark, prepaid only.  Reference value: `0`: No automatic renewal, `1`: Automatic renewal.
      */
-    prepaidRenewFlag?: pulumi.Input<number>;
+    prepaidRenewFlag?: pulumi.Input<number | undefined>;
     /**
      * subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * trade type. Reference value:- 0:postpaid- 1:Prepaid (Interface does not support the creation of prepaid instances yet).
      */
@@ -414,5 +414,5 @@ export interface InstanceArgs {
     /**
      * VPC ID. Assign an IP address to the engine in the VPC subnet. Reference value: vpc-conz6aix.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }

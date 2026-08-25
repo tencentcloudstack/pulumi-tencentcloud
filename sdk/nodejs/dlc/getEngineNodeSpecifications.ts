@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Dlc.getEngineNodeSpecifications({
+ * const example = tencentcloud.dlc.getEngineNodeSpecifications({
  *     dataEngineName: "tf-example",
  * });
  * ```
@@ -71,7 +71,7 @@ export interface GetEngineNodeSpecificationsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Dlc.getEngineNodeSpecifications({
+ * const example = tencentcloud.dlc.getEngineNodeSpecifications({
  *     dataEngineName: "tf-example",
  * });
  * ```
@@ -92,9 +92,9 @@ export interface GetEngineNodeSpecificationsOutputArgs {
     /**
      * Engine Name.
      */
-    dataEngineName?: pulumi.Input<string>;
+    dataEngineName?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

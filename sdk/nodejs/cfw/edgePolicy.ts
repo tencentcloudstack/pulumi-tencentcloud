@@ -101,6 +101,10 @@ export class EdgePolicy extends pulumi.CustomResource {
      */
     declare public readonly enable: pulumi.Output<string | undefined>;
     /**
+     * Execution order.
+     */
+    declare public /*out*/ readonly orderIndex: pulumi.Output<number>;
+    /**
      * Parameter template id.
      */
     declare public readonly paramTemplateId: pulumi.Output<string>;
@@ -157,6 +161,7 @@ export class EdgePolicy extends pulumi.CustomResource {
             resourceInputs["description"] = state?.description;
             resourceInputs["direction"] = state?.direction;
             resourceInputs["enable"] = state?.enable;
+            resourceInputs["orderIndex"] = state?.orderIndex;
             resourceInputs["paramTemplateId"] = state?.paramTemplateId;
             resourceInputs["port"] = state?.port;
             resourceInputs["protocol"] = state?.protocol;
@@ -205,6 +210,7 @@ export class EdgePolicy extends pulumi.CustomResource {
             resourceInputs["sourceType"] = args?.sourceType;
             resourceInputs["targetContent"] = args?.targetContent;
             resourceInputs["targetType"] = args?.targetType;
+            resourceInputs["orderIndex"] = undefined /*out*/;
             resourceInputs["uuid"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -219,55 +225,59 @@ export interface EdgePolicyState {
     /**
      * Description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Rule direction: 1, inbound; 0, outbound.
      */
-    direction?: pulumi.Input<number>;
+    direction?: pulumi.Input<number | undefined>;
     /**
      * Rule status, true means enabled, false means disabled. Default is true.
      */
-    enable?: pulumi.Input<string>;
+    enable?: pulumi.Input<string | undefined>;
+    /**
+     * Execution order.
+     */
+    orderIndex?: pulumi.Input<number | undefined>;
     /**
      * Parameter template id.
      */
-    paramTemplateId?: pulumi.Input<string>;
+    paramTemplateId?: pulumi.Input<string | undefined>;
     /**
      * The port for the access control policy. Value: -1/-1: All ports 80: Port 80.
      */
-    port?: pulumi.Input<string>;
+    port?: pulumi.Input<string | undefined>;
     /**
      * Protocol. If Direction=1 && Scope=serial, optional values: TCP UDP ICMP ANY HTTP HTTPS HTTP/HTTPS SMTP SMTPS SMTP/SMTPS FTP DNS; If Direction=1 && Scope!=serial, optional values: TCP; If Direction=0 && Scope=serial, optional values: TCP UDP ICMP ANY HTTP HTTPS HTTP/HTTPS SMTP SMTPS SMTP/SMTPS FTP DNS; If Direction=0 && Scope!=serial, optional values: TCP HTTP/HTTPS TLS/SSL.
      */
-    protocol?: pulumi.Input<string>;
+    protocol?: pulumi.Input<string | undefined>;
     /**
      * How the traffic set in the access control policy passes through the cloud firewall. Values: accept: allow; drop: reject; log: observe.
      */
-    ruleAction?: pulumi.Input<string>;
+    ruleAction?: pulumi.Input<string | undefined>;
     /**
      * Effective range. serial: serial; side: bypass; all: global, Default is all.
      */
-    scope?: pulumi.Input<string>;
+    scope?: pulumi.Input<string | undefined>;
     /**
      * Access source example: net:IP/CIDR(192.168.0.2).
      */
-    sourceContent?: pulumi.Input<string>;
+    sourceContent?: pulumi.Input<string | undefined>;
     /**
      * Access source type: for inbound rules, the type can be net, location, vendor, template; for outbound rules, it can be net, instance, tag, template, group.
      */
-    sourceType?: pulumi.Input<string>;
+    sourceType?: pulumi.Input<string | undefined>;
     /**
      * Example of access purpose: net: IP/CIDR(192.168.0.2) domain: domain name rules, such as *.qq.com.
      */
-    targetContent?: pulumi.Input<string>;
+    targetContent?: pulumi.Input<string | undefined>;
     /**
      * Access purpose type: For inbound rules, the type can be net, instance, tag, template, group; for outbound rules, it can be net, location, vendor, template.
      */
-    targetType?: pulumi.Input<string>;
+    targetType?: pulumi.Input<string | undefined>;
     /**
      * The unique id corresponding to the rule, no need to fill in when creating the rule.
      */
-    uuid?: pulumi.Input<number>;
+    uuid?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -277,7 +287,7 @@ export interface EdgePolicyArgs {
     /**
      * Description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Rule direction: 1, inbound; 0, outbound.
      */
@@ -285,11 +295,11 @@ export interface EdgePolicyArgs {
     /**
      * Rule status, true means enabled, false means disabled. Default is true.
      */
-    enable?: pulumi.Input<string>;
+    enable?: pulumi.Input<string | undefined>;
     /**
      * Parameter template id.
      */
-    paramTemplateId?: pulumi.Input<string>;
+    paramTemplateId?: pulumi.Input<string | undefined>;
     /**
      * The port for the access control policy. Value: -1/-1: All ports 80: Port 80.
      */
@@ -305,7 +315,7 @@ export interface EdgePolicyArgs {
     /**
      * Effective range. serial: serial; side: bypass; all: global, Default is all.
      */
-    scope?: pulumi.Input<string>;
+    scope?: pulumi.Input<string | undefined>;
     /**
      * Access source example: net:IP/CIDR(192.168.0.2).
      */

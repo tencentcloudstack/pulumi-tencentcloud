@@ -91,11 +91,11 @@ export interface SnapshotState {
     /**
      * ID of the instance for which to create a snapshot.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Snapshot name, which can contain up to 60 characters.
      */
-    snapshotName?: pulumi.Input<string>;
+    snapshotName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -109,5 +109,5 @@ export interface SnapshotArgs {
     /**
      * Snapshot name, which can contain up to 60 characters.
      */
-    snapshotName?: pulumi.Input<string>;
+    snapshotName?: pulumi.Input<string | undefined>;
 }

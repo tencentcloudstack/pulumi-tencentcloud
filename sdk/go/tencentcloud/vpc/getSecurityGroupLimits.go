@@ -62,12 +62,8 @@ type GetSecurityGroupLimitsResult struct {
 }
 
 func GetSecurityGroupLimitsOutput(ctx *pulumi.Context, args GetSecurityGroupLimitsOutputArgs, opts ...pulumi.InvokeOption) GetSecurityGroupLimitsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSecurityGroupLimitsResultOutput, error) {
-			args := v.(GetSecurityGroupLimitsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Vpc/getSecurityGroupLimits:getSecurityGroupLimits", args, GetSecurityGroupLimitsResultOutput{}, options).(GetSecurityGroupLimitsResultOutput), nil
-		}).(GetSecurityGroupLimitsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Vpc/getSecurityGroupLimits:getSecurityGroupLimits", args, GetSecurityGroupLimitsResultOutput{}, options).(GetSecurityGroupLimitsResultOutput)
 }
 
 // A collection of arguments for invoking getSecurityGroupLimits.

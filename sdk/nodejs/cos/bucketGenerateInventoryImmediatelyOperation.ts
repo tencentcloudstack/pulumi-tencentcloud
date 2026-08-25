@@ -96,11 +96,11 @@ export interface BucketGenerateInventoryImmediatelyOperationState {
     /**
      * Bucket.
      */
-    bucket?: pulumi.Input<string>;
+    bucket?: pulumi.Input<string | undefined>;
     /**
      * The id of inventory.
      */
-    inventoryId?: pulumi.Input<string>;
+    inventoryId?: pulumi.Input<string | undefined>;
 }
 
 /**

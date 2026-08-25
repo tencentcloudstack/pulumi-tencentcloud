@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const alarmNoticeCallbacks = tencentcloud.Monitor.getAlarmNoticeCallbacks({});
+ * const alarmNoticeCallbacks = tencentcloud.monitor.getAlarmNoticeCallbacks({});
  * ```
  */
 export function getAlarmNoticeCallbacks(args?: GetAlarmNoticeCallbacksArgs, opts?: pulumi.InvokeOptions): Promise<GetAlarmNoticeCallbacksResult> {
@@ -65,7 +65,7 @@ export interface GetAlarmNoticeCallbacksResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const alarmNoticeCallbacks = tencentcloud.Monitor.getAlarmNoticeCallbacks({});
+ * const alarmNoticeCallbacks = tencentcloud.monitor.getAlarmNoticeCallbacks({});
  * ```
  */
 export function getAlarmNoticeCallbacksOutput(args?: GetAlarmNoticeCallbacksOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAlarmNoticeCallbacksResult> {
@@ -84,9 +84,9 @@ export interface GetAlarmNoticeCallbacksOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

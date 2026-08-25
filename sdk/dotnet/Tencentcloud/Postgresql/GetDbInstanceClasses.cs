@@ -13,7 +13,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     public static class GetDbInstanceClasses
     {
         /// <summary>
-        /// Use this data source to query detailed information of postgresql DbInstanceClasses
+        /// Use this data source to query detailed information of PostgreSQL db instance classes
         /// 
         /// ## Example Usage
         /// 
@@ -21,15 +21,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var dbInstanceClasses = Tencentcloud.Postgresql.GetDbInstanceClasses.Invoke(new()
+        ///     var example = Tencentcloud.Postgresql.GetDbInstanceClasses.Invoke(new()
         ///     {
         ///         Zone = "ap-guangzhou-7",
         ///         DbEngine = "postgresql",
         ///         DbMajorVersion = "13",
+        ///         StorageType = "CLOUD_HSSD",
         ///     });
         /// 
         /// });
@@ -39,7 +40,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDbInstanceClassesResult>("tencentcloud:Postgresql/getDbInstanceClasses:getDbInstanceClasses", args ?? new GetDbInstanceClassesArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Use this data source to query detailed information of postgresql DbInstanceClasses
+        /// Use this data source to query detailed information of PostgreSQL db instance classes
         /// 
         /// ## Example Usage
         /// 
@@ -47,15 +48,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var dbInstanceClasses = Tencentcloud.Postgresql.GetDbInstanceClasses.Invoke(new()
+        ///     var example = Tencentcloud.Postgresql.GetDbInstanceClasses.Invoke(new()
         ///     {
         ///         Zone = "ap-guangzhou-7",
         ///         DbEngine = "postgresql",
         ///         DbMajorVersion = "13",
+        ///         StorageType = "CLOUD_HSSD",
         ///     });
         /// 
         /// });
@@ -65,7 +67,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
             => global::Pulumi.Deployment.Instance.Invoke<GetDbInstanceClassesResult>("tencentcloud:Postgresql/getDbInstanceClasses:getDbInstanceClasses", args ?? new GetDbInstanceClassesInvokeArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Use this data source to query detailed information of postgresql DbInstanceClasses
+        /// Use this data source to query detailed information of PostgreSQL db instance classes
         /// 
         /// ## Example Usage
         /// 
@@ -73,15 +75,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var dbInstanceClasses = Tencentcloud.Postgresql.GetDbInstanceClasses.Invoke(new()
+        ///     var example = Tencentcloud.Postgresql.GetDbInstanceClasses.Invoke(new()
         ///     {
         ///         Zone = "ap-guangzhou-7",
         ///         DbEngine = "postgresql",
         ///         DbMajorVersion = "13",
+        ///         StorageType = "CLOUD_HSSD",
         ///     });
         /// 
         /// });
@@ -111,6 +114,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// </summary>
         [Input("resultOutputFile")]
         public string? ResultOutputFile { get; set; }
+
+        /// <summary>
+        /// Storage type filter. Valid values: `PHYSICAL_LOCAL_SSD` (local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD).
+        /// </summary>
+        [Input("storageType")]
+        public string? StorageType { get; set; }
 
         /// <summary>
         /// AZ ID, which can be obtained through the `DescribeZones` API.
@@ -145,6 +154,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Input<string>? ResultOutputFile { get; set; }
 
         /// <summary>
+        /// Storage type filter. Valid values: `PHYSICAL_LOCAL_SSD` (local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD).
+        /// </summary>
+        [Input("storageType")]
+        public Input<string>? StorageType { get; set; }
+
+        /// <summary>
         /// AZ ID, which can be obtained through the `DescribeZones` API.
         /// </summary>
         [Input("zone", required: true)]
@@ -171,6 +186,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// </summary>
         public readonly string Id;
         public readonly string? ResultOutputFile;
+        public readonly string? StorageType;
         public readonly string Zone;
 
         [OutputConstructor]
@@ -185,6 +201,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
 
             string? resultOutputFile,
 
+            string? storageType,
+
             string zone)
         {
             ClassInfoSets = classInfoSets;
@@ -192,6 +210,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
             DbMajorVersion = dbMajorVersion;
             Id = id;
             ResultOutputFile = resultOutputFile;
+            StorageType = storageType;
             Zone = zone;
         }
     }

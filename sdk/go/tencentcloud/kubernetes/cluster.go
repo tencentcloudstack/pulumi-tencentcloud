@@ -12,6 +12,19 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
+// Provide a resource to create a kubernetes cluster.
+//
+// > **NOTE:** To use the custom Kubernetes component startup parameter function (parameter `extraArgs`), you need to submit a ticket for application.
+//
+// > **NOTE:** We recommend this usage that uses the `Kubernetes.Cluster` resource to create a cluster without any `workerConfig`, then adds nodes by the `Kubernetes.NodePool` resource.
+// It's more flexible than managing worker config directly with `Kubernetes.Cluster`, `Kubernetes.ScaleWorker`, or existing node management of `tencentcloudKubernetesAttachment`. The reason is that `workerConfig` is unchangeable and may cause the whole cluster resource to `ForceNew`.
+//
+// > **NOTE:** Executing `terraform destroy` to destroy the resource will default to deleting the node resource, If it is necessary to preserve node instance resources, Please set `instanceDeleteMode` to `retain`.
+//
+// > **NOTE:** If you want to set up addon for the tke cluster, it is recommended to use resource `Kubernetes.Addon`.
+//
+// > **NOTE:** Please do not use this resource and resource `Kubernetes.ClusterEndpoint` to operate cluster public network/intranet access at the same time.
+//
 // ## Example Usage
 //
 // ### Create a basic cluster with two worker nodes
@@ -107,7 +120,7 @@ import (
 //				ClusterDesc:                  pulumi.String("example for tke cluster"),
 //				ClusterMaxServiceNum:         pulumi.Int(32),
 //				ClusterInternet:              pulumi.Bool(false),
-//				ClusterInternetSecurityGroup: pulumi.String(sgId),
+//				ClusterInternetSecurityGroup: sgId.ToIDOutput().ToStringOutput(),
 //				ClusterVersion:               pulumi.String("1.22.5"),
 //				ClusterDeployType:            pulumi.String("MANAGED_CLUSTER"),
 //				Labels: pulumi.StringMap{
@@ -213,7 +226,7 @@ import (
 //			}
 //			_, err = kubernetes.NewNodePool(ctx, "example", &kubernetes.NodePoolArgs{
 //				Name:      pulumi.String("tf_example_node_pool"),
-//				ClusterId: example.ID(),
+//				ClusterId: example.ID().ToIDOutput().ToStringOutput(),
 //				MaxSize:   pulumi.Int(6),
 //				MinSize:   pulumi.Int(1),
 //				VpcId:     pulumi.String(firstVpcId),
@@ -229,7 +242,7 @@ import (
 //					SystemDiskType: pulumi.String("CLOUD_PREMIUM"),
 //					SystemDiskSize: pulumi.Int(50),
 //					OrderlySecurityGroupIds: pulumi.StringArray{
-//						pulumi.String(sgId),
+//						sgId.ToIDOutput().ToStringOutput(),
 //					},
 //					DataDisks: kubernetes.NodePoolAutoScalingConfigDataDiskArray{
 //						&kubernetes.NodePoolAutoScalingConfigDataDiskArgs{
@@ -367,7 +380,7 @@ import (
 //			}
 //			exampleNodePool, err := kubernetes.NewNodePool(ctx, "example", &kubernetes.NodePoolArgs{
 //				Name:      pulumi.String("tf_example_node_pool"),
-//				ClusterId: example.ID(),
+//				ClusterId: example.ID().ToIDOutput().ToStringOutput(),
 //				MaxSize:   pulumi.Int(6),
 //				MinSize:   pulumi.Int(1),
 //				VpcId:     pulumi.String(firstVpcId),
@@ -383,7 +396,7 @@ import (
 //					SystemDiskType: pulumi.String("CLOUD_PREMIUM"),
 //					SystemDiskSize: pulumi.Int(50),
 //					OrderlySecurityGroupIds: pulumi.StringArray{
-//						pulumi.String(sgId),
+//						sgId.ToIDOutput().ToStringOutput(),
 //					},
 //					DataDisks: kubernetes.NodePoolAutoScalingConfigDataDiskArray{
 //						&kubernetes.NodePoolAutoScalingConfigDataDiskArgs{
@@ -426,10 +439,10 @@ import (
 //				return err
 //			}
 //			_, err = kubernetes.NewClusterEndpoint(ctx, "example", &kubernetes.ClusterEndpointArgs{
-//				ClusterId:                    example.ID(),
+//				ClusterId:                    example.ID().ToIDOutput().ToStringOutput(),
 //				ClusterInternet:              pulumi.Bool(true),
 //				ClusterIntranet:              pulumi.Bool(true),
-//				ClusterInternetSecurityGroup: pulumi.String(sgId),
+//				ClusterInternetSecurityGroup: sgId.ToIDOutput().ToStringOutput(),
 //				ClusterIntranetSubnetId:      pulumi.String(firstSubnetId),
 //			}, pulumi.DependsOn([]pulumi.Resource{
 //				exampleNodePool,
@@ -536,7 +549,7 @@ import (
 //				ClusterDesc:                  pulumi.String("example for tke cluster"),
 //				ClusterMaxServiceNum:         pulumi.Int(32),
 //				ClusterInternet:              pulumi.Bool(false),
-//				ClusterInternetSecurityGroup: pulumi.String(sgId),
+//				ClusterInternetSecurityGroup: sgId.ToIDOutput().ToStringOutput(),
 //				ClusterVersion:               pulumi.String("1.22.5"),
 //				ClusterDeployType:            pulumi.String("MANAGED_CLUSTER"),
 //				Labels: pulumi.StringMap{
@@ -1005,7 +1018,7 @@ type Cluster struct {
 	// External network address to access.
 	ClusterExternalEndpoint pulumi.StringOutput `pulumi:"clusterExternalEndpoint"`
 	// Customized parameters for master component,such as kube-apiserver, kube-controller-manager, kube-scheduler.
-	ClusterExtraArgs ClusterClusterExtraArgsPtrOutput `pulumi:"clusterExtraArgs"`
+	ClusterExtraArgs ClusterClusterExtraArgsOutput `pulumi:"clusterExtraArgs"`
 	// Open internet access or not. If this field is set 'true', the field below `workerConfig` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `Kubernetes.ClusterEndpoint`.
 	ClusterInternet pulumi.BoolOutput `pulumi:"clusterInternet"`
 	// Domain name for cluster Kube-apiserver internet access. Be careful if you modify value of this parameter, the clusterExternalEndpoint value may be changed automatically too.
@@ -1034,7 +1047,7 @@ type Cluster struct {
 	ClusterOs pulumi.StringPtrOutput `pulumi:"clusterOs"`
 	// Image type of the cluster os, the available values include: 'GENERAL'. Default is 'GENERAL'.
 	ClusterOsType pulumi.StringPtrOutput `pulumi:"clusterOsType"`
-	// Subnet ID of the cluster, such as: subnet-b3p7d7q5.
+	// Control Plane Subnet Information. This field is required only in the following scenarios: When the container network plugin is CiliumOverlay, TKE will obtain 2 IPs from this subnet to create an internal load balancer; When creating a managed cluster that supports CDC with the VPC-CNI network plugin, at least 12 IPs must be reserved.
 	ClusterSubnetId pulumi.StringPtrOutput `pulumi:"clusterSubnetId"`
 	// Version of the cluster. Use `Kubernetes.getAvailableClusterVersions` to get the upgradable cluster version.
 	ClusterVersion pulumi.StringOutput `pulumi:"clusterVersion"`
@@ -1118,7 +1131,7 @@ type Cluster struct {
 	Tags pulumi.StringMapOutput `pulumi:"tags"`
 	// Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
 	Unschedulable pulumi.IntPtrOutput `pulumi:"unschedulable"`
-	// Indicates whether upgrade all instances when clusterVersion change. Default is false.
+	// Indicates whether upgrade all cluster instances. Default is false.
 	UpgradeInstancesFollowCluster pulumi.BoolPtrOutput `pulumi:"upgradeInstancesFollowCluster"`
 	// User name of account.
 	UserName pulumi.StringOutput `pulumi:"userName"`
@@ -1228,7 +1241,7 @@ type clusterState struct {
 	ClusterOs *string `pulumi:"clusterOs"`
 	// Image type of the cluster os, the available values include: 'GENERAL'. Default is 'GENERAL'.
 	ClusterOsType *string `pulumi:"clusterOsType"`
-	// Subnet ID of the cluster, such as: subnet-b3p7d7q5.
+	// Control Plane Subnet Information. This field is required only in the following scenarios: When the container network plugin is CiliumOverlay, TKE will obtain 2 IPs from this subnet to create an internal load balancer; When creating a managed cluster that supports CDC with the VPC-CNI network plugin, at least 12 IPs must be reserved.
 	ClusterSubnetId *string `pulumi:"clusterSubnetId"`
 	// Version of the cluster. Use `Kubernetes.getAvailableClusterVersions` to get the upgradable cluster version.
 	ClusterVersion *string `pulumi:"clusterVersion"`
@@ -1312,7 +1325,7 @@ type clusterState struct {
 	Tags map[string]string `pulumi:"tags"`
 	// Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
 	Unschedulable *int `pulumi:"unschedulable"`
-	// Indicates whether upgrade all instances when clusterVersion change. Default is false.
+	// Indicates whether upgrade all cluster instances. Default is false.
 	UpgradeInstancesFollowCluster *bool `pulumi:"upgradeInstancesFollowCluster"`
 	// User name of account.
 	UserName *string `pulumi:"userName"`
@@ -1385,7 +1398,7 @@ type ClusterState struct {
 	ClusterOs pulumi.StringPtrInput
 	// Image type of the cluster os, the available values include: 'GENERAL'. Default is 'GENERAL'.
 	ClusterOsType pulumi.StringPtrInput
-	// Subnet ID of the cluster, such as: subnet-b3p7d7q5.
+	// Control Plane Subnet Information. This field is required only in the following scenarios: When the container network plugin is CiliumOverlay, TKE will obtain 2 IPs from this subnet to create an internal load balancer; When creating a managed cluster that supports CDC with the VPC-CNI network plugin, at least 12 IPs must be reserved.
 	ClusterSubnetId pulumi.StringPtrInput
 	// Version of the cluster. Use `Kubernetes.getAvailableClusterVersions` to get the upgradable cluster version.
 	ClusterVersion pulumi.StringPtrInput
@@ -1469,7 +1482,7 @@ type ClusterState struct {
 	Tags pulumi.StringMapInput
 	// Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
 	Unschedulable pulumi.IntPtrInput
-	// Indicates whether upgrade all instances when clusterVersion change. Default is false.
+	// Indicates whether upgrade all cluster instances. Default is false.
 	UpgradeInstancesFollowCluster pulumi.BoolPtrInput
 	// User name of account.
 	UserName pulumi.StringPtrInput
@@ -1536,7 +1549,7 @@ type clusterArgs struct {
 	ClusterOs *string `pulumi:"clusterOs"`
 	// Image type of the cluster os, the available values include: 'GENERAL'. Default is 'GENERAL'.
 	ClusterOsType *string `pulumi:"clusterOsType"`
-	// Subnet ID of the cluster, such as: subnet-b3p7d7q5.
+	// Control Plane Subnet Information. This field is required only in the following scenarios: When the container network plugin is CiliumOverlay, TKE will obtain 2 IPs from this subnet to create an internal load balancer; When creating a managed cluster that supports CDC with the VPC-CNI network plugin, at least 12 IPs must be reserved.
 	ClusterSubnetId *string `pulumi:"clusterSubnetId"`
 	// Version of the cluster. Use `Kubernetes.getAvailableClusterVersions` to get the upgradable cluster version.
 	ClusterVersion *string `pulumi:"clusterVersion"`
@@ -1608,7 +1621,7 @@ type clusterArgs struct {
 	Tags map[string]string `pulumi:"tags"`
 	// Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
 	Unschedulable *int `pulumi:"unschedulable"`
-	// Indicates whether upgrade all instances when clusterVersion change. Default is false.
+	// Indicates whether upgrade all cluster instances. Default is false.
 	UpgradeInstancesFollowCluster *bool `pulumi:"upgradeInstancesFollowCluster"`
 	// Distinguish between shared network card multi-IP mode and independent network card mode. Fill in `tke-route-eni` for shared network card multi-IP mode and `tke-direct-eni` for independent network card mode. The default is shared network card mode. When it is necessary to turn off the vpc-cni container network capability, both `eniSubnetIds` and `vpcCniType` must be set to empty.
 	VpcCniType *string `pulumi:"vpcCniType"`
@@ -1668,7 +1681,7 @@ type ClusterArgs struct {
 	ClusterOs pulumi.StringPtrInput
 	// Image type of the cluster os, the available values include: 'GENERAL'. Default is 'GENERAL'.
 	ClusterOsType pulumi.StringPtrInput
-	// Subnet ID of the cluster, such as: subnet-b3p7d7q5.
+	// Control Plane Subnet Information. This field is required only in the following scenarios: When the container network plugin is CiliumOverlay, TKE will obtain 2 IPs from this subnet to create an internal load balancer; When creating a managed cluster that supports CDC with the VPC-CNI network plugin, at least 12 IPs must be reserved.
 	ClusterSubnetId pulumi.StringPtrInput
 	// Version of the cluster. Use `Kubernetes.getAvailableClusterVersions` to get the upgradable cluster version.
 	ClusterVersion pulumi.StringPtrInput
@@ -1740,7 +1753,7 @@ type ClusterArgs struct {
 	Tags pulumi.StringMapInput
 	// Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
 	Unschedulable pulumi.IntPtrInput
-	// Indicates whether upgrade all instances when clusterVersion change. Default is false.
+	// Indicates whether upgrade all cluster instances. Default is false.
 	UpgradeInstancesFollowCluster pulumi.BoolPtrInput
 	// Distinguish between shared network card multi-IP mode and independent network card mode. Fill in `tke-route-eni` for shared network card multi-IP mode and `tke-direct-eni` for independent network card mode. The default is shared network card mode. When it is necessary to turn off the vpc-cni container network capability, both `eniSubnetIds` and `vpcCniType` must be set to empty.
 	VpcCniType pulumi.StringPtrInput
@@ -1905,8 +1918,8 @@ func (o ClusterOutput) ClusterExternalEndpoint() pulumi.StringOutput {
 }
 
 // Customized parameters for master component,such as kube-apiserver, kube-controller-manager, kube-scheduler.
-func (o ClusterOutput) ClusterExtraArgs() ClusterClusterExtraArgsPtrOutput {
-	return o.ApplyT(func(v *Cluster) ClusterClusterExtraArgsPtrOutput { return v.ClusterExtraArgs }).(ClusterClusterExtraArgsPtrOutput)
+func (o ClusterOutput) ClusterExtraArgs() ClusterClusterExtraArgsOutput {
+	return o.ApplyT(func(v *Cluster) ClusterClusterExtraArgsOutput { return v.ClusterExtraArgs }).(ClusterClusterExtraArgsOutput)
 }
 
 // Open internet access or not. If this field is set 'true', the field below `workerConfig` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `Kubernetes.ClusterEndpoint`.
@@ -1979,7 +1992,7 @@ func (o ClusterOutput) ClusterOsType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringPtrOutput { return v.ClusterOsType }).(pulumi.StringPtrOutput)
 }
 
-// Subnet ID of the cluster, such as: subnet-b3p7d7q5.
+// Control Plane Subnet Information. This field is required only in the following scenarios: When the container network plugin is CiliumOverlay, TKE will obtain 2 IPs from this subnet to create an internal load balancer; When creating a managed cluster that supports CDC with the VPC-CNI network plugin, at least 12 IPs must be reserved.
 func (o ClusterOutput) ClusterSubnetId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringPtrOutput { return v.ClusterSubnetId }).(pulumi.StringPtrOutput)
 }
@@ -2186,7 +2199,7 @@ func (o ClusterOutput) Unschedulable() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.IntPtrOutput { return v.Unschedulable }).(pulumi.IntPtrOutput)
 }
 
-// Indicates whether upgrade all instances when clusterVersion change. Default is false.
+// Indicates whether upgrade all cluster instances. Default is false.
 func (o ClusterOutput) UpgradeInstancesFollowCluster() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.BoolPtrOutput { return v.UpgradeInstancesFollowCluster }).(pulumi.BoolPtrOutput)
 }

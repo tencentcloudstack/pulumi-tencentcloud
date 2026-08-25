@@ -37,7 +37,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// ## Import
     /// 
-    /// css push_auth_key_config can be imported using the id, e.g.
+    /// css PushAuthKeyConfig can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Css/pushAuthKeyConfig:PushAuthKeyConfig push_auth_key_config push_auth_key_config_id

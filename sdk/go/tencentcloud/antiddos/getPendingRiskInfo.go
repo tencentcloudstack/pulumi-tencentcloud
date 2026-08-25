@@ -70,12 +70,8 @@ type GetPendingRiskInfoResult struct {
 }
 
 func GetPendingRiskInfoOutput(ctx *pulumi.Context, args GetPendingRiskInfoOutputArgs, opts ...pulumi.InvokeOption) GetPendingRiskInfoResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetPendingRiskInfoResultOutput, error) {
-			args := v.(GetPendingRiskInfoArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Antiddos/getPendingRiskInfo:getPendingRiskInfo", args, GetPendingRiskInfoResultOutput{}, options).(GetPendingRiskInfoResultOutput), nil
-		}).(GetPendingRiskInfoResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Antiddos/getPendingRiskInfo:getPendingRiskInfo", args, GetPendingRiskInfoResultOutput{}, options).(GetPendingRiskInfoResultOutput)
 }
 
 // A collection of arguments for invoking getPendingRiskInfo.

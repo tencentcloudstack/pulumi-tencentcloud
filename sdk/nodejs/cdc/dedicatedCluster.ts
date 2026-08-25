@@ -126,19 +126,19 @@ export interface DedicatedClusterState {
     /**
      * Dedicated Cluster Description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Dedicated Cluster Name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Dedicated Cluster Site ID.
      */
-    siteId?: pulumi.Input<string>;
+    siteId?: pulumi.Input<string | undefined>;
     /**
      * Dedicated Cluster Zone.
      */
-    zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -148,11 +148,11 @@ export interface DedicatedClusterArgs {
     /**
      * Dedicated Cluster Description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Dedicated Cluster Name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Dedicated Cluster Site ID.
      */

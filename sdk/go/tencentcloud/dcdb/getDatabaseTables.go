@@ -47,12 +47,8 @@ type GetDatabaseTablesResult struct {
 }
 
 func GetDatabaseTablesOutput(ctx *pulumi.Context, args GetDatabaseTablesOutputArgs, opts ...pulumi.InvokeOption) GetDatabaseTablesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDatabaseTablesResultOutput, error) {
-			args := v.(GetDatabaseTablesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dcdb/getDatabaseTables:getDatabaseTables", args, GetDatabaseTablesResultOutput{}, options).(GetDatabaseTablesResultOutput), nil
-		}).(GetDatabaseTablesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dcdb/getDatabaseTables:getDatabaseTables", args, GetDatabaseTablesResultOutput{}, options).(GetDatabaseTablesResultOutput)
 }
 
 // A collection of arguments for invoking getDatabaseTables.

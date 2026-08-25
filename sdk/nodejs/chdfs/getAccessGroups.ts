@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const accessGroups = tencentcloud.Chdfs.getAccessGroups({
+ * const accessGroups = tencentcloud.chdfs.getAccessGroups({
  *     vpcId: "vpc-pewdpc0d",
  * });
  * ```
@@ -76,7 +76,7 @@ export interface GetAccessGroupsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const accessGroups = tencentcloud.Chdfs.getAccessGroups({
+ * const accessGroups = tencentcloud.chdfs.getAccessGroups({
  *     vpcId: "vpc-pewdpc0d",
  * });
  * ```
@@ -98,13 +98,13 @@ export interface GetAccessGroupsOutputArgs {
     /**
      * get groups belongs to the owner uin, must set but only can use one of VpcId and OwnerUin to get the groups.
      */
-    ownerUin?: pulumi.Input<number>;
+    ownerUin?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * get groups belongs to the vpc id, must set but only can use one of VpcId and OwnerUin to get the groups.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }

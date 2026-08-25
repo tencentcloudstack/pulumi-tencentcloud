@@ -105,19 +105,19 @@ export interface LogSetState {
     /**
      * Logset creation time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Logset name, which unique and fixed `clbLogset` among all CLS logsets.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Logset retention period in days. Maximun value is `90`.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * Number of log topics in logset.
      */
-    topicCount?: pulumi.Input<string>;
+    topicCount?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -127,5 +127,5 @@ export interface LogSetArgs {
     /**
      * Logset retention period in days. Maximun value is `90`.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
 }

@@ -92,7 +92,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
     /// 
     /// ## Import
     /// 
-    /// cvm security_group_attachment can be imported using the id, e.g.
+    /// cvm SecurityGroupAttachment can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Cvm/securityGroupAttachment:SecurityGroupAttachment example ins-odl0lrcy#sg-5275dorp

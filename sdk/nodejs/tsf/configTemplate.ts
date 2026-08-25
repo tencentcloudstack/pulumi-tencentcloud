@@ -140,35 +140,35 @@ export interface ConfigTemplateState {
     /**
      * Configuration template description.
      */
-    configTemplateDesc?: pulumi.Input<string>;
+    configTemplateDesc?: pulumi.Input<string | undefined>;
     /**
      * Template Id.
      */
-    configTemplateId?: pulumi.Input<string>;
+    configTemplateId?: pulumi.Input<string | undefined>;
     /**
      * Configuration template name.
      */
-    configTemplateName?: pulumi.Input<string>;
+    configTemplateName?: pulumi.Input<string | undefined>;
     /**
      * Configure the microservice framework corresponding to the template.
      */
-    configTemplateType?: pulumi.Input<string>;
+    configTemplateType?: pulumi.Input<string | undefined>;
     /**
      * Configure template data.
      */
-    configTemplateValue?: pulumi.Input<string>;
+    configTemplateValue?: pulumi.Input<string | undefined>;
     /**
      * creation time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Program id list.
      */
-    programIdLists?: pulumi.Input<pulumi.Input<string>[]>;
+    programIdLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * update time.
      */
-    updateTime?: pulumi.Input<string>;
+    updateTime?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -178,7 +178,7 @@ export interface ConfigTemplateArgs {
     /**
      * Configuration template description.
      */
-    configTemplateDesc?: pulumi.Input<string>;
+    configTemplateDesc?: pulumi.Input<string | undefined>;
     /**
      * Configuration template name.
      */
@@ -194,5 +194,5 @@ export interface ConfigTemplateArgs {
     /**
      * Program id list.
      */
-    programIdLists?: pulumi.Input<pulumi.Input<string>[]>;
+    programIdLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

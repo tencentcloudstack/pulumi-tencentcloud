@@ -81,12 +81,8 @@ type LookupCommandResult struct {
 }
 
 func LookupCommandOutput(ctx *pulumi.Context, args LookupCommandOutputArgs, opts ...pulumi.InvokeOption) LookupCommandResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupCommandResultOutput, error) {
-			args := v.(LookupCommandArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tat/getCommand:getCommand", args, LookupCommandResultOutput{}, options).(LookupCommandResultOutput), nil
-		}).(LookupCommandResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tat/getCommand:getCommand", args, LookupCommandResultOutput{}, options).(LookupCommandResultOutput)
 }
 
 // A collection of arguments for invoking getCommand.

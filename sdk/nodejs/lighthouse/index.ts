@@ -50,6 +50,11 @@ export const getAllScene: typeof import("./getAllScene").getAllScene = null as a
 export const getAllSceneOutput: typeof import("./getAllScene").getAllSceneOutput = null as any;
 utilities.lazyLoad(exports, ["getAllScene","getAllSceneOutput"], () => require("./getAllScene"));
 
+export { GetBlueprintsArgs, GetBlueprintsResult, GetBlueprintsOutputArgs } from "./getBlueprints";
+export const getBlueprints: typeof import("./getBlueprints").getBlueprints = null as any;
+export const getBlueprintsOutput: typeof import("./getBlueprints").getBlueprintsOutput = null as any;
+utilities.lazyLoad(exports, ["getBlueprints","getBlueprintsOutput"], () => require("./getBlueprints"));
+
 export { GetBundleArgs, GetBundleResult, GetBundleOutputArgs } from "./getBundle";
 export const getBundle: typeof import("./getBundle").getBundle = null as any;
 export const getBundleOutput: typeof import("./getBundle").getBundleOutput = null as any;
@@ -145,6 +150,11 @@ export type RenewInstance = import("./renewInstance").RenewInstance;
 export const RenewInstance: typeof import("./renewInstance").RenewInstance = null as any;
 utilities.lazyLoad(exports, ["RenewInstance"], () => require("./renewInstance"));
 
+export { ShareBlueprintAcrossAccountAttachmentArgs, ShareBlueprintAcrossAccountAttachmentState } from "./shareBlueprintAcrossAccountAttachment";
+export type ShareBlueprintAcrossAccountAttachment = import("./shareBlueprintAcrossAccountAttachment").ShareBlueprintAcrossAccountAttachment;
+export const ShareBlueprintAcrossAccountAttachment: typeof import("./shareBlueprintAcrossAccountAttachment").ShareBlueprintAcrossAccountAttachment = null as any;
+utilities.lazyLoad(exports, ["ShareBlueprintAcrossAccountAttachment"], () => require("./shareBlueprintAcrossAccountAttachment"));
+
 export { SnapshotArgs, SnapshotState } from "./snapshot";
 export type Snapshot = import("./snapshot").Snapshot;
 export const Snapshot: typeof import("./snapshot").Snapshot = null as any;
@@ -193,6 +203,8 @@ const _module = {
                 return new RenewDisk(name, <any>undefined, { urn })
             case "tencentcloud:Lighthouse/renewInstance:RenewInstance":
                 return new RenewInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Lighthouse/shareBlueprintAcrossAccountAttachment:ShareBlueprintAcrossAccountAttachment":
+                return new ShareBlueprintAcrossAccountAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Lighthouse/snapshot:Snapshot":
                 return new Snapshot(name, <any>undefined, { urn })
             case "tencentcloud:Lighthouse/startInstance:StartInstance":
@@ -218,6 +230,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/keyPairAttachm
 pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/rebootInstance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/renewDisk", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/renewInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/shareBlueprintAcrossAccountAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/snapshot", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/startInstance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Lighthouse/stopInstance", _module)

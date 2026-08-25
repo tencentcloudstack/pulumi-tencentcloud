@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const ruleEngineSettings = tencentcloud.Teo.getRuleEngineSettings({});
+ * const ruleEngineSettings = tencentcloud.teo.getRuleEngineSettings({});
  * ```
  */
 export function getRuleEngineSettings(args?: GetRuleEngineSettingsArgs, opts?: pulumi.InvokeOptions): Promise<GetRuleEngineSettingsResult> {
@@ -59,7 +59,7 @@ export interface GetRuleEngineSettingsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const ruleEngineSettings = tencentcloud.Teo.getRuleEngineSettings({});
+ * const ruleEngineSettings = tencentcloud.teo.getRuleEngineSettings({});
  * ```
  */
 export function getRuleEngineSettingsOutput(args?: GetRuleEngineSettingsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRuleEngineSettingsResult> {
@@ -77,5 +77,5 @@ export interface GetRuleEngineSettingsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

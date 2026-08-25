@@ -7,7 +7,7 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a cynosdb proxy
+ * Provides a resource to create a CynosDB proxy
  *
  * ## Example Usage
  *
@@ -117,6 +117,10 @@ export class Proxy extends pulumi.CustomResource {
      * Private network ID, which is consistent with the cluster private network ID by default.
      */
     declare public readonly uniqueVpcId: pulumi.Output<string>;
+    /**
+     * Internal IP address.
+     */
+    declare public /*out*/ readonly vip: pulumi.Output<string>;
 
     /**
      * Create a Proxy resource with the given unique name, arguments, and options.
@@ -145,6 +149,7 @@ export class Proxy extends pulumi.CustomResource {
             resourceInputs["securityGroupIds"] = state?.securityGroupIds;
             resourceInputs["uniqueSubnetId"] = state?.uniqueSubnetId;
             resourceInputs["uniqueVpcId"] = state?.uniqueVpcId;
+            resourceInputs["vip"] = state?.vip;
         } else {
             const args = argsOrState as ProxyArgs | undefined;
             if (args?.clusterId === undefined && !opts.urn) {
@@ -170,6 +175,7 @@ export class Proxy extends pulumi.CustomResource {
             resourceInputs["uniqueVpcId"] = args?.uniqueVpcId;
             resourceInputs["proxyGroupId"] = undefined /*out*/;
             resourceInputs["roInstances"] = undefined /*out*/;
+            resourceInputs["vip"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Proxy.__pulumiType, name, resourceInputs, opts);
@@ -183,59 +189,63 @@ export interface ProxyState {
     /**
      * Cluster ID.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Connection pool threshold: unit (second).
      */
-    connectionPoolTimeOut?: pulumi.Input<number>;
+    connectionPoolTimeOut?: pulumi.Input<number | undefined>;
     /**
      * Connection pool type: SessionConnectionPool (session level Connection pool).
      */
-    connectionPoolType?: pulumi.Input<string>;
+    connectionPoolType?: pulumi.Input<string | undefined>;
     /**
      * Number of CPU cores.
      */
-    cpu?: pulumi.Input<number>;
+    cpu?: pulumi.Input<number | undefined>;
     /**
      * Description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Memory.
      */
-    mem?: pulumi.Input<number>;
+    mem?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable Connection pool, yes - enable, no - do not enable.
      */
-    openConnectionPool?: pulumi.Input<string>;
+    openConnectionPool?: pulumi.Input<string | undefined>;
     /**
      * Number of database proxy group nodes. If it is set at the same time as the `proxyZones` field, the `proxyZones` parameter shall prevail.
      */
-    proxyCount?: pulumi.Input<number>;
+    proxyCount?: pulumi.Input<number | undefined>;
     /**
      * Proxy Group Id.
      */
-    proxyGroupId?: pulumi.Input<string>;
+    proxyGroupId?: pulumi.Input<string | undefined>;
     /**
      * Database node information.
      */
-    proxyZones?: pulumi.Input<pulumi.Input<inputs.Cynosdb.ProxyProxyZone>[]>;
+    proxyZones?: pulumi.Input<pulumi.Input<inputs.Cynosdb.ProxyProxyZone>[] | undefined>;
     /**
      * Read only instance list.
      */
-    roInstances?: pulumi.Input<pulumi.Input<inputs.Cynosdb.ProxyRoInstance>[]>;
+    roInstances?: pulumi.Input<pulumi.Input<inputs.Cynosdb.ProxyRoInstance>[] | undefined>;
     /**
      * Security Group ID Array.
      */
-    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The private network subnet ID is consistent with the cluster subnet ID by default.
      */
-    uniqueSubnetId?: pulumi.Input<string>;
+    uniqueSubnetId?: pulumi.Input<string | undefined>;
     /**
      * Private network ID, which is consistent with the cluster private network ID by default.
      */
-    uniqueVpcId?: pulumi.Input<string>;
+    uniqueVpcId?: pulumi.Input<string | undefined>;
+    /**
+     * Internal IP address.
+     */
+    vip?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -249,11 +259,11 @@ export interface ProxyArgs {
     /**
      * Connection pool threshold: unit (second).
      */
-    connectionPoolTimeOut?: pulumi.Input<number>;
+    connectionPoolTimeOut?: pulumi.Input<number | undefined>;
     /**
      * Connection pool type: SessionConnectionPool (session level Connection pool).
      */
-    connectionPoolType?: pulumi.Input<string>;
+    connectionPoolType?: pulumi.Input<string | undefined>;
     /**
      * Number of CPU cores.
      */
@@ -261,7 +271,7 @@ export interface ProxyArgs {
     /**
      * Description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Memory.
      */
@@ -269,25 +279,25 @@ export interface ProxyArgs {
     /**
      * Whether to enable Connection pool, yes - enable, no - do not enable.
      */
-    openConnectionPool?: pulumi.Input<string>;
+    openConnectionPool?: pulumi.Input<string | undefined>;
     /**
      * Number of database proxy group nodes. If it is set at the same time as the `proxyZones` field, the `proxyZones` parameter shall prevail.
      */
-    proxyCount?: pulumi.Input<number>;
+    proxyCount?: pulumi.Input<number | undefined>;
     /**
      * Database node information.
      */
-    proxyZones?: pulumi.Input<pulumi.Input<inputs.Cynosdb.ProxyProxyZone>[]>;
+    proxyZones?: pulumi.Input<pulumi.Input<inputs.Cynosdb.ProxyProxyZone>[] | undefined>;
     /**
      * Security Group ID Array.
      */
-    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The private network subnet ID is consistent with the cluster subnet ID by default.
      */
-    uniqueSubnetId?: pulumi.Input<string>;
+    uniqueSubnetId?: pulumi.Input<string | undefined>;
     /**
      * Private network ID, which is consistent with the cluster private network ID by default.
      */
-    uniqueVpcId?: pulumi.Input<string>;
+    uniqueVpcId?: pulumi.Input<string | undefined>;
 }

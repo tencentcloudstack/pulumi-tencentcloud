@@ -20,7 +20,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb.Inputs
         public Input<string>? InstanceId { get; set; }
 
         /// <summary>
-        /// Name of instance.
+        /// Name of instance. Only supported when modifying.
         /// </summary>
         [Input("instanceName")]
         public Input<string>? InstanceName { get; set; }

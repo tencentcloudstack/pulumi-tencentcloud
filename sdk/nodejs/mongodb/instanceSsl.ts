@@ -16,7 +16,7 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const example = new tencentcloud.mongodb.InstanceSsl("example", {
- *     instanceId: "cmgo-xxxxxxxx",
+ *     instanceId: "cmgo-olr1xx9d",
  *     enable: true,
  * });
  * ```
@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  * MongoDB instance SSL configuration can be imported using the instance id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Mongodb/instanceSsl:InstanceSsl example cmgo-xxxxxxxx
+ * $ pulumi import tencentcloud:Mongodb/instanceSsl:InstanceSsl example cmgo-olr1xx9d
  * ```
  */
 export class InstanceSsl extends pulumi.CustomResource {
@@ -122,23 +122,23 @@ export interface InstanceSslState {
     /**
      * Certificate download link. This field is only available when SSL is enabled.
      */
-    certUrl?: pulumi.Input<string>;
+    certUrl?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable SSL. Valid values: `true` - enable SSL, `false` - disable SSL.
      */
-    enable?: pulumi.Input<boolean>;
+    enable?: pulumi.Input<boolean | undefined>;
     /**
      * Certificate expiration time, format: 2023-05-01 12:00:00. This field is only available when SSL is enabled.
      */
-    expiredTime?: pulumi.Input<string>;
+    expiredTime?: pulumi.Input<string | undefined>;
     /**
      * Instance ID, for example: cmgo-p8vnipr5.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * SSL status. Valid values: `0` - SSL is disabled, `1` - SSL is enabled.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
 }
 
 /**

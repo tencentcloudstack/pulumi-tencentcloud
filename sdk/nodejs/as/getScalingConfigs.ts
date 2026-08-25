@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const asConfigs = tencentcloud.As.getScalingConfigs({
+ * const asConfigs = tencentcloud.as.getScalingConfigs({
  *     configurationId: "asc-oqio4yyj",
  *     resultOutputFile: "my_test_path",
  * });
@@ -80,7 +80,7 @@ export interface GetScalingConfigsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const asConfigs = tencentcloud.As.getScalingConfigs({
+ * const asConfigs = tencentcloud.as.getScalingConfigs({
  *     configurationId: "asc-oqio4yyj",
  *     resultOutputFile: "my_test_path",
  * });
@@ -103,13 +103,13 @@ export interface GetScalingConfigsOutputArgs {
     /**
      * Launch configuration ID.
      */
-    configurationId?: pulumi.Input<string>;
+    configurationId?: pulumi.Input<string | undefined>;
     /**
      * Launch configuration name.
      */
-    configurationName?: pulumi.Input<string>;
+    configurationName?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

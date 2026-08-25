@@ -35,7 +35,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * teo teo_function_runtime_environment can be imported using the id, e.g.
+ * teo teoFunctionRuntimeEnvironment can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Teo/functionRuntimeEnvironment:FunctionRuntimeEnvironment teo_function_runtime_environment zone_id#function_id
@@ -125,15 +125,15 @@ export interface FunctionRuntimeEnvironmentState {
     /**
      * The environment variable list.
      */
-    environmentVariables?: pulumi.Input<pulumi.Input<inputs.Teo.FunctionRuntimeEnvironmentEnvironmentVariable>[]>;
+    environmentVariables?: pulumi.Input<pulumi.Input<inputs.Teo.FunctionRuntimeEnvironmentEnvironmentVariable>[] | undefined>;
     /**
      * ID of the Function.
      */
-    functionId?: pulumi.Input<string>;
+    functionId?: pulumi.Input<string | undefined>;
     /**
      * ID of the site.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**

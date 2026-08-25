@@ -83,12 +83,8 @@ type GetInsAttributeResult struct {
 }
 
 func GetInsAttributeOutput(ctx *pulumi.Context, args GetInsAttributeOutputArgs, opts ...pulumi.InvokeOption) GetInsAttributeResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInsAttributeResultOutput, error) {
-			args := v.(GetInsAttributeArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Sqlserver/getInsAttribute:getInsAttribute", args, GetInsAttributeResultOutput{}, options).(GetInsAttributeResultOutput), nil
-		}).(GetInsAttributeResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Sqlserver/getInsAttribute:getInsAttribute", args, GetInsAttributeResultOutput{}, options).(GetInsAttributeResultOutput)
 }
 
 // A collection of arguments for invoking getInsAttribute.

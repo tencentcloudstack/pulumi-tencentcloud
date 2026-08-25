@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const alarmPolicy = tencentcloud.Monitor.getAlarmPolicy({
+ * const alarmPolicy = tencentcloud.monitor.getAlarmPolicy({
  *     module: "monitor",
  *     policyName: "terraform",
  *     monitorTypes: ["MT_QCE"],
@@ -223,7 +223,7 @@ export interface GetAlarmPolicyResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const alarmPolicy = tencentcloud.Monitor.getAlarmPolicy({
+ * const alarmPolicy = tencentcloud.monitor.getAlarmPolicy({
  *     module: "monitor",
  *     policyName: "terraform",
  *     monitorTypes: ["MT_QCE"],
@@ -272,19 +272,19 @@ export interface GetAlarmPolicyOutputArgs {
     /**
      * The alarm object list, which is a JSON string. The outer array corresponds to multiple instances, and the inner array is the dimension of an object.For example, 'CVM - Basic Monitor' can be written as: [ {Dimensions: {unInstanceId: ins-qr8d555g}}, {Dimensions: {unInstanceId: ins-qr8d555h}} ]You can also refer to the 'Example 2' below.For more information on the parameter samples of different Tencent Cloud services, see [Product Policy Type and Dimension Information](https://www.tencentcloud.com/document/product/248/39565?has_map=1).Note: If 1 is passed in for NeedCorrespondence, the relationship between a policy and an instance needs to be returned. You can pass in up to 20 alarm object dimensions to avoid request timeout.
      */
-    dimensions?: pulumi.Input<string>;
+    dimensions?: pulumi.Input<string | undefined>;
     /**
      * Filter by alarm status. Valid values: [1]: enabled; [0]: disabled; [0, 1]: all.
      */
-    enables?: pulumi.Input<pulumi.Input<number>[]>;
+    enables?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Sort by field. For example, to sort by the last modification time, use Field: UpdateTime.
      */
-    field?: pulumi.Input<string>;
+    field?: pulumi.Input<string | undefined>;
     /**
      * Instance group ID.
      */
-    instanceGroupId?: pulumi.Input<number>;
+    instanceGroupId?: pulumi.Input<number | undefined>;
     /**
      * Value fixed at monitor.
      */
@@ -292,77 +292,77 @@ export interface GetAlarmPolicyOutputArgs {
     /**
      * Filter by monitor type. Valid values: MT_QCE (Tencent Cloud service monitoring). If this parameter is left empty, all will be queried by default.
      */
-    monitorTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    monitorTypes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Filter by namespace. For the values of different policy types, please see:[Poicy Type List](https://www.tencentcloud.com/document/product/248/39565?has_map=1).
      */
-    namespaces?: pulumi.Input<pulumi.Input<string>[]>;
+    namespaces?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Whether the relationship between a policy and the input parameter filter dimension is required. 1: Yes. 0: No. Default value: 0.
      */
-    needCorrespondence?: pulumi.Input<number>;
+    needCorrespondence?: pulumi.Input<number | undefined>;
     /**
      * Whether the returned result needs to filter policies associated with all objects. Valid values: 1 (Yes), 0 (No).
      */
-    notBindAll?: pulumi.Input<number>;
+    notBindAll?: pulumi.Input<number | undefined>;
     /**
      * If 1 is passed in, alarm policies with no notification rules configured are queried. If it is left empty or other values are passed in, all alarm policies are queried.
      */
-    notBindingNoticeRule?: pulumi.Input<number>;
+    notBindingNoticeRule?: pulumi.Input<number | undefined>;
     /**
      * Whether the returned result needs to filter policies associated with instance groups. Valid values: 1 (Yes), 0 (No).
      */
-    notInstanceGroup?: pulumi.Input<number>;
+    notInstanceGroup?: pulumi.Input<number | undefined>;
     /**
      * List of the notification template IDs, which can be obtained by querying the notification template list.It can be queried with the API [DescribeAlarmNotices](https://www.tencentcloud.com/document/product/248/39300).
      */
-    noticeIds?: pulumi.Input<pulumi.Input<string>[]>;
+    noticeIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Filter by quick alarm policy. If this parameter is left empty, all policies are displayed. ONECLICK: Display quick alarm policies; NOT_ONECLICK: Display non-quick alarm policies.
      */
-    oneClickPolicyTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    oneClickPolicyTypes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Sort order. Valid values: ASC (ascending), DESC (descending).
      */
-    order?: pulumi.Input<string>;
+    order?: pulumi.Input<string | undefined>;
     /**
      * Fuzzy search by policy name.
      */
-    policyName?: pulumi.Input<string>;
+    policyName?: pulumi.Input<string | undefined>;
     /**
      * Filter by default policy. Valid values: DEFAULT (display default policy), NOT_DEFAULT (display non-default policies). If this parameter is left empty, all policies will be displayed.
      */
-    policyTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    policyTypes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * ID array of the policy project, which can be viewed on the following page: [Project Management](https://console.tencentcloud.com/project).
      */
-    projectIds?: pulumi.Input<pulumi.Input<number>[]>;
+    projectIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * ID of the TencentCloud Managed Service for Prometheus instance, which is used for customizing a metric policy.
      */
-    promInsId?: pulumi.Input<string>;
+    promInsId?: pulumi.Input<string | undefined>;
     /**
      * Search by recipient group. You can get the user group list with the API [ListGroups](https://www.tencentcloud.com/document/product/598/34589?from_cn_redirect=1) in 'Cloud Access Management' or query the user group list where a sub-user is in with the API [ListGroupsForUser](https://www.tencentcloud.com/document/product/598/34588?from_cn_redirect=1). The GroupId field in the returned result should be entered here.
      */
-    receiverGroups?: pulumi.Input<pulumi.Input<number>[]>;
+    receiverGroups?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Search by schedule.
      */
-    receiverOnCallFormIds?: pulumi.Input<pulumi.Input<string>[]>;
+    receiverOnCallFormIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Search by recipient. You can get the user list with the API [ListUsers](https://www.tencentcloud.com/document/product/598/34587?from_cn_redirect=1) in 'Cloud Access Management' or query the sub-user information with the API [GetUser](https://www.tencentcloud.com/document/product/598/34590?from_cn_redirect=1). The Uid field in the returned result should be entered here.
      */
-    receiverUids?: pulumi.Input<pulumi.Input<number>[]>;
+    receiverUids?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Filter by trigger condition. Valid values: STATIC (display policies with static threshold), DYNAMIC (display policies with dynamic threshold). If this parameter is left empty, all policies will be displayed.
      */
-    ruleTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    ruleTypes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Filter alarm policy by triggered task (such as auto scaling task). Up to 10 tasks can be specified.
      */
-    triggerTasks?: pulumi.Input<pulumi.Input<inputs.Monitor.GetAlarmPolicyTriggerTaskArgs>[]>;
+    triggerTasks?: pulumi.Input<pulumi.Input<inputs.Monitor.GetAlarmPolicyTriggerTaskArgs>[] | undefined>;
 }

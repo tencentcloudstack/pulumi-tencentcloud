@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
     ///         Remark = "this is demo",
     ///     });
     /// 
+    ///     return new Dictionary&lt;string, object?&gt;
+    ///     {
+    ///         ["domainStatus"] = foo.Status,
+    ///         ["recordCount"] = foo.RecordCount,
+    ///         ["domainGrade"] = foo.Grade,
+    ///     };
     /// });
     /// ```
     /// 
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public Output<int> DomainId { get; private set; } = null!;
 
         /// <summary>
+        /// The DNS plan/package grade of the domain (e.g., DP_Free, DP_Plus).
+        /// </summary>
+        [Output("grade")]
+        public Output<string> Grade { get; private set; } = null!;
+
+        /// <summary>
         /// The Group Id of Domain.
         /// </summary>
         [Output("groupId")]
@@ -72,6 +84,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// </summary>
         [Output("isMark")]
         public Output<string> IsMark { get; private set; } = null!;
+
+        /// <summary>
+        /// Number of DNS records under this domain.
+        /// </summary>
+        [Output("recordCount")]
+        public Output<int> RecordCount { get; private set; } = null!;
 
         /// <summary>
         /// The remark of Domain.
@@ -90,6 +108,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// </summary>
         [Output("status")]
         public Output<string?> Status { get; private set; } = null!;
+
+        /// <summary>
+        /// Last modification time of the domain.
+        /// </summary>
+        [Output("updatedOn")]
+        public Output<string> UpdatedOn { get; private set; } = null!;
 
 
         /// <summary>
@@ -195,6 +219,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public Input<int>? DomainId { get; set; }
 
         /// <summary>
+        /// The DNS plan/package grade of the domain (e.g., DP_Free, DP_Plus).
+        /// </summary>
+        [Input("grade")]
+        public Input<string>? Grade { get; set; }
+
+        /// <summary>
         /// The Group Id of Domain.
         /// </summary>
         [Input("groupId")]
@@ -205,6 +235,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// </summary>
         [Input("isMark")]
         public Input<string>? IsMark { get; set; }
+
+        /// <summary>
+        /// Number of DNS records under this domain.
+        /// </summary>
+        [Input("recordCount")]
+        public Input<int>? RecordCount { get; set; }
 
         /// <summary>
         /// The remark of Domain.
@@ -223,6 +259,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }
+
+        /// <summary>
+        /// Last modification time of the domain.
+        /// </summary>
+        [Input("updatedOn")]
+        public Input<string>? UpdatedOn { get; set; }
 
         public DomainInstanceState()
         {

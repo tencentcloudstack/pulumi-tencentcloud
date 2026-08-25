@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const id = tencentcloud.Tcr.getVpcAttachments({
+ * const id = tencentcloud.tcr.getVpcAttachments({
  *     instanceId: "cls-satg5125",
  * });
  * ```
@@ -84,7 +84,7 @@ export interface GetVpcAttachmentsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const id = tencentcloud.Tcr.getVpcAttachments({
+ * const id = tencentcloud.tcr.getVpcAttachments({
  *     instanceId: "cls-satg5125",
  * });
  * ```
@@ -110,13 +110,13 @@ export interface GetVpcAttachmentsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * ID of subnet to query.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * ID of VPC to query.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }

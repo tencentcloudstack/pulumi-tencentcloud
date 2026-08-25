@@ -116,12 +116,8 @@ type GetPeakPointsResult struct {
 }
 
 func GetPeakPointsOutput(ctx *pulumi.Context, args GetPeakPointsOutputArgs, opts ...pulumi.InvokeOption) GetPeakPointsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetPeakPointsResultOutput, error) {
-			args := v.(GetPeakPointsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Waf/getPeakPoints:getPeakPoints", args, GetPeakPointsResultOutput{}, options).(GetPeakPointsResultOutput), nil
-		}).(GetPeakPointsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Waf/getPeakPoints:getPeakPoints", args, GetPeakPointsResultOutput{}, options).(GetPeakPointsResultOutput)
 }
 
 // A collection of arguments for invoking getPeakPoints.

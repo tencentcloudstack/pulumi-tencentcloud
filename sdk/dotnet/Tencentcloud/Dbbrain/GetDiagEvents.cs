@@ -13,29 +13,53 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
     public static class GetDiagEvents
     {
         /// <summary>
-        /// Use this data source to query detailed information of dbbrain DiagEvents
+        /// Use this data source to query detailed information of DBbrain diag events
         /// 
         /// ## Example Usage
+        /// 
+        /// ### Query events only by time
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var diagEvents = Tencentcloud.Dbbrain.GetDiagEvents.Invoke(new()
+        ///     var example = Tencentcloud.Dbbrain.GetDiagEvents.Invoke(new()
         ///     {
+        ///         StartTime = "2025-01-01T00:00:00+08:00",
+        ///         EndTime = "2026-12-31T00:00:00+08:00",
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// 
+        /// ### Or add another filters
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Dbbrain.GetDiagEvents.Invoke(new()
+        ///     {
+        ///         StartTime = "2026-01-01T00:00:00+08:00",
+        ///         EndTime = "2026-12-31T00:00:00+08:00",
         ///         InstanceIds = new[]
         ///         {
-        ///             "%s",
+        ///             "crs-kpyy0txj",
         ///         },
-        ///         StartTime = "%s",
-        ///         EndTime = "%s",
+        ///         Product = "redis",
         ///         Severities = new[]
         ///         {
         ///             1,
+        ///             2,
+        ///             3,
         ///             4,
         ///             5,
         ///         },
@@ -48,29 +72,53 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDiagEventsResult>("tencentcloud:Dbbrain/getDiagEvents:getDiagEvents", args ?? new GetDiagEventsArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Use this data source to query detailed information of dbbrain DiagEvents
+        /// Use this data source to query detailed information of DBbrain diag events
         /// 
         /// ## Example Usage
+        /// 
+        /// ### Query events only by time
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var diagEvents = Tencentcloud.Dbbrain.GetDiagEvents.Invoke(new()
+        ///     var example = Tencentcloud.Dbbrain.GetDiagEvents.Invoke(new()
         ///     {
+        ///         StartTime = "2025-01-01T00:00:00+08:00",
+        ///         EndTime = "2026-12-31T00:00:00+08:00",
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// 
+        /// ### Or add another filters
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Dbbrain.GetDiagEvents.Invoke(new()
+        ///     {
+        ///         StartTime = "2026-01-01T00:00:00+08:00",
+        ///         EndTime = "2026-12-31T00:00:00+08:00",
         ///         InstanceIds = new[]
         ///         {
-        ///             "%s",
+        ///             "crs-kpyy0txj",
         ///         },
-        ///         StartTime = "%s",
-        ///         EndTime = "%s",
+        ///         Product = "redis",
         ///         Severities = new[]
         ///         {
         ///             1,
+        ///             2,
+        ///             3,
         ///             4,
         ///             5,
         ///         },
@@ -83,29 +131,53 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
             => global::Pulumi.Deployment.Instance.Invoke<GetDiagEventsResult>("tencentcloud:Dbbrain/getDiagEvents:getDiagEvents", args ?? new GetDiagEventsInvokeArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Use this data source to query detailed information of dbbrain DiagEvents
+        /// Use this data source to query detailed information of DBbrain diag events
         /// 
         /// ## Example Usage
+        /// 
+        /// ### Query events only by time
         /// 
         /// ```csharp
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var diagEvents = Tencentcloud.Dbbrain.GetDiagEvents.Invoke(new()
+        ///     var example = Tencentcloud.Dbbrain.GetDiagEvents.Invoke(new()
         ///     {
+        ///         StartTime = "2025-01-01T00:00:00+08:00",
+        ///         EndTime = "2026-12-31T00:00:00+08:00",
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// 
+        /// ### Or add another filters
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Dbbrain.GetDiagEvents.Invoke(new()
+        ///     {
+        ///         StartTime = "2026-01-01T00:00:00+08:00",
+        ///         EndTime = "2026-12-31T00:00:00+08:00",
         ///         InstanceIds = new[]
         ///         {
-        ///             "%s",
+        ///             "crs-kpyy0txj",
         ///         },
-        ///         StartTime = "%s",
-        ///         EndTime = "%s",
+        ///         Product = "redis",
         ///         Severities = new[]
         ///         {
         ///             1,
+        ///             2,
+        ///             3,
         ///             4,
         ///             5,
         ///         },
@@ -122,7 +194,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
     public sealed class GetDiagEventsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
-        /// end time.
+        /// End time.
         /// </summary>
         [Input("endTime", required: true)]
         public string EndTime { get; set; } = null!;
@@ -131,13 +203,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         private List<string>? _instanceIds;
 
         /// <summary>
-        /// instance id list.
+        /// Instance ID list.
         /// </summary>
         public List<string> InstanceIds
         {
             get => _instanceIds ?? (_instanceIds = new List<string>());
             set => _instanceIds = value;
         }
+
+        /// <summary>
+        /// Service product type; supported values include: `Mysql` - Cloud Database MySQL, `Redis` - Cloud Database Redis, `Mariadb` - MariaDB database. The default is `Mysql`.
+        /// </summary>
+        [Input("product")]
+        public string? Product { get; set; }
 
         /// <summary>
         /// Used to save results.
@@ -149,7 +227,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         private List<int>? _severities;
 
         /// <summary>
-        /// severity list, optional value is 1-fatal, 2-severity, 3-warning, 4-tips, 5-health.
+        /// Severity list, optional value is 1-fatal, 2-severity, 3-warning, 4-tips, 5-health.
         /// </summary>
         public List<int> Severities
         {
@@ -158,7 +236,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         }
 
         /// <summary>
-        /// start time.
+        /// Start time.
         /// </summary>
         [Input("startTime", required: true)]
         public string StartTime { get; set; } = null!;
@@ -172,7 +250,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
     public sealed class GetDiagEventsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
-        /// end time.
+        /// End time.
         /// </summary>
         [Input("endTime", required: true)]
         public Input<string> EndTime { get; set; } = null!;
@@ -181,13 +259,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         private InputList<string>? _instanceIds;
 
         /// <summary>
-        /// instance id list.
+        /// Instance ID list.
         /// </summary>
         public InputList<string> InstanceIds
         {
             get => _instanceIds ?? (_instanceIds = new InputList<string>());
             set => _instanceIds = value;
         }
+
+        /// <summary>
+        /// Service product type; supported values include: `Mysql` - Cloud Database MySQL, `Redis` - Cloud Database Redis, `Mariadb` - MariaDB database. The default is `Mysql`.
+        /// </summary>
+        [Input("product")]
+        public Input<string>? Product { get; set; }
 
         /// <summary>
         /// Used to save results.
@@ -199,7 +283,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         private InputList<int>? _severities;
 
         /// <summary>
-        /// severity list, optional value is 1-fatal, 2-severity, 3-warning, 4-tips, 5-health.
+        /// Severity list, optional value is 1-fatal, 2-severity, 3-warning, 4-tips, 5-health.
         /// </summary>
         public InputList<int> Severities
         {
@@ -208,7 +292,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         }
 
         /// <summary>
-        /// start time.
+        /// Start time.
         /// </summary>
         [Input("startTime", required: true)]
         public Input<string> StartTime { get; set; } = null!;
@@ -224,7 +308,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
     public sealed class GetDiagEventsResult
     {
         /// <summary>
-        /// end time.
+        /// End time.
         /// </summary>
         public readonly string EndTime;
         /// <summary>
@@ -233,13 +317,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public readonly string Id;
         public readonly ImmutableArray<string> InstanceIds;
         /// <summary>
-        /// diag event list.
+        /// Diag event list.
         /// </summary>
         public readonly ImmutableArray<Outputs.GetDiagEventsListResult> Lists;
+        public readonly string? Product;
         public readonly string? ResultOutputFile;
         public readonly ImmutableArray<int> Severities;
         /// <summary>
-        /// start time.
+        /// Start time.
         /// </summary>
         public readonly string StartTime;
 
@@ -253,6 +338,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
 
             ImmutableArray<Outputs.GetDiagEventsListResult> lists,
 
+            string? product,
+
             string? resultOutputFile,
 
             ImmutableArray<int> severities,
@@ -263,6 +350,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
             Id = id;
             InstanceIds = instanceIds;
             Lists = lists;
+            Product = product;
             ResultOutputFile = resultOutputFile;
             Severities = severities;
             StartTime = startTime;

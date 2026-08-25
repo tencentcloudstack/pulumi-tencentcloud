@@ -21,10 +21,10 @@ import * as utilities from "../utilities";
  *     maxRequestNum: 100,
  *     maxRequestNumPreSec: 10,
  * });
- * const name = tencentcloud.ApiGateway.getUsagePlansOutput({
+ * const name = tencentcloud.apigateway.getUsagePlansOutput({
  *     usagePlanName: plan.usagePlanName,
  * });
- * const id = tencentcloud.ApiGateway.getUsagePlansOutput({
+ * const id = tencentcloud.apigateway.getUsagePlansOutput({
  *     usagePlanId: plan.id,
  * });
  * ```
@@ -94,10 +94,10 @@ export interface GetUsagePlansResult {
  *     maxRequestNum: 100,
  *     maxRequestNumPreSec: 10,
  * });
- * const name = tencentcloud.ApiGateway.getUsagePlansOutput({
+ * const name = tencentcloud.apigateway.getUsagePlansOutput({
  *     usagePlanName: plan.usagePlanName,
  * });
- * const id = tencentcloud.ApiGateway.getUsagePlansOutput({
+ * const id = tencentcloud.apigateway.getUsagePlansOutput({
  *     usagePlanId: plan.id,
  * });
  * ```
@@ -119,13 +119,13 @@ export interface GetUsagePlansOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * ID of the usage plan.
      */
-    usagePlanId?: pulumi.Input<string>;
+    usagePlanId?: pulumi.Input<string | undefined>;
     /**
      * Name of the usage plan.
      */
-    usagePlanName?: pulumi.Input<string>;
+    usagePlanName?: pulumi.Input<string | undefined>;
 }

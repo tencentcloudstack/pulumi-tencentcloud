@@ -73,12 +73,8 @@ type GetAccessRegionsByDestRegionResult struct {
 }
 
 func GetAccessRegionsByDestRegionOutput(ctx *pulumi.Context, args GetAccessRegionsByDestRegionOutputArgs, opts ...pulumi.InvokeOption) GetAccessRegionsByDestRegionResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetAccessRegionsByDestRegionResultOutput, error) {
-			args := v.(GetAccessRegionsByDestRegionArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Gaap/getAccessRegionsByDestRegion:getAccessRegionsByDestRegion", args, GetAccessRegionsByDestRegionResultOutput{}, options).(GetAccessRegionsByDestRegionResultOutput), nil
-		}).(GetAccessRegionsByDestRegionResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Gaap/getAccessRegionsByDestRegion:getAccessRegionsByDestRegion", args, GetAccessRegionsByDestRegionResultOutput{}, options).(GetAccessRegionsByDestRegionResultOutput)
 }
 
 // A collection of arguments for invoking getAccessRegionsByDestRegion.

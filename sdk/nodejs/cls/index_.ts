@@ -35,9 +35,11 @@ import * as utilities from "../utilities";
  *         test: "test",
  *     },
  * });
- * const tokenizerValue = "@&?|#()='\",;:<>[]{}";
+ * const tokenizerValue = `@&?|#()='\\\\\\",;:<>[]{}/ \\
+ * \\\\t\\\\r\\\\\\\\
+ * `;
  * const exampleIndex = new tencentcloud.cls.Index("example", {
- *     topicId: exampleTopic.id,
+ *     topicId: "abc97756-e620-47a4-aa2b-08561e79f086",
  *     rule: {
  *         fullText: {
  *             caseSensitive: true,
@@ -48,21 +50,67 @@ import * as utilities from "../utilities";
  *             caseSensitive: true,
  *             keyValues: [
  *                 {
- *                     key: "hello",
+ *                     key: "key1",
  *                     value: {
  *                         containZH: true,
  *                         sqlFlag: true,
  *                         tokenizer: tokenizerValue,
  *                         type: "text",
+ *                         alias: "alias1",
  *                     },
  *                 },
  *                 {
- *                     key: "world",
+ *                     key: "key2",
  *                     value: {
  *                         containZH: true,
  *                         sqlFlag: true,
  *                         tokenizer: tokenizerValue,
- *                         type: "text",
+ *                         type: "json",
+ *                         alias: "alias2",
+ *                         childNodes: [
+ *                             {
+ *                                 key: "key3",
+ *                                 value: {
+ *                                     containZH: true,
+ *                                     sqlFlag: true,
+ *                                     tokenizer: tokenizerValue,
+ *                                     type: "json",
+ *                                     alias: "alias3",
+ *                                     childNodes: [
+ *                                         {
+ *                                             key: "key4",
+ *                                             value: {
+ *                                                 containZH: true,
+ *                                                 sqlFlag: true,
+ *                                                 tokenizer: tokenizerValue,
+ *                                                 type: "text",
+ *                                                 alias: "alias4",
+ *                                             },
+ *                                         },
+ *                                         {
+ *                                             key: "key5",
+ *                                             value: {
+ *                                                 containZH: true,
+ *                                                 sqlFlag: true,
+ *                                                 tokenizer: tokenizerValue,
+ *                                                 type: "text",
+ *                                                 alias: "name5",
+ *                                             },
+ *                                         },
+ *                                     ],
+ *                                 },
+ *                             },
+ *                             {
+ *                                 key: "key6",
+ *                                 value: {
+ *                                     containZH: true,
+ *                                     sqlFlag: true,
+ *                                     tokenizer: tokenizerValue,
+ *                                     type: "text",
+ *                                     alias: "name6",
+ *                                 },
+ *                             },
+ *                         ],
  *                     },
  *                 },
  *             ],
@@ -187,23 +235,23 @@ export interface IndexState {
     /**
      * Internal field marker of full-text index. Default value: false. Valid value: false: excluding internal fields; true: including internal fields.
      */
-    includeInternalFields?: pulumi.Input<boolean>;
+    includeInternalFields?: pulumi.Input<boolean | undefined>;
     /**
      * Metadata flag. Default value: 0. Valid value: 0: full-text index (including the metadata field with key-value index enabled); 1: full-text index (including all metadata fields); 2: full-text index (excluding metadata fields)..
      */
-    metadataFlag?: pulumi.Input<number>;
+    metadataFlag?: pulumi.Input<number | undefined>;
     /**
      * Index rule.
      */
-    rule?: pulumi.Input<inputs.Cls.IndexRule>;
+    rule?: pulumi.Input<inputs.Cls.IndexRule | undefined>;
     /**
      * Whether to take effect. Default value: true.
      */
-    status?: pulumi.Input<boolean>;
+    status?: pulumi.Input<boolean | undefined>;
     /**
      * Log topic ID.
      */
-    topicId?: pulumi.Input<string>;
+    topicId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -213,19 +261,19 @@ export interface IndexArgs {
     /**
      * Internal field marker of full-text index. Default value: false. Valid value: false: excluding internal fields; true: including internal fields.
      */
-    includeInternalFields?: pulumi.Input<boolean>;
+    includeInternalFields?: pulumi.Input<boolean | undefined>;
     /**
      * Metadata flag. Default value: 0. Valid value: 0: full-text index (including the metadata field with key-value index enabled); 1: full-text index (including all metadata fields); 2: full-text index (excluding metadata fields)..
      */
-    metadataFlag?: pulumi.Input<number>;
+    metadataFlag?: pulumi.Input<number | undefined>;
     /**
      * Index rule.
      */
-    rule?: pulumi.Input<inputs.Cls.IndexRule>;
+    rule?: pulumi.Input<inputs.Cls.IndexRule | undefined>;
     /**
      * Whether to take effect. Default value: true.
      */
-    status?: pulumi.Input<boolean>;
+    status?: pulumi.Input<boolean | undefined>;
     /**
      * Log topic ID.
      */

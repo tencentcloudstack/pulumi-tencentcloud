@@ -72,7 +72,7 @@ import (
 //
 // ## Import
 //
-// clickhouse backup_strategy can be imported using the id, e.g.
+// clickhouse backupStrategy can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Clickhouse/backupStrategy:BackupStrategy backup_strategy instance_id

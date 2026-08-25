@@ -101,7 +101,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public Output<int?> InstanceMemorySize { get; private set; } = null!;
 
         /// <summary>
-        /// Name of instance.
+        /// Instance name.
         /// </summary>
         [Output("instanceName")]
         public Output<string> InstanceName { get; private set; } = null!;
@@ -226,7 +226,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public Input<int>? InstanceMemorySize { get; set; }
 
         /// <summary>
-        /// Name of instance.
+        /// Instance name.
         /// </summary>
         [Input("instanceName", required: true)]
         public Input<string> InstanceName { get; set; } = null!;
@@ -300,7 +300,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public Input<int>? InstanceMemorySize { get; set; }
 
         /// <summary>
-        /// Name of instance.
+        /// Instance name.
         /// </summary>
         [Input("instanceName")]
         public Input<string>? InstanceName { get; set; }

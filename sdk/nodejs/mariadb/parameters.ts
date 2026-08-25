@@ -15,8 +15,8 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const parameters = new tencentcloud.mariadb.Parameters("parameters", {
- *     instanceId: "tdsql-4pzs5b67",
+ * const example = new tencentcloud.mariadb.Parameters("example", {
+ *     instanceId: "tdsql-5n00ev40zl",
  *     params: [
  *         {
  *             param: "auto_increment_increment",
@@ -29,6 +29,14 @@ import * as utilities from "../utilities";
  *         {
  *             param: "autocommit",
  *             value: "ON",
+ *         },
+ *         {
+ *             param: "binlog_transaction_dependency_history_size",
+ *             value: "25000",
+ *         },
+ *         {
+ *             param: "binlog_write_threshold",
+ *             value: "1610612736",
  *         },
  *         {
  *             param: "character_set_server",
@@ -52,7 +60,7 @@ import * as utilities from "../utilities";
  *         },
  *         {
  *             param: "default_collation_for_utf8mb4",
- *             value: "utf8mb4_general_ci",
+ *             value: "utf8mb4_0900_ai_ci",
  *         },
  *         {
  *             param: "default_week_format",
@@ -83,12 +91,32 @@ import * as utilities from "../utilities";
  *             value: "ON",
  *         },
  *         {
+ *             param: "explicit_defaults_for_timestamp",
+ *             value: "ON",
+ *         },
+ *         {
  *             param: "group_concat_max_len",
  *             value: "1024",
  *         },
  *         {
+ *             param: "innodb_autoinc_lock_mode",
+ *             value: "2",
+ *         },
+ *         {
+ *             param: "innodb_backquery_enable",
+ *             value: "OFF",
+ *         },
+ *         {
+ *             param: "innodb_backquery_window",
+ *             value: "86400",
+ *         },
+ *         {
  *             param: "innodb_concurrency_tickets",
  *             value: "5000",
+ *         },
+ *         {
+ *             param: "innodb_encryption_algorithm",
+ *             value: "AES",
  *         },
  *         {
  *             param: "innodb_flush_log_at_trx_commit",
@@ -101,6 +129,10 @@ import * as utilities from "../utilities";
  *         {
  *             param: "innodb_max_dirty_pages_pct",
  *             value: "70.000000",
+ *         },
+ *         {
+ *             param: "innodb_max_undo_log_size",
+ *             value: "1073741824",
  *         },
  *         {
  *             param: "innodb_old_blocks_pct",
@@ -128,7 +160,7 @@ import * as utilities from "../utilities";
  *         },
  *         {
  *             param: "innodb_strict_mode",
- *             value: "OFF",
+ *             value: "ON",
  *         },
  *         {
  *             param: "innodb_table_locks",
@@ -141,6 +173,10 @@ import * as utilities from "../utilities";
  *         {
  *             param: "interactive_timeout",
  *             value: "28800",
+ *         },
+ *         {
+ *             param: "join_buffer_size",
+ *             value: "2097152",
  *         },
  *         {
  *             param: "key_cache_age_threshold",
@@ -173,6 +209,10 @@ import * as utilities from "../utilities";
  *         {
  *             param: "low_priority_updates",
  *             value: "OFF",
+ *         },
+ *         {
+ *             param: "lower_case_table_names",
+ *             value: "1",
  *         },
  *         {
  *             param: "max_allowed_packet",
@@ -219,12 +259,24 @@ import * as utilities from "../utilities";
  *             value: "300",
  *         },
  *         {
+ *             param: "optimizer_switch",
+ *             value: "batched_key_access=off,block_nested_loop=on,condition_fanout_filter=on,csi_prefer_first_match_semi_join=on,csi_prefer_hash_group_by=on,csi_prefer_no_ref_access=on,csi_route_prefer=on,derived_condition_pushdown=on,derived_merge=on,duplicateweedout=on,engine_condition_pushdown=on,firstmatch=on,group_by_no_tmptable_for_csi=on,hash_join=on,hypergraph_optimizer=off,index_condition_pushdown=on,index_merge=on,index_merge_intersection=on,index_merge_sort_union=on,index_merge_union=on,loosescan=on,materialization=on,mrr=on,mrr_cost_based=on,prefer_ordering_index=on,semijoin=on,skip_scan=on,sort_merge_join=off,subquery_materialization_cost_based=on,subquery_to_derived=off,use_index_extensions=on,use_invisible_indexes=off,winmagic=off",
+ *         },
+ *         {
+ *             param: "performance_schema",
+ *             value: "ON",
+ *         },
+ *         {
  *             param: "query_alloc_block_size",
  *             value: "16384",
  *         },
  *         {
  *             param: "query_prealloc_size",
  *             value: "24576",
+ *         },
+ *         {
+ *             param: "reject_table_no_pk",
+ *             value: "1",
  *         },
  *         {
  *             param: "slow_launch_time",
@@ -263,6 +315,14 @@ import * as utilities from "../utilities";
  *             value: "20480",
  *         },
  *         {
+ *             param: "thread_pool_oversubscribe",
+ *             value: "30",
+ *         },
+ *         {
+ *             param: "thread_pool_size",
+ *             value: "24",
+ *         },
+ *         {
  *             param: "time_zone",
  *             value: "+08:00",
  *         },
@@ -285,9 +345,8 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * mariadb parameters can be imported using the id, e.g.
- *
  * ```sh
- * $ pulumi import tencentcloud:Mariadb/parameters:Parameters parameters tdsql-4pzs5b67
+ * $ pulumi import tencentcloud:Mariadb/parameters:Parameters example tdsql-4pzs5b67
  * ```
  */
 export class Parameters extends pulumi.CustomResource {
@@ -365,11 +424,11 @@ export interface ParametersState {
     /**
      * instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Number of days to keep, no more than 30.
      */
-    params?: pulumi.Input<pulumi.Input<inputs.Mariadb.ParametersParam>[]>;
+    params?: pulumi.Input<pulumi.Input<inputs.Mariadb.ParametersParam>[] | undefined>;
 }
 
 /**

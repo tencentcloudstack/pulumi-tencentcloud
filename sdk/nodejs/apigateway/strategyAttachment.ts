@@ -176,19 +176,19 @@ export interface StrategyAttachmentState {
     /**
      * The API that needs to be bound.
      */
-    bindApiId?: pulumi.Input<string>;
+    bindApiId?: pulumi.Input<string | undefined>;
     /**
      * The environment of the strategy association. Valid values: `test`, `release`, `prepub`.
      */
-    environmentName?: pulumi.Input<string>;
+    environmentName?: pulumi.Input<string | undefined>;
     /**
      * The ID of the API gateway service.
      */
-    serviceId?: pulumi.Input<string>;
+    serviceId?: pulumi.Input<string | undefined>;
     /**
      * The ID of the API gateway strategy.
      */
-    strategyId?: pulumi.Input<string>;
+    strategyId?: pulumi.Input<string | undefined>;
 }
 
 /**

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataTaskVersion = tencentcloud.Wedata.getTaskVersion({
+ * const wedataTaskVersion = tencentcloud.wedata.getTaskVersion({
  *     projectId: "2905622749543821312",
  *     taskId: "20251015164958429",
  * });
@@ -79,7 +79,7 @@ export interface GetTaskVersionResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataTaskVersion = tencentcloud.Wedata.getTaskVersion({
+ * const wedataTaskVersion = tencentcloud.wedata.getTaskVersion({
  *     projectId: "2905622749543821312",
  *     taskId: "20251015164958429",
  * });
@@ -106,7 +106,7 @@ export interface GetTaskVersionOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Task ID.
      */
@@ -114,5 +114,5 @@ export interface GetTaskVersionOutputArgs {
     /**
      * Submit version ID. If not specified, the latest submit version will be used by default.
      */
-    versionId?: pulumi.Input<string>;
+    versionId?: pulumi.Input<string | undefined>;
 }

@@ -79,7 +79,7 @@ type ReadonlyInstance struct {
 	InstanceMaintainWeekdays pulumi.StringArrayOutput `pulumi:"instanceMaintainWeekdays"`
 	// Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
 	InstanceMemorySize pulumi.IntPtrOutput `pulumi:"instanceMemorySize"`
-	// Name of instance.
+	// Instance name.
 	InstanceName pulumi.StringOutput `pulumi:"instanceName"`
 	// Status of the instance.
 	InstanceStatus pulumi.StringOutput `pulumi:"instanceStatus"`
@@ -141,7 +141,7 @@ type readonlyInstanceState struct {
 	InstanceMaintainWeekdays []string `pulumi:"instanceMaintainWeekdays"`
 	// Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
 	InstanceMemorySize *int `pulumi:"instanceMemorySize"`
-	// Name of instance.
+	// Instance name.
 	InstanceName *string `pulumi:"instanceName"`
 	// Status of the instance.
 	InstanceStatus *string `pulumi:"instanceStatus"`
@@ -168,7 +168,7 @@ type ReadonlyInstanceState struct {
 	InstanceMaintainWeekdays pulumi.StringArrayInput
 	// Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
 	InstanceMemorySize pulumi.IntPtrInput
-	// Name of instance.
+	// Instance name.
 	InstanceName pulumi.StringPtrInput
 	// Status of the instance.
 	InstanceStatus pulumi.StringPtrInput
@@ -199,7 +199,7 @@ type readonlyInstanceArgs struct {
 	InstanceMaintainWeekdays []string `pulumi:"instanceMaintainWeekdays"`
 	// Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
 	InstanceMemorySize *int `pulumi:"instanceMemorySize"`
-	// Name of instance.
+	// Instance name.
 	InstanceName string `pulumi:"instanceName"`
 	// ID of the subnet within this VPC.
 	SubnetId *string `pulumi:"subnetId"`
@@ -223,7 +223,7 @@ type ReadonlyInstanceArgs struct {
 	InstanceMaintainWeekdays pulumi.StringArrayInput
 	// Memory capacity of read-write type instance, unit in GB. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
 	InstanceMemorySize pulumi.IntPtrInput
-	// Name of instance.
+	// Instance name.
 	InstanceName pulumi.StringInput
 	// ID of the subnet within this VPC.
 	SubnetId pulumi.StringPtrInput
@@ -353,7 +353,7 @@ func (o ReadonlyInstanceOutput) InstanceMemorySize() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.IntPtrOutput { return v.InstanceMemorySize }).(pulumi.IntPtrOutput)
 }
 
-// Name of instance.
+// Instance name.
 func (o ReadonlyInstanceOutput) InstanceName() pulumi.StringOutput {
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.StringOutput { return v.InstanceName }).(pulumi.StringOutput)
 }

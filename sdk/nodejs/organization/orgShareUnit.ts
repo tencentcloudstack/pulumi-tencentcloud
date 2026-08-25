@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * organization org_share_unit can be imported using the id, e.g.
+ * organization orgShareUnit can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Organization/orgShareUnit:OrgShareUnit org_share_unit area#unit_id
@@ -112,19 +112,19 @@ export interface OrgShareUnitState {
     /**
      * Shared unit region. The regions that support sharing can be obtained through the DescribeShareAreas interface.
      */
-    area?: pulumi.Input<string>;
+    area?: pulumi.Input<string | undefined>;
     /**
      * Shared unit description. Up to 128 characters.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Shared unit name. It only supports a combination of uppercase and lowercase letters, numbers, -, and _, with a length of 3-128 characters.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Shared unit region. The regions that support sharing can be obtained through the DescribeShareAreas interface.
      */
-    unitId?: pulumi.Input<string>;
+    unitId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -138,9 +138,9 @@ export interface OrgShareUnitArgs {
     /**
      * Shared unit description. Up to 128 characters.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Shared unit name. It only supports a combination of uppercase and lowercase letters, numbers, -, and _, with a length of 3-128 characters.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }

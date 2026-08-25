@@ -264,85 +264,85 @@ export interface ServiceState {
     /**
      * A list of APIs.
      */
-    apiLists?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ServiceApiList>[]>;
+    apiLists?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ServiceApiList>[] | undefined>;
     /**
      * Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * It has been deprecated from version 1.81.9. Self-deployed cluster name, which is used to specify the self-deployed cluster where the service is to be created.
      *
      * @deprecated It has been deprecated from version 1.81.9.
      */
-    exclusiveSetName?: pulumi.Input<string>;
+    exclusiveSetName?: pulumi.Input<string | undefined>;
     /**
      * Port number for http access over private network.
      */
-    innerHttpPort?: pulumi.Input<number>;
+    innerHttpPort?: pulumi.Input<number | undefined>;
     /**
      * Port number for https access over private network.
      */
-    innerHttpsPort?: pulumi.Input<number>;
+    innerHttpsPort?: pulumi.Input<number | undefined>;
     /**
      * Exclusive instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Private network access subdomain name.
      */
-    internalSubDomain?: pulumi.Input<string>;
+    internalSubDomain?: pulumi.Input<string | undefined>;
     /**
      * IP version number. Valid values: `IPv4`, `IPv6`. Default value: `IPv4`.
      */
-    ipVersion?: pulumi.Input<string>;
+    ipVersion?: pulumi.Input<string | undefined>;
     /**
      * Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
      */
-    modifyTime?: pulumi.Input<string>;
+    modifyTime?: pulumi.Input<string | undefined>;
     /**
      * Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER` indicates access over private network, and `OUTER` indicates access over public network.
      */
-    netTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    netTypes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Public network access subdomain name.
      */
-    outerSubDomain?: pulumi.Input<string>;
+    outerSubDomain?: pulumi.Input<string | undefined>;
     /**
      * API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
      */
-    preLimit?: pulumi.Input<number>;
+    preLimit?: pulumi.Input<number | undefined>;
     /**
      * Service frontend request type. Valid values: `http`, `https`, `http&https`.
      */
-    protocol?: pulumi.Input<string>;
+    protocol?: pulumi.Input<string | undefined>;
     /**
      * API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
      */
-    releaseLimit?: pulumi.Input<number>;
+    releaseLimit?: pulumi.Input<number | undefined>;
     /**
      * Custom service description.
      */
-    serviceDesc?: pulumi.Input<string>;
+    serviceDesc?: pulumi.Input<string | undefined>;
     /**
      * Custom service name.
      */
-    serviceName?: pulumi.Input<string>;
+    serviceName?: pulumi.Input<string | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
      */
-    testLimit?: pulumi.Input<number>;
+    testLimit?: pulumi.Input<number | undefined>;
     /**
      * VPC ID.
      */
-    uniqVpcId?: pulumi.Input<string>;
+    uniqVpcId?: pulumi.Input<string | undefined>;
     /**
      * A list of attach usage plans.
      */
-    usagePlanLists?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ServiceUsagePlanList>[]>;
+    usagePlanLists?: pulumi.Input<pulumi.Input<inputs.ApiGateway.ServiceUsagePlanList>[] | undefined>;
 }
 
 /**
@@ -354,15 +354,15 @@ export interface ServiceArgs {
      *
      * @deprecated It has been deprecated from version 1.81.9.
      */
-    exclusiveSetName?: pulumi.Input<string>;
+    exclusiveSetName?: pulumi.Input<string | undefined>;
     /**
      * Exclusive instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * IP version number. Valid values: `IPv4`, `IPv6`. Default value: `IPv4`.
      */
-    ipVersion?: pulumi.Input<string>;
+    ipVersion?: pulumi.Input<string | undefined>;
     /**
      * Network type list, which is used to specify the supported network types. Valid values: `INNER`, `OUTER`. `INNER` indicates access over private network, and `OUTER` indicates access over public network.
      */
@@ -370,7 +370,7 @@ export interface ServiceArgs {
     /**
      * API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
      */
-    preLimit?: pulumi.Input<number>;
+    preLimit?: pulumi.Input<number | undefined>;
     /**
      * Service frontend request type. Valid values: `http`, `https`, `http&https`.
      */
@@ -378,11 +378,11 @@ export interface ServiceArgs {
     /**
      * API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
      */
-    releaseLimit?: pulumi.Input<number>;
+    releaseLimit?: pulumi.Input<number | undefined>;
     /**
      * Custom service description.
      */
-    serviceDesc?: pulumi.Input<string>;
+    serviceDesc?: pulumi.Input<string | undefined>;
     /**
      * Custom service name.
      */
@@ -390,13 +390,13 @@ export interface ServiceArgs {
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * API QPS value. Enter a positive number to limit the API query rate per second `QPS`.
      */
-    testLimit?: pulumi.Input<number>;
+    testLimit?: pulumi.Input<number | undefined>;
     /**
      * VPC ID.
      */
-    uniqVpcId?: pulumi.Input<string>;
+    uniqVpcId?: pulumi.Input<string | undefined>;
 }

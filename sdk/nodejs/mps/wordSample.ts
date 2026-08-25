@@ -29,7 +29,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * mps word_sample can be imported using the id, e.g.
+ * mps wordSample can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Mps/wordSample:WordSample word_sample keyword
@@ -116,15 +116,15 @@ export interface WordSampleState {
     /**
      * Keyword. Length limit: 20 characters.
      */
-    keyword?: pulumi.Input<string>;
+    keyword?: pulumi.Input<string | undefined>;
     /**
      * Keyword tag. Array length limit: 20 tags. Each tag length limit: 128 characters.
      */
-    tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Keyword usage. Valid values: 1.`Recognition.Ocr`: OCR-based content recognition. 2.`Recognition.Asr`: ASR-based content recognition. 3.`Review.Ocr`: OCR-based inappropriate information recognition. 4.`Review.Asr`: ASR-based inappropriate information recognition.
      */
-    usages?: pulumi.Input<pulumi.Input<string>[]>;
+    usages?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -138,7 +138,7 @@ export interface WordSampleArgs {
     /**
      * Keyword tag. Array length limit: 20 tags. Each tag length limit: 128 characters.
      */
-    tags?: pulumi.Input<pulumi.Input<string>[]>;
+    tags?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Keyword usage. Valid values: 1.`Recognition.Ocr`: OCR-based content recognition. 2.`Recognition.Asr`: ASR-based content recognition. 3.`Review.Ocr`: OCR-based inappropriate information recognition. 4.`Review.Asr`: ASR-based inappropriate information recognition.
      */

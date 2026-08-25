@@ -39,15 +39,15 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("tf_redis_vpc"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String(zone.Lists[2].Zone),
 //				Name:             pulumi.String("tf_redis_subnet"),
 //				CidrBlock:        pulumi.String("10.0.1.0/24"),
@@ -86,10 +86,10 @@ import (
 //				RedisReplicasNum: pulumi.Int(zone.Lists[2].RedisReplicasNums[0]),
 //				Name:             pulumi.String("tf_example1"),
 //				Port:             pulumi.Int(6379),
-//				VpcId:            vpc.ID(),
-//				SubnetId:         subnet.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 //				SecurityGroups: pulumi.StringArray{
-//					securityGroup.ID(),
+//					securityGroup.ID().ToIDOutput().ToStringOutput(),
 //				},
 //			})
 //			if err != nil {
@@ -104,10 +104,10 @@ import (
 //				RedisReplicasNum: pulumi.Int(zone.Lists[2].RedisReplicasNums[0]),
 //				Name:             pulumi.String("tf_example2"),
 //				Port:             pulumi.Int(6379),
-//				VpcId:            vpc.ID(),
-//				SubnetId:         subnet.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 //				SecurityGroups: pulumi.StringArray{
-//					securityGroup.ID(),
+//					securityGroup.ID().ToIDOutput().ToStringOutput(),
 //				},
 //			})
 //			if err != nil {
@@ -115,9 +115,9 @@ import (
 //			}
 //			_, err = redis.NewReplicateAttachment(ctx, "example", &redis.ReplicateAttachmentArgs{
 //				GroupId:          pulumi.String("crs-rpl-orfiwmn5"),
-//				MasterInstanceId: example1.ID(),
+//				MasterInstanceId: example1.ID().ToIDOutput().ToStringOutput(),
 //				InstanceIds: pulumi.StringArray{
-//					example2.ID(),
+//					example2.ID().ToIDOutput().ToStringOutput(),
 //				},
 //			})
 //			if err != nil {

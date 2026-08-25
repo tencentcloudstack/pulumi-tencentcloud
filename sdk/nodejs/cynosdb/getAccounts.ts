@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const accounts = tencentcloud.Cynosdb.getAccounts({
+ * const accounts = tencentcloud.cynosdb.getAccounts({
  *     clusterId: "cynosdbmysql-bws8h88b",
  *     accountNames: ["root"],
  * });
@@ -79,7 +79,7 @@ export interface GetAccountsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const accounts = tencentcloud.Cynosdb.getAccounts({
+ * const accounts = tencentcloud.cynosdb.getAccounts({
  *     clusterId: "cynosdbmysql-bws8h88b",
  *     accountNames: ["root"],
  * });
@@ -102,7 +102,7 @@ export interface GetAccountsOutputArgs {
     /**
      * List of accounts to be filtered.
      */
-    accountNames?: pulumi.Input<pulumi.Input<string>[]>;
+    accountNames?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The ID of cluster.
      */
@@ -110,9 +110,9 @@ export interface GetAccountsOutputArgs {
     /**
      * List of hosts to be filtered.
      */
-    hosts?: pulumi.Input<pulumi.Input<string>[]>;
+    hosts?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

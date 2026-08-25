@@ -48,7 +48,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
     /// 
     /// ## Import
     /// 
-    /// tem application_service can be imported using the environmentId#applicationId#serviceName, e.g.
+    /// tem ApplicationService can be imported using the environmentId#applicationId#serviceName, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Tem/applicationService:ApplicationService application_service en-dpxyydl5#app-jrl3346j#test0-1

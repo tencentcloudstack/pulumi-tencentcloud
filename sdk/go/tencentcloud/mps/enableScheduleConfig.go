@@ -24,6 +24,7 @@ import (
 // import (
 //
 //	"fmt"
+//	"strconv"
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
@@ -188,7 +189,7 @@ import (
 //				return err
 //			}
 //			_, err = mps.NewEnableScheduleConfig(ctx, "config", &mps.EnableScheduleConfigArgs{
-//				ScheduleId: example.ID(),
+//				ScheduleId: example.ID().ToIDOutput().ApplyT(func(id pulumi.ID) (int, error) { return strconv.Atoi(string(id)) }).(pulumi.IntOutput),
 //				Enabled:    pulumi.Bool(true),
 //			})
 //			if err != nil {
@@ -229,7 +230,7 @@ import (
 //
 // ## Import
 //
-// mps enable_schedule_config can be imported using the id, e.g.
+// mps enableScheduleConfig can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Mps/enableScheduleConfig:EnableScheduleConfig enable_schedule_config enable_schedule_config_id

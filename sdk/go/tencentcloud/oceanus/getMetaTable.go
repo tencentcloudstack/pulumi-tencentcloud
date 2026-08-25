@@ -83,12 +83,8 @@ type GetMetaTableResult struct {
 }
 
 func GetMetaTableOutput(ctx *pulumi.Context, args GetMetaTableOutputArgs, opts ...pulumi.InvokeOption) GetMetaTableResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetMetaTableResultOutput, error) {
-			args := v.(GetMetaTableArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Oceanus/getMetaTable:getMetaTable", args, GetMetaTableResultOutput{}, options).(GetMetaTableResultOutput), nil
-		}).(GetMetaTableResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Oceanus/getMetaTable:getMetaTable", args, GetMetaTableResultOutput{}, options).(GetMetaTableResultOutput)
 }
 
 // A collection of arguments for invoking getMetaTable.

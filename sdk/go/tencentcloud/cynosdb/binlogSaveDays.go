@@ -43,7 +43,7 @@ import (
 //
 // ## Import
 //
-// cynosdb binlog_save_days can be imported using the id, e.g.
+// cynosdb binlogSaveDays can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Cynosdb/binlogSaveDays:BinlogSaveDays binlog_save_days binlog_save_days_id

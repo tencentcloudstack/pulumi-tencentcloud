@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const tags = tencentcloud.Tag.getKeys({});
+ * const tags = tencentcloud.tag.getKeys({});
  * ```
  *
  * ### Qeury tag keys by filter
@@ -24,7 +24,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const tags = tencentcloud.Tag.getKeys({
+ * const tags = tencentcloud.tag.getKeys({
  *     createUin: 1486445011341,
  *     showProject: 1,
  *     category: "All",
@@ -92,7 +92,7 @@ export interface GetKeysResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const tags = tencentcloud.Tag.getKeys({});
+ * const tags = tencentcloud.tag.getKeys({});
  * ```
  *
  * ### Qeury tag keys by filter
@@ -101,7 +101,7 @@ export interface GetKeysResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const tags = tencentcloud.Tag.getKeys({
+ * const tags = tencentcloud.tag.getKeys({
  *     createUin: 1486445011341,
  *     showProject: 1,
  *     category: "All",
@@ -126,17 +126,17 @@ export interface GetKeysOutputArgs {
     /**
      * Tag type. Valid values: Custom: custom tag; System: system tag; All: all tags. Default value: All.
      */
-    category?: pulumi.Input<string>;
+    category?: pulumi.Input<string | undefined>;
     /**
      * Creator `Uin`. If not specified, `Uin` is only used as the query condition.
      */
-    createUin?: pulumi.Input<number>;
+    createUin?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Whether to show project. Allow values: 0: no, 1: yes.
      */
-    showProject?: pulumi.Input<number>;
+    showProject?: pulumi.Input<number | undefined>;
 }

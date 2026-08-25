@@ -48,15 +48,15 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc-example"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				Name:             pulumi.String("subnet-example"),
 //				CidrBlock:        pulumi.String("10.0.0.0/16"),
 //				AvailabilityZone: pulumi.String(zones.Zones[0].Name),
@@ -82,12 +82,12 @@ import (
 //			}
 //			exampleScalingGroup, err := as.NewScalingGroup(ctx, "example", &as.ScalingGroupArgs{
 //				ScalingGroupName: pulumi.String("tf-example"),
-//				ConfigurationId:  example.ID(),
+//				ConfigurationId:  example.ID().ToIDOutput().ToStringOutput(),
 //				MaxSize:          pulumi.Int(1),
 //				MinSize:          pulumi.Int(0),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				SubnetIds: pulumi.StringArray{
-//					subnet.ID(),
+//					subnet2.ID().ToIDOutput().ToStringOutput(),
 //				},
 //			})
 //			if err != nil {
@@ -101,7 +101,7 @@ import (
 //				return err
 //			}
 //			_, err = as.NewNotification(ctx, "as_notification", &as.NotificationArgs{
-//				ScalingGroupId: exampleScalingGroup.ID(),
+//				ScalingGroupId: exampleScalingGroup.ID().ToIDOutput().ToStringOutput(),
 //				NotificationTypes: pulumi.StringArray{
 //					pulumi.String("SCALE_OUT_SUCCESSFUL"),
 //					pulumi.String("SCALE_OUT_FAILED"),
@@ -110,7 +110,7 @@ import (
 //					pulumi.String("REPLACE_UNHEALTHY_INSTANCE_FAILED"),
 //				},
 //				NotificationUserGroupIds: pulumi.StringArray{
-//					exampleGroup.ID(),
+//					exampleGroup.ID().ToIDOutput().ToStringOutput(),
 //				},
 //			})
 //			if err != nil {

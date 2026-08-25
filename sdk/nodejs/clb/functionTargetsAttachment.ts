@@ -34,10 +34,10 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * clb function_targets_attachment can be imported using the id, e.g.
+ * clb functionTargetsAttachment can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Clb/functionTargetsAttachment:FunctionTargetsAttachment function_targets loadBalancerId#listenerId#locationId or loadBalancerId#listenerId#domain#rule
+ * terraform import tencentcloud_clb_function_targets_attachment.function_targets loadBalancerId#listenerId#locationId or loadBalancerId#listenerId#domain#rule
  * ```
  */
 export class FunctionTargetsAttachment extends pulumi.CustomResource {
@@ -142,27 +142,27 @@ export interface FunctionTargetsAttachmentState {
     /**
      * The domain name of the target forwarding rule. If the LocationId parameter has been entered, this parameter will not take effect.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * List of cloud functions to be bound.
      */
-    functionTargets?: pulumi.Input<inputs.Clb.FunctionTargetsAttachmentFunctionTargets>;
+    functionTargets?: pulumi.Input<inputs.Clb.FunctionTargetsAttachmentFunctionTargets | undefined>;
     /**
      * Load Balancer Listener ID.
      */
-    listenerId?: pulumi.Input<string>;
+    listenerId?: pulumi.Input<string | undefined>;
     /**
      * Load Balancer Instance ID.
      */
-    loadBalancerId?: pulumi.Input<string>;
+    loadBalancerId?: pulumi.Input<string | undefined>;
     /**
      * The ID of the target forwarding rule. When binding the cloud function to a layer-7 forwarding rule, this parameter or the Domain+Url parameter must be entered.
      */
-    locationId?: pulumi.Input<string>;
+    locationId?: pulumi.Input<string | undefined>;
     /**
      * The URL of the target forwarding rule. If the LocationId parameter has been entered, this parameter will not take effect.
      */
-    url?: pulumi.Input<string>;
+    url?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -172,7 +172,7 @@ export interface FunctionTargetsAttachmentArgs {
     /**
      * The domain name of the target forwarding rule. If the LocationId parameter has been entered, this parameter will not take effect.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * List of cloud functions to be bound.
      */
@@ -188,9 +188,9 @@ export interface FunctionTargetsAttachmentArgs {
     /**
      * The ID of the target forwarding rule. When binding the cloud function to a layer-7 forwarding rule, this parameter or the Domain+Url parameter must be entered.
      */
-    locationId?: pulumi.Input<string>;
+    locationId?: pulumi.Input<string | undefined>;
     /**
      * The URL of the target forwarding rule. If the LocationId parameter has been entered, this parameter will not take effect.
      */
-    url?: pulumi.Input<string>;
+    url?: pulumi.Input<string | undefined>;
 }

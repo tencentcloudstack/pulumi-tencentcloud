@@ -86,7 +86,7 @@ import * as utilities from "../utilities";
  *     },
  * });
  * const config = new tencentcloud.mps.EnableWorkflowConfig("config", {
- *     workflowId: example.id,
+ *     workflowId: example.id.apply(x =>Number(x)),
  *     enabled: true,
  * });
  * ```
@@ -98,14 +98,14 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new tencentcloud.mps.EnableWorkflowConfig("config", {
- *     workflowId: example.id,
+ *     workflowId: Number(example.id),
  *     enabled: false,
  * });
  * ```
  *
  * ## Import
  *
- * mps enable_workflow_config can be imported using the id, e.g.
+ * mps enableWorkflowConfig can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Mps/enableWorkflowConfig:EnableWorkflowConfig enable_workflow_config enable_workflow_config_id
@@ -186,11 +186,11 @@ export interface EnableWorkflowConfigState {
     /**
      * true: enable; false: disable.
      */
-    enabled?: pulumi.Input<boolean>;
+    enabled?: pulumi.Input<boolean | undefined>;
     /**
      * Workflow ID.
      */
-    workflowId?: pulumi.Input<number>;
+    workflowId?: pulumi.Input<number | undefined>;
 }
 
 /**

@@ -111,23 +111,23 @@ export interface TmpKeyGenerateState {
     /**
      * Temporary access credentials.
      */
-    credentials?: pulumi.Input<pulumi.Input<inputs.Pts.TmpKeyGenerateCredential>[]>;
+    credentials?: pulumi.Input<pulumi.Input<inputs.Pts.TmpKeyGenerateCredential>[] | undefined>;
     /**
      * Timestamp of temporary access credential timeout (in seconds).
      */
-    expiredTime?: pulumi.Input<number>;
+    expiredTime?: pulumi.Input<number | undefined>;
     /**
      * Project ID.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * Scenario ID.
      */
-    scenarioId?: pulumi.Input<string>;
+    scenarioId?: pulumi.Input<string | undefined>;
     /**
      * The timestamp of the moment when the temporary access credential was obtained (in seconds).
      */
-    startTime?: pulumi.Input<number>;
+    startTime?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -141,5 +141,5 @@ export interface TmpKeyGenerateArgs {
     /**
      * Scenario ID.
      */
-    scenarioId?: pulumi.Input<string>;
+    scenarioId?: pulumi.Input<string | undefined>;
 }

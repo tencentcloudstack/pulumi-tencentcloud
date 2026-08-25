@@ -81,12 +81,8 @@ type GetDescribeManagersResult struct {
 }
 
 func GetDescribeManagersOutput(ctx *pulumi.Context, args GetDescribeManagersOutputArgs, opts ...pulumi.InvokeOption) GetDescribeManagersResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDescribeManagersResultOutput, error) {
-			args := v.(GetDescribeManagersArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ssl/getDescribeManagers:getDescribeManagers", args, GetDescribeManagersResultOutput{}, options).(GetDescribeManagersResultOutput), nil
-		}).(GetDescribeManagersResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ssl/getDescribeManagers:getDescribeManagers", args, GetDescribeManagersResultOutput{}, options).(GetDescribeManagersResultOutput)
 }
 
 // A collection of arguments for invoking getDescribeManagers.

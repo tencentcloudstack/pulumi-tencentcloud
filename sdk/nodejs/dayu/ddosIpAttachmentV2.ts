@@ -98,11 +98,11 @@ export interface DdosIpAttachmentV2State {
     /**
      * Anti-DDoS instance ID.
      */
-    bgpInstanceId?: pulumi.Input<string>;
+    bgpInstanceId?: pulumi.Input<string | undefined>;
     /**
      * Array of IPs to bind to the Anti-DDoS instance. For Anti-DDoS Pro Single IP instance, the array contains only one IP. If there are no IPs to bind, it is empty; however, either BoundDevList or UnBoundDevList must not be empty.
      */
-    boundIpLists?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosIpAttachmentV2BoundIpList>[]>;
+    boundIpLists?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosIpAttachmentV2BoundIpList>[] | undefined>;
 }
 
 /**
@@ -116,5 +116,5 @@ export interface DdosIpAttachmentV2Args {
     /**
      * Array of IPs to bind to the Anti-DDoS instance. For Anti-DDoS Pro Single IP instance, the array contains only one IP. If there are no IPs to bind, it is empty; however, either BoundDevList or UnBoundDevList must not be empty.
      */
-    boundIpLists?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosIpAttachmentV2BoundIpList>[]>;
+    boundIpLists?: pulumi.Input<pulumi.Input<inputs.Dayu.DdosIpAttachmentV2BoundIpList>[] | undefined>;
 }

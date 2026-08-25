@@ -15,10 +15,10 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const name = tencentcloud.Monitor.getPolicyGroups({
+ * const name = tencentcloud.monitor.getPolicyGroups({
  *     name: "test",
  * });
- * const objects = name.then(name => tencentcloud.Monitor.getBindingObjects({
+ * const objects = name.then(name => tencentcloud.monitor.getBindingObjects({
  *     groupId: name.lists?.[0]?.groupId,
  * }));
  * ```
@@ -69,10 +69,10 @@ export interface GetBindingObjectsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const name = tencentcloud.Monitor.getPolicyGroups({
+ * const name = tencentcloud.monitor.getPolicyGroups({
  *     name: "test",
  * });
- * const objects = name.then(name => tencentcloud.Monitor.getBindingObjects({
+ * const objects = name.then(name => tencentcloud.monitor.getBindingObjects({
  *     groupId: name.lists?.[0]?.groupId,
  * }));
  * ```
@@ -96,5 +96,5 @@ export interface GetBindingObjectsOutputArgs {
     /**
      * Used to store results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

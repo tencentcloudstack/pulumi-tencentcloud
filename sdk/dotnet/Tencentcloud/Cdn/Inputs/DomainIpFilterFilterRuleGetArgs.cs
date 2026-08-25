@@ -14,7 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
     public sealed class DomainIpFilterFilterRuleGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Ip filter `Blacklist`/`Whitelist` type of filter rules.
+        /// Blacklist or whitelist, valid values: `Blacklist`, `Whitelist`.
         /// </summary>
         [Input("filterType", required: true)]
         public Input<string> FilterType { get; set; } = null!;
@@ -35,7 +35,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         private InputList<string>? _rulePaths;
 
         /// <summary>
-        /// Content list for each `RuleType`: `*` for `All`, file ext like `Jpg` for `File`, `/dir/like/` for `Directory` and `/path/index.html` for `Path`.
+        /// Rule paths.
         /// </summary>
         public InputList<string> RulePaths
         {
@@ -44,7 +44,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         }
 
         /// <summary>
-        /// Ip filter rule type of filter rules, available: `All`, `File`, `Directory`, `Path`.
+        /// Rule type, valid values: `All`, `File`, `Directory`, `Path`.
         /// </summary>
         [Input("ruleType", required: true)]
         public Input<string> RuleType { get; set; } = null!;

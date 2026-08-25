@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const logBackups = tencentcloud.Postgresql.getLogBackups({
+ * const logBackups = tencentcloud.postgresql.getLogBackups({
  *     minFinishTime: "%s",
  *     maxFinishTime: "%s",
  *     filters: [{
@@ -25,7 +25,7 @@ import * as utilities from "../utilities";
  *     orderBy: "StartTime",
  *     orderByType: "desc",
  * });
- * const backupDownloadUrls = logBackups.then(logBackups => tencentcloud.Postgresql.getBackupDownloadUrls({
+ * const backupDownloadUrls = logBackups.then(logBackups => tencentcloud.postgresql.getBackupDownloadUrls({
  *     dbInstanceId: pgsqlId,
  *     backupType: "LogBackup",
  *     backupId: logBackups.logBackupSets?.[0]?.id,
@@ -110,7 +110,7 @@ export interface GetBackupDownloadUrlsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const logBackups = tencentcloud.Postgresql.getLogBackups({
+ * const logBackups = tencentcloud.postgresql.getLogBackups({
  *     minFinishTime: "%s",
  *     maxFinishTime: "%s",
  *     filters: [{
@@ -120,7 +120,7 @@ export interface GetBackupDownloadUrlsResult {
  *     orderBy: "StartTime",
  *     orderByType: "desc",
  * });
- * const backupDownloadUrls = logBackups.then(logBackups => tencentcloud.Postgresql.getBackupDownloadUrls({
+ * const backupDownloadUrls = logBackups.then(logBackups => tencentcloud.postgresql.getBackupDownloadUrls({
  *     dbInstanceId: pgsqlId,
  *     backupType: "LogBackup",
  *     backupId: logBackups.logBackupSets?.[0]?.id,
@@ -154,7 +154,7 @@ export interface GetBackupDownloadUrlsOutputArgs {
     /**
      * Backup download restriction.
      */
-    backupDownloadRestriction?: pulumi.Input<inputs.Postgresql.GetBackupDownloadUrlsBackupDownloadRestrictionArgs>;
+    backupDownloadRestriction?: pulumi.Input<inputs.Postgresql.GetBackupDownloadUrlsBackupDownloadRestrictionArgs | undefined>;
     /**
      * Unique backup ID.
      */
@@ -170,9 +170,9 @@ export interface GetBackupDownloadUrlsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Validity period of a URL, which is 12 hours by default.
      */
-    urlExpireTime?: pulumi.Input<number>;
+    urlExpireTime?: pulumi.Input<number | undefined>;
 }

@@ -44,7 +44,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
     /// 
     /// ## Import
     /// 
-    /// bi project_user_role can be imported using the id, e.g.
+    /// bi ProjectUserRole can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Bi/projectUserRole:ProjectUserRole project_user_role projectId#userId

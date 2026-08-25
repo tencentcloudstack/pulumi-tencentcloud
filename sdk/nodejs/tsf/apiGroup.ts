@@ -29,7 +29,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * tsf api_group can be imported using the id, e.g.
+ * tsf apiGroup can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Tsf/apiGroup:ApiGroup api_group api_group_id
@@ -206,75 +206,75 @@ export interface ApiGroupState {
     /**
      * Access group ACL type.
      */
-    aclMode?: pulumi.Input<string>;
+    aclMode?: pulumi.Input<string | undefined>;
     /**
      * number of APIs.
      */
-    apiCount?: pulumi.Input<number>;
+    apiCount?: pulumi.Input<number | undefined>;
     /**
      * authentication type. secret: key authentication; none: no authentication.
      */
-    authType?: pulumi.Input<string>;
+    authType?: pulumi.Input<string | undefined>;
     /**
      * api group bound gateway deployment group.
      */
-    bindedGatewayDeployGroups?: pulumi.Input<pulumi.Input<inputs.Tsf.ApiGroupBindedGatewayDeployGroup>[]>;
+    bindedGatewayDeployGroups?: pulumi.Input<pulumi.Input<inputs.Tsf.ApiGroupBindedGatewayDeployGroup>[] | undefined>;
     /**
      * Group creation time such as: 2019-06-20 15:51:28.
      */
-    createdTime?: pulumi.Input<string>;
+    createdTime?: pulumi.Input<string | undefined>;
     /**
      * remarks.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * gateway entity ID.
      */
-    gatewayInstanceId?: pulumi.Input<string>;
+    gatewayInstanceId?: pulumi.Input<string | undefined>;
     /**
      * Type of gateway instance.
      */
-    gatewayInstanceType?: pulumi.Input<string>;
+    gatewayInstanceType?: pulumi.Input<string | undefined>;
     /**
      * grouping context.
      */
-    groupContext?: pulumi.Input<string>;
+    groupContext?: pulumi.Input<string | undefined>;
     /**
      * Api Group Id.
      */
-    groupId?: pulumi.Input<string>;
+    groupId?: pulumi.Input<string | undefined>;
     /**
      * group name, cannot contain Chinese.
      */
-    groupName?: pulumi.Input<string>;
+    groupName?: pulumi.Input<string | undefined>;
     /**
      * grouping type, default ms. ms: microservice grouping; external: external Api grouping.
      */
-    groupType?: pulumi.Input<string>;
+    groupType?: pulumi.Input<string | undefined>;
     /**
      * namespace parameter key value.
      */
-    namespaceNameKey?: pulumi.Input<string>;
+    namespaceNameKey?: pulumi.Input<string | undefined>;
     /**
      * namespace parameter position, path, header or query, the default is path.
      */
-    namespaceNameKeyPosition?: pulumi.Input<string>;
+    namespaceNameKeyPosition?: pulumi.Input<string | undefined>;
     /**
      * microservice name parameter key value.
      */
-    serviceNameKey?: pulumi.Input<string>;
+    serviceNameKey?: pulumi.Input<string | undefined>;
     /**
      * microservice name parameter position, path, header or query, the default is path.
      */
-    serviceNameKeyPosition?: pulumi.Input<string>;
+    serviceNameKeyPosition?: pulumi.Input<string | undefined>;
     /**
      * Release status, drafted: Not published. released: released.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Group update time such as: 2019-06-20 15:51:28.
      */
-    updatedTime?: pulumi.Input<string>;
+    updatedTime?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -284,15 +284,15 @@ export interface ApiGroupArgs {
     /**
      * authentication type. secret: key authentication; none: no authentication.
      */
-    authType?: pulumi.Input<string>;
+    authType?: pulumi.Input<string | undefined>;
     /**
      * remarks.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * gateway entity ID.
      */
-    gatewayInstanceId?: pulumi.Input<string>;
+    gatewayInstanceId?: pulumi.Input<string | undefined>;
     /**
      * grouping context.
      */
@@ -304,21 +304,21 @@ export interface ApiGroupArgs {
     /**
      * grouping type, default ms. ms: microservice grouping; external: external Api grouping.
      */
-    groupType?: pulumi.Input<string>;
+    groupType?: pulumi.Input<string | undefined>;
     /**
      * namespace parameter key value.
      */
-    namespaceNameKey?: pulumi.Input<string>;
+    namespaceNameKey?: pulumi.Input<string | undefined>;
     /**
      * namespace parameter position, path, header or query, the default is path.
      */
-    namespaceNameKeyPosition?: pulumi.Input<string>;
+    namespaceNameKeyPosition?: pulumi.Input<string | undefined>;
     /**
      * microservice name parameter key value.
      */
-    serviceNameKey?: pulumi.Input<string>;
+    serviceNameKey?: pulumi.Input<string | undefined>;
     /**
      * microservice name parameter position, path, header or query, the default is path.
      */
-    serviceNameKeyPosition?: pulumi.Input<string>;
+    serviceNameKeyPosition?: pulumi.Input<string | undefined>;
 }

@@ -83,12 +83,8 @@ type GetInstanceConfigsResult struct {
 }
 
 func GetInstanceConfigsOutput(ctx *pulumi.Context, args GetInstanceConfigsOutputArgs, opts ...pulumi.InvokeOption) GetInstanceConfigsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstanceConfigsResultOutput, error) {
-			args := v.(GetInstanceConfigsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Reserved/getInstanceConfigs:getInstanceConfigs", args, GetInstanceConfigsResultOutput{}, options).(GetInstanceConfigsResultOutput), nil
-		}).(GetInstanceConfigsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Reserved/getInstanceConfigs:getInstanceConfigs", args, GetInstanceConfigsResultOutput{}, options).(GetInstanceConfigsResultOutput)
 }
 
 // A collection of arguments for invoking getInstanceConfigs.

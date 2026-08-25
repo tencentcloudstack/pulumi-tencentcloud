@@ -35,7 +35,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Events.Outputs
         /// </summary>
         public readonly string StorageRegion;
         /// <summary>
-        /// Storage type (Valid values: cos, cls).
+        /// Storage type (Valid values: cos, cls, ckafka).
         /// </summary>
         public readonly string StorageType;
 

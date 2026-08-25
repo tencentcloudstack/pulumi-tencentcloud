@@ -45,6 +45,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     ///             ExecutorNums = 1,
     ///             ExecutorSize = "medium",
     ///         },
+    ///         Tags = new[]
+    ///         {
+    ///             new Tencentcloud.Dlc.Inputs.DataEngineTagArgs
+    ///             {
+    ///                 TagKey = "createBy",
+    ///                 TagValue = "Terraform",
+    ///             },
+    ///         },
     ///     });
     /// 
     /// });
@@ -52,7 +60,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     /// 
     /// ## Import
     /// 
-    /// DLC data engine can be imported using the id, e.g.
+    /// DLC data engine can be imported using the dataEngineName#dataEngineId, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Dlc/dataEngine:DataEngine example tf-example#DataEngine-d3gk8r5h
@@ -120,6 +128,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// </summary>
         [Output("dataEngineConfigPairs")]
         public Output<ImmutableArray<Outputs.DataEngineDataEngineConfigPair>> DataEngineConfigPairs { get; private set; } = null!;
+
+        /// <summary>
+        /// Data engine ID.
+        /// </summary>
+        [Output("dataEngineId")]
+        public Output<string> DataEngineId { get; private set; } = null!;
 
         /// <summary>
         /// The name of the virtual cluster.
@@ -234,6 +248,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// </summary>
         [Output("size")]
         public Output<int?> Size { get; private set; } = null!;
+
+        /// <summary>
+        /// Tag list. Each tag contains a key-value pair. Changing this parameter will trigger a new resource since the DLC `UpdateDataEngine` API does not support modifying tags.
+        /// </summary>
+        [Output("tags")]
+        public Output<ImmutableArray<Outputs.DataEngineTag>> Tags { get; private set; } = null!;
 
         /// <summary>
         /// The usage duration of the resource. Postpaid: Fill in 3,600 as a fixed figure; prepaid: fill in a figure equal to or bigger than 1 which means purchasing resources for one month. The maximum figure is not bigger than 120. The default value is 1.
@@ -480,6 +500,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         [Input("size")]
         public Input<int>? Size { get; set; }
 
+        [Input("tags")]
+        private InputList<Inputs.DataEngineTagArgs>? _tags;
+
+        /// <summary>
+        /// Tag list. Each tag contains a key-value pair. Changing this parameter will trigger a new resource since the DLC `UpdateDataEngine` API does not support modifying tags.
+        /// </summary>
+        public InputList<Inputs.DataEngineTagArgs> Tags
+        {
+            get => _tags ?? (_tags = new InputList<Inputs.DataEngineTagArgs>());
+            set => _tags = value;
+        }
+
         /// <summary>
         /// The usage duration of the resource. Postpaid: Fill in 3,600 as a fixed figure; prepaid: fill in a figure equal to or bigger than 1 which means purchasing resources for one month. The maximum figure is not bigger than 120. The default value is 1.
         /// </summary>
@@ -571,6 +603,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
             get => _dataEngineConfigPairs ?? (_dataEngineConfigPairs = new InputList<Inputs.DataEngineDataEngineConfigPairGetArgs>());
             set => _dataEngineConfigPairs = value;
         }
+
+        /// <summary>
+        /// Data engine ID.
+        /// </summary>
+        [Input("dataEngineId")]
+        public Input<string>? DataEngineId { get; set; }
 
         /// <summary>
         /// The name of the virtual cluster.
@@ -685,6 +723,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// </summary>
         [Input("size")]
         public Input<int>? Size { get; set; }
+
+        [Input("tags")]
+        private InputList<Inputs.DataEngineTagGetArgs>? _tags;
+
+        /// <summary>
+        /// Tag list. Each tag contains a key-value pair. Changing this parameter will trigger a new resource since the DLC `UpdateDataEngine` API does not support modifying tags.
+        /// </summary>
+        public InputList<Inputs.DataEngineTagGetArgs> Tags
+        {
+            get => _tags ?? (_tags = new InputList<Inputs.DataEngineTagGetArgs>());
+            set => _tags = value;
+        }
 
         /// <summary>
         /// The usage duration of the resource. Postpaid: Fill in 3,600 as a fixed figure; prepaid: fill in a figure equal to or bigger than 1 which means purchasing resources for one month. The maximum figure is not bigger than 120. The default value is 1.

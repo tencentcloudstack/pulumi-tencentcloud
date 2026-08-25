@@ -16,6 +16,8 @@ import (
 //
 // ## Example Usage
 //
+// ### Basic Configuration
+//
 // ```go
 // package main
 //
@@ -30,16 +32,117 @@ import (
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := vpn.NewSslServer(ctx, "example", &vpn.SslServerArgs{
 //				LocalAddresses: pulumi.StringArray{
-//					pulumi.String("10.0.0.0/17"),
+//					pulumi.String("10.0.200.0/24"),
 //				},
-//				RemoteAddress:      pulumi.String("11.0.0.0/16"),
-//				SslVpnServerName:   pulumi.String("helloworld"),
-//				VpnGatewayId:       pulumi.String("vpngw-335lwf7d"),
-//				SslVpnProtocol:     pulumi.String("UDP"),
-//				SslVpnPort:         pulumi.Int(1194),
-//				IntegrityAlgorithm: pulumi.String("MD5"),
-//				EncryptAlgorithm:   pulumi.String("AES-128-CBC"),
-//				Compress:           pulumi.Bool(true),
+//				RemoteAddress:    pulumi.String("192.168.100.0/24"),
+//				SslVpnServerName: pulumi.String("helloworld"),
+//				VpnGatewayId:     pulumi.String("vpngw-6lq9ayur"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### With Tags and DNS Configuration
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpn"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := vpn.NewSslServer(ctx, "example", &vpn.SslServerArgs{
+//				LocalAddresses: pulumi.StringArray{
+//					pulumi.String("10.0.200.0/24"),
+//				},
+//				RemoteAddress:    pulumi.String("192.168.100.0/24"),
+//				SslVpnServerName: pulumi.String("helloworld"),
+//				VpnGatewayId:     pulumi.String("vpngw-6lq9ayur"),
+//				Tags: pulumi.StringMap{
+//					"Environment": pulumi.String("production"),
+//					"Owner":       pulumi.String("team-a"),
+//				},
+//				DnsServers: &vpn.SslServerDnsServersArgs{
+//					PrimaryDns:   pulumi.String("8.8.8.8"),
+//					SecondaryDns: pulumi.String("8.8.4.4"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### With SSO Authentication (Requires Whitelist)
+//
+// **Note:** SSO authentication feature requires whitelist approval from TencentCloud. Please contact TencentCloud support to apply for whitelist access before enabling this feature.
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpn"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := vpn.NewSslServer(ctx, "example", &vpn.SslServerArgs{
+//				LocalAddresses: pulumi.StringArray{
+//					pulumi.String("10.0.200.0/24"),
+//				},
+//				RemoteAddress:    pulumi.String("192.168.100.0/24"),
+//				SslVpnServerName: pulumi.String("helloworld"),
+//				VpnGatewayId:     pulumi.String("vpngw-6lq9ayur"),
+//				SsoEnabled:       pulumi.Bool(true),
+//				SamlData:         pulumi.String("<SAML configuration data>"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### parameter only controls the feature switch. Detailed access policies must be configured through the TencentCloud console or other resources.
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpn"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := vpn.NewSslServer(ctx, "example", &vpn.SslServerArgs{
+//				LocalAddresses: pulumi.StringArray{
+//					pulumi.String("10.0.200.0/24"),
+//				},
+//				RemoteAddress:       pulumi.String("192.168.100.0/24"),
+//				SslVpnServerName:    pulumi.String("helloworld"),
+//				VpnGatewayId:        pulumi.String("vpngw-6lq9ayur"),
+//				AccessPolicyEnabled: pulumi.Bool(true),
 //			})
 //			if err != nil {
 //				return err
@@ -60,22 +163,32 @@ import (
 type SslServer struct {
 	pulumi.CustomResourceState
 
+	// Enable access policy control. Default: false.
+	AccessPolicyEnabled pulumi.BoolOutput `pulumi:"accessPolicyEnabled"`
 	// Need compressed. Currently is not supports compress. Default value: False.
 	Compress pulumi.BoolPtrOutput `pulumi:"compress"`
+	// DNS server configuration.
+	DnsServers SslServerDnsServersOutput `pulumi:"dnsServers"`
 	// The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC.Default value: AES-128-CBC.
-	EncryptAlgorithm pulumi.StringPtrOutput `pulumi:"encryptAlgorithm"`
+	EncryptAlgorithm pulumi.StringOutput `pulumi:"encryptAlgorithm"`
 	// The integrity algorithm. Valid values: SHA1. Default value: SHA1.
-	IntegrityAlgorithm pulumi.StringPtrOutput `pulumi:"integrityAlgorithm"`
+	IntegrityAlgorithm pulumi.StringOutput `pulumi:"integrityAlgorithm"`
 	// List of local CIDR.
 	LocalAddresses pulumi.StringArrayOutput `pulumi:"localAddresses"`
 	// Remote CIDR for client.
 	RemoteAddress pulumi.StringOutput `pulumi:"remoteAddress"`
+	// SAML-DATA. Required when ssoEnabled is true.
+	SamlData pulumi.StringPtrOutput `pulumi:"samlData"`
 	// The port of ssl vpn. Currently only supports UDP. Default value: 1194.
-	SslVpnPort pulumi.IntPtrOutput `pulumi:"sslVpnPort"`
+	SslVpnPort pulumi.IntOutput `pulumi:"sslVpnPort"`
 	// The protocol of ssl vpn. Default value: UDP.
-	SslVpnProtocol pulumi.StringPtrOutput `pulumi:"sslVpnProtocol"`
+	SslVpnProtocol pulumi.StringOutput `pulumi:"sslVpnProtocol"`
 	// The name of ssl vpn server to be created.
 	SslVpnServerName pulumi.StringOutput `pulumi:"sslVpnServerName"`
+	// Enable SSO authentication. Default: false. This feature requires whitelist approval.
+	SsoEnabled pulumi.BoolOutput `pulumi:"ssoEnabled"`
+	// Tags for resource management.
+	Tags pulumi.StringMapOutput `pulumi:"tags"`
 	// VPN gateway ID.
 	VpnGatewayId pulumi.StringOutput `pulumi:"vpnGatewayId"`
 }
@@ -122,8 +235,12 @@ func GetSslServer(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering SslServer resources.
 type sslServerState struct {
+	// Enable access policy control. Default: false.
+	AccessPolicyEnabled *bool `pulumi:"accessPolicyEnabled"`
 	// Need compressed. Currently is not supports compress. Default value: False.
 	Compress *bool `pulumi:"compress"`
+	// DNS server configuration.
+	DnsServers *SslServerDnsServers `pulumi:"dnsServers"`
 	// The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC.Default value: AES-128-CBC.
 	EncryptAlgorithm *string `pulumi:"encryptAlgorithm"`
 	// The integrity algorithm. Valid values: SHA1. Default value: SHA1.
@@ -132,19 +249,29 @@ type sslServerState struct {
 	LocalAddresses []string `pulumi:"localAddresses"`
 	// Remote CIDR for client.
 	RemoteAddress *string `pulumi:"remoteAddress"`
+	// SAML-DATA. Required when ssoEnabled is true.
+	SamlData *string `pulumi:"samlData"`
 	// The port of ssl vpn. Currently only supports UDP. Default value: 1194.
 	SslVpnPort *int `pulumi:"sslVpnPort"`
 	// The protocol of ssl vpn. Default value: UDP.
 	SslVpnProtocol *string `pulumi:"sslVpnProtocol"`
 	// The name of ssl vpn server to be created.
 	SslVpnServerName *string `pulumi:"sslVpnServerName"`
+	// Enable SSO authentication. Default: false. This feature requires whitelist approval.
+	SsoEnabled *bool `pulumi:"ssoEnabled"`
+	// Tags for resource management.
+	Tags map[string]string `pulumi:"tags"`
 	// VPN gateway ID.
 	VpnGatewayId *string `pulumi:"vpnGatewayId"`
 }
 
 type SslServerState struct {
+	// Enable access policy control. Default: false.
+	AccessPolicyEnabled pulumi.BoolPtrInput
 	// Need compressed. Currently is not supports compress. Default value: False.
 	Compress pulumi.BoolPtrInput
+	// DNS server configuration.
+	DnsServers SslServerDnsServersPtrInput
 	// The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC.Default value: AES-128-CBC.
 	EncryptAlgorithm pulumi.StringPtrInput
 	// The integrity algorithm. Valid values: SHA1. Default value: SHA1.
@@ -153,12 +280,18 @@ type SslServerState struct {
 	LocalAddresses pulumi.StringArrayInput
 	// Remote CIDR for client.
 	RemoteAddress pulumi.StringPtrInput
+	// SAML-DATA. Required when ssoEnabled is true.
+	SamlData pulumi.StringPtrInput
 	// The port of ssl vpn. Currently only supports UDP. Default value: 1194.
 	SslVpnPort pulumi.IntPtrInput
 	// The protocol of ssl vpn. Default value: UDP.
 	SslVpnProtocol pulumi.StringPtrInput
 	// The name of ssl vpn server to be created.
 	SslVpnServerName pulumi.StringPtrInput
+	// Enable SSO authentication. Default: false. This feature requires whitelist approval.
+	SsoEnabled pulumi.BoolPtrInput
+	// Tags for resource management.
+	Tags pulumi.StringMapInput
 	// VPN gateway ID.
 	VpnGatewayId pulumi.StringPtrInput
 }
@@ -168,8 +301,12 @@ func (SslServerState) ElementType() reflect.Type {
 }
 
 type sslServerArgs struct {
+	// Enable access policy control. Default: false.
+	AccessPolicyEnabled *bool `pulumi:"accessPolicyEnabled"`
 	// Need compressed. Currently is not supports compress. Default value: False.
 	Compress *bool `pulumi:"compress"`
+	// DNS server configuration.
+	DnsServers *SslServerDnsServers `pulumi:"dnsServers"`
 	// The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC.Default value: AES-128-CBC.
 	EncryptAlgorithm *string `pulumi:"encryptAlgorithm"`
 	// The integrity algorithm. Valid values: SHA1. Default value: SHA1.
@@ -178,20 +315,30 @@ type sslServerArgs struct {
 	LocalAddresses []string `pulumi:"localAddresses"`
 	// Remote CIDR for client.
 	RemoteAddress string `pulumi:"remoteAddress"`
+	// SAML-DATA. Required when ssoEnabled is true.
+	SamlData *string `pulumi:"samlData"`
 	// The port of ssl vpn. Currently only supports UDP. Default value: 1194.
 	SslVpnPort *int `pulumi:"sslVpnPort"`
 	// The protocol of ssl vpn. Default value: UDP.
 	SslVpnProtocol *string `pulumi:"sslVpnProtocol"`
 	// The name of ssl vpn server to be created.
 	SslVpnServerName string `pulumi:"sslVpnServerName"`
+	// Enable SSO authentication. Default: false. This feature requires whitelist approval.
+	SsoEnabled *bool `pulumi:"ssoEnabled"`
+	// Tags for resource management.
+	Tags map[string]string `pulumi:"tags"`
 	// VPN gateway ID.
 	VpnGatewayId string `pulumi:"vpnGatewayId"`
 }
 
 // The set of arguments for constructing a SslServer resource.
 type SslServerArgs struct {
+	// Enable access policy control. Default: false.
+	AccessPolicyEnabled pulumi.BoolPtrInput
 	// Need compressed. Currently is not supports compress. Default value: False.
 	Compress pulumi.BoolPtrInput
+	// DNS server configuration.
+	DnsServers SslServerDnsServersPtrInput
 	// The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC.Default value: AES-128-CBC.
 	EncryptAlgorithm pulumi.StringPtrInput
 	// The integrity algorithm. Valid values: SHA1. Default value: SHA1.
@@ -200,12 +347,18 @@ type SslServerArgs struct {
 	LocalAddresses pulumi.StringArrayInput
 	// Remote CIDR for client.
 	RemoteAddress pulumi.StringInput
+	// SAML-DATA. Required when ssoEnabled is true.
+	SamlData pulumi.StringPtrInput
 	// The port of ssl vpn. Currently only supports UDP. Default value: 1194.
 	SslVpnPort pulumi.IntPtrInput
 	// The protocol of ssl vpn. Default value: UDP.
 	SslVpnProtocol pulumi.StringPtrInput
 	// The name of ssl vpn server to be created.
 	SslVpnServerName pulumi.StringInput
+	// Enable SSO authentication. Default: false. This feature requires whitelist approval.
+	SsoEnabled pulumi.BoolPtrInput
+	// Tags for resource management.
+	Tags pulumi.StringMapInput
 	// VPN gateway ID.
 	VpnGatewayId pulumi.StringInput
 }
@@ -297,19 +450,29 @@ func (o SslServerOutput) ToSslServerOutputWithContext(ctx context.Context) SslSe
 	return o
 }
 
+// Enable access policy control. Default: false.
+func (o SslServerOutput) AccessPolicyEnabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v *SslServer) pulumi.BoolOutput { return v.AccessPolicyEnabled }).(pulumi.BoolOutput)
+}
+
 // Need compressed. Currently is not supports compress. Default value: False.
 func (o SslServerOutput) Compress() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *SslServer) pulumi.BoolPtrOutput { return v.Compress }).(pulumi.BoolPtrOutput)
 }
 
+// DNS server configuration.
+func (o SslServerOutput) DnsServers() SslServerDnsServersOutput {
+	return o.ApplyT(func(v *SslServer) SslServerDnsServersOutput { return v.DnsServers }).(SslServerDnsServersOutput)
+}
+
 // The encrypt algorithm. Valid values: AES-128-CBC, AES-192-CBC, AES-256-CBC.Default value: AES-128-CBC.
-func (o SslServerOutput) EncryptAlgorithm() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SslServer) pulumi.StringPtrOutput { return v.EncryptAlgorithm }).(pulumi.StringPtrOutput)
+func (o SslServerOutput) EncryptAlgorithm() pulumi.StringOutput {
+	return o.ApplyT(func(v *SslServer) pulumi.StringOutput { return v.EncryptAlgorithm }).(pulumi.StringOutput)
 }
 
 // The integrity algorithm. Valid values: SHA1. Default value: SHA1.
-func (o SslServerOutput) IntegrityAlgorithm() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SslServer) pulumi.StringPtrOutput { return v.IntegrityAlgorithm }).(pulumi.StringPtrOutput)
+func (o SslServerOutput) IntegrityAlgorithm() pulumi.StringOutput {
+	return o.ApplyT(func(v *SslServer) pulumi.StringOutput { return v.IntegrityAlgorithm }).(pulumi.StringOutput)
 }
 
 // List of local CIDR.
@@ -322,19 +485,34 @@ func (o SslServerOutput) RemoteAddress() pulumi.StringOutput {
 	return o.ApplyT(func(v *SslServer) pulumi.StringOutput { return v.RemoteAddress }).(pulumi.StringOutput)
 }
 
+// SAML-DATA. Required when ssoEnabled is true.
+func (o SslServerOutput) SamlData() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SslServer) pulumi.StringPtrOutput { return v.SamlData }).(pulumi.StringPtrOutput)
+}
+
 // The port of ssl vpn. Currently only supports UDP. Default value: 1194.
-func (o SslServerOutput) SslVpnPort() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *SslServer) pulumi.IntPtrOutput { return v.SslVpnPort }).(pulumi.IntPtrOutput)
+func (o SslServerOutput) SslVpnPort() pulumi.IntOutput {
+	return o.ApplyT(func(v *SslServer) pulumi.IntOutput { return v.SslVpnPort }).(pulumi.IntOutput)
 }
 
 // The protocol of ssl vpn. Default value: UDP.
-func (o SslServerOutput) SslVpnProtocol() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SslServer) pulumi.StringPtrOutput { return v.SslVpnProtocol }).(pulumi.StringPtrOutput)
+func (o SslServerOutput) SslVpnProtocol() pulumi.StringOutput {
+	return o.ApplyT(func(v *SslServer) pulumi.StringOutput { return v.SslVpnProtocol }).(pulumi.StringOutput)
 }
 
 // The name of ssl vpn server to be created.
 func (o SslServerOutput) SslVpnServerName() pulumi.StringOutput {
 	return o.ApplyT(func(v *SslServer) pulumi.StringOutput { return v.SslVpnServerName }).(pulumi.StringOutput)
+}
+
+// Enable SSO authentication. Default: false. This feature requires whitelist approval.
+func (o SslServerOutput) SsoEnabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v *SslServer) pulumi.BoolOutput { return v.SsoEnabled }).(pulumi.BoolOutput)
+}
+
+// Tags for resource management.
+func (o SslServerOutput) Tags() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *SslServer) pulumi.StringMapOutput { return v.Tags }).(pulumi.StringMapOutput)
 }
 
 // VPN gateway ID.

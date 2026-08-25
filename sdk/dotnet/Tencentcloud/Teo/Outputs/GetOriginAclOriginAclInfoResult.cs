@@ -33,6 +33,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly ImmutableArray<Outputs.GetOriginAclOriginAclInfoNextOriginAclResult> NextOriginAcls;
         /// <summary>
+        /// Origin ACL control domain.
+        /// </summary>
+        public readonly string OriginAclFamily;
+        /// <summary>
         /// Origin protection status. Vaild values:
         /// - online: in effect;
         /// - offline: disabled;
@@ -50,12 +54,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
 
             ImmutableArray<Outputs.GetOriginAclOriginAclInfoNextOriginAclResult> nextOriginAcls,
 
+            string originAclFamily,
+
             string status)
         {
             CurrentOriginAcls = currentOriginAcls;
             L4ProxyIds = l4ProxyIds;
             L7Hosts = l7Hosts;
             NextOriginAcls = nextOriginAcls;
+            OriginAclFamily = originAclFamily;
             Status = status;
         }
     }

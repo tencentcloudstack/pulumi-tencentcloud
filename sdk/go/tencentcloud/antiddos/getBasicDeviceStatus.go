@@ -78,12 +78,8 @@ type GetBasicDeviceStatusResult struct {
 }
 
 func GetBasicDeviceStatusOutput(ctx *pulumi.Context, args GetBasicDeviceStatusOutputArgs, opts ...pulumi.InvokeOption) GetBasicDeviceStatusResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetBasicDeviceStatusResultOutput, error) {
-			args := v.(GetBasicDeviceStatusArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Antiddos/getBasicDeviceStatus:getBasicDeviceStatus", args, GetBasicDeviceStatusResultOutput{}, options).(GetBasicDeviceStatusResultOutput), nil
-		}).(GetBasicDeviceStatusResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Antiddos/getBasicDeviceStatus:getBasicDeviceStatus", args, GetBasicDeviceStatusResultOutput{}, options).(GetBasicDeviceStatusResultOutput)
 }
 
 // A collection of arguments for invoking getBasicDeviceStatus.

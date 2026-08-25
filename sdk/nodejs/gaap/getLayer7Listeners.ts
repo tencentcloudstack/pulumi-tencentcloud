@@ -28,7 +28,7 @@ import * as utilities from "../utilities";
  *     port: 80,
  *     proxyId: foo.id,
  * });
- * const listenerId = tencentcloud.Gaap.getLayer7ListenersOutput({
+ * const listenerId = tencentcloud.gaap.getLayer7ListenersOutput({
  *     protocol: "HTTP",
  *     proxyId: foo.id,
  *     listenerId: fooLayer7Listener.id,
@@ -133,7 +133,7 @@ export interface GetLayer7ListenersResult {
  *     port: 80,
  *     proxyId: foo.id,
  * });
- * const listenerId = tencentcloud.Gaap.getLayer7ListenersOutput({
+ * const listenerId = tencentcloud.gaap.getLayer7ListenersOutput({
  *     protocol: "HTTP",
  *     proxyId: foo.id,
  *     listenerId: fooLayer7Listener.id,
@@ -160,19 +160,19 @@ export interface GetLayer7ListenersOutputArgs {
     /**
      * Group id.
      */
-    groupId?: pulumi.Input<string>;
+    groupId?: pulumi.Input<string | undefined>;
     /**
      * ID of the layer7 listener to be queried.
      */
-    listenerId?: pulumi.Input<string>;
+    listenerId?: pulumi.Input<string | undefined>;
     /**
      * Name of the layer7 listener to be queried.
      */
-    listenerName?: pulumi.Input<string>;
+    listenerName?: pulumi.Input<string | undefined>;
     /**
      * Port of the layer7 listener to be queried.
      */
-    port?: pulumi.Input<number>;
+    port?: pulumi.Input<number | undefined>;
     /**
      * Protocol of the layer7 listener to be queried. Valid values: `HTTP` and `HTTPS`.
      */
@@ -180,9 +180,9 @@ export interface GetLayer7ListenersOutputArgs {
     /**
      * ID of the GAAP proxy to be queried.
      */
-    proxyId?: pulumi.Input<string>;
+    proxyId?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

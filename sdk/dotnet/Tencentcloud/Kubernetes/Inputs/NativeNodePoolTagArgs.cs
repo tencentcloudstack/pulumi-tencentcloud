@@ -14,7 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
     public sealed class NativeNodePoolTagArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The resource type bound to the label.
+        /// The resource type bound to the label. `Cluster`: related to clusters; `Machine`: related to node pools.
         /// </summary>
         [Input("resourceType")]
         public Input<string>? ResourceType { get; set; }

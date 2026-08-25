@@ -41,17 +41,17 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc-mysql"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String(zones.Zones[0].Name),
 //				Name:             pulumi.String("subnet-mysql"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("10.0.0.0/16"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -76,11 +76,11 @@ import (
 //				InstanceName:     pulumi.String("tf-example-mysql"),
 //				MemSize:          pulumi.Int(4000),
 //				VolumeSize:       pulumi.Int(200),
-//				VpcId:            vpc.ID(),
-//				SubnetId:         subnet.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 //				IntranetPort:     pulumi.Int(3306),
 //				SecurityGroups: pulumi.StringArray{
-//					securityGroup.ID(),
+//					securityGroup.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				Tags: pulumi.StringMap{
 //					"name": pulumi.String("test"),
@@ -94,15 +94,15 @@ import (
 //				return err
 //			}
 //			_, err = mysql.NewReadonlyInstance(ctx, "example", &mysql.ReadonlyInstanceArgs{
-//				MasterInstanceId: example.ID(),
+//				MasterInstanceId: example.ID().ToIDOutput().ToStringOutput(),
 //				InstanceName:     pulumi.String("tf-example"),
 //				MemSize:          pulumi.Int(128000),
 //				VolumeSize:       pulumi.Int(255),
-//				VpcId:            vpc.ID(),
-//				SubnetId:         subnet.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 //				IntranetPort:     pulumi.Int(3306),
 //				SecurityGroups: pulumi.StringArray{
-//					securityGroup.ID(),
+//					securityGroup.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				Tags: pulumi.StringMap{
 //					"createBy": pulumi.String("terraform"),
@@ -120,7 +120,6 @@ import (
 // ## Import
 //
 // mysql read-only database instances can be imported using the id, e.g.
-//
 // ```sh
 // $ pulumi import tencentcloud:Mysql/readonlyInstance:ReadonlyInstance default cdb-dnqksd9f
 // ```
@@ -143,6 +142,8 @@ type ReadonlyInstance struct {
 	// - `CLOUD_NATIVE_CLUSTER_EXCLUSIVE`: cluster version enhanced type.
 	//   If it is not specified, it defaults to a universal instance.
 	DeviceType pulumi.StringOutput `pulumi:"deviceType"`
+	// Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
+	DiskType pulumi.StringOutput `pulumi:"diskType"`
 	// Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
 	FastUpgrade pulumi.IntPtrOutput `pulumi:"fastUpgrade"`
 	// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
@@ -175,6 +176,10 @@ type ReadonlyInstance struct {
 	PrepaidPeriod pulumi.IntPtrOutput `pulumi:"prepaidPeriod"`
 	// Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used. Cross-region query requires master instance permission.
 	RoGroupId pulumi.StringOutput `pulumi:"roGroupId"`
+	// VIP-only read access.
+	RoVip pulumi.StringOutput `pulumi:"roVip"`
+	// VIP port number (read-only).
+	RoVport pulumi.IntOutput `pulumi:"roVport"`
 	// Security groups to use.
 	SecurityGroups pulumi.StringArrayOutput `pulumi:"securityGroups"`
 	// Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
@@ -255,6 +260,8 @@ type readonlyInstanceState struct {
 	// - `CLOUD_NATIVE_CLUSTER_EXCLUSIVE`: cluster version enhanced type.
 	//   If it is not specified, it defaults to a universal instance.
 	DeviceType *string `pulumi:"deviceType"`
+	// Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
+	DiskType *string `pulumi:"diskType"`
 	// Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
 	FastUpgrade *int `pulumi:"fastUpgrade"`
 	// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
@@ -287,6 +294,10 @@ type readonlyInstanceState struct {
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
 	// Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used. Cross-region query requires master instance permission.
 	RoGroupId *string `pulumi:"roGroupId"`
+	// VIP-only read access.
+	RoVip *string `pulumi:"roVip"`
+	// VIP port number (read-only).
+	RoVport *int `pulumi:"roVport"`
 	// Security groups to use.
 	SecurityGroups []string `pulumi:"securityGroups"`
 	// Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
@@ -326,6 +337,8 @@ type ReadonlyInstanceState struct {
 	// - `CLOUD_NATIVE_CLUSTER_EXCLUSIVE`: cluster version enhanced type.
 	//   If it is not specified, it defaults to a universal instance.
 	DeviceType pulumi.StringPtrInput
+	// Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
+	DiskType pulumi.StringPtrInput
 	// Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
 	FastUpgrade pulumi.IntPtrInput
 	// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
@@ -358,6 +371,10 @@ type ReadonlyInstanceState struct {
 	PrepaidPeriod pulumi.IntPtrInput
 	// Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used. Cross-region query requires master instance permission.
 	RoGroupId pulumi.StringPtrInput
+	// VIP-only read access.
+	RoVip pulumi.StringPtrInput
+	// VIP port number (read-only).
+	RoVport pulumi.IntPtrInput
 	// Security groups to use.
 	SecurityGroups pulumi.StringArrayInput
 	// Availability zone deployment method. Available values: 0 - Single availability zone; 1 - Multiple availability zones.
@@ -401,6 +418,8 @@ type readonlyInstanceArgs struct {
 	// - `CLOUD_NATIVE_CLUSTER_EXCLUSIVE`: cluster version enhanced type.
 	//   If it is not specified, it defaults to a universal instance.
 	DeviceType *string `pulumi:"deviceType"`
+	// Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
+	DiskType *string `pulumi:"diskType"`
 	// Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
 	FastUpgrade *int `pulumi:"fastUpgrade"`
 	// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
@@ -465,6 +484,8 @@ type ReadonlyInstanceArgs struct {
 	// - `CLOUD_NATIVE_CLUSTER_EXCLUSIVE`: cluster version enhanced type.
 	//   If it is not specified, it defaults to a universal instance.
 	DeviceType pulumi.StringPtrInput
+	// Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
+	DiskType pulumi.StringPtrInput
 	// Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
 	FastUpgrade pulumi.IntPtrInput
 	// Indicate whether to delete instance directly or not. Default is `false`. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance. When the main mysql instance set true, this para of the readonly mysql instance will not take effect.
@@ -629,6 +650,11 @@ func (o ReadonlyInstanceOutput) DeviceType() pulumi.StringOutput {
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.StringOutput { return v.DeviceType }).(pulumi.StringOutput)
 }
 
+// Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
+func (o ReadonlyInstanceOutput) DiskType() pulumi.StringOutput {
+	return o.ApplyT(func(v *ReadonlyInstance) pulumi.StringOutput { return v.DiskType }).(pulumi.StringOutput)
+}
+
 // Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
 func (o ReadonlyInstanceOutput) FastUpgrade() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.IntPtrOutput { return v.FastUpgrade }).(pulumi.IntPtrOutput)
@@ -701,6 +727,16 @@ func (o ReadonlyInstanceOutput) PrepaidPeriod() pulumi.IntPtrOutput {
 // Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used. Cross-region query requires master instance permission.
 func (o ReadonlyInstanceOutput) RoGroupId() pulumi.StringOutput {
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.StringOutput { return v.RoGroupId }).(pulumi.StringOutput)
+}
+
+// VIP-only read access.
+func (o ReadonlyInstanceOutput) RoVip() pulumi.StringOutput {
+	return o.ApplyT(func(v *ReadonlyInstance) pulumi.StringOutput { return v.RoVip }).(pulumi.StringOutput)
+}
+
+// VIP port number (read-only).
+func (o ReadonlyInstanceOutput) RoVport() pulumi.IntOutput {
+	return o.ApplyT(func(v *ReadonlyInstance) pulumi.IntOutput { return v.RoVport }).(pulumi.IntOutput)
 }
 
 // Security groups to use.

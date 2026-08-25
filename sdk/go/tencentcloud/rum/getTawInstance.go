@@ -24,31 +24,33 @@ import (
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/rum"
 //
 // )
-// func main() {
-// pulumi.Run(func(ctx *pulumi.Context) error {
-// _, err := rum.GetTawInstance(ctx, &rum.GetTawInstanceArgs{
-// ChargeStatuses: interface{}{
-// 1,
-// },
-// ChargeTypes: interface{}{
-// 1,
-// },
-// AreaIds: interface{}{
-// 1,
-// },
-// InstanceStatuses: interface{}{
-// 2,
-// },
-// InstanceIds: []string{
-// "rum-pasZKEI3RLgakj",
-// },
-// }, nil);
-// if err != nil {
-// return err
-// }
-// return nil
-// })
-// }
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := rum.GetTawInstance(ctx, &rum.GetTawInstanceArgs{
+//				ChargeStatuses: []int{
+//					1,
+//				},
+//				ChargeTypes: []int{
+//					1,
+//				},
+//				AreaIds: []int{
+//					1,
+//				},
+//				InstanceStatuses: []int{
+//					2,
+//				},
+//				InstanceIds: []string{
+//					"rum-pasZKEI3RLgakj",
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func LookupTawInstance(ctx *pulumi.Context, args *LookupTawInstanceArgs, opts ...pulumi.InvokeOption) (*LookupTawInstanceResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
@@ -91,12 +93,8 @@ type LookupTawInstanceResult struct {
 }
 
 func LookupTawInstanceOutput(ctx *pulumi.Context, args LookupTawInstanceOutputArgs, opts ...pulumi.InvokeOption) LookupTawInstanceResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupTawInstanceResultOutput, error) {
-			args := v.(LookupTawInstanceArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Rum/getTawInstance:getTawInstance", args, LookupTawInstanceResultOutput{}, options).(LookupTawInstanceResultOutput), nil
-		}).(LookupTawInstanceResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Rum/getTawInstance:getTawInstance", args, LookupTawInstanceResultOutput{}, options).(LookupTawInstanceResultOutput)
 }
 
 // A collection of arguments for invoking getTawInstance.

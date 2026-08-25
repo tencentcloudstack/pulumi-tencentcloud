@@ -167,27 +167,27 @@ export interface RocketmqTopicState {
     /**
      * Instance Id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Number of queue. Must be greater than or equal to 3.
      */
-    queueNum?: pulumi.Input<number>;
+    queueNum?: pulumi.Input<number | undefined>;
     /**
      * remark.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Tag of topic.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * topic.
      */
-    topic?: pulumi.Input<string>;
+    topic?: pulumi.Input<string | undefined>;
     /**
      * Topic type. `UNSPECIFIED`: not specified, `NORMAL`: normal message, `FIFO`: sequential message, `DELAY`: delayed message.
      */
-    topicType?: pulumi.Input<string>;
+    topicType?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -205,11 +205,11 @@ export interface RocketmqTopicArgs {
     /**
      * remark.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Tag of topic.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * topic.
      */

@@ -43,7 +43,7 @@ import (
 //
 // ## Import
 //
-// cfs auto_snapshot_policy_attachment can be imported using the id, e.g.
+// cfs autoSnapshotPolicyAttachment can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Cfs/autoSnapshotPolicyAttachment:AutoSnapshotPolicyAttachment auto_snapshot_policy_attachment auto_snapshot_policy_id#file_system_ids

@@ -76,12 +76,8 @@ type GetBatchsResult struct {
 }
 
 func GetBatchsOutput(ctx *pulumi.Context, args GetBatchsOutputArgs, opts ...pulumi.InvokeOption) GetBatchsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetBatchsResultOutput, error) {
-			args := v.(GetBatchsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cos/getBatchs:getBatchs", args, GetBatchsResultOutput{}, options).(GetBatchsResultOutput), nil
-		}).(GetBatchsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cos/getBatchs:getBatchs", args, GetBatchsResultOutput{}, options).(GetBatchsResultOutput)
 }
 
 // A collection of arguments for invoking getBatchs.

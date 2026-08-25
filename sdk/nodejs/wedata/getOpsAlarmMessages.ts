@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataOpsAlarmMessages = tencentcloud.Wedata.getOpsAlarmMessages({
+ * const wedataOpsAlarmMessages = tencentcloud.wedata.getOpsAlarmMessages({
  *     projectId: "1859317240494305280",
  *     startTime: "2025-10-14 21:09:26",
  *     endTime: "2025-10-14 21:10:26",
@@ -100,7 +100,7 @@ export interface GetOpsAlarmMessagesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataOpsAlarmMessages = tencentcloud.Wedata.getOpsAlarmMessages({
+ * const wedataOpsAlarmMessages = tencentcloud.wedata.getOpsAlarmMessages({
  *     projectId: "1859317240494305280",
  *     startTime: "2025-10-14 21:09:26",
  *     endTime: "2025-10-14 21:10:26",
@@ -129,15 +129,15 @@ export interface GetOpsAlarmMessagesOutputArgs {
     /**
      * Alarm level.
      */
-    alarmLevel?: pulumi.Input<number>;
+    alarmLevel?: pulumi.Input<number | undefined>;
     /**
      * Alert recipient Id.
      */
-    alarmRecipientId?: pulumi.Input<string>;
+    alarmRecipientId?: pulumi.Input<string | undefined>;
     /**
      * Specifies the Alarm end time in the format yyyy-MM-dd HH:MM:ss.
      */
-    endTime?: pulumi.Input<string>;
+    endTime?: pulumi.Input<string | undefined>;
     /**
      * Project id.
      */
@@ -145,13 +145,13 @@ export interface GetOpsAlarmMessagesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Starting Alarm time. format: yyyy-MM-dd HH:MM:ss.
      */
-    startTime?: pulumi.Input<string>;
+    startTime?: pulumi.Input<string | undefined>;
     /**
      * For incoming and returned filter time zone, default UTC+8.
      */
-    timeZone?: pulumi.Input<string>;
+    timeZone?: pulumi.Input<string | undefined>;
 }

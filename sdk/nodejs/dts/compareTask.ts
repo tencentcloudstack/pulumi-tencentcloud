@@ -128,23 +128,23 @@ export interface CompareTaskState {
     /**
      * compare task id.
      */
-    compareTaskId?: pulumi.Input<string>;
+    compareTaskId?: pulumi.Input<string | undefined>;
     /**
      * job id.
      */
-    jobId?: pulumi.Input<string>;
+    jobId?: pulumi.Input<string | undefined>;
     /**
      * object mode.
      */
-    objectMode?: pulumi.Input<string>;
+    objectMode?: pulumi.Input<string | undefined>;
     /**
      * objects.
      */
-    objects?: pulumi.Input<inputs.Dts.CompareTaskObjects>;
+    objects?: pulumi.Input<inputs.Dts.CompareTaskObjects | undefined>;
     /**
      * task name.
      */
-    taskName?: pulumi.Input<string>;
+    taskName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -158,13 +158,13 @@ export interface CompareTaskArgs {
     /**
      * object mode.
      */
-    objectMode?: pulumi.Input<string>;
+    objectMode?: pulumi.Input<string | undefined>;
     /**
      * objects.
      */
-    objects?: pulumi.Input<inputs.Dts.CompareTaskObjects>;
+    objects?: pulumi.Input<inputs.Dts.CompareTaskObjects | undefined>;
     /**
      * task name.
      */
-    taskName?: pulumi.Input<string>;
+    taskName?: pulumi.Input<string | undefined>;
 }

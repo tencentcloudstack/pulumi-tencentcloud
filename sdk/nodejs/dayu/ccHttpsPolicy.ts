@@ -171,47 +171,47 @@ export interface CcHttpsPolicyState {
     /**
      * Action mode. Valid values are `alg` and `drop`.
      */
-    action?: pulumi.Input<string>;
+    action?: pulumi.Input<string | undefined>;
     /**
      * Create time of the CC self-define https policy.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Domain that the CC self-define https policy works for, only valid when `protocol` is `https`.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Ip of the CC self-define https policy.
      */
-    ipLists?: pulumi.Input<pulumi.Input<string>[]>;
+    ipLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Name of the CC self-define https policy. Length should between 1 and 20.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Id of the CC self-define https policy.
      */
-    policyId?: pulumi.Input<string>;
+    policyId?: pulumi.Input<string | undefined>;
     /**
      * ID of the resource that the CC self-define https policy works for.
      */
-    resourceId?: pulumi.Input<string>;
+    resourceId?: pulumi.Input<string | undefined>;
     /**
      * Type of the resource that the CC self-define https policy works for, valid value is `bgpip`.
      */
-    resourceType?: pulumi.Input<string>;
+    resourceType?: pulumi.Input<string | undefined>;
     /**
      * Rule id of the domain that the CC self-define https policy works for, only valid when `protocol` is `https`.
      */
-    ruleId?: pulumi.Input<string>;
+    ruleId?: pulumi.Input<string | undefined>;
     /**
      * Rule list of the CC self-define https policy.
      */
-    ruleLists?: pulumi.Input<pulumi.Input<inputs.Dayu.CcHttpsPolicyRuleList>[]>;
+    ruleLists?: pulumi.Input<pulumi.Input<inputs.Dayu.CcHttpsPolicyRuleList>[] | undefined>;
     /**
      * Indicate the CC self-define https policy takes effect or not.
      */
-    switch?: pulumi.Input<boolean>;
+    switch?: pulumi.Input<boolean | undefined>;
 }
 
 /**
@@ -221,7 +221,7 @@ export interface CcHttpsPolicyArgs {
     /**
      * Action mode. Valid values are `alg` and `drop`.
      */
-    action?: pulumi.Input<string>;
+    action?: pulumi.Input<string | undefined>;
     /**
      * Domain that the CC self-define https policy works for, only valid when `protocol` is `https`.
      */
@@ -229,7 +229,7 @@ export interface CcHttpsPolicyArgs {
     /**
      * Name of the CC self-define https policy. Length should between 1 and 20.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * ID of the resource that the CC self-define https policy works for.
      */
@@ -249,5 +249,5 @@ export interface CcHttpsPolicyArgs {
     /**
      * Indicate the CC self-define https policy takes effect or not.
      */
-    switch?: pulumi.Input<boolean>;
+    switch?: pulumi.Input<boolean | undefined>;
 }

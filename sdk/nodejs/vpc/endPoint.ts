@@ -164,43 +164,43 @@ export interface EndPointState {
     /**
      * CDC instance ID.
      */
-    cdcId?: pulumi.Input<string>;
+    cdcId?: pulumi.Input<string | undefined>;
     /**
      * Create Time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Name of endpoint.
      */
-    endPointName?: pulumi.Input<string>;
+    endPointName?: pulumi.Input<string | undefined>;
     /**
      * APPID.
      */
-    endPointOwner?: pulumi.Input<string>;
+    endPointOwner?: pulumi.Input<string | undefined>;
     /**
      * ID of endpoint service.
      */
-    endPointServiceId?: pulumi.Input<string>;
+    endPointServiceId?: pulumi.Input<string | undefined>;
     /**
      * VIP of endpoint ip.
      */
-    endPointVip?: pulumi.Input<string>;
+    endPointVip?: pulumi.Input<string | undefined>;
     /**
      * Ordered security groups associated with the endpoint.
      */
-    securityGroupsIds?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupsIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * state of end point.
      */
-    state?: pulumi.Input<string>;
+    state?: pulumi.Input<string | undefined>;
     /**
      * ID of subnet instance.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * ID of vpc instance.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -218,11 +218,11 @@ export interface EndPointArgs {
     /**
      * VIP of endpoint ip.
      */
-    endPointVip?: pulumi.Input<string>;
+    endPointVip?: pulumi.Input<string | undefined>;
     /**
      * Ordered security groups associated with the endpoint.
      */
-    securityGroupsIds?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupsIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * ID of subnet instance.
      */

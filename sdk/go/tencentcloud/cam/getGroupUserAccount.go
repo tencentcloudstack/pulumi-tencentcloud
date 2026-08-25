@@ -75,12 +75,8 @@ type GetGroupUserAccountResult struct {
 }
 
 func GetGroupUserAccountOutput(ctx *pulumi.Context, args GetGroupUserAccountOutputArgs, opts ...pulumi.InvokeOption) GetGroupUserAccountResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetGroupUserAccountResultOutput, error) {
-			args := v.(GetGroupUserAccountArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cam/getGroupUserAccount:getGroupUserAccount", args, GetGroupUserAccountResultOutput{}, options).(GetGroupUserAccountResultOutput), nil
-		}).(GetGroupUserAccountResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cam/getGroupUserAccount:getGroupUserAccount", args, GetGroupUserAccountResultOutput{}, options).(GetGroupUserAccountResultOutput)
 }
 
 // A collection of arguments for invoking getGroupUserAccount.

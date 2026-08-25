@@ -55,6 +55,16 @@ export type Monitor = import("./monitor").Monitor;
 export const Monitor: typeof import("./monitor").Monitor = null as any;
 utilities.lazyLoad(exports, ["Monitor"], () => require("./monitor"));
 
+export { PackageInstanceArgs, PackageInstanceState } from "./packageInstance";
+export type PackageInstance = import("./packageInstance").PackageInstance;
+export const PackageInstance: typeof import("./packageInstance").PackageInstance = null as any;
+utilities.lazyLoad(exports, ["PackageInstance"], () => require("./packageInstance"));
+
+export { PackageTaskArgs, PackageTaskState } from "./packageTask";
+export type PackageTask = import("./packageTask").PackageTask;
+export const PackageTask: typeof import("./packageTask").PackageTask = null as any;
+utilities.lazyLoad(exports, ["PackageTask"], () => require("./packageTask"));
+
 export { StrategyArgs, StrategyState } from "./strategy";
 export type Strategy = import("./strategy").Strategy;
 export const Strategy: typeof import("./strategy").Strategy = null as any;
@@ -71,6 +81,10 @@ const _module = {
                 return new Instance(name, <any>undefined, { urn })
             case "tencentcloud:Igtm/monitor:Monitor":
                 return new Monitor(name, <any>undefined, { urn })
+            case "tencentcloud:Igtm/packageInstance:PackageInstance":
+                return new PackageInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Igtm/packageTask:PackageTask":
+                return new PackageTask(name, <any>undefined, { urn })
             case "tencentcloud:Igtm/strategy:Strategy":
                 return new Strategy(name, <any>undefined, { urn })
             default:
@@ -81,4 +95,6 @@ const _module = {
 pulumi.runtime.registerResourceModule("tencentcloud", "Igtm/addressPool", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Igtm/instance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Igtm/monitor", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Igtm/packageInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Igtm/packageTask", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Igtm/strategy", _module)

@@ -28,7 +28,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
@@ -37,7 +37,7 @@ import (
 //			}
 //			_, err = gwlb.NewTargetGroup(ctx, "gwlb_target_group", &gwlb.TargetGroupArgs{
 //				TargetGroupName: pulumi.String("tf-test"),
-//				VpcId:           vpc.ID(),
+//				VpcId:           vpc2.ID().ToIDOutput().ToStringOutput(),
 //				Port:            pulumi.Int(6081),
 //				HealthCheck: &gwlb.TargetGroupHealthCheckArgs{
 //					HealthSwitch: pulumi.Bool(true),
@@ -60,7 +60,7 @@ import (
 //
 // ## Import
 //
-// gwlb gwlb_target_group can be imported using the id, e.g.
+// gwlb gwlbTargetGroup can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Gwlb/targetGroup:TargetGroup gwlb_target_group gwlb_target_group_id
@@ -73,7 +73,7 @@ type TargetGroup struct {
 	// Health check settings.
 	HealthCheck TargetGroupHealthCheckOutput `pulumi:"healthCheck"`
 	// Default port of the target group, which can be used when servers are added later. Either 'Port' or 'TargetGroupInstances.N.port' must be filled in.
-	Port pulumi.IntPtrOutput `pulumi:"port"`
+	Port pulumi.IntOutput `pulumi:"port"`
 	// GWLB target group protocol.
 	// - TENCENT_GENEVE: GENEVE standard protocol;
 	// - AWS_GENEVE: GENEVE compatibility protocol (a ticket is required for allowlisting).
@@ -305,8 +305,8 @@ func (o TargetGroupOutput) HealthCheck() TargetGroupHealthCheckOutput {
 }
 
 // Default port of the target group, which can be used when servers are added later. Either 'Port' or 'TargetGroupInstances.N.port' must be filled in.
-func (o TargetGroupOutput) Port() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *TargetGroup) pulumi.IntPtrOutput { return v.Port }).(pulumi.IntPtrOutput)
+func (o TargetGroupOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v *TargetGroup) pulumi.IntOutput { return v.Port }).(pulumi.IntOutput)
 }
 
 // GWLB target group protocol.

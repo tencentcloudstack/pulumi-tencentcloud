@@ -14,6 +14,10 @@ import (
 
 // Provides a resource to create a cls topic.
 //
+// > **NOTE:** Field `encryption` can only be enabled, not disabled.
+//
+// > **NOTE:** Field `customKmsInfo` is for user-defined KMS key. If not set, the CLS default key (alias KMS-CLS) is used.
+//
 // ## Example Usage
 //
 // ### Create a standard cls topic
@@ -41,7 +45,7 @@ import (
 //			}
 //			_, err = cls.NewTopic(ctx, "example", &cls.TopicArgs{
 //				TopicName:          pulumi.String("tf_example"),
-//				LogsetId:           example.ID(),
+//				LogsetId:           example.ID().ToIDOutput().ToStringOutput(),
 //				AutoSplit:          pulumi.Bool(false),
 //				MaxSplitPartitions: pulumi.Int(20),
 //				PartitionCount:     pulumi.Int(1),
@@ -87,7 +91,7 @@ import (
 //			}
 //			_, err = cls.NewTopic(ctx, "example", &cls.TopicArgs{
 //				TopicName:          pulumi.String("tf_example"),
-//				LogsetId:           example.ID(),
+//				LogsetId:           example.ID().ToIDOutput().ToStringOutput(),
 //				AutoSplit:          pulumi.Bool(false),
 //				MaxSplitPartitions: pulumi.Int(20),
 //				PartitionCount:     pulumi.Int(1),
@@ -124,6 +128,102 @@ import (
 //
 // ```
 //
+// ### Create a cls metric topic(biz_type=1)
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cls"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			example, err := cls.NewLogset(ctx, "example", &cls.LogsetArgs{
+//				LogsetName: pulumi.String("tf_example"),
+//				Tags: pulumi.StringMap{
+//					"tagKey": pulumi.String("tagValue"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = cls.NewTopic(ctx, "example", &cls.TopicArgs{
+//				TopicName:          pulumi.String("tf_example"),
+//				LogsetId:           example.ID().ToIDOutput().ToStringOutput(),
+//				AutoSplit:          pulumi.Bool(false),
+//				MaxSplitPartitions: pulumi.Int(20),
+//				PartitionCount:     pulumi.Int(1),
+//				Period:             pulumi.Int(30),
+//				StorageType:        pulumi.String("hot"),
+//				Describes:          pulumi.String("Test Demo."),
+//				BizType:            pulumi.Int(1),
+//				Tags: pulumi.StringMap{
+//					"tagKey": pulumi.String("tagValue"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Create a cls topic with custom KMS key (encryption=1)
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cls"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			example, err := cls.NewLogset(ctx, "example", &cls.LogsetArgs{
+//				LogsetName: pulumi.String("tf_example"),
+//				Tags: pulumi.StringMap{
+//					"tagKey": pulumi.String("tagValue"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = cls.NewTopic(ctx, "example", &cls.TopicArgs{
+//				TopicName:          pulumi.String("tf_example"),
+//				LogsetId:           example.ID().ToIDOutput().ToStringOutput(),
+//				AutoSplit:          pulumi.Bool(false),
+//				MaxSplitPartitions: pulumi.Int(20),
+//				PartitionCount:     pulumi.Int(1),
+//				Period:             pulumi.Int(30),
+//				StorageType:        pulumi.String("hot"),
+//				Describes:          pulumi.String("Test Demo."),
+//				Encryption:         pulumi.Int(1),
+//				CustomKmsInfo: &cls.TopicCustomKmsInfoArgs{
+//					KmsRegion: pulumi.String("ap-guangzhou"),
+//					KmsKeyId:  pulumi.String("xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"),
+//				},
+//				Tags: pulumi.StringMap{
+//					"tagKey": pulumi.String("tagValue"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
 // ## Import
 //
 // cls topic can be imported using the id, e.g.
@@ -131,32 +231,44 @@ import (
 // ```sh
 // $ pulumi import tencentcloud:Cls/topic:Topic example 2f5764c1-c833-44c5-84c7-950979b2a278
 // ```
+//
+// cls metric topic (biz_type=1) can be imported using the id with "#1" suffix, e.g.
+//
+// ```sh
+// $ pulumi import tencentcloud:Cls/topic:Topic example 2f5764c1-c833-44c5-84c7-950979b2a278#1
+// ```
 type Topic struct {
 	pulumi.CustomResourceState
 
-	// Whether to enable automatic split. Default value: true.
+	// Whether to enable automatic split. Default value: `true`.
 	AutoSplit pulumi.BoolOutput `pulumi:"autoSplit"`
-	// Log Topic Description.
+	// Topic type. `0`: log topic (default), `1`: metric topic.
+	BizType pulumi.IntOutput `pulumi:"bizType"`
+	// User-defined KMS key information. If empty, the default key (alias `KMS-CLS`) is used.
+	CustomKmsInfo TopicCustomKmsInfoOutput `pulumi:"customKmsInfo"`
+	// Log topic description.
 	Describes pulumi.StringPtrOutput `pulumi:"describes"`
-	// Log Subject Extension Information.
+	// Encryption-related parameters. Supported for encryption-enabled regions and allowlisted users; cannot be passed in other scenarios. `0` or not passed: no encryption; `1`: kms-cls cloud product key encryption. Once enabled, it cannot be disabled. Supported regions: ap-beijing, ap-guangzhou, ap-shanghai, ap-singapore, ap-bangkok, ap-jakarta, eu-frankfurt, ap-seoul, ap-tokyo.
+	Encryption pulumi.IntOutput `pulumi:"encryption"`
+	// Topic extension information.
 	Extends TopicExtendsPtrOutput `pulumi:"extends"`
-	// 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
+	// `0`: turn off log settling. Non-`0`: the number of days of standard storage after enabling log settling. HotPeriod must be greater than or equal to 7 and less than Period. Only effective when `storageType` is `hot`. Not supported for metric topics.
 	HotPeriod pulumi.IntOutput `pulumi:"hotPeriod"`
-	// No authentication switch. False: closed; True: Enable. The default is false. After activation, anonymous access to the log topic will be supported for specified operations.
+	// Free authentication switch. `false`: closed (default); `true`: enabled. When enabled, anonymous access to the log topic will be supported for specified operations. Not supported for metric topics.
 	IsWebTracking pulumi.BoolOutput `pulumi:"isWebTracking"`
-	// Logset ID.
+	// Logset ID. Get the logset ID via `DescribeLogsets` API.
 	LogsetId pulumi.StringOutput `pulumi:"logsetId"`
-	// Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.
+	// Maximum number of partitions allowed for the topic if automatic split is enabled. Default value: `50`.
 	MaxSplitPartitions pulumi.IntOutput `pulumi:"maxSplitPartitions"`
-	// Number of log topic partitions. Default value: 1. Maximum value: 10.
+	// Number of log topic partitions. Default: 1, maximum: 10.
 	PartitionCount pulumi.IntOutput `pulumi:"partitionCount"`
-	// lifetime. Unit: days. Standard storage value range: 1 to 3600. Infrequent storage value range: 7 to 3600 days. A value of 3640 indicates permanent retention.If this value is not input, it defaults to the Period value of the log set corresponding to the accessed log topic (defaults to 30 days in case of access failure).
+	// Retention period, unit: days. Log topic (standard storage): 1 to 3600 days, value `3640` means permanent retention. Log topic (infrequent storage): 7 to 3600 days, value `3640` means permanent retention. Metric topic: 1 to 3600 days, value `3640` means permanent retention.
 	Period pulumi.IntOutput `pulumi:"period"`
-	// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first.
+	// Log topic storage type. Valid values: `hot`: standard storage; `cold`: infrequent storage. Default value: `hot`. Not supported for metric topics.
 	StorageType pulumi.StringOutput `pulumi:"storageType"`
-	// Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
+	// Tag description list. Up to 10 tag key-value pairs are supported, and the same resource can only be bound to the same tag key.
 	Tags pulumi.StringMapOutput `pulumi:"tags"`
-	// Log topic name.
+	// Log topic name. Constraints: cannot be an empty string, cannot contain the `|` character, and cannot use the following reserved names: `clsServiceLog`, `loglistenerStatus`, `loglistenerAlarm`, `loglistenerBusiness`, `clsServiceMetric`.
 	TopicName pulumi.StringOutput `pulumi:"topicName"`
 }
 
@@ -196,56 +308,68 @@ func GetTopic(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Topic resources.
 type topicState struct {
-	// Whether to enable automatic split. Default value: true.
+	// Whether to enable automatic split. Default value: `true`.
 	AutoSplit *bool `pulumi:"autoSplit"`
-	// Log Topic Description.
+	// Topic type. `0`: log topic (default), `1`: metric topic.
+	BizType *int `pulumi:"bizType"`
+	// User-defined KMS key information. If empty, the default key (alias `KMS-CLS`) is used.
+	CustomKmsInfo *TopicCustomKmsInfo `pulumi:"customKmsInfo"`
+	// Log topic description.
 	Describes *string `pulumi:"describes"`
-	// Log Subject Extension Information.
+	// Encryption-related parameters. Supported for encryption-enabled regions and allowlisted users; cannot be passed in other scenarios. `0` or not passed: no encryption; `1`: kms-cls cloud product key encryption. Once enabled, it cannot be disabled. Supported regions: ap-beijing, ap-guangzhou, ap-shanghai, ap-singapore, ap-bangkok, ap-jakarta, eu-frankfurt, ap-seoul, ap-tokyo.
+	Encryption *int `pulumi:"encryption"`
+	// Topic extension information.
 	Extends *TopicExtends `pulumi:"extends"`
-	// 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
+	// `0`: turn off log settling. Non-`0`: the number of days of standard storage after enabling log settling. HotPeriod must be greater than or equal to 7 and less than Period. Only effective when `storageType` is `hot`. Not supported for metric topics.
 	HotPeriod *int `pulumi:"hotPeriod"`
-	// No authentication switch. False: closed; True: Enable. The default is false. After activation, anonymous access to the log topic will be supported for specified operations.
+	// Free authentication switch. `false`: closed (default); `true`: enabled. When enabled, anonymous access to the log topic will be supported for specified operations. Not supported for metric topics.
 	IsWebTracking *bool `pulumi:"isWebTracking"`
-	// Logset ID.
+	// Logset ID. Get the logset ID via `DescribeLogsets` API.
 	LogsetId *string `pulumi:"logsetId"`
-	// Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.
+	// Maximum number of partitions allowed for the topic if automatic split is enabled. Default value: `50`.
 	MaxSplitPartitions *int `pulumi:"maxSplitPartitions"`
-	// Number of log topic partitions. Default value: 1. Maximum value: 10.
+	// Number of log topic partitions. Default: 1, maximum: 10.
 	PartitionCount *int `pulumi:"partitionCount"`
-	// lifetime. Unit: days. Standard storage value range: 1 to 3600. Infrequent storage value range: 7 to 3600 days. A value of 3640 indicates permanent retention.If this value is not input, it defaults to the Period value of the log set corresponding to the accessed log topic (defaults to 30 days in case of access failure).
+	// Retention period, unit: days. Log topic (standard storage): 1 to 3600 days, value `3640` means permanent retention. Log topic (infrequent storage): 7 to 3600 days, value `3640` means permanent retention. Metric topic: 1 to 3600 days, value `3640` means permanent retention.
 	Period *int `pulumi:"period"`
-	// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first.
+	// Log topic storage type. Valid values: `hot`: standard storage; `cold`: infrequent storage. Default value: `hot`. Not supported for metric topics.
 	StorageType *string `pulumi:"storageType"`
-	// Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
+	// Tag description list. Up to 10 tag key-value pairs are supported, and the same resource can only be bound to the same tag key.
 	Tags map[string]string `pulumi:"tags"`
-	// Log topic name.
+	// Log topic name. Constraints: cannot be an empty string, cannot contain the `|` character, and cannot use the following reserved names: `clsServiceLog`, `loglistenerStatus`, `loglistenerAlarm`, `loglistenerBusiness`, `clsServiceMetric`.
 	TopicName *string `pulumi:"topicName"`
 }
 
 type TopicState struct {
-	// Whether to enable automatic split. Default value: true.
+	// Whether to enable automatic split. Default value: `true`.
 	AutoSplit pulumi.BoolPtrInput
-	// Log Topic Description.
+	// Topic type. `0`: log topic (default), `1`: metric topic.
+	BizType pulumi.IntPtrInput
+	// User-defined KMS key information. If empty, the default key (alias `KMS-CLS`) is used.
+	CustomKmsInfo TopicCustomKmsInfoPtrInput
+	// Log topic description.
 	Describes pulumi.StringPtrInput
-	// Log Subject Extension Information.
+	// Encryption-related parameters. Supported for encryption-enabled regions and allowlisted users; cannot be passed in other scenarios. `0` or not passed: no encryption; `1`: kms-cls cloud product key encryption. Once enabled, it cannot be disabled. Supported regions: ap-beijing, ap-guangzhou, ap-shanghai, ap-singapore, ap-bangkok, ap-jakarta, eu-frankfurt, ap-seoul, ap-tokyo.
+	Encryption pulumi.IntPtrInput
+	// Topic extension information.
 	Extends TopicExtendsPtrInput
-	// 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
+	// `0`: turn off log settling. Non-`0`: the number of days of standard storage after enabling log settling. HotPeriod must be greater than or equal to 7 and less than Period. Only effective when `storageType` is `hot`. Not supported for metric topics.
 	HotPeriod pulumi.IntPtrInput
-	// No authentication switch. False: closed; True: Enable. The default is false. After activation, anonymous access to the log topic will be supported for specified operations.
+	// Free authentication switch. `false`: closed (default); `true`: enabled. When enabled, anonymous access to the log topic will be supported for specified operations. Not supported for metric topics.
 	IsWebTracking pulumi.BoolPtrInput
-	// Logset ID.
+	// Logset ID. Get the logset ID via `DescribeLogsets` API.
 	LogsetId pulumi.StringPtrInput
-	// Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.
+	// Maximum number of partitions allowed for the topic if automatic split is enabled. Default value: `50`.
 	MaxSplitPartitions pulumi.IntPtrInput
-	// Number of log topic partitions. Default value: 1. Maximum value: 10.
+	// Number of log topic partitions. Default: 1, maximum: 10.
 	PartitionCount pulumi.IntPtrInput
-	// lifetime. Unit: days. Standard storage value range: 1 to 3600. Infrequent storage value range: 7 to 3600 days. A value of 3640 indicates permanent retention.If this value is not input, it defaults to the Period value of the log set corresponding to the accessed log topic (defaults to 30 days in case of access failure).
+	// Retention period, unit: days. Log topic (standard storage): 1 to 3600 days, value `3640` means permanent retention. Log topic (infrequent storage): 7 to 3600 days, value `3640` means permanent retention. Metric topic: 1 to 3600 days, value `3640` means permanent retention.
 	Period pulumi.IntPtrInput
-	// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first.
+	// Log topic storage type. Valid values: `hot`: standard storage; `cold`: infrequent storage. Default value: `hot`. Not supported for metric topics.
 	StorageType pulumi.StringPtrInput
-	// Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
+	// Tag description list. Up to 10 tag key-value pairs are supported, and the same resource can only be bound to the same tag key.
 	Tags pulumi.StringMapInput
-	// Log topic name.
+	// Log topic name. Constraints: cannot be an empty string, cannot contain the `|` character, and cannot use the following reserved names: `clsServiceLog`, `loglistenerStatus`, `loglistenerAlarm`, `loglistenerBusiness`, `clsServiceMetric`.
 	TopicName pulumi.StringPtrInput
 }
 
@@ -254,57 +378,69 @@ func (TopicState) ElementType() reflect.Type {
 }
 
 type topicArgs struct {
-	// Whether to enable automatic split. Default value: true.
+	// Whether to enable automatic split. Default value: `true`.
 	AutoSplit *bool `pulumi:"autoSplit"`
-	// Log Topic Description.
+	// Topic type. `0`: log topic (default), `1`: metric topic.
+	BizType *int `pulumi:"bizType"`
+	// User-defined KMS key information. If empty, the default key (alias `KMS-CLS`) is used.
+	CustomKmsInfo *TopicCustomKmsInfo `pulumi:"customKmsInfo"`
+	// Log topic description.
 	Describes *string `pulumi:"describes"`
-	// Log Subject Extension Information.
+	// Encryption-related parameters. Supported for encryption-enabled regions and allowlisted users; cannot be passed in other scenarios. `0` or not passed: no encryption; `1`: kms-cls cloud product key encryption. Once enabled, it cannot be disabled. Supported regions: ap-beijing, ap-guangzhou, ap-shanghai, ap-singapore, ap-bangkok, ap-jakarta, eu-frankfurt, ap-seoul, ap-tokyo.
+	Encryption *int `pulumi:"encryption"`
+	// Topic extension information.
 	Extends *TopicExtends `pulumi:"extends"`
-	// 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
+	// `0`: turn off log settling. Non-`0`: the number of days of standard storage after enabling log settling. HotPeriod must be greater than or equal to 7 and less than Period. Only effective when `storageType` is `hot`. Not supported for metric topics.
 	HotPeriod *int `pulumi:"hotPeriod"`
-	// No authentication switch. False: closed; True: Enable. The default is false. After activation, anonymous access to the log topic will be supported for specified operations.
+	// Free authentication switch. `false`: closed (default); `true`: enabled. When enabled, anonymous access to the log topic will be supported for specified operations. Not supported for metric topics.
 	IsWebTracking *bool `pulumi:"isWebTracking"`
-	// Logset ID.
+	// Logset ID. Get the logset ID via `DescribeLogsets` API.
 	LogsetId string `pulumi:"logsetId"`
-	// Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.
+	// Maximum number of partitions allowed for the topic if automatic split is enabled. Default value: `50`.
 	MaxSplitPartitions *int `pulumi:"maxSplitPartitions"`
-	// Number of log topic partitions. Default value: 1. Maximum value: 10.
+	// Number of log topic partitions. Default: 1, maximum: 10.
 	PartitionCount *int `pulumi:"partitionCount"`
-	// lifetime. Unit: days. Standard storage value range: 1 to 3600. Infrequent storage value range: 7 to 3600 days. A value of 3640 indicates permanent retention.If this value is not input, it defaults to the Period value of the log set corresponding to the accessed log topic (defaults to 30 days in case of access failure).
+	// Retention period, unit: days. Log topic (standard storage): 1 to 3600 days, value `3640` means permanent retention. Log topic (infrequent storage): 7 to 3600 days, value `3640` means permanent retention. Metric topic: 1 to 3600 days, value `3640` means permanent retention.
 	Period *int `pulumi:"period"`
-	// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first.
+	// Log topic storage type. Valid values: `hot`: standard storage; `cold`: infrequent storage. Default value: `hot`. Not supported for metric topics.
 	StorageType *string `pulumi:"storageType"`
-	// Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
+	// Tag description list. Up to 10 tag key-value pairs are supported, and the same resource can only be bound to the same tag key.
 	Tags map[string]string `pulumi:"tags"`
-	// Log topic name.
+	// Log topic name. Constraints: cannot be an empty string, cannot contain the `|` character, and cannot use the following reserved names: `clsServiceLog`, `loglistenerStatus`, `loglistenerAlarm`, `loglistenerBusiness`, `clsServiceMetric`.
 	TopicName string `pulumi:"topicName"`
 }
 
 // The set of arguments for constructing a Topic resource.
 type TopicArgs struct {
-	// Whether to enable automatic split. Default value: true.
+	// Whether to enable automatic split. Default value: `true`.
 	AutoSplit pulumi.BoolPtrInput
-	// Log Topic Description.
+	// Topic type. `0`: log topic (default), `1`: metric topic.
+	BizType pulumi.IntPtrInput
+	// User-defined KMS key information. If empty, the default key (alias `KMS-CLS`) is used.
+	CustomKmsInfo TopicCustomKmsInfoPtrInput
+	// Log topic description.
 	Describes pulumi.StringPtrInput
-	// Log Subject Extension Information.
+	// Encryption-related parameters. Supported for encryption-enabled regions and allowlisted users; cannot be passed in other scenarios. `0` or not passed: no encryption; `1`: kms-cls cloud product key encryption. Once enabled, it cannot be disabled. Supported regions: ap-beijing, ap-guangzhou, ap-shanghai, ap-singapore, ap-bangkok, ap-jakarta, eu-frankfurt, ap-seoul, ap-tokyo.
+	Encryption pulumi.IntPtrInput
+	// Topic extension information.
 	Extends TopicExtendsPtrInput
-	// 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
+	// `0`: turn off log settling. Non-`0`: the number of days of standard storage after enabling log settling. HotPeriod must be greater than or equal to 7 and less than Period. Only effective when `storageType` is `hot`. Not supported for metric topics.
 	HotPeriod pulumi.IntPtrInput
-	// No authentication switch. False: closed; True: Enable. The default is false. After activation, anonymous access to the log topic will be supported for specified operations.
+	// Free authentication switch. `false`: closed (default); `true`: enabled. When enabled, anonymous access to the log topic will be supported for specified operations. Not supported for metric topics.
 	IsWebTracking pulumi.BoolPtrInput
-	// Logset ID.
+	// Logset ID. Get the logset ID via `DescribeLogsets` API.
 	LogsetId pulumi.StringInput
-	// Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.
+	// Maximum number of partitions allowed for the topic if automatic split is enabled. Default value: `50`.
 	MaxSplitPartitions pulumi.IntPtrInput
-	// Number of log topic partitions. Default value: 1. Maximum value: 10.
+	// Number of log topic partitions. Default: 1, maximum: 10.
 	PartitionCount pulumi.IntPtrInput
-	// lifetime. Unit: days. Standard storage value range: 1 to 3600. Infrequent storage value range: 7 to 3600 days. A value of 3640 indicates permanent retention.If this value is not input, it defaults to the Period value of the log set corresponding to the accessed log topic (defaults to 30 days in case of access failure).
+	// Retention period, unit: days. Log topic (standard storage): 1 to 3600 days, value `3640` means permanent retention. Log topic (infrequent storage): 7 to 3600 days, value `3640` means permanent retention. Metric topic: 1 to 3600 days, value `3640` means permanent retention.
 	Period pulumi.IntPtrInput
-	// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first.
+	// Log topic storage type. Valid values: `hot`: standard storage; `cold`: infrequent storage. Default value: `hot`. Not supported for metric topics.
 	StorageType pulumi.StringPtrInput
-	// Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
+	// Tag description list. Up to 10 tag key-value pairs are supported, and the same resource can only be bound to the same tag key.
 	Tags pulumi.StringMapInput
-	// Log topic name.
+	// Log topic name. Constraints: cannot be an empty string, cannot contain the `|` character, and cannot use the following reserved names: `clsServiceLog`, `loglistenerStatus`, `loglistenerAlarm`, `loglistenerBusiness`, `clsServiceMetric`.
 	TopicName pulumi.StringInput
 }
 
@@ -395,62 +531,77 @@ func (o TopicOutput) ToTopicOutputWithContext(ctx context.Context) TopicOutput {
 	return o
 }
 
-// Whether to enable automatic split. Default value: true.
+// Whether to enable automatic split. Default value: `true`.
 func (o TopicOutput) AutoSplit() pulumi.BoolOutput {
 	return o.ApplyT(func(v *Topic) pulumi.BoolOutput { return v.AutoSplit }).(pulumi.BoolOutput)
 }
 
-// Log Topic Description.
+// Topic type. `0`: log topic (default), `1`: metric topic.
+func (o TopicOutput) BizType() pulumi.IntOutput {
+	return o.ApplyT(func(v *Topic) pulumi.IntOutput { return v.BizType }).(pulumi.IntOutput)
+}
+
+// User-defined KMS key information. If empty, the default key (alias `KMS-CLS`) is used.
+func (o TopicOutput) CustomKmsInfo() TopicCustomKmsInfoOutput {
+	return o.ApplyT(func(v *Topic) TopicCustomKmsInfoOutput { return v.CustomKmsInfo }).(TopicCustomKmsInfoOutput)
+}
+
+// Log topic description.
 func (o TopicOutput) Describes() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Topic) pulumi.StringPtrOutput { return v.Describes }).(pulumi.StringPtrOutput)
 }
 
-// Log Subject Extension Information.
+// Encryption-related parameters. Supported for encryption-enabled regions and allowlisted users; cannot be passed in other scenarios. `0` or not passed: no encryption; `1`: kms-cls cloud product key encryption. Once enabled, it cannot be disabled. Supported regions: ap-beijing, ap-guangzhou, ap-shanghai, ap-singapore, ap-bangkok, ap-jakarta, eu-frankfurt, ap-seoul, ap-tokyo.
+func (o TopicOutput) Encryption() pulumi.IntOutput {
+	return o.ApplyT(func(v *Topic) pulumi.IntOutput { return v.Encryption }).(pulumi.IntOutput)
+}
+
+// Topic extension information.
 func (o TopicOutput) Extends() TopicExtendsPtrOutput {
 	return o.ApplyT(func(v *Topic) TopicExtendsPtrOutput { return v.Extends }).(TopicExtendsPtrOutput)
 }
 
-// 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
+// `0`: turn off log settling. Non-`0`: the number of days of standard storage after enabling log settling. HotPeriod must be greater than or equal to 7 and less than Period. Only effective when `storageType` is `hot`. Not supported for metric topics.
 func (o TopicOutput) HotPeriod() pulumi.IntOutput {
 	return o.ApplyT(func(v *Topic) pulumi.IntOutput { return v.HotPeriod }).(pulumi.IntOutput)
 }
 
-// No authentication switch. False: closed; True: Enable. The default is false. After activation, anonymous access to the log topic will be supported for specified operations.
+// Free authentication switch. `false`: closed (default); `true`: enabled. When enabled, anonymous access to the log topic will be supported for specified operations. Not supported for metric topics.
 func (o TopicOutput) IsWebTracking() pulumi.BoolOutput {
 	return o.ApplyT(func(v *Topic) pulumi.BoolOutput { return v.IsWebTracking }).(pulumi.BoolOutput)
 }
 
-// Logset ID.
+// Logset ID. Get the logset ID via `DescribeLogsets` API.
 func (o TopicOutput) LogsetId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Topic) pulumi.StringOutput { return v.LogsetId }).(pulumi.StringOutput)
 }
 
-// Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.
+// Maximum number of partitions allowed for the topic if automatic split is enabled. Default value: `50`.
 func (o TopicOutput) MaxSplitPartitions() pulumi.IntOutput {
 	return o.ApplyT(func(v *Topic) pulumi.IntOutput { return v.MaxSplitPartitions }).(pulumi.IntOutput)
 }
 
-// Number of log topic partitions. Default value: 1. Maximum value: 10.
+// Number of log topic partitions. Default: 1, maximum: 10.
 func (o TopicOutput) PartitionCount() pulumi.IntOutput {
 	return o.ApplyT(func(v *Topic) pulumi.IntOutput { return v.PartitionCount }).(pulumi.IntOutput)
 }
 
-// lifetime. Unit: days. Standard storage value range: 1 to 3600. Infrequent storage value range: 7 to 3600 days. A value of 3640 indicates permanent retention.If this value is not input, it defaults to the Period value of the log set corresponding to the accessed log topic (defaults to 30 days in case of access failure).
+// Retention period, unit: days. Log topic (standard storage): 1 to 3600 days, value `3640` means permanent retention. Log topic (infrequent storage): 7 to 3600 days, value `3640` means permanent retention. Metric topic: 1 to 3600 days, value `3640` means permanent retention.
 func (o TopicOutput) Period() pulumi.IntOutput {
 	return o.ApplyT(func(v *Topic) pulumi.IntOutput { return v.Period }).(pulumi.IntOutput)
 }
 
-// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first.
+// Log topic storage type. Valid values: `hot`: standard storage; `cold`: infrequent storage. Default value: `hot`. Not supported for metric topics.
 func (o TopicOutput) StorageType() pulumi.StringOutput {
 	return o.ApplyT(func(v *Topic) pulumi.StringOutput { return v.StorageType }).(pulumi.StringOutput)
 }
 
-// Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
+// Tag description list. Up to 10 tag key-value pairs are supported, and the same resource can only be bound to the same tag key.
 func (o TopicOutput) Tags() pulumi.StringMapOutput {
 	return o.ApplyT(func(v *Topic) pulumi.StringMapOutput { return v.Tags }).(pulumi.StringMapOutput)
 }
 
-// Log topic name.
+// Log topic name. Constraints: cannot be an empty string, cannot contain the `|` character, and cannot use the following reserved names: `clsServiceLog`, `loglistenerStatus`, `loglistenerAlarm`, `loglistenerBusiness`, `clsServiceMetric`.
 func (o TopicOutput) TopicName() pulumi.StringOutput {
 	return o.ApplyT(func(v *Topic) pulumi.StringOutput { return v.TopicName }).(pulumi.StringOutput)
 }

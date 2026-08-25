@@ -128,41 +128,41 @@ export interface GetInstancesOutputArgs {
     /**
      * cluster excluster type.
      */
-    exclusterType?: pulumi.Input<number>;
+    exclusterType?: pulumi.Input<number | undefined>;
     /**
      * instance ids.
      */
-    instanceIds?: pulumi.Input<pulumi.Input<string>[]>;
+    instanceIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * search according to the cluster excluter type.
      */
-    isFilterExcluster?: pulumi.Input<boolean>;
+    isFilterExcluster?: pulumi.Input<boolean | undefined>;
     /**
      * search according to the vpc.
      */
-    isFilterVpc?: pulumi.Input<boolean>;
+    isFilterVpc?: pulumi.Input<boolean | undefined>;
     /**
      * project ids.
      */
-    projectIds?: pulumi.Input<pulumi.Input<number>[]>;
+    projectIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * search key, support fuzzy query.
      */
-    searchKey?: pulumi.Input<string>;
+    searchKey?: pulumi.Input<string | undefined>;
     /**
      * search name, support instancename, vip, all.
      */
-    searchName?: pulumi.Input<string>;
+    searchName?: pulumi.Input<string | undefined>;
     /**
      * subnet id, valid when IsFilterVpc is true.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * vpc id, valid when IsFilterVpc is true.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }

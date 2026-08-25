@@ -42,17 +42,17 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc-example"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String(zones.Zones[0].Name),
 //				Name:             pulumi.String("subnet-example"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("10.0.0.0/16"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -77,11 +77,11 @@ import (
 //				InstanceName:     pulumi.String("tf-example"),
 //				MemSize:          pulumi.Int(4000),
 //				VolumeSize:       pulumi.Int(200),
-//				VpcId:            vpc.ID(),
-//				SubnetId:         subnet.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 //				IntranetPort:     pulumi.Int(3306),
 //				SecurityGroups: pulumi.StringArray{
-//					securityGroup.ID(),
+//					securityGroup.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				Tags: pulumi.StringMap{
 //					"createBy": pulumi.String("terraform"),
@@ -110,7 +110,7 @@ import (
 //				SecretName:     pulumi.String("tf-example"),
 //				UserNamePrefix: pulumi.String("prefix"),
 //				ProductName:    pulumi.String("Mysql"),
-//				InstanceId:     example.ID(),
+//				InstanceId:     example.ID().ToIDOutput().ToStringOutput(),
 //				Domains: pulumi.StringArray{
 //					pulumi.String("10.0.0.0"),
 //				},
@@ -123,7 +123,7 @@ import (
 //					},
 //				},
 //				Description:       pulumi.String("for ssm product test"),
-//				KmsKeyId:          exampleKey.ID(),
+//				KmsKeyId:          exampleKey.ID().ToIDOutput().ToStringOutput(),
 //				Status:            pulumi.String("Enabled"),
 //				EnableRotation:    pulumi.Bool(true),
 //				RotationBeginTime: pulumi.String("2023-08-05 20:54:33"),
@@ -191,6 +191,61 @@ import (
 //				RotationFrequency: pulumi.Int(30),
 //				Tags: pulumi.StringMap{
 //					"createdBy": pulumi.String("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Ssm secret for mongodb
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ssm"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := ssm.NewProductSecret(ctx, "example", &ssm.ProductSecretArgs{
+//				SecretName:     pulumi.String("tf-mongodb-example"),
+//				UserNamePrefix: pulumi.String("ssm"),
+//				ProductName:    pulumi.String("MongoDB"),
+//				InstanceId:     pulumi.String("cmgo-xxxxxx"),
+//				Domains: pulumi.StringArray{
+//					pulumi.String("%"),
+//				},
+//				PrivilegesLists: ssm.ProductSecretPrivilegesListArray{
+//					&ssm.ProductSecretPrivilegesListArgs{
+//						PrivilegeName: pulumi.String("GlobalPrivileges"),
+//						Privileges: pulumi.StringArray{
+//							pulumi.String("READ_ONLY"),
+//						},
+//					},
+//					&ssm.ProductSecretPrivilegesListArgs{
+//						PrivilegeName: pulumi.String("DatabasePrivileges"),
+//						Database:      pulumi.String("admin"),
+//						Privileges: pulumi.StringArray{
+//							pulumi.String("READ_WRITE"),
+//						},
+//					},
+//				},
+//				Description:       pulumi.String("MongoDB secret"),
+//				Status:            pulumi.String("Enabled"),
+//				EnableRotation:    pulumi.Bool(true),
+//				RotationBeginTime: pulumi.String("2026-02-04 00:00:00"),
+//				RotationFrequency: pulumi.Int(30),
+//				Tags: pulumi.StringMap{
+//					"env": pulumi.String("test"),
 //				},
 //			})
 //			if err != nil {

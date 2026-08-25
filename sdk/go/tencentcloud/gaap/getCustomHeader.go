@@ -67,12 +67,8 @@ type LookupCustomHeaderResult struct {
 }
 
 func LookupCustomHeaderOutput(ctx *pulumi.Context, args LookupCustomHeaderOutputArgs, opts ...pulumi.InvokeOption) LookupCustomHeaderResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupCustomHeaderResultOutput, error) {
-			args := v.(LookupCustomHeaderArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Gaap/getCustomHeader:getCustomHeader", args, LookupCustomHeaderResultOutput{}, options).(LookupCustomHeaderResultOutput), nil
-		}).(LookupCustomHeaderResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Gaap/getCustomHeader:getCustomHeader", args, LookupCustomHeaderResultOutput{}, options).(LookupCustomHeaderResultOutput)
 }
 
 // A collection of arguments for invoking getCustomHeader.

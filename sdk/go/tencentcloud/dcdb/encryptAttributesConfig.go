@@ -38,14 +38,14 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			vpc, err := vpc.GetInstances(ctx, &vpc.GetInstancesArgs{
+//			vpc2, err := vpc.GetInstances(ctx, &vpc.GetInstancesArgs{
 //				Name: pulumi.StringRef("Default-VPC"),
 //			}, nil)
 //			if err != nil {
 //				return err
 //			}
 //			subnet, err := vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
-//				VpcId: pulumi.StringRef(vpc.InstanceLists[0].VpcId),
+//				VpcId: pulumi.StringRef(vpc2.InstanceLists[0].VpcId),
 //			}, nil)
 //			if err != nil {
 //				return err
@@ -106,7 +106,7 @@ import (
 //			hourdbDcdbId := hourdbInstance.ID()
 //			// for postpaid instance
 //			_, err = dcdb.NewEncryptAttributesConfig(ctx, "config_hourdb", &dcdb.EncryptAttributesConfigArgs{
-//				InstanceId:     pulumi.String(hourdbDcdbId),
+//				InstanceId:     hourdbDcdbId.ToIDOutput().ToStringOutput(),
 //				EncryptEnabled: pulumi.Int(1),
 //			})
 //			if err != nil {
@@ -114,7 +114,7 @@ import (
 //			}
 //			// for prepaid instance
 //			_, err = dcdb.NewEncryptAttributesConfig(ctx, "config_prepaid", &dcdb.EncryptAttributesConfigArgs{
-//				InstanceId:     pulumi.String(prepaidDcdbId),
+//				InstanceId:     prepaidDcdbId.ToIDOutput().ToStringOutput(),
 //				EncryptEnabled: pulumi.Int(1),
 //			})
 //			if err != nil {
@@ -128,7 +128,7 @@ import (
 //
 // ## Import
 //
-// dcdb encrypt_attributes_config can be imported using the id, e.g.
+// dcdb encryptAttributesConfig can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Dcdb/encryptAttributesConfig:EncryptAttributesConfig encrypt_attributes_config encrypt_attributes_config_id

@@ -13,7 +13,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     public static class GetSpecinfos
     {
         /// <summary>
-        /// Use this data source to get the available product configs of the postgresql instance.
+        /// Use this data source to get the available product configs of the PostgreSQL specifications.
         /// 
         /// ## Example Usage
         /// 
@@ -21,13 +21,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var foo = Tencentcloud.Postgresql.GetSpecinfos.Invoke(new()
+        ///     var example = Tencentcloud.Postgresql.GetSpecinfos.Invoke(new()
         ///     {
-        ///         AvailabilityZone = "ap-shanghai-2",
+        ///         AvailabilityZone = "ap-guangzhou-7",
+        ///         StorageType = "CLOUD_HSSD",
         ///     });
         /// 
         /// });
@@ -37,7 +38,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSpecinfosResult>("tencentcloud:Postgresql/getSpecinfos:getSpecinfos", args ?? new GetSpecinfosArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Use this data source to get the available product configs of the postgresql instance.
+        /// Use this data source to get the available product configs of the PostgreSQL specifications.
         /// 
         /// ## Example Usage
         /// 
@@ -45,13 +46,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var foo = Tencentcloud.Postgresql.GetSpecinfos.Invoke(new()
+        ///     var example = Tencentcloud.Postgresql.GetSpecinfos.Invoke(new()
         ///     {
-        ///         AvailabilityZone = "ap-shanghai-2",
+        ///         AvailabilityZone = "ap-guangzhou-7",
+        ///         StorageType = "CLOUD_HSSD",
         ///     });
         /// 
         /// });
@@ -61,7 +63,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
             => global::Pulumi.Deployment.Instance.Invoke<GetSpecinfosResult>("tencentcloud:Postgresql/getSpecinfos:getSpecinfos", args ?? new GetSpecinfosInvokeArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Use this data source to get the available product configs of the postgresql instance.
+        /// Use this data source to get the available product configs of the PostgreSQL specifications.
         /// 
         /// ## Example Usage
         /// 
@@ -69,13 +71,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var foo = Tencentcloud.Postgresql.GetSpecinfos.Invoke(new()
+        ///     var example = Tencentcloud.Postgresql.GetSpecinfos.Invoke(new()
         ///     {
-        ///         AvailabilityZone = "ap-shanghai-2",
+        ///         AvailabilityZone = "ap-guangzhou-7",
+        ///         StorageType = "CLOUD_HSSD",
         ///     });
         /// 
         /// });
@@ -100,6 +103,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         [Input("resultOutputFile")]
         public string? ResultOutputFile { get; set; }
 
+        /// <summary>
+        /// Storage type filter. Valid values: `PHYSICAL_LOCAL_SSD` (local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD).
+        /// </summary>
+        [Input("storageType")]
+        public string? StorageType { get; set; }
+
         public GetSpecinfosArgs()
         {
         }
@@ -119,6 +128,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// </summary>
         [Input("resultOutputFile")]
         public Input<string>? ResultOutputFile { get; set; }
+
+        /// <summary>
+        /// Storage type filter. Valid values: `PHYSICAL_LOCAL_SSD` (local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD).
+        /// </summary>
+        [Input("storageType")]
+        public Input<string>? StorageType { get; set; }
 
         public GetSpecinfosInvokeArgs()
         {
@@ -140,6 +155,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// </summary>
         public readonly ImmutableArray<Outputs.GetSpecinfosListResult> Lists;
         public readonly string? ResultOutputFile;
+        public readonly string? StorageType;
 
         [OutputConstructor]
         private GetSpecinfosResult(
@@ -149,12 +165,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
 
             ImmutableArray<Outputs.GetSpecinfosListResult> lists,
 
-            string? resultOutputFile)
+            string? resultOutputFile,
+
+            string? storageType)
         {
             AvailabilityZone = availabilityZone;
             Id = id;
             Lists = lists;
             ResultOutputFile = resultOutputFile;
+            StorageType = storageType;
         }
     }
 }

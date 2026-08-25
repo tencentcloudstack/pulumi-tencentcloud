@@ -20,10 +20,10 @@ import * as utilities from "../utilities";
  *     description: "ci-temp-test-ccn-des",
  *     qos: "AG",
  * });
- * const idInstances = tencentcloud.Ccn.getInstancesOutput({
+ * const idInstances = tencentcloud.ccn.getInstancesOutput({
  *     ccnId: main.id,
  * });
- * const nameInstances = tencentcloud.Ccn.getInstancesOutput({
+ * const nameInstances = tencentcloud.ccn.getInstancesOutput({
  *     name: main.name,
  * });
  * ```
@@ -92,10 +92,10 @@ export interface GetInstancesResult {
  *     description: "ci-temp-test-ccn-des",
  *     qos: "AG",
  * });
- * const idInstances = tencentcloud.Ccn.getInstancesOutput({
+ * const idInstances = tencentcloud.ccn.getInstancesOutput({
  *     ccnId: main.id,
  * });
- * const nameInstances = tencentcloud.Ccn.getInstancesOutput({
+ * const nameInstances = tencentcloud.ccn.getInstancesOutput({
  *     name: main.name,
  * });
  * ```
@@ -117,13 +117,13 @@ export interface GetInstancesOutputArgs {
     /**
      * ID of the CCN to be queried.
      */
-    ccnId?: pulumi.Input<string>;
+    ccnId?: pulumi.Input<string | undefined>;
     /**
      * Name of the CCN to be queried.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

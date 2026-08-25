@@ -52,8 +52,7 @@ import (
 //
 // ## Import
 //
-// tcm cluster_attachment can be imported using the mesh_id#cluster_id, e.g.
-//
+// tcm clusterAttachment can be imported using the mesh_id#cluster_id, e.g.
 // ```sh
 // $ pulumi import tencentcloud:Tcm/clusterAttachment:ClusterAttachment cluster_attachment mesh-b9q6vf9l#cls-rc5uy6dy
 // ```

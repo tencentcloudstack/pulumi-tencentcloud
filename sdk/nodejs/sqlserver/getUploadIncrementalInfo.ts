@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Sqlserver.getUploadIncrementalInfo({
+ * const example = tencentcloud.sqlserver.getUploadIncrementalInfo({
  *     instanceId: "mssql-4tgeyeeh",
  *     backupMigrationId: "mssql-backup-migration-83t5u3tv",
  *     incrementalMigrationId: "mssql-incremental-migration-h36gkdxn",
@@ -106,7 +106,7 @@ export interface GetUploadIncrementalInfoResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Sqlserver.getUploadIncrementalInfo({
+ * const example = tencentcloud.sqlserver.getUploadIncrementalInfo({
  *     instanceId: "mssql-4tgeyeeh",
  *     backupMigrationId: "mssql-backup-migration-83t5u3tv",
  *     incrementalMigrationId: "mssql-incremental-migration-h36gkdxn",
@@ -142,5 +142,5 @@ export interface GetUploadIncrementalInfoOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

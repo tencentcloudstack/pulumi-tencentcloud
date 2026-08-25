@@ -32,7 +32,7 @@ import * as utilities from "../utilities";
  *     listenerId: fooLayer7Listener.id,
  *     domain: "www.qq.com",
  * });
- * const foo = tencentcloud.Gaap.getHttpDomainsOutput({
+ * const foo = tencentcloud.gaap.getHttpDomainsOutput({
  *     listenerId: fooLayer7Listener.id,
  *     domain: fooHttpDomain.domain,
  * });
@@ -110,7 +110,7 @@ export interface GetHttpDomainsResult {
  *     listenerId: fooLayer7Listener.id,
  *     domain: "www.qq.com",
  * });
- * const foo = tencentcloud.Gaap.getHttpDomainsOutput({
+ * const foo = tencentcloud.gaap.getHttpDomainsOutput({
  *     listenerId: fooLayer7Listener.id,
  *     domain: fooHttpDomain.domain,
  * });
@@ -140,5 +140,5 @@ export interface GetHttpDomainsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

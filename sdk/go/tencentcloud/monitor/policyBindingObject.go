@@ -21,8 +21,6 @@ import (
 //
 // import (
 //
-//	"fmt"
-//
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/instances"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/monitor"
@@ -31,7 +29,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			instances, err := instances.GetInstance(ctx, &instances.GetInstanceArgs{}, nil)
+//			instances2, err := instances.GetInstance(ctx, &instances.GetInstanceArgs{}, nil)
 //			if err != nil {
 //				return err
 //			}
@@ -78,10 +76,10 @@ import (
 //			}
 //			// for cvm
 //			_, err = monitor.NewPolicyBindingObject(ctx, "binding", &monitor.PolicyBindingObjectArgs{
-//				PolicyId: policy.ID(),
+//				PolicyId: policy.ID().ToIDOutput().ToStringOutput(),
 //				Dimensions: monitor.PolicyBindingObjectDimensionArray{
 //					&monitor.PolicyBindingObjectDimensionArgs{
-//						DimensionsJson: pulumi.Sprintf("{\"unInstanceId\":\"%v\"}", instances.InstanceLists[0].InstanceId),
+//						DimensionsJson: pulumi.Sprintf("{\"unInstanceId\":\"%v\"}", instances2.InstanceLists[0].InstanceId),
 //					},
 //				},
 //			})

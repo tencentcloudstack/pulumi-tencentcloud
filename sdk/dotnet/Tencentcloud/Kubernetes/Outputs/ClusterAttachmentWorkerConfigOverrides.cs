@@ -23,7 +23,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
         /// </summary>
         public readonly int? DesiredPodNum;
         /// <summary>
-        /// This argument was no longer supported by TencentCloud TKE. Docker graph path. Default is `/var/lib/docker`.
+        /// This argument was no longer supported by TencentCloud TKE. Docker graph path. Default is determined by the platform (currently /var/lib/containerd for containerd-based nodes).
         /// </summary>
         public readonly string? DockerGraphPath;
         /// <summary>

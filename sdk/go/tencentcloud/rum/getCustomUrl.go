@@ -136,12 +136,8 @@ type GetCustomUrlResult struct {
 }
 
 func GetCustomUrlOutput(ctx *pulumi.Context, args GetCustomUrlOutputArgs, opts ...pulumi.InvokeOption) GetCustomUrlResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetCustomUrlResultOutput, error) {
-			args := v.(GetCustomUrlArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Rum/getCustomUrl:getCustomUrl", args, GetCustomUrlResultOutput{}, options).(GetCustomUrlResultOutput), nil
-		}).(GetCustomUrlResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Rum/getCustomUrl:getCustomUrl", args, GetCustomUrlResultOutput{}, options).(GetCustomUrlResultOutput)
 }
 
 // A collection of arguments for invoking getCustomUrl.

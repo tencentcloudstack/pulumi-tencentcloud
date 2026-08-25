@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "cdb",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -124,23 +124,23 @@ export interface RoInstanceIpState {
     /**
      * Read-only instance ID, in the format: cdbro-3i70uj0k, which is the same as the read-only instance ID displayed on the cloud database console page.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Intranet IP address of the read-only instance.
      */
-    roVip?: pulumi.Input<string>;
+    roVip?: pulumi.Input<string | undefined>;
     /**
      * Intranet port number of the read-only instance.
      */
-    roVport?: pulumi.Input<number>;
+    roVport?: pulumi.Input<number | undefined>;
     /**
      * Subnet descriptor, for example: subnet-1typ0s7d.
      */
-    uniqSubnetId?: pulumi.Input<string>;
+    uniqSubnetId?: pulumi.Input<string | undefined>;
     /**
      * vpc descriptor, for example: vpc-a23yt67j, if this field is passed, UniqSubnetId must be passed.
      */
-    uniqVpcId?: pulumi.Input<string>;
+    uniqVpcId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -154,9 +154,9 @@ export interface RoInstanceIpArgs {
     /**
      * Subnet descriptor, for example: subnet-1typ0s7d.
      */
-    uniqSubnetId?: pulumi.Input<string>;
+    uniqSubnetId?: pulumi.Input<string | undefined>;
     /**
      * vpc descriptor, for example: vpc-a23yt67j, if this field is passed, UniqSubnetId must be passed.
      */
-    uniqVpcId?: pulumi.Input<string>;
+    uniqVpcId?: pulumi.Input<string | undefined>;
 }

@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create security group.
+ * Provides a resource to create Security group.
  *
  * ## Example Usage
  *
@@ -16,7 +16,7 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const example = new tencentcloud.security.Group("example", {
- *     name: "tf-example-sg",
+ *     name: "tf-example",
  *     description: "sg test",
  * });
  * ```
@@ -28,11 +28,11 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const example = new tencentcloud.security.Group("example", {
- *     name: "tf-example-sg",
+ *     name: "tf-example",
  *     description: "sg test",
  *     projectId: 0,
  *     tags: {
- *         example: "test",
+ *         createdBy: "Terraform",
  *     },
  * });
  * ```
@@ -42,7 +42,7 @@ import * as utilities from "../utilities";
  * Security group can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Security/group:Group  tencentcloud_security_group.sglab sg-ey3wmiz1
+ * $ pulumi import tencentcloud:Security/group:Group example sg-ey3wmiz1
  * ```
  */
 export class Group extends pulumi.CustomResource {
@@ -126,19 +126,19 @@ export interface GroupState {
     /**
      * Description of the security group.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Name of the security group to be queried.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Project ID of the security group.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Tags of the security group.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 /**
@@ -148,17 +148,17 @@ export interface GroupArgs {
     /**
      * Description of the security group.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Name of the security group to be queried.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Project ID of the security group.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Tags of the security group.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

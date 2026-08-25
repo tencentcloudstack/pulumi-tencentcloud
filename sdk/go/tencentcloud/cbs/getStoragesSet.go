@@ -116,12 +116,8 @@ type GetStoragesSetResult struct {
 }
 
 func GetStoragesSetOutput(ctx *pulumi.Context, args GetStoragesSetOutputArgs, opts ...pulumi.InvokeOption) GetStoragesSetResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetStoragesSetResultOutput, error) {
-			args := v.(GetStoragesSetArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cbs/getStoragesSet:getStoragesSet", args, GetStoragesSetResultOutput{}, options).(GetStoragesSetResultOutput), nil
-		}).(GetStoragesSetResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cbs/getStoragesSet:getStoragesSet", args, GetStoragesSetResultOutput{}, options).(GetStoragesSetResultOutput)
 }
 
 // A collection of arguments for invoking getStoragesSet.

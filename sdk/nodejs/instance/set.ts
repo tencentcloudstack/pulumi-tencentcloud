@@ -97,6 +97,9 @@ export class Set extends pulumi.CustomResource {
      * instance id list.
      */
     declare public /*out*/ readonly instanceIds: pulumi.Output<string[]>;
+    /**
+     * The name of the instance. The max length of instanceName is 128, and default value is `Terraform-CVM-Instance`.
+     */
     declare public readonly instanceName: pulumi.Output<string | undefined>;
     /**
      * Current status of the instance.
@@ -279,136 +282,139 @@ export interface SetState {
     /**
      * Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.
      */
-    allocatePublicIp?: pulumi.Input<boolean>;
+    allocatePublicIp?: pulumi.Input<boolean | undefined>;
     /**
      * The available zone for the CVM instance.
      */
-    availabilityZone?: pulumi.Input<string>;
+    availabilityZone?: pulumi.Input<string | undefined>;
     /**
      * bandwidth package id. if user is standard user, then the bandwidthPackageId is needed, or default has bandwidth_package_id.
      */
-    bandwidthPackageId?: pulumi.Input<string>;
+    bandwidthPackageId?: pulumi.Input<string | undefined>;
     /**
      * CAM role name authorized to access.
      */
-    camRoleName?: pulumi.Input<string>;
+    camRoleName?: pulumi.Input<string | undefined>;
     /**
      * Create time of the instance.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.
      */
-    disableMonitorService?: pulumi.Input<boolean>;
+    disableMonitorService?: pulumi.Input<boolean | undefined>;
     /**
      * Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.
      */
-    disableSecurityService?: pulumi.Input<boolean>;
+    disableSecurityService?: pulumi.Input<boolean | undefined>;
     /**
      * instance ids list to exclude.
      */
-    excludeInstanceIds?: pulumi.Input<pulumi.Input<string>[]>;
+    excludeInstanceIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Expired time of the instance.
      */
-    expiredTime?: pulumi.Input<string>;
+    expiredTime?: pulumi.Input<string | undefined>;
     /**
      * The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifications may lead to the reinstallation of the instance's operating system..
      */
-    hostname?: pulumi.Input<string>;
+    hostname?: pulumi.Input<string | undefined>;
     /**
      * The image to use for the instance. Changing `imageId` will cause the instance reset.
      */
-    imageId?: pulumi.Input<string>;
+    imageId?: pulumi.Input<string | undefined>;
     /**
      * The charge type of instance. Only support `POSTPAID_BY_HOUR`.
      */
-    instanceChargeType?: pulumi.Input<string>;
+    instanceChargeType?: pulumi.Input<string | undefined>;
     /**
      * The number of instances to be purchased. Value range:[1,100]; default value: 1.
      */
-    instanceCount?: pulumi.Input<number>;
+    instanceCount?: pulumi.Input<number | undefined>;
     /**
      * instance id list.
      */
-    instanceIds?: pulumi.Input<pulumi.Input<string>[]>;
-    instanceName?: pulumi.Input<string>;
+    instanceIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
+     * The name of the instance. The max length of instanceName is 128, and default value is `Terraform-CVM-Instance`.
+     */
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * Current status of the instance.
      */
-    instanceStatus?: pulumi.Input<string>;
+    instanceStatus?: pulumi.Input<string | undefined>;
     /**
      * The type of the instance.
      */
-    instanceType?: pulumi.Input<string>;
+    instanceType?: pulumi.Input<string | undefined>;
     /**
      * Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value does not need to be set when `allocatePublicIp` is false.
      */
-    internetChargeType?: pulumi.Input<string>;
+    internetChargeType?: pulumi.Input<string | undefined>;
     /**
      * Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when `allocatePublicIp` is false.
      */
-    internetMaxBandwidthOut?: pulumi.Input<number>;
+    internetMaxBandwidthOut?: pulumi.Input<number | undefined>;
     /**
      * Whether to keep image login or not, default is `false`. When the image type is private or shared or imported, this parameter can be set `true`. Modifications may lead to the reinstallation of the instance's operating system.
      */
-    keepImageLogin?: pulumi.Input<boolean>;
+    keepImageLogin?: pulumi.Input<boolean | undefined>;
     /**
      * The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifications may lead to the reinstallation of the instance's operating system.
      */
-    keyName?: pulumi.Input<string>;
+    keyName?: pulumi.Input<string | undefined>;
     /**
      * Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifications may lead to the reinstallation of the instance's operating system.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * The ID of a placement group.
      */
-    placementGroupId?: pulumi.Input<string>;
+    placementGroupId?: pulumi.Input<string | undefined>;
     /**
      * The private IP to be assigned to this instance, must be in the provided subnet and available.
      */
-    privateIp?: pulumi.Input<string>;
+    privateIp?: pulumi.Input<string | undefined>;
     /**
      * The project the instance belongs to, default to 0.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Public IP of the instance.
      */
-    publicIp?: pulumi.Input<string>;
+    publicIp?: pulumi.Input<string | undefined>;
     /**
      * A list of security group IDs to associate with.
      */
-    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroups?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * System disk snapshot ID used to initialize the system disk. When system disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
      */
-    systemDiskId?: pulumi.Input<string>;
+    systemDiskId?: pulumi.Input<string | undefined>;
     /**
      * Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.
      */
-    systemDiskSize?: pulumi.Input<number>;
+    systemDiskSize?: pulumi.Input<number | undefined>;
     /**
      * System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD. NOTE: If modified, the instance may force stop.
      */
-    systemDiskType?: pulumi.Input<string>;
+    systemDiskType?: pulumi.Input<string | undefined>;
     /**
      * The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.
      */
-    userData?: pulumi.Input<string>;
+    userData?: pulumi.Input<string | undefined>;
     /**
      * The user data to be injected into this instance, in plain text. Conflicts with `userData`. Up to 16 KB after base64 encoded.
      */
-    userDataRaw?: pulumi.Input<string>;
+    userDataRaw?: pulumi.Input<string | undefined>;
     /**
      * The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -418,7 +424,7 @@ export interface SetArgs {
     /**
      * Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.
      */
-    allocatePublicIp?: pulumi.Input<boolean>;
+    allocatePublicIp?: pulumi.Input<boolean | undefined>;
     /**
      * The available zone for the CVM instance.
      */
@@ -426,27 +432,27 @@ export interface SetArgs {
     /**
      * bandwidth package id. if user is standard user, then the bandwidthPackageId is needed, or default has bandwidth_package_id.
      */
-    bandwidthPackageId?: pulumi.Input<string>;
+    bandwidthPackageId?: pulumi.Input<string | undefined>;
     /**
      * CAM role name authorized to access.
      */
-    camRoleName?: pulumi.Input<string>;
+    camRoleName?: pulumi.Input<string | undefined>;
     /**
      * Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.
      */
-    disableMonitorService?: pulumi.Input<boolean>;
+    disableMonitorService?: pulumi.Input<boolean | undefined>;
     /**
      * Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.
      */
-    disableSecurityService?: pulumi.Input<boolean>;
+    disableSecurityService?: pulumi.Input<boolean | undefined>;
     /**
      * instance ids list to exclude.
      */
-    excludeInstanceIds?: pulumi.Input<pulumi.Input<string>[]>;
+    excludeInstanceIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Modifications may lead to the reinstallation of the instance's operating system..
      */
-    hostname?: pulumi.Input<string>;
+    hostname?: pulumi.Input<string | undefined>;
     /**
      * The image to use for the instance. Changing `imageId` will cause the instance reset.
      */
@@ -454,78 +460,81 @@ export interface SetArgs {
     /**
      * The charge type of instance. Only support `POSTPAID_BY_HOUR`.
      */
-    instanceChargeType?: pulumi.Input<string>;
+    instanceChargeType?: pulumi.Input<string | undefined>;
     /**
      * The number of instances to be purchased. Value range:[1,100]; default value: 1.
      */
-    instanceCount?: pulumi.Input<number>;
-    instanceName?: pulumi.Input<string>;
+    instanceCount?: pulumi.Input<number | undefined>;
+    /**
+     * The name of the instance. The max length of instanceName is 128, and default value is `Terraform-CVM-Instance`.
+     */
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * The type of the instance.
      */
-    instanceType?: pulumi.Input<string>;
+    instanceType?: pulumi.Input<string | undefined>;
     /**
      * Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value does not need to be set when `allocatePublicIp` is false.
      */
-    internetChargeType?: pulumi.Input<string>;
+    internetChargeType?: pulumi.Input<string | undefined>;
     /**
      * Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when `allocatePublicIp` is false.
      */
-    internetMaxBandwidthOut?: pulumi.Input<number>;
+    internetMaxBandwidthOut?: pulumi.Input<number | undefined>;
     /**
      * Whether to keep image login or not, default is `false`. When the image type is private or shared or imported, this parameter can be set `true`. Modifications may lead to the reinstallation of the instance's operating system.
      */
-    keepImageLogin?: pulumi.Input<boolean>;
+    keepImageLogin?: pulumi.Input<boolean | undefined>;
     /**
      * The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifications may lead to the reinstallation of the instance's operating system.
      */
-    keyName?: pulumi.Input<string>;
+    keyName?: pulumi.Input<string | undefined>;
     /**
      * Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifications may lead to the reinstallation of the instance's operating system.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * The ID of a placement group.
      */
-    placementGroupId?: pulumi.Input<string>;
+    placementGroupId?: pulumi.Input<string | undefined>;
     /**
      * The private IP to be assigned to this instance, must be in the provided subnet and available.
      */
-    privateIp?: pulumi.Input<string>;
+    privateIp?: pulumi.Input<string | undefined>;
     /**
      * The project the instance belongs to, default to 0.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * A list of security group IDs to associate with.
      */
-    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroups?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * System disk snapshot ID used to initialize the system disk. When system disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
      */
-    systemDiskId?: pulumi.Input<string>;
+    systemDiskId?: pulumi.Input<string | undefined>;
     /**
      * Size of the system disk. Valid value ranges: (50~1000). and unit is GB. Default is 50GB. If modified, the instance may force stop.
      */
-    systemDiskSize?: pulumi.Input<number>;
+    systemDiskSize?: pulumi.Input<number | undefined>;
     /**
      * System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD. NOTE: If modified, the instance may force stop.
      */
-    systemDiskType?: pulumi.Input<string>;
+    systemDiskType?: pulumi.Input<string | undefined>;
     /**
      * The user data to be injected into this instance. Must be base64 encoded and up to 16 KB.
      */
-    userData?: pulumi.Input<string>;
+    userData?: pulumi.Input<string | undefined>;
     /**
      * The user data to be injected into this instance, in plain text. Conflicts with `userData`. Up to 16 KB after base64 encoded.
      */
-    userDataRaw?: pulumi.Input<string>;
+    userDataRaw?: pulumi.Input<string | undefined>;
     /**
      * The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }

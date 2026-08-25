@@ -25,7 +25,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * organization org_member_policy_attachment can be imported using the id, e.g.
+ * organization orgMemberPolicyAttachment can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Organization/orgMemberPolicyAttachment:OrgMemberPolicyAttachment org_member_policy_attachment org_member_policy_attachment_id
@@ -121,19 +121,19 @@ export interface OrgMemberPolicyAttachmentState {
     /**
      * Notes.The maximum length is 128 characters.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Organization identity ID.
      */
-    identityId?: pulumi.Input<number>;
+    identityId?: pulumi.Input<number | undefined>;
     /**
      * Member Uin list. Up to 10.
      */
-    memberUins?: pulumi.Input<pulumi.Input<number>[]>;
+    memberUins?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Policy name.The maximum length is 128 characters, supporting English letters, numbers, and symbols +=,.@_-.
      */
-    policyName?: pulumi.Input<string>;
+    policyName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -143,7 +143,7 @@ export interface OrgMemberPolicyAttachmentArgs {
     /**
      * Notes.The maximum length is 128 characters.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Organization identity ID.
      */

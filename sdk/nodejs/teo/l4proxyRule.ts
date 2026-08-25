@@ -34,7 +34,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * teo teo_l4_proxy can be imported using the id, e.g.
+ * teo teoL4Proxy can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Teo/l4ProxyRule:L4ProxyRule teo_l4_proxy_rule zoneId#proxyId#ruleId
@@ -124,15 +124,15 @@ export interface L4ProxyRuleState {
     /**
      * List of forwarding rules. Note: When L4ProxyRule is used here, Protocol, PortRange, OriginType, OriginValue, and OriginPortRange are required fields; ClientIPPassThroughMode, SessionPersist, SessionPersistTime, and RuleTag are optional fields; do not fill in RuleId and Status.
      */
-    l4ProxyRules?: pulumi.Input<inputs.Teo.L4ProxyRuleL4ProxyRules>;
+    l4ProxyRules?: pulumi.Input<inputs.Teo.L4ProxyRuleL4ProxyRules | undefined>;
     /**
      * Layer 4 proxy instance ID.
      */
-    proxyId?: pulumi.Input<string>;
+    proxyId?: pulumi.Input<string | undefined>;
     /**
      * Zone ID.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**

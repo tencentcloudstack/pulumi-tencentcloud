@@ -30,7 +30,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     ///   e.respondWith(response);
     /// });
     /// ",
-    ///         Name = "aaa-zone-2qtuhspy7cr6-1310708577",
+    ///         Name = "aaa",
     ///         Remark = "test",
     ///         ZoneId = "zone-2qtuhspy7cr6",
     ///     });
@@ -40,7 +40,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// 
     /// ## Import
     /// 
-    /// teo teo_function can be imported using the id, e.g.
+    /// teo TeoFunction can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Teo/function:Function teo_function zone_id#function_id

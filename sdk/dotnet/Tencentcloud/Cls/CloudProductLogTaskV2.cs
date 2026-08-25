@@ -13,7 +13,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// <summary>
     /// Provides a resource to create a cls cloud product log task
     /// 
-    /// &gt; **NOTE:** In the destruction of resources, if cascading deletion of logset and topic is required, please set `ForceDelete` to `True`.
+    /// &gt; **NOTE:** In the destruction of resources, if cascading deletion of logset and topic is required, please set `IsDeleteTopic` and `IsDeleteLogset` to `True`.
     /// 
     /// ## Example Usage
     /// 
@@ -36,7 +36,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     ///         ClsRegion = "ap-guangzhou",
     ///         LogsetName = "tf-example",
     ///         TopicName = "tf-example",
-    ///         ForceDelete = true,
+    ///         IsDeleteTopic = true,
+    ///         IsDeleteLogset = true,
     ///     });
     /// 
     /// });
@@ -61,7 +62,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     ///         ClsRegion = "ap-guangzhou",
     ///         LogsetId = "ca5b4f56-1174-4eee-bc4c-69e48e0e8c45",
     ///         TopicId = "d8177ca9-466b-42f4-a110-5933daf0a83a",
-    ///         ForceDelete = false,
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Create log delivery with tags bound to the associated logset and topic
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Cls.CloudProductLogTaskV2("example", new()
+    ///     {
+    ///         InstanceId = "postgres-0an6hpv3",
+    ///         AssumerName = "PostgreSQL",
+    ///         LogType = "PostgreSQL-SLOW",
+    ///         CloudProductRegion = "gz",
+    ///         ClsRegion = "ap-guangzhou",
+    ///         LogsetName = "tf-example",
+    ///         TopicName = "tf-example",
+    ///         Tags = 
+    ///         {
+    ///             { "Environment", "production" },
+    ///             { "Team", "backend" },
+    ///         },
     ///     });
     /// 
     /// });
@@ -79,79 +108,110 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     public partial class CloudProductLogTaskV2 : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Cloud product identification, Values: CDS, CWP, CDB, TDSQL-C, MongoDB, TDStore, DCDB, MariaDB, PostgreSQL, BH, APIS.
+        /// Cloud product identification. Supported values: APIS, BH, CDB, CDS, CFS, CLB, CSIP, CWP, DCDB, DNSPod, EMR, HTTPDNS, KHL, llmsgw, MariaDB, MDP, MongoDB, PostgreSQL, TCSS, TDSQL-C, TDStore, TencentDB-Redis, TEO, TokenHub, TSE.
         /// </summary>
         [Output("assumerName")]
         public Output<string> AssumerName { get; private set; } = null!;
 
         /// <summary>
-        /// Cloud product region. There are differences in the input format of different log types in different regions. Please refer to the following example:
-        /// - CDS(all log type): ap-guangzhou
-        /// - CDB-AUDIT: gz
-        /// - TDSQL-C-AUDIT: gz
-        /// - MongoDB-AUDIT: gz
-        /// - MongoDB-SlowLog: ap-guangzhou
-        /// - MongoDB-ErrorLog: ap-guangzhou
-        /// - TDMYSQL-SLOW: gz
-        /// - DCDB(all log type): gz
-        /// - MariaDB(all log type): gz
-        /// - PostgreSQL(all log type): gz
-        /// - BH(all log type): overseas-polaris(Domestic sites overseas)/fsi-polaris(Domestic sites finance)/general-polaris(Domestic sites)/intl-sg-prod(International sites)
-        /// - APIS(all log type): gz.
+        /// Cloud product region. The input format varies by log type:
+        /// - Short region code (e.g., `Gz`, `Sh`, `Bj`): applies to APIS (all), CDB-AUDIT, TDSQL-C-AUDIT, TDMYSQL-SLOW, DCDB (all), MariaDB (all), PostgreSQL (all), MongoDB-AUDIT, TencentDB-Redis (all), EMR-OPERATION.
+        /// - Long region code (e.g., `ap-guangzhou`, `ap-shanghai`): applies to CDS (all), MongoDB-SlowLog, MongoDB-ErrorLog, MongoDB-OperationLog, DNSPod-RESOLVELOG, HTTPDNS-RESOLVELOG, MDP-SSAI, CFS-AUDIT, TEO-INEFERENCE, CSIP, TCSS, TSE, CWP, KHL.
+        /// - BH Polaris name: applies to BH (all), values: `overseas-polaris` (Hong Kong and overseas), `fsi-polaris` (finance zone), `general-polaris` (general zone), `intl-sg-prod` (international site).
         /// </summary>
         [Output("cloudProductRegion")]
         public Output<string> CloudProductRegion { get; private set; } = null!;
 
         /// <summary>
-        /// CLS target region.
+        /// CLS target region. Refer to the region list documentation for supported regions.
         /// </summary>
         [Output("clsRegion")]
         public Output<string> ClsRegion { get; private set; } = null!;
 
         /// <summary>
-        /// Log configuration extension information, generally used to store additional log delivery configurations.
+        /// Log configuration extension information, generally used to store additional log delivery configurations. Example: `{"ServiceName":["HDFS","KNOX","YARN","ZOOKEEPER"],"Policy":0}`.
         /// </summary>
         [Output("extend")]
         public Output<string> Extend { get; private set; } = null!;
 
         /// <summary>
-        /// Indicate whether to forcibly delete the corresponding logset and topic. If set to true, it will be forcibly deleted. Default is false.
+        /// It has been deprecated from version 1.82.102. Please use `IsDeleteTopic` or `IsDeleteLogset` instead. Indicate whether to forcibly delete the corresponding logset and topic. If set to true, it will be forcibly deleted. Default is false.
         /// </summary>
         [Output("forceDelete")]
         public Output<bool?> ForceDelete { get; private set; } = null!;
 
         /// <summary>
-        /// Instance ID.
+        /// Instance ID. Obtain it from the official documentation of the corresponding cloud product.
         /// </summary>
         [Output("instanceId")]
         public Output<string> InstanceId { get; private set; } = null!;
 
         /// <summary>
-        /// Log type, Values: CDS-AUDIT, CDS-RISK, CDB-AUDIT, TDSQL-C-AUDIT, MongoDB-AUDIT, MongoDB-SlowLog, MongoDB-ErrorLog, TDMYSQL-SLOW, DCDB-AUDIT, DCDB-SLOW, DCDB-ERROR, MariaDB-AUDIT, MariaDB-SLOW, MariaDB-ERROR, PostgreSQL-SLOW, PostgreSQL-ERROR, PostgreSQL-AUDIT, BH-FILELOG, BH-COMMANDLOG, APIS-ACCESS.
+        /// Whether to delete the associated Logset when deleting the log collection task. This field only takes effect when `ForceDelete` is false. If the Logset has other Topics, it will not be deleted. Default is false.
+        /// </summary>
+        [Output("isDeleteLogset")]
+        public Output<bool?> IsDeleteLogset { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to delete the associated Topic when deleting the log collection task. This field only takes effect when `ForceDelete` is false. Default is false.
+        /// </summary>
+        [Output("isDeleteTopic")]
+        public Output<bool?> IsDeleteTopic { get; private set; } = null!;
+
+        /// <summary>
+        /// Log type, must correspond to the `AssumerName` value. Mapping:
+        /// - APIS: APIS-ACCESS
+        /// - BH: BH-COMMANDLOG, BH-FILELOG
+        /// - CDB: CDB-AUDIT
+        /// - CDS: CDS-AUDIT, CDS-RISK
+        /// - CFS: CFS-AUDIT
+        /// - CLB: CMR-SPEND
+        /// - CSIP: CSIP
+        /// - CWP: CWP
+        /// - DCDB: DCDB-AUDIT, DCDB-ERROR, DCDB-SLOW
+        /// - DNSPod: DNSPod-RESOLVELOG
+        /// - EMR: EMR-OPERATION
+        /// - HTTPDNS: HTTPDNS-RESOLVELOG
+        /// - MariaDB: MariaDB-AUDIT, MariaDB-ERROR, MariaDB-SLOW
+        /// - MDP: MDP-SSAI
+        /// - MongoDB: MongoDB-AUDIT, MongoDB-ErrorLog, MongoDB-OperationLog, MongoDB-SlowLog
+        /// - PostgreSQL: PostgreSQL-AUDIT, PostgreSQL-ERROR, PostgreSQL-SLOW
+        /// - TCSS: TCSS
+        /// - TDSQL-C: TDSQL-C-AUDIT
+        /// - TDStore: TDMYSQL-SLOW
+        /// - TencentDB-Redis: Redis-AUDIT, Redis-ERROR, Redis-SLOW
+        /// - TEO: TEO-INEFERENCE
+        /// - llmsgw: llmsgw-mcp-security-alarm.
         /// </summary>
         [Output("logType")]
         public Output<string> LogType { get; private set; } = null!;
 
         /// <summary>
-        /// Log set ID.
+        /// Log set ID. Obtain it via the DescribeLogsets API.
         /// </summary>
         [Output("logsetId")]
         public Output<string> LogsetId { get; private set; } = null!;
 
         /// <summary>
-        /// Log set name, required if `LogsetId` is not filled in. If the log set does not exist, it will be automatically created.
+        /// Log set name, required when `LogsetId` is not specified. If the log set does not exist, it will be created automatically.
         /// </summary>
         [Output("logsetName")]
         public Output<string> LogsetName { get; private set; } = null!;
 
         /// <summary>
-        /// Log theme ID.
+        /// Tag description list. Up to 10 tag key-value pairs are supported, and each tag key can only be bound to the same resource once. Tags are bound to the associated log topic.
+        /// </summary>
+        [Output("tags")]
+        public Output<ImmutableDictionary<string, string>?> Tags { get; private set; } = null!;
+
+        /// <summary>
+        /// Log topic ID. Obtain it via the DescribeTopics API.
         /// </summary>
         [Output("topicId")]
         public Output<string> TopicId { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the log topic is required when `TopicId` is not filled in. If the log theme does not exist, it will be automatically created.
+        /// Log topic name, required when `TopicId` is not specified. If the log topic does not exist, it will be created automatically.
         /// </summary>
         [Output("topicName")]
         public Output<string> TopicName { get; private set; } = null!;
@@ -204,79 +264,116 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     public sealed class CloudProductLogTaskV2Args : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Cloud product identification, Values: CDS, CWP, CDB, TDSQL-C, MongoDB, TDStore, DCDB, MariaDB, PostgreSQL, BH, APIS.
+        /// Cloud product identification. Supported values: APIS, BH, CDB, CDS, CFS, CLB, CSIP, CWP, DCDB, DNSPod, EMR, HTTPDNS, KHL, llmsgw, MariaDB, MDP, MongoDB, PostgreSQL, TCSS, TDSQL-C, TDStore, TencentDB-Redis, TEO, TokenHub, TSE.
         /// </summary>
         [Input("assumerName", required: true)]
         public Input<string> AssumerName { get; set; } = null!;
 
         /// <summary>
-        /// Cloud product region. There are differences in the input format of different log types in different regions. Please refer to the following example:
-        /// - CDS(all log type): ap-guangzhou
-        /// - CDB-AUDIT: gz
-        /// - TDSQL-C-AUDIT: gz
-        /// - MongoDB-AUDIT: gz
-        /// - MongoDB-SlowLog: ap-guangzhou
-        /// - MongoDB-ErrorLog: ap-guangzhou
-        /// - TDMYSQL-SLOW: gz
-        /// - DCDB(all log type): gz
-        /// - MariaDB(all log type): gz
-        /// - PostgreSQL(all log type): gz
-        /// - BH(all log type): overseas-polaris(Domestic sites overseas)/fsi-polaris(Domestic sites finance)/general-polaris(Domestic sites)/intl-sg-prod(International sites)
-        /// - APIS(all log type): gz.
+        /// Cloud product region. The input format varies by log type:
+        /// - Short region code (e.g., `Gz`, `Sh`, `Bj`): applies to APIS (all), CDB-AUDIT, TDSQL-C-AUDIT, TDMYSQL-SLOW, DCDB (all), MariaDB (all), PostgreSQL (all), MongoDB-AUDIT, TencentDB-Redis (all), EMR-OPERATION.
+        /// - Long region code (e.g., `ap-guangzhou`, `ap-shanghai`): applies to CDS (all), MongoDB-SlowLog, MongoDB-ErrorLog, MongoDB-OperationLog, DNSPod-RESOLVELOG, HTTPDNS-RESOLVELOG, MDP-SSAI, CFS-AUDIT, TEO-INEFERENCE, CSIP, TCSS, TSE, CWP, KHL.
+        /// - BH Polaris name: applies to BH (all), values: `overseas-polaris` (Hong Kong and overseas), `fsi-polaris` (finance zone), `general-polaris` (general zone), `intl-sg-prod` (international site).
         /// </summary>
         [Input("cloudProductRegion", required: true)]
         public Input<string> CloudProductRegion { get; set; } = null!;
 
         /// <summary>
-        /// CLS target region.
+        /// CLS target region. Refer to the region list documentation for supported regions.
         /// </summary>
         [Input("clsRegion", required: true)]
         public Input<string> ClsRegion { get; set; } = null!;
 
         /// <summary>
-        /// Log configuration extension information, generally used to store additional log delivery configurations.
+        /// Log configuration extension information, generally used to store additional log delivery configurations. Example: `{"ServiceName":["HDFS","KNOX","YARN","ZOOKEEPER"],"Policy":0}`.
         /// </summary>
         [Input("extend")]
         public Input<string>? Extend { get; set; }
 
         /// <summary>
-        /// Indicate whether to forcibly delete the corresponding logset and topic. If set to true, it will be forcibly deleted. Default is false.
+        /// It has been deprecated from version 1.82.102. Please use `IsDeleteTopic` or `IsDeleteLogset` instead. Indicate whether to forcibly delete the corresponding logset and topic. If set to true, it will be forcibly deleted. Default is false.
         /// </summary>
         [Input("forceDelete")]
         public Input<bool>? ForceDelete { get; set; }
 
         /// <summary>
-        /// Instance ID.
+        /// Instance ID. Obtain it from the official documentation of the corresponding cloud product.
         /// </summary>
         [Input("instanceId", required: true)]
         public Input<string> InstanceId { get; set; } = null!;
 
         /// <summary>
-        /// Log type, Values: CDS-AUDIT, CDS-RISK, CDB-AUDIT, TDSQL-C-AUDIT, MongoDB-AUDIT, MongoDB-SlowLog, MongoDB-ErrorLog, TDMYSQL-SLOW, DCDB-AUDIT, DCDB-SLOW, DCDB-ERROR, MariaDB-AUDIT, MariaDB-SLOW, MariaDB-ERROR, PostgreSQL-SLOW, PostgreSQL-ERROR, PostgreSQL-AUDIT, BH-FILELOG, BH-COMMANDLOG, APIS-ACCESS.
+        /// Whether to delete the associated Logset when deleting the log collection task. This field only takes effect when `ForceDelete` is false. If the Logset has other Topics, it will not be deleted. Default is false.
+        /// </summary>
+        [Input("isDeleteLogset")]
+        public Input<bool>? IsDeleteLogset { get; set; }
+
+        /// <summary>
+        /// Whether to delete the associated Topic when deleting the log collection task. This field only takes effect when `ForceDelete` is false. Default is false.
+        /// </summary>
+        [Input("isDeleteTopic")]
+        public Input<bool>? IsDeleteTopic { get; set; }
+
+        /// <summary>
+        /// Log type, must correspond to the `AssumerName` value. Mapping:
+        /// - APIS: APIS-ACCESS
+        /// - BH: BH-COMMANDLOG, BH-FILELOG
+        /// - CDB: CDB-AUDIT
+        /// - CDS: CDS-AUDIT, CDS-RISK
+        /// - CFS: CFS-AUDIT
+        /// - CLB: CMR-SPEND
+        /// - CSIP: CSIP
+        /// - CWP: CWP
+        /// - DCDB: DCDB-AUDIT, DCDB-ERROR, DCDB-SLOW
+        /// - DNSPod: DNSPod-RESOLVELOG
+        /// - EMR: EMR-OPERATION
+        /// - HTTPDNS: HTTPDNS-RESOLVELOG
+        /// - MariaDB: MariaDB-AUDIT, MariaDB-ERROR, MariaDB-SLOW
+        /// - MDP: MDP-SSAI
+        /// - MongoDB: MongoDB-AUDIT, MongoDB-ErrorLog, MongoDB-OperationLog, MongoDB-SlowLog
+        /// - PostgreSQL: PostgreSQL-AUDIT, PostgreSQL-ERROR, PostgreSQL-SLOW
+        /// - TCSS: TCSS
+        /// - TDSQL-C: TDSQL-C-AUDIT
+        /// - TDStore: TDMYSQL-SLOW
+        /// - TencentDB-Redis: Redis-AUDIT, Redis-ERROR, Redis-SLOW
+        /// - TEO: TEO-INEFERENCE
+        /// - llmsgw: llmsgw-mcp-security-alarm.
         /// </summary>
         [Input("logType", required: true)]
         public Input<string> LogType { get; set; } = null!;
 
         /// <summary>
-        /// Log set ID.
+        /// Log set ID. Obtain it via the DescribeLogsets API.
         /// </summary>
         [Input("logsetId")]
         public Input<string>? LogsetId { get; set; }
 
         /// <summary>
-        /// Log set name, required if `LogsetId` is not filled in. If the log set does not exist, it will be automatically created.
+        /// Log set name, required when `LogsetId` is not specified. If the log set does not exist, it will be created automatically.
         /// </summary>
         [Input("logsetName")]
         public Input<string>? LogsetName { get; set; }
 
+        [Input("tags")]
+        private InputMap<string>? _tags;
+
         /// <summary>
-        /// Log theme ID.
+        /// Tag description list. Up to 10 tag key-value pairs are supported, and each tag key can only be bound to the same resource once. Tags are bound to the associated log topic.
+        /// </summary>
+        public InputMap<string> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<string>());
+            set => _tags = value;
+        }
+
+        /// <summary>
+        /// Log topic ID. Obtain it via the DescribeTopics API.
         /// </summary>
         [Input("topicId")]
         public Input<string>? TopicId { get; set; }
 
         /// <summary>
-        /// The name of the log topic is required when `TopicId` is not filled in. If the log theme does not exist, it will be automatically created.
+        /// Log topic name, required when `TopicId` is not specified. If the log topic does not exist, it will be created automatically.
         /// </summary>
         [Input("topicName")]
         public Input<string>? TopicName { get; set; }
@@ -290,79 +387,116 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     public sealed class CloudProductLogTaskV2State : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Cloud product identification, Values: CDS, CWP, CDB, TDSQL-C, MongoDB, TDStore, DCDB, MariaDB, PostgreSQL, BH, APIS.
+        /// Cloud product identification. Supported values: APIS, BH, CDB, CDS, CFS, CLB, CSIP, CWP, DCDB, DNSPod, EMR, HTTPDNS, KHL, llmsgw, MariaDB, MDP, MongoDB, PostgreSQL, TCSS, TDSQL-C, TDStore, TencentDB-Redis, TEO, TokenHub, TSE.
         /// </summary>
         [Input("assumerName")]
         public Input<string>? AssumerName { get; set; }
 
         /// <summary>
-        /// Cloud product region. There are differences in the input format of different log types in different regions. Please refer to the following example:
-        /// - CDS(all log type): ap-guangzhou
-        /// - CDB-AUDIT: gz
-        /// - TDSQL-C-AUDIT: gz
-        /// - MongoDB-AUDIT: gz
-        /// - MongoDB-SlowLog: ap-guangzhou
-        /// - MongoDB-ErrorLog: ap-guangzhou
-        /// - TDMYSQL-SLOW: gz
-        /// - DCDB(all log type): gz
-        /// - MariaDB(all log type): gz
-        /// - PostgreSQL(all log type): gz
-        /// - BH(all log type): overseas-polaris(Domestic sites overseas)/fsi-polaris(Domestic sites finance)/general-polaris(Domestic sites)/intl-sg-prod(International sites)
-        /// - APIS(all log type): gz.
+        /// Cloud product region. The input format varies by log type:
+        /// - Short region code (e.g., `Gz`, `Sh`, `Bj`): applies to APIS (all), CDB-AUDIT, TDSQL-C-AUDIT, TDMYSQL-SLOW, DCDB (all), MariaDB (all), PostgreSQL (all), MongoDB-AUDIT, TencentDB-Redis (all), EMR-OPERATION.
+        /// - Long region code (e.g., `ap-guangzhou`, `ap-shanghai`): applies to CDS (all), MongoDB-SlowLog, MongoDB-ErrorLog, MongoDB-OperationLog, DNSPod-RESOLVELOG, HTTPDNS-RESOLVELOG, MDP-SSAI, CFS-AUDIT, TEO-INEFERENCE, CSIP, TCSS, TSE, CWP, KHL.
+        /// - BH Polaris name: applies to BH (all), values: `overseas-polaris` (Hong Kong and overseas), `fsi-polaris` (finance zone), `general-polaris` (general zone), `intl-sg-prod` (international site).
         /// </summary>
         [Input("cloudProductRegion")]
         public Input<string>? CloudProductRegion { get; set; }
 
         /// <summary>
-        /// CLS target region.
+        /// CLS target region. Refer to the region list documentation for supported regions.
         /// </summary>
         [Input("clsRegion")]
         public Input<string>? ClsRegion { get; set; }
 
         /// <summary>
-        /// Log configuration extension information, generally used to store additional log delivery configurations.
+        /// Log configuration extension information, generally used to store additional log delivery configurations. Example: `{"ServiceName":["HDFS","KNOX","YARN","ZOOKEEPER"],"Policy":0}`.
         /// </summary>
         [Input("extend")]
         public Input<string>? Extend { get; set; }
 
         /// <summary>
-        /// Indicate whether to forcibly delete the corresponding logset and topic. If set to true, it will be forcibly deleted. Default is false.
+        /// It has been deprecated from version 1.82.102. Please use `IsDeleteTopic` or `IsDeleteLogset` instead. Indicate whether to forcibly delete the corresponding logset and topic. If set to true, it will be forcibly deleted. Default is false.
         /// </summary>
         [Input("forceDelete")]
         public Input<bool>? ForceDelete { get; set; }
 
         /// <summary>
-        /// Instance ID.
+        /// Instance ID. Obtain it from the official documentation of the corresponding cloud product.
         /// </summary>
         [Input("instanceId")]
         public Input<string>? InstanceId { get; set; }
 
         /// <summary>
-        /// Log type, Values: CDS-AUDIT, CDS-RISK, CDB-AUDIT, TDSQL-C-AUDIT, MongoDB-AUDIT, MongoDB-SlowLog, MongoDB-ErrorLog, TDMYSQL-SLOW, DCDB-AUDIT, DCDB-SLOW, DCDB-ERROR, MariaDB-AUDIT, MariaDB-SLOW, MariaDB-ERROR, PostgreSQL-SLOW, PostgreSQL-ERROR, PostgreSQL-AUDIT, BH-FILELOG, BH-COMMANDLOG, APIS-ACCESS.
+        /// Whether to delete the associated Logset when deleting the log collection task. This field only takes effect when `ForceDelete` is false. If the Logset has other Topics, it will not be deleted. Default is false.
+        /// </summary>
+        [Input("isDeleteLogset")]
+        public Input<bool>? IsDeleteLogset { get; set; }
+
+        /// <summary>
+        /// Whether to delete the associated Topic when deleting the log collection task. This field only takes effect when `ForceDelete` is false. Default is false.
+        /// </summary>
+        [Input("isDeleteTopic")]
+        public Input<bool>? IsDeleteTopic { get; set; }
+
+        /// <summary>
+        /// Log type, must correspond to the `AssumerName` value. Mapping:
+        /// - APIS: APIS-ACCESS
+        /// - BH: BH-COMMANDLOG, BH-FILELOG
+        /// - CDB: CDB-AUDIT
+        /// - CDS: CDS-AUDIT, CDS-RISK
+        /// - CFS: CFS-AUDIT
+        /// - CLB: CMR-SPEND
+        /// - CSIP: CSIP
+        /// - CWP: CWP
+        /// - DCDB: DCDB-AUDIT, DCDB-ERROR, DCDB-SLOW
+        /// - DNSPod: DNSPod-RESOLVELOG
+        /// - EMR: EMR-OPERATION
+        /// - HTTPDNS: HTTPDNS-RESOLVELOG
+        /// - MariaDB: MariaDB-AUDIT, MariaDB-ERROR, MariaDB-SLOW
+        /// - MDP: MDP-SSAI
+        /// - MongoDB: MongoDB-AUDIT, MongoDB-ErrorLog, MongoDB-OperationLog, MongoDB-SlowLog
+        /// - PostgreSQL: PostgreSQL-AUDIT, PostgreSQL-ERROR, PostgreSQL-SLOW
+        /// - TCSS: TCSS
+        /// - TDSQL-C: TDSQL-C-AUDIT
+        /// - TDStore: TDMYSQL-SLOW
+        /// - TencentDB-Redis: Redis-AUDIT, Redis-ERROR, Redis-SLOW
+        /// - TEO: TEO-INEFERENCE
+        /// - llmsgw: llmsgw-mcp-security-alarm.
         /// </summary>
         [Input("logType")]
         public Input<string>? LogType { get; set; }
 
         /// <summary>
-        /// Log set ID.
+        /// Log set ID. Obtain it via the DescribeLogsets API.
         /// </summary>
         [Input("logsetId")]
         public Input<string>? LogsetId { get; set; }
 
         /// <summary>
-        /// Log set name, required if `LogsetId` is not filled in. If the log set does not exist, it will be automatically created.
+        /// Log set name, required when `LogsetId` is not specified. If the log set does not exist, it will be created automatically.
         /// </summary>
         [Input("logsetName")]
         public Input<string>? LogsetName { get; set; }
 
+        [Input("tags")]
+        private InputMap<string>? _tags;
+
         /// <summary>
-        /// Log theme ID.
+        /// Tag description list. Up to 10 tag key-value pairs are supported, and each tag key can only be bound to the same resource once. Tags are bound to the associated log topic.
+        /// </summary>
+        public InputMap<string> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<string>());
+            set => _tags = value;
+        }
+
+        /// <summary>
+        /// Log topic ID. Obtain it via the DescribeTopics API.
         /// </summary>
         [Input("topicId")]
         public Input<string>? TopicId { get; set; }
 
         /// <summary>
-        /// The name of the log topic is required when `TopicId` is not filled in. If the log theme does not exist, it will be automatically created.
+        /// Log topic name, required when `TopicId` is not specified. If the log topic does not exist, it will be created automatically.
         /// </summary>
         [Input("topicName")]
         public Input<string>? TopicName { get; set; }

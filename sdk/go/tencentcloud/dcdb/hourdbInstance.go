@@ -61,7 +61,6 @@ import (
 // ## Import
 //
 // DCDB hourdb instance can be imported using the id, e.g.
-//
 // ```sh
 // $ pulumi import tencentcloud:Dcdb/hourdbInstance:HourdbInstance example tdsqlshard-nr6j5sed
 // ```

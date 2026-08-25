@@ -88,7 +88,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// 
     /// ## Import
     /// 
-    /// tdmq professional_cluster can be imported using the id, e.g.
+    /// tdmq ProfessionalCluster can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Tdmq/professionalCluster:ProfessionalCluster professional_cluster professional_cluster_id

@@ -21,6 +21,8 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "tencentcloud:Cwp/autoOpenProversionConfig:AutoOpenProversionConfig":
+		r = &AutoOpenProversionConfig{}
 	case "tencentcloud:Cwp/licenseBindAttachment:LicenseBindAttachment":
 		r = &LicenseBindAttachment{}
 	case "tencentcloud:Cwp/licenseOrder:LicenseOrder":
@@ -38,6 +40,11 @@ func init() {
 	if err != nil {
 		version = semver.Version{Major: 1}
 	}
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cwp/autoOpenProversionConfig",
+		&module{version},
+	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Cwp/licenseBindAttachment",

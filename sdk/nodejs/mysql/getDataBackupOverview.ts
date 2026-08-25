@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const dataBackupOverview = tencentcloud.Mysql.getDataBackupOverview({
+ * const dataBackupOverview = tencentcloud.mysql.getDataBackupOverview({
  *     product: "mysql",
  * });
  * ```
@@ -108,7 +108,7 @@ export interface GetDataBackupOverviewResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const dataBackupOverview = tencentcloud.Mysql.getDataBackupOverview({
+ * const dataBackupOverview = tencentcloud.mysql.getDataBackupOverview({
  *     product: "mysql",
  * });
  * ```
@@ -132,5 +132,5 @@ export interface GetDataBackupOverviewOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

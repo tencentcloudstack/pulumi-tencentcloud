@@ -75,12 +75,8 @@ type GetRedisTopKeyPrefixListResult struct {
 }
 
 func GetRedisTopKeyPrefixListOutput(ctx *pulumi.Context, args GetRedisTopKeyPrefixListOutputArgs, opts ...pulumi.InvokeOption) GetRedisTopKeyPrefixListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetRedisTopKeyPrefixListResultOutput, error) {
-			args := v.(GetRedisTopKeyPrefixListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dbbrain/getRedisTopKeyPrefixList:getRedisTopKeyPrefixList", args, GetRedisTopKeyPrefixListResultOutput{}, options).(GetRedisTopKeyPrefixListResultOutput), nil
-		}).(GetRedisTopKeyPrefixListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dbbrain/getRedisTopKeyPrefixList:getRedisTopKeyPrefixList", args, GetRedisTopKeyPrefixListResultOutput{}, options).(GetRedisTopKeyPrefixListResultOutput)
 }
 
 // A collection of arguments for invoking getRedisTopKeyPrefixList.

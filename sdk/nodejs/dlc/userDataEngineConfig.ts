@@ -32,7 +32,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * dlc user_data_engine_config can be imported using the id, e.g.
+ * dlc userDataEngineConfig can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Dlc/userDataEngineConfig:UserDataEngineConfig user_data_engine_config user_data_engine_config_id
@@ -116,15 +116,15 @@ export interface UserDataEngineConfigState {
     /**
      * Engine configuration items.
      */
-    dataEngineConfigPairs?: pulumi.Input<pulumi.Input<inputs.Dlc.UserDataEngineConfigDataEngineConfigPair>[]>;
+    dataEngineConfigPairs?: pulumi.Input<pulumi.Input<inputs.Dlc.UserDataEngineConfigDataEngineConfigPair>[] | undefined>;
     /**
      * Engine unique id.
      */
-    dataEngineId?: pulumi.Input<string>;
+    dataEngineId?: pulumi.Input<string | undefined>;
     /**
      * Job engine resource configuration template.
      */
-    sessionResourceTemplate?: pulumi.Input<inputs.Dlc.UserDataEngineConfigSessionResourceTemplate>;
+    sessionResourceTemplate?: pulumi.Input<inputs.Dlc.UserDataEngineConfigSessionResourceTemplate | undefined>;
 }
 
 /**
@@ -134,7 +134,7 @@ export interface UserDataEngineConfigArgs {
     /**
      * Engine configuration items.
      */
-    dataEngineConfigPairs?: pulumi.Input<pulumi.Input<inputs.Dlc.UserDataEngineConfigDataEngineConfigPair>[]>;
+    dataEngineConfigPairs?: pulumi.Input<pulumi.Input<inputs.Dlc.UserDataEngineConfigDataEngineConfigPair>[] | undefined>;
     /**
      * Engine unique id.
      */
@@ -142,5 +142,5 @@ export interface UserDataEngineConfigArgs {
     /**
      * Job engine resource configuration template.
      */
-    sessionResourceTemplate?: pulumi.Input<inputs.Dlc.UserDataEngineConfigSessionResourceTemplate>;
+    sessionResourceTemplate?: pulumi.Input<inputs.Dlc.UserDataEngineConfigSessionResourceTemplate | undefined>;
 }

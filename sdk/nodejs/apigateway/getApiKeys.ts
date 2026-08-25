@@ -19,10 +19,10 @@ import * as utilities from "../utilities";
  *     secretName: "my_api_key",
  *     status: "on",
  * });
- * const name = tencentcloud.ApiGateway.getApiKeysOutput({
+ * const name = tencentcloud.apigateway.getApiKeysOutput({
  *     secretName: test.secretName,
  * });
- * const id = tencentcloud.ApiGateway.getApiKeysOutput({
+ * const id = tencentcloud.apigateway.getApiKeysOutput({
  *     apiKeyId: test.id,
  * });
  * ```
@@ -87,10 +87,10 @@ export interface GetApiKeysResult {
  *     secretName: "my_api_key",
  *     status: "on",
  * });
- * const name = tencentcloud.ApiGateway.getApiKeysOutput({
+ * const name = tencentcloud.apigateway.getApiKeysOutput({
  *     secretName: test.secretName,
  * });
- * const id = tencentcloud.ApiGateway.getApiKeysOutput({
+ * const id = tencentcloud.apigateway.getApiKeysOutput({
  *     apiKeyId: test.id,
  * });
  * ```
@@ -112,13 +112,13 @@ export interface GetApiKeysOutputArgs {
     /**
      * Created API key ID, this field is exactly the same as ID.
      */
-    apiKeyId?: pulumi.Input<string>;
+    apiKeyId?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Custom key name.
      */
-    secretName?: pulumi.Input<string>;
+    secretName?: pulumi.Input<string | undefined>;
 }

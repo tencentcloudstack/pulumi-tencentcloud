@@ -12,7 +12,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Use this resource to create tcr repository.
+// Use this resource to create TCR repository.
 //
 // ## Example Usage
 //
@@ -31,35 +31,31 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			example, err := tcr.NewInstance(ctx, "example", &tcr.InstanceArgs{
-//				Name:         pulumi.String("tf-example-tcr"),
-//				InstanceType: pulumi.String("premium"),
+//				Name:         pulumi.String("tf-example"),
+//				InstanceType: pulumi.String("standard"),
 //				DeleteBucket: pulumi.Bool(true),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			exampleNamespace, err := tcr.NewNamespace(ctx, "example", &tcr.NamespaceArgs{
-//				InstanceId:   example.ID(),
-//				Name:         pulumi.String("tf_example_ns"),
-//				IsPublic:     pulumi.Bool(true),
-//				IsAutoScan:   pulumi.Bool(true),
-//				IsPreventVul: pulumi.Bool(true),
-//				Severity:     pulumi.String("medium"),
-//				CveWhitelistItems: tcr.NamespaceCveWhitelistItemArray{
-//					&tcr.NamespaceCveWhitelistItemArgs{
-//						CveId: pulumi.String("cve-xxxxx"),
-//					},
+//				Tags: pulumi.StringMap{
+//					"createdBy": pulumi.String("Terraform"),
 //				},
 //			})
 //			if err != nil {
 //				return err
 //			}
+//			exampleNamespace, err := tcr.NewNamespace(ctx, "example", &tcr.NamespaceArgs{
+//				InstanceId: example.ID().ToIDOutput().ToStringOutput(),
+//				Name:       pulumi.String("tf_example"),
+//				Severity:   pulumi.String("medium"),
+//			})
+//			if err != nil {
+//				return err
+//			}
 //			_, err = tcr.NewRepository(ctx, "example", &tcr.RepositoryArgs{
-//				InstanceId:    example.ID(),
+//				InstanceId:    example.ID().ToIDOutput().ToStringOutput(),
 //				NamespaceName: exampleNamespace.Name,
-//				Name:          pulumi.String("test"),
-//				BriefDesc:     pulumi.String("111"),
-//				Description:   pulumi.String("111111111111111111111111111111111111"),
+//				Name:          pulumi.String("tf-example"),
+//				BriefDesc:     pulumi.String("desc."),
+//				Description:   pulumi.String("description."),
+//				ForceDelete:   pulumi.Bool(true),
 //			})
 //			if err != nil {
 //				return err
@@ -72,10 +68,10 @@ import (
 //
 // ## Import
 //
-// tcr repository can be imported using the id, e.g.
+// TCR repository can be imported using the instanceId#nameSpaceName#name, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Tcr/repository:Repository foo instance_id#namespace_name#repository_name
+// $ pulumi import tencentcloud:Tcr/repository:Repository example tcr-s1jud21h#tf_example#tf-example
 // ```
 type Repository struct {
 	pulumi.CustomResourceState
@@ -86,6 +82,8 @@ type Repository struct {
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
 	// Description of the repository. Valid length is [1~1000].
 	Description pulumi.StringPtrOutput `pulumi:"description"`
+	// The default value is true, meaning that the repository will be deleted directly regardless of whether it contains any images; false means that the existence of images will be checked before deleting the repository.
+	ForceDelete pulumi.BoolPtrOutput `pulumi:"forceDelete"`
 	// ID of the TCR instance.
 	InstanceId pulumi.StringOutput `pulumi:"instanceId"`
 	// Indicate the repository is public or not.
@@ -142,6 +140,8 @@ type repositoryState struct {
 	CreateTime *string `pulumi:"createTime"`
 	// Description of the repository. Valid length is [1~1000].
 	Description *string `pulumi:"description"`
+	// The default value is true, meaning that the repository will be deleted directly regardless of whether it contains any images; false means that the existence of images will be checked before deleting the repository.
+	ForceDelete *bool `pulumi:"forceDelete"`
 	// ID of the TCR instance.
 	InstanceId *string `pulumi:"instanceId"`
 	// Indicate the repository is public or not.
@@ -163,6 +163,8 @@ type RepositoryState struct {
 	CreateTime pulumi.StringPtrInput
 	// Description of the repository. Valid length is [1~1000].
 	Description pulumi.StringPtrInput
+	// The default value is true, meaning that the repository will be deleted directly regardless of whether it contains any images; false means that the existence of images will be checked before deleting the repository.
+	ForceDelete pulumi.BoolPtrInput
 	// ID of the TCR instance.
 	InstanceId pulumi.StringPtrInput
 	// Indicate the repository is public or not.
@@ -186,6 +188,8 @@ type repositoryArgs struct {
 	BriefDesc *string `pulumi:"briefDesc"`
 	// Description of the repository. Valid length is [1~1000].
 	Description *string `pulumi:"description"`
+	// The default value is true, meaning that the repository will be deleted directly regardless of whether it contains any images; false means that the existence of images will be checked before deleting the repository.
+	ForceDelete *bool `pulumi:"forceDelete"`
 	// ID of the TCR instance.
 	InstanceId string `pulumi:"instanceId"`
 	// Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such as `sub1/sub2/repo`.
@@ -200,6 +204,8 @@ type RepositoryArgs struct {
 	BriefDesc pulumi.StringPtrInput
 	// Description of the repository. Valid length is [1~1000].
 	Description pulumi.StringPtrInput
+	// The default value is true, meaning that the repository will be deleted directly regardless of whether it contains any images; false means that the existence of images will be checked before deleting the repository.
+	ForceDelete pulumi.BoolPtrInput
 	// ID of the TCR instance.
 	InstanceId pulumi.StringInput
 	// Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such as `sub1/sub2/repo`.
@@ -308,6 +314,11 @@ func (o RepositoryOutput) CreateTime() pulumi.StringOutput {
 // Description of the repository. Valid length is [1~1000].
 func (o RepositoryOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Repository) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// The default value is true, meaning that the repository will be deleted directly regardless of whether it contains any images; false means that the existence of images will be checked before deleting the repository.
+func (o RepositoryOutput) ForceDelete() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *Repository) pulumi.BoolPtrOutput { return v.ForceDelete }).(pulumi.BoolPtrOutput)
 }
 
 // ID of the TCR instance.

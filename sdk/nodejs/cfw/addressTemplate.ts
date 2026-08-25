@@ -39,7 +39,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * cfw address_template can be imported using the id, e.g.
+ * cfw addressTemplate can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Cfw/addressTemplate:AddressTemplate example mb_1300846651_1695611353900
@@ -135,19 +135,19 @@ export interface AddressTemplateState {
     /**
      * Template Detail.
      */
-    detail?: pulumi.Input<string>;
+    detail?: pulumi.Input<string | undefined>;
     /**
      * Type is 1, ip template eg: 1.1.1.1,2.2.2.2; Type is 5, domain name template eg: www.qq.com, www.tencent.com.
      */
-    ipString?: pulumi.Input<string>;
+    ipString?: pulumi.Input<string | undefined>;
     /**
      * Template name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * 1: ip template; 5: domain name templates.
      */
-    type?: pulumi.Input<number>;
+    type?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -165,7 +165,7 @@ export interface AddressTemplateArgs {
     /**
      * Template name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * 1: ip template; 5: domain name templates.
      */

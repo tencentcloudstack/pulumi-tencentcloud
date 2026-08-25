@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const vr = tencentcloud.Cdn.getDomainVerifier({
+ * const vr = tencentcloud.cdn.getDomainVerifier({
  *     domain: "www.examplexxx123.com",
  *     autoVerify: true,
  *     freezeRecord: true,
@@ -120,7 +120,7 @@ export interface GetDomainVerifierResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const vr = tencentcloud.Cdn.getDomainVerifier({
+ * const vr = tencentcloud.cdn.getDomainVerifier({
  *     domain: "www.examplexxx123.com",
  *     autoVerify: true,
  *     freezeRecord: true,
@@ -148,7 +148,7 @@ export interface GetDomainVerifierOutputArgs {
     /**
      * Specify whether to keep first create result instead of re-create again.
      */
-    autoVerify?: pulumi.Input<boolean>;
+    autoVerify?: pulumi.Input<boolean | undefined>;
     /**
      * Specify domain name, e.g. `www.examplexxx123.com`.
      */
@@ -156,17 +156,17 @@ export interface GetDomainVerifierOutputArgs {
     /**
      * Indicates failed reason of verification.
      */
-    failedReason?: pulumi.Input<string>;
+    failedReason?: pulumi.Input<string | undefined>;
     /**
      * Specify whether the verification record needs to be freeze instead of refresh every 8 hours, this used for domain verification.
      */
-    freezeRecord?: pulumi.Input<boolean>;
+    freezeRecord?: pulumi.Input<boolean | undefined>;
     /**
      * Used for save result json.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Specify verify type, values: `dns` (default), `file`.
      */
-    verifyType?: pulumi.Input<string>;
+    verifyType?: pulumi.Input<string | undefined>;
 }

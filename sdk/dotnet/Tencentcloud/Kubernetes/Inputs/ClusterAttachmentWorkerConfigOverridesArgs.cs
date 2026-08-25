@@ -32,7 +32,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public Input<int>? DesiredPodNum { get; set; }
 
         /// <summary>
-        /// This argument was no longer supported by TencentCloud TKE. Docker graph path. Default is `/var/lib/docker`.
+        /// This argument was no longer supported by TencentCloud TKE. Docker graph path. Default is determined by the platform (currently /var/lib/containerd for containerd-based nodes).
         /// </summary>
         [Input("dockerGraphPath")]
         public Input<string>? DockerGraphPath { get; set; }

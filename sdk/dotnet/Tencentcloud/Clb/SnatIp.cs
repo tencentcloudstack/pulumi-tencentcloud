@@ -14,7 +14,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// Provide a resource to create a SnatIp of CLB instance.
     /// 
     /// &gt; **NOTE:** Target CLB instance must enable `SnatPro` before creating snat ips.
-    /// **NOTE:** Dynamic allocate IP doesn't support for now.
+    /// 
+    /// &gt; **NOTE:** Dynamic allocate IP doesn't support for now.
     /// 
     /// ## Example Usage
     /// 
@@ -26,26 +27,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var snatTest = new Tencentcloud.Clb.Instance("snat_test", new()
+    ///     var example = new Tencentcloud.Clb.SnatIp("example", new()
     ///     {
-    ///         NetworkType = "OPEN",
-    ///         ClbName = "tf-clb-snat-test",
-    ///     });
-    /// 
-    ///     var foo = new Tencentcloud.Clb.SnatIp("foo", new()
-    ///     {
-    ///         ClbId = snatTest.Id,
+    ///         ClbId = "lb-jnx618r2",
     ///         Ips = new[]
     ///         {
     ///             new Tencentcloud.Clb.Inputs.SnatIpIpArgs
     ///             {
-    ///                 SubnetId = "subnet-12345678",
-    ///                 Ip = "172.16.0.1",
+    ///                 SubnetId = "subnet-hhi88a58",
+    ///                 Ip = "10.0.30.10",
     ///             },
     ///             new Tencentcloud.Clb.Inputs.SnatIpIpArgs
     ///             {
-    ///                 SubnetId = "subnet-12345678",
-    ///                 Ip = "172.16.0.2",
+    ///                 SubnetId = "subnet-d4umunpy",
     ///             },
     ///         },
     ///     });
@@ -55,10 +49,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// ## Import
     /// 
-    /// ClbSnatIp instance can be imported by clb instance id, e.g.
+    /// Clb instance snat ip can be imported by clb instance id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Clb/snatIp:SnatIp test clb_id
+    /// $ pulumi import tencentcloud:Clb/snatIp:SnatIp example lb-jnx618r2
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clb/snatIp:SnatIp")]

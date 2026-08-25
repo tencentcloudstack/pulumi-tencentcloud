@@ -86,12 +86,8 @@ type LookupBindApiAppsStatusResult struct {
 }
 
 func LookupBindApiAppsStatusOutput(ctx *pulumi.Context, args LookupBindApiAppsStatusOutputArgs, opts ...pulumi.InvokeOption) LookupBindApiAppsStatusResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupBindApiAppsStatusResultOutput, error) {
-			args := v.(LookupBindApiAppsStatusArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:ApiGateway/getBindApiAppsStatus:getBindApiAppsStatus", args, LookupBindApiAppsStatusResultOutput{}, options).(LookupBindApiAppsStatusResultOutput), nil
-		}).(LookupBindApiAppsStatusResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:ApiGateway/getBindApiAppsStatus:getBindApiAppsStatus", args, LookupBindApiAppsStatusResultOutput{}, options).(LookupBindApiAppsStatusResultOutput)
 }
 
 // A collection of arguments for invoking getBindApiAppsStatus.

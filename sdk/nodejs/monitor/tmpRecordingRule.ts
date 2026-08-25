@@ -51,7 +51,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * monitor recordingRule can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Monitor/tmpRecordingRule:TmpRecordingRule recordingRule instanceId#recordingRule_id
  * ```
@@ -143,19 +142,19 @@ export interface TmpRecordingRuleState {
     /**
      * Recording rule group.
      */
-    group?: pulumi.Input<string>;
+    group?: pulumi.Input<string | undefined>;
     /**
      * Instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Recording rule name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Rule state.
      */
-    ruleState?: pulumi.Input<number>;
+    ruleState?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -173,9 +172,9 @@ export interface TmpRecordingRuleArgs {
     /**
      * Recording rule name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Rule state.
      */
-    ruleState?: pulumi.Input<number>;
+    ruleState?: pulumi.Input<number | undefined>;
 }

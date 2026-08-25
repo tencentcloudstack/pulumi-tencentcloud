@@ -10,40 +10,6 @@ using Pulumi;
 
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
 {
-    /// <summary>
-    /// Provides a resource to create a tsf repository
-    /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using System.Collections.Generic;
-    /// using System.Linq;
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// return await Deployment.RunAsync(() =&gt; 
-    /// {
-    ///     var repository = new Tencentcloud.Tsf.Repository("repository", new()
-    ///     {
-    ///         RepositoryName = "",
-    ///         RepositoryType = "",
-    ///         BucketName = "",
-    ///         BucketRegion = "",
-    ///         Directory = "",
-    ///         RepositoryDesc = "",
-    ///     });
-    /// 
-    /// });
-    /// ```
-    /// 
-    /// ## Import
-    /// 
-    /// tsf repository can be imported using the id, e.g.
-    /// 
-    /// ```sh
-    /// $ pulumi import tencentcloud:Tsf/repository:Repository repository repository_id
-    /// ```
-    /// </summary>
     [TencentcloudResourceType("tencentcloud:Tsf/repository:Repository")]
     public partial class Repository : global::Pulumi.CustomResource
     {

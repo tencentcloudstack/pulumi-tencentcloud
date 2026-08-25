@@ -108,15 +108,15 @@ export interface EnableOptimalSwitchingState {
     /**
      * `0`:disabled, `1`:enable.
      */
-    enableSwitch?: pulumi.Input<number>;
+    enableSwitch?: pulumi.Input<number | undefined>;
     /**
      * Group name.
      */
-    hostGroupName?: pulumi.Input<string>;
+    hostGroupName?: pulumi.Input<string | undefined>;
     /**
      * Stream id.
      */
-    streamName?: pulumi.Input<string>;
+    streamName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -126,11 +126,11 @@ export interface EnableOptimalSwitchingArgs {
     /**
      * `0`:disabled, `1`:enable.
      */
-    enableSwitch?: pulumi.Input<number>;
+    enableSwitch?: pulumi.Input<number | undefined>;
     /**
      * Group name.
      */
-    hostGroupName?: pulumi.Input<string>;
+    hostGroupName?: pulumi.Input<string | undefined>;
     /**
      * Stream id.
      */

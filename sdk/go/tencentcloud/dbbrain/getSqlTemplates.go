@@ -83,12 +83,8 @@ type GetSqlTemplatesResult struct {
 }
 
 func GetSqlTemplatesOutput(ctx *pulumi.Context, args GetSqlTemplatesOutputArgs, opts ...pulumi.InvokeOption) GetSqlTemplatesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSqlTemplatesResultOutput, error) {
-			args := v.(GetSqlTemplatesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dbbrain/getSqlTemplates:getSqlTemplates", args, GetSqlTemplatesResultOutput{}, options).(GetSqlTemplatesResultOutput), nil
-		}).(GetSqlTemplatesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dbbrain/getSqlTemplates:getSqlTemplates", args, GetSqlTemplatesResultOutput{}, options).(GetSqlTemplatesResultOutput)
 }
 
 // A collection of arguments for invoking getSqlTemplates.

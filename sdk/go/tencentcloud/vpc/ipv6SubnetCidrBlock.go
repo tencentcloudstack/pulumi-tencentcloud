@@ -16,7 +16,7 @@ import (
 //
 // ## Import
 //
-// vpc ipv6_subnet_cidr_block can be imported using the id, e.g.
+// vpc ipv6SubnetCidrBlock can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Vpc/ipv6SubnetCidrBlock:Ipv6SubnetCidrBlock ipv6_subnet_cidr_block ipv6_subnet_cidr_block_id

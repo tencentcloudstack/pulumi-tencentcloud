@@ -109,7 +109,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * tcr immutable_tag_rule can be imported using the id, e.g.
+ * tcr immutableTagRule can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Tcr/immutableTagRule:ImmutableTagRule immutable_tag_rule immutable_tag_rule_id
@@ -205,19 +205,19 @@ export interface ImmutableTagRuleState {
     /**
      * namespace name.
      */
-    namespaceName?: pulumi.Input<string>;
+    namespaceName?: pulumi.Input<string | undefined>;
     /**
      * instance id.
      */
-    registryId?: pulumi.Input<string>;
+    registryId?: pulumi.Input<string | undefined>;
     /**
      * rule.
      */
-    rule?: pulumi.Input<inputs.Tcr.ImmutableTagRuleRule>;
+    rule?: pulumi.Input<inputs.Tcr.ImmutableTagRuleRule | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 /**
@@ -239,5 +239,5 @@ export interface ImmutableTagRuleArgs {
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

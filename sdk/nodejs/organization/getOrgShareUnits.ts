@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const organizationOrgShareUnits = tencentcloud.Organization.getOrgShareUnits({
+ * const organizationOrgShareUnits = tencentcloud.organization.getOrgShareUnits({
  *     area: "ap-guangzhou",
  *     searchKey: "xxxxxx",
  * });
@@ -73,7 +73,7 @@ export interface GetOrgShareUnitsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const organizationOrgShareUnits = tencentcloud.Organization.getOrgShareUnits({
+ * const organizationOrgShareUnits = tencentcloud.organization.getOrgShareUnits({
  *     area: "ap-guangzhou",
  *     searchKey: "xxxxxx",
  * });
@@ -99,9 +99,9 @@ export interface GetOrgShareUnitsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Search for keywords. Support UnitId and Name searches.
      */
-    searchKey?: pulumi.Input<string>;
+    searchKey?: pulumi.Input<string | undefined>;
 }

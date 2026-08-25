@@ -16,15 +16,15 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * // query by name
- * const foo = tencentcloud.Cam.getUsers({
+ * const foo = tencentcloud.cam.getUsers({
  *     name: "cam-user-test",
  * });
  * // query by email
- * const bar = tencentcloud.Cam.getUsers({
+ * const bar = tencentcloud.cam.getUsers({
  *     email: "hello@test.com",
  * });
  * // query by phone
- * const far = tencentcloud.Cam.getUsers({
+ * const far = tencentcloud.cam.getUsers({
  *     phoneNum: "12345678910",
  * });
  * ```
@@ -140,15 +140,15 @@ export interface GetUsersResult {
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * // query by name
- * const foo = tencentcloud.Cam.getUsers({
+ * const foo = tencentcloud.cam.getUsers({
  *     name: "cam-user-test",
  * });
  * // query by email
- * const bar = tencentcloud.Cam.getUsers({
+ * const bar = tencentcloud.cam.getUsers({
  *     email: "hello@test.com",
  * });
  * // query by phone
- * const far = tencentcloud.Cam.getUsers({
+ * const far = tencentcloud.cam.getUsers({
  *     phoneNum: "12345678910",
  * });
  * ```
@@ -176,37 +176,37 @@ export interface GetUsersOutputArgs {
     /**
      * Indicate whether the user can login in.
      */
-    consoleLogin?: pulumi.Input<boolean>;
+    consoleLogin?: pulumi.Input<boolean | undefined>;
     /**
      * Country code of the CAM user to be queried.
      */
-    countryCode?: pulumi.Input<string>;
+    countryCode?: pulumi.Input<string | undefined>;
     /**
      * Email of the CAM user to be queried.
      */
-    email?: pulumi.Input<string>;
+    email?: pulumi.Input<string | undefined>;
     /**
      * Name of CAM user to be queried.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Phone num of the CAM user to be queried.
      */
-    phoneNum?: pulumi.Input<string>;
+    phoneNum?: pulumi.Input<string | undefined>;
     /**
      * Remark of the CAM user to be queried.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Uid of the CAM user to be queried.
      */
-    uid?: pulumi.Input<number>;
+    uid?: pulumi.Input<number | undefined>;
     /**
      * Uin of the CAM user to be queried.
      */
-    uin?: pulumi.Input<number>;
+    uin?: pulumi.Input<number | undefined>;
 }

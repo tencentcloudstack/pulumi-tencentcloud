@@ -78,12 +78,8 @@ type GetWorkSpacesResult struct {
 }
 
 func GetWorkSpacesOutput(ctx *pulumi.Context, args GetWorkSpacesOutputArgs, opts ...pulumi.InvokeOption) GetWorkSpacesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetWorkSpacesResultOutput, error) {
-			args := v.(GetWorkSpacesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Oceanus/getWorkSpaces:getWorkSpaces", args, GetWorkSpacesResultOutput{}, options).(GetWorkSpacesResultOutput), nil
-		}).(GetWorkSpacesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Oceanus/getWorkSpaces:getWorkSpaces", args, GetWorkSpacesResultOutput{}, options).(GetWorkSpacesResultOutput)
 }
 
 // A collection of arguments for invoking getWorkSpaces.

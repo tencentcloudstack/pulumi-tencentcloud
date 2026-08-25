@@ -1381,7 +1381,10 @@ type FunctionImageConfig struct {
 	ImagePort *int `pulumi:"imagePort"`
 	// The image type. personal or enterprise.
 	ImageType string `pulumi:"imageType"`
-	// The uri of image.
+	// The uri of image. Supports three formats:
+	// - Format A: registry/repo:tag
+	// - Format B: registry/repo@sha256:digest
+	// - Format C: registry/repo:tag@sha256:digest.
 	ImageUri string `pulumi:"imageUri"`
 	// The registry id of TCR. When image type is enterprise, it must be set.
 	RegistryId *string `pulumi:"registryId"`
@@ -1411,7 +1414,10 @@ type FunctionImageConfigArgs struct {
 	ImagePort pulumi.IntPtrInput `pulumi:"imagePort"`
 	// The image type. personal or enterprise.
 	ImageType pulumi.StringInput `pulumi:"imageType"`
-	// The uri of image.
+	// The uri of image. Supports three formats:
+	// - Format A: registry/repo:tag
+	// - Format B: registry/repo@sha256:digest
+	// - Format C: registry/repo:tag@sha256:digest.
 	ImageUri pulumi.StringInput `pulumi:"imageUri"`
 	// The registry id of TCR. When image type is enterprise, it must be set.
 	RegistryId pulumi.StringPtrInput `pulumi:"registryId"`
@@ -1498,7 +1504,10 @@ func (o FunctionImageConfigOutput) ImageType() pulumi.StringOutput {
 	return o.ApplyT(func(v FunctionImageConfig) string { return v.ImageType }).(pulumi.StringOutput)
 }
 
-// The uri of image.
+// The uri of image. Supports three formats:
+// - Format A: registry/repo:tag
+// - Format B: registry/repo@sha256:digest
+// - Format C: registry/repo:tag@sha256:digest.
 func (o FunctionImageConfigOutput) ImageUri() pulumi.StringOutput {
 	return o.ApplyT(func(v FunctionImageConfig) string { return v.ImageUri }).(pulumi.StringOutput)
 }
@@ -1526,6 +1535,601 @@ func (o FunctionImageConfigArrayOutput) Index(i pulumi.IntInput) FunctionImageCo
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) FunctionImageConfig {
 		return vs[0].([]FunctionImageConfig)[vs[1].(int)]
 	}).(FunctionImageConfigOutput)
+}
+
+type FunctionInstanceConcurrencyConfig struct {
+	// Whether to enable intelligent dynamic concurrency. Valid values: 'TRUE', 'FALSE'. 'FALSE' means static concurrency.
+	DynamicEnabled *string `pulumi:"dynamicEnabled"`
+	// Security isolation switch. Valid values: 'TRUE', 'FALSE'.
+	InstanceIsolationEnabled *string `pulumi:"instanceIsolationEnabled"`
+	// Maximum single-instance concurrency, range: 1-100.
+	MaxConcurrency *int `pulumi:"maxConcurrency"`
+	// Dynamic concurrency configuration parameters.
+	MixNodeConfigs []FunctionInstanceConcurrencyConfigMixNodeConfig `pulumi:"mixNodeConfigs"`
+	// Session configuration parameters.
+	SessionConfig *FunctionInstanceConcurrencyConfigSessionConfig `pulumi:"sessionConfig"`
+	// Concurrency mode, valid values: 'Session-Based' or 'Request-Based'.
+	Type *string `pulumi:"type"`
+}
+
+// FunctionInstanceConcurrencyConfigInput is an input type that accepts FunctionInstanceConcurrencyConfigArgs and FunctionInstanceConcurrencyConfigOutput values.
+// You can construct a concrete instance of `FunctionInstanceConcurrencyConfigInput` via:
+//
+//	FunctionInstanceConcurrencyConfigArgs{...}
+type FunctionInstanceConcurrencyConfigInput interface {
+	pulumi.Input
+
+	ToFunctionInstanceConcurrencyConfigOutput() FunctionInstanceConcurrencyConfigOutput
+	ToFunctionInstanceConcurrencyConfigOutputWithContext(context.Context) FunctionInstanceConcurrencyConfigOutput
+}
+
+type FunctionInstanceConcurrencyConfigArgs struct {
+	// Whether to enable intelligent dynamic concurrency. Valid values: 'TRUE', 'FALSE'. 'FALSE' means static concurrency.
+	DynamicEnabled pulumi.StringPtrInput `pulumi:"dynamicEnabled"`
+	// Security isolation switch. Valid values: 'TRUE', 'FALSE'.
+	InstanceIsolationEnabled pulumi.StringPtrInput `pulumi:"instanceIsolationEnabled"`
+	// Maximum single-instance concurrency, range: 1-100.
+	MaxConcurrency pulumi.IntPtrInput `pulumi:"maxConcurrency"`
+	// Dynamic concurrency configuration parameters.
+	MixNodeConfigs FunctionInstanceConcurrencyConfigMixNodeConfigArrayInput `pulumi:"mixNodeConfigs"`
+	// Session configuration parameters.
+	SessionConfig FunctionInstanceConcurrencyConfigSessionConfigPtrInput `pulumi:"sessionConfig"`
+	// Concurrency mode, valid values: 'Session-Based' or 'Request-Based'.
+	Type pulumi.StringPtrInput `pulumi:"type"`
+}
+
+func (FunctionInstanceConcurrencyConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*FunctionInstanceConcurrencyConfig)(nil)).Elem()
+}
+
+func (i FunctionInstanceConcurrencyConfigArgs) ToFunctionInstanceConcurrencyConfigOutput() FunctionInstanceConcurrencyConfigOutput {
+	return i.ToFunctionInstanceConcurrencyConfigOutputWithContext(context.Background())
+}
+
+func (i FunctionInstanceConcurrencyConfigArgs) ToFunctionInstanceConcurrencyConfigOutputWithContext(ctx context.Context) FunctionInstanceConcurrencyConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FunctionInstanceConcurrencyConfigOutput)
+}
+
+func (i FunctionInstanceConcurrencyConfigArgs) ToFunctionInstanceConcurrencyConfigPtrOutput() FunctionInstanceConcurrencyConfigPtrOutput {
+	return i.ToFunctionInstanceConcurrencyConfigPtrOutputWithContext(context.Background())
+}
+
+func (i FunctionInstanceConcurrencyConfigArgs) ToFunctionInstanceConcurrencyConfigPtrOutputWithContext(ctx context.Context) FunctionInstanceConcurrencyConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FunctionInstanceConcurrencyConfigOutput).ToFunctionInstanceConcurrencyConfigPtrOutputWithContext(ctx)
+}
+
+// FunctionInstanceConcurrencyConfigPtrInput is an input type that accepts FunctionInstanceConcurrencyConfigArgs, FunctionInstanceConcurrencyConfigPtr and FunctionInstanceConcurrencyConfigPtrOutput values.
+// You can construct a concrete instance of `FunctionInstanceConcurrencyConfigPtrInput` via:
+//
+//	        FunctionInstanceConcurrencyConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type FunctionInstanceConcurrencyConfigPtrInput interface {
+	pulumi.Input
+
+	ToFunctionInstanceConcurrencyConfigPtrOutput() FunctionInstanceConcurrencyConfigPtrOutput
+	ToFunctionInstanceConcurrencyConfigPtrOutputWithContext(context.Context) FunctionInstanceConcurrencyConfigPtrOutput
+}
+
+type functionInstanceConcurrencyConfigPtrType FunctionInstanceConcurrencyConfigArgs
+
+func FunctionInstanceConcurrencyConfigPtr(v *FunctionInstanceConcurrencyConfigArgs) FunctionInstanceConcurrencyConfigPtrInput {
+	return (*functionInstanceConcurrencyConfigPtrType)(v)
+}
+
+func (*functionInstanceConcurrencyConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**FunctionInstanceConcurrencyConfig)(nil)).Elem()
+}
+
+func (i *functionInstanceConcurrencyConfigPtrType) ToFunctionInstanceConcurrencyConfigPtrOutput() FunctionInstanceConcurrencyConfigPtrOutput {
+	return i.ToFunctionInstanceConcurrencyConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *functionInstanceConcurrencyConfigPtrType) ToFunctionInstanceConcurrencyConfigPtrOutputWithContext(ctx context.Context) FunctionInstanceConcurrencyConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FunctionInstanceConcurrencyConfigPtrOutput)
+}
+
+type FunctionInstanceConcurrencyConfigOutput struct{ *pulumi.OutputState }
+
+func (FunctionInstanceConcurrencyConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*FunctionInstanceConcurrencyConfig)(nil)).Elem()
+}
+
+func (o FunctionInstanceConcurrencyConfigOutput) ToFunctionInstanceConcurrencyConfigOutput() FunctionInstanceConcurrencyConfigOutput {
+	return o
+}
+
+func (o FunctionInstanceConcurrencyConfigOutput) ToFunctionInstanceConcurrencyConfigOutputWithContext(ctx context.Context) FunctionInstanceConcurrencyConfigOutput {
+	return o
+}
+
+func (o FunctionInstanceConcurrencyConfigOutput) ToFunctionInstanceConcurrencyConfigPtrOutput() FunctionInstanceConcurrencyConfigPtrOutput {
+	return o.ToFunctionInstanceConcurrencyConfigPtrOutputWithContext(context.Background())
+}
+
+func (o FunctionInstanceConcurrencyConfigOutput) ToFunctionInstanceConcurrencyConfigPtrOutputWithContext(ctx context.Context) FunctionInstanceConcurrencyConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v FunctionInstanceConcurrencyConfig) *FunctionInstanceConcurrencyConfig {
+		return &v
+	}).(FunctionInstanceConcurrencyConfigPtrOutput)
+}
+
+// Whether to enable intelligent dynamic concurrency. Valid values: 'TRUE', 'FALSE'. 'FALSE' means static concurrency.
+func (o FunctionInstanceConcurrencyConfigOutput) DynamicEnabled() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v FunctionInstanceConcurrencyConfig) *string { return v.DynamicEnabled }).(pulumi.StringPtrOutput)
+}
+
+// Security isolation switch. Valid values: 'TRUE', 'FALSE'.
+func (o FunctionInstanceConcurrencyConfigOutput) InstanceIsolationEnabled() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v FunctionInstanceConcurrencyConfig) *string { return v.InstanceIsolationEnabled }).(pulumi.StringPtrOutput)
+}
+
+// Maximum single-instance concurrency, range: 1-100.
+func (o FunctionInstanceConcurrencyConfigOutput) MaxConcurrency() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v FunctionInstanceConcurrencyConfig) *int { return v.MaxConcurrency }).(pulumi.IntPtrOutput)
+}
+
+// Dynamic concurrency configuration parameters.
+func (o FunctionInstanceConcurrencyConfigOutput) MixNodeConfigs() FunctionInstanceConcurrencyConfigMixNodeConfigArrayOutput {
+	return o.ApplyT(func(v FunctionInstanceConcurrencyConfig) []FunctionInstanceConcurrencyConfigMixNodeConfig {
+		return v.MixNodeConfigs
+	}).(FunctionInstanceConcurrencyConfigMixNodeConfigArrayOutput)
+}
+
+// Session configuration parameters.
+func (o FunctionInstanceConcurrencyConfigOutput) SessionConfig() FunctionInstanceConcurrencyConfigSessionConfigPtrOutput {
+	return o.ApplyT(func(v FunctionInstanceConcurrencyConfig) *FunctionInstanceConcurrencyConfigSessionConfig {
+		return v.SessionConfig
+	}).(FunctionInstanceConcurrencyConfigSessionConfigPtrOutput)
+}
+
+// Concurrency mode, valid values: 'Session-Based' or 'Request-Based'.
+func (o FunctionInstanceConcurrencyConfigOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v FunctionInstanceConcurrencyConfig) *string { return v.Type }).(pulumi.StringPtrOutput)
+}
+
+type FunctionInstanceConcurrencyConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (FunctionInstanceConcurrencyConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**FunctionInstanceConcurrencyConfig)(nil)).Elem()
+}
+
+func (o FunctionInstanceConcurrencyConfigPtrOutput) ToFunctionInstanceConcurrencyConfigPtrOutput() FunctionInstanceConcurrencyConfigPtrOutput {
+	return o
+}
+
+func (o FunctionInstanceConcurrencyConfigPtrOutput) ToFunctionInstanceConcurrencyConfigPtrOutputWithContext(ctx context.Context) FunctionInstanceConcurrencyConfigPtrOutput {
+	return o
+}
+
+func (o FunctionInstanceConcurrencyConfigPtrOutput) Elem() FunctionInstanceConcurrencyConfigOutput {
+	return o.ApplyT(func(v *FunctionInstanceConcurrencyConfig) FunctionInstanceConcurrencyConfig {
+		if v != nil {
+			return *v
+		}
+		var ret FunctionInstanceConcurrencyConfig
+		return ret
+	}).(FunctionInstanceConcurrencyConfigOutput)
+}
+
+// Whether to enable intelligent dynamic concurrency. Valid values: 'TRUE', 'FALSE'. 'FALSE' means static concurrency.
+func (o FunctionInstanceConcurrencyConfigPtrOutput) DynamicEnabled() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *FunctionInstanceConcurrencyConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DynamicEnabled
+	}).(pulumi.StringPtrOutput)
+}
+
+// Security isolation switch. Valid values: 'TRUE', 'FALSE'.
+func (o FunctionInstanceConcurrencyConfigPtrOutput) InstanceIsolationEnabled() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *FunctionInstanceConcurrencyConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.InstanceIsolationEnabled
+	}).(pulumi.StringPtrOutput)
+}
+
+// Maximum single-instance concurrency, range: 1-100.
+func (o FunctionInstanceConcurrencyConfigPtrOutput) MaxConcurrency() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *FunctionInstanceConcurrencyConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return v.MaxConcurrency
+	}).(pulumi.IntPtrOutput)
+}
+
+// Dynamic concurrency configuration parameters.
+func (o FunctionInstanceConcurrencyConfigPtrOutput) MixNodeConfigs() FunctionInstanceConcurrencyConfigMixNodeConfigArrayOutput {
+	return o.ApplyT(func(v *FunctionInstanceConcurrencyConfig) []FunctionInstanceConcurrencyConfigMixNodeConfig {
+		if v == nil {
+			return nil
+		}
+		return v.MixNodeConfigs
+	}).(FunctionInstanceConcurrencyConfigMixNodeConfigArrayOutput)
+}
+
+// Session configuration parameters.
+func (o FunctionInstanceConcurrencyConfigPtrOutput) SessionConfig() FunctionInstanceConcurrencyConfigSessionConfigPtrOutput {
+	return o.ApplyT(func(v *FunctionInstanceConcurrencyConfig) *FunctionInstanceConcurrencyConfigSessionConfig {
+		if v == nil {
+			return nil
+		}
+		return v.SessionConfig
+	}).(FunctionInstanceConcurrencyConfigSessionConfigPtrOutput)
+}
+
+// Concurrency mode, valid values: 'Session-Based' or 'Request-Based'.
+func (o FunctionInstanceConcurrencyConfigPtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *FunctionInstanceConcurrencyConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
+type FunctionInstanceConcurrencyConfigMixNodeConfig struct {
+	// GPU model name.
+	NodeSpec *string `pulumi:"nodeSpec"`
+	// Number of concurrent instances.
+	Num *int `pulumi:"num"`
+}
+
+// FunctionInstanceConcurrencyConfigMixNodeConfigInput is an input type that accepts FunctionInstanceConcurrencyConfigMixNodeConfigArgs and FunctionInstanceConcurrencyConfigMixNodeConfigOutput values.
+// You can construct a concrete instance of `FunctionInstanceConcurrencyConfigMixNodeConfigInput` via:
+//
+//	FunctionInstanceConcurrencyConfigMixNodeConfigArgs{...}
+type FunctionInstanceConcurrencyConfigMixNodeConfigInput interface {
+	pulumi.Input
+
+	ToFunctionInstanceConcurrencyConfigMixNodeConfigOutput() FunctionInstanceConcurrencyConfigMixNodeConfigOutput
+	ToFunctionInstanceConcurrencyConfigMixNodeConfigOutputWithContext(context.Context) FunctionInstanceConcurrencyConfigMixNodeConfigOutput
+}
+
+type FunctionInstanceConcurrencyConfigMixNodeConfigArgs struct {
+	// GPU model name.
+	NodeSpec pulumi.StringPtrInput `pulumi:"nodeSpec"`
+	// Number of concurrent instances.
+	Num pulumi.IntPtrInput `pulumi:"num"`
+}
+
+func (FunctionInstanceConcurrencyConfigMixNodeConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*FunctionInstanceConcurrencyConfigMixNodeConfig)(nil)).Elem()
+}
+
+func (i FunctionInstanceConcurrencyConfigMixNodeConfigArgs) ToFunctionInstanceConcurrencyConfigMixNodeConfigOutput() FunctionInstanceConcurrencyConfigMixNodeConfigOutput {
+	return i.ToFunctionInstanceConcurrencyConfigMixNodeConfigOutputWithContext(context.Background())
+}
+
+func (i FunctionInstanceConcurrencyConfigMixNodeConfigArgs) ToFunctionInstanceConcurrencyConfigMixNodeConfigOutputWithContext(ctx context.Context) FunctionInstanceConcurrencyConfigMixNodeConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FunctionInstanceConcurrencyConfigMixNodeConfigOutput)
+}
+
+// FunctionInstanceConcurrencyConfigMixNodeConfigArrayInput is an input type that accepts FunctionInstanceConcurrencyConfigMixNodeConfigArray and FunctionInstanceConcurrencyConfigMixNodeConfigArrayOutput values.
+// You can construct a concrete instance of `FunctionInstanceConcurrencyConfigMixNodeConfigArrayInput` via:
+//
+//	FunctionInstanceConcurrencyConfigMixNodeConfigArray{ FunctionInstanceConcurrencyConfigMixNodeConfigArgs{...} }
+type FunctionInstanceConcurrencyConfigMixNodeConfigArrayInput interface {
+	pulumi.Input
+
+	ToFunctionInstanceConcurrencyConfigMixNodeConfigArrayOutput() FunctionInstanceConcurrencyConfigMixNodeConfigArrayOutput
+	ToFunctionInstanceConcurrencyConfigMixNodeConfigArrayOutputWithContext(context.Context) FunctionInstanceConcurrencyConfigMixNodeConfigArrayOutput
+}
+
+type FunctionInstanceConcurrencyConfigMixNodeConfigArray []FunctionInstanceConcurrencyConfigMixNodeConfigInput
+
+func (FunctionInstanceConcurrencyConfigMixNodeConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]FunctionInstanceConcurrencyConfigMixNodeConfig)(nil)).Elem()
+}
+
+func (i FunctionInstanceConcurrencyConfigMixNodeConfigArray) ToFunctionInstanceConcurrencyConfigMixNodeConfigArrayOutput() FunctionInstanceConcurrencyConfigMixNodeConfigArrayOutput {
+	return i.ToFunctionInstanceConcurrencyConfigMixNodeConfigArrayOutputWithContext(context.Background())
+}
+
+func (i FunctionInstanceConcurrencyConfigMixNodeConfigArray) ToFunctionInstanceConcurrencyConfigMixNodeConfigArrayOutputWithContext(ctx context.Context) FunctionInstanceConcurrencyConfigMixNodeConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FunctionInstanceConcurrencyConfigMixNodeConfigArrayOutput)
+}
+
+type FunctionInstanceConcurrencyConfigMixNodeConfigOutput struct{ *pulumi.OutputState }
+
+func (FunctionInstanceConcurrencyConfigMixNodeConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*FunctionInstanceConcurrencyConfigMixNodeConfig)(nil)).Elem()
+}
+
+func (o FunctionInstanceConcurrencyConfigMixNodeConfigOutput) ToFunctionInstanceConcurrencyConfigMixNodeConfigOutput() FunctionInstanceConcurrencyConfigMixNodeConfigOutput {
+	return o
+}
+
+func (o FunctionInstanceConcurrencyConfigMixNodeConfigOutput) ToFunctionInstanceConcurrencyConfigMixNodeConfigOutputWithContext(ctx context.Context) FunctionInstanceConcurrencyConfigMixNodeConfigOutput {
+	return o
+}
+
+// GPU model name.
+func (o FunctionInstanceConcurrencyConfigMixNodeConfigOutput) NodeSpec() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v FunctionInstanceConcurrencyConfigMixNodeConfig) *string { return v.NodeSpec }).(pulumi.StringPtrOutput)
+}
+
+// Number of concurrent instances.
+func (o FunctionInstanceConcurrencyConfigMixNodeConfigOutput) Num() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v FunctionInstanceConcurrencyConfigMixNodeConfig) *int { return v.Num }).(pulumi.IntPtrOutput)
+}
+
+type FunctionInstanceConcurrencyConfigMixNodeConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (FunctionInstanceConcurrencyConfigMixNodeConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]FunctionInstanceConcurrencyConfigMixNodeConfig)(nil)).Elem()
+}
+
+func (o FunctionInstanceConcurrencyConfigMixNodeConfigArrayOutput) ToFunctionInstanceConcurrencyConfigMixNodeConfigArrayOutput() FunctionInstanceConcurrencyConfigMixNodeConfigArrayOutput {
+	return o
+}
+
+func (o FunctionInstanceConcurrencyConfigMixNodeConfigArrayOutput) ToFunctionInstanceConcurrencyConfigMixNodeConfigArrayOutputWithContext(ctx context.Context) FunctionInstanceConcurrencyConfigMixNodeConfigArrayOutput {
+	return o
+}
+
+func (o FunctionInstanceConcurrencyConfigMixNodeConfigArrayOutput) Index(i pulumi.IntInput) FunctionInstanceConcurrencyConfigMixNodeConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) FunctionInstanceConcurrencyConfigMixNodeConfig {
+		return vs[0].([]FunctionInstanceConcurrencyConfigMixNodeConfig)[vs[1].(int)]
+	}).(FunctionInstanceConcurrencyConfigMixNodeConfigOutput)
+}
+
+type FunctionInstanceConcurrencyConfigSessionConfig struct {
+	// Idle timeout strategy. Valid values: 'FATAL' for auto destroy, 'PAUSE' for auto pause. Only available when security isolation is enabled.
+	IdleTimeoutStrategy *string `pulumi:"idleTimeoutStrategy"`
+	// Maximum number of concurrent sessions per instance.
+	MaximumConcurrencySessionPerInstance *int `pulumi:"maximumConcurrencySessionPerInstance"`
+	// Session idle timeout in seconds.
+	MaximumIdleTimeInSeconds *int `pulumi:"maximumIdleTimeInSeconds"`
+	// Session lifecycle in seconds.
+	MaximumTtlInSeconds *int `pulumi:"maximumTtlInSeconds"`
+	// Session name, starts with a letter, length 5-40 characters, can contain letters, digits, underscores, and hyphens.
+	SessionName *string `pulumi:"sessionName"`
+	// Session path information.
+	SessionPath *string `pulumi:"sessionPath"`
+	// Session source. Valid values: 'HEADER', 'COOKIE', 'QUERY_STRING'.
+	SessionSource *string `pulumi:"sessionSource"`
+}
+
+// FunctionInstanceConcurrencyConfigSessionConfigInput is an input type that accepts FunctionInstanceConcurrencyConfigSessionConfigArgs and FunctionInstanceConcurrencyConfigSessionConfigOutput values.
+// You can construct a concrete instance of `FunctionInstanceConcurrencyConfigSessionConfigInput` via:
+//
+//	FunctionInstanceConcurrencyConfigSessionConfigArgs{...}
+type FunctionInstanceConcurrencyConfigSessionConfigInput interface {
+	pulumi.Input
+
+	ToFunctionInstanceConcurrencyConfigSessionConfigOutput() FunctionInstanceConcurrencyConfigSessionConfigOutput
+	ToFunctionInstanceConcurrencyConfigSessionConfigOutputWithContext(context.Context) FunctionInstanceConcurrencyConfigSessionConfigOutput
+}
+
+type FunctionInstanceConcurrencyConfigSessionConfigArgs struct {
+	// Idle timeout strategy. Valid values: 'FATAL' for auto destroy, 'PAUSE' for auto pause. Only available when security isolation is enabled.
+	IdleTimeoutStrategy pulumi.StringPtrInput `pulumi:"idleTimeoutStrategy"`
+	// Maximum number of concurrent sessions per instance.
+	MaximumConcurrencySessionPerInstance pulumi.IntPtrInput `pulumi:"maximumConcurrencySessionPerInstance"`
+	// Session idle timeout in seconds.
+	MaximumIdleTimeInSeconds pulumi.IntPtrInput `pulumi:"maximumIdleTimeInSeconds"`
+	// Session lifecycle in seconds.
+	MaximumTtlInSeconds pulumi.IntPtrInput `pulumi:"maximumTtlInSeconds"`
+	// Session name, starts with a letter, length 5-40 characters, can contain letters, digits, underscores, and hyphens.
+	SessionName pulumi.StringPtrInput `pulumi:"sessionName"`
+	// Session path information.
+	SessionPath pulumi.StringPtrInput `pulumi:"sessionPath"`
+	// Session source. Valid values: 'HEADER', 'COOKIE', 'QUERY_STRING'.
+	SessionSource pulumi.StringPtrInput `pulumi:"sessionSource"`
+}
+
+func (FunctionInstanceConcurrencyConfigSessionConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*FunctionInstanceConcurrencyConfigSessionConfig)(nil)).Elem()
+}
+
+func (i FunctionInstanceConcurrencyConfigSessionConfigArgs) ToFunctionInstanceConcurrencyConfigSessionConfigOutput() FunctionInstanceConcurrencyConfigSessionConfigOutput {
+	return i.ToFunctionInstanceConcurrencyConfigSessionConfigOutputWithContext(context.Background())
+}
+
+func (i FunctionInstanceConcurrencyConfigSessionConfigArgs) ToFunctionInstanceConcurrencyConfigSessionConfigOutputWithContext(ctx context.Context) FunctionInstanceConcurrencyConfigSessionConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FunctionInstanceConcurrencyConfigSessionConfigOutput)
+}
+
+func (i FunctionInstanceConcurrencyConfigSessionConfigArgs) ToFunctionInstanceConcurrencyConfigSessionConfigPtrOutput() FunctionInstanceConcurrencyConfigSessionConfigPtrOutput {
+	return i.ToFunctionInstanceConcurrencyConfigSessionConfigPtrOutputWithContext(context.Background())
+}
+
+func (i FunctionInstanceConcurrencyConfigSessionConfigArgs) ToFunctionInstanceConcurrencyConfigSessionConfigPtrOutputWithContext(ctx context.Context) FunctionInstanceConcurrencyConfigSessionConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FunctionInstanceConcurrencyConfigSessionConfigOutput).ToFunctionInstanceConcurrencyConfigSessionConfigPtrOutputWithContext(ctx)
+}
+
+// FunctionInstanceConcurrencyConfigSessionConfigPtrInput is an input type that accepts FunctionInstanceConcurrencyConfigSessionConfigArgs, FunctionInstanceConcurrencyConfigSessionConfigPtr and FunctionInstanceConcurrencyConfigSessionConfigPtrOutput values.
+// You can construct a concrete instance of `FunctionInstanceConcurrencyConfigSessionConfigPtrInput` via:
+//
+//	        FunctionInstanceConcurrencyConfigSessionConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type FunctionInstanceConcurrencyConfigSessionConfigPtrInput interface {
+	pulumi.Input
+
+	ToFunctionInstanceConcurrencyConfigSessionConfigPtrOutput() FunctionInstanceConcurrencyConfigSessionConfigPtrOutput
+	ToFunctionInstanceConcurrencyConfigSessionConfigPtrOutputWithContext(context.Context) FunctionInstanceConcurrencyConfigSessionConfigPtrOutput
+}
+
+type functionInstanceConcurrencyConfigSessionConfigPtrType FunctionInstanceConcurrencyConfigSessionConfigArgs
+
+func FunctionInstanceConcurrencyConfigSessionConfigPtr(v *FunctionInstanceConcurrencyConfigSessionConfigArgs) FunctionInstanceConcurrencyConfigSessionConfigPtrInput {
+	return (*functionInstanceConcurrencyConfigSessionConfigPtrType)(v)
+}
+
+func (*functionInstanceConcurrencyConfigSessionConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**FunctionInstanceConcurrencyConfigSessionConfig)(nil)).Elem()
+}
+
+func (i *functionInstanceConcurrencyConfigSessionConfigPtrType) ToFunctionInstanceConcurrencyConfigSessionConfigPtrOutput() FunctionInstanceConcurrencyConfigSessionConfigPtrOutput {
+	return i.ToFunctionInstanceConcurrencyConfigSessionConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *functionInstanceConcurrencyConfigSessionConfigPtrType) ToFunctionInstanceConcurrencyConfigSessionConfigPtrOutputWithContext(ctx context.Context) FunctionInstanceConcurrencyConfigSessionConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(FunctionInstanceConcurrencyConfigSessionConfigPtrOutput)
+}
+
+type FunctionInstanceConcurrencyConfigSessionConfigOutput struct{ *pulumi.OutputState }
+
+func (FunctionInstanceConcurrencyConfigSessionConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*FunctionInstanceConcurrencyConfigSessionConfig)(nil)).Elem()
+}
+
+func (o FunctionInstanceConcurrencyConfigSessionConfigOutput) ToFunctionInstanceConcurrencyConfigSessionConfigOutput() FunctionInstanceConcurrencyConfigSessionConfigOutput {
+	return o
+}
+
+func (o FunctionInstanceConcurrencyConfigSessionConfigOutput) ToFunctionInstanceConcurrencyConfigSessionConfigOutputWithContext(ctx context.Context) FunctionInstanceConcurrencyConfigSessionConfigOutput {
+	return o
+}
+
+func (o FunctionInstanceConcurrencyConfigSessionConfigOutput) ToFunctionInstanceConcurrencyConfigSessionConfigPtrOutput() FunctionInstanceConcurrencyConfigSessionConfigPtrOutput {
+	return o.ToFunctionInstanceConcurrencyConfigSessionConfigPtrOutputWithContext(context.Background())
+}
+
+func (o FunctionInstanceConcurrencyConfigSessionConfigOutput) ToFunctionInstanceConcurrencyConfigSessionConfigPtrOutputWithContext(ctx context.Context) FunctionInstanceConcurrencyConfigSessionConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v FunctionInstanceConcurrencyConfigSessionConfig) *FunctionInstanceConcurrencyConfigSessionConfig {
+		return &v
+	}).(FunctionInstanceConcurrencyConfigSessionConfigPtrOutput)
+}
+
+// Idle timeout strategy. Valid values: 'FATAL' for auto destroy, 'PAUSE' for auto pause. Only available when security isolation is enabled.
+func (o FunctionInstanceConcurrencyConfigSessionConfigOutput) IdleTimeoutStrategy() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v FunctionInstanceConcurrencyConfigSessionConfig) *string { return v.IdleTimeoutStrategy }).(pulumi.StringPtrOutput)
+}
+
+// Maximum number of concurrent sessions per instance.
+func (o FunctionInstanceConcurrencyConfigSessionConfigOutput) MaximumConcurrencySessionPerInstance() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v FunctionInstanceConcurrencyConfigSessionConfig) *int {
+		return v.MaximumConcurrencySessionPerInstance
+	}).(pulumi.IntPtrOutput)
+}
+
+// Session idle timeout in seconds.
+func (o FunctionInstanceConcurrencyConfigSessionConfigOutput) MaximumIdleTimeInSeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v FunctionInstanceConcurrencyConfigSessionConfig) *int { return v.MaximumIdleTimeInSeconds }).(pulumi.IntPtrOutput)
+}
+
+// Session lifecycle in seconds.
+func (o FunctionInstanceConcurrencyConfigSessionConfigOutput) MaximumTtlInSeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v FunctionInstanceConcurrencyConfigSessionConfig) *int { return v.MaximumTtlInSeconds }).(pulumi.IntPtrOutput)
+}
+
+// Session name, starts with a letter, length 5-40 characters, can contain letters, digits, underscores, and hyphens.
+func (o FunctionInstanceConcurrencyConfigSessionConfigOutput) SessionName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v FunctionInstanceConcurrencyConfigSessionConfig) *string { return v.SessionName }).(pulumi.StringPtrOutput)
+}
+
+// Session path information.
+func (o FunctionInstanceConcurrencyConfigSessionConfigOutput) SessionPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v FunctionInstanceConcurrencyConfigSessionConfig) *string { return v.SessionPath }).(pulumi.StringPtrOutput)
+}
+
+// Session source. Valid values: 'HEADER', 'COOKIE', 'QUERY_STRING'.
+func (o FunctionInstanceConcurrencyConfigSessionConfigOutput) SessionSource() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v FunctionInstanceConcurrencyConfigSessionConfig) *string { return v.SessionSource }).(pulumi.StringPtrOutput)
+}
+
+type FunctionInstanceConcurrencyConfigSessionConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (FunctionInstanceConcurrencyConfigSessionConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**FunctionInstanceConcurrencyConfigSessionConfig)(nil)).Elem()
+}
+
+func (o FunctionInstanceConcurrencyConfigSessionConfigPtrOutput) ToFunctionInstanceConcurrencyConfigSessionConfigPtrOutput() FunctionInstanceConcurrencyConfigSessionConfigPtrOutput {
+	return o
+}
+
+func (o FunctionInstanceConcurrencyConfigSessionConfigPtrOutput) ToFunctionInstanceConcurrencyConfigSessionConfigPtrOutputWithContext(ctx context.Context) FunctionInstanceConcurrencyConfigSessionConfigPtrOutput {
+	return o
+}
+
+func (o FunctionInstanceConcurrencyConfigSessionConfigPtrOutput) Elem() FunctionInstanceConcurrencyConfigSessionConfigOutput {
+	return o.ApplyT(func(v *FunctionInstanceConcurrencyConfigSessionConfig) FunctionInstanceConcurrencyConfigSessionConfig {
+		if v != nil {
+			return *v
+		}
+		var ret FunctionInstanceConcurrencyConfigSessionConfig
+		return ret
+	}).(FunctionInstanceConcurrencyConfigSessionConfigOutput)
+}
+
+// Idle timeout strategy. Valid values: 'FATAL' for auto destroy, 'PAUSE' for auto pause. Only available when security isolation is enabled.
+func (o FunctionInstanceConcurrencyConfigSessionConfigPtrOutput) IdleTimeoutStrategy() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *FunctionInstanceConcurrencyConfigSessionConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.IdleTimeoutStrategy
+	}).(pulumi.StringPtrOutput)
+}
+
+// Maximum number of concurrent sessions per instance.
+func (o FunctionInstanceConcurrencyConfigSessionConfigPtrOutput) MaximumConcurrencySessionPerInstance() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *FunctionInstanceConcurrencyConfigSessionConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return v.MaximumConcurrencySessionPerInstance
+	}).(pulumi.IntPtrOutput)
+}
+
+// Session idle timeout in seconds.
+func (o FunctionInstanceConcurrencyConfigSessionConfigPtrOutput) MaximumIdleTimeInSeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *FunctionInstanceConcurrencyConfigSessionConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return v.MaximumIdleTimeInSeconds
+	}).(pulumi.IntPtrOutput)
+}
+
+// Session lifecycle in seconds.
+func (o FunctionInstanceConcurrencyConfigSessionConfigPtrOutput) MaximumTtlInSeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *FunctionInstanceConcurrencyConfigSessionConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return v.MaximumTtlInSeconds
+	}).(pulumi.IntPtrOutput)
+}
+
+// Session name, starts with a letter, length 5-40 characters, can contain letters, digits, underscores, and hyphens.
+func (o FunctionInstanceConcurrencyConfigSessionConfigPtrOutput) SessionName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *FunctionInstanceConcurrencyConfigSessionConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SessionName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Session path information.
+func (o FunctionInstanceConcurrencyConfigSessionConfigPtrOutput) SessionPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *FunctionInstanceConcurrencyConfigSessionConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SessionPath
+	}).(pulumi.StringPtrOutput)
+}
+
+// Session source. Valid values: 'HEADER', 'COOKIE', 'QUERY_STRING'.
+func (o FunctionInstanceConcurrencyConfigSessionConfigPtrOutput) SessionSource() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *FunctionInstanceConcurrencyConfigSessionConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SessionSource
+	}).(pulumi.StringPtrOutput)
 }
 
 type FunctionIntranetConfig struct {
@@ -5966,6 +6570,12 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayInput)(nil)).Elem(), FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*FunctionImageConfigInput)(nil)).Elem(), FunctionImageConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*FunctionImageConfigArrayInput)(nil)).Elem(), FunctionImageConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FunctionInstanceConcurrencyConfigInput)(nil)).Elem(), FunctionInstanceConcurrencyConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FunctionInstanceConcurrencyConfigPtrInput)(nil)).Elem(), FunctionInstanceConcurrencyConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FunctionInstanceConcurrencyConfigMixNodeConfigInput)(nil)).Elem(), FunctionInstanceConcurrencyConfigMixNodeConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FunctionInstanceConcurrencyConfigMixNodeConfigArrayInput)(nil)).Elem(), FunctionInstanceConcurrencyConfigMixNodeConfigArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FunctionInstanceConcurrencyConfigSessionConfigInput)(nil)).Elem(), FunctionInstanceConcurrencyConfigSessionConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*FunctionInstanceConcurrencyConfigSessionConfigPtrInput)(nil)).Elem(), FunctionInstanceConcurrencyConfigSessionConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*FunctionIntranetConfigInput)(nil)).Elem(), FunctionIntranetConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*FunctionIntranetConfigPtrInput)(nil)).Elem(), FunctionIntranetConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*FunctionLayerInput)(nil)).Elem(), FunctionLayerArgs{})
@@ -6046,6 +6656,12 @@ func init() {
 	pulumi.RegisterOutputType(FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArrayOutput{})
 	pulumi.RegisterOutputType(FunctionImageConfigOutput{})
 	pulumi.RegisterOutputType(FunctionImageConfigArrayOutput{})
+	pulumi.RegisterOutputType(FunctionInstanceConcurrencyConfigOutput{})
+	pulumi.RegisterOutputType(FunctionInstanceConcurrencyConfigPtrOutput{})
+	pulumi.RegisterOutputType(FunctionInstanceConcurrencyConfigMixNodeConfigOutput{})
+	pulumi.RegisterOutputType(FunctionInstanceConcurrencyConfigMixNodeConfigArrayOutput{})
+	pulumi.RegisterOutputType(FunctionInstanceConcurrencyConfigSessionConfigOutput{})
+	pulumi.RegisterOutputType(FunctionInstanceConcurrencyConfigSessionConfigPtrOutput{})
 	pulumi.RegisterOutputType(FunctionIntranetConfigOutput{})
 	pulumi.RegisterOutputType(FunctionIntranetConfigPtrOutput{})
 	pulumi.RegisterOutputType(FunctionLayerOutput{})

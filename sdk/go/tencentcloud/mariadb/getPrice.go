@@ -96,12 +96,8 @@ type GetPriceResult struct {
 }
 
 func GetPriceOutput(ctx *pulumi.Context, args GetPriceOutputArgs, opts ...pulumi.InvokeOption) GetPriceResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetPriceResultOutput, error) {
-			args := v.(GetPriceArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mariadb/getPrice:getPrice", args, GetPriceResultOutput{}, options).(GetPriceResultOutput), nil
-		}).(GetPriceResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mariadb/getPrice:getPrice", args, GetPriceResultOutput{}, options).(GetPriceResultOutput)
 }
 
 // A collection of arguments for invoking getPrice.

@@ -71,12 +71,8 @@ type LookupMsApiListResult struct {
 }
 
 func LookupMsApiListOutput(ctx *pulumi.Context, args LookupMsApiListOutputArgs, opts ...pulumi.InvokeOption) LookupMsApiListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupMsApiListResultOutput, error) {
-			args := v.(LookupMsApiListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tsf/getMsApiList:getMsApiList", args, LookupMsApiListResultOutput{}, options).(LookupMsApiListResultOutput), nil
-		}).(LookupMsApiListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tsf/getMsApiList:getMsApiList", args, LookupMsApiListResultOutput{}, options).(LookupMsApiListResultOutput)
 }
 
 // A collection of arguments for invoking getMsApiList.

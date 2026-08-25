@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const describeManagers = tencentcloud.Ssl.getDescribeManagers({
+ * const describeManagers = tencentcloud.ssl.getDescribeManagers({
  *     companyId: 11772,
  * });
  * ```
@@ -96,7 +96,7 @@ export interface GetDescribeManagersResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const describeManagers = tencentcloud.Ssl.getDescribeManagers({
+ * const describeManagers = tencentcloud.ssl.getDescribeManagers({
  *     companyId: 11772,
  * });
  * ```
@@ -124,21 +124,21 @@ export interface GetDescribeManagersOutputArgs {
     /**
      * Vague query manager email (will be abandoned), please use Searchkey.
      */
-    managerMail?: pulumi.Input<string>;
+    managerMail?: pulumi.Input<string | undefined>;
     /**
      * Manager&amp;#39;s name (will be abandoned), please use Searchkey.
      */
-    managerName?: pulumi.Input<string>;
+    managerName?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Manager&amp;#39;s surname/Manager name/mailbox/department precise matching.
      */
-    searchKey?: pulumi.Input<string>;
+    searchKey?: pulumi.Input<string | undefined>;
     /**
      * Filter according to the status of the manager, and the value is available&amp;#39;None&amp;#39; Unable to submit review&amp;#39;Audit&amp;#39;, Asian Credit Review&amp;#39;Caaudit&amp;#39; CA review&amp;#39;OK&amp;#39; has been reviewed&amp;#39;Invalid&amp;#39; review failed&amp;#39;Expiring&amp;#39; is about to expire&amp;#39;Expired&amp;#39; expired.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
 }

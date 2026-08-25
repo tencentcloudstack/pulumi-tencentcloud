@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const probeData = tencentcloud.Cat.getProbeData({
+ * const probeData = tencentcloud.cat.getProbeData({
  *     beginTime: 1667923200000,
  *     endTime: 1667996208428,
  *     taskType: "AnalyzeTaskType_Network",
@@ -152,7 +152,7 @@ export interface GetProbeDataResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const probeData = tencentcloud.Cat.getProbeData({
+ * const probeData = tencentcloud.cat.getProbeData({
  *     beginTime: 1667923200000,
  *     endTime: 1667996208428,
  *     taskType: "AnalyzeTaskType_Network",
@@ -201,15 +201,15 @@ export interface GetProbeDataOutputArgs {
     /**
      * City list.
      */
-    cities?: pulumi.Input<pulumi.Input<string>[]>;
+    cities?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Code list.
      */
-    codes?: pulumi.Input<pulumi.Input<string>[]>;
+    codes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Districts list.
      */
-    districts?: pulumi.Input<pulumi.Input<string>[]>;
+    districts?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * End timestamp (in milliseconds).
      */
@@ -217,7 +217,7 @@ export interface GetProbeDataOutputArgs {
     /**
      * ErrorTypes list.
      */
-    errorTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    errorTypes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Limit.
      */
@@ -229,11 +229,11 @@ export interface GetProbeDataOutputArgs {
     /**
      * Operators list.
      */
-    operators?: pulumi.Input<pulumi.Input<string>[]>;
+    operators?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Selected Fields.
      */
@@ -245,7 +245,7 @@ export interface GetProbeDataOutputArgs {
     /**
      * TaskID list.
      */
-    taskIds?: pulumi.Input<pulumi.Input<string>[]>;
+    taskIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Task Type in AnalyzeTaskType_Network,AnalyzeTaskType_Browse,AnalyzeTaskType_UploadDownload,AnalyzeTaskType_Transport,AnalyzeTaskType_MediaStream.
      */

@@ -75,12 +75,8 @@ type GetUsedIpAddressResult struct {
 }
 
 func GetUsedIpAddressOutput(ctx *pulumi.Context, args GetUsedIpAddressOutputArgs, opts ...pulumi.InvokeOption) GetUsedIpAddressResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetUsedIpAddressResultOutput, error) {
-			args := v.(GetUsedIpAddressArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Vpc/getUsedIpAddress:getUsedIpAddress", args, GetUsedIpAddressResultOutput{}, options).(GetUsedIpAddressResultOutput), nil
-		}).(GetUsedIpAddressResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Vpc/getUsedIpAddress:getUsedIpAddress", args, GetUsedIpAddressResultOutput{}, options).(GetUsedIpAddressResultOutput)
 }
 
 // A collection of arguments for invoking getUsedIpAddress.

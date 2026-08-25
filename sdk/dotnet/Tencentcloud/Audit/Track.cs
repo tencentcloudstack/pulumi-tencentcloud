@@ -75,6 +75,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit
     ///             StorageType = "cos",
     ///             StorageAccountId = "100037717137",
     ///             StorageAppId = "1309116520",
+    ///             Compress = 1,
     ///         },
     ///     });
     /// 
@@ -84,7 +85,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit
     /// ## Import
     /// 
     /// audit track can be imported using the id, e.g.
-    /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Audit/track:Track example 24283
     /// ```
@@ -129,7 +129,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit
         public Output<int> Status { get; private set; } = null!;
 
         /// <summary>
-        /// Track Storage, support `Cos` and `Cls`.
+        /// Track Storage, support `Cos`, `Cls` and `Ckafka`.
         /// </summary>
         [Output("storage")]
         public Output<Outputs.TrackStorage> Storage { get; private set; } = null!;
@@ -224,7 +224,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit
         public Input<int> Status { get; set; } = null!;
 
         /// <summary>
-        /// Track Storage, support `Cos` and `Cls`.
+        /// Track Storage, support `Cos`, `Cls` and `Ckafka`.
         /// </summary>
         [Input("storage", required: true)]
         public Input<Inputs.TrackStorageArgs> Storage { get; set; } = null!;
@@ -286,7 +286,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit
         public Input<int>? Status { get; set; }
 
         /// <summary>
-        /// Track Storage, support `Cos` and `Cls`.
+        /// Track Storage, support `Cos`, `Cls` and `Ckafka`.
         /// </summary>
         [Input("storage")]
         public Input<Inputs.TrackStorageGetArgs>? Storage { get; set; }

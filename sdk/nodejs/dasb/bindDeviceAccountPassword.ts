@@ -20,11 +20,11 @@ import * as utilities from "../utilities";
  *     name: "tf_example",
  * });
  * const exampleDeviceAccount = new tencentcloud.dasb.DeviceAccount("example", {
- *     deviceId: example.id,
+ *     deviceId: example.id.apply(x =>Number(x)),
  *     account: "root",
  * });
  * const exampleBindDeviceAccountPassword = new tencentcloud.dasb.BindDeviceAccountPassword("example", {
- *     deviceAccountId: exampleDeviceAccount.id,
+ *     deviceAccountId: exampleDeviceAccount.id.apply(x =>Number(x)),
  *     password: "TerraformPassword",
  * });
  * ```
@@ -104,11 +104,11 @@ export interface BindDeviceAccountPasswordState {
     /**
      * Host account ID.
      */
-    deviceAccountId?: pulumi.Input<number>;
+    deviceAccountId?: pulumi.Input<number | undefined>;
     /**
      * Host account password.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
 }
 
 /**

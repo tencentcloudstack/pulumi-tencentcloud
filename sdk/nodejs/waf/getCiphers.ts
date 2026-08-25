@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getCiphers({});
+ * const example = tencentcloud.waf.getCiphers({});
  * ```
  */
 export function getCiphers(args?: GetCiphersArgs, opts?: pulumi.InvokeOptions): Promise<GetCiphersResult> {
@@ -59,7 +59,7 @@ export interface GetCiphersResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getCiphers({});
+ * const example = tencentcloud.waf.getCiphers({});
  * ```
  */
 export function getCiphersOutput(args?: GetCiphersOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCiphersResult> {
@@ -77,5 +77,5 @@ export interface GetCiphersOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

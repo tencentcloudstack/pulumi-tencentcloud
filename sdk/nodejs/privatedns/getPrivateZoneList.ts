@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.PrivateDns.getPrivateZoneList({});
+ * const example = tencentcloud.privatedns.getPrivateZoneList({});
  * ```
  *
  * ### Query private zones by ZoneId:
@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.PrivateDns.getPrivateZoneList({
+ * const example = tencentcloud.privatedns.getPrivateZoneList({
  *     filters: [{
  *         name: "ZoneId",
  *         values: ["zone-6xg5xgky1"],
@@ -40,7 +40,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.PrivateDns.getPrivateZoneList({
+ * const example = tencentcloud.privatedns.getPrivateZoneList({
  *     filters: [{
  *         name: "Domain",
  *         values: ["domain.com"],
@@ -54,7 +54,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.PrivateDns.getPrivateZoneList({
+ * const example = tencentcloud.privatedns.getPrivateZoneList({
  *     filters: [{
  *         name: "Vpc",
  *         values: ["vpc-axrsmmrv"],
@@ -111,7 +111,7 @@ export interface GetPrivateZoneListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.PrivateDns.getPrivateZoneList({});
+ * const example = tencentcloud.privatedns.getPrivateZoneList({});
  * ```
  *
  * ### Query private zones by ZoneId:
@@ -120,7 +120,7 @@ export interface GetPrivateZoneListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.PrivateDns.getPrivateZoneList({
+ * const example = tencentcloud.privatedns.getPrivateZoneList({
  *     filters: [{
  *         name: "ZoneId",
  *         values: ["zone-6xg5xgky1"],
@@ -134,7 +134,7 @@ export interface GetPrivateZoneListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.PrivateDns.getPrivateZoneList({
+ * const example = tencentcloud.privatedns.getPrivateZoneList({
  *     filters: [{
  *         name: "Domain",
  *         values: ["domain.com"],
@@ -148,7 +148,7 @@ export interface GetPrivateZoneListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.PrivateDns.getPrivateZoneList({
+ * const example = tencentcloud.privatedns.getPrivateZoneList({
  *     filters: [{
  *         name: "Vpc",
  *         values: ["vpc-axrsmmrv"],
@@ -172,9 +172,9 @@ export interface GetPrivateZoneListOutputArgs {
     /**
      * filters.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.PrivateDns.GetPrivateZoneListFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.PrivateDns.GetPrivateZoneListFilterArgs>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

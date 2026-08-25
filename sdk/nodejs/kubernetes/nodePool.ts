@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  * const config = new pulumi.Config();
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
  * const clusterCidr = config.get("clusterCidr") || "172.31.0.0/16";
- * const vpc = tencentcloud.Vpc.getSubnets({
+ * const vpc = tencentcloud.vpc.getSubnets({
  *     isDefault: true,
  *     availabilityZone: availabilityZone,
  * });
@@ -609,147 +609,147 @@ export interface NodePoolState {
     /**
      * Node Annotation List.
      */
-    annotations?: pulumi.Input<pulumi.Input<inputs.Kubernetes.NodePoolAnnotation>[]>;
+    annotations?: pulumi.Input<pulumi.Input<inputs.Kubernetes.NodePoolAnnotation>[] | undefined>;
     /**
      * Auto scaling config parameters.
      */
-    autoScalingConfig?: pulumi.Input<inputs.Kubernetes.NodePoolAutoScalingConfig>;
+    autoScalingConfig?: pulumi.Input<inputs.Kubernetes.NodePoolAutoScalingConfig | undefined>;
     /**
      * The auto scaling group ID.
      */
-    autoScalingGroupId?: pulumi.Input<string>;
+    autoScalingGroupId?: pulumi.Input<string | undefined>;
     /**
      * Automatically update instance tags. The default value is false. After configuration, if the scaling group tags are updated, the tags of the running instances in the scaling group will be updated synchronously (synchronous updates only support adding and modifying tags, and do not support deleting tags for the time being). Synchronous updates do not take effect immediately and there is a certain delay.
      */
-    autoUpdateInstanceTags?: pulumi.Input<boolean>;
+    autoUpdateInstanceTags?: pulumi.Input<boolean | undefined>;
     /**
      * The total of autoscaling added node.
      */
-    autoscalingAddedTotal?: pulumi.Input<number>;
+    autoscalingAddedTotal?: pulumi.Input<number | undefined>;
     /**
      * ID of the cluster.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Seconds of scaling group cool down. Default value is `300`.
      */
-    defaultCooldown?: pulumi.Input<number>;
+    defaultCooldown?: pulumi.Input<number | undefined>;
     /**
      * Indicate to keep the CVM instance when delete the node pool. Default is `true`.
      */
-    deleteKeepInstance?: pulumi.Input<boolean>;
+    deleteKeepInstance?: pulumi.Input<boolean | undefined>;
     /**
      * Indicates whether the node pool deletion protection is enabled.
      */
-    deletionProtection?: pulumi.Input<boolean>;
+    deletionProtection?: pulumi.Input<boolean | undefined>;
     /**
      * Desired capacity of the node. If `enableAutoScale` is set `true`, this will be a computed parameter.
      */
-    desiredCapacity?: pulumi.Input<number>;
+    desiredCapacity?: pulumi.Input<number | undefined>;
     /**
      * Indicate whether to enable auto scaling or not.
      */
-    enableAutoScale?: pulumi.Input<boolean>;
+    enableAutoScale?: pulumi.Input<boolean | undefined>;
     /**
      * Labels of kubernetes node pool created nodes. The label key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').
      */
-    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * The launch config ID.
      */
-    launchConfigId?: pulumi.Input<string>;
+    launchConfigId?: pulumi.Input<string | undefined>;
     /**
      * The total of manually added node.
      */
-    manuallyAddedTotal?: pulumi.Input<number>;
+    manuallyAddedTotal?: pulumi.Input<number | undefined>;
     /**
      * Maximum number of node.
      */
-    maxSize?: pulumi.Input<number>;
+    maxSize?: pulumi.Input<number | undefined>;
     /**
      * Minimum number of node.
      */
-    minSize?: pulumi.Input<number>;
+    minSize?: pulumi.Input<number | undefined>;
     /**
      * Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.
      */
-    multiZoneSubnetPolicy?: pulumi.Input<string>;
+    multiZoneSubnetPolicy?: pulumi.Input<string | undefined>;
     /**
      * Name of the node pool. The name does not exceed 25 characters, and only supports Chinese, English, numbers, underscores, separators (`-`) and decimal points.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Node config.
      */
-    nodeConfig?: pulumi.Input<inputs.Kubernetes.NodePoolNodeConfig>;
+    nodeConfig?: pulumi.Input<inputs.Kubernetes.NodePoolNodeConfig | undefined>;
     /**
      * The total node count.
      */
-    nodeCount?: pulumi.Input<number>;
+    nodeCount?: pulumi.Input<number | undefined>;
     /**
      * Node pool operating system (enter the image ID for a custom image, and enter the OS name for a public image). If custom image, please refer to [TencentCloud Documentation](https://www.tencentcloud.com/document/product/457/46750?lang=en&pg=#list-of-public-images-supported-by-tke) for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
      */
-    nodeOs?: pulumi.Input<string>;
+    nodeOs?: pulumi.Input<string | undefined>;
     /**
      * The image version of the node. Valida values are `DOCKER_CUSTOMIZE` and `GENERAL`. Default is `GENERAL`. This parameter will only affect new nodes, not including the existing nodes.
      */
-    nodeOsType?: pulumi.Input<string>;
+    nodeOsType?: pulumi.Input<string | undefined>;
     /**
      * Available values for retry policies include `IMMEDIATE_RETRY` and `INCREMENTAL_INTERVALS`.
      */
-    retryPolicy?: pulumi.Input<string>;
+    retryPolicy?: pulumi.Input<string | undefined>;
     /**
      * Control how many expectations(`desiredCapacity`) can be tolerated successfully. Unit is percentage, Default is `100`. Only can be set if `waitNodeReady` is `true`.
      */
-    scaleTolerance?: pulumi.Input<number>;
+    scaleTolerance?: pulumi.Input<number | undefined>;
     /**
      * Name of relative scaling group.
      */
-    scalingGroupName?: pulumi.Input<string>;
+    scalingGroupName?: pulumi.Input<string | undefined>;
     /**
      * Project ID the scaling group belongs to.
      */
-    scalingGroupProjectId?: pulumi.Input<number>;
+    scalingGroupProjectId?: pulumi.Input<number | undefined>;
     /**
      * Auto scaling mode. Valid values are `CLASSIC_SCALING`(scaling by create/destroy instances), `WAKE_UP_STOPPED_SCALING`(Boot priority for expansion. When expanding the capacity, the shutdown operation is given priority to the shutdown of the instance. If the number of instances is still lower than the expected number of instances after the startup, the instance will be created, and the method of destroying the instance will still be used for shrinking).
      */
-    scalingMode?: pulumi.Input<string>;
+    scalingMode?: pulumi.Input<string | undefined>;
     /**
      * Status of the node pool.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * ID list of subnet, and for VPC it is required.
      */
-    subnetIds?: pulumi.Input<pulumi.Input<string>[]>;
+    subnetIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Node pool tag specifications, will passthroughs to the scaling instances.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Taints of kubernetes node pool created nodes.
      */
-    taints?: pulumi.Input<pulumi.Input<inputs.Kubernetes.NodePoolTaint>[]>;
+    taints?: pulumi.Input<pulumi.Input<inputs.Kubernetes.NodePoolTaint>[] | undefined>;
     /**
      * Policy of scaling group termination. Available values: `["OLDEST_INSTANCE"]`, `["NEWEST_INSTANCE"]`.
      */
-    terminationPolicies?: pulumi.Input<string>;
+    terminationPolicies?: pulumi.Input<string | undefined>;
     /**
      * Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
      */
-    unschedulable?: pulumi.Input<number>;
+    unschedulable?: pulumi.Input<number | undefined>;
     /**
      * ID of VPC network.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * Whether to wait for all desired nodes to be ready. Default is false. Only can be set if `enableAutoScale` is `false`.
      */
-    waitNodeReady?: pulumi.Input<boolean>;
+    waitNodeReady?: pulumi.Input<boolean | undefined>;
     /**
      * List of auto scaling group available zones, for Basic network it is required.
      */
-    zones?: pulumi.Input<pulumi.Input<string>[]>;
+    zones?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -759,7 +759,7 @@ export interface NodePoolArgs {
     /**
      * Node Annotation List.
      */
-    annotations?: pulumi.Input<pulumi.Input<inputs.Kubernetes.NodePoolAnnotation>[]>;
+    annotations?: pulumi.Input<pulumi.Input<inputs.Kubernetes.NodePoolAnnotation>[] | undefined>;
     /**
      * Auto scaling config parameters.
      */
@@ -767,7 +767,7 @@ export interface NodePoolArgs {
     /**
      * Automatically update instance tags. The default value is false. After configuration, if the scaling group tags are updated, the tags of the running instances in the scaling group will be updated synchronously (synchronous updates only support adding and modifying tags, and do not support deleting tags for the time being). Synchronous updates do not take effect immediately and there is a certain delay.
      */
-    autoUpdateInstanceTags?: pulumi.Input<boolean>;
+    autoUpdateInstanceTags?: pulumi.Input<boolean | undefined>;
     /**
      * ID of the cluster.
      */
@@ -775,27 +775,27 @@ export interface NodePoolArgs {
     /**
      * Seconds of scaling group cool down. Default value is `300`.
      */
-    defaultCooldown?: pulumi.Input<number>;
+    defaultCooldown?: pulumi.Input<number | undefined>;
     /**
      * Indicate to keep the CVM instance when delete the node pool. Default is `true`.
      */
-    deleteKeepInstance?: pulumi.Input<boolean>;
+    deleteKeepInstance?: pulumi.Input<boolean | undefined>;
     /**
      * Indicates whether the node pool deletion protection is enabled.
      */
-    deletionProtection?: pulumi.Input<boolean>;
+    deletionProtection?: pulumi.Input<boolean | undefined>;
     /**
      * Desired capacity of the node. If `enableAutoScale` is set `true`, this will be a computed parameter.
      */
-    desiredCapacity?: pulumi.Input<number>;
+    desiredCapacity?: pulumi.Input<number | undefined>;
     /**
      * Indicate whether to enable auto scaling or not.
      */
-    enableAutoScale?: pulumi.Input<boolean>;
+    enableAutoScale?: pulumi.Input<boolean | undefined>;
     /**
      * Labels of kubernetes node pool created nodes. The label key name does not exceed 63 characters, only supports English, numbers,'/','-', and does not allow beginning with ('/').
      */
-    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Maximum number of node.
      */
@@ -807,63 +807,63 @@ export interface NodePoolArgs {
     /**
      * Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.
      */
-    multiZoneSubnetPolicy?: pulumi.Input<string>;
+    multiZoneSubnetPolicy?: pulumi.Input<string | undefined>;
     /**
      * Name of the node pool. The name does not exceed 25 characters, and only supports Chinese, English, numbers, underscores, separators (`-`) and decimal points.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Node config.
      */
-    nodeConfig?: pulumi.Input<inputs.Kubernetes.NodePoolNodeConfig>;
+    nodeConfig?: pulumi.Input<inputs.Kubernetes.NodePoolNodeConfig | undefined>;
     /**
      * Node pool operating system (enter the image ID for a custom image, and enter the OS name for a public image). If custom image, please refer to [TencentCloud Documentation](https://www.tencentcloud.com/document/product/457/46750?lang=en&pg=#list-of-public-images-supported-by-tke) for available values. Default is 'tlinux2.4x86_64'. This parameter will only affect new nodes, not including the existing nodes.
      */
-    nodeOs?: pulumi.Input<string>;
+    nodeOs?: pulumi.Input<string | undefined>;
     /**
      * The image version of the node. Valida values are `DOCKER_CUSTOMIZE` and `GENERAL`. Default is `GENERAL`. This parameter will only affect new nodes, not including the existing nodes.
      */
-    nodeOsType?: pulumi.Input<string>;
+    nodeOsType?: pulumi.Input<string | undefined>;
     /**
      * Available values for retry policies include `IMMEDIATE_RETRY` and `INCREMENTAL_INTERVALS`.
      */
-    retryPolicy?: pulumi.Input<string>;
+    retryPolicy?: pulumi.Input<string | undefined>;
     /**
      * Control how many expectations(`desiredCapacity`) can be tolerated successfully. Unit is percentage, Default is `100`. Only can be set if `waitNodeReady` is `true`.
      */
-    scaleTolerance?: pulumi.Input<number>;
+    scaleTolerance?: pulumi.Input<number | undefined>;
     /**
      * Name of relative scaling group.
      */
-    scalingGroupName?: pulumi.Input<string>;
+    scalingGroupName?: pulumi.Input<string | undefined>;
     /**
      * Project ID the scaling group belongs to.
      */
-    scalingGroupProjectId?: pulumi.Input<number>;
+    scalingGroupProjectId?: pulumi.Input<number | undefined>;
     /**
      * Auto scaling mode. Valid values are `CLASSIC_SCALING`(scaling by create/destroy instances), `WAKE_UP_STOPPED_SCALING`(Boot priority for expansion. When expanding the capacity, the shutdown operation is given priority to the shutdown of the instance. If the number of instances is still lower than the expected number of instances after the startup, the instance will be created, and the method of destroying the instance will still be used for shrinking).
      */
-    scalingMode?: pulumi.Input<string>;
+    scalingMode?: pulumi.Input<string | undefined>;
     /**
      * ID list of subnet, and for VPC it is required.
      */
-    subnetIds?: pulumi.Input<pulumi.Input<string>[]>;
+    subnetIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Node pool tag specifications, will passthroughs to the scaling instances.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Taints of kubernetes node pool created nodes.
      */
-    taints?: pulumi.Input<pulumi.Input<inputs.Kubernetes.NodePoolTaint>[]>;
+    taints?: pulumi.Input<pulumi.Input<inputs.Kubernetes.NodePoolTaint>[] | undefined>;
     /**
      * Policy of scaling group termination. Available values: `["OLDEST_INSTANCE"]`, `["NEWEST_INSTANCE"]`.
      */
-    terminationPolicies?: pulumi.Input<string>;
+    terminationPolicies?: pulumi.Input<string | undefined>;
     /**
      * Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
      */
-    unschedulable?: pulumi.Input<number>;
+    unschedulable?: pulumi.Input<number | undefined>;
     /**
      * ID of VPC network.
      */
@@ -871,9 +871,9 @@ export interface NodePoolArgs {
     /**
      * Whether to wait for all desired nodes to be ready. Default is false. Only can be set if `enableAutoScale` is `false`.
      */
-    waitNodeReady?: pulumi.Input<boolean>;
+    waitNodeReady?: pulumi.Input<boolean | undefined>;
     /**
      * List of auto scaling group available zones, for Basic network it is required.
      */
-    zones?: pulumi.Input<pulumi.Input<string>[]>;
+    zones?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

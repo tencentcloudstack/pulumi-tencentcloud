@@ -34,10 +34,10 @@ import * as utilities from "../utilities";
  *     protocol: "TCP",
  *     port: "80",
  * });
- * const protocol = pulumi.all([fooSecurityPolicy.id, fooSecurityRule.protocol]).apply(([id, protocol]) => tencentcloud.Gaap.getSecurityRulesOutput({
- *     policyId: id,
- *     protocol: protocol,
- * }));
+ * const protocol = tencentcloud.gaap.getSecurityRulesOutput({
+ *     policyId: fooSecurityPolicy.id,
+ *     protocol: fooSecurityRule.protocol,
+ * });
  * ```
  */
 export function getSecurityRules(args: GetSecurityRulesArgs, opts?: pulumi.InvokeOptions): Promise<GetSecurityRulesResult> {
@@ -156,10 +156,10 @@ export interface GetSecurityRulesResult {
  *     protocol: "TCP",
  *     port: "80",
  * });
- * const protocol = pulumi.all([fooSecurityPolicy.id, fooSecurityRule.protocol]).apply(([id, protocol]) => tencentcloud.Gaap.getSecurityRulesOutput({
- *     policyId: id,
- *     protocol: protocol,
- * }));
+ * const protocol = tencentcloud.gaap.getSecurityRulesOutput({
+ *     policyId: fooSecurityPolicy.id,
+ *     protocol: fooSecurityRule.protocol,
+ * });
  * ```
  */
 export function getSecurityRulesOutput(args: GetSecurityRulesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSecurityRulesResult> {
@@ -183,15 +183,15 @@ export interface GetSecurityRulesOutputArgs {
     /**
      * Policy of the rule to be queried.
      */
-    action?: pulumi.Input<string>;
+    action?: pulumi.Input<string | undefined>;
     /**
      * A network address block of the request source to be queried.
      */
-    cidrIp?: pulumi.Input<string>;
+    cidrIp?: pulumi.Input<string | undefined>;
     /**
      * Name of the security policy rule to be queried.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * ID of the security policy to be queried.
      */
@@ -199,17 +199,17 @@ export interface GetSecurityRulesOutputArgs {
     /**
      * Port of the security policy rule to be queried.
      */
-    port?: pulumi.Input<string>;
+    port?: pulumi.Input<string | undefined>;
     /**
      * Protocol of the security policy rule to be queried.
      */
-    protocol?: pulumi.Input<string>;
+    protocol?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * ID of the security policy rules to be queried.
      */
-    ruleId?: pulumi.Input<string>;
+    ruleId?: pulumi.Input<string | undefined>;
 }

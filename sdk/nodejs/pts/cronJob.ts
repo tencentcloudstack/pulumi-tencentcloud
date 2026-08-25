@@ -28,8 +28,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * pts cron_job can be imported using the projectId#cronJobId, e.g.
- *
+ * pts cronJob can be imported using the projectId#cronJobId, e.g.
  * ```sh
  * $ pulumi import tencentcloud:Pts/cronJob:CronJob cron_job project-7qkzxhea#scenario-c22lqb1w
  * ```
@@ -217,75 +216,75 @@ export interface CronJobState {
     /**
      * Reason for suspension.
      */
-    abortReason?: pulumi.Input<number>;
+    abortReason?: pulumi.Input<number | undefined>;
     /**
      * App ID.
      */
-    appId?: pulumi.Input<number>;
+    appId?: pulumi.Input<number | undefined>;
     /**
      * Creation time; type: Timestamp ISO8601.
      */
-    createdAt?: pulumi.Input<string>;
+    createdAt?: pulumi.Input<string | undefined>;
     /**
      * Cron expression, When setting cronExpression at that time, frequencyType must be greater than 1.
      */
-    cronExpression?: pulumi.Input<string>;
+    cronExpression?: pulumi.Input<string | undefined>;
     /**
      * Cron job ID.
      */
-    cronJobId?: pulumi.Input<string>;
+    cronJobId?: pulumi.Input<string | undefined>;
     /**
      * End Time; type: Timestamp ISO8601.
      */
-    endTime?: pulumi.Input<string>;
+    endTime?: pulumi.Input<string | undefined>;
     /**
      * Execution frequency type, `1`: execute only once; `2`: daily granularity; `3`: weekly granularity; `4`: advanced.
      */
-    frequencyType?: pulumi.Input<number>;
+    frequencyType?: pulumi.Input<number | undefined>;
     /**
      * Job Owner.
      */
-    jobOwner?: pulumi.Input<string>;
+    jobOwner?: pulumi.Input<string | undefined>;
     /**
      * Cron Job Name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Note.
      */
-    note?: pulumi.Input<string>;
+    note?: pulumi.Input<string | undefined>;
     /**
      * Notice ID.
      */
-    noticeId?: pulumi.Input<string>;
+    noticeId?: pulumi.Input<string | undefined>;
     /**
      * Project Id.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * Scenario Id.
      */
-    scenarioId?: pulumi.Input<string>;
+    scenarioId?: pulumi.Input<string | undefined>;
     /**
      * Scenario Name.
      */
-    scenarioName?: pulumi.Input<string>;
+    scenarioName?: pulumi.Input<string | undefined>;
     /**
      * Scheduled task status.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * Sub-user ID.
      */
-    subAccountUin?: pulumi.Input<string>;
+    subAccountUin?: pulumi.Input<string | undefined>;
     /**
      * User ID.
      */
-    uin?: pulumi.Input<string>;
+    uin?: pulumi.Input<string | undefined>;
     /**
      * Update time; type: Timestamp ISO8601.
      */
-    updatedAt?: pulumi.Input<string>;
+    updatedAt?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -299,7 +298,7 @@ export interface CronJobArgs {
     /**
      * End Time; type: Timestamp ISO8601.
      */
-    endTime?: pulumi.Input<string>;
+    endTime?: pulumi.Input<string | undefined>;
     /**
      * Execution frequency type, `1`: execute only once; `2`: daily granularity; `3`: weekly granularity; `4`: advanced.
      */
@@ -311,15 +310,15 @@ export interface CronJobArgs {
     /**
      * Cron Job Name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Note.
      */
-    note?: pulumi.Input<string>;
+    note?: pulumi.Input<string | undefined>;
     /**
      * Notice ID.
      */
-    noticeId?: pulumi.Input<string>;
+    noticeId?: pulumi.Input<string | undefined>;
     /**
      * Project Id.
      */

@@ -74,12 +74,8 @@ type GetClusterResourcesResult struct {
 }
 
 func GetClusterResourcesOutput(ctx *pulumi.Context, args GetClusterResourcesOutputArgs, opts ...pulumi.InvokeOption) GetClusterResourcesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetClusterResourcesResultOutput, error) {
-			args := v.(GetClusterResourcesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Clb/getClusterResources:getClusterResources", args, GetClusterResourcesResultOutput{}, options).(GetClusterResourcesResultOutput), nil
-		}).(GetClusterResourcesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Clb/getClusterResources:getClusterResources", args, GetClusterResourcesResultOutput{}, options).(GetClusterResourcesResultOutput)
 }
 
 // A collection of arguments for invoking getClusterResources.

@@ -35,7 +35,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ciam
     /// 
     /// ## Import
     /// 
-    /// ciam user_store can be imported using the id, e.g.
+    /// ciam UserStore can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Ciam/userStore:UserStore user_store userStoreId

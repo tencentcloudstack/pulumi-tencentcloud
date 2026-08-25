@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const groupInstances = tencentcloud.Tsf.getGroupInstances({
+ * const groupInstances = tencentcloud.tsf.getGroupInstances({
  *     groupId: "group-yrjkln9v",
  *     searchWord: "testing",
  *     orderBy: "ASC",
@@ -90,7 +90,7 @@ export interface GetGroupInstancesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const groupInstances = tencentcloud.Tsf.getGroupInstances({
+ * const groupInstances = tencentcloud.tsf.getGroupInstances({
  *     groupId: "group-yrjkln9v",
  *     searchWord: "testing",
  *     orderBy: "ASC",
@@ -120,17 +120,17 @@ export interface GetGroupInstancesOutputArgs {
     /**
      * order term.
      */
-    orderBy?: pulumi.Input<string>;
+    orderBy?: pulumi.Input<string | undefined>;
     /**
      * order type.
      */
-    orderType?: pulumi.Input<number>;
+    orderType?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * search word.
      */
-    searchWord?: pulumi.Input<string>;
+    searchWord?: pulumi.Input<string | undefined>;
 }

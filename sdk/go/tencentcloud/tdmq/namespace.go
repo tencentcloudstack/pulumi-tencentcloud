@@ -41,12 +41,18 @@ import (
 //			_, err = tdmq.NewNamespace(ctx, "example", &tdmq.NamespaceArgs{
 //				EnvironName: pulumi.String("tf_example"),
 //				MsgTtl:      pulumi.Int(300),
-//				ClusterId:   example.ID(),
+//				ClusterId:   example.ID().ToIDOutput().ToStringOutput(),
 //				RetentionPolicy: &tdmq.NamespaceRetentionPolicyArgs{
 //					TimeInMinutes: pulumi.Int(60),
 //					SizeInMb:      pulumi.Int(10),
 //				},
 //				Remark: pulumi.String("remark."),
+//				Tags: tdmq.NamespaceTagArray{
+//					&tdmq.NamespaceTagArgs{
+//						TagKey:   pulumi.String("createdBy"),
+//						TagValue: pulumi.String("terraform"),
+//					},
+//				},
 //			})
 //			if err != nil {
 //				return err
@@ -77,6 +83,8 @@ type Namespace struct {
 	Remark pulumi.StringPtrOutput `pulumi:"remark"`
 	// The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `timeInMinutes`: the time of message to retain; `sizeInMb`: the size of message to retain.
 	RetentionPolicy NamespaceRetentionPolicyOutput `pulumi:"retentionPolicy"`
+	// The tags of the tencentcloud_tdmq_namespace.
+	Tags NamespaceTagArrayOutput `pulumi:"tags"`
 }
 
 // NewNamespace registers a new resource with the given unique name, arguments, and options.
@@ -128,6 +136,8 @@ type namespaceState struct {
 	Remark *string `pulumi:"remark"`
 	// The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `timeInMinutes`: the time of message to retain; `sizeInMb`: the size of message to retain.
 	RetentionPolicy *NamespaceRetentionPolicy `pulumi:"retentionPolicy"`
+	// The tags of the tencentcloud_tdmq_namespace.
+	Tags []NamespaceTag `pulumi:"tags"`
 }
 
 type NamespaceState struct {
@@ -141,6 +151,8 @@ type NamespaceState struct {
 	Remark pulumi.StringPtrInput
 	// The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `timeInMinutes`: the time of message to retain; `sizeInMb`: the size of message to retain.
 	RetentionPolicy NamespaceRetentionPolicyPtrInput
+	// The tags of the tencentcloud_tdmq_namespace.
+	Tags NamespaceTagArrayInput
 }
 
 func (NamespaceState) ElementType() reflect.Type {
@@ -158,6 +170,8 @@ type namespaceArgs struct {
 	Remark *string `pulumi:"remark"`
 	// The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `timeInMinutes`: the time of message to retain; `sizeInMb`: the size of message to retain.
 	RetentionPolicy *NamespaceRetentionPolicy `pulumi:"retentionPolicy"`
+	// The tags of the tencentcloud_tdmq_namespace.
+	Tags []NamespaceTag `pulumi:"tags"`
 }
 
 // The set of arguments for constructing a Namespace resource.
@@ -172,6 +186,8 @@ type NamespaceArgs struct {
 	Remark pulumi.StringPtrInput
 	// The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `timeInMinutes`: the time of message to retain; `sizeInMb`: the size of message to retain.
 	RetentionPolicy NamespaceRetentionPolicyPtrInput
+	// The tags of the tencentcloud_tdmq_namespace.
+	Tags NamespaceTagArrayInput
 }
 
 func (NamespaceArgs) ElementType() reflect.Type {
@@ -284,6 +300,11 @@ func (o NamespaceOutput) Remark() pulumi.StringPtrOutput {
 // The Policy of message to retain. Format like: `{time_in_minutes: Int, size_in_mb: Int}`. `timeInMinutes`: the time of message to retain; `sizeInMb`: the size of message to retain.
 func (o NamespaceOutput) RetentionPolicy() NamespaceRetentionPolicyOutput {
 	return o.ApplyT(func(v *Namespace) NamespaceRetentionPolicyOutput { return v.RetentionPolicy }).(NamespaceRetentionPolicyOutput)
+}
+
+// The tags of the tencentcloud_tdmq_namespace.
+func (o NamespaceOutput) Tags() NamespaceTagArrayOutput {
+	return o.ApplyT(func(v *Namespace) NamespaceTagArrayOutput { return v.Tags }).(NamespaceTagArrayOutput)
 }
 
 type NamespaceArrayOutput struct{ *pulumi.OutputState }

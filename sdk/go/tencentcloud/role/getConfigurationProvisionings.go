@@ -83,12 +83,8 @@ type GetConfigurationProvisioningsResult struct {
 }
 
 func GetConfigurationProvisioningsOutput(ctx *pulumi.Context, args GetConfigurationProvisioningsOutputArgs, opts ...pulumi.InvokeOption) GetConfigurationProvisioningsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetConfigurationProvisioningsResultOutput, error) {
-			args := v.(GetConfigurationProvisioningsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Role/getConfigurationProvisionings:getConfigurationProvisionings", args, GetConfigurationProvisioningsResultOutput{}, options).(GetConfigurationProvisioningsResultOutput), nil
-		}).(GetConfigurationProvisioningsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Role/getConfigurationProvisionings:getConfigurationProvisionings", args, GetConfigurationProvisioningsResultOutput{}, options).(GetConfigurationProvisioningsResultOutput)
 }
 
 // A collection of arguments for invoking getConfigurationProvisionings.

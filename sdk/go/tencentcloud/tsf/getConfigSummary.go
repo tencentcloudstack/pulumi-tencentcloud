@@ -93,12 +93,8 @@ type LookupConfigSummaryResult struct {
 }
 
 func LookupConfigSummaryOutput(ctx *pulumi.Context, args LookupConfigSummaryOutputArgs, opts ...pulumi.InvokeOption) LookupConfigSummaryResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupConfigSummaryResultOutput, error) {
-			args := v.(LookupConfigSummaryArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tsf/getConfigSummary:getConfigSummary", args, LookupConfigSummaryResultOutput{}, options).(LookupConfigSummaryResultOutput), nil
-		}).(LookupConfigSummaryResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tsf/getConfigSummary:getConfigSummary", args, LookupConfigSummaryResultOutput{}, options).(LookupConfigSummaryResultOutput)
 }
 
 // A collection of arguments for invoking getConfigSummary.

@@ -88,12 +88,8 @@ type GetGatewayFlowMonitorDetailResult struct {
 }
 
 func GetGatewayFlowMonitorDetailOutput(ctx *pulumi.Context, args GetGatewayFlowMonitorDetailOutputArgs, opts ...pulumi.InvokeOption) GetGatewayFlowMonitorDetailResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetGatewayFlowMonitorDetailResultOutput, error) {
-			args := v.(GetGatewayFlowMonitorDetailArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Vpc/getGatewayFlowMonitorDetail:getGatewayFlowMonitorDetail", args, GetGatewayFlowMonitorDetailResultOutput{}, options).(GetGatewayFlowMonitorDetailResultOutput), nil
-		}).(GetGatewayFlowMonitorDetailResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Vpc/getGatewayFlowMonitorDetail:getGatewayFlowMonitorDetail", args, GetGatewayFlowMonitorDetailResultOutput{}, options).(GetGatewayFlowMonitorDetailResultOutput)
 }
 
 // A collection of arguments for invoking getGatewayFlowMonitorDetail.

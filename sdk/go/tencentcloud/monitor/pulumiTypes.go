@@ -1482,6 +1482,218 @@ func (o AlarmPolicyFilterPtrOutput) Type() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+type AlarmPolicyHierarchicalNotice struct {
+	// Notification level list, e.g. ["Remind", "Serious"].
+	Classifications []string `pulumi:"classifications"`
+	// Notification template ID.
+	NoticeId string `pulumi:"noticeId"`
+}
+
+// AlarmPolicyHierarchicalNoticeInput is an input type that accepts AlarmPolicyHierarchicalNoticeArgs and AlarmPolicyHierarchicalNoticeOutput values.
+// You can construct a concrete instance of `AlarmPolicyHierarchicalNoticeInput` via:
+//
+//	AlarmPolicyHierarchicalNoticeArgs{...}
+type AlarmPolicyHierarchicalNoticeInput interface {
+	pulumi.Input
+
+	ToAlarmPolicyHierarchicalNoticeOutput() AlarmPolicyHierarchicalNoticeOutput
+	ToAlarmPolicyHierarchicalNoticeOutputWithContext(context.Context) AlarmPolicyHierarchicalNoticeOutput
+}
+
+type AlarmPolicyHierarchicalNoticeArgs struct {
+	// Notification level list, e.g. ["Remind", "Serious"].
+	Classifications pulumi.StringArrayInput `pulumi:"classifications"`
+	// Notification template ID.
+	NoticeId pulumi.StringInput `pulumi:"noticeId"`
+}
+
+func (AlarmPolicyHierarchicalNoticeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmPolicyHierarchicalNotice)(nil)).Elem()
+}
+
+func (i AlarmPolicyHierarchicalNoticeArgs) ToAlarmPolicyHierarchicalNoticeOutput() AlarmPolicyHierarchicalNoticeOutput {
+	return i.ToAlarmPolicyHierarchicalNoticeOutputWithContext(context.Background())
+}
+
+func (i AlarmPolicyHierarchicalNoticeArgs) ToAlarmPolicyHierarchicalNoticeOutputWithContext(ctx context.Context) AlarmPolicyHierarchicalNoticeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmPolicyHierarchicalNoticeOutput)
+}
+
+// AlarmPolicyHierarchicalNoticeArrayInput is an input type that accepts AlarmPolicyHierarchicalNoticeArray and AlarmPolicyHierarchicalNoticeArrayOutput values.
+// You can construct a concrete instance of `AlarmPolicyHierarchicalNoticeArrayInput` via:
+//
+//	AlarmPolicyHierarchicalNoticeArray{ AlarmPolicyHierarchicalNoticeArgs{...} }
+type AlarmPolicyHierarchicalNoticeArrayInput interface {
+	pulumi.Input
+
+	ToAlarmPolicyHierarchicalNoticeArrayOutput() AlarmPolicyHierarchicalNoticeArrayOutput
+	ToAlarmPolicyHierarchicalNoticeArrayOutputWithContext(context.Context) AlarmPolicyHierarchicalNoticeArrayOutput
+}
+
+type AlarmPolicyHierarchicalNoticeArray []AlarmPolicyHierarchicalNoticeInput
+
+func (AlarmPolicyHierarchicalNoticeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AlarmPolicyHierarchicalNotice)(nil)).Elem()
+}
+
+func (i AlarmPolicyHierarchicalNoticeArray) ToAlarmPolicyHierarchicalNoticeArrayOutput() AlarmPolicyHierarchicalNoticeArrayOutput {
+	return i.ToAlarmPolicyHierarchicalNoticeArrayOutputWithContext(context.Background())
+}
+
+func (i AlarmPolicyHierarchicalNoticeArray) ToAlarmPolicyHierarchicalNoticeArrayOutputWithContext(ctx context.Context) AlarmPolicyHierarchicalNoticeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmPolicyHierarchicalNoticeArrayOutput)
+}
+
+type AlarmPolicyHierarchicalNoticeOutput struct{ *pulumi.OutputState }
+
+func (AlarmPolicyHierarchicalNoticeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmPolicyHierarchicalNotice)(nil)).Elem()
+}
+
+func (o AlarmPolicyHierarchicalNoticeOutput) ToAlarmPolicyHierarchicalNoticeOutput() AlarmPolicyHierarchicalNoticeOutput {
+	return o
+}
+
+func (o AlarmPolicyHierarchicalNoticeOutput) ToAlarmPolicyHierarchicalNoticeOutputWithContext(ctx context.Context) AlarmPolicyHierarchicalNoticeOutput {
+	return o
+}
+
+// Notification level list, e.g. ["Remind", "Serious"].
+func (o AlarmPolicyHierarchicalNoticeOutput) Classifications() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AlarmPolicyHierarchicalNotice) []string { return v.Classifications }).(pulumi.StringArrayOutput)
+}
+
+// Notification template ID.
+func (o AlarmPolicyHierarchicalNoticeOutput) NoticeId() pulumi.StringOutput {
+	return o.ApplyT(func(v AlarmPolicyHierarchicalNotice) string { return v.NoticeId }).(pulumi.StringOutput)
+}
+
+type AlarmPolicyHierarchicalNoticeArrayOutput struct{ *pulumi.OutputState }
+
+func (AlarmPolicyHierarchicalNoticeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AlarmPolicyHierarchicalNotice)(nil)).Elem()
+}
+
+func (o AlarmPolicyHierarchicalNoticeArrayOutput) ToAlarmPolicyHierarchicalNoticeArrayOutput() AlarmPolicyHierarchicalNoticeArrayOutput {
+	return o
+}
+
+func (o AlarmPolicyHierarchicalNoticeArrayOutput) ToAlarmPolicyHierarchicalNoticeArrayOutputWithContext(ctx context.Context) AlarmPolicyHierarchicalNoticeArrayOutput {
+	return o
+}
+
+func (o AlarmPolicyHierarchicalNoticeArrayOutput) Index(i pulumi.IntInput) AlarmPolicyHierarchicalNoticeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AlarmPolicyHierarchicalNotice {
+		return vs[0].([]AlarmPolicyHierarchicalNotice)[vs[1].(int)]
+	}).(AlarmPolicyHierarchicalNoticeOutput)
+}
+
+type AlarmPolicyNoticeContentTmplBindInfo struct {
+	// Notification content template ID.
+	ContentTmplId string `pulumi:"contentTmplId"`
+	// Notification template ID.
+	NoticeId string `pulumi:"noticeId"`
+}
+
+// AlarmPolicyNoticeContentTmplBindInfoInput is an input type that accepts AlarmPolicyNoticeContentTmplBindInfoArgs and AlarmPolicyNoticeContentTmplBindInfoOutput values.
+// You can construct a concrete instance of `AlarmPolicyNoticeContentTmplBindInfoInput` via:
+//
+//	AlarmPolicyNoticeContentTmplBindInfoArgs{...}
+type AlarmPolicyNoticeContentTmplBindInfoInput interface {
+	pulumi.Input
+
+	ToAlarmPolicyNoticeContentTmplBindInfoOutput() AlarmPolicyNoticeContentTmplBindInfoOutput
+	ToAlarmPolicyNoticeContentTmplBindInfoOutputWithContext(context.Context) AlarmPolicyNoticeContentTmplBindInfoOutput
+}
+
+type AlarmPolicyNoticeContentTmplBindInfoArgs struct {
+	// Notification content template ID.
+	ContentTmplId pulumi.StringInput `pulumi:"contentTmplId"`
+	// Notification template ID.
+	NoticeId pulumi.StringInput `pulumi:"noticeId"`
+}
+
+func (AlarmPolicyNoticeContentTmplBindInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmPolicyNoticeContentTmplBindInfo)(nil)).Elem()
+}
+
+func (i AlarmPolicyNoticeContentTmplBindInfoArgs) ToAlarmPolicyNoticeContentTmplBindInfoOutput() AlarmPolicyNoticeContentTmplBindInfoOutput {
+	return i.ToAlarmPolicyNoticeContentTmplBindInfoOutputWithContext(context.Background())
+}
+
+func (i AlarmPolicyNoticeContentTmplBindInfoArgs) ToAlarmPolicyNoticeContentTmplBindInfoOutputWithContext(ctx context.Context) AlarmPolicyNoticeContentTmplBindInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmPolicyNoticeContentTmplBindInfoOutput)
+}
+
+// AlarmPolicyNoticeContentTmplBindInfoArrayInput is an input type that accepts AlarmPolicyNoticeContentTmplBindInfoArray and AlarmPolicyNoticeContentTmplBindInfoArrayOutput values.
+// You can construct a concrete instance of `AlarmPolicyNoticeContentTmplBindInfoArrayInput` via:
+//
+//	AlarmPolicyNoticeContentTmplBindInfoArray{ AlarmPolicyNoticeContentTmplBindInfoArgs{...} }
+type AlarmPolicyNoticeContentTmplBindInfoArrayInput interface {
+	pulumi.Input
+
+	ToAlarmPolicyNoticeContentTmplBindInfoArrayOutput() AlarmPolicyNoticeContentTmplBindInfoArrayOutput
+	ToAlarmPolicyNoticeContentTmplBindInfoArrayOutputWithContext(context.Context) AlarmPolicyNoticeContentTmplBindInfoArrayOutput
+}
+
+type AlarmPolicyNoticeContentTmplBindInfoArray []AlarmPolicyNoticeContentTmplBindInfoInput
+
+func (AlarmPolicyNoticeContentTmplBindInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AlarmPolicyNoticeContentTmplBindInfo)(nil)).Elem()
+}
+
+func (i AlarmPolicyNoticeContentTmplBindInfoArray) ToAlarmPolicyNoticeContentTmplBindInfoArrayOutput() AlarmPolicyNoticeContentTmplBindInfoArrayOutput {
+	return i.ToAlarmPolicyNoticeContentTmplBindInfoArrayOutputWithContext(context.Background())
+}
+
+func (i AlarmPolicyNoticeContentTmplBindInfoArray) ToAlarmPolicyNoticeContentTmplBindInfoArrayOutputWithContext(ctx context.Context) AlarmPolicyNoticeContentTmplBindInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AlarmPolicyNoticeContentTmplBindInfoArrayOutput)
+}
+
+type AlarmPolicyNoticeContentTmplBindInfoOutput struct{ *pulumi.OutputState }
+
+func (AlarmPolicyNoticeContentTmplBindInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AlarmPolicyNoticeContentTmplBindInfo)(nil)).Elem()
+}
+
+func (o AlarmPolicyNoticeContentTmplBindInfoOutput) ToAlarmPolicyNoticeContentTmplBindInfoOutput() AlarmPolicyNoticeContentTmplBindInfoOutput {
+	return o
+}
+
+func (o AlarmPolicyNoticeContentTmplBindInfoOutput) ToAlarmPolicyNoticeContentTmplBindInfoOutputWithContext(ctx context.Context) AlarmPolicyNoticeContentTmplBindInfoOutput {
+	return o
+}
+
+// Notification content template ID.
+func (o AlarmPolicyNoticeContentTmplBindInfoOutput) ContentTmplId() pulumi.StringOutput {
+	return o.ApplyT(func(v AlarmPolicyNoticeContentTmplBindInfo) string { return v.ContentTmplId }).(pulumi.StringOutput)
+}
+
+// Notification template ID.
+func (o AlarmPolicyNoticeContentTmplBindInfoOutput) NoticeId() pulumi.StringOutput {
+	return o.ApplyT(func(v AlarmPolicyNoticeContentTmplBindInfo) string { return v.NoticeId }).(pulumi.StringOutput)
+}
+
+type AlarmPolicyNoticeContentTmplBindInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (AlarmPolicyNoticeContentTmplBindInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AlarmPolicyNoticeContentTmplBindInfo)(nil)).Elem()
+}
+
+func (o AlarmPolicyNoticeContentTmplBindInfoArrayOutput) ToAlarmPolicyNoticeContentTmplBindInfoArrayOutput() AlarmPolicyNoticeContentTmplBindInfoArrayOutput {
+	return o
+}
+
+func (o AlarmPolicyNoticeContentTmplBindInfoArrayOutput) ToAlarmPolicyNoticeContentTmplBindInfoArrayOutputWithContext(ctx context.Context) AlarmPolicyNoticeContentTmplBindInfoArrayOutput {
+	return o
+}
+
+func (o AlarmPolicyNoticeContentTmplBindInfoArrayOutput) Index(i pulumi.IntInput) AlarmPolicyNoticeContentTmplBindInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AlarmPolicyNoticeContentTmplBindInfo {
+		return vs[0].([]AlarmPolicyNoticeContentTmplBindInfo)[vs[1].(int)]
+	}).(AlarmPolicyNoticeContentTmplBindInfoOutput)
+}
+
 type AlarmPolicyPolicyTag struct {
 	// Tag key.
 	Key string `pulumi:"key"`
@@ -1945,6 +2157,112 @@ func (o BindingReceiverReceiversPtrOutput) StartTime() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+type ExternalClusterExternalLabel struct {
+	// Label name.
+	Name string `pulumi:"name"`
+	// Label value.
+	Value *string `pulumi:"value"`
+}
+
+// ExternalClusterExternalLabelInput is an input type that accepts ExternalClusterExternalLabelArgs and ExternalClusterExternalLabelOutput values.
+// You can construct a concrete instance of `ExternalClusterExternalLabelInput` via:
+//
+//	ExternalClusterExternalLabelArgs{...}
+type ExternalClusterExternalLabelInput interface {
+	pulumi.Input
+
+	ToExternalClusterExternalLabelOutput() ExternalClusterExternalLabelOutput
+	ToExternalClusterExternalLabelOutputWithContext(context.Context) ExternalClusterExternalLabelOutput
+}
+
+type ExternalClusterExternalLabelArgs struct {
+	// Label name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Label value.
+	Value pulumi.StringPtrInput `pulumi:"value"`
+}
+
+func (ExternalClusterExternalLabelArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ExternalClusterExternalLabel)(nil)).Elem()
+}
+
+func (i ExternalClusterExternalLabelArgs) ToExternalClusterExternalLabelOutput() ExternalClusterExternalLabelOutput {
+	return i.ToExternalClusterExternalLabelOutputWithContext(context.Background())
+}
+
+func (i ExternalClusterExternalLabelArgs) ToExternalClusterExternalLabelOutputWithContext(ctx context.Context) ExternalClusterExternalLabelOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ExternalClusterExternalLabelOutput)
+}
+
+// ExternalClusterExternalLabelArrayInput is an input type that accepts ExternalClusterExternalLabelArray and ExternalClusterExternalLabelArrayOutput values.
+// You can construct a concrete instance of `ExternalClusterExternalLabelArrayInput` via:
+//
+//	ExternalClusterExternalLabelArray{ ExternalClusterExternalLabelArgs{...} }
+type ExternalClusterExternalLabelArrayInput interface {
+	pulumi.Input
+
+	ToExternalClusterExternalLabelArrayOutput() ExternalClusterExternalLabelArrayOutput
+	ToExternalClusterExternalLabelArrayOutputWithContext(context.Context) ExternalClusterExternalLabelArrayOutput
+}
+
+type ExternalClusterExternalLabelArray []ExternalClusterExternalLabelInput
+
+func (ExternalClusterExternalLabelArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ExternalClusterExternalLabel)(nil)).Elem()
+}
+
+func (i ExternalClusterExternalLabelArray) ToExternalClusterExternalLabelArrayOutput() ExternalClusterExternalLabelArrayOutput {
+	return i.ToExternalClusterExternalLabelArrayOutputWithContext(context.Background())
+}
+
+func (i ExternalClusterExternalLabelArray) ToExternalClusterExternalLabelArrayOutputWithContext(ctx context.Context) ExternalClusterExternalLabelArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ExternalClusterExternalLabelArrayOutput)
+}
+
+type ExternalClusterExternalLabelOutput struct{ *pulumi.OutputState }
+
+func (ExternalClusterExternalLabelOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ExternalClusterExternalLabel)(nil)).Elem()
+}
+
+func (o ExternalClusterExternalLabelOutput) ToExternalClusterExternalLabelOutput() ExternalClusterExternalLabelOutput {
+	return o
+}
+
+func (o ExternalClusterExternalLabelOutput) ToExternalClusterExternalLabelOutputWithContext(ctx context.Context) ExternalClusterExternalLabelOutput {
+	return o
+}
+
+// Label name.
+func (o ExternalClusterExternalLabelOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ExternalClusterExternalLabel) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Label value.
+func (o ExternalClusterExternalLabelOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ExternalClusterExternalLabel) *string { return v.Value }).(pulumi.StringPtrOutput)
+}
+
+type ExternalClusterExternalLabelArrayOutput struct{ *pulumi.OutputState }
+
+func (ExternalClusterExternalLabelArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ExternalClusterExternalLabel)(nil)).Elem()
+}
+
+func (o ExternalClusterExternalLabelArrayOutput) ToExternalClusterExternalLabelArrayOutput() ExternalClusterExternalLabelArrayOutput {
+	return o
+}
+
+func (o ExternalClusterExternalLabelArrayOutput) ToExternalClusterExternalLabelArrayOutputWithContext(ctx context.Context) ExternalClusterExternalLabelArrayOutput {
+	return o
+}
+
+func (o ExternalClusterExternalLabelArrayOutput) Index(i pulumi.IntInput) ExternalClusterExternalLabelOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ExternalClusterExternalLabel {
+		return vs[0].([]ExternalClusterExternalLabel)[vs[1].(int)]
+	}).(ExternalClusterExternalLabelOutput)
+}
+
 type GrafanaSsoAccountRole struct {
 	// Grafana organization id string.
 	Organization string `pulumi:"organization"`
@@ -2049,6 +2367,3568 @@ func (o GrafanaSsoAccountRoleArrayOutput) Index(i pulumi.IntInput) GrafanaSsoAcc
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GrafanaSsoAccountRole {
 		return vs[0].([]GrafanaSsoAccountRole)[vs[1].(int)]
 	}).(GrafanaSsoAccountRoleOutput)
+}
+
+type NoticeContentTmplTmplContents struct {
+	// DingDing Robot notification channel configuration.
+	DingDingRobots []NoticeContentTmplTmplContentsDingDingRobot `pulumi:"dingDingRobots"`
+	// FeiShu Robot notification channel configuration.
+	FeiShuRobots []NoticeContentTmplTmplContentsFeiShuRobot `pulumi:"feiShuRobots"`
+	// PagerDuty Robot notification channel configuration.
+	PagerDutyRobots []NoticeContentTmplTmplContentsPagerDutyRobot `pulumi:"pagerDutyRobots"`
+	// QCloud Yehe notification channel configuration.
+	QcloudYehes []NoticeContentTmplTmplContentsQcloudYehe `pulumi:"qcloudYehes"`
+	// Teams Robot notification channel configuration.
+	TeamsRobots []NoticeContentTmplTmplContentsTeamsRobot `pulumi:"teamsRobots"`
+	// WeWork Robot notification channel configuration.
+	WeWorkRobots []NoticeContentTmplTmplContentsWeWorkRobot `pulumi:"weWorkRobots"`
+	// Webhook notification channel configuration.
+	Webhooks []NoticeContentTmplTmplContentsWebhook `pulumi:"webhooks"`
+}
+
+// NoticeContentTmplTmplContentsInput is an input type that accepts NoticeContentTmplTmplContentsArgs and NoticeContentTmplTmplContentsOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsInput` via:
+//
+//	NoticeContentTmplTmplContentsArgs{...}
+type NoticeContentTmplTmplContentsInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsOutput() NoticeContentTmplTmplContentsOutput
+	ToNoticeContentTmplTmplContentsOutputWithContext(context.Context) NoticeContentTmplTmplContentsOutput
+}
+
+type NoticeContentTmplTmplContentsArgs struct {
+	// DingDing Robot notification channel configuration.
+	DingDingRobots NoticeContentTmplTmplContentsDingDingRobotArrayInput `pulumi:"dingDingRobots"`
+	// FeiShu Robot notification channel configuration.
+	FeiShuRobots NoticeContentTmplTmplContentsFeiShuRobotArrayInput `pulumi:"feiShuRobots"`
+	// PagerDuty Robot notification channel configuration.
+	PagerDutyRobots NoticeContentTmplTmplContentsPagerDutyRobotArrayInput `pulumi:"pagerDutyRobots"`
+	// QCloud Yehe notification channel configuration.
+	QcloudYehes NoticeContentTmplTmplContentsQcloudYeheArrayInput `pulumi:"qcloudYehes"`
+	// Teams Robot notification channel configuration.
+	TeamsRobots NoticeContentTmplTmplContentsTeamsRobotArrayInput `pulumi:"teamsRobots"`
+	// WeWork Robot notification channel configuration.
+	WeWorkRobots NoticeContentTmplTmplContentsWeWorkRobotArrayInput `pulumi:"weWorkRobots"`
+	// Webhook notification channel configuration.
+	Webhooks NoticeContentTmplTmplContentsWebhookArrayInput `pulumi:"webhooks"`
+}
+
+func (NoticeContentTmplTmplContentsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContents)(nil)).Elem()
+}
+
+func (i NoticeContentTmplTmplContentsArgs) ToNoticeContentTmplTmplContentsOutput() NoticeContentTmplTmplContentsOutput {
+	return i.ToNoticeContentTmplTmplContentsOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsArgs) ToNoticeContentTmplTmplContentsOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsOutput)
+}
+
+func (i NoticeContentTmplTmplContentsArgs) ToNoticeContentTmplTmplContentsPtrOutput() NoticeContentTmplTmplContentsPtrOutput {
+	return i.ToNoticeContentTmplTmplContentsPtrOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsArgs) ToNoticeContentTmplTmplContentsPtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsOutput).ToNoticeContentTmplTmplContentsPtrOutputWithContext(ctx)
+}
+
+// NoticeContentTmplTmplContentsPtrInput is an input type that accepts NoticeContentTmplTmplContentsArgs, NoticeContentTmplTmplContentsPtr and NoticeContentTmplTmplContentsPtrOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsPtrInput` via:
+//
+//	        NoticeContentTmplTmplContentsArgs{...}
+//
+//	or:
+//
+//	        nil
+type NoticeContentTmplTmplContentsPtrInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsPtrOutput() NoticeContentTmplTmplContentsPtrOutput
+	ToNoticeContentTmplTmplContentsPtrOutputWithContext(context.Context) NoticeContentTmplTmplContentsPtrOutput
+}
+
+type noticeContentTmplTmplContentsPtrType NoticeContentTmplTmplContentsArgs
+
+func NoticeContentTmplTmplContentsPtr(v *NoticeContentTmplTmplContentsArgs) NoticeContentTmplTmplContentsPtrInput {
+	return (*noticeContentTmplTmplContentsPtrType)(v)
+}
+
+func (*noticeContentTmplTmplContentsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NoticeContentTmplTmplContents)(nil)).Elem()
+}
+
+func (i *noticeContentTmplTmplContentsPtrType) ToNoticeContentTmplTmplContentsPtrOutput() NoticeContentTmplTmplContentsPtrOutput {
+	return i.ToNoticeContentTmplTmplContentsPtrOutputWithContext(context.Background())
+}
+
+func (i *noticeContentTmplTmplContentsPtrType) ToNoticeContentTmplTmplContentsPtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsPtrOutput)
+}
+
+type NoticeContentTmplTmplContentsOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContents)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsOutput) ToNoticeContentTmplTmplContentsOutput() NoticeContentTmplTmplContentsOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsOutput) ToNoticeContentTmplTmplContentsOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsOutput) ToNoticeContentTmplTmplContentsPtrOutput() NoticeContentTmplTmplContentsPtrOutput {
+	return o.ToNoticeContentTmplTmplContentsPtrOutputWithContext(context.Background())
+}
+
+func (o NoticeContentTmplTmplContentsOutput) ToNoticeContentTmplTmplContentsPtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NoticeContentTmplTmplContents) *NoticeContentTmplTmplContents {
+		return &v
+	}).(NoticeContentTmplTmplContentsPtrOutput)
+}
+
+// DingDing Robot notification channel configuration.
+func (o NoticeContentTmplTmplContentsOutput) DingDingRobots() NoticeContentTmplTmplContentsDingDingRobotArrayOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContents) []NoticeContentTmplTmplContentsDingDingRobot {
+		return v.DingDingRobots
+	}).(NoticeContentTmplTmplContentsDingDingRobotArrayOutput)
+}
+
+// FeiShu Robot notification channel configuration.
+func (o NoticeContentTmplTmplContentsOutput) FeiShuRobots() NoticeContentTmplTmplContentsFeiShuRobotArrayOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContents) []NoticeContentTmplTmplContentsFeiShuRobot {
+		return v.FeiShuRobots
+	}).(NoticeContentTmplTmplContentsFeiShuRobotArrayOutput)
+}
+
+// PagerDuty Robot notification channel configuration.
+func (o NoticeContentTmplTmplContentsOutput) PagerDutyRobots() NoticeContentTmplTmplContentsPagerDutyRobotArrayOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContents) []NoticeContentTmplTmplContentsPagerDutyRobot {
+		return v.PagerDutyRobots
+	}).(NoticeContentTmplTmplContentsPagerDutyRobotArrayOutput)
+}
+
+// QCloud Yehe notification channel configuration.
+func (o NoticeContentTmplTmplContentsOutput) QcloudYehes() NoticeContentTmplTmplContentsQcloudYeheArrayOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContents) []NoticeContentTmplTmplContentsQcloudYehe { return v.QcloudYehes }).(NoticeContentTmplTmplContentsQcloudYeheArrayOutput)
+}
+
+// Teams Robot notification channel configuration.
+func (o NoticeContentTmplTmplContentsOutput) TeamsRobots() NoticeContentTmplTmplContentsTeamsRobotArrayOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContents) []NoticeContentTmplTmplContentsTeamsRobot { return v.TeamsRobots }).(NoticeContentTmplTmplContentsTeamsRobotArrayOutput)
+}
+
+// WeWork Robot notification channel configuration.
+func (o NoticeContentTmplTmplContentsOutput) WeWorkRobots() NoticeContentTmplTmplContentsWeWorkRobotArrayOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContents) []NoticeContentTmplTmplContentsWeWorkRobot {
+		return v.WeWorkRobots
+	}).(NoticeContentTmplTmplContentsWeWorkRobotArrayOutput)
+}
+
+// Webhook notification channel configuration.
+func (o NoticeContentTmplTmplContentsOutput) Webhooks() NoticeContentTmplTmplContentsWebhookArrayOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContents) []NoticeContentTmplTmplContentsWebhook { return v.Webhooks }).(NoticeContentTmplTmplContentsWebhookArrayOutput)
+}
+
+type NoticeContentTmplTmplContentsPtrOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NoticeContentTmplTmplContents)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsPtrOutput) ToNoticeContentTmplTmplContentsPtrOutput() NoticeContentTmplTmplContentsPtrOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsPtrOutput) ToNoticeContentTmplTmplContentsPtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsPtrOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsPtrOutput) Elem() NoticeContentTmplTmplContentsOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContents) NoticeContentTmplTmplContents {
+		if v != nil {
+			return *v
+		}
+		var ret NoticeContentTmplTmplContents
+		return ret
+	}).(NoticeContentTmplTmplContentsOutput)
+}
+
+// DingDing Robot notification channel configuration.
+func (o NoticeContentTmplTmplContentsPtrOutput) DingDingRobots() NoticeContentTmplTmplContentsDingDingRobotArrayOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContents) []NoticeContentTmplTmplContentsDingDingRobot {
+		if v == nil {
+			return nil
+		}
+		return v.DingDingRobots
+	}).(NoticeContentTmplTmplContentsDingDingRobotArrayOutput)
+}
+
+// FeiShu Robot notification channel configuration.
+func (o NoticeContentTmplTmplContentsPtrOutput) FeiShuRobots() NoticeContentTmplTmplContentsFeiShuRobotArrayOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContents) []NoticeContentTmplTmplContentsFeiShuRobot {
+		if v == nil {
+			return nil
+		}
+		return v.FeiShuRobots
+	}).(NoticeContentTmplTmplContentsFeiShuRobotArrayOutput)
+}
+
+// PagerDuty Robot notification channel configuration.
+func (o NoticeContentTmplTmplContentsPtrOutput) PagerDutyRobots() NoticeContentTmplTmplContentsPagerDutyRobotArrayOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContents) []NoticeContentTmplTmplContentsPagerDutyRobot {
+		if v == nil {
+			return nil
+		}
+		return v.PagerDutyRobots
+	}).(NoticeContentTmplTmplContentsPagerDutyRobotArrayOutput)
+}
+
+// QCloud Yehe notification channel configuration.
+func (o NoticeContentTmplTmplContentsPtrOutput) QcloudYehes() NoticeContentTmplTmplContentsQcloudYeheArrayOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContents) []NoticeContentTmplTmplContentsQcloudYehe {
+		if v == nil {
+			return nil
+		}
+		return v.QcloudYehes
+	}).(NoticeContentTmplTmplContentsQcloudYeheArrayOutput)
+}
+
+// Teams Robot notification channel configuration.
+func (o NoticeContentTmplTmplContentsPtrOutput) TeamsRobots() NoticeContentTmplTmplContentsTeamsRobotArrayOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContents) []NoticeContentTmplTmplContentsTeamsRobot {
+		if v == nil {
+			return nil
+		}
+		return v.TeamsRobots
+	}).(NoticeContentTmplTmplContentsTeamsRobotArrayOutput)
+}
+
+// WeWork Robot notification channel configuration.
+func (o NoticeContentTmplTmplContentsPtrOutput) WeWorkRobots() NoticeContentTmplTmplContentsWeWorkRobotArrayOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContents) []NoticeContentTmplTmplContentsWeWorkRobot {
+		if v == nil {
+			return nil
+		}
+		return v.WeWorkRobots
+	}).(NoticeContentTmplTmplContentsWeWorkRobotArrayOutput)
+}
+
+// Webhook notification channel configuration.
+func (o NoticeContentTmplTmplContentsPtrOutput) Webhooks() NoticeContentTmplTmplContentsWebhookArrayOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContents) []NoticeContentTmplTmplContentsWebhook {
+		if v == nil {
+			return nil
+		}
+		return v.Webhooks
+	}).(NoticeContentTmplTmplContentsWebhookArrayOutput)
+}
+
+type NoticeContentTmplTmplContentsDingDingRobot struct {
+	// Matching status list, e.g. Trigger, Recovery.
+	MatchingStatuses []string `pulumi:"matchingStatuses"`
+	// Template configuration.
+	Template *NoticeContentTmplTmplContentsDingDingRobotTemplate `pulumi:"template"`
+}
+
+// NoticeContentTmplTmplContentsDingDingRobotInput is an input type that accepts NoticeContentTmplTmplContentsDingDingRobotArgs and NoticeContentTmplTmplContentsDingDingRobotOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsDingDingRobotInput` via:
+//
+//	NoticeContentTmplTmplContentsDingDingRobotArgs{...}
+type NoticeContentTmplTmplContentsDingDingRobotInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsDingDingRobotOutput() NoticeContentTmplTmplContentsDingDingRobotOutput
+	ToNoticeContentTmplTmplContentsDingDingRobotOutputWithContext(context.Context) NoticeContentTmplTmplContentsDingDingRobotOutput
+}
+
+type NoticeContentTmplTmplContentsDingDingRobotArgs struct {
+	// Matching status list, e.g. Trigger, Recovery.
+	MatchingStatuses pulumi.StringArrayInput `pulumi:"matchingStatuses"`
+	// Template configuration.
+	Template NoticeContentTmplTmplContentsDingDingRobotTemplatePtrInput `pulumi:"template"`
+}
+
+func (NoticeContentTmplTmplContentsDingDingRobotArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsDingDingRobot)(nil)).Elem()
+}
+
+func (i NoticeContentTmplTmplContentsDingDingRobotArgs) ToNoticeContentTmplTmplContentsDingDingRobotOutput() NoticeContentTmplTmplContentsDingDingRobotOutput {
+	return i.ToNoticeContentTmplTmplContentsDingDingRobotOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsDingDingRobotArgs) ToNoticeContentTmplTmplContentsDingDingRobotOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsDingDingRobotOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsDingDingRobotOutput)
+}
+
+// NoticeContentTmplTmplContentsDingDingRobotArrayInput is an input type that accepts NoticeContentTmplTmplContentsDingDingRobotArray and NoticeContentTmplTmplContentsDingDingRobotArrayOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsDingDingRobotArrayInput` via:
+//
+//	NoticeContentTmplTmplContentsDingDingRobotArray{ NoticeContentTmplTmplContentsDingDingRobotArgs{...} }
+type NoticeContentTmplTmplContentsDingDingRobotArrayInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsDingDingRobotArrayOutput() NoticeContentTmplTmplContentsDingDingRobotArrayOutput
+	ToNoticeContentTmplTmplContentsDingDingRobotArrayOutputWithContext(context.Context) NoticeContentTmplTmplContentsDingDingRobotArrayOutput
+}
+
+type NoticeContentTmplTmplContentsDingDingRobotArray []NoticeContentTmplTmplContentsDingDingRobotInput
+
+func (NoticeContentTmplTmplContentsDingDingRobotArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NoticeContentTmplTmplContentsDingDingRobot)(nil)).Elem()
+}
+
+func (i NoticeContentTmplTmplContentsDingDingRobotArray) ToNoticeContentTmplTmplContentsDingDingRobotArrayOutput() NoticeContentTmplTmplContentsDingDingRobotArrayOutput {
+	return i.ToNoticeContentTmplTmplContentsDingDingRobotArrayOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsDingDingRobotArray) ToNoticeContentTmplTmplContentsDingDingRobotArrayOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsDingDingRobotArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsDingDingRobotArrayOutput)
+}
+
+type NoticeContentTmplTmplContentsDingDingRobotOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsDingDingRobotOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsDingDingRobot)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsDingDingRobotOutput) ToNoticeContentTmplTmplContentsDingDingRobotOutput() NoticeContentTmplTmplContentsDingDingRobotOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsDingDingRobotOutput) ToNoticeContentTmplTmplContentsDingDingRobotOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsDingDingRobotOutput {
+	return o
+}
+
+// Matching status list, e.g. Trigger, Recovery.
+func (o NoticeContentTmplTmplContentsDingDingRobotOutput) MatchingStatuses() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsDingDingRobot) []string { return v.MatchingStatuses }).(pulumi.StringArrayOutput)
+}
+
+// Template configuration.
+func (o NoticeContentTmplTmplContentsDingDingRobotOutput) Template() NoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsDingDingRobot) *NoticeContentTmplTmplContentsDingDingRobotTemplate {
+		return v.Template
+	}).(NoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutput)
+}
+
+type NoticeContentTmplTmplContentsDingDingRobotArrayOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsDingDingRobotArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NoticeContentTmplTmplContentsDingDingRobot)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsDingDingRobotArrayOutput) ToNoticeContentTmplTmplContentsDingDingRobotArrayOutput() NoticeContentTmplTmplContentsDingDingRobotArrayOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsDingDingRobotArrayOutput) ToNoticeContentTmplTmplContentsDingDingRobotArrayOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsDingDingRobotArrayOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsDingDingRobotArrayOutput) Index(i pulumi.IntInput) NoticeContentTmplTmplContentsDingDingRobotOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) NoticeContentTmplTmplContentsDingDingRobot {
+		return vs[0].([]NoticeContentTmplTmplContentsDingDingRobot)[vs[1].(int)]
+	}).(NoticeContentTmplTmplContentsDingDingRobotOutput)
+}
+
+type NoticeContentTmplTmplContentsDingDingRobotTemplate struct {
+	// Content template.
+	ContentTmpl *string `pulumi:"contentTmpl"`
+	// Title template.
+	TitleTmpl *string `pulumi:"titleTmpl"`
+}
+
+// NoticeContentTmplTmplContentsDingDingRobotTemplateInput is an input type that accepts NoticeContentTmplTmplContentsDingDingRobotTemplateArgs and NoticeContentTmplTmplContentsDingDingRobotTemplateOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsDingDingRobotTemplateInput` via:
+//
+//	NoticeContentTmplTmplContentsDingDingRobotTemplateArgs{...}
+type NoticeContentTmplTmplContentsDingDingRobotTemplateInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsDingDingRobotTemplateOutput() NoticeContentTmplTmplContentsDingDingRobotTemplateOutput
+	ToNoticeContentTmplTmplContentsDingDingRobotTemplateOutputWithContext(context.Context) NoticeContentTmplTmplContentsDingDingRobotTemplateOutput
+}
+
+type NoticeContentTmplTmplContentsDingDingRobotTemplateArgs struct {
+	// Content template.
+	ContentTmpl pulumi.StringPtrInput `pulumi:"contentTmpl"`
+	// Title template.
+	TitleTmpl pulumi.StringPtrInput `pulumi:"titleTmpl"`
+}
+
+func (NoticeContentTmplTmplContentsDingDingRobotTemplateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsDingDingRobotTemplate)(nil)).Elem()
+}
+
+func (i NoticeContentTmplTmplContentsDingDingRobotTemplateArgs) ToNoticeContentTmplTmplContentsDingDingRobotTemplateOutput() NoticeContentTmplTmplContentsDingDingRobotTemplateOutput {
+	return i.ToNoticeContentTmplTmplContentsDingDingRobotTemplateOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsDingDingRobotTemplateArgs) ToNoticeContentTmplTmplContentsDingDingRobotTemplateOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsDingDingRobotTemplateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsDingDingRobotTemplateOutput)
+}
+
+func (i NoticeContentTmplTmplContentsDingDingRobotTemplateArgs) ToNoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutput() NoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutput {
+	return i.ToNoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsDingDingRobotTemplateArgs) ToNoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsDingDingRobotTemplateOutput).ToNoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutputWithContext(ctx)
+}
+
+// NoticeContentTmplTmplContentsDingDingRobotTemplatePtrInput is an input type that accepts NoticeContentTmplTmplContentsDingDingRobotTemplateArgs, NoticeContentTmplTmplContentsDingDingRobotTemplatePtr and NoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsDingDingRobotTemplatePtrInput` via:
+//
+//	        NoticeContentTmplTmplContentsDingDingRobotTemplateArgs{...}
+//
+//	or:
+//
+//	        nil
+type NoticeContentTmplTmplContentsDingDingRobotTemplatePtrInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutput() NoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutput
+	ToNoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutputWithContext(context.Context) NoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutput
+}
+
+type noticeContentTmplTmplContentsDingDingRobotTemplatePtrType NoticeContentTmplTmplContentsDingDingRobotTemplateArgs
+
+func NoticeContentTmplTmplContentsDingDingRobotTemplatePtr(v *NoticeContentTmplTmplContentsDingDingRobotTemplateArgs) NoticeContentTmplTmplContentsDingDingRobotTemplatePtrInput {
+	return (*noticeContentTmplTmplContentsDingDingRobotTemplatePtrType)(v)
+}
+
+func (*noticeContentTmplTmplContentsDingDingRobotTemplatePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NoticeContentTmplTmplContentsDingDingRobotTemplate)(nil)).Elem()
+}
+
+func (i *noticeContentTmplTmplContentsDingDingRobotTemplatePtrType) ToNoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutput() NoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutput {
+	return i.ToNoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutputWithContext(context.Background())
+}
+
+func (i *noticeContentTmplTmplContentsDingDingRobotTemplatePtrType) ToNoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutput)
+}
+
+type NoticeContentTmplTmplContentsDingDingRobotTemplateOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsDingDingRobotTemplateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsDingDingRobotTemplate)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsDingDingRobotTemplateOutput) ToNoticeContentTmplTmplContentsDingDingRobotTemplateOutput() NoticeContentTmplTmplContentsDingDingRobotTemplateOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsDingDingRobotTemplateOutput) ToNoticeContentTmplTmplContentsDingDingRobotTemplateOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsDingDingRobotTemplateOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsDingDingRobotTemplateOutput) ToNoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutput() NoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutput {
+	return o.ToNoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutputWithContext(context.Background())
+}
+
+func (o NoticeContentTmplTmplContentsDingDingRobotTemplateOutput) ToNoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NoticeContentTmplTmplContentsDingDingRobotTemplate) *NoticeContentTmplTmplContentsDingDingRobotTemplate {
+		return &v
+	}).(NoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutput)
+}
+
+// Content template.
+func (o NoticeContentTmplTmplContentsDingDingRobotTemplateOutput) ContentTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsDingDingRobotTemplate) *string { return v.ContentTmpl }).(pulumi.StringPtrOutput)
+}
+
+// Title template.
+func (o NoticeContentTmplTmplContentsDingDingRobotTemplateOutput) TitleTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsDingDingRobotTemplate) *string { return v.TitleTmpl }).(pulumi.StringPtrOutput)
+}
+
+type NoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NoticeContentTmplTmplContentsDingDingRobotTemplate)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutput) ToNoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutput() NoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutput) ToNoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutput) Elem() NoticeContentTmplTmplContentsDingDingRobotTemplateOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsDingDingRobotTemplate) NoticeContentTmplTmplContentsDingDingRobotTemplate {
+		if v != nil {
+			return *v
+		}
+		var ret NoticeContentTmplTmplContentsDingDingRobotTemplate
+		return ret
+	}).(NoticeContentTmplTmplContentsDingDingRobotTemplateOutput)
+}
+
+// Content template.
+func (o NoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutput) ContentTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsDingDingRobotTemplate) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ContentTmpl
+	}).(pulumi.StringPtrOutput)
+}
+
+// Title template.
+func (o NoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutput) TitleTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsDingDingRobotTemplate) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TitleTmpl
+	}).(pulumi.StringPtrOutput)
+}
+
+type NoticeContentTmplTmplContentsFeiShuRobot struct {
+	// Matching status list, e.g. Trigger, Recovery.
+	MatchingStatuses []string `pulumi:"matchingStatuses"`
+	// Template configuration.
+	Template *NoticeContentTmplTmplContentsFeiShuRobotTemplate `pulumi:"template"`
+}
+
+// NoticeContentTmplTmplContentsFeiShuRobotInput is an input type that accepts NoticeContentTmplTmplContentsFeiShuRobotArgs and NoticeContentTmplTmplContentsFeiShuRobotOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsFeiShuRobotInput` via:
+//
+//	NoticeContentTmplTmplContentsFeiShuRobotArgs{...}
+type NoticeContentTmplTmplContentsFeiShuRobotInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsFeiShuRobotOutput() NoticeContentTmplTmplContentsFeiShuRobotOutput
+	ToNoticeContentTmplTmplContentsFeiShuRobotOutputWithContext(context.Context) NoticeContentTmplTmplContentsFeiShuRobotOutput
+}
+
+type NoticeContentTmplTmplContentsFeiShuRobotArgs struct {
+	// Matching status list, e.g. Trigger, Recovery.
+	MatchingStatuses pulumi.StringArrayInput `pulumi:"matchingStatuses"`
+	// Template configuration.
+	Template NoticeContentTmplTmplContentsFeiShuRobotTemplatePtrInput `pulumi:"template"`
+}
+
+func (NoticeContentTmplTmplContentsFeiShuRobotArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsFeiShuRobot)(nil)).Elem()
+}
+
+func (i NoticeContentTmplTmplContentsFeiShuRobotArgs) ToNoticeContentTmplTmplContentsFeiShuRobotOutput() NoticeContentTmplTmplContentsFeiShuRobotOutput {
+	return i.ToNoticeContentTmplTmplContentsFeiShuRobotOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsFeiShuRobotArgs) ToNoticeContentTmplTmplContentsFeiShuRobotOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsFeiShuRobotOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsFeiShuRobotOutput)
+}
+
+// NoticeContentTmplTmplContentsFeiShuRobotArrayInput is an input type that accepts NoticeContentTmplTmplContentsFeiShuRobotArray and NoticeContentTmplTmplContentsFeiShuRobotArrayOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsFeiShuRobotArrayInput` via:
+//
+//	NoticeContentTmplTmplContentsFeiShuRobotArray{ NoticeContentTmplTmplContentsFeiShuRobotArgs{...} }
+type NoticeContentTmplTmplContentsFeiShuRobotArrayInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsFeiShuRobotArrayOutput() NoticeContentTmplTmplContentsFeiShuRobotArrayOutput
+	ToNoticeContentTmplTmplContentsFeiShuRobotArrayOutputWithContext(context.Context) NoticeContentTmplTmplContentsFeiShuRobotArrayOutput
+}
+
+type NoticeContentTmplTmplContentsFeiShuRobotArray []NoticeContentTmplTmplContentsFeiShuRobotInput
+
+func (NoticeContentTmplTmplContentsFeiShuRobotArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NoticeContentTmplTmplContentsFeiShuRobot)(nil)).Elem()
+}
+
+func (i NoticeContentTmplTmplContentsFeiShuRobotArray) ToNoticeContentTmplTmplContentsFeiShuRobotArrayOutput() NoticeContentTmplTmplContentsFeiShuRobotArrayOutput {
+	return i.ToNoticeContentTmplTmplContentsFeiShuRobotArrayOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsFeiShuRobotArray) ToNoticeContentTmplTmplContentsFeiShuRobotArrayOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsFeiShuRobotArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsFeiShuRobotArrayOutput)
+}
+
+type NoticeContentTmplTmplContentsFeiShuRobotOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsFeiShuRobotOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsFeiShuRobot)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsFeiShuRobotOutput) ToNoticeContentTmplTmplContentsFeiShuRobotOutput() NoticeContentTmplTmplContentsFeiShuRobotOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsFeiShuRobotOutput) ToNoticeContentTmplTmplContentsFeiShuRobotOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsFeiShuRobotOutput {
+	return o
+}
+
+// Matching status list, e.g. Trigger, Recovery.
+func (o NoticeContentTmplTmplContentsFeiShuRobotOutput) MatchingStatuses() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsFeiShuRobot) []string { return v.MatchingStatuses }).(pulumi.StringArrayOutput)
+}
+
+// Template configuration.
+func (o NoticeContentTmplTmplContentsFeiShuRobotOutput) Template() NoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsFeiShuRobot) *NoticeContentTmplTmplContentsFeiShuRobotTemplate {
+		return v.Template
+	}).(NoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutput)
+}
+
+type NoticeContentTmplTmplContentsFeiShuRobotArrayOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsFeiShuRobotArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NoticeContentTmplTmplContentsFeiShuRobot)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsFeiShuRobotArrayOutput) ToNoticeContentTmplTmplContentsFeiShuRobotArrayOutput() NoticeContentTmplTmplContentsFeiShuRobotArrayOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsFeiShuRobotArrayOutput) ToNoticeContentTmplTmplContentsFeiShuRobotArrayOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsFeiShuRobotArrayOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsFeiShuRobotArrayOutput) Index(i pulumi.IntInput) NoticeContentTmplTmplContentsFeiShuRobotOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) NoticeContentTmplTmplContentsFeiShuRobot {
+		return vs[0].([]NoticeContentTmplTmplContentsFeiShuRobot)[vs[1].(int)]
+	}).(NoticeContentTmplTmplContentsFeiShuRobotOutput)
+}
+
+type NoticeContentTmplTmplContentsFeiShuRobotTemplate struct {
+	// Content template.
+	ContentTmpl *string `pulumi:"contentTmpl"`
+	// Title template.
+	TitleTmpl *string `pulumi:"titleTmpl"`
+}
+
+// NoticeContentTmplTmplContentsFeiShuRobotTemplateInput is an input type that accepts NoticeContentTmplTmplContentsFeiShuRobotTemplateArgs and NoticeContentTmplTmplContentsFeiShuRobotTemplateOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsFeiShuRobotTemplateInput` via:
+//
+//	NoticeContentTmplTmplContentsFeiShuRobotTemplateArgs{...}
+type NoticeContentTmplTmplContentsFeiShuRobotTemplateInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsFeiShuRobotTemplateOutput() NoticeContentTmplTmplContentsFeiShuRobotTemplateOutput
+	ToNoticeContentTmplTmplContentsFeiShuRobotTemplateOutputWithContext(context.Context) NoticeContentTmplTmplContentsFeiShuRobotTemplateOutput
+}
+
+type NoticeContentTmplTmplContentsFeiShuRobotTemplateArgs struct {
+	// Content template.
+	ContentTmpl pulumi.StringPtrInput `pulumi:"contentTmpl"`
+	// Title template.
+	TitleTmpl pulumi.StringPtrInput `pulumi:"titleTmpl"`
+}
+
+func (NoticeContentTmplTmplContentsFeiShuRobotTemplateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsFeiShuRobotTemplate)(nil)).Elem()
+}
+
+func (i NoticeContentTmplTmplContentsFeiShuRobotTemplateArgs) ToNoticeContentTmplTmplContentsFeiShuRobotTemplateOutput() NoticeContentTmplTmplContentsFeiShuRobotTemplateOutput {
+	return i.ToNoticeContentTmplTmplContentsFeiShuRobotTemplateOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsFeiShuRobotTemplateArgs) ToNoticeContentTmplTmplContentsFeiShuRobotTemplateOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsFeiShuRobotTemplateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsFeiShuRobotTemplateOutput)
+}
+
+func (i NoticeContentTmplTmplContentsFeiShuRobotTemplateArgs) ToNoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutput() NoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutput {
+	return i.ToNoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsFeiShuRobotTemplateArgs) ToNoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsFeiShuRobotTemplateOutput).ToNoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutputWithContext(ctx)
+}
+
+// NoticeContentTmplTmplContentsFeiShuRobotTemplatePtrInput is an input type that accepts NoticeContentTmplTmplContentsFeiShuRobotTemplateArgs, NoticeContentTmplTmplContentsFeiShuRobotTemplatePtr and NoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsFeiShuRobotTemplatePtrInput` via:
+//
+//	        NoticeContentTmplTmplContentsFeiShuRobotTemplateArgs{...}
+//
+//	or:
+//
+//	        nil
+type NoticeContentTmplTmplContentsFeiShuRobotTemplatePtrInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutput() NoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutput
+	ToNoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutputWithContext(context.Context) NoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutput
+}
+
+type noticeContentTmplTmplContentsFeiShuRobotTemplatePtrType NoticeContentTmplTmplContentsFeiShuRobotTemplateArgs
+
+func NoticeContentTmplTmplContentsFeiShuRobotTemplatePtr(v *NoticeContentTmplTmplContentsFeiShuRobotTemplateArgs) NoticeContentTmplTmplContentsFeiShuRobotTemplatePtrInput {
+	return (*noticeContentTmplTmplContentsFeiShuRobotTemplatePtrType)(v)
+}
+
+func (*noticeContentTmplTmplContentsFeiShuRobotTemplatePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NoticeContentTmplTmplContentsFeiShuRobotTemplate)(nil)).Elem()
+}
+
+func (i *noticeContentTmplTmplContentsFeiShuRobotTemplatePtrType) ToNoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutput() NoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutput {
+	return i.ToNoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutputWithContext(context.Background())
+}
+
+func (i *noticeContentTmplTmplContentsFeiShuRobotTemplatePtrType) ToNoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutput)
+}
+
+type NoticeContentTmplTmplContentsFeiShuRobotTemplateOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsFeiShuRobotTemplateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsFeiShuRobotTemplate)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsFeiShuRobotTemplateOutput) ToNoticeContentTmplTmplContentsFeiShuRobotTemplateOutput() NoticeContentTmplTmplContentsFeiShuRobotTemplateOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsFeiShuRobotTemplateOutput) ToNoticeContentTmplTmplContentsFeiShuRobotTemplateOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsFeiShuRobotTemplateOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsFeiShuRobotTemplateOutput) ToNoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutput() NoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutput {
+	return o.ToNoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutputWithContext(context.Background())
+}
+
+func (o NoticeContentTmplTmplContentsFeiShuRobotTemplateOutput) ToNoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NoticeContentTmplTmplContentsFeiShuRobotTemplate) *NoticeContentTmplTmplContentsFeiShuRobotTemplate {
+		return &v
+	}).(NoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutput)
+}
+
+// Content template.
+func (o NoticeContentTmplTmplContentsFeiShuRobotTemplateOutput) ContentTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsFeiShuRobotTemplate) *string { return v.ContentTmpl }).(pulumi.StringPtrOutput)
+}
+
+// Title template.
+func (o NoticeContentTmplTmplContentsFeiShuRobotTemplateOutput) TitleTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsFeiShuRobotTemplate) *string { return v.TitleTmpl }).(pulumi.StringPtrOutput)
+}
+
+type NoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NoticeContentTmplTmplContentsFeiShuRobotTemplate)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutput) ToNoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutput() NoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutput) ToNoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutput) Elem() NoticeContentTmplTmplContentsFeiShuRobotTemplateOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsFeiShuRobotTemplate) NoticeContentTmplTmplContentsFeiShuRobotTemplate {
+		if v != nil {
+			return *v
+		}
+		var ret NoticeContentTmplTmplContentsFeiShuRobotTemplate
+		return ret
+	}).(NoticeContentTmplTmplContentsFeiShuRobotTemplateOutput)
+}
+
+// Content template.
+func (o NoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutput) ContentTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsFeiShuRobotTemplate) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ContentTmpl
+	}).(pulumi.StringPtrOutput)
+}
+
+// Title template.
+func (o NoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutput) TitleTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsFeiShuRobotTemplate) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TitleTmpl
+	}).(pulumi.StringPtrOutput)
+}
+
+type NoticeContentTmplTmplContentsPagerDutyRobot struct {
+	// Matching status list.
+	MatchingStatuses []string `pulumi:"matchingStatuses"`
+	// PagerDuty template.
+	Template *NoticeContentTmplTmplContentsPagerDutyRobotTemplate `pulumi:"template"`
+}
+
+// NoticeContentTmplTmplContentsPagerDutyRobotInput is an input type that accepts NoticeContentTmplTmplContentsPagerDutyRobotArgs and NoticeContentTmplTmplContentsPagerDutyRobotOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsPagerDutyRobotInput` via:
+//
+//	NoticeContentTmplTmplContentsPagerDutyRobotArgs{...}
+type NoticeContentTmplTmplContentsPagerDutyRobotInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsPagerDutyRobotOutput() NoticeContentTmplTmplContentsPagerDutyRobotOutput
+	ToNoticeContentTmplTmplContentsPagerDutyRobotOutputWithContext(context.Context) NoticeContentTmplTmplContentsPagerDutyRobotOutput
+}
+
+type NoticeContentTmplTmplContentsPagerDutyRobotArgs struct {
+	// Matching status list.
+	MatchingStatuses pulumi.StringArrayInput `pulumi:"matchingStatuses"`
+	// PagerDuty template.
+	Template NoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrInput `pulumi:"template"`
+}
+
+func (NoticeContentTmplTmplContentsPagerDutyRobotArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsPagerDutyRobot)(nil)).Elem()
+}
+
+func (i NoticeContentTmplTmplContentsPagerDutyRobotArgs) ToNoticeContentTmplTmplContentsPagerDutyRobotOutput() NoticeContentTmplTmplContentsPagerDutyRobotOutput {
+	return i.ToNoticeContentTmplTmplContentsPagerDutyRobotOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsPagerDutyRobotArgs) ToNoticeContentTmplTmplContentsPagerDutyRobotOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsPagerDutyRobotOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsPagerDutyRobotOutput)
+}
+
+// NoticeContentTmplTmplContentsPagerDutyRobotArrayInput is an input type that accepts NoticeContentTmplTmplContentsPagerDutyRobotArray and NoticeContentTmplTmplContentsPagerDutyRobotArrayOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsPagerDutyRobotArrayInput` via:
+//
+//	NoticeContentTmplTmplContentsPagerDutyRobotArray{ NoticeContentTmplTmplContentsPagerDutyRobotArgs{...} }
+type NoticeContentTmplTmplContentsPagerDutyRobotArrayInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsPagerDutyRobotArrayOutput() NoticeContentTmplTmplContentsPagerDutyRobotArrayOutput
+	ToNoticeContentTmplTmplContentsPagerDutyRobotArrayOutputWithContext(context.Context) NoticeContentTmplTmplContentsPagerDutyRobotArrayOutput
+}
+
+type NoticeContentTmplTmplContentsPagerDutyRobotArray []NoticeContentTmplTmplContentsPagerDutyRobotInput
+
+func (NoticeContentTmplTmplContentsPagerDutyRobotArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NoticeContentTmplTmplContentsPagerDutyRobot)(nil)).Elem()
+}
+
+func (i NoticeContentTmplTmplContentsPagerDutyRobotArray) ToNoticeContentTmplTmplContentsPagerDutyRobotArrayOutput() NoticeContentTmplTmplContentsPagerDutyRobotArrayOutput {
+	return i.ToNoticeContentTmplTmplContentsPagerDutyRobotArrayOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsPagerDutyRobotArray) ToNoticeContentTmplTmplContentsPagerDutyRobotArrayOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsPagerDutyRobotArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsPagerDutyRobotArrayOutput)
+}
+
+type NoticeContentTmplTmplContentsPagerDutyRobotOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsPagerDutyRobotOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsPagerDutyRobot)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsPagerDutyRobotOutput) ToNoticeContentTmplTmplContentsPagerDutyRobotOutput() NoticeContentTmplTmplContentsPagerDutyRobotOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsPagerDutyRobotOutput) ToNoticeContentTmplTmplContentsPagerDutyRobotOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsPagerDutyRobotOutput {
+	return o
+}
+
+// Matching status list.
+func (o NoticeContentTmplTmplContentsPagerDutyRobotOutput) MatchingStatuses() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsPagerDutyRobot) []string { return v.MatchingStatuses }).(pulumi.StringArrayOutput)
+}
+
+// PagerDuty template.
+func (o NoticeContentTmplTmplContentsPagerDutyRobotOutput) Template() NoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsPagerDutyRobot) *NoticeContentTmplTmplContentsPagerDutyRobotTemplate {
+		return v.Template
+	}).(NoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutput)
+}
+
+type NoticeContentTmplTmplContentsPagerDutyRobotArrayOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsPagerDutyRobotArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NoticeContentTmplTmplContentsPagerDutyRobot)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsPagerDutyRobotArrayOutput) ToNoticeContentTmplTmplContentsPagerDutyRobotArrayOutput() NoticeContentTmplTmplContentsPagerDutyRobotArrayOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsPagerDutyRobotArrayOutput) ToNoticeContentTmplTmplContentsPagerDutyRobotArrayOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsPagerDutyRobotArrayOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsPagerDutyRobotArrayOutput) Index(i pulumi.IntInput) NoticeContentTmplTmplContentsPagerDutyRobotOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) NoticeContentTmplTmplContentsPagerDutyRobot {
+		return vs[0].([]NoticeContentTmplTmplContentsPagerDutyRobot)[vs[1].(int)]
+	}).(NoticeContentTmplTmplContentsPagerDutyRobotOutput)
+}
+
+type NoticeContentTmplTmplContentsPagerDutyRobotTemplate struct {
+	// Request body.
+	Body *string `pulumi:"body"`
+	// Request headers.
+	Headers []NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeader `pulumi:"headers"`
+	// Title template.
+	TitleTmpl *string `pulumi:"titleTmpl"`
+}
+
+// NoticeContentTmplTmplContentsPagerDutyRobotTemplateInput is an input type that accepts NoticeContentTmplTmplContentsPagerDutyRobotTemplateArgs and NoticeContentTmplTmplContentsPagerDutyRobotTemplateOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsPagerDutyRobotTemplateInput` via:
+//
+//	NoticeContentTmplTmplContentsPagerDutyRobotTemplateArgs{...}
+type NoticeContentTmplTmplContentsPagerDutyRobotTemplateInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsPagerDutyRobotTemplateOutput() NoticeContentTmplTmplContentsPagerDutyRobotTemplateOutput
+	ToNoticeContentTmplTmplContentsPagerDutyRobotTemplateOutputWithContext(context.Context) NoticeContentTmplTmplContentsPagerDutyRobotTemplateOutput
+}
+
+type NoticeContentTmplTmplContentsPagerDutyRobotTemplateArgs struct {
+	// Request body.
+	Body pulumi.StringPtrInput `pulumi:"body"`
+	// Request headers.
+	Headers NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArrayInput `pulumi:"headers"`
+	// Title template.
+	TitleTmpl pulumi.StringPtrInput `pulumi:"titleTmpl"`
+}
+
+func (NoticeContentTmplTmplContentsPagerDutyRobotTemplateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsPagerDutyRobotTemplate)(nil)).Elem()
+}
+
+func (i NoticeContentTmplTmplContentsPagerDutyRobotTemplateArgs) ToNoticeContentTmplTmplContentsPagerDutyRobotTemplateOutput() NoticeContentTmplTmplContentsPagerDutyRobotTemplateOutput {
+	return i.ToNoticeContentTmplTmplContentsPagerDutyRobotTemplateOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsPagerDutyRobotTemplateArgs) ToNoticeContentTmplTmplContentsPagerDutyRobotTemplateOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsPagerDutyRobotTemplateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsPagerDutyRobotTemplateOutput)
+}
+
+func (i NoticeContentTmplTmplContentsPagerDutyRobotTemplateArgs) ToNoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutput() NoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutput {
+	return i.ToNoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsPagerDutyRobotTemplateArgs) ToNoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsPagerDutyRobotTemplateOutput).ToNoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutputWithContext(ctx)
+}
+
+// NoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrInput is an input type that accepts NoticeContentTmplTmplContentsPagerDutyRobotTemplateArgs, NoticeContentTmplTmplContentsPagerDutyRobotTemplatePtr and NoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrInput` via:
+//
+//	        NoticeContentTmplTmplContentsPagerDutyRobotTemplateArgs{...}
+//
+//	or:
+//
+//	        nil
+type NoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutput() NoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutput
+	ToNoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutputWithContext(context.Context) NoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutput
+}
+
+type noticeContentTmplTmplContentsPagerDutyRobotTemplatePtrType NoticeContentTmplTmplContentsPagerDutyRobotTemplateArgs
+
+func NoticeContentTmplTmplContentsPagerDutyRobotTemplatePtr(v *NoticeContentTmplTmplContentsPagerDutyRobotTemplateArgs) NoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrInput {
+	return (*noticeContentTmplTmplContentsPagerDutyRobotTemplatePtrType)(v)
+}
+
+func (*noticeContentTmplTmplContentsPagerDutyRobotTemplatePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NoticeContentTmplTmplContentsPagerDutyRobotTemplate)(nil)).Elem()
+}
+
+func (i *noticeContentTmplTmplContentsPagerDutyRobotTemplatePtrType) ToNoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutput() NoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutput {
+	return i.ToNoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutputWithContext(context.Background())
+}
+
+func (i *noticeContentTmplTmplContentsPagerDutyRobotTemplatePtrType) ToNoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutput)
+}
+
+type NoticeContentTmplTmplContentsPagerDutyRobotTemplateOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsPagerDutyRobotTemplateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsPagerDutyRobotTemplate)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsPagerDutyRobotTemplateOutput) ToNoticeContentTmplTmplContentsPagerDutyRobotTemplateOutput() NoticeContentTmplTmplContentsPagerDutyRobotTemplateOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsPagerDutyRobotTemplateOutput) ToNoticeContentTmplTmplContentsPagerDutyRobotTemplateOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsPagerDutyRobotTemplateOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsPagerDutyRobotTemplateOutput) ToNoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutput() NoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutput {
+	return o.ToNoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutputWithContext(context.Background())
+}
+
+func (o NoticeContentTmplTmplContentsPagerDutyRobotTemplateOutput) ToNoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NoticeContentTmplTmplContentsPagerDutyRobotTemplate) *NoticeContentTmplTmplContentsPagerDutyRobotTemplate {
+		return &v
+	}).(NoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutput)
+}
+
+// Request body.
+func (o NoticeContentTmplTmplContentsPagerDutyRobotTemplateOutput) Body() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsPagerDutyRobotTemplate) *string { return v.Body }).(pulumi.StringPtrOutput)
+}
+
+// Request headers.
+func (o NoticeContentTmplTmplContentsPagerDutyRobotTemplateOutput) Headers() NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArrayOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsPagerDutyRobotTemplate) []NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeader {
+		return v.Headers
+	}).(NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArrayOutput)
+}
+
+// Title template.
+func (o NoticeContentTmplTmplContentsPagerDutyRobotTemplateOutput) TitleTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsPagerDutyRobotTemplate) *string { return v.TitleTmpl }).(pulumi.StringPtrOutput)
+}
+
+type NoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NoticeContentTmplTmplContentsPagerDutyRobotTemplate)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutput) ToNoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutput() NoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutput) ToNoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutput) Elem() NoticeContentTmplTmplContentsPagerDutyRobotTemplateOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsPagerDutyRobotTemplate) NoticeContentTmplTmplContentsPagerDutyRobotTemplate {
+		if v != nil {
+			return *v
+		}
+		var ret NoticeContentTmplTmplContentsPagerDutyRobotTemplate
+		return ret
+	}).(NoticeContentTmplTmplContentsPagerDutyRobotTemplateOutput)
+}
+
+// Request body.
+func (o NoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutput) Body() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsPagerDutyRobotTemplate) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Body
+	}).(pulumi.StringPtrOutput)
+}
+
+// Request headers.
+func (o NoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutput) Headers() NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArrayOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsPagerDutyRobotTemplate) []NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeader {
+		if v == nil {
+			return nil
+		}
+		return v.Headers
+	}).(NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArrayOutput)
+}
+
+// Title template.
+func (o NoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutput) TitleTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsPagerDutyRobotTemplate) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TitleTmpl
+	}).(pulumi.StringPtrOutput)
+}
+
+type NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeader struct {
+	// Header key.
+	Key *string `pulumi:"key"`
+	// Header values.
+	Values []string `pulumi:"values"`
+}
+
+// NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderInput is an input type that accepts NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArgs and NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderInput` via:
+//
+//	NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArgs{...}
+type NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderOutput() NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderOutput
+	ToNoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderOutputWithContext(context.Context) NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderOutput
+}
+
+type NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArgs struct {
+	// Header key.
+	Key pulumi.StringPtrInput `pulumi:"key"`
+	// Header values.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeader)(nil)).Elem()
+}
+
+func (i NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArgs) ToNoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderOutput() NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderOutput {
+	return i.ToNoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArgs) ToNoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderOutput)
+}
+
+// NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArrayInput is an input type that accepts NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArray and NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArrayOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArrayInput` via:
+//
+//	NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArray{ NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArgs{...} }
+type NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArrayInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArrayOutput() NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArrayOutput
+	ToNoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArrayOutputWithContext(context.Context) NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArrayOutput
+}
+
+type NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArray []NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderInput
+
+func (NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeader)(nil)).Elem()
+}
+
+func (i NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArray) ToNoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArrayOutput() NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArrayOutput {
+	return i.ToNoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArrayOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArray) ToNoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArrayOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArrayOutput)
+}
+
+type NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeader)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderOutput) ToNoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderOutput() NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderOutput) ToNoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderOutput {
+	return o
+}
+
+// Header key.
+func (o NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeader) *string { return v.Key }).(pulumi.StringPtrOutput)
+}
+
+// Header values.
+func (o NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeader) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArrayOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeader)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArrayOutput) ToNoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArrayOutput() NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArrayOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArrayOutput) ToNoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArrayOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArrayOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArrayOutput) Index(i pulumi.IntInput) NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeader {
+		return vs[0].([]NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeader)[vs[1].(int)]
+	}).(NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderOutput)
+}
+
+type NoticeContentTmplTmplContentsQcloudYehe struct {
+	// Matching status list, e.g. Trigger, Recovery.
+	MatchingStatuses []string `pulumi:"matchingStatuses"`
+	// Template configuration.
+	Template *NoticeContentTmplTmplContentsQcloudYeheTemplate `pulumi:"template"`
+}
+
+// NoticeContentTmplTmplContentsQcloudYeheInput is an input type that accepts NoticeContentTmplTmplContentsQcloudYeheArgs and NoticeContentTmplTmplContentsQcloudYeheOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsQcloudYeheInput` via:
+//
+//	NoticeContentTmplTmplContentsQcloudYeheArgs{...}
+type NoticeContentTmplTmplContentsQcloudYeheInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsQcloudYeheOutput() NoticeContentTmplTmplContentsQcloudYeheOutput
+	ToNoticeContentTmplTmplContentsQcloudYeheOutputWithContext(context.Context) NoticeContentTmplTmplContentsQcloudYeheOutput
+}
+
+type NoticeContentTmplTmplContentsQcloudYeheArgs struct {
+	// Matching status list, e.g. Trigger, Recovery.
+	MatchingStatuses pulumi.StringArrayInput `pulumi:"matchingStatuses"`
+	// Template configuration.
+	Template NoticeContentTmplTmplContentsQcloudYeheTemplatePtrInput `pulumi:"template"`
+}
+
+func (NoticeContentTmplTmplContentsQcloudYeheArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsQcloudYehe)(nil)).Elem()
+}
+
+func (i NoticeContentTmplTmplContentsQcloudYeheArgs) ToNoticeContentTmplTmplContentsQcloudYeheOutput() NoticeContentTmplTmplContentsQcloudYeheOutput {
+	return i.ToNoticeContentTmplTmplContentsQcloudYeheOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsQcloudYeheArgs) ToNoticeContentTmplTmplContentsQcloudYeheOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsQcloudYeheOutput)
+}
+
+// NoticeContentTmplTmplContentsQcloudYeheArrayInput is an input type that accepts NoticeContentTmplTmplContentsQcloudYeheArray and NoticeContentTmplTmplContentsQcloudYeheArrayOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsQcloudYeheArrayInput` via:
+//
+//	NoticeContentTmplTmplContentsQcloudYeheArray{ NoticeContentTmplTmplContentsQcloudYeheArgs{...} }
+type NoticeContentTmplTmplContentsQcloudYeheArrayInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsQcloudYeheArrayOutput() NoticeContentTmplTmplContentsQcloudYeheArrayOutput
+	ToNoticeContentTmplTmplContentsQcloudYeheArrayOutputWithContext(context.Context) NoticeContentTmplTmplContentsQcloudYeheArrayOutput
+}
+
+type NoticeContentTmplTmplContentsQcloudYeheArray []NoticeContentTmplTmplContentsQcloudYeheInput
+
+func (NoticeContentTmplTmplContentsQcloudYeheArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NoticeContentTmplTmplContentsQcloudYehe)(nil)).Elem()
+}
+
+func (i NoticeContentTmplTmplContentsQcloudYeheArray) ToNoticeContentTmplTmplContentsQcloudYeheArrayOutput() NoticeContentTmplTmplContentsQcloudYeheArrayOutput {
+	return i.ToNoticeContentTmplTmplContentsQcloudYeheArrayOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsQcloudYeheArray) ToNoticeContentTmplTmplContentsQcloudYeheArrayOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsQcloudYeheArrayOutput)
+}
+
+type NoticeContentTmplTmplContentsQcloudYeheOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsQcloudYeheOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsQcloudYehe)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheOutput) ToNoticeContentTmplTmplContentsQcloudYeheOutput() NoticeContentTmplTmplContentsQcloudYeheOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheOutput) ToNoticeContentTmplTmplContentsQcloudYeheOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheOutput {
+	return o
+}
+
+// Matching status list, e.g. Trigger, Recovery.
+func (o NoticeContentTmplTmplContentsQcloudYeheOutput) MatchingStatuses() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsQcloudYehe) []string { return v.MatchingStatuses }).(pulumi.StringArrayOutput)
+}
+
+// Template configuration.
+func (o NoticeContentTmplTmplContentsQcloudYeheOutput) Template() NoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsQcloudYehe) *NoticeContentTmplTmplContentsQcloudYeheTemplate {
+		return v.Template
+	}).(NoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutput)
+}
+
+type NoticeContentTmplTmplContentsQcloudYeheArrayOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsQcloudYeheArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NoticeContentTmplTmplContentsQcloudYehe)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheArrayOutput) ToNoticeContentTmplTmplContentsQcloudYeheArrayOutput() NoticeContentTmplTmplContentsQcloudYeheArrayOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheArrayOutput) ToNoticeContentTmplTmplContentsQcloudYeheArrayOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheArrayOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheArrayOutput) Index(i pulumi.IntInput) NoticeContentTmplTmplContentsQcloudYeheOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) NoticeContentTmplTmplContentsQcloudYehe {
+		return vs[0].([]NoticeContentTmplTmplContentsQcloudYehe)[vs[1].(int)]
+	}).(NoticeContentTmplTmplContentsQcloudYeheOutput)
+}
+
+type NoticeContentTmplTmplContentsQcloudYeheTemplate struct {
+	// Andon notification.
+	Andon *NoticeContentTmplTmplContentsQcloudYeheTemplateAndon `pulumi:"andon"`
+	// Email notification.
+	Email *NoticeContentTmplTmplContentsQcloudYeheTemplateEmail `pulumi:"email"`
+	// Enterprise WeChat notification.
+	Qywx *NoticeContentTmplTmplContentsQcloudYeheTemplateQywx `pulumi:"qywx"`
+	// Site notification.
+	Site *NoticeContentTmplTmplContentsQcloudYeheTemplateSite `pulumi:"site"`
+	// SMS notification.
+	Sms *NoticeContentTmplTmplContentsQcloudYeheTemplateSms `pulumi:"sms"`
+	// Voice notification.
+	Voice *NoticeContentTmplTmplContentsQcloudYeheTemplateVoice `pulumi:"voice"`
+	// WeChat notification.
+	Wechat *NoticeContentTmplTmplContentsQcloudYeheTemplateWechat `pulumi:"wechat"`
+}
+
+// NoticeContentTmplTmplContentsQcloudYeheTemplateInput is an input type that accepts NoticeContentTmplTmplContentsQcloudYeheTemplateArgs and NoticeContentTmplTmplContentsQcloudYeheTemplateOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsQcloudYeheTemplateInput` via:
+//
+//	NoticeContentTmplTmplContentsQcloudYeheTemplateArgs{...}
+type NoticeContentTmplTmplContentsQcloudYeheTemplateInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsQcloudYeheTemplateOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateOutput
+	ToNoticeContentTmplTmplContentsQcloudYeheTemplateOutputWithContext(context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateOutput
+}
+
+type NoticeContentTmplTmplContentsQcloudYeheTemplateArgs struct {
+	// Andon notification.
+	Andon NoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrInput `pulumi:"andon"`
+	// Email notification.
+	Email NoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrInput `pulumi:"email"`
+	// Enterprise WeChat notification.
+	Qywx NoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrInput `pulumi:"qywx"`
+	// Site notification.
+	Site NoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrInput `pulumi:"site"`
+	// SMS notification.
+	Sms NoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrInput `pulumi:"sms"`
+	// Voice notification.
+	Voice NoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrInput `pulumi:"voice"`
+	// WeChat notification.
+	Wechat NoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrInput `pulumi:"wechat"`
+}
+
+func (NoticeContentTmplTmplContentsQcloudYeheTemplateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsQcloudYeheTemplate)(nil)).Elem()
+}
+
+func (i NoticeContentTmplTmplContentsQcloudYeheTemplateArgs) ToNoticeContentTmplTmplContentsQcloudYeheTemplateOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateOutput {
+	return i.ToNoticeContentTmplTmplContentsQcloudYeheTemplateOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsQcloudYeheTemplateArgs) ToNoticeContentTmplTmplContentsQcloudYeheTemplateOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsQcloudYeheTemplateOutput)
+}
+
+func (i NoticeContentTmplTmplContentsQcloudYeheTemplateArgs) ToNoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutput {
+	return i.ToNoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsQcloudYeheTemplateArgs) ToNoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsQcloudYeheTemplateOutput).ToNoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutputWithContext(ctx)
+}
+
+// NoticeContentTmplTmplContentsQcloudYeheTemplatePtrInput is an input type that accepts NoticeContentTmplTmplContentsQcloudYeheTemplateArgs, NoticeContentTmplTmplContentsQcloudYeheTemplatePtr and NoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsQcloudYeheTemplatePtrInput` via:
+//
+//	        NoticeContentTmplTmplContentsQcloudYeheTemplateArgs{...}
+//
+//	or:
+//
+//	        nil
+type NoticeContentTmplTmplContentsQcloudYeheTemplatePtrInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutput
+	ToNoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutputWithContext(context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutput
+}
+
+type noticeContentTmplTmplContentsQcloudYeheTemplatePtrType NoticeContentTmplTmplContentsQcloudYeheTemplateArgs
+
+func NoticeContentTmplTmplContentsQcloudYeheTemplatePtr(v *NoticeContentTmplTmplContentsQcloudYeheTemplateArgs) NoticeContentTmplTmplContentsQcloudYeheTemplatePtrInput {
+	return (*noticeContentTmplTmplContentsQcloudYeheTemplatePtrType)(v)
+}
+
+func (*noticeContentTmplTmplContentsQcloudYeheTemplatePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NoticeContentTmplTmplContentsQcloudYeheTemplate)(nil)).Elem()
+}
+
+func (i *noticeContentTmplTmplContentsQcloudYeheTemplatePtrType) ToNoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutput {
+	return i.ToNoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutputWithContext(context.Background())
+}
+
+func (i *noticeContentTmplTmplContentsQcloudYeheTemplatePtrType) ToNoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutput)
+}
+
+type NoticeContentTmplTmplContentsQcloudYeheTemplateOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsQcloudYeheTemplateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsQcloudYeheTemplate)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutput {
+	return o.ToNoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutputWithContext(context.Background())
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NoticeContentTmplTmplContentsQcloudYeheTemplate) *NoticeContentTmplTmplContentsQcloudYeheTemplate {
+		return &v
+	}).(NoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutput)
+}
+
+// Andon notification.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateOutput) Andon() NoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsQcloudYeheTemplate) *NoticeContentTmplTmplContentsQcloudYeheTemplateAndon {
+		return v.Andon
+	}).(NoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutput)
+}
+
+// Email notification.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateOutput) Email() NoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsQcloudYeheTemplate) *NoticeContentTmplTmplContentsQcloudYeheTemplateEmail {
+		return v.Email
+	}).(NoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutput)
+}
+
+// Enterprise WeChat notification.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateOutput) Qywx() NoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsQcloudYeheTemplate) *NoticeContentTmplTmplContentsQcloudYeheTemplateQywx {
+		return v.Qywx
+	}).(NoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutput)
+}
+
+// Site notification.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateOutput) Site() NoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsQcloudYeheTemplate) *NoticeContentTmplTmplContentsQcloudYeheTemplateSite {
+		return v.Site
+	}).(NoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutput)
+}
+
+// SMS notification.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateOutput) Sms() NoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsQcloudYeheTemplate) *NoticeContentTmplTmplContentsQcloudYeheTemplateSms {
+		return v.Sms
+	}).(NoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutput)
+}
+
+// Voice notification.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateOutput) Voice() NoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsQcloudYeheTemplate) *NoticeContentTmplTmplContentsQcloudYeheTemplateVoice {
+		return v.Voice
+	}).(NoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutput)
+}
+
+// WeChat notification.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateOutput) Wechat() NoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsQcloudYeheTemplate) *NoticeContentTmplTmplContentsQcloudYeheTemplateWechat {
+		return v.Wechat
+	}).(NoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutput)
+}
+
+type NoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NoticeContentTmplTmplContentsQcloudYeheTemplate)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutput) Elem() NoticeContentTmplTmplContentsQcloudYeheTemplateOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsQcloudYeheTemplate) NoticeContentTmplTmplContentsQcloudYeheTemplate {
+		if v != nil {
+			return *v
+		}
+		var ret NoticeContentTmplTmplContentsQcloudYeheTemplate
+		return ret
+	}).(NoticeContentTmplTmplContentsQcloudYeheTemplateOutput)
+}
+
+// Andon notification.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutput) Andon() NoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsQcloudYeheTemplate) *NoticeContentTmplTmplContentsQcloudYeheTemplateAndon {
+		if v == nil {
+			return nil
+		}
+		return v.Andon
+	}).(NoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutput)
+}
+
+// Email notification.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutput) Email() NoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsQcloudYeheTemplate) *NoticeContentTmplTmplContentsQcloudYeheTemplateEmail {
+		if v == nil {
+			return nil
+		}
+		return v.Email
+	}).(NoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutput)
+}
+
+// Enterprise WeChat notification.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutput) Qywx() NoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsQcloudYeheTemplate) *NoticeContentTmplTmplContentsQcloudYeheTemplateQywx {
+		if v == nil {
+			return nil
+		}
+		return v.Qywx
+	}).(NoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutput)
+}
+
+// Site notification.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutput) Site() NoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsQcloudYeheTemplate) *NoticeContentTmplTmplContentsQcloudYeheTemplateSite {
+		if v == nil {
+			return nil
+		}
+		return v.Site
+	}).(NoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutput)
+}
+
+// SMS notification.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutput) Sms() NoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsQcloudYeheTemplate) *NoticeContentTmplTmplContentsQcloudYeheTemplateSms {
+		if v == nil {
+			return nil
+		}
+		return v.Sms
+	}).(NoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutput)
+}
+
+// Voice notification.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutput) Voice() NoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsQcloudYeheTemplate) *NoticeContentTmplTmplContentsQcloudYeheTemplateVoice {
+		if v == nil {
+			return nil
+		}
+		return v.Voice
+	}).(NoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutput)
+}
+
+// WeChat notification.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutput) Wechat() NoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsQcloudYeheTemplate) *NoticeContentTmplTmplContentsQcloudYeheTemplateWechat {
+		if v == nil {
+			return nil
+		}
+		return v.Wechat
+	}).(NoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutput)
+}
+
+type NoticeContentTmplTmplContentsQcloudYeheTemplateAndon struct {
+	// Content template.
+	ContentTmpl *string `pulumi:"contentTmpl"`
+	// Title template.
+	TitleTmpl *string `pulumi:"titleTmpl"`
+}
+
+// NoticeContentTmplTmplContentsQcloudYeheTemplateAndonInput is an input type that accepts NoticeContentTmplTmplContentsQcloudYeheTemplateAndonArgs and NoticeContentTmplTmplContentsQcloudYeheTemplateAndonOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsQcloudYeheTemplateAndonInput` via:
+//
+//	NoticeContentTmplTmplContentsQcloudYeheTemplateAndonArgs{...}
+type NoticeContentTmplTmplContentsQcloudYeheTemplateAndonInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsQcloudYeheTemplateAndonOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateAndonOutput
+	ToNoticeContentTmplTmplContentsQcloudYeheTemplateAndonOutputWithContext(context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateAndonOutput
+}
+
+type NoticeContentTmplTmplContentsQcloudYeheTemplateAndonArgs struct {
+	// Content template.
+	ContentTmpl pulumi.StringPtrInput `pulumi:"contentTmpl"`
+	// Title template.
+	TitleTmpl pulumi.StringPtrInput `pulumi:"titleTmpl"`
+}
+
+func (NoticeContentTmplTmplContentsQcloudYeheTemplateAndonArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsQcloudYeheTemplateAndon)(nil)).Elem()
+}
+
+func (i NoticeContentTmplTmplContentsQcloudYeheTemplateAndonArgs) ToNoticeContentTmplTmplContentsQcloudYeheTemplateAndonOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateAndonOutput {
+	return i.ToNoticeContentTmplTmplContentsQcloudYeheTemplateAndonOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsQcloudYeheTemplateAndonArgs) ToNoticeContentTmplTmplContentsQcloudYeheTemplateAndonOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateAndonOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsQcloudYeheTemplateAndonOutput)
+}
+
+func (i NoticeContentTmplTmplContentsQcloudYeheTemplateAndonArgs) ToNoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutput {
+	return i.ToNoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsQcloudYeheTemplateAndonArgs) ToNoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsQcloudYeheTemplateAndonOutput).ToNoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutputWithContext(ctx)
+}
+
+// NoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrInput is an input type that accepts NoticeContentTmplTmplContentsQcloudYeheTemplateAndonArgs, NoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtr and NoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrInput` via:
+//
+//	        NoticeContentTmplTmplContentsQcloudYeheTemplateAndonArgs{...}
+//
+//	or:
+//
+//	        nil
+type NoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutput
+	ToNoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutputWithContext(context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutput
+}
+
+type noticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrType NoticeContentTmplTmplContentsQcloudYeheTemplateAndonArgs
+
+func NoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtr(v *NoticeContentTmplTmplContentsQcloudYeheTemplateAndonArgs) NoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrInput {
+	return (*noticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrType)(v)
+}
+
+func (*noticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NoticeContentTmplTmplContentsQcloudYeheTemplateAndon)(nil)).Elem()
+}
+
+func (i *noticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrType) ToNoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutput {
+	return i.ToNoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutputWithContext(context.Background())
+}
+
+func (i *noticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrType) ToNoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutput)
+}
+
+type NoticeContentTmplTmplContentsQcloudYeheTemplateAndonOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsQcloudYeheTemplateAndonOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsQcloudYeheTemplateAndon)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateAndonOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateAndonOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateAndonOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateAndonOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateAndonOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateAndonOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateAndonOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutput {
+	return o.ToNoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutputWithContext(context.Background())
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateAndonOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NoticeContentTmplTmplContentsQcloudYeheTemplateAndon) *NoticeContentTmplTmplContentsQcloudYeheTemplateAndon {
+		return &v
+	}).(NoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutput)
+}
+
+// Content template.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateAndonOutput) ContentTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsQcloudYeheTemplateAndon) *string { return v.ContentTmpl }).(pulumi.StringPtrOutput)
+}
+
+// Title template.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateAndonOutput) TitleTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsQcloudYeheTemplateAndon) *string { return v.TitleTmpl }).(pulumi.StringPtrOutput)
+}
+
+type NoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NoticeContentTmplTmplContentsQcloudYeheTemplateAndon)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutput) Elem() NoticeContentTmplTmplContentsQcloudYeheTemplateAndonOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsQcloudYeheTemplateAndon) NoticeContentTmplTmplContentsQcloudYeheTemplateAndon {
+		if v != nil {
+			return *v
+		}
+		var ret NoticeContentTmplTmplContentsQcloudYeheTemplateAndon
+		return ret
+	}).(NoticeContentTmplTmplContentsQcloudYeheTemplateAndonOutput)
+}
+
+// Content template.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutput) ContentTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsQcloudYeheTemplateAndon) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ContentTmpl
+	}).(pulumi.StringPtrOutput)
+}
+
+// Title template.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutput) TitleTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsQcloudYeheTemplateAndon) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TitleTmpl
+	}).(pulumi.StringPtrOutput)
+}
+
+type NoticeContentTmplTmplContentsQcloudYeheTemplateEmail struct {
+	// Content template.
+	ContentTmpl *string `pulumi:"contentTmpl"`
+	// Title template.
+	TitleTmpl *string `pulumi:"titleTmpl"`
+}
+
+// NoticeContentTmplTmplContentsQcloudYeheTemplateEmailInput is an input type that accepts NoticeContentTmplTmplContentsQcloudYeheTemplateEmailArgs and NoticeContentTmplTmplContentsQcloudYeheTemplateEmailOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsQcloudYeheTemplateEmailInput` via:
+//
+//	NoticeContentTmplTmplContentsQcloudYeheTemplateEmailArgs{...}
+type NoticeContentTmplTmplContentsQcloudYeheTemplateEmailInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsQcloudYeheTemplateEmailOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateEmailOutput
+	ToNoticeContentTmplTmplContentsQcloudYeheTemplateEmailOutputWithContext(context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateEmailOutput
+}
+
+type NoticeContentTmplTmplContentsQcloudYeheTemplateEmailArgs struct {
+	// Content template.
+	ContentTmpl pulumi.StringPtrInput `pulumi:"contentTmpl"`
+	// Title template.
+	TitleTmpl pulumi.StringPtrInput `pulumi:"titleTmpl"`
+}
+
+func (NoticeContentTmplTmplContentsQcloudYeheTemplateEmailArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsQcloudYeheTemplateEmail)(nil)).Elem()
+}
+
+func (i NoticeContentTmplTmplContentsQcloudYeheTemplateEmailArgs) ToNoticeContentTmplTmplContentsQcloudYeheTemplateEmailOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateEmailOutput {
+	return i.ToNoticeContentTmplTmplContentsQcloudYeheTemplateEmailOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsQcloudYeheTemplateEmailArgs) ToNoticeContentTmplTmplContentsQcloudYeheTemplateEmailOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateEmailOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsQcloudYeheTemplateEmailOutput)
+}
+
+func (i NoticeContentTmplTmplContentsQcloudYeheTemplateEmailArgs) ToNoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutput {
+	return i.ToNoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsQcloudYeheTemplateEmailArgs) ToNoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsQcloudYeheTemplateEmailOutput).ToNoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutputWithContext(ctx)
+}
+
+// NoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrInput is an input type that accepts NoticeContentTmplTmplContentsQcloudYeheTemplateEmailArgs, NoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtr and NoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrInput` via:
+//
+//	        NoticeContentTmplTmplContentsQcloudYeheTemplateEmailArgs{...}
+//
+//	or:
+//
+//	        nil
+type NoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutput
+	ToNoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutputWithContext(context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutput
+}
+
+type noticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrType NoticeContentTmplTmplContentsQcloudYeheTemplateEmailArgs
+
+func NoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtr(v *NoticeContentTmplTmplContentsQcloudYeheTemplateEmailArgs) NoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrInput {
+	return (*noticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrType)(v)
+}
+
+func (*noticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NoticeContentTmplTmplContentsQcloudYeheTemplateEmail)(nil)).Elem()
+}
+
+func (i *noticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrType) ToNoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutput {
+	return i.ToNoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutputWithContext(context.Background())
+}
+
+func (i *noticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrType) ToNoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutput)
+}
+
+type NoticeContentTmplTmplContentsQcloudYeheTemplateEmailOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsQcloudYeheTemplateEmailOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsQcloudYeheTemplateEmail)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateEmailOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateEmailOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateEmailOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateEmailOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateEmailOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateEmailOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateEmailOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutput {
+	return o.ToNoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutputWithContext(context.Background())
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateEmailOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NoticeContentTmplTmplContentsQcloudYeheTemplateEmail) *NoticeContentTmplTmplContentsQcloudYeheTemplateEmail {
+		return &v
+	}).(NoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutput)
+}
+
+// Content template.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateEmailOutput) ContentTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsQcloudYeheTemplateEmail) *string { return v.ContentTmpl }).(pulumi.StringPtrOutput)
+}
+
+// Title template.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateEmailOutput) TitleTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsQcloudYeheTemplateEmail) *string { return v.TitleTmpl }).(pulumi.StringPtrOutput)
+}
+
+type NoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NoticeContentTmplTmplContentsQcloudYeheTemplateEmail)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutput) Elem() NoticeContentTmplTmplContentsQcloudYeheTemplateEmailOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsQcloudYeheTemplateEmail) NoticeContentTmplTmplContentsQcloudYeheTemplateEmail {
+		if v != nil {
+			return *v
+		}
+		var ret NoticeContentTmplTmplContentsQcloudYeheTemplateEmail
+		return ret
+	}).(NoticeContentTmplTmplContentsQcloudYeheTemplateEmailOutput)
+}
+
+// Content template.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutput) ContentTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsQcloudYeheTemplateEmail) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ContentTmpl
+	}).(pulumi.StringPtrOutput)
+}
+
+// Title template.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutput) TitleTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsQcloudYeheTemplateEmail) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TitleTmpl
+	}).(pulumi.StringPtrOutput)
+}
+
+type NoticeContentTmplTmplContentsQcloudYeheTemplateQywx struct {
+	// Content template.
+	ContentTmpl *string `pulumi:"contentTmpl"`
+	// Title template.
+	TitleTmpl *string `pulumi:"titleTmpl"`
+}
+
+// NoticeContentTmplTmplContentsQcloudYeheTemplateQywxInput is an input type that accepts NoticeContentTmplTmplContentsQcloudYeheTemplateQywxArgs and NoticeContentTmplTmplContentsQcloudYeheTemplateQywxOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsQcloudYeheTemplateQywxInput` via:
+//
+//	NoticeContentTmplTmplContentsQcloudYeheTemplateQywxArgs{...}
+type NoticeContentTmplTmplContentsQcloudYeheTemplateQywxInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsQcloudYeheTemplateQywxOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateQywxOutput
+	ToNoticeContentTmplTmplContentsQcloudYeheTemplateQywxOutputWithContext(context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateQywxOutput
+}
+
+type NoticeContentTmplTmplContentsQcloudYeheTemplateQywxArgs struct {
+	// Content template.
+	ContentTmpl pulumi.StringPtrInput `pulumi:"contentTmpl"`
+	// Title template.
+	TitleTmpl pulumi.StringPtrInput `pulumi:"titleTmpl"`
+}
+
+func (NoticeContentTmplTmplContentsQcloudYeheTemplateQywxArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsQcloudYeheTemplateQywx)(nil)).Elem()
+}
+
+func (i NoticeContentTmplTmplContentsQcloudYeheTemplateQywxArgs) ToNoticeContentTmplTmplContentsQcloudYeheTemplateQywxOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateQywxOutput {
+	return i.ToNoticeContentTmplTmplContentsQcloudYeheTemplateQywxOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsQcloudYeheTemplateQywxArgs) ToNoticeContentTmplTmplContentsQcloudYeheTemplateQywxOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateQywxOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsQcloudYeheTemplateQywxOutput)
+}
+
+func (i NoticeContentTmplTmplContentsQcloudYeheTemplateQywxArgs) ToNoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutput {
+	return i.ToNoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsQcloudYeheTemplateQywxArgs) ToNoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsQcloudYeheTemplateQywxOutput).ToNoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutputWithContext(ctx)
+}
+
+// NoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrInput is an input type that accepts NoticeContentTmplTmplContentsQcloudYeheTemplateQywxArgs, NoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtr and NoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrInput` via:
+//
+//	        NoticeContentTmplTmplContentsQcloudYeheTemplateQywxArgs{...}
+//
+//	or:
+//
+//	        nil
+type NoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutput
+	ToNoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutputWithContext(context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutput
+}
+
+type noticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrType NoticeContentTmplTmplContentsQcloudYeheTemplateQywxArgs
+
+func NoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtr(v *NoticeContentTmplTmplContentsQcloudYeheTemplateQywxArgs) NoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrInput {
+	return (*noticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrType)(v)
+}
+
+func (*noticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NoticeContentTmplTmplContentsQcloudYeheTemplateQywx)(nil)).Elem()
+}
+
+func (i *noticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrType) ToNoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutput {
+	return i.ToNoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutputWithContext(context.Background())
+}
+
+func (i *noticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrType) ToNoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutput)
+}
+
+type NoticeContentTmplTmplContentsQcloudYeheTemplateQywxOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsQcloudYeheTemplateQywxOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsQcloudYeheTemplateQywx)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateQywxOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateQywxOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateQywxOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateQywxOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateQywxOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateQywxOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateQywxOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutput {
+	return o.ToNoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutputWithContext(context.Background())
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateQywxOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NoticeContentTmplTmplContentsQcloudYeheTemplateQywx) *NoticeContentTmplTmplContentsQcloudYeheTemplateQywx {
+		return &v
+	}).(NoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutput)
+}
+
+// Content template.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateQywxOutput) ContentTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsQcloudYeheTemplateQywx) *string { return v.ContentTmpl }).(pulumi.StringPtrOutput)
+}
+
+// Title template.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateQywxOutput) TitleTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsQcloudYeheTemplateQywx) *string { return v.TitleTmpl }).(pulumi.StringPtrOutput)
+}
+
+type NoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NoticeContentTmplTmplContentsQcloudYeheTemplateQywx)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutput) Elem() NoticeContentTmplTmplContentsQcloudYeheTemplateQywxOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsQcloudYeheTemplateQywx) NoticeContentTmplTmplContentsQcloudYeheTemplateQywx {
+		if v != nil {
+			return *v
+		}
+		var ret NoticeContentTmplTmplContentsQcloudYeheTemplateQywx
+		return ret
+	}).(NoticeContentTmplTmplContentsQcloudYeheTemplateQywxOutput)
+}
+
+// Content template.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutput) ContentTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsQcloudYeheTemplateQywx) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ContentTmpl
+	}).(pulumi.StringPtrOutput)
+}
+
+// Title template.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutput) TitleTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsQcloudYeheTemplateQywx) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TitleTmpl
+	}).(pulumi.StringPtrOutput)
+}
+
+type NoticeContentTmplTmplContentsQcloudYeheTemplateSite struct {
+	// Content template.
+	ContentTmpl *string `pulumi:"contentTmpl"`
+	// Title template.
+	TitleTmpl *string `pulumi:"titleTmpl"`
+}
+
+// NoticeContentTmplTmplContentsQcloudYeheTemplateSiteInput is an input type that accepts NoticeContentTmplTmplContentsQcloudYeheTemplateSiteArgs and NoticeContentTmplTmplContentsQcloudYeheTemplateSiteOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsQcloudYeheTemplateSiteInput` via:
+//
+//	NoticeContentTmplTmplContentsQcloudYeheTemplateSiteArgs{...}
+type NoticeContentTmplTmplContentsQcloudYeheTemplateSiteInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsQcloudYeheTemplateSiteOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateSiteOutput
+	ToNoticeContentTmplTmplContentsQcloudYeheTemplateSiteOutputWithContext(context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateSiteOutput
+}
+
+type NoticeContentTmplTmplContentsQcloudYeheTemplateSiteArgs struct {
+	// Content template.
+	ContentTmpl pulumi.StringPtrInput `pulumi:"contentTmpl"`
+	// Title template.
+	TitleTmpl pulumi.StringPtrInput `pulumi:"titleTmpl"`
+}
+
+func (NoticeContentTmplTmplContentsQcloudYeheTemplateSiteArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsQcloudYeheTemplateSite)(nil)).Elem()
+}
+
+func (i NoticeContentTmplTmplContentsQcloudYeheTemplateSiteArgs) ToNoticeContentTmplTmplContentsQcloudYeheTemplateSiteOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateSiteOutput {
+	return i.ToNoticeContentTmplTmplContentsQcloudYeheTemplateSiteOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsQcloudYeheTemplateSiteArgs) ToNoticeContentTmplTmplContentsQcloudYeheTemplateSiteOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateSiteOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsQcloudYeheTemplateSiteOutput)
+}
+
+func (i NoticeContentTmplTmplContentsQcloudYeheTemplateSiteArgs) ToNoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutput {
+	return i.ToNoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsQcloudYeheTemplateSiteArgs) ToNoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsQcloudYeheTemplateSiteOutput).ToNoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutputWithContext(ctx)
+}
+
+// NoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrInput is an input type that accepts NoticeContentTmplTmplContentsQcloudYeheTemplateSiteArgs, NoticeContentTmplTmplContentsQcloudYeheTemplateSitePtr and NoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrInput` via:
+//
+//	        NoticeContentTmplTmplContentsQcloudYeheTemplateSiteArgs{...}
+//
+//	or:
+//
+//	        nil
+type NoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutput
+	ToNoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutputWithContext(context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutput
+}
+
+type noticeContentTmplTmplContentsQcloudYeheTemplateSitePtrType NoticeContentTmplTmplContentsQcloudYeheTemplateSiteArgs
+
+func NoticeContentTmplTmplContentsQcloudYeheTemplateSitePtr(v *NoticeContentTmplTmplContentsQcloudYeheTemplateSiteArgs) NoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrInput {
+	return (*noticeContentTmplTmplContentsQcloudYeheTemplateSitePtrType)(v)
+}
+
+func (*noticeContentTmplTmplContentsQcloudYeheTemplateSitePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NoticeContentTmplTmplContentsQcloudYeheTemplateSite)(nil)).Elem()
+}
+
+func (i *noticeContentTmplTmplContentsQcloudYeheTemplateSitePtrType) ToNoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutput {
+	return i.ToNoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutputWithContext(context.Background())
+}
+
+func (i *noticeContentTmplTmplContentsQcloudYeheTemplateSitePtrType) ToNoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutput)
+}
+
+type NoticeContentTmplTmplContentsQcloudYeheTemplateSiteOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsQcloudYeheTemplateSiteOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsQcloudYeheTemplateSite)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateSiteOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateSiteOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateSiteOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateSiteOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateSiteOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateSiteOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateSiteOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutput {
+	return o.ToNoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutputWithContext(context.Background())
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateSiteOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NoticeContentTmplTmplContentsQcloudYeheTemplateSite) *NoticeContentTmplTmplContentsQcloudYeheTemplateSite {
+		return &v
+	}).(NoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutput)
+}
+
+// Content template.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateSiteOutput) ContentTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsQcloudYeheTemplateSite) *string { return v.ContentTmpl }).(pulumi.StringPtrOutput)
+}
+
+// Title template.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateSiteOutput) TitleTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsQcloudYeheTemplateSite) *string { return v.TitleTmpl }).(pulumi.StringPtrOutput)
+}
+
+type NoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NoticeContentTmplTmplContentsQcloudYeheTemplateSite)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutput) Elem() NoticeContentTmplTmplContentsQcloudYeheTemplateSiteOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsQcloudYeheTemplateSite) NoticeContentTmplTmplContentsQcloudYeheTemplateSite {
+		if v != nil {
+			return *v
+		}
+		var ret NoticeContentTmplTmplContentsQcloudYeheTemplateSite
+		return ret
+	}).(NoticeContentTmplTmplContentsQcloudYeheTemplateSiteOutput)
+}
+
+// Content template.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutput) ContentTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsQcloudYeheTemplateSite) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ContentTmpl
+	}).(pulumi.StringPtrOutput)
+}
+
+// Title template.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutput) TitleTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsQcloudYeheTemplateSite) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TitleTmpl
+	}).(pulumi.StringPtrOutput)
+}
+
+type NoticeContentTmplTmplContentsQcloudYeheTemplateSms struct {
+	// Content template.
+	ContentTmpl *string `pulumi:"contentTmpl"`
+	// Title template.
+	TitleTmpl *string `pulumi:"titleTmpl"`
+}
+
+// NoticeContentTmplTmplContentsQcloudYeheTemplateSmsInput is an input type that accepts NoticeContentTmplTmplContentsQcloudYeheTemplateSmsArgs and NoticeContentTmplTmplContentsQcloudYeheTemplateSmsOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsQcloudYeheTemplateSmsInput` via:
+//
+//	NoticeContentTmplTmplContentsQcloudYeheTemplateSmsArgs{...}
+type NoticeContentTmplTmplContentsQcloudYeheTemplateSmsInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsQcloudYeheTemplateSmsOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateSmsOutput
+	ToNoticeContentTmplTmplContentsQcloudYeheTemplateSmsOutputWithContext(context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateSmsOutput
+}
+
+type NoticeContentTmplTmplContentsQcloudYeheTemplateSmsArgs struct {
+	// Content template.
+	ContentTmpl pulumi.StringPtrInput `pulumi:"contentTmpl"`
+	// Title template.
+	TitleTmpl pulumi.StringPtrInput `pulumi:"titleTmpl"`
+}
+
+func (NoticeContentTmplTmplContentsQcloudYeheTemplateSmsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsQcloudYeheTemplateSms)(nil)).Elem()
+}
+
+func (i NoticeContentTmplTmplContentsQcloudYeheTemplateSmsArgs) ToNoticeContentTmplTmplContentsQcloudYeheTemplateSmsOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateSmsOutput {
+	return i.ToNoticeContentTmplTmplContentsQcloudYeheTemplateSmsOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsQcloudYeheTemplateSmsArgs) ToNoticeContentTmplTmplContentsQcloudYeheTemplateSmsOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateSmsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsQcloudYeheTemplateSmsOutput)
+}
+
+func (i NoticeContentTmplTmplContentsQcloudYeheTemplateSmsArgs) ToNoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutput {
+	return i.ToNoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsQcloudYeheTemplateSmsArgs) ToNoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsQcloudYeheTemplateSmsOutput).ToNoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutputWithContext(ctx)
+}
+
+// NoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrInput is an input type that accepts NoticeContentTmplTmplContentsQcloudYeheTemplateSmsArgs, NoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtr and NoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrInput` via:
+//
+//	        NoticeContentTmplTmplContentsQcloudYeheTemplateSmsArgs{...}
+//
+//	or:
+//
+//	        nil
+type NoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutput
+	ToNoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutputWithContext(context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutput
+}
+
+type noticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrType NoticeContentTmplTmplContentsQcloudYeheTemplateSmsArgs
+
+func NoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtr(v *NoticeContentTmplTmplContentsQcloudYeheTemplateSmsArgs) NoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrInput {
+	return (*noticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrType)(v)
+}
+
+func (*noticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NoticeContentTmplTmplContentsQcloudYeheTemplateSms)(nil)).Elem()
+}
+
+func (i *noticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrType) ToNoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutput {
+	return i.ToNoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutputWithContext(context.Background())
+}
+
+func (i *noticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrType) ToNoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutput)
+}
+
+type NoticeContentTmplTmplContentsQcloudYeheTemplateSmsOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsQcloudYeheTemplateSmsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsQcloudYeheTemplateSms)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateSmsOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateSmsOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateSmsOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateSmsOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateSmsOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateSmsOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateSmsOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutput {
+	return o.ToNoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutputWithContext(context.Background())
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateSmsOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NoticeContentTmplTmplContentsQcloudYeheTemplateSms) *NoticeContentTmplTmplContentsQcloudYeheTemplateSms {
+		return &v
+	}).(NoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutput)
+}
+
+// Content template.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateSmsOutput) ContentTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsQcloudYeheTemplateSms) *string { return v.ContentTmpl }).(pulumi.StringPtrOutput)
+}
+
+// Title template.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateSmsOutput) TitleTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsQcloudYeheTemplateSms) *string { return v.TitleTmpl }).(pulumi.StringPtrOutput)
+}
+
+type NoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NoticeContentTmplTmplContentsQcloudYeheTemplateSms)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutput) Elem() NoticeContentTmplTmplContentsQcloudYeheTemplateSmsOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsQcloudYeheTemplateSms) NoticeContentTmplTmplContentsQcloudYeheTemplateSms {
+		if v != nil {
+			return *v
+		}
+		var ret NoticeContentTmplTmplContentsQcloudYeheTemplateSms
+		return ret
+	}).(NoticeContentTmplTmplContentsQcloudYeheTemplateSmsOutput)
+}
+
+// Content template.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutput) ContentTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsQcloudYeheTemplateSms) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ContentTmpl
+	}).(pulumi.StringPtrOutput)
+}
+
+// Title template.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutput) TitleTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsQcloudYeheTemplateSms) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TitleTmpl
+	}).(pulumi.StringPtrOutput)
+}
+
+type NoticeContentTmplTmplContentsQcloudYeheTemplateVoice struct {
+	// Content template.
+	ContentTmpl *string `pulumi:"contentTmpl"`
+	// Title template.
+	TitleTmpl *string `pulumi:"titleTmpl"`
+}
+
+// NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceInput is an input type that accepts NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceArgs and NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceInput` via:
+//
+//	NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceArgs{...}
+type NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsQcloudYeheTemplateVoiceOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceOutput
+	ToNoticeContentTmplTmplContentsQcloudYeheTemplateVoiceOutputWithContext(context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceOutput
+}
+
+type NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceArgs struct {
+	// Content template.
+	ContentTmpl pulumi.StringPtrInput `pulumi:"contentTmpl"`
+	// Title template.
+	TitleTmpl pulumi.StringPtrInput `pulumi:"titleTmpl"`
+}
+
+func (NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsQcloudYeheTemplateVoice)(nil)).Elem()
+}
+
+func (i NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceArgs) ToNoticeContentTmplTmplContentsQcloudYeheTemplateVoiceOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceOutput {
+	return i.ToNoticeContentTmplTmplContentsQcloudYeheTemplateVoiceOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceArgs) ToNoticeContentTmplTmplContentsQcloudYeheTemplateVoiceOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceOutput)
+}
+
+func (i NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceArgs) ToNoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutput {
+	return i.ToNoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceArgs) ToNoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceOutput).ToNoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutputWithContext(ctx)
+}
+
+// NoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrInput is an input type that accepts NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceArgs, NoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtr and NoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrInput` via:
+//
+//	        NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceArgs{...}
+//
+//	or:
+//
+//	        nil
+type NoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutput
+	ToNoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutputWithContext(context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutput
+}
+
+type noticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrType NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceArgs
+
+func NoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtr(v *NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceArgs) NoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrInput {
+	return (*noticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrType)(v)
+}
+
+func (*noticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NoticeContentTmplTmplContentsQcloudYeheTemplateVoice)(nil)).Elem()
+}
+
+func (i *noticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrType) ToNoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutput {
+	return i.ToNoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutputWithContext(context.Background())
+}
+
+func (i *noticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrType) ToNoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutput)
+}
+
+type NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsQcloudYeheTemplateVoice)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateVoiceOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateVoiceOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutput {
+	return o.ToNoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutputWithContext(context.Background())
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NoticeContentTmplTmplContentsQcloudYeheTemplateVoice) *NoticeContentTmplTmplContentsQcloudYeheTemplateVoice {
+		return &v
+	}).(NoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutput)
+}
+
+// Content template.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceOutput) ContentTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsQcloudYeheTemplateVoice) *string { return v.ContentTmpl }).(pulumi.StringPtrOutput)
+}
+
+// Title template.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceOutput) TitleTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsQcloudYeheTemplateVoice) *string { return v.TitleTmpl }).(pulumi.StringPtrOutput)
+}
+
+type NoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NoticeContentTmplTmplContentsQcloudYeheTemplateVoice)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutput) Elem() NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsQcloudYeheTemplateVoice) NoticeContentTmplTmplContentsQcloudYeheTemplateVoice {
+		if v != nil {
+			return *v
+		}
+		var ret NoticeContentTmplTmplContentsQcloudYeheTemplateVoice
+		return ret
+	}).(NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceOutput)
+}
+
+// Content template.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutput) ContentTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsQcloudYeheTemplateVoice) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ContentTmpl
+	}).(pulumi.StringPtrOutput)
+}
+
+// Title template.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutput) TitleTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsQcloudYeheTemplateVoice) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TitleTmpl
+	}).(pulumi.StringPtrOutput)
+}
+
+type NoticeContentTmplTmplContentsQcloudYeheTemplateWechat struct {
+	// Alarm content template.
+	AlarmContentTmpl *string `pulumi:"alarmContentTmpl"`
+	// Alarm object template.
+	AlarmObjectTmpl *string `pulumi:"alarmObjectTmpl"`
+	// Alarm region template.
+	AlarmRegionTmpl *string `pulumi:"alarmRegionTmpl"`
+	// Alarm time template.
+	AlarmTimeTmpl *string `pulumi:"alarmTimeTmpl"`
+}
+
+// NoticeContentTmplTmplContentsQcloudYeheTemplateWechatInput is an input type that accepts NoticeContentTmplTmplContentsQcloudYeheTemplateWechatArgs and NoticeContentTmplTmplContentsQcloudYeheTemplateWechatOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsQcloudYeheTemplateWechatInput` via:
+//
+//	NoticeContentTmplTmplContentsQcloudYeheTemplateWechatArgs{...}
+type NoticeContentTmplTmplContentsQcloudYeheTemplateWechatInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsQcloudYeheTemplateWechatOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateWechatOutput
+	ToNoticeContentTmplTmplContentsQcloudYeheTemplateWechatOutputWithContext(context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateWechatOutput
+}
+
+type NoticeContentTmplTmplContentsQcloudYeheTemplateWechatArgs struct {
+	// Alarm content template.
+	AlarmContentTmpl pulumi.StringPtrInput `pulumi:"alarmContentTmpl"`
+	// Alarm object template.
+	AlarmObjectTmpl pulumi.StringPtrInput `pulumi:"alarmObjectTmpl"`
+	// Alarm region template.
+	AlarmRegionTmpl pulumi.StringPtrInput `pulumi:"alarmRegionTmpl"`
+	// Alarm time template.
+	AlarmTimeTmpl pulumi.StringPtrInput `pulumi:"alarmTimeTmpl"`
+}
+
+func (NoticeContentTmplTmplContentsQcloudYeheTemplateWechatArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsQcloudYeheTemplateWechat)(nil)).Elem()
+}
+
+func (i NoticeContentTmplTmplContentsQcloudYeheTemplateWechatArgs) ToNoticeContentTmplTmplContentsQcloudYeheTemplateWechatOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateWechatOutput {
+	return i.ToNoticeContentTmplTmplContentsQcloudYeheTemplateWechatOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsQcloudYeheTemplateWechatArgs) ToNoticeContentTmplTmplContentsQcloudYeheTemplateWechatOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateWechatOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsQcloudYeheTemplateWechatOutput)
+}
+
+func (i NoticeContentTmplTmplContentsQcloudYeheTemplateWechatArgs) ToNoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutput {
+	return i.ToNoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsQcloudYeheTemplateWechatArgs) ToNoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsQcloudYeheTemplateWechatOutput).ToNoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutputWithContext(ctx)
+}
+
+// NoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrInput is an input type that accepts NoticeContentTmplTmplContentsQcloudYeheTemplateWechatArgs, NoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtr and NoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrInput` via:
+//
+//	        NoticeContentTmplTmplContentsQcloudYeheTemplateWechatArgs{...}
+//
+//	or:
+//
+//	        nil
+type NoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutput
+	ToNoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutputWithContext(context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutput
+}
+
+type noticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrType NoticeContentTmplTmplContentsQcloudYeheTemplateWechatArgs
+
+func NoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtr(v *NoticeContentTmplTmplContentsQcloudYeheTemplateWechatArgs) NoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrInput {
+	return (*noticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrType)(v)
+}
+
+func (*noticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NoticeContentTmplTmplContentsQcloudYeheTemplateWechat)(nil)).Elem()
+}
+
+func (i *noticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrType) ToNoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutput {
+	return i.ToNoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutputWithContext(context.Background())
+}
+
+func (i *noticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrType) ToNoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutput)
+}
+
+type NoticeContentTmplTmplContentsQcloudYeheTemplateWechatOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsQcloudYeheTemplateWechatOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsQcloudYeheTemplateWechat)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateWechatOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateWechatOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateWechatOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateWechatOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateWechatOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateWechatOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateWechatOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutput {
+	return o.ToNoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutputWithContext(context.Background())
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateWechatOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NoticeContentTmplTmplContentsQcloudYeheTemplateWechat) *NoticeContentTmplTmplContentsQcloudYeheTemplateWechat {
+		return &v
+	}).(NoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutput)
+}
+
+// Alarm content template.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateWechatOutput) AlarmContentTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsQcloudYeheTemplateWechat) *string { return v.AlarmContentTmpl }).(pulumi.StringPtrOutput)
+}
+
+// Alarm object template.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateWechatOutput) AlarmObjectTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsQcloudYeheTemplateWechat) *string { return v.AlarmObjectTmpl }).(pulumi.StringPtrOutput)
+}
+
+// Alarm region template.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateWechatOutput) AlarmRegionTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsQcloudYeheTemplateWechat) *string { return v.AlarmRegionTmpl }).(pulumi.StringPtrOutput)
+}
+
+// Alarm time template.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateWechatOutput) AlarmTimeTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsQcloudYeheTemplateWechat) *string { return v.AlarmTimeTmpl }).(pulumi.StringPtrOutput)
+}
+
+type NoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NoticeContentTmplTmplContentsQcloudYeheTemplateWechat)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutput() NoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutput) ToNoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutput) Elem() NoticeContentTmplTmplContentsQcloudYeheTemplateWechatOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsQcloudYeheTemplateWechat) NoticeContentTmplTmplContentsQcloudYeheTemplateWechat {
+		if v != nil {
+			return *v
+		}
+		var ret NoticeContentTmplTmplContentsQcloudYeheTemplateWechat
+		return ret
+	}).(NoticeContentTmplTmplContentsQcloudYeheTemplateWechatOutput)
+}
+
+// Alarm content template.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutput) AlarmContentTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsQcloudYeheTemplateWechat) *string {
+		if v == nil {
+			return nil
+		}
+		return v.AlarmContentTmpl
+	}).(pulumi.StringPtrOutput)
+}
+
+// Alarm object template.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutput) AlarmObjectTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsQcloudYeheTemplateWechat) *string {
+		if v == nil {
+			return nil
+		}
+		return v.AlarmObjectTmpl
+	}).(pulumi.StringPtrOutput)
+}
+
+// Alarm region template.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutput) AlarmRegionTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsQcloudYeheTemplateWechat) *string {
+		if v == nil {
+			return nil
+		}
+		return v.AlarmRegionTmpl
+	}).(pulumi.StringPtrOutput)
+}
+
+// Alarm time template.
+func (o NoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutput) AlarmTimeTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsQcloudYeheTemplateWechat) *string {
+		if v == nil {
+			return nil
+		}
+		return v.AlarmTimeTmpl
+	}).(pulumi.StringPtrOutput)
+}
+
+type NoticeContentTmplTmplContentsTeamsRobot struct {
+	// Matching status list, e.g. Trigger, Recovery.
+	MatchingStatuses []string `pulumi:"matchingStatuses"`
+	// Template configuration.
+	Template *NoticeContentTmplTmplContentsTeamsRobotTemplate `pulumi:"template"`
+}
+
+// NoticeContentTmplTmplContentsTeamsRobotInput is an input type that accepts NoticeContentTmplTmplContentsTeamsRobotArgs and NoticeContentTmplTmplContentsTeamsRobotOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsTeamsRobotInput` via:
+//
+//	NoticeContentTmplTmplContentsTeamsRobotArgs{...}
+type NoticeContentTmplTmplContentsTeamsRobotInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsTeamsRobotOutput() NoticeContentTmplTmplContentsTeamsRobotOutput
+	ToNoticeContentTmplTmplContentsTeamsRobotOutputWithContext(context.Context) NoticeContentTmplTmplContentsTeamsRobotOutput
+}
+
+type NoticeContentTmplTmplContentsTeamsRobotArgs struct {
+	// Matching status list, e.g. Trigger, Recovery.
+	MatchingStatuses pulumi.StringArrayInput `pulumi:"matchingStatuses"`
+	// Template configuration.
+	Template NoticeContentTmplTmplContentsTeamsRobotTemplatePtrInput `pulumi:"template"`
+}
+
+func (NoticeContentTmplTmplContentsTeamsRobotArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsTeamsRobot)(nil)).Elem()
+}
+
+func (i NoticeContentTmplTmplContentsTeamsRobotArgs) ToNoticeContentTmplTmplContentsTeamsRobotOutput() NoticeContentTmplTmplContentsTeamsRobotOutput {
+	return i.ToNoticeContentTmplTmplContentsTeamsRobotOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsTeamsRobotArgs) ToNoticeContentTmplTmplContentsTeamsRobotOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsTeamsRobotOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsTeamsRobotOutput)
+}
+
+// NoticeContentTmplTmplContentsTeamsRobotArrayInput is an input type that accepts NoticeContentTmplTmplContentsTeamsRobotArray and NoticeContentTmplTmplContentsTeamsRobotArrayOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsTeamsRobotArrayInput` via:
+//
+//	NoticeContentTmplTmplContentsTeamsRobotArray{ NoticeContentTmplTmplContentsTeamsRobotArgs{...} }
+type NoticeContentTmplTmplContentsTeamsRobotArrayInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsTeamsRobotArrayOutput() NoticeContentTmplTmplContentsTeamsRobotArrayOutput
+	ToNoticeContentTmplTmplContentsTeamsRobotArrayOutputWithContext(context.Context) NoticeContentTmplTmplContentsTeamsRobotArrayOutput
+}
+
+type NoticeContentTmplTmplContentsTeamsRobotArray []NoticeContentTmplTmplContentsTeamsRobotInput
+
+func (NoticeContentTmplTmplContentsTeamsRobotArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NoticeContentTmplTmplContentsTeamsRobot)(nil)).Elem()
+}
+
+func (i NoticeContentTmplTmplContentsTeamsRobotArray) ToNoticeContentTmplTmplContentsTeamsRobotArrayOutput() NoticeContentTmplTmplContentsTeamsRobotArrayOutput {
+	return i.ToNoticeContentTmplTmplContentsTeamsRobotArrayOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsTeamsRobotArray) ToNoticeContentTmplTmplContentsTeamsRobotArrayOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsTeamsRobotArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsTeamsRobotArrayOutput)
+}
+
+type NoticeContentTmplTmplContentsTeamsRobotOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsTeamsRobotOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsTeamsRobot)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsTeamsRobotOutput) ToNoticeContentTmplTmplContentsTeamsRobotOutput() NoticeContentTmplTmplContentsTeamsRobotOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsTeamsRobotOutput) ToNoticeContentTmplTmplContentsTeamsRobotOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsTeamsRobotOutput {
+	return o
+}
+
+// Matching status list, e.g. Trigger, Recovery.
+func (o NoticeContentTmplTmplContentsTeamsRobotOutput) MatchingStatuses() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsTeamsRobot) []string { return v.MatchingStatuses }).(pulumi.StringArrayOutput)
+}
+
+// Template configuration.
+func (o NoticeContentTmplTmplContentsTeamsRobotOutput) Template() NoticeContentTmplTmplContentsTeamsRobotTemplatePtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsTeamsRobot) *NoticeContentTmplTmplContentsTeamsRobotTemplate {
+		return v.Template
+	}).(NoticeContentTmplTmplContentsTeamsRobotTemplatePtrOutput)
+}
+
+type NoticeContentTmplTmplContentsTeamsRobotArrayOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsTeamsRobotArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NoticeContentTmplTmplContentsTeamsRobot)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsTeamsRobotArrayOutput) ToNoticeContentTmplTmplContentsTeamsRobotArrayOutput() NoticeContentTmplTmplContentsTeamsRobotArrayOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsTeamsRobotArrayOutput) ToNoticeContentTmplTmplContentsTeamsRobotArrayOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsTeamsRobotArrayOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsTeamsRobotArrayOutput) Index(i pulumi.IntInput) NoticeContentTmplTmplContentsTeamsRobotOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) NoticeContentTmplTmplContentsTeamsRobot {
+		return vs[0].([]NoticeContentTmplTmplContentsTeamsRobot)[vs[1].(int)]
+	}).(NoticeContentTmplTmplContentsTeamsRobotOutput)
+}
+
+type NoticeContentTmplTmplContentsTeamsRobotTemplate struct {
+	// Content template.
+	ContentTmpl *string `pulumi:"contentTmpl"`
+}
+
+// NoticeContentTmplTmplContentsTeamsRobotTemplateInput is an input type that accepts NoticeContentTmplTmplContentsTeamsRobotTemplateArgs and NoticeContentTmplTmplContentsTeamsRobotTemplateOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsTeamsRobotTemplateInput` via:
+//
+//	NoticeContentTmplTmplContentsTeamsRobotTemplateArgs{...}
+type NoticeContentTmplTmplContentsTeamsRobotTemplateInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsTeamsRobotTemplateOutput() NoticeContentTmplTmplContentsTeamsRobotTemplateOutput
+	ToNoticeContentTmplTmplContentsTeamsRobotTemplateOutputWithContext(context.Context) NoticeContentTmplTmplContentsTeamsRobotTemplateOutput
+}
+
+type NoticeContentTmplTmplContentsTeamsRobotTemplateArgs struct {
+	// Content template.
+	ContentTmpl pulumi.StringPtrInput `pulumi:"contentTmpl"`
+}
+
+func (NoticeContentTmplTmplContentsTeamsRobotTemplateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsTeamsRobotTemplate)(nil)).Elem()
+}
+
+func (i NoticeContentTmplTmplContentsTeamsRobotTemplateArgs) ToNoticeContentTmplTmplContentsTeamsRobotTemplateOutput() NoticeContentTmplTmplContentsTeamsRobotTemplateOutput {
+	return i.ToNoticeContentTmplTmplContentsTeamsRobotTemplateOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsTeamsRobotTemplateArgs) ToNoticeContentTmplTmplContentsTeamsRobotTemplateOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsTeamsRobotTemplateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsTeamsRobotTemplateOutput)
+}
+
+func (i NoticeContentTmplTmplContentsTeamsRobotTemplateArgs) ToNoticeContentTmplTmplContentsTeamsRobotTemplatePtrOutput() NoticeContentTmplTmplContentsTeamsRobotTemplatePtrOutput {
+	return i.ToNoticeContentTmplTmplContentsTeamsRobotTemplatePtrOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsTeamsRobotTemplateArgs) ToNoticeContentTmplTmplContentsTeamsRobotTemplatePtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsTeamsRobotTemplatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsTeamsRobotTemplateOutput).ToNoticeContentTmplTmplContentsTeamsRobotTemplatePtrOutputWithContext(ctx)
+}
+
+// NoticeContentTmplTmplContentsTeamsRobotTemplatePtrInput is an input type that accepts NoticeContentTmplTmplContentsTeamsRobotTemplateArgs, NoticeContentTmplTmplContentsTeamsRobotTemplatePtr and NoticeContentTmplTmplContentsTeamsRobotTemplatePtrOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsTeamsRobotTemplatePtrInput` via:
+//
+//	        NoticeContentTmplTmplContentsTeamsRobotTemplateArgs{...}
+//
+//	or:
+//
+//	        nil
+type NoticeContentTmplTmplContentsTeamsRobotTemplatePtrInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsTeamsRobotTemplatePtrOutput() NoticeContentTmplTmplContentsTeamsRobotTemplatePtrOutput
+	ToNoticeContentTmplTmplContentsTeamsRobotTemplatePtrOutputWithContext(context.Context) NoticeContentTmplTmplContentsTeamsRobotTemplatePtrOutput
+}
+
+type noticeContentTmplTmplContentsTeamsRobotTemplatePtrType NoticeContentTmplTmplContentsTeamsRobotTemplateArgs
+
+func NoticeContentTmplTmplContentsTeamsRobotTemplatePtr(v *NoticeContentTmplTmplContentsTeamsRobotTemplateArgs) NoticeContentTmplTmplContentsTeamsRobotTemplatePtrInput {
+	return (*noticeContentTmplTmplContentsTeamsRobotTemplatePtrType)(v)
+}
+
+func (*noticeContentTmplTmplContentsTeamsRobotTemplatePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NoticeContentTmplTmplContentsTeamsRobotTemplate)(nil)).Elem()
+}
+
+func (i *noticeContentTmplTmplContentsTeamsRobotTemplatePtrType) ToNoticeContentTmplTmplContentsTeamsRobotTemplatePtrOutput() NoticeContentTmplTmplContentsTeamsRobotTemplatePtrOutput {
+	return i.ToNoticeContentTmplTmplContentsTeamsRobotTemplatePtrOutputWithContext(context.Background())
+}
+
+func (i *noticeContentTmplTmplContentsTeamsRobotTemplatePtrType) ToNoticeContentTmplTmplContentsTeamsRobotTemplatePtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsTeamsRobotTemplatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsTeamsRobotTemplatePtrOutput)
+}
+
+type NoticeContentTmplTmplContentsTeamsRobotTemplateOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsTeamsRobotTemplateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsTeamsRobotTemplate)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsTeamsRobotTemplateOutput) ToNoticeContentTmplTmplContentsTeamsRobotTemplateOutput() NoticeContentTmplTmplContentsTeamsRobotTemplateOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsTeamsRobotTemplateOutput) ToNoticeContentTmplTmplContentsTeamsRobotTemplateOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsTeamsRobotTemplateOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsTeamsRobotTemplateOutput) ToNoticeContentTmplTmplContentsTeamsRobotTemplatePtrOutput() NoticeContentTmplTmplContentsTeamsRobotTemplatePtrOutput {
+	return o.ToNoticeContentTmplTmplContentsTeamsRobotTemplatePtrOutputWithContext(context.Background())
+}
+
+func (o NoticeContentTmplTmplContentsTeamsRobotTemplateOutput) ToNoticeContentTmplTmplContentsTeamsRobotTemplatePtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsTeamsRobotTemplatePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NoticeContentTmplTmplContentsTeamsRobotTemplate) *NoticeContentTmplTmplContentsTeamsRobotTemplate {
+		return &v
+	}).(NoticeContentTmplTmplContentsTeamsRobotTemplatePtrOutput)
+}
+
+// Content template.
+func (o NoticeContentTmplTmplContentsTeamsRobotTemplateOutput) ContentTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsTeamsRobotTemplate) *string { return v.ContentTmpl }).(pulumi.StringPtrOutput)
+}
+
+type NoticeContentTmplTmplContentsTeamsRobotTemplatePtrOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsTeamsRobotTemplatePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NoticeContentTmplTmplContentsTeamsRobotTemplate)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsTeamsRobotTemplatePtrOutput) ToNoticeContentTmplTmplContentsTeamsRobotTemplatePtrOutput() NoticeContentTmplTmplContentsTeamsRobotTemplatePtrOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsTeamsRobotTemplatePtrOutput) ToNoticeContentTmplTmplContentsTeamsRobotTemplatePtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsTeamsRobotTemplatePtrOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsTeamsRobotTemplatePtrOutput) Elem() NoticeContentTmplTmplContentsTeamsRobotTemplateOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsTeamsRobotTemplate) NoticeContentTmplTmplContentsTeamsRobotTemplate {
+		if v != nil {
+			return *v
+		}
+		var ret NoticeContentTmplTmplContentsTeamsRobotTemplate
+		return ret
+	}).(NoticeContentTmplTmplContentsTeamsRobotTemplateOutput)
+}
+
+// Content template.
+func (o NoticeContentTmplTmplContentsTeamsRobotTemplatePtrOutput) ContentTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsTeamsRobotTemplate) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ContentTmpl
+	}).(pulumi.StringPtrOutput)
+}
+
+type NoticeContentTmplTmplContentsWeWorkRobot struct {
+	// Matching status list, e.g. Trigger, Recovery.
+	MatchingStatuses []string `pulumi:"matchingStatuses"`
+	// Template configuration.
+	Template *NoticeContentTmplTmplContentsWeWorkRobotTemplate `pulumi:"template"`
+}
+
+// NoticeContentTmplTmplContentsWeWorkRobotInput is an input type that accepts NoticeContentTmplTmplContentsWeWorkRobotArgs and NoticeContentTmplTmplContentsWeWorkRobotOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsWeWorkRobotInput` via:
+//
+//	NoticeContentTmplTmplContentsWeWorkRobotArgs{...}
+type NoticeContentTmplTmplContentsWeWorkRobotInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsWeWorkRobotOutput() NoticeContentTmplTmplContentsWeWorkRobotOutput
+	ToNoticeContentTmplTmplContentsWeWorkRobotOutputWithContext(context.Context) NoticeContentTmplTmplContentsWeWorkRobotOutput
+}
+
+type NoticeContentTmplTmplContentsWeWorkRobotArgs struct {
+	// Matching status list, e.g. Trigger, Recovery.
+	MatchingStatuses pulumi.StringArrayInput `pulumi:"matchingStatuses"`
+	// Template configuration.
+	Template NoticeContentTmplTmplContentsWeWorkRobotTemplatePtrInput `pulumi:"template"`
+}
+
+func (NoticeContentTmplTmplContentsWeWorkRobotArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsWeWorkRobot)(nil)).Elem()
+}
+
+func (i NoticeContentTmplTmplContentsWeWorkRobotArgs) ToNoticeContentTmplTmplContentsWeWorkRobotOutput() NoticeContentTmplTmplContentsWeWorkRobotOutput {
+	return i.ToNoticeContentTmplTmplContentsWeWorkRobotOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsWeWorkRobotArgs) ToNoticeContentTmplTmplContentsWeWorkRobotOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsWeWorkRobotOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsWeWorkRobotOutput)
+}
+
+// NoticeContentTmplTmplContentsWeWorkRobotArrayInput is an input type that accepts NoticeContentTmplTmplContentsWeWorkRobotArray and NoticeContentTmplTmplContentsWeWorkRobotArrayOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsWeWorkRobotArrayInput` via:
+//
+//	NoticeContentTmplTmplContentsWeWorkRobotArray{ NoticeContentTmplTmplContentsWeWorkRobotArgs{...} }
+type NoticeContentTmplTmplContentsWeWorkRobotArrayInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsWeWorkRobotArrayOutput() NoticeContentTmplTmplContentsWeWorkRobotArrayOutput
+	ToNoticeContentTmplTmplContentsWeWorkRobotArrayOutputWithContext(context.Context) NoticeContentTmplTmplContentsWeWorkRobotArrayOutput
+}
+
+type NoticeContentTmplTmplContentsWeWorkRobotArray []NoticeContentTmplTmplContentsWeWorkRobotInput
+
+func (NoticeContentTmplTmplContentsWeWorkRobotArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NoticeContentTmplTmplContentsWeWorkRobot)(nil)).Elem()
+}
+
+func (i NoticeContentTmplTmplContentsWeWorkRobotArray) ToNoticeContentTmplTmplContentsWeWorkRobotArrayOutput() NoticeContentTmplTmplContentsWeWorkRobotArrayOutput {
+	return i.ToNoticeContentTmplTmplContentsWeWorkRobotArrayOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsWeWorkRobotArray) ToNoticeContentTmplTmplContentsWeWorkRobotArrayOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsWeWorkRobotArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsWeWorkRobotArrayOutput)
+}
+
+type NoticeContentTmplTmplContentsWeWorkRobotOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsWeWorkRobotOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsWeWorkRobot)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsWeWorkRobotOutput) ToNoticeContentTmplTmplContentsWeWorkRobotOutput() NoticeContentTmplTmplContentsWeWorkRobotOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsWeWorkRobotOutput) ToNoticeContentTmplTmplContentsWeWorkRobotOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsWeWorkRobotOutput {
+	return o
+}
+
+// Matching status list, e.g. Trigger, Recovery.
+func (o NoticeContentTmplTmplContentsWeWorkRobotOutput) MatchingStatuses() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsWeWorkRobot) []string { return v.MatchingStatuses }).(pulumi.StringArrayOutput)
+}
+
+// Template configuration.
+func (o NoticeContentTmplTmplContentsWeWorkRobotOutput) Template() NoticeContentTmplTmplContentsWeWorkRobotTemplatePtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsWeWorkRobot) *NoticeContentTmplTmplContentsWeWorkRobotTemplate {
+		return v.Template
+	}).(NoticeContentTmplTmplContentsWeWorkRobotTemplatePtrOutput)
+}
+
+type NoticeContentTmplTmplContentsWeWorkRobotArrayOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsWeWorkRobotArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NoticeContentTmplTmplContentsWeWorkRobot)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsWeWorkRobotArrayOutput) ToNoticeContentTmplTmplContentsWeWorkRobotArrayOutput() NoticeContentTmplTmplContentsWeWorkRobotArrayOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsWeWorkRobotArrayOutput) ToNoticeContentTmplTmplContentsWeWorkRobotArrayOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsWeWorkRobotArrayOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsWeWorkRobotArrayOutput) Index(i pulumi.IntInput) NoticeContentTmplTmplContentsWeWorkRobotOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) NoticeContentTmplTmplContentsWeWorkRobot {
+		return vs[0].([]NoticeContentTmplTmplContentsWeWorkRobot)[vs[1].(int)]
+	}).(NoticeContentTmplTmplContentsWeWorkRobotOutput)
+}
+
+type NoticeContentTmplTmplContentsWeWorkRobotTemplate struct {
+	// Content template.
+	ContentTmpl *string `pulumi:"contentTmpl"`
+}
+
+// NoticeContentTmplTmplContentsWeWorkRobotTemplateInput is an input type that accepts NoticeContentTmplTmplContentsWeWorkRobotTemplateArgs and NoticeContentTmplTmplContentsWeWorkRobotTemplateOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsWeWorkRobotTemplateInput` via:
+//
+//	NoticeContentTmplTmplContentsWeWorkRobotTemplateArgs{...}
+type NoticeContentTmplTmplContentsWeWorkRobotTemplateInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsWeWorkRobotTemplateOutput() NoticeContentTmplTmplContentsWeWorkRobotTemplateOutput
+	ToNoticeContentTmplTmplContentsWeWorkRobotTemplateOutputWithContext(context.Context) NoticeContentTmplTmplContentsWeWorkRobotTemplateOutput
+}
+
+type NoticeContentTmplTmplContentsWeWorkRobotTemplateArgs struct {
+	// Content template.
+	ContentTmpl pulumi.StringPtrInput `pulumi:"contentTmpl"`
+}
+
+func (NoticeContentTmplTmplContentsWeWorkRobotTemplateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsWeWorkRobotTemplate)(nil)).Elem()
+}
+
+func (i NoticeContentTmplTmplContentsWeWorkRobotTemplateArgs) ToNoticeContentTmplTmplContentsWeWorkRobotTemplateOutput() NoticeContentTmplTmplContentsWeWorkRobotTemplateOutput {
+	return i.ToNoticeContentTmplTmplContentsWeWorkRobotTemplateOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsWeWorkRobotTemplateArgs) ToNoticeContentTmplTmplContentsWeWorkRobotTemplateOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsWeWorkRobotTemplateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsWeWorkRobotTemplateOutput)
+}
+
+func (i NoticeContentTmplTmplContentsWeWorkRobotTemplateArgs) ToNoticeContentTmplTmplContentsWeWorkRobotTemplatePtrOutput() NoticeContentTmplTmplContentsWeWorkRobotTemplatePtrOutput {
+	return i.ToNoticeContentTmplTmplContentsWeWorkRobotTemplatePtrOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsWeWorkRobotTemplateArgs) ToNoticeContentTmplTmplContentsWeWorkRobotTemplatePtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsWeWorkRobotTemplatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsWeWorkRobotTemplateOutput).ToNoticeContentTmplTmplContentsWeWorkRobotTemplatePtrOutputWithContext(ctx)
+}
+
+// NoticeContentTmplTmplContentsWeWorkRobotTemplatePtrInput is an input type that accepts NoticeContentTmplTmplContentsWeWorkRobotTemplateArgs, NoticeContentTmplTmplContentsWeWorkRobotTemplatePtr and NoticeContentTmplTmplContentsWeWorkRobotTemplatePtrOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsWeWorkRobotTemplatePtrInput` via:
+//
+//	        NoticeContentTmplTmplContentsWeWorkRobotTemplateArgs{...}
+//
+//	or:
+//
+//	        nil
+type NoticeContentTmplTmplContentsWeWorkRobotTemplatePtrInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsWeWorkRobotTemplatePtrOutput() NoticeContentTmplTmplContentsWeWorkRobotTemplatePtrOutput
+	ToNoticeContentTmplTmplContentsWeWorkRobotTemplatePtrOutputWithContext(context.Context) NoticeContentTmplTmplContentsWeWorkRobotTemplatePtrOutput
+}
+
+type noticeContentTmplTmplContentsWeWorkRobotTemplatePtrType NoticeContentTmplTmplContentsWeWorkRobotTemplateArgs
+
+func NoticeContentTmplTmplContentsWeWorkRobotTemplatePtr(v *NoticeContentTmplTmplContentsWeWorkRobotTemplateArgs) NoticeContentTmplTmplContentsWeWorkRobotTemplatePtrInput {
+	return (*noticeContentTmplTmplContentsWeWorkRobotTemplatePtrType)(v)
+}
+
+func (*noticeContentTmplTmplContentsWeWorkRobotTemplatePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NoticeContentTmplTmplContentsWeWorkRobotTemplate)(nil)).Elem()
+}
+
+func (i *noticeContentTmplTmplContentsWeWorkRobotTemplatePtrType) ToNoticeContentTmplTmplContentsWeWorkRobotTemplatePtrOutput() NoticeContentTmplTmplContentsWeWorkRobotTemplatePtrOutput {
+	return i.ToNoticeContentTmplTmplContentsWeWorkRobotTemplatePtrOutputWithContext(context.Background())
+}
+
+func (i *noticeContentTmplTmplContentsWeWorkRobotTemplatePtrType) ToNoticeContentTmplTmplContentsWeWorkRobotTemplatePtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsWeWorkRobotTemplatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsWeWorkRobotTemplatePtrOutput)
+}
+
+type NoticeContentTmplTmplContentsWeWorkRobotTemplateOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsWeWorkRobotTemplateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsWeWorkRobotTemplate)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsWeWorkRobotTemplateOutput) ToNoticeContentTmplTmplContentsWeWorkRobotTemplateOutput() NoticeContentTmplTmplContentsWeWorkRobotTemplateOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsWeWorkRobotTemplateOutput) ToNoticeContentTmplTmplContentsWeWorkRobotTemplateOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsWeWorkRobotTemplateOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsWeWorkRobotTemplateOutput) ToNoticeContentTmplTmplContentsWeWorkRobotTemplatePtrOutput() NoticeContentTmplTmplContentsWeWorkRobotTemplatePtrOutput {
+	return o.ToNoticeContentTmplTmplContentsWeWorkRobotTemplatePtrOutputWithContext(context.Background())
+}
+
+func (o NoticeContentTmplTmplContentsWeWorkRobotTemplateOutput) ToNoticeContentTmplTmplContentsWeWorkRobotTemplatePtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsWeWorkRobotTemplatePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NoticeContentTmplTmplContentsWeWorkRobotTemplate) *NoticeContentTmplTmplContentsWeWorkRobotTemplate {
+		return &v
+	}).(NoticeContentTmplTmplContentsWeWorkRobotTemplatePtrOutput)
+}
+
+// Content template.
+func (o NoticeContentTmplTmplContentsWeWorkRobotTemplateOutput) ContentTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsWeWorkRobotTemplate) *string { return v.ContentTmpl }).(pulumi.StringPtrOutput)
+}
+
+type NoticeContentTmplTmplContentsWeWorkRobotTemplatePtrOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsWeWorkRobotTemplatePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NoticeContentTmplTmplContentsWeWorkRobotTemplate)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsWeWorkRobotTemplatePtrOutput) ToNoticeContentTmplTmplContentsWeWorkRobotTemplatePtrOutput() NoticeContentTmplTmplContentsWeWorkRobotTemplatePtrOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsWeWorkRobotTemplatePtrOutput) ToNoticeContentTmplTmplContentsWeWorkRobotTemplatePtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsWeWorkRobotTemplatePtrOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsWeWorkRobotTemplatePtrOutput) Elem() NoticeContentTmplTmplContentsWeWorkRobotTemplateOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsWeWorkRobotTemplate) NoticeContentTmplTmplContentsWeWorkRobotTemplate {
+		if v != nil {
+			return *v
+		}
+		var ret NoticeContentTmplTmplContentsWeWorkRobotTemplate
+		return ret
+	}).(NoticeContentTmplTmplContentsWeWorkRobotTemplateOutput)
+}
+
+// Content template.
+func (o NoticeContentTmplTmplContentsWeWorkRobotTemplatePtrOutput) ContentTmpl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsWeWorkRobotTemplate) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ContentTmpl
+	}).(pulumi.StringPtrOutput)
+}
+
+type NoticeContentTmplTmplContentsWebhook struct {
+	// Matching status list.
+	MatchingStatuses []string `pulumi:"matchingStatuses"`
+	// Webhook template.
+	Template *NoticeContentTmplTmplContentsWebhookTemplate `pulumi:"template"`
+}
+
+// NoticeContentTmplTmplContentsWebhookInput is an input type that accepts NoticeContentTmplTmplContentsWebhookArgs and NoticeContentTmplTmplContentsWebhookOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsWebhookInput` via:
+//
+//	NoticeContentTmplTmplContentsWebhookArgs{...}
+type NoticeContentTmplTmplContentsWebhookInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsWebhookOutput() NoticeContentTmplTmplContentsWebhookOutput
+	ToNoticeContentTmplTmplContentsWebhookOutputWithContext(context.Context) NoticeContentTmplTmplContentsWebhookOutput
+}
+
+type NoticeContentTmplTmplContentsWebhookArgs struct {
+	// Matching status list.
+	MatchingStatuses pulumi.StringArrayInput `pulumi:"matchingStatuses"`
+	// Webhook template.
+	Template NoticeContentTmplTmplContentsWebhookTemplatePtrInput `pulumi:"template"`
+}
+
+func (NoticeContentTmplTmplContentsWebhookArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsWebhook)(nil)).Elem()
+}
+
+func (i NoticeContentTmplTmplContentsWebhookArgs) ToNoticeContentTmplTmplContentsWebhookOutput() NoticeContentTmplTmplContentsWebhookOutput {
+	return i.ToNoticeContentTmplTmplContentsWebhookOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsWebhookArgs) ToNoticeContentTmplTmplContentsWebhookOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsWebhookOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsWebhookOutput)
+}
+
+// NoticeContentTmplTmplContentsWebhookArrayInput is an input type that accepts NoticeContentTmplTmplContentsWebhookArray and NoticeContentTmplTmplContentsWebhookArrayOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsWebhookArrayInput` via:
+//
+//	NoticeContentTmplTmplContentsWebhookArray{ NoticeContentTmplTmplContentsWebhookArgs{...} }
+type NoticeContentTmplTmplContentsWebhookArrayInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsWebhookArrayOutput() NoticeContentTmplTmplContentsWebhookArrayOutput
+	ToNoticeContentTmplTmplContentsWebhookArrayOutputWithContext(context.Context) NoticeContentTmplTmplContentsWebhookArrayOutput
+}
+
+type NoticeContentTmplTmplContentsWebhookArray []NoticeContentTmplTmplContentsWebhookInput
+
+func (NoticeContentTmplTmplContentsWebhookArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NoticeContentTmplTmplContentsWebhook)(nil)).Elem()
+}
+
+func (i NoticeContentTmplTmplContentsWebhookArray) ToNoticeContentTmplTmplContentsWebhookArrayOutput() NoticeContentTmplTmplContentsWebhookArrayOutput {
+	return i.ToNoticeContentTmplTmplContentsWebhookArrayOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsWebhookArray) ToNoticeContentTmplTmplContentsWebhookArrayOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsWebhookArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsWebhookArrayOutput)
+}
+
+type NoticeContentTmplTmplContentsWebhookOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsWebhookOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsWebhook)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsWebhookOutput) ToNoticeContentTmplTmplContentsWebhookOutput() NoticeContentTmplTmplContentsWebhookOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsWebhookOutput) ToNoticeContentTmplTmplContentsWebhookOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsWebhookOutput {
+	return o
+}
+
+// Matching status list.
+func (o NoticeContentTmplTmplContentsWebhookOutput) MatchingStatuses() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsWebhook) []string { return v.MatchingStatuses }).(pulumi.StringArrayOutput)
+}
+
+// Webhook template.
+func (o NoticeContentTmplTmplContentsWebhookOutput) Template() NoticeContentTmplTmplContentsWebhookTemplatePtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsWebhook) *NoticeContentTmplTmplContentsWebhookTemplate {
+		return v.Template
+	}).(NoticeContentTmplTmplContentsWebhookTemplatePtrOutput)
+}
+
+type NoticeContentTmplTmplContentsWebhookArrayOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsWebhookArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NoticeContentTmplTmplContentsWebhook)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsWebhookArrayOutput) ToNoticeContentTmplTmplContentsWebhookArrayOutput() NoticeContentTmplTmplContentsWebhookArrayOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsWebhookArrayOutput) ToNoticeContentTmplTmplContentsWebhookArrayOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsWebhookArrayOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsWebhookArrayOutput) Index(i pulumi.IntInput) NoticeContentTmplTmplContentsWebhookOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) NoticeContentTmplTmplContentsWebhook {
+		return vs[0].([]NoticeContentTmplTmplContentsWebhook)[vs[1].(int)]
+	}).(NoticeContentTmplTmplContentsWebhookOutput)
+}
+
+type NoticeContentTmplTmplContentsWebhookTemplate struct {
+	// Request body.
+	Body *string `pulumi:"body"`
+	// Body content type.
+	BodyContentType *string `pulumi:"bodyContentType"`
+	// Request headers.
+	Headers []NoticeContentTmplTmplContentsWebhookTemplateHeader `pulumi:"headers"`
+}
+
+// NoticeContentTmplTmplContentsWebhookTemplateInput is an input type that accepts NoticeContentTmplTmplContentsWebhookTemplateArgs and NoticeContentTmplTmplContentsWebhookTemplateOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsWebhookTemplateInput` via:
+//
+//	NoticeContentTmplTmplContentsWebhookTemplateArgs{...}
+type NoticeContentTmplTmplContentsWebhookTemplateInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsWebhookTemplateOutput() NoticeContentTmplTmplContentsWebhookTemplateOutput
+	ToNoticeContentTmplTmplContentsWebhookTemplateOutputWithContext(context.Context) NoticeContentTmplTmplContentsWebhookTemplateOutput
+}
+
+type NoticeContentTmplTmplContentsWebhookTemplateArgs struct {
+	// Request body.
+	Body pulumi.StringPtrInput `pulumi:"body"`
+	// Body content type.
+	BodyContentType pulumi.StringPtrInput `pulumi:"bodyContentType"`
+	// Request headers.
+	Headers NoticeContentTmplTmplContentsWebhookTemplateHeaderArrayInput `pulumi:"headers"`
+}
+
+func (NoticeContentTmplTmplContentsWebhookTemplateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsWebhookTemplate)(nil)).Elem()
+}
+
+func (i NoticeContentTmplTmplContentsWebhookTemplateArgs) ToNoticeContentTmplTmplContentsWebhookTemplateOutput() NoticeContentTmplTmplContentsWebhookTemplateOutput {
+	return i.ToNoticeContentTmplTmplContentsWebhookTemplateOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsWebhookTemplateArgs) ToNoticeContentTmplTmplContentsWebhookTemplateOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsWebhookTemplateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsWebhookTemplateOutput)
+}
+
+func (i NoticeContentTmplTmplContentsWebhookTemplateArgs) ToNoticeContentTmplTmplContentsWebhookTemplatePtrOutput() NoticeContentTmplTmplContentsWebhookTemplatePtrOutput {
+	return i.ToNoticeContentTmplTmplContentsWebhookTemplatePtrOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsWebhookTemplateArgs) ToNoticeContentTmplTmplContentsWebhookTemplatePtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsWebhookTemplatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsWebhookTemplateOutput).ToNoticeContentTmplTmplContentsWebhookTemplatePtrOutputWithContext(ctx)
+}
+
+// NoticeContentTmplTmplContentsWebhookTemplatePtrInput is an input type that accepts NoticeContentTmplTmplContentsWebhookTemplateArgs, NoticeContentTmplTmplContentsWebhookTemplatePtr and NoticeContentTmplTmplContentsWebhookTemplatePtrOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsWebhookTemplatePtrInput` via:
+//
+//	        NoticeContentTmplTmplContentsWebhookTemplateArgs{...}
+//
+//	or:
+//
+//	        nil
+type NoticeContentTmplTmplContentsWebhookTemplatePtrInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsWebhookTemplatePtrOutput() NoticeContentTmplTmplContentsWebhookTemplatePtrOutput
+	ToNoticeContentTmplTmplContentsWebhookTemplatePtrOutputWithContext(context.Context) NoticeContentTmplTmplContentsWebhookTemplatePtrOutput
+}
+
+type noticeContentTmplTmplContentsWebhookTemplatePtrType NoticeContentTmplTmplContentsWebhookTemplateArgs
+
+func NoticeContentTmplTmplContentsWebhookTemplatePtr(v *NoticeContentTmplTmplContentsWebhookTemplateArgs) NoticeContentTmplTmplContentsWebhookTemplatePtrInput {
+	return (*noticeContentTmplTmplContentsWebhookTemplatePtrType)(v)
+}
+
+func (*noticeContentTmplTmplContentsWebhookTemplatePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NoticeContentTmplTmplContentsWebhookTemplate)(nil)).Elem()
+}
+
+func (i *noticeContentTmplTmplContentsWebhookTemplatePtrType) ToNoticeContentTmplTmplContentsWebhookTemplatePtrOutput() NoticeContentTmplTmplContentsWebhookTemplatePtrOutput {
+	return i.ToNoticeContentTmplTmplContentsWebhookTemplatePtrOutputWithContext(context.Background())
+}
+
+func (i *noticeContentTmplTmplContentsWebhookTemplatePtrType) ToNoticeContentTmplTmplContentsWebhookTemplatePtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsWebhookTemplatePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsWebhookTemplatePtrOutput)
+}
+
+type NoticeContentTmplTmplContentsWebhookTemplateOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsWebhookTemplateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsWebhookTemplate)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsWebhookTemplateOutput) ToNoticeContentTmplTmplContentsWebhookTemplateOutput() NoticeContentTmplTmplContentsWebhookTemplateOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsWebhookTemplateOutput) ToNoticeContentTmplTmplContentsWebhookTemplateOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsWebhookTemplateOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsWebhookTemplateOutput) ToNoticeContentTmplTmplContentsWebhookTemplatePtrOutput() NoticeContentTmplTmplContentsWebhookTemplatePtrOutput {
+	return o.ToNoticeContentTmplTmplContentsWebhookTemplatePtrOutputWithContext(context.Background())
+}
+
+func (o NoticeContentTmplTmplContentsWebhookTemplateOutput) ToNoticeContentTmplTmplContentsWebhookTemplatePtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsWebhookTemplatePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NoticeContentTmplTmplContentsWebhookTemplate) *NoticeContentTmplTmplContentsWebhookTemplate {
+		return &v
+	}).(NoticeContentTmplTmplContentsWebhookTemplatePtrOutput)
+}
+
+// Request body.
+func (o NoticeContentTmplTmplContentsWebhookTemplateOutput) Body() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsWebhookTemplate) *string { return v.Body }).(pulumi.StringPtrOutput)
+}
+
+// Body content type.
+func (o NoticeContentTmplTmplContentsWebhookTemplateOutput) BodyContentType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsWebhookTemplate) *string { return v.BodyContentType }).(pulumi.StringPtrOutput)
+}
+
+// Request headers.
+func (o NoticeContentTmplTmplContentsWebhookTemplateOutput) Headers() NoticeContentTmplTmplContentsWebhookTemplateHeaderArrayOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsWebhookTemplate) []NoticeContentTmplTmplContentsWebhookTemplateHeader {
+		return v.Headers
+	}).(NoticeContentTmplTmplContentsWebhookTemplateHeaderArrayOutput)
+}
+
+type NoticeContentTmplTmplContentsWebhookTemplatePtrOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsWebhookTemplatePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NoticeContentTmplTmplContentsWebhookTemplate)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsWebhookTemplatePtrOutput) ToNoticeContentTmplTmplContentsWebhookTemplatePtrOutput() NoticeContentTmplTmplContentsWebhookTemplatePtrOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsWebhookTemplatePtrOutput) ToNoticeContentTmplTmplContentsWebhookTemplatePtrOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsWebhookTemplatePtrOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsWebhookTemplatePtrOutput) Elem() NoticeContentTmplTmplContentsWebhookTemplateOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsWebhookTemplate) NoticeContentTmplTmplContentsWebhookTemplate {
+		if v != nil {
+			return *v
+		}
+		var ret NoticeContentTmplTmplContentsWebhookTemplate
+		return ret
+	}).(NoticeContentTmplTmplContentsWebhookTemplateOutput)
+}
+
+// Request body.
+func (o NoticeContentTmplTmplContentsWebhookTemplatePtrOutput) Body() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsWebhookTemplate) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Body
+	}).(pulumi.StringPtrOutput)
+}
+
+// Body content type.
+func (o NoticeContentTmplTmplContentsWebhookTemplatePtrOutput) BodyContentType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsWebhookTemplate) *string {
+		if v == nil {
+			return nil
+		}
+		return v.BodyContentType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Request headers.
+func (o NoticeContentTmplTmplContentsWebhookTemplatePtrOutput) Headers() NoticeContentTmplTmplContentsWebhookTemplateHeaderArrayOutput {
+	return o.ApplyT(func(v *NoticeContentTmplTmplContentsWebhookTemplate) []NoticeContentTmplTmplContentsWebhookTemplateHeader {
+		if v == nil {
+			return nil
+		}
+		return v.Headers
+	}).(NoticeContentTmplTmplContentsWebhookTemplateHeaderArrayOutput)
+}
+
+type NoticeContentTmplTmplContentsWebhookTemplateHeader struct {
+	// Header key.
+	Key *string `pulumi:"key"`
+	// Header values.
+	Values []string `pulumi:"values"`
+}
+
+// NoticeContentTmplTmplContentsWebhookTemplateHeaderInput is an input type that accepts NoticeContentTmplTmplContentsWebhookTemplateHeaderArgs and NoticeContentTmplTmplContentsWebhookTemplateHeaderOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsWebhookTemplateHeaderInput` via:
+//
+//	NoticeContentTmplTmplContentsWebhookTemplateHeaderArgs{...}
+type NoticeContentTmplTmplContentsWebhookTemplateHeaderInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsWebhookTemplateHeaderOutput() NoticeContentTmplTmplContentsWebhookTemplateHeaderOutput
+	ToNoticeContentTmplTmplContentsWebhookTemplateHeaderOutputWithContext(context.Context) NoticeContentTmplTmplContentsWebhookTemplateHeaderOutput
+}
+
+type NoticeContentTmplTmplContentsWebhookTemplateHeaderArgs struct {
+	// Header key.
+	Key pulumi.StringPtrInput `pulumi:"key"`
+	// Header values.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (NoticeContentTmplTmplContentsWebhookTemplateHeaderArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsWebhookTemplateHeader)(nil)).Elem()
+}
+
+func (i NoticeContentTmplTmplContentsWebhookTemplateHeaderArgs) ToNoticeContentTmplTmplContentsWebhookTemplateHeaderOutput() NoticeContentTmplTmplContentsWebhookTemplateHeaderOutput {
+	return i.ToNoticeContentTmplTmplContentsWebhookTemplateHeaderOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsWebhookTemplateHeaderArgs) ToNoticeContentTmplTmplContentsWebhookTemplateHeaderOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsWebhookTemplateHeaderOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsWebhookTemplateHeaderOutput)
+}
+
+// NoticeContentTmplTmplContentsWebhookTemplateHeaderArrayInput is an input type that accepts NoticeContentTmplTmplContentsWebhookTemplateHeaderArray and NoticeContentTmplTmplContentsWebhookTemplateHeaderArrayOutput values.
+// You can construct a concrete instance of `NoticeContentTmplTmplContentsWebhookTemplateHeaderArrayInput` via:
+//
+//	NoticeContentTmplTmplContentsWebhookTemplateHeaderArray{ NoticeContentTmplTmplContentsWebhookTemplateHeaderArgs{...} }
+type NoticeContentTmplTmplContentsWebhookTemplateHeaderArrayInput interface {
+	pulumi.Input
+
+	ToNoticeContentTmplTmplContentsWebhookTemplateHeaderArrayOutput() NoticeContentTmplTmplContentsWebhookTemplateHeaderArrayOutput
+	ToNoticeContentTmplTmplContentsWebhookTemplateHeaderArrayOutputWithContext(context.Context) NoticeContentTmplTmplContentsWebhookTemplateHeaderArrayOutput
+}
+
+type NoticeContentTmplTmplContentsWebhookTemplateHeaderArray []NoticeContentTmplTmplContentsWebhookTemplateHeaderInput
+
+func (NoticeContentTmplTmplContentsWebhookTemplateHeaderArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NoticeContentTmplTmplContentsWebhookTemplateHeader)(nil)).Elem()
+}
+
+func (i NoticeContentTmplTmplContentsWebhookTemplateHeaderArray) ToNoticeContentTmplTmplContentsWebhookTemplateHeaderArrayOutput() NoticeContentTmplTmplContentsWebhookTemplateHeaderArrayOutput {
+	return i.ToNoticeContentTmplTmplContentsWebhookTemplateHeaderArrayOutputWithContext(context.Background())
+}
+
+func (i NoticeContentTmplTmplContentsWebhookTemplateHeaderArray) ToNoticeContentTmplTmplContentsWebhookTemplateHeaderArrayOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsWebhookTemplateHeaderArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NoticeContentTmplTmplContentsWebhookTemplateHeaderArrayOutput)
+}
+
+type NoticeContentTmplTmplContentsWebhookTemplateHeaderOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsWebhookTemplateHeaderOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NoticeContentTmplTmplContentsWebhookTemplateHeader)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsWebhookTemplateHeaderOutput) ToNoticeContentTmplTmplContentsWebhookTemplateHeaderOutput() NoticeContentTmplTmplContentsWebhookTemplateHeaderOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsWebhookTemplateHeaderOutput) ToNoticeContentTmplTmplContentsWebhookTemplateHeaderOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsWebhookTemplateHeaderOutput {
+	return o
+}
+
+// Header key.
+func (o NoticeContentTmplTmplContentsWebhookTemplateHeaderOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsWebhookTemplateHeader) *string { return v.Key }).(pulumi.StringPtrOutput)
+}
+
+// Header values.
+func (o NoticeContentTmplTmplContentsWebhookTemplateHeaderOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v NoticeContentTmplTmplContentsWebhookTemplateHeader) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type NoticeContentTmplTmplContentsWebhookTemplateHeaderArrayOutput struct{ *pulumi.OutputState }
+
+func (NoticeContentTmplTmplContentsWebhookTemplateHeaderArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NoticeContentTmplTmplContentsWebhookTemplateHeader)(nil)).Elem()
+}
+
+func (o NoticeContentTmplTmplContentsWebhookTemplateHeaderArrayOutput) ToNoticeContentTmplTmplContentsWebhookTemplateHeaderArrayOutput() NoticeContentTmplTmplContentsWebhookTemplateHeaderArrayOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsWebhookTemplateHeaderArrayOutput) ToNoticeContentTmplTmplContentsWebhookTemplateHeaderArrayOutputWithContext(ctx context.Context) NoticeContentTmplTmplContentsWebhookTemplateHeaderArrayOutput {
+	return o
+}
+
+func (o NoticeContentTmplTmplContentsWebhookTemplateHeaderArrayOutput) Index(i pulumi.IntInput) NoticeContentTmplTmplContentsWebhookTemplateHeaderOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) NoticeContentTmplTmplContentsWebhookTemplateHeader {
+		return vs[0].([]NoticeContentTmplTmplContentsWebhookTemplateHeader)[vs[1].(int)]
+	}).(NoticeContentTmplTmplContentsWebhookTemplateHeaderOutput)
 }
 
 type PolicyBindingObjectDimension struct {
@@ -16288,6 +20168,166 @@ func (o GetGrafanaPluginOverviewsPluginSetArrayOutput) Index(i pulumi.IntInput) 
 	}).(GetGrafanaPluginOverviewsPluginSetOutput)
 }
 
+type GetNoticeContentTmplsNoticeContentTmplList struct {
+	// Create time.
+	CreateTime int `pulumi:"createTime"`
+	// Creator uin.
+	Creator string `pulumi:"creator"`
+	// Monitor type for query. Valid value: `MT_QCE`.
+	MonitorType string `pulumi:"monitorType"`
+	// Template content in JSON format.
+	TmplContentsJson string `pulumi:"tmplContentsJson"`
+	// Template ID.
+	TmplId string `pulumi:"tmplId"`
+	// Template language for query. Valid values: `en`, `zh`.
+	TmplLanguage string `pulumi:"tmplLanguage"`
+	// Template name for query.
+	TmplName string `pulumi:"tmplName"`
+	// Update time.
+	UpdateTime int `pulumi:"updateTime"`
+}
+
+// GetNoticeContentTmplsNoticeContentTmplListInput is an input type that accepts GetNoticeContentTmplsNoticeContentTmplListArgs and GetNoticeContentTmplsNoticeContentTmplListOutput values.
+// You can construct a concrete instance of `GetNoticeContentTmplsNoticeContentTmplListInput` via:
+//
+//	GetNoticeContentTmplsNoticeContentTmplListArgs{...}
+type GetNoticeContentTmplsNoticeContentTmplListInput interface {
+	pulumi.Input
+
+	ToGetNoticeContentTmplsNoticeContentTmplListOutput() GetNoticeContentTmplsNoticeContentTmplListOutput
+	ToGetNoticeContentTmplsNoticeContentTmplListOutputWithContext(context.Context) GetNoticeContentTmplsNoticeContentTmplListOutput
+}
+
+type GetNoticeContentTmplsNoticeContentTmplListArgs struct {
+	// Create time.
+	CreateTime pulumi.IntInput `pulumi:"createTime"`
+	// Creator uin.
+	Creator pulumi.StringInput `pulumi:"creator"`
+	// Monitor type for query. Valid value: `MT_QCE`.
+	MonitorType pulumi.StringInput `pulumi:"monitorType"`
+	// Template content in JSON format.
+	TmplContentsJson pulumi.StringInput `pulumi:"tmplContentsJson"`
+	// Template ID.
+	TmplId pulumi.StringInput `pulumi:"tmplId"`
+	// Template language for query. Valid values: `en`, `zh`.
+	TmplLanguage pulumi.StringInput `pulumi:"tmplLanguage"`
+	// Template name for query.
+	TmplName pulumi.StringInput `pulumi:"tmplName"`
+	// Update time.
+	UpdateTime pulumi.IntInput `pulumi:"updateTime"`
+}
+
+func (GetNoticeContentTmplsNoticeContentTmplListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNoticeContentTmplsNoticeContentTmplList)(nil)).Elem()
+}
+
+func (i GetNoticeContentTmplsNoticeContentTmplListArgs) ToGetNoticeContentTmplsNoticeContentTmplListOutput() GetNoticeContentTmplsNoticeContentTmplListOutput {
+	return i.ToGetNoticeContentTmplsNoticeContentTmplListOutputWithContext(context.Background())
+}
+
+func (i GetNoticeContentTmplsNoticeContentTmplListArgs) ToGetNoticeContentTmplsNoticeContentTmplListOutputWithContext(ctx context.Context) GetNoticeContentTmplsNoticeContentTmplListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNoticeContentTmplsNoticeContentTmplListOutput)
+}
+
+// GetNoticeContentTmplsNoticeContentTmplListArrayInput is an input type that accepts GetNoticeContentTmplsNoticeContentTmplListArray and GetNoticeContentTmplsNoticeContentTmplListArrayOutput values.
+// You can construct a concrete instance of `GetNoticeContentTmplsNoticeContentTmplListArrayInput` via:
+//
+//	GetNoticeContentTmplsNoticeContentTmplListArray{ GetNoticeContentTmplsNoticeContentTmplListArgs{...} }
+type GetNoticeContentTmplsNoticeContentTmplListArrayInput interface {
+	pulumi.Input
+
+	ToGetNoticeContentTmplsNoticeContentTmplListArrayOutput() GetNoticeContentTmplsNoticeContentTmplListArrayOutput
+	ToGetNoticeContentTmplsNoticeContentTmplListArrayOutputWithContext(context.Context) GetNoticeContentTmplsNoticeContentTmplListArrayOutput
+}
+
+type GetNoticeContentTmplsNoticeContentTmplListArray []GetNoticeContentTmplsNoticeContentTmplListInput
+
+func (GetNoticeContentTmplsNoticeContentTmplListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNoticeContentTmplsNoticeContentTmplList)(nil)).Elem()
+}
+
+func (i GetNoticeContentTmplsNoticeContentTmplListArray) ToGetNoticeContentTmplsNoticeContentTmplListArrayOutput() GetNoticeContentTmplsNoticeContentTmplListArrayOutput {
+	return i.ToGetNoticeContentTmplsNoticeContentTmplListArrayOutputWithContext(context.Background())
+}
+
+func (i GetNoticeContentTmplsNoticeContentTmplListArray) ToGetNoticeContentTmplsNoticeContentTmplListArrayOutputWithContext(ctx context.Context) GetNoticeContentTmplsNoticeContentTmplListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNoticeContentTmplsNoticeContentTmplListArrayOutput)
+}
+
+type GetNoticeContentTmplsNoticeContentTmplListOutput struct{ *pulumi.OutputState }
+
+func (GetNoticeContentTmplsNoticeContentTmplListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNoticeContentTmplsNoticeContentTmplList)(nil)).Elem()
+}
+
+func (o GetNoticeContentTmplsNoticeContentTmplListOutput) ToGetNoticeContentTmplsNoticeContentTmplListOutput() GetNoticeContentTmplsNoticeContentTmplListOutput {
+	return o
+}
+
+func (o GetNoticeContentTmplsNoticeContentTmplListOutput) ToGetNoticeContentTmplsNoticeContentTmplListOutputWithContext(ctx context.Context) GetNoticeContentTmplsNoticeContentTmplListOutput {
+	return o
+}
+
+// Create time.
+func (o GetNoticeContentTmplsNoticeContentTmplListOutput) CreateTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNoticeContentTmplsNoticeContentTmplList) int { return v.CreateTime }).(pulumi.IntOutput)
+}
+
+// Creator uin.
+func (o GetNoticeContentTmplsNoticeContentTmplListOutput) Creator() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNoticeContentTmplsNoticeContentTmplList) string { return v.Creator }).(pulumi.StringOutput)
+}
+
+// Monitor type for query. Valid value: `MT_QCE`.
+func (o GetNoticeContentTmplsNoticeContentTmplListOutput) MonitorType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNoticeContentTmplsNoticeContentTmplList) string { return v.MonitorType }).(pulumi.StringOutput)
+}
+
+// Template content in JSON format.
+func (o GetNoticeContentTmplsNoticeContentTmplListOutput) TmplContentsJson() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNoticeContentTmplsNoticeContentTmplList) string { return v.TmplContentsJson }).(pulumi.StringOutput)
+}
+
+// Template ID.
+func (o GetNoticeContentTmplsNoticeContentTmplListOutput) TmplId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNoticeContentTmplsNoticeContentTmplList) string { return v.TmplId }).(pulumi.StringOutput)
+}
+
+// Template language for query. Valid values: `en`, `zh`.
+func (o GetNoticeContentTmplsNoticeContentTmplListOutput) TmplLanguage() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNoticeContentTmplsNoticeContentTmplList) string { return v.TmplLanguage }).(pulumi.StringOutput)
+}
+
+// Template name for query.
+func (o GetNoticeContentTmplsNoticeContentTmplListOutput) TmplName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNoticeContentTmplsNoticeContentTmplList) string { return v.TmplName }).(pulumi.StringOutput)
+}
+
+// Update time.
+func (o GetNoticeContentTmplsNoticeContentTmplListOutput) UpdateTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNoticeContentTmplsNoticeContentTmplList) int { return v.UpdateTime }).(pulumi.IntOutput)
+}
+
+type GetNoticeContentTmplsNoticeContentTmplListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetNoticeContentTmplsNoticeContentTmplListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNoticeContentTmplsNoticeContentTmplList)(nil)).Elem()
+}
+
+func (o GetNoticeContentTmplsNoticeContentTmplListArrayOutput) ToGetNoticeContentTmplsNoticeContentTmplListArrayOutput() GetNoticeContentTmplsNoticeContentTmplListArrayOutput {
+	return o
+}
+
+func (o GetNoticeContentTmplsNoticeContentTmplListArrayOutput) ToGetNoticeContentTmplsNoticeContentTmplListArrayOutputWithContext(ctx context.Context) GetNoticeContentTmplsNoticeContentTmplListArrayOutput {
+	return o
+}
+
+func (o GetNoticeContentTmplsNoticeContentTmplListArrayOutput) Index(i pulumi.IntInput) GetNoticeContentTmplsNoticeContentTmplListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetNoticeContentTmplsNoticeContentTmplList {
+		return vs[0].([]GetNoticeContentTmplsNoticeContentTmplList)[vs[1].(int)]
+	}).(GetNoticeContentTmplsNoticeContentTmplListOutput)
+}
+
 type GetPolicyConditionsList struct {
 	// A list of event condition metrics. Each element contains the following attributes:
 	EventMetrics []GetPolicyConditionsListEventMetric `pulumi:"eventMetrics"`
@@ -19989,14 +24029,68 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*AlarmPolicyEventConditionFilterPtrInput)(nil)).Elem(), AlarmPolicyEventConditionFilterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AlarmPolicyFilterInput)(nil)).Elem(), AlarmPolicyFilterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AlarmPolicyFilterPtrInput)(nil)).Elem(), AlarmPolicyFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmPolicyHierarchicalNoticeInput)(nil)).Elem(), AlarmPolicyHierarchicalNoticeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmPolicyHierarchicalNoticeArrayInput)(nil)).Elem(), AlarmPolicyHierarchicalNoticeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmPolicyNoticeContentTmplBindInfoInput)(nil)).Elem(), AlarmPolicyNoticeContentTmplBindInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AlarmPolicyNoticeContentTmplBindInfoArrayInput)(nil)).Elem(), AlarmPolicyNoticeContentTmplBindInfoArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AlarmPolicyPolicyTagInput)(nil)).Elem(), AlarmPolicyPolicyTagArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AlarmPolicyPolicyTagArrayInput)(nil)).Elem(), AlarmPolicyPolicyTagArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AlarmPolicyTriggerTaskInput)(nil)).Elem(), AlarmPolicyTriggerTaskArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AlarmPolicyTriggerTaskArrayInput)(nil)).Elem(), AlarmPolicyTriggerTaskArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BindingReceiverReceiversInput)(nil)).Elem(), BindingReceiverReceiversArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BindingReceiverReceiversPtrInput)(nil)).Elem(), BindingReceiverReceiversArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ExternalClusterExternalLabelInput)(nil)).Elem(), ExternalClusterExternalLabelArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ExternalClusterExternalLabelArrayInput)(nil)).Elem(), ExternalClusterExternalLabelArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GrafanaSsoAccountRoleInput)(nil)).Elem(), GrafanaSsoAccountRoleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GrafanaSsoAccountRoleArrayInput)(nil)).Elem(), GrafanaSsoAccountRoleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsInput)(nil)).Elem(), NoticeContentTmplTmplContentsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsPtrInput)(nil)).Elem(), NoticeContentTmplTmplContentsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsDingDingRobotInput)(nil)).Elem(), NoticeContentTmplTmplContentsDingDingRobotArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsDingDingRobotArrayInput)(nil)).Elem(), NoticeContentTmplTmplContentsDingDingRobotArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsDingDingRobotTemplateInput)(nil)).Elem(), NoticeContentTmplTmplContentsDingDingRobotTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsDingDingRobotTemplatePtrInput)(nil)).Elem(), NoticeContentTmplTmplContentsDingDingRobotTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsFeiShuRobotInput)(nil)).Elem(), NoticeContentTmplTmplContentsFeiShuRobotArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsFeiShuRobotArrayInput)(nil)).Elem(), NoticeContentTmplTmplContentsFeiShuRobotArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsFeiShuRobotTemplateInput)(nil)).Elem(), NoticeContentTmplTmplContentsFeiShuRobotTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsFeiShuRobotTemplatePtrInput)(nil)).Elem(), NoticeContentTmplTmplContentsFeiShuRobotTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsPagerDutyRobotInput)(nil)).Elem(), NoticeContentTmplTmplContentsPagerDutyRobotArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsPagerDutyRobotArrayInput)(nil)).Elem(), NoticeContentTmplTmplContentsPagerDutyRobotArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsPagerDutyRobotTemplateInput)(nil)).Elem(), NoticeContentTmplTmplContentsPagerDutyRobotTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrInput)(nil)).Elem(), NoticeContentTmplTmplContentsPagerDutyRobotTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderInput)(nil)).Elem(), NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArrayInput)(nil)).Elem(), NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsQcloudYeheInput)(nil)).Elem(), NoticeContentTmplTmplContentsQcloudYeheArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsQcloudYeheArrayInput)(nil)).Elem(), NoticeContentTmplTmplContentsQcloudYeheArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsQcloudYeheTemplateInput)(nil)).Elem(), NoticeContentTmplTmplContentsQcloudYeheTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsQcloudYeheTemplatePtrInput)(nil)).Elem(), NoticeContentTmplTmplContentsQcloudYeheTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsQcloudYeheTemplateAndonInput)(nil)).Elem(), NoticeContentTmplTmplContentsQcloudYeheTemplateAndonArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrInput)(nil)).Elem(), NoticeContentTmplTmplContentsQcloudYeheTemplateAndonArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsQcloudYeheTemplateEmailInput)(nil)).Elem(), NoticeContentTmplTmplContentsQcloudYeheTemplateEmailArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrInput)(nil)).Elem(), NoticeContentTmplTmplContentsQcloudYeheTemplateEmailArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsQcloudYeheTemplateQywxInput)(nil)).Elem(), NoticeContentTmplTmplContentsQcloudYeheTemplateQywxArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrInput)(nil)).Elem(), NoticeContentTmplTmplContentsQcloudYeheTemplateQywxArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsQcloudYeheTemplateSiteInput)(nil)).Elem(), NoticeContentTmplTmplContentsQcloudYeheTemplateSiteArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrInput)(nil)).Elem(), NoticeContentTmplTmplContentsQcloudYeheTemplateSiteArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsQcloudYeheTemplateSmsInput)(nil)).Elem(), NoticeContentTmplTmplContentsQcloudYeheTemplateSmsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrInput)(nil)).Elem(), NoticeContentTmplTmplContentsQcloudYeheTemplateSmsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceInput)(nil)).Elem(), NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrInput)(nil)).Elem(), NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsQcloudYeheTemplateWechatInput)(nil)).Elem(), NoticeContentTmplTmplContentsQcloudYeheTemplateWechatArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrInput)(nil)).Elem(), NoticeContentTmplTmplContentsQcloudYeheTemplateWechatArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsTeamsRobotInput)(nil)).Elem(), NoticeContentTmplTmplContentsTeamsRobotArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsTeamsRobotArrayInput)(nil)).Elem(), NoticeContentTmplTmplContentsTeamsRobotArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsTeamsRobotTemplateInput)(nil)).Elem(), NoticeContentTmplTmplContentsTeamsRobotTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsTeamsRobotTemplatePtrInput)(nil)).Elem(), NoticeContentTmplTmplContentsTeamsRobotTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsWeWorkRobotInput)(nil)).Elem(), NoticeContentTmplTmplContentsWeWorkRobotArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsWeWorkRobotArrayInput)(nil)).Elem(), NoticeContentTmplTmplContentsWeWorkRobotArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsWeWorkRobotTemplateInput)(nil)).Elem(), NoticeContentTmplTmplContentsWeWorkRobotTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsWeWorkRobotTemplatePtrInput)(nil)).Elem(), NoticeContentTmplTmplContentsWeWorkRobotTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsWebhookInput)(nil)).Elem(), NoticeContentTmplTmplContentsWebhookArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsWebhookArrayInput)(nil)).Elem(), NoticeContentTmplTmplContentsWebhookArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsWebhookTemplateInput)(nil)).Elem(), NoticeContentTmplTmplContentsWebhookTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsWebhookTemplatePtrInput)(nil)).Elem(), NoticeContentTmplTmplContentsWebhookTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsWebhookTemplateHeaderInput)(nil)).Elem(), NoticeContentTmplTmplContentsWebhookTemplateHeaderArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentTmplTmplContentsWebhookTemplateHeaderArrayInput)(nil)).Elem(), NoticeContentTmplTmplContentsWebhookTemplateHeaderArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PolicyBindingObjectDimensionInput)(nil)).Elem(), PolicyBindingObjectDimensionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*PolicyBindingObjectDimensionArrayInput)(nil)).Elem(), PolicyBindingObjectDimensionArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TmpAlertGroupCustomReceiverInput)(nil)).Elem(), TmpAlertGroupCustomReceiverArgs{})
@@ -20179,6 +24273,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDataListArrayInput)(nil)).Elem(), GetDataListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetGrafanaPluginOverviewsPluginSetInput)(nil)).Elem(), GetGrafanaPluginOverviewsPluginSetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetGrafanaPluginOverviewsPluginSetArrayInput)(nil)).Elem(), GetGrafanaPluginOverviewsPluginSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNoticeContentTmplsNoticeContentTmplListInput)(nil)).Elem(), GetNoticeContentTmplsNoticeContentTmplListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNoticeContentTmplsNoticeContentTmplListArrayInput)(nil)).Elem(), GetNoticeContentTmplsNoticeContentTmplListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetPolicyConditionsListInput)(nil)).Elem(), GetPolicyConditionsListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetPolicyConditionsListArrayInput)(nil)).Elem(), GetPolicyConditionsListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetPolicyConditionsListEventMetricInput)(nil)).Elem(), GetPolicyConditionsListEventMetricArgs{})
@@ -20243,14 +24339,68 @@ func init() {
 	pulumi.RegisterOutputType(AlarmPolicyEventConditionFilterPtrOutput{})
 	pulumi.RegisterOutputType(AlarmPolicyFilterOutput{})
 	pulumi.RegisterOutputType(AlarmPolicyFilterPtrOutput{})
+	pulumi.RegisterOutputType(AlarmPolicyHierarchicalNoticeOutput{})
+	pulumi.RegisterOutputType(AlarmPolicyHierarchicalNoticeArrayOutput{})
+	pulumi.RegisterOutputType(AlarmPolicyNoticeContentTmplBindInfoOutput{})
+	pulumi.RegisterOutputType(AlarmPolicyNoticeContentTmplBindInfoArrayOutput{})
 	pulumi.RegisterOutputType(AlarmPolicyPolicyTagOutput{})
 	pulumi.RegisterOutputType(AlarmPolicyPolicyTagArrayOutput{})
 	pulumi.RegisterOutputType(AlarmPolicyTriggerTaskOutput{})
 	pulumi.RegisterOutputType(AlarmPolicyTriggerTaskArrayOutput{})
 	pulumi.RegisterOutputType(BindingReceiverReceiversOutput{})
 	pulumi.RegisterOutputType(BindingReceiverReceiversPtrOutput{})
+	pulumi.RegisterOutputType(ExternalClusterExternalLabelOutput{})
+	pulumi.RegisterOutputType(ExternalClusterExternalLabelArrayOutput{})
 	pulumi.RegisterOutputType(GrafanaSsoAccountRoleOutput{})
 	pulumi.RegisterOutputType(GrafanaSsoAccountRoleArrayOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsPtrOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsDingDingRobotOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsDingDingRobotArrayOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsDingDingRobotTemplateOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsDingDingRobotTemplatePtrOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsFeiShuRobotOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsFeiShuRobotArrayOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsFeiShuRobotTemplateOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsFeiShuRobotTemplatePtrOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsPagerDutyRobotOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsPagerDutyRobotArrayOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsPagerDutyRobotTemplateOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsPagerDutyRobotTemplatePtrOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsPagerDutyRobotTemplateHeaderArrayOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsQcloudYeheOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsQcloudYeheArrayOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsQcloudYeheTemplateOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsQcloudYeheTemplatePtrOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsQcloudYeheTemplateAndonOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsQcloudYeheTemplateAndonPtrOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsQcloudYeheTemplateEmailOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsQcloudYeheTemplateEmailPtrOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsQcloudYeheTemplateQywxOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsQcloudYeheTemplateQywxPtrOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsQcloudYeheTemplateSiteOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsQcloudYeheTemplateSitePtrOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsQcloudYeheTemplateSmsOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsQcloudYeheTemplateSmsPtrOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsQcloudYeheTemplateVoiceOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsQcloudYeheTemplateVoicePtrOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsQcloudYeheTemplateWechatOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsQcloudYeheTemplateWechatPtrOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsTeamsRobotOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsTeamsRobotArrayOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsTeamsRobotTemplateOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsTeamsRobotTemplatePtrOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsWeWorkRobotOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsWeWorkRobotArrayOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsWeWorkRobotTemplateOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsWeWorkRobotTemplatePtrOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsWebhookOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsWebhookArrayOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsWebhookTemplateOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsWebhookTemplatePtrOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsWebhookTemplateHeaderOutput{})
+	pulumi.RegisterOutputType(NoticeContentTmplTmplContentsWebhookTemplateHeaderArrayOutput{})
 	pulumi.RegisterOutputType(PolicyBindingObjectDimensionOutput{})
 	pulumi.RegisterOutputType(PolicyBindingObjectDimensionArrayOutput{})
 	pulumi.RegisterOutputType(TmpAlertGroupCustomReceiverOutput{})
@@ -20433,6 +24583,8 @@ func init() {
 	pulumi.RegisterOutputType(GetDataListArrayOutput{})
 	pulumi.RegisterOutputType(GetGrafanaPluginOverviewsPluginSetOutput{})
 	pulumi.RegisterOutputType(GetGrafanaPluginOverviewsPluginSetArrayOutput{})
+	pulumi.RegisterOutputType(GetNoticeContentTmplsNoticeContentTmplListOutput{})
+	pulumi.RegisterOutputType(GetNoticeContentTmplsNoticeContentTmplListArrayOutput{})
 	pulumi.RegisterOutputType(GetPolicyConditionsListOutput{})
 	pulumi.RegisterOutputType(GetPolicyConditionsListArrayOutput{})
 	pulumi.RegisterOutputType(GetPolicyConditionsListEventMetricOutput{})

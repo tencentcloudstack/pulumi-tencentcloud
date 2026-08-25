@@ -75,8 +75,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
     /// 
     /// ## Import
     /// 
-    /// ses email_address can be imported using the id, e.g.
-    /// 
+    /// ses EmailAddress can be imported using the id, e.g.
     /// ```sh
     /// $ pulumi import tencentcloud:Ses/receiver:Receiver receiver receiverId
     /// ```

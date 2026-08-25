@@ -133,19 +133,19 @@ export interface ForwardRuleState {
     /**
      * Endpoint ID.
      */
-    endPointId?: pulumi.Input<string>;
+    endPointId?: pulumi.Input<string | undefined>;
     /**
      * Forwarding rule name.
      */
-    ruleName?: pulumi.Input<string>;
+    ruleName?: pulumi.Input<string | undefined>;
     /**
      * Forwarding rule type. DOWN: From cloud to off-cloud; UP: From off-cloud to cloud.
      */
-    ruleType?: pulumi.Input<string>;
+    ruleType?: pulumi.Input<string | undefined>;
     /**
      * Private domain ID, which can be viewed on the private domain list page.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**

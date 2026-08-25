@@ -30,8 +30,8 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := cdn.NewDomain(ctx, "foo", &cdn.DomainArgs{
-//				Domain:       pulumi.String("xxxx.com"),
+//			_, err := cdn.NewDomain(ctx, "example", &cdn.DomainArgs{
+//				Domain:       pulumi.String("example.com"),
 //				ServiceType:  pulumi.String("web"),
 //				Area:         pulumi.String("mainland"),
 //				FullUrlCache: pulumi.Bool(false),
@@ -81,8 +81,8 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := cdn.NewDomain(ctx, "foo", &cdn.DomainArgs{
-//				Domain:      pulumi.String("xxxx.com"),
+//			_, err := cdn.NewDomain(ctx, "example", &cdn.DomainArgs{
+//				Domain:      pulumi.String("example.com"),
 //				ServiceType: pulumi.String("web"),
 //				Area:        pulumi.String("mainland"),
 //				CacheKey: &cdn.DomainCacheKeyArgs{
@@ -165,8 +165,8 @@ import (
 //				return err
 //			}
 //			// Create cdn domain
-//			_, err = cdn.NewDomain(ctx, "cdn", &cdn.DomainArgs{
-//				Domain:      pulumi.String("abc.com"),
+//			_, err = cdn.NewDomain(ctx, "example", &cdn.DomainArgs{
+//				Domain:      pulumi.String("example.com"),
 //				ServiceType: pulumi.String("web"),
 //				Area:        pulumi.String("mainland"),
 //				CacheKey: &cdn.DomainCacheKeyArgs{
@@ -198,110 +198,214 @@ import (
 //
 // ```
 //
+// ### Example Usage of CDN domain with advanced fields
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cdn"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := cdn.NewDomain(ctx, "example", &cdn.DomainArgs{
+//				Domain:      pulumi.String("example.com"),
+//				ServiceType: pulumi.String("web"),
+//				Area:        pulumi.String("mainland"),
+//				Origin: &cdn.DomainOriginArgs{
+//					OriginType: pulumi.String("ip"),
+//					OriginLists: pulumi.StringArray{
+//						pulumi.String("127.0.0.1"),
+//					},
+//					OriginPullProtocol: pulumi.String("follow"),
+//				},
+//				HttpsConfig: &cdn.DomainHttpsConfigArgs{
+//					HttpsSwitch:        pulumi.String("off"),
+//					Http2Switch:        pulumi.String("off"),
+//					OcspStaplingSwitch: pulumi.String("off"),
+//					SpdySwitch:         pulumi.String("off"),
+//					VerifyClient:       pulumi.String("off"),
+//					Hsts: &cdn.DomainHttpsConfigHstsArgs{
+//						Switch:            pulumi.String("on"),
+//						MaxAge:            pulumi.Int(31536000),
+//						IncludeSubDomains: pulumi.String("on"),
+//					},
+//				},
+//				UserAgentFilter: &cdn.DomainUserAgentFilterArgs{
+//					Switch: pulumi.String("on"),
+//					FilterRules: cdn.DomainUserAgentFilterFilterRuleArray{
+//						&cdn.DomainUserAgentFilterFilterRuleArgs{
+//							RuleType: pulumi.String("all"),
+//							RulePaths: pulumi.StringArray{
+//								pulumi.String("*"),
+//							},
+//							UserAgents: pulumi.StringArray{
+//								pulumi.String("Mozilla/5.0"),
+//							},
+//							FilterType: pulumi.String("blacklist"),
+//						},
+//					},
+//				},
+//				UrlRedirect: &cdn.DomainUrlRedirectArgs{
+//					Switch: pulumi.String("on"),
+//					PathRules: cdn.DomainUrlRedirectPathRuleArray{
+//						&cdn.DomainUrlRedirectPathRuleArgs{
+//							RedirectStatusCode: pulumi.Int(302),
+//							Pattern:            pulumi.String("/old/*"),
+//							RedirectUrl:        pulumi.String("/new/$1"),
+//						},
+//					},
+//				},
+//				OriginCombine: &cdn.DomainOriginCombineArgs{
+//					Switch: pulumi.String("on"),
+//				},
+//				RangeOriginPull: &cdn.DomainRangeOriginPullArgs{
+//					Switch: pulumi.String("on"),
+//					RangeRules: cdn.DomainRangeOriginPullRangeRuleArray{
+//						&cdn.DomainRangeOriginPullRangeRuleArgs{
+//							Switch:   pulumi.String("on"),
+//							RuleType: pulumi.String("file"),
+//							RulePaths: pulumi.StringArray{
+//								pulumi.String("jpg"),
+//								pulumi.String("png"),
+//							},
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
 // ## Import
 //
 // CDN domain can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Cdn/domain:Domain foo xxxx.com
+// $ pulumi import tencentcloud:Cdn/domain:Domain example example.com
 // ```
 type Domain struct {
 	pulumi.CustomResourceState
 
+	// Access port configuration. List of ports that can be accessed.
+	AccessPorts pulumi.IntArrayOutput `pulumi:"accessPorts"`
 	// Domain name acceleration region. `mainland`: acceleration inside mainland China, `overseas`: acceleration outside mainland China, `global`: global acceleration. Overseas acceleration service must be enabled to use overseas acceleration and global acceleration.
-	Area pulumi.StringPtrOutput `pulumi:"area"`
+	Area pulumi.StringOutput `pulumi:"area"`
 	// Specify timestamp hotlink protection configuration, NOTE: only one type can choose for the sub elements.
-	Authentication DomainAuthenticationPtrOutput `pulumi:"authentication"`
+	Authentication DomainAuthenticationOutput `pulumi:"authentication"`
+	// Traffic anti-hotlinking protection configuration. Note: Create API does not support this field, it will be set via Update API after creation.
+	AutoGuard DomainAutoGuardOutput `pulumi:"autoGuard"`
 	// Access authentication for S3 origin.
-	AwsPrivateAccess DomainAwsPrivateAccessPtrOutput `pulumi:"awsPrivateAccess"`
+	AwsPrivateAccess DomainAwsPrivateAccessOutput `pulumi:"awsPrivateAccess"`
 	// Bandwidth cap configuration.
-	BandWidthAlert DomainBandWidthAlertPtrOutput `pulumi:"bandWidthAlert"`
+	BandWidthAlert DomainBandWidthAlertOutput `pulumi:"bandWidthAlert"`
 	// Cache key configuration (Ignore Query String configuration). NOTE: All of `fullUrlCache` default value is `on`.
-	CacheKey DomainCacheKeyPtrOutput `pulumi:"cacheKey"`
+	CacheKey DomainCacheKeyOutput `pulumi:"cacheKey"`
 	// CNAME address of domain name.
 	Cname pulumi.StringOutput `pulumi:"cname"`
 	// Smart compression configurations.
-	Compression DomainCompressionPtrOutput `pulumi:"compression"`
+	Compression DomainCompressionOutput `pulumi:"compression"`
 	// Creation time of domain name.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
 	// Name of the acceleration domain.
 	Domain pulumi.StringOutput `pulumi:"domain"`
 	// Downstream capping configuration.
-	DownstreamCapping DomainDownstreamCappingPtrOutput `pulumi:"downstreamCapping"`
+	DownstreamCapping DomainDownstreamCappingOutput `pulumi:"downstreamCapping"`
 	// Used for store `dryRun` request json.
 	DryRunCreateResult pulumi.StringOutput `pulumi:"dryRunCreateResult"`
 	// Used for store `dryRun` update request json.
 	DryRunUpdateResult pulumi.StringOutput `pulumi:"dryRunUpdateResult"`
 	// Error page configurations.
-	ErrorPage DomainErrorPagePtrOutput `pulumi:"errorPage"`
+	ErrorPage DomainErrorPageOutput `pulumi:"errorPage"`
 	// Used for validate only by store arguments to request json string as expected, WARNING: if set to `true`, NO Cloud Api will be invoked but store as local data, do not use this argument unless you really know what you are doing.
-	ExplicitUsingDryRun pulumi.BoolPtrOutput `pulumi:"explicitUsingDryRun"`
+	ExplicitUsingDryRun pulumi.BoolOutput `pulumi:"explicitUsingDryRun"`
 	// 301/302 redirect following switch, available values: `on`, `off` (default).
 	FollowRedirectSwitch pulumi.StringPtrOutput `pulumi:"followRedirectSwitch"`
 	// Use `cacheKey` > `fullUrlCache` instead. Whether to enable full-path cache. Default value is `true`.
 	//
 	// Deprecated: Use `cacheKey` -> `fullUrlCache` instead.
 	FullUrlCache pulumi.BoolPtrOutput `pulumi:"fullUrlCache"`
+	// Regional access control configuration. Note: Create API does not support this field, it will be set via Update API after creation.
+	GeoBlocker DomainGeoBlockerOutput `pulumi:"geoBlocker"`
+	// HTTPS service is enabled by default (this is a paid service; please refer to the billing information and product documentation for details).
+	HttpsBilling DomainHttpsBillingOutput `pulumi:"httpsBilling"`
 	// HTTPS acceleration configuration. It's a list and consist of at most one item.
 	HttpsConfig DomainHttpsConfigOutput `pulumi:"httpsConfig"`
 	// Access authentication for OBS origin.
-	HwPrivateAccess DomainHwPrivateAccessPtrOutput `pulumi:"hwPrivateAccess"`
+	HwPrivateAccess DomainHwPrivateAccessOutput `pulumi:"hwPrivateAccess"`
 	// Specify Ip filter configurations.
-	IpFilter DomainIpFilterPtrOutput `pulumi:"ipFilter"`
+	IpFilter DomainIpFilterOutput `pulumi:"ipFilter"`
 	// Specify Ip frequency limit configurations.
-	IpFreqLimit DomainIpFreqLimitPtrOutput `pulumi:"ipFreqLimit"`
+	IpFreqLimit DomainIpFreqLimitOutput `pulumi:"ipFreqLimit"`
 	// ipv6 access configuration switch. Only available when area set to `mainland`. Valid values are `on` and `off`. Default value is `off`.
 	Ipv6AccessSwitch pulumi.StringPtrOutput `pulumi:"ipv6AccessSwitch"`
 	// Browser cache configuration. (This feature is in beta and not generally available yet).
-	MaxAge DomainMaxAgePtrOutput `pulumi:"maxAge"`
+	MaxAge DomainMaxAgeOutput `pulumi:"maxAge"`
 	// Offline cache switch, available values: `on`, `off` (default).
-	OfflineCacheSwitch pulumi.StringPtrOutput `pulumi:"offlineCacheSwitch"`
+	OfflineCacheSwitch pulumi.StringOutput `pulumi:"offlineCacheSwitch"`
 	// Origin server configuration. It's a list and consist of at most one item.
 	Origin DomainOriginOutput `pulumi:"origin"`
+	// Origin combine configuration.
+	OriginCombine DomainOriginCombineOutput `pulumi:"originCombine"`
 	// Cross-border linkage optimization configuration. (This feature is in beta and not generally available yet).
-	OriginPullOptimization DomainOriginPullOptimizationPtrOutput `pulumi:"originPullOptimization"`
+	OriginPullOptimization DomainOriginPullOptimizationOutput `pulumi:"originPullOptimization"`
 	// Cross-border linkage optimization configuration.
-	OriginPullTimeout DomainOriginPullTimeoutPtrOutput `pulumi:"originPullTimeout"`
+	OriginPullTimeout DomainOriginPullTimeoutOutput `pulumi:"originPullTimeout"`
 	// Access authentication for OSS origin.
-	OssPrivateAccess DomainOssPrivateAccessPtrOutput `pulumi:"ossPrivateAccess"`
+	OssPrivateAccess DomainOssPrivateAccessOutput `pulumi:"ossPrivateAccess"`
 	// Object storage back-to-source authentication of other vendors.
-	OthersPrivateAccess DomainOthersPrivateAccessPtrOutput `pulumi:"othersPrivateAccess"`
+	OthersPrivateAccess DomainOthersPrivateAccessOutput `pulumi:"othersPrivateAccess"`
 	// Maximum post size configuration.
 	PostMaxSizes DomainPostMaxSizeArrayOutput `pulumi:"postMaxSizes"`
 	// The project CDN belongs to, default to 0.
 	ProjectId pulumi.IntPtrOutput `pulumi:"projectId"`
 	// Access authentication for OBS origin.
-	QnPrivateAccess DomainQnPrivateAccessPtrOutput `pulumi:"qnPrivateAccess"`
+	QnPrivateAccess DomainQnPrivateAccessOutput `pulumi:"qnPrivateAccess"`
 	// QUIC switch, available values: `on`, `off` (default).
-	QuicSwitch pulumi.StringPtrOutput `pulumi:"quicSwitch"`
+	QuicSwitch pulumi.StringOutput `pulumi:"quicSwitch"`
+	// Range origin pull configuration with path-based rules.
+	RangeOriginPull DomainRangeOriginPullOutput `pulumi:"rangeOriginPull"`
 	// Sharding back to source configuration switch. Valid values are `on` and `off`. Default value is `on`.
 	RangeOriginSwitch pulumi.StringPtrOutput `pulumi:"rangeOriginSwitch"`
 	// Referer configuration.
-	Referer DomainRefererPtrOutput `pulumi:"referer"`
+	Referer DomainRefererOutput `pulumi:"referer"`
 	// Request header configuration. It's a list and consist of at most one item.
 	RequestHeader DomainRequestHeaderOutput `pulumi:"requestHeader"`
 	// Response header configurations.
-	ResponseHeader DomainResponseHeaderPtrOutput `pulumi:"responseHeader"`
+	ResponseHeader DomainResponseHeaderOutput `pulumi:"responseHeader"`
 	// Response header cache switch, available values: `on`, `off` (default).
-	ResponseHeaderCacheSwitch pulumi.StringPtrOutput `pulumi:"responseHeaderCacheSwitch"`
+	ResponseHeaderCacheSwitch pulumi.StringOutput `pulumi:"responseHeaderCacheSwitch"`
 	// Advanced path cache configuration.
 	RuleCaches DomainRuleCacheArrayOutput `pulumi:"ruleCaches"`
 	// SEO switch, available values: `on`, `off` (default).
-	SeoSwitch pulumi.StringPtrOutput `pulumi:"seoSwitch"`
+	SeoSwitch pulumi.StringOutput `pulumi:"seoSwitch"`
 	// Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration, `hybrid`: hybrid acceleration, `dynamic`: dynamic acceleration.
 	ServiceType pulumi.StringOutput `pulumi:"serviceType"`
 	// Specific configuration for mainland, NOTE: Both specifying full schema or using it is superfluous, please use cloud api parameters json passthroughs, check the [Data Types](https://www.tencentcloud.com/document/api/228/31739#MainlandConfig) for more details.
-	SpecificConfigMainland pulumi.StringPtrOutput `pulumi:"specificConfigMainland"`
+	SpecificConfigMainland pulumi.StringOutput `pulumi:"specificConfigMainland"`
 	// Specific configuration for oversea, NOTE: Both specifying full schema or using it is superfluous, please use cloud api parameters json passthroughs, check the [Data Types](https://www.tencentcloud.com/document/api/228/31739#OverseaConfig) for more details.
-	SpecificConfigOverseas pulumi.StringPtrOutput `pulumi:"specificConfigOverseas"`
+	SpecificConfigOverseas pulumi.StringOutput `pulumi:"specificConfigOverseas"`
 	// Acceleration service status.
 	Status pulumi.StringOutput `pulumi:"status"`
 	// Status code cache configurations.
-	StatusCodeCache DomainStatusCodeCachePtrOutput `pulumi:"statusCodeCache"`
+	StatusCodeCache DomainStatusCodeCacheOutput `pulumi:"statusCodeCache"`
 	// Tags of cdn domain.
 	Tags pulumi.StringMapOutput `pulumi:"tags"`
+	// URL redirect configuration.
+	UrlRedirect DomainUrlRedirectOutput `pulumi:"urlRedirect"`
+	// UserAgent blacklist/whitelist configuration.
+	UserAgentFilter DomainUserAgentFilterOutput `pulumi:"userAgentFilter"`
 	// Video seek switch, available values: `on`, `off` (default).
-	VideoSeekSwitch pulumi.StringPtrOutput `pulumi:"videoSeekSwitch"`
+	VideoSeekSwitch pulumi.StringOutput `pulumi:"videoSeekSwitch"`
 }
 
 // NewDomain registers a new resource with the given unique name, arguments, and options.
@@ -343,10 +447,14 @@ func GetDomain(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Domain resources.
 type domainState struct {
+	// Access port configuration. List of ports that can be accessed.
+	AccessPorts []int `pulumi:"accessPorts"`
 	// Domain name acceleration region. `mainland`: acceleration inside mainland China, `overseas`: acceleration outside mainland China, `global`: global acceleration. Overseas acceleration service must be enabled to use overseas acceleration and global acceleration.
 	Area *string `pulumi:"area"`
 	// Specify timestamp hotlink protection configuration, NOTE: only one type can choose for the sub elements.
 	Authentication *DomainAuthentication `pulumi:"authentication"`
+	// Traffic anti-hotlinking protection configuration. Note: Create API does not support this field, it will be set via Update API after creation.
+	AutoGuard *DomainAutoGuard `pulumi:"autoGuard"`
 	// Access authentication for S3 origin.
 	AwsPrivateAccess *DomainAwsPrivateAccess `pulumi:"awsPrivateAccess"`
 	// Bandwidth cap configuration.
@@ -377,6 +485,10 @@ type domainState struct {
 	//
 	// Deprecated: Use `cacheKey` -> `fullUrlCache` instead.
 	FullUrlCache *bool `pulumi:"fullUrlCache"`
+	// Regional access control configuration. Note: Create API does not support this field, it will be set via Update API after creation.
+	GeoBlocker *DomainGeoBlocker `pulumi:"geoBlocker"`
+	// HTTPS service is enabled by default (this is a paid service; please refer to the billing information and product documentation for details).
+	HttpsBilling *DomainHttpsBilling `pulumi:"httpsBilling"`
 	// HTTPS acceleration configuration. It's a list and consist of at most one item.
 	HttpsConfig *DomainHttpsConfig `pulumi:"httpsConfig"`
 	// Access authentication for OBS origin.
@@ -393,6 +505,8 @@ type domainState struct {
 	OfflineCacheSwitch *string `pulumi:"offlineCacheSwitch"`
 	// Origin server configuration. It's a list and consist of at most one item.
 	Origin *DomainOrigin `pulumi:"origin"`
+	// Origin combine configuration.
+	OriginCombine *DomainOriginCombine `pulumi:"originCombine"`
 	// Cross-border linkage optimization configuration. (This feature is in beta and not generally available yet).
 	OriginPullOptimization *DomainOriginPullOptimization `pulumi:"originPullOptimization"`
 	// Cross-border linkage optimization configuration.
@@ -409,6 +523,8 @@ type domainState struct {
 	QnPrivateAccess *DomainQnPrivateAccess `pulumi:"qnPrivateAccess"`
 	// QUIC switch, available values: `on`, `off` (default).
 	QuicSwitch *string `pulumi:"quicSwitch"`
+	// Range origin pull configuration with path-based rules.
+	RangeOriginPull *DomainRangeOriginPull `pulumi:"rangeOriginPull"`
 	// Sharding back to source configuration switch. Valid values are `on` and `off`. Default value is `on`.
 	RangeOriginSwitch *string `pulumi:"rangeOriginSwitch"`
 	// Referer configuration.
@@ -435,15 +551,23 @@ type domainState struct {
 	StatusCodeCache *DomainStatusCodeCache `pulumi:"statusCodeCache"`
 	// Tags of cdn domain.
 	Tags map[string]string `pulumi:"tags"`
+	// URL redirect configuration.
+	UrlRedirect *DomainUrlRedirect `pulumi:"urlRedirect"`
+	// UserAgent blacklist/whitelist configuration.
+	UserAgentFilter *DomainUserAgentFilter `pulumi:"userAgentFilter"`
 	// Video seek switch, available values: `on`, `off` (default).
 	VideoSeekSwitch *string `pulumi:"videoSeekSwitch"`
 }
 
 type DomainState struct {
+	// Access port configuration. List of ports that can be accessed.
+	AccessPorts pulumi.IntArrayInput
 	// Domain name acceleration region. `mainland`: acceleration inside mainland China, `overseas`: acceleration outside mainland China, `global`: global acceleration. Overseas acceleration service must be enabled to use overseas acceleration and global acceleration.
 	Area pulumi.StringPtrInput
 	// Specify timestamp hotlink protection configuration, NOTE: only one type can choose for the sub elements.
 	Authentication DomainAuthenticationPtrInput
+	// Traffic anti-hotlinking protection configuration. Note: Create API does not support this field, it will be set via Update API after creation.
+	AutoGuard DomainAutoGuardPtrInput
 	// Access authentication for S3 origin.
 	AwsPrivateAccess DomainAwsPrivateAccessPtrInput
 	// Bandwidth cap configuration.
@@ -474,6 +598,10 @@ type DomainState struct {
 	//
 	// Deprecated: Use `cacheKey` -> `fullUrlCache` instead.
 	FullUrlCache pulumi.BoolPtrInput
+	// Regional access control configuration. Note: Create API does not support this field, it will be set via Update API after creation.
+	GeoBlocker DomainGeoBlockerPtrInput
+	// HTTPS service is enabled by default (this is a paid service; please refer to the billing information and product documentation for details).
+	HttpsBilling DomainHttpsBillingPtrInput
 	// HTTPS acceleration configuration. It's a list and consist of at most one item.
 	HttpsConfig DomainHttpsConfigPtrInput
 	// Access authentication for OBS origin.
@@ -490,6 +618,8 @@ type DomainState struct {
 	OfflineCacheSwitch pulumi.StringPtrInput
 	// Origin server configuration. It's a list and consist of at most one item.
 	Origin DomainOriginPtrInput
+	// Origin combine configuration.
+	OriginCombine DomainOriginCombinePtrInput
 	// Cross-border linkage optimization configuration. (This feature is in beta and not generally available yet).
 	OriginPullOptimization DomainOriginPullOptimizationPtrInput
 	// Cross-border linkage optimization configuration.
@@ -506,6 +636,8 @@ type DomainState struct {
 	QnPrivateAccess DomainQnPrivateAccessPtrInput
 	// QUIC switch, available values: `on`, `off` (default).
 	QuicSwitch pulumi.StringPtrInput
+	// Range origin pull configuration with path-based rules.
+	RangeOriginPull DomainRangeOriginPullPtrInput
 	// Sharding back to source configuration switch. Valid values are `on` and `off`. Default value is `on`.
 	RangeOriginSwitch pulumi.StringPtrInput
 	// Referer configuration.
@@ -532,6 +664,10 @@ type DomainState struct {
 	StatusCodeCache DomainStatusCodeCachePtrInput
 	// Tags of cdn domain.
 	Tags pulumi.StringMapInput
+	// URL redirect configuration.
+	UrlRedirect DomainUrlRedirectPtrInput
+	// UserAgent blacklist/whitelist configuration.
+	UserAgentFilter DomainUserAgentFilterPtrInput
 	// Video seek switch, available values: `on`, `off` (default).
 	VideoSeekSwitch pulumi.StringPtrInput
 }
@@ -541,10 +677,14 @@ func (DomainState) ElementType() reflect.Type {
 }
 
 type domainArgs struct {
+	// Access port configuration. List of ports that can be accessed.
+	AccessPorts []int `pulumi:"accessPorts"`
 	// Domain name acceleration region. `mainland`: acceleration inside mainland China, `overseas`: acceleration outside mainland China, `global`: global acceleration. Overseas acceleration service must be enabled to use overseas acceleration and global acceleration.
 	Area *string `pulumi:"area"`
 	// Specify timestamp hotlink protection configuration, NOTE: only one type can choose for the sub elements.
 	Authentication *DomainAuthentication `pulumi:"authentication"`
+	// Traffic anti-hotlinking protection configuration. Note: Create API does not support this field, it will be set via Update API after creation.
+	AutoGuard *DomainAutoGuard `pulumi:"autoGuard"`
 	// Access authentication for S3 origin.
 	AwsPrivateAccess *DomainAwsPrivateAccess `pulumi:"awsPrivateAccess"`
 	// Bandwidth cap configuration.
@@ -567,6 +707,10 @@ type domainArgs struct {
 	//
 	// Deprecated: Use `cacheKey` -> `fullUrlCache` instead.
 	FullUrlCache *bool `pulumi:"fullUrlCache"`
+	// Regional access control configuration. Note: Create API does not support this field, it will be set via Update API after creation.
+	GeoBlocker *DomainGeoBlocker `pulumi:"geoBlocker"`
+	// HTTPS service is enabled by default (this is a paid service; please refer to the billing information and product documentation for details).
+	HttpsBilling *DomainHttpsBilling `pulumi:"httpsBilling"`
 	// HTTPS acceleration configuration. It's a list and consist of at most one item.
 	HttpsConfig *DomainHttpsConfig `pulumi:"httpsConfig"`
 	// Access authentication for OBS origin.
@@ -583,6 +727,8 @@ type domainArgs struct {
 	OfflineCacheSwitch *string `pulumi:"offlineCacheSwitch"`
 	// Origin server configuration. It's a list and consist of at most one item.
 	Origin DomainOrigin `pulumi:"origin"`
+	// Origin combine configuration.
+	OriginCombine *DomainOriginCombine `pulumi:"originCombine"`
 	// Cross-border linkage optimization configuration. (This feature is in beta and not generally available yet).
 	OriginPullOptimization *DomainOriginPullOptimization `pulumi:"originPullOptimization"`
 	// Cross-border linkage optimization configuration.
@@ -599,6 +745,8 @@ type domainArgs struct {
 	QnPrivateAccess *DomainQnPrivateAccess `pulumi:"qnPrivateAccess"`
 	// QUIC switch, available values: `on`, `off` (default).
 	QuicSwitch *string `pulumi:"quicSwitch"`
+	// Range origin pull configuration with path-based rules.
+	RangeOriginPull *DomainRangeOriginPull `pulumi:"rangeOriginPull"`
 	// Sharding back to source configuration switch. Valid values are `on` and `off`. Default value is `on`.
 	RangeOriginSwitch *string `pulumi:"rangeOriginSwitch"`
 	// Referer configuration.
@@ -623,16 +771,24 @@ type domainArgs struct {
 	StatusCodeCache *DomainStatusCodeCache `pulumi:"statusCodeCache"`
 	// Tags of cdn domain.
 	Tags map[string]string `pulumi:"tags"`
+	// URL redirect configuration.
+	UrlRedirect *DomainUrlRedirect `pulumi:"urlRedirect"`
+	// UserAgent blacklist/whitelist configuration.
+	UserAgentFilter *DomainUserAgentFilter `pulumi:"userAgentFilter"`
 	// Video seek switch, available values: `on`, `off` (default).
 	VideoSeekSwitch *string `pulumi:"videoSeekSwitch"`
 }
 
 // The set of arguments for constructing a Domain resource.
 type DomainArgs struct {
+	// Access port configuration. List of ports that can be accessed.
+	AccessPorts pulumi.IntArrayInput
 	// Domain name acceleration region. `mainland`: acceleration inside mainland China, `overseas`: acceleration outside mainland China, `global`: global acceleration. Overseas acceleration service must be enabled to use overseas acceleration and global acceleration.
 	Area pulumi.StringPtrInput
 	// Specify timestamp hotlink protection configuration, NOTE: only one type can choose for the sub elements.
 	Authentication DomainAuthenticationPtrInput
+	// Traffic anti-hotlinking protection configuration. Note: Create API does not support this field, it will be set via Update API after creation.
+	AutoGuard DomainAutoGuardPtrInput
 	// Access authentication for S3 origin.
 	AwsPrivateAccess DomainAwsPrivateAccessPtrInput
 	// Bandwidth cap configuration.
@@ -655,6 +811,10 @@ type DomainArgs struct {
 	//
 	// Deprecated: Use `cacheKey` -> `fullUrlCache` instead.
 	FullUrlCache pulumi.BoolPtrInput
+	// Regional access control configuration. Note: Create API does not support this field, it will be set via Update API after creation.
+	GeoBlocker DomainGeoBlockerPtrInput
+	// HTTPS service is enabled by default (this is a paid service; please refer to the billing information and product documentation for details).
+	HttpsBilling DomainHttpsBillingPtrInput
 	// HTTPS acceleration configuration. It's a list and consist of at most one item.
 	HttpsConfig DomainHttpsConfigPtrInput
 	// Access authentication for OBS origin.
@@ -671,6 +831,8 @@ type DomainArgs struct {
 	OfflineCacheSwitch pulumi.StringPtrInput
 	// Origin server configuration. It's a list and consist of at most one item.
 	Origin DomainOriginInput
+	// Origin combine configuration.
+	OriginCombine DomainOriginCombinePtrInput
 	// Cross-border linkage optimization configuration. (This feature is in beta and not generally available yet).
 	OriginPullOptimization DomainOriginPullOptimizationPtrInput
 	// Cross-border linkage optimization configuration.
@@ -687,6 +849,8 @@ type DomainArgs struct {
 	QnPrivateAccess DomainQnPrivateAccessPtrInput
 	// QUIC switch, available values: `on`, `off` (default).
 	QuicSwitch pulumi.StringPtrInput
+	// Range origin pull configuration with path-based rules.
+	RangeOriginPull DomainRangeOriginPullPtrInput
 	// Sharding back to source configuration switch. Valid values are `on` and `off`. Default value is `on`.
 	RangeOriginSwitch pulumi.StringPtrInput
 	// Referer configuration.
@@ -711,6 +875,10 @@ type DomainArgs struct {
 	StatusCodeCache DomainStatusCodeCachePtrInput
 	// Tags of cdn domain.
 	Tags pulumi.StringMapInput
+	// URL redirect configuration.
+	UrlRedirect DomainUrlRedirectPtrInput
+	// UserAgent blacklist/whitelist configuration.
+	UserAgentFilter DomainUserAgentFilterPtrInput
 	// Video seek switch, available values: `on`, `off` (default).
 	VideoSeekSwitch pulumi.StringPtrInput
 }
@@ -802,29 +970,39 @@ func (o DomainOutput) ToDomainOutputWithContext(ctx context.Context) DomainOutpu
 	return o
 }
 
+// Access port configuration. List of ports that can be accessed.
+func (o DomainOutput) AccessPorts() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v *Domain) pulumi.IntArrayOutput { return v.AccessPorts }).(pulumi.IntArrayOutput)
+}
+
 // Domain name acceleration region. `mainland`: acceleration inside mainland China, `overseas`: acceleration outside mainland China, `global`: global acceleration. Overseas acceleration service must be enabled to use overseas acceleration and global acceleration.
-func (o DomainOutput) Area() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Domain) pulumi.StringPtrOutput { return v.Area }).(pulumi.StringPtrOutput)
+func (o DomainOutput) Area() pulumi.StringOutput {
+	return o.ApplyT(func(v *Domain) pulumi.StringOutput { return v.Area }).(pulumi.StringOutput)
 }
 
 // Specify timestamp hotlink protection configuration, NOTE: only one type can choose for the sub elements.
-func (o DomainOutput) Authentication() DomainAuthenticationPtrOutput {
-	return o.ApplyT(func(v *Domain) DomainAuthenticationPtrOutput { return v.Authentication }).(DomainAuthenticationPtrOutput)
+func (o DomainOutput) Authentication() DomainAuthenticationOutput {
+	return o.ApplyT(func(v *Domain) DomainAuthenticationOutput { return v.Authentication }).(DomainAuthenticationOutput)
+}
+
+// Traffic anti-hotlinking protection configuration. Note: Create API does not support this field, it will be set via Update API after creation.
+func (o DomainOutput) AutoGuard() DomainAutoGuardOutput {
+	return o.ApplyT(func(v *Domain) DomainAutoGuardOutput { return v.AutoGuard }).(DomainAutoGuardOutput)
 }
 
 // Access authentication for S3 origin.
-func (o DomainOutput) AwsPrivateAccess() DomainAwsPrivateAccessPtrOutput {
-	return o.ApplyT(func(v *Domain) DomainAwsPrivateAccessPtrOutput { return v.AwsPrivateAccess }).(DomainAwsPrivateAccessPtrOutput)
+func (o DomainOutput) AwsPrivateAccess() DomainAwsPrivateAccessOutput {
+	return o.ApplyT(func(v *Domain) DomainAwsPrivateAccessOutput { return v.AwsPrivateAccess }).(DomainAwsPrivateAccessOutput)
 }
 
 // Bandwidth cap configuration.
-func (o DomainOutput) BandWidthAlert() DomainBandWidthAlertPtrOutput {
-	return o.ApplyT(func(v *Domain) DomainBandWidthAlertPtrOutput { return v.BandWidthAlert }).(DomainBandWidthAlertPtrOutput)
+func (o DomainOutput) BandWidthAlert() DomainBandWidthAlertOutput {
+	return o.ApplyT(func(v *Domain) DomainBandWidthAlertOutput { return v.BandWidthAlert }).(DomainBandWidthAlertOutput)
 }
 
 // Cache key configuration (Ignore Query String configuration). NOTE: All of `fullUrlCache` default value is `on`.
-func (o DomainOutput) CacheKey() DomainCacheKeyPtrOutput {
-	return o.ApplyT(func(v *Domain) DomainCacheKeyPtrOutput { return v.CacheKey }).(DomainCacheKeyPtrOutput)
+func (o DomainOutput) CacheKey() DomainCacheKeyOutput {
+	return o.ApplyT(func(v *Domain) DomainCacheKeyOutput { return v.CacheKey }).(DomainCacheKeyOutput)
 }
 
 // CNAME address of domain name.
@@ -833,8 +1011,8 @@ func (o DomainOutput) Cname() pulumi.StringOutput {
 }
 
 // Smart compression configurations.
-func (o DomainOutput) Compression() DomainCompressionPtrOutput {
-	return o.ApplyT(func(v *Domain) DomainCompressionPtrOutput { return v.Compression }).(DomainCompressionPtrOutput)
+func (o DomainOutput) Compression() DomainCompressionOutput {
+	return o.ApplyT(func(v *Domain) DomainCompressionOutput { return v.Compression }).(DomainCompressionOutput)
 }
 
 // Creation time of domain name.
@@ -848,8 +1026,8 @@ func (o DomainOutput) Domain() pulumi.StringOutput {
 }
 
 // Downstream capping configuration.
-func (o DomainOutput) DownstreamCapping() DomainDownstreamCappingPtrOutput {
-	return o.ApplyT(func(v *Domain) DomainDownstreamCappingPtrOutput { return v.DownstreamCapping }).(DomainDownstreamCappingPtrOutput)
+func (o DomainOutput) DownstreamCapping() DomainDownstreamCappingOutput {
+	return o.ApplyT(func(v *Domain) DomainDownstreamCappingOutput { return v.DownstreamCapping }).(DomainDownstreamCappingOutput)
 }
 
 // Used for store `dryRun` request json.
@@ -863,13 +1041,13 @@ func (o DomainOutput) DryRunUpdateResult() pulumi.StringOutput {
 }
 
 // Error page configurations.
-func (o DomainOutput) ErrorPage() DomainErrorPagePtrOutput {
-	return o.ApplyT(func(v *Domain) DomainErrorPagePtrOutput { return v.ErrorPage }).(DomainErrorPagePtrOutput)
+func (o DomainOutput) ErrorPage() DomainErrorPageOutput {
+	return o.ApplyT(func(v *Domain) DomainErrorPageOutput { return v.ErrorPage }).(DomainErrorPageOutput)
 }
 
 // Used for validate only by store arguments to request json string as expected, WARNING: if set to `true`, NO Cloud Api will be invoked but store as local data, do not use this argument unless you really know what you are doing.
-func (o DomainOutput) ExplicitUsingDryRun() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *Domain) pulumi.BoolPtrOutput { return v.ExplicitUsingDryRun }).(pulumi.BoolPtrOutput)
+func (o DomainOutput) ExplicitUsingDryRun() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Domain) pulumi.BoolOutput { return v.ExplicitUsingDryRun }).(pulumi.BoolOutput)
 }
 
 // 301/302 redirect following switch, available values: `on`, `off` (default).
@@ -884,24 +1062,34 @@ func (o DomainOutput) FullUrlCache() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Domain) pulumi.BoolPtrOutput { return v.FullUrlCache }).(pulumi.BoolPtrOutput)
 }
 
+// Regional access control configuration. Note: Create API does not support this field, it will be set via Update API after creation.
+func (o DomainOutput) GeoBlocker() DomainGeoBlockerOutput {
+	return o.ApplyT(func(v *Domain) DomainGeoBlockerOutput { return v.GeoBlocker }).(DomainGeoBlockerOutput)
+}
+
+// HTTPS service is enabled by default (this is a paid service; please refer to the billing information and product documentation for details).
+func (o DomainOutput) HttpsBilling() DomainHttpsBillingOutput {
+	return o.ApplyT(func(v *Domain) DomainHttpsBillingOutput { return v.HttpsBilling }).(DomainHttpsBillingOutput)
+}
+
 // HTTPS acceleration configuration. It's a list and consist of at most one item.
 func (o DomainOutput) HttpsConfig() DomainHttpsConfigOutput {
 	return o.ApplyT(func(v *Domain) DomainHttpsConfigOutput { return v.HttpsConfig }).(DomainHttpsConfigOutput)
 }
 
 // Access authentication for OBS origin.
-func (o DomainOutput) HwPrivateAccess() DomainHwPrivateAccessPtrOutput {
-	return o.ApplyT(func(v *Domain) DomainHwPrivateAccessPtrOutput { return v.HwPrivateAccess }).(DomainHwPrivateAccessPtrOutput)
+func (o DomainOutput) HwPrivateAccess() DomainHwPrivateAccessOutput {
+	return o.ApplyT(func(v *Domain) DomainHwPrivateAccessOutput { return v.HwPrivateAccess }).(DomainHwPrivateAccessOutput)
 }
 
 // Specify Ip filter configurations.
-func (o DomainOutput) IpFilter() DomainIpFilterPtrOutput {
-	return o.ApplyT(func(v *Domain) DomainIpFilterPtrOutput { return v.IpFilter }).(DomainIpFilterPtrOutput)
+func (o DomainOutput) IpFilter() DomainIpFilterOutput {
+	return o.ApplyT(func(v *Domain) DomainIpFilterOutput { return v.IpFilter }).(DomainIpFilterOutput)
 }
 
 // Specify Ip frequency limit configurations.
-func (o DomainOutput) IpFreqLimit() DomainIpFreqLimitPtrOutput {
-	return o.ApplyT(func(v *Domain) DomainIpFreqLimitPtrOutput { return v.IpFreqLimit }).(DomainIpFreqLimitPtrOutput)
+func (o DomainOutput) IpFreqLimit() DomainIpFreqLimitOutput {
+	return o.ApplyT(func(v *Domain) DomainIpFreqLimitOutput { return v.IpFreqLimit }).(DomainIpFreqLimitOutput)
 }
 
 // ipv6 access configuration switch. Only available when area set to `mainland`. Valid values are `on` and `off`. Default value is `off`.
@@ -910,13 +1098,13 @@ func (o DomainOutput) Ipv6AccessSwitch() pulumi.StringPtrOutput {
 }
 
 // Browser cache configuration. (This feature is in beta and not generally available yet).
-func (o DomainOutput) MaxAge() DomainMaxAgePtrOutput {
-	return o.ApplyT(func(v *Domain) DomainMaxAgePtrOutput { return v.MaxAge }).(DomainMaxAgePtrOutput)
+func (o DomainOutput) MaxAge() DomainMaxAgeOutput {
+	return o.ApplyT(func(v *Domain) DomainMaxAgeOutput { return v.MaxAge }).(DomainMaxAgeOutput)
 }
 
 // Offline cache switch, available values: `on`, `off` (default).
-func (o DomainOutput) OfflineCacheSwitch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Domain) pulumi.StringPtrOutput { return v.OfflineCacheSwitch }).(pulumi.StringPtrOutput)
+func (o DomainOutput) OfflineCacheSwitch() pulumi.StringOutput {
+	return o.ApplyT(func(v *Domain) pulumi.StringOutput { return v.OfflineCacheSwitch }).(pulumi.StringOutput)
 }
 
 // Origin server configuration. It's a list and consist of at most one item.
@@ -924,24 +1112,29 @@ func (o DomainOutput) Origin() DomainOriginOutput {
 	return o.ApplyT(func(v *Domain) DomainOriginOutput { return v.Origin }).(DomainOriginOutput)
 }
 
+// Origin combine configuration.
+func (o DomainOutput) OriginCombine() DomainOriginCombineOutput {
+	return o.ApplyT(func(v *Domain) DomainOriginCombineOutput { return v.OriginCombine }).(DomainOriginCombineOutput)
+}
+
 // Cross-border linkage optimization configuration. (This feature is in beta and not generally available yet).
-func (o DomainOutput) OriginPullOptimization() DomainOriginPullOptimizationPtrOutput {
-	return o.ApplyT(func(v *Domain) DomainOriginPullOptimizationPtrOutput { return v.OriginPullOptimization }).(DomainOriginPullOptimizationPtrOutput)
+func (o DomainOutput) OriginPullOptimization() DomainOriginPullOptimizationOutput {
+	return o.ApplyT(func(v *Domain) DomainOriginPullOptimizationOutput { return v.OriginPullOptimization }).(DomainOriginPullOptimizationOutput)
 }
 
 // Cross-border linkage optimization configuration.
-func (o DomainOutput) OriginPullTimeout() DomainOriginPullTimeoutPtrOutput {
-	return o.ApplyT(func(v *Domain) DomainOriginPullTimeoutPtrOutput { return v.OriginPullTimeout }).(DomainOriginPullTimeoutPtrOutput)
+func (o DomainOutput) OriginPullTimeout() DomainOriginPullTimeoutOutput {
+	return o.ApplyT(func(v *Domain) DomainOriginPullTimeoutOutput { return v.OriginPullTimeout }).(DomainOriginPullTimeoutOutput)
 }
 
 // Access authentication for OSS origin.
-func (o DomainOutput) OssPrivateAccess() DomainOssPrivateAccessPtrOutput {
-	return o.ApplyT(func(v *Domain) DomainOssPrivateAccessPtrOutput { return v.OssPrivateAccess }).(DomainOssPrivateAccessPtrOutput)
+func (o DomainOutput) OssPrivateAccess() DomainOssPrivateAccessOutput {
+	return o.ApplyT(func(v *Domain) DomainOssPrivateAccessOutput { return v.OssPrivateAccess }).(DomainOssPrivateAccessOutput)
 }
 
 // Object storage back-to-source authentication of other vendors.
-func (o DomainOutput) OthersPrivateAccess() DomainOthersPrivateAccessPtrOutput {
-	return o.ApplyT(func(v *Domain) DomainOthersPrivateAccessPtrOutput { return v.OthersPrivateAccess }).(DomainOthersPrivateAccessPtrOutput)
+func (o DomainOutput) OthersPrivateAccess() DomainOthersPrivateAccessOutput {
+	return o.ApplyT(func(v *Domain) DomainOthersPrivateAccessOutput { return v.OthersPrivateAccess }).(DomainOthersPrivateAccessOutput)
 }
 
 // Maximum post size configuration.
@@ -955,13 +1148,18 @@ func (o DomainOutput) ProjectId() pulumi.IntPtrOutput {
 }
 
 // Access authentication for OBS origin.
-func (o DomainOutput) QnPrivateAccess() DomainQnPrivateAccessPtrOutput {
-	return o.ApplyT(func(v *Domain) DomainQnPrivateAccessPtrOutput { return v.QnPrivateAccess }).(DomainQnPrivateAccessPtrOutput)
+func (o DomainOutput) QnPrivateAccess() DomainQnPrivateAccessOutput {
+	return o.ApplyT(func(v *Domain) DomainQnPrivateAccessOutput { return v.QnPrivateAccess }).(DomainQnPrivateAccessOutput)
 }
 
 // QUIC switch, available values: `on`, `off` (default).
-func (o DomainOutput) QuicSwitch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Domain) pulumi.StringPtrOutput { return v.QuicSwitch }).(pulumi.StringPtrOutput)
+func (o DomainOutput) QuicSwitch() pulumi.StringOutput {
+	return o.ApplyT(func(v *Domain) pulumi.StringOutput { return v.QuicSwitch }).(pulumi.StringOutput)
+}
+
+// Range origin pull configuration with path-based rules.
+func (o DomainOutput) RangeOriginPull() DomainRangeOriginPullOutput {
+	return o.ApplyT(func(v *Domain) DomainRangeOriginPullOutput { return v.RangeOriginPull }).(DomainRangeOriginPullOutput)
 }
 
 // Sharding back to source configuration switch. Valid values are `on` and `off`. Default value is `on`.
@@ -970,8 +1168,8 @@ func (o DomainOutput) RangeOriginSwitch() pulumi.StringPtrOutput {
 }
 
 // Referer configuration.
-func (o DomainOutput) Referer() DomainRefererPtrOutput {
-	return o.ApplyT(func(v *Domain) DomainRefererPtrOutput { return v.Referer }).(DomainRefererPtrOutput)
+func (o DomainOutput) Referer() DomainRefererOutput {
+	return o.ApplyT(func(v *Domain) DomainRefererOutput { return v.Referer }).(DomainRefererOutput)
 }
 
 // Request header configuration. It's a list and consist of at most one item.
@@ -980,13 +1178,13 @@ func (o DomainOutput) RequestHeader() DomainRequestHeaderOutput {
 }
 
 // Response header configurations.
-func (o DomainOutput) ResponseHeader() DomainResponseHeaderPtrOutput {
-	return o.ApplyT(func(v *Domain) DomainResponseHeaderPtrOutput { return v.ResponseHeader }).(DomainResponseHeaderPtrOutput)
+func (o DomainOutput) ResponseHeader() DomainResponseHeaderOutput {
+	return o.ApplyT(func(v *Domain) DomainResponseHeaderOutput { return v.ResponseHeader }).(DomainResponseHeaderOutput)
 }
 
 // Response header cache switch, available values: `on`, `off` (default).
-func (o DomainOutput) ResponseHeaderCacheSwitch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Domain) pulumi.StringPtrOutput { return v.ResponseHeaderCacheSwitch }).(pulumi.StringPtrOutput)
+func (o DomainOutput) ResponseHeaderCacheSwitch() pulumi.StringOutput {
+	return o.ApplyT(func(v *Domain) pulumi.StringOutput { return v.ResponseHeaderCacheSwitch }).(pulumi.StringOutput)
 }
 
 // Advanced path cache configuration.
@@ -995,8 +1193,8 @@ func (o DomainOutput) RuleCaches() DomainRuleCacheArrayOutput {
 }
 
 // SEO switch, available values: `on`, `off` (default).
-func (o DomainOutput) SeoSwitch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Domain) pulumi.StringPtrOutput { return v.SeoSwitch }).(pulumi.StringPtrOutput)
+func (o DomainOutput) SeoSwitch() pulumi.StringOutput {
+	return o.ApplyT(func(v *Domain) pulumi.StringOutput { return v.SeoSwitch }).(pulumi.StringOutput)
 }
 
 // Acceleration domain name service type. `web`: static acceleration, `download`: download acceleration, `media`: streaming media VOD acceleration, `hybrid`: hybrid acceleration, `dynamic`: dynamic acceleration.
@@ -1005,13 +1203,13 @@ func (o DomainOutput) ServiceType() pulumi.StringOutput {
 }
 
 // Specific configuration for mainland, NOTE: Both specifying full schema or using it is superfluous, please use cloud api parameters json passthroughs, check the [Data Types](https://www.tencentcloud.com/document/api/228/31739#MainlandConfig) for more details.
-func (o DomainOutput) SpecificConfigMainland() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Domain) pulumi.StringPtrOutput { return v.SpecificConfigMainland }).(pulumi.StringPtrOutput)
+func (o DomainOutput) SpecificConfigMainland() pulumi.StringOutput {
+	return o.ApplyT(func(v *Domain) pulumi.StringOutput { return v.SpecificConfigMainland }).(pulumi.StringOutput)
 }
 
 // Specific configuration for oversea, NOTE: Both specifying full schema or using it is superfluous, please use cloud api parameters json passthroughs, check the [Data Types](https://www.tencentcloud.com/document/api/228/31739#OverseaConfig) for more details.
-func (o DomainOutput) SpecificConfigOverseas() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Domain) pulumi.StringPtrOutput { return v.SpecificConfigOverseas }).(pulumi.StringPtrOutput)
+func (o DomainOutput) SpecificConfigOverseas() pulumi.StringOutput {
+	return o.ApplyT(func(v *Domain) pulumi.StringOutput { return v.SpecificConfigOverseas }).(pulumi.StringOutput)
 }
 
 // Acceleration service status.
@@ -1020,8 +1218,8 @@ func (o DomainOutput) Status() pulumi.StringOutput {
 }
 
 // Status code cache configurations.
-func (o DomainOutput) StatusCodeCache() DomainStatusCodeCachePtrOutput {
-	return o.ApplyT(func(v *Domain) DomainStatusCodeCachePtrOutput { return v.StatusCodeCache }).(DomainStatusCodeCachePtrOutput)
+func (o DomainOutput) StatusCodeCache() DomainStatusCodeCacheOutput {
+	return o.ApplyT(func(v *Domain) DomainStatusCodeCacheOutput { return v.StatusCodeCache }).(DomainStatusCodeCacheOutput)
 }
 
 // Tags of cdn domain.
@@ -1029,9 +1227,19 @@ func (o DomainOutput) Tags() pulumi.StringMapOutput {
 	return o.ApplyT(func(v *Domain) pulumi.StringMapOutput { return v.Tags }).(pulumi.StringMapOutput)
 }
 
+// URL redirect configuration.
+func (o DomainOutput) UrlRedirect() DomainUrlRedirectOutput {
+	return o.ApplyT(func(v *Domain) DomainUrlRedirectOutput { return v.UrlRedirect }).(DomainUrlRedirectOutput)
+}
+
+// UserAgent blacklist/whitelist configuration.
+func (o DomainOutput) UserAgentFilter() DomainUserAgentFilterOutput {
+	return o.ApplyT(func(v *Domain) DomainUserAgentFilterOutput { return v.UserAgentFilter }).(DomainUserAgentFilterOutput)
+}
+
 // Video seek switch, available values: `on`, `off` (default).
-func (o DomainOutput) VideoSeekSwitch() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Domain) pulumi.StringPtrOutput { return v.VideoSeekSwitch }).(pulumi.StringPtrOutput)
+func (o DomainOutput) VideoSeekSwitch() pulumi.StringOutput {
+	return o.ApplyT(func(v *Domain) pulumi.StringOutput { return v.VideoSeekSwitch }).(pulumi.StringOutput)
 }
 
 type DomainArrayOutput struct{ *pulumi.OutputState }

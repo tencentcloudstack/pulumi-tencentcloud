@@ -25,7 +25,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * monitor grafana_dns_config can be imported using the id, e.g.
+ * monitor grafanaDnsConfig can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Monitor/grafanaDnsConfig:GrafanaDnsConfig grafana_dns_config instance_id
@@ -103,11 +103,11 @@ export interface GrafanaDnsConfigState {
     /**
      * Grafana instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * DNS nameserver list.
      */
-    nameServers?: pulumi.Input<pulumi.Input<string>[]>;
+    nameServers?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -121,5 +121,5 @@ export interface GrafanaDnsConfigArgs {
     /**
      * DNS nameserver list.
      */
-    nameServers?: pulumi.Input<pulumi.Input<string>[]>;
+    nameServers?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

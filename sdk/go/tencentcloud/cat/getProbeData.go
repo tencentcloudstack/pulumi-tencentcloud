@@ -118,12 +118,8 @@ type GetProbeDataResult struct {
 }
 
 func GetProbeDataOutput(ctx *pulumi.Context, args GetProbeDataOutputArgs, opts ...pulumi.InvokeOption) GetProbeDataResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetProbeDataResultOutput, error) {
-			args := v.(GetProbeDataArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cat/getProbeData:getProbeData", args, GetProbeDataResultOutput{}, options).(GetProbeDataResultOutput), nil
-		}).(GetProbeDataResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cat/getProbeData:getProbeData", args, GetProbeDataResultOutput{}, options).(GetProbeDataResultOutput)
 }
 
 // A collection of arguments for invoking getProbeData.

@@ -39,6 +39,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &LiveTranscodeRuleAttachment{}
 	case "tencentcloud:Css/liveTranscodeTemplate:LiveTranscodeTemplate":
 		r = &LiveTranscodeTemplate{}
+	case "tencentcloud:Css/originStreamInfo:OriginStreamInfo":
+		r = &OriginStreamInfo{}
 	case "tencentcloud:Css/padRuleAttachment:PadRuleAttachment":
 		r = &PadRuleAttachment{}
 	case "tencentcloud:Css/padTemplate:PadTemplate":
@@ -129,6 +131,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Css/liveTranscodeTemplate",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Css/originStreamInfo",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

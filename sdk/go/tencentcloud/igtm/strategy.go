@@ -100,7 +100,7 @@ import (
 //				return err
 //			}
 //			_, err = igtm.NewStrategy(ctx, "example", &igtm.StrategyArgs{
-//				InstanceId:   example.ID(),
+//				InstanceId:   example.ID().ToIDOutput().ToStringOutput(),
 //				StrategyName: pulumi.String("tf-example"),
 //				Sources: igtm.StrategySourceArray{
 //					&igtm.StrategySourceArgs{
@@ -162,7 +162,7 @@ import (
 // IGTM strategy can be imported using the instanceId#strategyId, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Igtm/strategy:Strategy igtm_strategy gtm-uukztqtoaru#7556
+// $ pulumi import tencentcloud:Igtm/strategy:Strategy example gtm-uukztqtoaru#7556
 // ```
 type Strategy struct {
 	pulumi.CustomResourceState

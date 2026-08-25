@@ -58,7 +58,6 @@ import (
 // ## Import
 //
 // tdcpg instance can be imported using the id, e.g.
-//
 // ```sh
 // $ pulumi import tencentcloud:Tdcpg/instance:Instance instance cluster_id#instance_id
 // ```

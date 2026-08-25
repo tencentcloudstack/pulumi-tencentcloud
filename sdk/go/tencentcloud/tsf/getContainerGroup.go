@@ -89,12 +89,8 @@ type LookupContainerGroupResult struct {
 }
 
 func LookupContainerGroupOutput(ctx *pulumi.Context, args LookupContainerGroupOutputArgs, opts ...pulumi.InvokeOption) LookupContainerGroupResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupContainerGroupResultOutput, error) {
-			args := v.(LookupContainerGroupArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tsf/getContainerGroup:getContainerGroup", args, LookupContainerGroupResultOutput{}, options).(LookupContainerGroupResultOutput), nil
-		}).(LookupContainerGroupResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tsf/getContainerGroup:getContainerGroup", args, LookupContainerGroupResultOutput{}, options).(LookupContainerGroupResultOutput)
 }
 
 // A collection of arguments for invoking getContainerGroup.

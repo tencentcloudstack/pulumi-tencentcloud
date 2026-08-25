@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * oceanus work_space can be imported using the id, e.g.
+ * oceanus workSpace can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Oceanus/workSpace:WorkSpace example space-0dan3yux#tf_example
@@ -159,51 +159,51 @@ export interface WorkSpaceState {
     /**
      * User APPID.
      */
-    appId?: pulumi.Input<number>;
+    appId?: pulumi.Input<number | undefined>;
     /**
      * Create time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Creator UIN.
      */
-    creatorUin?: pulumi.Input<string>;
+    creatorUin?: pulumi.Input<string | undefined>;
     /**
      * Workspace description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Number of Jobs.
      */
-    jobsCount?: pulumi.Input<number>;
+    jobsCount?: pulumi.Input<number | undefined>;
     /**
      * Owner UIN.
      */
-    ownerUin?: pulumi.Input<string>;
+    ownerUin?: pulumi.Input<string | undefined>;
     /**
      * Number of workspace members.
      */
-    roleAuthCount?: pulumi.Input<number>;
+    roleAuthCount?: pulumi.Input<number | undefined>;
     /**
      * Serial ID.
      */
-    serialId?: pulumi.Input<string>;
+    serialId?: pulumi.Input<string | undefined>;
     /**
      * Workspace status.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * Update time.
      */
-    updateTime?: pulumi.Input<string>;
+    updateTime?: pulumi.Input<string | undefined>;
     /**
      * Workspace ID.
      */
-    workSpaceId?: pulumi.Input<string>;
+    workSpaceId?: pulumi.Input<string | undefined>;
     /**
      * Workspace name.
      */
-    workSpaceName?: pulumi.Input<string>;
+    workSpaceName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -213,7 +213,7 @@ export interface WorkSpaceArgs {
     /**
      * Workspace description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Workspace name.
      */

@@ -77,12 +77,8 @@ type GetDescribeHostLighthouseInstanceListResult struct {
 }
 
 func GetDescribeHostLighthouseInstanceListOutput(ctx *pulumi.Context, args GetDescribeHostLighthouseInstanceListOutputArgs, opts ...pulumi.InvokeOption) GetDescribeHostLighthouseInstanceListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDescribeHostLighthouseInstanceListResultOutput, error) {
-			args := v.(GetDescribeHostLighthouseInstanceListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ssl/getDescribeHostLighthouseInstanceList:getDescribeHostLighthouseInstanceList", args, GetDescribeHostLighthouseInstanceListResultOutput{}, options).(GetDescribeHostLighthouseInstanceListResultOutput), nil
-		}).(GetDescribeHostLighthouseInstanceListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ssl/getDescribeHostLighthouseInstanceList:getDescribeHostLighthouseInstanceList", args, GetDescribeHostLighthouseInstanceListResultOutput{}, options).(GetDescribeHostLighthouseInstanceListResultOutput)
 }
 
 // A collection of arguments for invoking getDescribeHostLighthouseInstanceList.

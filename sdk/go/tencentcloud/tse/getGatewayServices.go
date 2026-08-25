@@ -76,12 +76,8 @@ type LookupGatewayServicesResult struct {
 }
 
 func LookupGatewayServicesOutput(ctx *pulumi.Context, args LookupGatewayServicesOutputArgs, opts ...pulumi.InvokeOption) LookupGatewayServicesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupGatewayServicesResultOutput, error) {
-			args := v.(LookupGatewayServicesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tse/getGatewayServices:getGatewayServices", args, LookupGatewayServicesResultOutput{}, options).(LookupGatewayServicesResultOutput), nil
-		}).(LookupGatewayServicesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tse/getGatewayServices:getGatewayServices", args, LookupGatewayServicesResultOutput{}, options).(LookupGatewayServicesResultOutput)
 }
 
 // A collection of arguments for invoking getGatewayServices.

@@ -19,11 +19,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
         /// </summary>
         public readonly bool? AutoCreateDiscoveryAnonymousAuth;
         /// <summary>
-        /// Specify service-account-issuer. If UseTkeDefault is set to `True`, please do not set this field, it will be ignored anyway.
+        /// Specify service-account-issuer. If UseTkeDefault is set to `True`, please do not set this field, it will be ignored anyway. This field is also computed: when UseTkeDefault is `True`, TKE will auto-generate the value and it will be read back into state.
         /// </summary>
         public readonly string? Issuer;
         /// <summary>
-        /// Specify service-account-jwks-uri. If UseTkeDefault is set to `True`, please do not set this field, it will be ignored anyway.
+        /// Specify service-account-jwks-uri. If UseTkeDefault is set to `True`, please do not set this field, it will be ignored anyway. This field is also computed: when UseTkeDefault is `True`, TKE will auto-generate the value and it will be read back into state.
         /// </summary>
         public readonly string? JwksUri;
         /// <summary>

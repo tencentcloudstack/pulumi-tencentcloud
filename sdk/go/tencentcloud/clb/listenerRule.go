@@ -171,11 +171,11 @@ type ListenerRule struct {
 	Quic pulumi.BoolOutput `pulumi:"quic"`
 	// ID of this CLB listener rule.
 	RuleId pulumi.StringOutput `pulumi:"ruleId"`
-	// Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
-	Scheduler pulumi.StringPtrOutput `pulumi:"scheduler"`
-	// Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+	// Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR` when `targetType` is not `TARGETGROUP-V2`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+	Scheduler pulumi.StringOutput `pulumi:"scheduler"`
+	// Session Persistence Duration. Setting this to 0 disables session persistence; to enable it, the value must be between 30 and 86,400 (inclusive), in seconds.
 	SessionExpireTime pulumi.IntPtrOutput `pulumi:"sessionExpireTime"`
-	// Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group.
+	// Backend target type. Valid values: `NODE`, `TARGETGROUP`, `TARGETGROUP-V2`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group.
 	TargetType pulumi.StringPtrOutput `pulumi:"targetType"`
 	// Url of the listener rule.
 	Url pulumi.StringOutput `pulumi:"url"`
@@ -270,11 +270,11 @@ type listenerRuleState struct {
 	Quic *bool `pulumi:"quic"`
 	// ID of this CLB listener rule.
 	RuleId *string `pulumi:"ruleId"`
-	// Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+	// Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR` when `targetType` is not `TARGETGROUP-V2`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	Scheduler *string `pulumi:"scheduler"`
-	// Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+	// Session Persistence Duration. Setting this to 0 disables session persistence; to enable it, the value must be between 30 and 86,400 (inclusive), in seconds.
 	SessionExpireTime *int `pulumi:"sessionExpireTime"`
-	// Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group.
+	// Backend target type. Valid values: `NODE`, `TARGETGROUP`, `TARGETGROUP-V2`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group.
 	TargetType *string `pulumi:"targetType"`
 	// Url of the listener rule.
 	Url *string `pulumi:"url"`
@@ -331,11 +331,11 @@ type ListenerRuleState struct {
 	Quic pulumi.BoolPtrInput
 	// ID of this CLB listener rule.
 	RuleId pulumi.StringPtrInput
-	// Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+	// Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR` when `targetType` is not `TARGETGROUP-V2`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	Scheduler pulumi.StringPtrInput
-	// Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+	// Session Persistence Duration. Setting this to 0 disables session persistence; to enable it, the value must be between 30 and 86,400 (inclusive), in seconds.
 	SessionExpireTime pulumi.IntPtrInput
-	// Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group.
+	// Backend target type. Valid values: `NODE`, `TARGETGROUP`, `TARGETGROUP-V2`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group.
 	TargetType pulumi.StringPtrInput
 	// Url of the listener rule.
 	Url pulumi.StringPtrInput
@@ -394,11 +394,11 @@ type listenerRuleArgs struct {
 	Oauth *ListenerRuleOauth `pulumi:"oauth"`
 	// Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names.
 	Quic *bool `pulumi:"quic"`
-	// Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+	// Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR` when `targetType` is not `TARGETGROUP-V2`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	Scheduler *string `pulumi:"scheduler"`
-	// Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+	// Session Persistence Duration. Setting this to 0 disables session persistence; to enable it, the value must be between 30 and 86,400 (inclusive), in seconds.
 	SessionExpireTime *int `pulumi:"sessionExpireTime"`
-	// Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group.
+	// Backend target type. Valid values: `NODE`, `TARGETGROUP`, `TARGETGROUP-V2`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group.
 	TargetType *string `pulumi:"targetType"`
 	// Url of the listener rule.
 	Url string `pulumi:"url"`
@@ -454,11 +454,11 @@ type ListenerRuleArgs struct {
 	Oauth ListenerRuleOauthPtrInput
 	// Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names.
 	Quic pulumi.BoolPtrInput
-	// Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+	// Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR` when `targetType` is not `TARGETGROUP-V2`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
 	Scheduler pulumi.StringPtrInput
-	// Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+	// Session Persistence Duration. Setting this to 0 disables session persistence; to enable it, the value must be between 30 and 86,400 (inclusive), in seconds.
 	SessionExpireTime pulumi.IntPtrInput
-	// Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group.
+	// Backend target type. Valid values: `NODE`, `TARGETGROUP`, `TARGETGROUP-V2`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group.
 	TargetType pulumi.StringPtrInput
 	// Url of the listener rule.
 	Url pulumi.StringInput
@@ -676,17 +676,17 @@ func (o ListenerRuleOutput) RuleId() pulumi.StringOutput {
 	return o.ApplyT(func(v *ListenerRule) pulumi.StringOutput { return v.RuleId }).(pulumi.StringOutput)
 }
 
-// Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
-func (o ListenerRuleOutput) Scheduler() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ListenerRule) pulumi.StringPtrOutput { return v.Scheduler }).(pulumi.StringPtrOutput)
+// Scheduling method of the CLB listener rules. Valid values: `WRR`, `IP HASH`, `LEAST_CONN`. The default is `WRR` when `targetType` is not `TARGETGROUP-V2`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+func (o ListenerRuleOutput) Scheduler() pulumi.StringOutput {
+	return o.ApplyT(func(v *ListenerRule) pulumi.StringOutput { return v.Scheduler }).(pulumi.StringOutput)
 }
 
-// Time of session persistence within the CLB listener. NOTES: Available when scheduler is specified as `WRR`, and not available when listener protocol is `TCP_SSL`.  NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
+// Session Persistence Duration. Setting this to 0 disables session persistence; to enable it, the value must be between 30 and 86,400 (inclusive), in seconds.
 func (o ListenerRuleOutput) SessionExpireTime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ListenerRule) pulumi.IntPtrOutput { return v.SessionExpireTime }).(pulumi.IntPtrOutput)
 }
 
-// Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group.
+// Backend target type. Valid values: `NODE`, `TARGETGROUP`, `TARGETGROUP-V2`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group.
 func (o ListenerRuleOutput) TargetType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ListenerRule) pulumi.StringPtrOutput { return v.TargetType }).(pulumi.StringPtrOutput)
 }

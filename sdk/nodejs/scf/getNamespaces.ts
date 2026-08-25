@@ -16,7 +16,7 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const fooNamespace = new tencentcloud.scf.Namespace("foo", {namespace: "ci-test-scf"});
- * const foo = tencentcloud.Scf.getNamespacesOutput({
+ * const foo = tencentcloud.scf.getNamespacesOutput({
  *     namespace: fooNamespace.id,
  * });
  * ```
@@ -81,7 +81,7 @@ export interface GetNamespacesResult {
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const fooNamespace = new tencentcloud.scf.Namespace("foo", {namespace: "ci-test-scf"});
- * const foo = tencentcloud.Scf.getNamespacesOutput({
+ * const foo = tencentcloud.scf.getNamespacesOutput({
  *     namespace: fooNamespace.id,
  * });
  * ```
@@ -103,13 +103,13 @@ export interface GetNamespacesOutputArgs {
     /**
      * Description of the SCF namespace to be queried.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Name of the SCF namespace to be queried.
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

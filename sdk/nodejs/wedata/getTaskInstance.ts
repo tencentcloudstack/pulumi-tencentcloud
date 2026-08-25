@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataTaskInstance = tencentcloud.Wedata.getTaskInstance({
+ * const wedataTaskInstance = tencentcloud.wedata.getTaskInstance({
  *     projectId: "1859317240494305280",
  *     instanceKey: "20250324192240178_2025-10-13 11:50:00",
  * });
@@ -79,7 +79,7 @@ export interface GetTaskInstanceResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataTaskInstance = tencentcloud.Wedata.getTaskInstance({
+ * const wedataTaskInstance = tencentcloud.wedata.getTaskInstance({
  *     projectId: "1859317240494305280",
  *     instanceKey: "20250324192240178_2025-10-13 11:50:00",
  * });
@@ -110,9 +110,9 @@ export interface GetTaskInstanceOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Time zone, the time zone of the input time string, default UTC+8.
      */
-    timeZone?: pulumi.Input<string>;
+    timeZone?: pulumi.Input<string | undefined>;
 }

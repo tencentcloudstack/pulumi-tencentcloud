@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Placement.getGroups({
+ * const example = tencentcloud.placement.getGroups({
  *     placementGroupId: "ps-bwvst92h",
  *     name: "tf_example",
  * });
@@ -80,7 +80,7 @@ export interface GetGroupsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Placement.getGroups({
+ * const example = tencentcloud.placement.getGroups({
  *     placementGroupId: "ps-bwvst92h",
  *     name: "tf_example",
  * });
@@ -103,13 +103,13 @@ export interface GetGroupsOutputArgs {
     /**
      * Name of the placement group to be queried.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * ID of the placement group to be queried.
      */
-    placementGroupId?: pulumi.Input<string>;
+    placementGroupId?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

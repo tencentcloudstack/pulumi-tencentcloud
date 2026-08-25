@@ -68,7 +68,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * tse cngw_canary_rule can be imported using the gatewayId#serviceId#priority, e.g.
+ * tse cngwCanaryRule can be imported using the gatewayId#serviceId#priority, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Tse/cngwCanaryRule:CngwCanaryRule cngw_canary_rule gateway-ddbb709b#b6017eaf-2363-481e-9e93-8d65aaf498cd#100
@@ -164,19 +164,19 @@ export interface CngwCanaryRuleState {
     /**
      * canary rule configuration.
      */
-    canaryRule?: pulumi.Input<inputs.Tse.CngwCanaryRuleCanaryRule>;
+    canaryRule?: pulumi.Input<inputs.Tse.CngwCanaryRuleCanaryRule | undefined>;
     /**
      * gateway ID.
      */
-    gatewayId?: pulumi.Input<string>;
+    gatewayId?: pulumi.Input<string | undefined>;
     /**
      * service ID.
      */
-    serviceId?: pulumi.Input<string>;
+    serviceId?: pulumi.Input<string | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 /**
@@ -198,5 +198,5 @@ export interface CngwCanaryRuleArgs {
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

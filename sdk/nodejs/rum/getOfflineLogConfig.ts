@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const offlineLogConfig = tencentcloud.Rum.getOfflineLogConfig({
+ * const offlineLogConfig = tencentcloud.rum.getOfflineLogConfig({
  *     projectKey: "ZEYrYfvaYQ30jRdmPx",
  * });
  * ```
@@ -68,7 +68,7 @@ export interface GetOfflineLogConfigResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const offlineLogConfig = tencentcloud.Rum.getOfflineLogConfig({
+ * const offlineLogConfig = tencentcloud.rum.getOfflineLogConfig({
  *     projectKey: "ZEYrYfvaYQ30jRdmPx",
  * });
  * ```
@@ -92,5 +92,5 @@ export interface GetOfflineLogConfigOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

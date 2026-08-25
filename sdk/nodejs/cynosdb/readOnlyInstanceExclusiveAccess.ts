@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * const cynosdbClusterId = config.get("cynosdbClusterId") || "default_cynosdb_cluster";
  * const cynosdbClusterInstanceId = config.get("cynosdbClusterInstanceId") || "default_cluster_instance";
  * const cynosdbClusterSecurityGroupId = config.get("cynosdbClusterSecurityGroupId") || "default_security_group_id";
- * const gz3 = tencentcloud.Vpc.getSubnets({
+ * const gz3 = tencentcloud.vpc.getSubnets({
  *     availabilityZone: defaultAz,
  *     isDefault: true,
  * });
@@ -141,27 +141,27 @@ export interface ReadOnlyInstanceExclusiveAccessState {
     /**
      * Cluster ID.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Need to activate a read-only instance ID with unique access.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * port.
      */
-    port?: pulumi.Input<number>;
+    port?: pulumi.Input<number | undefined>;
     /**
      * Security Group.
      */
-    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The specified subnet ID.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * Specified VPC ID.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -183,7 +183,7 @@ export interface ReadOnlyInstanceExclusiveAccessArgs {
     /**
      * Security Group.
      */
-    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The specified subnet ID.
      */

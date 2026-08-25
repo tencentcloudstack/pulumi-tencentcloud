@@ -136,12 +136,8 @@ type GetSetUrlStatisticsResult struct {
 }
 
 func GetSetUrlStatisticsOutput(ctx *pulumi.Context, args GetSetUrlStatisticsOutputArgs, opts ...pulumi.InvokeOption) GetSetUrlStatisticsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSetUrlStatisticsResultOutput, error) {
-			args := v.(GetSetUrlStatisticsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Rum/getSetUrlStatistics:getSetUrlStatistics", args, GetSetUrlStatisticsResultOutput{}, options).(GetSetUrlStatisticsResultOutput), nil
-		}).(GetSetUrlStatisticsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Rum/getSetUrlStatistics:getSetUrlStatistics", args, GetSetUrlStatisticsResultOutput{}, options).(GetSetUrlStatisticsResultOutput)
 }
 
 // A collection of arguments for invoking getSetUrlStatistics.

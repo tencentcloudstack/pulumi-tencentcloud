@@ -34,7 +34,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * tdmqRocketmq topic can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Tdmq/rocketmqTopic:RocketmqTopic topic topic_id
  * ```
@@ -156,35 +155,35 @@ export interface RocketmqTopicState {
     /**
      * Cluster ID.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Creation time in milliseconds.
      */
-    createTime?: pulumi.Input<number>;
+    createTime?: pulumi.Input<number | undefined>;
     /**
      * Topic namespace. Currently, you can create topics only in one single namespace.
      */
-    namespaceName?: pulumi.Input<string>;
+    namespaceName?: pulumi.Input<string | undefined>;
     /**
      * Number of partitions.
      */
-    partitionNum?: pulumi.Input<number>;
+    partitionNum?: pulumi.Input<number | undefined>;
     /**
      * Topic remarks (up to 128 characters).
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Topic name, which can contain 3-64 letters, digits, hyphens, and underscores.
      */
-    topicName?: pulumi.Input<string>;
+    topicName?: pulumi.Input<string | undefined>;
     /**
      * Topic type. Valid values: Normal, GlobalOrder, PartitionedOrder.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
     /**
      * Update time in milliseconds.
      */
-    updateTime?: pulumi.Input<number>;
+    updateTime?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -202,11 +201,11 @@ export interface RocketmqTopicArgs {
     /**
      * Number of partitions.
      */
-    partitionNum?: pulumi.Input<number>;
+    partitionNum?: pulumi.Input<number | undefined>;
     /**
      * Topic remarks (up to 128 characters).
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Topic name, which can contain 3-64 letters, digits, hyphens, and underscores.
      */

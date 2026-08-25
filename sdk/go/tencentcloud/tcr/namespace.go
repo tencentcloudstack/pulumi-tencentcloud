@@ -41,7 +41,7 @@ import (
 //				return err
 //			}
 //			_, err = tcr.NewNamespace(ctx, "example", &tcr.NamespaceArgs{
-//				InstanceId:   example.ID(),
+//				InstanceId:   example.ID().ToIDOutput().ToStringOutput(),
 //				Name:         pulumi.String("example"),
 //				IsPublic:     pulumi.Bool(true),
 //				IsAutoScan:   pulumi.Bool(true),
@@ -51,6 +51,10 @@ import (
 //					&tcr.NamespaceCveWhitelistItemArgs{
 //						CveId: pulumi.String("cve-xxxxx"),
 //					},
+//				},
+//				Tags: pulumi.StringMap{
+//					"env":       pulumi.String("production"),
+//					"createdBy": pulumi.String("terraform"),
 //				},
 //			})
 //			if err != nil {
@@ -86,6 +90,8 @@ type Namespace struct {
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Block vulnerability level, currently only supports `low`, `medium`, `high`.
 	Severity pulumi.StringPtrOutput `pulumi:"severity"`
+	// Tag key-value pairs for the TCR namespace.
+	Tags pulumi.StringMapOutput `pulumi:"tags"`
 }
 
 // NewNamespace registers a new resource with the given unique name, arguments, and options.
@@ -135,6 +141,8 @@ type namespaceState struct {
 	Name *string `pulumi:"name"`
 	// Block vulnerability level, currently only supports `low`, `medium`, `high`.
 	Severity *string `pulumi:"severity"`
+	// Tag key-value pairs for the TCR namespace.
+	Tags map[string]string `pulumi:"tags"`
 }
 
 type NamespaceState struct {
@@ -152,6 +160,8 @@ type NamespaceState struct {
 	Name pulumi.StringPtrInput
 	// Block vulnerability level, currently only supports `low`, `medium`, `high`.
 	Severity pulumi.StringPtrInput
+	// Tag key-value pairs for the TCR namespace.
+	Tags pulumi.StringMapInput
 }
 
 func (NamespaceState) ElementType() reflect.Type {
@@ -173,6 +183,8 @@ type namespaceArgs struct {
 	Name *string `pulumi:"name"`
 	// Block vulnerability level, currently only supports `low`, `medium`, `high`.
 	Severity *string `pulumi:"severity"`
+	// Tag key-value pairs for the TCR namespace.
+	Tags map[string]string `pulumi:"tags"`
 }
 
 // The set of arguments for constructing a Namespace resource.
@@ -191,6 +203,8 @@ type NamespaceArgs struct {
 	Name pulumi.StringPtrInput
 	// Block vulnerability level, currently only supports `low`, `medium`, `high`.
 	Severity pulumi.StringPtrInput
+	// Tag key-value pairs for the TCR namespace.
+	Tags pulumi.StringMapInput
 }
 
 func (NamespaceArgs) ElementType() reflect.Type {
@@ -313,6 +327,11 @@ func (o NamespaceOutput) Name() pulumi.StringOutput {
 // Block vulnerability level, currently only supports `low`, `medium`, `high`.
 func (o NamespaceOutput) Severity() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Namespace) pulumi.StringPtrOutput { return v.Severity }).(pulumi.StringPtrOutput)
+}
+
+// Tag key-value pairs for the TCR namespace.
+func (o NamespaceOutput) Tags() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *Namespace) pulumi.StringMapOutput { return v.Tags }).(pulumi.StringMapOutput)
 }
 
 type NamespaceArrayOutput struct{ *pulumi.OutputState }

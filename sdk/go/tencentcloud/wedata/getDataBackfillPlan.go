@@ -39,9 +39,9 @@ import (
 //	}
 //
 // ```
-func GetDataBackfillPlan(ctx *pulumi.Context, args *GetDataBackfillPlanArgs, opts ...pulumi.InvokeOption) (*GetDataBackfillPlanResult, error) {
+func LookupDataBackfillPlan(ctx *pulumi.Context, args *LookupDataBackfillPlanArgs, opts ...pulumi.InvokeOption) (*LookupDataBackfillPlanResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
-	var rv GetDataBackfillPlanResult
+	var rv LookupDataBackfillPlanResult
 	err := ctx.Invoke("tencentcloud:Wedata/getDataBackfillPlan:getDataBackfillPlan", args, &rv, opts...)
 	if err != nil {
 		return nil, err
@@ -50,7 +50,7 @@ func GetDataBackfillPlan(ctx *pulumi.Context, args *GetDataBackfillPlanArgs, opt
 }
 
 // A collection of arguments for invoking getDataBackfillPlan.
-type GetDataBackfillPlanArgs struct {
+type LookupDataBackfillPlanArgs struct {
 	// Backfill Plan ID.
 	DataBackfillPlanId string `pulumi:"dataBackfillPlanId"`
 	// Project ID.
@@ -62,7 +62,7 @@ type GetDataBackfillPlanArgs struct {
 }
 
 // A collection of values returned by getDataBackfillPlan.
-type GetDataBackfillPlanResult struct {
+type LookupDataBackfillPlanResult struct {
 	DataBackfillPlanId string `pulumi:"dataBackfillPlanId"`
 	// Backfill details.
 	Datas []GetDataBackfillPlanData `pulumi:"datas"`
@@ -73,17 +73,13 @@ type GetDataBackfillPlanResult struct {
 	TimeZone         *string `pulumi:"timeZone"`
 }
 
-func GetDataBackfillPlanOutput(ctx *pulumi.Context, args GetDataBackfillPlanOutputArgs, opts ...pulumi.InvokeOption) GetDataBackfillPlanResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDataBackfillPlanResultOutput, error) {
-			args := v.(GetDataBackfillPlanArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Wedata/getDataBackfillPlan:getDataBackfillPlan", args, GetDataBackfillPlanResultOutput{}, options).(GetDataBackfillPlanResultOutput), nil
-		}).(GetDataBackfillPlanResultOutput)
+func LookupDataBackfillPlanOutput(ctx *pulumi.Context, args LookupDataBackfillPlanOutputArgs, opts ...pulumi.InvokeOption) LookupDataBackfillPlanResultOutput {
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Wedata/getDataBackfillPlan:getDataBackfillPlan", args, LookupDataBackfillPlanResultOutput{}, options).(LookupDataBackfillPlanResultOutput)
 }
 
 // A collection of arguments for invoking getDataBackfillPlan.
-type GetDataBackfillPlanOutputArgs struct {
+type LookupDataBackfillPlanOutputArgs struct {
 	// Backfill Plan ID.
 	DataBackfillPlanId pulumi.StringInput `pulumi:"dataBackfillPlanId"`
 	// Project ID.
@@ -94,51 +90,51 @@ type GetDataBackfillPlanOutputArgs struct {
 	TimeZone pulumi.StringPtrInput `pulumi:"timeZone"`
 }
 
-func (GetDataBackfillPlanOutputArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetDataBackfillPlanArgs)(nil)).Elem()
+func (LookupDataBackfillPlanOutputArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupDataBackfillPlanArgs)(nil)).Elem()
 }
 
 // A collection of values returned by getDataBackfillPlan.
-type GetDataBackfillPlanResultOutput struct{ *pulumi.OutputState }
+type LookupDataBackfillPlanResultOutput struct{ *pulumi.OutputState }
 
-func (GetDataBackfillPlanResultOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetDataBackfillPlanResult)(nil)).Elem()
+func (LookupDataBackfillPlanResultOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LookupDataBackfillPlanResult)(nil)).Elem()
 }
 
-func (o GetDataBackfillPlanResultOutput) ToGetDataBackfillPlanResultOutput() GetDataBackfillPlanResultOutput {
+func (o LookupDataBackfillPlanResultOutput) ToLookupDataBackfillPlanResultOutput() LookupDataBackfillPlanResultOutput {
 	return o
 }
 
-func (o GetDataBackfillPlanResultOutput) ToGetDataBackfillPlanResultOutputWithContext(ctx context.Context) GetDataBackfillPlanResultOutput {
+func (o LookupDataBackfillPlanResultOutput) ToLookupDataBackfillPlanResultOutputWithContext(ctx context.Context) LookupDataBackfillPlanResultOutput {
 	return o
 }
 
-func (o GetDataBackfillPlanResultOutput) DataBackfillPlanId() pulumi.StringOutput {
-	return o.ApplyT(func(v GetDataBackfillPlanResult) string { return v.DataBackfillPlanId }).(pulumi.StringOutput)
+func (o LookupDataBackfillPlanResultOutput) DataBackfillPlanId() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupDataBackfillPlanResult) string { return v.DataBackfillPlanId }).(pulumi.StringOutput)
 }
 
 // Backfill details.
-func (o GetDataBackfillPlanResultOutput) Datas() GetDataBackfillPlanDataArrayOutput {
-	return o.ApplyT(func(v GetDataBackfillPlanResult) []GetDataBackfillPlanData { return v.Datas }).(GetDataBackfillPlanDataArrayOutput)
+func (o LookupDataBackfillPlanResultOutput) Datas() GetDataBackfillPlanDataArrayOutput {
+	return o.ApplyT(func(v LookupDataBackfillPlanResult) []GetDataBackfillPlanData { return v.Datas }).(GetDataBackfillPlanDataArrayOutput)
 }
 
 // The provider-assigned unique ID for this managed resource.
-func (o GetDataBackfillPlanResultOutput) Id() pulumi.StringOutput {
-	return o.ApplyT(func(v GetDataBackfillPlanResult) string { return v.Id }).(pulumi.StringOutput)
+func (o LookupDataBackfillPlanResultOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupDataBackfillPlanResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
-func (o GetDataBackfillPlanResultOutput) ProjectId() pulumi.StringOutput {
-	return o.ApplyT(func(v GetDataBackfillPlanResult) string { return v.ProjectId }).(pulumi.StringOutput)
+func (o LookupDataBackfillPlanResultOutput) ProjectId() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupDataBackfillPlanResult) string { return v.ProjectId }).(pulumi.StringOutput)
 }
 
-func (o GetDataBackfillPlanResultOutput) ResultOutputFile() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v GetDataBackfillPlanResult) *string { return v.ResultOutputFile }).(pulumi.StringPtrOutput)
+func (o LookupDataBackfillPlanResultOutput) ResultOutputFile() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LookupDataBackfillPlanResult) *string { return v.ResultOutputFile }).(pulumi.StringPtrOutput)
 }
 
-func (o GetDataBackfillPlanResultOutput) TimeZone() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v GetDataBackfillPlanResult) *string { return v.TimeZone }).(pulumi.StringPtrOutput)
+func (o LookupDataBackfillPlanResultOutput) TimeZone() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LookupDataBackfillPlanResult) *string { return v.TimeZone }).(pulumi.StringPtrOutput)
 }
 
 func init() {
-	pulumi.RegisterOutputType(GetDataBackfillPlanResultOutput{})
+	pulumi.RegisterOutputType(LookupDataBackfillPlanResultOutput{})
 }

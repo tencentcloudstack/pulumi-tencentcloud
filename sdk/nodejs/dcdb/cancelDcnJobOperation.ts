@@ -13,13 +13,13 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const internal = tencentcloud.Security.getGroups({
+ * const internal = tencentcloud.security.getGroups({
  *     name: "default",
  * });
- * const vpc = tencentcloud.Vpc.getInstances({
+ * const vpc = tencentcloud.vpc.getInstances({
  *     name: "Default-VPC",
  * });
- * const subnet = vpc.then(vpc => tencentcloud.Vpc.getSubnets({
+ * const subnet = vpc.then(vpc => tencentcloud.vpc.getSubnets({
  *     vpcId: vpc.instanceLists?.[0]?.vpcId,
  * }));
  * const vpcId = subnet.then(subnet => subnet.instanceLists?.[0]?.vpcId);
@@ -113,7 +113,7 @@ export interface CancelDcnJobOperationState {
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**

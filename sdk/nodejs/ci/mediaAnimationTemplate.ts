@@ -131,23 +131,23 @@ export interface MediaAnimationTemplateState {
     /**
      * bucket name.
      */
-    bucket?: pulumi.Input<string>;
+    bucket?: pulumi.Input<string | undefined>;
     /**
      * container format.
      */
-    container?: pulumi.Input<inputs.Ci.MediaAnimationTemplateContainer>;
+    container?: pulumi.Input<inputs.Ci.MediaAnimationTemplateContainer | undefined>;
     /**
      * The template name only supports `Chinese`, `English`, `numbers`, `_`, `-` and `*`.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * time interval.
      */
-    timeInterval?: pulumi.Input<inputs.Ci.MediaAnimationTemplateTimeInterval>;
+    timeInterval?: pulumi.Input<inputs.Ci.MediaAnimationTemplateTimeInterval | undefined>;
     /**
      * video information, do not upload Video, which is equivalent to deleting video information.
      */
-    video?: pulumi.Input<inputs.Ci.MediaAnimationTemplateVideo>;
+    video?: pulumi.Input<inputs.Ci.MediaAnimationTemplateVideo | undefined>;
 }
 
 /**
@@ -165,13 +165,13 @@ export interface MediaAnimationTemplateArgs {
     /**
      * The template name only supports `Chinese`, `English`, `numbers`, `_`, `-` and `*`.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * time interval.
      */
-    timeInterval?: pulumi.Input<inputs.Ci.MediaAnimationTemplateTimeInterval>;
+    timeInterval?: pulumi.Input<inputs.Ci.MediaAnimationTemplateTimeInterval | undefined>;
     /**
      * video information, do not upload Video, which is equivalent to deleting video information.
      */
-    video?: pulumi.Input<inputs.Ci.MediaAnimationTemplateVideo>;
+    video?: pulumi.Input<inputs.Ci.MediaAnimationTemplateVideo | undefined>;
 }

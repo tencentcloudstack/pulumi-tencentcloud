@@ -23,6 +23,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "tencentcloud:Redis/account:Account":
 		r = &Account{}
+	case "tencentcloud:Redis/auditLog:AuditLog":
+		r = &AuditLog{}
 	case "tencentcloud:Redis/backupConfig:BackupConfig":
 		r = &BackupConfig{}
 	case "tencentcloud:Redis/backupDownloadRestriction:BackupDownloadRestriction":
@@ -81,6 +83,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Redis/account",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Redis/auditLog",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

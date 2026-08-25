@@ -37,7 +37,7 @@ import (
 //				return err
 //			}
 //			_, err = route.NewTable(ctx, "foo", &route.TableArgs{
-//				VpcId: foo.ID(),
+//				VpcId: foo.ID().ToIDOutput().ToStringOutput(),
 //				Name:  pulumi.String("ci-temp-test-rt"),
 //			})
 //			if err != nil {

@@ -67,12 +67,8 @@ type GetPlatformEventPatternsResult struct {
 }
 
 func GetPlatformEventPatternsOutput(ctx *pulumi.Context, args GetPlatformEventPatternsOutputArgs, opts ...pulumi.InvokeOption) GetPlatformEventPatternsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetPlatformEventPatternsResultOutput, error) {
-			args := v.(GetPlatformEventPatternsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Eb/getPlatformEventPatterns:getPlatformEventPatterns", args, GetPlatformEventPatternsResultOutput{}, options).(GetPlatformEventPatternsResultOutput), nil
-		}).(GetPlatformEventPatternsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Eb/getPlatformEventPatterns:getPlatformEventPatterns", args, GetPlatformEventPatternsResultOutput{}, options).(GetPlatformEventPatternsResultOutput)
 }
 
 // A collection of arguments for invoking getPlatformEventPatterns.

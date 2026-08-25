@@ -52,7 +52,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// 
     /// ## Import
     /// 
-    /// teo teo_l4_proxy can be imported using the id, e.g.
+    /// teo TeoL4Proxy can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Teo/l4ProxyRule:L4ProxyRule teo_l4_proxy_rule zoneId#proxyId#ruleId

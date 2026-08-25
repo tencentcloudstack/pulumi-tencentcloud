@@ -41,7 +41,7 @@ import (
 //			exampleNamespace, err := tdmq.NewNamespace(ctx, "example", &tdmq.NamespaceArgs{
 //				EnvironName: pulumi.String("tf_example"),
 //				MsgTtl:      pulumi.Int(300),
-//				ClusterId:   example.ID(),
+//				ClusterId:   example.ID().ToIDOutput().ToStringOutput(),
 //				RetentionPolicy: &tdmq.NamespaceRetentionPolicyArgs{
 //					TimeInMinutes: pulumi.Int(60),
 //					SizeInMb:      pulumi.Int(10),
@@ -53,7 +53,7 @@ import (
 //			}
 //			exampleRole, err := tdmq.NewRole(ctx, "example", &tdmq.RoleArgs{
 //				RoleName:  pulumi.String("tf_example"),
-//				ClusterId: example.ID(),
+//				ClusterId: example.ID().ToIDOutput().ToStringOutput(),
 //				Remark:    pulumi.String("remark."),
 //			})
 //			if err != nil {
@@ -66,7 +66,7 @@ import (
 //					pulumi.String("produce"),
 //					pulumi.String("consume"),
 //				},
-//				ClusterId: example.ID(),
+//				ClusterId: example.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err

@@ -205,49 +205,49 @@ export interface CaCertificateState {
     /**
      * CA certificate.
      */
-    caCertificate?: pulumi.Input<string>;
+    caCertificate?: pulumi.Input<string | undefined>;
     /**
      * Certificate common name.
      */
-    caCn?: pulumi.Input<string>;
+    caCn?: pulumi.Input<string | undefined>;
     /**
      * Certificate serial number.
      */
-    caSn?: pulumi.Input<string>;
+    caSn?: pulumi.Input<string | undefined>;
     /**
      * Certificate create time.
      */
-    createdTime?: pulumi.Input<number>;
+    createdTime?: pulumi.Input<number | undefined>;
     /**
      * Certificate format, Default is PEM.
      */
-    format?: pulumi.Input<string>;
+    format?: pulumi.Input<string | undefined>;
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Certificate expiring date.
      */
-    notAfterTime?: pulumi.Input<number>;
+    notAfterTime?: pulumi.Input<number | undefined>;
     /**
      * Certificate effective start date.
      */
-    notBeforeTime?: pulumi.Input<number>;
+    notBeforeTime?: pulumi.Input<number | undefined>;
     /**
      * Certificate status, Default is ACTIVE.
      * ACTIVE activation;
      * INACTIVE not active.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Certificate update time.
      */
-    updateTime?: pulumi.Input<number>;
+    updateTime?: pulumi.Input<number | undefined>;
     /**
      * Verification certificate.
      */
-    verificationCertificate?: pulumi.Input<string>;
+    verificationCertificate?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -261,7 +261,7 @@ export interface CaCertificateArgs {
     /**
      * Certificate format, Default is PEM.
      */
-    format?: pulumi.Input<string>;
+    format?: pulumi.Input<string | undefined>;
     /**
      * Instance ID.
      */
@@ -271,7 +271,7 @@ export interface CaCertificateArgs {
      * ACTIVE activation;
      * INACTIVE not active.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Verification certificate.
      */

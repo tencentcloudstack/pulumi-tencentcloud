@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const parseNotification = tencentcloud.Mps.getParseNotification({
+ * const parseNotification = tencentcloud.mps.getParseNotification({
  *     content: "your_content",
  * });
  * ```
@@ -60,7 +60,7 @@ export interface GetParseNotificationResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const parseNotification = tencentcloud.Mps.getParseNotification({
+ * const parseNotification = tencentcloud.mps.getParseNotification({
  *     content: "your_content",
  * });
  * ```
@@ -84,5 +84,5 @@ export interface GetParseNotificationOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

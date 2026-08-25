@@ -82,6 +82,14 @@ import (
 //	}
 //
 // ```
+//
+// ### Query with Network and Performance Requirements
+//
+// ### Query GPU Instances
+//
+// ### Query with Local Disk Support
+//
+// ### Query Price Information
 func GetTypes(ctx *pulumi.Context, args *GetTypesArgs, opts ...pulumi.InvokeOption) (*GetTypesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTypesResult
@@ -133,12 +141,8 @@ type GetTypesResult struct {
 }
 
 func GetTypesOutput(ctx *pulumi.Context, args GetTypesOutputArgs, opts ...pulumi.InvokeOption) GetTypesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetTypesResultOutput, error) {
-			args := v.(GetTypesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Instance/getTypes:getTypes", args, GetTypesResultOutput{}, options).(GetTypesResultOutput), nil
-		}).(GetTypesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Instance/getTypes:getTypes", args, GetTypesResultOutput{}, options).(GetTypesResultOutput)
 }
 
 // A collection of arguments for invoking getTypes.

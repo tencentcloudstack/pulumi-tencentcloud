@@ -21,30 +21,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var config = new Config();
-    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
-    ///     var vpc = Tencentcloud.Vpc.GetSubnets.Invoke(new()
-    ///     {
-    ///         IsDefault = true,
-    ///         AvailabilityZone = availabilityZone,
-    ///     });
-    /// 
-    ///     var vpcId = vpc.Apply(getSubnetsResult =&gt; getSubnetsResult.InstanceLists[0]?.VpcId);
-    /// 
-    ///     var subnetId = vpc.Apply(getSubnetsResult =&gt; getSubnetsResult.InstanceLists[0]?.SubnetId);
-    /// 
     ///     var example = new Tencentcloud.Tcaplus.Cluster("example", new()
     ///     {
     ///         IdlType = "PROTO",
     ///         ClusterName = "tf_example_tcaplus_cluster",
-    ///         VpcId = vpcId,
-    ///         SubnetId = subnetId,
-    ///         Password = "your_pw_123111",
+    ///         VpcId = "vpc-i5yyodl9",
+    ///         SubnetId = "subnet-hhi88a58",
+    ///         Password = "Password@2026",
     ///         OldPasswordExpireLast = 3600,
     ///     });
     /// 
@@ -52,9 +39,63 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
     ///     {
     ///         ClusterId = example.Id,
     ///         TablegroupName = "tf_example_group_name",
+    ///         ResourceTags = new[]
+    ///         {
+    ///             new Tencentcloud.Tcaplus.Inputs.TablegroupResourceTagArgs
+    ///             {
+    ///                 TagKey = "CreatedBy",
+    ///                 TagValue = "Terraform",
+    ///             },
+    ///         },
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ### Create a tcaplusdb table group with user-specified table group id
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Tcaplus.Cluster("example", new()
+    ///     {
+    ///         IdlType = "PROTO",
+    ///         ClusterName = "tf_example_tcaplus_cluster",
+    ///         VpcId = "vpc-i5yyodl9",
+    ///         SubnetId = "subnet-hhi88a58",
+    ///         Password = "Password@2026",
+    ///         OldPasswordExpireLast = 3600,
+    ///     });
+    /// 
+    ///     var exampleTablegroup = new Tencentcloud.Tcaplus.Tablegroup("example", new()
+    ///     {
+    ///         ClusterId = example.Id,
+    ///         TablegroupName = "tf_example_group_name",
+    ///         TableGroupId = "109",
+    ///         ResourceTags = new[]
+    ///         {
+    ///             new Tencentcloud.Tcaplus.Inputs.TablegroupResourceTagArgs
+    ///             {
+    ///                 TagKey = "CreatedBy",
+    ///                 TagValue = "Terraform",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// TcaplusDB table group can be imported using the clusterId:tableGroupId, e.g.
+    /// 
+    /// ```sh
+    /// $ pulumi import tencentcloud:Tcaplus/tablegroup:Tablegroup example 5516511420:52
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcaplus/tablegroup:Tablegroup")]
@@ -73,13 +114,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
         public Output<string> CreateTime { get; private set; } = null!;
 
         /// <summary>
+        /// Set of table group tags.
+        /// </summary>
+        [Output("resourceTags")]
+        public Output<ImmutableArray<Outputs.TablegroupResourceTag>> ResourceTags { get; private set; } = null!;
+
+        /// <summary>
         /// Number of tables.
         /// </summary>
         [Output("tableCount")]
         public Output<int> TableCount { get; private set; } = null!;
 
         /// <summary>
-        /// Name of the TcaplusDB table group. Name length should be between 1 and 30.
+        /// ID of the TcaplusDB table group, can be user-specified (must be unique within the cluster) or auto-incremented by the API when not set. Immutable after creation.
+        /// </summary>
+        [Output("tableGroupId")]
+        public Output<string> TableGroupId { get; private set; } = null!;
+
+        /// <summary>
+        /// Table group name; may consist of Chinese characters, English letters, or numeric characters, with a maximum length of 32 characters.
         /// </summary>
         [Output("tablegroupName")]
         public Output<string> TablegroupName { get; private set; } = null!;
@@ -143,8 +196,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
         [Input("clusterId", required: true)]
         public Input<string> ClusterId { get; set; } = null!;
 
+        [Input("resourceTags")]
+        private InputList<Inputs.TablegroupResourceTagArgs>? _resourceTags;
+
         /// <summary>
-        /// Name of the TcaplusDB table group. Name length should be between 1 and 30.
+        /// Set of table group tags.
+        /// </summary>
+        public InputList<Inputs.TablegroupResourceTagArgs> ResourceTags
+        {
+            get => _resourceTags ?? (_resourceTags = new InputList<Inputs.TablegroupResourceTagArgs>());
+            set => _resourceTags = value;
+        }
+
+        /// <summary>
+        /// ID of the TcaplusDB table group, can be user-specified (must be unique within the cluster) or auto-incremented by the API when not set. Immutable after creation.
+        /// </summary>
+        [Input("tableGroupId")]
+        public Input<string>? TableGroupId { get; set; }
+
+        /// <summary>
+        /// Table group name; may consist of Chinese characters, English letters, or numeric characters, with a maximum length of 32 characters.
         /// </summary>
         [Input("tablegroupName", required: true)]
         public Input<string> TablegroupName { get; set; } = null!;
@@ -169,6 +240,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
         [Input("createTime")]
         public Input<string>? CreateTime { get; set; }
 
+        [Input("resourceTags")]
+        private InputList<Inputs.TablegroupResourceTagGetArgs>? _resourceTags;
+
+        /// <summary>
+        /// Set of table group tags.
+        /// </summary>
+        public InputList<Inputs.TablegroupResourceTagGetArgs> ResourceTags
+        {
+            get => _resourceTags ?? (_resourceTags = new InputList<Inputs.TablegroupResourceTagGetArgs>());
+            set => _resourceTags = value;
+        }
+
         /// <summary>
         /// Number of tables.
         /// </summary>
@@ -176,7 +259,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
         public Input<int>? TableCount { get; set; }
 
         /// <summary>
-        /// Name of the TcaplusDB table group. Name length should be between 1 and 30.
+        /// ID of the TcaplusDB table group, can be user-specified (must be unique within the cluster) or auto-incremented by the API when not set. Immutable after creation.
+        /// </summary>
+        [Input("tableGroupId")]
+        public Input<string>? TableGroupId { get; set; }
+
+        /// <summary>
+        /// Table group name; may consist of Chinese characters, English letters, or numeric characters, with a maximum length of 32 characters.
         /// </summary>
         [Input("tablegroupName")]
         public Input<string>? TablegroupName { get; set; }

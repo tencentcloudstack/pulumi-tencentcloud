@@ -33,7 +33,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * tdcpg instance can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Tdcpg/instance:Instance instance cluster_id#instance_id
  * ```
@@ -134,23 +133,23 @@ export interface InstanceState {
     /**
      * cluster id.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * cpu cores.
      */
-    cpu?: pulumi.Input<number>;
+    cpu?: pulumi.Input<number | undefined>;
     /**
      * instance name.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * memory size.
      */
-    memory?: pulumi.Input<number>;
+    memory?: pulumi.Input<number | undefined>;
     /**
      * operation timing, optional value is IMMEDIATE or MAINTAIN_PERIOD.
      */
-    operationTiming?: pulumi.Input<string>;
+    operationTiming?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -168,7 +167,7 @@ export interface InstanceArgs {
     /**
      * instance name.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * memory size.
      */
@@ -176,5 +175,5 @@ export interface InstanceArgs {
     /**
      * operation timing, optional value is IMMEDIATE or MAINTAIN_PERIOD.
      */
-    operationTiming?: pulumi.Input<string>;
+    operationTiming?: pulumi.Input<string | undefined>;
 }

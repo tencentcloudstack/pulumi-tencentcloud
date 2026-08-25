@@ -13,14 +13,14 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "as",
  * });
- * const image = tencentcloud.Images.getInstance({
+ * const image = tencentcloud.images.getInstance({
  *     imageTypes: ["PUBLIC_IMAGE"],
  *     osName: "TencentOS Server 3.2 (Final)",
  * });
- * const instanceTypes = zones.then(zones => tencentcloud.Instance.getTypes({
+ * const instanceTypes = zones.then(zones => tencentcloud.instance.getTypes({
  *     filters: [
  *         {
  *             name: "zone",
@@ -170,15 +170,15 @@ export interface StopInstancesState {
     /**
      * Launch configuration ID.
      */
-    autoScalingGroupId?: pulumi.Input<string>;
+    autoScalingGroupId?: pulumi.Input<string | undefined>;
     /**
      * List of cvm instances to stop.
      */
-    instanceIds?: pulumi.Input<pulumi.Input<string>[]>;
+    instanceIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Billing method of a pay-as-you-go instance after shutdown. Available values: `KEEP_CHARGING`,`STOP_CHARGING`. Default `KEEP_CHARGING`.
      */
-    stoppedMode?: pulumi.Input<string>;
+    stoppedMode?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -196,5 +196,5 @@ export interface StopInstancesArgs {
     /**
      * Billing method of a pay-as-you-go instance after shutdown. Available values: `KEEP_CHARGING`,`STOP_CHARGING`. Default `KEEP_CHARGING`.
      */
-    stoppedMode?: pulumi.Input<string>;
+    stoppedMode?: pulumi.Input<string | undefined>;
 }

@@ -12,7 +12,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provide a resource to create a TDMQ topic.
+// Provides a resource to create a TDMQ topic.
 //
 // ## Example Usage
 //
@@ -41,7 +41,7 @@ import (
 //			exampleNamespace, err := tdmq.NewNamespace(ctx, "example", &tdmq.NamespaceArgs{
 //				EnvironName: pulumi.String("tf_example"),
 //				MsgTtl:      pulumi.Int(300),
-//				ClusterId:   example.ID(),
+//				ClusterId:   example.ID().ToIDOutput().ToStringOutput(),
 //				RetentionPolicy: &tdmq.NamespaceRetentionPolicyArgs{
 //					TimeInMinutes: pulumi.Int(60),
 //					SizeInMb:      pulumi.Int(10),
@@ -53,11 +53,15 @@ import (
 //			}
 //			_, err = tdmq.NewTopic(ctx, "example", &tdmq.TopicArgs{
 //				EnvironId:       exampleNamespace.EnvironName,
-//				ClusterId:       example.ID(),
+//				ClusterId:       example.ID().ToIDOutput().ToStringOutput(),
 //				TopicName:       pulumi.String("tf-example-topic"),
 //				Partitions:      pulumi.Int(6),
 //				PulsarTopicType: pulumi.Int(3),
 //				Remark:          pulumi.String("remark."),
+//				Tags: tdmq.TopicTagArray{
+//					Env:  "test",
+//					Team: "backend",
+//				},
 //			})
 //			if err != nil {
 //				return err
@@ -82,6 +86,8 @@ type Topic struct {
 	PulsarTopicType pulumi.IntOutput `pulumi:"pulsarTopicType"`
 	// Description of the namespace.
 	Remark pulumi.StringPtrOutput `pulumi:"remark"`
+	// Tag description list.
+	Tags TopicTagArrayOutput `pulumi:"tags"`
 	// The name of topic to be created.
 	TopicName pulumi.StringOutput `pulumi:"topicName"`
 	// This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.
@@ -144,6 +150,8 @@ type topicState struct {
 	PulsarTopicType *int `pulumi:"pulsarTopicType"`
 	// Description of the namespace.
 	Remark *string `pulumi:"remark"`
+	// Tag description list.
+	Tags []TopicTag `pulumi:"tags"`
 	// The name of topic to be created.
 	TopicName *string `pulumi:"topicName"`
 	// This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.
@@ -165,6 +173,8 @@ type TopicState struct {
 	PulsarTopicType pulumi.IntPtrInput
 	// Description of the namespace.
 	Remark pulumi.StringPtrInput
+	// Tag description list.
+	Tags TopicTagArrayInput
 	// The name of topic to be created.
 	TopicName pulumi.StringPtrInput
 	// This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.
@@ -188,6 +198,8 @@ type topicArgs struct {
 	PulsarTopicType *int `pulumi:"pulsarTopicType"`
 	// Description of the namespace.
 	Remark *string `pulumi:"remark"`
+	// Tag description list.
+	Tags []TopicTag `pulumi:"tags"`
 	// The name of topic to be created.
 	TopicName string `pulumi:"topicName"`
 	// This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.
@@ -208,6 +220,8 @@ type TopicArgs struct {
 	PulsarTopicType pulumi.IntPtrInput
 	// Description of the namespace.
 	Remark pulumi.StringPtrInput
+	// Tag description list.
+	Tags TopicTagArrayInput
 	// The name of topic to be created.
 	TopicName pulumi.StringInput
 	// This input will be gradually discarded and can be switched to PulsarTopicType parameter 0: Normal message; 1: Global sequential messages; 2: Local sequential messages; 3: Retrying queue; 4: Dead letter queue. The type of topic.
@@ -331,6 +345,11 @@ func (o TopicOutput) PulsarTopicType() pulumi.IntOutput {
 // Description of the namespace.
 func (o TopicOutput) Remark() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Topic) pulumi.StringPtrOutput { return v.Remark }).(pulumi.StringPtrOutput)
+}
+
+// Tag description list.
+func (o TopicOutput) Tags() TopicTagArrayOutput {
+	return o.ApplyT(func(v *Topic) TopicTagArrayOutput { return v.Tags }).(TopicTagArrayOutput)
 }
 
 // The name of topic to be created.

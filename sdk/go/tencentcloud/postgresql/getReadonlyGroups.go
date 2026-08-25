@@ -94,12 +94,8 @@ type GetReadonlyGroupsResult struct {
 }
 
 func GetReadonlyGroupsOutput(ctx *pulumi.Context, args GetReadonlyGroupsOutputArgs, opts ...pulumi.InvokeOption) GetReadonlyGroupsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetReadonlyGroupsResultOutput, error) {
-			args := v.(GetReadonlyGroupsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Postgresql/getReadonlyGroups:getReadonlyGroups", args, GetReadonlyGroupsResultOutput{}, options).(GetReadonlyGroupsResultOutput), nil
-		}).(GetReadonlyGroupsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Postgresql/getReadonlyGroups:getReadonlyGroups", args, GetReadonlyGroupsResultOutput{}, options).(GetReadonlyGroupsResultOutput)
 }
 
 // A collection of arguments for invoking getReadonlyGroups.

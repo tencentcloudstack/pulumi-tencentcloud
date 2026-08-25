@@ -36,15 +36,15 @@ import (
 //			if param := cfg.Get("availabilityZone"); param != "" {
 //				availabilityZone = param
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("tf_monitor_vpc"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("tf_monitor_subnet"),
 //				CidrBlock:        pulumi.String("10.0.1.0/24"),
@@ -54,8 +54,8 @@ import (
 //			}
 //			foo, err := monitor.NewTmpInstance(ctx, "foo", &monitor.TmpInstanceArgs{
 //				InstanceName:      pulumi.String("tf-tmp-instance"),
-//				VpcId:             vpc.ID(),
-//				SubnetId:          subnet.ID(),
+//				VpcId:             vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:          subnet2.ID().ToIDOutput().ToStringOutput(),
 //				DataRetentionTime: pulumi.Int(30),
 //				Zone:              pulumi.String(availabilityZone),
 //				Tags: pulumi.StringMap{
@@ -66,14 +66,14 @@ import (
 //				return err
 //			}
 //			fooTmpCvmAgent, err := monitor.NewTmpCvmAgent(ctx, "foo", &monitor.TmpCvmAgentArgs{
-//				InstanceId: foo.ID(),
+//				InstanceId: foo.ID().ToIDOutput().ToStringOutput(),
 //				Name:       pulumi.String("tf-agent"),
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			_, err = monitor.NewTmpScrapeJob(ctx, "foo", &monitor.TmpScrapeJobArgs{
-//				InstanceId: foo.ID(),
+//				InstanceId: foo.ID().ToIDOutput().ToStringOutput(),
 //				AgentId:    fooTmpCvmAgent.AgentId,
 //				Config:     pulumi.String("job_name: demo-config\nhonor_timestamps: true\nmetrics_path: /metrics\nscheme: https\n"),
 //			})
@@ -89,7 +89,6 @@ import (
 // ## Import
 //
 // monitor tmpScrapeJob can be imported using the id, e.g.
-//
 // ```sh
 // $ pulumi import tencentcloud:Monitor/tmpScrapeJob:TmpScrapeJob tmpScrapeJob tmpScrapeJob_id
 // ```

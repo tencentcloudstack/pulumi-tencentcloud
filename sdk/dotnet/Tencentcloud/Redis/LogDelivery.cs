@@ -74,10 +74,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     ///     {
     ///         InstanceId = "crs-dmjj8en7",
     ///         LogRegion = "ap-guangzhou",
-    ///         LogsetName = "tf-example",
-    ///         TopicName = "tf-example",
+    ///         LogsetName = "tf-example132",
+    ///         TopicName = "tf-example132",
     ///         Period = 20,
     ///         CreateIndex = true,
+    ///         IsDeleteTopic = true,
+    ///         IsDeleteLogset = true,
     ///     });
     /// 
     /// });
@@ -85,7 +87,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// 
     /// ## Import
     /// 
-    /// Redis log delivery can be imported, e.g.
+    /// Redis log delivery can be imported using the instanceId, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Redis/logDelivery:LogDelivery example crs-dmjj8en7
@@ -105,6 +107,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// </summary>
         [Output("instanceId")]
         public Output<string> InstanceId { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to delete the associated Logset when deleting the log delivery. Default is false.
+        /// </summary>
+        [Output("isDeleteLogset")]
+        public Output<bool?> IsDeleteLogset { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to delete the associated Topic when deleting the log delivery. Default is false.
+        /// </summary>
+        [Output("isDeleteTopic")]
+        public Output<bool?> IsDeleteTopic { get; private set; } = null!;
 
         /// <summary>
         /// The region where the log set is located; if not specified, the region where the instance is located will be used by default.
@@ -202,6 +216,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public Input<string> InstanceId { get; set; } = null!;
 
         /// <summary>
+        /// Whether to delete the associated Logset when deleting the log delivery. Default is false.
+        /// </summary>
+        [Input("isDeleteLogset")]
+        public Input<bool>? IsDeleteLogset { get; set; }
+
+        /// <summary>
+        /// Whether to delete the associated Topic when deleting the log delivery. Default is false.
+        /// </summary>
+        [Input("isDeleteTopic")]
+        public Input<bool>? IsDeleteTopic { get; set; }
+
+        /// <summary>
         /// The region where the log set is located; if not specified, the region where the instance is located will be used by default.
         /// </summary>
         [Input("logRegion")]
@@ -256,6 +282,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// </summary>
         [Input("instanceId")]
         public Input<string>? InstanceId { get; set; }
+
+        /// <summary>
+        /// Whether to delete the associated Logset when deleting the log delivery. Default is false.
+        /// </summary>
+        [Input("isDeleteLogset")]
+        public Input<bool>? IsDeleteLogset { get; set; }
+
+        /// <summary>
+        /// Whether to delete the associated Topic when deleting the log delivery. Default is false.
+        /// </summary>
+        [Input("isDeleteTopic")]
+        public Input<bool>? IsDeleteTopic { get; set; }
 
         /// <summary>
         /// The region where the log set is located; if not specified, the region where the instance is located will be used by default.

@@ -117,7 +117,7 @@ export class Ipv4Address extends pulumi.CustomResource {
      */
     declare public readonly privateIpAddresses: pulumi.Output<outputs.Eni.Ipv4AddressPrivateIpAddress[]>;
     /**
-     * IP service level. It is used together with `SecondaryPrivateIpAddressCount`. Values: PT`(Gold), `AU`(Silver), `AG `(Bronze) and DEFAULT (Default).
+     * IP service level. It is used together with `SecondaryPrivateIpAddressCount`. Values: PT` (Gold),  `AU` (Silver),  `AG `(Bronze) and DEFAULT (Default).
      */
     declare public readonly qosLevel: pulumi.Output<string>;
     /**
@@ -164,19 +164,19 @@ export interface Ipv4AddressState {
     /**
      * The ID of the ENI instance, such as `eni-m6dyj72l`.
      */
-    networkInterfaceId?: pulumi.Input<string>;
+    networkInterfaceId?: pulumi.Input<string | undefined>;
     /**
      * The information on private IP addresses, of which you can specify a maximum of 10 at a time. You should provide either this parameter or SecondaryPrivateIpAddressCount, or both.
      */
-    privateIpAddresses?: pulumi.Input<pulumi.Input<inputs.Eni.Ipv4AddressPrivateIpAddress>[]>;
+    privateIpAddresses?: pulumi.Input<pulumi.Input<inputs.Eni.Ipv4AddressPrivateIpAddress>[] | undefined>;
     /**
-     * IP service level. It is used together with `SecondaryPrivateIpAddressCount`. Values: PT`(Gold), `AU`(Silver), `AG `(Bronze) and DEFAULT (Default).
+     * IP service level. It is used together with `SecondaryPrivateIpAddressCount`. Values: PT` (Gold),  `AU` (Silver),  `AG `(Bronze) and DEFAULT (Default).
      */
-    qosLevel?: pulumi.Input<string>;
+    qosLevel?: pulumi.Input<string | undefined>;
     /**
      * The number of newly-applied private IP addresses. You should provide either this parameter or PrivateIpAddresses, or both. The total number of private IP addresses cannot exceed the quota.
      */
-    secondaryPrivateIpAddressCount?: pulumi.Input<number>;
+    secondaryPrivateIpAddressCount?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -190,13 +190,13 @@ export interface Ipv4AddressArgs {
     /**
      * The information on private IP addresses, of which you can specify a maximum of 10 at a time. You should provide either this parameter or SecondaryPrivateIpAddressCount, or both.
      */
-    privateIpAddresses?: pulumi.Input<pulumi.Input<inputs.Eni.Ipv4AddressPrivateIpAddress>[]>;
+    privateIpAddresses?: pulumi.Input<pulumi.Input<inputs.Eni.Ipv4AddressPrivateIpAddress>[] | undefined>;
     /**
-     * IP service level. It is used together with `SecondaryPrivateIpAddressCount`. Values: PT`(Gold), `AU`(Silver), `AG `(Bronze) and DEFAULT (Default).
+     * IP service level. It is used together with `SecondaryPrivateIpAddressCount`. Values: PT` (Gold),  `AU` (Silver),  `AG `(Bronze) and DEFAULT (Default).
      */
-    qosLevel?: pulumi.Input<string>;
+    qosLevel?: pulumi.Input<string | undefined>;
     /**
      * The number of newly-applied private IP addresses. You should provide either this parameter or PrivateIpAddresses, or both. The total number of private IP addresses cannot exceed the quota.
      */
-    secondaryPrivateIpAddressCount?: pulumi.Input<number>;
+    secondaryPrivateIpAddressCount?: pulumi.Input<number | undefined>;
 }

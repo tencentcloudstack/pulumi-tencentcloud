@@ -112,15 +112,15 @@ export interface StartInstanceRefreshState {
     /**
      * Scaling group ID.
      */
-    autoScalingGroupId?: pulumi.Input<string>;
+    autoScalingGroupId?: pulumi.Input<string | undefined>;
     /**
      * Refresh mode. Value range: ROLLING_UPDATE_RESET: Reinstall the system for rolling update; ROLLING_UPDATE_REPLACE: Create a new instance for rolling update. This mode does not support the rollback interface yet.
      */
-    refreshMode?: pulumi.Input<string>;
+    refreshMode?: pulumi.Input<string | undefined>;
     /**
      * Refresh settings.
      */
-    refreshSettings?: pulumi.Input<inputs.As.StartInstanceRefreshRefreshSettings>;
+    refreshSettings?: pulumi.Input<inputs.As.StartInstanceRefreshRefreshSettings | undefined>;
 }
 
 /**
@@ -134,7 +134,7 @@ export interface StartInstanceRefreshArgs {
     /**
      * Refresh mode. Value range: ROLLING_UPDATE_RESET: Reinstall the system for rolling update; ROLLING_UPDATE_REPLACE: Create a new instance for rolling update. This mode does not support the rollback interface yet.
      */
-    refreshMode?: pulumi.Input<string>;
+    refreshMode?: pulumi.Input<string | undefined>;
     /**
      * Refresh settings.
      */

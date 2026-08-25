@@ -45,11 +45,9 @@ import * as utilities from "../utilities";
  *
  * ```sh
  * $ pulumi import tencentcloud:Clb/customizedConfigV2:CustomizedConfigV2 example pz-diowqstq#SERVER
- * ```
  *
  * Or
  *
- * ```sh
  * $ pulumi import tencentcloud:Clb/customizedConfigV2:CustomizedConfigV2 example pz-4r10y4b2#LOCATION
  * ```
  */
@@ -155,27 +153,27 @@ export interface CustomizedConfigV2State {
     /**
      * Content of Customized Config.
      */
-    configContent?: pulumi.Input<string>;
+    configContent?: pulumi.Input<string | undefined>;
     /**
      * ID of Customized Config.
      */
-    configId?: pulumi.Input<string>;
+    configId?: pulumi.Input<string | undefined>;
     /**
      * Name of Customized Config.
      */
-    configName?: pulumi.Input<string>;
+    configName?: pulumi.Input<string | undefined>;
     /**
      * Type of Customized Config. Valid values: `SERVER` and `LOCATION`.
      */
-    configType?: pulumi.Input<string>;
+    configType?: pulumi.Input<string | undefined>;
     /**
      * Create time of Customized Config.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Update time of Customized Config.
      */
-    updateTime?: pulumi.Input<string>;
+    updateTime?: pulumi.Input<string | undefined>;
 }
 
 /**

@@ -67,12 +67,8 @@ type GetGetTableColumnsResult struct {
 }
 
 func GetGetTableColumnsOutput(ctx *pulumi.Context, args GetGetTableColumnsOutputArgs, opts ...pulumi.InvokeOption) GetGetTableColumnsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetGetTableColumnsResultOutput, error) {
-			args := v.(GetGetTableColumnsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Wedata/getGetTableColumns:getGetTableColumns", args, GetGetTableColumnsResultOutput{}, options).(GetGetTableColumnsResultOutput), nil
-		}).(GetGetTableColumnsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Wedata/getGetTableColumns:getGetTableColumns", args, GetGetTableColumnsResultOutput{}, options).(GetGetTableColumnsResultOutput)
 }
 
 // A collection of arguments for invoking getGetTableColumns.

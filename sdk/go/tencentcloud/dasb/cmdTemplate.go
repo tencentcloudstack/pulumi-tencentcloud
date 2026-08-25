@@ -43,7 +43,7 @@ import (
 //
 // ## Import
 //
-// dasb cmd_template can be imported using the id, e.g.
+// dasb cmdTemplate can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Dasb/cmdTemplate:CmdTemplate example 15

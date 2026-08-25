@@ -27,7 +27,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// {
     ///     var example = new Tencentcloud.Teo.OriginAcl("example", new()
     ///     {
-    ///         ZoneId = "zone-39quuimqg8r6",
+    ///         ZoneId = "zone-3fkff38fyw8s",
+    ///         OriginAclFamily = "gaz",
     ///         L7Hosts = new[]
     ///         {
     ///             "example1.com",
@@ -48,15 +49,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// 
     /// ## Import
     /// 
-    /// TEO origin acl can be imported using the zone_id, e.g.
-    /// 
-    /// `
-    /// 
-    /// ```sh
-    /// $ pulumi import tencentcloud:Teo/originAcl:OriginAcl example zone-39quuimqg8r6
-    /// ```
-    /// 
-    /// `
+    /// TEO origin acl can be imported using the id, e.g.
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Teo/originAcl:OriginAcl")]
     public partial class OriginAcl : global::Pulumi.CustomResource
@@ -72,6 +65,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// </summary>
         [Output("l7Hosts")]
         public Output<ImmutableArray<string>> L7Hosts { get; private set; } = null!;
+
+        /// <summary>
+        /// Origin ACL control domain. Valid values: gaz, mlc, emc, plat-gaz, plat-mlc, plat-emc.
+        /// </summary>
+        [Output("originAclFamily")]
+        public Output<string> OriginAclFamily { get; private set; } = null!;
 
         /// <summary>
         /// Specifies the site ID.
@@ -151,6 +150,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         }
 
         /// <summary>
+        /// Origin ACL control domain. Valid values: gaz, mlc, emc, plat-gaz, plat-mlc, plat-emc.
+        /// </summary>
+        [Input("originAclFamily")]
+        public Input<string>? OriginAclFamily { get; set; }
+
+        /// <summary>
         /// Specifies the site ID.
         /// </summary>
         [Input("zoneId", required: true)]
@@ -187,6 +192,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
             get => _l7Hosts ?? (_l7Hosts = new InputList<string>());
             set => _l7Hosts = value;
         }
+
+        /// <summary>
+        /// Origin ACL control domain. Valid values: gaz, mlc, emc, plat-gaz, plat-mlc, plat-emc.
+        /// </summary>
+        [Input("originAclFamily")]
+        public Input<string>? OriginAclFamily { get; set; }
 
         /// <summary>
         /// Specifies the site ID.

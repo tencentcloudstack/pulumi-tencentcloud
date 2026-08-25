@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const pendingRiskInfo = tencentcloud.Antiddos.getPendingRiskInfo({});
+ * const pendingRiskInfo = tencentcloud.antiddos.getPendingRiskInfo({});
  * ```
  */
 export function getPendingRiskInfo(args?: GetPendingRiskInfoArgs, opts?: pulumi.InvokeOptions): Promise<GetPendingRiskInfoResult> {
@@ -73,7 +73,7 @@ export interface GetPendingRiskInfoResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const pendingRiskInfo = tencentcloud.Antiddos.getPendingRiskInfo({});
+ * const pendingRiskInfo = tencentcloud.antiddos.getPendingRiskInfo({});
  * ```
  */
 export function getPendingRiskInfoOutput(args?: GetPendingRiskInfoOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetPendingRiskInfoResult> {
@@ -91,5 +91,5 @@ export interface GetPendingRiskInfoOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

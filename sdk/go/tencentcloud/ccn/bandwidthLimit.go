@@ -45,7 +45,7 @@ import (
 //				return err
 //			}
 //			_, err = ccn.NewBandwidthLimit(ctx, "limit1", &ccn.BandwidthLimitArgs{
-//				CcnId:          main.ID(),
+//				CcnId:          main.ID().ToIDOutput().ToStringOutput(),
 //				Region:         pulumi.String(otherRegion1),
 //				BandwidthLimit: pulumi.Int(500),
 //			})
@@ -92,7 +92,7 @@ import (
 //				return err
 //			}
 //			_, err = ccn.NewBandwidthLimit(ctx, "limit1", &ccn.BandwidthLimitArgs{
-//				CcnId:          main.ID(),
+//				CcnId:          main.ID().ToIDOutput().ToStringOutput(),
 //				Region:         pulumi.String(otherRegion1),
 //				DstRegion:      pulumi.String(otherRegion2),
 //				BandwidthLimit: pulumi.Int(100),

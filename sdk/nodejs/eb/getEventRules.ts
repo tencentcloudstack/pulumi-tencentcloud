@@ -37,7 +37,7 @@ import * as utilities from "../utilities";
  *         createdBy: "terraform",
  *     },
  * });
- * const eventRules = tencentcloud.Eb.getEventRulesOutput({
+ * const eventRules = tencentcloud.eb.getEventRulesOutput({
  *     eventBusId: foo.id,
  *     orderBy: "AddTime",
  *     order: "DESC",
@@ -127,7 +127,7 @@ export interface GetEventRulesResult {
  *         createdBy: "terraform",
  *     },
  * });
- * const eventRules = tencentcloud.Eb.getEventRulesOutput({
+ * const eventRules = tencentcloud.eb.getEventRulesOutput({
  *     eventBusId: foo.id,
  *     orderBy: "AddTime",
  *     order: "DESC",
@@ -155,13 +155,13 @@ export interface GetEventRulesOutputArgs {
     /**
      * Return results in ascending or descending order, optional values ASC (ascending) and DESC (descending).
      */
-    order?: pulumi.Input<string>;
+    order?: pulumi.Input<string | undefined>;
     /**
      * According to which field to sort the returned results, the following fields are supported: AddTime (creation time), ModTime (modification time).
      */
-    orderBy?: pulumi.Input<string>;
+    orderBy?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
 {
     /// <summary>
-    /// Provides a resource to create a teo TeoL4Proxy
+    /// Provides a resource to create a TEO L4 proxy instance
     /// 
     /// ## Example Usage
     /// 
@@ -38,10 +38,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// 
     /// ## Import
     /// 
-    /// teo teo_l4_proxy can be imported using the id, e.g.
+    /// TEO L4 proxy can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Teo/l4Proxy:L4Proxy teo_l4_proxy teo_l4_proxy_id
+    /// $ pulumi import tencentcloud:Teo/l4Proxy:L4Proxy teo_l4_proxy zone_id#proxy_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Teo/l4Proxy:L4Proxy")]
@@ -60,16 +60,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Output<string?> Area { get; private set; } = null!;
 
         /// <summary>
-        /// Layer 3/Layer 4 DDoS protection. The default protection option of the platform will be used if it is left empty. For details, see [Exclusive DDoS Protection Usage](https://intl.cloud.tencent.com/document/product/1552/95994?from_cn_redirect=1).
+        /// It has been deprecated from version 1.82.90. Please do not use this field anymore. Layer 3/Layer 4 DDoS protection. The default protection option of the platform will be used if it is left empty. For details, see [Exclusive DDoS Protection Usage](https://intl.cloud.tencent.com/document/product/1552/95994?from_cn_redirect=1).
         /// </summary>
         [Output("ddosProtectionConfig")]
-        public Output<Outputs.L4ProxyDdosProtectionConfig?> DdosProtectionConfig { get; private set; } = null!;
+        public Output<Outputs.L4ProxyDdosProtectionConfig> DdosProtectionConfig { get; private set; } = null!;
 
         /// <summary>
         /// Specifies whether to enable IPv6 access. The default value off is used if left empty. This configuration can only be enabled in certain acceleration zones and security protection configurations. For details, see [Creating an L4 Proxy Instance](https://intl.cloud.tencent.com/document/product/1552/90025?from_cn_redirect=1). Valid values: `On`: Enable; `Off`: Disable.
         /// </summary>
         [Output("ipv6")]
         public Output<string?> Ipv6 { get; private set; } = null!;
+
+        /// <summary>
+        /// L4 proxy instance ID.
+        /// </summary>
+        [Output("proxyId")]
+        public Output<string> ProxyId { get; private set; } = null!;
 
         /// <summary>
         /// Layer 4 proxy instance name. You can enter 1-50 characters. Valid characters are a-z, 0-9, and hyphens (-). However, hyphens (-) cannot be used individually or consecutively and should not be placed at the beginning or end of the name. Modifications are not allowed after creation.
@@ -149,7 +155,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Input<string>? Area { get; set; }
 
         /// <summary>
-        /// Layer 3/Layer 4 DDoS protection. The default protection option of the platform will be used if it is left empty. For details, see [Exclusive DDoS Protection Usage](https://intl.cloud.tencent.com/document/product/1552/95994?from_cn_redirect=1).
+        /// It has been deprecated from version 1.82.90. Please do not use this field anymore. Layer 3/Layer 4 DDoS protection. The default protection option of the platform will be used if it is left empty. For details, see [Exclusive DDoS Protection Usage](https://intl.cloud.tencent.com/document/product/1552/95994?from_cn_redirect=1).
         /// </summary>
         [Input("ddosProtectionConfig")]
         public Input<Inputs.L4ProxyDdosProtectionConfigArgs>? DdosProtectionConfig { get; set; }
@@ -199,7 +205,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Input<string>? Area { get; set; }
 
         /// <summary>
-        /// Layer 3/Layer 4 DDoS protection. The default protection option of the platform will be used if it is left empty. For details, see [Exclusive DDoS Protection Usage](https://intl.cloud.tencent.com/document/product/1552/95994?from_cn_redirect=1).
+        /// It has been deprecated from version 1.82.90. Please do not use this field anymore. Layer 3/Layer 4 DDoS protection. The default protection option of the platform will be used if it is left empty. For details, see [Exclusive DDoS Protection Usage](https://intl.cloud.tencent.com/document/product/1552/95994?from_cn_redirect=1).
         /// </summary>
         [Input("ddosProtectionConfig")]
         public Input<Inputs.L4ProxyDdosProtectionConfigGetArgs>? DdosProtectionConfig { get; set; }
@@ -209,6 +215,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// </summary>
         [Input("ipv6")]
         public Input<string>? Ipv6 { get; set; }
+
+        /// <summary>
+        /// L4 proxy instance ID.
+        /// </summary>
+        [Input("proxyId")]
+        public Input<string>? ProxyId { get; set; }
 
         /// <summary>
         /// Layer 4 proxy instance name. You can enter 1-50 characters. Valid characters are a-z, 0-9, and hyphens (-). However, hyphens (-) cannot be used individually or consecutively and should not be placed at the beginning or end of the name. Modifications are not allowed after creation.

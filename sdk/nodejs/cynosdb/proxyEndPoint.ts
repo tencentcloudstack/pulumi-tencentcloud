@@ -7,7 +7,7 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a cynosdb proxyEndPoint
+ * Provides a resource to create a CynosDB proxy end point
  *
  * ## Example Usage
  *
@@ -15,13 +15,15 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const proxyEndPoint = new tencentcloud.cynosdb.ProxyEndPoint("proxy_end_point", {
- *     clusterId: "cynosdbmysql-bws8h88b",
- *     uniqueVpcId: "vpc-4owdpnwr",
- *     uniqueSubnetId: "subnet-dwj7ipnc",
+ * const example = new tencentcloud.cynosdb.ProxyEndPoint("example", {
+ *     clusterId: "cynosdbmysql-phxwek8d",
+ *     uniqueVpcId: "vpc-i5yyodl9",
+ *     uniqueSubnetId: "subnet-5rrirqyc",
+ *     openConnectionPool: "no",
+ *     rwType: "READONLY",
  *     instanceWeights: [{
- *         instanceId: "cynosdbmysql-ins-afqx1hy0",
- *         weight: 1,
+ *         instanceId: "cynosdbmysql-ins-239owfiu",
+ *         weight: 2,
  *     }],
  * });
  * ```
@@ -30,7 +32,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const proxyEndPoint = new tencentcloud.cynosdb.ProxyEndPoint("proxy_end_point", {
+ * const example = new tencentcloud.cynosdb.ProxyEndPoint("example", {
  *     clusterId: "cynosdbmysql-bws8h88b",
  *     uniqueVpcId: "vpc-4owdpnwr",
  *     uniqueSubnetId: "subnet-dwj7ipnc",
@@ -49,7 +51,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const proxyEndPoint = new tencentcloud.cynosdb.ProxyEndPoint("proxy_end_point", {
+ * const example = new tencentcloud.cynosdb.ProxyEndPoint("example", {
  *     clusterId: "cynosdbmysql-bws8h88b",
  *     uniqueVpcId: "vpc-4owdpnwr",
  *     uniqueSubnetId: "subnet-dwj7ipnc",
@@ -71,7 +73,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const proxyEndPoint = new tencentcloud.cynosdb.ProxyEndPoint("proxy_end_point", {
+ * const example = new tencentcloud.cynosdb.ProxyEndPoint("example", {
  *     clusterId: "cynosdbmysql-bws8h88b",
  *     uniqueVpcId: "vpc-4owdpnwr",
  *     uniqueSubnetId: "subnet-dwj7ipnc",
@@ -89,7 +91,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const proxyEndPoint = new tencentcloud.cynosdb.ProxyEndPoint("proxy_end_point", {
+ * const example = new tencentcloud.cynosdb.ProxyEndPoint("example", {
  *     clusterId: "cynosdbmysql-bws8h88b",
  *     uniqueVpcId: "vpc-4owdpnwr",
  *     uniqueSubnetId: "subnet-dwj7ipnc",
@@ -111,7 +113,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const proxyEndPoint = new tencentcloud.cynosdb.ProxyEndPoint("proxy_end_point", {
+ * const example = new tencentcloud.cynosdb.ProxyEndPoint("example", {
  *     clusterId: "cynosdbmysql-bws8h88b",
  *     uniqueVpcId: "vpc-4owdpnwr",
  *     uniqueSubnetId: "subnet-dwj7ipnc",
@@ -132,7 +134,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const proxyEndPoint = new tencentcloud.cynosdb.ProxyEndPoint("proxy_end_point", {
+ * const example = new tencentcloud.cynosdb.ProxyEndPoint("example", {
  *     clusterId: "cynosdbmysql-bws8h88b",
  *     uniqueVpcId: "vpc-4owdpnwr",
  *     uniqueSubnetId: "subnet-dwj7ipnc",
@@ -350,87 +352,87 @@ export interface ProxyEndPointState {
     /**
      * Connection mode: nearby, balance.
      */
-    accessMode?: pulumi.Input<string>;
+    accessMode?: pulumi.Input<string | undefined>;
     /**
      * Do you want to automatically add read-only instances? Yes - Yes, no - Do not automatically add.
      */
-    autoAddRo?: pulumi.Input<string>;
+    autoAddRo?: pulumi.Input<string | undefined>;
     /**
      * Cluster ID.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Connection pool threshold: unit (second).
      */
-    connectionPoolTimeOut?: pulumi.Input<number>;
+    connectionPoolTimeOut?: pulumi.Input<number | undefined>;
     /**
      * Connection pool type: SessionConnectionPool (session level Connection pool).
      */
-    connectionPoolType?: pulumi.Input<string>;
+    connectionPoolType?: pulumi.Input<string | undefined>;
     /**
      * Consistency timeout.
      */
-    consistencyTimeOut?: pulumi.Input<number>;
+    consistencyTimeOut?: pulumi.Input<number | undefined>;
     /**
      * Consistency type: event, global, session.
      */
-    consistencyType?: pulumi.Input<string>;
+    consistencyType?: pulumi.Input<string | undefined>;
     /**
      * Description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Enable Failover. yes or no.
      */
-    failOver?: pulumi.Input<string>;
+    failOver?: pulumi.Input<string | undefined>;
     /**
      * Instance Group ID.
      */
-    instanceGroupId?: pulumi.Input<string>;
+    instanceGroupId?: pulumi.Input<string | undefined>;
     /**
      * Instance Weight.
      */
-    instanceWeights?: pulumi.Input<pulumi.Input<inputs.Cynosdb.ProxyEndPointInstanceWeight>[]>;
+    instanceWeights?: pulumi.Input<pulumi.Input<inputs.Cynosdb.ProxyEndPointInstanceWeight>[] | undefined>;
     /**
      * Whether to enable Connection pool, yes - enable, no - do not enable.
      */
-    openConnectionPool?: pulumi.Input<string>;
+    openConnectionPool?: pulumi.Input<string | undefined>;
     /**
      * Proxy Group ID.
      */
-    proxyGroupId?: pulumi.Input<string>;
+    proxyGroupId?: pulumi.Input<string | undefined>;
     /**
      * Read and write attributes: READWRITE, READONLY.
      */
-    rwType?: pulumi.Input<string>;
+    rwType?: pulumi.Input<string | undefined>;
     /**
      * Security Group ID Array.
      */
-    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Transaction splitting.
      */
-    transSplit?: pulumi.Input<boolean>;
+    transSplit?: pulumi.Input<boolean | undefined>;
     /**
      * The private network subnet ID is consistent with the cluster subnet ID by default.
      */
-    uniqueSubnetId?: pulumi.Input<string>;
+    uniqueSubnetId?: pulumi.Input<string | undefined>;
     /**
      * Private network ID, which is consistent with the cluster private network ID by default.
      */
-    uniqueVpcId?: pulumi.Input<string>;
+    uniqueVpcId?: pulumi.Input<string | undefined>;
     /**
      * VIP Information.
      */
-    vip?: pulumi.Input<string>;
+    vip?: pulumi.Input<string | undefined>;
     /**
      * Port Information.
      */
-    vport?: pulumi.Input<number>;
+    vport?: pulumi.Input<number | undefined>;
     /**
      * Weight mode: system system allocation, custom customization.
      */
-    weightMode?: pulumi.Input<string>;
+    weightMode?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -440,11 +442,11 @@ export interface ProxyEndPointArgs {
     /**
      * Connection mode: nearby, balance.
      */
-    accessMode?: pulumi.Input<string>;
+    accessMode?: pulumi.Input<string | undefined>;
     /**
      * Do you want to automatically add read-only instances? Yes - Yes, no - Do not automatically add.
      */
-    autoAddRo?: pulumi.Input<string>;
+    autoAddRo?: pulumi.Input<string | undefined>;
     /**
      * Cluster ID.
      */
@@ -452,47 +454,47 @@ export interface ProxyEndPointArgs {
     /**
      * Connection pool threshold: unit (second).
      */
-    connectionPoolTimeOut?: pulumi.Input<number>;
+    connectionPoolTimeOut?: pulumi.Input<number | undefined>;
     /**
      * Connection pool type: SessionConnectionPool (session level Connection pool).
      */
-    connectionPoolType?: pulumi.Input<string>;
+    connectionPoolType?: pulumi.Input<string | undefined>;
     /**
      * Consistency timeout.
      */
-    consistencyTimeOut?: pulumi.Input<number>;
+    consistencyTimeOut?: pulumi.Input<number | undefined>;
     /**
      * Consistency type: event, global, session.
      */
-    consistencyType?: pulumi.Input<string>;
+    consistencyType?: pulumi.Input<string | undefined>;
     /**
      * Description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Enable Failover. yes or no.
      */
-    failOver?: pulumi.Input<string>;
+    failOver?: pulumi.Input<string | undefined>;
     /**
      * Instance Weight.
      */
-    instanceWeights?: pulumi.Input<pulumi.Input<inputs.Cynosdb.ProxyEndPointInstanceWeight>[]>;
+    instanceWeights?: pulumi.Input<pulumi.Input<inputs.Cynosdb.ProxyEndPointInstanceWeight>[] | undefined>;
     /**
      * Whether to enable Connection pool, yes - enable, no - do not enable.
      */
-    openConnectionPool?: pulumi.Input<string>;
+    openConnectionPool?: pulumi.Input<string | undefined>;
     /**
      * Read and write attributes: READWRITE, READONLY.
      */
-    rwType?: pulumi.Input<string>;
+    rwType?: pulumi.Input<string | undefined>;
     /**
      * Security Group ID Array.
      */
-    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Transaction splitting.
      */
-    transSplit?: pulumi.Input<boolean>;
+    transSplit?: pulumi.Input<boolean | undefined>;
     /**
      * The private network subnet ID is consistent with the cluster subnet ID by default.
      */
@@ -504,13 +506,13 @@ export interface ProxyEndPointArgs {
     /**
      * VIP Information.
      */
-    vip?: pulumi.Input<string>;
+    vip?: pulumi.Input<string | undefined>;
     /**
      * Port Information.
      */
-    vport?: pulumi.Input<number>;
+    vport?: pulumi.Input<number | undefined>;
     /**
      * Weight mode: system system allocation, custom customization.
      */
-    weightMode?: pulumi.Input<string>;
+    weightMode?: pulumi.Input<string | undefined>;
 }

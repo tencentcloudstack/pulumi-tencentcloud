@@ -79,12 +79,8 @@ type GetSpecResult struct {
 }
 
 func GetSpecOutput(ctx *pulumi.Context, args GetSpecOutputArgs, opts ...pulumi.InvokeOption) GetSpecResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSpecResultOutput, error) {
-			args := v.(GetSpecArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Clickhouse/getSpec:getSpec", args, GetSpecResultOutput{}, options).(GetSpecResultOutput), nil
-		}).(GetSpecResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Clickhouse/getSpec:getSpec", args, GetSpecResultOutput{}, options).(GetSpecResultOutput)
 }
 
 // A collection of arguments for invoking getSpec.

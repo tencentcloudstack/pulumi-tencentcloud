@@ -39,7 +39,7 @@ import (
 //				return err
 //			}
 //			exampleNamespace, err := tcr.NewNamespace(ctx, "example", &tcr.NamespaceArgs{
-//				InstanceId:   example.ID(),
+//				InstanceId:   example.ID().ToIDOutput().ToStringOutput(),
 //				Name:         pulumi.String("tf_example_ns"),
 //				IsPublic:     pulumi.Bool(true),
 //				IsAutoScan:   pulumi.Bool(true),
@@ -55,7 +55,7 @@ import (
 //				return err
 //			}
 //			exampleRepository, err := tcr.NewRepository(ctx, "example", &tcr.RepositoryArgs{
-//				InstanceId:    example.ID(),
+//				InstanceId:    example.ID().ToIDOutput().ToStringOutput(),
 //				NamespaceName: exampleNamespace.Name,
 //				Name:          pulumi.String("test"),
 //				BriefDesc:     pulumi.String("111"),
@@ -65,7 +65,7 @@ import (
 //				return err
 //			}
 //			_, err = tcr.NewCreateImageSignatureOperation(ctx, "example", &tcr.CreateImageSignatureOperationArgs{
-//				RegistryId:     example.ID(),
+//				RegistryId:     example.ID().ToIDOutput().ToStringOutput(),
 //				NamespaceName:  exampleNamespace.Name,
 //				RepositoryName: exampleRepository.Name,
 //				ImageVersion:   pulumi.String("v1"),
@@ -81,7 +81,7 @@ import (
 //
 // ## Import
 //
-// tcr image_signature_operation can be imported using the id, e.g.
+// tcr imageSignatureOperation can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Tcr/createImageSignatureOperation:CreateImageSignatureOperation image_signature_operation image_signature_operation_id

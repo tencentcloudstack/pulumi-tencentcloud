@@ -24,22 +24,24 @@ import (
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/organization"
 //
 // )
-// func main() {
-// pulumi.Run(func(ctx *pulumi.Context) error {
-// _, err := organization.GetOrgFinancialByMember(ctx, &organization.GetOrgFinancialByMemberArgs{
-// Month: "2023-05",
-// EndMonth: pulumi.StringRef("2023-10"),
-// MemberUins: interface{}{
-// 100015591986,
-// 100029796005,
-// },
-// }, nil);
-// if err != nil {
-// return err
-// }
-// return nil
-// })
-// }
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := organization.GetOrgFinancialByMember(ctx, &organization.GetOrgFinancialByMemberArgs{
+//				Month:    "2023-05",
+//				EndMonth: pulumi.StringRef("2023-10"),
+//				MemberUins: pulumi.IntArray{
+//					100015591986,
+//					100029796005,
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetOrgFinancialByMember(ctx *pulumi.Context, args *GetOrgFinancialByMemberArgs, opts ...pulumi.InvokeOption) (*GetOrgFinancialByMemberResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
@@ -81,12 +83,8 @@ type GetOrgFinancialByMemberResult struct {
 }
 
 func GetOrgFinancialByMemberOutput(ctx *pulumi.Context, args GetOrgFinancialByMemberOutputArgs, opts ...pulumi.InvokeOption) GetOrgFinancialByMemberResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetOrgFinancialByMemberResultOutput, error) {
-			args := v.(GetOrgFinancialByMemberArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Organization/getOrgFinancialByMember:getOrgFinancialByMember", args, GetOrgFinancialByMemberResultOutput{}, options).(GetOrgFinancialByMemberResultOutput), nil
-		}).(GetOrgFinancialByMemberResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Organization/getOrgFinancialByMember:getOrgFinancialByMember", args, GetOrgFinancialByMemberResultOutput{}, options).(GetOrgFinancialByMemberResultOutput)
 }
 
 // A collection of arguments for invoking getOrgFinancialByMember.

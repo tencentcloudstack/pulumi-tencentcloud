@@ -54,7 +54,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * ci media_transcode_pro_template can be imported using the bucket#templateId, e.g.
+ * ci mediaTranscodeProTemplate can be imported using the bucket#templateId, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Ci/mediaTranscodeProTemplate:MediaTranscodeProTemplate media_transcode_pro_template terraform-ci-xxxxxx#t13ed9af009da0414e9c7c63456ec8f4d2
@@ -165,31 +165,31 @@ export interface MediaTranscodeProTemplateState {
     /**
      * Audio information, do not transmit Audio, which is equivalent to deleting audio information.
      */
-    audio?: pulumi.Input<inputs.Ci.MediaTranscodeProTemplateAudio>;
+    audio?: pulumi.Input<inputs.Ci.MediaTranscodeProTemplateAudio | undefined>;
     /**
      * bucket name.
      */
-    bucket?: pulumi.Input<string>;
+    bucket?: pulumi.Input<string | undefined>;
     /**
      * container format.
      */
-    container?: pulumi.Input<inputs.Ci.MediaTranscodeProTemplateContainer>;
+    container?: pulumi.Input<inputs.Ci.MediaTranscodeProTemplateContainer | undefined>;
     /**
      * The template name only supports `Chinese`, `English`, `numbers`, `_`, `-` and `*`.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * time interval.
      */
-    timeInterval?: pulumi.Input<inputs.Ci.MediaTranscodeProTemplateTimeInterval>;
+    timeInterval?: pulumi.Input<inputs.Ci.MediaTranscodeProTemplateTimeInterval | undefined>;
     /**
      * transcoding configuration.
      */
-    transConfig?: pulumi.Input<inputs.Ci.MediaTranscodeProTemplateTransConfig>;
+    transConfig?: pulumi.Input<inputs.Ci.MediaTranscodeProTemplateTransConfig | undefined>;
     /**
      * video information, do not upload Video, which is equivalent to deleting video information.
      */
-    video?: pulumi.Input<inputs.Ci.MediaTranscodeProTemplateVideo>;
+    video?: pulumi.Input<inputs.Ci.MediaTranscodeProTemplateVideo | undefined>;
 }
 
 /**
@@ -199,7 +199,7 @@ export interface MediaTranscodeProTemplateArgs {
     /**
      * Audio information, do not transmit Audio, which is equivalent to deleting audio information.
      */
-    audio?: pulumi.Input<inputs.Ci.MediaTranscodeProTemplateAudio>;
+    audio?: pulumi.Input<inputs.Ci.MediaTranscodeProTemplateAudio | undefined>;
     /**
      * bucket name.
      */
@@ -211,17 +211,17 @@ export interface MediaTranscodeProTemplateArgs {
     /**
      * The template name only supports `Chinese`, `English`, `numbers`, `_`, `-` and `*`.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * time interval.
      */
-    timeInterval?: pulumi.Input<inputs.Ci.MediaTranscodeProTemplateTimeInterval>;
+    timeInterval?: pulumi.Input<inputs.Ci.MediaTranscodeProTemplateTimeInterval | undefined>;
     /**
      * transcoding configuration.
      */
-    transConfig?: pulumi.Input<inputs.Ci.MediaTranscodeProTemplateTransConfig>;
+    transConfig?: pulumi.Input<inputs.Ci.MediaTranscodeProTemplateTransConfig | undefined>;
     /**
      * video information, do not upload Video, which is equivalent to deleting video information.
      */
-    video?: pulumi.Input<inputs.Ci.MediaTranscodeProTemplateVideo>;
+    video?: pulumi.Input<inputs.Ci.MediaTranscodeProTemplateVideo | undefined>;
 }

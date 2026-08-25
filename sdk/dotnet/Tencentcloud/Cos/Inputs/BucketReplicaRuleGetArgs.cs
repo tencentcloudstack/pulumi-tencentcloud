@@ -14,16 +14,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
     public sealed class BucketReplicaRuleGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Synchronized deletion marker.
+        /// </summary>
+        [Input("deleteMarkerReplication")]
+        public Input<Inputs.BucketReplicaRuleDeleteMarkerReplicationGetArgs>? DeleteMarkerReplication { get; set; }
+
+        /// <summary>
         /// Destination bucket identifier, format: `qcs::cos:&lt;region&gt;::&lt;bucketname-appid&gt;`. NOTE: destination bucket must enable versioning.
         /// </summary>
         [Input("destinationBucket", required: true)]
         public Input<string> DestinationBucket { get; set; } = null!;
 
         /// <summary>
-        /// Storage class of destination, available values: `STANDARD`, `INTELLIGENT_TIERING`, `STANDARD_IA`. default is following current class of destination.
+        /// This field must be included when `source_selection_criteria.sse_kms_encrypted_objects.status` is set to Enabled. It is used to specify the KMS key used for KMS-encrypted objects copied to the destination bucket.
+        /// </summary>
+        [Input("destinationEncryptionKmsKeyId")]
+        public Input<string>? DestinationEncryptionKmsKeyId { get; set; }
+
+        /// <summary>
+        /// Storage class of destination, available values: `Standard`, `Intelligent_Tiering`, `Standard_IA`. default is following current class of destination.
         /// </summary>
         [Input("destinationStorageClass")]
         public Input<string>? DestinationStorageClass { get; set; }
+
+        /// <summary>
+        /// Filter the objects to be copied. The bucket feature will copy objects that match the prefixes and tags specified in the Filter settings.
+        /// </summary>
+        [Input("filter")]
+        public Input<Inputs.BucketReplicaRuleFilterGetArgs>? Filter { get; set; }
 
         /// <summary>
         /// Name of a specific rule.
@@ -38,10 +56,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
         public Input<string>? Prefix { get; set; }
 
         /// <summary>
+        /// Execution priority, used to handle scenarios where the target storage buckets are the same and multiple replication rules match the same object. Note: Supports setting positive integers in the range of 1-1000. The Priority values of different rules cannot be duplicated. Storage bucket replication rules must either all have Priority set or all not have Priority set. When all rules have Priority set, overlapping prefixes are allowed for different rules when the target storage buckets are the same. When different rules match the same object, the rule with the smallest Priority value will be triggered first. When none of the rules have Priority set, overlapping prefixes are not allowed for different rules.
+        /// </summary>
+        [Input("priority")]
+        public Input<int>? Priority { get; set; }
+
+        /// <summary>
+        /// This is used to specify additional conditions for objects supported by bucket replication rules. Currently, only the option to replicate KMS-encrypted objects is supported.
+        /// </summary>
+        [Input("sourceSelectionCriteria")]
+        public Input<Inputs.BucketReplicaRuleSourceSelectionCriteriaGetArgs>? SourceSelectionCriteria { get; set; }
+
+        /// <summary>
         /// Status identifier, available values: `Enabled`, `Disabled`.
         /// </summary>
-        [Input("status", required: true)]
-        public Input<string> Status { get; set; } = null!;
+        [Input("status")]
+        public Input<string>? Status { get; set; }
 
         public BucketReplicaRuleGetArgs()
         {

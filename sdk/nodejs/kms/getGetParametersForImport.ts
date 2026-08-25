@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Kms.getGetParametersForImport({
+ * const example = tencentcloud.kms.getGetParametersForImport({
  *     keyId: "786aea8c-4aec-11ee-b601-525400281a45",
  *     wrappingAlgorithm: "RSAES_OAEP_SHA_1",
  *     wrappingKeySpec: "RSA_2048",
@@ -86,7 +86,7 @@ export interface GetGetParametersForImportResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Kms.getGetParametersForImport({
+ * const example = tencentcloud.kms.getGetParametersForImport({
  *     keyId: "786aea8c-4aec-11ee-b601-525400281a45",
  *     wrappingAlgorithm: "RSAES_OAEP_SHA_1",
  *     wrappingKeySpec: "RSA_2048",
@@ -114,7 +114,7 @@ export interface GetGetParametersForImportOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Specifies the algorithm for encrypting key material, currently supports RSAES_PKCS1_V1_5, RSAES_OAEP_SHA_1, RSAES_OAEP_SHA_256.
      */

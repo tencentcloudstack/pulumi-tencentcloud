@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const elasticPublicIpv6s = tencentcloud.Elastic.getPublicIpv6s({
+ * const elasticPublicIpv6s = tencentcloud.elastic.getPublicIpv6s({
  *     ipv6AddressIds: ["xxxxxx"],
  * });
  * ```
@@ -44,7 +44,7 @@ export interface GetPublicIpv6sArgs {
      * - egress-String-required: no-(filter condition) filter by exit.
      * - address-type-String-required: no-(filter condition) filter by IPv6 type.
      * - address-isp-String-required: no-(filter condition) filter by operator type.
-     * The status includes: 'CREATING','BINDING','BIND','UNBINDING','UNBIND','OFFLINING','BIND_ENI','PRIVATE'.
+     *   The status includes: 'CREATING','BINDING','BIND','UNBINDING','UNBIND','OFFLINING','BIND_ENI','PRIVATE'.
      * - address-name-String-required: no-(filter condition) filter by EIP name. Blur filtering is not supported.
      * - tag-key-String-required: no-(filter condition) filter by label key.
      * - tag-value-String-required: no-(filter condition) filter by tag value.
@@ -55,7 +55,7 @@ export interface GetPublicIpv6sArgs {
      * Unique ID column that identifies IPv6.
      * - Traditional Elastic IPv6 unique ID is like: `eip-11112222`
      * - Elastic IPv6 unique ID is like: `eipv6 -11112222`
-     * Note: Parameters do not support specifying both IPv6AddressIds and Filters.
+     *   Note: Parameters do not support specifying both IPv6AddressIds and Filters.
      */
     ipv6AddressIds?: string[];
     /**
@@ -94,7 +94,7 @@ export interface GetPublicIpv6sResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const elasticPublicIpv6s = tencentcloud.Elastic.getPublicIpv6s({
+ * const elasticPublicIpv6s = tencentcloud.elastic.getPublicIpv6s({
  *     ipv6AddressIds: ["xxxxxx"],
  * });
  * ```
@@ -123,26 +123,26 @@ export interface GetPublicIpv6sOutputArgs {
      * - egress-String-required: no-(filter condition) filter by exit.
      * - address-type-String-required: no-(filter condition) filter by IPv6 type.
      * - address-isp-String-required: no-(filter condition) filter by operator type.
-     * The status includes: 'CREATING','BINDING','BIND','UNBINDING','UNBIND','OFFLINING','BIND_ENI','PRIVATE'.
+     *   The status includes: 'CREATING','BINDING','BIND','UNBINDING','UNBIND','OFFLINING','BIND_ENI','PRIVATE'.
      * - address-name-String-required: no-(filter condition) filter by EIP name. Blur filtering is not supported.
      * - tag-key-String-required: no-(filter condition) filter by label key.
      * - tag-value-String-required: no-(filter condition) filter by tag value.
      * - tag:tag-key-String-required: no-(filter condition) filter by label key value pair. Tag-key is replaced with a specific label key.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Elastic.GetPublicIpv6sFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Elastic.GetPublicIpv6sFilterArgs>[] | undefined>;
     /**
      * Unique ID column that identifies IPv6.
      * - Traditional Elastic IPv6 unique ID is like: `eip-11112222`
      * - Elastic IPv6 unique ID is like: `eipv6 -11112222`
-     * Note: Parameters do not support specifying both IPv6AddressIds and Filters.
+     *   Note: Parameters do not support specifying both IPv6AddressIds and Filters.
      */
-    ipv6AddressIds?: pulumi.Input<pulumi.Input<string>[]>;
+    ipv6AddressIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Whether to query traditional IPv6 address information.
      */
-    traditional?: pulumi.Input<boolean>;
+    traditional?: pulumi.Input<boolean | undefined>;
 }

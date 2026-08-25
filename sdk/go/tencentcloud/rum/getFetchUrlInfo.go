@@ -136,12 +136,8 @@ type GetFetchUrlInfoResult struct {
 }
 
 func GetFetchUrlInfoOutput(ctx *pulumi.Context, args GetFetchUrlInfoOutputArgs, opts ...pulumi.InvokeOption) GetFetchUrlInfoResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetFetchUrlInfoResultOutput, error) {
-			args := v.(GetFetchUrlInfoArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Rum/getFetchUrlInfo:getFetchUrlInfo", args, GetFetchUrlInfoResultOutput{}, options).(GetFetchUrlInfoResultOutput), nil
-		}).(GetFetchUrlInfoResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Rum/getFetchUrlInfo:getFetchUrlInfo", args, GetFetchUrlInfoResultOutput{}, options).(GetFetchUrlInfoResultOutput)
 }
 
 // A collection of arguments for invoking getFetchUrlInfo.

@@ -20,6 +20,9 @@ Object.defineProperty(exports, "allowedAccountIds", {
     enumerable: true,
 });
 
+/**
+ * The `assumeRole` block. If provided, terraform will attempt to assume this role using the supplied credentials.
+ */
 export declare const assumeRole: outputs.config.AssumeRole | undefined;
 Object.defineProperty(exports, "assumeRole", {
     get() {
@@ -28,6 +31,9 @@ Object.defineProperty(exports, "assumeRole", {
     enumerable: true,
 });
 
+/**
+ * The `assumeRoleWithSaml` block. If provided, terraform will attempt to assume this role using the supplied credentials.
+ */
 export declare const assumeRoleWithSaml: outputs.config.AssumeRoleWithSaml | undefined;
 Object.defineProperty(exports, "assumeRoleWithSaml", {
     get() {
@@ -36,6 +42,9 @@ Object.defineProperty(exports, "assumeRoleWithSaml", {
     enumerable: true,
 });
 
+/**
+ * The `assumeRoleWithWebIdentity` block. If provided, terraform will attempt to assume this role using the supplied credentials.
+ */
 export declare const assumeRoleWithWebIdentity: outputs.config.AssumeRoleWithWebIdentity | undefined;
 Object.defineProperty(exports, "assumeRoleWithWebIdentity", {
     get() {
@@ -99,6 +108,9 @@ Object.defineProperty(exports, "forbiddenAccountIds", {
     enumerable: true,
 });
 
+/**
+ * The `mfaCertification` block. If provided, terraform will attempt to use the provided credentials for MFA authentication.
+ */
 export declare const mfaCertification: outputs.config.MfaCertification | undefined;
 Object.defineProperty(exports, "mfaCertification", {
     get() {

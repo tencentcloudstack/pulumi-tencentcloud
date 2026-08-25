@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Oceanus.getSavepointList({
+ * const example = tencentcloud.oceanus.getSavepointList({
  *     jobId: "cql-314rw6w0",
  *     workSpaceId: "space-2idq8wbr",
  * });
@@ -73,7 +73,7 @@ export interface GetSavepointListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Oceanus.getSavepointList({
+ * const example = tencentcloud.oceanus.getSavepointList({
  *     jobId: "cql-314rw6w0",
  *     workSpaceId: "space-2idq8wbr",
  * });
@@ -99,9 +99,9 @@ export interface GetSavepointListOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Workspace SerialId.
      */
-    workSpaceId?: pulumi.Input<string>;
+    workSpaceId?: pulumi.Input<string | undefined>;
 }

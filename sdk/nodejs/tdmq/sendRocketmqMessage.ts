@@ -128,27 +128,27 @@ export interface SendRocketmqMessageState {
     /**
      * Cluster id.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Information.
      */
-    msgBody?: pulumi.Input<string>;
+    msgBody?: pulumi.Input<string | undefined>;
     /**
      * Message key information.
      */
-    msgKey?: pulumi.Input<string>;
+    msgKey?: pulumi.Input<string | undefined>;
     /**
      * Message tag information.
      */
-    msgTag?: pulumi.Input<string>;
+    msgTag?: pulumi.Input<string | undefined>;
     /**
      * Namespaces.
      */
-    namespaceId?: pulumi.Input<string>;
+    namespaceId?: pulumi.Input<string | undefined>;
     /**
      * topic name.
      */
-    topicName?: pulumi.Input<string>;
+    topicName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -166,11 +166,11 @@ export interface SendRocketmqMessageArgs {
     /**
      * Message key information.
      */
-    msgKey?: pulumi.Input<string>;
+    msgKey?: pulumi.Input<string | undefined>;
     /**
      * Message tag information.
      */
-    msgTag?: pulumi.Input<string>;
+    msgTag?: pulumi.Input<string | undefined>;
     /**
      * Namespaces.
      */

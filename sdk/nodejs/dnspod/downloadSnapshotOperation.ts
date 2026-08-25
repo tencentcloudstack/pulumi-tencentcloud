@@ -100,15 +100,15 @@ export interface DownloadSnapshotOperationState {
     /**
      * Snapshot download url.
      */
-    cosUrl?: pulumi.Input<string>;
+    cosUrl?: pulumi.Input<string | undefined>;
     /**
      * Domain.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Snapshot ID.
      */
-    snapshotId?: pulumi.Input<string>;
+    snapshotId?: pulumi.Input<string | undefined>;
 }
 
 /**

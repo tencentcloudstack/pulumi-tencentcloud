@@ -44,7 +44,7 @@ import (
 //
 // ## Import
 //
-// tsf application_release_config can be imported using the configId#groupId#configReleaseId, e.g.
+// tsf applicationReleaseConfig can be imported using the configId#groupId#configReleaseId, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Tsf/applicationReleaseConfig:ApplicationReleaseConfig application_release_config dcfg-nalqbqwv#group-yxmz72gv#dcfgr-maeeq2ea

@@ -37,7 +37,7 @@ import * as utilities from "../utilities";
  *     environment: "test",
  *     bindType: "SERVICE",
  * });
- * const environmentTest = tencentcloud.ApiGateway.getUsagePlanEnvironmentsOutput({
+ * const environmentTest = tencentcloud.apigateway.getUsagePlanEnvironmentsOutput({
  *     usagePlanId: attachService.usagePlanId,
  *     bindType: "SERVICE",
  * });
@@ -117,7 +117,7 @@ export interface GetUsagePlanEnvironmentsResult {
  *     environment: "test",
  *     bindType: "SERVICE",
  * });
- * const environmentTest = tencentcloud.ApiGateway.getUsagePlanEnvironmentsOutput({
+ * const environmentTest = tencentcloud.apigateway.getUsagePlanEnvironmentsOutput({
  *     usagePlanId: attachService.usagePlanId,
  *     bindType: "SERVICE",
  * });
@@ -139,11 +139,11 @@ export interface GetUsagePlanEnvironmentsOutputArgs {
     /**
      * Binding type. Valid values: `API`, `SERVICE`. Default value: `SERVICE`.
      */
-    bindType?: pulumi.Input<string>;
+    bindType?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * ID of the usage plan to be queried.
      */

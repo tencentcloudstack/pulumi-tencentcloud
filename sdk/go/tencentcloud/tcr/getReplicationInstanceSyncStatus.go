@@ -83,12 +83,8 @@ type GetReplicationInstanceSyncStatusResult struct {
 }
 
 func GetReplicationInstanceSyncStatusOutput(ctx *pulumi.Context, args GetReplicationInstanceSyncStatusOutputArgs, opts ...pulumi.InvokeOption) GetReplicationInstanceSyncStatusResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetReplicationInstanceSyncStatusResultOutput, error) {
-			args := v.(GetReplicationInstanceSyncStatusArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tcr/getReplicationInstanceSyncStatus:getReplicationInstanceSyncStatus", args, GetReplicationInstanceSyncStatusResultOutput{}, options).(GetReplicationInstanceSyncStatusResultOutput), nil
-		}).(GetReplicationInstanceSyncStatusResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tcr/getReplicationInstanceSyncStatus:getReplicationInstanceSyncStatus", args, GetReplicationInstanceSyncStatusResultOutput{}, options).(GetReplicationInstanceSyncStatusResultOutput)
 }
 
 // A collection of arguments for invoking getReplicationInstanceSyncStatus.

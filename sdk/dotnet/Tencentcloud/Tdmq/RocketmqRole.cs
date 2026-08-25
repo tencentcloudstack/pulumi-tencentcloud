@@ -42,7 +42,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// ## Import
     /// 
     /// tdmqRocketmq role can be imported using the id, e.g.
-    /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Tdmq/rocketmqRole:RocketmqRole role role_id
     /// ```

@@ -68,12 +68,8 @@ type LookupGroupConfigReleaseResult struct {
 }
 
 func LookupGroupConfigReleaseOutput(ctx *pulumi.Context, args LookupGroupConfigReleaseOutputArgs, opts ...pulumi.InvokeOption) LookupGroupConfigReleaseResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupGroupConfigReleaseResultOutput, error) {
-			args := v.(LookupGroupConfigReleaseArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tsf/getGroupConfigRelease:getGroupConfigRelease", args, LookupGroupConfigReleaseResultOutput{}, options).(LookupGroupConfigReleaseResultOutput), nil
-		}).(LookupGroupConfigReleaseResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tsf/getGroupConfigRelease:getGroupConfigRelease", args, LookupGroupConfigReleaseResultOutput{}, options).(LookupGroupConfigReleaseResultOutput)
 }
 
 // A collection of arguments for invoking getGroupConfigRelease.

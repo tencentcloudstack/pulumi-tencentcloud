@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "sqlserver",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -347,87 +347,87 @@ export interface GeneralCloudRoInstanceState {
     /**
      * System character set collation, default: Chinese_PRC_CI_AS.
      */
-    collation?: pulumi.Input<string>;
+    collation?: pulumi.Input<string | undefined>;
     /**
      * Number of instance cores.
      */
-    cpu?: pulumi.Input<number>;
+    cpu?: pulumi.Input<number | undefined>;
     /**
      * Payment mode, the value supports PREPAID (prepaid), POSTPAID (postpaid).
      */
-    instanceChargeType?: pulumi.Input<string>;
+    instanceChargeType?: pulumi.Input<string | undefined>;
     /**
      * Primary instance ID, in the format: mssql-3l3fgqn7.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * The host disk type of the purchased instance, CLOUD_HSSD-enhanced SSD cloud disk for virtual machines, CLOUD_TSSD-extremely fast SSD cloud disk for virtual machines, CLOUD_BSSD-universal SSD cloud disk for virtual machines.
      */
-    machineType?: pulumi.Input<string>;
+    machineType?: pulumi.Input<string | undefined>;
     /**
      * Instance memory size, in GB.
      */
-    memory?: pulumi.Input<number>;
+    memory?: pulumi.Input<number | undefined>;
     /**
      * Purchase instance period, the default value is 1, which means one month. The value cannot exceed 48.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * Required when ReadOnlyGroupType=3, existing read-only group ID.
      */
-    readOnlyGroupId?: pulumi.Input<string>;
+    readOnlyGroupId?: pulumi.Input<string | undefined>;
     /**
      * Required when ReadOnlyGroupType=2, whether to enable the delayed elimination function for the newly created read-only group, 1-on, 0-off. When the delay between the read-only replica and the primary instance is greater than the threshold, it will be automatically removed.
      */
-    readOnlyGroupIsOfflineDelay?: pulumi.Input<number>;
+    readOnlyGroupIsOfflineDelay?: pulumi.Input<number | undefined>;
     /**
      * Mandatory when ReadOnlyGroupType=2 and ReadOnlyGroupIsOfflineDelay=1, the threshold for delay culling of newly created read-only groups.
      */
-    readOnlyGroupMaxDelayTime?: pulumi.Input<number>;
+    readOnlyGroupMaxDelayTime?: pulumi.Input<number | undefined>;
     /**
      * Required when ReadOnlyGroupType=2 and ReadOnlyGroupIsOfflineDelay=1, the newly created read-only group retains at least the number of read-only replicas after delay elimination.
      */
-    readOnlyGroupMinInGroup?: pulumi.Input<number>;
+    readOnlyGroupMinInGroup?: pulumi.Input<number | undefined>;
     /**
      * Required when ReadOnlyGroupType=2, the name of the newly created read-only group.
      */
-    readOnlyGroupName?: pulumi.Input<string>;
+    readOnlyGroupName?: pulumi.Input<string | undefined>;
     /**
      * Read-only group type option, 1- Ship according to one instance and one read-only group, 2 - Ship after creating a read-only group, all instances are under this read-only group, 3 - All instances shipped are in the existing Some read-only groups below.
      */
-    readOnlyGroupType?: pulumi.Input<number>;
+    readOnlyGroupType?: pulumi.Input<number | undefined>;
     /**
      * Tag description list.
      */
-    resourceTags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    resourceTags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Primary read only instance ID, in the format: mssqlro-lbljc5qd.
      */
-    roInstanceId?: pulumi.Input<string>;
+    roInstanceId?: pulumi.Input<string | undefined>;
     /**
      * Security group list, fill in the security group ID in the form of sg-xxx.
      */
-    securityGroupLists?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Instance disk size, in GB.
      */
-    storage?: pulumi.Input<number>;
+    storage?: pulumi.Input<number | undefined>;
     /**
      * VPC subnet ID, in the form of subnet-bdoe83fa; SubnetId and VpcId need to be set at the same time or not set at the same time.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * System time zone, default: China Standard Time.
      */
-    timeZone?: pulumi.Input<string>;
+    timeZone?: pulumi.Input<string | undefined>;
     /**
      * VPC network ID, in the form of vpc-dsp338hz; SubnetId and VpcId need to be set at the same time or not set at the same time.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * Instance Availability Zone, similar to ap-guangzhou-1 (Guangzhou District 1); the instance sales area can be obtained through the interface DescribeZones.
      */
-    zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -437,7 +437,7 @@ export interface GeneralCloudRoInstanceArgs {
     /**
      * System character set collation, default: Chinese_PRC_CI_AS.
      */
-    collation?: pulumi.Input<string>;
+    collation?: pulumi.Input<string | undefined>;
     /**
      * Number of instance cores.
      */
@@ -445,7 +445,7 @@ export interface GeneralCloudRoInstanceArgs {
     /**
      * Payment mode, the value supports PREPAID (prepaid), POSTPAID (postpaid).
      */
-    instanceChargeType?: pulumi.Input<string>;
+    instanceChargeType?: pulumi.Input<string | undefined>;
     /**
      * Primary instance ID, in the format: mssql-3l3fgqn7.
      */
@@ -461,27 +461,27 @@ export interface GeneralCloudRoInstanceArgs {
     /**
      * Purchase instance period, the default value is 1, which means one month. The value cannot exceed 48.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * Required when ReadOnlyGroupType=3, existing read-only group ID.
      */
-    readOnlyGroupId?: pulumi.Input<string>;
+    readOnlyGroupId?: pulumi.Input<string | undefined>;
     /**
      * Required when ReadOnlyGroupType=2, whether to enable the delayed elimination function for the newly created read-only group, 1-on, 0-off. When the delay between the read-only replica and the primary instance is greater than the threshold, it will be automatically removed.
      */
-    readOnlyGroupIsOfflineDelay?: pulumi.Input<number>;
+    readOnlyGroupIsOfflineDelay?: pulumi.Input<number | undefined>;
     /**
      * Mandatory when ReadOnlyGroupType=2 and ReadOnlyGroupIsOfflineDelay=1, the threshold for delay culling of newly created read-only groups.
      */
-    readOnlyGroupMaxDelayTime?: pulumi.Input<number>;
+    readOnlyGroupMaxDelayTime?: pulumi.Input<number | undefined>;
     /**
      * Required when ReadOnlyGroupType=2 and ReadOnlyGroupIsOfflineDelay=1, the newly created read-only group retains at least the number of read-only replicas after delay elimination.
      */
-    readOnlyGroupMinInGroup?: pulumi.Input<number>;
+    readOnlyGroupMinInGroup?: pulumi.Input<number | undefined>;
     /**
      * Required when ReadOnlyGroupType=2, the name of the newly created read-only group.
      */
-    readOnlyGroupName?: pulumi.Input<string>;
+    readOnlyGroupName?: pulumi.Input<string | undefined>;
     /**
      * Read-only group type option, 1- Ship according to one instance and one read-only group, 2 - Ship after creating a read-only group, all instances are under this read-only group, 3 - All instances shipped are in the existing Some read-only groups below.
      */
@@ -489,11 +489,11 @@ export interface GeneralCloudRoInstanceArgs {
     /**
      * Tag description list.
      */
-    resourceTags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    resourceTags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Security group list, fill in the security group ID in the form of sg-xxx.
      */
-    securityGroupLists?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Instance disk size, in GB.
      */
@@ -501,15 +501,15 @@ export interface GeneralCloudRoInstanceArgs {
     /**
      * VPC subnet ID, in the form of subnet-bdoe83fa; SubnetId and VpcId need to be set at the same time or not set at the same time.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * System time zone, default: China Standard Time.
      */
-    timeZone?: pulumi.Input<string>;
+    timeZone?: pulumi.Input<string | undefined>;
     /**
      * VPC network ID, in the form of vpc-dsp338hz; SubnetId and VpcId need to be set at the same time or not set at the same time.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * Instance Availability Zone, similar to ap-guangzhou-1 (Guangzhou District 1); the instance sales area can be obtained through the interface DescribeZones.
      */

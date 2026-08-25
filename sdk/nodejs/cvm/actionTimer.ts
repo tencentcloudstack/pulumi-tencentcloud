@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  *
  * const config = new pulumi.Config();
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-6";
- * const images = tencentcloud.Images.getInstance({
+ * const images = tencentcloud.images.getInstance({
  *     imageTypes: ["PUBLIC_IMAGE"],
  *     imageNameRegex: "TencentOS Server",
  * });
@@ -140,11 +140,11 @@ export interface ActionTimerState {
     /**
      * Scheduled tasks. This parameter can be used to specify scheduled tasks for instances, and currently only supports scheduled destruction.
      */
-    actionTimer?: pulumi.Input<inputs.Cvm.ActionTimerActionTimer>;
+    actionTimer?: pulumi.Input<inputs.Cvm.ActionTimerActionTimer | undefined>;
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**

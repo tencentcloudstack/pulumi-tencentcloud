@@ -53,7 +53,7 @@ import (
 //
 // ## Import
 //
-// cynosdb cluster_databases can be imported using the id, e.g.
+// cynosdb clusterDatabases can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Cynosdb/clusterDatabases:ClusterDatabases cluster_databases cluster_databases_id

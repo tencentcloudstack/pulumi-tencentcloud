@@ -36,17 +36,17 @@ import (
 //			if param := cfg.Get("availabilityZone"); param != "" {
 //				availabilityZone = param
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("subnet"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("10.0.20.0/28"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -54,8 +54,8 @@ import (
 //				return err
 //			}
 //			gwlbInstance, err := gwlb.NewInstance(ctx, "gwlb_instance", &gwlb.InstanceArgs{
-//				VpcId:            vpc.ID(),
-//				SubnetId:         subnet.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 //				LoadBalancerName: pulumi.String("tf-test"),
 //				LbChargeType:     pulumi.String("POSTPAID_BY_HOUR"),
 //				Tags: gwlb.InstanceTagArray{
@@ -70,7 +70,7 @@ import (
 //			}
 //			gwlbTargetGroup, err := gwlb.NewTargetGroup(ctx, "gwlb_target_group", &gwlb.TargetGroupArgs{
 //				TargetGroupName: pulumi.String("tf-test"),
-//				VpcId:           vpc.ID(),
+//				VpcId:           vpc2.ID().ToIDOutput().ToStringOutput(),
 //				Port:            pulumi.Int(6081),
 //				HealthCheck: &gwlb.TargetGroupHealthCheckArgs{
 //					HealthSwitch: pulumi.Bool(true),
@@ -86,8 +86,8 @@ import (
 //				return err
 //			}
 //			_, err = gwlb.NewInstanceAssociateTargetGroup(ctx, "gwlb_instance_associate_target_group", &gwlb.InstanceAssociateTargetGroupArgs{
-//				LoadBalancerId: gwlbInstance.ID(),
-//				TargetGroupId:  gwlbTargetGroup.ID(),
+//				LoadBalancerId: gwlbInstance.ID().ToIDOutput().ToStringOutput(),
+//				TargetGroupId:  gwlbTargetGroup.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err

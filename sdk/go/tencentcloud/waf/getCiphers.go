@@ -62,12 +62,8 @@ type GetCiphersResult struct {
 }
 
 func GetCiphersOutput(ctx *pulumi.Context, args GetCiphersOutputArgs, opts ...pulumi.InvokeOption) GetCiphersResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetCiphersResultOutput, error) {
-			args := v.(GetCiphersArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Waf/getCiphers:getCiphers", args, GetCiphersResultOutput{}, options).(GetCiphersResultOutput), nil
-		}).(GetCiphersResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Waf/getCiphers:getCiphers", args, GetCiphersResultOutput{}, options).(GetCiphersResultOutput)
 }
 
 // A collection of arguments for invoking getCiphers.

@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const schedules = tencentcloud.Mps.getSchedules({
+ * const schedules = tencentcloud.mps.getSchedules({
  *     status: "Enabled",
  * });
  * ```
@@ -86,7 +86,7 @@ export interface GetSchedulesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const schedules = tencentcloud.Mps.getSchedules({
+ * const schedules = tencentcloud.mps.getSchedules({
  *     status: "Enabled",
  * });
  * ```
@@ -109,17 +109,17 @@ export interface GetSchedulesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * The IDs of the schemes to query. Array length limit: 100.
      */
-    scheduleIds?: pulumi.Input<pulumi.Input<number>[]>;
+    scheduleIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * The scheme status. Valid values:`Enabled`, `Disabled`. If you do not specify this parameter, all schemes will be returned regardless of the status.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * The trigger type. Valid values:`CosFileUpload`: The scheme is triggered when a file is uploaded to Tencent Cloud Object Storage (COS).`AwsS3FileUpload`: The scheme is triggered when a file is uploaded to AWS S3.If you do not specify this parameter or leave it empty, all schemes will be returned regardless of the trigger type.
      */
-    triggerType?: pulumi.Input<string>;
+    triggerType?: pulumi.Input<string | undefined>;
 }

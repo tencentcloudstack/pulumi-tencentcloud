@@ -28,7 +28,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * tse cngw_route_rate_limit can be imported using the id, e.g.
+ * tse cngwRouteRateLimit can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Tse/cngwNetworkAccessControl:CngwNetworkAccessControl cngw_network_access_control gatewayId#groupId#networkId
@@ -124,19 +124,19 @@ export interface CngwNetworkAccessControlState {
     /**
      * access control policy.
      */
-    accessControl?: pulumi.Input<inputs.Tse.CngwNetworkAccessControlAccessControl>;
+    accessControl?: pulumi.Input<inputs.Tse.CngwNetworkAccessControlAccessControl | undefined>;
     /**
      * gateway ID.
      */
-    gatewayId?: pulumi.Input<string>;
+    gatewayId?: pulumi.Input<string | undefined>;
     /**
      * gateway group ID.
      */
-    groupId?: pulumi.Input<string>;
+    groupId?: pulumi.Input<string | undefined>;
     /**
      * network id.
      */
-    networkId?: pulumi.Input<string>;
+    networkId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -146,7 +146,7 @@ export interface CngwNetworkAccessControlArgs {
     /**
      * access control policy.
      */
-    accessControl?: pulumi.Input<inputs.Tse.CngwNetworkAccessControlAccessControl>;
+    accessControl?: pulumi.Input<inputs.Tse.CngwNetworkAccessControlAccessControl | undefined>;
     /**
      * gateway ID.
      */

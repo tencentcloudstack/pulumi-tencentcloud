@@ -78,8 +78,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// 
     /// ## Import
     /// 
-    /// redis param_template can be imported using the id, e.g.
-    /// 
+    /// redis ParamTemplate can be imported using the id, e.g.
     /// ```sh
     /// $ pulumi import tencentcloud:Redis/paramTemplate:ParamTemplate example crs-cfg-oyyon8f6
     /// ```

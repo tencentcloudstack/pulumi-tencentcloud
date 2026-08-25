@@ -130,35 +130,35 @@ export interface ResourcePackageState {
     /**
      * Validity period of resource package, in days.
      */
-    expireDay?: pulumi.Input<number>;
+    expireDay?: pulumi.Input<number | undefined>;
     /**
      * Instance Type.
      */
-    instanceType?: pulumi.Input<string>;
+    instanceType?: pulumi.Input<string | undefined>;
     /**
      * Number of purchased resource packs.
      */
-    packageCount?: pulumi.Input<number>;
+    packageCount?: pulumi.Input<number | undefined>;
     /**
      * Resource Package Name.
      */
-    packageName?: pulumi.Input<string>;
+    packageName?: pulumi.Input<string | undefined>;
     /**
      * Resource package usage region China - common in mainland China, overseas - common in Hong Kong, Macao, Taiwan, and overseas.
      */
-    packageRegion?: pulumi.Input<string>;
+    packageRegion?: pulumi.Input<string | undefined>;
     /**
      * Resource package size, calculated in 10000 units; Storage resources: GB.
      */
-    packageSpec?: pulumi.Input<number>;
+    packageSpec?: pulumi.Input<number | undefined>;
     /**
      * Resource package type: CCU computing resource package, DISK storage resource package.
      */
-    packageType?: pulumi.Input<string>;
+    packageType?: pulumi.Input<string | undefined>;
     /**
      * Resource package version base basic version, common general version, enterprise enterprise version.
      */
-    packageVersion?: pulumi.Input<string>;
+    packageVersion?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -180,7 +180,7 @@ export interface ResourcePackageArgs {
     /**
      * Resource Package Name.
      */
-    packageName?: pulumi.Input<string>;
+    packageName?: pulumi.Input<string | undefined>;
     /**
      * Resource package usage region China - common in mainland China, overseas - common in Hong Kong, Macao, Taiwan, and overseas.
      */

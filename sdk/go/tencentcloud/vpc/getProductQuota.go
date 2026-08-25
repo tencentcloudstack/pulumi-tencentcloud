@@ -67,12 +67,8 @@ type GetProductQuotaResult struct {
 }
 
 func GetProductQuotaOutput(ctx *pulumi.Context, args GetProductQuotaOutputArgs, opts ...pulumi.InvokeOption) GetProductQuotaResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetProductQuotaResultOutput, error) {
-			args := v.(GetProductQuotaArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Vpc/getProductQuota:getProductQuota", args, GetProductQuotaResultOutput{}, options).(GetProductQuotaResultOutput), nil
-		}).(GetProductQuotaResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Vpc/getProductQuota:getProductQuota", args, GetProductQuotaResultOutput{}, options).(GetProductQuotaResultOutput)
 }
 
 // A collection of arguments for invoking getProductQuota.

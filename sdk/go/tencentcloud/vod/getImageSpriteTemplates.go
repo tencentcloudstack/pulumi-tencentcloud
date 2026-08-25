@@ -44,7 +44,7 @@ import (
 //			}
 //			_ = vod.GetImageSpriteTemplatesOutput(ctx, vod.GetImageSpriteTemplatesOutputArgs{
 //				Type:       pulumi.String("Custom"),
-//				Definition: fooImageSpriteTemplate.ID(),
+//				Definition: fooImageSpriteTemplate.ID().ToIDOutput().ToStringOutput(),
 //			}, nil)
 //			return nil
 //		})
@@ -88,12 +88,8 @@ type GetImageSpriteTemplatesResult struct {
 }
 
 func GetImageSpriteTemplatesOutput(ctx *pulumi.Context, args GetImageSpriteTemplatesOutputArgs, opts ...pulumi.InvokeOption) GetImageSpriteTemplatesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetImageSpriteTemplatesResultOutput, error) {
-			args := v.(GetImageSpriteTemplatesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Vod/getImageSpriteTemplates:getImageSpriteTemplates", args, GetImageSpriteTemplatesResultOutput{}, options).(GetImageSpriteTemplatesResultOutput), nil
-		}).(GetImageSpriteTemplatesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Vod/getImageSpriteTemplates:getImageSpriteTemplates", args, GetImageSpriteTemplatesResultOutput{}, options).(GetImageSpriteTemplatesResultOutput)
 }
 
 // A collection of arguments for invoking getImageSpriteTemplates.

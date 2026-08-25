@@ -49,8 +49,9 @@ type Set struct {
 	// The number of instances to be purchased. Value range:[1,100]; default value: 1.
 	InstanceCount pulumi.IntPtrOutput `pulumi:"instanceCount"`
 	// instance id list.
-	InstanceIds  pulumi.StringArrayOutput `pulumi:"instanceIds"`
-	InstanceName pulumi.StringPtrOutput   `pulumi:"instanceName"`
+	InstanceIds pulumi.StringArrayOutput `pulumi:"instanceIds"`
+	// The name of the instance. The max length of instanceName is 128, and default value is `Terraform-CVM-Instance`.
+	InstanceName pulumi.StringPtrOutput `pulumi:"instanceName"`
 	// Current status of the instance.
 	InstanceStatus pulumi.StringOutput `pulumi:"instanceStatus"`
 	// The type of the instance.
@@ -161,8 +162,9 @@ type setState struct {
 	// The number of instances to be purchased. Value range:[1,100]; default value: 1.
 	InstanceCount *int `pulumi:"instanceCount"`
 	// instance id list.
-	InstanceIds  []string `pulumi:"instanceIds"`
-	InstanceName *string  `pulumi:"instanceName"`
+	InstanceIds []string `pulumi:"instanceIds"`
+	// The name of the instance. The max length of instanceName is 128, and default value is `Terraform-CVM-Instance`.
+	InstanceName *string `pulumi:"instanceName"`
 	// Current status of the instance.
 	InstanceStatus *string `pulumi:"instanceStatus"`
 	// The type of the instance.
@@ -231,7 +233,8 @@ type SetState struct {
 	// The number of instances to be purchased. Value range:[1,100]; default value: 1.
 	InstanceCount pulumi.IntPtrInput
 	// instance id list.
-	InstanceIds  pulumi.StringArrayInput
+	InstanceIds pulumi.StringArrayInput
+	// The name of the instance. The max length of instanceName is 128, and default value is `Terraform-CVM-Instance`.
 	InstanceName pulumi.StringPtrInput
 	// Current status of the instance.
 	InstanceStatus pulumi.StringPtrInput
@@ -299,8 +302,9 @@ type setArgs struct {
 	// The charge type of instance. Only support `POSTPAID_BY_HOUR`.
 	InstanceChargeType *string `pulumi:"instanceChargeType"`
 	// The number of instances to be purchased. Value range:[1,100]; default value: 1.
-	InstanceCount *int    `pulumi:"instanceCount"`
-	InstanceName  *string `pulumi:"instanceName"`
+	InstanceCount *int `pulumi:"instanceCount"`
+	// The name of the instance. The max length of instanceName is 128, and default value is `Terraform-CVM-Instance`.
+	InstanceName *string `pulumi:"instanceName"`
 	// The type of the instance.
 	InstanceType *string `pulumi:"instanceType"`
 	// Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value does not need to be set when `allocatePublicIp` is false.
@@ -361,7 +365,8 @@ type SetArgs struct {
 	InstanceChargeType pulumi.StringPtrInput
 	// The number of instances to be purchased. Value range:[1,100]; default value: 1.
 	InstanceCount pulumi.IntPtrInput
-	InstanceName  pulumi.StringPtrInput
+	// The name of the instance. The max length of instanceName is 128, and default value is `Terraform-CVM-Instance`.
+	InstanceName pulumi.StringPtrInput
 	// The type of the instance.
 	InstanceType pulumi.StringPtrInput
 	// Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. This value does not need to be set when `allocatePublicIp` is false.
@@ -555,6 +560,7 @@ func (o SetOutput) InstanceIds() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Set) pulumi.StringArrayOutput { return v.InstanceIds }).(pulumi.StringArrayOutput)
 }
 
+// The name of the instance. The max length of instanceName is 128, and default value is `Terraform-CVM-Instance`.
 func (o SetOutput) InstanceName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Set) pulumi.StringPtrOutput { return v.InstanceName }).(pulumi.StringPtrOutput)
 }

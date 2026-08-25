@@ -167,31 +167,31 @@ export interface CcPolicyV2State {
     /**
      * Business of resource instance. bgpip indicates anti-anti-ip ip; bgp means exclusive package; bgp-multip means shared packet; net indicates anti-anti-ip pro version.
      */
-    business?: pulumi.Input<string>;
+    business?: pulumi.Input<string | undefined>;
     /**
      * Blacklist and whitelist.
      */
-    ccBlackWhiteIps?: pulumi.Input<pulumi.Input<inputs.Dayu.CcPolicyV2CcBlackWhiteIp>[]>;
+    ccBlackWhiteIps?: pulumi.Input<pulumi.Input<inputs.Dayu.CcPolicyV2CcBlackWhiteIp>[] | undefined>;
     /**
      * Details of the CC region blocking policy list.
      */
-    ccGeoIpPolicys?: pulumi.Input<pulumi.Input<inputs.Dayu.CcPolicyV2CcGeoIpPolicy>[]>;
+    ccGeoIpPolicys?: pulumi.Input<pulumi.Input<inputs.Dayu.CcPolicyV2CcGeoIpPolicy>[] | undefined>;
     /**
      * CC Precision Protection List.
      */
-    ccPrecisionPolicys?: pulumi.Input<pulumi.Input<inputs.Dayu.CcPolicyV2CcPrecisionPolicy>[]>;
+    ccPrecisionPolicys?: pulumi.Input<pulumi.Input<inputs.Dayu.CcPolicyV2CcPrecisionPolicy>[] | undefined>;
     /**
      * CC frequency throttling policy.
      */
-    ccPrecisionReqLimits?: pulumi.Input<pulumi.Input<inputs.Dayu.CcPolicyV2CcPrecisionReqLimit>[]>;
+    ccPrecisionReqLimits?: pulumi.Input<pulumi.Input<inputs.Dayu.CcPolicyV2CcPrecisionReqLimit>[] | undefined>;
     /**
      * The ID of the resource instance.
      */
-    resourceId?: pulumi.Input<string>;
+    resourceId?: pulumi.Input<string | undefined>;
     /**
      * List of protection threshold configurations.
      */
-    thresholds?: pulumi.Input<pulumi.Input<inputs.Dayu.CcPolicyV2Threshold>[]>;
+    thresholds?: pulumi.Input<pulumi.Input<inputs.Dayu.CcPolicyV2Threshold>[] | undefined>;
 }
 
 /**
@@ -205,19 +205,19 @@ export interface CcPolicyV2Args {
     /**
      * Blacklist and whitelist.
      */
-    ccBlackWhiteIps?: pulumi.Input<pulumi.Input<inputs.Dayu.CcPolicyV2CcBlackWhiteIp>[]>;
+    ccBlackWhiteIps?: pulumi.Input<pulumi.Input<inputs.Dayu.CcPolicyV2CcBlackWhiteIp>[] | undefined>;
     /**
      * Details of the CC region blocking policy list.
      */
-    ccGeoIpPolicys?: pulumi.Input<pulumi.Input<inputs.Dayu.CcPolicyV2CcGeoIpPolicy>[]>;
+    ccGeoIpPolicys?: pulumi.Input<pulumi.Input<inputs.Dayu.CcPolicyV2CcGeoIpPolicy>[] | undefined>;
     /**
      * CC Precision Protection List.
      */
-    ccPrecisionPolicys?: pulumi.Input<pulumi.Input<inputs.Dayu.CcPolicyV2CcPrecisionPolicy>[]>;
+    ccPrecisionPolicys?: pulumi.Input<pulumi.Input<inputs.Dayu.CcPolicyV2CcPrecisionPolicy>[] | undefined>;
     /**
      * CC frequency throttling policy.
      */
-    ccPrecisionReqLimits?: pulumi.Input<pulumi.Input<inputs.Dayu.CcPolicyV2CcPrecisionReqLimit>[]>;
+    ccPrecisionReqLimits?: pulumi.Input<pulumi.Input<inputs.Dayu.CcPolicyV2CcPrecisionReqLimit>[] | undefined>;
     /**
      * The ID of the resource instance.
      */
@@ -225,5 +225,5 @@ export interface CcPolicyV2Args {
     /**
      * List of protection threshold configurations.
      */
-    thresholds?: pulumi.Input<pulumi.Input<inputs.Dayu.CcPolicyV2Threshold>[]>;
+    thresholds?: pulumi.Input<pulumi.Input<inputs.Dayu.CcPolicyV2Threshold>[] | undefined>;
 }

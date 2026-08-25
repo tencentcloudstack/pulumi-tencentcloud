@@ -15,6 +15,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb.Outputs
     public sealed class GetInstanceBackupsBackupListResult
     {
         /// <summary>
+        /// Backup record ID.
+        /// </summary>
+        public readonly int BackId;
+        /// <summary>
         /// Remark of backup.
         /// </summary>
         public readonly string BackupDesc;
@@ -27,6 +31,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb.Outputs
         /// </summary>
         public readonly string BackupName;
         /// <summary>
+        /// Region where the backup is stored (for cross-region backups).
+        /// </summary>
+        public readonly string BackupRegion;
+        /// <summary>
         /// Size of backup(KN).
         /// </summary>
         public readonly int BackupSize;
@@ -35,6 +43,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb.Outputs
         /// </summary>
         public readonly int BackupType;
         /// <summary>
+        /// Scheduled deletion time for the backup.
+        /// </summary>
+        public readonly string DeleteTime;
+        /// <summary>
         /// end time of backup.
         /// </summary>
         public readonly string EndTime;
@@ -42,6 +54,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb.Outputs
         /// Instance ID, the format is: cmgo-9d0p6umb.Same as the instance ID displayed in the cloud database console page.
         /// </summary>
         public readonly string InstanceId;
+        /// <summary>
+        /// Time point supported for backup restore.
+        /// </summary>
+        public readonly string RestoreTime;
         /// <summary>
         /// start time of backup.
         /// </summary>
@@ -53,31 +69,43 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb.Outputs
 
         [OutputConstructor]
         private GetInstanceBackupsBackupListResult(
+            int backId,
+
             string backupDesc,
 
             int backupMethod,
 
             string backupName,
 
+            string backupRegion,
+
             int backupSize,
 
             int backupType,
+
+            string deleteTime,
 
             string endTime,
 
             string instanceId,
 
+            string restoreTime,
+
             string startTime,
 
             int status)
         {
+            BackId = backId;
             BackupDesc = backupDesc;
             BackupMethod = backupMethod;
             BackupName = backupName;
+            BackupRegion = backupRegion;
             BackupSize = backupSize;
             BackupType = backupType;
+            DeleteTime = deleteTime;
             EndTime = endTime;
             InstanceId = instanceId;
+            RestoreTime = restoreTime;
             StartTime = startTime;
             Status = status;
         }

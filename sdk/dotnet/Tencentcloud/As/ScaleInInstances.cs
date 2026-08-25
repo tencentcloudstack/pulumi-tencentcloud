@@ -19,7 +19,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -94,7 +93,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     /// 
     /// ## Import
     /// 
-    /// as scale_in_instances can be imported using the id, e.g.
+    /// as ScaleInInstances can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:As/scaleInInstances:ScaleInInstances scale_in_instances scale_in_instances_id

@@ -64,7 +64,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * wedata integration_offline_task can be imported using the id, e.g.
+ * wedata integrationOfflineTask can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Wedata/integrationOfflineTask:IntegrationOfflineTask example 1612982498218618880#20231102200955095
@@ -223,47 +223,47 @@ export interface IntegrationOfflineTaskState {
     /**
      * Interval time of scheduling, the minimum value: 1.
      */
-    cycleStep?: pulumi.Input<number>;
+    cycleStep?: pulumi.Input<number | undefined>;
     /**
      * Execution time, unit is minutes, only available for day/week/month/year scheduling. For example, daily scheduling is executed once every day at 02:00, and the delayTime is 120 minutes.
      */
-    delayTime?: pulumi.Input<number>;
+    delayTime?: pulumi.Input<number | undefined>;
     /**
      * Effective end time, the format is yyyy-MM-dd HH:mm:ss.
      */
-    endTime?: pulumi.Input<string>;
+    endTime?: pulumi.Input<string | undefined>;
     /**
      * Description information.
      */
-    notes?: pulumi.Input<string>;
+    notes?: pulumi.Input<string | undefined>;
     /**
      * Project ID.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * Effective start time, the format is yyyy-MM-dd HH:mm:ss.
      */
-    startTime?: pulumi.Input<string>;
+    startTime?: pulumi.Input<string | undefined>;
     /**
      * Scheduling configuration: flexible period configuration, only available for hourly/weekly/monthly/yearly scheduling. If the hourly task is specified to run at 0:00, 3:00 and 4:00 every day, it is 0,3,4.
      */
-    taskAction?: pulumi.Input<string>;
+    taskAction?: pulumi.Input<string | undefined>;
     /**
      * Task ID.
      */
-    taskId?: pulumi.Input<string>;
+    taskId?: pulumi.Input<string | undefined>;
     /**
      * Task Information.
      */
-    taskInfo?: pulumi.Input<inputs.Wedata.IntegrationOfflineTaskTaskInfo>;
+    taskInfo?: pulumi.Input<inputs.Wedata.IntegrationOfflineTaskTaskInfo | undefined>;
     /**
      * Task display mode, 0: canvas mode, 1: form mode.
      */
-    taskMode?: pulumi.Input<string>;
+    taskMode?: pulumi.Input<string | undefined>;
     /**
      * Task name.
      */
-    taskName?: pulumi.Input<string>;
+    taskName?: pulumi.Input<string | undefined>;
 }
 
 /**

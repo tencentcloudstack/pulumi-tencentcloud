@@ -24,42 +24,32 @@ import (
 // import (
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tcaplus"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			cfg := config.New(ctx, "")
-//			availabilityZone := "ap-guangzhou-3"
-//			if param := cfg.Get("availabilityZone"); param != "" {
-//				availabilityZone = param
-//			}
-//			vpc, err := vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
-//				IsDefault:        pulumi.BoolRef(true),
-//				AvailabilityZone: pulumi.StringRef(availabilityZone),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			vpcId := vpc.InstanceLists[0].VpcId
-//			subnetId := vpc.InstanceLists[0].SubnetId
 //			example, err := tcaplus.NewCluster(ctx, "example", &tcaplus.ClusterArgs{
 //				IdlType:               pulumi.String("PROTO"),
 //				ClusterName:           pulumi.String("tf_example_tcaplus_cluster"),
-//				VpcId:                 pulumi.String(vpcId),
-//				SubnetId:              pulumi.String(subnetId),
-//				Password:              pulumi.String("your_pw_123111"),
+//				VpcId:                 pulumi.String("vpc-i5yyodl9"),
+//				SubnetId:              pulumi.String("subnet-hhi88a58"),
+//				Password:              pulumi.String("Password@2026"),
 //				OldPasswordExpireLast: pulumi.Int(3600),
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			_, err = tcaplus.NewTablegroup(ctx, "example", &tcaplus.TablegroupArgs{
-//				ClusterId:      example.ID(),
+//				ClusterId:      example.ID().ToIDOutput().ToStringOutput(),
 //				TablegroupName: pulumi.String("tf_example_group_name"),
+//				ResourceTags: tcaplus.TablegroupResourceTagArray{
+//					&tcaplus.TablegroupResourceTagArgs{
+//						TagKey:   pulumi.String("CreatedBy"),
+//						TagValue: pulumi.String("Terraform"),
+//					},
+//				},
 //			})
 //			if err != nil {
 //				return err
@@ -69,6 +59,59 @@ import (
 //	}
 //
 // ```
+//
+// ### Create a tcaplusdb table group with user-specified table group id
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tcaplus"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			example, err := tcaplus.NewCluster(ctx, "example", &tcaplus.ClusterArgs{
+//				IdlType:               pulumi.String("PROTO"),
+//				ClusterName:           pulumi.String("tf_example_tcaplus_cluster"),
+//				VpcId:                 pulumi.String("vpc-i5yyodl9"),
+//				SubnetId:              pulumi.String("subnet-hhi88a58"),
+//				Password:              pulumi.String("Password@2026"),
+//				OldPasswordExpireLast: pulumi.Int(3600),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = tcaplus.NewTablegroup(ctx, "example", &tcaplus.TablegroupArgs{
+//				ClusterId:      example.ID().ToIDOutput().ToStringOutput(),
+//				TablegroupName: pulumi.String("tf_example_group_name"),
+//				TableGroupId:   pulumi.String("109"),
+//				ResourceTags: tcaplus.TablegroupResourceTagArray{
+//					&tcaplus.TablegroupResourceTagArgs{
+//						TagKey:   pulumi.String("CreatedBy"),
+//						TagValue: pulumi.String("Terraform"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// TcaplusDB table group can be imported using the clusterId:tableGroupId, e.g.
+//
+// ```sh
+// $ pulumi import tencentcloud:Tcaplus/tablegroup:Tablegroup example 5516511420:52
+// ```
 type Tablegroup struct {
 	pulumi.CustomResourceState
 
@@ -76,9 +119,13 @@ type Tablegroup struct {
 	ClusterId pulumi.StringOutput `pulumi:"clusterId"`
 	// Create time of the TcaplusDB table group.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
+	// Set of table group tags.
+	ResourceTags TablegroupResourceTagArrayOutput `pulumi:"resourceTags"`
 	// Number of tables.
 	TableCount pulumi.IntOutput `pulumi:"tableCount"`
-	// Name of the TcaplusDB table group. Name length should be between 1 and 30.
+	// ID of the TcaplusDB table group, can be user-specified (must be unique within the cluster) or auto-incremented by the API when not set. Immutable after creation.
+	TableGroupId pulumi.StringOutput `pulumi:"tableGroupId"`
+	// Table group name; may consist of Chinese characters, English letters, or numeric characters, with a maximum length of 32 characters.
 	TablegroupName pulumi.StringOutput `pulumi:"tablegroupName"`
 	// Total storage size (MB).
 	TotalSize pulumi.IntOutput `pulumi:"totalSize"`
@@ -124,9 +171,13 @@ type tablegroupState struct {
 	ClusterId *string `pulumi:"clusterId"`
 	// Create time of the TcaplusDB table group.
 	CreateTime *string `pulumi:"createTime"`
+	// Set of table group tags.
+	ResourceTags []TablegroupResourceTag `pulumi:"resourceTags"`
 	// Number of tables.
 	TableCount *int `pulumi:"tableCount"`
-	// Name of the TcaplusDB table group. Name length should be between 1 and 30.
+	// ID of the TcaplusDB table group, can be user-specified (must be unique within the cluster) or auto-incremented by the API when not set. Immutable after creation.
+	TableGroupId *string `pulumi:"tableGroupId"`
+	// Table group name; may consist of Chinese characters, English letters, or numeric characters, with a maximum length of 32 characters.
 	TablegroupName *string `pulumi:"tablegroupName"`
 	// Total storage size (MB).
 	TotalSize *int `pulumi:"totalSize"`
@@ -137,9 +188,13 @@ type TablegroupState struct {
 	ClusterId pulumi.StringPtrInput
 	// Create time of the TcaplusDB table group.
 	CreateTime pulumi.StringPtrInput
+	// Set of table group tags.
+	ResourceTags TablegroupResourceTagArrayInput
 	// Number of tables.
 	TableCount pulumi.IntPtrInput
-	// Name of the TcaplusDB table group. Name length should be between 1 and 30.
+	// ID of the TcaplusDB table group, can be user-specified (must be unique within the cluster) or auto-incremented by the API when not set. Immutable after creation.
+	TableGroupId pulumi.StringPtrInput
+	// Table group name; may consist of Chinese characters, English letters, or numeric characters, with a maximum length of 32 characters.
 	TablegroupName pulumi.StringPtrInput
 	// Total storage size (MB).
 	TotalSize pulumi.IntPtrInput
@@ -152,7 +207,11 @@ func (TablegroupState) ElementType() reflect.Type {
 type tablegroupArgs struct {
 	// ID of the TcaplusDB cluster to which the table group belongs.
 	ClusterId string `pulumi:"clusterId"`
-	// Name of the TcaplusDB table group. Name length should be between 1 and 30.
+	// Set of table group tags.
+	ResourceTags []TablegroupResourceTag `pulumi:"resourceTags"`
+	// ID of the TcaplusDB table group, can be user-specified (must be unique within the cluster) or auto-incremented by the API when not set. Immutable after creation.
+	TableGroupId *string `pulumi:"tableGroupId"`
+	// Table group name; may consist of Chinese characters, English letters, or numeric characters, with a maximum length of 32 characters.
 	TablegroupName string `pulumi:"tablegroupName"`
 }
 
@@ -160,7 +219,11 @@ type tablegroupArgs struct {
 type TablegroupArgs struct {
 	// ID of the TcaplusDB cluster to which the table group belongs.
 	ClusterId pulumi.StringInput
-	// Name of the TcaplusDB table group. Name length should be between 1 and 30.
+	// Set of table group tags.
+	ResourceTags TablegroupResourceTagArrayInput
+	// ID of the TcaplusDB table group, can be user-specified (must be unique within the cluster) or auto-incremented by the API when not set. Immutable after creation.
+	TableGroupId pulumi.StringPtrInput
+	// Table group name; may consist of Chinese characters, English letters, or numeric characters, with a maximum length of 32 characters.
 	TablegroupName pulumi.StringInput
 }
 
@@ -261,12 +324,22 @@ func (o TablegroupOutput) CreateTime() pulumi.StringOutput {
 	return o.ApplyT(func(v *Tablegroup) pulumi.StringOutput { return v.CreateTime }).(pulumi.StringOutput)
 }
 
+// Set of table group tags.
+func (o TablegroupOutput) ResourceTags() TablegroupResourceTagArrayOutput {
+	return o.ApplyT(func(v *Tablegroup) TablegroupResourceTagArrayOutput { return v.ResourceTags }).(TablegroupResourceTagArrayOutput)
+}
+
 // Number of tables.
 func (o TablegroupOutput) TableCount() pulumi.IntOutput {
 	return o.ApplyT(func(v *Tablegroup) pulumi.IntOutput { return v.TableCount }).(pulumi.IntOutput)
 }
 
-// Name of the TcaplusDB table group. Name length should be between 1 and 30.
+// ID of the TcaplusDB table group, can be user-specified (must be unique within the cluster) or auto-incremented by the API when not set. Immutable after creation.
+func (o TablegroupOutput) TableGroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Tablegroup) pulumi.StringOutput { return v.TableGroupId }).(pulumi.StringOutput)
+}
+
+// Table group name; may consist of Chinese characters, English letters, or numeric characters, with a maximum length of 32 characters.
 func (o TablegroupOutput) TablegroupName() pulumi.StringOutput {
 	return o.ApplyT(func(v *Tablegroup) pulumi.StringOutput { return v.TablegroupName }).(pulumi.StringOutput)
 }

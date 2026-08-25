@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const test = tencentcloud.Dbbrain.getSlowLogUserHostStats({
+ * const test = tencentcloud.dbbrain.getSlowLogUserHostStats({
  *     instanceId: "%s",
  *     startTime: "%s",
  *     endTime: "%s",
@@ -93,7 +93,7 @@ export interface GetSlowLogUserHostStatsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const test = tencentcloud.Dbbrain.getSlowLogUserHostStats({
+ * const test = tencentcloud.dbbrain.getSlowLogUserHostStats({
  *     instanceId: "%s",
  *     startTime: "%s",
  *     endTime: "%s",
@@ -128,15 +128,15 @@ export interface GetSlowLogUserHostStatsOutputArgs {
     /**
      * MD5 value of SOL template.
      */
-    md5?: pulumi.Input<string>;
+    md5?: pulumi.Input<string | undefined>;
     /**
      * Types of service products, supported values:`mysql` - Cloud Database MySQL; `cynosdb` - Cloud Database TDSQL-C for MySQL, defaults to `mysql`.
      */
-    product?: pulumi.Input<string>;
+    product?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Start time of the query range, time format such as: 2019-09-10 12:13:14.
      */

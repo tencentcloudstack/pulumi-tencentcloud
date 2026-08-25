@@ -19,7 +19,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eni
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -88,7 +87,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eni
     /// ENI can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Eni/instance:Instance  tencentcloud_eni.example eni-qka182br
+    ///   $ pulumi import tencentcloud:Eni/instance:Instance example eni-qka182br
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Eni/instance:Instance")]

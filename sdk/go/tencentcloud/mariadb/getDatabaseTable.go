@@ -75,12 +75,8 @@ type GetDatabaseTableResult struct {
 }
 
 func GetDatabaseTableOutput(ctx *pulumi.Context, args GetDatabaseTableOutputArgs, opts ...pulumi.InvokeOption) GetDatabaseTableResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDatabaseTableResultOutput, error) {
-			args := v.(GetDatabaseTableArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mariadb/getDatabaseTable:getDatabaseTable", args, GetDatabaseTableResultOutput{}, options).(GetDatabaseTableResultOutput), nil
-		}).(GetDatabaseTableResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mariadb/getDatabaseTable:getDatabaseTable", args, GetDatabaseTableResultOutput{}, options).(GetDatabaseTableResultOutput)
 }
 
 // A collection of arguments for invoking getDatabaseTable.

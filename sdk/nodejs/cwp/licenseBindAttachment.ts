@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a cwp licenseBindAttachment
+ * Provides a resource to create a CWP license bind attachment
  *
  * ## Example Usage
  *
@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cwp.getMachinesSimple({
+ * const example = tencentcloud.cwp.getMachinesSimple({
  *     machineType: "CVM",
  *     machineRegion: "ap-guangzhou",
  *     projectIds: [1210293],
@@ -43,7 +43,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * cwp license_bind_attachment can be imported using the id, e.g.
+ * CWP license bind attachment can be imported using the resourceId#licenseId#quuid#licenseType, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Cwp/licenseBindAttachment:LicenseBindAttachment example cwplic-ab3edffa#44#2c7e5cce-1cec-4456-8d18-018f160dd987#0
@@ -184,47 +184,47 @@ export interface LicenseBindAttachmentState {
     /**
      * agent status.
      */
-    agentStatus?: pulumi.Input<string>;
+    agentStatus?: pulumi.Input<string | undefined>;
     /**
      * Is it allowed to change the binding, false is not allowed to change the binding.
      */
-    isSwitchBind?: pulumi.Input<boolean>;
+    isSwitchBind?: pulumi.Input<boolean | undefined>;
     /**
      * Allow unbinding, false does not allow unbinding.
      */
-    isUnbind?: pulumi.Input<boolean>;
+    isUnbind?: pulumi.Input<boolean | undefined>;
     /**
      * License ID.
      */
-    licenseId?: pulumi.Input<number>;
+    licenseId?: pulumi.Input<number | undefined>;
     /**
      * LicenseType, 0 CWP Pro - Pay as you go, 1 CWP Pro - Monthly subscription, 2 CWP Ultimate - Monthly subscription. Default is 0.
      */
-    licenseType?: pulumi.Input<number>;
+    licenseType?: pulumi.Input<number | undefined>;
     /**
      * machine ip.
      */
-    machineIp?: pulumi.Input<string>;
+    machineIp?: pulumi.Input<string | undefined>;
     /**
      * machine name.
      */
-    machineName?: pulumi.Input<string>;
+    machineName?: pulumi.Input<string | undefined>;
     /**
      * machine wan ip.
      */
-    machineWanIp?: pulumi.Input<string>;
+    machineWanIp?: pulumi.Input<string | undefined>;
     /**
      * Machine quota that needs to be bound.
      */
-    quuid?: pulumi.Input<string>;
+    quuid?: pulumi.Input<string | undefined>;
     /**
      * Resource ID.
      */
-    resourceId?: pulumi.Input<string>;
+    resourceId?: pulumi.Input<string | undefined>;
     /**
      * uuid.
      */
-    uuid?: pulumi.Input<string>;
+    uuid?: pulumi.Input<string | undefined>;
 }
 
 /**

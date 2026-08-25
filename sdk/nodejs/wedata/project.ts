@@ -7,6 +7,8 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
+ * Provides a resource to create a WeData project
+ *
  * ## Example Usage
  *
  * ```typescript
@@ -124,23 +126,23 @@ export interface ProjectState {
     /**
      * DLC binding cluster information.
      */
-    dlcInfo?: pulumi.Input<inputs.Wedata.ProjectDlcInfo>;
+    dlcInfo?: pulumi.Input<inputs.Wedata.ProjectDlcInfo | undefined>;
     /**
      * Project basic information.
      */
-    project?: pulumi.Input<inputs.Wedata.ProjectProject>;
+    project?: pulumi.Input<inputs.Wedata.ProjectProject | undefined>;
     /**
      * Project ID.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * List of bound resource group IDs.
      */
-    resourceIds?: pulumi.Input<pulumi.Input<string>[]>;
+    resourceIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Item status: 0: disabled, 1: enabled.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -150,7 +152,7 @@ export interface ProjectArgs {
     /**
      * DLC binding cluster information.
      */
-    dlcInfo?: pulumi.Input<inputs.Wedata.ProjectDlcInfo>;
+    dlcInfo?: pulumi.Input<inputs.Wedata.ProjectDlcInfo | undefined>;
     /**
      * Project basic information.
      */
@@ -158,9 +160,9 @@ export interface ProjectArgs {
     /**
      * List of bound resource group IDs.
      */
-    resourceIds?: pulumi.Input<pulumi.Input<string>[]>;
+    resourceIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Item status: 0: disabled, 1: enabled.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
 }

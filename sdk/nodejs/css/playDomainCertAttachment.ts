@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Ssl.getCertificates({
+ * const foo = tencentcloud.ssl.getCertificates({
  *     name: "your_ssl_cert",
  * });
  * const playDomainCertAttachment = new tencentcloud.css.PlayDomainCertAttachment("play_domain_cert_attachment", {
@@ -29,7 +29,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * css play_domain_cert_attachment can be imported using the id, e.g.
+ * css playDomainCertAttachment can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Css/playDomainCertAttachment:PlayDomainCertAttachment play_domain_cert_attachment domainName#cloudCertId
@@ -137,31 +137,31 @@ export interface PlayDomainCertAttachmentState {
     /**
      * certificate expiration time.
      */
-    certExpireTime?: pulumi.Input<string>;
+    certExpireTime?: pulumi.Input<string | undefined>;
     /**
      * certificate ID.
      */
-    certId?: pulumi.Input<number>;
+    certId?: pulumi.Input<number | undefined>;
     /**
      * certificate type. 0: Self-owned certificate, 1: Tencent Cloud ssl managed certificate.
      */
-    certType?: pulumi.Input<number>;
+    certType?: pulumi.Input<number | undefined>;
     /**
      * certificate remarks. Synonymous with CertName.
      */
-    certificateAlias?: pulumi.Input<string>;
+    certificateAlias?: pulumi.Input<string | undefined>;
     /**
      * Tencent cloud ssl certificate Id. Refer to `tencentcloud.Ssl.Certificate` to create or obtain the resource ID.
      */
-    cloudCertId?: pulumi.Input<string>;
+    cloudCertId?: pulumi.Input<string | undefined>;
     /**
      * The playback domains to bind and whether to enable HTTPS for them. If `CloudCertId` is unspecified, and a domain is already bound with a certificate, this API will only update the HTTPS configuration of the domain.
      */
-    domainInfo?: pulumi.Input<inputs.Css.PlayDomainCertAttachmentDomainInfo>;
+    domainInfo?: pulumi.Input<inputs.Css.PlayDomainCertAttachmentDomainInfo | undefined>;
     /**
      * The time when the rule was last updated.
      */
-    updateTime?: pulumi.Input<string>;
+    updateTime?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -171,7 +171,7 @@ export interface PlayDomainCertAttachmentArgs {
     /**
      * Tencent cloud ssl certificate Id. Refer to `tencentcloud.Ssl.Certificate` to create or obtain the resource ID.
      */
-    cloudCertId?: pulumi.Input<string>;
+    cloudCertId?: pulumi.Input<string | undefined>;
     /**
      * The playback domains to bind and whether to enable HTTPS for them. If `CloudCertId` is unspecified, and a domain is already bound with a certificate, this API will only update the HTTPS configuration of the domain.
      */

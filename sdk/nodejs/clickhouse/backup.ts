@@ -102,11 +102,11 @@ export interface BackupState {
     /**
      * COS bucket name.
      */
-    cosBucketName?: pulumi.Input<string>;
+    cosBucketName?: pulumi.Input<string | undefined>;
     /**
      * Instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**

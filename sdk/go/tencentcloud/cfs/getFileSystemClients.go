@@ -67,12 +67,8 @@ type GetFileSystemClientsResult struct {
 }
 
 func GetFileSystemClientsOutput(ctx *pulumi.Context, args GetFileSystemClientsOutputArgs, opts ...pulumi.InvokeOption) GetFileSystemClientsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetFileSystemClientsResultOutput, error) {
-			args := v.(GetFileSystemClientsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cfs/getFileSystemClients:getFileSystemClients", args, GetFileSystemClientsResultOutput{}, options).(GetFileSystemClientsResultOutput), nil
-		}).(GetFileSystemClientsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cfs/getFileSystemClients:getFileSystemClients", args, GetFileSystemClientsResultOutput{}, options).(GetFileSystemClientsResultOutput)
 }
 
 // A collection of arguments for invoking getFileSystemClients.

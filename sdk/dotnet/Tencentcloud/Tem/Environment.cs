@@ -46,7 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
     /// ## Import
     /// 
     /// tem environment can be imported using the id, e.g.
-    /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Tem/environment:Environment environment environment_id
     /// ```

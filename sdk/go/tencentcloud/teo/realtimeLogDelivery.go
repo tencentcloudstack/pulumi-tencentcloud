@@ -80,7 +80,7 @@ import (
 //
 // ## Import
 //
-// teo teo_realtime_log_delivery can be imported using the id, e.g.
+// teo teoRealtimeLogDelivery can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Teo/realtimeLogDelivery:RealtimeLogDelivery teo_realtime_log_delivery zoneId#taskId
@@ -116,7 +116,7 @@ type RealtimeLogDelivery struct {
 	TaskId pulumi.StringOutput `pulumi:"taskId"`
 	// The name of the real-time log delivery task. The format is a combination of numbers, English, -, and _. The maximum length is 200 characters.
 	TaskName pulumi.StringOutput `pulumi:"taskName"`
-	// The real-time log delivery task type. The possible values are: `cls`: push to Tencent Cloud CLS; `customEndpoint`: push to a custom HTTP(S) address; `s3`: push to an AWS S3 compatible storage bucket address.
+	// The real-time log delivery task type. The possible values are: `cls`: push to Tencent Cloud CLS; `customEndpoint`: push to a custom HTTP(S) address; `s3`: push to an AWS S3 compatible storage bucket address; `logAnalysis`: push to EdgeOne log analysis.
 	TaskType pulumi.StringOutput `pulumi:"taskType"`
 	// ID of the site.
 	ZoneId pulumi.StringOutput `pulumi:"zoneId"`
@@ -204,7 +204,7 @@ type realtimeLogDeliveryState struct {
 	TaskId *string `pulumi:"taskId"`
 	// The name of the real-time log delivery task. The format is a combination of numbers, English, -, and _. The maximum length is 200 characters.
 	TaskName *string `pulumi:"taskName"`
-	// The real-time log delivery task type. The possible values are: `cls`: push to Tencent Cloud CLS; `customEndpoint`: push to a custom HTTP(S) address; `s3`: push to an AWS S3 compatible storage bucket address.
+	// The real-time log delivery task type. The possible values are: `cls`: push to Tencent Cloud CLS; `customEndpoint`: push to a custom HTTP(S) address; `s3`: push to an AWS S3 compatible storage bucket address; `logAnalysis`: push to EdgeOne log analysis.
 	TaskType *string `pulumi:"taskType"`
 	// ID of the site.
 	ZoneId *string `pulumi:"zoneId"`
@@ -239,7 +239,7 @@ type RealtimeLogDeliveryState struct {
 	TaskId pulumi.StringPtrInput
 	// The name of the real-time log delivery task. The format is a combination of numbers, English, -, and _. The maximum length is 200 characters.
 	TaskName pulumi.StringPtrInput
-	// The real-time log delivery task type. The possible values are: `cls`: push to Tencent Cloud CLS; `customEndpoint`: push to a custom HTTP(S) address; `s3`: push to an AWS S3 compatible storage bucket address.
+	// The real-time log delivery task type. The possible values are: `cls`: push to Tencent Cloud CLS; `customEndpoint`: push to a custom HTTP(S) address; `s3`: push to an AWS S3 compatible storage bucket address; `logAnalysis`: push to EdgeOne log analysis.
 	TaskType pulumi.StringPtrInput
 	// ID of the site.
 	ZoneId pulumi.StringPtrInput
@@ -276,7 +276,7 @@ type realtimeLogDeliveryArgs struct {
 	Sample int `pulumi:"sample"`
 	// The name of the real-time log delivery task. The format is a combination of numbers, English, -, and _. The maximum length is 200 characters.
 	TaskName string `pulumi:"taskName"`
-	// The real-time log delivery task type. The possible values are: `cls`: push to Tencent Cloud CLS; `customEndpoint`: push to a custom HTTP(S) address; `s3`: push to an AWS S3 compatible storage bucket address.
+	// The real-time log delivery task type. The possible values are: `cls`: push to Tencent Cloud CLS; `customEndpoint`: push to a custom HTTP(S) address; `s3`: push to an AWS S3 compatible storage bucket address; `logAnalysis`: push to EdgeOne log analysis.
 	TaskType string `pulumi:"taskType"`
 	// ID of the site.
 	ZoneId string `pulumi:"zoneId"`
@@ -310,7 +310,7 @@ type RealtimeLogDeliveryArgs struct {
 	Sample pulumi.IntInput
 	// The name of the real-time log delivery task. The format is a combination of numbers, English, -, and _. The maximum length is 200 characters.
 	TaskName pulumi.StringInput
-	// The real-time log delivery task type. The possible values are: `cls`: push to Tencent Cloud CLS; `customEndpoint`: push to a custom HTTP(S) address; `s3`: push to an AWS S3 compatible storage bucket address.
+	// The real-time log delivery task type. The possible values are: `cls`: push to Tencent Cloud CLS; `customEndpoint`: push to a custom HTTP(S) address; `s3`: push to an AWS S3 compatible storage bucket address; `logAnalysis`: push to EdgeOne log analysis.
 	TaskType pulumi.StringInput
 	// ID of the site.
 	ZoneId pulumi.StringInput
@@ -475,7 +475,7 @@ func (o RealtimeLogDeliveryOutput) TaskName() pulumi.StringOutput {
 	return o.ApplyT(func(v *RealtimeLogDelivery) pulumi.StringOutput { return v.TaskName }).(pulumi.StringOutput)
 }
 
-// The real-time log delivery task type. The possible values are: `cls`: push to Tencent Cloud CLS; `customEndpoint`: push to a custom HTTP(S) address; `s3`: push to an AWS S3 compatible storage bucket address.
+// The real-time log delivery task type. The possible values are: `cls`: push to Tencent Cloud CLS; `customEndpoint`: push to a custom HTTP(S) address; `s3`: push to an AWS S3 compatible storage bucket address; `logAnalysis`: push to EdgeOne log analysis.
 func (o RealtimeLogDeliveryOutput) TaskType() pulumi.StringOutput {
 	return o.ApplyT(func(v *RealtimeLogDelivery) pulumi.StringOutput { return v.TaskType }).(pulumi.StringOutput)
 }

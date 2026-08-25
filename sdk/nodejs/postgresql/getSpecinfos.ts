@@ -7,7 +7,7 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Use this data source to get the available product configs of the postgresql instance.
+ * Use this data source to get the available product configs of the PostgreSQL specifications.
  *
  * ## Example Usage
  *
@@ -15,8 +15,9 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Postgresql.getSpecinfos({
- *     availabilityZone: "ap-shanghai-2",
+ * const example = tencentcloud.postgresql.getSpecinfos({
+ *     availabilityZone: "ap-guangzhou-7",
+ *     storageType: "CLOUD_HSSD",
  * });
  * ```
  */
@@ -25,6 +26,7 @@ export function getSpecinfos(args: GetSpecinfosArgs, opts?: pulumi.InvokeOptions
     return pulumi.runtime.invoke("tencentcloud:Postgresql/getSpecinfos:getSpecinfos", {
         "availabilityZone": args.availabilityZone,
         "resultOutputFile": args.resultOutputFile,
+        "storageType": args.storageType,
     }, opts);
 }
 
@@ -40,6 +42,10 @@ export interface GetSpecinfosArgs {
      * Used to save results.
      */
     resultOutputFile?: string;
+    /**
+     * Storage type filter. Valid values: `PHYSICAL_LOCAL_SSD` (local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD).
+     */
+    storageType?: string;
 }
 
 /**
@@ -56,9 +62,10 @@ export interface GetSpecinfosResult {
      */
     readonly lists: outputs.Postgresql.GetSpecinfosList[];
     readonly resultOutputFile?: string;
+    readonly storageType?: string;
 }
 /**
- * Use this data source to get the available product configs of the postgresql instance.
+ * Use this data source to get the available product configs of the PostgreSQL specifications.
  *
  * ## Example Usage
  *
@@ -66,8 +73,9 @@ export interface GetSpecinfosResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Postgresql.getSpecinfos({
- *     availabilityZone: "ap-shanghai-2",
+ * const example = tencentcloud.postgresql.getSpecinfos({
+ *     availabilityZone: "ap-guangzhou-7",
+ *     storageType: "CLOUD_HSSD",
  * });
  * ```
  */
@@ -76,6 +84,7 @@ export function getSpecinfosOutput(args: GetSpecinfosOutputArgs, opts?: pulumi.I
     return pulumi.runtime.invokeOutput("tencentcloud:Postgresql/getSpecinfos:getSpecinfos", {
         "availabilityZone": args.availabilityZone,
         "resultOutputFile": args.resultOutputFile,
+        "storageType": args.storageType,
     }, opts);
 }
 
@@ -90,5 +99,9 @@ export interface GetSpecinfosOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
+    /**
+     * Storage type filter. Valid values: `PHYSICAL_LOCAL_SSD` (local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD).
+     */
+    storageType?: pulumi.Input<string | undefined>;
 }

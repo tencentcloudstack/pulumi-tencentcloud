@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const price = tencentcloud.Mariadb.getPrice({
+ * const price = tencentcloud.mariadb.getPrice({
  *     zone: "ap-guangzhou-3",
  *     nodeCount: 2,
  *     memory: 2,
@@ -116,7 +116,7 @@ export interface GetPriceResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const price = tencentcloud.Mariadb.getPrice({
+ * const price = tencentcloud.mariadb.getPrice({
  *     zone: "ap-guangzhou-3",
  *     nodeCount: 2,
  *     memory: 2,
@@ -149,7 +149,7 @@ export interface GetPriceOutputArgs {
     /**
      * Price unit. Valid values: `* pent` (cent), `* microPent` (microcent).
      */
-    amountUnit?: pulumi.Input<string>;
+    amountUnit?: pulumi.Input<string | undefined>;
     /**
      * The quantity you want to purchase is queried by default for the price of purchasing 1 instance.
      */
@@ -165,15 +165,15 @@ export interface GetPriceOutputArgs {
     /**
      * Billing type. Valid values: `postpaid` (pay-as-you-go), `prepaid` (monthly subscription).
      */
-    paymode?: pulumi.Input<string>;
+    paymode?: pulumi.Input<string | undefined>;
     /**
      * Purchase period in months.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Storage capacity in GB. The maximum and minimum storage space can be obtained by querying instance specification through the `DescribeDBInstanceSpecs` API.
      */

@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * dasb cmd_template can be imported using the id, e.g.
+ * dasb cmdTemplate can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Dasb/cmdTemplate:CmdTemplate example 15
@@ -99,11 +99,11 @@ export interface CmdTemplateState {
     /**
      * Command list, n separated, maximum length 32768 bytes.
      */
-    cmdList?: pulumi.Input<string>;
+    cmdList?: pulumi.Input<string | undefined>;
     /**
      * Template name, maximum length 32 characters, cannot contain blank characters.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -117,5 +117,5 @@ export interface CmdTemplateArgs {
     /**
      * Template name, maximum length 32 characters, cannot contain blank characters.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }

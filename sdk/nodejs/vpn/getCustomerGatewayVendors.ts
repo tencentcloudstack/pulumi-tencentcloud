@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const vpnCustomerGatewayVendors = tencentcloud.Vpn.getCustomerGatewayVendors({});
+ * const vpnCustomerGatewayVendors = tencentcloud.vpn.getCustomerGatewayVendors({});
  * ```
  */
 export function getCustomerGatewayVendors(args?: GetCustomerGatewayVendorsArgs, opts?: pulumi.InvokeOptions): Promise<GetCustomerGatewayVendorsResult> {
@@ -59,7 +59,7 @@ export interface GetCustomerGatewayVendorsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const vpnCustomerGatewayVendors = tencentcloud.Vpn.getCustomerGatewayVendors({});
+ * const vpnCustomerGatewayVendors = tencentcloud.vpn.getCustomerGatewayVendors({});
  * ```
  */
 export function getCustomerGatewayVendorsOutput(args?: GetCustomerGatewayVendorsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCustomerGatewayVendorsResult> {
@@ -77,5 +77,5 @@ export interface GetCustomerGatewayVendorsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

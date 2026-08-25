@@ -79,12 +79,8 @@ type GetLogFilesResult struct {
 }
 
 func GetLogFilesOutput(ctx *pulumi.Context, args GetLogFilesOutputArgs, opts ...pulumi.InvokeOption) GetLogFilesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetLogFilesResultOutput, error) {
-			args := v.(GetLogFilesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dcdb/getLogFiles:getLogFiles", args, GetLogFilesResultOutput{}, options).(GetLogFilesResultOutput), nil
-		}).(GetLogFilesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dcdb/getLogFiles:getLogFiles", args, GetLogFilesResultOutput{}, options).(GetLogFilesResultOutput)
 }
 
 // A collection of arguments for invoking getLogFiles.

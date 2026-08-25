@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const fileDownloadUrl = tencentcloud.Mariadb.getFileDownloadUrl({
+ * const fileDownloadUrl = tencentcloud.mariadb.getFileDownloadUrl({
  *     instanceId: "tdsql-9vqvls95",
  *     filePath: "/cos_backup/test.txt",
  * });
@@ -71,7 +71,7 @@ export interface GetFileDownloadUrlResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const fileDownloadUrl = tencentcloud.Mariadb.getFileDownloadUrl({
+ * const fileDownloadUrl = tencentcloud.mariadb.getFileDownloadUrl({
  *     instanceId: "tdsql-9vqvls95",
  *     filePath: "/cos_backup/test.txt",
  * });
@@ -101,5 +101,5 @@ export interface GetFileDownloadUrlOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

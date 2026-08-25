@@ -101,15 +101,15 @@ export interface InstanceBackupState {
     /**
      * 0:logical backup, 1:physical backup.
      */
-    backupMethod?: pulumi.Input<number>;
+    backupMethod?: pulumi.Input<number | undefined>;
     /**
      * backup notes.
      */
-    backupRemark?: pulumi.Input<string>;
+    backupRemark?: pulumi.Input<string | undefined>;
     /**
      * Instance ID, the format is: cmgo-9d0p6umb.Same as the instance ID displayed in the cloud database console page.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -123,7 +123,7 @@ export interface InstanceBackupArgs {
     /**
      * backup notes.
      */
-    backupRemark?: pulumi.Input<string>;
+    backupRemark?: pulumi.Input<string | undefined>;
     /**
      * Instance ID, the format is: cmgo-9d0p6umb.Same as the instance ID displayed in the cloud database console page.
      */

@@ -131,19 +131,19 @@ export interface SslState {
     /**
      * Instance ID. Example value: cdb-c1nl9rpv.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * RO group ID. Example value: cdbrg-k9a6gup3.
      */
-    roGroupId?: pulumi.Input<string>;
+    roGroupId?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable SSL. `ON` means enabled, `OFF` means not enabled.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * The certificate download link. Example value: http://testdownload.url.
      */
-    url?: pulumi.Input<string>;
+    url?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -153,11 +153,11 @@ export interface SslArgs {
     /**
      * Instance ID. Example value: cdb-c1nl9rpv.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * RO group ID. Example value: cdbrg-k9a6gup3.
      */
-    roGroupId?: pulumi.Input<string>;
+    roGroupId?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable SSL. `ON` means enabled, `OFF` means not enabled.
      */

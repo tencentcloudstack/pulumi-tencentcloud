@@ -68,12 +68,8 @@ type GetInstanceParamRecordsResult struct {
 }
 
 func GetInstanceParamRecordsOutput(ctx *pulumi.Context, args GetInstanceParamRecordsOutputArgs, opts ...pulumi.InvokeOption) GetInstanceParamRecordsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstanceParamRecordsResultOutput, error) {
-			args := v.(GetInstanceParamRecordsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Sqlserver/getInstanceParamRecords:getInstanceParamRecords", args, GetInstanceParamRecordsResultOutput{}, options).(GetInstanceParamRecordsResultOutput), nil
-		}).(GetInstanceParamRecordsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Sqlserver/getInstanceParamRecords:getInstanceParamRecords", args, GetInstanceParamRecordsResultOutput{}, options).(GetInstanceParamRecordsResultOutput)
 }
 
 // A collection of arguments for invoking getInstanceParamRecords.

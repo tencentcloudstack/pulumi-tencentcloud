@@ -177,67 +177,67 @@ export interface NamespaceState {
     /**
      * cluster ID.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * creation time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Delete ID.
      */
-    deleteFlag?: pulumi.Input<boolean>;
+    deleteFlag?: pulumi.Input<boolean | undefined>;
     /**
      * default namespace.
      */
-    isDefault?: pulumi.Input<string>;
+    isDefault?: pulumi.Input<string | undefined>;
     /**
      * whether to enable high availability.
      */
-    isHaEnable?: pulumi.Input<string>;
+    isHaEnable?: pulumi.Input<string | undefined>;
     /**
      * KubeInjectEnable value.
      */
-    kubeInjectEnable?: pulumi.Input<boolean>;
+    kubeInjectEnable?: pulumi.Input<boolean | undefined>;
     /**
      * Namespace encoding.
      */
-    namespaceCode?: pulumi.Input<string>;
+    namespaceCode?: pulumi.Input<string | undefined>;
     /**
      * namespace description.
      */
-    namespaceDesc?: pulumi.Input<string>;
+    namespaceDesc?: pulumi.Input<string | undefined>;
     /**
      * Namespace ID.
      */
-    namespaceId?: pulumi.Input<string>;
+    namespaceId?: pulumi.Input<string | undefined>;
     /**
      * namespace name.
      */
-    namespaceName?: pulumi.Input<string>;
+    namespaceName?: pulumi.Input<string | undefined>;
     /**
      * namespace resource type (default is DEF).
      */
-    namespaceResourceType?: pulumi.Input<string>;
+    namespaceResourceType?: pulumi.Input<string | undefined>;
     /**
      * namespace status.
      */
-    namespaceStatus?: pulumi.Input<string>;
+    namespaceStatus?: pulumi.Input<string | undefined>;
     /**
      * Whether it is a global namespace (the default is DEF, which means a common namespace; GLOBAL means a global namespace).
      */
-    namespaceType?: pulumi.Input<string>;
+    namespaceType?: pulumi.Input<string | undefined>;
     /**
      * ID of the dataset to be bound.
      */
-    programId?: pulumi.Input<string>;
+    programId?: pulumi.Input<string | undefined>;
     /**
      * Program id list.
      */
-    programIdLists?: pulumi.Input<pulumi.Input<string>[]>;
+    programIdLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * update time.
      */
-    updateTime?: pulumi.Input<string>;
+    updateTime?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -247,19 +247,19 @@ export interface NamespaceArgs {
     /**
      * cluster ID.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * whether to enable high availability.
      */
-    isHaEnable?: pulumi.Input<string>;
+    isHaEnable?: pulumi.Input<string | undefined>;
     /**
      * namespace description.
      */
-    namespaceDesc?: pulumi.Input<string>;
+    namespaceDesc?: pulumi.Input<string | undefined>;
     /**
      * Namespace ID.
      */
-    namespaceId?: pulumi.Input<string>;
+    namespaceId?: pulumi.Input<string | undefined>;
     /**
      * namespace name.
      */
@@ -267,17 +267,17 @@ export interface NamespaceArgs {
     /**
      * namespace resource type (default is DEF).
      */
-    namespaceResourceType?: pulumi.Input<string>;
+    namespaceResourceType?: pulumi.Input<string | undefined>;
     /**
      * Whether it is a global namespace (the default is DEF, which means a common namespace; GLOBAL means a global namespace).
      */
-    namespaceType?: pulumi.Input<string>;
+    namespaceType?: pulumi.Input<string | undefined>;
     /**
      * ID of the dataset to be bound.
      */
-    programId?: pulumi.Input<string>;
+    programId?: pulumi.Input<string | undefined>;
     /**
      * Program id list.
      */
-    programIdLists?: pulumi.Input<pulumi.Input<string>[]>;
+    programIdLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

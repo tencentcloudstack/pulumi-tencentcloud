@@ -69,12 +69,8 @@ type GetProxiesStatusResult struct {
 }
 
 func GetProxiesStatusOutput(ctx *pulumi.Context, args GetProxiesStatusOutputArgs, opts ...pulumi.InvokeOption) GetProxiesStatusResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetProxiesStatusResultOutput, error) {
-			args := v.(GetProxiesStatusArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Gaap/getProxiesStatus:getProxiesStatus", args, GetProxiesStatusResultOutput{}, options).(GetProxiesStatusResultOutput), nil
-		}).(GetProxiesStatusResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Gaap/getProxiesStatus:getProxiesStatus", args, GetProxiesStatusResultOutput{}, options).(GetProxiesStatusResultOutput)
 }
 
 // A collection of arguments for invoking getProxiesStatus.

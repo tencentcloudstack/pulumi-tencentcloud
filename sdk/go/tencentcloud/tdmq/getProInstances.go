@@ -74,12 +74,8 @@ type GetProInstancesResult struct {
 }
 
 func GetProInstancesOutput(ctx *pulumi.Context, args GetProInstancesOutputArgs, opts ...pulumi.InvokeOption) GetProInstancesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetProInstancesResultOutput, error) {
-			args := v.(GetProInstancesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tdmq/getProInstances:getProInstances", args, GetProInstancesResultOutput{}, options).(GetProInstancesResultOutput), nil
-		}).(GetProInstancesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tdmq/getProInstances:getProInstances", args, GetProInstancesResultOutput{}, options).(GetProInstancesResultOutput)
 }
 
 // A collection of arguments for invoking getProInstances.

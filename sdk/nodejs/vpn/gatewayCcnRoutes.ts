@@ -23,7 +23,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * vpc vpn_gateway_ccn_routes can be imported using the id, e.g.
+ * vpc vpnGatewayCcnRoutes can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Vpn/gatewayCcnRoutes:GatewayCcnRoutes vpn_gateway_ccn_routes vpn_gateway_id#ccn_routes_id
@@ -122,19 +122,19 @@ export interface GatewayCcnRoutesState {
     /**
      * Routing CIDR.
      */
-    destinationCidrBlock?: pulumi.Input<string>;
+    destinationCidrBlock?: pulumi.Input<string | undefined>;
     /**
      * Route Id.
      */
-    routeId?: pulumi.Input<string>;
+    routeId?: pulumi.Input<string | undefined>;
     /**
      * Whether routing information is enabled. `ENABLE`: Enable Route, `DISABLE`: Disable Route.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * VPN GATEWAY INSTANCE ID.
      */
-    vpnGatewayId?: pulumi.Input<string>;
+    vpnGatewayId?: pulumi.Input<string | undefined>;
 }
 
 /**

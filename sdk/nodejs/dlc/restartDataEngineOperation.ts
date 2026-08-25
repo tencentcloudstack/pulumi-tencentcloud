@@ -91,11 +91,11 @@ export interface RestartDataEngineOperationState {
     /**
      * Engine ID.
      */
-    dataEngineId?: pulumi.Input<string>;
+    dataEngineId?: pulumi.Input<string | undefined>;
     /**
      * Whether to restart by force and ignore tasks.
      */
-    forcedOperation?: pulumi.Input<boolean>;
+    forcedOperation?: pulumi.Input<boolean | undefined>;
 }
 
 /**
@@ -109,5 +109,5 @@ export interface RestartDataEngineOperationArgs {
     /**
      * Whether to restart by force and ignore tasks.
      */
-    forcedOperation?: pulumi.Input<boolean>;
+    forcedOperation?: pulumi.Input<boolean | undefined>;
 }

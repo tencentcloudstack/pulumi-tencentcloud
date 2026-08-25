@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const spec = tencentcloud.Clickhouse.getSpec({
+ * const spec = tencentcloud.clickhouse.getSpec({
  *     zone: "ap-guangzhou-7",
  *     payMode: "PREPAID",
  *     isElastic: false,
@@ -88,7 +88,7 @@ export interface GetSpecResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const spec = tencentcloud.Clickhouse.getSpec({
+ * const spec = tencentcloud.clickhouse.getSpec({
  *     zone: "ap-guangzhou-7",
  *     payMode: "PREPAID",
  *     isElastic: false,
@@ -112,15 +112,15 @@ export interface GetSpecOutputArgs {
     /**
      * Is it elastic.
      */
-    isElastic?: pulumi.Input<boolean>;
+    isElastic?: pulumi.Input<boolean | undefined>;
     /**
      * Billing type, PREPAID means annual and monthly subscription, POSTPAID_BY_HOUR means pay-as-you-go billing.
      */
-    payMode?: pulumi.Input<string>;
+    payMode?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Regional information.
      */

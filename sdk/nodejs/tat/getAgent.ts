@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const agent = tencentcloud.Tat.getAgent({
+ * const agent = tencentcloud.tat.getAgent({
  *     filters: [{
  *         name: "environment",
  *         values: ["Linux"],
@@ -76,7 +76,7 @@ export interface GetAgentResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const agent = tencentcloud.Tat.getAgent({
+ * const agent = tencentcloud.tat.getAgent({
  *     filters: [{
  *         name: "environment",
  *         values: ["Linux"],
@@ -101,13 +101,13 @@ export interface GetAgentOutputArgs {
     /**
      * Filter conditions. agent-status - String - Required: No - (Filter condition) Filter by agent status. Valid values: Online, Offline. environment - String - Required: No - (Filter condition) Filter by the agent environment. Valid value: Linux. instance-id - String - Required: No - (Filter condition) Filter by the instance ID. Up to 10 Filters allowed in one request. For each filter, five Filter.Values can be specified. InstanceIds and Filters cannot be specified at the same time.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Tat.GetAgentFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Tat.GetAgentFilterArgs>[] | undefined>;
     /**
      * List of instance IDs for the query.
      */
-    instanceIds?: pulumi.Input<pulumi.Input<string>[]>;
+    instanceIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

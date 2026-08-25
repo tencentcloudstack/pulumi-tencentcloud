@@ -65,7 +65,7 @@ import (
 //
 // ## Import
 //
-// mps ai_recognition_template can be imported using the id, e.g.
+// mps aiRecognitionTemplate can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Mps/aiRecognitionTemplate:AiRecognitionTemplate ai_recognition_template ai_recognition_template_id

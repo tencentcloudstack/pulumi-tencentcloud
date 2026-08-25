@@ -62,12 +62,8 @@ type GetPlatformProductsResult struct {
 }
 
 func GetPlatformProductsOutput(ctx *pulumi.Context, args GetPlatformProductsOutputArgs, opts ...pulumi.InvokeOption) GetPlatformProductsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetPlatformProductsResultOutput, error) {
-			args := v.(GetPlatformProductsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Eb/getPlatformProducts:getPlatformProducts", args, GetPlatformProductsResultOutput{}, options).(GetPlatformProductsResultOutput), nil
-		}).(GetPlatformProductsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Eb/getPlatformProducts:getPlatformProducts", args, GetPlatformProductsResultOutput{}, options).(GetPlatformProductsResultOutput)
 }
 
 // A collection of arguments for invoking getPlatformProducts.

@@ -17,7 +17,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Outputs
         /// <summary>
         /// Snat IP.
         /// </summary>
-        public readonly string Ip;
+        public readonly string? Ip;
         /// <summary>
         /// Subnet ID.
         /// </summary>
@@ -25,7 +25,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Outputs
 
         [OutputConstructor]
         private SnatIpIp(
-            string ip,
+            string? ip,
 
             string subnetId)
         {

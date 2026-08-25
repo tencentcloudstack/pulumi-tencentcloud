@@ -92,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public Input<Inputs.L7AccSettingZoneConfigMaxAgeArgs>? MaxAge { get; set; }
 
         /// <summary>
+        /// Network error logging configuration.
+        /// </summary>
+        [Input("networkErrorLogging")]
+        public Input<Inputs.L7AccSettingZoneConfigNetworkErrorLoggingArgs>? NetworkErrorLogging { get; set; }
+
+        /// <summary>
         /// OCSP stapling configuration.
         /// </summary>
         [Input("ocspStapling")]

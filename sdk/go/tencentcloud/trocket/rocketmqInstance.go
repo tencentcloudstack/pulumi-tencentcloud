@@ -14,8 +14,6 @@ import (
 
 // Provides a resource to create a Trocket rocketmq instance
 //
-// > **NOTE:** It only supports create postpaid rocketmq 5.x instance.
-//
 // ## Example Usage
 //
 // ### Create Basic Instance
@@ -35,7 +33,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
@@ -43,9 +41,9 @@ import (
 //				return err
 //			}
 //			// create vpc subnet
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				Name:             pulumi.String("subnet"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String("ap-guangzhou-6"),
 //				CidrBlock:        pulumi.String("10.0.20.0/28"),
 //				IsMulticast:      pulumi.Bool(false),
@@ -59,8 +57,8 @@ import (
 //				InstanceType: pulumi.String("PRO"),
 //				SkuCode:      pulumi.String("pro_4k"),
 //				Remark:       pulumi.String("remark"),
-//				VpcId:        vpc.ID(),
-//				SubnetId:     subnet.ID(),
+//				VpcId:        vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:     subnet2.ID().ToIDOutput().ToStringOutput(),
 //				Tags: pulumi.StringMap{
 //					"tag_key":   pulumi.String("rocketmq"),
 //					"tag_value": pulumi.String("5.x"),
@@ -92,7 +90,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
@@ -100,9 +98,9 @@ import (
 //				return err
 //			}
 //			// create vpc subnet
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				Name:             pulumi.String("subnet"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String("ap-guangzhou-6"),
 //				CidrBlock:        pulumi.String("10.0.20.0/28"),
 //				IsMulticast:      pulumi.Bool(false),
@@ -116,8 +114,8 @@ import (
 //				InstanceType: pulumi.String("PRO"),
 //				SkuCode:      pulumi.String("pro_4k"),
 //				Remark:       pulumi.String("remark"),
-//				VpcId:        vpc.ID(),
-//				SubnetId:     subnet.ID(),
+//				VpcId:        vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:     subnet2.ID().ToIDOutput().ToStringOutput(),
 //				EnablePublic: pulumi.Bool(true),
 //				Bandwidth:    pulumi.Int(10),
 //				IpRules: trocket.RocketmqInstanceIpRuleArray{
@@ -146,6 +144,71 @@ import (
 //
 // ```
 //
+// ### Create Instance with Billing and Deployment Params
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/trocket"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			// create vpc
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//				Name:      pulumi.String("vpc"),
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create vpc subnet
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				Name:             pulumi.String("subnet"),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				AvailabilityZone: pulumi.String("ap-guangzhou-6"),
+//				CidrBlock:        pulumi.String("10.0.20.0/28"),
+//				IsMulticast:      pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create rocketmq instance with billing and deployment params
+//			_, err = trocket.NewRocketmqInstance(ctx, "example", &trocket.RocketmqInstanceArgs{
+//				Name:         pulumi.String("tf-example"),
+//				InstanceType: pulumi.String("PRO"),
+//				SkuCode:      pulumi.String("pro_4k"),
+//				Remark:       pulumi.String("remark"),
+//				VpcId:        vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:     subnet2.ID().ToIDOutput().ToStringOutput(),
+//				PayMode:      pulumi.Int(1),
+//				RenewFlag:    pulumi.Int(1),
+//				TimeSpan:     pulumi.Int(12),
+//				MaxTopicNum:  pulumi.Int(1000),
+//				ZoneIds: pulumi.IntArray{
+//					pulumi.Int(100006),
+//					pulumi.Int(100007),
+//				},
+//				Tags: pulumi.StringMap{
+//					"tag_key":   pulumi.String("rocketmq"),
+//					"tag_value": pulumi.String("5.x"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
 // ## Import
 //
 // Trocket rocketmq instance can be imported using the id, e.g.
@@ -156,32 +219,42 @@ import (
 type RocketmqInstance struct {
 	pulumi.CustomResourceState
 
-	// Public network bandwidth. `bandwidth` must be greater than zero when `enablePublic` equal true.
+	// Public network bandwidth in Mbps, default 0. Must be a positive integer greater than 0 when public network is enabled.
 	Bandwidth pulumi.IntOutput `pulumi:"bandwidth"`
-	// Whether to enable the public network. Must set `bandwidth` when `enablePublic` equal true.
+	// Whether to enable public network access, default false. When set to true, `bandwidth` must be set to a positive integer.
 	EnablePublic pulumi.BoolOutput `pulumi:"enablePublic"`
-	// Instance type. Valid values: `EXPERIMENT`, `BASIC`, `PRO`, `PLATINUM`.
+	// Instance type. Valid values: `EXPERIMENT` (trial edition), `BASIC` (basic edition), `PRO` (professional edition), `PLATINUM` (platinum edition).
 	InstanceType pulumi.StringOutput `pulumi:"instanceType"`
-	// Public network access whitelist.
+	// Public network access whitelist. If left empty, all IP access is denied.
 	IpRules RocketmqInstanceIpRuleArrayOutput `pulumi:"ipRules"`
-	// Message retention time in hours.
+	// Maximum number of topics that can be created. The default/minimum and maximum are obtained from the TopicNumLimit and TopicNumUpperLimit parameters in the ProductSKU output of the DescribeProductSKUs interface.
+	MaxTopicNum pulumi.IntPtrOutput `pulumi:"maxTopicNum"`
+	// Message retention time in hours. The value range and default are obtained from the DefaultRetention/RetentionLowerLimit/RetentionUpperLimit parameters in the ProductSKU output of the DescribeProductSKUs interface.
 	MessageRetention pulumi.IntOutput `pulumi:"messageRetention"`
-	// Instance name.
+	// Instance (cluster) name, 3-64 characters, can only contain digits, letters, hyphen '-' and underscore '_'.
 	Name pulumi.StringOutput `pulumi:"name"`
+	// Billing mode. `0`: pay-as-you-go (postpaid), `1`: subscription (prepaid). Default is `0`.
+	PayMode pulumi.IntOutput `pulumi:"payMode"`
 	// Public network access address.
 	PublicEndPoint pulumi.StringOutput `pulumi:"publicEndPoint"`
-	// Remark.
+	// Remark information.
 	Remark pulumi.StringPtrOutput `pulumi:"remark"`
-	// SKU code. Available specifications are as follows: experiment_500, basic_1k, basic_2k, basic_3k, basic_4k, basic_5k, basic_6k, basic_7k, basic_8k, basic_9k, basic_10k, pro_4k, pro_6k, pro_8k, pro_1w, pro_15k, pro_2w, pro_25k, pro_3w, pro_35k, pro_4w, pro_45k, pro_5w, pro_55k, pro_60k, pro_65k, pro_70k, pro_75k, pro_80k, pro_85k, pro_90k, pro_95k, pro_100k, platinum_1w, platinum_2w, platinum_3w, platinum_4w, platinum_5w, platinum_6w, platinum_7w, platinum_8w, platinum_9w, platinum_10w, platinum_12w, platinum_14w, platinum_16w, platinum_18w, platinum_20w, platinum_25w, platinum_30w, platinum_35w, platinum_40w, platinum_45w, platinum_50w, platinum_60w, platinum_70w, platinum_80w, platinum_90w, platinum_100w.
+	// Whether to auto-renew a prepaid instance. `0`: no auto-renewal, `1`: auto-renewal. Default is `0`.
+	RenewFlag pulumi.IntOutput `pulumi:"renewFlag"`
+	// SKU code, obtained from the ProductSKU output of the DescribeProductSKUs interface.
 	SkuCode pulumi.StringOutput `pulumi:"skuCode"`
-	// Subnet id.
+	// Subnet ID that the instance binds to.
 	SubnetId pulumi.StringOutput `pulumi:"subnetId"`
-	// Tag description list.
+	// Tag list.
 	Tags pulumi.StringMapOutput `pulumi:"tags"`
+	// Purchase duration of a prepaid instance in months. Value range: 1-60. Default is `1`.
+	TimeSpan pulumi.IntPtrOutput `pulumi:"timeSpan"`
 	// VPC access address.
 	VpcEndPoint pulumi.StringOutput `pulumi:"vpcEndPoint"`
-	// VPC id.
+	// VPC ID that the instance binds to.
 	VpcId pulumi.StringOutput `pulumi:"vpcId"`
+	// List of deployment availability zones, obtained from the ZoneInfo structure returned by the DescribeZones interface.
+	ZoneIds pulumi.IntArrayOutput `pulumi:"zoneIds"`
 }
 
 // NewRocketmqInstance registers a new resource with the given unique name, arguments, and options.
@@ -226,61 +299,81 @@ func GetRocketmqInstance(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering RocketmqInstance resources.
 type rocketmqInstanceState struct {
-	// Public network bandwidth. `bandwidth` must be greater than zero when `enablePublic` equal true.
+	// Public network bandwidth in Mbps, default 0. Must be a positive integer greater than 0 when public network is enabled.
 	Bandwidth *int `pulumi:"bandwidth"`
-	// Whether to enable the public network. Must set `bandwidth` when `enablePublic` equal true.
+	// Whether to enable public network access, default false. When set to true, `bandwidth` must be set to a positive integer.
 	EnablePublic *bool `pulumi:"enablePublic"`
-	// Instance type. Valid values: `EXPERIMENT`, `BASIC`, `PRO`, `PLATINUM`.
+	// Instance type. Valid values: `EXPERIMENT` (trial edition), `BASIC` (basic edition), `PRO` (professional edition), `PLATINUM` (platinum edition).
 	InstanceType *string `pulumi:"instanceType"`
-	// Public network access whitelist.
+	// Public network access whitelist. If left empty, all IP access is denied.
 	IpRules []RocketmqInstanceIpRule `pulumi:"ipRules"`
-	// Message retention time in hours.
+	// Maximum number of topics that can be created. The default/minimum and maximum are obtained from the TopicNumLimit and TopicNumUpperLimit parameters in the ProductSKU output of the DescribeProductSKUs interface.
+	MaxTopicNum *int `pulumi:"maxTopicNum"`
+	// Message retention time in hours. The value range and default are obtained from the DefaultRetention/RetentionLowerLimit/RetentionUpperLimit parameters in the ProductSKU output of the DescribeProductSKUs interface.
 	MessageRetention *int `pulumi:"messageRetention"`
-	// Instance name.
+	// Instance (cluster) name, 3-64 characters, can only contain digits, letters, hyphen '-' and underscore '_'.
 	Name *string `pulumi:"name"`
+	// Billing mode. `0`: pay-as-you-go (postpaid), `1`: subscription (prepaid). Default is `0`.
+	PayMode *int `pulumi:"payMode"`
 	// Public network access address.
 	PublicEndPoint *string `pulumi:"publicEndPoint"`
-	// Remark.
+	// Remark information.
 	Remark *string `pulumi:"remark"`
-	// SKU code. Available specifications are as follows: experiment_500, basic_1k, basic_2k, basic_3k, basic_4k, basic_5k, basic_6k, basic_7k, basic_8k, basic_9k, basic_10k, pro_4k, pro_6k, pro_8k, pro_1w, pro_15k, pro_2w, pro_25k, pro_3w, pro_35k, pro_4w, pro_45k, pro_5w, pro_55k, pro_60k, pro_65k, pro_70k, pro_75k, pro_80k, pro_85k, pro_90k, pro_95k, pro_100k, platinum_1w, platinum_2w, platinum_3w, platinum_4w, platinum_5w, platinum_6w, platinum_7w, platinum_8w, platinum_9w, platinum_10w, platinum_12w, platinum_14w, platinum_16w, platinum_18w, platinum_20w, platinum_25w, platinum_30w, platinum_35w, platinum_40w, platinum_45w, platinum_50w, platinum_60w, platinum_70w, platinum_80w, platinum_90w, platinum_100w.
+	// Whether to auto-renew a prepaid instance. `0`: no auto-renewal, `1`: auto-renewal. Default is `0`.
+	RenewFlag *int `pulumi:"renewFlag"`
+	// SKU code, obtained from the ProductSKU output of the DescribeProductSKUs interface.
 	SkuCode *string `pulumi:"skuCode"`
-	// Subnet id.
+	// Subnet ID that the instance binds to.
 	SubnetId *string `pulumi:"subnetId"`
-	// Tag description list.
+	// Tag list.
 	Tags map[string]string `pulumi:"tags"`
+	// Purchase duration of a prepaid instance in months. Value range: 1-60. Default is `1`.
+	TimeSpan *int `pulumi:"timeSpan"`
 	// VPC access address.
 	VpcEndPoint *string `pulumi:"vpcEndPoint"`
-	// VPC id.
+	// VPC ID that the instance binds to.
 	VpcId *string `pulumi:"vpcId"`
+	// List of deployment availability zones, obtained from the ZoneInfo structure returned by the DescribeZones interface.
+	ZoneIds []int `pulumi:"zoneIds"`
 }
 
 type RocketmqInstanceState struct {
-	// Public network bandwidth. `bandwidth` must be greater than zero when `enablePublic` equal true.
+	// Public network bandwidth in Mbps, default 0. Must be a positive integer greater than 0 when public network is enabled.
 	Bandwidth pulumi.IntPtrInput
-	// Whether to enable the public network. Must set `bandwidth` when `enablePublic` equal true.
+	// Whether to enable public network access, default false. When set to true, `bandwidth` must be set to a positive integer.
 	EnablePublic pulumi.BoolPtrInput
-	// Instance type. Valid values: `EXPERIMENT`, `BASIC`, `PRO`, `PLATINUM`.
+	// Instance type. Valid values: `EXPERIMENT` (trial edition), `BASIC` (basic edition), `PRO` (professional edition), `PLATINUM` (platinum edition).
 	InstanceType pulumi.StringPtrInput
-	// Public network access whitelist.
+	// Public network access whitelist. If left empty, all IP access is denied.
 	IpRules RocketmqInstanceIpRuleArrayInput
-	// Message retention time in hours.
+	// Maximum number of topics that can be created. The default/minimum and maximum are obtained from the TopicNumLimit and TopicNumUpperLimit parameters in the ProductSKU output of the DescribeProductSKUs interface.
+	MaxTopicNum pulumi.IntPtrInput
+	// Message retention time in hours. The value range and default are obtained from the DefaultRetention/RetentionLowerLimit/RetentionUpperLimit parameters in the ProductSKU output of the DescribeProductSKUs interface.
 	MessageRetention pulumi.IntPtrInput
-	// Instance name.
+	// Instance (cluster) name, 3-64 characters, can only contain digits, letters, hyphen '-' and underscore '_'.
 	Name pulumi.StringPtrInput
+	// Billing mode. `0`: pay-as-you-go (postpaid), `1`: subscription (prepaid). Default is `0`.
+	PayMode pulumi.IntPtrInput
 	// Public network access address.
 	PublicEndPoint pulumi.StringPtrInput
-	// Remark.
+	// Remark information.
 	Remark pulumi.StringPtrInput
-	// SKU code. Available specifications are as follows: experiment_500, basic_1k, basic_2k, basic_3k, basic_4k, basic_5k, basic_6k, basic_7k, basic_8k, basic_9k, basic_10k, pro_4k, pro_6k, pro_8k, pro_1w, pro_15k, pro_2w, pro_25k, pro_3w, pro_35k, pro_4w, pro_45k, pro_5w, pro_55k, pro_60k, pro_65k, pro_70k, pro_75k, pro_80k, pro_85k, pro_90k, pro_95k, pro_100k, platinum_1w, platinum_2w, platinum_3w, platinum_4w, platinum_5w, platinum_6w, platinum_7w, platinum_8w, platinum_9w, platinum_10w, platinum_12w, platinum_14w, platinum_16w, platinum_18w, platinum_20w, platinum_25w, platinum_30w, platinum_35w, platinum_40w, platinum_45w, platinum_50w, platinum_60w, platinum_70w, platinum_80w, platinum_90w, platinum_100w.
+	// Whether to auto-renew a prepaid instance. `0`: no auto-renewal, `1`: auto-renewal. Default is `0`.
+	RenewFlag pulumi.IntPtrInput
+	// SKU code, obtained from the ProductSKU output of the DescribeProductSKUs interface.
 	SkuCode pulumi.StringPtrInput
-	// Subnet id.
+	// Subnet ID that the instance binds to.
 	SubnetId pulumi.StringPtrInput
-	// Tag description list.
+	// Tag list.
 	Tags pulumi.StringMapInput
+	// Purchase duration of a prepaid instance in months. Value range: 1-60. Default is `1`.
+	TimeSpan pulumi.IntPtrInput
 	// VPC access address.
 	VpcEndPoint pulumi.StringPtrInput
-	// VPC id.
+	// VPC ID that the instance binds to.
 	VpcId pulumi.StringPtrInput
+	// List of deployment availability zones, obtained from the ZoneInfo structure returned by the DescribeZones interface.
+	ZoneIds pulumi.IntArrayInput
 }
 
 func (RocketmqInstanceState) ElementType() reflect.Type {
@@ -288,54 +381,74 @@ func (RocketmqInstanceState) ElementType() reflect.Type {
 }
 
 type rocketmqInstanceArgs struct {
-	// Public network bandwidth. `bandwidth` must be greater than zero when `enablePublic` equal true.
+	// Public network bandwidth in Mbps, default 0. Must be a positive integer greater than 0 when public network is enabled.
 	Bandwidth *int `pulumi:"bandwidth"`
-	// Whether to enable the public network. Must set `bandwidth` when `enablePublic` equal true.
+	// Whether to enable public network access, default false. When set to true, `bandwidth` must be set to a positive integer.
 	EnablePublic *bool `pulumi:"enablePublic"`
-	// Instance type. Valid values: `EXPERIMENT`, `BASIC`, `PRO`, `PLATINUM`.
+	// Instance type. Valid values: `EXPERIMENT` (trial edition), `BASIC` (basic edition), `PRO` (professional edition), `PLATINUM` (platinum edition).
 	InstanceType string `pulumi:"instanceType"`
-	// Public network access whitelist.
+	// Public network access whitelist. If left empty, all IP access is denied.
 	IpRules []RocketmqInstanceIpRule `pulumi:"ipRules"`
-	// Message retention time in hours.
+	// Maximum number of topics that can be created. The default/minimum and maximum are obtained from the TopicNumLimit and TopicNumUpperLimit parameters in the ProductSKU output of the DescribeProductSKUs interface.
+	MaxTopicNum *int `pulumi:"maxTopicNum"`
+	// Message retention time in hours. The value range and default are obtained from the DefaultRetention/RetentionLowerLimit/RetentionUpperLimit parameters in the ProductSKU output of the DescribeProductSKUs interface.
 	MessageRetention *int `pulumi:"messageRetention"`
-	// Instance name.
+	// Instance (cluster) name, 3-64 characters, can only contain digits, letters, hyphen '-' and underscore '_'.
 	Name *string `pulumi:"name"`
-	// Remark.
+	// Billing mode. `0`: pay-as-you-go (postpaid), `1`: subscription (prepaid). Default is `0`.
+	PayMode *int `pulumi:"payMode"`
+	// Remark information.
 	Remark *string `pulumi:"remark"`
-	// SKU code. Available specifications are as follows: experiment_500, basic_1k, basic_2k, basic_3k, basic_4k, basic_5k, basic_6k, basic_7k, basic_8k, basic_9k, basic_10k, pro_4k, pro_6k, pro_8k, pro_1w, pro_15k, pro_2w, pro_25k, pro_3w, pro_35k, pro_4w, pro_45k, pro_5w, pro_55k, pro_60k, pro_65k, pro_70k, pro_75k, pro_80k, pro_85k, pro_90k, pro_95k, pro_100k, platinum_1w, platinum_2w, platinum_3w, platinum_4w, platinum_5w, platinum_6w, platinum_7w, platinum_8w, platinum_9w, platinum_10w, platinum_12w, platinum_14w, platinum_16w, platinum_18w, platinum_20w, platinum_25w, platinum_30w, platinum_35w, platinum_40w, platinum_45w, platinum_50w, platinum_60w, platinum_70w, platinum_80w, platinum_90w, platinum_100w.
+	// Whether to auto-renew a prepaid instance. `0`: no auto-renewal, `1`: auto-renewal. Default is `0`.
+	RenewFlag *int `pulumi:"renewFlag"`
+	// SKU code, obtained from the ProductSKU output of the DescribeProductSKUs interface.
 	SkuCode string `pulumi:"skuCode"`
-	// Subnet id.
+	// Subnet ID that the instance binds to.
 	SubnetId string `pulumi:"subnetId"`
-	// Tag description list.
+	// Tag list.
 	Tags map[string]string `pulumi:"tags"`
-	// VPC id.
+	// Purchase duration of a prepaid instance in months. Value range: 1-60. Default is `1`.
+	TimeSpan *int `pulumi:"timeSpan"`
+	// VPC ID that the instance binds to.
 	VpcId string `pulumi:"vpcId"`
+	// List of deployment availability zones, obtained from the ZoneInfo structure returned by the DescribeZones interface.
+	ZoneIds []int `pulumi:"zoneIds"`
 }
 
 // The set of arguments for constructing a RocketmqInstance resource.
 type RocketmqInstanceArgs struct {
-	// Public network bandwidth. `bandwidth` must be greater than zero when `enablePublic` equal true.
+	// Public network bandwidth in Mbps, default 0. Must be a positive integer greater than 0 when public network is enabled.
 	Bandwidth pulumi.IntPtrInput
-	// Whether to enable the public network. Must set `bandwidth` when `enablePublic` equal true.
+	// Whether to enable public network access, default false. When set to true, `bandwidth` must be set to a positive integer.
 	EnablePublic pulumi.BoolPtrInput
-	// Instance type. Valid values: `EXPERIMENT`, `BASIC`, `PRO`, `PLATINUM`.
+	// Instance type. Valid values: `EXPERIMENT` (trial edition), `BASIC` (basic edition), `PRO` (professional edition), `PLATINUM` (platinum edition).
 	InstanceType pulumi.StringInput
-	// Public network access whitelist.
+	// Public network access whitelist. If left empty, all IP access is denied.
 	IpRules RocketmqInstanceIpRuleArrayInput
-	// Message retention time in hours.
+	// Maximum number of topics that can be created. The default/minimum and maximum are obtained from the TopicNumLimit and TopicNumUpperLimit parameters in the ProductSKU output of the DescribeProductSKUs interface.
+	MaxTopicNum pulumi.IntPtrInput
+	// Message retention time in hours. The value range and default are obtained from the DefaultRetention/RetentionLowerLimit/RetentionUpperLimit parameters in the ProductSKU output of the DescribeProductSKUs interface.
 	MessageRetention pulumi.IntPtrInput
-	// Instance name.
+	// Instance (cluster) name, 3-64 characters, can only contain digits, letters, hyphen '-' and underscore '_'.
 	Name pulumi.StringPtrInput
-	// Remark.
+	// Billing mode. `0`: pay-as-you-go (postpaid), `1`: subscription (prepaid). Default is `0`.
+	PayMode pulumi.IntPtrInput
+	// Remark information.
 	Remark pulumi.StringPtrInput
-	// SKU code. Available specifications are as follows: experiment_500, basic_1k, basic_2k, basic_3k, basic_4k, basic_5k, basic_6k, basic_7k, basic_8k, basic_9k, basic_10k, pro_4k, pro_6k, pro_8k, pro_1w, pro_15k, pro_2w, pro_25k, pro_3w, pro_35k, pro_4w, pro_45k, pro_5w, pro_55k, pro_60k, pro_65k, pro_70k, pro_75k, pro_80k, pro_85k, pro_90k, pro_95k, pro_100k, platinum_1w, platinum_2w, platinum_3w, platinum_4w, platinum_5w, platinum_6w, platinum_7w, platinum_8w, platinum_9w, platinum_10w, platinum_12w, platinum_14w, platinum_16w, platinum_18w, platinum_20w, platinum_25w, platinum_30w, platinum_35w, platinum_40w, platinum_45w, platinum_50w, platinum_60w, platinum_70w, platinum_80w, platinum_90w, platinum_100w.
+	// Whether to auto-renew a prepaid instance. `0`: no auto-renewal, `1`: auto-renewal. Default is `0`.
+	RenewFlag pulumi.IntPtrInput
+	// SKU code, obtained from the ProductSKU output of the DescribeProductSKUs interface.
 	SkuCode pulumi.StringInput
-	// Subnet id.
+	// Subnet ID that the instance binds to.
 	SubnetId pulumi.StringInput
-	// Tag description list.
+	// Tag list.
 	Tags pulumi.StringMapInput
-	// VPC id.
+	// Purchase duration of a prepaid instance in months. Value range: 1-60. Default is `1`.
+	TimeSpan pulumi.IntPtrInput
+	// VPC ID that the instance binds to.
 	VpcId pulumi.StringInput
+	// List of deployment availability zones, obtained from the ZoneInfo structure returned by the DescribeZones interface.
+	ZoneIds pulumi.IntArrayInput
 }
 
 func (RocketmqInstanceArgs) ElementType() reflect.Type {
@@ -425,34 +538,44 @@ func (o RocketmqInstanceOutput) ToRocketmqInstanceOutputWithContext(ctx context.
 	return o
 }
 
-// Public network bandwidth. `bandwidth` must be greater than zero when `enablePublic` equal true.
+// Public network bandwidth in Mbps, default 0. Must be a positive integer greater than 0 when public network is enabled.
 func (o RocketmqInstanceOutput) Bandwidth() pulumi.IntOutput {
 	return o.ApplyT(func(v *RocketmqInstance) pulumi.IntOutput { return v.Bandwidth }).(pulumi.IntOutput)
 }
 
-// Whether to enable the public network. Must set `bandwidth` when `enablePublic` equal true.
+// Whether to enable public network access, default false. When set to true, `bandwidth` must be set to a positive integer.
 func (o RocketmqInstanceOutput) EnablePublic() pulumi.BoolOutput {
 	return o.ApplyT(func(v *RocketmqInstance) pulumi.BoolOutput { return v.EnablePublic }).(pulumi.BoolOutput)
 }
 
-// Instance type. Valid values: `EXPERIMENT`, `BASIC`, `PRO`, `PLATINUM`.
+// Instance type. Valid values: `EXPERIMENT` (trial edition), `BASIC` (basic edition), `PRO` (professional edition), `PLATINUM` (platinum edition).
 func (o RocketmqInstanceOutput) InstanceType() pulumi.StringOutput {
 	return o.ApplyT(func(v *RocketmqInstance) pulumi.StringOutput { return v.InstanceType }).(pulumi.StringOutput)
 }
 
-// Public network access whitelist.
+// Public network access whitelist. If left empty, all IP access is denied.
 func (o RocketmqInstanceOutput) IpRules() RocketmqInstanceIpRuleArrayOutput {
 	return o.ApplyT(func(v *RocketmqInstance) RocketmqInstanceIpRuleArrayOutput { return v.IpRules }).(RocketmqInstanceIpRuleArrayOutput)
 }
 
-// Message retention time in hours.
+// Maximum number of topics that can be created. The default/minimum and maximum are obtained from the TopicNumLimit and TopicNumUpperLimit parameters in the ProductSKU output of the DescribeProductSKUs interface.
+func (o RocketmqInstanceOutput) MaxTopicNum() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RocketmqInstance) pulumi.IntPtrOutput { return v.MaxTopicNum }).(pulumi.IntPtrOutput)
+}
+
+// Message retention time in hours. The value range and default are obtained from the DefaultRetention/RetentionLowerLimit/RetentionUpperLimit parameters in the ProductSKU output of the DescribeProductSKUs interface.
 func (o RocketmqInstanceOutput) MessageRetention() pulumi.IntOutput {
 	return o.ApplyT(func(v *RocketmqInstance) pulumi.IntOutput { return v.MessageRetention }).(pulumi.IntOutput)
 }
 
-// Instance name.
+// Instance (cluster) name, 3-64 characters, can only contain digits, letters, hyphen '-' and underscore '_'.
 func (o RocketmqInstanceOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *RocketmqInstance) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// Billing mode. `0`: pay-as-you-go (postpaid), `1`: subscription (prepaid). Default is `0`.
+func (o RocketmqInstanceOutput) PayMode() pulumi.IntOutput {
+	return o.ApplyT(func(v *RocketmqInstance) pulumi.IntOutput { return v.PayMode }).(pulumi.IntOutput)
 }
 
 // Public network access address.
@@ -460,24 +583,34 @@ func (o RocketmqInstanceOutput) PublicEndPoint() pulumi.StringOutput {
 	return o.ApplyT(func(v *RocketmqInstance) pulumi.StringOutput { return v.PublicEndPoint }).(pulumi.StringOutput)
 }
 
-// Remark.
+// Remark information.
 func (o RocketmqInstanceOutput) Remark() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *RocketmqInstance) pulumi.StringPtrOutput { return v.Remark }).(pulumi.StringPtrOutput)
 }
 
-// SKU code. Available specifications are as follows: experiment_500, basic_1k, basic_2k, basic_3k, basic_4k, basic_5k, basic_6k, basic_7k, basic_8k, basic_9k, basic_10k, pro_4k, pro_6k, pro_8k, pro_1w, pro_15k, pro_2w, pro_25k, pro_3w, pro_35k, pro_4w, pro_45k, pro_5w, pro_55k, pro_60k, pro_65k, pro_70k, pro_75k, pro_80k, pro_85k, pro_90k, pro_95k, pro_100k, platinum_1w, platinum_2w, platinum_3w, platinum_4w, platinum_5w, platinum_6w, platinum_7w, platinum_8w, platinum_9w, platinum_10w, platinum_12w, platinum_14w, platinum_16w, platinum_18w, platinum_20w, platinum_25w, platinum_30w, platinum_35w, platinum_40w, platinum_45w, platinum_50w, platinum_60w, platinum_70w, platinum_80w, platinum_90w, platinum_100w.
+// Whether to auto-renew a prepaid instance. `0`: no auto-renewal, `1`: auto-renewal. Default is `0`.
+func (o RocketmqInstanceOutput) RenewFlag() pulumi.IntOutput {
+	return o.ApplyT(func(v *RocketmqInstance) pulumi.IntOutput { return v.RenewFlag }).(pulumi.IntOutput)
+}
+
+// SKU code, obtained from the ProductSKU output of the DescribeProductSKUs interface.
 func (o RocketmqInstanceOutput) SkuCode() pulumi.StringOutput {
 	return o.ApplyT(func(v *RocketmqInstance) pulumi.StringOutput { return v.SkuCode }).(pulumi.StringOutput)
 }
 
-// Subnet id.
+// Subnet ID that the instance binds to.
 func (o RocketmqInstanceOutput) SubnetId() pulumi.StringOutput {
 	return o.ApplyT(func(v *RocketmqInstance) pulumi.StringOutput { return v.SubnetId }).(pulumi.StringOutput)
 }
 
-// Tag description list.
+// Tag list.
 func (o RocketmqInstanceOutput) Tags() pulumi.StringMapOutput {
 	return o.ApplyT(func(v *RocketmqInstance) pulumi.StringMapOutput { return v.Tags }).(pulumi.StringMapOutput)
+}
+
+// Purchase duration of a prepaid instance in months. Value range: 1-60. Default is `1`.
+func (o RocketmqInstanceOutput) TimeSpan() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RocketmqInstance) pulumi.IntPtrOutput { return v.TimeSpan }).(pulumi.IntPtrOutput)
 }
 
 // VPC access address.
@@ -485,9 +618,14 @@ func (o RocketmqInstanceOutput) VpcEndPoint() pulumi.StringOutput {
 	return o.ApplyT(func(v *RocketmqInstance) pulumi.StringOutput { return v.VpcEndPoint }).(pulumi.StringOutput)
 }
 
-// VPC id.
+// VPC ID that the instance binds to.
 func (o RocketmqInstanceOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v *RocketmqInstance) pulumi.StringOutput { return v.VpcId }).(pulumi.StringOutput)
+}
+
+// List of deployment availability zones, obtained from the ZoneInfo structure returned by the DescribeZones interface.
+func (o RocketmqInstanceOutput) ZoneIds() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v *RocketmqInstance) pulumi.IntArrayOutput { return v.ZoneIds }).(pulumi.IntArrayOutput)
 }
 
 type RocketmqInstanceArrayOutput struct{ *pulumi.OutputState }

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const cluster = tencentcloud.Tsf.getCluster({
+ * const cluster = tencentcloud.tsf.getCluster({
  *     clusterIdLists: ["cluster-vwgj5e6y"],
  *     clusterType: "V",
  *     disableProgramAuthCheck: true,
@@ -90,7 +90,7 @@ export interface GetClusterResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const cluster = tencentcloud.Tsf.getCluster({
+ * const cluster = tencentcloud.tsf.getCluster({
  *     clusterIdLists: ["cluster-vwgj5e6y"],
  *     clusterType: "V",
  *     disableProgramAuthCheck: true,
@@ -116,21 +116,21 @@ export interface GetClusterOutputArgs {
     /**
      * Cluster ID list to be queried, if not filled in or passed, all content will be queried.
      */
-    clusterIdLists?: pulumi.Input<pulumi.Input<string>[]>;
+    clusterIdLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The type of cluster to be queried, if left blank or not passed, all content will be queried. C: container, V: virtual machine.
      */
-    clusterType?: pulumi.Input<string>;
+    clusterType?: pulumi.Input<string | undefined>;
     /**
      * Whether to disable dataset authentication.
      */
-    disableProgramAuthCheck?: pulumi.Input<boolean>;
+    disableProgramAuthCheck?: pulumi.Input<boolean | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Filter by keywords for Cluster Id or name.
      */
-    searchWord?: pulumi.Input<string>;
+    searchWord?: pulumi.Input<string | undefined>;
 }

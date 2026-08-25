@@ -83,6 +83,7 @@ import (
 //					StorageType:      pulumi.String("cos"),
 //					StorageAccountId: pulumi.String("100037717137"),
 //					StorageAppId:     pulumi.String("1309116520"),
+//					Compress:         pulumi.Int(1),
 //				},
 //			})
 //			if err != nil {
@@ -97,7 +98,6 @@ import (
 // ## Import
 //
 // audit track can be imported using the id, e.g.
-//
 // ```sh
 // $ pulumi import tencentcloud:Audit/track:Track example 24283
 // ```
@@ -116,7 +116,7 @@ type Track struct {
 	ResourceType pulumi.StringOutput `pulumi:"resourceType"`
 	// Track status, optional:- `0`: Close- `1`: Open.
 	Status pulumi.IntOutput `pulumi:"status"`
-	// Track Storage, support `cos` and `cls`.
+	// Track Storage, support `cos`, `cls` and `ckafka`.
 	Storage TrackStorageOutput `pulumi:"storage"`
 	// Whether to enable the delivery of group member operation logs to the group management account or trusted service management account, optional:- `0`: Close- `1`: Open.
 	TrackForAllMembers pulumi.IntPtrOutput `pulumi:"trackForAllMembers"`
@@ -179,7 +179,7 @@ type trackState struct {
 	ResourceType *string `pulumi:"resourceType"`
 	// Track status, optional:- `0`: Close- `1`: Open.
 	Status *int `pulumi:"status"`
-	// Track Storage, support `cos` and `cls`.
+	// Track Storage, support `cos`, `cls` and `ckafka`.
 	Storage *TrackStorage `pulumi:"storage"`
 	// Whether to enable the delivery of group member operation logs to the group management account or trusted service management account, optional:- `0`: Close- `1`: Open.
 	TrackForAllMembers *int `pulumi:"trackForAllMembers"`
@@ -198,7 +198,7 @@ type TrackState struct {
 	ResourceType pulumi.StringPtrInput
 	// Track status, optional:- `0`: Close- `1`: Open.
 	Status pulumi.IntPtrInput
-	// Track Storage, support `cos` and `cls`.
+	// Track Storage, support `cos`, `cls` and `ckafka`.
 	Storage TrackStoragePtrInput
 	// Whether to enable the delivery of group member operation logs to the group management account or trusted service management account, optional:- `0`: Close- `1`: Open.
 	TrackForAllMembers pulumi.IntPtrInput
@@ -219,7 +219,7 @@ type trackArgs struct {
 	ResourceType string `pulumi:"resourceType"`
 	// Track status, optional:- `0`: Close- `1`: Open.
 	Status int `pulumi:"status"`
-	// Track Storage, support `cos` and `cls`.
+	// Track Storage, support `cos`, `cls` and `ckafka`.
 	Storage TrackStorage `pulumi:"storage"`
 	// Whether to enable the delivery of group member operation logs to the group management account or trusted service management account, optional:- `0`: Close- `1`: Open.
 	TrackForAllMembers *int `pulumi:"trackForAllMembers"`
@@ -237,7 +237,7 @@ type TrackArgs struct {
 	ResourceType pulumi.StringInput
 	// Track status, optional:- `0`: Close- `1`: Open.
 	Status pulumi.IntInput
-	// Track Storage, support `cos` and `cls`.
+	// Track Storage, support `cos`, `cls` and `ckafka`.
 	Storage TrackStorageInput
 	// Whether to enable the delivery of group member operation logs to the group management account or trusted service management account, optional:- `0`: Close- `1`: Open.
 	TrackForAllMembers pulumi.IntPtrInput
@@ -360,7 +360,7 @@ func (o TrackOutput) Status() pulumi.IntOutput {
 	return o.ApplyT(func(v *Track) pulumi.IntOutput { return v.Status }).(pulumi.IntOutput)
 }
 
-// Track Storage, support `cos` and `cls`.
+// Track Storage, support `cos`, `cls` and `ckafka`.
 func (o TrackOutput) Storage() TrackStorageOutput {
 	return o.ApplyT(func(v *Track) TrackStorageOutput { return v.Storage }).(TrackStorageOutput)
 }

@@ -32,7 +32,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc-example"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
@@ -45,8 +45,8 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			nat, err := nat.NewGateway(ctx, "nat", &nat.GatewayArgs{
-//				VpcId:         vpc.ID(),
+//			nat2, err := nat.NewGateway(ctx, "nat", &nat.GatewayArgs{
+//				VpcId:         vpc2.ID().ToIDOutput().ToStringOutput(),
 //				Name:          pulumi.String("tf_example_nat_gateway"),
 //				MaxConcurrent: pulumi.Int(3000000),
 //				Bandwidth:     pulumi.Int(500),
@@ -58,8 +58,8 @@ import (
 //				return err
 //			}
 //			_, err = nat.NewRefreshNatDcRoute(ctx, "refresh_nat_dc_route", &nat.RefreshNatDcRouteArgs{
-//				NatGatewayId: nat.ID(),
-//				VpcId:        vpc.ID(),
+//				NatGatewayId: nat2.ID().ToIDOutput().ToStringOutput(),
+//				VpcId:        vpc2.ID().ToIDOutput().ToStringOutput(),
 //				DryRun:       pulumi.Bool(true),
 //			})
 //			if err != nil {
@@ -101,7 +101,7 @@ import (
 //
 // ## Import
 //
-// vpc refresh_nat_dc_route can be imported using the id, e.g.
+// vpc refreshNatDcRoute can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Nat/refreshNatDcRoute:RefreshNatDcRoute refresh_nat_dc_route vpc_id#nat_gateway_id

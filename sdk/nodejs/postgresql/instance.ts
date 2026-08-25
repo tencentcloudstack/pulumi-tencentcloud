@@ -330,7 +330,7 @@ export class Instance extends pulumi.CustomResource {
     /**
      * Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
      */
-    declare public readonly autoRenewFlag: pulumi.Output<number | undefined>;
+    declare public readonly autoRenewFlag: pulumi.Output<number>;
     /**
      * Whether to use voucher, `1` for enabled.
      */
@@ -340,7 +340,9 @@ export class Instance extends pulumi.CustomResource {
      */
     declare public readonly availabilityZone: pulumi.Output<string>;
     /**
-     * Specify DB backup plan.
+     * This field is deprecated from version 1.83.9. Use resource `tencentcloud.Postgresql.BackupPlan` to manage PG instance backup plan. Specify DB backup plan.
+     *
+     * @deprecated This field is deprecated from version 1.83.9. Use resource `tencentcloud.Postgresql.BackupPlan` to manage PG instance backup plan.
      */
     declare public readonly backupPlan: pulumi.Output<outputs.Postgresql.InstanceBackupPlan>;
     /**
@@ -380,7 +382,7 @@ export class Instance extends pulumi.CustomResource {
     /**
      * Whether to enable instance deletion protection. Default: false.
      */
-    declare public readonly deleteProtection: pulumi.Output<boolean | undefined>;
+    declare public readonly deleteProtection: pulumi.Output<boolean>;
     /**
      * Version of the postgresql database engine. Valid values: `10.4`, `10.17`, `10.23`, `11.8`, `11.12`, `11.22`, `12.4`, `12.7`, `12.18`, `13.3`, `14.2`, `14.11`, `15.1`, `16.0`.
      */
@@ -462,6 +464,10 @@ export class Instance extends pulumi.CustomResource {
      */
     declare public readonly storage: pulumi.Output<number>;
     /**
+     * Storage type of the instance. Valid values: `PHYSICAL_LOCAL_SSD` (default, local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD). NOTE: This field will force new resource when modified.
+     */
+    declare public readonly storageType: pulumi.Output<string>;
+    /**
      * ID of subnet.
      */
     declare public readonly subnetId: pulumi.Output<string>;
@@ -532,6 +538,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["rootUser"] = state?.rootUser;
             resourceInputs["securityGroups"] = state?.securityGroups;
             resourceInputs["storage"] = state?.storage;
+            resourceInputs["storageType"] = state?.storageType;
             resourceInputs["subnetId"] = state?.subnetId;
             resourceInputs["tags"] = state?.tags;
             resourceInputs["uid"] = state?.uid;
@@ -586,6 +593,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["rootUser"] = args?.rootUser;
             resourceInputs["securityGroups"] = args?.securityGroups;
             resourceInputs["storage"] = args?.storage;
+            resourceInputs["storageType"] = args?.storageType;
             resourceInputs["subnetId"] = args?.subnetId;
             resourceInputs["tags"] = args?.tags;
             resourceInputs["voucherIds"] = args?.voucherIds;
@@ -612,161 +620,167 @@ export interface InstanceState {
     /**
      * Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
      */
-    autoRenewFlag?: pulumi.Input<number>;
+    autoRenewFlag?: pulumi.Input<number | undefined>;
     /**
      * Whether to use voucher, `1` for enabled.
      */
-    autoVoucher?: pulumi.Input<number>;
+    autoVoucher?: pulumi.Input<number | undefined>;
     /**
      * Availability zone. NOTE: This field could not be modified, please use `dbNodeSet` instead of modification. The changes on this field will be suppressed when using the `dbNodeSet`.
      */
-    availabilityZone?: pulumi.Input<string>;
+    availabilityZone?: pulumi.Input<string | undefined>;
     /**
-     * Specify DB backup plan.
+     * This field is deprecated from version 1.83.9. Use resource `tencentcloud.Postgresql.BackupPlan` to manage PG instance backup plan. Specify DB backup plan.
+     *
+     * @deprecated This field is deprecated from version 1.83.9. Use resource `tencentcloud.Postgresql.BackupPlan` to manage PG instance backup plan.
      */
-    backupPlan?: pulumi.Input<inputs.Postgresql.InstanceBackupPlan>;
+    backupPlan?: pulumi.Input<inputs.Postgresql.InstanceBackupPlan | undefined>;
     /**
      * Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`. It only support to update the type from `POSTPAID_BY_HOUR` to `PREPAID`.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
     /**
      * Charset of the root account. Valid values are `UTF8`,`LATIN1`.
      */
-    charset?: pulumi.Input<string>;
+    charset?: pulumi.Input<string | undefined>;
     /**
      * Number of CPU cores. Allowed value must be equal `cpu` that data source `tencentcloud.Postgresql.getSpecinfos` provides.
      */
-    cpu?: pulumi.Input<number>;
+    cpu?: pulumi.Input<number | undefined>;
     /**
      * Create time of the postgresql instance.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.
      */
-    dbKernelVersion?: pulumi.Input<string>;
+    dbKernelVersion?: pulumi.Input<string | undefined>;
     /**
      * PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
      */
-    dbMajorVersion?: pulumi.Input<string>;
+    dbMajorVersion?: pulumi.Input<string | undefined>;
     /**
      * `dbMajorVesion` will be deprecated, use `dbMajorVersion` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
      *
      * @deprecated `dbMajorVesion` will be deprecated, use `dbMajorVersion` instead.
      */
-    dbMajorVesion?: pulumi.Input<string>;
+    dbMajorVesion?: pulumi.Input<string | undefined>;
     /**
      * Specify instance node info for disaster migration.
      */
-    dbNodeSets?: pulumi.Input<pulumi.Input<inputs.Postgresql.InstanceDbNodeSet>[]>;
+    dbNodeSets?: pulumi.Input<pulumi.Input<inputs.Postgresql.InstanceDbNodeSet>[] | undefined>;
     /**
      * Whether to enable instance deletion protection. Default: false.
      */
-    deleteProtection?: pulumi.Input<boolean>;
+    deleteProtection?: pulumi.Input<boolean | undefined>;
     /**
      * Version of the postgresql database engine. Valid values: `10.4`, `10.17`, `10.23`, `11.8`, `11.12`, `11.22`, `12.4`, `12.7`, `12.18`, `13.3`, `14.2`, `14.11`, `15.1`, `16.0`.
      */
-    engineVersion?: pulumi.Input<string>;
+    engineVersion?: pulumi.Input<string | undefined>;
     /**
      * Specify the cluster served by KMS. If KMSClusterId is blank, use the KMS of the default cluster. If you choose to specify a KMS cluster, you need to pass in KMSClusterId.
      */
-    kmsClusterId?: pulumi.Input<string>;
+    kmsClusterId?: pulumi.Input<string | undefined>;
     /**
      * KeyId of the custom key.
      */
-    kmsKeyId?: pulumi.Input<string>;
+    kmsKeyId?: pulumi.Input<string | undefined>;
     /**
      * Region of the custom key.
      */
-    kmsRegion?: pulumi.Input<string>;
+    kmsRegion?: pulumi.Input<string | undefined>;
     /**
      * max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.
      */
-    maxStandbyArchiveDelay?: pulumi.Input<number>;
+    maxStandbyArchiveDelay?: pulumi.Input<number | undefined>;
     /**
      * max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.
      */
-    maxStandbyStreamingDelay?: pulumi.Input<number>;
+    maxStandbyStreamingDelay?: pulumi.Input<number | undefined>;
     /**
      * Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud.Postgresql.getSpecinfos` provides.
      */
-    memory?: pulumi.Input<number>;
+    memory?: pulumi.Input<number | undefined>;
     /**
      * Name of the postgresql instance.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Whether to support data transparent encryption, 1: yes, 0: no (default).
      */
-    needSupportTde?: pulumi.Input<number>;
+    needSupportTde?: pulumi.Input<number | undefined>;
     /**
      * Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This field is valid only when creating a `PREPAID` type instance, or updating the charge type from `POSTPAID_BY_HOUR` to `PREPAID`.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * IP for private access.
      */
-    privateAccessIp?: pulumi.Input<string>;
+    privateAccessIp?: pulumi.Input<string | undefined>;
     /**
      * Port for private access.
      */
-    privateAccessPort?: pulumi.Input<number>;
+    privateAccessPort?: pulumi.Input<number | undefined>;
     /**
      * Project id, default value is `0`.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Host for public access.
      */
-    publicAccessHost?: pulumi.Input<string>;
+    publicAccessHost?: pulumi.Input<string | undefined>;
     /**
      * Port for public access.
      */
-    publicAccessPort?: pulumi.Input<number>;
+    publicAccessPort?: pulumi.Input<number | undefined>;
     /**
      * Indicates whether to enable the access to an instance from public network or not.
      */
-    publicAccessSwitch?: pulumi.Input<boolean>;
+    publicAccessSwitch?: pulumi.Input<boolean | undefined>;
     /**
      * Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
      */
-    rootPassword?: pulumi.Input<string>;
+    rootPassword?: pulumi.Input<string | undefined>;
     /**
      * Instance root account name. This parameter is optional, Default value is `root`.
      */
-    rootUser?: pulumi.Input<string>;
+    rootUser?: pulumi.Input<string | undefined>;
     /**
      * ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.
      */
-    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroups?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storageMin` and `storageMax` which data source `tencentcloud.Postgresql.getSpecinfos` provides.
      */
-    storage?: pulumi.Input<number>;
+    storage?: pulumi.Input<number | undefined>;
+    /**
+     * Storage type of the instance. Valid values: `PHYSICAL_LOCAL_SSD` (default, local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD). NOTE: This field will force new resource when modified.
+     */
+    storageType?: pulumi.Input<string | undefined>;
     /**
      * ID of subnet.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * The available tags within this postgresql.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Uid of the postgresql instance.
      */
-    uid?: pulumi.Input<number>;
+    uid?: pulumi.Input<number | undefined>;
     /**
      * Specify Voucher Ids if `autoVoucher` was `1`, only support using 1 vouchers for now.
      */
-    voucherIds?: pulumi.Input<pulumi.Input<string>[]>;
+    voucherIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * ID of VPC.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * Switch time after instance configurations are modified. `0`: Switch immediately; `2`: Switch during maintenance time window. Default: `0`. Note: This only takes effect when updating the `memory`, `storage`, `cpu`, `dbNodeSet`, `dbKernelVersion` fields.
      */
-    waitSwitch?: pulumi.Input<number>;
+    waitSwitch?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -776,77 +790,79 @@ export interface InstanceArgs {
     /**
      * Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
      */
-    autoRenewFlag?: pulumi.Input<number>;
+    autoRenewFlag?: pulumi.Input<number | undefined>;
     /**
      * Whether to use voucher, `1` for enabled.
      */
-    autoVoucher?: pulumi.Input<number>;
+    autoVoucher?: pulumi.Input<number | undefined>;
     /**
      * Availability zone. NOTE: This field could not be modified, please use `dbNodeSet` instead of modification. The changes on this field will be suppressed when using the `dbNodeSet`.
      */
     availabilityZone: pulumi.Input<string>;
     /**
-     * Specify DB backup plan.
+     * This field is deprecated from version 1.83.9. Use resource `tencentcloud.Postgresql.BackupPlan` to manage PG instance backup plan. Specify DB backup plan.
+     *
+     * @deprecated This field is deprecated from version 1.83.9. Use resource `tencentcloud.Postgresql.BackupPlan` to manage PG instance backup plan.
      */
-    backupPlan?: pulumi.Input<inputs.Postgresql.InstanceBackupPlan>;
+    backupPlan?: pulumi.Input<inputs.Postgresql.InstanceBackupPlan | undefined>;
     /**
      * Pay type of the postgresql instance. Values `POSTPAID_BY_HOUR` (Default), `PREPAID`. It only support to update the type from `POSTPAID_BY_HOUR` to `PREPAID`.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
     /**
      * Charset of the root account. Valid values are `UTF8`,`LATIN1`.
      */
-    charset?: pulumi.Input<string>;
+    charset?: pulumi.Input<string | undefined>;
     /**
      * Number of CPU cores. Allowed value must be equal `cpu` that data source `tencentcloud.Postgresql.getSpecinfos` provides.
      */
-    cpu?: pulumi.Input<number>;
+    cpu?: pulumi.Input<number | undefined>;
     /**
      * PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.
      */
-    dbKernelVersion?: pulumi.Input<string>;
+    dbKernelVersion?: pulumi.Input<string | undefined>;
     /**
      * PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
      */
-    dbMajorVersion?: pulumi.Input<string>;
+    dbMajorVersion?: pulumi.Input<string | undefined>;
     /**
      * `dbMajorVesion` will be deprecated, use `dbMajorVersion` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
      *
      * @deprecated `dbMajorVesion` will be deprecated, use `dbMajorVersion` instead.
      */
-    dbMajorVesion?: pulumi.Input<string>;
+    dbMajorVesion?: pulumi.Input<string | undefined>;
     /**
      * Specify instance node info for disaster migration.
      */
-    dbNodeSets?: pulumi.Input<pulumi.Input<inputs.Postgresql.InstanceDbNodeSet>[]>;
+    dbNodeSets?: pulumi.Input<pulumi.Input<inputs.Postgresql.InstanceDbNodeSet>[] | undefined>;
     /**
      * Whether to enable instance deletion protection. Default: false.
      */
-    deleteProtection?: pulumi.Input<boolean>;
+    deleteProtection?: pulumi.Input<boolean | undefined>;
     /**
      * Version of the postgresql database engine. Valid values: `10.4`, `10.17`, `10.23`, `11.8`, `11.12`, `11.22`, `12.4`, `12.7`, `12.18`, `13.3`, `14.2`, `14.11`, `15.1`, `16.0`.
      */
-    engineVersion?: pulumi.Input<string>;
+    engineVersion?: pulumi.Input<string | undefined>;
     /**
      * Specify the cluster served by KMS. If KMSClusterId is blank, use the KMS of the default cluster. If you choose to specify a KMS cluster, you need to pass in KMSClusterId.
      */
-    kmsClusterId?: pulumi.Input<string>;
+    kmsClusterId?: pulumi.Input<string | undefined>;
     /**
      * KeyId of the custom key.
      */
-    kmsKeyId?: pulumi.Input<string>;
+    kmsKeyId?: pulumi.Input<string | undefined>;
     /**
      * Region of the custom key.
      */
-    kmsRegion?: pulumi.Input<string>;
+    kmsRegion?: pulumi.Input<string | undefined>;
     /**
      * max_standby_archive_delay applies when WAL data is being read from WAL archive (and is therefore not current). Units are milliseconds if not specified.
      */
-    maxStandbyArchiveDelay?: pulumi.Input<number>;
+    maxStandbyArchiveDelay?: pulumi.Input<number | undefined>;
     /**
      * max_standby_streaming_delay applies when WAL data is being received via streaming replication. Units are milliseconds if not specified.
      */
-    maxStandbyStreamingDelay?: pulumi.Input<number>;
+    maxStandbyStreamingDelay?: pulumi.Input<number | undefined>;
     /**
      * Memory size(in GB). Allowed value must be larger than `memory` that data source `tencentcloud.Postgresql.getSpecinfos` provides.
      */
@@ -854,23 +870,23 @@ export interface InstanceArgs {
     /**
      * Name of the postgresql instance.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Whether to support data transparent encryption, 1: yes, 0: no (default).
      */
-    needSupportTde?: pulumi.Input<number>;
+    needSupportTde?: pulumi.Input<number | undefined>;
     /**
      * Specify Prepaid period in month. Default `1`. Values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This field is valid only when creating a `PREPAID` type instance, or updating the charge type from `POSTPAID_BY_HOUR` to `PREPAID`.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * Project id, default value is `0`.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Indicates whether to enable the access to an instance from public network or not.
      */
-    publicAccessSwitch?: pulumi.Input<boolean>;
+    publicAccessSwitch?: pulumi.Input<boolean | undefined>;
     /**
      * Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
      */
@@ -878,15 +894,19 @@ export interface InstanceArgs {
     /**
      * Instance root account name. This parameter is optional, Default value is `root`.
      */
-    rootUser?: pulumi.Input<string>;
+    rootUser?: pulumi.Input<string | undefined>;
     /**
      * ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.
      */
-    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroups?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Volume size(in GB). Allowed value must be a multiple of 10. The storage must be set with the limit of `storageMin` and `storageMax` which data source `tencentcloud.Postgresql.getSpecinfos` provides.
      */
     storage: pulumi.Input<number>;
+    /**
+     * Storage type of the instance. Valid values: `PHYSICAL_LOCAL_SSD` (default, local SSD), `CLOUD_PREMIUM` (premium cloud disk), `CLOUD_SSD` (cloud SSD), `CLOUD_HSSD` (enhanced cloud SSD). NOTE: This field will force new resource when modified.
+     */
+    storageType?: pulumi.Input<string | undefined>;
     /**
      * ID of subnet.
      */
@@ -894,11 +914,11 @@ export interface InstanceArgs {
     /**
      * The available tags within this postgresql.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Specify Voucher Ids if `autoVoucher` was `1`, only support using 1 vouchers for now.
      */
-    voucherIds?: pulumi.Input<pulumi.Input<string>[]>;
+    voucherIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * ID of VPC.
      */
@@ -906,5 +926,5 @@ export interface InstanceArgs {
     /**
      * Switch time after instance configurations are modified. `0`: Switch immediately; `2`: Switch during maintenance time window. Default: `0`. Note: This only takes effect when updating the `memory`, `storage`, `cpu`, `dbNodeSet`, `dbKernelVersion` fields.
      */
-    waitSwitch?: pulumi.Input<number>;
+    waitSwitch?: pulumi.Input<number | undefined>;
 }

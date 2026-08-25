@@ -120,23 +120,23 @@ export interface CustomerGatewayState {
     /**
      * BGP ASN. Value range: 1 - 4294967295. Using BGP requires configuring ASN. 139341, 45090, and 58835 are not available.
      */
-    bgpAsn?: pulumi.Input<number>;
+    bgpAsn?: pulumi.Input<number | undefined>;
     /**
      * Create time of the customer gateway.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Name of the customer gateway. The length of character is limited to 1-60.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Public IP of the customer gateway.
      */
-    publicIpAddress?: pulumi.Input<string>;
+    publicIpAddress?: pulumi.Input<string | undefined>;
     /**
      * A list of tags used to associate different resources.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 /**
@@ -146,11 +146,11 @@ export interface CustomerGatewayArgs {
     /**
      * BGP ASN. Value range: 1 - 4294967295. Using BGP requires configuring ASN. 139341, 45090, and 58835 are not available.
      */
-    bgpAsn?: pulumi.Input<number>;
+    bgpAsn?: pulumi.Input<number | undefined>;
     /**
      * Name of the customer gateway. The length of character is limited to 1-60.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Public IP of the customer gateway.
      */
@@ -158,5 +158,5 @@ export interface CustomerGatewayArgs {
     /**
      * A list of tags used to associate different resources.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

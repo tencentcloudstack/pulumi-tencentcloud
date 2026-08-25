@@ -11,6 +11,8 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
 {
     /// <summary>
+    /// Provides a resource to create a WeData project
+    /// 
     /// ## Example Usage
     /// 
     /// ```csharp

@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Kubernetes.getClusterCommonNames({
+ * const example = tencentcloud.kubernetes.getClusterCommonNames({
  *     clusterId: "cls-fdy7hm1q",
  *     subaccountUins: [
  *         "100037718139",
@@ -32,7 +32,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Kubernetes.getClusterCommonNames({
+ * const example = tencentcloud.kubernetes.getClusterCommonNames({
  *     clusterId: "cls-fdy7hm1q",
  *     roleIds: ["4611686018441060141"],
  * });
@@ -99,7 +99,7 @@ export interface GetClusterCommonNamesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Kubernetes.getClusterCommonNames({
+ * const example = tencentcloud.kubernetes.getClusterCommonNames({
  *     clusterId: "cls-fdy7hm1q",
  *     subaccountUins: [
  *         "100037718139",
@@ -114,7 +114,7 @@ export interface GetClusterCommonNamesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Kubernetes.getClusterCommonNames({
+ * const example = tencentcloud.kubernetes.getClusterCommonNames({
  *     clusterId: "cls-fdy7hm1q",
  *     roleIds: ["4611686018441060141"],
  * });
@@ -138,17 +138,17 @@ export interface GetClusterCommonNamesOutputArgs {
     /**
      * Cluster ID.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * List of Role ID. Up to 50 sub-accounts can be passed in at a time.
      */
-    roleIds?: pulumi.Input<pulumi.Input<string>[]>;
+    roleIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * List of sub-account. Up to 50 sub-accounts can be passed in at a time.
      */
-    subaccountUins?: pulumi.Input<pulumi.Input<string>[]>;
+    subaccountUins?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

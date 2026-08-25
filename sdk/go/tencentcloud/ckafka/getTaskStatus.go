@@ -67,12 +67,8 @@ type LookupTaskStatusResult struct {
 }
 
 func LookupTaskStatusOutput(ctx *pulumi.Context, args LookupTaskStatusOutputArgs, opts ...pulumi.InvokeOption) LookupTaskStatusResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupTaskStatusResultOutput, error) {
-			args := v.(LookupTaskStatusArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ckafka/getTaskStatus:getTaskStatus", args, LookupTaskStatusResultOutput{}, options).(LookupTaskStatusResultOutput), nil
-		}).(LookupTaskStatusResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ckafka/getTaskStatus:getTaskStatus", args, LookupTaskStatusResultOutput{}, options).(LookupTaskStatusResultOutput)
 }
 
 // A collection of arguments for invoking getTaskStatus.

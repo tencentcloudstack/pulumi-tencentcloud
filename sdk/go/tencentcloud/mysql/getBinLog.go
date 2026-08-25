@@ -68,12 +68,8 @@ type GetBinLogResult struct {
 }
 
 func GetBinLogOutput(ctx *pulumi.Context, args GetBinLogOutputArgs, opts ...pulumi.InvokeOption) GetBinLogResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetBinLogResultOutput, error) {
-			args := v.(GetBinLogArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mysql/getBinLog:getBinLog", args, GetBinLogResultOutput{}, options).(GetBinLogResultOutput), nil
-		}).(GetBinLogResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mysql/getBinLog:getBinLog", args, GetBinLogResultOutput{}, options).(GetBinLogResultOutput)
 }
 
 // A collection of arguments for invoking getBinLog.

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const mysqlProcessList = tencentcloud.Dbbrain.getMysqlProcessList({
+ * const mysqlProcessList = tencentcloud.dbbrain.getMysqlProcessList({
  *     instanceId: mysqlId,
  *     product: "mysql",
  * });
@@ -141,7 +141,7 @@ export interface GetMysqlProcessListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const mysqlProcessList = tencentcloud.Dbbrain.getMysqlProcessList({
+ * const mysqlProcessList = tencentcloud.dbbrain.getMysqlProcessList({
  *     instanceId: mysqlId,
  *     product: "mysql",
  * });
@@ -171,23 +171,23 @@ export interface GetMysqlProcessListOutputArgs {
     /**
      * The execution type of the thread, used to filter the thread list.
      */
-    command?: pulumi.Input<string>;
+    command?: pulumi.Input<string | undefined>;
     /**
      * The threads operations database, used to filter the thread list.
      */
-    db?: pulumi.Input<string>;
+    db?: pulumi.Input<string | undefined>;
     /**
      * The operating host address of the thread, used to filter the thread list.
      */
-    host?: pulumi.Input<string>;
+    host?: pulumi.Input<string | undefined>;
     /**
      * thread ID, used to filter the thread list.
      */
-    id?: pulumi.Input<number>;
+    id?: pulumi.Input<number | undefined>;
     /**
      * The threads operation statement is used to filter the thread list.
      */
-    info?: pulumi.Input<string>;
+    info?: pulumi.Input<string | undefined>;
     /**
      * instance id.
      */
@@ -195,21 +195,21 @@ export interface GetMysqlProcessListOutputArgs {
     /**
      * Service product type, supported values: `mysql` - cloud database MySQL; `cynosdb` - cloud database TDSQL-C for MySQL, the default is `mysql`.
      */
-    product?: pulumi.Input<string>;
+    product?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * The operational state of the thread, used to filter the thread list.
      */
-    state?: pulumi.Input<string>;
+    state?: pulumi.Input<string | undefined>;
     /**
      * The minimum value of the operation duration of a thread, in seconds, used to filter the list of threads whose operation duration is longer than this value.
      */
-    time?: pulumi.Input<number>;
+    time?: pulumi.Input<number | undefined>;
     /**
      * The operating account name of the thread, used to filter the thread list.
      */
-    user?: pulumi.Input<string>;
+    user?: pulumi.Input<string | undefined>;
 }

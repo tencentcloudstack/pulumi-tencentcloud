@@ -13,10 +13,10 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "as",
  * });
- * const image = tencentcloud.Images.getInstance({
+ * const image = tencentcloud.images.getInstance({
  *     imageTypes: ["PUBLIC_IMAGE"],
  *     osName: "TencentOS Server 3.2 (Final)",
  * });
@@ -62,6 +62,14 @@ import * as utilities from "../utilities";
  *     recurrence: "0 0 * * *",
  * });
  * ```
+ *
+ * ## Import
+ *
+ * AS schedule can be imported using the id, e.g.
+ *
+ * ```sh
+ * $ pulumi import tencentcloud:As/schedule:Schedule example asst-ezsey1r5
+ * ```
  */
 export class Schedule extends pulumi.CustomResource {
     /**
@@ -95,6 +103,15 @@ export class Schedule extends pulumi.CustomResource {
      * The desired number of CVM instances that should be running in the group.
      */
     declare public readonly desiredCapacity: pulumi.Output<number>;
+    /**
+     * This flag disables the normal update of the DesiredCapacityproperty that would otherwise occur when a scheduled scaling task is triggered.
+     * Specifies whether the scheduled task triggers proactive modification of the DesiredCapacity when the value is True. DesiredCapacity may be modified by the minSize and maxSize mechanism.
+     * The following cases assume that DisableUpdateDesiredCapacity is True:
+     * - When scheduled task triggered, the original DesiredCapacity is 5. The scheduled task changes the minSize to 10, the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 5 is less than minSize 10, so the final new DesiredCapacity is 10.
+     * - When scheduled task triggered, the original DesiredCapacity is 25. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 25 is greater than the maxSize 20, so the final new DesiredCapacity is 20.
+     * - When scheduled task triggered, the original DesiredCapacity is 13. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect, and the DesiredCapacity is still 13.
+     */
+    declare public readonly disableUpdateDesiredCapacity: pulumi.Output<boolean>;
     /**
      * The time for this action to end, in "YYYY-MM-DDThh:mm:ss+08:00" format (UTC+8).
      */
@@ -138,6 +155,7 @@ export class Schedule extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as ScheduleState | undefined;
             resourceInputs["desiredCapacity"] = state?.desiredCapacity;
+            resourceInputs["disableUpdateDesiredCapacity"] = state?.disableUpdateDesiredCapacity;
             resourceInputs["endTime"] = state?.endTime;
             resourceInputs["maxSize"] = state?.maxSize;
             resourceInputs["minSize"] = state?.minSize;
@@ -166,6 +184,7 @@ export class Schedule extends pulumi.CustomResource {
                 throw new Error("Missing required property 'startTime'");
             }
             resourceInputs["desiredCapacity"] = args?.desiredCapacity;
+            resourceInputs["disableUpdateDesiredCapacity"] = args?.disableUpdateDesiredCapacity;
             resourceInputs["endTime"] = args?.endTime;
             resourceInputs["maxSize"] = args?.maxSize;
             resourceInputs["minSize"] = args?.minSize;
@@ -186,35 +205,44 @@ export interface ScheduleState {
     /**
      * The desired number of CVM instances that should be running in the group.
      */
-    desiredCapacity?: pulumi.Input<number>;
+    desiredCapacity?: pulumi.Input<number | undefined>;
+    /**
+     * This flag disables the normal update of the DesiredCapacityproperty that would otherwise occur when a scheduled scaling task is triggered.
+     * Specifies whether the scheduled task triggers proactive modification of the DesiredCapacity when the value is True. DesiredCapacity may be modified by the minSize and maxSize mechanism.
+     * The following cases assume that DisableUpdateDesiredCapacity is True:
+     * - When scheduled task triggered, the original DesiredCapacity is 5. The scheduled task changes the minSize to 10, the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 5 is less than minSize 10, so the final new DesiredCapacity is 10.
+     * - When scheduled task triggered, the original DesiredCapacity is 25. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 25 is greater than the maxSize 20, so the final new DesiredCapacity is 20.
+     * - When scheduled task triggered, the original DesiredCapacity is 13. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect, and the DesiredCapacity is still 13.
+     */
+    disableUpdateDesiredCapacity?: pulumi.Input<boolean | undefined>;
     /**
      * The time for this action to end, in "YYYY-MM-DDThh:mm:ss+08:00" format (UTC+8).
      */
-    endTime?: pulumi.Input<string>;
+    endTime?: pulumi.Input<string | undefined>;
     /**
      * The maximum size for the Auto Scaling group.
      */
-    maxSize?: pulumi.Input<number>;
+    maxSize?: pulumi.Input<number | undefined>;
     /**
      * The minimum size for the Auto Scaling group.
      */
-    minSize?: pulumi.Input<number>;
+    minSize?: pulumi.Input<number | undefined>;
     /**
      * The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with endTime together.
      */
-    recurrence?: pulumi.Input<string>;
+    recurrence?: pulumi.Input<string | undefined>;
     /**
      * ID of a scaling group.
      */
-    scalingGroupId?: pulumi.Input<string>;
+    scalingGroupId?: pulumi.Input<string | undefined>;
     /**
      * The name of this scaling action.
      */
-    scheduleActionName?: pulumi.Input<string>;
+    scheduleActionName?: pulumi.Input<string | undefined>;
     /**
      * The time for this action to start, in "YYYY-MM-DDThh:mm:ss+08:00" format (UTC+8).
      */
-    startTime?: pulumi.Input<string>;
+    startTime?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -226,9 +254,18 @@ export interface ScheduleArgs {
      */
     desiredCapacity: pulumi.Input<number>;
     /**
+     * This flag disables the normal update of the DesiredCapacityproperty that would otherwise occur when a scheduled scaling task is triggered.
+     * Specifies whether the scheduled task triggers proactive modification of the DesiredCapacity when the value is True. DesiredCapacity may be modified by the minSize and maxSize mechanism.
+     * The following cases assume that DisableUpdateDesiredCapacity is True:
+     * - When scheduled task triggered, the original DesiredCapacity is 5. The scheduled task changes the minSize to 10, the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 5 is less than minSize 10, so the final new DesiredCapacity is 10.
+     * - When scheduled task triggered, the original DesiredCapacity is 25. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 25 is greater than the maxSize 20, so the final new DesiredCapacity is 20.
+     * - When scheduled task triggered, the original DesiredCapacity is 13. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect, and the DesiredCapacity is still 13.
+     */
+    disableUpdateDesiredCapacity?: pulumi.Input<boolean | undefined>;
+    /**
      * The time for this action to end, in "YYYY-MM-DDThh:mm:ss+08:00" format (UTC+8).
      */
-    endTime?: pulumi.Input<string>;
+    endTime?: pulumi.Input<string | undefined>;
     /**
      * The maximum size for the Auto Scaling group.
      */
@@ -240,7 +277,7 @@ export interface ScheduleArgs {
     /**
      * The time when recurring future actions will start. Start time is specified by the user following the Unix cron syntax format. And this argument should be set with endTime together.
      */
-    recurrence?: pulumi.Input<string>;
+    recurrence?: pulumi.Input<string | undefined>;
     /**
      * ID of a scaling group.
      */

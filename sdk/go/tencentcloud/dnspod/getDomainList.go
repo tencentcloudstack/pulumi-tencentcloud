@@ -11,7 +11,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Use this data source to query detailed information of dnspod domainList
+// Use this data source to query detailed information of DnsPod domain list
 //
 // ## Example Usage
 //
@@ -24,43 +24,45 @@ import (
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dnspod"
 //
 // )
-// func main() {
-// pulumi.Run(func(ctx *pulumi.Context) error {
-// _, err := dnspod.GetDomainList(ctx, &dnspod.GetDomainListArgs{
-// Type: "ALL",
-// GroupIds: interface{}{
-// 1,
-// },
-// Keyword: pulumi.StringRef(""),
-// SortField: pulumi.StringRef("UPDATED_ON"),
-// SortType: pulumi.StringRef("DESC"),
-// Statuses: []string{
-// "PAUSE",
-// },
-// Packages: []string{
-// "",
-// },
-// Remark: pulumi.StringRef(""),
-// UpdatedAtBegin: pulumi.StringRef("2021-05-01 03:00:00"),
-// UpdatedAtEnd: pulumi.StringRef("2024-05-10 20:00:00"),
-// RecordCountBegin: pulumi.IntRef(0),
-// RecordCountEnd: pulumi.IntRef(100),
-// ProjectId: pulumi.IntRef(-1),
-// Tags: []dnspod.GetDomainListTag{
-// {
-// TagKey: "created_by",
-// TagValues: []string{
-// "terraform",
-// },
-// },
-// },
-// }, nil);
-// if err != nil {
-// return err
-// }
-// return nil
-// })
-// }
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := dnspod.GetDomainList(ctx, &dnspod.GetDomainListArgs{
+//				Type: "ALL",
+//				GroupIds: []int{
+//					1,
+//				},
+//				Keyword:   pulumi.StringRef(""),
+//				SortField: pulumi.StringRef("UPDATED_ON"),
+//				SortType:  pulumi.StringRef("DESC"),
+//				Statuses: []string{
+//					"PAUSE",
+//				},
+//				Packages: []string{
+//					"",
+//				},
+//				Remark:           pulumi.StringRef(""),
+//				UpdatedAtBegin:   pulumi.StringRef("2021-05-01 03:00:00"),
+//				UpdatedAtEnd:     pulumi.StringRef("2025-05-10 20:00:00"),
+//				RecordCountBegin: pulumi.IntRef(0),
+//				RecordCountEnd:   pulumi.IntRef(100),
+//				ProjectId:        pulumi.IntRef(-1),
+//				Tags: []dnspod.GetDomainListTag{
+//					{
+//						TagKey: "created_by",
+//						TagValues: []string{
+//							"terraform",
+//						},
+//					},
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetDomainList(ctx *pulumi.Context, args *GetDomainListArgs, opts ...pulumi.InvokeOption) (*GetDomainListResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
@@ -133,12 +135,8 @@ type GetDomainListResult struct {
 }
 
 func GetDomainListOutput(ctx *pulumi.Context, args GetDomainListOutputArgs, opts ...pulumi.InvokeOption) GetDomainListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDomainListResultOutput, error) {
-			args := v.(GetDomainListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dnspod/getDomainList:getDomainList", args, GetDomainListResultOutput{}, options).(GetDomainListResultOutput), nil
-		}).(GetDomainListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dnspod/getDomainList:getDomainList", args, GetDomainListResultOutput{}, options).(GetDomainListResultOutput)
 }
 
 // A collection of arguments for invoking getDomainList.

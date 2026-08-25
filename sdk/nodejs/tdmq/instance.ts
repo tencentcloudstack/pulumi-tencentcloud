@@ -114,19 +114,19 @@ export interface InstanceState {
     /**
      * The Dedicated Cluster Id.
      */
-    bindClusterId?: pulumi.Input<number>;
+    bindClusterId?: pulumi.Input<number | undefined>;
     /**
      * The name of tdmq cluster to be created.
      */
-    clusterName?: pulumi.Input<string>;
+    clusterName?: pulumi.Input<string | undefined>;
     /**
      * Description of the tdmq cluster.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 /**
@@ -136,7 +136,7 @@ export interface InstanceArgs {
     /**
      * The Dedicated Cluster Id.
      */
-    bindClusterId?: pulumi.Input<number>;
+    bindClusterId?: pulumi.Input<number | undefined>;
     /**
      * The name of tdmq cluster to be created.
      */
@@ -144,9 +144,9 @@ export interface InstanceArgs {
     /**
      * Description of the tdmq cluster.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

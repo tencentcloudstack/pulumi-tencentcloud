@@ -43,7 +43,7 @@ import (
 //
 // ## Import
 //
-// vpc vpn_gateway_ssl_client_cert can be imported using the id, e.g.
+// vpc vpnGatewaySslClientCert can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Vpn/gatewaySslClientCert:GatewaySslClientCert vpn_gateway_ssl_client_cert ssl_client_id

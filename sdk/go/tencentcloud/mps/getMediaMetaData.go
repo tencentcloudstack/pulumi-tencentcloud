@@ -86,12 +86,8 @@ type GetMediaMetaDataResult struct {
 }
 
 func GetMediaMetaDataOutput(ctx *pulumi.Context, args GetMediaMetaDataOutputArgs, opts ...pulumi.InvokeOption) GetMediaMetaDataResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetMediaMetaDataResultOutput, error) {
-			args := v.(GetMediaMetaDataArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mps/getMediaMetaData:getMediaMetaData", args, GetMediaMetaDataResultOutput{}, options).(GetMediaMetaDataResultOutput), nil
-		}).(GetMediaMetaDataResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mps/getMediaMetaData:getMediaMetaData", args, GetMediaMetaDataResultOutput{}, options).(GetMediaMetaDataResultOutput)
 }
 
 // A collection of arguments for invoking getMediaMetaData.

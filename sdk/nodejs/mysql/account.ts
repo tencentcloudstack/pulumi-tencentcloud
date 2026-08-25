@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "cdb",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -172,27 +172,27 @@ export interface AccountState {
     /**
      * Database description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Account host, default is `%`.
      */
-    host?: pulumi.Input<string>;
+    host?: pulumi.Input<string | undefined>;
     /**
      * The maximum number of available connections for a new account, the default value is 10240, and the maximum value that can be set is 10240.
      */
-    maxUserConnections?: pulumi.Input<number>;
+    maxUserConnections?: pulumi.Input<number | undefined>;
     /**
      * Instance ID to which the account belongs.
      */
-    mysqlId?: pulumi.Input<string>;
+    mysqlId?: pulumi.Input<string | undefined>;
     /**
      * Account name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Operation password.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -202,15 +202,15 @@ export interface AccountArgs {
     /**
      * Database description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Account host, default is `%`.
      */
-    host?: pulumi.Input<string>;
+    host?: pulumi.Input<string | undefined>;
     /**
      * The maximum number of available connections for a new account, the default value is 10240, and the maximum value that can be set is 10240.
      */
-    maxUserConnections?: pulumi.Input<number>;
+    maxUserConnections?: pulumi.Input<number | undefined>;
     /**
      * Instance ID to which the account belongs.
      */
@@ -218,7 +218,7 @@ export interface AccountArgs {
     /**
      * Account name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Operation password.
      */

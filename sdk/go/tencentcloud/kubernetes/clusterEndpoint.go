@@ -106,16 +106,20 @@ type ClusterEndpoint struct {
 	ClusterInternet pulumi.BoolPtrOutput `pulumi:"clusterInternet"`
 	// Domain name for cluster Kube-apiserver internet access.  Be careful if you modify value of this parameter, the clusterExternalEndpoint value may be changed automatically too.
 	ClusterInternetDomain pulumi.StringPtrOutput `pulumi:"clusterInternetDomain"`
-	// Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
+	// Security group ID for internet cluster endpoint. NOTE: This argument must not be empty if cluster internet enabled.
 	ClusterInternetSecurityGroup pulumi.StringPtrOutput `pulumi:"clusterInternetSecurityGroup"`
 	// Open intranet access or not.
 	ClusterIntranet pulumi.BoolPtrOutput `pulumi:"clusterIntranet"`
 	// Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgwEndpoint value may be changed automatically too.
 	ClusterIntranetDomain pulumi.StringPtrOutput `pulumi:"clusterIntranetDomain"`
+	// Security group ID for intranet cluster endpoint.
+	ClusterIntranetSecurityGroup pulumi.StringPtrOutput `pulumi:"clusterIntranetSecurityGroup"`
 	// Subnet id who can access this independent cluster, this field must and can only set  when `clusterIntranet` is true. `clusterIntranetSubnetId` can not modify once be set.
 	ClusterIntranetSubnetId pulumi.StringPtrOutput `pulumi:"clusterIntranetSubnetId"`
 	// Domain name for access.
 	Domain pulumi.StringOutput `pulumi:"domain"`
+	// Enable internal or external access using an existing CLB.
+	ExistedLoadBalancerId pulumi.StringPtrOutput `pulumi:"existedLoadBalancerId"`
 	// The LB parameter. Only used for public network access.
 	ExtensiveParameters pulumi.StringPtrOutput `pulumi:"extensiveParameters"`
 	// The Intranet address used for access.
@@ -185,16 +189,20 @@ type clusterEndpointState struct {
 	ClusterInternet *bool `pulumi:"clusterInternet"`
 	// Domain name for cluster Kube-apiserver internet access.  Be careful if you modify value of this parameter, the clusterExternalEndpoint value may be changed automatically too.
 	ClusterInternetDomain *string `pulumi:"clusterInternetDomain"`
-	// Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
+	// Security group ID for internet cluster endpoint. NOTE: This argument must not be empty if cluster internet enabled.
 	ClusterInternetSecurityGroup *string `pulumi:"clusterInternetSecurityGroup"`
 	// Open intranet access or not.
 	ClusterIntranet *bool `pulumi:"clusterIntranet"`
 	// Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgwEndpoint value may be changed automatically too.
 	ClusterIntranetDomain *string `pulumi:"clusterIntranetDomain"`
+	// Security group ID for intranet cluster endpoint.
+	ClusterIntranetSecurityGroup *string `pulumi:"clusterIntranetSecurityGroup"`
 	// Subnet id who can access this independent cluster, this field must and can only set  when `clusterIntranet` is true. `clusterIntranetSubnetId` can not modify once be set.
 	ClusterIntranetSubnetId *string `pulumi:"clusterIntranetSubnetId"`
 	// Domain name for access.
 	Domain *string `pulumi:"domain"`
+	// Enable internal or external access using an existing CLB.
+	ExistedLoadBalancerId *string `pulumi:"existedLoadBalancerId"`
 	// The LB parameter. Only used for public network access.
 	ExtensiveParameters *string `pulumi:"extensiveParameters"`
 	// The Intranet address used for access.
@@ -226,16 +234,20 @@ type ClusterEndpointState struct {
 	ClusterInternet pulumi.BoolPtrInput
 	// Domain name for cluster Kube-apiserver internet access.  Be careful if you modify value of this parameter, the clusterExternalEndpoint value may be changed automatically too.
 	ClusterInternetDomain pulumi.StringPtrInput
-	// Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
+	// Security group ID for internet cluster endpoint. NOTE: This argument must not be empty if cluster internet enabled.
 	ClusterInternetSecurityGroup pulumi.StringPtrInput
 	// Open intranet access or not.
 	ClusterIntranet pulumi.BoolPtrInput
 	// Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgwEndpoint value may be changed automatically too.
 	ClusterIntranetDomain pulumi.StringPtrInput
+	// Security group ID for intranet cluster endpoint.
+	ClusterIntranetSecurityGroup pulumi.StringPtrInput
 	// Subnet id who can access this independent cluster, this field must and can only set  when `clusterIntranet` is true. `clusterIntranetSubnetId` can not modify once be set.
 	ClusterIntranetSubnetId pulumi.StringPtrInput
 	// Domain name for access.
 	Domain pulumi.StringPtrInput
+	// Enable internal or external access using an existing CLB.
+	ExistedLoadBalancerId pulumi.StringPtrInput
 	// The LB parameter. Only used for public network access.
 	ExtensiveParameters pulumi.StringPtrInput
 	// The Intranet address used for access.
@@ -265,14 +277,18 @@ type clusterEndpointArgs struct {
 	ClusterInternet *bool `pulumi:"clusterInternet"`
 	// Domain name for cluster Kube-apiserver internet access.  Be careful if you modify value of this parameter, the clusterExternalEndpoint value may be changed automatically too.
 	ClusterInternetDomain *string `pulumi:"clusterInternetDomain"`
-	// Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
+	// Security group ID for internet cluster endpoint. NOTE: This argument must not be empty if cluster internet enabled.
 	ClusterInternetSecurityGroup *string `pulumi:"clusterInternetSecurityGroup"`
 	// Open intranet access or not.
 	ClusterIntranet *bool `pulumi:"clusterIntranet"`
 	// Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgwEndpoint value may be changed automatically too.
 	ClusterIntranetDomain *string `pulumi:"clusterIntranetDomain"`
+	// Security group ID for intranet cluster endpoint.
+	ClusterIntranetSecurityGroup *string `pulumi:"clusterIntranetSecurityGroup"`
 	// Subnet id who can access this independent cluster, this field must and can only set  when `clusterIntranet` is true. `clusterIntranetSubnetId` can not modify once be set.
 	ClusterIntranetSubnetId *string `pulumi:"clusterIntranetSubnetId"`
+	// Enable internal or external access using an existing CLB.
+	ExistedLoadBalancerId *string `pulumi:"existedLoadBalancerId"`
 	// The LB parameter. Only used for public network access.
 	ExtensiveParameters *string `pulumi:"extensiveParameters"`
 	// this argument was deprecated, use `clusterInternetSecurityGroup` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `clusterDeployType` is 'MANAGED_CLUSTER' and `clusterInternet` is true. `managedClusterInternetSecurityPolicies` can not delete or empty once be set.
@@ -289,14 +305,18 @@ type ClusterEndpointArgs struct {
 	ClusterInternet pulumi.BoolPtrInput
 	// Domain name for cluster Kube-apiserver internet access.  Be careful if you modify value of this parameter, the clusterExternalEndpoint value may be changed automatically too.
 	ClusterInternetDomain pulumi.StringPtrInput
-	// Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
+	// Security group ID for internet cluster endpoint. NOTE: This argument must not be empty if cluster internet enabled.
 	ClusterInternetSecurityGroup pulumi.StringPtrInput
 	// Open intranet access or not.
 	ClusterIntranet pulumi.BoolPtrInput
 	// Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgwEndpoint value may be changed automatically too.
 	ClusterIntranetDomain pulumi.StringPtrInput
+	// Security group ID for intranet cluster endpoint.
+	ClusterIntranetSecurityGroup pulumi.StringPtrInput
 	// Subnet id who can access this independent cluster, this field must and can only set  when `clusterIntranet` is true. `clusterIntranetSubnetId` can not modify once be set.
 	ClusterIntranetSubnetId pulumi.StringPtrInput
+	// Enable internal or external access using an existing CLB.
+	ExistedLoadBalancerId pulumi.StringPtrInput
 	// The LB parameter. Only used for public network access.
 	ExtensiveParameters pulumi.StringPtrInput
 	// this argument was deprecated, use `clusterInternetSecurityGroup` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `clusterDeployType` is 'MANAGED_CLUSTER' and `clusterInternet` is true. `managedClusterInternetSecurityPolicies` can not delete or empty once be set.
@@ -422,7 +442,7 @@ func (o ClusterEndpointOutput) ClusterInternetDomain() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ClusterEndpoint) pulumi.StringPtrOutput { return v.ClusterInternetDomain }).(pulumi.StringPtrOutput)
 }
 
-// Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
+// Security group ID for internet cluster endpoint. NOTE: This argument must not be empty if cluster internet enabled.
 func (o ClusterEndpointOutput) ClusterInternetSecurityGroup() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ClusterEndpoint) pulumi.StringPtrOutput { return v.ClusterInternetSecurityGroup }).(pulumi.StringPtrOutput)
 }
@@ -437,6 +457,11 @@ func (o ClusterEndpointOutput) ClusterIntranetDomain() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ClusterEndpoint) pulumi.StringPtrOutput { return v.ClusterIntranetDomain }).(pulumi.StringPtrOutput)
 }
 
+// Security group ID for intranet cluster endpoint.
+func (o ClusterEndpointOutput) ClusterIntranetSecurityGroup() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterEndpoint) pulumi.StringPtrOutput { return v.ClusterIntranetSecurityGroup }).(pulumi.StringPtrOutput)
+}
+
 // Subnet id who can access this independent cluster, this field must and can only set  when `clusterIntranet` is true. `clusterIntranetSubnetId` can not modify once be set.
 func (o ClusterEndpointOutput) ClusterIntranetSubnetId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ClusterEndpoint) pulumi.StringPtrOutput { return v.ClusterIntranetSubnetId }).(pulumi.StringPtrOutput)
@@ -445,6 +470,11 @@ func (o ClusterEndpointOutput) ClusterIntranetSubnetId() pulumi.StringPtrOutput 
 // Domain name for access.
 func (o ClusterEndpointOutput) Domain() pulumi.StringOutput {
 	return o.ApplyT(func(v *ClusterEndpoint) pulumi.StringOutput { return v.Domain }).(pulumi.StringOutput)
+}
+
+// Enable internal or external access using an existing CLB.
+func (o ClusterEndpointOutput) ExistedLoadBalancerId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterEndpoint) pulumi.StringPtrOutput { return v.ExistedLoadBalancerId }).(pulumi.StringPtrOutput)
 }
 
 // The LB parameter. Only used for public network access.

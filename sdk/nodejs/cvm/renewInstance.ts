@@ -104,7 +104,7 @@ export class RenewInstance extends pulumi.CustomResource {
      * Whether to renew the elastic data disk. Valid values:
      * - `TRUE`: Indicates to renew the subscription instance and renew the attached elastic data disk at the same time
      * - `FALSE`: Indicates that the subscription instance will be renewed and the elastic data disk attached to it will not be renewed
-     * Default value: TRUE.
+     *   Default value: TRUE.
      */
     declare public readonly renewPortableDataDisk: pulumi.Output<boolean | undefined>;
 
@@ -145,18 +145,18 @@ export interface RenewInstanceState {
     /**
      * Prepaid mode, that is, yearly and monthly subscription related parameter settings. Through this parameter, you can specify the renewal duration of the Subscription instance, whether to set automatic renewal, and other attributes. For yearly and monthly subscription instances, this parameter is required.
      */
-    instanceChargePrepaid?: pulumi.Input<inputs.Cvm.RenewInstanceInstanceChargePrepaid>;
+    instanceChargePrepaid?: pulumi.Input<inputs.Cvm.RenewInstanceInstanceChargePrepaid | undefined>;
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Whether to renew the elastic data disk. Valid values:
      * - `TRUE`: Indicates to renew the subscription instance and renew the attached elastic data disk at the same time
      * - `FALSE`: Indicates that the subscription instance will be renewed and the elastic data disk attached to it will not be renewed
-     * Default value: TRUE.
+     *   Default value: TRUE.
      */
-    renewPortableDataDisk?: pulumi.Input<boolean>;
+    renewPortableDataDisk?: pulumi.Input<boolean | undefined>;
 }
 
 /**
@@ -166,7 +166,7 @@ export interface RenewInstanceArgs {
     /**
      * Prepaid mode, that is, yearly and monthly subscription related parameter settings. Through this parameter, you can specify the renewal duration of the Subscription instance, whether to set automatic renewal, and other attributes. For yearly and monthly subscription instances, this parameter is required.
      */
-    instanceChargePrepaid?: pulumi.Input<inputs.Cvm.RenewInstanceInstanceChargePrepaid>;
+    instanceChargePrepaid?: pulumi.Input<inputs.Cvm.RenewInstanceInstanceChargePrepaid | undefined>;
     /**
      * Instance ID.
      */
@@ -175,7 +175,7 @@ export interface RenewInstanceArgs {
      * Whether to renew the elastic data disk. Valid values:
      * - `TRUE`: Indicates to renew the subscription instance and renew the attached elastic data disk at the same time
      * - `FALSE`: Indicates that the subscription instance will be renewed and the elastic data disk attached to it will not be renewed
-     * Default value: TRUE.
+     *   Default value: TRUE.
      */
-    renewPortableDataDisk?: pulumi.Input<boolean>;
+    renewPortableDataDisk?: pulumi.Input<boolean | undefined>;
 }

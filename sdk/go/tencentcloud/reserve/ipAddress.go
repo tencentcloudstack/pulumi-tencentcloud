@@ -49,7 +49,7 @@ import (
 //
 // ## Import
 //
-// vpc reserve_ip_addresses can be imported using the id, e.g.
+// vpc reserveIpAddresses can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Reserve/ipAddress:IpAddress reserve_ip_addresses ${vpcId}#${reserveIpId}

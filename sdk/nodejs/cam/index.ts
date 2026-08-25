@@ -55,6 +55,11 @@ export const getPolicies: typeof import("./getPolicies").getPolicies = null as a
 export const getPoliciesOutput: typeof import("./getPolicies").getPoliciesOutput = null as any;
 utilities.lazyLoad(exports, ["getPolicies","getPoliciesOutput"], () => require("./getPolicies"));
 
+export { GetPolicyDetailArgs, GetPolicyDetailResult, GetPolicyDetailOutputArgs } from "./getPolicyDetail";
+export const getPolicyDetail: typeof import("./getPolicyDetail").getPolicyDetail = null as any;
+export const getPolicyDetailOutput: typeof import("./getPolicyDetail").getPolicyDetailOutput = null as any;
+utilities.lazyLoad(exports, ["getPolicyDetail","getPolicyDetailOutput"], () => require("./getPolicyDetail"));
+
 export { GetPolicyGrantingServiceAccessArgs, GetPolicyGrantingServiceAccessResult, GetPolicyGrantingServiceAccessOutputArgs } from "./getPolicyGrantingServiceAccess";
 export const getPolicyGrantingServiceAccess: typeof import("./getPolicyGrantingServiceAccess").getPolicyGrantingServiceAccess = null as any;
 export const getPolicyGrantingServiceAccessOutput: typeof import("./getPolicyGrantingServiceAccess").getPolicyGrantingServiceAccessOutput = null as any;

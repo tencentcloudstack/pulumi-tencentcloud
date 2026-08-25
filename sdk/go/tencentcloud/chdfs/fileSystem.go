@@ -54,7 +54,7 @@ import (
 //
 // ## Import
 //
-// chdfs file_system can be imported using the id, e.g.
+// chdfs fileSystem can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Chdfs/fileSystem:FileSystem file_system file_system_id

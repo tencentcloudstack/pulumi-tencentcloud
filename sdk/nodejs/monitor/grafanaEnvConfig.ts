@@ -24,7 +24,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * monitor grafana_env_config can be imported using the id, e.g.
+ * monitor grafanaEnvConfig can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Monitor/grafanaEnvConfig:GrafanaEnvConfig grafana_env_config instance_id
@@ -102,11 +102,11 @@ export interface GrafanaEnvConfigState {
     /**
      * Environment variables.
      */
-    envs?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    envs?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Grafana instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -116,7 +116,7 @@ export interface GrafanaEnvConfigArgs {
     /**
      * Environment variables.
      */
-    envs?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    envs?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Grafana instance ID.
      */

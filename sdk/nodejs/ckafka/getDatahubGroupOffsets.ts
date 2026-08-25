@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const datahubGroupOffsets = tencentcloud.Ckafka.getDatahubGroupOffsets({});
+ * const datahubGroupOffsets = tencentcloud.ckafka.getDatahubGroupOffsets({});
  * ```
  */
 export function getDatahubGroupOffsets(args: GetDatahubGroupOffsetsArgs, opts?: pulumi.InvokeOptions): Promise<GetDatahubGroupOffsetsResult> {
@@ -76,7 +76,7 @@ export interface GetDatahubGroupOffsetsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const datahubGroupOffsets = tencentcloud.Ckafka.getDatahubGroupOffsets({});
+ * const datahubGroupOffsets = tencentcloud.ckafka.getDatahubGroupOffsets({});
  * ```
  */
 export function getDatahubGroupOffsetsOutput(args: GetDatahubGroupOffsetsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDatahubGroupOffsetsResult> {
@@ -104,9 +104,9 @@ export interface GetDatahubGroupOffsetsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * fuzzy match topicName.
      */
-    searchWord?: pulumi.Input<string>;
+    searchWord?: pulumi.Input<string | undefined>;
 }

@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "sqlserver",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -65,7 +65,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * sqlserver business_intelligence_file can be imported using the id, e.g.
+ * sqlserver businessIntelligenceFile can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Sqlserver/businessIntelligenceFile:BusinessIntelligenceFile example mssqlbi-fo2dwujt#test.xlsx
@@ -161,19 +161,19 @@ export interface BusinessIntelligenceFileState {
     /**
      * File Type FLAT - Flat File as Data Source, SSIS - ssis project package.
      */
-    fileType?: pulumi.Input<string>;
+    fileType?: pulumi.Input<string | undefined>;
     /**
      * Cos Url.
      */
-    fileUrl?: pulumi.Input<string>;
+    fileUrl?: pulumi.Input<string | undefined>;
     /**
      * instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * remark.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -195,5 +195,5 @@ export interface BusinessIntelligenceFileArgs {
     /**
      * remark.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
 }

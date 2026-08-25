@@ -68,12 +68,8 @@ type GetProxyDetailResult struct {
 }
 
 func GetProxyDetailOutput(ctx *pulumi.Context, args GetProxyDetailOutputArgs, opts ...pulumi.InvokeOption) GetProxyDetailResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetProxyDetailResultOutput, error) {
-			args := v.(GetProxyDetailArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Gaap/getProxyDetail:getProxyDetail", args, GetProxyDetailResultOutput{}, options).(GetProxyDetailResultOutput), nil
-		}).(GetProxyDetailResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Gaap/getProxyDetail:getProxyDetail", args, GetProxyDetailResultOutput{}, options).(GetProxyDetailResultOutput)
 }
 
 // A collection of arguments for invoking getProxyDetail.

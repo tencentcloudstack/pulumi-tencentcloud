@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataOpsWorkflows = tencentcloud.Wedata.getOpsWorkflows({
+ * const wedataOpsWorkflows = tencentcloud.wedata.getOpsWorkflows({
  *     projectId: "2905622749543821312",
  *     folderId: "720ecbfb-7e5a-11f0-ba36-b8cef6a5af5c",
  *     status: "ALL_RUNNING",
@@ -131,7 +131,7 @@ export interface GetOpsWorkflowsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataOpsWorkflows = tencentcloud.Wedata.getOpsWorkflows({
+ * const wedataOpsWorkflows = tencentcloud.wedata.getOpsWorkflows({
  *     projectId: "2905622749543821312",
  *     folderId: "720ecbfb-7e5a-11f0-ba36-b8cef6a5af5c",
  *     status: "ALL_RUNNING",
@@ -166,27 +166,27 @@ export interface GetOpsWorkflowsOutputArgs {
     /**
      * Creation time, format yyyy-MM-dd HH:mm:ss.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Creator ID.
      */
-    createUserUin?: pulumi.Input<string>;
+    createUserUin?: pulumi.Input<string | undefined>;
     /**
      * File ID.
      */
-    folderId?: pulumi.Input<string>;
+    folderId?: pulumi.Input<string | undefined>;
     /**
      * Workflow keyword filter, supports fuzzy matching by workflow ID/name.
      */
-    keyWord?: pulumi.Input<string>;
+    keyWord?: pulumi.Input<string | undefined>;
     /**
      * Update time, format yyyy-MM-dd HH:mm:ss.
      */
-    modifyTime?: pulumi.Input<string>;
+    modifyTime?: pulumi.Input<string | undefined>;
     /**
      * Responsible person ID.
      */
-    ownerUin?: pulumi.Input<string>;
+    ownerUin?: pulumi.Input<string | undefined>;
     /**
      * Project ID.
      */
@@ -194,21 +194,21 @@ export interface GetOpsWorkflowsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Sorting field, optional values: `CreateTime`, `TaskCount`.
      */
-    sortItem?: pulumi.Input<string>;
+    sortItem?: pulumi.Input<string | undefined>;
     /**
      * Sorting order, `DESC` or `ASC`, uppercase.
      */
-    sortType?: pulumi.Input<string>;
+    sortType?: pulumi.Input<string | undefined>;
     /**
      * Workflow status filter: `ALL_RUNNING`: All scheduled, `ALL_FREEZED`: All paused, `ALL_STOPPTED`: All offline, `PART_RUNNING`: Partially scheduled, `ALL_NO_RUNNING`: All unscheduled, `ALL_INVALID`: All invalid.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Workflow type filter, supported values: `Cycle` or `Manual`. By default, only `Cycle` is queried.
      */
-    workflowType?: pulumi.Input<string>;
+    workflowType?: pulumi.Input<string | undefined>;
 }

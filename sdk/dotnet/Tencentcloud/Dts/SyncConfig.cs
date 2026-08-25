@@ -15,7 +15,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
     /// 
     /// ## Example Usage
     /// 
-    /// ### Sync mysql database to cynosdb through cdb access type
+    /// ### Sync MySQL database to CynosDB through cdb access type
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
@@ -25,7 +25,46 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var example = new Tencentcloud.Cynosdb.Cluster("example", new()
+    ///     var example = new Tencentcloud.Mysql.Instance("example", new()
+    ///     {
+    ///         InstanceName = "tf-example",
+    ///         InternetService = 1,
+    ///         EngineVersion = "5.7",
+    ///         ChargeType = "POSTPAID",
+    ///         RootPassword = "Mysql@2026",
+    ///         SlaveDeployMode = 0,
+    ///         SlaveSyncMode = 0,
+    ///         DeviceType = "CLOUD_NATIVE_CLUSTER",
+    ///         AvailabilityZone = "ap-guangzhou-6",
+    ///         Cpu = 2,
+    ///         MemSize = 4000,
+    ///         VolumeSize = 200,
+    ///         VpcId = "vpc-i5yyodl9",
+    ///         SubnetId = "subnet-hhi88a58",
+    ///         IntranetPort = 3306,
+    ///         SecurityGroups = new[]
+    ///         {
+    ///             "sg-4rd5741x",
+    ///         },
+    ///         Parameters = 
+    ///         {
+    ///             { "character_set_server", "utf8" },
+    ///             { "max_connections", "1000" },
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "createBy", "terraform" },
+    ///         },
+    ///         ClusterTopology = new Tencentcloud.Mysql.Inputs.InstanceClusterTopologyArgs
+    ///         {
+    ///             ReadWriteNode = new Tencentcloud.Mysql.Inputs.InstanceClusterTopologyReadWriteNodeArgs
+    ///             {
+    ///                 Zone = "ap-guangzhou-6",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleCluster = new Tencentcloud.Cynosdb.Cluster("example", new()
     ///     {
     ///         AvailableZone = "ap-guangzhou-6",
     ///         VpcId = "vpc-i5yyodl9",
@@ -35,7 +74,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
     ///         DbVersion = "5.7",
     ///         Port = 3306,
     ///         ClusterName = "tf-example",
-    ///         Password = "cynosDB@123",
+    ///         Password = "CynosDB@2026",
     ///         InstanceMaintainDuration = 7200,
     ///         InstanceMaintainStartTime = 10800,
     ///         InstanceCpuCore = 2,
@@ -104,142 +143,65 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
     ///             {
     ///                 new Tencentcloud.Dts.Inputs.SyncConfigObjectsDatabaseArgs
     ///                 {
-    ///                     DbName = "tf_ci_test",
-    ///                     NewDbName = "tf_ci_test_new",
+    ///                     DbName = "testDB",
     ///                     DbMode = "Partial",
-    ///                     TableMode = "All",
+    ///                     TableMode = "Partial",
+    ///                     ViewMode = "Partial",
+    ///                     ProcedureMode = "Partial",
+    ///                     FunctionMode = "Partial",
     ///                     Tables = new[]
     ///                     {
     ///                         new Tencentcloud.Dts.Inputs.SyncConfigObjectsDatabaseTableArgs
     ///                         {
-    ///                             TableName = "test",
-    ///                             NewTableName = "test_new",
+    ///                             TableName = "testTable",
+    ///                             ColumnMode = "Partial",
+    ///                             Columns = new[]
+    ///                             {
+    ///                                 new Tencentcloud.Dts.Inputs.SyncConfigObjectsDatabaseTableColumnArgs
+    ///                                 {
+    ///                                     ColumnName = "id",
+    ///                                 },
+    ///                             },
+    ///                             TmpTables = new[]
+    ///                             {
+    ///                                 "_testTable_new",
+    ///                                 "_testTable_old",
+    ///                                 "_testTable_ghc",
+    ///                                 "_testTable_gho",
+    ///                                 "_testTable_del",
+    ///                             },
+    ///                             TableEditMode = "pt",
     ///                         },
     ///                     },
     ///                 },
     ///             },
+    ///             AdvancedObjects = new[]
+    ///             {
+    ///                 "procedure",
+    ///                 "function",
+    ///             },
     ///         },
     ///         SrcInfo = new Tencentcloud.Dts.Inputs.SyncConfigSrcInfoArgs
-    ///         {
-    ///             Region = "ap-guangzhou",
-    ///             InstanceId = "cdb-fitq5t9h",
-    ///             User = "your_user_name",
-    ///             Password = "*",
-    ///             DbName = "tf_ci_test",
-    ///             VpcId = "vpc-i5yyodl9",
-    ///             SubnetId = "subnet-hhi88a58",
-    ///         },
-    ///         DstInfo = new Tencentcloud.Dts.Inputs.SyncConfigDstInfoArgs
     ///         {
     ///             Region = "ap-guangzhou",
     ///             InstanceId = example.Id,
     ///             User = "root",
-    ///             Password = "*",
-    ///             DbName = "tf_ci_test_new",
+    ///             Password = example.RootPassword,
+    ///             DbName = "testDB",
     ///             VpcId = "vpc-i5yyodl9",
     ///             SubnetId = "subnet-hhi88a58",
     ///         },
-    ///         AutoRetryTimeRangeMinutes = 0,
-    ///     });
-    /// 
-    /// });
-    /// ```
-    /// 
-    /// ### Sync mysql database using CCN to route from ap-shanghai to ap-guangzhou
-    /// 
-    /// ```csharp
-    /// using System.Collections.Generic;
-    /// using System.Linq;
-    /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// return await Deployment.RunAsync(() =&gt; 
-    /// {
-    ///     var vpcIdSh = "vpc-evtcyb3g";
-    /// 
-    ///     var subnetIdSh = "subnet-1t83cxkp";
-    /// 
-    ///     var srcMysql = Tencentcloud.Mysql.GetInstance.Invoke(new()
-    ///     {
-    ///         InstanceName = "your_user_name_mysql_src",
-    ///     });
-    /// 
-    ///     var srcIp = srcMysql.Apply(getInstanceResult =&gt; getInstanceResult.InstanceLists[0]?.IntranetIp);
-    /// 
-    ///     var srcPort = srcMysql.Apply(getInstanceResult =&gt; getInstanceResult.InstanceLists[0]?.IntranetPort);
-    /// 
-    ///     var ccns = Tencentcloud.Ccn.GetInstances.Invoke(new()
-    ///     {
-    ///         Name = "keep-ccn-dts-sh",
-    ///     });
-    /// 
-    ///     var ccnId = ccns.Apply(getInstancesResult =&gt; getInstancesResult.InstanceLists[0]?.CcnId);
-    /// 
-    ///     var dstMysql = Tencentcloud.Mysql.GetInstance.Invoke(new()
-    ///     {
-    ///         InstanceName = "your_user_name_mysql_src",
-    ///     });
-    /// 
-    ///     var dstMysqlId = dstMysql.Apply(getInstanceResult =&gt; getInstanceResult.InstanceLists[0]?.MysqlId);
-    /// 
-    ///     var config = new Config();
-    ///     var srcAzSh = config.Get("srcAzSh") ?? "ap-shanghai";
-    ///     var dstAzGz = config.Get("dstAzGz") ?? "ap-guangzhou";
-    ///     var syncJobs = Tencentcloud.Dts.GetSyncJobs.Invoke(new()
-    ///     {
-    ///         JobName = "keep_sync_config_ccn_2_cdb",
-    ///     });
-    /// 
-    ///     var example = new Tencentcloud.Dts.SyncConfig("example", new()
-    ///     {
-    ///         JobId = syncJobs.Apply(getSyncJobsResult =&gt; getSyncJobsResult.Lists[0]?.JobId),
-    ///         SrcAccessType = "ccn",
-    ///         DstAccessType = "cdb",
-    ///         JobMode = "liteMode",
-    ///         RunMode = "Immediate",
-    ///         Objects = new Tencentcloud.Dts.Inputs.SyncConfigObjectsArgs
-    ///         {
-    ///             Mode = "Partial",
-    ///             Databases = new[]
-    ///             {
-    ///                 new Tencentcloud.Dts.Inputs.SyncConfigObjectsDatabaseArgs
-    ///                 {
-    ///                     DbName = "tf_ci_test",
-    ///                     NewDbName = "tf_ci_test_new",
-    ///                     DbMode = "Partial",
-    ///                     TableMode = "All",
-    ///                     Tables = new[]
-    ///                     {
-    ///                         new Tencentcloud.Dts.Inputs.SyncConfigObjectsDatabaseTableArgs
-    ///                         {
-    ///                             TableName = "test",
-    ///                             NewTableName = "test_new",
-    ///                         },
-    ///                     },
-    ///                 },
-    ///             },
-    ///         },
-    ///         SrcInfo = new Tencentcloud.Dts.Inputs.SyncConfigSrcInfoArgs
-    ///         {
-    ///             Region = srcAzSh,
-    ///             User = "your_user_name",
-    ///             Password = "your_pass_word",
-    ///             Ip = srcIp,
-    ///             Port = srcPort,
-    ///             VpcId = vpcIdSh,
-    ///             SubnetId = subnetIdSh,
-    ///             CcnId = ccnId,
-    ///             DatabaseNetEnv = "TencentVPC",
-    ///         },
     ///         DstInfo = new Tencentcloud.Dts.Inputs.SyncConfigDstInfoArgs
     ///         {
-    ///             Region = dstAzGz,
-    ///             InstanceId = dstMysqlId,
-    ///             User = "your_user_name",
-    ///             Password = "your_pass_word",
+    ///             Region = "ap-guangzhou",
+    ///             InstanceId = exampleCluster.Id,
+    ///             User = "root",
+    ///             Password = exampleCluster.Password,
+    ///             DbName = "testDB",
+    ///             VpcId = "vpc-i5yyodl9",
+    ///             SubnetId = "subnet-hhi88a58",
     ///         },
-    ///         AutoRetryTimeRangeMinutes = 0,
+    ///         AutoRetryTimeRangeMinutes = 5,
     ///     });
     /// 
     /// });

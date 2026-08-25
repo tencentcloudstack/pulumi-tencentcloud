@@ -16,6 +16,8 @@ import (
 //
 // > **NOTE:** Use `unschedulable` to set whether the join node participates in the schedule. The `isSchedule` of 'worker_config' and 'worker_config_overrides' was deprecated.
 //
+// > **NOTE:** Starting from version `1.24`, Kubernetes has abandoned Docker, so after version `1.24`, the default value of the `dockerGraphPath` field is `/var/lib/containerd`. For details, please visit the link [Kubernetes blog](https://kubernetes.io/blog/2020/12/02/dont-panic-kubernetes-and-docker/).
+//
 // ## Example Usage
 //
 // ```go
@@ -56,7 +58,7 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			vpc, err := vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
+//			vpc2, err := vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
 //				IsDefault:        pulumi.BoolRef(true),
 //				AvailabilityZone: pulumi.StringRef(availabilityZone),
 //			}, nil)
@@ -90,7 +92,7 @@ import (
 //				return err
 //			}
 //			managedCluster, err := kubernetes.NewCluster(ctx, "managed_cluster", &kubernetes.ClusterArgs{
-//				VpcId:                pulumi.String(vpc.InstanceLists[0].VpcId),
+//				VpcId:                pulumi.String(vpc2.InstanceLists[0].VpcId),
 //				ClusterCidr:          pulumi.String("10.1.0.0/16"),
 //				ClusterMaxPodNum:     pulumi.Int(32),
 //				ClusterName:          pulumi.String("keep"),
@@ -106,7 +108,7 @@ import (
 //						InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
 //						InternetMaxBandwidthOut: pulumi.Int(100),
 //						PublicIpAssigned:        pulumi.Bool(true),
-//						SubnetId:                pulumi.String(vpc.InstanceLists[0].SubnetId),
+//						SubnetId:                pulumi.String(vpc2.InstanceLists[0].SubnetId),
 //						DataDisks: kubernetes.ClusterWorkerConfigDataDiskArray{
 //							&kubernetes.ClusterWorkerConfigDataDiskArgs{
 //								DiskType: pulumi.String("CLOUD_PREMIUM"),
@@ -125,8 +127,8 @@ import (
 //				return err
 //			}
 //			_, err = kubernetes.NewClusterAttachment(ctx, "test_attach", &kubernetes.ClusterAttachmentArgs{
-//				ClusterId:  managedCluster.ID(),
-//				InstanceId: foo.ID(),
+//				ClusterId:  managedCluster.ID().ToIDOutput().ToStringOutput(),
+//				InstanceId: foo.ID().ToIDOutput().ToStringOutput(),
 //				Password:   pulumi.String("Lo4wbdit"),
 //				Labels: pulumi.StringMap{
 //					"test1": pulumi.String("test1"),

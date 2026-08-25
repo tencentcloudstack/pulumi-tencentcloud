@@ -15,9 +15,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Outputs
     public sealed class IndexRuleTagKeyValueValue
     {
         /// <summary>
+        /// Field alias.
+        /// </summary>
+        public readonly string? Alias;
+        /// <summary>
+        /// Json child node list (recursive, up to 5 levels). Note: only json type fields can configure this parameter.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.IndexRuleTagKeyValueValueChildNode> ChildNodes;
+        /// <summary>
         /// Whether Chinese characters are contained.
         /// </summary>
         public readonly bool? ContainZH;
+        /// <summary>
+        /// Only enable index for child nodes, this field itself is not enabled. Note: only json type fields can configure this parameter.
+        /// </summary>
+        public readonly bool? OpenIndexForChildOnly;
         /// <summary>
         /// Whether the analysis feature is enabled for the field.
         /// </summary>
@@ -33,7 +45,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Outputs
 
         [OutputConstructor]
         private IndexRuleTagKeyValueValue(
+            string? alias,
+
+            ImmutableArray<Outputs.IndexRuleTagKeyValueValueChildNode> childNodes,
+
             bool? containZH,
+
+            bool? openIndexForChildOnly,
 
             bool? sqlFlag,
 
@@ -41,7 +59,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Outputs
 
             string type)
         {
+            Alias = alias;
+            ChildNodes = childNodes;
             ContainZH = containZH;
+            OpenIndexForChildOnly = openIndexForChildOnly;
             SqlFlag = sqlFlag;
             Tokenizer = tokenizer;
             Type = type;

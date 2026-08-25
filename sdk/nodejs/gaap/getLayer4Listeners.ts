@@ -41,7 +41,7 @@ import * as utilities from "../utilities";
  *         port: 80,
  *     }],
  * });
- * const foo = tencentcloud.Gaap.getLayer4ListenersOutput({
+ * const foo = tencentcloud.gaap.getLayer4ListenersOutput({
  *     protocol: "TCP",
  *     proxyId: fooProxy.id,
  *     listenerId: fooLayer4Listener.id,
@@ -153,7 +153,7 @@ export interface GetLayer4ListenersResult {
  *         port: 80,
  *     }],
  * });
- * const foo = tencentcloud.Gaap.getLayer4ListenersOutput({
+ * const foo = tencentcloud.gaap.getLayer4ListenersOutput({
  *     protocol: "TCP",
  *     proxyId: fooProxy.id,
  *     listenerId: fooLayer4Listener.id,
@@ -179,15 +179,15 @@ export interface GetLayer4ListenersOutputArgs {
     /**
      * ID of the layer4 listener to be queried.
      */
-    listenerId?: pulumi.Input<string>;
+    listenerId?: pulumi.Input<string | undefined>;
     /**
      * Name of the layer4 listener to be queried.
      */
-    listenerName?: pulumi.Input<string>;
+    listenerName?: pulumi.Input<string | undefined>;
     /**
      * Port of the layer4 listener to be queried.
      */
-    port?: pulumi.Input<number>;
+    port?: pulumi.Input<number | undefined>;
     /**
      * Protocol of the layer4 listener to be queried. Valid values: `TCP` and `UDP`.
      */
@@ -195,9 +195,9 @@ export interface GetLayer4ListenersOutputArgs {
     /**
      * ID of the GAAP proxy to be queried.
      */
-    proxyId?: pulumi.Input<string>;
+    proxyId?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

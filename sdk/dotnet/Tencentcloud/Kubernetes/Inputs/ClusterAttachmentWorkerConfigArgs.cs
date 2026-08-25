@@ -32,7 +32,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public Input<int>? DesiredPodNum { get; set; }
 
         /// <summary>
-        /// Docker graph path. Default is `/var/lib/docker`.
+        /// Docker graph path. Default is determined by the platform (currently /var/lib/containerd for containerd-based nodes).
         /// </summary>
         [Input("dockerGraphPath")]
         public Input<string>? DockerGraphPath { get; set; }
@@ -86,10 +86,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         }
 
         /// <summary>
-        /// Base64-encoded User Data text, the length limit is 16KB.
+        /// It has been deprecated from version 1.83.16. Use `UserScript` instead. Base64-encoded User Data text, the length limit is 16KB.
         /// </summary>
         [Input("userData")]
         public Input<string>? UserData { get; set; }
+
+        /// <summary>
+        /// A Base64-encoded user script that executes after Kubernetes components start. Users must ensure the script supports re-entrancy and retry logic. The script and its generated log files can be found in the `/data/ccs_userscript/` directory on the node. If the node should only join the scheduling pool after initialization is complete, the `Unschedulable` parameter can be used; in this case, add the command `kubectl uncordon nodename --kubeconfig=/root/.kube/config` at the end of the user script to enable scheduling on the node. Note: This field may return null, indicating that no valid value is available. Example value: `#!/bin/sh echo "hello world"`.
+        /// </summary>
+        [Input("userScript")]
+        public Input<string>? UserScript { get; set; }
 
         public ClusterAttachmentWorkerConfigArgs()
         {

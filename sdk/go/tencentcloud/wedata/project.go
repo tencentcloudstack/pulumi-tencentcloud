@@ -12,6 +12,8 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
+// Provides a resource to create a WeData project
+//
 // ## Example Usage
 //
 // ```go

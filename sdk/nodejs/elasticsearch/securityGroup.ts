@@ -24,7 +24,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * elasticsearch security_group can be imported using the id, e.g.
+ * elasticsearch securityGroup can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Elasticsearch/securityGroup:SecurityGroup security_group instance_id
@@ -102,11 +102,11 @@ export interface SecurityGroupState {
     /**
      * Instance Id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Security group id list.
      */
-    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -120,5 +120,5 @@ export interface SecurityGroupArgs {
     /**
      * Security group id list.
      */
-    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

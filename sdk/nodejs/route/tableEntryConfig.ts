@@ -129,15 +129,15 @@ export interface TableEntryConfigState {
     /**
      * Whether the entry is disabled.
      */
-    disabled?: pulumi.Input<boolean>;
+    disabled?: pulumi.Input<boolean | undefined>;
     /**
      * ID of route table entry.
      */
-    routeItemId?: pulumi.Input<string>;
+    routeItemId?: pulumi.Input<string | undefined>;
     /**
      * Route table ID.
      */
-    routeTableId?: pulumi.Input<string>;
+    routeTableId?: pulumi.Input<string | undefined>;
 }
 
 /**

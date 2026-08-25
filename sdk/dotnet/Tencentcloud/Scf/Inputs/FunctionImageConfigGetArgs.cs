@@ -50,7 +50,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Inputs
         public Input<string> ImageType { get; set; } = null!;
 
         /// <summary>
-        /// The uri of image.
+        /// The uri of image. Supports three formats:
+        /// - Format A: registry/repo:tag
+        /// - Format B: registry/repo@sha256:digest
+        /// - Format C: registry/repo:tag@sha256:digest.
         /// </summary>
         [Input("imageUri", required: true)]
         public Input<string> ImageUri { get; set; } = null!;

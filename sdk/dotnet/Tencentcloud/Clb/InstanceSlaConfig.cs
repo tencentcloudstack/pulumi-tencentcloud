@@ -34,7 +34,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// ## Import
     /// 
-    /// clb instance_sla_config can be imported using the id, e.g.
+    /// clb InstanceSlaConfig can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Clb/instanceSlaConfig:InstanceSlaConfig instance_sla_config instance_id

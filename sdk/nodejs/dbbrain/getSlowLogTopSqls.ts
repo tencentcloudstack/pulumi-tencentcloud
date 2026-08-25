@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const test = tencentcloud.Dbbrain.getSlowLogTopSqls({
+ * const test = tencentcloud.dbbrain.getSlowLogTopSqls({
  *     instanceId: "%s",
  *     startTime: "%s",
  *     endTime: "%s",
@@ -107,7 +107,7 @@ export interface GetSlowLogTopSqlsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const test = tencentcloud.Dbbrain.getSlowLogTopSqls({
+ * const test = tencentcloud.dbbrain.getSlowLogTopSqls({
  *     instanceId: "%s",
  *     startTime: "%s",
  *     endTime: "%s",
@@ -146,23 +146,23 @@ export interface GetSlowLogTopSqlsOutputArgs {
     /**
      * The sorting method supports ASC (ascending) and DESC (descending). The default is DESC.
      */
-    orderBy?: pulumi.Input<string>;
+    orderBy?: pulumi.Input<string | undefined>;
     /**
      * Service product type, supported values include: `mysql` - cloud database MySQL, `cynosdb` - cloud database CynosDB for MySQL, the default is `mysql`.
      */
-    product?: pulumi.Input<string>;
+    product?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Array of database names.
      */
-    schemaLists?: pulumi.Input<pulumi.Input<inputs.Dbbrain.GetSlowLogTopSqlsSchemaListArgs>[]>;
+    schemaLists?: pulumi.Input<pulumi.Input<inputs.Dbbrain.GetSlowLogTopSqlsSchemaListArgs>[] | undefined>;
     /**
      * Sort key, currently supports sort keys such as QueryTime, ExecTimes, RowsSent, LockTime and RowsExamined, the default is QueryTime.
      */
-    sortBy?: pulumi.Input<string>;
+    sortBy?: pulumi.Input<string | undefined>;
     /**
      * Start time, such as `2019-09-10 12:13:14`.
      */

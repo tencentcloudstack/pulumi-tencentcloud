@@ -18,6 +18,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw.Outputs
         /// Deploy regional information.
         /// </summary>
         public readonly Outputs.VpcInstanceVpcFwInstanceFwDeploy FwDeploy;
+        public readonly ImmutableArray<Outputs.VpcInstanceVpcFwInstanceFwGateway> FwGateways;
         /// <summary>
         /// Firewall instance ID (passed in editing scenario).
         /// </summary>
@@ -35,6 +36,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw.Outputs
         private VpcInstanceVpcFwInstance(
             Outputs.VpcInstanceVpcFwInstanceFwDeploy fwDeploy,
 
+            ImmutableArray<Outputs.VpcInstanceVpcFwInstanceFwGateway> fwGateways,
+
             string? fwInsId,
 
             string name,
@@ -42,6 +45,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw.Outputs
             ImmutableArray<string> vpcIds)
         {
             FwDeploy = fwDeploy;
+            FwGateways = fwGateways;
             FwInsId = fwInsId;
             Name = name;
             VpcIds = vpcIds;

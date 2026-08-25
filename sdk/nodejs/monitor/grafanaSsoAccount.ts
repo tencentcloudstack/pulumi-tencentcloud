@@ -51,7 +51,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * monitor grafana ssoAccount can be imported using the instance_id#user_id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Monitor/grafanaSsoAccount:GrafanaSsoAccount ssoAccount grafana-50nj6v00#111
  * ```
@@ -143,19 +142,19 @@ export interface GrafanaSsoAccountState {
     /**
      * grafana instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * account related description.
      */
-    notes?: pulumi.Input<string>;
+    notes?: pulumi.Input<string | undefined>;
     /**
      * grafana role.
      */
-    roles?: pulumi.Input<pulumi.Input<inputs.Monitor.GrafanaSsoAccountRole>[]>;
+    roles?: pulumi.Input<pulumi.Input<inputs.Monitor.GrafanaSsoAccountRole>[] | undefined>;
     /**
      * sub account uin of specific user.
      */
-    userId?: pulumi.Input<string>;
+    userId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -169,11 +168,11 @@ export interface GrafanaSsoAccountArgs {
     /**
      * account related description.
      */
-    notes?: pulumi.Input<string>;
+    notes?: pulumi.Input<string | undefined>;
     /**
      * grafana role.
      */
-    roles?: pulumi.Input<pulumi.Input<inputs.Monitor.GrafanaSsoAccountRole>[]>;
+    roles?: pulumi.Input<pulumi.Input<inputs.Monitor.GrafanaSsoAccountRole>[] | undefined>;
     /**
      * sub account uin of specific user.
      */

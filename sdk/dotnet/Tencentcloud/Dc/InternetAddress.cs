@@ -35,7 +35,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
     /// 
     /// ## Import
     /// 
-    /// dc internet_address can be imported using the id, e.g.
+    /// dc InternetAddress can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Dc/internetAddress:InternetAddress internet_address internet_address_id

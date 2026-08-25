@@ -79,11 +79,11 @@ export interface EncryptAttributesState {
     /**
      * whether to enable data encryption, it is not supported to turn it off after it is turned on. The optional values: 0-disable, 1-enable.
      */
-    encryptEnabled?: pulumi.Input<number>;
+    encryptEnabled?: pulumi.Input<number | undefined>;
     /**
      * instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**

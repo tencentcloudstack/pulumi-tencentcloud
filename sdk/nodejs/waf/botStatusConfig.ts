@@ -138,31 +138,31 @@ export interface BotStatusConfigState {
     /**
      * The currently enabled scenario with a global matching range and the highest priority.
      */
-    currentGlobalScenes?: pulumi.Input<pulumi.Input<inputs.Waf.BotStatusConfigCurrentGlobalScene>[]>;
+    currentGlobalScenes?: pulumi.Input<pulumi.Input<inputs.Waf.BotStatusConfigCurrentGlobalScene>[] | undefined>;
     /**
      * Total number of custom rules, excluding BOT whitelist.
      */
-    customRuleNums?: pulumi.Input<number>;
+    customRuleNums?: pulumi.Input<number | undefined>;
     /**
      * Domain.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Scene total count.
      */
-    sceneCount?: pulumi.Input<number>;
+    sceneCount?: pulumi.Input<number | undefined>;
     /**
      * Bot status. 1 - enable; 0 - disable.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Number of effective scenarios.
      */
-    validSceneCount?: pulumi.Input<number>;
+    validSceneCount?: pulumi.Input<number | undefined>;
 }
 
 /**

@@ -35,7 +35,7 @@ import (
 //				return err
 //			}
 //			_ = vpc.GetInstancesOutput(ctx, vpc.GetInstancesOutputArgs{
-//				VpcId: foo.ID(),
+//				VpcId: foo.ID().ToIDOutput().ToStringOutput(),
 //			}, nil)
 //			_ = vpc.GetInstancesOutput(ctx, vpc.GetInstancesOutputArgs{
 //				Name: foo.Name,
@@ -94,12 +94,8 @@ type GetInstancesResult struct {
 }
 
 func GetInstancesOutput(ctx *pulumi.Context, args GetInstancesOutputArgs, opts ...pulumi.InvokeOption) GetInstancesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstancesResultOutput, error) {
-			args := v.(GetInstancesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Vpc/getInstances:getInstances", args, GetInstancesResultOutput{}, options).(GetInstancesResultOutput), nil
-		}).(GetInstancesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Vpc/getInstances:getInstances", args, GetInstancesResultOutput{}, options).(GetInstancesResultOutput)
 }
 
 // A collection of arguments for invoking getInstances.

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const backupStream = tencentcloud.Css.getBackupStream({
+ * const backupStream = tencentcloud.css.getBackupStream({
  *     streamName: "live",
  * });
  * ```
@@ -70,7 +70,7 @@ export interface GetBackupStreamResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const backupStream = tencentcloud.Css.getBackupStream({
+ * const backupStream = tencentcloud.css.getBackupStream({
  *     streamName: "live",
  * });
  * ```
@@ -91,9 +91,9 @@ export interface GetBackupStreamOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Stream id.
      */
-    streamName?: pulumi.Input<string>;
+    streamName?: pulumi.Input<string | undefined>;
 }

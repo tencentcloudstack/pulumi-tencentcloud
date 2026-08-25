@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "sqlserver",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -61,7 +61,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * sqlserver business_intelligence_instance can be imported using the id, e.g.
+ * sqlserver businessIntelligenceInstance can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Sqlserver/businessIntelligenceInstance:BusinessIntelligenceInstance example mssqlbi-fo2dwujt
@@ -232,63 +232,63 @@ export interface BusinessIntelligenceInstanceState {
     /**
      * The number of CPU cores of the instance you want to purchase.
      */
-    cpu?: pulumi.Input<number>;
+    cpu?: pulumi.Input<number | undefined>;
     /**
      * Supported versions of business intelligence server. Valid values: 201603 (SQL Server 2016 Integration Services), 201703 (SQL Server 2017 Integration Services), 201903 (SQL Server 2019 Integration Services). Default value: 201903. As the purchasable versions are region-specific, you can use the DescribeProductConfig API to query the information of purchasable versions in each region.
      */
-    dbVersion?: pulumi.Input<string>;
+    dbVersion?: pulumi.Input<string | undefined>;
     /**
      * Instance Name.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * The host type of purchased instance. Valid values: CLOUD_PREMIUM (virtual machine with premium cloud disk), CLOUD_SSD (virtual machine with SSD).
      */
-    machineType?: pulumi.Input<string>;
+    machineType?: pulumi.Input<string | undefined>;
     /**
      * Instance memory size in GB.
      */
-    memory?: pulumi.Input<number>;
+    memory?: pulumi.Input<number | undefined>;
     /**
      * Project ID.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Tags associated with the instances to be created.
      */
-    resourceTags?: pulumi.Input<pulumi.Input<inputs.Sqlserver.BusinessIntelligenceInstanceResourceTag>[]>;
+    resourceTags?: pulumi.Input<pulumi.Input<inputs.Sqlserver.BusinessIntelligenceInstanceResourceTag>[] | undefined>;
     /**
      * Security group list, which contains security group IDs in the format of sg-xxx.
      */
-    securityGroupLists?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Configuration of the maintenance window, which specifies the maintenance duration in hours.
      */
-    span?: pulumi.Input<number>;
+    span?: pulumi.Input<number | undefined>;
     /**
      * Configuration of the maintenance window, which specifies the start time of daily maintenance.
      */
-    startTime?: pulumi.Input<string>;
+    startTime?: pulumi.Input<string | undefined>;
     /**
      * Instance disk size in GB.
      */
-    storage?: pulumi.Input<number>;
+    storage?: pulumi.Input<number | undefined>;
     /**
      * VPC subnet ID in the format of subnet-bdoe83fa. Both SubnetId and VpcId need to be set or unset at the same time.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * VPC ID in the format of vpc-dsp338hz. Both SubnetId and VpcId need to be set or unset at the same time.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * Configuration of the maintenance window, which specifies the day of the week when maintenance can be performed. Valid values: 1 (Monday), 2 (Tuesday), 3 (Wednesday), 4 (Thursday), 5 (Friday), 6 (Saturday), 7 (Sunday).
      */
-    weeklies?: pulumi.Input<pulumi.Input<number>[]>;
+    weeklies?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Instance AZ, such as ap-guangzhou-1 (Guangzhou Zone 1). Purchasable AZs for an instance can be obtained through theDescribeZones API.
      */
-    zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -302,7 +302,7 @@ export interface BusinessIntelligenceInstanceArgs {
     /**
      * Supported versions of business intelligence server. Valid values: 201603 (SQL Server 2016 Integration Services), 201703 (SQL Server 2017 Integration Services), 201903 (SQL Server 2019 Integration Services). Default value: 201903. As the purchasable versions are region-specific, you can use the DescribeProductConfig API to query the information of purchasable versions in each region.
      */
-    dbVersion?: pulumi.Input<string>;
+    dbVersion?: pulumi.Input<string | undefined>;
     /**
      * Instance Name.
      */
@@ -318,23 +318,23 @@ export interface BusinessIntelligenceInstanceArgs {
     /**
      * Project ID.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Tags associated with the instances to be created.
      */
-    resourceTags?: pulumi.Input<pulumi.Input<inputs.Sqlserver.BusinessIntelligenceInstanceResourceTag>[]>;
+    resourceTags?: pulumi.Input<pulumi.Input<inputs.Sqlserver.BusinessIntelligenceInstanceResourceTag>[] | undefined>;
     /**
      * Security group list, which contains security group IDs in the format of sg-xxx.
      */
-    securityGroupLists?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Configuration of the maintenance window, which specifies the maintenance duration in hours.
      */
-    span?: pulumi.Input<number>;
+    span?: pulumi.Input<number | undefined>;
     /**
      * Configuration of the maintenance window, which specifies the start time of daily maintenance.
      */
-    startTime?: pulumi.Input<string>;
+    startTime?: pulumi.Input<string | undefined>;
     /**
      * Instance disk size in GB.
      */
@@ -342,15 +342,15 @@ export interface BusinessIntelligenceInstanceArgs {
     /**
      * VPC subnet ID in the format of subnet-bdoe83fa. Both SubnetId and VpcId need to be set or unset at the same time.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * VPC ID in the format of vpc-dsp338hz. Both SubnetId and VpcId need to be set or unset at the same time.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * Configuration of the maintenance window, which specifies the day of the week when maintenance can be performed. Valid values: 1 (Monday), 2 (Tuesday), 3 (Wednesday), 4 (Thursday), 5 (Friday), 6 (Saturday), 7 (Sunday).
      */
-    weeklies?: pulumi.Input<pulumi.Input<number>[]>;
+    weeklies?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Instance AZ, such as ap-guangzhou-1 (Guangzhou Zone 1). Purchasable AZs for an instance can be obtained through theDescribeZones API.
      */

@@ -131,12 +131,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
             set => _allowedAccountIds = value;
         }
 
+        /// <summary>
+        /// The `AssumeRole` block. If provided, terraform will attempt to assume this role using the supplied credentials.
+        /// </summary>
         [Input("assumeRole", json: true)]
         public Input<Inputs.ProviderAssumeRoleArgs>? AssumeRole { get; set; }
 
+        /// <summary>
+        /// The `AssumeRoleWithSaml` block. If provided, terraform will attempt to assume this role using the supplied credentials.
+        /// </summary>
         [Input("assumeRoleWithSaml", json: true)]
         public Input<Inputs.ProviderAssumeRoleWithSamlArgs>? AssumeRoleWithSaml { get; set; }
 
+        /// <summary>
+        /// The `AssumeRoleWithWebIdentity` block. If provided, terraform will attempt to assume this role using the supplied credentials.
+        /// </summary>
         [Input("assumeRoleWithWebIdentity", json: true)]
         public Input<Inputs.ProviderAssumeRoleWithWebIdentityArgs>? AssumeRoleWithWebIdentity { get; set; }
 
@@ -176,6 +185,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
             set => _forbiddenAccountIds = value;
         }
 
+        /// <summary>
+        /// The `MfaCertification` block. If provided, terraform will attempt to use the provided credentials for MFA authentication.
+        /// </summary>
         [Input("mfaCertification", json: true)]
         public Input<Inputs.ProviderMfaCertificationArgs>? MfaCertification { get; set; }
 

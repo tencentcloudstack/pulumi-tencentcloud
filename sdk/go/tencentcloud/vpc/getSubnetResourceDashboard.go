@@ -69,12 +69,8 @@ type GetSubnetResourceDashboardResult struct {
 }
 
 func GetSubnetResourceDashboardOutput(ctx *pulumi.Context, args GetSubnetResourceDashboardOutputArgs, opts ...pulumi.InvokeOption) GetSubnetResourceDashboardResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSubnetResourceDashboardResultOutput, error) {
-			args := v.(GetSubnetResourceDashboardArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Vpc/getSubnetResourceDashboard:getSubnetResourceDashboard", args, GetSubnetResourceDashboardResultOutput{}, options).(GetSubnetResourceDashboardResultOutput), nil
-		}).(GetSubnetResourceDashboardResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Vpc/getSubnetResourceDashboard:getSubnetResourceDashboard", args, GetSubnetResourceDashboardResultOutput{}, options).(GetSubnetResourceDashboardResultOutput)
 }
 
 // A collection of arguments for invoking getSubnetResourceDashboard.

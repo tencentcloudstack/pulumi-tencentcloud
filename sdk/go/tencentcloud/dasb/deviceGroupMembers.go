@@ -21,6 +21,8 @@ import (
 //
 // import (
 //
+//	"strconv"
+//
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dasb"
 //
@@ -44,9 +46,9 @@ import (
 //				return err
 //			}
 //			_, err = dasb.NewDeviceGroupMembers(ctx, "example", &dasb.DeviceGroupMembersArgs{
-//				DeviceGroupId: exampleDeviceGroup.ID(),
+//				DeviceGroupId: exampleDeviceGroup.ID().ToIDOutput().ApplyT(func(id pulumi.ID) (int, error) { return strconv.Atoi(string(id)) }).(pulumi.IntOutput),
 //				MemberIdSets: pulumi.IntArray{
-//					example.ID(),
+//					example.ID().ToIDOutput().ApplyT(func(id pulumi.ID) (int, error) { return strconv.Atoi(string(id)) }).(pulumi.IntOutput),
 //				},
 //			})
 //			if err != nil {
@@ -60,7 +62,7 @@ import (
 //
 // ## Import
 //
-// dasb device_group_members can be imported using the id, e.g.
+// dasb deviceGroupMembers can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Dasb/deviceGroupMembers:DeviceGroupMembers example 53#102

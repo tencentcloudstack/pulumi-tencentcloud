@@ -14,6 +14,83 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// Provide a resource to configure addon that kubernetes comes with.
     /// 
     /// ## Example Usage
+    /// 
+    /// ### Update cluster-autoscaler addon
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using System.Text.Json;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Kubernetes.AddonConfig("example", new()
+    ///     {
+    ///         ClusterId = "cls-5yezvaxo",
+    ///         AddonName = "cluster-autoscaler",
+    ///         RawValues = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
+    ///         {
+    ///             ["autoDiscovery"] = new Dictionary&lt;string, object?&gt;
+    ///             {
+    ///                 ["labels"] = new[]
+    ///                 {
+    ///                     new Dictionary&lt;string, object?&gt;
+    ///                     {
+    ///                         ["node.tke.cloud.tencent.com/autoscaling-enabled"] = "true",
+    ///                     },
+    ///                 },
+    ///             },
+    ///             ["extraArgs"] = new Dictionary&lt;string, object?&gt;
+    ///             {
+    ///                 ["expander"] = "random",
+    ///                 ["ignore-daemonsets-utilization"] = false,
+    ///                 ["ignore-taint_1"] = "tke.cloud.tencent.com/direct-eni-unavailable",
+    ///                 ["ignore-taint_2"] = "tke.cloud.tencent.com/eni-ip-unavailable",
+    ///                 ["ignore-taint_3"] = "tke.cloud.tencent.com/uninitialized",
+    ///                 ["ignore-taint_4"] = "tke.cloud.tencent.com/no-aia-ip",
+    ///                 ["scale-down-unready-time"] = "20m0s",
+    ///                 ["scale-down-utilization-threshold"] = 0.005,
+    ///                 ["skip-nodes-with-local-storage"] = true,
+    ///                 ["scale-down-delay-after-add"] = "10mm",
+    ///                 ["scale-down-enabled"] = true,
+    ///                 ["scale-down-unneeded-time"] = "10mm",
+    ///                 ["skip-nodes-with-system-pods"] = true,
+    ///                 ["max-empty-bulk-delete"] = 11,
+    ///                 ["max-nodes-total"] = 5,
+    ///                 ["max-total-unready-percentage"] = 33,
+    ///                 ["ok-total-unready-count"] = 3,
+    ///             },
+    ///             ["image"] = new Dictionary&lt;string, object?&gt;
+    ///             {
+    ///                 ["repository"] = "ccr.ccs.tencentyun.com/tkeimages/cluster-autoscaler",
+    ///             },
+    ///             ["resources"] = new Dictionary&lt;string, object?&gt;
+    ///             {
+    ///                 ["limits"] = new Dictionary&lt;string, object?&gt;
+    ///                 {
+    ///                     ["cpu"] = "2",
+    ///                     ["memory"] = "4Gi",
+    ///                 },
+    ///                 ["requests"] = new Dictionary&lt;string, object?&gt;
+    ///                 {
+    ///                     ["cpu"] = "200m",
+    ///                     ["memory"] = "256Mi",
+    ///                 },
+    ///             },
+    ///         }),
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// kubernetes cluster addon config can be imported using the clusterId#addonName, e.g.
+    /// ```sh
+    /// $ pulumi import tencentcloud:Kubernetes/addonConfig:AddonConfig example cls-5yezvaxo#cluster-autoscaler
+    /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Kubernetes/addonConfig:AddonConfig")]
     public partial class AddonConfig : global::Pulumi.CustomResource

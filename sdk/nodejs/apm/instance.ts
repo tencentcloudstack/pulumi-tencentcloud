@@ -26,6 +26,22 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ### CLS key-value index configuration example
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.apm.Instance("example", {
+ *     name: "tf-example",
+ *     description: "desc.",
+ *     isRelatedLog: 1,
+ *     logIndexType: 1,
+ *     logTraceIdKey: "traceId",
+ *     logSpanIdKey: "spanId",
+ * });
+ * ```
+ *
  * ## Import
  *
  * APM instance can be imported using the id, e.g.
@@ -63,25 +79,165 @@ export class Instance extends pulumi.CustomResource {
     }
 
     /**
+     * List of custom display tags.
+     */
+    declare public readonly customShowTags: pulumi.Output<string[] | undefined>;
+    /**
+     * Associated dashboard id, which takes effect after the associated dashboard is enabled.
+     */
+    declare public readonly dashboardTopicId: pulumi.Output<string | undefined>;
+    /**
      * Description Of Instance.
      */
     declare public readonly description: pulumi.Output<string | undefined>;
+    /**
+     * Error rate warning line. when the average error rate of the application exceeds this threshold, the system will give an abnormal note.
+     */
+    declare public readonly errRateThreshold: pulumi.Output<number>;
+    /**
+     * Error sampling switch (0: off, 1: on).
+     */
+    declare public readonly errorSample: pulumi.Output<number>;
+    /**
+     * Whether it is free (0 = paid edition; 1 = tsf restricted free edition; 2 = free edition), default 0.
+     */
+    declare public readonly free: pulumi.Output<number>;
+    /**
+     * APM instance ID.
+     */
+    declare public /*out*/ readonly instanceId: pulumi.Output<string>;
+    /**
+     * Whether to enable the detection of deleting arbitrary files. (0 - disabled; 1: enabled).
+     */
+    declare public readonly isDeleteAnyFileAnalysis: pulumi.Output<number>;
+    /**
+     * Whether to enable deserialization detection. (0 - disabled; 1 - enabled).
+     */
+    declare public readonly isDeserializationAnalysis: pulumi.Output<number>;
+    /**
+     * Whether to enable traversal detection of the directory. (0 - disabled; 1 - enabled).
+     */
+    declare public readonly isDirectoryTraversalAnalysis: pulumi.Output<number>;
+    /**
+     * Whether to enable expression injection detection. (0 - disabled; 1 - enabled).
+     */
+    declare public readonly isExpressionInjectionAnalysis: pulumi.Output<number>;
+    /**
+     * Whether to enable the detection of the inclusion of arbitrary files. (0: disabled, 1: enabled).
+     */
+    declare public readonly isIncludeAnyFileAnalysis: pulumi.Output<number>;
+    /**
+     * Whether to enable component vulnerability detection (0 = no, 1 = yes).
+     */
+    declare public readonly isInstrumentationVulnerabilityScan: pulumi.Output<number>;
+    /**
+     * Whether to enable JNDI injection detection. (0 - disabled; 1 - enabled).
+     */
+    declare public readonly isJndiInjectionAnalysis: pulumi.Output<number>;
+    /**
+     * Whether to enable JNI injection detection. (0 - disabled, 1 - enabled).
+     */
+    declare public readonly isJniInjectionAnalysis: pulumi.Output<number>;
+    /**
+     * Whether to enable detection of Java webshell.
+     */
+    declare public readonly isMemoryHijackingAnalysis: pulumi.Output<number>;
+    /**
+     * Whether to enable the detection of reading arbitrary files. (0 - disabled; 1 - enabled).
+     */
+    declare public readonly isReadAnyFileAnalysis: pulumi.Output<number>;
+    /**
+     * Whether to associate the dashboard (0 = off, 1 = on).
+     */
+    declare public readonly isRelatedDashboard: pulumi.Output<number>;
+    /**
+     * Log feature switch (0: off; 1: on).
+     */
+    declare public readonly isRelatedLog: pulumi.Output<number>;
+    /**
+     * Whether to enable detection of the remote command attack.
+     */
+    declare public readonly isRemoteCommandExecutionAnalysis: pulumi.Output<number>;
+    /**
+     * Whether to enable script engine injection detection. (0 - disabled; 1 - enabled).
+     */
+    declare public readonly isScriptEngineInjectionAnalysis: pulumi.Output<number>;
+    /**
+     * SQL injection detection switch (0: off, 1: on).
+     */
+    declare public readonly isSqlInjectionAnalysis: pulumi.Output<number>;
+    /**
+     * Whether to enable template engine injection detection. (0: disabled; 1: enabled).
+     */
+    declare public readonly isTemplateEngineInjectionAnalysis: pulumi.Output<number>;
+    /**
+     * Whether to enable the detection of uploading arbitrary files. (0 - disabled; 1 - enabled).
+     */
+    declare public readonly isUploadAnyFileAnalysis: pulumi.Output<number>;
+    /**
+     * Whether to enable Webshell backdoor detection. (0 - disabled; 1 - enabled).
+     */
+    declare public readonly isWebshellBackdoorAnalysis: pulumi.Output<number>;
+    /**
+     * CLS index type. (0 = full-text index; 1 = key-value index).
+     */
+    declare public readonly logIndexType: pulumi.Output<number>;
+    /**
+     * Log region, which takes effect after the log feature is enabled.
+     */
+    declare public readonly logRegion: pulumi.Output<string | undefined>;
+    /**
+     * Logset, which takes effect only after the log feature is enabled.
+     */
+    declare public readonly logSet: pulumi.Output<string | undefined>;
+    /**
+     * Log source, which takes effect only after the log feature is enabled.
+     */
+    declare public readonly logSource: pulumi.Output<string | undefined>;
+    /**
+     * Index key of spanId. It is valid when the CLS index type is key-value index.
+     */
+    declare public readonly logSpanIdKey: pulumi.Output<string | undefined>;
+    /**
+     * CLS log topic id, which takes effect after the log feature is enabled.
+     */
+    declare public readonly logTopicId: pulumi.Output<string | undefined>;
+    /**
+     * Index key of traceId. It is valid when the CLS index type is key-value index.
+     */
+    declare public readonly logTraceIdKey: pulumi.Output<string | undefined>;
     /**
      * Name Of Instance.
      */
     declare public readonly name: pulumi.Output<string>;
     /**
+     * Billing switch.
+     */
+    declare public readonly openBilling: pulumi.Output<boolean>;
+    /**
      * Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
      */
-    declare public readonly payMode: pulumi.Output<number | undefined>;
+    declare public readonly payMode: pulumi.Output<number>;
     /**
      * External Network Reporting Address.
      */
     declare public /*out*/ readonly publicCollectorUrl: pulumi.Output<string>;
     /**
+     * Response time warning line.
+     */
+    declare public readonly responseDurationWarningThreshold: pulumi.Output<number>;
+    /**
+     * Sampling rate (unit: %).
+     */
+    declare public readonly sampleRate: pulumi.Output<number>;
+    /**
+     * Sampling slow call saving threshold (unit: ms).
+     */
+    declare public readonly slowRequestSavedThreshold: pulumi.Output<number>;
+    /**
      * Quota Of Instance Reporting.
      */
-    declare public readonly spanDailyCounters: pulumi.Output<number | undefined>;
+    declare public readonly spanDailyCounters: pulumi.Output<number>;
     /**
      * Tag description list.
      */
@@ -94,6 +250,14 @@ export class Instance extends pulumi.CustomResource {
      * Duration Of Trace Data.
      */
     declare public readonly traceDuration: pulumi.Output<number>;
+    /**
+     * Convergence threshold for URL long segments.
+     */
+    declare public readonly urlLongSegmentThreshold: pulumi.Output<number>;
+    /**
+     * Convergence threshold for URL numerical segments.
+     */
+    declare public readonly urlNumberSegmentThreshold: pulumi.Output<number>;
 
     /**
      * Create a Instance resource with the given unique name, arguments, and options.
@@ -108,22 +272,96 @@ export class Instance extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as InstanceState | undefined;
+            resourceInputs["customShowTags"] = state?.customShowTags;
+            resourceInputs["dashboardTopicId"] = state?.dashboardTopicId;
             resourceInputs["description"] = state?.description;
+            resourceInputs["errRateThreshold"] = state?.errRateThreshold;
+            resourceInputs["errorSample"] = state?.errorSample;
+            resourceInputs["free"] = state?.free;
+            resourceInputs["instanceId"] = state?.instanceId;
+            resourceInputs["isDeleteAnyFileAnalysis"] = state?.isDeleteAnyFileAnalysis;
+            resourceInputs["isDeserializationAnalysis"] = state?.isDeserializationAnalysis;
+            resourceInputs["isDirectoryTraversalAnalysis"] = state?.isDirectoryTraversalAnalysis;
+            resourceInputs["isExpressionInjectionAnalysis"] = state?.isExpressionInjectionAnalysis;
+            resourceInputs["isIncludeAnyFileAnalysis"] = state?.isIncludeAnyFileAnalysis;
+            resourceInputs["isInstrumentationVulnerabilityScan"] = state?.isInstrumentationVulnerabilityScan;
+            resourceInputs["isJndiInjectionAnalysis"] = state?.isJndiInjectionAnalysis;
+            resourceInputs["isJniInjectionAnalysis"] = state?.isJniInjectionAnalysis;
+            resourceInputs["isMemoryHijackingAnalysis"] = state?.isMemoryHijackingAnalysis;
+            resourceInputs["isReadAnyFileAnalysis"] = state?.isReadAnyFileAnalysis;
+            resourceInputs["isRelatedDashboard"] = state?.isRelatedDashboard;
+            resourceInputs["isRelatedLog"] = state?.isRelatedLog;
+            resourceInputs["isRemoteCommandExecutionAnalysis"] = state?.isRemoteCommandExecutionAnalysis;
+            resourceInputs["isScriptEngineInjectionAnalysis"] = state?.isScriptEngineInjectionAnalysis;
+            resourceInputs["isSqlInjectionAnalysis"] = state?.isSqlInjectionAnalysis;
+            resourceInputs["isTemplateEngineInjectionAnalysis"] = state?.isTemplateEngineInjectionAnalysis;
+            resourceInputs["isUploadAnyFileAnalysis"] = state?.isUploadAnyFileAnalysis;
+            resourceInputs["isWebshellBackdoorAnalysis"] = state?.isWebshellBackdoorAnalysis;
+            resourceInputs["logIndexType"] = state?.logIndexType;
+            resourceInputs["logRegion"] = state?.logRegion;
+            resourceInputs["logSet"] = state?.logSet;
+            resourceInputs["logSource"] = state?.logSource;
+            resourceInputs["logSpanIdKey"] = state?.logSpanIdKey;
+            resourceInputs["logTopicId"] = state?.logTopicId;
+            resourceInputs["logTraceIdKey"] = state?.logTraceIdKey;
             resourceInputs["name"] = state?.name;
+            resourceInputs["openBilling"] = state?.openBilling;
             resourceInputs["payMode"] = state?.payMode;
             resourceInputs["publicCollectorUrl"] = state?.publicCollectorUrl;
+            resourceInputs["responseDurationWarningThreshold"] = state?.responseDurationWarningThreshold;
+            resourceInputs["sampleRate"] = state?.sampleRate;
+            resourceInputs["slowRequestSavedThreshold"] = state?.slowRequestSavedThreshold;
             resourceInputs["spanDailyCounters"] = state?.spanDailyCounters;
             resourceInputs["tags"] = state?.tags;
             resourceInputs["token"] = state?.token;
             resourceInputs["traceDuration"] = state?.traceDuration;
+            resourceInputs["urlLongSegmentThreshold"] = state?.urlLongSegmentThreshold;
+            resourceInputs["urlNumberSegmentThreshold"] = state?.urlNumberSegmentThreshold;
         } else {
             const args = argsOrState as InstanceArgs | undefined;
+            resourceInputs["customShowTags"] = args?.customShowTags;
+            resourceInputs["dashboardTopicId"] = args?.dashboardTopicId;
             resourceInputs["description"] = args?.description;
+            resourceInputs["errRateThreshold"] = args?.errRateThreshold;
+            resourceInputs["errorSample"] = args?.errorSample;
+            resourceInputs["free"] = args?.free;
+            resourceInputs["isDeleteAnyFileAnalysis"] = args?.isDeleteAnyFileAnalysis;
+            resourceInputs["isDeserializationAnalysis"] = args?.isDeserializationAnalysis;
+            resourceInputs["isDirectoryTraversalAnalysis"] = args?.isDirectoryTraversalAnalysis;
+            resourceInputs["isExpressionInjectionAnalysis"] = args?.isExpressionInjectionAnalysis;
+            resourceInputs["isIncludeAnyFileAnalysis"] = args?.isIncludeAnyFileAnalysis;
+            resourceInputs["isInstrumentationVulnerabilityScan"] = args?.isInstrumentationVulnerabilityScan;
+            resourceInputs["isJndiInjectionAnalysis"] = args?.isJndiInjectionAnalysis;
+            resourceInputs["isJniInjectionAnalysis"] = args?.isJniInjectionAnalysis;
+            resourceInputs["isMemoryHijackingAnalysis"] = args?.isMemoryHijackingAnalysis;
+            resourceInputs["isReadAnyFileAnalysis"] = args?.isReadAnyFileAnalysis;
+            resourceInputs["isRelatedDashboard"] = args?.isRelatedDashboard;
+            resourceInputs["isRelatedLog"] = args?.isRelatedLog;
+            resourceInputs["isRemoteCommandExecutionAnalysis"] = args?.isRemoteCommandExecutionAnalysis;
+            resourceInputs["isScriptEngineInjectionAnalysis"] = args?.isScriptEngineInjectionAnalysis;
+            resourceInputs["isSqlInjectionAnalysis"] = args?.isSqlInjectionAnalysis;
+            resourceInputs["isTemplateEngineInjectionAnalysis"] = args?.isTemplateEngineInjectionAnalysis;
+            resourceInputs["isUploadAnyFileAnalysis"] = args?.isUploadAnyFileAnalysis;
+            resourceInputs["isWebshellBackdoorAnalysis"] = args?.isWebshellBackdoorAnalysis;
+            resourceInputs["logIndexType"] = args?.logIndexType;
+            resourceInputs["logRegion"] = args?.logRegion;
+            resourceInputs["logSet"] = args?.logSet;
+            resourceInputs["logSource"] = args?.logSource;
+            resourceInputs["logSpanIdKey"] = args?.logSpanIdKey;
+            resourceInputs["logTopicId"] = args?.logTopicId;
+            resourceInputs["logTraceIdKey"] = args?.logTraceIdKey;
             resourceInputs["name"] = args?.name;
+            resourceInputs["openBilling"] = args?.openBilling;
             resourceInputs["payMode"] = args?.payMode;
+            resourceInputs["responseDurationWarningThreshold"] = args?.responseDurationWarningThreshold;
+            resourceInputs["sampleRate"] = args?.sampleRate;
+            resourceInputs["slowRequestSavedThreshold"] = args?.slowRequestSavedThreshold;
             resourceInputs["spanDailyCounters"] = args?.spanDailyCounters;
             resourceInputs["tags"] = args?.tags;
             resourceInputs["traceDuration"] = args?.traceDuration;
+            resourceInputs["urlLongSegmentThreshold"] = args?.urlLongSegmentThreshold;
+            resourceInputs["urlNumberSegmentThreshold"] = args?.urlNumberSegmentThreshold;
+            resourceInputs["instanceId"] = undefined /*out*/;
             resourceInputs["publicCollectorUrl"] = undefined /*out*/;
             resourceInputs["token"] = undefined /*out*/;
         }
@@ -137,37 +375,185 @@ export class Instance extends pulumi.CustomResource {
  */
 export interface InstanceState {
     /**
+     * List of custom display tags.
+     */
+    customShowTags?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
+     * Associated dashboard id, which takes effect after the associated dashboard is enabled.
+     */
+    dashboardTopicId?: pulumi.Input<string | undefined>;
+    /**
      * Description Of Instance.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
+    /**
+     * Error rate warning line. when the average error rate of the application exceeds this threshold, the system will give an abnormal note.
+     */
+    errRateThreshold?: pulumi.Input<number | undefined>;
+    /**
+     * Error sampling switch (0: off, 1: on).
+     */
+    errorSample?: pulumi.Input<number | undefined>;
+    /**
+     * Whether it is free (0 = paid edition; 1 = tsf restricted free edition; 2 = free edition), default 0.
+     */
+    free?: pulumi.Input<number | undefined>;
+    /**
+     * APM instance ID.
+     */
+    instanceId?: pulumi.Input<string | undefined>;
+    /**
+     * Whether to enable the detection of deleting arbitrary files. (0 - disabled; 1: enabled).
+     */
+    isDeleteAnyFileAnalysis?: pulumi.Input<number | undefined>;
+    /**
+     * Whether to enable deserialization detection. (0 - disabled; 1 - enabled).
+     */
+    isDeserializationAnalysis?: pulumi.Input<number | undefined>;
+    /**
+     * Whether to enable traversal detection of the directory. (0 - disabled; 1 - enabled).
+     */
+    isDirectoryTraversalAnalysis?: pulumi.Input<number | undefined>;
+    /**
+     * Whether to enable expression injection detection. (0 - disabled; 1 - enabled).
+     */
+    isExpressionInjectionAnalysis?: pulumi.Input<number | undefined>;
+    /**
+     * Whether to enable the detection of the inclusion of arbitrary files. (0: disabled, 1: enabled).
+     */
+    isIncludeAnyFileAnalysis?: pulumi.Input<number | undefined>;
+    /**
+     * Whether to enable component vulnerability detection (0 = no, 1 = yes).
+     */
+    isInstrumentationVulnerabilityScan?: pulumi.Input<number | undefined>;
+    /**
+     * Whether to enable JNDI injection detection. (0 - disabled; 1 - enabled).
+     */
+    isJndiInjectionAnalysis?: pulumi.Input<number | undefined>;
+    /**
+     * Whether to enable JNI injection detection. (0 - disabled, 1 - enabled).
+     */
+    isJniInjectionAnalysis?: pulumi.Input<number | undefined>;
+    /**
+     * Whether to enable detection of Java webshell.
+     */
+    isMemoryHijackingAnalysis?: pulumi.Input<number | undefined>;
+    /**
+     * Whether to enable the detection of reading arbitrary files. (0 - disabled; 1 - enabled).
+     */
+    isReadAnyFileAnalysis?: pulumi.Input<number | undefined>;
+    /**
+     * Whether to associate the dashboard (0 = off, 1 = on).
+     */
+    isRelatedDashboard?: pulumi.Input<number | undefined>;
+    /**
+     * Log feature switch (0: off; 1: on).
+     */
+    isRelatedLog?: pulumi.Input<number | undefined>;
+    /**
+     * Whether to enable detection of the remote command attack.
+     */
+    isRemoteCommandExecutionAnalysis?: pulumi.Input<number | undefined>;
+    /**
+     * Whether to enable script engine injection detection. (0 - disabled; 1 - enabled).
+     */
+    isScriptEngineInjectionAnalysis?: pulumi.Input<number | undefined>;
+    /**
+     * SQL injection detection switch (0: off, 1: on).
+     */
+    isSqlInjectionAnalysis?: pulumi.Input<number | undefined>;
+    /**
+     * Whether to enable template engine injection detection. (0: disabled; 1: enabled).
+     */
+    isTemplateEngineInjectionAnalysis?: pulumi.Input<number | undefined>;
+    /**
+     * Whether to enable the detection of uploading arbitrary files. (0 - disabled; 1 - enabled).
+     */
+    isUploadAnyFileAnalysis?: pulumi.Input<number | undefined>;
+    /**
+     * Whether to enable Webshell backdoor detection. (0 - disabled; 1 - enabled).
+     */
+    isWebshellBackdoorAnalysis?: pulumi.Input<number | undefined>;
+    /**
+     * CLS index type. (0 = full-text index; 1 = key-value index).
+     */
+    logIndexType?: pulumi.Input<number | undefined>;
+    /**
+     * Log region, which takes effect after the log feature is enabled.
+     */
+    logRegion?: pulumi.Input<string | undefined>;
+    /**
+     * Logset, which takes effect only after the log feature is enabled.
+     */
+    logSet?: pulumi.Input<string | undefined>;
+    /**
+     * Log source, which takes effect only after the log feature is enabled.
+     */
+    logSource?: pulumi.Input<string | undefined>;
+    /**
+     * Index key of spanId. It is valid when the CLS index type is key-value index.
+     */
+    logSpanIdKey?: pulumi.Input<string | undefined>;
+    /**
+     * CLS log topic id, which takes effect after the log feature is enabled.
+     */
+    logTopicId?: pulumi.Input<string | undefined>;
+    /**
+     * Index key of traceId. It is valid when the CLS index type is key-value index.
+     */
+    logTraceIdKey?: pulumi.Input<string | undefined>;
     /**
      * Name Of Instance.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
+    /**
+     * Billing switch.
+     */
+    openBilling?: pulumi.Input<boolean | undefined>;
     /**
      * Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
      */
-    payMode?: pulumi.Input<number>;
+    payMode?: pulumi.Input<number | undefined>;
     /**
      * External Network Reporting Address.
      */
-    publicCollectorUrl?: pulumi.Input<string>;
+    publicCollectorUrl?: pulumi.Input<string | undefined>;
+    /**
+     * Response time warning line.
+     */
+    responseDurationWarningThreshold?: pulumi.Input<number | undefined>;
+    /**
+     * Sampling rate (unit: %).
+     */
+    sampleRate?: pulumi.Input<number | undefined>;
+    /**
+     * Sampling slow call saving threshold (unit: ms).
+     */
+    slowRequestSavedThreshold?: pulumi.Input<number | undefined>;
     /**
      * Quota Of Instance Reporting.
      */
-    spanDailyCounters?: pulumi.Input<number>;
+    spanDailyCounters?: pulumi.Input<number | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Business system authentication token.
      */
-    token?: pulumi.Input<string>;
+    token?: pulumi.Input<string | undefined>;
     /**
      * Duration Of Trace Data.
      */
-    traceDuration?: pulumi.Input<number>;
+    traceDuration?: pulumi.Input<number | undefined>;
+    /**
+     * Convergence threshold for URL long segments.
+     */
+    urlLongSegmentThreshold?: pulumi.Input<number | undefined>;
+    /**
+     * Convergence threshold for URL numerical segments.
+     */
+    urlNumberSegmentThreshold?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -175,27 +561,171 @@ export interface InstanceState {
  */
 export interface InstanceArgs {
     /**
+     * List of custom display tags.
+     */
+    customShowTags?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
+     * Associated dashboard id, which takes effect after the associated dashboard is enabled.
+     */
+    dashboardTopicId?: pulumi.Input<string | undefined>;
+    /**
      * Description Of Instance.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
+    /**
+     * Error rate warning line. when the average error rate of the application exceeds this threshold, the system will give an abnormal note.
+     */
+    errRateThreshold?: pulumi.Input<number | undefined>;
+    /**
+     * Error sampling switch (0: off, 1: on).
+     */
+    errorSample?: pulumi.Input<number | undefined>;
+    /**
+     * Whether it is free (0 = paid edition; 1 = tsf restricted free edition; 2 = free edition), default 0.
+     */
+    free?: pulumi.Input<number | undefined>;
+    /**
+     * Whether to enable the detection of deleting arbitrary files. (0 - disabled; 1: enabled).
+     */
+    isDeleteAnyFileAnalysis?: pulumi.Input<number | undefined>;
+    /**
+     * Whether to enable deserialization detection. (0 - disabled; 1 - enabled).
+     */
+    isDeserializationAnalysis?: pulumi.Input<number | undefined>;
+    /**
+     * Whether to enable traversal detection of the directory. (0 - disabled; 1 - enabled).
+     */
+    isDirectoryTraversalAnalysis?: pulumi.Input<number | undefined>;
+    /**
+     * Whether to enable expression injection detection. (0 - disabled; 1 - enabled).
+     */
+    isExpressionInjectionAnalysis?: pulumi.Input<number | undefined>;
+    /**
+     * Whether to enable the detection of the inclusion of arbitrary files. (0: disabled, 1: enabled).
+     */
+    isIncludeAnyFileAnalysis?: pulumi.Input<number | undefined>;
+    /**
+     * Whether to enable component vulnerability detection (0 = no, 1 = yes).
+     */
+    isInstrumentationVulnerabilityScan?: pulumi.Input<number | undefined>;
+    /**
+     * Whether to enable JNDI injection detection. (0 - disabled; 1 - enabled).
+     */
+    isJndiInjectionAnalysis?: pulumi.Input<number | undefined>;
+    /**
+     * Whether to enable JNI injection detection. (0 - disabled, 1 - enabled).
+     */
+    isJniInjectionAnalysis?: pulumi.Input<number | undefined>;
+    /**
+     * Whether to enable detection of Java webshell.
+     */
+    isMemoryHijackingAnalysis?: pulumi.Input<number | undefined>;
+    /**
+     * Whether to enable the detection of reading arbitrary files. (0 - disabled; 1 - enabled).
+     */
+    isReadAnyFileAnalysis?: pulumi.Input<number | undefined>;
+    /**
+     * Whether to associate the dashboard (0 = off, 1 = on).
+     */
+    isRelatedDashboard?: pulumi.Input<number | undefined>;
+    /**
+     * Log feature switch (0: off; 1: on).
+     */
+    isRelatedLog?: pulumi.Input<number | undefined>;
+    /**
+     * Whether to enable detection of the remote command attack.
+     */
+    isRemoteCommandExecutionAnalysis?: pulumi.Input<number | undefined>;
+    /**
+     * Whether to enable script engine injection detection. (0 - disabled; 1 - enabled).
+     */
+    isScriptEngineInjectionAnalysis?: pulumi.Input<number | undefined>;
+    /**
+     * SQL injection detection switch (0: off, 1: on).
+     */
+    isSqlInjectionAnalysis?: pulumi.Input<number | undefined>;
+    /**
+     * Whether to enable template engine injection detection. (0: disabled; 1: enabled).
+     */
+    isTemplateEngineInjectionAnalysis?: pulumi.Input<number | undefined>;
+    /**
+     * Whether to enable the detection of uploading arbitrary files. (0 - disabled; 1 - enabled).
+     */
+    isUploadAnyFileAnalysis?: pulumi.Input<number | undefined>;
+    /**
+     * Whether to enable Webshell backdoor detection. (0 - disabled; 1 - enabled).
+     */
+    isWebshellBackdoorAnalysis?: pulumi.Input<number | undefined>;
+    /**
+     * CLS index type. (0 = full-text index; 1 = key-value index).
+     */
+    logIndexType?: pulumi.Input<number | undefined>;
+    /**
+     * Log region, which takes effect after the log feature is enabled.
+     */
+    logRegion?: pulumi.Input<string | undefined>;
+    /**
+     * Logset, which takes effect only after the log feature is enabled.
+     */
+    logSet?: pulumi.Input<string | undefined>;
+    /**
+     * Log source, which takes effect only after the log feature is enabled.
+     */
+    logSource?: pulumi.Input<string | undefined>;
+    /**
+     * Index key of spanId. It is valid when the CLS index type is key-value index.
+     */
+    logSpanIdKey?: pulumi.Input<string | undefined>;
+    /**
+     * CLS log topic id, which takes effect after the log feature is enabled.
+     */
+    logTopicId?: pulumi.Input<string | undefined>;
+    /**
+     * Index key of traceId. It is valid when the CLS index type is key-value index.
+     */
+    logTraceIdKey?: pulumi.Input<string | undefined>;
     /**
      * Name Of Instance.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
+    /**
+     * Billing switch.
+     */
+    openBilling?: pulumi.Input<boolean | undefined>;
     /**
      * Modify the billing mode: `1` means prepaid, `0` means pay-as-you-go, the default value is `0`.
      */
-    payMode?: pulumi.Input<number>;
+    payMode?: pulumi.Input<number | undefined>;
+    /**
+     * Response time warning line.
+     */
+    responseDurationWarningThreshold?: pulumi.Input<number | undefined>;
+    /**
+     * Sampling rate (unit: %).
+     */
+    sampleRate?: pulumi.Input<number | undefined>;
+    /**
+     * Sampling slow call saving threshold (unit: ms).
+     */
+    slowRequestSavedThreshold?: pulumi.Input<number | undefined>;
     /**
      * Quota Of Instance Reporting.
      */
-    spanDailyCounters?: pulumi.Input<number>;
+    spanDailyCounters?: pulumi.Input<number | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Duration Of Trace Data.
      */
-    traceDuration?: pulumi.Input<number>;
+    traceDuration?: pulumi.Input<number | undefined>;
+    /**
+     * Convergence threshold for URL long segments.
+     */
+    urlLongSegmentThreshold?: pulumi.Input<number | undefined>;
+    /**
+     * Convergence threshold for URL numerical segments.
+     */
+    urlNumberSegmentThreshold?: pulumi.Input<number | undefined>;
 }

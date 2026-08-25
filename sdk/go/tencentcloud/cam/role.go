@@ -44,7 +44,7 @@ import (
 //					map[string]interface{}{
 //						"action": "name/sts:AssumeRole",
 //						"effect": "allow",
-//						"principal": map[string]interface{}{
+//						"principal": map[string][]string{
 //							"qcs": []string{
 //								fmt.Sprintf("qcs::cam::uin/%v:root", uin),
 //							},
@@ -59,7 +59,7 @@ import (
 //			json0 := string(tmpJSON0)
 //			example, err := cam.NewRole(ctx, "example", &cam.RoleArgs{
 //				Name:            pulumi.String("tf-example"),
-//				Document:        pulumi.String(json0),
+//				Document:        json0,
 //				ConsoleLogin:    pulumi.Bool(true),
 //				Description:     pulumi.String("test"),
 //				SessionDuration: pulumi.Int(7200),
@@ -99,7 +99,7 @@ import (
 //					map[string]interface{}{
 //						"action": "name/sts:AssumeRole",
 //						"effect": "allow",
-//						"principal": map[string]interface{}{
+//						"principal": map[string][]string{
 //							"service": []string{
 //								"scf.qcloud.com",
 //							},
@@ -137,8 +137,6 @@ import (
 // package main
 //
 // import (
-//
-//	"fmt"
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
@@ -209,7 +207,8 @@ type Role struct {
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
 	// Description of the CAM role.
 	Description pulumi.StringPtrOutput `pulumi:"description"`
-	Document    pulumi.StringOutput    `pulumi:"document"`
+	// Document of the CAM role. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in terraform: 1. The elements in json claimed supporting two types as `string` and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when appears, it must be replaced with the uin it stands for.
+	Document pulumi.StringOutput `pulumi:"document"`
 	// Name of CAM role.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// RoleArn Information for Roles.
@@ -261,7 +260,8 @@ type roleState struct {
 	CreateTime *string `pulumi:"createTime"`
 	// Description of the CAM role.
 	Description *string `pulumi:"description"`
-	Document    *string `pulumi:"document"`
+	// Document of the CAM role. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in terraform: 1. The elements in json claimed supporting two types as `string` and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when appears, it must be replaced with the uin it stands for.
+	Document *string `pulumi:"document"`
 	// Name of CAM role.
 	Name *string `pulumi:"name"`
 	// RoleArn Information for Roles.
@@ -281,7 +281,8 @@ type RoleState struct {
 	CreateTime pulumi.StringPtrInput
 	// Description of the CAM role.
 	Description pulumi.StringPtrInput
-	Document    pulumi.StringPtrInput
+	// Document of the CAM role. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in terraform: 1. The elements in json claimed supporting two types as `string` and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when appears, it must be replaced with the uin it stands for.
+	Document pulumi.StringPtrInput
 	// Name of CAM role.
 	Name pulumi.StringPtrInput
 	// RoleArn Information for Roles.
@@ -303,7 +304,8 @@ type roleArgs struct {
 	ConsoleLogin *bool `pulumi:"consoleLogin"`
 	// Description of the CAM role.
 	Description *string `pulumi:"description"`
-	Document    string  `pulumi:"document"`
+	// Document of the CAM role. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in terraform: 1. The elements in json claimed supporting two types as `string` and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when appears, it must be replaced with the uin it stands for.
+	Document string `pulumi:"document"`
 	// Name of CAM role.
 	Name *string `pulumi:"name"`
 	// The maximum validity period of the temporary key for creating a role.
@@ -318,7 +320,8 @@ type RoleArgs struct {
 	ConsoleLogin pulumi.BoolPtrInput
 	// Description of the CAM role.
 	Description pulumi.StringPtrInput
-	Document    pulumi.StringInput
+	// Document of the CAM role. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in terraform: 1. The elements in json claimed supporting two types as `string` and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when appears, it must be replaced with the uin it stands for.
+	Document pulumi.StringInput
 	// Name of CAM role.
 	Name pulumi.StringPtrInput
 	// The maximum validity period of the temporary key for creating a role.
@@ -429,6 +432,7 @@ func (o RoleOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Role) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
 }
 
+// Document of the CAM role. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in terraform: 1. The elements in json claimed supporting two types as `string` and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when appears, it must be replaced with the uin it stands for.
 func (o RoleOutput) Document() pulumi.StringOutput {
 	return o.ApplyT(func(v *Role) pulumi.StringOutput { return v.Document }).(pulumi.StringOutput)
 }

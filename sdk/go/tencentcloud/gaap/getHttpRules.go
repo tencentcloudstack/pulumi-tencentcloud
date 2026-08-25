@@ -41,7 +41,7 @@ import (
 //				Protocol: pulumi.String("HTTP"),
 //				Name:     pulumi.String("ci-test-gaap-l7-listener"),
 //				Port:     pulumi.Int(80),
-//				ProxyId:  fooProxy.ID(),
+//				ProxyId:  fooProxy.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err
@@ -54,14 +54,14 @@ import (
 //				return err
 //			}
 //			fooHttpRule, err := gaap.NewHttpRule(ctx, "foo", &gaap.HttpRuleArgs{
-//				ListenerId:     fooLayer7Listener.ID(),
+//				ListenerId:     fooLayer7Listener.ID().ToIDOutput().ToStringOutput(),
 //				Domain:         pulumi.String("www.qq.com"),
 //				Path:           pulumi.String("/"),
 //				RealserverType: pulumi.String("IP"),
 //				HealthCheck:    pulumi.Bool(true),
 //				Realservers: gaap.HttpRuleRealserverArray{
 //					&gaap.HttpRuleRealserverArgs{
-//						Id:   fooRealserver.ID(),
+//						Id:   fooRealserver.ID().ToIDOutput().ToStringOutput(),
 //						Ip:   fooRealserver.Ip,
 //						Port: pulumi.Int(80),
 //					},
@@ -71,7 +71,7 @@ import (
 //				return err
 //			}
 //			_ = gaap.GetHttpRulesOutput(ctx, gaap.GetHttpRulesOutputArgs{
-//				ListenerId: fooLayer7Listener.ID(),
+//				ListenerId: fooLayer7Listener.ID().ToIDOutput().ToStringOutput(),
 //				Domain:     fooHttpRule.Domain,
 //			}, nil)
 //			return nil
@@ -121,12 +121,8 @@ type GetHttpRulesResult struct {
 }
 
 func GetHttpRulesOutput(ctx *pulumi.Context, args GetHttpRulesOutputArgs, opts ...pulumi.InvokeOption) GetHttpRulesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetHttpRulesResultOutput, error) {
-			args := v.(GetHttpRulesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Gaap/getHttpRules:getHttpRules", args, GetHttpRulesResultOutput{}, options).(GetHttpRulesResultOutput), nil
-		}).(GetHttpRulesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Gaap/getHttpRules:getHttpRules", args, GetHttpRulesResultOutput{}, options).(GetHttpRulesResultOutput)
 }
 
 // A collection of arguments for invoking getHttpRules.

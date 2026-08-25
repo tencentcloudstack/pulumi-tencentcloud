@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
- * Use this resource to create tcr repository.
+ * Use this resource to create TCR repository.
  *
  * ## Example Usage
  *
@@ -16,36 +16,34 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const example = new tencentcloud.tcr.Instance("example", {
- *     name: "tf-example-tcr",
- *     instanceType: "premium",
+ *     name: "tf-example",
+ *     instanceType: "standard",
  *     deleteBucket: true,
+ *     tags: {
+ *         createdBy: "Terraform",
+ *     },
  * });
  * const exampleNamespace = new tencentcloud.tcr.Namespace("example", {
  *     instanceId: example.id,
- *     name: "tf_example_ns",
- *     isPublic: true,
- *     isAutoScan: true,
- *     isPreventVul: true,
+ *     name: "tf_example",
  *     severity: "medium",
- *     cveWhitelistItems: [{
- *         cveId: "cve-xxxxx",
- *     }],
  * });
  * const exampleRepository = new tencentcloud.tcr.Repository("example", {
  *     instanceId: example.id,
  *     namespaceName: exampleNamespace.name,
- *     name: "test",
- *     briefDesc: "111",
- *     description: "111111111111111111111111111111111111",
+ *     name: "tf-example",
+ *     briefDesc: "desc.",
+ *     description: "description.",
+ *     forceDelete: true,
  * });
  * ```
  *
  * ## Import
  *
- * tcr repository can be imported using the id, e.g.
+ * TCR repository can be imported using the instanceId#nameSpaceName#name, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Tcr/repository:Repository foo instance_id#namespace_name#repository_name
+ * $ pulumi import tencentcloud:Tcr/repository:Repository example tcr-s1jud21h#tf_example#tf-example
  * ```
  */
 export class Repository extends pulumi.CustomResource {
@@ -89,6 +87,10 @@ export class Repository extends pulumi.CustomResource {
      */
     declare public readonly description: pulumi.Output<string | undefined>;
     /**
+     * The default value is true, meaning that the repository will be deleted directly regardless of whether it contains any images; false means that the existence of images will be checked before deleting the repository.
+     */
+    declare public readonly forceDelete: pulumi.Output<boolean | undefined>;
+    /**
      * ID of the TCR instance.
      */
     declare public readonly instanceId: pulumi.Output<string>;
@@ -129,6 +131,7 @@ export class Repository extends pulumi.CustomResource {
             resourceInputs["briefDesc"] = state?.briefDesc;
             resourceInputs["createTime"] = state?.createTime;
             resourceInputs["description"] = state?.description;
+            resourceInputs["forceDelete"] = state?.forceDelete;
             resourceInputs["instanceId"] = state?.instanceId;
             resourceInputs["isPublic"] = state?.isPublic;
             resourceInputs["name"] = state?.name;
@@ -145,6 +148,7 @@ export class Repository extends pulumi.CustomResource {
             }
             resourceInputs["briefDesc"] = args?.briefDesc;
             resourceInputs["description"] = args?.description;
+            resourceInputs["forceDelete"] = args?.forceDelete;
             resourceInputs["instanceId"] = args?.instanceId;
             resourceInputs["name"] = args?.name;
             resourceInputs["namespaceName"] = args?.namespaceName;
@@ -165,39 +169,43 @@ export interface RepositoryState {
     /**
      * Brief description of the repository. Valid length is [1~100].
      */
-    briefDesc?: pulumi.Input<string>;
+    briefDesc?: pulumi.Input<string | undefined>;
     /**
      * Create time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Description of the repository. Valid length is [1~1000].
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
+    /**
+     * The default value is true, meaning that the repository will be deleted directly regardless of whether it contains any images; false means that the existence of images will be checked before deleting the repository.
+     */
+    forceDelete?: pulumi.Input<boolean | undefined>;
     /**
      * ID of the TCR instance.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Indicate the repository is public or not.
      */
-    isPublic?: pulumi.Input<boolean>;
+    isPublic?: pulumi.Input<boolean | undefined>;
     /**
      * Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such as `sub1/sub2/repo`.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Name of the TCR namespace.
      */
-    namespaceName?: pulumi.Input<string>;
+    namespaceName?: pulumi.Input<string | undefined>;
     /**
      * Last updated time.
      */
-    updateTime?: pulumi.Input<string>;
+    updateTime?: pulumi.Input<string | undefined>;
     /**
      * URL of the repository.
      */
-    url?: pulumi.Input<string>;
+    url?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -207,11 +215,15 @@ export interface RepositoryArgs {
     /**
      * Brief description of the repository. Valid length is [1~100].
      */
-    briefDesc?: pulumi.Input<string>;
+    briefDesc?: pulumi.Input<string | undefined>;
     /**
      * Description of the repository. Valid length is [1~1000].
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
+    /**
+     * The default value is true, meaning that the repository will be deleted directly regardless of whether it contains any images; false means that the existence of images will be checked before deleting the repository.
+     */
+    forceDelete?: pulumi.Input<boolean | undefined>;
     /**
      * ID of the TCR instance.
      */
@@ -219,7 +231,7 @@ export interface RepositoryArgs {
     /**
      * Name of the TCR repository. Valid length is [2~200]. It can only contain lowercase letters, numbers and separators (`.`, `_`, `-`, `/`), and cannot start, end or continue with separators. Support the use of multi-level address formats, such as `sub1/sub2/repo`.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Name of the TCR namespace.
      */

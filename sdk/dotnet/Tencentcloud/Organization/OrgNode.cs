@@ -35,8 +35,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
     /// 
     /// ## Import
     /// 
-    /// organization org_node can be imported using the id, e.g.
-    /// 
+    /// organization OrgNode can be imported using the id, e.g.
     /// ```sh
     /// $ pulumi import tencentcloud:Organization/orgNode:OrgNode org_node orgNode_id
     /// ```

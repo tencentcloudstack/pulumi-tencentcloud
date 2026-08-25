@@ -12,7 +12,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a organization identityCenterExternalSamlIdentityProvider
+// Provides a resource to create a Organization identity center external saml identity provider
 //
 // ## Example Usage
 //
@@ -28,9 +28,49 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := identity.NewCenterExternalSamlIdentityProvider(ctx, "identity_center_external_saml_identity_provider", &identity.CenterExternalSamlIdentityProviderArgs{
-//				ZoneId:    pulumi.String("z-xxxxxx"),
+//			_, err := identity.NewCenterExternalSamlIdentityProvider(ctx, "example", &identity.CenterExternalSamlIdentityProviderArgs{
+//				ZoneId:                  pulumi.String("z-1os7c9znogct"),
+//				SsoStatus:               pulumi.String("Enabled"),
+//				EncodedMetadataDocument: pulumi.String("PD94bWwgdmVyc2lvbj0iM......VzY3JpcHRvcj4="),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Or
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/identity"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := identity.NewCenterExternalSamlIdentityProvider(ctx, "example", &identity.CenterExternalSamlIdentityProviderArgs{
+//				ZoneId:    pulumi.String("z-1os7c9znogct"),
+//				EntityId:  pulumi.String("https://sts.windows.net/d513d5bc-9f39-4069-ba9a-1eeab2ca58c1/"),
+//				LoginUrl:  pulumi.String("https://login.microsoftonline.com/d513d5bc-9f39-4069-ba9a-1eeab2ca58c1/saml2"),
 //				SsoStatus: pulumi.String("Enabled"),
+//				X509Certificate: pulumi.String(`-----BEGIN CERTIFICATE-----
+//
+// MIIC8DCCAdigAwIBAgIQVbznAx6JSrhKG7gfJdx+jDANBgkqhkiG9w0BAQsFADA0MTIwMAYDVQQD
+// ......
+// ......
+// ......
+// 8hRskP2V6CH9PS0Zz2Zq
+// -----END CERTIFICATE-----
+// `),
+//
 //			})
 //			if err != nil {
 //				return err
@@ -43,10 +83,10 @@ import (
 //
 // ## Import
 //
-// organization identity_center_external_saml_identity_provider can be imported using the id, e.g.
+// Organization identity center external saml identity provider can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Identity/centerExternalSamlIdentityProvider:CenterExternalSamlIdentityProvider identity_center_external_saml_identity_provider ${zoneId}
+// $ pulumi import tencentcloud:Identity/centerExternalSamlIdentityProvider:CenterExternalSamlIdentityProvider example z-1os7c9znogct
 // ```
 type CenterExternalSamlIdentityProvider struct {
 	pulumi.CustomResourceState

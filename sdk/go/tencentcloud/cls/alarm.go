@@ -16,7 +16,7 @@ import (
 //
 // ## Example Usage
 //
-// ### Use single condition
+// ### Use single condition with alarmNoticeIds
 //
 // ```go
 // package main
@@ -68,6 +68,96 @@ import (
 //				MonitorTime: &cls.AlarmMonitorTimeArgs{
 //					Time: pulumi.Int(1),
 //					Type: pulumi.String("Period"),
+//				},
+//				Classifications: pulumi.StringMap{
+//					"env":     pulumi.String("production"),
+//					"service": pulumi.String("api-gateway"),
+//				},
+//				Tags: pulumi.StringMap{
+//					"createdBy": pulumi.String("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### are mutually exclusive. You can only use one of them.
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cls"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := cls.NewAlarm(ctx, "example_monitor_notice", &cls.AlarmArgs{
+//				Name: pulumi.String("tf-example-monitor-notice"),
+//				MonitorNotice: &cls.AlarmMonitorNoticeArgs{
+//					Notices: cls.AlarmMonitorNoticeNoticeArray{
+//						&cls.AlarmMonitorNoticeNoticeArgs{
+//							NoticeId:      pulumi.String("notice-c2af43ee-1a4b-4c4a-ae3e-f81481280101"),
+//							ContentTmplId: pulumi.String("tmpl-5f7c8a9b-1234-5678-90ab-cdef12345678"),
+//							AlarmLevels: pulumi.IntArray{
+//								pulumi.Int(1),
+//								pulumi.Int(2),
+//							},
+//						},
+//						&cls.AlarmMonitorNoticeNoticeArgs{
+//							NoticeId:      pulumi.String("notice-d3bf54ff-2b5c-5d5b-bf4f-f92582391202"),
+//							ContentTmplId: pulumi.String("tmpl-6g8d9b0c-2345-6789-01bc-def123456789"),
+//							AlarmLevels: pulumi.IntArray{
+//								pulumi.Int(3),
+//							},
+//						},
+//					},
+//				},
+//				AlarmPeriod:     pulumi.Int(15),
+//				Condition:       pulumi.String("$1.errorCounts > 100"),
+//				AlarmLevel:      pulumi.Int(1),
+//				MessageTemplate: pulumi.String("{{.Label}}"),
+//				Status:          pulumi.Bool(true),
+//				TriggerCount:    pulumi.Int(1),
+//				AlarmTargets: cls.AlarmAlarmTargetArray{
+//					&cls.AlarmAlarmTargetArgs{
+//						LogsetId:        pulumi.String("e74efb8e-f647-48b2-a725-43f11b122081"),
+//						TopicId:         pulumi.String("59cf3ec0-1612-4157-be3f-341b2e7a53cb"),
+//						Query:           pulumi.String("status:>500 | select count(*) as errorCounts"),
+//						StartTimeOffset: pulumi.Int(-15),
+//						EndTimeOffset:   pulumi.Int(0),
+//						Number:          pulumi.Int(1),
+//						SyntaxRule:      pulumi.Int(1),
+//					},
+//				},
+//				Analyses: cls.AlarmAnalysisArray{
+//					&cls.AlarmAnalysisArgs{
+//						Content: pulumi.String("__FILENAME__"),
+//						Name:    pulumi.String("terraform"),
+//						Type:    pulumi.String("field"),
+//						ConfigInfos: cls.AlarmAnalysisConfigInfoArray{
+//							&cls.AlarmAnalysisConfigInfoArgs{
+//								Key:   pulumi.String("QueryIndex"),
+//								Value: pulumi.String("1"),
+//							},
+//						},
+//					},
+//				},
+//				MonitorTime: &cls.AlarmMonitorTimeArgs{
+//					Time: pulumi.Int(1),
+//					Type: pulumi.String("Period"),
+//				},
+//				Classifications: pulumi.StringMap{
+//					"env":     pulumi.String("production"),
+//					"service": pulumi.String("data-pipeline"),
 //				},
 //				Tags: pulumi.StringMap{
 //					"createdBy": pulumi.String("terraform"),
@@ -143,6 +233,10 @@ import (
 //					Time: pulumi.Int(1),
 //					Type: pulumi.String("Period"),
 //				},
+//				Classifications: pulumi.StringMap{
+//					"env":     pulumi.String("staging"),
+//					"service": pulumi.String("data-pipeline"),
+//				},
 //				Tags: pulumi.StringMap{
 //					"createdBy": pulumi.String("terraform"),
 //				},
@@ -168,7 +262,7 @@ type Alarm struct {
 
 	// Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.
 	AlarmLevel pulumi.IntOutput `pulumi:"alarmLevel"`
-	// list of alarm notice id.
+	// List of alarm notice id. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.
 	AlarmNoticeIds pulumi.StringArrayOutput `pulumi:"alarmNoticeIds"`
 	// alarm repeat cycle.
 	AlarmPeriod pulumi.IntOutput `pulumi:"alarmPeriod"`
@@ -178,10 +272,14 @@ type Alarm struct {
 	Analyses AlarmAnalysisArrayOutput `pulumi:"analyses"`
 	// user define callback.
 	CallBack AlarmCallBackOutput `pulumi:"callBack"`
+	// Alarm classification information map. Key must match regex `^a-z$`, value length cannot exceed 200 characters. Maximum 20 entries.
+	Classifications pulumi.StringMapOutput `pulumi:"classifications"`
 	// Trigger condition.
 	Condition pulumi.StringPtrOutput `pulumi:"condition"`
 	// user define alarm notice.
 	MessageTemplate pulumi.StringPtrOutput `pulumi:"messageTemplate"`
+	// Monitor notice configuration for observable platform. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.
+	MonitorNotice AlarmMonitorNoticePtrOutput `pulumi:"monitorNotice"`
 	// monitor task execution time.
 	MonitorTime AlarmMonitorTimeOutput `pulumi:"monitorTime"`
 	// Multiple triggering conditions.
@@ -203,9 +301,6 @@ func NewAlarm(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.AlarmNoticeIds == nil {
-		return nil, errors.New("invalid value for required argument 'AlarmNoticeIds'")
-	}
 	if args.AlarmPeriod == nil {
 		return nil, errors.New("invalid value for required argument 'AlarmPeriod'")
 	}
@@ -243,7 +338,7 @@ func GetAlarm(ctx *pulumi.Context,
 type alarmState struct {
 	// Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.
 	AlarmLevel *int `pulumi:"alarmLevel"`
-	// list of alarm notice id.
+	// List of alarm notice id. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.
 	AlarmNoticeIds []string `pulumi:"alarmNoticeIds"`
 	// alarm repeat cycle.
 	AlarmPeriod *int `pulumi:"alarmPeriod"`
@@ -253,10 +348,14 @@ type alarmState struct {
 	Analyses []AlarmAnalysis `pulumi:"analyses"`
 	// user define callback.
 	CallBack *AlarmCallBack `pulumi:"callBack"`
+	// Alarm classification information map. Key must match regex `^a-z$`, value length cannot exceed 200 characters. Maximum 20 entries.
+	Classifications map[string]string `pulumi:"classifications"`
 	// Trigger condition.
 	Condition *string `pulumi:"condition"`
 	// user define alarm notice.
 	MessageTemplate *string `pulumi:"messageTemplate"`
+	// Monitor notice configuration for observable platform. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.
+	MonitorNotice *AlarmMonitorNotice `pulumi:"monitorNotice"`
 	// monitor task execution time.
 	MonitorTime *AlarmMonitorTime `pulumi:"monitorTime"`
 	// Multiple triggering conditions.
@@ -274,7 +373,7 @@ type alarmState struct {
 type AlarmState struct {
 	// Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.
 	AlarmLevel pulumi.IntPtrInput
-	// list of alarm notice id.
+	// List of alarm notice id. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.
 	AlarmNoticeIds pulumi.StringArrayInput
 	// alarm repeat cycle.
 	AlarmPeriod pulumi.IntPtrInput
@@ -284,10 +383,14 @@ type AlarmState struct {
 	Analyses AlarmAnalysisArrayInput
 	// user define callback.
 	CallBack AlarmCallBackPtrInput
+	// Alarm classification information map. Key must match regex `^a-z$`, value length cannot exceed 200 characters. Maximum 20 entries.
+	Classifications pulumi.StringMapInput
 	// Trigger condition.
 	Condition pulumi.StringPtrInput
 	// user define alarm notice.
 	MessageTemplate pulumi.StringPtrInput
+	// Monitor notice configuration for observable platform. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.
+	MonitorNotice AlarmMonitorNoticePtrInput
 	// monitor task execution time.
 	MonitorTime AlarmMonitorTimePtrInput
 	// Multiple triggering conditions.
@@ -309,7 +412,7 @@ func (AlarmState) ElementType() reflect.Type {
 type alarmArgs struct {
 	// Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.
 	AlarmLevel *int `pulumi:"alarmLevel"`
-	// list of alarm notice id.
+	// List of alarm notice id. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.
 	AlarmNoticeIds []string `pulumi:"alarmNoticeIds"`
 	// alarm repeat cycle.
 	AlarmPeriod int `pulumi:"alarmPeriod"`
@@ -319,10 +422,14 @@ type alarmArgs struct {
 	Analyses []AlarmAnalysis `pulumi:"analyses"`
 	// user define callback.
 	CallBack *AlarmCallBack `pulumi:"callBack"`
+	// Alarm classification information map. Key must match regex `^a-z$`, value length cannot exceed 200 characters. Maximum 20 entries.
+	Classifications map[string]string `pulumi:"classifications"`
 	// Trigger condition.
 	Condition *string `pulumi:"condition"`
 	// user define alarm notice.
 	MessageTemplate *string `pulumi:"messageTemplate"`
+	// Monitor notice configuration for observable platform. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.
+	MonitorNotice *AlarmMonitorNotice `pulumi:"monitorNotice"`
 	// monitor task execution time.
 	MonitorTime AlarmMonitorTime `pulumi:"monitorTime"`
 	// Multiple triggering conditions.
@@ -341,7 +448,7 @@ type alarmArgs struct {
 type AlarmArgs struct {
 	// Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.
 	AlarmLevel pulumi.IntPtrInput
-	// list of alarm notice id.
+	// List of alarm notice id. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.
 	AlarmNoticeIds pulumi.StringArrayInput
 	// alarm repeat cycle.
 	AlarmPeriod pulumi.IntInput
@@ -351,10 +458,14 @@ type AlarmArgs struct {
 	Analyses AlarmAnalysisArrayInput
 	// user define callback.
 	CallBack AlarmCallBackPtrInput
+	// Alarm classification information map. Key must match regex `^a-z$`, value length cannot exceed 200 characters. Maximum 20 entries.
+	Classifications pulumi.StringMapInput
 	// Trigger condition.
 	Condition pulumi.StringPtrInput
 	// user define alarm notice.
 	MessageTemplate pulumi.StringPtrInput
+	// Monitor notice configuration for observable platform. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.
+	MonitorNotice AlarmMonitorNoticePtrInput
 	// monitor task execution time.
 	MonitorTime AlarmMonitorTimeInput
 	// Multiple triggering conditions.
@@ -461,7 +572,7 @@ func (o AlarmOutput) AlarmLevel() pulumi.IntOutput {
 	return o.ApplyT(func(v *Alarm) pulumi.IntOutput { return v.AlarmLevel }).(pulumi.IntOutput)
 }
 
-// list of alarm notice id.
+// List of alarm notice id. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.
 func (o AlarmOutput) AlarmNoticeIds() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Alarm) pulumi.StringArrayOutput { return v.AlarmNoticeIds }).(pulumi.StringArrayOutput)
 }
@@ -486,6 +597,11 @@ func (o AlarmOutput) CallBack() AlarmCallBackOutput {
 	return o.ApplyT(func(v *Alarm) AlarmCallBackOutput { return v.CallBack }).(AlarmCallBackOutput)
 }
 
+// Alarm classification information map. Key must match regex `^a-z$`, value length cannot exceed 200 characters. Maximum 20 entries.
+func (o AlarmOutput) Classifications() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *Alarm) pulumi.StringMapOutput { return v.Classifications }).(pulumi.StringMapOutput)
+}
+
 // Trigger condition.
 func (o AlarmOutput) Condition() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Alarm) pulumi.StringPtrOutput { return v.Condition }).(pulumi.StringPtrOutput)
@@ -494,6 +610,11 @@ func (o AlarmOutput) Condition() pulumi.StringPtrOutput {
 // user define alarm notice.
 func (o AlarmOutput) MessageTemplate() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Alarm) pulumi.StringPtrOutput { return v.MessageTemplate }).(pulumi.StringPtrOutput)
+}
+
+// Monitor notice configuration for observable platform. Note: AlarmNoticeIds and MonitorNotice cannot be set at the same time.
+func (o AlarmOutput) MonitorNotice() AlarmMonitorNoticePtrOutput {
+	return o.ApplyT(func(v *Alarm) AlarmMonitorNoticePtrOutput { return v.MonitorNotice }).(AlarmMonitorNoticePtrOutput)
 }
 
 // monitor task execution time.

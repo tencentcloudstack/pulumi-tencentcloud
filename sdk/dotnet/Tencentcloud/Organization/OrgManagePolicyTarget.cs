@@ -36,7 +36,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
     /// 
     /// ## Import
     /// 
-    /// organization org_manage_policy_target can be imported using the id, e.g.
+    /// organization OrgManagePolicyTarget can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Organization/orgManagePolicyTarget:OrgManagePolicyTarget org_manage_policy_target policy_type#policy_id#target_type#target_id

@@ -23,8 +23,6 @@ import (
 //
 // import (
 //
-//	"fmt"
-//
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/user"
@@ -50,7 +48,7 @@ import (
 //			// create cos bucket inventory
 //			_, err = cos.NewBucketInventory(ctx, "example", &cos.BucketInventoryArgs{
 //				Name:                   pulumi.String("tf-example"),
-//				Bucket:                 example.ID(),
+//				Bucket:                 example.ID().ToIDOutput().ToStringOutput(),
 //				IsEnabled:              pulumi.String("true"),
 //				IncludedObjectVersions: pulumi.String("Current"),
 //				OptionalFields: &cos.BucketInventoryOptionalFieldsArgs{

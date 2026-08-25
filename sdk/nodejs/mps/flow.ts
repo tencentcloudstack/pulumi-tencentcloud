@@ -216,19 +216,19 @@ export interface FlowState {
     /**
      * The event ID associated with this Flow. Each flow can only be associated with one Event.
      */
-    eventId?: pulumi.Input<string>;
+    eventId?: pulumi.Input<string | undefined>;
     /**
      * Flow name.
      */
-    flowName?: pulumi.Input<string>;
+    flowName?: pulumi.Input<string | undefined>;
     /**
      * The input group for the flow.
      */
-    inputGroups?: pulumi.Input<pulumi.Input<inputs.Mps.FlowInputGroup>[]>;
+    inputGroups?: pulumi.Input<pulumi.Input<inputs.Mps.FlowInputGroup>[] | undefined>;
     /**
      * Maximum bandwidth, unit bps, optional [10000000, 20000000, 50000000].
      */
-    maxBandwidth?: pulumi.Input<number>;
+    maxBandwidth?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -238,7 +238,7 @@ export interface FlowArgs {
     /**
      * The event ID associated with this Flow. Each flow can only be associated with one Event.
      */
-    eventId?: pulumi.Input<string>;
+    eventId?: pulumi.Input<string | undefined>;
     /**
      * Flow name.
      */
@@ -246,7 +246,7 @@ export interface FlowArgs {
     /**
      * The input group for the flow.
      */
-    inputGroups?: pulumi.Input<pulumi.Input<inputs.Mps.FlowInputGroup>[]>;
+    inputGroups?: pulumi.Input<pulumi.Input<inputs.Mps.FlowInputGroup>[] | undefined>;
     /**
      * Maximum bandwidth, unit bps, optional [10000000, 20000000, 50000000].
      */

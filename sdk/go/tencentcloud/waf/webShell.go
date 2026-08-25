@@ -43,7 +43,7 @@ import (
 //
 // ## Import
 //
-// waf web_shell can be imported using the id, e.g.
+// waf webShell can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Waf/webShell:WebShell example demo.waf.com

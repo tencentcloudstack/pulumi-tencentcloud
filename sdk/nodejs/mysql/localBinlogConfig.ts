@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "cdb",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -63,7 +63,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * mysql local_binlog_config can be imported using the id, e.g.
+ * mysql localBinlogConfig can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Mysql/localBinlogConfig:LocalBinlogConfig local_binlog_config instance_id
@@ -153,15 +153,15 @@ export interface LocalBinlogConfigState {
     /**
      * Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Space utilization of local binlog. Value range: [30,50].
      */
-    maxUsage?: pulumi.Input<number>;
+    maxUsage?: pulumi.Input<number | undefined>;
     /**
      * Retention period of local binlog. Valid range: 72-168 hours. When there is disaster recovery instance, the valid range will be 120-168 hours.
      */
-    saveHours?: pulumi.Input<number>;
+    saveHours?: pulumi.Input<number | undefined>;
 }
 
 /**

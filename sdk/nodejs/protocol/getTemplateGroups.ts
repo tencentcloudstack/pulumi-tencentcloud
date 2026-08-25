@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const name = tencentcloud.Protocol.getTemplateGroups({
+ * const name = tencentcloud.protocol.getTemplateGroups({
  *     name: "test",
  * });
  * ```
@@ -75,7 +75,7 @@ export interface GetTemplateGroupsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const name = tencentcloud.Protocol.getTemplateGroups({
+ * const name = tencentcloud.protocol.getTemplateGroups({
  *     name: "test",
  * });
  * ```
@@ -97,13 +97,13 @@ export interface GetTemplateGroupsOutputArgs {
     /**
      * ID of the protocol template group to query.
      */
-    id?: pulumi.Input<string>;
+    id?: pulumi.Input<string | undefined>;
     /**
      * Name of the protocol template group to query.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

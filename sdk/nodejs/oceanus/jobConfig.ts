@@ -266,87 +266,87 @@ export interface JobConfigState {
     /**
      * Oceanus platform job recovery switch 1: on -1: off.
      */
-    autoRecover?: pulumi.Input<number>;
+    autoRecover?: pulumi.Input<number | undefined>;
     /**
      * Class log level.
      */
-    clazzLevels?: pulumi.Input<pulumi.Input<inputs.Oceanus.JobConfigClazzLevel>[]>;
+    clazzLevels?: pulumi.Input<pulumi.Input<inputs.Oceanus.JobConfigClazzLevel>[] | undefined>;
     /**
      * CLS logset ID.
      */
-    clsLogsetId?: pulumi.Input<string>;
+    clsLogsetId?: pulumi.Input<string | undefined>;
     /**
      * CLS log topic ID.
      */
-    clsTopicId?: pulumi.Input<string>;
+    clsTopicId?: pulumi.Input<string | undefined>;
     /**
      * COS storage bucket name used by the job.
      */
-    cosBucket?: pulumi.Input<string>;
+    cosBucket?: pulumi.Input<string | undefined>;
     /**
      * Job default parallelism.
      */
-    defaultParallelism?: pulumi.Input<number>;
+    defaultParallelism?: pulumi.Input<number | undefined>;
     /**
      * Main class.
      */
-    entrypointClass?: pulumi.Input<string>;
+    entrypointClass?: pulumi.Input<string | undefined>;
     /**
      * Expert mode configuration.
      */
-    expertModeConfiguration?: pulumi.Input<inputs.Oceanus.JobConfigExpertModeConfiguration>;
+    expertModeConfiguration?: pulumi.Input<inputs.Oceanus.JobConfigExpertModeConfiguration | undefined>;
     /**
      * Whether to enable expert mode.
      */
-    expertModeOn?: pulumi.Input<boolean>;
+    expertModeOn?: pulumi.Input<boolean | undefined>;
     /**
      * Job ID.
      */
-    jobId?: pulumi.Input<string>;
+    jobId?: pulumi.Input<string | undefined>;
     /**
      * JobManager specification.
      */
-    jobManagerSpec?: pulumi.Input<number>;
+    jobManagerSpec?: pulumi.Input<number | undefined>;
     /**
      * Whether to collect job logs.
      */
-    logCollect?: pulumi.Input<boolean>;
+    logCollect?: pulumi.Input<boolean | undefined>;
     /**
      * Log collection type 2:CLS; 3:COS.
      */
-    logCollectType?: pulumi.Input<number>;
+    logCollectType?: pulumi.Input<number | undefined>;
     /**
      * Log level.
      */
-    logLevel?: pulumi.Input<string>;
+    logLevel?: pulumi.Input<string | undefined>;
     /**
      * Main class parameters.
      */
-    programArgs?: pulumi.Input<string>;
+    programArgs?: pulumi.Input<string | undefined>;
     /**
      * System parameters.
      */
-    properties?: pulumi.Input<pulumi.Input<inputs.Oceanus.JobConfigProperty>[]>;
+    properties?: pulumi.Input<pulumi.Input<inputs.Oceanus.JobConfigProperty>[] | undefined>;
     /**
      * Python version used by the pyflink job at runtime.
      */
-    pythonVersion?: pulumi.Input<string>;
+    pythonVersion?: pulumi.Input<string | undefined>;
     /**
      * Remarks.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Resource reference array.
      */
-    resourceRefs?: pulumi.Input<pulumi.Input<inputs.Oceanus.JobConfigResourceRef>[]>;
+    resourceRefs?: pulumi.Input<pulumi.Input<inputs.Oceanus.JobConfigResourceRef>[] | undefined>;
     /**
      * TaskManager specification.
      */
-    taskManagerSpec?: pulumi.Input<number>;
+    taskManagerSpec?: pulumi.Input<number | undefined>;
     /**
      * Workspace SerialId.
      */
-    workSpaceId?: pulumi.Input<string>;
+    workSpaceId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -356,39 +356,39 @@ export interface JobConfigArgs {
     /**
      * Oceanus platform job recovery switch 1: on -1: off.
      */
-    autoRecover?: pulumi.Input<number>;
+    autoRecover?: pulumi.Input<number | undefined>;
     /**
      * Class log level.
      */
-    clazzLevels?: pulumi.Input<pulumi.Input<inputs.Oceanus.JobConfigClazzLevel>[]>;
+    clazzLevels?: pulumi.Input<pulumi.Input<inputs.Oceanus.JobConfigClazzLevel>[] | undefined>;
     /**
      * CLS logset ID.
      */
-    clsLogsetId?: pulumi.Input<string>;
+    clsLogsetId?: pulumi.Input<string | undefined>;
     /**
      * CLS log topic ID.
      */
-    clsTopicId?: pulumi.Input<string>;
+    clsTopicId?: pulumi.Input<string | undefined>;
     /**
      * COS storage bucket name used by the job.
      */
-    cosBucket?: pulumi.Input<string>;
+    cosBucket?: pulumi.Input<string | undefined>;
     /**
      * Job default parallelism.
      */
-    defaultParallelism?: pulumi.Input<number>;
+    defaultParallelism?: pulumi.Input<number | undefined>;
     /**
      * Main class.
      */
-    entrypointClass?: pulumi.Input<string>;
+    entrypointClass?: pulumi.Input<string | undefined>;
     /**
      * Expert mode configuration.
      */
-    expertModeConfiguration?: pulumi.Input<inputs.Oceanus.JobConfigExpertModeConfiguration>;
+    expertModeConfiguration?: pulumi.Input<inputs.Oceanus.JobConfigExpertModeConfiguration | undefined>;
     /**
      * Whether to enable expert mode.
      */
-    expertModeOn?: pulumi.Input<boolean>;
+    expertModeOn?: pulumi.Input<boolean | undefined>;
     /**
      * Job ID.
      */
@@ -396,45 +396,45 @@ export interface JobConfigArgs {
     /**
      * JobManager specification.
      */
-    jobManagerSpec?: pulumi.Input<number>;
+    jobManagerSpec?: pulumi.Input<number | undefined>;
     /**
      * Whether to collect job logs.
      */
-    logCollect?: pulumi.Input<boolean>;
+    logCollect?: pulumi.Input<boolean | undefined>;
     /**
      * Log collection type 2:CLS; 3:COS.
      */
-    logCollectType?: pulumi.Input<number>;
+    logCollectType?: pulumi.Input<number | undefined>;
     /**
      * Log level.
      */
-    logLevel?: pulumi.Input<string>;
+    logLevel?: pulumi.Input<string | undefined>;
     /**
      * Main class parameters.
      */
-    programArgs?: pulumi.Input<string>;
+    programArgs?: pulumi.Input<string | undefined>;
     /**
      * System parameters.
      */
-    properties?: pulumi.Input<pulumi.Input<inputs.Oceanus.JobConfigProperty>[]>;
+    properties?: pulumi.Input<pulumi.Input<inputs.Oceanus.JobConfigProperty>[] | undefined>;
     /**
      * Python version used by the pyflink job at runtime.
      */
-    pythonVersion?: pulumi.Input<string>;
+    pythonVersion?: pulumi.Input<string | undefined>;
     /**
      * Remarks.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Resource reference array.
      */
-    resourceRefs?: pulumi.Input<pulumi.Input<inputs.Oceanus.JobConfigResourceRef>[]>;
+    resourceRefs?: pulumi.Input<pulumi.Input<inputs.Oceanus.JobConfigResourceRef>[] | undefined>;
     /**
      * TaskManager specification.
      */
-    taskManagerSpec?: pulumi.Input<number>;
+    taskManagerSpec?: pulumi.Input<number | undefined>;
     /**
      * Workspace SerialId.
      */
-    workSpaceId?: pulumi.Input<string>;
+    workSpaceId?: pulumi.Input<string | undefined>;
 }

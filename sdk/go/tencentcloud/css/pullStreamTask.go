@@ -52,8 +52,7 @@ import (
 //
 // ## Import
 //
-// css pull_stream_task can be imported using the id, e.g.
-//
+// css pullStreamTask can be imported using the id, e.g.
 // ```sh
 // $ pulumi import tencentcloud:Css/pullStreamTask:PullStreamTask pull_stream_task pullStreamTask_id
 // ```

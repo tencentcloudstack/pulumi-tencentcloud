@@ -10,10 +10,20 @@ export type AutoScaleStrategy = import("./autoScaleStrategy").AutoScaleStrategy;
 export const AutoScaleStrategy: typeof import("./autoScaleStrategy").AutoScaleStrategy = null as any;
 utilities.lazyLoad(exports, ["AutoScaleStrategy"], () => require("./autoScaleStrategy"));
 
+export { BootScriptArgs, BootScriptState } from "./bootScript";
+export type BootScript = import("./bootScript").BootScript;
+export const BootScript: typeof import("./bootScript").BootScript = null as any;
+utilities.lazyLoad(exports, ["BootScript"], () => require("./bootScript"));
+
 export { ClusterArgs, ClusterState } from "./cluster";
 export type Cluster = import("./cluster").Cluster;
 export const Cluster: typeof import("./cluster").Cluster = null as any;
 utilities.lazyLoad(exports, ["Cluster"], () => require("./cluster"));
+
+export { ClusterV2Args, ClusterV2State } from "./clusterV2";
+export type ClusterV2 = import("./clusterV2").ClusterV2;
+export const ClusterV2: typeof import("./clusterV2").ClusterV2 = null as any;
+utilities.lazyLoad(exports, ["ClusterV2"], () => require("./clusterV2"));
 
 export { DeployYarnOperationArgs, DeployYarnOperationState } from "./deployYarnOperation";
 export type DeployYarnOperation = import("./deployYarnOperation").DeployYarnOperation;
@@ -67,8 +77,12 @@ const _module = {
         switch (type) {
             case "tencentcloud:Emr/autoScaleStrategy:AutoScaleStrategy":
                 return new AutoScaleStrategy(name, <any>undefined, { urn })
+            case "tencentcloud:Emr/bootScript:BootScript":
+                return new BootScript(name, <any>undefined, { urn })
             case "tencentcloud:Emr/cluster:Cluster":
                 return new Cluster(name, <any>undefined, { urn })
+            case "tencentcloud:Emr/clusterV2:ClusterV2":
+                return new ClusterV2(name, <any>undefined, { urn })
             case "tencentcloud:Emr/deployYarnOperation:DeployYarnOperation":
                 return new DeployYarnOperation(name, <any>undefined, { urn })
             case "tencentcloud:Emr/userManager:UserManager":
@@ -81,7 +95,9 @@ const _module = {
     },
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Emr/autoScaleStrategy", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Emr/bootScript", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Emr/cluster", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Emr/clusterV2", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Emr/deployYarnOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Emr/userManager", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Emr/yarn", _module)

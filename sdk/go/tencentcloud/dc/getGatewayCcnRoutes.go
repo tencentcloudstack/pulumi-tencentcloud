@@ -40,7 +40,7 @@ import (
 //			}
 //			ccnMain, err := dc.NewGateway(ctx, "ccn_main", &dc.GatewayArgs{
 //				Name:              pulumi.String("ci-cdg-ccn-test"),
-//				NetworkInstanceId: main.ID(),
+//				NetworkInstanceId: main.ID().ToIDOutput().ToStringOutput(),
 //				NetworkType:       pulumi.String("CCN"),
 //				GatewayType:       pulumi.String("NORMAL"),
 //			})
@@ -48,14 +48,14 @@ import (
 //				return err
 //			}
 //			_, err = dc.NewGatewayCcnRoute(ctx, "route1", &dc.GatewayCcnRouteArgs{
-//				DcgId:     ccnMain.ID(),
+//				DcgId:     ccnMain.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock: pulumi.String("10.1.1.0/32"),
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			_, err = dc.NewGatewayCcnRoute(ctx, "route2", &dc.GatewayCcnRouteArgs{
-//				DcgId:     ccnMain.ID(),
+//				DcgId:     ccnMain.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock: pulumi.String("192.1.1.0/32"),
 //			})
 //			if err != nil {
@@ -63,7 +63,7 @@ import (
 //			}
 //			// You need to sleep for a few seconds because there is a cache on the server
 //			_ = dc.GetGatewayCcnRoutesOutput(ctx, dc.GetGatewayCcnRoutesOutputArgs{
-//				DcgId: ccnMain.ID(),
+//				DcgId: ccnMain.ID().ToIDOutput().ToStringOutput(),
 //			}, nil)
 //			return nil
 //		})
@@ -134,12 +134,8 @@ type GetGatewayCcnRoutesResult struct {
 }
 
 func GetGatewayCcnRoutesOutput(ctx *pulumi.Context, args GetGatewayCcnRoutesOutputArgs, opts ...pulumi.InvokeOption) GetGatewayCcnRoutesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetGatewayCcnRoutesResultOutput, error) {
-			args := v.(GetGatewayCcnRoutesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dc/getGatewayCcnRoutes:getGatewayCcnRoutes", args, GetGatewayCcnRoutesResultOutput{}, options).(GetGatewayCcnRoutesResultOutput), nil
-		}).(GetGatewayCcnRoutesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dc/getGatewayCcnRoutes:getGatewayCcnRoutes", args, GetGatewayCcnRoutesResultOutput{}, options).(GetGatewayCcnRoutesResultOutput)
 }
 
 // A collection of arguments for invoking getGatewayCcnRoutes.

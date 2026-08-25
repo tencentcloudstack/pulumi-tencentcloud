@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
 {
     /// <summary>
-    /// Provides a resource to create a tcr tag retention rule.
+    /// Provides a resource to create a TCR tag retention rule.
     /// 
     /// ## Example Usage
     /// 
@@ -27,50 +27,70 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// {
     ///     var example = new Tencentcloud.Tcr.Instance("example", new()
     ///     {
-    ///         Name = "tf-example-tcr",
-    ///         InstanceType = "basic",
+    ///         Name = "tf-example",
+    ///         InstanceType = "standard",
     ///         DeleteBucket = true,
     ///         Tags = 
     ///         {
-    ///             { "createdBy", "terraform" },
+    ///             { "createdBy", "Terraform" },
     ///         },
     ///     });
     /// 
     ///     var exampleNamespace = new Tencentcloud.Tcr.Namespace("example", new()
     ///     {
     ///         InstanceId = example.Id,
-    ///         Name = "tf_example_ns_retention",
-    ///         IsPublic = true,
-    ///         IsAutoScan = true,
-    ///         IsPreventVul = true,
+    ///         Name = "tf_example",
     ///         Severity = "medium",
-    ///         CveWhitelistItems = new[]
-    ///         {
-    ///             new Tencentcloud.Tcr.Inputs.NamespaceCveWhitelistItemArgs
-    ///             {
-    ///                 CveId = "cve-xxxxx",
-    ///             },
-    ///         },
     ///     });
     /// 
-    ///     var myRule = new Tencentcloud.Tcr.TagRetentionRule("my_rule", new()
+    ///     var exampleTagRetentionRule = new Tencentcloud.Tcr.TagRetentionRule("example", new()
     ///     {
     ///         RegistryId = example.Id,
     ///         NamespaceName = exampleNamespace.Name,
-    ///         RetentionRule = new Tencentcloud.Tcr.Inputs.TagRetentionRuleRetentionRuleArgs
+    ///         AdvancedRuleItems = new[]
     ///         {
-    ///             Key = "nDaysSinceLastPush",
-    ///             Value = 2,
+    ///             new Tencentcloud.Tcr.Inputs.TagRetentionRuleAdvancedRuleItemArgs
+    ///             {
+    ///                 RepositoryFilter = new Tencentcloud.Tcr.Inputs.TagRetentionRuleAdvancedRuleItemRepositoryFilterArgs
+    ///                 {
+    ///                     Decoration = "repoMatches",
+    ///                     Pattern = "**",
+    ///                 },
+    ///                 RetentionPolicy = new Tencentcloud.Tcr.Inputs.TagRetentionRuleAdvancedRuleItemRetentionPolicyArgs
+    ///                 {
+    ///                     Key = "nDaysSinceLastPush",
+    ///                     Value = 2,
+    ///                 },
+    ///                 TagFilter = new Tencentcloud.Tcr.Inputs.TagRetentionRuleAdvancedRuleItemTagFilterArgs
+    ///                 {
+    ///                     Decoration = "matches",
+    ///                     Pattern = "**",
+    ///                 },
+    ///             },
     ///         },
     ///         CronSetting = "daily",
     ///     });
     /// 
     /// });
     /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// TCR tag retention rule can be imported using the registryId#namespaceName#retentionId, e.g.
+    /// 
+    /// ```sh
+    /// $ pulumi import tencentcloud:Tcr/tagRetentionRule:TagRetentionRule example tcr-s1jud21h#tf_example#3
+    /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcr/tagRetentionRule:TagRetentionRule")]
     public partial class TagRetentionRule : global::Pulumi.CustomResource
     {
+        /// <summary>
+        /// The advanced retention policy takes precedence; when both the basic and advanced retention policies are configured, the advanced retention policy will be used.
+        /// </summary>
+        [Output("advancedRuleItems")]
+        public Output<ImmutableArray<Outputs.TagRetentionRuleAdvancedRuleItem>> AdvancedRuleItems { get; private set; } = null!;
+
         /// <summary>
         /// Execution cycle, currently only available selections are: manual; daily; weekly; monthly.
         /// </summary>
@@ -154,6 +174,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
 
     public sealed class TagRetentionRuleArgs : global::Pulumi.ResourceArgs
     {
+        [Input("advancedRuleItems")]
+        private InputList<Inputs.TagRetentionRuleAdvancedRuleItemArgs>? _advancedRuleItems;
+
+        /// <summary>
+        /// The advanced retention policy takes precedence; when both the basic and advanced retention policies are configured, the advanced retention policy will be used.
+        /// </summary>
+        public InputList<Inputs.TagRetentionRuleAdvancedRuleItemArgs> AdvancedRuleItems
+        {
+            get => _advancedRuleItems ?? (_advancedRuleItems = new InputList<Inputs.TagRetentionRuleAdvancedRuleItemArgs>());
+            set => _advancedRuleItems = value;
+        }
+
         /// <summary>
         /// Execution cycle, currently only available selections are: manual; daily; weekly; monthly.
         /// </summary>
@@ -181,8 +213,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// <summary>
         /// Retention Policy.
         /// </summary>
-        [Input("retentionRule", required: true)]
-        public Input<Inputs.TagRetentionRuleRetentionRuleArgs> RetentionRule { get; set; } = null!;
+        [Input("retentionRule")]
+        public Input<Inputs.TagRetentionRuleRetentionRuleArgs>? RetentionRule { get; set; }
 
         public TagRetentionRuleArgs()
         {
@@ -192,6 +224,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
 
     public sealed class TagRetentionRuleState : global::Pulumi.ResourceArgs
     {
+        [Input("advancedRuleItems")]
+        private InputList<Inputs.TagRetentionRuleAdvancedRuleItemGetArgs>? _advancedRuleItems;
+
+        /// <summary>
+        /// The advanced retention policy takes precedence; when both the basic and advanced retention policies are configured, the advanced retention policy will be used.
+        /// </summary>
+        public InputList<Inputs.TagRetentionRuleAdvancedRuleItemGetArgs> AdvancedRuleItems
+        {
+            get => _advancedRuleItems ?? (_advancedRuleItems = new InputList<Inputs.TagRetentionRuleAdvancedRuleItemGetArgs>());
+            set => _advancedRuleItems = value;
+        }
+
         /// <summary>
         /// Execution cycle, currently only available selections are: manual; daily; weekly; monthly.
         /// </summary>

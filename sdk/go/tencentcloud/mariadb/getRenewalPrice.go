@@ -76,12 +76,8 @@ type GetRenewalPriceResult struct {
 }
 
 func GetRenewalPriceOutput(ctx *pulumi.Context, args GetRenewalPriceOutputArgs, opts ...pulumi.InvokeOption) GetRenewalPriceResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetRenewalPriceResultOutput, error) {
-			args := v.(GetRenewalPriceArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mariadb/getRenewalPrice:getRenewalPrice", args, GetRenewalPriceResultOutput{}, options).(GetRenewalPriceResultOutput), nil
-		}).(GetRenewalPriceResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mariadb/getRenewalPrice:getRenewalPrice", args, GetRenewalPriceResultOutput{}, options).(GetRenewalPriceResultOutput)
 }
 
 // A collection of arguments for invoking getRenewalPrice.

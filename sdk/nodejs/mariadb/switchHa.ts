@@ -94,11 +94,11 @@ export interface SwitchHaState {
     /**
      * Instance ID in the format of tdsql-ow728lmc.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Target AZ. The node with the lowest delay in the target AZ will be automatically promoted to primary node.
      */
-    zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string | undefined>;
 }
 
 /**

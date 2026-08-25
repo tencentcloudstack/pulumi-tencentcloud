@@ -48,6 +48,6 @@ export function getRabbitmqVipInstanceOutput(args?: GetRabbitmqVipInstanceOutput
  * A collection of arguments for invoking getRabbitmqVipInstance.
  */
 export interface GetRabbitmqVipInstanceOutputArgs {
-    filters?: pulumi.Input<pulumi.Input<inputs.Tdmq.GetRabbitmqVipInstanceFilterArgs>[]>;
-    resultOutputFile?: pulumi.Input<string>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Tdmq.GetRabbitmqVipInstanceFilterArgs>[] | undefined>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

@@ -39,12 +39,8 @@ type GetOpsAsyncJobResult struct {
 }
 
 func GetOpsAsyncJobOutput(ctx *pulumi.Context, args GetOpsAsyncJobOutputArgs, opts ...pulumi.InvokeOption) GetOpsAsyncJobResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetOpsAsyncJobResultOutput, error) {
-			args := v.(GetOpsAsyncJobArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Wedata/getOpsAsyncJob:getOpsAsyncJob", args, GetOpsAsyncJobResultOutput{}, options).(GetOpsAsyncJobResultOutput), nil
-		}).(GetOpsAsyncJobResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Wedata/getOpsAsyncJob:getOpsAsyncJob", args, GetOpsAsyncJobResultOutput{}, options).(GetOpsAsyncJobResultOutput)
 }
 
 // A collection of arguments for invoking getOpsAsyncJob.

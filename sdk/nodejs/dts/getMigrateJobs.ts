@@ -27,13 +27,13 @@ import * as utilities from "../utilities";
  *         tagValue: "bbb",
  *     }],
  * });
- * const all = tencentcloud.Dts.getMigrateJobs({});
- * const job = migrateJob.id.apply(id => tencentcloud.Dts.getMigrateJobsOutput({
- *     jobId: id,
+ * const all = tencentcloud.dts.getMigrateJobs({});
+ * const job = tencentcloud.dts.getMigrateJobsOutput({
+ *     jobId: migrateJob.id,
  *     jobName: migrateJob.jobName,
  *     statuses: ["created"],
- * }));
- * const srcDest = tencentcloud.Dts.getMigrateJobs({
+ * });
+ * const srcDest = tencentcloud.dts.getMigrateJobs({
  *     srcRegion: "ap-guangzhou",
  *     srcDatabaseTypes: ["mysql"],
  *     dstRegion: "ap-guangzhou",
@@ -192,13 +192,13 @@ export interface GetMigrateJobsResult {
  *         tagValue: "bbb",
  *     }],
  * });
- * const all = tencentcloud.Dts.getMigrateJobs({});
- * const job = migrateJob.id.apply(id => tencentcloud.Dts.getMigrateJobsOutput({
- *     jobId: id,
+ * const all = tencentcloud.dts.getMigrateJobs({});
+ * const job = tencentcloud.dts.getMigrateJobsOutput({
+ *     jobId: migrateJob.id,
  *     jobName: migrateJob.jobName,
  *     statuses: ["created"],
- * }));
- * const srcDest = tencentcloud.Dts.getMigrateJobs({
+ * });
+ * const srcDest = tencentcloud.dts.getMigrateJobs({
  *     srcRegion: "ap-guangzhou",
  *     srcDatabaseTypes: ["mysql"],
  *     dstRegion: "ap-guangzhou",
@@ -240,61 +240,61 @@ export interface GetMigrateJobsOutputArgs {
     /**
      * destination access type.
      */
-    dstAccessTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    dstAccessTypes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * destination database type.
      */
-    dstDatabaseTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    dstDatabaseTypes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * source instance id.
      */
-    dstInstanceId?: pulumi.Input<string>;
+    dstInstanceId?: pulumi.Input<string | undefined>;
     /**
      * destination region.
      */
-    dstRegion?: pulumi.Input<string>;
+    dstRegion?: pulumi.Input<string | undefined>;
     /**
      * job id.
      */
-    jobId?: pulumi.Input<string>;
+    jobId?: pulumi.Input<string | undefined>;
     /**
      * job name.
      */
-    jobName?: pulumi.Input<string>;
+    jobName?: pulumi.Input<string | undefined>;
     /**
      * order by, default by create time.
      */
-    orderSeq?: pulumi.Input<string>;
+    orderSeq?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * run mode.
      */
-    runMode?: pulumi.Input<string>;
+    runMode?: pulumi.Input<string | undefined>;
     /**
      * source access type.
      */
-    srcAccessTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    srcAccessTypes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * source database type.
      */
-    srcDatabaseTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    srcDatabaseTypes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * source instance id.
      */
-    srcInstanceId?: pulumi.Input<string>;
+    srcInstanceId?: pulumi.Input<string | undefined>;
     /**
      * source region.
      */
-    srcRegion?: pulumi.Input<string>;
+    srcRegion?: pulumi.Input<string | undefined>;
     /**
      * migrate status.
      */
-    statuses?: pulumi.Input<pulumi.Input<string>[]>;
+    statuses?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * tag filters.
      */
-    tagFilters?: pulumi.Input<pulumi.Input<inputs.Dts.GetMigrateJobsTagFilterArgs>[]>;
+    tagFilters?: pulumi.Input<pulumi.Input<inputs.Dts.GetMigrateJobsTagFilterArgs>[] | undefined>;
 }

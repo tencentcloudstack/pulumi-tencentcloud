@@ -78,7 +78,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
     /// 
     /// ## Import
     /// 
-    /// emr emr_auto_scale_strategy can be imported using the id, e.g.
+    /// emr EmrAutoScaleStrategy can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Emr/autoScaleStrategy:AutoScaleStrategy emr_auto_scale_strategy emr_auto_scale_strategy_id

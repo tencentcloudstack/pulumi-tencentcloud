@@ -15,13 +15,13 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const internal = tencentcloud.Security.getGroups({
+ * const internal = tencentcloud.security.getGroups({
  *     name: "default",
  * });
- * const vpc = tencentcloud.Vpc.getInstances({
+ * const vpc = tencentcloud.vpc.getInstances({
  *     name: "Default-VPC",
  * });
- * const subnet = vpc.then(vpc => tencentcloud.Vpc.getSubnets({
+ * const subnet = vpc.then(vpc => tencentcloud.vpc.getSubnets({
  *     vpcId: vpc.instanceLists?.[0]?.vpcId,
  * }));
  * const vpcId = subnet.then(subnet => subnet.instanceLists?.[0]?.vpcId);
@@ -76,7 +76,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * dcdb encrypt_attributes_config can be imported using the id, e.g.
+ * dcdb encryptAttributesConfig can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Dcdb/encryptAttributesConfig:EncryptAttributesConfig encrypt_attributes_config encrypt_attributes_config_id
@@ -157,11 +157,11 @@ export interface EncryptAttributesConfigState {
     /**
      * whether to enable data encryption. Notice: it is not supported to turn it off after it is turned on. The optional values: 0-disable, 1-enable.
      */
-    encryptEnabled?: pulumi.Input<number>;
+    encryptEnabled?: pulumi.Input<number | undefined>;
     /**
      * instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**

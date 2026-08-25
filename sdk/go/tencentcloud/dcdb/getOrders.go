@@ -69,12 +69,8 @@ type GetOrdersResult struct {
 }
 
 func GetOrdersOutput(ctx *pulumi.Context, args GetOrdersOutputArgs, opts ...pulumi.InvokeOption) GetOrdersResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetOrdersResultOutput, error) {
-			args := v.(GetOrdersArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dcdb/getOrders:getOrders", args, GetOrdersResultOutput{}, options).(GetOrdersResultOutput), nil
-		}).(GetOrdersResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dcdb/getOrders:getOrders", args, GetOrdersResultOutput{}, options).(GetOrdersResultOutput)
 }
 
 // A collection of arguments for invoking getOrders.

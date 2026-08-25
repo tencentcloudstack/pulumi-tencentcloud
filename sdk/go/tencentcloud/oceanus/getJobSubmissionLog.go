@@ -98,12 +98,8 @@ type GetJobSubmissionLogResult struct {
 }
 
 func GetJobSubmissionLogOutput(ctx *pulumi.Context, args GetJobSubmissionLogOutputArgs, opts ...pulumi.InvokeOption) GetJobSubmissionLogResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetJobSubmissionLogResultOutput, error) {
-			args := v.(GetJobSubmissionLogArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Oceanus/getJobSubmissionLog:getJobSubmissionLog", args, GetJobSubmissionLogResultOutput{}, options).(GetJobSubmissionLogResultOutput), nil
-		}).(GetJobSubmissionLogResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Oceanus/getJobSubmissionLog:getJobSubmissionLog", args, GetJobSubmissionLogResultOutput{}, options).(GetJobSubmissionLogResultOutput)
 }
 
 // A collection of arguments for invoking getJobSubmissionLog.

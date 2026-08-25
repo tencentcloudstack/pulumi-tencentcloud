@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Igtm.getAddressPoolList({});
+ * const example = tencentcloud.igtm.getAddressPoolList({});
  * ```
  *
  * ### Query address pool list by filter
@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Igtm.getAddressPoolList({
+ * const example = tencentcloud.igtm.getAddressPoolList({
  *     filters: [{
  *         name: "PoolName",
  *         values: ["tf-example"],
@@ -84,7 +84,7 @@ export interface GetAddressPoolListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Igtm.getAddressPoolList({});
+ * const example = tencentcloud.igtm.getAddressPoolList({});
  * ```
  *
  * ### Query address pool list by filter
@@ -93,7 +93,7 @@ export interface GetAddressPoolListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Igtm.getAddressPoolList({
+ * const example = tencentcloud.igtm.getAddressPoolList({
  *     filters: [{
  *         name: "PoolName",
  *         values: ["tf-example"],
@@ -118,9 +118,9 @@ export interface GetAddressPoolListOutputArgs {
     /**
      * Alert filter conditions.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Igtm.GetAddressPoolListFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Igtm.GetAddressPoolListFilterArgs>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

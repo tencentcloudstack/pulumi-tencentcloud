@@ -57,7 +57,7 @@ import (
 //
 // ## Import
 //
-// antiddos ddos_speed_limit_config can be imported using the id, e.g.
+// antiddos ddosSpeedLimitConfig can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Antiddos/ddosSpeedLimitConfig:DdosSpeedLimitConfig ddos_speed_limit_config ${instanceId}#${configId}s

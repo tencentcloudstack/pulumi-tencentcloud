@@ -15,6 +15,32 @@ import (
 //
 // ## Example Usage
 //
+// ### Query all Ckafka instances
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ckafka"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := ckafka.GetInstances(ctx, &ckafka.GetInstancesArgs{}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Query Ckafka instances by filters
+//
 // ```go
 // package main
 //
@@ -29,7 +55,21 @@ import (
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := ckafka.GetInstances(ctx, &ckafka.GetInstancesArgs{
 //				InstanceIds: []string{
-//					"ckafka-vv7wpvae",
+//					"ckafka-7k5nbnem",
+//					"ckafka-8j4raxv8",
+//				},
+//				Statuses: []int{
+//					0,
+//					1,
+//					2,
+//				},
+//				Filters: []ckafka.GetInstancesFilter{
+//					{
+//						Name: "InstanceType",
+//						Values: []string{
+//							"profession",
+//						},
+//					},
 //				},
 //			}, nil)
 //			if err != nil {
@@ -56,9 +96,13 @@ type GetInstancesArgs struct {
 	Filters []GetInstancesFilter `pulumi:"filters"`
 	// Filter by instance ID.
 	InstanceIds []string `pulumi:"instanceIds"`
-	// The number of pages, default is `10`.
+	// This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances. The number of pages, default is `10`.
+	//
+	// Deprecated: This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.
 	Limit *int `pulumi:"limit"`
-	// The page start offset, default is `0`.
+	// This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances. The page start offset, default is `0`.
+	//
+	// Deprecated: This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.
 	Offset *int `pulumi:"offset"`
 	// Used to save results.
 	ResultOutputFile *string `pulumi:"resultOutputFile"`
@@ -77,11 +121,13 @@ type GetInstancesResult struct {
 	Id          string   `pulumi:"id"`
 	InstanceIds []string `pulumi:"instanceIds"`
 	// A list of ckafka users. Each element contains the following attributes:
-	InstanceLists    []GetInstancesInstanceList `pulumi:"instanceLists"`
-	Limit            *int                       `pulumi:"limit"`
-	Offset           *int                       `pulumi:"offset"`
-	ResultOutputFile *string                    `pulumi:"resultOutputFile"`
-	SearchWord       *string                    `pulumi:"searchWord"`
+	InstanceLists []GetInstancesInstanceList `pulumi:"instanceLists"`
+	// Deprecated: This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.
+	Limit *int `pulumi:"limit"`
+	// Deprecated: This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.
+	Offset           *int    `pulumi:"offset"`
+	ResultOutputFile *string `pulumi:"resultOutputFile"`
+	SearchWord       *string `pulumi:"searchWord"`
 	// The status of the instance. 0: Created, 1: Running, 2: Delete: 5 Quarantined, -1 Creation failed.
 	Statuses []int `pulumi:"statuses"`
 	// Tag Key.
@@ -89,12 +135,8 @@ type GetInstancesResult struct {
 }
 
 func GetInstancesOutput(ctx *pulumi.Context, args GetInstancesOutputArgs, opts ...pulumi.InvokeOption) GetInstancesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstancesResultOutput, error) {
-			args := v.(GetInstancesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ckafka/getInstances:getInstances", args, GetInstancesResultOutput{}, options).(GetInstancesResultOutput), nil
-		}).(GetInstancesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ckafka/getInstances:getInstances", args, GetInstancesResultOutput{}, options).(GetInstancesResultOutput)
 }
 
 // A collection of arguments for invoking getInstances.
@@ -103,9 +145,13 @@ type GetInstancesOutputArgs struct {
 	Filters GetInstancesFilterArrayInput `pulumi:"filters"`
 	// Filter by instance ID.
 	InstanceIds pulumi.StringArrayInput `pulumi:"instanceIds"`
-	// The number of pages, default is `10`.
+	// This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances. The number of pages, default is `10`.
+	//
+	// Deprecated: This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.
 	Limit pulumi.IntPtrInput `pulumi:"limit"`
-	// The page start offset, default is `0`.
+	// This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances. The page start offset, default is `0`.
+	//
+	// Deprecated: This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.
 	Offset pulumi.IntPtrInput `pulumi:"offset"`
 	// Used to save results.
 	ResultOutputFile pulumi.StringPtrInput `pulumi:"resultOutputFile"`
@@ -154,10 +200,12 @@ func (o GetInstancesResultOutput) InstanceLists() GetInstancesInstanceListArrayO
 	return o.ApplyT(func(v GetInstancesResult) []GetInstancesInstanceList { return v.InstanceLists }).(GetInstancesInstanceListArrayOutput)
 }
 
+// Deprecated: This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.
 func (o GetInstancesResultOutput) Limit() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v GetInstancesResult) *int { return v.Limit }).(pulumi.IntPtrOutput)
 }
 
+// Deprecated: This parameter is deprecated and will be removed in a future version. The data source now automatically retrieves all instances.
 func (o GetInstancesResultOutput) Offset() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v GetInstancesResult) *int { return v.Offset }).(pulumi.IntPtrOutput)
 }

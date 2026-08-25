@@ -276,7 +276,7 @@ type AuditTrackStorage struct {
 	StoragePrefix string `pulumi:"storagePrefix"`
 	// StorageRegion *string `json:'StorageRegion,omitnil,omitempty' name: 'StorageRegion'`.
 	StorageRegion string `pulumi:"storageRegion"`
-	// Storage type (Valid values: cos, cls).
+	// Storage type (Valid values: cos, cls, ckafka).
 	StorageType string `pulumi:"storageType"`
 }
 
@@ -302,7 +302,7 @@ type AuditTrackStorageArgs struct {
 	StoragePrefix pulumi.StringInput `pulumi:"storagePrefix"`
 	// StorageRegion *string `json:'StorageRegion,omitnil,omitempty' name: 'StorageRegion'`.
 	StorageRegion pulumi.StringInput `pulumi:"storageRegion"`
-	// Storage type (Valid values: cos, cls).
+	// Storage type (Valid values: cos, cls, ckafka).
 	StorageType pulumi.StringInput `pulumi:"storageType"`
 }
 
@@ -408,7 +408,7 @@ func (o AuditTrackStorageOutput) StorageRegion() pulumi.StringOutput {
 	return o.ApplyT(func(v AuditTrackStorage) string { return v.StorageRegion }).(pulumi.StringOutput)
 }
 
-// Storage type (Valid values: cos, cls).
+// Storage type (Valid values: cos, cls, ckafka).
 func (o AuditTrackStorageOutput) StorageType() pulumi.StringOutput {
 	return o.ApplyT(func(v AuditTrackStorage) string { return v.StorageType }).(pulumi.StringOutput)
 }
@@ -487,7 +487,7 @@ func (o AuditTrackStoragePtrOutput) StorageRegion() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-// Storage type (Valid values: cos, cls).
+// Storage type (Valid values: cos, cls, ckafka).
 func (o AuditTrackStoragePtrOutput) StorageType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *AuditTrackStorage) *string {
 		if v == nil {

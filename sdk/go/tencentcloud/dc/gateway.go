@@ -14,6 +14,8 @@ import (
 
 // Provides a resource to creating direct connect gateway instance.
 //
+// > **NOTE:** Currently, it is not supported to set `cnnRouteType` to `BGP` simultaneously during the creation of resource `Dc.Gateway`(only configuration modification is supported); This feature requires contacting the VPC product team to be added to the whitelist.
+//
 // ## Example Usage
 //
 // ### If networkType is VPC
@@ -32,7 +34,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("vpc"),
 //			})
@@ -42,9 +44,13 @@ import (
 //			// create dc gateway
 //			_, err = dc.NewGateway(ctx, "example", &dc.GatewayArgs{
 //				Name:              pulumi.String("tf-example"),
-//				NetworkInstanceId: vpc.ID(),
+//				NetworkInstanceId: vpc2.ID().ToIDOutput().ToStringOutput(),
 //				NetworkType:       pulumi.String("VPC"),
 //				GatewayType:       pulumi.String("NORMAL"),
+//				Tags: pulumi.StringMap{
+//					"Environment": pulumi.String("production"),
+//					"Owner":       pulumi.String("ops-team"),
+//				},
 //			})
 //			if err != nil {
 //				return err
@@ -71,7 +77,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			// create ccn
-//			ccn, err := ccn.NewInstance(ctx, "ccn", &ccn.InstanceArgs{
+//			ccn2, err := ccn.NewInstance(ctx, "ccn", &ccn.InstanceArgs{
 //				Name:               pulumi.String("tf-example"),
 //				Description:        pulumi.String("desc."),
 //				Qos:                pulumi.String("AG"),
@@ -87,9 +93,47 @@ import (
 //			// create dc gateway
 //			_, err = dc.NewGateway(ctx, "example", &dc.GatewayArgs{
 //				Name:              pulumi.String("tf-example"),
-//				NetworkInstanceId: ccn.ID(),
+//				NetworkInstanceId: ccn2.ID().ToIDOutput().ToStringOutput(),
 //				NetworkType:       pulumi.String("CCN"),
 //				GatewayType:       pulumi.String("NORMAL"),
+//				Tags: pulumi.StringMap{
+//					"Team":    pulumi.String("networking"),
+//					"Purpose": pulumi.String("production"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Update tags
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dc"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := dc.NewGateway(ctx, "example", &dc.GatewayArgs{
+//				Name:              pulumi.String("tf-example"),
+//				NetworkInstanceId: pulumi.Any(ccn.Id),
+//				NetworkType:       pulumi.String("CCN"),
+//				GatewayType:       pulumi.String("NORMAL"),
+//				Tags: pulumi.StringMap{
+//					"Environment": pulumi.String("staging"),
+//					"Team":        pulumi.String("devops"),
+//					"CostCenter":  pulumi.String("IT-001"),
+//				},
 //			})
 //			if err != nil {
 //				return err
@@ -102,7 +146,7 @@ import (
 //
 // ## Import
 //
-// Direct connect gateway instance can be imported, e.g.
+// Direct connect gateway instance can be imported, e.g. Tags will be imported automatically.
 //
 // ```sh
 // $ pulumi import tencentcloud:Dc/gateway:Gateway example dcg-dr1y0hu7
@@ -116,14 +160,24 @@ type Gateway struct {
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
 	// Indicates whether the BGP is enabled.
 	EnableBgp pulumi.BoolOutput `pulumi:"enableBgp"`
+	// Dedicated connection gateway custom ASN, range: 45090, 64512-65534 and 4200000000-4294967294.
+	GatewayAsn pulumi.IntOutput `pulumi:"gatewayAsn"`
 	// Type of the gateway. Valid value: `NORMAL` and `NAT`. Default is `NORMAL`. NOTES: CCN only supports `NORMAL` and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.
 	GatewayType pulumi.StringPtrOutput `pulumi:"gatewayType"`
+	// ID of DC highly available placement group.
+	HaZoneGroupId pulumi.StringPtrOutput `pulumi:"haZoneGroupId"`
+	// CCN route publishing method. Valid values: standard and exquisite. This parameter is only valid for the CCN direct connect gateway.
+	ModeType pulumi.StringOutput `pulumi:"modeType"`
 	// Name of the DCG.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// If the `networkType` value is `VPC`, the available value is VPC ID. But when the `networkType` value is `CCN`, the available value is CCN instance ID.
 	NetworkInstanceId pulumi.StringOutput `pulumi:"networkInstanceId"`
 	// Type of associated network. Valid value: `VPC` and `CCN`.
 	NetworkType pulumi.StringOutput `pulumi:"networkType"`
+	// Tag key-value pairs for the DC gateway. Multiple tags can be set.
+	Tags pulumi.StringMapOutput `pulumi:"tags"`
+	// Availability zone where the direct connect gateway resides.
+	Zone pulumi.StringOutput `pulumi:"zone"`
 }
 
 // NewGateway registers a new resource with the given unique name, arguments, and options.
@@ -168,14 +222,24 @@ type gatewayState struct {
 	CreateTime *string `pulumi:"createTime"`
 	// Indicates whether the BGP is enabled.
 	EnableBgp *bool `pulumi:"enableBgp"`
+	// Dedicated connection gateway custom ASN, range: 45090, 64512-65534 and 4200000000-4294967294.
+	GatewayAsn *int `pulumi:"gatewayAsn"`
 	// Type of the gateway. Valid value: `NORMAL` and `NAT`. Default is `NORMAL`. NOTES: CCN only supports `NORMAL` and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.
 	GatewayType *string `pulumi:"gatewayType"`
+	// ID of DC highly available placement group.
+	HaZoneGroupId *string `pulumi:"haZoneGroupId"`
+	// CCN route publishing method. Valid values: standard and exquisite. This parameter is only valid for the CCN direct connect gateway.
+	ModeType *string `pulumi:"modeType"`
 	// Name of the DCG.
 	Name *string `pulumi:"name"`
 	// If the `networkType` value is `VPC`, the available value is VPC ID. But when the `networkType` value is `CCN`, the available value is CCN instance ID.
 	NetworkInstanceId *string `pulumi:"networkInstanceId"`
 	// Type of associated network. Valid value: `VPC` and `CCN`.
 	NetworkType *string `pulumi:"networkType"`
+	// Tag key-value pairs for the DC gateway. Multiple tags can be set.
+	Tags map[string]string `pulumi:"tags"`
+	// Availability zone where the direct connect gateway resides.
+	Zone *string `pulumi:"zone"`
 }
 
 type GatewayState struct {
@@ -185,14 +249,24 @@ type GatewayState struct {
 	CreateTime pulumi.StringPtrInput
 	// Indicates whether the BGP is enabled.
 	EnableBgp pulumi.BoolPtrInput
+	// Dedicated connection gateway custom ASN, range: 45090, 64512-65534 and 4200000000-4294967294.
+	GatewayAsn pulumi.IntPtrInput
 	// Type of the gateway. Valid value: `NORMAL` and `NAT`. Default is `NORMAL`. NOTES: CCN only supports `NORMAL` and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.
 	GatewayType pulumi.StringPtrInput
+	// ID of DC highly available placement group.
+	HaZoneGroupId pulumi.StringPtrInput
+	// CCN route publishing method. Valid values: standard and exquisite. This parameter is only valid for the CCN direct connect gateway.
+	ModeType pulumi.StringPtrInput
 	// Name of the DCG.
 	Name pulumi.StringPtrInput
 	// If the `networkType` value is `VPC`, the available value is VPC ID. But when the `networkType` value is `CCN`, the available value is CCN instance ID.
 	NetworkInstanceId pulumi.StringPtrInput
 	// Type of associated network. Valid value: `VPC` and `CCN`.
 	NetworkType pulumi.StringPtrInput
+	// Tag key-value pairs for the DC gateway. Multiple tags can be set.
+	Tags pulumi.StringMapInput
+	// Availability zone where the direct connect gateway resides.
+	Zone pulumi.StringPtrInput
 }
 
 func (GatewayState) ElementType() reflect.Type {
@@ -200,26 +274,50 @@ func (GatewayState) ElementType() reflect.Type {
 }
 
 type gatewayArgs struct {
+	// Type of CCN route. Valid value: `BGP` and `STATIC`. The property is available when the DCG type is CCN gateway and BGP enabled.
+	CnnRouteType *string `pulumi:"cnnRouteType"`
+	// Dedicated connection gateway custom ASN, range: 45090, 64512-65534 and 4200000000-4294967294.
+	GatewayAsn *int `pulumi:"gatewayAsn"`
 	// Type of the gateway. Valid value: `NORMAL` and `NAT`. Default is `NORMAL`. NOTES: CCN only supports `NORMAL` and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.
 	GatewayType *string `pulumi:"gatewayType"`
+	// ID of DC highly available placement group.
+	HaZoneGroupId *string `pulumi:"haZoneGroupId"`
+	// CCN route publishing method. Valid values: standard and exquisite. This parameter is only valid for the CCN direct connect gateway.
+	ModeType *string `pulumi:"modeType"`
 	// Name of the DCG.
 	Name *string `pulumi:"name"`
 	// If the `networkType` value is `VPC`, the available value is VPC ID. But when the `networkType` value is `CCN`, the available value is CCN instance ID.
 	NetworkInstanceId string `pulumi:"networkInstanceId"`
 	// Type of associated network. Valid value: `VPC` and `CCN`.
 	NetworkType string `pulumi:"networkType"`
+	// Tag key-value pairs for the DC gateway. Multiple tags can be set.
+	Tags map[string]string `pulumi:"tags"`
+	// Availability zone where the direct connect gateway resides.
+	Zone *string `pulumi:"zone"`
 }
 
 // The set of arguments for constructing a Gateway resource.
 type GatewayArgs struct {
+	// Type of CCN route. Valid value: `BGP` and `STATIC`. The property is available when the DCG type is CCN gateway and BGP enabled.
+	CnnRouteType pulumi.StringPtrInput
+	// Dedicated connection gateway custom ASN, range: 45090, 64512-65534 and 4200000000-4294967294.
+	GatewayAsn pulumi.IntPtrInput
 	// Type of the gateway. Valid value: `NORMAL` and `NAT`. Default is `NORMAL`. NOTES: CCN only supports `NORMAL` and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.
 	GatewayType pulumi.StringPtrInput
+	// ID of DC highly available placement group.
+	HaZoneGroupId pulumi.StringPtrInput
+	// CCN route publishing method. Valid values: standard and exquisite. This parameter is only valid for the CCN direct connect gateway.
+	ModeType pulumi.StringPtrInput
 	// Name of the DCG.
 	Name pulumi.StringPtrInput
 	// If the `networkType` value is `VPC`, the available value is VPC ID. But when the `networkType` value is `CCN`, the available value is CCN instance ID.
 	NetworkInstanceId pulumi.StringInput
 	// Type of associated network. Valid value: `VPC` and `CCN`.
 	NetworkType pulumi.StringInput
+	// Tag key-value pairs for the DC gateway. Multiple tags can be set.
+	Tags pulumi.StringMapInput
+	// Availability zone where the direct connect gateway resides.
+	Zone pulumi.StringPtrInput
 }
 
 func (GatewayArgs) ElementType() reflect.Type {
@@ -324,9 +422,24 @@ func (o GatewayOutput) EnableBgp() pulumi.BoolOutput {
 	return o.ApplyT(func(v *Gateway) pulumi.BoolOutput { return v.EnableBgp }).(pulumi.BoolOutput)
 }
 
+// Dedicated connection gateway custom ASN, range: 45090, 64512-65534 and 4200000000-4294967294.
+func (o GatewayOutput) GatewayAsn() pulumi.IntOutput {
+	return o.ApplyT(func(v *Gateway) pulumi.IntOutput { return v.GatewayAsn }).(pulumi.IntOutput)
+}
+
 // Type of the gateway. Valid value: `NORMAL` and `NAT`. Default is `NORMAL`. NOTES: CCN only supports `NORMAL` and a VPC can create two DCGs, the one is NAT type and the other is non-NAT type.
 func (o GatewayOutput) GatewayType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Gateway) pulumi.StringPtrOutput { return v.GatewayType }).(pulumi.StringPtrOutput)
+}
+
+// ID of DC highly available placement group.
+func (o GatewayOutput) HaZoneGroupId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Gateway) pulumi.StringPtrOutput { return v.HaZoneGroupId }).(pulumi.StringPtrOutput)
+}
+
+// CCN route publishing method. Valid values: standard and exquisite. This parameter is only valid for the CCN direct connect gateway.
+func (o GatewayOutput) ModeType() pulumi.StringOutput {
+	return o.ApplyT(func(v *Gateway) pulumi.StringOutput { return v.ModeType }).(pulumi.StringOutput)
 }
 
 // Name of the DCG.
@@ -342,6 +455,16 @@ func (o GatewayOutput) NetworkInstanceId() pulumi.StringOutput {
 // Type of associated network. Valid value: `VPC` and `CCN`.
 func (o GatewayOutput) NetworkType() pulumi.StringOutput {
 	return o.ApplyT(func(v *Gateway) pulumi.StringOutput { return v.NetworkType }).(pulumi.StringOutput)
+}
+
+// Tag key-value pairs for the DC gateway. Multiple tags can be set.
+func (o GatewayOutput) Tags() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *Gateway) pulumi.StringMapOutput { return v.Tags }).(pulumi.StringMapOutput)
+}
+
+// Availability zone where the direct connect gateway resides.
+func (o GatewayOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v *Gateway) pulumi.StringOutput { return v.Zone }).(pulumi.StringOutput)
 }
 
 type GatewayArrayOutput struct{ *pulumi.OutputState }

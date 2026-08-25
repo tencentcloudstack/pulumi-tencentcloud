@@ -45,7 +45,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * cfw block_ignore_list can be imported using the id, e.g.
+ * cfw blockIgnoreList can be imported using the id, e.g.
  *
  * If import ip rule
  *
@@ -167,31 +167,31 @@ export interface BlockIgnoreState {
     /**
      * Remarks information, length cannot exceed 50.
      */
-    comment?: pulumi.Input<string>;
+    comment?: pulumi.Input<string | undefined>;
     /**
      * Rule direction, 0 outbound, 1 inbound, 3 intranet.
      */
-    direction?: pulumi.Input<string>;
+    direction?: pulumi.Input<string | undefined>;
     /**
      * Rule domain name, one of IP and Domain is required.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Rule end time, format: 2006-01-02 15:04:05, must be greater than the current time.
      */
-    endTime?: pulumi.Input<string>;
+    endTime?: pulumi.Input<string | undefined>;
     /**
      * Rule IP address, one of IP and Domain is required.
      */
-    ip?: pulumi.Input<string>;
+    ip?: pulumi.Input<string | undefined>;
     /**
      * Rule type, 1 block, 2 ignore, domain block is not supported.
      */
-    ruleType?: pulumi.Input<number>;
+    ruleType?: pulumi.Input<number | undefined>;
     /**
      * Rule start time.
      */
-    startTime?: pulumi.Input<string>;
+    startTime?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -201,7 +201,7 @@ export interface BlockIgnoreArgs {
     /**
      * Remarks information, length cannot exceed 50.
      */
-    comment?: pulumi.Input<string>;
+    comment?: pulumi.Input<string | undefined>;
     /**
      * Rule direction, 0 outbound, 1 inbound, 3 intranet.
      */
@@ -209,7 +209,7 @@ export interface BlockIgnoreArgs {
     /**
      * Rule domain name, one of IP and Domain is required.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Rule end time, format: 2006-01-02 15:04:05, must be greater than the current time.
      */
@@ -217,7 +217,7 @@ export interface BlockIgnoreArgs {
     /**
      * Rule IP address, one of IP and Domain is required.
      */
-    ip?: pulumi.Input<string>;
+    ip?: pulumi.Input<string | undefined>;
     /**
      * Rule type, 1 block, 2 ignore, domain block is not supported.
      */
@@ -225,5 +225,5 @@ export interface BlockIgnoreArgs {
     /**
      * Rule start time.
      */
-    startTime?: pulumi.Input<string>;
+    startTime?: pulumi.Input<string | undefined>;
 }

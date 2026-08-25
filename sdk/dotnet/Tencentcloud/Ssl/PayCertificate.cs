@@ -70,10 +70,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// 
     /// ## Import
     /// 
-    /// payment SSL instance can be imported, e.g.
+    /// payment SSL instance can be imported certificateId#productId#domainNum#timeSpan, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Ssl/payCertificate:PayCertificate ssl iPQNn61x#33#1#1
+    /// $ pulumi import tencentcloud:Ssl/payCertificate:PayCertificate example iPQNn61x#33#1#1
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ssl/payCertificate:PayCertificate")]
@@ -209,18 +209,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// </summary>
         [Input("domainNum", required: true)]
         public Input<int> DomainNum { get; set; } = null!;
-
-        [Input("dvAuths")]
-        private InputList<Inputs.PayCertificateDvAuthArgs>? _dvAuths;
-
-        /// <summary>
-        /// DV certification information.
-        /// </summary>
-        public InputList<Inputs.PayCertificateDvAuthArgs> DvAuths
-        {
-            get => _dvAuths ?? (_dvAuths = new InputList<Inputs.PayCertificateDvAuthArgs>());
-            set => _dvAuths = value;
-        }
 
         /// <summary>
         /// Certificate information.

@@ -126,19 +126,19 @@ export interface ModifyDiagDbInstanceOperationState {
     /**
      * Instance configuration, including inspection, overview switch, etc.
      */
-    instanceConfs?: pulumi.Input<inputs.Dbbrain.ModifyDiagDbInstanceOperationInstanceConfs>;
+    instanceConfs?: pulumi.Input<inputs.Dbbrain.ModifyDiagDbInstanceOperationInstanceConfs | undefined>;
     /**
      * Specifies the ID of the instance whose inspection status is changed.
      */
-    instanceIds?: pulumi.Input<pulumi.Input<string>[]>;
+    instanceIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Service product type, supported values include: mysql - cloud database MySQL, cynosdb - cloud database CynosDB for MySQL.
      */
-    product?: pulumi.Input<string>;
+    product?: pulumi.Input<string | undefined>;
     /**
      * Effective instance region, the value is All, which means all regions.
      */
-    regions?: pulumi.Input<string>;
+    regions?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -152,7 +152,7 @@ export interface ModifyDiagDbInstanceOperationArgs {
     /**
      * Specifies the ID of the instance whose inspection status is changed.
      */
-    instanceIds?: pulumi.Input<pulumi.Input<string>[]>;
+    instanceIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Service product type, supported values include: mysql - cloud database MySQL, cynosdb - cloud database CynosDB for MySQL.
      */
@@ -160,5 +160,5 @@ export interface ModifyDiagDbInstanceOperationArgs {
     /**
      * Effective instance region, the value is All, which means all regions.
      */
-    regions?: pulumi.Input<string>;
+    regions?: pulumi.Input<string | undefined>;
 }

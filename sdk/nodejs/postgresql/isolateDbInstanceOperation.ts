@@ -82,7 +82,7 @@ export interface IsolateDbInstanceOperationState {
     /**
      * List of resource IDs. Note that currently you cannot isolate multiple instances at the same time. Only one instance ID can be passed in here.
      */
-    dbInstanceIdSets?: pulumi.Input<pulumi.Input<string>[]>;
+    dbInstanceIdSets?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**

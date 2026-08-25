@@ -136,12 +136,8 @@ type GetStaticResourceResult struct {
 }
 
 func GetStaticResourceOutput(ctx *pulumi.Context, args GetStaticResourceOutputArgs, opts ...pulumi.InvokeOption) GetStaticResourceResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetStaticResourceResultOutput, error) {
-			args := v.(GetStaticResourceArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Rum/getStaticResource:getStaticResource", args, GetStaticResourceResultOutput{}, options).(GetStaticResourceResultOutput), nil
-		}).(GetStaticResourceResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Rum/getStaticResource:getStaticResource", args, GetStaticResourceResultOutput{}, options).(GetStaticResourceResultOutput)
 }
 
 // A collection of arguments for invoking getStaticResource.

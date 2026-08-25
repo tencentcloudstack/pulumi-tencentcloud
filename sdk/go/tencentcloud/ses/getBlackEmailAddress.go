@@ -80,12 +80,8 @@ type GetBlackEmailAddressResult struct {
 }
 
 func GetBlackEmailAddressOutput(ctx *pulumi.Context, args GetBlackEmailAddressOutputArgs, opts ...pulumi.InvokeOption) GetBlackEmailAddressResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetBlackEmailAddressResultOutput, error) {
-			args := v.(GetBlackEmailAddressArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ses/getBlackEmailAddress:getBlackEmailAddress", args, GetBlackEmailAddressResultOutput{}, options).(GetBlackEmailAddressResultOutput), nil
-		}).(GetBlackEmailAddressResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ses/getBlackEmailAddress:getBlackEmailAddress", args, GetBlackEmailAddressResultOutput{}, options).(GetBlackEmailAddressResultOutput)
 }
 
 // A collection of arguments for invoking getBlackEmailAddress.

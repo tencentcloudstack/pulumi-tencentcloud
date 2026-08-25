@@ -90,12 +90,8 @@ type GetSlowLogTopSqlsResult struct {
 }
 
 func GetSlowLogTopSqlsOutput(ctx *pulumi.Context, args GetSlowLogTopSqlsOutputArgs, opts ...pulumi.InvokeOption) GetSlowLogTopSqlsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSlowLogTopSqlsResultOutput, error) {
-			args := v.(GetSlowLogTopSqlsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dbbrain/getSlowLogTopSqls:getSlowLogTopSqls", args, GetSlowLogTopSqlsResultOutput{}, options).(GetSlowLogTopSqlsResultOutput), nil
-		}).(GetSlowLogTopSqlsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dbbrain/getSlowLogTopSqls:getSlowLogTopSqls", args, GetSlowLogTopSqlsResultOutput{}, options).(GetSlowLogTopSqlsResultOutput)
 }
 
 // A collection of arguments for invoking getSlowLogTopSqls.

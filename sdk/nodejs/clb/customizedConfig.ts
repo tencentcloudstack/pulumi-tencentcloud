@@ -140,23 +140,23 @@ export interface CustomizedConfigState {
     /**
      * Content of Customized Config.
      */
-    configContent?: pulumi.Input<string>;
+    configContent?: pulumi.Input<string | undefined>;
     /**
      * Name of Customized Config.
      */
-    configName?: pulumi.Input<string>;
+    configName?: pulumi.Input<string | undefined>;
     /**
      * Create time of Customized Config.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * List of LoadBalancer Ids.
      */
-    loadBalancerIds?: pulumi.Input<pulumi.Input<string>[]>;
+    loadBalancerIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Update time of Customized Config.
      */
-    updateTime?: pulumi.Input<string>;
+    updateTime?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -174,5 +174,5 @@ export interface CustomizedConfigArgs {
     /**
      * List of LoadBalancer Ids.
      */
-    loadBalancerIds?: pulumi.Input<pulumi.Input<string>[]>;
+    loadBalancerIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

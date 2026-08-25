@@ -83,12 +83,8 @@ type GetAvailableClusterVersionsResult struct {
 }
 
 func GetAvailableClusterVersionsOutput(ctx *pulumi.Context, args GetAvailableClusterVersionsOutputArgs, opts ...pulumi.InvokeOption) GetAvailableClusterVersionsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetAvailableClusterVersionsResultOutput, error) {
-			args := v.(GetAvailableClusterVersionsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Kubernetes/getAvailableClusterVersions:getAvailableClusterVersions", args, GetAvailableClusterVersionsResultOutput{}, options).(GetAvailableClusterVersionsResultOutput), nil
-		}).(GetAvailableClusterVersionsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Kubernetes/getAvailableClusterVersions:getAvailableClusterVersions", args, GetAvailableClusterVersionsResultOutput{}, options).(GetAvailableClusterVersionsResultOutput)
 }
 
 // A collection of arguments for invoking getAvailableClusterVersions.

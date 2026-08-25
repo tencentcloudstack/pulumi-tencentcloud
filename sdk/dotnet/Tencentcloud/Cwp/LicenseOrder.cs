@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
 {
     /// <summary>
-    /// Provides a resource to create a cwp LicenseOrder
+    /// Provides a resource to create a CWP license order
     /// 
     /// ## Example Usage
     /// 
@@ -41,7 +41,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
     /// 
     /// ## Import
     /// 
-    /// cwp license_order can be imported using the id, e.g.
+    /// CWP license order can be imported using the resourceId#regionId, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Cwp/licenseOrder:LicenseOrder example cwplic-130715d2#1
@@ -63,13 +63,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
         public Output<int> LicenseId { get; private set; } = null!;
 
         /// <summary>
-        /// License quantity, Quantity to be purchased.Default is 1.
+        /// Authorization quantity: the number of units that need to be purchased, The default is 1.
         /// </summary>
         [Output("licenseNum")]
         public Output<int?> LicenseNum { get; private set; } = null!;
 
         /// <summary>
-        /// LicenseType, 0 CWP Pro - Pay as you go, 1 CWP Pro - Monthly subscription, 2 CWP Ultimate - Monthly subscription. Default is 0.
+        /// Authorization type. 0: Pro Edition-pay-as-you-go; 1: Pro Edition-monthly subscription; 2 - Ultimate Edition-monthly subscriptionThe default is 0.
         /// </summary>
         [Output("licenseType")]
         public Output<int?> LicenseType { get; private set; } = null!;
@@ -81,7 +81,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
         public Output<int?> ProjectId { get; private set; } = null!;
 
         /// <summary>
-        /// Purchase order region, only 1 Guangzhou, 9 Singapore is supported here. Guangzhou is recommended. Singapore is whitelisted. Default is 1.
+        /// Region of purchase order. In this case, only 1 - Guangzhou and 9 - Singapore are supported. Guangzhou is recommended. Singapore region is reserved for allowlisted users. The default is 1.
         /// </summary>
         [Output("regionId")]
         public Output<int?> RegionId { get; private set; } = null!;
@@ -152,13 +152,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
         public Input<string>? Alias { get; set; }
 
         /// <summary>
-        /// License quantity, Quantity to be purchased.Default is 1.
+        /// Authorization quantity: the number of units that need to be purchased, The default is 1.
         /// </summary>
         [Input("licenseNum")]
         public Input<int>? LicenseNum { get; set; }
 
         /// <summary>
-        /// LicenseType, 0 CWP Pro - Pay as you go, 1 CWP Pro - Monthly subscription, 2 CWP Ultimate - Monthly subscription. Default is 0.
+        /// Authorization type. 0: Pro Edition-pay-as-you-go; 1: Pro Edition-monthly subscription; 2 - Ultimate Edition-monthly subscriptionThe default is 0.
         /// </summary>
         [Input("licenseType")]
         public Input<int>? LicenseType { get; set; }
@@ -170,7 +170,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
         public Input<int>? ProjectId { get; set; }
 
         /// <summary>
-        /// Purchase order region, only 1 Guangzhou, 9 Singapore is supported here. Guangzhou is recommended. Singapore is whitelisted. Default is 1.
+        /// Region of purchase order. In this case, only 1 - Guangzhou and 9 - Singapore are supported. Guangzhou is recommended. Singapore region is reserved for allowlisted users. The default is 1.
         /// </summary>
         [Input("regionId")]
         public Input<int>? RegionId { get; set; }
@@ -208,13 +208,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
         public Input<int>? LicenseId { get; set; }
 
         /// <summary>
-        /// License quantity, Quantity to be purchased.Default is 1.
+        /// Authorization quantity: the number of units that need to be purchased, The default is 1.
         /// </summary>
         [Input("licenseNum")]
         public Input<int>? LicenseNum { get; set; }
 
         /// <summary>
-        /// LicenseType, 0 CWP Pro - Pay as you go, 1 CWP Pro - Monthly subscription, 2 CWP Ultimate - Monthly subscription. Default is 0.
+        /// Authorization type. 0: Pro Edition-pay-as-you-go; 1: Pro Edition-monthly subscription; 2 - Ultimate Edition-monthly subscriptionThe default is 0.
         /// </summary>
         [Input("licenseType")]
         public Input<int>? LicenseType { get; set; }
@@ -226,7 +226,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
         public Input<int>? ProjectId { get; set; }
 
         /// <summary>
-        /// Purchase order region, only 1 Guangzhou, 9 Singapore is supported here. Guangzhou is recommended. Singapore is whitelisted. Default is 1.
+        /// Region of purchase order. In this case, only 1 - Guangzhou and 9 - Singapore are supported. Guangzhou is recommended. Singapore region is reserved for allowlisted users. The default is 1.
         /// </summary>
         [Input("regionId")]
         public Input<int>? RegionId { get; set; }

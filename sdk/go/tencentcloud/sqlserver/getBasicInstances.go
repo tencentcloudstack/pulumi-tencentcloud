@@ -137,12 +137,8 @@ type GetBasicInstancesResult struct {
 }
 
 func GetBasicInstancesOutput(ctx *pulumi.Context, args GetBasicInstancesOutputArgs, opts ...pulumi.InvokeOption) GetBasicInstancesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetBasicInstancesResultOutput, error) {
-			args := v.(GetBasicInstancesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Sqlserver/getBasicInstances:getBasicInstances", args, GetBasicInstancesResultOutput{}, options).(GetBasicInstancesResultOutput), nil
-		}).(GetBasicInstancesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Sqlserver/getBasicInstances:getBasicInstances", args, GetBasicInstancesResultOutput{}, options).(GetBasicInstancesResultOutput)
 }
 
 // A collection of arguments for invoking getBasicInstances.

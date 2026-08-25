@@ -45,7 +45,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * monitor grafanaPlugin can be imported using the instance_id#plugin_id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Monitor/grafanaPlugin:GrafanaPlugin grafanaPlugin grafana-50nj6v00#grafana-piechart-panel
  * ```
@@ -131,15 +130,15 @@ export interface GrafanaPluginState {
     /**
      * Grafana instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Plugin id.
      */
-    pluginId?: pulumi.Input<string>;
+    pluginId?: pulumi.Input<string | undefined>;
     /**
      * Plugin version.
      */
-    version?: pulumi.Input<string>;
+    version?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -157,5 +156,5 @@ export interface GrafanaPluginArgs {
     /**
      * Plugin version.
      */
-    version?: pulumi.Input<string>;
+    version?: pulumi.Input<string | undefined>;
 }

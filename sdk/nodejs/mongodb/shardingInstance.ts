@@ -2,10 +2,16 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provide a resource to create a Mongodb sharding instance.
+ *
+ * > **NOTE:** The `addNodeList` and `removeNodeList` arguments are used to submit node change actions. When updating the resource, only newly added items in these lists will be sent to the API. If an existing item is removed from the Terraform configuration, Terraform only updates the local state and does not submit a repeated add or remove request. To add or remove another read-only node, append a new block instead of modifying an existing one. After the change is completed, obsolete action records can be removed from the configuration, and this cleanup does not trigger a new node operation when the remaining list is a subset of the previous list. In general, it is recommended to keep these action records in the configuration and avoid cleanup unless necessary.
+ *
+ * > **NOTE:** The `cpu` parameter takes effect only when the configuration is changed. Changing the `cpu` triggers the `ModifyDBInstanceSpec` API to adjust the CPU specification of the running MongoDB instance in-place. The supported CPU specifications can be obtained through the `DescribeSpecInfo` API.
  *
  * ## Example Usage
  *
@@ -13,22 +19,81 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const mongodb = new tencentcloud.mongodb.ShardingInstance("mongodb", {
- *     instanceName: "mongodb",
+ * const example = new tencentcloud.mongodb.ShardingInstance("example", {
+ *     instanceName: "tf-example",
  *     shardQuantity: 2,
  *     nodesPerShard: 3,
  *     memory: 4,
  *     volume: 100,
- *     engineVersion: "MONGO_36_WT",
+ *     engineVersion: "MONGO_40_WT",
  *     machineType: "HIO10G",
- *     availableZone: "ap-guangzhou-3",
- *     vpcId: "vpc-mz3efvbw",
- *     subnetId: "subnet-lk0svi3p",
+ *     availableZone: "ap-guangzhou-6",
+ *     vpcId: "vpc-i5yyodl9",
+ *     subnetId: "subnet-hhi88a58",
  *     projectId: 0,
- *     password: "password1234",
+ *     password: "Password@123",
  *     mongosCpu: 1,
  *     mongosMemory: 2,
  *     mongosNodeNum: 3,
+ * });
+ * ```
+ *
+ * ### Add a read-only node
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.mongodb.ShardingInstance("example", {
+ *     instanceName: "tf-example",
+ *     shardQuantity: 2,
+ *     nodesPerShard: 3,
+ *     memory: 4,
+ *     volume: 100,
+ *     engineVersion: "MONGO_40_WT",
+ *     machineType: "HIO10G",
+ *     availableZone: "ap-guangzhou-6",
+ *     vpcId: "vpc-i5yyodl9",
+ *     subnetId: "subnet-hhi88a58",
+ *     projectId: 0,
+ *     password: "Password@123",
+ *     mongosCpu: 1,
+ *     mongosMemory: 2,
+ *     mongosNodeNum: 3,
+ *     addNodeLists: [{
+ *         role: "READONLY",
+ *         zone: "ap-guangzhou-6",
+ *     }],
+ * });
+ * ```
+ *
+ * ### Remove a read-only node
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.mongodb.ShardingInstance("example", {
+ *     instanceName: "tf-example",
+ *     shardQuantity: 2,
+ *     nodesPerShard: 3,
+ *     memory: 4,
+ *     volume: 100,
+ *     engineVersion: "MONGO_40_WT",
+ *     machineType: "HIO10G",
+ *     availableZone: "ap-guangzhou-6",
+ *     vpcId: "vpc-i5yyodl9",
+ *     subnetId: "subnet-hhi88a58",
+ *     projectId: 0,
+ *     password: "Password@123",
+ *     mongosCpu: 1,
+ *     mongosMemory: 2,
+ *     mongosNodeNum: 3,
+ *     removeNodeLists: [{
+ *         role: "READONLY",
+ *         nodeName: "cmgo-xxxx_0-node-readonly0",
+ *         zone: "ap-guangzhou-6",
+ *     }],
  * });
  * ```
  *
@@ -37,7 +102,7 @@ import * as utilities from "../utilities";
  * Mongodb sharding instance can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Mongodb/shardingInstance:ShardingInstance mongodb cmgo-41s6jwy4
+ * $ pulumi import tencentcloud:Mongodb/shardingInstance:ShardingInstance example cmgo-41s6jwy4
  * ```
  */
 export class ShardingInstance extends pulumi.CustomResource {
@@ -69,6 +134,10 @@ export class ShardingInstance extends pulumi.CustomResource {
     }
 
     /**
+     * Add node list. Node type and availability zone information.
+     */
+    declare public readonly addNodeLists: pulumi.Output<outputs.Mongodb.ShardingInstanceAddNodeList[] | undefined>;
+    /**
      * Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
      */
     declare public readonly autoRenewFlag: pulumi.Output<number | undefined>;
@@ -89,6 +158,10 @@ export class ShardingInstance extends pulumi.CustomResource {
      */
     declare public readonly chargeType: pulumi.Output<string | undefined>;
     /**
+     * The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+     */
+    declare public readonly cpu: pulumi.Output<number>;
+    /**
      * Creation time of the Mongodb instance.
      */
     declare public /*out*/ readonly createTime: pulumi.Output<string>;
@@ -100,6 +173,7 @@ export class ShardingInstance extends pulumi.CustomResource {
      * - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
      * - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
      * - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+     * - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
      */
     declare public readonly engineVersion: pulumi.Output<string>;
     /**
@@ -110,7 +184,7 @@ export class ShardingInstance extends pulumi.CustomResource {
      * Switch time for instance configuration changes.
      * - 0: When the adjustment is completed, perform the configuration task immediately. Default is 0.
      * - 1: Perform reconfiguration tasks within the maintenance time window.
-     * Note: Adjusting the number of nodes and slices does not support changes within the maintenance window.
+     *   Note: Adjusting the number of nodes and slices does not support changes within the maintenance window.
      */
     declare public readonly inMaintenance: pulumi.Output<number | undefined>;
     /**
@@ -138,7 +212,7 @@ export class ShardingInstance extends pulumi.CustomResource {
      */
     declare public readonly mongosNodeNum: pulumi.Output<number>;
     /**
-     * Number of nodes per shard, at least 3(one master and two slaves).
+     * Number of nodes per shard, at least 3(one master and two slaves). Allow value[3, 5, 7].
      */
     declare public readonly nodesPerShard: pulumi.Output<number>;
     /**
@@ -153,6 +227,10 @@ export class ShardingInstance extends pulumi.CustomResource {
      * ID of the project which the instance belongs.
      */
     declare public readonly projectId: pulumi.Output<number | undefined>;
+    /**
+     * Remove node list. Node type, node name, and availability zone information. Note: Based on the consistency principle of each shard node in a sharding instance, when removing nodes, you only need to specify the node corresponding to shard 0, e.g., `cmgo-xxxx_0-node-readonly0` will remove the first readonly node of each shard.
+     */
+    declare public readonly removeNodeLists: pulumi.Output<outputs.Mongodb.ShardingInstanceRemoveNodeList[] | undefined>;
     /**
      * ID of the security group.
      */
@@ -203,10 +281,12 @@ export class ShardingInstance extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ShardingInstanceState | undefined;
+            resourceInputs["addNodeLists"] = state?.addNodeLists;
             resourceInputs["autoRenewFlag"] = state?.autoRenewFlag;
             resourceInputs["availabilityZoneLists"] = state?.availabilityZoneLists;
             resourceInputs["availableZone"] = state?.availableZone;
             resourceInputs["chargeType"] = state?.chargeType;
+            resourceInputs["cpu"] = state?.cpu;
             resourceInputs["createTime"] = state?.createTime;
             resourceInputs["engineVersion"] = state?.engineVersion;
             resourceInputs["hiddenZone"] = state?.hiddenZone;
@@ -221,6 +301,7 @@ export class ShardingInstance extends pulumi.CustomResource {
             resourceInputs["password"] = state?.password;
             resourceInputs["prepaidPeriod"] = state?.prepaidPeriod;
             resourceInputs["projectId"] = state?.projectId;
+            resourceInputs["removeNodeLists"] = state?.removeNodeLists;
             resourceInputs["securityGroups"] = state?.securityGroups;
             resourceInputs["shardQuantity"] = state?.shardQuantity;
             resourceInputs["status"] = state?.status;
@@ -256,10 +337,12 @@ export class ShardingInstance extends pulumi.CustomResource {
             if (args?.volume === undefined && !opts.urn) {
                 throw new Error("Missing required property 'volume'");
             }
+            resourceInputs["addNodeLists"] = args?.addNodeLists;
             resourceInputs["autoRenewFlag"] = args?.autoRenewFlag;
             resourceInputs["availabilityZoneLists"] = args?.availabilityZoneLists;
             resourceInputs["availableZone"] = args?.availableZone;
             resourceInputs["chargeType"] = args?.chargeType;
+            resourceInputs["cpu"] = args?.cpu;
             resourceInputs["engineVersion"] = args?.engineVersion;
             resourceInputs["hiddenZone"] = args?.hiddenZone;
             resourceInputs["inMaintenance"] = args?.inMaintenance;
@@ -273,6 +356,7 @@ export class ShardingInstance extends pulumi.CustomResource {
             resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
             resourceInputs["prepaidPeriod"] = args?.prepaidPeriod;
             resourceInputs["projectId"] = args?.projectId;
+            resourceInputs["removeNodeLists"] = args?.removeNodeLists;
             resourceInputs["securityGroups"] = args?.securityGroups;
             resourceInputs["shardQuantity"] = args?.shardQuantity;
             resourceInputs["subnetId"] = args?.subnetId;
@@ -296,9 +380,13 @@ export class ShardingInstance extends pulumi.CustomResource {
  */
 export interface ShardingInstanceState {
     /**
+     * Add node list. Node type and availability zone information.
+     */
+    addNodeLists?: pulumi.Input<pulumi.Input<inputs.Mongodb.ShardingInstanceAddNodeList>[] | undefined>;
+    /**
      * Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
      */
-    autoRenewFlag?: pulumi.Input<number>;
+    autoRenewFlag?: pulumi.Input<number | undefined>;
     /**
      * A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
      * - Multi-availability zone deployment nodes can only be deployed in 3 different availability zones. It is not supported to deploy most nodes of the cluster in the same availability zone. For example, a 3-node cluster does not support the deployment of 2 nodes in the same zone.
@@ -306,19 +394,23 @@ export interface ShardingInstanceState {
      * - Read-only disaster recovery instances are not supported.
      * - Basic network cannot be selected.
      */
-    availabilityZoneLists?: pulumi.Input<pulumi.Input<string>[]>;
+    availabilityZoneLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The available zone of the Mongodb.
      */
-    availableZone?: pulumi.Input<string>;
+    availableZone?: pulumi.Input<string | undefined>;
     /**
      * The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
+    /**
+     * The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+     */
+    cpu?: pulumi.Input<number | undefined>;
     /**
      * Creation time of the Mongodb instance.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Refers to version information. The DescribeSpecInfo API can be called to obtain detailed information about the supported versions.
      * - MONGO_40_WT: version of the MongoDB 4.0 WiredTiger storage engine.
@@ -327,95 +419,100 @@ export interface ShardingInstanceState {
      * - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
      * - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
      * - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+     * - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
      */
-    engineVersion?: pulumi.Input<string>;
+    engineVersion?: pulumi.Input<string | undefined>;
     /**
      * The availability zone to which the Hidden node belongs. This parameter is required in cross-AZ instance deployment.
      */
-    hiddenZone?: pulumi.Input<string>;
+    hiddenZone?: pulumi.Input<string | undefined>;
     /**
      * Switch time for instance configuration changes.
      * - 0: When the adjustment is completed, perform the configuration task immediately. Default is 0.
      * - 1: Perform reconfiguration tasks within the maintenance time window.
-     * Note: Adjusting the number of nodes and slices does not support changes within the maintenance window.
+     *   Note: Adjusting the number of nodes and slices does not support changes within the maintenance window.
      */
-    inMaintenance?: pulumi.Input<number>;
+    inMaintenance?: pulumi.Input<number | undefined>;
     /**
      * Name of the Mongodb instance.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
      */
-    machineType?: pulumi.Input<string>;
+    machineType?: pulumi.Input<string | undefined>;
     /**
      * Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
      */
-    memory?: pulumi.Input<number>;
+    memory?: pulumi.Input<number | undefined>;
     /**
      * Number of mongos cpu.
      */
-    mongosCpu?: pulumi.Input<number>;
+    mongosCpu?: pulumi.Input<number | undefined>;
     /**
      * Mongos memory size in GB.
      */
-    mongosMemory?: pulumi.Input<number>;
+    mongosMemory?: pulumi.Input<number | undefined>;
     /**
      * Number of mongos.
      */
-    mongosNodeNum?: pulumi.Input<number>;
+    mongosNodeNum?: pulumi.Input<number | undefined>;
     /**
-     * Number of nodes per shard, at least 3(one master and two slaves).
+     * Number of nodes per shard, at least 3(one master and two slaves). Allow value[3, 5, 7].
      */
-    nodesPerShard?: pulumi.Input<number>;
+    nodesPerShard?: pulumi.Input<number | undefined>;
     /**
      * Password of this Mongodb account.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when chargeType is set to `PREPAID`.
      */
-    prepaidPeriod?: pulumi.Input<number>;
+    prepaidPeriod?: pulumi.Input<number | undefined>;
     /**
      * ID of the project which the instance belongs.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
+    /**
+     * Remove node list. Node type, node name, and availability zone information. Note: Based on the consistency principle of each shard node in a sharding instance, when removing nodes, you only need to specify the node corresponding to shard 0, e.g., `cmgo-xxxx_0-node-readonly0` will remove the first readonly node of each shard.
+     */
+    removeNodeLists?: pulumi.Input<pulumi.Input<inputs.Mongodb.ShardingInstanceRemoveNodeList>[] | undefined>;
     /**
      * ID of the security group.
      */
-    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroups?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Number of sharding.
      */
-    shardQuantity?: pulumi.Input<number>;
+    shardQuantity?: pulumi.Input<number | undefined>;
     /**
      * Status of the Mongodb instance, and available values include pending initialization(expressed with 0),  processing(expressed with 1), running(expressed with 2) and expired(expressed with -2).
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * ID of the subnet within this VPC. The value is required if `vpcId` is set.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * The tags of the Mongodb. Key name `project` is system reserved and can't be used.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * IP of the Mongodb instance.
      */
-    vip?: pulumi.Input<string>;
+    vip?: pulumi.Input<string | undefined>;
     /**
      * Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
      */
-    volume?: pulumi.Input<number>;
+    volume?: pulumi.Input<number | undefined>;
     /**
      * ID of the VPC.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * IP port of the Mongodb instance.
      */
-    vport?: pulumi.Input<number>;
+    vport?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -423,9 +520,13 @@ export interface ShardingInstanceState {
  */
 export interface ShardingInstanceArgs {
     /**
+     * Add node list. Node type and availability zone information.
+     */
+    addNodeLists?: pulumi.Input<pulumi.Input<inputs.Mongodb.ShardingInstanceAddNodeList>[] | undefined>;
+    /**
      * Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
      */
-    autoRenewFlag?: pulumi.Input<number>;
+    autoRenewFlag?: pulumi.Input<number | undefined>;
     /**
      * A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
      * - Multi-availability zone deployment nodes can only be deployed in 3 different availability zones. It is not supported to deploy most nodes of the cluster in the same availability zone. For example, a 3-node cluster does not support the deployment of 2 nodes in the same zone.
@@ -433,7 +534,7 @@ export interface ShardingInstanceArgs {
      * - Read-only disaster recovery instances are not supported.
      * - Basic network cannot be selected.
      */
-    availabilityZoneLists?: pulumi.Input<pulumi.Input<string>[]>;
+    availabilityZoneLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The available zone of the Mongodb.
      */
@@ -441,7 +542,11 @@ export interface ShardingInstanceArgs {
     /**
      * The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
+    /**
+     * The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+     */
+    cpu?: pulumi.Input<number | undefined>;
     /**
      * Refers to version information. The DescribeSpecInfo API can be called to obtain detailed information about the supported versions.
      * - MONGO_40_WT: version of the MongoDB 4.0 WiredTiger storage engine.
@@ -450,19 +555,20 @@ export interface ShardingInstanceArgs {
      * - MONGO_50_WT: version of the MongoDB 5.0 WiredTiger storage engine.
      * - MONGO_60_WT: version of the MongoDB 6.0 WiredTiger storage engine.
      * - MONGO_70_WT: version of the MongoDB 7.0 WiredTiger storage engine.
+     * - MONGO_80_WT: version of the MongoDB 8.0 WiredTiger storage engine.
      */
     engineVersion: pulumi.Input<string>;
     /**
      * The availability zone to which the Hidden node belongs. This parameter is required in cross-AZ instance deployment.
      */
-    hiddenZone?: pulumi.Input<string>;
+    hiddenZone?: pulumi.Input<string | undefined>;
     /**
      * Switch time for instance configuration changes.
      * - 0: When the adjustment is completed, perform the configuration task immediately. Default is 0.
      * - 1: Perform reconfiguration tasks within the maintenance time window.
-     * Note: Adjusting the number of nodes and slices does not support changes within the maintenance window.
+     *   Note: Adjusting the number of nodes and slices does not support changes within the maintenance window.
      */
-    inMaintenance?: pulumi.Input<number>;
+    inMaintenance?: pulumi.Input<number | undefined>;
     /**
      * Name of the Mongodb instance.
      */
@@ -478,35 +584,39 @@ export interface ShardingInstanceArgs {
     /**
      * Number of mongos cpu.
      */
-    mongosCpu?: pulumi.Input<number>;
+    mongosCpu?: pulumi.Input<number | undefined>;
     /**
      * Mongos memory size in GB.
      */
-    mongosMemory?: pulumi.Input<number>;
+    mongosMemory?: pulumi.Input<number | undefined>;
     /**
      * Number of mongos.
      */
-    mongosNodeNum?: pulumi.Input<number>;
+    mongosNodeNum?: pulumi.Input<number | undefined>;
     /**
-     * Number of nodes per shard, at least 3(one master and two slaves).
+     * Number of nodes per shard, at least 3(one master and two slaves). Allow value[3, 5, 7].
      */
     nodesPerShard: pulumi.Input<number>;
     /**
      * Password of this Mongodb account.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when chargeType is set to `PREPAID`.
      */
-    prepaidPeriod?: pulumi.Input<number>;
+    prepaidPeriod?: pulumi.Input<number | undefined>;
     /**
      * ID of the project which the instance belongs.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
+    /**
+     * Remove node list. Node type, node name, and availability zone information. Note: Based on the consistency principle of each shard node in a sharding instance, when removing nodes, you only need to specify the node corresponding to shard 0, e.g., `cmgo-xxxx_0-node-readonly0` will remove the first readonly node of each shard.
+     */
+    removeNodeLists?: pulumi.Input<pulumi.Input<inputs.Mongodb.ShardingInstanceRemoveNodeList>[] | undefined>;
     /**
      * ID of the security group.
      */
-    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroups?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Number of sharding.
      */
@@ -514,11 +624,11 @@ export interface ShardingInstanceArgs {
     /**
      * ID of the subnet within this VPC. The value is required if `vpcId` is set.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * The tags of the Mongodb. Key name `project` is system reserved and can't be used.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
      */
@@ -526,5 +636,5 @@ export interface ShardingInstanceArgs {
     /**
      * ID of the VPC.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }

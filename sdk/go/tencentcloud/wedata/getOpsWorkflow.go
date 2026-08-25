@@ -71,12 +71,8 @@ type GetOpsWorkflowResult struct {
 }
 
 func GetOpsWorkflowOutput(ctx *pulumi.Context, args GetOpsWorkflowOutputArgs, opts ...pulumi.InvokeOption) GetOpsWorkflowResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetOpsWorkflowResultOutput, error) {
-			args := v.(GetOpsWorkflowArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Wedata/getOpsWorkflow:getOpsWorkflow", args, GetOpsWorkflowResultOutput{}, options).(GetOpsWorkflowResultOutput), nil
-		}).(GetOpsWorkflowResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Wedata/getOpsWorkflow:getOpsWorkflow", args, GetOpsWorkflowResultOutput{}, options).(GetOpsWorkflowResultOutput)
 }
 
 // A collection of arguments for invoking getOpsWorkflow.

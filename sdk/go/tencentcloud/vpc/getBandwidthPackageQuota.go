@@ -62,12 +62,8 @@ type GetBandwidthPackageQuotaResult struct {
 }
 
 func GetBandwidthPackageQuotaOutput(ctx *pulumi.Context, args GetBandwidthPackageQuotaOutputArgs, opts ...pulumi.InvokeOption) GetBandwidthPackageQuotaResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetBandwidthPackageQuotaResultOutput, error) {
-			args := v.(GetBandwidthPackageQuotaArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Vpc/getBandwidthPackageQuota:getBandwidthPackageQuota", args, GetBandwidthPackageQuotaResultOutput{}, options).(GetBandwidthPackageQuotaResultOutput), nil
-		}).(GetBandwidthPackageQuotaResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Vpc/getBandwidthPackageQuota:getBandwidthPackageQuota", args, GetBandwidthPackageQuotaResultOutput{}, options).(GetBandwidthPackageQuotaResultOutput)
 }
 
 // A collection of arguments for invoking getBandwidthPackageQuota.

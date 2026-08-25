@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "sqlserver",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -65,7 +65,7 @@ import * as utilities from "../utilities";
  *     backupName: "tf_example_backup",
  *     strategy: 0,
  * });
- * const example = tencentcloud.Sqlserver.getBackupByFlowIdOutput({
+ * const example = tencentcloud.sqlserver.getBackupByFlowIdOutput({
  *     instanceId: exampleGeneralBackup.instanceId,
  *     flowId: exampleGeneralBackup.flowId,
  * });
@@ -163,7 +163,7 @@ export interface GetBackupByFlowIdResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "sqlserver",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -215,7 +215,7 @@ export interface GetBackupByFlowIdResult {
  *     backupName: "tf_example_backup",
  *     strategy: 0,
  * });
- * const example = tencentcloud.Sqlserver.getBackupByFlowIdOutput({
+ * const example = tencentcloud.sqlserver.getBackupByFlowIdOutput({
  *     instanceId: exampleGeneralBackup.instanceId,
  *     flowId: exampleGeneralBackup.flowId,
  * });
@@ -245,5 +245,5 @@ export interface GetBackupByFlowIdOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

@@ -79,12 +79,8 @@ type GetGetParametersForImportResult struct {
 }
 
 func GetGetParametersForImportOutput(ctx *pulumi.Context, args GetGetParametersForImportOutputArgs, opts ...pulumi.InvokeOption) GetGetParametersForImportResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetGetParametersForImportResultOutput, error) {
-			args := v.(GetGetParametersForImportArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Kms/getGetParametersForImport:getGetParametersForImport", args, GetGetParametersForImportResultOutput{}, options).(GetGetParametersForImportResultOutput), nil
-		}).(GetGetParametersForImportResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Kms/getGetParametersForImport:getGetParametersForImport", args, GetGetParametersForImportResultOutput{}, options).(GetGetParametersForImportResultOutput)
 }
 
 // A collection of arguments for invoking getGetParametersForImport.

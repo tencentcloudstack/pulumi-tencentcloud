@@ -22,7 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -108,7 +107,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// ## Import
     /// 
     /// mysql read-only database instances can be imported using the id, e.g.
-    /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Mysql/readonlyInstance:ReadonlyInstance default cdb-dnqksd9f
     /// ```
@@ -151,6 +149,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// </summary>
         [Output("deviceType")]
         public Output<string> DeviceType { get; private set; } = null!;
+
+        /// <summary>
+        /// Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
+        /// </summary>
+        [Output("diskType")]
+        public Output<string> DiskType { get; private set; } = null!;
 
         /// <summary>
         /// Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
@@ -235,6 +239,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// </summary>
         [Output("roGroupId")]
         public Output<string> RoGroupId { get; private set; } = null!;
+
+        /// <summary>
+        /// VIP-only read access.
+        /// </summary>
+        [Output("roVip")]
+        public Output<string> RoVip { get; private set; } = null!;
+
+        /// <summary>
+        /// VIP port number (read-only).
+        /// </summary>
+        [Output("roVport")]
+        public Output<int> RoVport { get; private set; } = null!;
 
         /// <summary>
         /// Security groups to use.
@@ -378,6 +394,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// </summary>
         [Input("deviceType")]
         public Input<string>? DeviceType { get; set; }
+
+        /// <summary>
+        /// Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
+        /// </summary>
+        [Input("diskType")]
+        public Input<string>? DiskType { get; set; }
 
         /// <summary>
         /// Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
@@ -556,6 +578,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public Input<string>? DeviceType { get; set; }
 
         /// <summary>
+        /// Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
+        /// </summary>
+        [Input("diskType")]
+        public Input<string>? DiskType { get; set; }
+
+        /// <summary>
         /// Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
         /// </summary>
         [Input("fastUpgrade")]
@@ -638,6 +666,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// </summary>
         [Input("roGroupId")]
         public Input<string>? RoGroupId { get; set; }
+
+        /// <summary>
+        /// VIP-only read access.
+        /// </summary>
+        [Input("roVip")]
+        public Input<string>? RoVip { get; set; }
+
+        /// <summary>
+        /// VIP port number (read-only).
+        /// </summary>
+        [Input("roVport")]
+        public Input<int>? RoVport { get; set; }
 
         [Input("securityGroups")]
         private InputList<string>? _securityGroups;

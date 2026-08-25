@@ -90,11 +90,11 @@ export interface OverwriteWhiteBoxDeviceFingerprintsState {
     /**
      * Device fingerprint list.
      */
-    deviceFingerprints?: pulumi.Input<pulumi.Input<inputs.Kms.OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprint>[]>;
+    deviceFingerprints?: pulumi.Input<pulumi.Input<inputs.Kms.OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprint>[] | undefined>;
     /**
      * CMK unique identifier.
      */
-    keyId?: pulumi.Input<string>;
+    keyId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -104,7 +104,7 @@ export interface OverwriteWhiteBoxDeviceFingerprintsArgs {
     /**
      * Device fingerprint list.
      */
-    deviceFingerprints?: pulumi.Input<pulumi.Input<inputs.Kms.OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprint>[]>;
+    deviceFingerprints?: pulumi.Input<pulumi.Input<inputs.Kms.OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprint>[] | undefined>;
     /**
      * CMK unique identifier.
      */

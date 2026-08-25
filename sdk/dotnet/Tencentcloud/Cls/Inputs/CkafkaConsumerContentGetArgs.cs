@@ -19,6 +19,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         [Input("enableTag", required: true)]
         public Input<bool> EnableTag { get; set; } = null!;
 
+        /// <summary>
+        /// JSON format for delivery. Valid values:
+        /// </summary>
+        [Input("jsonType")]
+        public Input<int>? JsonType { get; set; }
+
         [Input("metaFields", required: true)]
         private InputList<string>? _metaFields;
 

@@ -81,12 +81,8 @@ type GetPublisherSummaryResult struct {
 }
 
 func GetPublisherSummaryOutput(ctx *pulumi.Context, args GetPublisherSummaryOutputArgs, opts ...pulumi.InvokeOption) GetPublisherSummaryResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetPublisherSummaryResultOutput, error) {
-			args := v.(GetPublisherSummaryArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tdmq/getPublisherSummary:getPublisherSummary", args, GetPublisherSummaryResultOutput{}, options).(GetPublisherSummaryResultOutput), nil
-		}).(GetPublisherSummaryResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tdmq/getPublisherSummary:getPublisherSummary", args, GetPublisherSummaryResultOutput{}, options).(GetPublisherSummaryResultOutput)
 }
 
 // A collection of arguments for invoking getPublisherSummary.

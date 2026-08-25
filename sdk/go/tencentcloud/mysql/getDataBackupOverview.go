@@ -89,12 +89,8 @@ type GetDataBackupOverviewResult struct {
 }
 
 func GetDataBackupOverviewOutput(ctx *pulumi.Context, args GetDataBackupOverviewOutputArgs, opts ...pulumi.InvokeOption) GetDataBackupOverviewResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDataBackupOverviewResultOutput, error) {
-			args := v.(GetDataBackupOverviewArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mysql/getDataBackupOverview:getDataBackupOverview", args, GetDataBackupOverviewResultOutput{}, options).(GetDataBackupOverviewResultOutput), nil
-		}).(GetDataBackupOverviewResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mysql/getDataBackupOverview:getDataBackupOverview", args, GetDataBackupOverviewResultOutput{}, options).(GetDataBackupOverviewResultOutput)
 }
 
 // A collection of arguments for invoking getDataBackupOverview.

@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const imageManifests = tencentcloud.Tcr.getImageManifests({
+ * const imageManifests = tencentcloud.tcr.getImageManifests({
  *     registryId: "%s",
  *     namespaceName: "%s",
  *     repositoryName: "%s",
@@ -89,7 +89,7 @@ export interface GetImageManifestsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const imageManifests = tencentcloud.Tcr.getImageManifests({
+ * const imageManifests = tencentcloud.tcr.getImageManifests({
  *     registryId: "%s",
  *     namespaceName: "%s",
  *     repositoryName: "%s",
@@ -131,5 +131,5 @@ export interface GetImageManifestsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

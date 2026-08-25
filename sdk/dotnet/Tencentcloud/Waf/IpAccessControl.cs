@@ -61,7 +61,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// 
     /// ## Import
     /// 
-    /// waf ip_access_control can be imported using the id, e.g.
+    /// waf IpAccessControl can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Waf/ipAccessControl:IpAccessControl example waf_2kxtlbky00b3b4qz#www.demo.com#sparta-waf

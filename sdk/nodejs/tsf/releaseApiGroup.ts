@@ -82,7 +82,7 @@ export interface ReleaseApiGroupState {
     /**
      * api group Id.
      */
-    groupId?: pulumi.Input<string>;
+    groupId?: pulumi.Input<string | undefined>;
 }
 
 /**

@@ -27,7 +27,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
     /// {
     ///     var example = new Tencentcloud.Mongodb.InstanceSsl("example", new()
     ///     {
-    ///         InstanceId = "cmgo-xxxxxxxx",
+    ///         InstanceId = "cmgo-olr1xx9d",
     ///         Enable = true,
     ///     });
     /// 
@@ -39,7 +39,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
     /// MongoDB instance SSL configuration can be imported using the instance id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Mongodb/instanceSsl:InstanceSsl example cmgo-xxxxxxxx
+    /// $ pulumi import tencentcloud:Mongodb/instanceSsl:InstanceSsl example cmgo-olr1xx9d
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mongodb/instanceSsl:InstanceSsl")]

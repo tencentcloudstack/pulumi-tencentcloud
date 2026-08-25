@@ -44,7 +44,7 @@ import (
 //
 // ## Import
 //
-// vpc ha_vip_instance_attachment can be imported using the id(${haVipId}#${instanceType}#${instanceId}), e.g.
+// vpc haVipInstanceAttachment can be imported using the id(${haVipId}#${instanceType}#${instanceId}), e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Ha/vipInstanceAttachment:VipInstanceAttachment ha_vip_instance_attachment ha_vip_instance_attachment_id

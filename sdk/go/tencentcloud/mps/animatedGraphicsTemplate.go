@@ -48,7 +48,7 @@ import (
 //
 // ## Import
 //
-// mps animated_graphics_template can be imported using the id, e.g.
+// mps animatedGraphicsTemplate can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Mps/animatedGraphicsTemplate:AnimatedGraphicsTemplate animated_graphics_template animated_graphics_template_id

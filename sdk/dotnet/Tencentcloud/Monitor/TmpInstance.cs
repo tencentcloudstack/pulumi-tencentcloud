@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
 {
     /// <summary>
-    /// Provides a resource to create a monitor tmpInstance
+    /// Provides a resource to create a monitor (Cloud Monitor) tmpInstance
     /// 
     /// ## Example Usage
     /// 
@@ -46,6 +46,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     ///         SubnetId = subnet.Id,
     ///         DataRetentionTime = 30,
     ///         Zone = availabilityZone,
+    ///         LongTermStorageRetentionTime = 90,
     ///         Tags = 
     ///         {
     ///             { "createdBy", "terraform" },
@@ -58,7 +59,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// ## Import
     /// 
     /// monitor tmpInstance can be imported using the id, e.g.
-    /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Monitor/tmpInstance:TmpInstance example prom-1uvo0tjm
     /// ```
@@ -89,6 +89,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// </summary>
         [Output("ipv4Address")]
         public Output<string> Ipv4Address { get; private set; } = null!;
+
+        /// <summary>
+        /// Long-term storage retention time(in days). Value range: 60-730.
+        /// </summary>
+        [Output("longTermStorageRetentionTime")]
+        public Output<int> LongTermStorageRetentionTime { get; private set; } = null!;
 
         /// <summary>
         /// Proxy address.
@@ -186,6 +192,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public Input<string> InstanceName { get; set; } = null!;
 
         /// <summary>
+        /// Long-term storage retention time(in days). Value range: 60-730.
+        /// </summary>
+        [Input("longTermStorageRetentionTime")]
+        public Input<int>? LongTermStorageRetentionTime { get; set; }
+
+        /// <summary>
         /// Subnet Id.
         /// </summary>
         [Input("subnetId", required: true)]
@@ -246,6 +258,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// </summary>
         [Input("ipv4Address")]
         public Input<string>? Ipv4Address { get; set; }
+
+        /// <summary>
+        /// Long-term storage retention time(in days). Value range: 60-730.
+        /// </summary>
+        [Input("longTermStorageRetentionTime")]
+        public Input<int>? LongTermStorageRetentionTime { get; set; }
 
         /// <summary>
         /// Proxy address.

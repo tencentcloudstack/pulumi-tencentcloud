@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const gatewayAllGroupApis = tencentcloud.Tsf.getGatewayAllGroupApis({
+ * const gatewayAllGroupApis = tencentcloud.tsf.getGatewayAllGroupApis({
  *     gatewayDeployGroupId: "group-aeoej4qy",
  *     searchWord: "user",
  * });
@@ -76,7 +76,7 @@ export interface GetGatewayAllGroupApisResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const gatewayAllGroupApis = tencentcloud.Tsf.getGatewayAllGroupApis({
+ * const gatewayAllGroupApis = tencentcloud.tsf.getGatewayAllGroupApis({
  *     gatewayDeployGroupId: "group-aeoej4qy",
  *     searchWord: "user",
  * });
@@ -102,9 +102,9 @@ export interface GetGatewayAllGroupApisOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Search keyword, supports api group name or API path.
      */
-    searchWord?: pulumi.Input<string>;
+    searchWord?: pulumi.Input<string | undefined>;
 }

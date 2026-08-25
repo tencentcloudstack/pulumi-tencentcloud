@@ -70,12 +70,8 @@ type GetInstanceQpsLimitResult struct {
 }
 
 func GetInstanceQpsLimitOutput(ctx *pulumi.Context, args GetInstanceQpsLimitOutputArgs, opts ...pulumi.InvokeOption) GetInstanceQpsLimitResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstanceQpsLimitResultOutput, error) {
-			args := v.(GetInstanceQpsLimitArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Waf/getInstanceQpsLimit:getInstanceQpsLimit", args, GetInstanceQpsLimitResultOutput{}, options).(GetInstanceQpsLimitResultOutput), nil
-		}).(GetInstanceQpsLimitResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Waf/getInstanceQpsLimit:getInstanceQpsLimit", args, GetInstanceQpsLimitResultOutput{}, options).(GetInstanceQpsLimitResultOutput)
 }
 
 // A collection of arguments for invoking getInstanceQpsLimit.

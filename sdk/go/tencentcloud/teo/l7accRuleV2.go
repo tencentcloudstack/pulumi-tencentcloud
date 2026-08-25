@@ -14,6 +14,8 @@ import (
 
 // Provides a resource to create a TEO l7 acc rule v2
 //
+// > **NOTE:** Compared to tencentcloud_teo_l7_acc_rule, Teo.L7AccRuleV2 is simpler to use but is limited to managing a single rule and lacks the ability to maintain rule ordering. It is best suited for scenarios where you need to manage multiple rules independently and priority/sequencing is not a concern.
+//
 // ## Example Usage
 //
 // ```go
@@ -33,7 +35,7 @@ import (
 //				Descriptions: pulumi.StringArray{
 //					pulumi.String("description"),
 //				},
-//				RuleName: pulumi.String("网站加速"),
+//				RuleName: pulumi.String("Web Acceleration"),
 //				Status:   pulumi.String("enable"),
 //				Branches: teo.L7AccRuleV2BranchArray{
 //					&teo.L7AccRuleV2BranchArgs{
@@ -77,6 +79,30 @@ import (
 //										&teo.L7AccRuleV2BranchActionModifyRequestHeaderParametersHeaderActionArgs{
 //											Action: pulumi.String("del"),
 //											Name:   pulumi.String("Eo-Client-Device"),
+//										},
+//									},
+//								},
+//							},
+//							&teo.L7AccRuleV2BranchActionArgs{
+//								Name: pulumi.String("ContentCompression"),
+//								ContentCompressionParameters: &teo.L7AccRuleV2BranchActionContentCompressionParametersArgs{
+//									Switch: pulumi.String("on"),
+//								},
+//							},
+//							&teo.L7AccRuleV2BranchActionArgs{
+//								Name: pulumi.String("Vary"),
+//								VaryParameters: &teo.L7AccRuleV2BranchActionVaryParametersArgs{
+//									Switch: pulumi.String("on"),
+//								},
+//							},
+//							&teo.L7AccRuleV2BranchActionArgs{
+//								Name: pulumi.String("OriginAuthentication"),
+//								OriginAuthenticationParameters: &teo.L7AccRuleV2BranchActionOriginAuthenticationParametersArgs{
+//									RequestProperties: teo.L7AccRuleV2BranchActionOriginAuthenticationParametersRequestPropertyArray{
+//										&teo.L7AccRuleV2BranchActionOriginAuthenticationParametersRequestPropertyArgs{
+//											Type:  pulumi.String("Header"),
+//											Name:  pulumi.String("Authorization"),
+//											Value: pulumi.String("Bearer token123"),
 //										},
 //									},
 //								},
@@ -135,17 +161,76 @@ import (
 //
 // ```
 //
+// ### Using AdvancedOriginRouting, Shield, and SiteFailover actions
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/teo"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := teo.NewL7AccRuleV2(ctx, "example_failover", &teo.L7AccRuleV2Args{
+//				ZoneId: pulumi.String("zone-3fkff38fyw8s"),
+//				Descriptions: pulumi.StringArray{
+//					pulumi.String("description"),
+//				},
+//				RuleName: pulumi.String("Web Acceleration Failover"),
+//				Status:   pulumi.String("enable"),
+//				Branches: teo.L7AccRuleV2BranchArray{
+//					&teo.L7AccRuleV2BranchArgs{
+//						Condition: pulumi.String("${http.request.host} in ['www.example.com']"),
+//						Actions: teo.L7AccRuleV2BranchActionArray{
+//							&teo.L7AccRuleV2BranchActionArgs{
+//								Name: pulumi.String("AdvancedOriginRouting"),
+//								AdvancedOriginRoutingParameters: &teo.L7AccRuleV2BranchActionAdvancedOriginRoutingParametersArgs{
+//									Direction: pulumi.String("MainlandChinaAndGlobalAdaptive"),
+//								},
+//							},
+//							&teo.L7AccRuleV2BranchActionArgs{
+//								Name: pulumi.String("Shield"),
+//								ShieldParameters: &teo.L7AccRuleV2BranchActionShieldParametersArgs{
+//									ShieldSpaceId: pulumi.String("shield-space-abc123"),
+//								},
+//							},
+//							&teo.L7AccRuleV2BranchActionArgs{
+//								Name: pulumi.String("SiteFailover"),
+//								SiteFailoverParameters: &teo.L7AccRuleV2BranchActionSiteFailoverParametersArgs{
+//									SiteFailoverStatusCodes: pulumi.IntArray{
+//										pulumi.Int(500),
+//									},
+//									SiteFailoverParams: teo.L7AccRuleV2BranchActionSiteFailoverParametersSiteFailoverParamArray{
+//										&teo.L7AccRuleV2BranchActionSiteFailoverParametersSiteFailoverParamArgs{
+//											Mode:            pulumi.String("FailoverToHost"),
+//											Origin:          pulumi.String("backup.example.com"),
+//											OriginProtocol:  pulumi.String("https"),
+//											HttpsOriginPort: pulumi.Int(443),
+//											StatusCode:      pulumi.Int(302),
+//										},
+//									},
+//								},
+//							},
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
 // ## Import
 //
 // TEO l7 acc rule v2 can be imported using the {zone_id}#{rule_id}, e.g.
-//
-// `
-//
-// ```sh
-// $ pulumi import tencentcloud:Teo/l7AccRuleV2:L7AccRuleV2 example zone-3fkff38fyw8s#rule-3ft1xeuhlj1b
-// ```
-//
-// `
 type L7AccRuleV2 struct {
 	pulumi.CustomResourceState
 

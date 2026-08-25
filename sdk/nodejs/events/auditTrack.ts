@@ -53,7 +53,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * events audit track can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Events/auditTrack:AuditTrack example 24283
  * ```
@@ -99,7 +98,7 @@ export class AuditTrack extends pulumi.CustomResource {
      */
     declare public readonly status: pulumi.Output<number>;
     /**
-     * Storage type of shipped data. Valid values: `cos`, `cls`.
+     * Storage type of shipped data. Valid values: `cos`, `cls` and `ckafka`.
      */
     declare public readonly storage: pulumi.Output<outputs.Events.AuditTrackStorage>;
     /**
@@ -160,27 +159,27 @@ export interface AuditTrackState {
     /**
      * Data filtering criteria.
      */
-    filters?: pulumi.Input<inputs.Events.AuditTrackFilters>;
+    filters?: pulumi.Input<inputs.Events.AuditTrackFilters | undefined>;
     /**
      * Tracking set name, which can only contain 3-48 letters, digits, hyphens, and underscores.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Tracking set status (0: Not enabled; 1: Enabled).
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
-     * Storage type of shipped data. Valid values: `cos`, `cls`.
+     * Storage type of shipped data. Valid values: `cos`, `cls` and `ckafka`.
      */
-    storage?: pulumi.Input<inputs.Events.AuditTrackStorage>;
+    storage?: pulumi.Input<inputs.Events.AuditTrackStorage | undefined>;
     /**
      * Whether to enable the feature of shipping organization members operation logs to the organization admin account or the trusted service admin account (0: Not enabled; 1: Enabled. This feature can only be enabled by the organization admin account or the trusted service admin account).
      */
-    trackForAllMembers?: pulumi.Input<number>;
+    trackForAllMembers?: pulumi.Input<number | undefined>;
     /**
      * Whether the log list has come to an end. `true`: Yes. Pagination is not required.
      */
-    trackId?: pulumi.Input<number>;
+    trackId?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -194,17 +193,17 @@ export interface AuditTrackArgs {
     /**
      * Tracking set name, which can only contain 3-48 letters, digits, hyphens, and underscores.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Tracking set status (0: Not enabled; 1: Enabled).
      */
     status: pulumi.Input<number>;
     /**
-     * Storage type of shipped data. Valid values: `cos`, `cls`.
+     * Storage type of shipped data. Valid values: `cos`, `cls` and `ckafka`.
      */
     storage: pulumi.Input<inputs.Events.AuditTrackStorage>;
     /**
      * Whether to enable the feature of shipping organization members operation logs to the organization admin account or the trusted service admin account (0: Not enabled; 1: Enabled. This feature can only be enabled by the organization admin account or the trusted service admin account).
      */
-    trackForAllMembers?: pulumi.Input<number>;
+    trackForAllMembers?: pulumi.Input<number | undefined>;
 }

@@ -69,7 +69,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// 
     /// ## Import
     /// 
-    /// cls kafka_recharge can be imported using the id, e.g.
+    /// cls KafkaRecharge can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Cls/kafkaRecharge:KafkaRecharge kafka_recharge kafka_recharge_id

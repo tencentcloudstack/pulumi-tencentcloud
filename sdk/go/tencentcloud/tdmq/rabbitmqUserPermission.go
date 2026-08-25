@@ -48,7 +48,7 @@ import (
 //			}
 //			// create rabbitmq user
 //			exampleRabbitmqUser, err := tdmq.NewRabbitmqUser(ctx, "example", &tdmq.RabbitmqUserArgs{
-//				InstanceId:  example.ID(),
+//				InstanceId:  example.ID().ToIDOutput().ToStringOutput(),
 //				User:        pulumi.String("tf-example-user"),
 //				Password:    pulumi.String("Password@123"),
 //				Description: pulumi.String("test user"),
@@ -61,7 +61,7 @@ import (
 //			}
 //			// create virtual host
 //			exampleRabbitmqVirtualHost, err := tdmq.NewRabbitmqVirtualHost(ctx, "example", &tdmq.RabbitmqVirtualHostArgs{
-//				InstanceId:  example.ID(),
+//				InstanceId:  example.ID().ToIDOutput().ToStringOutput(),
 //				VirtualHost: pulumi.String("tf-example-vhost"),
 //				Description: pulumi.String("test virtual host"),
 //				TraceFlag:   pulumi.Bool(false),
@@ -71,7 +71,7 @@ import (
 //			}
 //			// create user permission
 //			_, err = tdmq.NewRabbitmqUserPermission(ctx, "example", &tdmq.RabbitmqUserPermissionArgs{
-//				InstanceId:   example.ID(),
+//				InstanceId:   example.ID().ToIDOutput().ToStringOutput(),
 //				User:         exampleRabbitmqUser.User,
 //				VirtualHost:  exampleRabbitmqVirtualHost.VirtualHost,
 //				ConfigRegexp: pulumi.String(".*"),
@@ -89,7 +89,7 @@ import (
 //
 // ## Import
 //
-// tdmq rabbitmq_user_permission can be imported using the id, e.g.
+// tdmq rabbitmqUserPermission can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Tdmq/rabbitmqUserPermission:RabbitmqUserPermission example amqp-xxxxxxxx#user#vhost

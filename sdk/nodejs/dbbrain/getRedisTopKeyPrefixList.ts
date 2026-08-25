@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const redisTopKeyPrefixList = tencentcloud.Dbbrain.getRedisTopKeyPrefixList({
+ * const redisTopKeyPrefixList = tencentcloud.dbbrain.getRedisTopKeyPrefixList({
  *     instanceId: redisId,
  *     date: "%s",
  *     product: "redis",
@@ -80,7 +80,7 @@ export interface GetRedisTopKeyPrefixListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const redisTopKeyPrefixList = tencentcloud.Dbbrain.getRedisTopKeyPrefixList({
+ * const redisTopKeyPrefixList = tencentcloud.dbbrain.getRedisTopKeyPrefixList({
  *     instanceId: redisId,
  *     date: "%s",
  *     product: "redis",
@@ -116,5 +116,5 @@ export interface GetRedisTopKeyPrefixListOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

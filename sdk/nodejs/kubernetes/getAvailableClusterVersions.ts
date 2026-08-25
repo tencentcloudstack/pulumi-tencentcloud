@@ -15,11 +15,11 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const queryById = tencentcloud.Kubernetes.getAvailableClusterVersions({
+ * const queryById = tencentcloud.kubernetes.getAvailableClusterVersions({
  *     clusterId: "xxx",
  * });
  * export const versionsId = queryById.then(queryById => queryById.versions);
- * const queryByIds = tencentcloud.Kubernetes.getAvailableClusterVersions({
+ * const queryByIds = tencentcloud.kubernetes.getAvailableClusterVersions({
  *     clusterIds: ["xxx"],
  * });
  * export const versionsIds = queryByIds.then(queryByIds => queryByIds.clusters);
@@ -85,11 +85,11 @@ export interface GetAvailableClusterVersionsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const queryById = tencentcloud.Kubernetes.getAvailableClusterVersions({
+ * const queryById = tencentcloud.kubernetes.getAvailableClusterVersions({
  *     clusterId: "xxx",
  * });
  * export const versionsId = queryById.then(queryById => queryById.versions);
- * const queryByIds = tencentcloud.Kubernetes.getAvailableClusterVersions({
+ * const queryByIds = tencentcloud.kubernetes.getAvailableClusterVersions({
  *     clusterIds: ["xxx"],
  * });
  * export const versionsIds = queryByIds.then(queryByIds => queryByIds.clusters);
@@ -112,13 +112,13 @@ export interface GetAvailableClusterVersionsOutputArgs {
     /**
      * Cluster Id.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * list of cluster IDs.
      */
-    clusterIds?: pulumi.Input<pulumi.Input<string>[]>;
+    clusterIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

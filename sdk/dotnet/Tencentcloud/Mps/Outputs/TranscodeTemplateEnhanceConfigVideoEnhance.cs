@@ -27,7 +27,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Outputs
         /// </summary>
         public readonly Outputs.TranscodeTemplateEnhanceConfigVideoEnhanceDenoise? Denoise;
         /// <summary>
-        /// Face Enhancement Configuration.Note: This field may return null, indicating that no valid value can be obtained.
+        /// It has been deprecated from version v1.82.67. Please do not use this again. Face Enhancement Configuration.Note: This field may return null, indicating that no valid value can be obtained.
         /// </summary>
         public readonly Outputs.TranscodeTemplateEnhanceConfigVideoEnhanceFaceEnhance? FaceEnhance;
         /// <summary>
@@ -51,7 +51,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Outputs
         /// </summary>
         public readonly Outputs.TranscodeTemplateEnhanceConfigVideoEnhanceScratchRepair? ScratchRepair;
         /// <summary>
-        /// Detail Enhancement Configuration.Note: This field may return null, indicating that no valid value can be obtained.
+        /// It has been deprecated from version v1.82.67. Please do not use this again. Detail Enhancement Configuration.Note: This field may return null, indicating that no valid value can be obtained.
         /// </summary>
         public readonly Outputs.TranscodeTemplateEnhanceConfigVideoEnhanceSharpEnhance? SharpEnhance;
         /// <summary>

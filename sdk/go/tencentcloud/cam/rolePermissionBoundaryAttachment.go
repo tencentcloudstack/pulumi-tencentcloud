@@ -104,13 +104,9 @@ import (
 //
 // ```sh
 // $ pulumi import tencentcloud:Cam/rolePermissionBoundaryAttachment:RolePermissionBoundaryAttachment example 1##tf-example
-// ```
 //
-// ```sh
 // $ pulumi import tencentcloud:Cam/rolePermissionBoundaryAttachment:RolePermissionBoundaryAttachment example 1#4611686018441060141#
-// ```
 //
-// ```sh
 // $ pulumi import tencentcloud:Cam/rolePermissionBoundaryAttachment:RolePermissionBoundaryAttachment example 1#4611686018441060141#tf-example
 // ```
 type RolePermissionBoundaryAttachment struct {

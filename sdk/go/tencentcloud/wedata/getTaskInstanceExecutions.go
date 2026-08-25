@@ -74,12 +74,8 @@ type GetTaskInstanceExecutionsResult struct {
 }
 
 func GetTaskInstanceExecutionsOutput(ctx *pulumi.Context, args GetTaskInstanceExecutionsOutputArgs, opts ...pulumi.InvokeOption) GetTaskInstanceExecutionsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetTaskInstanceExecutionsResultOutput, error) {
-			args := v.(GetTaskInstanceExecutionsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Wedata/getTaskInstanceExecutions:getTaskInstanceExecutions", args, GetTaskInstanceExecutionsResultOutput{}, options).(GetTaskInstanceExecutionsResultOutput), nil
-		}).(GetTaskInstanceExecutionsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Wedata/getTaskInstanceExecutions:getTaskInstanceExecutions", args, GetTaskInstanceExecutionsResultOutput{}, options).(GetTaskInstanceExecutionsResultOutput)
 }
 
 // A collection of arguments for invoking getTaskInstanceExecutions.

@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.User.getInfo({});
+ * const foo = tencentcloud.user.getInfo({});
  * ```
  */
 export function getInfo(args?: GetInfoArgs, opts?: pulumi.InvokeOptions): Promise<GetInfoResult> {
@@ -69,7 +69,7 @@ export interface GetInfoResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.User.getInfo({});
+ * const foo = tencentcloud.user.getInfo({});
  * ```
  */
 export function getInfoOutput(args?: GetInfoOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInfoResult> {
@@ -87,5 +87,5 @@ export interface GetInfoOutputArgs {
     /**
      * Used for save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

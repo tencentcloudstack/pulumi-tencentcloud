@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Sqlserver.getCrossRegionZone({
+ * const example = tencentcloud.sqlserver.getCrossRegionZone({
  *     instanceId: "mssql-qelbzgwf",
  * });
  * ```
@@ -68,7 +68,7 @@ export interface GetCrossRegionZoneResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Sqlserver.getCrossRegionZone({
+ * const example = tencentcloud.sqlserver.getCrossRegionZone({
  *     instanceId: "mssql-qelbzgwf",
  * });
  * ```
@@ -92,5 +92,5 @@ export interface GetCrossRegionZoneOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

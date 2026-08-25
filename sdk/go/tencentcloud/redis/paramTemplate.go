@@ -78,7 +78,7 @@ import (
 //			_, err = redis.NewParamTemplate(ctx, "example_copy", &redis.ParamTemplateArgs{
 //				Name:        pulumi.String("tf-template-copied"),
 //				Description: pulumi.String("This is an copied redis param template from tf-template."),
-//				TemplateId:  example.ID(),
+//				TemplateId:  example.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err
@@ -91,8 +91,7 @@ import (
 //
 // ## Import
 //
-// redis param_template can be imported using the id, e.g.
-//
+// redis paramTemplate can be imported using the id, e.g.
 // ```sh
 // $ pulumi import tencentcloud:Redis/paramTemplate:ParamTemplate example crs-cfg-oyyon8f6
 // ```

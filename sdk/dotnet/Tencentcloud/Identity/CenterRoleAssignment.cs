@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Identity
 {
     /// <summary>
-    /// Provides a resource to create a organization IdentityCenterRoleAssignment
+    /// Provides a resource to create a Organization identity center role assignment
     /// 
     /// ## Example Usage
     /// 
@@ -23,14 +23,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Identity
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var identityCenterRoleAssignment = new Tencentcloud.Identity.CenterRoleAssignment("identity_center_role_assignment", new()
+    ///     var example = new Tencentcloud.Identity.CenterRoleAssignment("example", new()
     ///     {
-    ///         ZoneId = "z-xxxxxx",
-    ///         PrincipalId = "u-xxxxxx",
+    ///         ZoneId = "z-1os7c9znogct",
+    ///         PrincipalId = "u-lyfm8b7qoi5l",
     ///         PrincipalType = "User",
-    ///         TargetUin = "xxxxxx",
+    ///         TargetUin = 100043911945,
     ///         TargetType = "MemberUin",
-    ///         RoleConfigurationId = "rc-xxxxxx",
+    ///         RoleConfigurationId = "rc-ihogrs0e6ceg",
     ///     });
     /// 
     /// });
@@ -38,10 +38,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Identity
     /// 
     /// ## Import
     /// 
-    /// organization identity_center_role_assignment can be imported using the id, e.g.
+    /// Organization identity center role assignment can be imported using the {zoneId}#{roleConfigurationId}#{targetType}#{targetUinString}#{principalType}, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Identity/centerRoleAssignment:CenterRoleAssignment identity_center_role_assignment {zoneId}#{roleConfigurationId}#{targetType}#{targetUinString}#{principalType}#{principalId}
+    /// $ pulumi import tencentcloud:Identity/centerRoleAssignment:CenterRoleAssignment example z-1os7c9znogct#rc-ihogrs0e6ceg#MemberUin#100043911945#User#u-lyfm8b7qoi5l
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Identity/centerRoleAssignment:CenterRoleAssignment")]

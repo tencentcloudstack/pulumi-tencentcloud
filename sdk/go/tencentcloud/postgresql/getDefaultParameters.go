@@ -71,12 +71,8 @@ type GetDefaultParametersResult struct {
 }
 
 func GetDefaultParametersOutput(ctx *pulumi.Context, args GetDefaultParametersOutputArgs, opts ...pulumi.InvokeOption) GetDefaultParametersResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDefaultParametersResultOutput, error) {
-			args := v.(GetDefaultParametersArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Postgresql/getDefaultParameters:getDefaultParameters", args, GetDefaultParametersResultOutput{}, options).(GetDefaultParametersResultOutput), nil
-		}).(GetDefaultParametersResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Postgresql/getDefaultParameters:getDefaultParameters", args, GetDefaultParametersResultOutput{}, options).(GetDefaultParametersResultOutput)
 }
 
 // A collection of arguments for invoking getDefaultParameters.

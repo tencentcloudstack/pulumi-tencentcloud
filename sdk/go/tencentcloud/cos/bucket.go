@@ -27,8 +27,6 @@ import (
 //
 // import (
 //
-//	"fmt"
-//
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/user"
@@ -61,8 +59,6 @@ import (
 // package main
 //
 // import (
-//
-//	"fmt"
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
@@ -101,8 +97,6 @@ import (
 //
 // import (
 //
-//	"fmt"
-//
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/kms"
@@ -133,7 +127,7 @@ import (
 //				Bucket:              pulumi.Sprintf("tf-bucket-cdc-%v", appId),
 //				Acl:                 pulumi.String("private"),
 //				EncryptionAlgorithm: pulumi.String("KMS"),
-//				KmsId:               example.ID(),
+//				KmsId:               example.ID().ToIDOutput().ToStringOutput(),
 //				VersioningEnable:    pulumi.Bool(true),
 //				AccelerationEnable:  pulumi.Bool(false),
 //				ForceClean:          pulumi.Bool(true),
@@ -153,8 +147,6 @@ import (
 // package main
 //
 // import (
-//
-//	"fmt"
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
@@ -191,8 +183,6 @@ import (
 // package main
 //
 // import (
-//
-//	"fmt"
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
@@ -289,8 +279,6 @@ import (
 //
 // import (
 //
-//	"fmt"
-//
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/user"
@@ -351,8 +339,6 @@ import (
 //
 // import (
 //
-//	"fmt"
-//
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/user"
@@ -391,9 +377,7 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			ctx.Export("endpointTest", bucketWithStaticWebsite.Website.ApplyT(func(website cos.BucketWebsite) (*string, error) {
-//				return &website.Endpoint, nil
-//			}).(pulumi.StringPtrOutput))
+//			ctx.Export("endpointTest", bucketWithStaticWebsite.Website.Endpoint())
 //			return nil
 //		})
 //	}
@@ -406,8 +390,6 @@ import (
 // package main
 //
 // import (
-//
-//	"fmt"
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
@@ -423,12 +405,13 @@ import (
 //			}
 //			appId := info.AppId
 //			_, err = cos.NewBucket(ctx, "bucket_with_cors", &cos.BucketArgs{
-//				Bucket: pulumi.Sprintf("bucket-with-cors-%v", appId),
-//				Acl:    pulumi.String("public-read-write"),
+//				Bucket:           pulumi.Sprintf("bucket-with-cors-%v", appId),
+//				Acl:              pulumi.String("public-read-write"),
+//				CorsResponseVary: pulumi.String("true"),
 //				CorsRules: cos.BucketCorsRuleArray{
 //					&cos.BucketCorsRuleArgs{
 //						AllowedOrigins: pulumi.StringArray{
-//							pulumi.String("http://*.abc.com"),
+//							pulumi.String("http://*.example.com"),
 //						},
 //						AllowedMethods: pulumi.StringArray{
 //							pulumi.String("PUT"),
@@ -459,8 +442,6 @@ import (
 // package main
 //
 // import (
-//
-//	"fmt"
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
@@ -506,8 +487,6 @@ import (
 // package main
 //
 // import (
-//
-//	"fmt"
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
@@ -561,8 +540,6 @@ import (
 //
 // import (
 //
-//	"fmt"
-//
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/user"
@@ -609,8 +586,6 @@ import (
 // package main
 //
 // import (
-//
-//	"fmt"
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
@@ -688,12 +663,201 @@ import (
 //				ReplicaRole:      pulumi.Sprintf("qcs::cam::uin/%v:uin/%v", ownerUin, uin),
 //				ReplicaRules: cos.BucketReplicaRuleArray{
 //					&cos.BucketReplicaRuleArgs{
-//						Id:     pulumi.String("test-rep1"),
-//						Status: pulumi.String("Enabled"),
-//						Prefix: pulumi.String("dist"),
+//						Id:       pulumi.String("rule1"),
+//						Status:   pulumi.String("Enabled"),
+//						Priority: pulumi.Int(1),
+//						Prefix:   pulumi.String("/prefix"),
+//						Filter: &cos.BucketReplicaRuleFilterArgs{
+//							And: &cos.BucketReplicaRuleFilterAndArgs{
+//								Tags: cos.BucketReplicaRuleFilterAndTagArray{
+//									&cos.BucketReplicaRuleFilterAndTagArgs{
+//										Key:   pulumi.String("tagKey1"),
+//										Value: pulumi.String("tagValue1"),
+//									},
+//									&cos.BucketReplicaRuleFilterAndTagArgs{
+//										Key:   pulumi.String("tagKey2"),
+//										Value: pulumi.String("tagValue2"),
+//									},
+//								},
+//							},
+//						},
 //						DestinationBucket: bucketReplicate.Bucket.ApplyT(func(bucket string) (string, error) {
 //							return fmt.Sprintf("qcs::cos:%v::%v", region, bucket), nil
 //						}).(pulumi.StringOutput),
+//						DestinationStorageClass:       pulumi.String("Standard"),
+//						DestinationEncryptionKmsKeyId: pulumi.String("4f14a617-7c7d-11ef-9a62-525400d3a886"),
+//						DeleteMarkerReplication: &cos.BucketReplicaRuleDeleteMarkerReplicationArgs{
+//							Status: pulumi.String("Disabled"),
+//						},
+//						SourceSelectionCriteria: &cos.BucketReplicaRuleSourceSelectionCriteriaArgs{
+//							SseKmsEncryptedObjects: &cos.BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsArgs{
+//								Status: pulumi.String("Enabled"),
+//							},
+//						},
+//					},
+//					&cos.BucketReplicaRuleArgs{
+//						Id:       pulumi.String("rule2"),
+//						Status:   pulumi.String("Enabled"),
+//						Priority: pulumi.Int(2),
+//						DestinationBucket: bucketReplicate.Bucket.ApplyT(func(bucket string) (string, error) {
+//							return fmt.Sprintf("qcs::cos:%v::%v", region, bucket), nil
+//						}).(pulumi.StringOutput),
+//						DestinationStorageClass:       pulumi.String("Standard"),
+//						DestinationEncryptionKmsKeyId: pulumi.String("4f14a617-7c7d-11ef-9a62-525400d3a886"),
+//						DeleteMarkerReplication: &cos.BucketReplicaRuleDeleteMarkerReplicationArgs{
+//							Status: pulumi.String("Enabled"),
+//						},
+//						SourceSelectionCriteria: &cos.BucketReplicaRuleSourceSelectionCriteriaArgs{
+//							SseKmsEncryptedObjects: &cos.BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsArgs{
+//								Status: pulumi.String("Enabled"),
+//							},
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Using intelligent tiering, Only enable intelligent tiering
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/user"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			info, err := user.GetInfo(ctx, &user.GetInfoArgs{}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			appId := info.AppId
+//			_, err = cos.NewBucket(ctx, "example", &cos.BucketArgs{
+//				Bucket:                            pulumi.Sprintf("bucket-intelligent-tiering-%v", appId),
+//				Acl:                               pulumi.String("private"),
+//				EnableIntelligentTiering:          pulumi.Bool(true),
+//				IntelligentTieringDays:            pulumi.Int(30),
+//				IntelligentTieringRequestFrequent: pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Using intelligent tiering and configure the intelligent tiered storage archiving and deep archiving rules list.
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/user"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			info, err := user.GetInfo(ctx, &user.GetInfoArgs{}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			appId := info.AppId
+//			_, err = cos.NewBucket(ctx, "example", &cos.BucketArgs{
+//				Bucket:                            pulumi.Sprintf("bucket-intelligent-tiering-%v", appId),
+//				Acl:                               pulumi.String("private"),
+//				EnableIntelligentTiering:          pulumi.Bool(true),
+//				IntelligentTieringDays:            pulumi.Int(30),
+//				IntelligentTieringRequestFrequent: pulumi.Int(1),
+//				IntelligentTieringArchivingRuleLists: cos.BucketIntelligentTieringArchivingRuleListArray{
+//					&cos.BucketIntelligentTieringArchivingRuleListArgs{
+//						RuleId: pulumi.String("rule1"),
+//						Status: pulumi.String("Enabled"),
+//						Tierings: cos.BucketIntelligentTieringArchivingRuleListTieringArray{
+//							&cos.BucketIntelligentTieringArchivingRuleListTieringArgs{
+//								AccessTier: pulumi.String("ARCHIVE_ACCESS"),
+//								Days:       pulumi.Int(91),
+//							},
+//							&cos.BucketIntelligentTieringArchivingRuleListTieringArgs{
+//								AccessTier: pulumi.String("DEEP_ARCHIVE_ACCESS"),
+//								Days:       pulumi.Int(180),
+//							},
+//						},
+//					},
+//					&cos.BucketIntelligentTieringArchivingRuleListArgs{
+//						RuleId: pulumi.String("rule2"),
+//						Status: pulumi.String("Enabled"),
+//						Filter: &cos.BucketIntelligentTieringArchivingRuleListFilterArgs{
+//							Prefix: pulumi.String("/prefix"),
+//							Tags: cos.BucketIntelligentTieringArchivingRuleListFilterTagArray{
+//								&cos.BucketIntelligentTieringArchivingRuleListFilterTagArgs{
+//									Key:   pulumi.String("tagKey"),
+//									Value: pulumi.String("tagValue"),
+//								},
+//							},
+//						},
+//						Tierings: cos.BucketIntelligentTieringArchivingRuleListTieringArray{
+//							&cos.BucketIntelligentTieringArchivingRuleListTieringArgs{
+//								AccessTier: pulumi.String("ARCHIVE_ACCESS"),
+//								Days:       pulumi.Int(91),
+//							},
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Using object lock config
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/user"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			info, err := user.GetInfo(ctx, &user.GetInfoArgs{}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			appId := info.AppId
+//			_, err = cos.NewBucket(ctx, "example", &cos.BucketArgs{
+//				Bucket: pulumi.Sprintf("bucket-intelligent-tiering-%v", appId),
+//				Acl:    pulumi.String("private"),
+//				ObjectLockConfiguration: &cos.BucketObjectLockConfigurationArgs{
+//					Enabled: pulumi.Bool(true),
+//					Rule: &cos.BucketObjectLockConfigurationRuleArgs{
+//						Days: pulumi.Int(30),
 //					},
 //				},
 //			})
@@ -712,8 +876,6 @@ import (
 // package main
 //
 // import (
-//
-//	"fmt"
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
@@ -764,6 +926,8 @@ type Bucket struct {
 	CdcId pulumi.StringPtrOutput `pulumi:"cdcId"`
 	// Indicates whether to create a bucket of metadata acceleration. For more information, please refer to `https://www.tencentcloud.com/document/product/436/43305`.
 	ChdfsOfs pulumi.BoolOutput `pulumi:"chdfsOfs"`
+	// Whether to return the `Vary: Origin` header in the CORS response. Valid values: `true`, `false`.
+	CorsResponseVary pulumi.StringOutput `pulumi:"corsResponseVary"`
 	// A rule of Cross-Origin Resource Sharing (documented below).
 	CorsRules BucketCorsRuleArrayOutput `pulumi:"corsRules"`
 	// The URL of this cos bucket.
@@ -774,6 +938,8 @@ type Bucket struct {
 	EncryptionAlgorithm pulumi.StringPtrOutput `pulumi:"encryptionAlgorithm"`
 	// Force cleanup all objects before delete bucket.
 	ForceClean pulumi.BoolPtrOutput `pulumi:"forceClean"`
+	// List of intelligent tiered storage, archiving, and deep archiving rules. NOTE: only `enableIntelligentTiering` is true can configure this argument.
+	IntelligentTieringArchivingRuleLists BucketIntelligentTieringArchivingRuleListArrayOutput `pulumi:"intelligentTieringArchivingRuleLists"`
 	// Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.
 	IntelligentTieringDays pulumi.IntOutput `pulumi:"intelligentTieringDays"`
 	// Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.
@@ -785,11 +951,13 @@ type Bucket struct {
 	// Indicate the access log of this bucket to be saved or not. Default is `false`. If set `true`, the access log will be saved with `logTargetBucket`. To enable log, the full access of log service must be granted. [Full Access Role Policy](https://intl.cloud.tencent.com/document/product/436/16920).
 	LogEnable pulumi.BoolPtrOutput `pulumi:"logEnable"`
 	// The prefix log name which saves the access log of this bucket per 5 minutes. Eg. `MyLogPrefix/`. The log access file format is `logTargetBucket`/`logPrefix`{YYYY}/{MM}/{DD}/{time}_{random}_{index}.gz. Only valid when `logEnable` is `true`.
-	LogPrefix pulumi.StringOutput `pulumi:"logPrefix"`
+	LogPrefix pulumi.StringPtrOutput `pulumi:"logPrefix"`
 	// The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is `logTargetBucket`/`logPrefix`{YYYY}/{MM}/{DD}/{time}_{random}_{index}.gz. Only valid when `logEnable` is `true`. User must have full access on this bucket.
-	LogTargetBucket pulumi.StringOutput `pulumi:"logTargetBucket"`
+	LogTargetBucket pulumi.StringPtrOutput `pulumi:"logTargetBucket"`
 	// Indicates whether to create a bucket of multi available zone.
 	MultiAz pulumi.BoolPtrOutput `pulumi:"multiAz"`
+	// Object locking configuration. Once enabled, this feature cannot be disabled.
+	ObjectLockConfiguration BucketObjectLockConfigurationOutput `pulumi:"objectLockConfiguration"`
 	// Bucket Origin Domain settings.
 	OriginDomainRules BucketOriginDomainRuleArrayOutput `pulumi:"originDomainRules"`
 	// Bucket Origin-Pull settings.
@@ -851,6 +1019,8 @@ type bucketState struct {
 	CdcId *string `pulumi:"cdcId"`
 	// Indicates whether to create a bucket of metadata acceleration. For more information, please refer to `https://www.tencentcloud.com/document/product/436/43305`.
 	ChdfsOfs *bool `pulumi:"chdfsOfs"`
+	// Whether to return the `Vary: Origin` header in the CORS response. Valid values: `true`, `false`.
+	CorsResponseVary *string `pulumi:"corsResponseVary"`
 	// A rule of Cross-Origin Resource Sharing (documented below).
 	CorsRules []BucketCorsRule `pulumi:"corsRules"`
 	// The URL of this cos bucket.
@@ -861,6 +1031,8 @@ type bucketState struct {
 	EncryptionAlgorithm *string `pulumi:"encryptionAlgorithm"`
 	// Force cleanup all objects before delete bucket.
 	ForceClean *bool `pulumi:"forceClean"`
+	// List of intelligent tiered storage, archiving, and deep archiving rules. NOTE: only `enableIntelligentTiering` is true can configure this argument.
+	IntelligentTieringArchivingRuleLists []BucketIntelligentTieringArchivingRuleList `pulumi:"intelligentTieringArchivingRuleLists"`
 	// Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.
 	IntelligentTieringDays *int `pulumi:"intelligentTieringDays"`
 	// Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.
@@ -877,6 +1049,8 @@ type bucketState struct {
 	LogTargetBucket *string `pulumi:"logTargetBucket"`
 	// Indicates whether to create a bucket of multi available zone.
 	MultiAz *bool `pulumi:"multiAz"`
+	// Object locking configuration. Once enabled, this feature cannot be disabled.
+	ObjectLockConfiguration *BucketObjectLockConfiguration `pulumi:"objectLockConfiguration"`
 	// Bucket Origin Domain settings.
 	OriginDomainRules []BucketOriginDomainRule `pulumi:"originDomainRules"`
 	// Bucket Origin-Pull settings.
@@ -906,6 +1080,8 @@ type BucketState struct {
 	CdcId pulumi.StringPtrInput
 	// Indicates whether to create a bucket of metadata acceleration. For more information, please refer to `https://www.tencentcloud.com/document/product/436/43305`.
 	ChdfsOfs pulumi.BoolPtrInput
+	// Whether to return the `Vary: Origin` header in the CORS response. Valid values: `true`, `false`.
+	CorsResponseVary pulumi.StringPtrInput
 	// A rule of Cross-Origin Resource Sharing (documented below).
 	CorsRules BucketCorsRuleArrayInput
 	// The URL of this cos bucket.
@@ -916,6 +1092,8 @@ type BucketState struct {
 	EncryptionAlgorithm pulumi.StringPtrInput
 	// Force cleanup all objects before delete bucket.
 	ForceClean pulumi.BoolPtrInput
+	// List of intelligent tiered storage, archiving, and deep archiving rules. NOTE: only `enableIntelligentTiering` is true can configure this argument.
+	IntelligentTieringArchivingRuleLists BucketIntelligentTieringArchivingRuleListArrayInput
 	// Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.
 	IntelligentTieringDays pulumi.IntPtrInput
 	// Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.
@@ -932,6 +1110,8 @@ type BucketState struct {
 	LogTargetBucket pulumi.StringPtrInput
 	// Indicates whether to create a bucket of multi available zone.
 	MultiAz pulumi.BoolPtrInput
+	// Object locking configuration. Once enabled, this feature cannot be disabled.
+	ObjectLockConfiguration BucketObjectLockConfigurationPtrInput
 	// Bucket Origin Domain settings.
 	OriginDomainRules BucketOriginDomainRuleArrayInput
 	// Bucket Origin-Pull settings.
@@ -965,6 +1145,8 @@ type bucketArgs struct {
 	CdcId *string `pulumi:"cdcId"`
 	// Indicates whether to create a bucket of metadata acceleration. For more information, please refer to `https://www.tencentcloud.com/document/product/436/43305`.
 	ChdfsOfs *bool `pulumi:"chdfsOfs"`
+	// Whether to return the `Vary: Origin` header in the CORS response. Valid values: `true`, `false`.
+	CorsResponseVary *string `pulumi:"corsResponseVary"`
 	// A rule of Cross-Origin Resource Sharing (documented below).
 	CorsRules []BucketCorsRule `pulumi:"corsRules"`
 	// Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.
@@ -973,6 +1155,8 @@ type bucketArgs struct {
 	EncryptionAlgorithm *string `pulumi:"encryptionAlgorithm"`
 	// Force cleanup all objects before delete bucket.
 	ForceClean *bool `pulumi:"forceClean"`
+	// List of intelligent tiered storage, archiving, and deep archiving rules. NOTE: only `enableIntelligentTiering` is true can configure this argument.
+	IntelligentTieringArchivingRuleLists []BucketIntelligentTieringArchivingRuleList `pulumi:"intelligentTieringArchivingRuleLists"`
 	// Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.
 	IntelligentTieringDays *int `pulumi:"intelligentTieringDays"`
 	// Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.
@@ -989,6 +1173,8 @@ type bucketArgs struct {
 	LogTargetBucket *string `pulumi:"logTargetBucket"`
 	// Indicates whether to create a bucket of multi available zone.
 	MultiAz *bool `pulumi:"multiAz"`
+	// Object locking configuration. Once enabled, this feature cannot be disabled.
+	ObjectLockConfiguration *BucketObjectLockConfiguration `pulumi:"objectLockConfiguration"`
 	// Bucket Origin Domain settings.
 	OriginDomainRules []BucketOriginDomainRule `pulumi:"originDomainRules"`
 	// Bucket Origin-Pull settings.
@@ -1019,6 +1205,8 @@ type BucketArgs struct {
 	CdcId pulumi.StringPtrInput
 	// Indicates whether to create a bucket of metadata acceleration. For more information, please refer to `https://www.tencentcloud.com/document/product/436/43305`.
 	ChdfsOfs pulumi.BoolPtrInput
+	// Whether to return the `Vary: Origin` header in the CORS response. Valid values: `true`, `false`.
+	CorsResponseVary pulumi.StringPtrInput
 	// A rule of Cross-Origin Resource Sharing (documented below).
 	CorsRules BucketCorsRuleArrayInput
 	// Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.
@@ -1027,6 +1215,8 @@ type BucketArgs struct {
 	EncryptionAlgorithm pulumi.StringPtrInput
 	// Force cleanup all objects before delete bucket.
 	ForceClean pulumi.BoolPtrInput
+	// List of intelligent tiered storage, archiving, and deep archiving rules. NOTE: only `enableIntelligentTiering` is true can configure this argument.
+	IntelligentTieringArchivingRuleLists BucketIntelligentTieringArchivingRuleListArrayInput
 	// Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.
 	IntelligentTieringDays pulumi.IntPtrInput
 	// Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.
@@ -1043,6 +1233,8 @@ type BucketArgs struct {
 	LogTargetBucket pulumi.StringPtrInput
 	// Indicates whether to create a bucket of multi available zone.
 	MultiAz pulumi.BoolPtrInput
+	// Object locking configuration. Once enabled, this feature cannot be disabled.
+	ObjectLockConfiguration BucketObjectLockConfigurationPtrInput
 	// Bucket Origin Domain settings.
 	OriginDomainRules BucketOriginDomainRuleArrayInput
 	// Bucket Origin-Pull settings.
@@ -1176,6 +1368,11 @@ func (o BucketOutput) ChdfsOfs() pulumi.BoolOutput {
 	return o.ApplyT(func(v *Bucket) pulumi.BoolOutput { return v.ChdfsOfs }).(pulumi.BoolOutput)
 }
 
+// Whether to return the `Vary: Origin` header in the CORS response. Valid values: `true`, `false`.
+func (o BucketOutput) CorsResponseVary() pulumi.StringOutput {
+	return o.ApplyT(func(v *Bucket) pulumi.StringOutput { return v.CorsResponseVary }).(pulumi.StringOutput)
+}
+
 // A rule of Cross-Origin Resource Sharing (documented below).
 func (o BucketOutput) CorsRules() BucketCorsRuleArrayOutput {
 	return o.ApplyT(func(v *Bucket) BucketCorsRuleArrayOutput { return v.CorsRules }).(BucketCorsRuleArrayOutput)
@@ -1199,6 +1396,13 @@ func (o BucketOutput) EncryptionAlgorithm() pulumi.StringPtrOutput {
 // Force cleanup all objects before delete bucket.
 func (o BucketOutput) ForceClean() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Bucket) pulumi.BoolPtrOutput { return v.ForceClean }).(pulumi.BoolPtrOutput)
+}
+
+// List of intelligent tiered storage, archiving, and deep archiving rules. NOTE: only `enableIntelligentTiering` is true can configure this argument.
+func (o BucketOutput) IntelligentTieringArchivingRuleLists() BucketIntelligentTieringArchivingRuleListArrayOutput {
+	return o.ApplyT(func(v *Bucket) BucketIntelligentTieringArchivingRuleListArrayOutput {
+		return v.IntelligentTieringArchivingRuleLists
+	}).(BucketIntelligentTieringArchivingRuleListArrayOutput)
 }
 
 // Specifies the limit of days for standard-tier data to low-frequency data in an intelligent tiered storage configuration, with optional days of 30, 60, 90. Default value is 30.
@@ -1227,18 +1431,23 @@ func (o BucketOutput) LogEnable() pulumi.BoolPtrOutput {
 }
 
 // The prefix log name which saves the access log of this bucket per 5 minutes. Eg. `MyLogPrefix/`. The log access file format is `logTargetBucket`/`logPrefix`{YYYY}/{MM}/{DD}/{time}_{random}_{index}.gz. Only valid when `logEnable` is `true`.
-func (o BucketOutput) LogPrefix() pulumi.StringOutput {
-	return o.ApplyT(func(v *Bucket) pulumi.StringOutput { return v.LogPrefix }).(pulumi.StringOutput)
+func (o BucketOutput) LogPrefix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Bucket) pulumi.StringPtrOutput { return v.LogPrefix }).(pulumi.StringPtrOutput)
 }
 
 // The target bucket name which saves the access log of this bucket per 5 minutes. The log access file format is `logTargetBucket`/`logPrefix`{YYYY}/{MM}/{DD}/{time}_{random}_{index}.gz. Only valid when `logEnable` is `true`. User must have full access on this bucket.
-func (o BucketOutput) LogTargetBucket() pulumi.StringOutput {
-	return o.ApplyT(func(v *Bucket) pulumi.StringOutput { return v.LogTargetBucket }).(pulumi.StringOutput)
+func (o BucketOutput) LogTargetBucket() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Bucket) pulumi.StringPtrOutput { return v.LogTargetBucket }).(pulumi.StringPtrOutput)
 }
 
 // Indicates whether to create a bucket of multi available zone.
 func (o BucketOutput) MultiAz() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Bucket) pulumi.BoolPtrOutput { return v.MultiAz }).(pulumi.BoolPtrOutput)
+}
+
+// Object locking configuration. Once enabled, this feature cannot be disabled.
+func (o BucketOutput) ObjectLockConfiguration() BucketObjectLockConfigurationOutput {
+	return o.ApplyT(func(v *Bucket) BucketObjectLockConfigurationOutput { return v.ObjectLockConfiguration }).(BucketObjectLockConfigurationOutput)
 }
 
 // Bucket Origin Domain settings.

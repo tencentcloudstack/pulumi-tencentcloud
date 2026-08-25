@@ -279,47 +279,47 @@ export interface CustomRuleState {
     /**
      * Action type, 1(Block), 2(Captcha), 3(log), 4(Redirect).
      */
-    actionType?: pulumi.Input<string>;
+    actionType?: pulumi.Input<string | undefined>;
     /**
      * Domain.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Expiration time in second-level timestamp, for example, 1677254399 indicates the expiration time is 2023-02-24 23:59:59; 0 indicates it will never expire.
      */
-    expireTime?: pulumi.Input<string>;
+    expireTime?: pulumi.Input<string | undefined>;
     /**
      * Rule execution time.
      */
-    jobDateTime?: pulumi.Input<inputs.Waf.CustomRuleJobDateTime>;
+    jobDateTime?: pulumi.Input<inputs.Waf.CustomRuleJobDateTime | undefined>;
     /**
      * Rule execution mode: TimedJob indicates scheduled execution. CronJob indicates periodic execution.
      */
-    jobType?: pulumi.Input<string>;
+    jobType?: pulumi.Input<string | undefined>;
     /**
      * Rule Name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * If the action is a Redirect, it represents the redirect address; Other situations can be left blank.
      */
-    redirect?: pulumi.Input<string>;
+    redirect?: pulumi.Input<string | undefined>;
     /**
      * rule ID.
      */
-    ruleId?: pulumi.Input<string>;
+    ruleId?: pulumi.Input<string | undefined>;
     /**
      * Priority, value range 0-100.
      */
-    sortId?: pulumi.Input<string>;
+    sortId?: pulumi.Input<string | undefined>;
     /**
      * The status of the rule, 1(open), 0(close).
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Strategies detail.
      */
-    strategies?: pulumi.Input<pulumi.Input<inputs.Waf.CustomRuleStrategy>[]>;
+    strategies?: pulumi.Input<pulumi.Input<inputs.Waf.CustomRuleStrategy>[] | undefined>;
 }
 
 /**
@@ -341,19 +341,19 @@ export interface CustomRuleArgs {
     /**
      * Rule execution time.
      */
-    jobDateTime?: pulumi.Input<inputs.Waf.CustomRuleJobDateTime>;
+    jobDateTime?: pulumi.Input<inputs.Waf.CustomRuleJobDateTime | undefined>;
     /**
      * Rule execution mode: TimedJob indicates scheduled execution. CronJob indicates periodic execution.
      */
-    jobType?: pulumi.Input<string>;
+    jobType?: pulumi.Input<string | undefined>;
     /**
      * Rule Name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * If the action is a Redirect, it represents the redirect address; Other situations can be left blank.
      */
-    redirect?: pulumi.Input<string>;
+    redirect?: pulumi.Input<string | undefined>;
     /**
      * Priority, value range 0-100.
      */
@@ -361,7 +361,7 @@ export interface CustomRuleArgs {
     /**
      * The status of the rule, 1(open), 0(close).
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Strategies detail.
      */

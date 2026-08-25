@@ -9,23 +9,42 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * ### ### Basic Usage
+ *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.vod.SubApplication("foo", {
- *     name: "foo",
+ * const example = new tencentcloud.vod.SubApplication("example", {
+ *     name: "tf-example",
  *     status: "On",
  *     description: "this is sub application",
  * });
  * ```
  *
+ * ### ### Tags Update Example
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.vod.SubApplication("example", {
+ *     name: "tf-example",
+ *     status: "On",
+ *     description: "Sub application with updatable tags",
+ *     tags: {
+ *         team: "media",
+ *         environment: "production",
+ *     },
+ * });
+ * ```
+ *
  * ## Import
  *
- * VOD super player config can be imported using the name+, e.g.
+ * VOD sub application can be imported using the name and id separated by `name#sub_app_id`, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Vod/subApplication:SubApplication foo name+"#"+id
+ * $ pulumi import tencentcloud:Vod/subApplication:SubApplication example tf-example#1500066377
  * ```
  */
 export class SubApplication extends pulumi.CustomResource {
@@ -72,6 +91,14 @@ export class SubApplication extends pulumi.CustomResource {
      * Sub appliaction status.
      */
     declare public readonly status: pulumi.Output<string>;
+    /**
+     * Sub application ID.
+     */
+    declare public /*out*/ readonly subAppId: pulumi.Output<string>;
+    /**
+     * Tag key-value pairs for resource management. Maximum 10 tags.
+     */
+    declare public readonly tags: pulumi.Output<{[key: string]: string} | undefined>;
 
     /**
      * Create a SubApplication resource with the given unique name, arguments, and options.
@@ -90,6 +117,8 @@ export class SubApplication extends pulumi.CustomResource {
             resourceInputs["description"] = state?.description;
             resourceInputs["name"] = state?.name;
             resourceInputs["status"] = state?.status;
+            resourceInputs["subAppId"] = state?.subAppId;
+            resourceInputs["tags"] = state?.tags;
         } else {
             const args = argsOrState as SubApplicationArgs | undefined;
             if (args?.status === undefined && !opts.urn) {
@@ -98,7 +127,9 @@ export class SubApplication extends pulumi.CustomResource {
             resourceInputs["description"] = args?.description;
             resourceInputs["name"] = args?.name;
             resourceInputs["status"] = args?.status;
+            resourceInputs["tags"] = args?.tags;
             resourceInputs["createTime"] = undefined /*out*/;
+            resourceInputs["subAppId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(SubApplication.__pulumiType, name, resourceInputs, opts);
@@ -112,19 +143,27 @@ export interface SubApplicationState {
     /**
      * The time when the sub application was created.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Sub application description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and must be unique under a user.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Sub appliaction status.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
+    /**
+     * Sub application ID.
+     */
+    subAppId?: pulumi.Input<string | undefined>;
+    /**
+     * Tag key-value pairs for resource management. Maximum 10 tags.
+     */
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 /**
@@ -134,13 +173,17 @@ export interface SubApplicationArgs {
     /**
      * Sub application description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Sub application name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and must be unique under a user.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Sub appliaction status.
      */
     status: pulumi.Input<string>;
+    /**
+     * Tag key-value pairs for resource management. Maximum 10 tags.
+     */
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

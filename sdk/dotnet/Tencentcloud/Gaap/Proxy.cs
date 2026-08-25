@@ -44,7 +44,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
     /// GAAP proxy can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Gaap/proxy:Proxy  tencentcloud_gaap_proxy.foo link-11112222
+    ///   $ pulumi import tencentcloud:Gaap/proxy:Proxy foo link-11112222
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Gaap/proxy:Proxy")]

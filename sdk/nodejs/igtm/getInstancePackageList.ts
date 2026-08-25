@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Igtm.getInstancePackageList({});
+ * const example = tencentcloud.igtm.getInstancePackageList({});
  * ```
  *
  * ### Query igtm instance package list by filter
@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Igtm.getInstancePackageList({
+ * const example = tencentcloud.igtm.getInstancePackageList({
  *     filters: [{
  *         name: "InstanceId",
  *         values: ["gtm-uukztqtoaru"],
@@ -90,7 +90,7 @@ export interface GetInstancePackageListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Igtm.getInstancePackageList({});
+ * const example = tencentcloud.igtm.getInstancePackageList({});
  * ```
  *
  * ### Query igtm instance package list by filter
@@ -99,7 +99,7 @@ export interface GetInstancePackageListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Igtm.getInstancePackageList({
+ * const example = tencentcloud.igtm.getInstancePackageList({
  *     filters: [{
  *         name: "InstanceId",
  *         values: ["gtm-uukztqtoaru"],
@@ -125,13 +125,13 @@ export interface GetInstancePackageListOutputArgs {
     /**
      * Filter conditions.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Igtm.GetInstancePackageListFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Igtm.GetInstancePackageListFilterArgs>[] | undefined>;
     /**
      * Whether used: 0 not used 1 used.
      */
-    isUsed?: pulumi.Input<number>;
+    isUsed?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

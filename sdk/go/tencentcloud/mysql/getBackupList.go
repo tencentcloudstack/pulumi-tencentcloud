@@ -72,12 +72,8 @@ type GetBackupListResult struct {
 }
 
 func GetBackupListOutput(ctx *pulumi.Context, args GetBackupListOutputArgs, opts ...pulumi.InvokeOption) GetBackupListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetBackupListResultOutput, error) {
-			args := v.(GetBackupListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mysql/getBackupList:getBackupList", args, GetBackupListResultOutput{}, options).(GetBackupListResultOutput), nil
-		}).(GetBackupListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mysql/getBackupList:getBackupList", args, GetBackupListResultOutput{}, options).(GetBackupListResultOutput)
 }
 
 // A collection of arguments for invoking getBackupList.

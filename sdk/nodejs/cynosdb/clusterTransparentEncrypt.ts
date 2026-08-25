@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a cynosdb clusterTransparentEncrypt
+ * Provides a resource to create a Cynosdb cluster transparent encrypt
  *
  * > **NOTE:** Once activated, it cannot be deactivated.
  *
@@ -17,21 +17,21 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const cynosdbClusterTransparentEncrypt = new tencentcloud.cynosdb.ClusterTransparentEncrypt("cynosdb_cluster_transparent_encrypt", {
+ * const example = new tencentcloud.cynosdb.ClusterTransparentEncrypt("example", {
  *     clusterId: cynosdbmysql_bu6hlulf,
- *     isOpenGlobalEncryption: false,
  *     keyId: "f063c18b-xxxx-xxxx-xxxx-525400d3a886",
  *     keyRegion: "ap-guangzhou",
  *     keyType: "custom",
+ *     isOpenGlobalEncryption: false,
  * });
  * ```
  *
  * ## Import
  *
- * cynosdb cluster_transparent_encrypt can be imported using the id, e.g.
+ * Cynosdb cluster transparent encrypt can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Cynosdb/clusterTransparentEncrypt:ClusterTransparentEncrypt cynosdb_cluster_transparent_encrypt cynosdbmysql-bu6hlulf
+ * $ pulumi import tencentcloud:Cynosdb/clusterTransparentEncrypt:ClusterTransparentEncrypt example cynosdbmysql-bu6hlulf
  * ```
  */
 export class ClusterTransparentEncrypt extends pulumi.CustomResource {
@@ -127,23 +127,23 @@ export interface ClusterTransparentEncryptState {
     /**
      * Cluster ID.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable global encryption.
      */
-    isOpenGlobalEncryption?: pulumi.Input<boolean>;
+    isOpenGlobalEncryption?: pulumi.Input<boolean | undefined>;
     /**
      * Key Id.
      */
-    keyId?: pulumi.Input<string>;
+    keyId?: pulumi.Input<string | undefined>;
     /**
      * Key region.
      */
-    keyRegion?: pulumi.Input<string>;
+    keyRegion?: pulumi.Input<string | undefined>;
     /**
      * Key type (cloud, custom).
      */
-    keyType?: pulumi.Input<string>;
+    keyType?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -157,15 +157,15 @@ export interface ClusterTransparentEncryptArgs {
     /**
      * Whether to enable global encryption.
      */
-    isOpenGlobalEncryption?: pulumi.Input<boolean>;
+    isOpenGlobalEncryption?: pulumi.Input<boolean | undefined>;
     /**
      * Key Id.
      */
-    keyId?: pulumi.Input<string>;
+    keyId?: pulumi.Input<string | undefined>;
     /**
      * Key region.
      */
-    keyRegion?: pulumi.Input<string>;
+    keyRegion?: pulumi.Input<string | undefined>;
     /**
      * Key type (cloud, custom).
      */

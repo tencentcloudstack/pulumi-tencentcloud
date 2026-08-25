@@ -101,15 +101,15 @@ export interface ModifyDomainOwnerOperationState {
     /**
      * The account to which the domain needs to be transferred, supporting Uin or email format.
      */
-    account?: pulumi.Input<string>;
+    account?: pulumi.Input<string | undefined>;
     /**
      * Domain.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Domain ID. The parameter DomainId has a higher priority than the parameter Domain. If the parameter DomainId is passed, the parameter Domain will be ignored. You can find all Domains and DomainIds through the DescribeDomainList interface.
      */
-    domainId?: pulumi.Input<number>;
+    domainId?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -127,5 +127,5 @@ export interface ModifyDomainOwnerOperationArgs {
     /**
      * Domain ID. The parameter DomainId has a higher priority than the parameter Domain. If the parameter DomainId is passed, the parameter Domain will be ignored. You can find all Domains and DomainIds through the DescribeDomainList interface.
      */
-    domainId?: pulumi.Input<number>;
+    domainId?: pulumi.Input<number | undefined>;
 }

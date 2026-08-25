@@ -21,14 +21,13 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfgen"
+	pftfgen "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/pf/tfgen"
 	"github.com/pulumi/pulumi/pkg/v3/codegen/schema"
 	tencentcloud "github.com/tencentcloudstack/pulumi-tencentcloud/provider"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/provider/pkg/version"
 )
 
 func main() {
-	tfgen.Main("tencentcloud", version.Version, tencentcloud.Provider())
+	pftfgen.MainWithMuxer("tencentcloud", tencentcloud.Provider())
 	temporaryReplaceCodeExampleImportStatement()
 }
 

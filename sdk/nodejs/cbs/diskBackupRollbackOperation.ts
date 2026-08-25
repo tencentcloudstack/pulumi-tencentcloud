@@ -100,15 +100,15 @@ export interface DiskBackupRollbackOperationState {
     /**
      * Cloud disk backup point ID.
      */
-    diskBackupId?: pulumi.Input<string>;
+    diskBackupId?: pulumi.Input<string | undefined>;
     /**
      * Cloud disk backup point original cloud disk ID.
      */
-    diskId?: pulumi.Input<string>;
+    diskId?: pulumi.Input<string | undefined>;
     /**
      * Whether the rollback is completed. `true` meaing rollback completed, `false` meaning still rollbacking.
      */
-    isRollbackCompleted?: pulumi.Input<boolean>;
+    isRollbackCompleted?: pulumi.Input<boolean | undefined>;
 }
 
 /**

@@ -43,7 +43,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
     /// 
     /// ## Import
     /// 
-    /// tse cngw_route_rate_limit can be imported using the id, e.g.
+    /// tse CngwRouteRateLimit can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Tse/cngwNetworkAccessControl:CngwNetworkAccessControl cngw_network_access_control gatewayId#groupId#networkId

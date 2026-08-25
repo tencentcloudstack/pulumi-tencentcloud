@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const accessGroups = tencentcloud.Cfs.getAccessGroups({
+ * const accessGroups = tencentcloud.cfs.getAccessGroups({
  *     accessGroupId: "pgroup-7nx89k7l",
  *     name: "test",
  * });
@@ -80,7 +80,7 @@ export interface GetAccessGroupsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const accessGroups = tencentcloud.Cfs.getAccessGroups({
+ * const accessGroups = tencentcloud.cfs.getAccessGroups({
  *     accessGroupId: "pgroup-7nx89k7l",
  *     name: "test",
  * });
@@ -103,13 +103,13 @@ export interface GetAccessGroupsOutputArgs {
     /**
      * A specified access group ID used to query.
      */
-    accessGroupId?: pulumi.Input<string>;
+    accessGroupId?: pulumi.Input<string | undefined>;
     /**
      * A access group Name used to query.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

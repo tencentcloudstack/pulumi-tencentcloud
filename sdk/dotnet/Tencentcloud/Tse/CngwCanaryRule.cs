@@ -97,7 +97,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
     /// 
     /// ## Import
     /// 
-    /// tse cngw_canary_rule can be imported using the gatewayId#serviceId#priority, e.g.
+    /// tse CngwCanaryRule can be imported using the gatewayId#serviceId#priority, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Tse/cngwCanaryRule:CngwCanaryRule cngw_canary_rule gateway-ddbb709b#b6017eaf-2363-481e-9e93-8d65aaf498cd#100

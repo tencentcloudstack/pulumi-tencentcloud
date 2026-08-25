@@ -150,39 +150,39 @@ export interface ResourceState {
     /**
      * Folder id.
      */
-    folderId?: pulumi.Input<string>;
+    folderId?: pulumi.Input<string | undefined>;
     /**
      * Resource name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Resource description.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Resource version description.
      */
-    resourceConfigRemark?: pulumi.Input<string>;
+    resourceConfigRemark?: pulumi.Input<string | undefined>;
     /**
      * Resource ID.
      */
-    resourceId?: pulumi.Input<string>;
+    resourceId?: pulumi.Input<string | undefined>;
     /**
      * Resource location.
      */
-    resourceLoc?: pulumi.Input<inputs.Oceanus.ResourceResourceLoc>;
+    resourceLoc?: pulumi.Input<inputs.Oceanus.ResourceResourceLoc | undefined>;
     /**
      * Resource type, only support JAR now, value is 1.
      */
-    resourceType?: pulumi.Input<number>;
+    resourceType?: pulumi.Input<number | undefined>;
     /**
      * Resource Version.
      */
-    version?: pulumi.Input<number>;
+    version?: pulumi.Input<number | undefined>;
     /**
      * Workspace serialId.
      */
-    workSpaceId?: pulumi.Input<string>;
+    workSpaceId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -192,19 +192,19 @@ export interface ResourceArgs {
     /**
      * Folder id.
      */
-    folderId?: pulumi.Input<string>;
+    folderId?: pulumi.Input<string | undefined>;
     /**
      * Resource name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Resource description.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Resource version description.
      */
-    resourceConfigRemark?: pulumi.Input<string>;
+    resourceConfigRemark?: pulumi.Input<string | undefined>;
     /**
      * Resource location.
      */
@@ -216,5 +216,5 @@ export interface ResourceArgs {
     /**
      * Workspace serialId.
      */
-    workSpaceId?: pulumi.Input<string>;
+    workSpaceId?: pulumi.Input<string | undefined>;
 }

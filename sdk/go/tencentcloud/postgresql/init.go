@@ -29,12 +29,16 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ApplyParameterTemplateOperation{}
 	case "tencentcloud:Postgresql/backupDownloadRestrictionConfig:BackupDownloadRestrictionConfig":
 		r = &BackupDownloadRestrictionConfig{}
+	case "tencentcloud:Postgresql/backupPlan:BackupPlan":
+		r = &BackupPlan{}
 	case "tencentcloud:Postgresql/backupPlanConfig:BackupPlanConfig":
 		r = &BackupPlanConfig{}
 	case "tencentcloud:Postgresql/baseBackup:BaseBackup":
 		r = &BaseBackup{}
 	case "tencentcloud:Postgresql/cloneDbInstance:CloneDbInstance":
 		r = &CloneDbInstance{}
+	case "tencentcloud:Postgresql/database:Database":
+		r = &Database{}
 	case "tencentcloud:Postgresql/deleteLogBackupOperation:DeleteLogBackupOperation":
 		r = &DeleteLogBackupOperation{}
 	case "tencentcloud:Postgresql/disisolateDbInstanceOperation:DisisolateDbInstanceOperation":
@@ -55,20 +59,24 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ModifySwitchTimePeriodOperation{}
 	case "tencentcloud:Postgresql/parameterTemplate:ParameterTemplate":
 		r = &ParameterTemplate{}
+	case "tencentcloud:Postgresql/parameterTemplateConfig:ParameterTemplateConfig":
+		r = &ParameterTemplateConfig{}
 	case "tencentcloud:Postgresql/parameters:Parameters":
 		r = &Parameters{}
 	case "tencentcloud:Postgresql/readonlyAttachment:ReadonlyAttachment":
 		r = &ReadonlyAttachment{}
 	case "tencentcloud:Postgresql/readonlyGroup:ReadonlyGroup":
 		r = &ReadonlyGroup{}
-	case "tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance":
-		r = &ReadonlyInstance{}
+	case "tencentcloud:Postgresql/readonlyInstanceV2:ReadonlyInstanceV2":
+		r = &ReadonlyInstanceV2{}
 	case "tencentcloud:Postgresql/rebalanceReadonlyGroupOperation:RebalanceReadonlyGroupOperation":
 		r = &RebalanceReadonlyGroupOperation{}
 	case "tencentcloud:Postgresql/renewDbInstanceOperation:RenewDbInstanceOperation":
 		r = &RenewDbInstanceOperation{}
 	case "tencentcloud:Postgresql/restartDbInstanceOperation:RestartDbInstanceOperation":
 		r = &RestartDbInstanceOperation{}
+	case "tencentcloud:Postgresql/restoreDbInstanceObjectsOperation:RestoreDbInstanceObjectsOperation":
+		r = &RestoreDbInstanceObjectsOperation{}
 	case "tencentcloud:Postgresql/securityGroupConfig:SecurityGroupConfig":
 		r = &SecurityGroupConfig{}
 	case "tencentcloud:Postgresql/timeWindow:TimeWindow":
@@ -108,6 +116,11 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Postgresql/backupPlan",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Postgresql/backupPlanConfig",
 		&module{version},
 	)
@@ -119,6 +132,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Postgresql/cloneDbInstance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Postgresql/database",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -173,6 +191,11 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Postgresql/parameterTemplateConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Postgresql/parameters",
 		&module{version},
 	)
@@ -188,7 +211,7 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"Postgresql/readonlyInstance",
+		"Postgresql/readonlyInstanceV2",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -204,6 +227,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Postgresql/restartDbInstanceOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Postgresql/restoreDbInstanceObjectsOperation",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

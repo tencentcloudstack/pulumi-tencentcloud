@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Postgresql.getDedicatedClusters({});
+ * const example = tencentcloud.postgresql.getDedicatedClusters({});
  * ```
  *
  * ### Query instances by filters
@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Postgresql.getDedicatedClusters({
+ * const example = tencentcloud.postgresql.getDedicatedClusters({
  *     filters: [{
  *         name: "dedicated-cluster-id",
  *         values: ["cluster-262n63e8"],
@@ -83,7 +83,7 @@ export interface GetDedicatedClustersResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Postgresql.getDedicatedClusters({});
+ * const example = tencentcloud.postgresql.getDedicatedClusters({});
  * ```
  *
  * ### Query instances by filters
@@ -92,7 +92,7 @@ export interface GetDedicatedClustersResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Postgresql.getDedicatedClusters({
+ * const example = tencentcloud.postgresql.getDedicatedClusters({
  *     filters: [{
  *         name: "dedicated-cluster-id",
  *         values: ["cluster-262n63e8"],
@@ -116,9 +116,9 @@ export interface GetDedicatedClustersOutputArgs {
     /**
      * Querying based on one or more filtering criteria, the currently supported filtering criteria are: dedicated-cluster-id: filtering by dedicated cluster ID.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Postgresql.GetDedicatedClustersFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Postgresql.GetDedicatedClustersFilterArgs>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

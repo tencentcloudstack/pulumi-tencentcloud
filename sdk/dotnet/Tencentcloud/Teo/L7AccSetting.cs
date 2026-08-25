@@ -112,6 +112,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     ///                 CacheTime = 600,
     ///                 FollowOrigin = "on",
     ///             },
+    ///             NetworkErrorLogging = new Tencentcloud.Teo.Inputs.L7AccSettingZoneConfigNetworkErrorLoggingArgs
+    ///             {
+    ///                 Switch = "off",
+    ///             },
     ///             OcspStapling = new Tencentcloud.Teo.Inputs.L7AccSettingZoneConfigOcspStaplingArgs
     ///             {
     ///                 Switch = "off",
@@ -167,15 +171,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// 
     /// ## Import
     /// 
-    /// teo l7_acc_setting can be imported using the zone_id, e.g.
-    /// 
-    /// `
-    /// 
-    /// ```sh
-    /// $ pulumi import tencentcloud:Teo/l7AccSetting:L7AccSetting teo_l7_acc_setting zone-297z8rf93cfw
-    /// ```
-    /// 
-    /// `
+    /// teo L7AccSetting can be imported using the zone_id, e.g.
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Teo/l7AccSetting:L7AccSetting")]
     public partial class L7AccSetting : global::Pulumi.CustomResource

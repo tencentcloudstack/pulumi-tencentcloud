@@ -58,7 +58,7 @@ import (
 //
 // ## Import
 //
-// lighthouse firewall_template can be imported using the id, e.g.
+// lighthouse firewallTemplate can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Lighthouse/firewallTemplate:FirewallTemplate firewall_template firewall_template_id

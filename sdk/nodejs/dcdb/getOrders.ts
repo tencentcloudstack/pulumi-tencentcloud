@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const orders = tencentcloud.Dcdb.getOrders({
+ * const orders = tencentcloud.dcdb.getOrders({
  *     dealNames: ["2023061224903413767xxxx"],
  * });
  * ```
@@ -66,7 +66,7 @@ export interface GetOrdersResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const orders = tencentcloud.Dcdb.getOrders({
+ * const orders = tencentcloud.dcdb.getOrders({
  *     dealNames: ["2023061224903413767xxxx"],
  * });
  * ```
@@ -90,5 +90,5 @@ export interface GetOrdersOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

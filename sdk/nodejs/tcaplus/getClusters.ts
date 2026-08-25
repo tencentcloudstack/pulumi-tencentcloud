@@ -15,13 +15,13 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const name = tencentcloud.Tcaplus.getClusters({
+ * const name = tencentcloud.tcaplus.getClusters({
  *     clusterName: "cluster",
  * });
- * const id = tencentcloud.Tcaplus.getClusters({
+ * const id = tencentcloud.tcaplus.getClusters({
  *     clusterId: test.id,
  * });
- * const idname = tencentcloud.Tcaplus.getClusters({
+ * const idname = tencentcloud.tcaplus.getClusters({
  *     clusterId: test.id,
  *     clusterName: "cluster",
  * });
@@ -86,13 +86,13 @@ export interface GetClustersResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const name = tencentcloud.Tcaplus.getClusters({
+ * const name = tencentcloud.tcaplus.getClusters({
  *     clusterName: "cluster",
  * });
- * const id = tencentcloud.Tcaplus.getClusters({
+ * const id = tencentcloud.tcaplus.getClusters({
  *     clusterId: test.id,
  * });
- * const idname = tencentcloud.Tcaplus.getClusters({
+ * const idname = tencentcloud.tcaplus.getClusters({
  *     clusterId: test.id,
  *     clusterName: "cluster",
  * });
@@ -115,13 +115,13 @@ export interface GetClustersOutputArgs {
     /**
      * ID of the TcaplusDB cluster to be query.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Name of the TcaplusDB cluster to be query.
      */
-    clusterName?: pulumi.Input<string>;
+    clusterName?: pulumi.Input<string | undefined>;
     /**
      * File for saving results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

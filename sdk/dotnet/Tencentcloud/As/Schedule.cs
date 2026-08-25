@@ -19,7 +19,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -96,6 +95,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     /// 
     /// });
     /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// AS schedule can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    /// $ pulumi import tencentcloud:As/schedule:Schedule example asst-ezsey1r5
+    /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:As/schedule:Schedule")]
     public partial class Schedule : global::Pulumi.CustomResource
@@ -105,6 +112,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         /// </summary>
         [Output("desiredCapacity")]
         public Output<int> DesiredCapacity { get; private set; } = null!;
+
+        /// <summary>
+        /// This flag disables the normal update of the DesiredCapacityproperty that would otherwise occur when a scheduled scaling task is triggered.
+        /// Specifies whether the scheduled task triggers proactive modification of the DesiredCapacity when the value is True. DesiredCapacity may be modified by the minSize and maxSize mechanism.
+        /// The following cases assume that DisableUpdateDesiredCapacity is True:
+        /// - When scheduled task triggered, the original DesiredCapacity is 5. The scheduled task changes the minSize to 10, the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 5 is less than minSize 10, so the final new DesiredCapacity is 10.
+        /// - When scheduled task triggered, the original DesiredCapacity is 25. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 25 is greater than the maxSize 20, so the final new DesiredCapacity is 20.
+        /// - When scheduled task triggered, the original DesiredCapacity is 13. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect, and the DesiredCapacity is still 13.
+        /// </summary>
+        [Output("disableUpdateDesiredCapacity")]
+        public Output<bool> DisableUpdateDesiredCapacity { get; private set; } = null!;
 
         /// <summary>
         /// The time for this action to end, in "YYYY-MM-DDThh:mm:ss+08:00" format (UTC+8).
@@ -202,6 +220,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public Input<int> DesiredCapacity { get; set; } = null!;
 
         /// <summary>
+        /// This flag disables the normal update of the DesiredCapacityproperty that would otherwise occur when a scheduled scaling task is triggered.
+        /// Specifies whether the scheduled task triggers proactive modification of the DesiredCapacity when the value is True. DesiredCapacity may be modified by the minSize and maxSize mechanism.
+        /// The following cases assume that DisableUpdateDesiredCapacity is True:
+        /// - When scheduled task triggered, the original DesiredCapacity is 5. The scheduled task changes the minSize to 10, the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 5 is less than minSize 10, so the final new DesiredCapacity is 10.
+        /// - When scheduled task triggered, the original DesiredCapacity is 25. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 25 is greater than the maxSize 20, so the final new DesiredCapacity is 20.
+        /// - When scheduled task triggered, the original DesiredCapacity is 13. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect, and the DesiredCapacity is still 13.
+        /// </summary>
+        [Input("disableUpdateDesiredCapacity")]
+        public Input<bool>? DisableUpdateDesiredCapacity { get; set; }
+
+        /// <summary>
         /// The time for this action to end, in "YYYY-MM-DDThh:mm:ss+08:00" format (UTC+8).
         /// </summary>
         [Input("endTime")]
@@ -256,6 +285,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         /// </summary>
         [Input("desiredCapacity")]
         public Input<int>? DesiredCapacity { get; set; }
+
+        /// <summary>
+        /// This flag disables the normal update of the DesiredCapacityproperty that would otherwise occur when a scheduled scaling task is triggered.
+        /// Specifies whether the scheduled task triggers proactive modification of the DesiredCapacity when the value is True. DesiredCapacity may be modified by the minSize and maxSize mechanism.
+        /// The following cases assume that DisableUpdateDesiredCapacity is True:
+        /// - When scheduled task triggered, the original DesiredCapacity is 5. The scheduled task changes the minSize to 10, the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 5 is less than minSize 10, so the final new DesiredCapacity is 10.
+        /// - When scheduled task triggered, the original DesiredCapacity is 25. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect. However, the original DesiredCapacity 25 is greater than the maxSize 20, so the final new DesiredCapacity is 20.
+        /// - When scheduled task triggered, the original DesiredCapacity is 13. The scheduled task changes the minSize to 10 and the maxSize to 20, and the DesiredCapacity to 15. Since the DesiredCapacity update is disabled, 15 does not take effect, and the DesiredCapacity is still 13.
+        /// </summary>
+        [Input("disableUpdateDesiredCapacity")]
+        public Input<bool>? DisableUpdateDesiredCapacity { get; set; }
 
         /// <summary>
         /// The time for this action to end, in "YYYY-MM-DDThh:mm:ss+08:00" format (UTC+8).

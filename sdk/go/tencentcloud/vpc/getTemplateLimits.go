@@ -62,12 +62,8 @@ type GetTemplateLimitsResult struct {
 }
 
 func GetTemplateLimitsOutput(ctx *pulumi.Context, args GetTemplateLimitsOutputArgs, opts ...pulumi.InvokeOption) GetTemplateLimitsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetTemplateLimitsResultOutput, error) {
-			args := v.(GetTemplateLimitsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Vpc/getTemplateLimits:getTemplateLimits", args, GetTemplateLimitsResultOutput{}, options).(GetTemplateLimitsResultOutput), nil
-		}).(GetTemplateLimitsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Vpc/getTemplateLimits:getTemplateLimits", args, GetTemplateLimitsResultOutput{}, options).(GetTemplateLimitsResultOutput)
 }
 
 // A collection of arguments for invoking getTemplateLimits.

@@ -167,43 +167,43 @@ export interface UpdateCertificateInstanceOperationState {
     /**
      * Whether to allow downloading, if you choose to upload the certificate, you can configure this parameter.
      */
-    allowDownload?: pulumi.Input<boolean>;
+    allowDownload?: pulumi.Input<boolean | undefined>;
     /**
      * Update new certificate ID.
      */
-    certificateId?: pulumi.Input<string>;
+    certificateId?: pulumi.Input<string | undefined>;
     /**
      * Certificate private key. If you upload the certificate public key, CertificateId does not need to be passed.
      */
-    certificatePrivateKey?: pulumi.Input<string>;
+    certificatePrivateKey?: pulumi.Input<string | undefined>;
     /**
      * Certificate public key. If you upload the certificate public key, CertificateId does not need to be passed.
      */
-    certificatePublicKey?: pulumi.Input<string>;
+    certificatePublicKey?: pulumi.Input<string | undefined>;
     /**
      * Whether to ignore expiration reminders for old certificates 0: Do not ignore notifications. 1: Ignore the notification and ignore the OldCertificateId expiration reminder.
      */
-    expiringNotificationSwitch?: pulumi.Input<number>;
+    expiringNotificationSwitch?: pulumi.Input<number | undefined>;
     /**
      * Update the original certificate ID.
      */
-    oldCertificateId?: pulumi.Input<string>;
+    oldCertificateId?: pulumi.Input<string | undefined>;
     /**
      * Project ID, if you choose to upload the certificate, you can configure this parameter.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Whether the same certificate is allowed to be uploaded repeatedly. If you choose to upload the certificate, you can configure this parameter.
      */
-    repeatable?: pulumi.Input<boolean>;
+    repeatable?: pulumi.Input<boolean | undefined>;
     /**
      * The resource type that needs to be deployed. The parameter value is optional: clb, cdn, waf, live, ddos, teo, apigateway, vod, tke, tcb.
      */
-    resourceTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    resourceTypes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * List of regions where cloud resources need to be deploye.
      */
-    resourceTypesRegions?: pulumi.Input<pulumi.Input<inputs.Ssl.UpdateCertificateInstanceOperationResourceTypesRegion>[]>;
+    resourceTypesRegions?: pulumi.Input<pulumi.Input<inputs.Ssl.UpdateCertificateInstanceOperationResourceTypesRegion>[] | undefined>;
 }
 
 /**
@@ -213,23 +213,23 @@ export interface UpdateCertificateInstanceOperationArgs {
     /**
      * Whether to allow downloading, if you choose to upload the certificate, you can configure this parameter.
      */
-    allowDownload?: pulumi.Input<boolean>;
+    allowDownload?: pulumi.Input<boolean | undefined>;
     /**
      * Update new certificate ID.
      */
-    certificateId?: pulumi.Input<string>;
+    certificateId?: pulumi.Input<string | undefined>;
     /**
      * Certificate private key. If you upload the certificate public key, CertificateId does not need to be passed.
      */
-    certificatePrivateKey?: pulumi.Input<string>;
+    certificatePrivateKey?: pulumi.Input<string | undefined>;
     /**
      * Certificate public key. If you upload the certificate public key, CertificateId does not need to be passed.
      */
-    certificatePublicKey?: pulumi.Input<string>;
+    certificatePublicKey?: pulumi.Input<string | undefined>;
     /**
      * Whether to ignore expiration reminders for old certificates 0: Do not ignore notifications. 1: Ignore the notification and ignore the OldCertificateId expiration reminder.
      */
-    expiringNotificationSwitch?: pulumi.Input<number>;
+    expiringNotificationSwitch?: pulumi.Input<number | undefined>;
     /**
      * Update the original certificate ID.
      */
@@ -237,11 +237,11 @@ export interface UpdateCertificateInstanceOperationArgs {
     /**
      * Project ID, if you choose to upload the certificate, you can configure this parameter.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Whether the same certificate is allowed to be uploaded repeatedly. If you choose to upload the certificate, you can configure this parameter.
      */
-    repeatable?: pulumi.Input<boolean>;
+    repeatable?: pulumi.Input<boolean | undefined>;
     /**
      * The resource type that needs to be deployed. The parameter value is optional: clb, cdn, waf, live, ddos, teo, apigateway, vod, tke, tcb.
      */
@@ -249,5 +249,5 @@ export interface UpdateCertificateInstanceOperationArgs {
     /**
      * List of regions where cloud resources need to be deploye.
      */
-    resourceTypesRegions?: pulumi.Input<pulumi.Input<inputs.Ssl.UpdateCertificateInstanceOperationResourceTypesRegion>[]>;
+    resourceTypesRegions?: pulumi.Input<pulumi.Input<inputs.Ssl.UpdateCertificateInstanceOperationResourceTypesRegion>[] | undefined>;
 }

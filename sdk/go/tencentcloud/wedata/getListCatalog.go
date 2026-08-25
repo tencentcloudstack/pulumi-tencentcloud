@@ -65,12 +65,8 @@ type GetListCatalogResult struct {
 }
 
 func GetListCatalogOutput(ctx *pulumi.Context, args GetListCatalogOutputArgs, opts ...pulumi.InvokeOption) GetListCatalogResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetListCatalogResultOutput, error) {
-			args := v.(GetListCatalogArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Wedata/getListCatalog:getListCatalog", args, GetListCatalogResultOutput{}, options).(GetListCatalogResultOutput), nil
-		}).(GetListCatalogResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Wedata/getListCatalog:getListCatalog", args, GetListCatalogResultOutput{}, options).(GetListCatalogResultOutput)
 }
 
 // A collection of arguments for invoking getListCatalog.

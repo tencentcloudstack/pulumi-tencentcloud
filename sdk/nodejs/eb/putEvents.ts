@@ -117,11 +117,11 @@ export interface PutEventsState {
     /**
      * event bus Id.
      */
-    eventBusId?: pulumi.Input<string>;
+    eventBusId?: pulumi.Input<string | undefined>;
     /**
      * event list.
      */
-    eventLists?: pulumi.Input<pulumi.Input<inputs.Eb.PutEventsEventList>[]>;
+    eventLists?: pulumi.Input<pulumi.Input<inputs.Eb.PutEventsEventList>[] | undefined>;
 }
 
 /**

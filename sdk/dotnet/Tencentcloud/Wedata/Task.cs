@@ -119,7 +119,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
     /// 
     /// ## Import
     /// 
-    /// wedata wedata_task can be imported using the id, e.g.
+    /// wedata WedataTask can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Wedata/task:Task wedata_task wedata_task_id

@@ -87,11 +87,11 @@ export interface GetAccountDbAttachmentsOutputArgs {
     /**
      * Name of the SQL Server account to be queried.
      */
-    accountName?: pulumi.Input<string>;
+    accountName?: pulumi.Input<string | undefined>;
     /**
      * Name of the DB to be queried.
      */
-    dbName?: pulumi.Input<string>;
+    dbName?: pulumi.Input<string | undefined>;
     /**
      * SQL Server instance ID that the account belongs to.
      */
@@ -99,5 +99,5 @@ export interface GetAccountDbAttachmentsOutputArgs {
     /**
      * Used to store results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

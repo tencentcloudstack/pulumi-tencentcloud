@@ -108,12 +108,8 @@ type GetDedicatedClusterOrdersResult struct {
 }
 
 func GetDedicatedClusterOrdersOutput(ctx *pulumi.Context, args GetDedicatedClusterOrdersOutputArgs, opts ...pulumi.InvokeOption) GetDedicatedClusterOrdersResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDedicatedClusterOrdersResultOutput, error) {
-			args := v.(GetDedicatedClusterOrdersArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cdc/getDedicatedClusterOrders:getDedicatedClusterOrders", args, GetDedicatedClusterOrdersResultOutput{}, options).(GetDedicatedClusterOrdersResultOutput), nil
-		}).(GetDedicatedClusterOrdersResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cdc/getDedicatedClusterOrders:getDedicatedClusterOrders", args, GetDedicatedClusterOrdersResultOutput{}, options).(GetDedicatedClusterOrdersResultOutput)
 }
 
 // A collection of arguments for invoking getDedicatedClusterOrders.

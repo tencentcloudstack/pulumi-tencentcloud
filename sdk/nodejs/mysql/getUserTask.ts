@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const userTask = tencentcloud.Mysql.getUserTask({
+ * const userTask = tencentcloud.mysql.getUserTask({
  *     instanceId: "cdb-fitq5t9h",
  *     asyncRequestId: "f2fe828c-773af816-0a08f542-94bb2a9c",
  *     taskTypes: ["5"],
@@ -108,7 +108,7 @@ export interface GetUserTaskResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const userTask = tencentcloud.Mysql.getUserTask({
+ * const userTask = tencentcloud.mysql.getUserTask({
  *     instanceId: "cdb-fitq5t9h",
  *     asyncRequestId: "f2fe828c-773af816-0a08f542-94bb2a9c",
  *     taskTypes: ["5"],
@@ -139,29 +139,29 @@ export interface GetUserTaskOutputArgs {
     /**
      * Asynchronous task request ID, the AsyncRequestId returned by executing cloud database-related operations.
      */
-    asyncRequestId?: pulumi.Input<string>;
+    asyncRequestId?: pulumi.Input<string | undefined>;
     /**
      * Instance ID, the format is: cdb-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page, and you can use the [query instance list] (https://cloud.tencent.com/document/api/236/15872) interface Gets the value of the field InstanceId in the output parameter.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * The start time of the first task, used for range query, the time format is as follows: 2017-12-31 10:40:01.
      */
-    startTimeBegin?: pulumi.Input<string>;
+    startTimeBegin?: pulumi.Input<string | undefined>;
     /**
      * The start time of the last task, used for range query, the time format is as follows: 2017-12-31 10:40:01.
      */
-    startTimeEnd?: pulumi.Input<string>;
+    startTimeEnd?: pulumi.Input<string | undefined>;
     /**
      * Task status. If no value is passed, all task statuses will be queried. Supported values include: `UNDEFINED` - undefined; `INITIAL` - initialization; `RUNNING` - running; `SUCCEED` - the execution was successful; `FAILED` - execution failed; `KILLED` - terminated; `REMOVED` - removed; `PAUSED` - Paused.
      */
-    taskStatuses?: pulumi.Input<pulumi.Input<string>[]>;
+    taskStatuses?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Task type. If no value is passed, all task types will be queried. Supported values include: `ROLLBACK` - database rollback; `SQL OPERATION` - SQL operation; `IMPORT DATA` - data import; `MODIFY PARAM` - parameter setting; `INITIAL` - initialize the cloud database instance; `REBOOT` - restarts the cloud database instance; `OPEN GTID` - open the cloud database instance GTID; `UPGRADE RO` - read-only instance upgrade; `BATCH ROLLBACK` - database batch rollback; `UPGRADE MASTER` - master upgrade; `DROP TABLES` - delete cloud database tables; `SWITCH DR TO MASTER` - The disaster recovery instance.
      */
-    taskTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    taskTypes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

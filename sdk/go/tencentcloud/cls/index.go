@@ -37,9 +37,9 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			exampleTopic, err := cls.NewTopic(ctx, "example", &cls.TopicArgs{
+//			_, err = cls.NewTopic(ctx, "example", &cls.TopicArgs{
 //				TopicName:          pulumi.String("tf_example"),
-//				LogsetId:           example.ID(),
+//				LogsetId:           example.ID().ToIDOutput().ToStringOutput(),
 //				AutoSplit:          pulumi.Bool(false),
 //				MaxSplitPartitions: pulumi.Int(20),
 //				PartitionCount:     pulumi.Int(1),
@@ -54,9 +54,9 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			tokenizerValue := "@&?|#()='\",;:<>[]{}"
+//			tokenizerValue := "@&?|#()='\\\\\\\",;:<>[]{}/ \\\n\\\\t\\\\r\\\\\\\\\n"
 //			_, err = cls.NewIndex(ctx, "example", &cls.IndexArgs{
-//				TopicId: exampleTopic.ID(),
+//				TopicId: pulumi.String("abc97756-e620-47a4-aa2b-08561e79f086"),
 //				Rule: &cls.IndexRuleArgs{
 //					FullText: &cls.IndexRuleFullTextArgs{
 //						CaseSensitive: pulumi.Bool(true),
@@ -67,21 +67,67 @@ import (
 //						CaseSensitive: pulumi.Bool(true),
 //						KeyValues: cls.IndexRuleKeyValueKeyValueArray{
 //							&cls.IndexRuleKeyValueKeyValueArgs{
-//								Key: pulumi.String("hello"),
+//								Key: pulumi.String("key1"),
 //								Value: &cls.IndexRuleKeyValueKeyValueValueArgs{
 //									ContainZH: pulumi.Bool(true),
 //									SqlFlag:   pulumi.Bool(true),
 //									Tokenizer: pulumi.String(tokenizerValue),
 //									Type:      pulumi.String("text"),
+//									Alias:     pulumi.String("alias1"),
 //								},
 //							},
 //							&cls.IndexRuleKeyValueKeyValueArgs{
-//								Key: pulumi.String("world"),
+//								Key: pulumi.String("key2"),
 //								Value: &cls.IndexRuleKeyValueKeyValueValueArgs{
 //									ContainZH: pulumi.Bool(true),
 //									SqlFlag:   pulumi.Bool(true),
 //									Tokenizer: pulumi.String(tokenizerValue),
-//									Type:      pulumi.String("text"),
+//									Type:      pulumi.String("json"),
+//									Alias:     pulumi.String("alias2"),
+//									ChildNodes: cls.IndexRuleKeyValueKeyValueValueChildNodeArray{
+//										&cls.IndexRuleKeyValueKeyValueValueChildNodeArgs{
+//											Key: pulumi.String("key3"),
+//											Value: &cls.IndexRuleKeyValueKeyValueValueChildNodeValueArgs{
+//												ContainZH: pulumi.Bool(true),
+//												SqlFlag:   pulumi.Bool(true),
+//												Tokenizer: pulumi.String(tokenizerValue),
+//												Type:      pulumi.String("json"),
+//												Alias:     pulumi.String("alias3"),
+//												ChildNodes: cls.IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArray{
+//													&cls.IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArgs{
+//														Key: pulumi.String("key4"),
+//														Value: &cls.IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueArgs{
+//															ContainZH: pulumi.Bool(true),
+//															SqlFlag:   pulumi.Bool(true),
+//															Tokenizer: pulumi.String(tokenizerValue),
+//															Type:      pulumi.String("text"),
+//															Alias:     pulumi.String("alias4"),
+//														},
+//													},
+//													&cls.IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeArgs{
+//														Key: pulumi.String("key5"),
+//														Value: &cls.IndexRuleKeyValueKeyValueValueChildNodeValueChildNodeValueArgs{
+//															ContainZH: pulumi.Bool(true),
+//															SqlFlag:   pulumi.Bool(true),
+//															Tokenizer: pulumi.String(tokenizerValue),
+//															Type:      pulumi.String("text"),
+//															Alias:     pulumi.String("name5"),
+//														},
+//													},
+//												},
+//											},
+//										},
+//										&cls.IndexRuleKeyValueKeyValueValueChildNodeArgs{
+//											Key: pulumi.String("key6"),
+//											Value: &cls.IndexRuleKeyValueKeyValueValueChildNodeValueArgs{
+//												ContainZH: pulumi.Bool(true),
+//												SqlFlag:   pulumi.Bool(true),
+//												Tokenizer: pulumi.String(tokenizerValue),
+//												Type:      pulumi.String("text"),
+//												Alias:     pulumi.String("name6"),
+//											},
+//										},
+//									},
 //								},
 //							},
 //						},

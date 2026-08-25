@@ -39,7 +39,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Outputs
         /// </summary>
         public readonly string ImageType;
         /// <summary>
-        /// The uri of image.
+        /// The uri of image. Supports three formats:
+        /// - Format A: registry/repo:tag
+        /// - Format B: registry/repo@sha256:digest
+        /// - Format C: registry/repo:tag@sha256:digest.
         /// </summary>
         public readonly string ImageUri;
         /// <summary>

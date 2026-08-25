@@ -74,12 +74,8 @@ type GetElasticPublicIpv6sResult struct {
 }
 
 func GetElasticPublicIpv6sOutput(ctx *pulumi.Context, args GetElasticPublicIpv6sOutputArgs, opts ...pulumi.InvokeOption) GetElasticPublicIpv6sResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetElasticPublicIpv6sResultOutput, error) {
-			args := v.(GetElasticPublicIpv6sArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Classic/getElasticPublicIpv6s:getElasticPublicIpv6s", args, GetElasticPublicIpv6sResultOutput{}, options).(GetElasticPublicIpv6sResultOutput), nil
-		}).(GetElasticPublicIpv6sResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Classic/getElasticPublicIpv6s:getElasticPublicIpv6s", args, GetElasticPublicIpv6sResultOutput{}, options).(GetElasticPublicIpv6sResultOutput)
 }
 
 // A collection of arguments for invoking getElasticPublicIpv6s.

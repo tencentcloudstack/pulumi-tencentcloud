@@ -1108,7 +1108,7 @@ func (o InstanceContainerVolumeArrayOutput) Index(i pulumi.IntInput) InstanceCon
 }
 
 type InstanceLoginConfiguration struct {
-	// whether auto generate password. if false, need set password.
+	// `YES` represents selecting to automatically generate a password, without specifying the Password field. `NO` represents selecting a custom password, in which case the Password field needs to be specified.
 	AutoGeneratePassword string `pulumi:"autoGeneratePassword"`
 	// Login password.
 	Password *string `pulumi:"password"`
@@ -1126,7 +1126,7 @@ type InstanceLoginConfigurationInput interface {
 }
 
 type InstanceLoginConfigurationArgs struct {
-	// whether auto generate password. if false, need set password.
+	// `YES` represents selecting to automatically generate a password, without specifying the Password field. `NO` represents selecting a custom password, in which case the Password field needs to be specified.
 	AutoGeneratePassword pulumi.StringInput `pulumi:"autoGeneratePassword"`
 	// Login password.
 	Password pulumi.StringPtrInput `pulumi:"password"`
@@ -1209,7 +1209,7 @@ func (o InstanceLoginConfigurationOutput) ToInstanceLoginConfigurationPtrOutputW
 	}).(InstanceLoginConfigurationPtrOutput)
 }
 
-// whether auto generate password. if false, need set password.
+// `YES` represents selecting to automatically generate a password, without specifying the Password field. `NO` represents selecting a custom password, in which case the Password field needs to be specified.
 func (o InstanceLoginConfigurationOutput) AutoGeneratePassword() pulumi.StringOutput {
 	return o.ApplyT(func(v InstanceLoginConfiguration) string { return v.AutoGeneratePassword }).(pulumi.StringOutput)
 }
@@ -1243,7 +1243,7 @@ func (o InstanceLoginConfigurationPtrOutput) Elem() InstanceLoginConfigurationOu
 	}).(InstanceLoginConfigurationOutput)
 }
 
-// whether auto generate password. if false, need set password.
+// `YES` represents selecting to automatically generate a password, without specifying the Password field. `NO` represents selecting a custom password, in which case the Password field needs to be specified.
 func (o InstanceLoginConfigurationPtrOutput) AutoGeneratePassword() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *InstanceLoginConfiguration) *string {
 		if v == nil {
@@ -1742,6 +1742,380 @@ func (o GetAllSceneSceneSetArrayOutput) Index(i pulumi.IntInput) GetAllSceneScen
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAllSceneSceneSet {
 		return vs[0].([]GetAllSceneSceneSet)[vs[1].(int)]
 	}).(GetAllSceneSceneSetOutput)
+}
+
+type GetBlueprintsBlueprintSet struct {
+	// Blueprint ID, which is the unique identifier of Blueprint.
+	BlueprintId string `pulumi:"blueprintId"`
+	// Blueprint name.
+	BlueprintName string `pulumi:"blueprintName"`
+	// Blueprint state.
+	BlueprintState string `pulumi:"blueprintState"`
+	// Blueprint type, such as APP_OS, PURE_OS, DOCKER, PRIVATE, and SHARED.
+	BlueprintType string `pulumi:"blueprintType"`
+	// URL of official website of the open-source project.
+	CommunityUrl string `pulumi:"communityUrl"`
+	// Creation time according to ISO 8601 standard. UTC time is used. Format is YYYY-MM-DDThh:mm:ssZ.
+	CreatedTime string `pulumi:"createdTime"`
+	// Blueprint description.
+	Description string `pulumi:"description"`
+	// Blueprint display title.
+	DisplayTitle string `pulumi:"displayTitle"`
+	// Blueprint display version.
+	DisplayVersion string `pulumi:"displayVersion"`
+	// Docker version. Note: This field may return null, indicating that no valid values can be obtained.
+	DockerVersion string `pulumi:"dockerVersion"`
+	// Guide documentation URL.
+	GuideUrl string `pulumi:"guideUrl"`
+	// ID of the Lighthouse blueprint shared from a CVM image. Note: this field may return null, indicating that no valid values can be obtained.
+	ImageId string `pulumi:"imageId"`
+	// Blueprint image URL.
+	ImageUrl string `pulumi:"imageUrl"`
+	// Operating system name.
+	OsName string `pulumi:"osName"`
+	// Operating system platform.
+	Platform string `pulumi:"platform"`
+	// Platform type, such as LINUX_UNIX and WINDOWS.
+	PlatformType string `pulumi:"platformType"`
+	// Memory size required by blueprint in GB.
+	RequiredMemorySize int `pulumi:"requiredMemorySize"`
+	// System disk size required by blueprint in GB.
+	RequiredSystemDiskSize int `pulumi:"requiredSystemDiskSize"`
+	// Array of IDs of scenes associated with a blueprint. Note: This field may return null, indicating that no valid values can be obtained.
+	SceneIdSets []string `pulumi:"sceneIdSets"`
+	// Whether the blueprint supports automation tools.
+	SupportAutomationTools bool `pulumi:"supportAutomationTools"`
+}
+
+// GetBlueprintsBlueprintSetInput is an input type that accepts GetBlueprintsBlueprintSetArgs and GetBlueprintsBlueprintSetOutput values.
+// You can construct a concrete instance of `GetBlueprintsBlueprintSetInput` via:
+//
+//	GetBlueprintsBlueprintSetArgs{...}
+type GetBlueprintsBlueprintSetInput interface {
+	pulumi.Input
+
+	ToGetBlueprintsBlueprintSetOutput() GetBlueprintsBlueprintSetOutput
+	ToGetBlueprintsBlueprintSetOutputWithContext(context.Context) GetBlueprintsBlueprintSetOutput
+}
+
+type GetBlueprintsBlueprintSetArgs struct {
+	// Blueprint ID, which is the unique identifier of Blueprint.
+	BlueprintId pulumi.StringInput `pulumi:"blueprintId"`
+	// Blueprint name.
+	BlueprintName pulumi.StringInput `pulumi:"blueprintName"`
+	// Blueprint state.
+	BlueprintState pulumi.StringInput `pulumi:"blueprintState"`
+	// Blueprint type, such as APP_OS, PURE_OS, DOCKER, PRIVATE, and SHARED.
+	BlueprintType pulumi.StringInput `pulumi:"blueprintType"`
+	// URL of official website of the open-source project.
+	CommunityUrl pulumi.StringInput `pulumi:"communityUrl"`
+	// Creation time according to ISO 8601 standard. UTC time is used. Format is YYYY-MM-DDThh:mm:ssZ.
+	CreatedTime pulumi.StringInput `pulumi:"createdTime"`
+	// Blueprint description.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Blueprint display title.
+	DisplayTitle pulumi.StringInput `pulumi:"displayTitle"`
+	// Blueprint display version.
+	DisplayVersion pulumi.StringInput `pulumi:"displayVersion"`
+	// Docker version. Note: This field may return null, indicating that no valid values can be obtained.
+	DockerVersion pulumi.StringInput `pulumi:"dockerVersion"`
+	// Guide documentation URL.
+	GuideUrl pulumi.StringInput `pulumi:"guideUrl"`
+	// ID of the Lighthouse blueprint shared from a CVM image. Note: this field may return null, indicating that no valid values can be obtained.
+	ImageId pulumi.StringInput `pulumi:"imageId"`
+	// Blueprint image URL.
+	ImageUrl pulumi.StringInput `pulumi:"imageUrl"`
+	// Operating system name.
+	OsName pulumi.StringInput `pulumi:"osName"`
+	// Operating system platform.
+	Platform pulumi.StringInput `pulumi:"platform"`
+	// Platform type, such as LINUX_UNIX and WINDOWS.
+	PlatformType pulumi.StringInput `pulumi:"platformType"`
+	// Memory size required by blueprint in GB.
+	RequiredMemorySize pulumi.IntInput `pulumi:"requiredMemorySize"`
+	// System disk size required by blueprint in GB.
+	RequiredSystemDiskSize pulumi.IntInput `pulumi:"requiredSystemDiskSize"`
+	// Array of IDs of scenes associated with a blueprint. Note: This field may return null, indicating that no valid values can be obtained.
+	SceneIdSets pulumi.StringArrayInput `pulumi:"sceneIdSets"`
+	// Whether the blueprint supports automation tools.
+	SupportAutomationTools pulumi.BoolInput `pulumi:"supportAutomationTools"`
+}
+
+func (GetBlueprintsBlueprintSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBlueprintsBlueprintSet)(nil)).Elem()
+}
+
+func (i GetBlueprintsBlueprintSetArgs) ToGetBlueprintsBlueprintSetOutput() GetBlueprintsBlueprintSetOutput {
+	return i.ToGetBlueprintsBlueprintSetOutputWithContext(context.Background())
+}
+
+func (i GetBlueprintsBlueprintSetArgs) ToGetBlueprintsBlueprintSetOutputWithContext(ctx context.Context) GetBlueprintsBlueprintSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBlueprintsBlueprintSetOutput)
+}
+
+// GetBlueprintsBlueprintSetArrayInput is an input type that accepts GetBlueprintsBlueprintSetArray and GetBlueprintsBlueprintSetArrayOutput values.
+// You can construct a concrete instance of `GetBlueprintsBlueprintSetArrayInput` via:
+//
+//	GetBlueprintsBlueprintSetArray{ GetBlueprintsBlueprintSetArgs{...} }
+type GetBlueprintsBlueprintSetArrayInput interface {
+	pulumi.Input
+
+	ToGetBlueprintsBlueprintSetArrayOutput() GetBlueprintsBlueprintSetArrayOutput
+	ToGetBlueprintsBlueprintSetArrayOutputWithContext(context.Context) GetBlueprintsBlueprintSetArrayOutput
+}
+
+type GetBlueprintsBlueprintSetArray []GetBlueprintsBlueprintSetInput
+
+func (GetBlueprintsBlueprintSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBlueprintsBlueprintSet)(nil)).Elem()
+}
+
+func (i GetBlueprintsBlueprintSetArray) ToGetBlueprintsBlueprintSetArrayOutput() GetBlueprintsBlueprintSetArrayOutput {
+	return i.ToGetBlueprintsBlueprintSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetBlueprintsBlueprintSetArray) ToGetBlueprintsBlueprintSetArrayOutputWithContext(ctx context.Context) GetBlueprintsBlueprintSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBlueprintsBlueprintSetArrayOutput)
+}
+
+type GetBlueprintsBlueprintSetOutput struct{ *pulumi.OutputState }
+
+func (GetBlueprintsBlueprintSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBlueprintsBlueprintSet)(nil)).Elem()
+}
+
+func (o GetBlueprintsBlueprintSetOutput) ToGetBlueprintsBlueprintSetOutput() GetBlueprintsBlueprintSetOutput {
+	return o
+}
+
+func (o GetBlueprintsBlueprintSetOutput) ToGetBlueprintsBlueprintSetOutputWithContext(ctx context.Context) GetBlueprintsBlueprintSetOutput {
+	return o
+}
+
+// Blueprint ID, which is the unique identifier of Blueprint.
+func (o GetBlueprintsBlueprintSetOutput) BlueprintId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBlueprintsBlueprintSet) string { return v.BlueprintId }).(pulumi.StringOutput)
+}
+
+// Blueprint name.
+func (o GetBlueprintsBlueprintSetOutput) BlueprintName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBlueprintsBlueprintSet) string { return v.BlueprintName }).(pulumi.StringOutput)
+}
+
+// Blueprint state.
+func (o GetBlueprintsBlueprintSetOutput) BlueprintState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBlueprintsBlueprintSet) string { return v.BlueprintState }).(pulumi.StringOutput)
+}
+
+// Blueprint type, such as APP_OS, PURE_OS, DOCKER, PRIVATE, and SHARED.
+func (o GetBlueprintsBlueprintSetOutput) BlueprintType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBlueprintsBlueprintSet) string { return v.BlueprintType }).(pulumi.StringOutput)
+}
+
+// URL of official website of the open-source project.
+func (o GetBlueprintsBlueprintSetOutput) CommunityUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBlueprintsBlueprintSet) string { return v.CommunityUrl }).(pulumi.StringOutput)
+}
+
+// Creation time according to ISO 8601 standard. UTC time is used. Format is YYYY-MM-DDThh:mm:ssZ.
+func (o GetBlueprintsBlueprintSetOutput) CreatedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBlueprintsBlueprintSet) string { return v.CreatedTime }).(pulumi.StringOutput)
+}
+
+// Blueprint description.
+func (o GetBlueprintsBlueprintSetOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBlueprintsBlueprintSet) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Blueprint display title.
+func (o GetBlueprintsBlueprintSetOutput) DisplayTitle() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBlueprintsBlueprintSet) string { return v.DisplayTitle }).(pulumi.StringOutput)
+}
+
+// Blueprint display version.
+func (o GetBlueprintsBlueprintSetOutput) DisplayVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBlueprintsBlueprintSet) string { return v.DisplayVersion }).(pulumi.StringOutput)
+}
+
+// Docker version. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetBlueprintsBlueprintSetOutput) DockerVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBlueprintsBlueprintSet) string { return v.DockerVersion }).(pulumi.StringOutput)
+}
+
+// Guide documentation URL.
+func (o GetBlueprintsBlueprintSetOutput) GuideUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBlueprintsBlueprintSet) string { return v.GuideUrl }).(pulumi.StringOutput)
+}
+
+// ID of the Lighthouse blueprint shared from a CVM image. Note: this field may return null, indicating that no valid values can be obtained.
+func (o GetBlueprintsBlueprintSetOutput) ImageId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBlueprintsBlueprintSet) string { return v.ImageId }).(pulumi.StringOutput)
+}
+
+// Blueprint image URL.
+func (o GetBlueprintsBlueprintSetOutput) ImageUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBlueprintsBlueprintSet) string { return v.ImageUrl }).(pulumi.StringOutput)
+}
+
+// Operating system name.
+func (o GetBlueprintsBlueprintSetOutput) OsName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBlueprintsBlueprintSet) string { return v.OsName }).(pulumi.StringOutput)
+}
+
+// Operating system platform.
+func (o GetBlueprintsBlueprintSetOutput) Platform() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBlueprintsBlueprintSet) string { return v.Platform }).(pulumi.StringOutput)
+}
+
+// Platform type, such as LINUX_UNIX and WINDOWS.
+func (o GetBlueprintsBlueprintSetOutput) PlatformType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBlueprintsBlueprintSet) string { return v.PlatformType }).(pulumi.StringOutput)
+}
+
+// Memory size required by blueprint in GB.
+func (o GetBlueprintsBlueprintSetOutput) RequiredMemorySize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBlueprintsBlueprintSet) int { return v.RequiredMemorySize }).(pulumi.IntOutput)
+}
+
+// System disk size required by blueprint in GB.
+func (o GetBlueprintsBlueprintSetOutput) RequiredSystemDiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBlueprintsBlueprintSet) int { return v.RequiredSystemDiskSize }).(pulumi.IntOutput)
+}
+
+// Array of IDs of scenes associated with a blueprint. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetBlueprintsBlueprintSetOutput) SceneIdSets() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetBlueprintsBlueprintSet) []string { return v.SceneIdSets }).(pulumi.StringArrayOutput)
+}
+
+// Whether the blueprint supports automation tools.
+func (o GetBlueprintsBlueprintSetOutput) SupportAutomationTools() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetBlueprintsBlueprintSet) bool { return v.SupportAutomationTools }).(pulumi.BoolOutput)
+}
+
+type GetBlueprintsBlueprintSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBlueprintsBlueprintSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBlueprintsBlueprintSet)(nil)).Elem()
+}
+
+func (o GetBlueprintsBlueprintSetArrayOutput) ToGetBlueprintsBlueprintSetArrayOutput() GetBlueprintsBlueprintSetArrayOutput {
+	return o
+}
+
+func (o GetBlueprintsBlueprintSetArrayOutput) ToGetBlueprintsBlueprintSetArrayOutputWithContext(ctx context.Context) GetBlueprintsBlueprintSetArrayOutput {
+	return o
+}
+
+func (o GetBlueprintsBlueprintSetArrayOutput) Index(i pulumi.IntInput) GetBlueprintsBlueprintSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBlueprintsBlueprintSet {
+		return vs[0].([]GetBlueprintsBlueprintSet)[vs[1].(int)]
+	}).(GetBlueprintsBlueprintSetOutput)
+}
+
+type GetBlueprintsFilter struct {
+	// Field to be filtered.
+	Name string `pulumi:"name"`
+	// Filter value of field.
+	Values []string `pulumi:"values"`
+}
+
+// GetBlueprintsFilterInput is an input type that accepts GetBlueprintsFilterArgs and GetBlueprintsFilterOutput values.
+// You can construct a concrete instance of `GetBlueprintsFilterInput` via:
+//
+//	GetBlueprintsFilterArgs{...}
+type GetBlueprintsFilterInput interface {
+	pulumi.Input
+
+	ToGetBlueprintsFilterOutput() GetBlueprintsFilterOutput
+	ToGetBlueprintsFilterOutputWithContext(context.Context) GetBlueprintsFilterOutput
+}
+
+type GetBlueprintsFilterArgs struct {
+	// Field to be filtered.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Filter value of field.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetBlueprintsFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBlueprintsFilter)(nil)).Elem()
+}
+
+func (i GetBlueprintsFilterArgs) ToGetBlueprintsFilterOutput() GetBlueprintsFilterOutput {
+	return i.ToGetBlueprintsFilterOutputWithContext(context.Background())
+}
+
+func (i GetBlueprintsFilterArgs) ToGetBlueprintsFilterOutputWithContext(ctx context.Context) GetBlueprintsFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBlueprintsFilterOutput)
+}
+
+// GetBlueprintsFilterArrayInput is an input type that accepts GetBlueprintsFilterArray and GetBlueprintsFilterArrayOutput values.
+// You can construct a concrete instance of `GetBlueprintsFilterArrayInput` via:
+//
+//	GetBlueprintsFilterArray{ GetBlueprintsFilterArgs{...} }
+type GetBlueprintsFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetBlueprintsFilterArrayOutput() GetBlueprintsFilterArrayOutput
+	ToGetBlueprintsFilterArrayOutputWithContext(context.Context) GetBlueprintsFilterArrayOutput
+}
+
+type GetBlueprintsFilterArray []GetBlueprintsFilterInput
+
+func (GetBlueprintsFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBlueprintsFilter)(nil)).Elem()
+}
+
+func (i GetBlueprintsFilterArray) ToGetBlueprintsFilterArrayOutput() GetBlueprintsFilterArrayOutput {
+	return i.ToGetBlueprintsFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetBlueprintsFilterArray) ToGetBlueprintsFilterArrayOutputWithContext(ctx context.Context) GetBlueprintsFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBlueprintsFilterArrayOutput)
+}
+
+type GetBlueprintsFilterOutput struct{ *pulumi.OutputState }
+
+func (GetBlueprintsFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBlueprintsFilter)(nil)).Elem()
+}
+
+func (o GetBlueprintsFilterOutput) ToGetBlueprintsFilterOutput() GetBlueprintsFilterOutput {
+	return o
+}
+
+func (o GetBlueprintsFilterOutput) ToGetBlueprintsFilterOutputWithContext(ctx context.Context) GetBlueprintsFilterOutput {
+	return o
+}
+
+// Field to be filtered.
+func (o GetBlueprintsFilterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBlueprintsFilter) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Filter value of field.
+func (o GetBlueprintsFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetBlueprintsFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetBlueprintsFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBlueprintsFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBlueprintsFilter)(nil)).Elem()
+}
+
+func (o GetBlueprintsFilterArrayOutput) ToGetBlueprintsFilterArrayOutput() GetBlueprintsFilterArrayOutput {
+	return o
+}
+
+func (o GetBlueprintsFilterArrayOutput) ToGetBlueprintsFilterArrayOutputWithContext(ctx context.Context) GetBlueprintsFilterArrayOutput {
+	return o
+}
+
+func (o GetBlueprintsFilterArrayOutput) Index(i pulumi.IntInput) GetBlueprintsFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBlueprintsFilter {
+		return vs[0].([]GetBlueprintsFilter)[vs[1].(int)]
+	}).(GetBlueprintsFilterOutput)
 }
 
 type GetBundleBundleSet struct {
@@ -5911,6 +6285,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*RenewInstanceInstanceChargePrepaidPtrInput)(nil)).Elem(), RenewInstanceInstanceChargePrepaidArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAllSceneSceneSetInput)(nil)).Elem(), GetAllSceneSceneSetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAllSceneSceneSetArrayInput)(nil)).Elem(), GetAllSceneSceneSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBlueprintsBlueprintSetInput)(nil)).Elem(), GetBlueprintsBlueprintSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBlueprintsBlueprintSetArrayInput)(nil)).Elem(), GetBlueprintsBlueprintSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBlueprintsFilterInput)(nil)).Elem(), GetBlueprintsFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBlueprintsFilterArrayInput)(nil)).Elem(), GetBlueprintsFilterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBundleBundleSetInput)(nil)).Elem(), GetBundleBundleSetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBundleBundleSetArrayInput)(nil)).Elem(), GetBundleBundleSetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBundleBundleSetPriceInput)(nil)).Elem(), GetBundleBundleSetPriceArgs{})
@@ -5993,6 +6371,10 @@ func init() {
 	pulumi.RegisterOutputType(RenewInstanceInstanceChargePrepaidPtrOutput{})
 	pulumi.RegisterOutputType(GetAllSceneSceneSetOutput{})
 	pulumi.RegisterOutputType(GetAllSceneSceneSetArrayOutput{})
+	pulumi.RegisterOutputType(GetBlueprintsBlueprintSetOutput{})
+	pulumi.RegisterOutputType(GetBlueprintsBlueprintSetArrayOutput{})
+	pulumi.RegisterOutputType(GetBlueprintsFilterOutput{})
+	pulumi.RegisterOutputType(GetBlueprintsFilterArrayOutput{})
 	pulumi.RegisterOutputType(GetBundleBundleSetOutput{})
 	pulumi.RegisterOutputType(GetBundleBundleSetArrayOutput{})
 	pulumi.RegisterOutputType(GetBundleBundleSetPriceOutput{})

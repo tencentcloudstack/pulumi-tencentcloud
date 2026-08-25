@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const rollbackRangeTime = tencentcloud.Mysql.getRollbackRangeTime({
+ * const rollbackRangeTime = tencentcloud.mysql.getRollbackRangeTime({
  *     instanceIds: ["cdb-fitq5t9h"],
  * });
  * ```
@@ -78,7 +78,7 @@ export interface GetRollbackRangeTimeResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const rollbackRangeTime = tencentcloud.Mysql.getRollbackRangeTime({
+ * const rollbackRangeTime = tencentcloud.mysql.getRollbackRangeTime({
  *     instanceIds: ["cdb-fitq5t9h"],
  * });
  * ```
@@ -100,7 +100,7 @@ export interface GetRollbackRangeTimeOutputArgs {
     /**
      * If the clone instance is not in the same region as the source instance, fill in the region where the clone instance is located, for example: ap-guangzhou.
      */
-    backupRegion?: pulumi.Input<string>;
+    backupRegion?: pulumi.Input<string | undefined>;
     /**
      * A list of instance IDs, the format of a single instance ID is: cdb-c1nl9rpv. Same instance ID as displayed in the ApsaraDB for Console page.
      */
@@ -108,9 +108,9 @@ export interface GetRollbackRangeTimeOutputArgs {
     /**
      * Whether the clone instance is in the same zone as the source instance, yes: `false`, no: `true`.
      */
-    isRemoteZone?: pulumi.Input<string>;
+    isRemoteZone?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

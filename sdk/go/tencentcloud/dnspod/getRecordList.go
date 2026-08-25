@@ -170,12 +170,8 @@ type GetRecordListResult struct {
 }
 
 func GetRecordListOutput(ctx *pulumi.Context, args GetRecordListOutputArgs, opts ...pulumi.InvokeOption) GetRecordListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetRecordListResultOutput, error) {
-			args := v.(GetRecordListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dnspod/getRecordList:getRecordList", args, GetRecordListResultOutput{}, options).(GetRecordListResultOutput), nil
-		}).(GetRecordListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dnspod/getRecordList:getRecordList", args, GetRecordListResultOutput{}, options).(GetRecordListResultOutput)
 }
 
 // A collection of arguments for invoking getRecordList.

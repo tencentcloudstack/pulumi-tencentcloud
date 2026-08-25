@@ -29,16 +29,11 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := ckafka.NewTopic(ctx, "example", &ckafka.TopicArgs{
-//				InstanceId:      pulumi.String("ckafka-bzmjpavn"),
-//				TopicName:       pulumi.String("tf-example"),
-//				Note:            pulumi.String("topic note"),
-//				ReplicaNum:      pulumi.Int(4),
-//				PartitionNum:    pulumi.Int(2),
-//				EnableWhiteList: pulumi.Bool(true),
-//				IpWhiteLists: pulumi.StringArray{
-//					pulumi.String("1.1.1.1"),
-//					pulumi.String("2.2.2.2"),
-//				},
+//				InstanceId:                  pulumi.String("ckafka-bzmja3mb"),
+//				TopicName:                   pulumi.String("tf-example"),
+//				Note:                        pulumi.String("topic note"),
+//				ReplicaNum:                  pulumi.Int(2),
+//				PartitionNum:                pulumi.Int(3),
 //				CleanUpPolicy:               pulumi.String("delete"),
 //				SyncReplicaMinNum:           pulumi.Int(2),
 //				UncleanLeaderElectionEnable: pulumi.Bool(false),
@@ -60,7 +55,7 @@ import (
 // ckafka topic can be imported using the instance_id#topic_name, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Ckafka/topic:Topic example ckafka-f9ife4zz#tf-example
+// $ pulumi import tencentcloud:Ckafka/topic:Topic example ckafka-bzmja3mb#tf-example
 // ```
 type Topic struct {
 	pulumi.CustomResourceState
@@ -89,9 +84,9 @@ type Topic struct {
 	Note pulumi.StringPtrOutput `pulumi:"note"`
 	// The number of partition.
 	PartitionNum pulumi.IntOutput `pulumi:"partitionNum"`
-	// The number of replica.
+	// The number of replica. Maximum is 3.
 	ReplicaNum pulumi.IntOutput `pulumi:"replicaNum"`
-	// Message can be selected. Retention time, unit is ms, the current minimum value is 60000ms.
+	// Optional parameter: Message retention time. Value range: [60000, 7776000000]. Unit: milliseconds. Default value: 7200000.
 	Retention pulumi.IntPtrOutput `pulumi:"retention"`
 	// Segment scrolling time, in ms, the current minimum is 3600000ms.
 	Segment pulumi.IntPtrOutput `pulumi:"segment"`
@@ -171,9 +166,9 @@ type topicState struct {
 	Note *string `pulumi:"note"`
 	// The number of partition.
 	PartitionNum *int `pulumi:"partitionNum"`
-	// The number of replica.
+	// The number of replica. Maximum is 3.
 	ReplicaNum *int `pulumi:"replicaNum"`
-	// Message can be selected. Retention time, unit is ms, the current minimum value is 60000ms.
+	// Optional parameter: Message retention time. Value range: [60000, 7776000000]. Unit: milliseconds. Default value: 7200000.
 	Retention *int `pulumi:"retention"`
 	// Segment scrolling time, in ms, the current minimum is 3600000ms.
 	Segment *int `pulumi:"segment"`
@@ -212,9 +207,9 @@ type TopicState struct {
 	Note pulumi.StringPtrInput
 	// The number of partition.
 	PartitionNum pulumi.IntPtrInput
-	// The number of replica.
+	// The number of replica. Maximum is 3.
 	ReplicaNum pulumi.IntPtrInput
-	// Message can be selected. Retention time, unit is ms, the current minimum value is 60000ms.
+	// Optional parameter: Message retention time. Value range: [60000, 7776000000]. Unit: milliseconds. Default value: 7200000.
 	Retention pulumi.IntPtrInput
 	// Segment scrolling time, in ms, the current minimum is 3600000ms.
 	Segment pulumi.IntPtrInput
@@ -247,9 +242,9 @@ type topicArgs struct {
 	Note *string `pulumi:"note"`
 	// The number of partition.
 	PartitionNum int `pulumi:"partitionNum"`
-	// The number of replica.
+	// The number of replica. Maximum is 3.
 	ReplicaNum int `pulumi:"replicaNum"`
-	// Message can be selected. Retention time, unit is ms, the current minimum value is 60000ms.
+	// Optional parameter: Message retention time. Value range: [60000, 7776000000]. Unit: milliseconds. Default value: 7200000.
 	Retention *int `pulumi:"retention"`
 	// Segment scrolling time, in ms, the current minimum is 3600000ms.
 	Segment *int `pulumi:"segment"`
@@ -277,9 +272,9 @@ type TopicArgs struct {
 	Note pulumi.StringPtrInput
 	// The number of partition.
 	PartitionNum pulumi.IntInput
-	// The number of replica.
+	// The number of replica. Maximum is 3.
 	ReplicaNum pulumi.IntInput
-	// Message can be selected. Retention time, unit is ms, the current minimum value is 60000ms.
+	// Optional parameter: Message retention time. Value range: [60000, 7776000000]. Unit: milliseconds. Default value: 7200000.
 	Retention pulumi.IntPtrInput
 	// Segment scrolling time, in ms, the current minimum is 3600000ms.
 	Segment pulumi.IntPtrInput
@@ -438,12 +433,12 @@ func (o TopicOutput) PartitionNum() pulumi.IntOutput {
 	return o.ApplyT(func(v *Topic) pulumi.IntOutput { return v.PartitionNum }).(pulumi.IntOutput)
 }
 
-// The number of replica.
+// The number of replica. Maximum is 3.
 func (o TopicOutput) ReplicaNum() pulumi.IntOutput {
 	return o.ApplyT(func(v *Topic) pulumi.IntOutput { return v.ReplicaNum }).(pulumi.IntOutput)
 }
 
-// Message can be selected. Retention time, unit is ms, the current minimum value is 60000ms.
+// Optional parameter: Message retention time. Value range: [60000, 7776000000]. Unit: milliseconds. Default value: 7200000.
 func (o TopicOutput) Retention() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Topic) pulumi.IntPtrOutput { return v.Retention }).(pulumi.IntPtrOutput)
 }

@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Mqtt.getInstanceDetail({
+ * const example = tencentcloud.mqtt.getInstanceDetail({
  *     instanceId: "mqtt-kngmpg9p",
  * });
  * ```
@@ -152,7 +152,7 @@ export interface GetInstanceDetailResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Mqtt.getInstanceDetail({
+ * const example = tencentcloud.mqtt.getInstanceDetail({
  *     instanceId: "mqtt-kngmpg9p",
  * });
  * ```
@@ -176,5 +176,5 @@ export interface GetInstanceDetailOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

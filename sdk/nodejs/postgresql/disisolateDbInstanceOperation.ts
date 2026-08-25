@@ -104,19 +104,19 @@ export interface DisisolateDbInstanceOperationState {
     /**
      * Whether to use vouchers. Valid values:true (yes), false (no). Default value:false.
      */
-    autoVoucher?: pulumi.Input<boolean>;
+    autoVoucher?: pulumi.Input<boolean | undefined>;
     /**
      * List of resource IDs. Note that currently you cannot remove multiple instances from isolation at the same time. Only one instance ID can be passed in here.
      */
-    dbInstanceIdSets?: pulumi.Input<pulumi.Input<string>[]>;
+    dbInstanceIdSets?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The valid period (in months) of the monthly-subscribed instance when removing it from isolation.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * Voucher ID list.
      */
-    voucherIds?: pulumi.Input<pulumi.Input<string>[]>;
+    voucherIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -126,7 +126,7 @@ export interface DisisolateDbInstanceOperationArgs {
     /**
      * Whether to use vouchers. Valid values:true (yes), false (no). Default value:false.
      */
-    autoVoucher?: pulumi.Input<boolean>;
+    autoVoucher?: pulumi.Input<boolean | undefined>;
     /**
      * List of resource IDs. Note that currently you cannot remove multiple instances from isolation at the same time. Only one instance ID can be passed in here.
      */
@@ -134,9 +134,9 @@ export interface DisisolateDbInstanceOperationArgs {
     /**
      * The valid period (in months) of the monthly-subscribed instance when removing it from isolation.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * Voucher ID list.
      */
-    voucherIds?: pulumi.Input<pulumi.Input<string>[]>;
+    voucherIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

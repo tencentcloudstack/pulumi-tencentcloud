@@ -71,12 +71,8 @@ type LookupTopicProduceConnectionResult struct {
 }
 
 func LookupTopicProduceConnectionOutput(ctx *pulumi.Context, args LookupTopicProduceConnectionOutputArgs, opts ...pulumi.InvokeOption) LookupTopicProduceConnectionResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupTopicProduceConnectionResultOutput, error) {
-			args := v.(LookupTopicProduceConnectionArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ckafka/getTopicProduceConnection:getTopicProduceConnection", args, LookupTopicProduceConnectionResultOutput{}, options).(LookupTopicProduceConnectionResultOutput), nil
-		}).(LookupTopicProduceConnectionResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ckafka/getTopicProduceConnection:getTopicProduceConnection", args, LookupTopicProduceConnectionResultOutput{}, options).(LookupTopicProduceConnectionResultOutput)
 }
 
 // A collection of arguments for invoking getTopicProduceConnection.

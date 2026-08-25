@@ -17,7 +17,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// <summary>
         /// ID of the L4 proxy instance. Note: This field may return null, indicating that no valid values can be obtained.
         /// </summary>
-        public readonly string? InstanceId;
+        public readonly string InstanceId;
         /// <summary>
         /// The parameter key.
         /// </summary>
@@ -25,11 +25,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// <summary>
         /// Quota for a resource. Values: `Zone`: Quota for sites; `custom-rule`: Quota for custom rules; `rate-limiting-rule`: Quota for rate limiting rules; `l4-proxy-instance`: Quota for L4 proxy instances. Note: This field may return null, indicating that no valid values can be obtained.
         /// </summary>
-        public readonly string? Pack;
+        public readonly string Pack;
         /// <summary>
         /// The protection specification. Values: `cm_30G`: 30 Gbps base protection bandwidth in **Chinese mainland** service area; `cm_60G`: 60 Gbps base protection bandwidth in **Chinese mainland** service area; `cm_100G`: 100 Gbps base protection bandwidth in **Chinese mainland** service area; `anycast_300G`: 300 Gbps Anycast-based protection in **Global (MLC)** service area; `AnycastUnlimited`: Unlimited Anycast-based protection bandwidth in **Global (MLC)** service area; `cm_30G_anycast_300G`: 30 Gbps base protection bandwidth in **Chinese mainland** service area and 300 Gbps Anycast-based protection bandwidth in **Global (MLC)** service area; `cm_30G_anycast_unlimited`: 30 Gbps base protection bandwidth in **Chinese mainland** service area and unlimited Anycast-based protection bandwidth in **Global (MLC)** service area; cm_60G_anycast_300G`: 60 Gbps base protection bandwidth in **Chinese mainland** service area and 300 Gbps Anycast-based protection bandwidth in **Global (MLC)** service area; cm_60G_anycast_unlimited`: 60 Gbps base protection bandwidth in **Chinese mainland** service area and unlimited Anycast-based protection bandwidth in **Global (MLC)** service area&lt;/li&gt;&lt;li&gt; `cm_100G_anycast_300G`: 100 Gbps base protection bandwidth in **Chinese mainland** service area and 300 Gbps Anycast-based protection bandwidth in **Global (MLC)** service area, cm_100G_anycast_unlimited`: 100 Gbps base protection bandwidth in **Chinese mainland** service area and unlimited Anycast-based protection bandwidth in **Global (MLC)** service area. Note: This field may return null, indicating that no valid values can be obtained.
         /// </summary>
-        public readonly string? ProtectionSpecs;
+        public readonly string ProtectionSpecs;
         /// <summary>
         /// The parameter value.
         /// </summary>
@@ -37,13 +37,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
 
         [OutputConstructor]
         private GetZonesZoneResourceSvResult(
-            string? instanceId,
+            string instanceId,
 
             string key,
 
-            string? pack,
+            string pack,
 
-            string? protectionSpecs,
+            string protectionSpecs,
 
             string value)
         {

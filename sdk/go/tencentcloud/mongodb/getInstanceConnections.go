@@ -67,12 +67,8 @@ type GetInstanceConnectionsResult struct {
 }
 
 func GetInstanceConnectionsOutput(ctx *pulumi.Context, args GetInstanceConnectionsOutputArgs, opts ...pulumi.InvokeOption) GetInstanceConnectionsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstanceConnectionsResultOutput, error) {
-			args := v.(GetInstanceConnectionsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mongodb/getInstanceConnections:getInstanceConnections", args, GetInstanceConnectionsResultOutput{}, options).(GetInstanceConnectionsResultOutput), nil
-		}).(GetInstanceConnectionsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mongodb/getInstanceConnections:getInstanceConnections", args, GetInstanceConnectionsResultOutput{}, options).(GetInstanceConnectionsResultOutput)
 }
 
 // A collection of arguments for invoking getInstanceConnections.

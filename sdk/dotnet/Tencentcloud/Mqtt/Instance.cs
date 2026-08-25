@@ -57,6 +57,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mqtt
     ///             SubnetId = subnet.Id,
     ///         },
     ///         PayMode = 0,
+    ///         X509Mode = "BYOC",
+    ///         DeviceCertificateProvisionType = "JITP",
+    ///         MessageRate = 100,
+    ///         UseDefaultServerCert = true,
     ///         Tags = 
     ///         {
     ///             { "createBy", "Terraform" },
@@ -156,6 +160,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mqtt
         public Output<string> InstanceType { get; private set; } = null!;
 
         /// <summary>
+        /// Single client message send/receive rate limit, unit: messages/second. Set to 0 to indicate no limit.
+        /// </summary>
+        [Output("messageRate")]
+        public Output<int> MessageRate { get; private set; } = null!;
+
+        /// <summary>
         /// Instance name.
         /// </summary>
         [Output("name")]
@@ -198,10 +208,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mqtt
         public Output<int?> TimeSpan { get; private set; } = null!;
 
         /// <summary>
+        /// Whether to use the default server certificate.
+        /// </summary>
+        [Output("useDefaultServerCert")]
+        public Output<bool> UseDefaultServerCert { get; private set; } = null!;
+
+        /// <summary>
         /// VPC information bound to the instance.
         /// </summary>
         [Output("vpcList")]
         public Output<Outputs.InstanceVpcList?> VpcList { get; private set; } = null!;
+
+        /// <summary>
+        /// X509 certificate mode. Valid values: `TLS` (one-way authentication), `mTLS` (two-way authentication), `BYOC` (one device one certificate).
+        /// </summary>
+        [Output("x509Mode")]
+        public Output<string> X509Mode { get; private set; } = null!;
 
 
         /// <summary>
@@ -263,6 +285,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mqtt
         public Input<bool>? AutomaticActivation { get; set; }
 
         /// <summary>
+        /// Client certificate registration method: JITP: Automatic registration; API: Manually register through the API.
+        /// </summary>
+        [Input("deviceCertificateProvisionType")]
+        public Input<string>? DeviceCertificateProvisionType { get; set; }
+
+        /// <summary>
         /// Indicate whether to force delete the instance. Default is `False`. If set true, the instance will be permanently deleted instead of being moved into the recycle bin. Note: only works for `PREPAID` instance.
         /// </summary>
         [Input("forceDelete")]
@@ -273,6 +301,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mqtt
         /// </summary>
         [Input("instanceType", required: true)]
         public Input<string> InstanceType { get; set; } = null!;
+
+        /// <summary>
+        /// Single client message send/receive rate limit, unit: messages/second. Set to 0 to indicate no limit.
+        /// </summary>
+        [Input("messageRate")]
+        public Input<int>? MessageRate { get; set; }
 
         /// <summary>
         /// Instance name.
@@ -323,10 +357,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mqtt
         public Input<int>? TimeSpan { get; set; }
 
         /// <summary>
+        /// Whether to use the default server certificate.
+        /// </summary>
+        [Input("useDefaultServerCert")]
+        public Input<bool>? UseDefaultServerCert { get; set; }
+
+        /// <summary>
         /// VPC information bound to the instance.
         /// </summary>
         [Input("vpcList")]
         public Input<Inputs.InstanceVpcListArgs>? VpcList { get; set; }
+
+        /// <summary>
+        /// X509 certificate mode. Valid values: `TLS` (one-way authentication), `mTLS` (two-way authentication), `BYOC` (one device one certificate).
+        /// </summary>
+        [Input("x509Mode")]
+        public Input<string>? X509Mode { get; set; }
 
         public InstanceArgs()
         {
@@ -365,6 +411,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mqtt
         /// </summary>
         [Input("instanceType")]
         public Input<string>? InstanceType { get; set; }
+
+        /// <summary>
+        /// Single client message send/receive rate limit, unit: messages/second. Set to 0 to indicate no limit.
+        /// </summary>
+        [Input("messageRate")]
+        public Input<int>? MessageRate { get; set; }
 
         /// <summary>
         /// Instance name.
@@ -415,10 +467,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mqtt
         public Input<int>? TimeSpan { get; set; }
 
         /// <summary>
+        /// Whether to use the default server certificate.
+        /// </summary>
+        [Input("useDefaultServerCert")]
+        public Input<bool>? UseDefaultServerCert { get; set; }
+
+        /// <summary>
         /// VPC information bound to the instance.
         /// </summary>
         [Input("vpcList")]
         public Input<Inputs.InstanceVpcListGetArgs>? VpcList { get; set; }
+
+        /// <summary>
+        /// X509 certificate mode. Valid values: `TLS` (one-way authentication), `mTLS` (two-way authentication), `BYOC` (one device one certificate).
+        /// </summary>
+        [Input("x509Mode")]
+        public Input<string>? X509Mode { get; set; }
 
         public InstanceState()
         {

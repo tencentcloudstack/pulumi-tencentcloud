@@ -64,12 +64,8 @@ type GetAlarmMonitorTypeResult struct {
 }
 
 func GetAlarmMonitorTypeOutput(ctx *pulumi.Context, args GetAlarmMonitorTypeOutputArgs, opts ...pulumi.InvokeOption) GetAlarmMonitorTypeResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetAlarmMonitorTypeResultOutput, error) {
-			args := v.(GetAlarmMonitorTypeArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Monitor/getAlarmMonitorType:getAlarmMonitorType", args, GetAlarmMonitorTypeResultOutput{}, options).(GetAlarmMonitorTypeResultOutput), nil
-		}).(GetAlarmMonitorTypeResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Monitor/getAlarmMonitorType:getAlarmMonitorType", args, GetAlarmMonitorTypeResultOutput{}, options).(GetAlarmMonitorTypeResultOutput)
 }
 
 // A collection of arguments for invoking getAlarmMonitorType.

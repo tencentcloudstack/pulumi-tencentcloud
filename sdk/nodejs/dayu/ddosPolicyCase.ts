@@ -284,99 +284,99 @@ export interface DdosPolicyCaseState {
     /**
      * App protocol set of the DDoS policy case.
      */
-    appProtocols?: pulumi.Input<pulumi.Input<string>[]>;
+    appProtocols?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * App type of the DDoS policy case. Valid values: `WEB`, `GAME`, `APP` and `OTHER`.
      */
-    appType?: pulumi.Input<string>;
+    appType?: pulumi.Input<string | undefined>;
     /**
      * Create time of the DDoS policy case.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Indicate whether the service involves overseas or not. Valid values: `no` and `yes`.
      */
-    hasAbroad?: pulumi.Input<string>;
+    hasAbroad?: pulumi.Input<string | undefined>;
     /**
      * Indicate whether the service actively initiates TCP requests or not. Valid values: `no` and `yes`.
      */
-    hasInitiateTcp?: pulumi.Input<string>;
+    hasInitiateTcp?: pulumi.Input<string | undefined>;
     /**
      * Indicate whether the actively initiate UDP requests or not. Valid values: `no` and `yes`.
      */
-    hasInitiateUdp?: pulumi.Input<string>;
+    hasInitiateUdp?: pulumi.Input<string | undefined>;
     /**
      * Indicate whether the service involves VPN service or not. Valid values: `no` and `yes`.
      */
-    hasVpn?: pulumi.Input<string>;
+    hasVpn?: pulumi.Input<string | undefined>;
     /**
      * The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than `minTcpPackageLen`.
      */
-    maxTcpPackageLen?: pulumi.Input<string>;
+    maxTcpPackageLen?: pulumi.Input<string | undefined>;
     /**
      * The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than `minUdpPackageLen`.
      */
-    maxUdpPackageLen?: pulumi.Input<string>;
+    maxUdpPackageLen?: pulumi.Input<string | undefined>;
     /**
      * The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.
      */
-    minTcpPackageLen?: pulumi.Input<string>;
+    minTcpPackageLen?: pulumi.Input<string | undefined>;
     /**
      * The minimum length of UDP message package, valid value length should be greater than 0 and less than 1500.
      */
-    minUdpPackageLen?: pulumi.Input<string>;
+    minUdpPackageLen?: pulumi.Input<string | undefined>;
     /**
      * Name of the DDoS policy case. Length should between 1 and 64.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * The port that actively initiates TCP requests. Valid value ranges: (1~65535).
      */
-    peerTcpPort?: pulumi.Input<string>;
+    peerTcpPort?: pulumi.Input<string | undefined>;
     /**
      * The port that actively initiates UDP requests. Valid value ranges: (1~65535).
      */
-    peerUdpPort?: pulumi.Input<string>;
+    peerUdpPort?: pulumi.Input<string | undefined>;
     /**
      * Platform set of the DDoS policy case.
      */
-    platformTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    platformTypes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Type of the resource that the DDoS policy case works for. Valid values: `bgpip`, `bgp` and `bgp-multip`.
      */
-    resourceType?: pulumi.Input<string>;
+    resourceType?: pulumi.Input<string | undefined>;
     /**
      * ID of the DDoS policy case.
      */
-    sceneId?: pulumi.Input<string>;
+    sceneId?: pulumi.Input<string | undefined>;
     /**
      * End port of the TCP service. Valid value ranges: (0~65535). It must be greater than `tcpStartPort`.
      */
-    tcpEndPort?: pulumi.Input<string>;
+    tcpEndPort?: pulumi.Input<string | undefined>;
     /**
      * The fixed signature of TCP protocol load, valid value length is range from 1 to 512.
      */
-    tcpFootprint?: pulumi.Input<string>;
+    tcpFootprint?: pulumi.Input<string | undefined>;
     /**
      * Start port of the TCP service. Valid value ranges: (0~65535).
      */
-    tcpStartPort?: pulumi.Input<string>;
+    tcpStartPort?: pulumi.Input<string | undefined>;
     /**
      * End port of the UDP service. Valid value ranges: (0~65535). It must be greater than `udpStartPort`.
      */
-    udpEndPort?: pulumi.Input<string>;
+    udpEndPort?: pulumi.Input<string | undefined>;
     /**
      * The fixed signature of TCP protocol load, valid value length is range from 1 to 512.
      */
-    udpFootprint?: pulumi.Input<string>;
+    udpFootprint?: pulumi.Input<string | undefined>;
     /**
      * Start port of the UDP service. Valid value ranges: (0~65535).
      */
-    udpStartPort?: pulumi.Input<string>;
+    udpStartPort?: pulumi.Input<string | undefined>;
     /**
      * Web API url set.
      */
-    webApiUrls?: pulumi.Input<pulumi.Input<string>[]>;
+    webApiUrls?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -402,39 +402,39 @@ export interface DdosPolicyCaseArgs {
     /**
      * Indicate whether the actively initiate UDP requests or not. Valid values: `no` and `yes`.
      */
-    hasInitiateUdp?: pulumi.Input<string>;
+    hasInitiateUdp?: pulumi.Input<string | undefined>;
     /**
      * Indicate whether the service involves VPN service or not. Valid values: `no` and `yes`.
      */
-    hasVpn?: pulumi.Input<string>;
+    hasVpn?: pulumi.Input<string | undefined>;
     /**
      * The max length of TCP message package, valid value length should be greater than 0 and less than 1500. It should be greater than `minTcpPackageLen`.
      */
-    maxTcpPackageLen?: pulumi.Input<string>;
+    maxTcpPackageLen?: pulumi.Input<string | undefined>;
     /**
      * The max length of UDP message package, valid value length should be greater than 0 and less than 1500. It should be greater than `minUdpPackageLen`.
      */
-    maxUdpPackageLen?: pulumi.Input<string>;
+    maxUdpPackageLen?: pulumi.Input<string | undefined>;
     /**
      * The minimum length of TCP message package, valid value length should be greater than 0 and less than 1500.
      */
-    minTcpPackageLen?: pulumi.Input<string>;
+    minTcpPackageLen?: pulumi.Input<string | undefined>;
     /**
      * The minimum length of UDP message package, valid value length should be greater than 0 and less than 1500.
      */
-    minUdpPackageLen?: pulumi.Input<string>;
+    minUdpPackageLen?: pulumi.Input<string | undefined>;
     /**
      * Name of the DDoS policy case. Length should between 1 and 64.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * The port that actively initiates TCP requests. Valid value ranges: (1~65535).
      */
-    peerTcpPort?: pulumi.Input<string>;
+    peerTcpPort?: pulumi.Input<string | undefined>;
     /**
      * The port that actively initiates UDP requests. Valid value ranges: (1~65535).
      */
-    peerUdpPort?: pulumi.Input<string>;
+    peerUdpPort?: pulumi.Input<string | undefined>;
     /**
      * Platform set of the DDoS policy case.
      */
@@ -450,7 +450,7 @@ export interface DdosPolicyCaseArgs {
     /**
      * The fixed signature of TCP protocol load, valid value length is range from 1 to 512.
      */
-    tcpFootprint?: pulumi.Input<string>;
+    tcpFootprint?: pulumi.Input<string | undefined>;
     /**
      * Start port of the TCP service. Valid value ranges: (0~65535).
      */
@@ -462,7 +462,7 @@ export interface DdosPolicyCaseArgs {
     /**
      * The fixed signature of TCP protocol load, valid value length is range from 1 to 512.
      */
-    udpFootprint?: pulumi.Input<string>;
+    udpFootprint?: pulumi.Input<string | undefined>;
     /**
      * Start port of the UDP service. Valid value ranges: (0~65535).
      */

@@ -259,87 +259,87 @@ export interface SiteState {
     /**
      * Site Detail Address.
      */
-    addressLine?: pulumi.Input<string>;
+    addressLine?: pulumi.Input<string | undefined>;
     /**
      * Whether there is an upstream circuit breaker.
      */
-    breakerRequirement?: pulumi.Input<boolean>;
+    breakerRequirement?: pulumi.Input<boolean | undefined>;
     /**
      * Site City.
      */
-    city?: pulumi.Input<string>;
+    city?: pulumi.Input<string | undefined>;
     /**
      * Whether the following environmental conditions are met: n1. There are no material requirements or the acceptance standard on site that will affect the delivery and installation of the CDC device. n2. The following conditions are met for finalized rack positions: Temperature ranges from 41 to 104 degrees F (5 to 40 degrees C). Humidity ranges from 10 degrees F (-12 degrees C) to 70 degrees F (21 degrees C) and relative humidity ranges from 8% RH to 80% RH. Air flows from front to back at the rack position and there is sufficient air in CFM (cubic feet per minute). The air quantity in CFM must be 145.8 times the power consumption (in KVA) of CDC.
      */
-    conditionRequirement?: pulumi.Input<boolean>;
+    conditionRequirement?: pulumi.Input<boolean | undefined>;
     /**
      * Site Country.
      */
-    country?: pulumi.Input<string>;
+    country?: pulumi.Input<string | undefined>;
     /**
      * Site Description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Whether the following dimension conditions are met: Your loading dock can accommodate one rack container (H x W x D = 94 x 54 x 48). You can provide a clear route from the delivery point of your rack (H x W x D = 80 x 24 x 48) to its final installation location. You should consider platforms, corridors, doors, turns, ramps, freight elevators as well as other access restrictions when measuring the depth. There shall be a 48 or greater front clearance and a 24 or greater rear clearance where the CDC is finally installed.
      */
-    dimensionRequirement?: pulumi.Input<boolean>;
+    dimensionRequirement?: pulumi.Input<boolean | undefined>;
     /**
      * Site Fiber Type. Using optical fiber type to connect the CDC device to the network SM(Single-Mode) or MM(Multi-Mode) fibers are available.
      */
-    fiberType?: pulumi.Input<string>;
+    fiberType?: pulumi.Input<string | undefined>;
     /**
      * Site Max Weight capacity (KG).
      */
-    maxWeight?: pulumi.Input<number>;
+    maxWeight?: pulumi.Input<number | undefined>;
     /**
      * Site Name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Whether you need help from Tencent Cloud for rack installation.
      */
-    needHelp?: pulumi.Input<boolean>;
+    needHelp?: pulumi.Input<boolean | undefined>;
     /**
      * Site Optical Standard. Optical standard used to connect the CDC device to the network This field depends on the uplink speed, optical fiber type, and distance to upstream equipment. Allow value: `SM`, `MM`.
      */
-    opticalStandard?: pulumi.Input<string>;
+    opticalStandard?: pulumi.Input<string | undefined>;
     /**
      * Detailed address of the site area (to be added).
      */
-    optionalAddressLine?: pulumi.Input<string>;
+    optionalAddressLine?: pulumi.Input<string | undefined>;
     /**
      * Site Power Connectors. Example: 380VAC3P.
      */
-    powerConnectors?: pulumi.Input<string>;
+    powerConnectors?: pulumi.Input<string | undefined>;
     /**
      * Site Power DrawKva (KW).
      */
-    powerDrawKva?: pulumi.Input<number>;
+    powerDrawKva?: pulumi.Input<number | undefined>;
     /**
      * Site Power Feed Drop. Whether power is supplied from above or below the rack. Allow value: `UP`, `DOWN`.
      */
-    powerFeedDrop?: pulumi.Input<string>;
+    powerFeedDrop?: pulumi.Input<string | undefined>;
     /**
      * Site Province.
      */
-    province?: pulumi.Input<string>;
+    province?: pulumi.Input<string | undefined>;
     /**
      * Whether redundant upstream equipment (switch or router) is provided so that both network devices can be connected to the network.
      */
-    redundantNetworking?: pulumi.Input<boolean>;
+    redundantNetworking?: pulumi.Input<boolean | undefined>;
     /**
      * Whether there is power redundancy.
      */
-    redundantPower?: pulumi.Input<boolean>;
+    redundantPower?: pulumi.Input<boolean | undefined>;
     /**
      * Number of uplinks used by each CDC device (2 devices per rack) when connected to the network.
      */
-    uplinkCount?: pulumi.Input<number>;
+    uplinkCount?: pulumi.Input<number | undefined>;
     /**
      * Uplink speed from the network to Tencent Cloud Region.
      */
-    uplinkSpeedGbps?: pulumi.Input<number>;
+    uplinkSpeedGbps?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -353,7 +353,7 @@ export interface SiteArgs {
     /**
      * Whether there is an upstream circuit breaker.
      */
-    breakerRequirement?: pulumi.Input<boolean>;
+    breakerRequirement?: pulumi.Input<boolean | undefined>;
     /**
      * Site City.
      */
@@ -361,7 +361,7 @@ export interface SiteArgs {
     /**
      * Whether the following environmental conditions are met: n1. There are no material requirements or the acceptance standard on site that will affect the delivery and installation of the CDC device. n2. The following conditions are met for finalized rack positions: Temperature ranges from 41 to 104 degrees F (5 to 40 degrees C). Humidity ranges from 10 degrees F (-12 degrees C) to 70 degrees F (21 degrees C) and relative humidity ranges from 8% RH to 80% RH. Air flows from front to back at the rack position and there is sufficient air in CFM (cubic feet per minute). The air quantity in CFM must be 145.8 times the power consumption (in KVA) of CDC.
      */
-    conditionRequirement?: pulumi.Input<boolean>;
+    conditionRequirement?: pulumi.Input<boolean | undefined>;
     /**
      * Site Country.
      */
@@ -369,47 +369,47 @@ export interface SiteArgs {
     /**
      * Site Description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Whether the following dimension conditions are met: Your loading dock can accommodate one rack container (H x W x D = 94 x 54 x 48). You can provide a clear route from the delivery point of your rack (H x W x D = 80 x 24 x 48) to its final installation location. You should consider platforms, corridors, doors, turns, ramps, freight elevators as well as other access restrictions when measuring the depth. There shall be a 48 or greater front clearance and a 24 or greater rear clearance where the CDC is finally installed.
      */
-    dimensionRequirement?: pulumi.Input<boolean>;
+    dimensionRequirement?: pulumi.Input<boolean | undefined>;
     /**
      * Site Fiber Type. Using optical fiber type to connect the CDC device to the network SM(Single-Mode) or MM(Multi-Mode) fibers are available.
      */
-    fiberType?: pulumi.Input<string>;
+    fiberType?: pulumi.Input<string | undefined>;
     /**
      * Site Max Weight capacity (KG).
      */
-    maxWeight?: pulumi.Input<number>;
+    maxWeight?: pulumi.Input<number | undefined>;
     /**
      * Site Name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Whether you need help from Tencent Cloud for rack installation.
      */
-    needHelp?: pulumi.Input<boolean>;
+    needHelp?: pulumi.Input<boolean | undefined>;
     /**
      * Site Optical Standard. Optical standard used to connect the CDC device to the network This field depends on the uplink speed, optical fiber type, and distance to upstream equipment. Allow value: `SM`, `MM`.
      */
-    opticalStandard?: pulumi.Input<string>;
+    opticalStandard?: pulumi.Input<string | undefined>;
     /**
      * Detailed address of the site area (to be added).
      */
-    optionalAddressLine?: pulumi.Input<string>;
+    optionalAddressLine?: pulumi.Input<string | undefined>;
     /**
      * Site Power Connectors. Example: 380VAC3P.
      */
-    powerConnectors?: pulumi.Input<string>;
+    powerConnectors?: pulumi.Input<string | undefined>;
     /**
      * Site Power DrawKva (KW).
      */
-    powerDrawKva?: pulumi.Input<number>;
+    powerDrawKva?: pulumi.Input<number | undefined>;
     /**
      * Site Power Feed Drop. Whether power is supplied from above or below the rack. Allow value: `UP`, `DOWN`.
      */
-    powerFeedDrop?: pulumi.Input<string>;
+    powerFeedDrop?: pulumi.Input<string | undefined>;
     /**
      * Site Province.
      */
@@ -417,17 +417,17 @@ export interface SiteArgs {
     /**
      * Whether redundant upstream equipment (switch or router) is provided so that both network devices can be connected to the network.
      */
-    redundantNetworking?: pulumi.Input<boolean>;
+    redundantNetworking?: pulumi.Input<boolean | undefined>;
     /**
      * Whether there is power redundancy.
      */
-    redundantPower?: pulumi.Input<boolean>;
+    redundantPower?: pulumi.Input<boolean | undefined>;
     /**
      * Number of uplinks used by each CDC device (2 devices per rack) when connected to the network.
      */
-    uplinkCount?: pulumi.Input<number>;
+    uplinkCount?: pulumi.Input<number | undefined>;
     /**
      * Uplink speed from the network to Tencent Cloud Region.
      */
-    uplinkSpeedGbps?: pulumi.Input<number>;
+    uplinkSpeedGbps?: pulumi.Input<number | undefined>;
 }

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cfw.getVpcFwSwitches({
+ * const example = tencentcloud.cfw.getVpcFwSwitches({
  *     vpcInsId: "cfwg-c8c2de41",
  * });
  * ```
@@ -66,7 +66,7 @@ export interface GetVpcFwSwitchesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cfw.getVpcFwSwitches({
+ * const example = tencentcloud.cfw.getVpcFwSwitches({
  *     vpcInsId: "cfwg-c8c2de41",
  * });
  * ```
@@ -86,7 +86,7 @@ export interface GetVpcFwSwitchesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Firewall instance id.
      */

@@ -83,12 +83,8 @@ type LookupMicroserviceResult struct {
 }
 
 func LookupMicroserviceOutput(ctx *pulumi.Context, args LookupMicroserviceOutputArgs, opts ...pulumi.InvokeOption) LookupMicroserviceResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupMicroserviceResultOutput, error) {
-			args := v.(LookupMicroserviceArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tsf/getMicroservice:getMicroservice", args, LookupMicroserviceResultOutput{}, options).(LookupMicroserviceResultOutput), nil
-		}).(LookupMicroserviceResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tsf/getMicroservice:getMicroservice", args, LookupMicroserviceResultOutput{}, options).(LookupMicroserviceResultOutput)
 }
 
 // A collection of arguments for invoking getMicroservice.

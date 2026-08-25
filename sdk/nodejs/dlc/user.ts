@@ -119,23 +119,23 @@ export interface UserState {
     /**
      * User alias, and its characters are less than 50.
      */
-    userAlias?: pulumi.Input<string>;
+    userAlias?: pulumi.Input<string | undefined>;
     /**
      * User description, which can make it easy to identify different users.
      */
-    userDescription?: pulumi.Input<string>;
+    userDescription?: pulumi.Input<string | undefined>;
     /**
      * Sub-user UIN that needs to be granted permissions. It can be checked through the upper right corner of Tencent Cloud Console > Account Information > Account ID.
      */
-    userId?: pulumi.Input<string>;
+    userId?: pulumi.Input<string | undefined>;
     /**
      * Types of users. ADMIN: administrators; COMMON: general users. When the type of user is administrator, the collections of permissions and bound working groups cannot be set. Administrators own all the permissions by default. If the parameter is not filled in, it will be COMMON by default.
      */
-    userType?: pulumi.Input<string>;
+    userType?: pulumi.Input<string | undefined>;
     /**
      * Collection of IDs of working groups bound to users.
      */
-    workGroupIds?: pulumi.Input<pulumi.Input<number>[]>;
+    workGroupIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
 }
 
 /**
@@ -145,11 +145,11 @@ export interface UserArgs {
     /**
      * User alias, and its characters are less than 50.
      */
-    userAlias?: pulumi.Input<string>;
+    userAlias?: pulumi.Input<string | undefined>;
     /**
      * User description, which can make it easy to identify different users.
      */
-    userDescription?: pulumi.Input<string>;
+    userDescription?: pulumi.Input<string | undefined>;
     /**
      * Sub-user UIN that needs to be granted permissions. It can be checked through the upper right corner of Tencent Cloud Console > Account Information > Account ID.
      */
@@ -157,5 +157,5 @@ export interface UserArgs {
     /**
      * Types of users. ADMIN: administrators; COMMON: general users. When the type of user is administrator, the collections of permissions and bound working groups cannot be set. Administrators own all the permissions by default. If the parameter is not filled in, it will be COMMON by default.
      */
-    userType?: pulumi.Input<string>;
+    userType?: pulumi.Input<string | undefined>;
 }

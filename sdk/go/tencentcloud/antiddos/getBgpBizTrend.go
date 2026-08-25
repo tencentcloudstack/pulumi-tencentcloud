@@ -91,12 +91,8 @@ type GetBgpBizTrendResult struct {
 }
 
 func GetBgpBizTrendOutput(ctx *pulumi.Context, args GetBgpBizTrendOutputArgs, opts ...pulumi.InvokeOption) GetBgpBizTrendResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetBgpBizTrendResultOutput, error) {
-			args := v.(GetBgpBizTrendArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Antiddos/getBgpBizTrend:getBgpBizTrend", args, GetBgpBizTrendResultOutput{}, options).(GetBgpBizTrendResultOutput), nil
-		}).(GetBgpBizTrendResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Antiddos/getBgpBizTrend:getBgpBizTrend", args, GetBgpBizTrendResultOutput{}, options).(GetBgpBizTrendResultOutput)
 }
 
 // A collection of arguments for invoking getBgpBizTrend.

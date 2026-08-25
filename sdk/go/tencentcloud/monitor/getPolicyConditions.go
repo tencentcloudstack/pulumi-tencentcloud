@@ -69,12 +69,8 @@ type GetPolicyConditionsResult struct {
 }
 
 func GetPolicyConditionsOutput(ctx *pulumi.Context, args GetPolicyConditionsOutputArgs, opts ...pulumi.InvokeOption) GetPolicyConditionsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetPolicyConditionsResultOutput, error) {
-			args := v.(GetPolicyConditionsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Monitor/getPolicyConditions:getPolicyConditions", args, GetPolicyConditionsResultOutput{}, options).(GetPolicyConditionsResultOutput), nil
-		}).(GetPolicyConditionsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Monitor/getPolicyConditions:getPolicyConditions", args, GetPolicyConditionsResultOutput{}, options).(GetPolicyConditionsResultOutput)
 }
 
 // A collection of arguments for invoking getPolicyConditions.

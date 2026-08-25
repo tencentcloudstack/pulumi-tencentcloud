@@ -62,12 +62,8 @@ type GetBlackHeaderResult struct {
 }
 
 func GetBlackHeaderOutput(ctx *pulumi.Context, args GetBlackHeaderOutputArgs, opts ...pulumi.InvokeOption) GetBlackHeaderResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetBlackHeaderResultOutput, error) {
-			args := v.(GetBlackHeaderArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Gaap/getBlackHeader:getBlackHeader", args, GetBlackHeaderResultOutput{}, options).(GetBlackHeaderResultOutput), nil
-		}).(GetBlackHeaderResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Gaap/getBlackHeader:getBlackHeader", args, GetBlackHeaderResultOutput{}, options).(GetBlackHeaderResultOutput)
 }
 
 // A collection of arguments for invoking getBlackHeader.

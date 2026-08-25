@@ -32,7 +32,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			tmpJSON0, err := json.Marshal(map[string]interface{}{
+//			tmpJSON0, err := json.Marshal(map[string]string{
 //				"key": "value",
 //			})
 //			if err != nil {
@@ -190,6 +190,8 @@ type CustomizeErrorPage struct {
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Page ID.
 	PageId pulumi.StringOutput `pulumi:"pageId"`
+	// List of business IDs that reference this error page.
+	References pulumi.StringArrayOutput `pulumi:"references"`
 	// Zone ID.
 	ZoneId pulumi.StringOutput `pulumi:"zoneId"`
 }
@@ -240,6 +242,8 @@ type customizeErrorPageState struct {
 	Name *string `pulumi:"name"`
 	// Page ID.
 	PageId *string `pulumi:"pageId"`
+	// List of business IDs that reference this error page.
+	References []string `pulumi:"references"`
 	// Zone ID.
 	ZoneId *string `pulumi:"zoneId"`
 }
@@ -255,6 +259,8 @@ type CustomizeErrorPageState struct {
 	Name pulumi.StringPtrInput
 	// Page ID.
 	PageId pulumi.StringPtrInput
+	// List of business IDs that reference this error page.
+	References pulumi.StringArrayInput
 	// Zone ID.
 	ZoneId pulumi.StringPtrInput
 }
@@ -400,6 +406,11 @@ func (o CustomizeErrorPageOutput) Name() pulumi.StringOutput {
 // Page ID.
 func (o CustomizeErrorPageOutput) PageId() pulumi.StringOutput {
 	return o.ApplyT(func(v *CustomizeErrorPage) pulumi.StringOutput { return v.PageId }).(pulumi.StringOutput)
+}
+
+// List of business IDs that reference this error page.
+func (o CustomizeErrorPageOutput) References() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *CustomizeErrorPage) pulumi.StringArrayOutput { return v.References }).(pulumi.StringArrayOutput)
 }
 
 // Zone ID.

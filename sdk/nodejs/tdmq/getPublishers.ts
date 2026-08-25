@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const publishers = tencentcloud.Tdmq.getPublishers({
+ * const publishers = tencentcloud.tdmq.getPublishers({
  *     clusterId: "pulsar-9n95ax58b9vn",
  *     namespace: "keep-ns",
  *     topic: "keep-topic",
@@ -100,7 +100,7 @@ export interface GetPublishersResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const publishers = tencentcloud.Tdmq.getPublishers({
+ * const publishers = tencentcloud.tdmq.getPublishers({
  *     clusterId: "pulsar-9n95ax58b9vn",
  *     namespace: "keep-ns",
  *     topic: "keep-topic",
@@ -138,7 +138,7 @@ export interface GetPublishersOutputArgs {
     /**
      * Parameter filter, support ProducerName, Address field.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Tdmq.GetPublishersFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Tdmq.GetPublishersFilterArgs>[] | undefined>;
     /**
      * namespace name.
      */
@@ -146,11 +146,11 @@ export interface GetPublishersOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * sorter.
      */
-    sort?: pulumi.Input<inputs.Tdmq.GetPublishersSortArgs>;
+    sort?: pulumi.Input<inputs.Tdmq.GetPublishersSortArgs | undefined>;
     /**
      * topic name.
      */

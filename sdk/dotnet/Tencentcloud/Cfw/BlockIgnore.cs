@@ -65,7 +65,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
     /// 
     /// ## Import
     /// 
-    /// cfw block_ignore_list can be imported using the id, e.g.
+    /// cfw BlockIgnoreList can be imported using the id, e.g.
     /// 
     /// If import ip rule
     /// 

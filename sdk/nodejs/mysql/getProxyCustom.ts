@@ -48,5 +48,5 @@ export function getProxyCustomOutput(args: GetProxyCustomOutputArgs, opts?: pulu
  */
 export interface GetProxyCustomOutputArgs {
     instanceId: pulumi.Input<string>;
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

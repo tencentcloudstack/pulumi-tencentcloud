@@ -216,67 +216,67 @@ export interface DatasourceState {
     /**
      * Catalog.
      */
-    catalog?: pulumi.Input<string>;
+    catalog?: pulumi.Input<string | undefined>;
     /**
      * Charset.
      */
-    charset?: pulumi.Input<string>;
+    charset?: pulumi.Input<string | undefined>;
     /**
      * Third-party datasource identification, this parameter can be ignored.
      */
-    dataOrigin?: pulumi.Input<string>;
+    dataOrigin?: pulumi.Input<string | undefined>;
     /**
      * Third-party datasource project id, this parameter can be ignored.
      */
-    dataOriginDatasourceId?: pulumi.Input<string>;
+    dataOriginDatasourceId?: pulumi.Input<string | undefined>;
     /**
      * Third-party datasource project id, this parameter can be ignored.
      */
-    dataOriginProjectId?: pulumi.Input<string>;
+    dataOriginProjectId?: pulumi.Input<string | undefined>;
     /**
      * Host.
      */
-    dbHost?: pulumi.Input<string>;
+    dbHost?: pulumi.Input<string | undefined>;
     /**
      * Database name.
      */
-    dbName?: pulumi.Input<string>;
+    dbName?: pulumi.Input<string | undefined>;
     /**
      * Port.
      */
-    dbPort?: pulumi.Input<number>;
+    dbPort?: pulumi.Input<number | undefined>;
     /**
      * Password.
      */
-    dbPwd?: pulumi.Input<string>;
+    dbPwd?: pulumi.Input<string | undefined>;
     /**
      * `MYSQL`, `MSSQL`, `POSTGRE`, `ORACLE`, `CLICKHOUSE`, `TIDB`, `HIVE`, `PRESTO`.
      */
-    dbType?: pulumi.Input<string>;
+    dbType?: pulumi.Input<string | undefined>;
     /**
      * User name.
      */
-    dbUser?: pulumi.Input<string>;
+    dbUser?: pulumi.Input<string | undefined>;
     /**
      * Project id.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Own or Cloud, default: `Own`.
      */
-    serviceType?: pulumi.Input<string>;
+    serviceType?: pulumi.Input<string | undefined>;
     /**
      * Datasource name in BI.
      */
-    sourceName?: pulumi.Input<string>;
+    sourceName?: pulumi.Input<string | undefined>;
     /**
      * Tencent cloud private network unified identity.
      */
-    uniqVpcId?: pulumi.Input<string>;
+    uniqVpcId?: pulumi.Input<string | undefined>;
     /**
      * Tencent cloud private network identity.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -286,7 +286,7 @@ export interface DatasourceArgs {
     /**
      * Catalog.
      */
-    catalog?: pulumi.Input<string>;
+    catalog?: pulumi.Input<string | undefined>;
     /**
      * Charset.
      */
@@ -294,15 +294,15 @@ export interface DatasourceArgs {
     /**
      * Third-party datasource identification, this parameter can be ignored.
      */
-    dataOrigin?: pulumi.Input<string>;
+    dataOrigin?: pulumi.Input<string | undefined>;
     /**
      * Third-party datasource project id, this parameter can be ignored.
      */
-    dataOriginDatasourceId?: pulumi.Input<string>;
+    dataOriginDatasourceId?: pulumi.Input<string | undefined>;
     /**
      * Third-party datasource project id, this parameter can be ignored.
      */
-    dataOriginProjectId?: pulumi.Input<string>;
+    dataOriginProjectId?: pulumi.Input<string | undefined>;
     /**
      * Host.
      */
@@ -334,7 +334,7 @@ export interface DatasourceArgs {
     /**
      * Own or Cloud, default: `Own`.
      */
-    serviceType?: pulumi.Input<string>;
+    serviceType?: pulumi.Input<string | undefined>;
     /**
      * Datasource name in BI.
      */
@@ -342,9 +342,9 @@ export interface DatasourceArgs {
     /**
      * Tencent cloud private network unified identity.
      */
-    uniqVpcId?: pulumi.Input<string>;
+    uniqVpcId?: pulumi.Input<string | undefined>;
     /**
      * Tencent cloud private network identity.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }

@@ -41,7 +41,7 @@ import (
 //				availabilityZone = param
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc"),
 //				CidrBlock: pulumi.String("172.16.0.0/16"),
 //			})
@@ -52,7 +52,7 @@ import (
 //			_, err = subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("subnet"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("10.0.20.0/28"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -75,7 +75,7 @@ import (
 //			}
 //			// create ccn route table
 //			_, err = ccn.NewRouteTable(ctx, "example", &ccn.RouteTableArgs{
-//				CcnId:       example.ID(),
+//				CcnId:       example.ID().ToIDOutput().ToStringOutput(),
 //				Name:        pulumi.String("tf-example"),
 //				Description: pulumi.String("desc."),
 //			})

@@ -24,7 +24,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * css push_auth_key_config can be imported using the id, e.g.
+ * css pushAuthKeyConfig can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Css/pushAuthKeyConfig:PushAuthKeyConfig push_auth_key_config push_auth_key_config_id
@@ -120,23 +120,23 @@ export interface PushAuthKeyConfigState {
     /**
      * Valid time, unit: second.
      */
-    authDelta?: pulumi.Input<number>;
+    authDelta?: pulumi.Input<number | undefined>;
     /**
      * Standby authentication key. No transfer means that the current value is not modified.
      */
-    backupAuthKey?: pulumi.Input<string>;
+    backupAuthKey?: pulumi.Input<string | undefined>;
     /**
      * Domain Name.
      */
-    domainName?: pulumi.Input<string>;
+    domainName?: pulumi.Input<string | undefined>;
     /**
      * Enable or not, 0: Close, 1: Enable. No transfer means that the current value is not modified.
      */
-    enable?: pulumi.Input<number>;
+    enable?: pulumi.Input<number | undefined>;
     /**
      * Primary authentication key. No transfer means that the current value is not modified.
      */
-    masterAuthKey?: pulumi.Input<string>;
+    masterAuthKey?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -146,11 +146,11 @@ export interface PushAuthKeyConfigArgs {
     /**
      * Valid time, unit: second.
      */
-    authDelta?: pulumi.Input<number>;
+    authDelta?: pulumi.Input<number | undefined>;
     /**
      * Standby authentication key. No transfer means that the current value is not modified.
      */
-    backupAuthKey?: pulumi.Input<string>;
+    backupAuthKey?: pulumi.Input<string | undefined>;
     /**
      * Domain Name.
      */
@@ -158,9 +158,9 @@ export interface PushAuthKeyConfigArgs {
     /**
      * Enable or not, 0: Close, 1: Enable. No transfer means that the current value is not modified.
      */
-    enable?: pulumi.Input<number>;
+    enable?: pulumi.Input<number | undefined>;
     /**
      * Primary authentication key. No transfer means that the current value is not modified.
      */
-    masterAuthKey?: pulumi.Input<string>;
+    masterAuthKey?: pulumi.Input<string | undefined>;
 }

@@ -118,7 +118,7 @@ export interface AddressTransformState {
     /**
      * the instance ID of a normal public network IP to be operated. eg:ins-23mk45jn.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**

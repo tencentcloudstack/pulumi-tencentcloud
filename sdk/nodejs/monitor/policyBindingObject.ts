@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instances = tencentcloud.Instances.getInstance({});
+ * const instances = tencentcloud.instances.getInstance({});
  * const policy = new tencentcloud.monitor.AlarmPolicy("policy", {
  *     policyName: "hello",
  *     monitorType: "MT_QCE",
@@ -140,11 +140,11 @@ export interface PolicyBindingObjectState {
     /**
      * A list objects. Each element contains the following attributes:
      */
-    dimensions?: pulumi.Input<pulumi.Input<inputs.Monitor.PolicyBindingObjectDimension>[]>;
+    dimensions?: pulumi.Input<pulumi.Input<inputs.Monitor.PolicyBindingObjectDimension>[] | undefined>;
     /**
      * Alarm policy ID for binding objects.
      */
-    policyId?: pulumi.Input<string>;
+    policyId?: pulumi.Input<string | undefined>;
 }
 
 /**

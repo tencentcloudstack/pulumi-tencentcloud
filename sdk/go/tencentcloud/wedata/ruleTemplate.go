@@ -21,7 +21,7 @@ import (
 //
 // import (
 //
-//	"github.com/pulumi/pulumi-std/sdk/go/std"
+//	"github.com/pulumi/pulumi-std/sdk/v2/go/std"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/wedata"
 //
@@ -62,7 +62,7 @@ import (
 //
 // ## Import
 //
-// wedata rule_template can be imported using the id, e.g.
+// wedata ruleTemplate can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Wedata/ruleTemplate:RuleTemplate rule_template rule_template_id

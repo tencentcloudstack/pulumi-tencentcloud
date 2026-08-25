@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * vpc ha_vip_instance_attachment can be imported using the id(${haVipId}#${instanceType}#${instanceId}), e.g.
+ * vpc haVipInstanceAttachment can be imported using the id(${haVipId}#${instanceType}#${instanceId}), e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Ha/vipInstanceAttachment:VipInstanceAttachment ha_vip_instance_attachment ha_vip_instance_attachment_id
@@ -106,15 +106,15 @@ export interface VipInstanceAttachmentState {
     /**
      * Unique ID of the HaVip instance.
      */
-    haVipId?: pulumi.Input<string>;
+    haVipId?: pulumi.Input<string | undefined>;
     /**
      * The unique ID of the slave machine or network card to which HaVip is bound.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * The type of HaVip binding. Values:CVM, ENI.
      */
-    instanceType?: pulumi.Input<string>;
+    instanceType?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -124,7 +124,7 @@ export interface VipInstanceAttachmentArgs {
     /**
      * Unique ID of the HaVip instance.
      */
-    haVipId?: pulumi.Input<string>;
+    haVipId?: pulumi.Input<string | undefined>;
     /**
      * The unique ID of the slave machine or network card to which HaVip is bound.
      */
@@ -132,5 +132,5 @@ export interface VipInstanceAttachmentArgs {
     /**
      * The type of HaVip binding. Values:CVM, ENI.
      */
-    instanceType?: pulumi.Input<string>;
+    instanceType?: pulumi.Input<string | undefined>;
 }

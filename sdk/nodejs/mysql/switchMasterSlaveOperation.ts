@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "cdb",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -147,19 +147,19 @@ export interface SwitchMasterSlaveOperationState {
     /**
      * target instance. Possible values: `first` - first standby; `second` - second standby. The default value is `first`, and only multi-AZ instances support setting it to `second`.
      */
-    dstSlave?: pulumi.Input<string>;
+    dstSlave?: pulumi.Input<string | undefined>;
     /**
      * Whether to force switch. Default is False. Note that if you set the mandatory switch to True, there is a risk of data loss on the instance, so use it with caution.
      */
-    forceSwitch?: pulumi.Input<boolean>;
+    forceSwitch?: pulumi.Input<boolean | undefined>;
     /**
      * instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Whether to switch within the time window. The default is False, i.e. do not switch within the time window. Note that if the ForceSwitch parameter is set to True, this parameter will not take effect.
      */
-    waitSwitch?: pulumi.Input<boolean>;
+    waitSwitch?: pulumi.Input<boolean | undefined>;
 }
 
 /**
@@ -169,11 +169,11 @@ export interface SwitchMasterSlaveOperationArgs {
     /**
      * target instance. Possible values: `first` - first standby; `second` - second standby. The default value is `first`, and only multi-AZ instances support setting it to `second`.
      */
-    dstSlave?: pulumi.Input<string>;
+    dstSlave?: pulumi.Input<string | undefined>;
     /**
      * Whether to force switch. Default is False. Note that if you set the mandatory switch to True, there is a risk of data loss on the instance, so use it with caution.
      */
-    forceSwitch?: pulumi.Input<boolean>;
+    forceSwitch?: pulumi.Input<boolean | undefined>;
     /**
      * instance id.
      */
@@ -181,5 +181,5 @@ export interface SwitchMasterSlaveOperationArgs {
     /**
      * Whether to switch within the time window. The default is False, i.e. do not switch within the time window. Note that if the ForceSwitch parameter is set to True, this parameter will not take effect.
      */
-    waitSwitch?: pulumi.Input<boolean>;
+    waitSwitch?: pulumi.Input<boolean | undefined>;
 }

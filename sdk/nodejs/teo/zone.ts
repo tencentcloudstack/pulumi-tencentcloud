@@ -11,6 +11,8 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * ### Basic Usage
+ *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
@@ -28,10 +30,38 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ### Enable Version Control Mode
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const zoneWithVersionControl = new tencentcloud.teo.Zone("zone_with_version_control", {
+ *     zoneName: "tf-teo-version.com",
+ *     type: "partial",
+ *     area: "overseas",
+ *     aliasZoneName: "teo-version-test",
+ *     paused: false,
+ *     planId: "edgeone-2kfv1h391n6w",
+ *     workModeInfos: [
+ *         {
+ *             configGroupType: "l7_acceleration",
+ *             workMode: "immediate_effect",
+ *         },
+ *         {
+ *             configGroupType: "edge_functions",
+ *             workMode: "immediate_effect",
+ *         },
+ *     ],
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * ```
+ *
  * ## Import
  *
  * teo zone can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Teo/zone:Zone zone zone_id
  * ```
@@ -100,9 +130,17 @@ export class Zone extends pulumi.CustomResource {
      */
     declare public readonly tags: pulumi.Output<{[key: string]: string} | undefined>;
     /**
-     * Site access type. The value of this parameter is as follows, and the default is partial if not filled in:partial: CNAME access; full: NS access; noDomainAccess: No domain access.
+     * Site Access Type. The possible values for this parameter are as follows; if left unspecified, the default value is `partial`:
      */
     declare public readonly type: pulumi.Output<string>;
+    /**
+     * Configuration group work mode. Each configuration module of the site can enable version control mode or immediate effect mode according to the configuration group dimension. For details, please refer to [Version Management](https://cloud.tencent.com/document/product/1552/113690).
+     */
+    declare public readonly workModeInfos: pulumi.Output<outputs.Teo.ZoneWorkModeInfo[]>;
+    /**
+     * Site ID.
+     */
+    declare public /*out*/ readonly zoneId: pulumi.Output<string>;
     /**
      * Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.
      */
@@ -130,6 +168,8 @@ export class Zone extends pulumi.CustomResource {
             resourceInputs["status"] = state?.status;
             resourceInputs["tags"] = state?.tags;
             resourceInputs["type"] = state?.type;
+            resourceInputs["workModeInfos"] = state?.workModeInfos;
+            resourceInputs["zoneId"] = state?.zoneId;
             resourceInputs["zoneName"] = state?.zoneName;
         } else {
             const args = argsOrState as ZoneArgs | undefined;
@@ -151,10 +191,12 @@ export class Zone extends pulumi.CustomResource {
             resourceInputs["planId"] = args?.planId;
             resourceInputs["tags"] = args?.tags;
             resourceInputs["type"] = args?.type;
+            resourceInputs["workModeInfos"] = args?.workModeInfos;
             resourceInputs["zoneName"] = args?.zoneName;
             resourceInputs["nameServers"] = undefined /*out*/;
             resourceInputs["ownershipVerifications"] = undefined /*out*/;
             resourceInputs["status"] = undefined /*out*/;
+            resourceInputs["zoneId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Zone.__pulumiType, name, resourceInputs, opts);
@@ -168,46 +210,54 @@ export interface ZoneState {
     /**
      * Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.
      */
-    aliasZoneName?: pulumi.Input<string>;
+    aliasZoneName?: pulumi.Input<string | undefined>;
     /**
      * When the Type value is partial/full, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is overseas if not filled in. When the Type value is noDomainAccess, please leave this value empty:
      * - global: Global availability zone.
      * - mainland: Chinese mainland availability zone.
      * - overseas: Global availability zone (excluding Chinese mainland).
      */
-    area?: pulumi.Input<string>;
+    area?: pulumi.Input<string | undefined>;
     /**
      * NS list allocated by Tencent Cloud.
      */
-    nameServers?: pulumi.Input<pulumi.Input<string>[]>;
+    nameServers?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Ownership verification information. Note: This field may return null, indicating that no valid value can be obtained.
      */
-    ownershipVerifications?: pulumi.Input<pulumi.Input<inputs.Teo.ZoneOwnershipVerification>[]>;
+    ownershipVerifications?: pulumi.Input<pulumi.Input<inputs.Teo.ZoneOwnershipVerification>[] | undefined>;
     /**
      * Indicates whether the site is disabled.
      */
-    paused?: pulumi.Input<boolean>;
+    paused?: pulumi.Input<boolean | undefined>;
     /**
      * The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.
      */
-    planId?: pulumi.Input<string>;
+    planId?: pulumi.Input<string | undefined>;
     /**
      * Site status. Valid values: `active`: NS is switched; `pending`: NS is not switched; `moved`: NS is moved; `deactivated`: this site is blocked.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
-     * Site access type. The value of this parameter is as follows, and the default is partial if not filled in:partial: CNAME access; full: NS access; noDomainAccess: No domain access.
+     * Site Access Type. The possible values for this parameter are as follows; if left unspecified, the default value is `partial`:
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
+    /**
+     * Configuration group work mode. Each configuration module of the site can enable version control mode or immediate effect mode according to the configuration group dimension. For details, please refer to [Version Management](https://cloud.tencent.com/document/product/1552/113690).
+     */
+    workModeInfos?: pulumi.Input<pulumi.Input<inputs.Teo.ZoneWorkModeInfo>[] | undefined>;
+    /**
+     * Site ID.
+     */
+    zoneId?: pulumi.Input<string | undefined>;
     /**
      * Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.
      */
-    zoneName?: pulumi.Input<string>;
+    zoneName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -217,7 +267,7 @@ export interface ZoneArgs {
     /**
      * Alias site identifier. Limit the input to a combination of numbers, English, - and _, within 20 characters. For details, refer to the alias site identifier. If there is no such usage scenario, leave this field empty.
      */
-    aliasZoneName?: pulumi.Input<string>;
+    aliasZoneName?: pulumi.Input<string | undefined>;
     /**
      * When the Type value is partial/full, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is overseas if not filled in. When the Type value is noDomainAccess, please leave this value empty:
      * - global: Global availability zone.
@@ -228,7 +278,7 @@ export interface ZoneArgs {
     /**
      * Indicates whether the site is disabled.
      */
-    paused?: pulumi.Input<boolean>;
+    paused?: pulumi.Input<boolean | undefined>;
     /**
      * The target Plan ID to be bound. When you have an existing Plan in your account, you can fill in this parameter to directly bind the site to the Plan. If you do not have a Plan that can be bound at the moment, please go to the console to purchase a Plan to complete the site creation.
      */
@@ -236,11 +286,15 @@ export interface ZoneArgs {
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
-     * Site access type. The value of this parameter is as follows, and the default is partial if not filled in:partial: CNAME access; full: NS access; noDomainAccess: No domain access.
+     * Site Access Type. The possible values for this parameter are as follows; if left unspecified, the default value is `partial`:
      */
     type: pulumi.Input<string>;
+    /**
+     * Configuration group work mode. Each configuration module of the site can enable version control mode or immediate effect mode according to the configuration group dimension. For details, please refer to [Version Management](https://cloud.tencent.com/document/product/1552/113690).
+     */
+    workModeInfos?: pulumi.Input<pulumi.Input<inputs.Teo.ZoneWorkModeInfo>[] | undefined>;
     /**
      * Site name. When accessing CNAME/NS, please pass the second-level domain (example.com) as the site name; when accessing without a domain name, please leave this value empty.
      */

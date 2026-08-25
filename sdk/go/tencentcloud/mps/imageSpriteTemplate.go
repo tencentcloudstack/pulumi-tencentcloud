@@ -51,7 +51,7 @@ import (
 //
 // ## Import
 //
-// mps image_sprite_template can be imported using the id, e.g.
+// mps imageSpriteTemplate can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Mps/imageSpriteTemplate:ImageSpriteTemplate image_sprite_template image_sprite_template_id

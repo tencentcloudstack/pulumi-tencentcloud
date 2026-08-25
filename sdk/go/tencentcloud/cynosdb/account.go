@@ -16,6 +16,8 @@ import (
 //
 // ## Example Usage
 //
+// ### If host is %
+//
 // ```go
 // package main
 //
@@ -28,13 +30,44 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := cynosdb.NewAccount(ctx, "account", &cynosdb.AccountArgs{
-//				ClusterId:          pulumi.String("cynosdbmysql-bws8h88b"),
-//				AccountName:        pulumi.String("terraform_test"),
-//				AccountPassword:    pulumi.String("Password@1234"),
+//			_, err := cynosdb.NewAccount(ctx, "example", &cynosdb.AccountArgs{
+//				ClusterId:          pulumi.String("cynosdbmysql-ddciqx2l"),
+//				AccountName:        pulumi.String("tf_example"),
+//				AccountPassword:    pulumi.String("Password@123"),
 //				Host:               pulumi.String("%"),
-//				Description:        pulumi.String("terraform test"),
-//				MaxUserConnections: pulumi.Int(2),
+//				Description:        pulumi.String("remark."),
+//				MaxUserConnections: pulumi.Int(10),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### If host is ip
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cynosdb"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := cynosdb.NewAccount(ctx, "example", &cynosdb.AccountArgs{
+//				ClusterId:          pulumi.String("cynosdbmysql-ddciqx2l"),
+//				AccountName:        pulumi.String("tf_example"),
+//				AccountPassword:    pulumi.String("Password@123"),
+//				Host:               pulumi.String("1.1.1.1"),
+//				Description:        pulumi.String("remark."),
+//				MaxUserConnections: pulumi.Int(0),
 //			})
 //			if err != nil {
 //				return err
@@ -47,10 +80,14 @@ import (
 //
 // ## Import
 //
-// cynosdb account can be imported using the id, e.g.
+// cynosdb account can be imported using the clusterId#accountName#host, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Cynosdb/account:Account account account_id
+// $ pulumi import tencentcloud:Cynosdb/account:Account example cynosdbmysql-ddciqx2l#tf_example#%
+//
+// or
+//
+// $ pulumi import tencentcloud:Cynosdb/account:Account example cynosdbmysql-ddciqx2l#tf_example#1.1.1.1
 // ```
 type Account struct {
 	pulumi.CustomResourceState

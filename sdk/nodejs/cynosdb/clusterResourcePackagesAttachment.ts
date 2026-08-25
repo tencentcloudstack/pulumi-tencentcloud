@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * cynosdb cluster_resource_packages_attachment can be imported using the id, e.g.
+ * cynosdb clusterResourcePackagesAttachment can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Cynosdb/clusterResourcePackagesAttachment:ClusterResourcePackagesAttachment cluster_resource_packages_attachment cluster_resource_packages_attachment_id
@@ -102,11 +102,11 @@ export interface ClusterResourcePackagesAttachmentState {
     /**
      * Cluster ID.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Resource Package Unique ID.
      */
-    packageIds?: pulumi.Input<pulumi.Input<string>[]>;
+    packageIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**

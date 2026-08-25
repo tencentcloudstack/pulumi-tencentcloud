@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "cdb",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -57,13 +57,13 @@ import * as utilities from "../utilities";
  *         max_connections: "1000",
  *     },
  * });
- * const example = tencentcloud.Mysql.getRollbackRangeTimeOutput({
+ * const example = tencentcloud.mysql.getRollbackRangeTimeOutput({
  *     instanceIds: [exampleInstance.id],
  * });
  * const exampleRollback = new tencentcloud.mysql.Rollback("example", {
  *     instanceId: exampleInstance.id,
  *     strategy: "full",
- *     rollbackTime: example.item[0].times[0].start,
+ *     rollbackTime: example.item?.[0]?.times?.[0]?.start.apply(x =>String(x)),
  *     databases: [{
  *         databaseName: "tf_db_bak",
  *         newDatabaseName: "tf_db_bak_new",
@@ -174,23 +174,23 @@ export interface RollbackState {
     /**
      * The database information to be archived, indicating that the entire database is archived.
      */
-    databases?: pulumi.Input<pulumi.Input<inputs.Mysql.RollbackDatabase>[]>;
+    databases?: pulumi.Input<pulumi.Input<inputs.Mysql.RollbackDatabase>[] | undefined>;
     /**
      * Cloud database instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Database rollback time, the time format is: yyyy-mm-dd hh:mm:ss.
      */
-    rollbackTime?: pulumi.Input<string>;
+    rollbackTime?: pulumi.Input<string | undefined>;
     /**
      * Rollback strategy. Available values are: table, db, full; the default value is full. table- Extremely fast rollback mode, only import the backup and binlog of the selected table level, if there is a cross-table operation, and the associated table is not selected at the same time, the rollback will fail. In this mode, the parameter Databases must be empty; db- Quick mode, only import the backup and binlog of the selected library level, if there is a cross-database operation, and the associated library is not selected at the same time, the rollback will fail; full- normal rollback mode, the backup and binlog of the entire instance will be imported, at a slower rate.
      */
-    strategy?: pulumi.Input<string>;
+    strategy?: pulumi.Input<string | undefined>;
     /**
      * The database table information to be rolled back, indicating that the file is rolled back by table.
      */
-    tables?: pulumi.Input<pulumi.Input<inputs.Mysql.RollbackTable>[]>;
+    tables?: pulumi.Input<pulumi.Input<inputs.Mysql.RollbackTable>[] | undefined>;
 }
 
 /**
@@ -200,7 +200,7 @@ export interface RollbackArgs {
     /**
      * The database information to be archived, indicating that the entire database is archived.
      */
-    databases?: pulumi.Input<pulumi.Input<inputs.Mysql.RollbackDatabase>[]>;
+    databases?: pulumi.Input<pulumi.Input<inputs.Mysql.RollbackDatabase>[] | undefined>;
     /**
      * Cloud database instance ID.
      */
@@ -216,5 +216,5 @@ export interface RollbackArgs {
     /**
      * The database table information to be rolled back, indicating that the file is rolled back by table.
      */
-    tables?: pulumi.Input<pulumi.Input<inputs.Mysql.RollbackTable>[]>;
+    tables?: pulumi.Input<pulumi.Input<inputs.Mysql.RollbackTable>[] | undefined>;
 }

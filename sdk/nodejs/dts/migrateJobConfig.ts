@@ -216,15 +216,15 @@ export interface MigrateJobConfigState {
     /**
      * The operation want to perform. Valid values are: `pause`, `continue`, `complete`, `recover`,`stop`.
      */
-    action?: pulumi.Input<string>;
+    action?: pulumi.Input<string | undefined>;
     /**
      * complete mode, optional value is waitForSync or immediately.
      */
-    completeMode?: pulumi.Input<string>;
+    completeMode?: pulumi.Input<string | undefined>;
     /**
      * job id.
      */
-    jobId?: pulumi.Input<string>;
+    jobId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -238,7 +238,7 @@ export interface MigrateJobConfigArgs {
     /**
      * complete mode, optional value is waitForSync or immediately.
      */
-    completeMode?: pulumi.Input<string>;
+    completeMode?: pulumi.Input<string | undefined>;
     /**
      * job id.
      */

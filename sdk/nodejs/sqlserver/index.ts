@@ -85,6 +85,11 @@ export type Db = import("./db").Db;
 export const Db: typeof import("./db").Db = null as any;
 utilities.lazyLoad(exports, ["Db"], () => require("./db"));
 
+export { DbInstanceSslConfigArgs, DbInstanceSslConfigState } from "./dbInstanceSslConfig";
+export type DbInstanceSslConfig = import("./dbInstanceSslConfig").DbInstanceSslConfig;
+export const DbInstanceSslConfig: typeof import("./dbInstanceSslConfig").DbInstanceSslConfig = null as any;
+utilities.lazyLoad(exports, ["DbInstanceSslConfig"], () => require("./dbInstanceSslConfig"));
+
 export { FullBackupMigrationArgs, FullBackupMigrationState } from "./fullBackupMigration";
 export type FullBackupMigration = import("./fullBackupMigration").FullBackupMigration;
 export const FullBackupMigration: typeof import("./fullBackupMigration").FullBackupMigration = null as any;
@@ -357,6 +362,8 @@ const _module = {
                 return new DatabaseTde(name, <any>undefined, { urn })
             case "tencentcloud:Sqlserver/db:Db":
                 return new Db(name, <any>undefined, { urn })
+            case "tencentcloud:Sqlserver/dbInstanceSslConfig:DbInstanceSslConfig":
+                return new DbInstanceSslConfig(name, <any>undefined, { urn })
             case "tencentcloud:Sqlserver/fullBackupMigration:FullBackupMigration":
                 return new FullBackupMigration(name, <any>undefined, { urn })
             case "tencentcloud:Sqlserver/generalBackup:GeneralBackup":
@@ -422,6 +429,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/configInstanceS
 pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/configTerminateDbInstance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/databaseTde", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/db", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/dbInstanceSslConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/fullBackupMigration", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/generalBackup", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Sqlserver/generalClone", _module)

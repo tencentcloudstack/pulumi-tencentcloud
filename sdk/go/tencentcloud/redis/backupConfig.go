@@ -38,15 +38,15 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("tf_redis_vpc"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String(zone.Lists[1].Zone),
 //				Name:             pulumi.String("tf_redis_subnet"),
 //				CidrBlock:        pulumi.String("10.0.1.0/24"),
@@ -63,14 +63,14 @@ import (
 //				RedisReplicasNum: pulumi.Int(zone.Lists[1].RedisReplicasNums[0]),
 //				Name:             pulumi.String("tf_example"),
 //				Port:             pulumi.Int(6379),
-//				VpcId:            vpc.ID(),
-//				SubnetId:         subnet.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			_, err = redis.NewBackupConfig(ctx, "example", &redis.BackupConfigArgs{
-//				RedisId:    example.ID(),
+//				RedisId:    example.ID().ToIDOutput().ToStringOutput(),
 //				BackupTime: pulumi.String("04:00-05:00"),
 //			})
 //			if err != nil {

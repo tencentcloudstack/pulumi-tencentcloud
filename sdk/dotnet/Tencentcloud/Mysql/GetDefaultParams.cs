@@ -21,11 +21,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var mysql57 = new Tencentcloud.Index.MysqlDefaultParams("mysql_57", new()
+        ///     var mysql57 = new Tencentcloud.MysqlDefaultParams("mysql_57", new()
         ///     {
         ///         DbVersion = "5.7",
         ///     });
@@ -45,11 +45,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var mysql57 = new Tencentcloud.Index.MysqlDefaultParams("mysql_57", new()
+        ///     var mysql57 = new Tencentcloud.MysqlDefaultParams("mysql_57", new()
         ///     {
         ///         DbVersion = "5.7",
         ///     });
@@ -69,11 +69,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var mysql57 = new Tencentcloud.Index.MysqlDefaultParams("mysql_57", new()
+        ///     var mysql57 = new Tencentcloud.MysqlDefaultParams("mysql_57", new()
         ///     {
         ///         DbVersion = "5.7",
         ///     });

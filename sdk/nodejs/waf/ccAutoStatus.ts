@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * waf cc_auto_status can be imported using the id, e.g.
+ * waf ccAutoStatus can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Waf/ccAutoStatus:CcAutoStatus example www.demo.com#sparta-waf
@@ -108,15 +108,15 @@ export interface CcAutoStatusState {
     /**
      * Domain.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Waf edition. clb-waf means clb-waf, sparta-waf means saas-waf.
      */
-    edition?: pulumi.Input<string>;
+    edition?: pulumi.Input<string | undefined>;
     /**
      * cc auto status, 1(open), 0(close).
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
 }
 
 /**

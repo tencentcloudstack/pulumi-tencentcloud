@@ -45,7 +45,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * css stream_monitor can be imported using the id, e.g.
+ * css streamMonitor can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Css/streamMonitor:StreamMonitor stream_monitor stream_monitor_id
@@ -186,51 +186,51 @@ export interface StreamMonitorState {
     /**
      * AI asr input index list.(first input index is 1.).
      */
-    aiAsrInputIndexLists?: pulumi.Input<pulumi.Input<number>[]>;
+    aiAsrInputIndexLists?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * If enable format diagnose.
      */
-    aiFormatDiagnose?: pulumi.Input<number>;
+    aiFormatDiagnose?: pulumi.Input<number | undefined>;
     /**
      * Ai ocr input index list(first input index is 1.).
      */
-    aiOcrInputIndexLists?: pulumi.Input<pulumi.Input<number>[]>;
+    aiOcrInputIndexLists?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * If store monitor event.
      */
-    allowMonitorReport?: pulumi.Input<number>;
+    allowMonitorReport?: pulumi.Input<number | undefined>;
     /**
      * Asr language.0: close.1: Chinese2: English3: Japanese4: Korean.
      */
-    asrLanguage?: pulumi.Input<number>;
+    asrLanguage?: pulumi.Input<number | undefined>;
     /**
      * If enable stream broken check.
      */
-    checkStreamBroken?: pulumi.Input<number>;
+    checkStreamBroken?: pulumi.Input<number | undefined>;
     /**
      * If enable low frame rate check.
      */
-    checkStreamLowFrameRate?: pulumi.Input<number>;
+    checkStreamLowFrameRate?: pulumi.Input<number | undefined>;
     /**
      * Wait monitor input info list.
      */
-    inputLists?: pulumi.Input<pulumi.Input<inputs.Css.StreamMonitorInputList>[]>;
+    inputLists?: pulumi.Input<pulumi.Input<inputs.Css.StreamMonitorInputList>[] | undefined>;
     /**
      * Monitor task name.
      */
-    monitorName?: pulumi.Input<string>;
+    monitorName?: pulumi.Input<string | undefined>;
     /**
      * Monitor event notify policy.
      */
-    notifyPolicy?: pulumi.Input<inputs.Css.StreamMonitorNotifyPolicy>;
+    notifyPolicy?: pulumi.Input<inputs.Css.StreamMonitorNotifyPolicy | undefined>;
     /**
      * Intelligent text recognition language settings: ocr language.0: close.1. Chinese,English.
      */
-    ocrLanguage?: pulumi.Input<number>;
+    ocrLanguage?: pulumi.Input<number | undefined>;
     /**
      * Monitor task output info.
      */
-    outputInfo?: pulumi.Input<inputs.Css.StreamMonitorOutputInfo>;
+    outputInfo?: pulumi.Input<inputs.Css.StreamMonitorOutputInfo | undefined>;
 }
 
 /**
@@ -240,31 +240,31 @@ export interface StreamMonitorArgs {
     /**
      * AI asr input index list.(first input index is 1.).
      */
-    aiAsrInputIndexLists?: pulumi.Input<pulumi.Input<number>[]>;
+    aiAsrInputIndexLists?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * If enable format diagnose.
      */
-    aiFormatDiagnose?: pulumi.Input<number>;
+    aiFormatDiagnose?: pulumi.Input<number | undefined>;
     /**
      * Ai ocr input index list(first input index is 1.).
      */
-    aiOcrInputIndexLists?: pulumi.Input<pulumi.Input<number>[]>;
+    aiOcrInputIndexLists?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * If store monitor event.
      */
-    allowMonitorReport?: pulumi.Input<number>;
+    allowMonitorReport?: pulumi.Input<number | undefined>;
     /**
      * Asr language.0: close.1: Chinese2: English3: Japanese4: Korean.
      */
-    asrLanguage?: pulumi.Input<number>;
+    asrLanguage?: pulumi.Input<number | undefined>;
     /**
      * If enable stream broken check.
      */
-    checkStreamBroken?: pulumi.Input<number>;
+    checkStreamBroken?: pulumi.Input<number | undefined>;
     /**
      * If enable low frame rate check.
      */
-    checkStreamLowFrameRate?: pulumi.Input<number>;
+    checkStreamLowFrameRate?: pulumi.Input<number | undefined>;
     /**
      * Wait monitor input info list.
      */
@@ -272,15 +272,15 @@ export interface StreamMonitorArgs {
     /**
      * Monitor task name.
      */
-    monitorName?: pulumi.Input<string>;
+    monitorName?: pulumi.Input<string | undefined>;
     /**
      * Monitor event notify policy.
      */
-    notifyPolicy?: pulumi.Input<inputs.Css.StreamMonitorNotifyPolicy>;
+    notifyPolicy?: pulumi.Input<inputs.Css.StreamMonitorNotifyPolicy | undefined>;
     /**
      * Intelligent text recognition language settings: ocr language.0: close.1. Chinese,English.
      */
-    ocrLanguage?: pulumi.Input<number>;
+    ocrLanguage?: pulumi.Input<number | undefined>;
     /**
      * Monitor task output info.
      */

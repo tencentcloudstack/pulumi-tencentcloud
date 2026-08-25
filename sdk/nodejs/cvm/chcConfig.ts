@@ -35,7 +35,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * cvm chc_config can be imported using the id, e.g.
+ * cvm chcConfig can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Cvm/chcConfig:ChcConfig chc_config chc_config_id
@@ -157,39 +157,39 @@ export interface ChcConfigState {
     /**
      * Out-of-band network security group list.
      */
-    bmcSecurityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    bmcSecurityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Valid characters: Letters, numbers, hyphens and underscores. Only set when update password.
      */
-    bmcUser?: pulumi.Input<string>;
+    bmcUser?: pulumi.Input<string | undefined>;
     /**
      * Out-of-band network information.
      */
-    bmcVirtualPrivateCloud?: pulumi.Input<inputs.Cvm.ChcConfigBmcVirtualPrivateCloud>;
+    bmcVirtualPrivateCloud?: pulumi.Input<inputs.Cvm.ChcConfigBmcVirtualPrivateCloud | undefined>;
     /**
      * CHC host ID.
      */
-    chcId?: pulumi.Input<string>;
+    chcId?: pulumi.Input<string | undefined>;
     /**
      * Deployment network security group list.
      */
-    deploySecurityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    deploySecurityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Deployment network information.
      */
-    deployVirtualPrivateCloud?: pulumi.Input<inputs.Cvm.ChcConfigDeployVirtualPrivateCloud>;
+    deployVirtualPrivateCloud?: pulumi.Input<inputs.Cvm.ChcConfigDeployVirtualPrivateCloud | undefined>;
     /**
      * Server type.
      */
-    deviceType?: pulumi.Input<string>;
+    deviceType?: pulumi.Input<string | undefined>;
     /**
      * CHC host name.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * The password can contain 8 to 16 characters, including letters, numbers and special symbols (()`~!@#$%^&amp;amp;*-+=_|{}).
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -199,15 +199,15 @@ export interface ChcConfigArgs {
     /**
      * Out-of-band network security group list.
      */
-    bmcSecurityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    bmcSecurityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Valid characters: Letters, numbers, hyphens and underscores. Only set when update password.
      */
-    bmcUser?: pulumi.Input<string>;
+    bmcUser?: pulumi.Input<string | undefined>;
     /**
      * Out-of-band network information.
      */
-    bmcVirtualPrivateCloud?: pulumi.Input<inputs.Cvm.ChcConfigBmcVirtualPrivateCloud>;
+    bmcVirtualPrivateCloud?: pulumi.Input<inputs.Cvm.ChcConfigBmcVirtualPrivateCloud | undefined>;
     /**
      * CHC host ID.
      */
@@ -215,21 +215,21 @@ export interface ChcConfigArgs {
     /**
      * Deployment network security group list.
      */
-    deploySecurityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    deploySecurityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Deployment network information.
      */
-    deployVirtualPrivateCloud?: pulumi.Input<inputs.Cvm.ChcConfigDeployVirtualPrivateCloud>;
+    deployVirtualPrivateCloud?: pulumi.Input<inputs.Cvm.ChcConfigDeployVirtualPrivateCloud | undefined>;
     /**
      * Server type.
      */
-    deviceType?: pulumi.Input<string>;
+    deviceType?: pulumi.Input<string | undefined>;
     /**
      * CHC host name.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * The password can contain 8 to 16 characters, including letters, numbers and special symbols (()`~!@#$%^&amp;amp;*-+=_|{}).
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
 }

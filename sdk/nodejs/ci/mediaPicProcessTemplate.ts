@@ -27,7 +27,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * ci media_pic_process_template can be imported using the bucket#templateId, e.g.
+ * ci mediaPicProcessTemplate can be imported using the bucket#templateId, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Ci/mediaPicProcessTemplate:MediaPicProcessTemplate media_pic_process_template terraform-ci-xxxxx#t184a8a26da4674c80bf260c1e34131a65
@@ -111,15 +111,15 @@ export interface MediaPicProcessTemplateState {
     /**
      * bucket name.
      */
-    bucket?: pulumi.Input<string>;
+    bucket?: pulumi.Input<string | undefined>;
     /**
      * The template name only supports `Chinese`, `English`, `numbers`, `_`, `-` and `*`.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * container format.
      */
-    picProcess?: pulumi.Input<inputs.Ci.MediaPicProcessTemplatePicProcess>;
+    picProcess?: pulumi.Input<inputs.Ci.MediaPicProcessTemplatePicProcess | undefined>;
 }
 
 /**
@@ -133,9 +133,9 @@ export interface MediaPicProcessTemplateArgs {
     /**
      * The template name only supports `Chinese`, `English`, `numbers`, `_`, `-` and `*`.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * container format.
      */
-    picProcess?: pulumi.Input<inputs.Ci.MediaPicProcessTemplatePicProcess>;
+    picProcess?: pulumi.Input<inputs.Ci.MediaPicProcessTemplatePicProcess | undefined>;
 }

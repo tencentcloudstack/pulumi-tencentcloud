@@ -51,7 +51,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
     /// 
     /// ## Import
     /// 
-    /// dasb user_group_members can be imported using the id, e.g.
+    /// dasb UserGroupMembers can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Dasb/userGroupMembers:UserGroupMembers example 3#14

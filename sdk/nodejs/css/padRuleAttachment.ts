@@ -23,7 +23,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * css pad_rule_attachment can be imported using the id, e.g.
+ * css padRuleAttachment can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Css/padRuleAttachment:PadRuleAttachment pad_rule_attachment templateId#domainName
@@ -116,19 +116,19 @@ export interface PadRuleAttachmentState {
     /**
      * Push path, must same with play path, default is live.
      */
-    appName?: pulumi.Input<string>;
+    appName?: pulumi.Input<string | undefined>;
     /**
      * Push domain.
      */
-    domainName?: pulumi.Input<string>;
+    domainName?: pulumi.Input<string | undefined>;
     /**
      * Stream name.
      */
-    streamName?: pulumi.Input<string>;
+    streamName?: pulumi.Input<string | undefined>;
     /**
      * Template id.
      */
-    templateId?: pulumi.Input<number>;
+    templateId?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -138,7 +138,7 @@ export interface PadRuleAttachmentArgs {
     /**
      * Push path, must same with play path, default is live.
      */
-    appName?: pulumi.Input<string>;
+    appName?: pulumi.Input<string | undefined>;
     /**
      * Push domain.
      */
@@ -146,7 +146,7 @@ export interface PadRuleAttachmentArgs {
     /**
      * Stream name.
      */
-    streamName?: pulumi.Input<string>;
+    streamName?: pulumi.Input<string | undefined>;
     /**
      * Template id.
      */

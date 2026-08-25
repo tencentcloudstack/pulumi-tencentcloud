@@ -10,39 +10,6 @@ using Pulumi;
 
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
 {
-    /// <summary>
-    /// Provides a resource to create a cfs UserQuota
-    /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using System.Collections.Generic;
-    /// using System.Linq;
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// return await Deployment.RunAsync(() =&gt; 
-    /// {
-    ///     var userQuota = new Tencentcloud.Cfs.UserQuota("user_quota", new()
-    ///     {
-    ///         FileSystemId = "cfs-4636029bc",
-    ///         UserType = "Uid",
-    ///         UserId = "2159973417",
-    ///         CapacityHardLimit = 10,
-    ///         FileHardLimit = 10000,
-    ///     });
-    /// 
-    /// });
-    /// ```
-    /// 
-    /// ## Import
-    /// 
-    /// cfs user_quota can be imported using the id, e.g.
-    /// 
-    /// ```sh
-    /// $ pulumi import tencentcloud:Cfs/userQuota:UserQuota user_quota user_quota_id
-    /// ```
-    /// </summary>
     [TencentcloudResourceType("tencentcloud:Cfs/userQuota:UserQuota")]
     public partial class UserQuota : global::Pulumi.CustomResource
     {

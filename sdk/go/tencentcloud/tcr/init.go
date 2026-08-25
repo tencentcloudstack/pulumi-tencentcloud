@@ -31,10 +31,10 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ImmutableTagRule{}
 	case "tencentcloud:Tcr/instance:Instance":
 		r = &Instance{}
-	case "tencentcloud:Tcr/manageReplicationOperation:ManageReplicationOperation":
-		r = &ManageReplicationOperation{}
 	case "tencentcloud:Tcr/namespace:Namespace":
 		r = &Namespace{}
+	case "tencentcloud:Tcr/replication:Replication":
+		r = &Replication{}
 	case "tencentcloud:Tcr/repository:Repository":
 		r = &Repository{}
 	case "tencentcloud:Tcr/serviceAccount:ServiceAccount":
@@ -89,12 +89,12 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"Tcr/manageReplicationOperation",
+		"Tcr/namespace",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
-		"Tcr/namespace",
+		"Tcr/replication",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

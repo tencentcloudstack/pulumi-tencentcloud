@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
 {
     /// <summary>
-    /// Provides a resource to create a postgresql ParameterTemplate
+    /// Provides a resource to create a PostgreSQL parameter template
     /// 
     /// ## Example Usage
     /// 
@@ -23,28 +23,65 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var parameterTemplate = new Tencentcloud.Postgresql.ParameterTemplate("parameter_template", new()
+    ///     var example = new Tencentcloud.Postgresql.ParameterTemplate("example", new()
     ///     {
-    ///         TemplateName = "your_temp_name",
-    ///         DbMajorVersion = "13",
+    ///         TemplateName = "tf-example",
+    ///         DbMajorVersion = "18",
     ///         DbEngine = "postgresql",
-    ///         TemplateDescription = "For_tf_test",
+    ///         TemplateDescription = "remark.",
     ///         ModifyParamEntrySets = new[]
     ///         {
     ///             new Tencentcloud.Postgresql.Inputs.ParameterTemplateModifyParamEntrySetArgs
     ///             {
     ///                 Name = "timezone",
-    ///                 ExpectedValue = "UTC",
+    ///                 ExpectedValue = "PRC",
     ///             },
     ///             new Tencentcloud.Postgresql.Inputs.ParameterTemplateModifyParamEntrySetArgs
     ///             {
     ///                 Name = "lock_timeout",
-    ///                 ExpectedValue = "123",
+    ///                 ExpectedValue = "60",
+    ///             },
+    ///             new Tencentcloud.Postgresql.Inputs.ParameterTemplateModifyParamEntrySetArgs
+    ///             {
+    ///                 Name = "event_triggers",
+    ///                 ExpectedValue = "on",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Postgresql.ParameterTemplate("example", new()
+    ///     {
+    ///         TemplateName = "tf-example",
+    ///         DbMajorVersion = "18",
+    ///         DbEngine = "postgresql",
+    ///         TemplateDescription = "remark.",
+    ///         ModifyParamEntrySets = new[]
+    ///         {
+    ///             new Tencentcloud.Postgresql.Inputs.ParameterTemplateModifyParamEntrySetArgs
+    ///             {
+    ///                 Name = "timezone",
+    ///                 ExpectedValue = "PRC",
+    ///             },
+    ///             new Tencentcloud.Postgresql.Inputs.ParameterTemplateModifyParamEntrySetArgs
+    ///             {
+    ///                 Name = "event_triggers",
+    ///                 ExpectedValue = "on",
     ///             },
     ///         },
     ///         DeleteParamSets = new[]
     ///         {
-    ///             "lc_time",
+    ///             "lock_timeout",
     ///         },
     ///     });
     /// 
@@ -53,12 +90,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// ## Import
     /// 
-    /// postgresql parameter_template can be imported using the id, e.g.
+    /// PostgreSQL parameter template can be imported using the id, e.g.
     /// 
-    /// Notice: `modify_param_entry_set` and `delete_param_set` do not support import.
+    /// Notice: `DeleteParamSet` do not support import.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Postgresql/parameterTemplate:ParameterTemplate parameter_template parameter_template_id
+    /// $ pulumi import tencentcloud:Postgresql/parameterTemplate:ParameterTemplate example 81ec47ed-0e4e-5af2-a648-2072fe63f225
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/parameterTemplate:ParameterTemplate")]

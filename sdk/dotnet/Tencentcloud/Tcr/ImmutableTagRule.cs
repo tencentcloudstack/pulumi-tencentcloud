@@ -152,7 +152,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// 
     /// ## Import
     /// 
-    /// tcr immutable_tag_rule can be imported using the id, e.g.
+    /// tcr ImmutableTagRule can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Tcr/immutableTagRule:ImmutableTagRule immutable_tag_rule immutable_tag_rule_id

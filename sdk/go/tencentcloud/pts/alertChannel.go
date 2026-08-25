@@ -102,8 +102,8 @@ import (
 //				return err
 //			}
 //			_, err = pts.NewAlertChannel(ctx, "alert_channel", &pts.AlertChannelArgs{
-//				NoticeId:      example.ID(),
-//				ProjectId:     project.ID(),
+//				NoticeId:      example.ID().ToIDOutput().ToStringOutput(),
+//				ProjectId:     project.ID().ToIDOutput().ToStringOutput(),
 //				AmpConsumerId: pulumi.String("Consumer-vvy1xxxxxx"),
 //			})
 //			if err != nil {
@@ -117,8 +117,7 @@ import (
 //
 // ## Import
 //
-// pts alert_channel can be imported using the project_id#notice_id, e.g.
-//
+// pts alertChannel can be imported using the project_id#notice_id, e.g.
 // ```sh
 // $ pulumi import tencentcloud:Pts/alertChannel:AlertChannel alert_channel project-kww5v8se#notice-kl66t6y9
 // ```

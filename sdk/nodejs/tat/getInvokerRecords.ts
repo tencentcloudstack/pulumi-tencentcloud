@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const invokerRecords = tencentcloud.Tat.getInvokerRecords({
+ * const invokerRecords = tencentcloud.tat.getInvokerRecords({
  *     invokerIds: ["ivk-cas4upyf"],
  * });
  * ```
@@ -67,7 +67,7 @@ export interface GetInvokerRecordsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const invokerRecords = tencentcloud.Tat.getInvokerRecords({
+ * const invokerRecords = tencentcloud.tat.getInvokerRecords({
  *     invokerIds: ["ivk-cas4upyf"],
  * });
  * ```
@@ -88,9 +88,9 @@ export interface GetInvokerRecordsOutputArgs {
     /**
      * List of invoker IDs. Up to 100 IDs are allowed.
      */
-    invokerIds?: pulumi.Input<pulumi.Input<string>[]>;
+    invokerIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

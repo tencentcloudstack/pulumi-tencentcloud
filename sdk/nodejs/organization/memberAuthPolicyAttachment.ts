@@ -156,47 +156,47 @@ export interface MemberAuthPolicyAttachmentState {
     /**
      * Bind type. 1-Subaccount, 2-User Group.
      */
-    bindType?: pulumi.Input<number>;
+    bindType?: pulumi.Input<number | undefined>;
     /**
      * Create time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Identity ID.
      */
-    identityId?: pulumi.Input<number>;
+    identityId?: pulumi.Input<number | undefined>;
     /**
      * Identity role alias name.
      */
-    identityRoleAliasName?: pulumi.Input<string>;
+    identityRoleAliasName?: pulumi.Input<string | undefined>;
     /**
      * Identity role name.
      */
-    identityRoleName?: pulumi.Input<string>;
+    identityRoleName?: pulumi.Input<string | undefined>;
     /**
      * Member name.
      */
-    memberName?: pulumi.Input<string>;
+    memberName?: pulumi.Input<string | undefined>;
     /**
      * Member UIN.
      */
-    memberUin?: pulumi.Input<number>;
+    memberUin?: pulumi.Input<number | undefined>;
     /**
      * Org sub account name.
      */
-    orgSubAccountName?: pulumi.Input<string>;
+    orgSubAccountName?: pulumi.Input<string | undefined>;
     /**
      * Organization administrator sub-account Uin.
      */
-    orgSubAccountUin?: pulumi.Input<number>;
+    orgSubAccountUin?: pulumi.Input<number | undefined>;
     /**
      * Pilicy ID.
      */
-    policyId?: pulumi.Input<number>;
+    policyId?: pulumi.Input<number | undefined>;
     /**
      * Policy name.
      */
-    policyName?: pulumi.Input<string>;
+    policyName?: pulumi.Input<string | undefined>;
 }
 
 /**

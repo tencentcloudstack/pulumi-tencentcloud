@@ -110,27 +110,27 @@ export interface WanIpConfigState {
     /**
      * Internet address domain name.
      */
-    dnsPodDomain?: pulumi.Input<string>;
+    dnsPodDomain?: pulumi.Input<string | undefined>;
     /**
      * Whether to open wan ip, true: enable; false: disable.
      */
-    enableWanIp?: pulumi.Input<boolean>;
+    enableWanIp?: pulumi.Input<boolean | undefined>;
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Read only group ID.
      */
-    roGroupId?: pulumi.Input<string>;
+    roGroupId?: pulumi.Input<string | undefined>;
     /**
      * Read only group.
      */
-    roGroups?: pulumi.Input<pulumi.Input<inputs.Sqlserver.WanIpConfigRoGroup>[]>;
+    roGroups?: pulumi.Input<pulumi.Input<inputs.Sqlserver.WanIpConfigRoGroup>[] | undefined>;
     /**
      * External port number.
      */
-    tgwWanVport?: pulumi.Input<number>;
+    tgwWanVport?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -148,5 +148,5 @@ export interface WanIpConfigArgs {
     /**
      * Read only group ID.
      */
-    roGroupId?: pulumi.Input<string>;
+    roGroupId?: pulumi.Input<string | undefined>;
 }

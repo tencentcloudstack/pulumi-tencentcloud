@@ -13,13 +13,13 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const diagHistory = tencentcloud.Dbbrain.getDiagHistory({
+ * const diagHistory = tencentcloud.dbbrain.getDiagHistory({
  *     instanceId: "%s",
  *     startTime: "%s",
  *     endTime: "%s",
  *     product: "mysql",
  * });
- * const diagEvent = diagHistory.then(diagHistory => tencentcloud.Dbbrain.getDiagEvent({
+ * const diagEvent = diagHistory.then(diagHistory => tencentcloud.dbbrain.getDiagEvent({
  *     instanceId: "%s",
  *     eventId: diagHistory.events?.[0]?.eventId,
  *     product: "mysql",
@@ -120,13 +120,13 @@ export interface GetDiagEventResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const diagHistory = tencentcloud.Dbbrain.getDiagHistory({
+ * const diagHistory = tencentcloud.dbbrain.getDiagHistory({
  *     instanceId: "%s",
  *     startTime: "%s",
  *     endTime: "%s",
  *     product: "mysql",
  * });
- * const diagEvent = diagHistory.then(diagHistory => tencentcloud.Dbbrain.getDiagEvent({
+ * const diagEvent = diagHistory.then(diagHistory => tencentcloud.dbbrain.getDiagEvent({
  *     instanceId: "%s",
  *     eventId: diagHistory.events?.[0]?.eventId,
  *     product: "mysql",
@@ -150,7 +150,7 @@ export interface GetDiagEventOutputArgs {
     /**
      * Event ID. Obtain it through `Get Instance Diagnosis History DescribeDBDiagHistory`.
      */
-    eventId?: pulumi.Input<number>;
+    eventId?: pulumi.Input<number | undefined>;
     /**
      * isntance id.
      */
@@ -158,9 +158,9 @@ export interface GetDiagEventOutputArgs {
     /**
      * Service product type, supported values include: `mysql` - cloud database MySQL, `cynosdb` - cloud database CynosDB for MySQL, the default is `mysql`.
      */
-    product?: pulumi.Input<string>;
+    product?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

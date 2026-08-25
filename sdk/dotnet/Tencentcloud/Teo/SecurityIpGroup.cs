@@ -43,7 +43,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// 
     /// ## Import
     /// 
-    /// teo teo_security_ip_group can be imported using the id, e.g.
+    /// teo TeoSecurityIpGroup can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Teo/securityIpGroup:SecurityIpGroup teo_security_ip_group zone_id#group_id

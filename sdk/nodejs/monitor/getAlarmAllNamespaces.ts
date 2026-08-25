@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const alarmAllNamespaces = tencentcloud.Monitor.getAlarmAllNamespaces({
+ * const alarmAllNamespaces = tencentcloud.monitor.getAlarmAllNamespaces({
  *     sceneType: "ST_ALARM",
  *     module: "monitor",
  *     monitorTypes: ["MT_QCE"],
@@ -95,7 +95,7 @@ export interface GetAlarmAllNamespacesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const alarmAllNamespaces = tencentcloud.Monitor.getAlarmAllNamespaces({
+ * const alarmAllNamespaces = tencentcloud.monitor.getAlarmAllNamespaces({
  *     sceneType: "ST_ALARM",
  *     module: "monitor",
  *     monitorTypes: ["MT_QCE"],
@@ -121,7 +121,7 @@ export interface GetAlarmAllNamespacesOutputArgs {
     /**
      * Filter based on the Id of the namespace without filling in the default query for all.
      */
-    ids?: pulumi.Input<pulumi.Input<string>[]>;
+    ids?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Fixed value, as `monitor`.
      */
@@ -129,11 +129,11 @@ export interface GetAlarmAllNamespacesOutputArgs {
     /**
      * Filter based on monitoring type, do not fill in default, check all types MT_QCE=cloud product monitoring.
      */
-    monitorTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    monitorTypes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Currently, only ST_ALARM=alarm type is filtered based on usage scenarios.
      */

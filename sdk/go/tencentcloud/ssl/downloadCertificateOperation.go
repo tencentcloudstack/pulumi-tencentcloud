@@ -43,7 +43,7 @@ import (
 //
 // ## Import
 //
-// ssl download_certificate can be imported using the id, e.g.
+// ssl downloadCertificate can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Ssl/downloadCertificateOperation:DownloadCertificateOperation download_certificate download_certificate_id

@@ -41,7 +41,7 @@ import (
 //
 // ## Import
 //
-// ssl update_certificate_record_retry can be imported using the id, e.g.
+// ssl updateCertificateRecordRetry can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Ssl/updateCertificateRecordRetryOperation:UpdateCertificateRecordRetryOperation update_certificate_record_retry update_certificate_record_retry_id

@@ -79,12 +79,8 @@ type GetListTableResult struct {
 }
 
 func GetListTableOutput(ctx *pulumi.Context, args GetListTableOutputArgs, opts ...pulumi.InvokeOption) GetListTableResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetListTableResultOutput, error) {
-			args := v.(GetListTableArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Wedata/getListTable:getListTable", args, GetListTableResultOutput{}, options).(GetListTableResultOutput), nil
-		}).(GetListTableResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Wedata/getListTable:getListTable", args, GetListTableResultOutput{}, options).(GetListTableResultOutput)
 }
 
 // A collection of arguments for invoking getListTable.

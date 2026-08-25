@@ -89,20 +89,19 @@ import (
 // ## Import
 //
 // SSM secret version can be imported using the secretName#versionId, e.g.
-//
 // ```sh
 // $ pulumi import tencentcloud:Ssm/secretVersion:SecretVersion v1 test#v1
 // ```
 type SecretVersion struct {
 	pulumi.CustomResourceState
 
-	// The base64-encoded binary secret. secretBinary and secretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
+	// Binary credential information, encoded using Base64. You must set exactly one of SecretBinary or SecretString.
 	SecretBinary pulumi.StringPtrOutput `pulumi:"secretBinary"`
-	// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+	// Specifies the name of the credential to which the new version is to be added.
 	SecretName pulumi.StringOutput `pulumi:"secretName"`
-	// The string text of secret. secretBinary and secretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
+	// Text-based credential information in plaintext (Base64 encoding is not required). You must set exactly one of SecretBinary or SecretString.
 	SecretString pulumi.StringPtrOutput `pulumi:"secretString"`
-	// Version of secret. The maximum length is 64 bytes. The versionId can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+	// Specifies the version ID for the newly added version. It can be up to 64 bytes in length and must consist of a combination of letters, numbers, and the characters `-`, `_`, or `.`, starting with a letter or a number.
 	VersionId pulumi.StringOutput `pulumi:"versionId"`
 }
 
@@ -142,24 +141,24 @@ func GetSecretVersion(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering SecretVersion resources.
 type secretVersionState struct {
-	// The base64-encoded binary secret. secretBinary and secretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
+	// Binary credential information, encoded using Base64. You must set exactly one of SecretBinary or SecretString.
 	SecretBinary *string `pulumi:"secretBinary"`
-	// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+	// Specifies the name of the credential to which the new version is to be added.
 	SecretName *string `pulumi:"secretName"`
-	// The string text of secret. secretBinary and secretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
+	// Text-based credential information in plaintext (Base64 encoding is not required). You must set exactly one of SecretBinary or SecretString.
 	SecretString *string `pulumi:"secretString"`
-	// Version of secret. The maximum length is 64 bytes. The versionId can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+	// Specifies the version ID for the newly added version. It can be up to 64 bytes in length and must consist of a combination of letters, numbers, and the characters `-`, `_`, or `.`, starting with a letter or a number.
 	VersionId *string `pulumi:"versionId"`
 }
 
 type SecretVersionState struct {
-	// The base64-encoded binary secret. secretBinary and secretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
+	// Binary credential information, encoded using Base64. You must set exactly one of SecretBinary or SecretString.
 	SecretBinary pulumi.StringPtrInput
-	// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+	// Specifies the name of the credential to which the new version is to be added.
 	SecretName pulumi.StringPtrInput
-	// The string text of secret. secretBinary and secretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
+	// Text-based credential information in plaintext (Base64 encoding is not required). You must set exactly one of SecretBinary or SecretString.
 	SecretString pulumi.StringPtrInput
-	// Version of secret. The maximum length is 64 bytes. The versionId can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+	// Specifies the version ID for the newly added version. It can be up to 64 bytes in length and must consist of a combination of letters, numbers, and the characters `-`, `_`, or `.`, starting with a letter or a number.
 	VersionId pulumi.StringPtrInput
 }
 
@@ -168,25 +167,25 @@ func (SecretVersionState) ElementType() reflect.Type {
 }
 
 type secretVersionArgs struct {
-	// The base64-encoded binary secret. secretBinary and secretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
+	// Binary credential information, encoded using Base64. You must set exactly one of SecretBinary or SecretString.
 	SecretBinary *string `pulumi:"secretBinary"`
-	// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+	// Specifies the name of the credential to which the new version is to be added.
 	SecretName string `pulumi:"secretName"`
-	// The string text of secret. secretBinary and secretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
+	// Text-based credential information in plaintext (Base64 encoding is not required). You must set exactly one of SecretBinary or SecretString.
 	SecretString *string `pulumi:"secretString"`
-	// Version of secret. The maximum length is 64 bytes. The versionId can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+	// Specifies the version ID for the newly added version. It can be up to 64 bytes in length and must consist of a combination of letters, numbers, and the characters `-`, `_`, or `.`, starting with a letter or a number.
 	VersionId string `pulumi:"versionId"`
 }
 
 // The set of arguments for constructing a SecretVersion resource.
 type SecretVersionArgs struct {
-	// The base64-encoded binary secret. secretBinary and secretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
+	// Binary credential information, encoded using Base64. You must set exactly one of SecretBinary or SecretString.
 	SecretBinary pulumi.StringPtrInput
-	// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+	// Specifies the name of the credential to which the new version is to be added.
 	SecretName pulumi.StringInput
-	// The string text of secret. secretBinary and secretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
+	// Text-based credential information in plaintext (Base64 encoding is not required). You must set exactly one of SecretBinary or SecretString.
 	SecretString pulumi.StringPtrInput
-	// Version of secret. The maximum length is 64 bytes. The versionId can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+	// Specifies the version ID for the newly added version. It can be up to 64 bytes in length and must consist of a combination of letters, numbers, and the characters `-`, `_`, or `.`, starting with a letter or a number.
 	VersionId pulumi.StringInput
 }
 
@@ -277,22 +276,22 @@ func (o SecretVersionOutput) ToSecretVersionOutputWithContext(ctx context.Contex
 	return o
 }
 
-// The base64-encoded binary secret. secretBinary and secretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
+// Binary credential information, encoded using Base64. You must set exactly one of SecretBinary or SecretString.
 func (o SecretVersionOutput) SecretBinary() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecretVersion) pulumi.StringPtrOutput { return v.SecretBinary }).(pulumi.StringPtrOutput)
 }
 
-// Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+// Specifies the name of the credential to which the new version is to be added.
 func (o SecretVersionOutput) SecretName() pulumi.StringOutput {
 	return o.ApplyT(func(v *SecretVersion) pulumi.StringOutput { return v.SecretName }).(pulumi.StringOutput)
 }
 
-// The string text of secret. secretBinary and secretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
+// Text-based credential information in plaintext (Base64 encoding is not required). You must set exactly one of SecretBinary or SecretString.
 func (o SecretVersionOutput) SecretString() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SecretVersion) pulumi.StringPtrOutput { return v.SecretString }).(pulumi.StringPtrOutput)
 }
 
-// Version of secret. The maximum length is 64 bytes. The versionId can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+// Specifies the version ID for the newly added version. It can be up to 64 bytes in length and must consist of a combination of letters, numbers, and the characters `-`, `_`, or `.`, starting with a letter or a number.
 func (o SecretVersionOutput) VersionId() pulumi.StringOutput {
 	return o.ApplyT(func(v *SecretVersion) pulumi.StringOutput { return v.VersionId }).(pulumi.StringOutput)
 }

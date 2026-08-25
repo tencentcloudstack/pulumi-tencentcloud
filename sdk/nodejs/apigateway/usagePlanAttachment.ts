@@ -205,27 +205,27 @@ export interface UsagePlanAttachmentState {
     /**
      * Array of key IDs to be bound.
      */
-    accessKeyIds?: pulumi.Input<pulumi.Input<string>[]>;
+    accessKeyIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * ID of the API. This parameter will be required when `bindType` is `API`.
      */
-    apiId?: pulumi.Input<string>;
+    apiId?: pulumi.Input<string | undefined>;
     /**
      * Binding type. Valid values: `API`, `SERVICE`. Default value is `SERVICE`.
      */
-    bindType?: pulumi.Input<string>;
+    bindType?: pulumi.Input<string | undefined>;
     /**
      * The environment to be bound. Valid values: `test`, `prepub`, `release`.
      */
-    environment?: pulumi.Input<string>;
+    environment?: pulumi.Input<string | undefined>;
     /**
      * ID of the service.
      */
-    serviceId?: pulumi.Input<string>;
+    serviceId?: pulumi.Input<string | undefined>;
     /**
      * ID of the usage plan.
      */
-    usagePlanId?: pulumi.Input<string>;
+    usagePlanId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -235,15 +235,15 @@ export interface UsagePlanAttachmentArgs {
     /**
      * Array of key IDs to be bound.
      */
-    accessKeyIds?: pulumi.Input<pulumi.Input<string>[]>;
+    accessKeyIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * ID of the API. This parameter will be required when `bindType` is `API`.
      */
-    apiId?: pulumi.Input<string>;
+    apiId?: pulumi.Input<string | undefined>;
     /**
      * Binding type. Valid values: `API`, `SERVICE`. Default value is `SERVICE`.
      */
-    bindType?: pulumi.Input<string>;
+    bindType?: pulumi.Input<string | undefined>;
     /**
      * The environment to be bound. Valid values: `test`, `prepub`, `release`.
      */

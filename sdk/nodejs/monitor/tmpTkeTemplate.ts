@@ -156,7 +156,7 @@ export interface TmpTkeTemplateState {
     /**
      * Template settings.
      */
-    template?: pulumi.Input<inputs.Monitor.TmpTkeTemplateTemplate>;
+    template?: pulumi.Input<inputs.Monitor.TmpTkeTemplateTemplate | undefined>;
 }
 
 /**

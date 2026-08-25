@@ -46,7 +46,7 @@ import (
 //
 // ## Import
 //
-// dcdb db_parameters can be imported using the id, e.g.
+// dcdb dbParameters can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Dcdb/dbParameters:DbParameters db_parameters instanceId#paramName

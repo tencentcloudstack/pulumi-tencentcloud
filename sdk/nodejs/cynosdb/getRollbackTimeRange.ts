@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const rollbackTimeRange = tencentcloud.Cynosdb.getRollbackTimeRange({
+ * const rollbackTimeRange = tencentcloud.cynosdb.getRollbackTimeRange({
  *     clusterId: "cynosdbmysql-bws8h88b",
  * });
  * ```
@@ -74,7 +74,7 @@ export interface GetRollbackTimeRangeResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const rollbackTimeRange = tencentcloud.Cynosdb.getRollbackTimeRange({
+ * const rollbackTimeRange = tencentcloud.cynosdb.getRollbackTimeRange({
  *     clusterId: "cynosdbmysql-bws8h88b",
  * });
  * ```
@@ -98,5 +98,5 @@ export interface GetRollbackTimeRangeOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

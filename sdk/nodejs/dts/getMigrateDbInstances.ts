@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const migrateDbInstances = tencentcloud.Dts.getMigrateDbInstances({
+ * const migrateDbInstances = tencentcloud.dts.getMigrateDbInstances({
  *     databaseType: "mysql",
  *     migrateRole: "src",
  *     instanceId: "cdb-ffulb2sg",
@@ -139,7 +139,7 @@ export interface GetMigrateDbInstancesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const migrateDbInstances = tencentcloud.Dts.getMigrateDbInstances({
+ * const migrateDbInstances = tencentcloud.dts.getMigrateDbInstances({
  *     databaseType: "mysql",
  *     migrateRole: "src",
  *     instanceId: "cdb-ffulb2sg",
@@ -177,7 +177,7 @@ export interface GetMigrateDbInstancesOutputArgs {
     /**
      * The owning account of the resource is null or self(resources in the self account), other(resources in the other account).
      */
-    accountMode?: pulumi.Input<string>;
+    accountMode?: pulumi.Input<string | undefined>;
     /**
      * Database type.
      */
@@ -185,37 +185,37 @@ export interface GetMigrateDbInstancesOutputArgs {
     /**
      * Database instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Database instance name.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * Limit.
      */
-    limit?: pulumi.Input<number>;
+    limit?: pulumi.Input<number | undefined>;
     /**
      * Whether the instance is the migration source or destination,src(for source), dst(for destination).
      */
-    migrateRole?: pulumi.Input<string>;
+    migrateRole?: pulumi.Input<string | undefined>;
     /**
      * Offset.
      */
-    offset?: pulumi.Input<number>;
+    offset?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * temporary secret id, used across account.
      */
-    tmpSecretId?: pulumi.Input<string>;
+    tmpSecretId?: pulumi.Input<string | undefined>;
     /**
      * temporary secret key, used across account.
      */
-    tmpSecretKey?: pulumi.Input<string>;
+    tmpSecretKey?: pulumi.Input<string | undefined>;
     /**
      * temporary token, used across account.
      */
-    tmpToken?: pulumi.Input<string>;
+    tmpToken?: pulumi.Input<string | undefined>;
 }

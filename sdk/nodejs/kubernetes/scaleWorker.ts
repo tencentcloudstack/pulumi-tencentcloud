@@ -291,63 +291,63 @@ export interface ScaleWorkerState {
     /**
      * ID of the cluster.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Used to save results of CVMs creation error messages.
      */
-    createResultOutputFile?: pulumi.Input<string>;
+    createResultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Configurations of tke data disk.
      */
-    dataDisks?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ScaleWorkerDataDisk>[]>;
+    dataDisks?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ScaleWorkerDataDisk>[] | undefined>;
     /**
      * Indicate to set desired pod number in current node. Valid when the cluster enable customized pod cidr.
      */
-    desiredPodNum?: pulumi.Input<number>;
+    desiredPodNum?: pulumi.Input<number | undefined>;
     /**
      * Docker graph path. Default is `/var/lib/docker`.
      */
-    dockerGraphPath?: pulumi.Input<string>;
+    dockerGraphPath?: pulumi.Input<string | undefined>;
     /**
      * Custom parameter information related to the node.
      */
-    extraArgs?: pulumi.Input<pulumi.Input<string>[]>;
+    extraArgs?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * GPU driver parameters.
      */
-    gpuArgs?: pulumi.Input<inputs.Kubernetes.ScaleWorkerGpuArgs>;
+    gpuArgs?: pulumi.Input<inputs.Kubernetes.ScaleWorkerGpuArgs | undefined>;
     /**
      * Labels of kubernetes scale worker created nodes.
      */
-    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Mount target. Default is not mounting.
      */
-    mountTarget?: pulumi.Input<string>;
+    mountTarget?: pulumi.Input<string | undefined>;
     /**
      * Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
      */
-    preStartUserScript?: pulumi.Input<string>;
+    preStartUserScript?: pulumi.Input<string | undefined>;
     /**
      * Node taint.
      */
-    taints?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ScaleWorkerTaint>[]>;
+    taints?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ScaleWorkerTaint>[] | undefined>;
     /**
      * Set whether the added node participates in scheduling. The default value is 0, which means participating in scheduling; non-0 means not participating in scheduling. After the node initialization is completed, you can execute kubectl uncordon nodename to join the node in scheduling.
      */
-    unschedulable?: pulumi.Input<number>;
+    unschedulable?: pulumi.Input<number | undefined>;
     /**
      * Base64 encoded user script, this script will be executed after the k8s component is run. The user needs to ensure that the script is reentrant and retry logic. The script and its generated log files can be viewed in the /data/ccs_userscript/ path of the node, if required. The node needs to be initialized before it can be added to the schedule. It can be used with the unschedulable parameter. After the final initialization of userScript is completed, add the kubectl uncordon nodename --kubeconfig=/root/.kube/config command to add the node to the schedule.
      */
-    userScript?: pulumi.Input<string>;
+    userScript?: pulumi.Input<string | undefined>;
     /**
      * Deploy the machine configuration information of the 'WORK' service, and create <=20 units for common users.
      */
-    workerConfig?: pulumi.Input<inputs.Kubernetes.ScaleWorkerWorkerConfig>;
+    workerConfig?: pulumi.Input<inputs.Kubernetes.ScaleWorkerWorkerConfig | undefined>;
     /**
      * An information list of kubernetes cluster 'WORKER'. Each element contains the following attributes:
      */
-    workerInstancesLists?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ScaleWorkerWorkerInstancesList>[]>;
+    workerInstancesLists?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ScaleWorkerWorkerInstancesList>[] | undefined>;
 }
 
 /**
@@ -361,51 +361,51 @@ export interface ScaleWorkerArgs {
     /**
      * Used to save results of CVMs creation error messages.
      */
-    createResultOutputFile?: pulumi.Input<string>;
+    createResultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Configurations of tke data disk.
      */
-    dataDisks?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ScaleWorkerDataDisk>[]>;
+    dataDisks?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ScaleWorkerDataDisk>[] | undefined>;
     /**
      * Indicate to set desired pod number in current node. Valid when the cluster enable customized pod cidr.
      */
-    desiredPodNum?: pulumi.Input<number>;
+    desiredPodNum?: pulumi.Input<number | undefined>;
     /**
      * Docker graph path. Default is `/var/lib/docker`.
      */
-    dockerGraphPath?: pulumi.Input<string>;
+    dockerGraphPath?: pulumi.Input<string | undefined>;
     /**
      * Custom parameter information related to the node.
      */
-    extraArgs?: pulumi.Input<pulumi.Input<string>[]>;
+    extraArgs?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * GPU driver parameters.
      */
-    gpuArgs?: pulumi.Input<inputs.Kubernetes.ScaleWorkerGpuArgs>;
+    gpuArgs?: pulumi.Input<inputs.Kubernetes.ScaleWorkerGpuArgs | undefined>;
     /**
      * Labels of kubernetes scale worker created nodes.
      */
-    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    labels?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Mount target. Default is not mounting.
      */
-    mountTarget?: pulumi.Input<string>;
+    mountTarget?: pulumi.Input<string | undefined>;
     /**
      * Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
      */
-    preStartUserScript?: pulumi.Input<string>;
+    preStartUserScript?: pulumi.Input<string | undefined>;
     /**
      * Node taint.
      */
-    taints?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ScaleWorkerTaint>[]>;
+    taints?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ScaleWorkerTaint>[] | undefined>;
     /**
      * Set whether the added node participates in scheduling. The default value is 0, which means participating in scheduling; non-0 means not participating in scheduling. After the node initialization is completed, you can execute kubectl uncordon nodename to join the node in scheduling.
      */
-    unschedulable?: pulumi.Input<number>;
+    unschedulable?: pulumi.Input<number | undefined>;
     /**
      * Base64 encoded user script, this script will be executed after the k8s component is run. The user needs to ensure that the script is reentrant and retry logic. The script and its generated log files can be viewed in the /data/ccs_userscript/ path of the node, if required. The node needs to be initialized before it can be added to the schedule. It can be used with the unschedulable parameter. After the final initialization of userScript is completed, add the kubectl uncordon nodename --kubeconfig=/root/.kube/config command to add the node to the schedule.
      */
-    userScript?: pulumi.Input<string>;
+    userScript?: pulumi.Input<string | undefined>;
     /**
      * Deploy the machine configuration information of the 'WORK' service, and create <=20 units for common users.
      */

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const backupDownloadInfo = tencentcloud.Redis.getBackupDownloadInfo({
+ * const backupDownloadInfo = tencentcloud.redis.getBackupDownloadInfo({
  *     instanceId: "crs-iw7d9wdd",
  *     backupId: "641186639-8362913-1516672770",
  * });
@@ -103,7 +103,7 @@ export interface GetBackupDownloadInfoResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const backupDownloadInfo = tencentcloud.Redis.getBackupDownloadInfo({
+ * const backupDownloadInfo = tencentcloud.redis.getBackupDownloadInfo({
  *     instanceId: "crs-iw7d9wdd",
  *     backupId: "641186639-8362913-1516672770",
  * });
@@ -138,25 +138,25 @@ export interface GetBackupDownloadInfoOutputArgs {
     /**
      * Identifies whether the customized LimitIP address can download the backup file.- In: Custom IP addresses are available for download.- NotIn: Custom IPs are not available for download.
      */
-    ipComparisonSymbol?: pulumi.Input<string>;
+    ipComparisonSymbol?: pulumi.Input<string | undefined>;
     /**
      * A custom VPC IP address for downloadable backup files.If the parameter LimitType is **Customize**, you need to configure this parameter.
      */
-    limitIps?: pulumi.Input<pulumi.Input<string>[]>;
+    limitIps?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Types of network restrictions for downloading backup files:- NoLimit: There is no limit, and backup files can be downloaded from both Tencent Cloud and internal and external networks.- LimitOnlyIntranet: Only intranet addresses automatically assigned by Tencent Cloud can download backup files.- Customize: refers to a user-defined private network downloadable backup file.
      */
-    limitType?: pulumi.Input<string>;
+    limitType?: pulumi.Input<string | undefined>;
     /**
      * A custom VPC ID for a downloadable backup file.If the parameter LimitType is **Customize**, you need to configure this parameter.
      */
-    limitVpcs?: pulumi.Input<pulumi.Input<inputs.Redis.GetBackupDownloadInfoLimitVpcArgs>[]>;
+    limitVpcs?: pulumi.Input<pulumi.Input<inputs.Redis.GetBackupDownloadInfoLimitVpcArgs>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * This parameter only supports entering In, which means that the custom LimitVpc can download the backup file.
      */
-    vpcComparisonSymbol?: pulumi.Input<string>;
+    vpcComparisonSymbol?: pulumi.Input<string | undefined>;
 }

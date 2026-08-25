@@ -171,51 +171,51 @@ export interface InstancesAttachmentState {
     /**
      * Cluster ID.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Image feature ID list.
      */
-    featureIdLists?: pulumi.Input<pulumi.Input<string>[]>;
+    featureIdLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Operating system image ID.
      */
-    imageId?: pulumi.Input<string>;
+    imageId?: pulumi.Input<string | undefined>;
     /**
      * Additional instance parameter information.
      */
-    instanceAdvancedSettings?: pulumi.Input<inputs.Tsf.InstancesAttachmentInstanceAdvancedSettings>;
+    instanceAdvancedSettings?: pulumi.Input<inputs.Tsf.InstancesAttachmentInstanceAdvancedSettings | undefined>;
     /**
      * Cloud server ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Cloud server import mode, required for virtual machine clusters, not required for container clusters. R: Reinstall TSF system image, M: Manual installation of agent.
      */
-    instanceImportMode?: pulumi.Input<string>;
+    instanceImportMode?: pulumi.Input<string | undefined>;
     /**
      * Associated key for system reinstallation.
      */
-    keyId?: pulumi.Input<string>;
+    keyId?: pulumi.Input<string | undefined>;
     /**
      * Image customization type.
      */
-    osCustomizeType?: pulumi.Input<string>;
+    osCustomizeType?: pulumi.Input<string | undefined>;
     /**
      * Operating system name.
      */
-    osName?: pulumi.Input<string>;
+    osName?: pulumi.Input<string | undefined>;
     /**
      * Reset system password.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * Security group.
      */
-    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Security group setting.
      */
-    sgId?: pulumi.Input<string>;
+    sgId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -229,15 +229,15 @@ export interface InstancesAttachmentArgs {
     /**
      * Image feature ID list.
      */
-    featureIdLists?: pulumi.Input<pulumi.Input<string>[]>;
+    featureIdLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Operating system image ID.
      */
-    imageId?: pulumi.Input<string>;
+    imageId?: pulumi.Input<string | undefined>;
     /**
      * Additional instance parameter information.
      */
-    instanceAdvancedSettings?: pulumi.Input<inputs.Tsf.InstancesAttachmentInstanceAdvancedSettings>;
+    instanceAdvancedSettings?: pulumi.Input<inputs.Tsf.InstancesAttachmentInstanceAdvancedSettings | undefined>;
     /**
      * Cloud server ID.
      */
@@ -245,29 +245,29 @@ export interface InstancesAttachmentArgs {
     /**
      * Cloud server import mode, required for virtual machine clusters, not required for container clusters. R: Reinstall TSF system image, M: Manual installation of agent.
      */
-    instanceImportMode?: pulumi.Input<string>;
+    instanceImportMode?: pulumi.Input<string | undefined>;
     /**
      * Associated key for system reinstallation.
      */
-    keyId?: pulumi.Input<string>;
+    keyId?: pulumi.Input<string | undefined>;
     /**
      * Image customization type.
      */
-    osCustomizeType?: pulumi.Input<string>;
+    osCustomizeType?: pulumi.Input<string | undefined>;
     /**
      * Operating system name.
      */
-    osName?: pulumi.Input<string>;
+    osName?: pulumi.Input<string | undefined>;
     /**
      * Reset system password.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * Security group.
      */
-    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Security group setting.
      */
-    sgId?: pulumi.Input<string>;
+    sgId?: pulumi.Input<string | undefined>;
 }

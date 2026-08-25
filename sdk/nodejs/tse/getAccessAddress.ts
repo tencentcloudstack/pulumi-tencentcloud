@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const accessAddress = tencentcloud.Tse.getAccessAddress({
+ * const accessAddress = tencentcloud.tse.getAccessAddress({
  *     instanceId: "ins-7eb7eea7",
  *     engineRegion: "ap-guangzhou",
  * });
@@ -119,7 +119,7 @@ export interface GetAccessAddressResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const accessAddress = tencentcloud.Tse.getAccessAddress({
+ * const accessAddress = tencentcloud.tse.getAccessAddress({
  *     instanceId: "ins-7eb7eea7",
  *     engineRegion: "ap-guangzhou",
  * });
@@ -144,7 +144,7 @@ export interface GetAccessAddressOutputArgs {
     /**
      * Deploy region.
      */
-    engineRegion?: pulumi.Input<string>;
+    engineRegion?: pulumi.Input<string | undefined>;
     /**
      * engine instance Id.
      */
@@ -152,17 +152,17 @@ export interface GetAccessAddressOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Subnet ID, Zookeeper does not need to pass vpcid and subnetid; nacos and Polaris need to pass vpcid and subnetid.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * VPC ID, Zookeeper does not need to pass vpcid and subnetid; nacos and Polaris need to pass vpcid and subnetid.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * Name of other engine components(pushgateway, polaris-limiter).
      */
-    workload?: pulumi.Input<string>;
+    workload?: pulumi.Input<string | undefined>;
 }

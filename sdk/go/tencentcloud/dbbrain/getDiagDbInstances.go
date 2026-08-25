@@ -87,12 +87,8 @@ type GetDiagDbInstancesResult struct {
 }
 
 func GetDiagDbInstancesOutput(ctx *pulumi.Context, args GetDiagDbInstancesOutputArgs, opts ...pulumi.InvokeOption) GetDiagDbInstancesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDiagDbInstancesResultOutput, error) {
-			args := v.(GetDiagDbInstancesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dbbrain/getDiagDbInstances:getDiagDbInstances", args, GetDiagDbInstancesResultOutput{}, options).(GetDiagDbInstancesResultOutput), nil
-		}).(GetDiagDbInstancesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dbbrain/getDiagDbInstances:getDiagDbInstances", args, GetDiagDbInstancesResultOutput{}, options).(GetDiagDbInstancesResultOutput)
 }
 
 // A collection of arguments for invoking getDiagDbInstances.

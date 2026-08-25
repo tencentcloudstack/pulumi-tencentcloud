@@ -119,11 +119,11 @@ export interface OutputState {
     /**
      * Flow ID.
      */
-    flowId?: pulumi.Input<string>;
+    flowId?: pulumi.Input<string | undefined>;
     /**
      * Output configuration of the transport stream.
      */
-    output?: pulumi.Input<inputs.Mps.OutputOutput>;
+    output?: pulumi.Input<inputs.Mps.OutputOutput | undefined>;
 }
 
 /**

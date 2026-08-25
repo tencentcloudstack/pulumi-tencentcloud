@@ -28,7 +28,7 @@ import * as utilities from "../utilities";
  *     preLimit: 100,
  *     testLimit: 100,
  * });
- * const id = tencentcloud.ApiGateway.getThrottlingServicesOutput({
+ * const id = tencentcloud.apigateway.getThrottlingServicesOutput({
  *     serviceId: service.id,
  * });
  * ```
@@ -96,7 +96,7 @@ export interface GetThrottlingServicesResult {
  *     preLimit: 100,
  *     testLimit: 100,
  * });
- * const id = tencentcloud.ApiGateway.getThrottlingServicesOutput({
+ * const id = tencentcloud.apigateway.getThrottlingServicesOutput({
  *     serviceId: service.id,
  * });
  * ```
@@ -117,9 +117,9 @@ export interface GetThrottlingServicesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Service ID for query.
      */
-    serviceId?: pulumi.Input<string>;
+    serviceId?: pulumi.Input<string | undefined>;
 }

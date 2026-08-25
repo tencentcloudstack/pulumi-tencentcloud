@@ -70,7 +70,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * apigateway api_app_attachment can be imported using the id, e.g.
+ * apigateway apiAppAttachment can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:ApiGateway/apiAppAttachment:ApiAppAttachment example app-f2dxx0lv#test#service-h0trno8e#api-grsomg0w
@@ -169,19 +169,19 @@ export interface ApiAppAttachmentState {
     /**
      * The unique ID of the application to be bound.
      */
-    apiAppId?: pulumi.Input<string>;
+    apiAppId?: pulumi.Input<string | undefined>;
     /**
      * The unique ID of the API to be bound.
      */
-    apiId?: pulumi.Input<string>;
+    apiId?: pulumi.Input<string | undefined>;
     /**
      * The environment to be bound.
      */
-    environment?: pulumi.Input<string>;
+    environment?: pulumi.Input<string | undefined>;
     /**
      * The unique ID of the service to be bound.
      */
-    serviceId?: pulumi.Input<string>;
+    serviceId?: pulumi.Input<string | undefined>;
 }
 
 /**

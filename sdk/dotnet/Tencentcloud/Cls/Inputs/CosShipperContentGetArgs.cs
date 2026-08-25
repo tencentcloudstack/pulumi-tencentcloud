@@ -20,7 +20,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         public Input<Inputs.CosShipperContentCsvGetArgs>? Csv { get; set; }
 
         /// <summary>
-        /// Content format. Valid values: json, csv.
+        /// Content format. Valid values: json, csv, parquet.
         /// </summary>
         [Input("format", required: true)]
         public Input<string> Format { get; set; } = null!;
@@ -30,6 +30,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         /// </summary>
         [Input("json")]
         public Input<Inputs.CosShipperContentJsonGetArgs>? Json { get; set; }
+
+        /// <summary>
+        /// Parquet format content description.Note: this field may return null, indicating that no valid values can be obtained.
+        /// </summary>
+        [Input("parquet")]
+        public Input<Inputs.CosShipperContentParquetGetArgs>? Parquet { get; set; }
 
         public CosShipperContentGetArgs()
         {

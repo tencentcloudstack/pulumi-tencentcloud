@@ -268,19 +268,19 @@ export interface BotSceneUcbRuleState {
     /**
      * Domain.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Rule content, add encoding SceneId information. When calling at the BOT global whitelist, SceneId is set to `global` and RuleType is passed as 10, Action is `permit`; When configuring BOT scenarios, SceneId is the scenario ID.
      */
-    rule?: pulumi.Input<inputs.Waf.BotSceneUcbRuleRule>;
+    rule?: pulumi.Input<inputs.Waf.BotSceneUcbRuleRule | undefined>;
     /**
      * Rule ID.
      */
-    ruleId?: pulumi.Input<string>;
+    ruleId?: pulumi.Input<string | undefined>;
     /**
      * When calling at the BOT global whitelist, pass `global`; When configuring BOT scenarios, transmit the specific scenario ID.
      */
-    sceneId?: pulumi.Input<string>;
+    sceneId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -294,7 +294,7 @@ export interface BotSceneUcbRuleArgs {
     /**
      * Rule content, add encoding SceneId information. When calling at the BOT global whitelist, SceneId is set to `global` and RuleType is passed as 10, Action is `permit`; When configuring BOT scenarios, SceneId is the scenario ID.
      */
-    rule?: pulumi.Input<inputs.Waf.BotSceneUcbRuleRule>;
+    rule?: pulumi.Input<inputs.Waf.BotSceneUcbRuleRule | undefined>;
     /**
      * When calling at the BOT global whitelist, pass `global`; When configuring BOT scenarios, transmit the specific scenario ID.
      */

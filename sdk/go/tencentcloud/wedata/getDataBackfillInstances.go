@@ -75,12 +75,8 @@ type GetDataBackfillInstancesResult struct {
 }
 
 func GetDataBackfillInstancesOutput(ctx *pulumi.Context, args GetDataBackfillInstancesOutputArgs, opts ...pulumi.InvokeOption) GetDataBackfillInstancesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDataBackfillInstancesResultOutput, error) {
-			args := v.(GetDataBackfillInstancesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Wedata/getDataBackfillInstances:getDataBackfillInstances", args, GetDataBackfillInstancesResultOutput{}, options).(GetDataBackfillInstancesResultOutput), nil
-		}).(GetDataBackfillInstancesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Wedata/getDataBackfillInstances:getDataBackfillInstances", args, GetDataBackfillInstancesResultOutput{}, options).(GetDataBackfillInstancesResultOutput)
 }
 
 // A collection of arguments for invoking getDataBackfillInstances.

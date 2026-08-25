@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * ckafka consumer_group can be imported using the id, e.g.
+ * ckafka consumerGroup can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Ckafka/consumerGroup:ConsumerGroup consumer_group consumer_group_id
@@ -109,15 +109,15 @@ export interface ConsumerGroupState {
     /**
      * GroupName.
      */
-    groupName?: pulumi.Input<string>;
+    groupName?: pulumi.Input<string | undefined>;
     /**
      * InstanceId.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * array of topic names.
      */
-    topicNameLists?: pulumi.Input<pulumi.Input<string>[]>;
+    topicNameLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -135,5 +135,5 @@ export interface ConsumerGroupArgs {
     /**
      * array of topic names.
      */
-    topicNameLists?: pulumi.Input<pulumi.Input<string>[]>;
+    topicNameLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

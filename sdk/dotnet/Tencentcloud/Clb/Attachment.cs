@@ -210,15 +210,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// CLB attachment can be imported using the id, e.g.
     /// 
-    /// If use rule_id
+    /// If use RuleId
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Clb/attachment:Attachment example loc-4xxr2cy7#lbl-hh141sn9#lb-7a0t6zqb
     /// ```
+    /// 
     /// If use domain &amp; url
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Clb/attachment:Attachment example test.com,/path#lbl-hh141sn9#lb-7a0t6zqb
+    /// ```
+    /// 
+    /// Of if use layer-4 forwarding rule
+    /// 
+    /// ```sh
+    /// $ pulumi import tencentcloud:Clb/attachment:Attachment example ""#lbl-hh141sn9#lb-7a0t6zqb
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clb/attachment:Attachment")]

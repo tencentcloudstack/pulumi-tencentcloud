@@ -23,7 +23,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * chdfs access_group can be imported using the id, e.g.
+ * chdfs accessGroup can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Chdfs/accessGroup:AccessGroup access_group access_group_id
@@ -119,19 +119,19 @@ export interface AccessGroupState {
     /**
      * Permission group name.
      */
-    accessGroupName?: pulumi.Input<string>;
+    accessGroupName?: pulumi.Input<string | undefined>;
     /**
      * Permission group description, default empty.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * VPC ID.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * vpc network type(1:CVM, 2:BM 1.0).
      */
-    vpcType?: pulumi.Input<number>;
+    vpcType?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -145,7 +145,7 @@ export interface AccessGroupArgs {
     /**
      * Permission group description, default empty.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * VPC ID.
      */

@@ -40,12 +40,8 @@ type GetCollationTimeZoneResult struct {
 }
 
 func GetCollationTimeZoneOutput(ctx *pulumi.Context, args GetCollationTimeZoneOutputArgs, opts ...pulumi.InvokeOption) GetCollationTimeZoneResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetCollationTimeZoneResultOutput, error) {
-			args := v.(GetCollationTimeZoneArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Sqlserver/getCollationTimeZone:getCollationTimeZone", args, GetCollationTimeZoneResultOutput{}, options).(GetCollationTimeZoneResultOutput), nil
-		}).(GetCollationTimeZoneResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Sqlserver/getCollationTimeZone:getCollationTimeZone", args, GetCollationTimeZoneResultOutput{}, options).(GetCollationTimeZoneResultOutput)
 }
 
 // A collection of arguments for invoking getCollationTimeZone.

@@ -72,12 +72,8 @@ type GetRoMinScaleResult struct {
 }
 
 func GetRoMinScaleOutput(ctx *pulumi.Context, args GetRoMinScaleOutputArgs, opts ...pulumi.InvokeOption) GetRoMinScaleResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetRoMinScaleResultOutput, error) {
-			args := v.(GetRoMinScaleArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mysql/getRoMinScale:getRoMinScale", args, GetRoMinScaleResultOutput{}, options).(GetRoMinScaleResultOutput), nil
-		}).(GetRoMinScaleResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mysql/getRoMinScale:getRoMinScale", args, GetRoMinScaleResultOutput{}, options).(GetRoMinScaleResultOutput)
 }
 
 // A collection of arguments for invoking getRoMinScale.

@@ -15,10 +15,20 @@ export type AssociationConfig = import("./associationConfig").AssociationConfig;
 export const AssociationConfig: typeof import("./associationConfig").AssociationConfig = null as any;
 utilities.lazyLoad(exports, ["AssociationConfig"], () => require("./associationConfig"));
 
+export { GetInstancesArgs, GetInstancesResult, GetInstancesOutputArgs } from "./getInstances";
+export const getInstances: typeof import("./getInstances").getInstances = null as any;
+export const getInstancesOutput: typeof import("./getInstances").getInstancesOutput = null as any;
+utilities.lazyLoad(exports, ["getInstances","getInstancesOutput"], () => require("./getInstances"));
+
 export { InstanceArgs, InstanceState } from "./instance";
 export type Instance = import("./instance").Instance;
 export const Instance: typeof import("./instance").Instance = null as any;
 utilities.lazyLoad(exports, ["Instance"], () => require("./instance"));
+
+export { PrometheusRuleArgs, PrometheusRuleState } from "./prometheusRule";
+export type PrometheusRule = import("./prometheusRule").PrometheusRule;
+export const PrometheusRule: typeof import("./prometheusRule").PrometheusRule = null as any;
+utilities.lazyLoad(exports, ["PrometheusRule"], () => require("./prometheusRule"));
 
 export { SampleConfigArgs, SampleConfigState } from "./sampleConfig";
 export type SampleConfig = import("./sampleConfig").SampleConfig;
@@ -36,6 +46,8 @@ const _module = {
                 return new AssociationConfig(name, <any>undefined, { urn })
             case "tencentcloud:Apm/instance:Instance":
                 return new Instance(name, <any>undefined, { urn })
+            case "tencentcloud:Apm/prometheusRule:PrometheusRule":
+                return new PrometheusRule(name, <any>undefined, { urn })
             case "tencentcloud:Apm/sampleConfig:SampleConfig":
                 return new SampleConfig(name, <any>undefined, { urn })
             default:
@@ -46,4 +58,5 @@ const _module = {
 pulumi.runtime.registerResourceModule("tencentcloud", "Apm/applicationConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Apm/associationConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Apm/instance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Apm/prometheusRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Apm/sampleConfig", _module)

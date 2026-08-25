@@ -70,12 +70,8 @@ type GetListKeysResult struct {
 }
 
 func GetListKeysOutput(ctx *pulumi.Context, args GetListKeysOutputArgs, opts ...pulumi.InvokeOption) GetListKeysResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetListKeysResultOutput, error) {
-			args := v.(GetListKeysArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Kms/getListKeys:getListKeys", args, GetListKeysResultOutput{}, options).(GetListKeysResultOutput), nil
-		}).(GetListKeysResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Kms/getListKeys:getListKeys", args, GetListKeysResultOutput{}, options).(GetListKeysResultOutput)
 }
 
 // A collection of arguments for invoking getListKeys.

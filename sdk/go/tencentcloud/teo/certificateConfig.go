@@ -12,7 +12,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a teo certificate
+// Provides a resource to create a TEO certificate config
 //
 // ## Example Usage
 //
@@ -75,9 +75,136 @@ import (
 //
 // ```
 //
+// ### Configure SSL certificate with edge mutual TLS
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/teo"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := teo.NewCertificateConfig(ctx, "certificate", &teo.CertificateConfigArgs{
+//				Host:   pulumi.String("test.tencentcloud-terraform-provider.cn"),
+//				Mode:   pulumi.String("sslcert"),
+//				ZoneId: pulumi.String("zone-2o1t24kgy362"),
+//				ServerCertInfos: teo.CertificateConfigServerCertInfoArray{
+//					&teo.CertificateConfigServerCertInfoArgs{
+//						CertId: pulumi.String("8xiUJIJd"),
+//					},
+//				},
+//				ClientCertInfo: &teo.CertificateConfigClientCertInfoArgs{
+//					Switch: pulumi.String("on"),
+//					CertInfos: teo.CertificateConfigClientCertInfoCertInfoArray{
+//						&teo.CertificateConfigClientCertInfoCertInfoArgs{
+//							CertId: pulumi.String("cert-client-001"),
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Configure SSL certificate with upstream mutual TLS
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/teo"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := teo.NewCertificateConfig(ctx, "certificate", &teo.CertificateConfigArgs{
+//				Host:   pulumi.String("test.tencentcloud-terraform-provider.cn"),
+//				Mode:   pulumi.String("sslcert"),
+//				ZoneId: pulumi.String("zone-2o1t24kgy362"),
+//				ServerCertInfos: teo.CertificateConfigServerCertInfoArray{
+//					&teo.CertificateConfigServerCertInfoArgs{
+//						CertId: pulumi.String("8xiUJIJd"),
+//					},
+//				},
+//				UpstreamCertInfo: &teo.CertificateConfigUpstreamCertInfoArgs{
+//					UpstreamMutualTls: &teo.CertificateConfigUpstreamCertInfoUpstreamMutualTlsArgs{
+//						Switch: pulumi.String("on"),
+//						CertInfos: teo.CertificateConfigUpstreamCertInfoUpstreamMutualTlsCertInfoArray{
+//							&teo.CertificateConfigUpstreamCertInfoUpstreamMutualTlsCertInfoArgs{
+//								CertId: pulumi.String("cert-upstream-001"),
+//							},
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Configure SSL certificate with upstream certificate verification
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/teo"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := teo.NewCertificateConfig(ctx, "certificate", &teo.CertificateConfigArgs{
+//				Host:   pulumi.String("test.tencentcloud-terraform-provider.cn"),
+//				Mode:   pulumi.String("sslcert"),
+//				ZoneId: pulumi.String("zone-2o1t24kgy362"),
+//				ServerCertInfos: teo.CertificateConfigServerCertInfoArray{
+//					&teo.CertificateConfigServerCertInfoArgs{
+//						CertId: pulumi.String("8xiUJIJd"),
+//					},
+//				},
+//				UpstreamCertInfo: &teo.CertificateConfigUpstreamCertInfoArgs{
+//					UpstreamCertificateVerify: &teo.CertificateConfigUpstreamCertInfoUpstreamCertificateVerifyArgs{
+//						VerificationMode: pulumi.String("custom_ca"),
+//						CustomCaCerts: teo.CertificateConfigUpstreamCertInfoUpstreamCertificateVerifyCustomCaCertArray{
+//							&teo.CertificateConfigUpstreamCertInfoUpstreamCertificateVerifyCustomCaCertArgs{
+//								CertId: pulumi.String("cert-ca-001"),
+//							},
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
 // ## Import
 //
-// teo certificate can be imported using the id, e.g.
+// TEO certificate config can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Teo/certificateConfig:CertificateConfig certificate zone_id#host
@@ -85,9 +212,11 @@ import (
 type CertificateConfig struct {
 	pulumi.CustomResourceState
 
+	// Edge mutual TLS authentication configuration, where client CA certificates are deployed on EO nodes for client-to-EO-node authentication. Disabled by default; leaving the field blank will retain the current configuration. This feature is currently in beta testing. please [contact us](https://cloud.tencent.com/online-service) to request access.
+	ClientCertInfo CertificateConfigClientCertInfoOutput `pulumi:"clientCertInfo"`
 	// Acceleration domain name that needs to modify the certificate configuration.
 	Host pulumi.StringOutput `pulumi:"host"`
-	// Mode of configuring the certificate, the values are: `disable`: Do not configure the certificate; `eofreecert`: Configure EdgeOne free certificate; `sslcert`: Configure SSL certificate. If not filled in, the default value is `disable`.
+	// Mode of configuring the certificate, the values are: `disable`: Do not configure the certificate; `eofreecert`: Configure EdgeOne free certificate; `eofreecertManual`: Deploy a free certificate applied for through DNS delegation validation or file validation; `sslcert`: Configure SSL certificate. If not filled in, the default value is `disable`.
 	Mode pulumi.StringOutput `pulumi:"mode"`
 	// SSL certificate configuration, this parameter takes effect only when mode = sslcert, just enter the corresponding CertId. You can go to the SSL certificate list to view the CertId.
 	ServerCertInfos CertificateConfigServerCertInfoArrayOutput `pulumi:"serverCertInfos"`
@@ -133,9 +262,11 @@ func GetCertificateConfig(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering CertificateConfig resources.
 type certificateConfigState struct {
+	// Edge mutual TLS authentication configuration, where client CA certificates are deployed on EO nodes for client-to-EO-node authentication. Disabled by default; leaving the field blank will retain the current configuration. This feature is currently in beta testing. please [contact us](https://cloud.tencent.com/online-service) to request access.
+	ClientCertInfo *CertificateConfigClientCertInfo `pulumi:"clientCertInfo"`
 	// Acceleration domain name that needs to modify the certificate configuration.
 	Host *string `pulumi:"host"`
-	// Mode of configuring the certificate, the values are: `disable`: Do not configure the certificate; `eofreecert`: Configure EdgeOne free certificate; `sslcert`: Configure SSL certificate. If not filled in, the default value is `disable`.
+	// Mode of configuring the certificate, the values are: `disable`: Do not configure the certificate; `eofreecert`: Configure EdgeOne free certificate; `eofreecertManual`: Deploy a free certificate applied for through DNS delegation validation or file validation; `sslcert`: Configure SSL certificate. If not filled in, the default value is `disable`.
 	Mode *string `pulumi:"mode"`
 	// SSL certificate configuration, this parameter takes effect only when mode = sslcert, just enter the corresponding CertId. You can go to the SSL certificate list to view the CertId.
 	ServerCertInfos []CertificateConfigServerCertInfo `pulumi:"serverCertInfos"`
@@ -146,9 +277,11 @@ type certificateConfigState struct {
 }
 
 type CertificateConfigState struct {
+	// Edge mutual TLS authentication configuration, where client CA certificates are deployed on EO nodes for client-to-EO-node authentication. Disabled by default; leaving the field blank will retain the current configuration. This feature is currently in beta testing. please [contact us](https://cloud.tencent.com/online-service) to request access.
+	ClientCertInfo CertificateConfigClientCertInfoPtrInput
 	// Acceleration domain name that needs to modify the certificate configuration.
 	Host pulumi.StringPtrInput
-	// Mode of configuring the certificate, the values are: `disable`: Do not configure the certificate; `eofreecert`: Configure EdgeOne free certificate; `sslcert`: Configure SSL certificate. If not filled in, the default value is `disable`.
+	// Mode of configuring the certificate, the values are: `disable`: Do not configure the certificate; `eofreecert`: Configure EdgeOne free certificate; `eofreecertManual`: Deploy a free certificate applied for through DNS delegation validation or file validation; `sslcert`: Configure SSL certificate. If not filled in, the default value is `disable`.
 	Mode pulumi.StringPtrInput
 	// SSL certificate configuration, this parameter takes effect only when mode = sslcert, just enter the corresponding CertId. You can go to the SSL certificate list to view the CertId.
 	ServerCertInfos CertificateConfigServerCertInfoArrayInput
@@ -163,9 +296,11 @@ func (CertificateConfigState) ElementType() reflect.Type {
 }
 
 type certificateConfigArgs struct {
+	// Edge mutual TLS authentication configuration, where client CA certificates are deployed on EO nodes for client-to-EO-node authentication. Disabled by default; leaving the field blank will retain the current configuration. This feature is currently in beta testing. please [contact us](https://cloud.tencent.com/online-service) to request access.
+	ClientCertInfo *CertificateConfigClientCertInfo `pulumi:"clientCertInfo"`
 	// Acceleration domain name that needs to modify the certificate configuration.
 	Host string `pulumi:"host"`
-	// Mode of configuring the certificate, the values are: `disable`: Do not configure the certificate; `eofreecert`: Configure EdgeOne free certificate; `sslcert`: Configure SSL certificate. If not filled in, the default value is `disable`.
+	// Mode of configuring the certificate, the values are: `disable`: Do not configure the certificate; `eofreecert`: Configure EdgeOne free certificate; `eofreecertManual`: Deploy a free certificate applied for through DNS delegation validation or file validation; `sslcert`: Configure SSL certificate. If not filled in, the default value is `disable`.
 	Mode *string `pulumi:"mode"`
 	// SSL certificate configuration, this parameter takes effect only when mode = sslcert, just enter the corresponding CertId. You can go to the SSL certificate list to view the CertId.
 	ServerCertInfos []CertificateConfigServerCertInfo `pulumi:"serverCertInfos"`
@@ -177,9 +312,11 @@ type certificateConfigArgs struct {
 
 // The set of arguments for constructing a CertificateConfig resource.
 type CertificateConfigArgs struct {
+	// Edge mutual TLS authentication configuration, where client CA certificates are deployed on EO nodes for client-to-EO-node authentication. Disabled by default; leaving the field blank will retain the current configuration. This feature is currently in beta testing. please [contact us](https://cloud.tencent.com/online-service) to request access.
+	ClientCertInfo CertificateConfigClientCertInfoPtrInput
 	// Acceleration domain name that needs to modify the certificate configuration.
 	Host pulumi.StringInput
-	// Mode of configuring the certificate, the values are: `disable`: Do not configure the certificate; `eofreecert`: Configure EdgeOne free certificate; `sslcert`: Configure SSL certificate. If not filled in, the default value is `disable`.
+	// Mode of configuring the certificate, the values are: `disable`: Do not configure the certificate; `eofreecert`: Configure EdgeOne free certificate; `eofreecertManual`: Deploy a free certificate applied for through DNS delegation validation or file validation; `sslcert`: Configure SSL certificate. If not filled in, the default value is `disable`.
 	Mode pulumi.StringPtrInput
 	// SSL certificate configuration, this parameter takes effect only when mode = sslcert, just enter the corresponding CertId. You can go to the SSL certificate list to view the CertId.
 	ServerCertInfos CertificateConfigServerCertInfoArrayInput
@@ -276,12 +413,17 @@ func (o CertificateConfigOutput) ToCertificateConfigOutputWithContext(ctx contex
 	return o
 }
 
+// Edge mutual TLS authentication configuration, where client CA certificates are deployed on EO nodes for client-to-EO-node authentication. Disabled by default; leaving the field blank will retain the current configuration. This feature is currently in beta testing. please [contact us](https://cloud.tencent.com/online-service) to request access.
+func (o CertificateConfigOutput) ClientCertInfo() CertificateConfigClientCertInfoOutput {
+	return o.ApplyT(func(v *CertificateConfig) CertificateConfigClientCertInfoOutput { return v.ClientCertInfo }).(CertificateConfigClientCertInfoOutput)
+}
+
 // Acceleration domain name that needs to modify the certificate configuration.
 func (o CertificateConfigOutput) Host() pulumi.StringOutput {
 	return o.ApplyT(func(v *CertificateConfig) pulumi.StringOutput { return v.Host }).(pulumi.StringOutput)
 }
 
-// Mode of configuring the certificate, the values are: `disable`: Do not configure the certificate; `eofreecert`: Configure EdgeOne free certificate; `sslcert`: Configure SSL certificate. If not filled in, the default value is `disable`.
+// Mode of configuring the certificate, the values are: `disable`: Do not configure the certificate; `eofreecert`: Configure EdgeOne free certificate; `eofreecertManual`: Deploy a free certificate applied for through DNS delegation validation or file validation; `sslcert`: Configure SSL certificate. If not filled in, the default value is `disable`.
 func (o CertificateConfigOutput) Mode() pulumi.StringOutput {
 	return o.ApplyT(func(v *CertificateConfig) pulumi.StringOutput { return v.Mode }).(pulumi.StringOutput)
 }

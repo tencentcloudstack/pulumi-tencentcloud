@@ -171,15 +171,15 @@ export interface RouteTableBroadcastPoliciesState {
     /**
      * CCN Instance ID.
      */
-    ccnId?: pulumi.Input<string>;
+    ccnId?: pulumi.Input<string | undefined>;
     /**
      * Routing propagation strategy.
      */
-    policies?: pulumi.Input<pulumi.Input<inputs.Ccn.RouteTableBroadcastPoliciesPolicy>[]>;
+    policies?: pulumi.Input<pulumi.Input<inputs.Ccn.RouteTableBroadcastPoliciesPolicy>[] | undefined>;
     /**
      * CCN Route table ID.
      */
-    routeTableId?: pulumi.Input<string>;
+    routeTableId?: pulumi.Input<string | undefined>;
 }
 
 /**

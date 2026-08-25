@@ -12,46 +12,6 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a tsf repository
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tsf"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := tsf.NewRepository(ctx, "repository", &tsf.RepositoryArgs{
-//				RepositoryName: pulumi.String(""),
-//				RepositoryType: pulumi.String(""),
-//				BucketName:     pulumi.String(""),
-//				BucketRegion:   pulumi.String(""),
-//				Directory:      pulumi.String(""),
-//				RepositoryDesc: pulumi.String(""),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
-// ```
-//
-// ## Import
-//
-// tsf repository can be imported using the id, e.g.
-//
-// ```sh
-// $ pulumi import tencentcloud:Tsf/repository:Repository repository repository_id
-// ```
 type Repository struct {
 	pulumi.CustomResourceState
 

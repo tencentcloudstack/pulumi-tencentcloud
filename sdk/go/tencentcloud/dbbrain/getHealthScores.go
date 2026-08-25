@@ -75,12 +75,8 @@ type GetHealthScoresResult struct {
 }
 
 func GetHealthScoresOutput(ctx *pulumi.Context, args GetHealthScoresOutputArgs, opts ...pulumi.InvokeOption) GetHealthScoresResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetHealthScoresResultOutput, error) {
-			args := v.(GetHealthScoresArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dbbrain/getHealthScores:getHealthScores", args, GetHealthScoresResultOutput{}, options).(GetHealthScoresResultOutput), nil
-		}).(GetHealthScoresResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dbbrain/getHealthScores:getHealthScores", args, GetHealthScoresResultOutput{}, options).(GetHealthScoresResultOutput)
 }
 
 // A collection of arguments for invoking getHealthScores.

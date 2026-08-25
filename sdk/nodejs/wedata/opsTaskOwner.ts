@@ -112,15 +112,15 @@ export interface OpsTaskOwnerState {
     /**
      * Task Owner ID. For multiple owners, separate them with `;`, for example: `100029411056;100042282926`.
      */
-    ownerUin?: pulumi.Input<string>;
+    ownerUin?: pulumi.Input<string | undefined>;
     /**
      * Project id.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * Task id.
      */
-    taskId?: pulumi.Input<string>;
+    taskId?: pulumi.Input<string | undefined>;
 }
 
 /**

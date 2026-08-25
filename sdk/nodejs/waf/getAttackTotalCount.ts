@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getAttackTotalCount({
+ * const example = tencentcloud.waf.getAttackTotalCount({
  *     startTime: "2023-09-01 00:00:00",
  *     endTime: "2023-09-07 00:00:00",
  *     domain: "domain.com",
@@ -29,7 +29,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getAttackTotalCount({
+ * const example = tencentcloud.waf.getAttackTotalCount({
  *     startTime: "2023-09-01 00:00:00",
  *     endTime: "2023-09-07 00:00:00",
  *     domain: "all",
@@ -103,7 +103,7 @@ export interface GetAttackTotalCountResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getAttackTotalCount({
+ * const example = tencentcloud.waf.getAttackTotalCount({
  *     startTime: "2023-09-01 00:00:00",
  *     endTime: "2023-09-07 00:00:00",
  *     domain: "domain.com",
@@ -117,7 +117,7 @@ export interface GetAttackTotalCountResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getAttackTotalCount({
+ * const example = tencentcloud.waf.getAttackTotalCount({
  *     startTime: "2023-09-01 00:00:00",
  *     endTime: "2023-09-07 00:00:00",
  *     domain: "all",
@@ -151,11 +151,11 @@ export interface GetAttackTotalCountOutputArgs {
     /**
      * Query conditions.
      */
-    queryString?: pulumi.Input<string>;
+    queryString?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Begin time.
      */

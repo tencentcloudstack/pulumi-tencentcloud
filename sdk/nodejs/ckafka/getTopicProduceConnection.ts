@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const topicProduceConnection = tencentcloud.Ckafka.getTopicProduceConnection({
+ * const topicProduceConnection = tencentcloud.ckafka.getTopicProduceConnection({
  *     instanceId: "ckafka-xxxxxx",
  *     topicName: "topic-xxxxxx",
  * });
@@ -73,7 +73,7 @@ export interface GetTopicProduceConnectionResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const topicProduceConnection = tencentcloud.Ckafka.getTopicProduceConnection({
+ * const topicProduceConnection = tencentcloud.ckafka.getTopicProduceConnection({
  *     instanceId: "ckafka-xxxxxx",
  *     topicName: "topic-xxxxxx",
  * });
@@ -99,7 +99,7 @@ export interface GetTopicProduceConnectionOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * TopicName.
      */

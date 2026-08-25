@@ -54,7 +54,7 @@ import (
 //			}
 //			json0 := string(tmpJSON0)
 //			_, err = eb.NewPutEvents(ctx, "example", &eb.PutEventsArgs{
-//				EventBusId: example.ID(),
+//				EventBusId: example.ID().ToIDOutput().ToStringOutput(),
 //				EventLists: eb.PutEventsEventListArray{
 //					&eb.PutEventsEventListArgs{
 //						Source:  pulumi.String("ckafka.cloud.tencent"),

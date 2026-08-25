@@ -67,6 +67,10 @@ export class Role extends pulumi.CustomResource {
      * The name of tdmq role.
      */
     declare public readonly roleName: pulumi.Output<string>;
+    /**
+     * Role token. This field is returned by the API and used for authentication.
+     */
+    declare public /*out*/ readonly token: pulumi.Output<string>;
 
     /**
      * Create a Role resource with the given unique name, arguments, and options.
@@ -84,6 +88,7 @@ export class Role extends pulumi.CustomResource {
             resourceInputs["clusterId"] = state?.clusterId;
             resourceInputs["remark"] = state?.remark;
             resourceInputs["roleName"] = state?.roleName;
+            resourceInputs["token"] = state?.token;
         } else {
             const args = argsOrState as RoleArgs | undefined;
             if (args?.clusterId === undefined && !opts.urn) {
@@ -98,8 +103,11 @@ export class Role extends pulumi.CustomResource {
             resourceInputs["clusterId"] = args?.clusterId;
             resourceInputs["remark"] = args?.remark;
             resourceInputs["roleName"] = args?.roleName;
+            resourceInputs["token"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["token"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(Role.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -111,15 +119,19 @@ export interface RoleState {
     /**
      * The id of tdmq cluster.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * The description of tdmq role.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * The name of tdmq role.
      */
-    roleName?: pulumi.Input<string>;
+    roleName?: pulumi.Input<string | undefined>;
+    /**
+     * Role token. This field is returned by the API and used for authentication.
+     */
+    token?: pulumi.Input<string | undefined>;
 }
 
 /**

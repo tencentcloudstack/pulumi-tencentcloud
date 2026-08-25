@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * scf function_version can be imported using the id, e.g.
+ * scf functionVersion can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Scf/functionVersion:FunctionVersion function_version functionName#namespace#functionVersion
@@ -112,19 +112,19 @@ export interface FunctionVersionState {
     /**
      * Function description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Name of the released function.
      */
-    functionName?: pulumi.Input<string>;
+    functionName?: pulumi.Input<string | undefined>;
     /**
      * Version of the released function.
      */
-    functionVersion?: pulumi.Input<string>;
+    functionVersion?: pulumi.Input<string | undefined>;
     /**
      * Function namespace.
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -134,7 +134,7 @@ export interface FunctionVersionArgs {
     /**
      * Function description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Name of the released function.
      */
@@ -142,5 +142,5 @@ export interface FunctionVersionArgs {
     /**
      * Function namespace.
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
 }

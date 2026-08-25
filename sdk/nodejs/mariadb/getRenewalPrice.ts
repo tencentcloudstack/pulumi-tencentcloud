@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const renewalPrice = tencentcloud.Mariadb.getRenewalPrice({
+ * const renewalPrice = tencentcloud.mariadb.getRenewalPrice({
  *     instanceId: "tdsql-9vqvls95",
  *     period: 2,
  * });
@@ -81,7 +81,7 @@ export interface GetRenewalPriceResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const renewalPrice = tencentcloud.Mariadb.getRenewalPrice({
+ * const renewalPrice = tencentcloud.mariadb.getRenewalPrice({
  *     instanceId: "tdsql-9vqvls95",
  *     period: 2,
  * });
@@ -104,7 +104,7 @@ export interface GetRenewalPriceOutputArgs {
     /**
      * Price unit. Valid values: `* pent` (cent), `* microPent` (microcent).
      */
-    amountUnit?: pulumi.Input<string>;
+    amountUnit?: pulumi.Input<string | undefined>;
     /**
      * Instance ID.
      */
@@ -112,9 +112,9 @@ export interface GetRenewalPriceOutputArgs {
     /**
      * Renewal duration, default: 1 month.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

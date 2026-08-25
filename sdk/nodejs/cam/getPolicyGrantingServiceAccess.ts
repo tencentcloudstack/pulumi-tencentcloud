@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const policyGrantingServiceAccess = tencentcloud.Cam.getPolicyGrantingServiceAccess({
+ * const policyGrantingServiceAccess = tencentcloud.cam.getPolicyGrantingServiceAccess({
  *     roleId: 4611686018436805021,
  *     serviceType: "cam",
  * });
@@ -89,7 +89,7 @@ export interface GetPolicyGrantingServiceAccessResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const policyGrantingServiceAccess = tencentcloud.Cam.getPolicyGrantingServiceAccess({
+ * const policyGrantingServiceAccess = tencentcloud.cam.getPolicyGrantingServiceAccess({
  *     roleId: 4611686018436805021,
  *     serviceType: "cam",
  * });
@@ -114,21 +114,21 @@ export interface GetPolicyGrantingServiceAccessOutputArgs {
     /**
      * Group Id, one of the three (TargetUin, RoleId, GroupId) must be passed.
      */
-    groupId?: pulumi.Input<number>;
+    groupId?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Role Id, one of the three (TargetUin, RoleId, GroupId) must be passed.
      */
-    roleId?: pulumi.Input<number>;
+    roleId?: pulumi.Input<number | undefined>;
     /**
      * Service type, this field needs to be passed when viewing the details of the service authorization interface.
      */
-    serviceType?: pulumi.Input<string>;
+    serviceType?: pulumi.Input<string | undefined>;
     /**
      * Sub-account uin, one of the three (TargetUin, RoleId, GroupId) must be passed.
      */
-    targetUin?: pulumi.Input<number>;
+    targetUin?: pulumi.Input<number | undefined>;
 }

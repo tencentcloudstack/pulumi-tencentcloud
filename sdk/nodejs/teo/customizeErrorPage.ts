@@ -143,6 +143,10 @@ export class CustomizeErrorPage extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly pageId: pulumi.Output<string>;
     /**
+     * List of business IDs that reference this error page.
+     */
+    declare public /*out*/ readonly references: pulumi.Output<string[]>;
+    /**
      * Zone ID.
      */
     declare public readonly zoneId: pulumi.Output<string>;
@@ -165,6 +169,7 @@ export class CustomizeErrorPage extends pulumi.CustomResource {
             resourceInputs["description"] = state?.description;
             resourceInputs["name"] = state?.name;
             resourceInputs["pageId"] = state?.pageId;
+            resourceInputs["references"] = state?.references;
             resourceInputs["zoneId"] = state?.zoneId;
         } else {
             const args = argsOrState as CustomizeErrorPageArgs | undefined;
@@ -180,6 +185,7 @@ export class CustomizeErrorPage extends pulumi.CustomResource {
             resourceInputs["name"] = args?.name;
             resourceInputs["zoneId"] = args?.zoneId;
             resourceInputs["pageId"] = undefined /*out*/;
+            resourceInputs["references"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(CustomizeErrorPage.__pulumiType, name, resourceInputs, opts);
@@ -193,27 +199,31 @@ export interface CustomizeErrorPageState {
     /**
      * Custom error page content, not exceeding 2 KB.
      */
-    content?: pulumi.Input<string>;
+    content?: pulumi.Input<string | undefined>;
     /**
      * Custom error page type, with values:<li>text/html; </li><li>application/json;</li><li>text/plain;</li><li>text/xml.</li>.
      */
-    contentType?: pulumi.Input<string>;
+    contentType?: pulumi.Input<string | undefined>;
     /**
      * Custom error page description, not exceeding 60 characters.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Custom error page name. The name must be 2-30 characters long.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Page ID.
      */
-    pageId?: pulumi.Input<string>;
+    pageId?: pulumi.Input<string | undefined>;
+    /**
+     * List of business IDs that reference this error page.
+     */
+    references?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Zone ID.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -223,7 +233,7 @@ export interface CustomizeErrorPageArgs {
     /**
      * Custom error page content, not exceeding 2 KB.
      */
-    content?: pulumi.Input<string>;
+    content?: pulumi.Input<string | undefined>;
     /**
      * Custom error page type, with values:<li>text/html; </li><li>application/json;</li><li>text/plain;</li><li>text/xml.</li>.
      */
@@ -231,11 +241,11 @@ export interface CustomizeErrorPageArgs {
     /**
      * Custom error page description, not exceeding 60 characters.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Custom error page name. The name must be 2-30 characters long.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Zone ID.
      */

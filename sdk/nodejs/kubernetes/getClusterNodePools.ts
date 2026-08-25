@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const clusterNodePools = tencentcloud.Kubernetes.getClusterNodePools({
+ * const clusterNodePools = tencentcloud.kubernetes.getClusterNodePools({
  *     clusterId: "cls-kzilgv5m",
  *     filters: [
  *         {
@@ -82,7 +82,7 @@ export interface GetClusterNodePoolsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const clusterNodePools = tencentcloud.Kubernetes.getClusterNodePools({
+ * const clusterNodePools = tencentcloud.kubernetes.getClusterNodePools({
  *     clusterId: "cls-kzilgv5m",
  *     filters: [
  *         {
@@ -117,9 +117,9 @@ export interface GetClusterNodePoolsOutputArgs {
     /**
      * NodePoolsName, Filter according to the node pool name, type: String, required: no. NodePoolsId, Filter according to the node pool ID, type: String, required: no. tags, Filter according to the label key value pairs, type: String, required: no. tag:tag-key, Filter according to the label key value pairs, type: String, required: no.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Kubernetes.GetClusterNodePoolsFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Kubernetes.GetClusterNodePoolsFilterArgs>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

@@ -117,12 +117,8 @@ type GetRocketmqInstancesResult struct {
 }
 
 func GetRocketmqInstancesOutput(ctx *pulumi.Context, args GetRocketmqInstancesOutputArgs, opts ...pulumi.InvokeOption) GetRocketmqInstancesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetRocketmqInstancesResultOutput, error) {
-			args := v.(GetRocketmqInstancesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Trocket/getRocketmqInstances:getRocketmqInstances", args, GetRocketmqInstancesResultOutput{}, options).(GetRocketmqInstancesResultOutput), nil
-		}).(GetRocketmqInstancesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Trocket/getRocketmqInstances:getRocketmqInstances", args, GetRocketmqInstancesResultOutput{}, options).(GetRocketmqInstancesResultOutput)
 }
 
 // A collection of arguments for invoking getRocketmqInstances.

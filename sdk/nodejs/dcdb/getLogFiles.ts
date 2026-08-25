@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const logFiles = tencentcloud.Dcdb.getLogFiles({
+ * const logFiles = tencentcloud.dcdb.getLogFiles({
  *     instanceId: dcdbId,
  *     shardId: "shard-1b5r04az",
  *     type: 1,
@@ -88,7 +88,7 @@ export interface GetLogFilesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const logFiles = tencentcloud.Dcdb.getLogFiles({
+ * const logFiles = tencentcloud.dcdb.getLogFiles({
  *     instanceId: dcdbId,
  *     shardId: "shard-1b5r04az",
  *     type: 1,
@@ -116,7 +116,7 @@ export interface GetLogFilesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Instance shard ID in the format of `shard-rc754ljk`.
      */

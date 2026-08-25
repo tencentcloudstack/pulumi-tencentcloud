@@ -102,11 +102,11 @@ export interface DedicatedClusterImageCacheState {
     /**
      * Cluster ID.
      */
-    dedicatedClusterId?: pulumi.Input<string>;
+    dedicatedClusterId?: pulumi.Input<string | undefined>;
     /**
      * Image ID.
      */
-    imageId?: pulumi.Input<string>;
+    imageId?: pulumi.Input<string | undefined>;
 }
 
 /**

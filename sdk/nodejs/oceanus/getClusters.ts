@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Oceanus.getClusters({});
+ * const example = tencentcloud.oceanus.getClusters({});
  * ```
  *
  * ### Query the specified cluster
@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Oceanus.getClusters({
+ * const example = tencentcloud.oceanus.getClusters({
  *     clusterIds: ["cluster-5c42n3a5"],
  *     orderType: 1,
  *     filters: [{
@@ -107,7 +107,7 @@ export interface GetClustersResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Oceanus.getClusters({});
+ * const example = tencentcloud.oceanus.getClusters({});
  * ```
  *
  * ### Query the specified cluster
@@ -116,7 +116,7 @@ export interface GetClustersResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Oceanus.getClusters({
+ * const example = tencentcloud.oceanus.getClusters({
  *     clusterIds: ["cluster-5c42n3a5"],
  *     orderType: 1,
  *     filters: [{
@@ -146,21 +146,21 @@ export interface GetClustersOutputArgs {
     /**
      * Query one or more clusters by their ID. The maximum number of clusters that can be queried at once is 100.
      */
-    clusterIds?: pulumi.Input<pulumi.Input<string>[]>;
+    clusterIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The filtering rules.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Oceanus.GetClustersFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Oceanus.GetClustersFilterArgs>[] | undefined>;
     /**
      * The sorting rule of the cluster information results. Possible values are 1 (sort by time in descending order), 2 (sort by time in ascending order), and 3 (sort by status).
      */
-    orderType?: pulumi.Input<number>;
+    orderType?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Workspace SerialId.
      */
-    workSpaceId?: pulumi.Input<string>;
+    workSpaceId?: pulumi.Input<string | undefined>;
 }

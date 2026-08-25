@@ -17,17 +17,17 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const object = tencentcloud.Cos.getBucketObject({
+ * const object = tencentcloud.cos.getBucketObject({
  *     bucket: `keep-bucket-${appId}`,
  *     key: "/mps-test/test.mov",
  * });
- * const metadata = Promise.all([object, object]).then(([object, object1]) => tencentcloud.Mps.getMediaMetaData({
+ * const metadata = object.then(object => tencentcloud.mps.getMediaMetaData({
  *     inputInfo: {
  *         type: "COS",
  *         cosInputInfo: {
  *             bucket: object.bucket,
  *             region: "%s",
- *             object: object1.key,
+ *             object: object.key,
  *         },
  *     },
  * }));
@@ -81,17 +81,17 @@ export interface GetMediaMetaDataResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const object = tencentcloud.Cos.getBucketObject({
+ * const object = tencentcloud.cos.getBucketObject({
  *     bucket: `keep-bucket-${appId}`,
  *     key: "/mps-test/test.mov",
  * });
- * const metadata = Promise.all([object, object]).then(([object, object1]) => tencentcloud.Mps.getMediaMetaData({
+ * const metadata = object.then(object => tencentcloud.mps.getMediaMetaData({
  *     inputInfo: {
  *         type: "COS",
  *         cosInputInfo: {
  *             bucket: object.bucket,
  *             region: "%s",
- *             object: object1.key,
+ *             object: object.key,
  *         },
  *     },
  * }));
@@ -116,5 +116,5 @@ export interface GetMediaMetaDataOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

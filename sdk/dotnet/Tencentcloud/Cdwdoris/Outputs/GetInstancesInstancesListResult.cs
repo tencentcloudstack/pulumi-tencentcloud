@@ -57,7 +57,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwdoris.Outputs
         /// <summary>
         /// Zookeeper node description information. Note: This field may return null, indicating that no valid values can be obtained.
         /// </summary>
-        public readonly Outputs.GetInstancesInstancesListCoreSummaryResult CoreSummary;
+        public readonly ImmutableArray<Outputs.GetInstancesInstancesListCoreSummaryResult> CoreSummaries;
         /// <summary>
         /// COS bucket. Note: This field may return null, indicating that no valid values can be obtained.
         /// </summary>
@@ -133,7 +133,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwdoris.Outputs
         /// <summary>
         /// Data node description information. Note: This field may return null, indicating that no valid values can be obtained.
         /// </summary>
-        public readonly Outputs.GetInstancesInstancesListMasterSummaryResult MasterSummary;
+        public readonly ImmutableArray<Outputs.GetInstancesInstancesListMasterSummaryResult> MasterSummaries;
         /// <summary>
         /// Monitoring Information. Note: This field may return null, indicating that no valid values can be obtained.
         /// </summary>
@@ -221,7 +221,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwdoris.Outputs
 
             string coolDownBucket,
 
-            Outputs.GetInstancesInstancesListCoreSummaryResult coreSummary,
+            ImmutableArray<Outputs.GetInstancesInstancesListCoreSummaryResult> coreSummaries,
 
             string cosBucketName,
 
@@ -259,7 +259,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwdoris.Outputs
 
             string kind,
 
-            Outputs.GetInstancesInstancesListMasterSummaryResult masterSummary,
+            ImmutableArray<Outputs.GetInstancesInstancesListMasterSummaryResult> masterSummaries,
 
             string monitor,
 
@@ -303,7 +303,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwdoris.Outputs
             ClsTopicId = clsTopicId;
             Components = components;
             CoolDownBucket = coolDownBucket;
-            CoreSummary = coreSummary;
+            CoreSummaries = coreSummaries;
             CosBucketName = cosBucketName;
             CosMoveFactor = cosMoveFactor;
             CreateTime = createTime;
@@ -322,7 +322,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwdoris.Outputs
             InstanceName = instanceName;
             IsWhiteSGs = isWhiteSGs;
             Kind = kind;
-            MasterSummary = masterSummary;
+            MasterSummaries = masterSummaries;
             Monitor = monitor;
             PayMode = payMode;
             Region = region;

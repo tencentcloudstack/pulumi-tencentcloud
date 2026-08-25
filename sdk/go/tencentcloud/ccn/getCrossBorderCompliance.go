@@ -115,12 +115,8 @@ type GetCrossBorderComplianceResult struct {
 }
 
 func GetCrossBorderComplianceOutput(ctx *pulumi.Context, args GetCrossBorderComplianceOutputArgs, opts ...pulumi.InvokeOption) GetCrossBorderComplianceResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetCrossBorderComplianceResultOutput, error) {
-			args := v.(GetCrossBorderComplianceArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ccn/getCrossBorderCompliance:getCrossBorderCompliance", args, GetCrossBorderComplianceResultOutput{}, options).(GetCrossBorderComplianceResultOutput), nil
-		}).(GetCrossBorderComplianceResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ccn/getCrossBorderCompliance:getCrossBorderCompliance", args, GetCrossBorderComplianceResultOutput{}, options).(GetCrossBorderComplianceResultOutput)
 }
 
 // A collection of arguments for invoking getCrossBorderCompliance.

@@ -15,9 +15,9 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instances = tencentcloud.Instances.getInstance({});
+ * const instances = tencentcloud.instances.getInstance({});
  * //cvm
- * const cvmMonitorData = instances.then(instances => tencentcloud.Monitor.getData({
+ * const cvmMonitorData = instances.then(instances => tencentcloud.monitor.getData({
  *     namespace: "QCE/CVM",
  *     metricName: "CPUUsage",
  *     dimensions: [{
@@ -29,7 +29,7 @@ import * as utilities from "../utilities";
  *     endTime: "2020-04-28T19:00:00+08:00",
  * }));
  * //cos
- * const cosMonitorData = tencentcloud.Monitor.getData({
+ * const cosMonitorData = tencentcloud.monitor.getData({
  *     namespace: "QCE/COS",
  *     metricName: "InternetTraffic",
  *     dimensions: [
@@ -124,9 +124,9 @@ export interface GetDataResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instances = tencentcloud.Instances.getInstance({});
+ * const instances = tencentcloud.instances.getInstance({});
  * //cvm
- * const cvmMonitorData = instances.then(instances => tencentcloud.Monitor.getData({
+ * const cvmMonitorData = instances.then(instances => tencentcloud.monitor.getData({
  *     namespace: "QCE/CVM",
  *     metricName: "CPUUsage",
  *     dimensions: [{
@@ -138,7 +138,7 @@ export interface GetDataResult {
  *     endTime: "2020-04-28T19:00:00+08:00",
  * }));
  * //cos
- * const cosMonitorData = tencentcloud.Monitor.getData({
+ * const cosMonitorData = tencentcloud.monitor.getData({
  *     namespace: "QCE/COS",
  *     metricName: "InternetTraffic",
  *     dimensions: [
@@ -193,11 +193,11 @@ export interface GetDataOutputArgs {
     /**
      * Statistical period.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * Used to store results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Start time for this query, eg:`2018-09-22T19:51:23+08:00`.
      */

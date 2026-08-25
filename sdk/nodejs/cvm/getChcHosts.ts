@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const chcHosts = tencentcloud.Cvm.getChcHosts({
+ * const chcHosts = tencentcloud.cvm.getChcHosts({
  *     chcIds: ["chc-xxxxxx"],
  *     filters: [{
  *         name: "zone",
@@ -82,7 +82,7 @@ export interface GetChcHostsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const chcHosts = tencentcloud.Cvm.getChcHosts({
+ * const chcHosts = tencentcloud.cvm.getChcHosts({
  *     chcIds: ["chc-xxxxxx"],
  *     filters: [{
  *         name: "zone",
@@ -108,7 +108,7 @@ export interface GetChcHostsOutputArgs {
     /**
      * CHC host ID. Up to 100 instances per request is allowed. ChcIds and Filters cannot be specified at the same time.
      */
-    chcIds?: pulumi.Input<pulumi.Input<string>[]>;
+    chcIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * `zone` Filter by the availability zone, such as ap-guangzhou-1. Valid values: See [Regions and Availability Zones](https://www.tencentcloud.com/document/product/213/6091?from_cn_redirect=1).
      * - `instance-name` Filter by the instance name.
@@ -117,9 +117,9 @@ export interface GetChcHostsOutputArgs {
      * - `vpc-id` Filter by the unique VPC ID.
      * - `subnet-id` Filter by the unique VPC subnet ID.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Cvm.GetChcHostsFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Cvm.GetChcHostsFilterArgs>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

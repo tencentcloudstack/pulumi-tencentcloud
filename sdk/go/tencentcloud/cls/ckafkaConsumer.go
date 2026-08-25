@@ -12,7 +12,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a cls ckafkaConsumer
+// Provides a resource to create a CLS ckafka consumer
 //
 // ## Example Usage
 //
@@ -28,8 +28,8 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := cls.NewCkafkaConsumer(ctx, "ckafka_consumer", &cls.CkafkaConsumerArgs{
-//				Compression: pulumi.Int(1),
+//			_, err := cls.NewCkafkaConsumer(ctx, "example", &cls.CkafkaConsumerArgs{
+//				Compression: pulumi.Int(0),
 //				NeedContent: pulumi.Bool(true),
 //				TopicId:     pulumi.String("7e34a3a7-635e-4da8-9005-88106c1fde69"),
 //				Ckafka: &cls.CkafkaConsumerCkafkaArgs{
@@ -51,6 +51,7 @@ import (
 //					},
 //					TagJsonNotTiled:   pulumi.Bool(true),
 //					TimestampAccuracy: pulumi.Int(2),
+//					JsonType:          pulumi.Int(1),
 //				},
 //			})
 //			if err != nil {
@@ -64,10 +65,10 @@ import (
 //
 // ## Import
 //
-// cls ckafka_consumer can be imported using the id, e.g.
+// cls ckafkaConsumer can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Cls/ckafkaConsumer:CkafkaConsumer ckafka_consumer topic_id
+// $ pulumi import tencentcloud:Cls/ckafkaConsumer:CkafkaConsumer example 7e34a3a7-635e-4da8-9005-88106c1fde69
 // ```
 type CkafkaConsumer struct {
 	pulumi.CustomResourceState

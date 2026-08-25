@@ -73,12 +73,8 @@ type GetVipEipAttachmentsResult struct {
 }
 
 func GetVipEipAttachmentsOutput(ctx *pulumi.Context, args GetVipEipAttachmentsOutputArgs, opts ...pulumi.InvokeOption) GetVipEipAttachmentsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetVipEipAttachmentsResultOutput, error) {
-			args := v.(GetVipEipAttachmentsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ha/getVipEipAttachments:getVipEipAttachments", args, GetVipEipAttachmentsResultOutput{}, options).(GetVipEipAttachmentsResultOutput), nil
-		}).(GetVipEipAttachmentsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ha/getVipEipAttachments:getVipEipAttachments", args, GetVipEipAttachmentsResultOutput{}, options).(GetVipEipAttachmentsResultOutput)
 }
 
 // A collection of arguments for invoking getVipEipAttachments.

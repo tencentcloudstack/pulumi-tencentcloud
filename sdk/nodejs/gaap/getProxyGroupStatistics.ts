@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const proxyGroupStatistics = tencentcloud.Gaap.getProxyGroupStatistics({
+ * const proxyGroupStatistics = tencentcloud.gaap.getProxyGroupStatistics({
  *     groupId: "link-m9t4yho9",
  *     startTime: "2023-10-09 00:00:00",
  *     endTime: "2023-10-09 23:59:59",
@@ -99,7 +99,7 @@ export interface GetProxyGroupStatisticsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const proxyGroupStatistics = tencentcloud.Gaap.getProxyGroupStatistics({
+ * const proxyGroupStatistics = tencentcloud.gaap.getProxyGroupStatistics({
  *     groupId: "link-m9t4yho9",
  *     startTime: "2023-10-09 00:00:00",
  *     endTime: "2023-10-09 23:59:59",
@@ -148,7 +148,7 @@ export interface GetProxyGroupStatisticsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Start Time.
      */

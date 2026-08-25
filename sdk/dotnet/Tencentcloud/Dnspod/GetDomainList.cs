@@ -13,7 +13,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
     public static class GetDomainList
     {
         /// <summary>
-        /// Use this data source to query detailed information of dnspod DomainList
+        /// Use this data source to query detailed information of DnsPod domain list
         /// 
         /// ## Example Usage
         /// 
@@ -21,7 +21,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
@@ -45,7 +45,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         ///         },
         ///         Remark = "",
         ///         UpdatedAtBegin = "2021-05-01 03:00:00",
-        ///         UpdatedAtEnd = "2024-05-10 20:00:00",
+        ///         UpdatedAtEnd = "2025-05-10 20:00:00",
         ///         RecordCountBegin = 0,
         ///         RecordCountEnd = 100,
         ///         ProjectId = -1,
@@ -69,7 +69,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDomainListResult>("tencentcloud:Dnspod/getDomainList:getDomainList", args ?? new GetDomainListArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Use this data source to query detailed information of dnspod DomainList
+        /// Use this data source to query detailed information of DnsPod domain list
         /// 
         /// ## Example Usage
         /// 
@@ -77,7 +77,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
@@ -101,7 +101,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         ///         },
         ///         Remark = "",
         ///         UpdatedAtBegin = "2021-05-01 03:00:00",
-        ///         UpdatedAtEnd = "2024-05-10 20:00:00",
+        ///         UpdatedAtEnd = "2025-05-10 20:00:00",
         ///         RecordCountBegin = 0,
         ///         RecordCountEnd = 100,
         ///         ProjectId = -1,
@@ -125,7 +125,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
             => global::Pulumi.Deployment.Instance.Invoke<GetDomainListResult>("tencentcloud:Dnspod/getDomainList:getDomainList", args ?? new GetDomainListInvokeArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Use this data source to query detailed information of dnspod DomainList
+        /// Use this data source to query detailed information of DnsPod domain list
         /// 
         /// ## Example Usage
         /// 
@@ -133,7 +133,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
@@ -157,7 +157,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         ///         },
         ///         Remark = "",
         ///         UpdatedAtBegin = "2021-05-01 03:00:00",
-        ///         UpdatedAtEnd = "2024-05-10 20:00:00",
+        ///         UpdatedAtEnd = "2025-05-10 20:00:00",
         ///         RecordCountBegin = 0,
         ///         RecordCountEnd = 100,
         ///         ProjectId = -1,

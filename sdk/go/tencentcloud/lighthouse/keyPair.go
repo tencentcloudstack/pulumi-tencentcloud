@@ -28,12 +28,13 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := lighthouse.NewKeyPair(ctx, "key_pair", &lighthouse.KeyPairArgs{
+//			keyPair, err := lighthouse.NewKeyPair(ctx, "key_pair", &lighthouse.KeyPairArgs{
 //				KeyName: pulumi.String("key_name_test"),
 //			})
 //			if err != nil {
 //				return err
 //			}
+//			ctx.Export("privateKey", keyPair.PrivateKey)
 //			return nil
 //		})
 //	}
@@ -42,7 +43,7 @@ import (
 //
 // ## Import
 //
-// lighthouse key_pair can be imported using the id, e.g.
+// lighthouse keyPair can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Lighthouse/keyPair:KeyPair key_pair key_pair_id

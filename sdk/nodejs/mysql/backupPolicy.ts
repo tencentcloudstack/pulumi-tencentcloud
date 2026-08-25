@@ -5,13 +5,17 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
+ * Provides a mysql policy resource to create a backup policy.
+ *
+ * > **NOTE:** This attribute `backupModel` only support 'physical' in Terraform TencentCloud provider version 1.16.2
+ *
  * ## Example Usage
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "cdb",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -165,31 +169,31 @@ export interface BackupPolicyState {
     /**
      * Backup method. Supported values include: `physical` - physical backup; `snapshot` - snapshot backup. Multi node only support `physical`, Single node only support `snapshot`.
      */
-    backupModel?: pulumi.Input<string>;
+    backupModel?: pulumi.Input<string | undefined>;
     /**
      * Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and `22:00-02:00`.
      */
-    backupTime?: pulumi.Input<string>;
+    backupTime?: pulumi.Input<string | undefined>;
     /**
      * Binlog retention time, in days. The minimum value is 7 days and the maximum value is 1830 days. This value cannot be set greater than the backup file retention time.
      */
-    binlogPeriod?: pulumi.Input<number>;
+    binlogPeriod?: pulumi.Input<number | undefined>;
     /**
      * The standard starting number of days for log backup storage. The log backup will be converted when it reaches the standard starting number of days for storage. The minimum is 30 days and must not be greater than the number of days for log backup retention.
      */
-    binlogStandbyDays?: pulumi.Input<number>;
+    binlogStandbyDays?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable the log backup standard storage policy, `off` - close, `on` - open, the default is off.
      */
-    enableBinlogStandby?: pulumi.Input<string>;
+    enableBinlogStandby?: pulumi.Input<string | undefined>;
     /**
      * Instance ID to which policies will be applied.
      */
-    mysqlId?: pulumi.Input<string>;
+    mysqlId?: pulumi.Input<string | undefined>;
     /**
      * The retention time of backup files, in days. The minimum value is 7 days and the maximum value is 1830 days. And default value is `7`.
      */
-    retentionPeriod?: pulumi.Input<number>;
+    retentionPeriod?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -199,23 +203,23 @@ export interface BackupPolicyArgs {
     /**
      * Backup method. Supported values include: `physical` - physical backup; `snapshot` - snapshot backup. Multi node only support `physical`, Single node only support `snapshot`.
      */
-    backupModel?: pulumi.Input<string>;
+    backupModel?: pulumi.Input<string | undefined>;
     /**
      * Instance backup time, in the format of 'HH:mm-HH:mm'. Time setting interval is four hours. Default to `02:00-06:00`. The following value can be supported: `02:00-06:00`, `06:00-10:00`, `10:00-14:00`, `14:00-18:00`, `18:00-22:00`, and `22:00-02:00`.
      */
-    backupTime?: pulumi.Input<string>;
+    backupTime?: pulumi.Input<string | undefined>;
     /**
      * Binlog retention time, in days. The minimum value is 7 days and the maximum value is 1830 days. This value cannot be set greater than the backup file retention time.
      */
-    binlogPeriod?: pulumi.Input<number>;
+    binlogPeriod?: pulumi.Input<number | undefined>;
     /**
      * The standard starting number of days for log backup storage. The log backup will be converted when it reaches the standard starting number of days for storage. The minimum is 30 days and must not be greater than the number of days for log backup retention.
      */
-    binlogStandbyDays?: pulumi.Input<number>;
+    binlogStandbyDays?: pulumi.Input<number | undefined>;
     /**
      * Whether to enable the log backup standard storage policy, `off` - close, `on` - open, the default is off.
      */
-    enableBinlogStandby?: pulumi.Input<string>;
+    enableBinlogStandby?: pulumi.Input<string | undefined>;
     /**
      * Instance ID to which policies will be applied.
      */
@@ -223,5 +227,5 @@ export interface BackupPolicyArgs {
     /**
      * The retention time of backup files, in days. The minimum value is 7 days and the maximum value is 1830 days. And default value is `7`.
      */
-    retentionPeriod?: pulumi.Input<number>;
+    retentionPeriod?: pulumi.Input<number | undefined>;
 }

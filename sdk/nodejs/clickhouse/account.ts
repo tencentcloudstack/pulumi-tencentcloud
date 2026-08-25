@@ -121,19 +121,19 @@ export interface AccountState {
     /**
      * Description.
      */
-    describe?: pulumi.Input<string>;
+    describe?: pulumi.Input<string | undefined>;
     /**
      * Instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Password.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * User name.
      */
-    userName?: pulumi.Input<string>;
+    userName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -143,7 +143,7 @@ export interface AccountArgs {
     /**
      * Description.
      */
-    describe?: pulumi.Input<string>;
+    describe?: pulumi.Input<string | undefined>;
     /**
      * Instance id.
      */

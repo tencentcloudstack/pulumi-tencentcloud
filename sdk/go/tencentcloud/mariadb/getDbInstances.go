@@ -24,24 +24,26 @@ import (
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/mariadb"
 //
 // )
-// func main() {
-// pulumi.Run(func(ctx *pulumi.Context) error {
-// _, err := mariadb.GetDbInstances(ctx, &mariadb.GetDbInstancesArgs{
-// InstanceIds: []string{
-// "tdsql-ijxtqk5p",
-// },
-// ProjectIds: interface{}{
-// 0,
-// },
-// VpcId: pulumi.StringRef("5556791"),
-// SubnetId: pulumi.StringRef("3454730"),
-// }, nil);
-// if err != nil {
-// return err
-// }
-// return nil
-// })
-// }
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := mariadb.GetDbInstances(ctx, &mariadb.GetDbInstancesArgs{
+//				InstanceIds: []string{
+//					"tdsql-ijxtqk5p",
+//				},
+//				ProjectIds: []int{
+//					0,
+//				},
+//				VpcId:    pulumi.StringRef("5556791"),
+//				SubnetId: pulumi.StringRef("3454730"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetDbInstances(ctx *pulumi.Context, args *GetDbInstancesArgs, opts ...pulumi.InvokeOption) (*GetDbInstancesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
@@ -86,12 +88,8 @@ type GetDbInstancesResult struct {
 }
 
 func GetDbInstancesOutput(ctx *pulumi.Context, args GetDbInstancesOutputArgs, opts ...pulumi.InvokeOption) GetDbInstancesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDbInstancesResultOutput, error) {
-			args := v.(GetDbInstancesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mariadb/getDbInstances:getDbInstances", args, GetDbInstancesResultOutput{}, options).(GetDbInstancesResultOutput), nil
-		}).(GetDbInstancesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mariadb/getDbInstances:getDbInstances", args, GetDbInstancesResultOutput{}, options).(GetDbInstancesResultOutput)
 }
 
 // A collection of arguments for invoking getDbInstances.

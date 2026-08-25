@@ -66,12 +66,8 @@ type GetListAlgorithmsResult struct {
 }
 
 func GetListAlgorithmsOutput(ctx *pulumi.Context, args GetListAlgorithmsOutputArgs, opts ...pulumi.InvokeOption) GetListAlgorithmsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetListAlgorithmsResultOutput, error) {
-			args := v.(GetListAlgorithmsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Kms/getListAlgorithms:getListAlgorithms", args, GetListAlgorithmsResultOutput{}, options).(GetListAlgorithmsResultOutput), nil
-		}).(GetListAlgorithmsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Kms/getListAlgorithms:getListAlgorithms", args, GetListAlgorithmsResultOutput{}, options).(GetListAlgorithmsResultOutput)
 }
 
 // A collection of arguments for invoking getListAlgorithms.

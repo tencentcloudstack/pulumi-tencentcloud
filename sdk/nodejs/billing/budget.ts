@@ -50,7 +50,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * billing billing_budget can be imported using the id, e.g.
+ * billing billingBudget can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Billing/budget:Budget billing_budget billing_budget_id
@@ -212,51 +212,51 @@ export interface BudgetState {
     /**
      * BILL: system bill, CONSUMPTION: consumption bill.
      */
-    billType?: pulumi.Input<string>;
+    billType?: pulumi.Input<string | undefined>;
     /**
      * Budget name.
      */
-    budgetName?: pulumi.Input<string>;
+    budgetName?: pulumi.Input<string | undefined>;
     /**
      * Budget remarks.
      */
-    budgetNote?: pulumi.Input<string>;
+    budgetNote?: pulumi.Input<string | undefined>;
     /**
      * Budget value limit. Transfer fixed value when the budget plan type is FIX(Fixed Budget); Passed when the budget plan type is CYCLE(Planned Budget)[{"dateDesc":"2025-07","quota":"1000"},{"dateDesc":"2025-08","quota":"2000"}].
      */
-    budgetQuota?: pulumi.Input<string>;
+    budgetQuota?: pulumi.Input<string | undefined>;
     /**
      * Cycle type, valid values: DAY, MONTH, QUARTER, YEAR.
      */
-    cycleType?: pulumi.Input<string>;
+    cycleType?: pulumi.Input<string | undefined>;
     /**
      * Budget dimension range conditions.
      */
-    dimensionsRange?: pulumi.Input<inputs.Billing.BudgetDimensionsRange>;
+    dimensionsRange?: pulumi.Input<inputs.Billing.BudgetDimensionsRange | undefined>;
     /**
      * COST original price, REAL_COST actual cost, CASH cash, INCENTIVE gift, VOUCHER voucher, TRANSFER share, TAX tax, AMOUNT_BEFORE_TAX cash payment (before tax).
      */
-    feeType?: pulumi.Input<string>;
+    feeType?: pulumi.Input<string | undefined>;
     /**
      * Valid period starting time 2025-01-01(cycle: days) / 2025-01 (cycle: months).
      */
-    periodBegin?: pulumi.Input<string>;
+    periodBegin?: pulumi.Input<string | undefined>;
     /**
      * Expiration period end time 2025-12-01(cycle: days) / 2025-12 (cycle: months).
      */
-    periodEnd?: pulumi.Input<string>;
+    periodEnd?: pulumi.Input<string | undefined>;
     /**
      * FIX: fixed budget, CYCLE: planned budget.
      */
-    planType?: pulumi.Input<string>;
+    planType?: pulumi.Input<string | undefined>;
     /**
      * Threshold reminder.
      */
-    warnJsons?: pulumi.Input<pulumi.Input<inputs.Billing.BudgetWarnJson>[]>;
+    warnJsons?: pulumi.Input<pulumi.Input<inputs.Billing.BudgetWarnJson>[] | undefined>;
     /**
      * Volatility reminder.
      */
-    waveThresholdJsons?: pulumi.Input<pulumi.Input<inputs.Billing.BudgetWaveThresholdJson>[]>;
+    waveThresholdJsons?: pulumi.Input<pulumi.Input<inputs.Billing.BudgetWaveThresholdJson>[] | undefined>;
 }
 
 /**
@@ -274,7 +274,7 @@ export interface BudgetArgs {
     /**
      * Budget remarks.
      */
-    budgetNote?: pulumi.Input<string>;
+    budgetNote?: pulumi.Input<string | undefined>;
     /**
      * Budget value limit. Transfer fixed value when the budget plan type is FIX(Fixed Budget); Passed when the budget plan type is CYCLE(Planned Budget)[{"dateDesc":"2025-07","quota":"1000"},{"dateDesc":"2025-08","quota":"2000"}].
      */
@@ -286,7 +286,7 @@ export interface BudgetArgs {
     /**
      * Budget dimension range conditions.
      */
-    dimensionsRange?: pulumi.Input<inputs.Billing.BudgetDimensionsRange>;
+    dimensionsRange?: pulumi.Input<inputs.Billing.BudgetDimensionsRange | undefined>;
     /**
      * COST original price, REAL_COST actual cost, CASH cash, INCENTIVE gift, VOUCHER voucher, TRANSFER share, TAX tax, AMOUNT_BEFORE_TAX cash payment (before tax).
      */
@@ -310,5 +310,5 @@ export interface BudgetArgs {
     /**
      * Volatility reminder.
      */
-    waveThresholdJsons?: pulumi.Input<pulumi.Input<inputs.Billing.BudgetWaveThresholdJson>[]>;
+    waveThresholdJsons?: pulumi.Input<pulumi.Input<inputs.Billing.BudgetWaveThresholdJson>[] | undefined>;
 }

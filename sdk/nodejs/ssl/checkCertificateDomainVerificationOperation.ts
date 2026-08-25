@@ -103,11 +103,11 @@ export interface CheckCertificateDomainVerificationOperationState {
     /**
      * The certificate ID.
      */
-    certificateId?: pulumi.Input<string>;
+    certificateId?: pulumi.Input<string | undefined>;
     /**
      * Domain name verification results.
      */
-    verificationResults?: pulumi.Input<pulumi.Input<inputs.Ssl.CheckCertificateDomainVerificationOperationVerificationResult>[]>;
+    verificationResults?: pulumi.Input<pulumi.Input<inputs.Ssl.CheckCertificateDomainVerificationOperationVerificationResult>[] | undefined>;
 }
 
 /**

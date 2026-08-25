@@ -25,7 +25,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * monitor grafana_whitelist_config can be imported using the id, e.g.
+ * monitor grafanaWhitelistConfig can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Monitor/grafanaWhitelistConfig:GrafanaWhitelistConfig grafana_whitelist_config instance_id
@@ -103,11 +103,11 @@ export interface GrafanaWhitelistConfigState {
     /**
      * Grafana instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * The addresses in the whitelist.
      */
-    whitelists?: pulumi.Input<pulumi.Input<string>[]>;
+    whitelists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -121,5 +121,5 @@ export interface GrafanaWhitelistConfigArgs {
     /**
      * The addresses in the whitelist.
      */
-    whitelists?: pulumi.Input<pulumi.Input<string>[]>;
+    whitelists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

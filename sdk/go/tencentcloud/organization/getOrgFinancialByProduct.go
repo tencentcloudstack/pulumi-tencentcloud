@@ -82,12 +82,8 @@ type GetOrgFinancialByProductResult struct {
 }
 
 func GetOrgFinancialByProductOutput(ctx *pulumi.Context, args GetOrgFinancialByProductOutputArgs, opts ...pulumi.InvokeOption) GetOrgFinancialByProductResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetOrgFinancialByProductResultOutput, error) {
-			args := v.(GetOrgFinancialByProductArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Organization/getOrgFinancialByProduct:getOrgFinancialByProduct", args, GetOrgFinancialByProductResultOutput{}, options).(GetOrgFinancialByProductResultOutput), nil
-		}).(GetOrgFinancialByProductResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Organization/getOrgFinancialByProduct:getOrgFinancialByProduct", args, GetOrgFinancialByProductResultOutput{}, options).(GetOrgFinancialByProductResultOutput)
 }
 
 // A collection of arguments for invoking getOrgFinancialByProduct.

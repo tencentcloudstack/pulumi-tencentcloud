@@ -255,15 +255,40 @@ export type PrivateNatGateway = import("./privateNatGateway").PrivateNatGateway;
 export const PrivateNatGateway: typeof import("./privateNatGateway").PrivateNatGateway = null as any;
 utilities.lazyLoad(exports, ["PrivateNatGateway"], () => require("./privateNatGateway"));
 
+export { PrivateNatGatewayTranslationAclRuleArgs, PrivateNatGatewayTranslationAclRuleState } from "./privateNatGatewayTranslationAclRule";
+export type PrivateNatGatewayTranslationAclRule = import("./privateNatGatewayTranslationAclRule").PrivateNatGatewayTranslationAclRule;
+export const PrivateNatGatewayTranslationAclRule: typeof import("./privateNatGatewayTranslationAclRule").PrivateNatGatewayTranslationAclRule = null as any;
+utilities.lazyLoad(exports, ["PrivateNatGatewayTranslationAclRule"], () => require("./privateNatGatewayTranslationAclRule"));
+
 export { PrivateNatGatewayTranslationNatRuleArgs, PrivateNatGatewayTranslationNatRuleState } from "./privateNatGatewayTranslationNatRule";
 export type PrivateNatGatewayTranslationNatRule = import("./privateNatGatewayTranslationNatRule").PrivateNatGatewayTranslationNatRule;
 export const PrivateNatGatewayTranslationNatRule: typeof import("./privateNatGatewayTranslationNatRule").PrivateNatGatewayTranslationNatRule = null as any;
 utilities.lazyLoad(exports, ["PrivateNatGatewayTranslationNatRule"], () => require("./privateNatGatewayTranslationNatRule"));
 
+export { ReplaceRoutesWithRoutePolicyConfigArgs, ReplaceRoutesWithRoutePolicyConfigState } from "./replaceRoutesWithRoutePolicyConfig";
+export type ReplaceRoutesWithRoutePolicyConfig = import("./replaceRoutesWithRoutePolicyConfig").ReplaceRoutesWithRoutePolicyConfig;
+export const ReplaceRoutesWithRoutePolicyConfig: typeof import("./replaceRoutesWithRoutePolicyConfig").ReplaceRoutesWithRoutePolicyConfig = null as any;
+utilities.lazyLoad(exports, ["ReplaceRoutesWithRoutePolicyConfig"], () => require("./replaceRoutesWithRoutePolicyConfig"));
+
 export { ResumeSnapshotInstanceArgs, ResumeSnapshotInstanceState } from "./resumeSnapshotInstance";
 export type ResumeSnapshotInstance = import("./resumeSnapshotInstance").ResumeSnapshotInstance;
 export const ResumeSnapshotInstance: typeof import("./resumeSnapshotInstance").ResumeSnapshotInstance = null as any;
 utilities.lazyLoad(exports, ["ResumeSnapshotInstance"], () => require("./resumeSnapshotInstance"));
+
+export { RoutePolicyArgs, RoutePolicyState } from "./routePolicy";
+export type RoutePolicy = import("./routePolicy").RoutePolicy;
+export const RoutePolicy: typeof import("./routePolicy").RoutePolicy = null as any;
+utilities.lazyLoad(exports, ["RoutePolicy"], () => require("./routePolicy"));
+
+export { RoutePolicyAssociationArgs, RoutePolicyAssociationState } from "./routePolicyAssociation";
+export type RoutePolicyAssociation = import("./routePolicyAssociation").RoutePolicyAssociation;
+export const RoutePolicyAssociation: typeof import("./routePolicyAssociation").RoutePolicyAssociation = null as any;
+utilities.lazyLoad(exports, ["RoutePolicyAssociation"], () => require("./routePolicyAssociation"));
+
+export { RoutePolicyEntriesArgs, RoutePolicyEntriesState } from "./routePolicyEntries";
+export type RoutePolicyEntries = import("./routePolicyEntries").RoutePolicyEntries;
+export const RoutePolicyEntries: typeof import("./routePolicyEntries").RoutePolicyEntries = null as any;
+utilities.lazyLoad(exports, ["RoutePolicyEntries"], () => require("./routePolicyEntries"));
 
 export { SnapshotPolicyArgs, SnapshotPolicyState } from "./snapshotPolicy";
 export type SnapshotPolicy = import("./snapshotPolicy").SnapshotPolicy;
@@ -338,10 +363,20 @@ const _module = {
                 return new PeerConnectRejectOperation(name, <any>undefined, { urn })
             case "tencentcloud:Vpc/privateNatGateway:PrivateNatGateway":
                 return new PrivateNatGateway(name, <any>undefined, { urn })
+            case "tencentcloud:Vpc/privateNatGatewayTranslationAclRule:PrivateNatGatewayTranslationAclRule":
+                return new PrivateNatGatewayTranslationAclRule(name, <any>undefined, { urn })
             case "tencentcloud:Vpc/privateNatGatewayTranslationNatRule:PrivateNatGatewayTranslationNatRule":
                 return new PrivateNatGatewayTranslationNatRule(name, <any>undefined, { urn })
+            case "tencentcloud:Vpc/replaceRoutesWithRoutePolicyConfig:ReplaceRoutesWithRoutePolicyConfig":
+                return new ReplaceRoutesWithRoutePolicyConfig(name, <any>undefined, { urn })
             case "tencentcloud:Vpc/resumeSnapshotInstance:ResumeSnapshotInstance":
                 return new ResumeSnapshotInstance(name, <any>undefined, { urn })
+            case "tencentcloud:Vpc/routePolicy:RoutePolicy":
+                return new RoutePolicy(name, <any>undefined, { urn })
+            case "tencentcloud:Vpc/routePolicyAssociation:RoutePolicyAssociation":
+                return new RoutePolicyAssociation(name, <any>undefined, { urn })
+            case "tencentcloud:Vpc/routePolicyEntries:RoutePolicyEntries":
+                return new RoutePolicyEntries(name, <any>undefined, { urn })
             case "tencentcloud:Vpc/snapshotPolicy:SnapshotPolicy":
                 return new SnapshotPolicy(name, <any>undefined, { urn })
             case "tencentcloud:Vpc/snapshotPolicyAttachment:SnapshotPolicyAttachment":
@@ -379,8 +414,13 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/peerConnectAcceptOper
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/peerConnectManager", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/peerConnectRejectOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/privateNatGateway", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/privateNatGatewayTranslationAclRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/privateNatGatewayTranslationNatRule", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/replaceRoutesWithRoutePolicyConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/resumeSnapshotInstance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/routePolicy", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/routePolicyAssociation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/routePolicyEntries", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/snapshotPolicy", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/snapshotPolicyAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Vpc/snapshotPolicyConfig", _module)

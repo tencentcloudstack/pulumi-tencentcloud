@@ -72,7 +72,8 @@ type PolicyByName struct {
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
 	// Description of the CAM policy.
 	Description pulumi.StringPtrOutput `pulumi:"description"`
-	Document    pulumi.StringOutput    `pulumi:"document"`
+	// Document of the CAM policy. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in terraform: 1. The elements in JSON claimed supporting two types as `string` and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when it appears, it must be replaced with the uin it stands for.
+	Document pulumi.StringOutput `pulumi:"document"`
 	// Name of CAM policy.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Type of the policy strategy. Valid values: `1`, `2`.  `1` means customer strategy and `2` means preset strategy.
@@ -118,7 +119,8 @@ type policyByNameState struct {
 	CreateTime *string `pulumi:"createTime"`
 	// Description of the CAM policy.
 	Description *string `pulumi:"description"`
-	Document    *string `pulumi:"document"`
+	// Document of the CAM policy. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in terraform: 1. The elements in JSON claimed supporting two types as `string` and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when it appears, it must be replaced with the uin it stands for.
+	Document *string `pulumi:"document"`
 	// Name of CAM policy.
 	Name *string `pulumi:"name"`
 	// Type of the policy strategy. Valid values: `1`, `2`.  `1` means customer strategy and `2` means preset strategy.
@@ -132,7 +134,8 @@ type PolicyByNameState struct {
 	CreateTime pulumi.StringPtrInput
 	// Description of the CAM policy.
 	Description pulumi.StringPtrInput
-	Document    pulumi.StringPtrInput
+	// Document of the CAM policy. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in terraform: 1. The elements in JSON claimed supporting two types as `string` and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when it appears, it must be replaced with the uin it stands for.
+	Document pulumi.StringPtrInput
 	// Name of CAM policy.
 	Name pulumi.StringPtrInput
 	// Type of the policy strategy. Valid values: `1`, `2`.  `1` means customer strategy and `2` means preset strategy.
@@ -148,7 +151,8 @@ func (PolicyByNameState) ElementType() reflect.Type {
 type policyByNameArgs struct {
 	// Description of the CAM policy.
 	Description *string `pulumi:"description"`
-	Document    string  `pulumi:"document"`
+	// Document of the CAM policy. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in terraform: 1. The elements in JSON claimed supporting two types as `string` and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when it appears, it must be replaced with the uin it stands for.
+	Document string `pulumi:"document"`
 	// Name of CAM policy.
 	Name *string `pulumi:"name"`
 }
@@ -157,7 +161,8 @@ type policyByNameArgs struct {
 type PolicyByNameArgs struct {
 	// Description of the CAM policy.
 	Description pulumi.StringPtrInput
-	Document    pulumi.StringInput
+	// Document of the CAM policy. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in terraform: 1. The elements in JSON claimed supporting two types as `string` and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when it appears, it must be replaced with the uin it stands for.
+	Document pulumi.StringInput
 	// Name of CAM policy.
 	Name pulumi.StringPtrInput
 }
@@ -259,6 +264,7 @@ func (o PolicyByNameOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *PolicyByName) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
 }
 
+// Document of the CAM policy. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in terraform: 1. The elements in JSON claimed supporting two types as `string` and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when it appears, it must be replaced with the uin it stands for.
 func (o PolicyByNameOutput) Document() pulumi.StringOutput {
 	return o.ApplyT(func(v *PolicyByName) pulumi.StringOutput { return v.Document }).(pulumi.StringOutput)
 }

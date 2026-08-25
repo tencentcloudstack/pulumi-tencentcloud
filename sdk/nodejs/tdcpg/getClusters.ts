@@ -17,12 +17,12 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const clusters = tencentcloud.Tdcpg.getClusters({
+ * const clusters = tencentcloud.tdcpg.getClusters({
  *     clusterId: "",
  *     clusterName: "",
  *     status: "",
  *     payMode: "",
- *     projectId: "",
+ *     projectId: Number(""),
  * });
  * ```
  */
@@ -114,12 +114,12 @@ export interface GetClustersResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const clusters = tencentcloud.Tdcpg.getClusters({
+ * const clusters = tencentcloud.tdcpg.getClusters({
  *     clusterId: "",
  *     clusterName: "",
  *     status: "",
  *     payMode: "",
- *     projectId: "",
+ *     projectId: Number(""),
  * });
  * ```
  */
@@ -143,25 +143,25 @@ export interface GetClustersOutputArgs {
     /**
      * cluster id.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * cluster name.
      */
-    clusterName?: pulumi.Input<string>;
+    clusterName?: pulumi.Input<string | undefined>;
     /**
      * pay mode.
      */
-    payMode?: pulumi.Input<string>;
+    payMode?: pulumi.Input<string | undefined>;
     /**
      * project id, default to 0, means default project.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * cluster status.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
 }

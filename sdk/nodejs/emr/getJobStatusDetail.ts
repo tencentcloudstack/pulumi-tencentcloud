@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const emrJobStatusDetail = tencentcloud.Emr.getJobStatusDetail({
+ * const emrJobStatusDetail = tencentcloud.emr.getJobStatusDetail({
  *     instanceId: "emr-byhnjsb3",
  *     flowParam: {
  *         fKey: "FlowId",
@@ -102,7 +102,7 @@ export interface GetJobStatusDetailResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const emrJobStatusDetail = tencentcloud.Emr.getJobStatusDetail({
+ * const emrJobStatusDetail = tencentcloud.emr.getJobStatusDetail({
  *     instanceId: "emr-byhnjsb3",
  *     flowParam: {
  *         fKey: "FlowId",
@@ -136,9 +136,9 @@ export interface GetJobStatusDetailOutputArgs {
     /**
      * Whether to return additional task information.
      */
-    needExtraDetail?: pulumi.Input<boolean>;
+    needExtraDetail?: pulumi.Input<boolean | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

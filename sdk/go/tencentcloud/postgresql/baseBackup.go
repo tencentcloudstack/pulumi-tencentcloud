@@ -12,9 +12,11 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a postgresql baseBackup
+// Provides a resource to create a PostgreSQL base backup
 //
 // ## Example Usage
+//
+// ### Create a PostgreSQL base backup
 //
 // ```go
 // package main
@@ -28,10 +30,10 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := postgresql.NewBaseBackup(ctx, "base_backup", &postgresql.BaseBackupArgs{
-//				DbInstanceId: pulumi.Any(pgsqlId),
+//			_, err := postgresql.NewBaseBackup(ctx, "example", &postgresql.BaseBackupArgs{
+//				DbInstanceId: pulumi.String("postgres-ckwcgdf1"),
 //				Tags: pulumi.StringMap{
-//					"createdBy": pulumi.String("terraform"),
+//					"createdBy": pulumi.String("Terraform"),
 //				},
 //			})
 //			if err != nil {
@@ -41,6 +43,44 @@ import (
 //		})
 //	}
 //
+// ```
+//
+// ### Customize the expire time
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/postgresql"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := postgresql.NewBaseBackup(ctx, "example", &postgresql.BaseBackupArgs{
+//				DbInstanceId:  pulumi.String("postgres-ckwcgdf1"),
+//				NewExpireTime: pulumi.String("2027-04-23 20:07:36"),
+//				Tags: pulumi.StringMap{
+//					"createdBy": pulumi.String("Terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## Import
+//
+// PostgreSQL base backup can be imported using the dBInstanceId#baseBackupId, e.g.
+//
+// ```sh
+// $ pulumi import tencentcloud:Postgresql/baseBackup:BaseBackup example postgres-ckwcgdf1#bac3d001-5160-5077-9139-49c1310e0854
 // ```
 type BaseBackup struct {
 	pulumi.CustomResourceState

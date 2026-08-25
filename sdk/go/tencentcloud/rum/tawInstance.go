@@ -49,8 +49,7 @@ import (
 //
 // ## Import
 //
-// rum taw_instance can be imported using the id, e.g.
-//
+// rum tawInstance can be imported using the id, e.g.
 // ```sh
 // $ pulumi import tencentcloud:Rum/tawInstance:TawInstance example rum-WYsjMaiGOVXBeJ
 // ```

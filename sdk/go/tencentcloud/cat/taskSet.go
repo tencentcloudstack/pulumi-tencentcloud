@@ -90,8 +90,7 @@ import (
 //
 // ## Import
 //
-// cat task_set can be imported using the id, e.g.
-//
+// cat taskSet can be imported using the id, e.g.
 // ```sh
 // $ pulumi import tencentcloud:Cat/taskSet:TaskSet task_set taskSet_id
 // ```

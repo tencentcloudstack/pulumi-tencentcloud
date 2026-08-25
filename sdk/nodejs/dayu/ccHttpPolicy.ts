@@ -199,47 +199,47 @@ export interface CcHttpPolicyState {
     /**
      * Action mode, only valid when `smode` is `matching`. Valid values are `alg` and `drop`.
      */
-    action?: pulumi.Input<string>;
+    action?: pulumi.Input<string | undefined>;
     /**
      * Create time of the CC self-define http policy.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Max frequency per minute, only valid when `smode` is `speedlimit`, the valid value ranges from 1 to 10000.
      */
-    frequency?: pulumi.Input<number>;
+    frequency?: pulumi.Input<number | undefined>;
     /**
      * Ip of the CC self-define http policy, only valid when `resourceType` is `bgp-multip`. The num of list items can only be set one.
      */
-    ip?: pulumi.Input<string>;
+    ip?: pulumi.Input<string | undefined>;
     /**
      * Name of the CC self-define http policy. Length should between 1 and 20.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Id of the CC self-define http policy.
      */
-    policyId?: pulumi.Input<string>;
+    policyId?: pulumi.Input<string | undefined>;
     /**
      * ID of the resource that the CC self-define http policy works for.
      */
-    resourceId?: pulumi.Input<string>;
+    resourceId?: pulumi.Input<string | undefined>;
     /**
      * Type of the resource that the CC self-define http policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
      */
-    resourceType?: pulumi.Input<string>;
+    resourceType?: pulumi.Input<string | undefined>;
     /**
      * Rule list of the CC self-define http policy,  only valid when `smode` is `matching`.
      */
-    ruleLists?: pulumi.Input<pulumi.Input<inputs.Dayu.CcHttpPolicyRuleList>[]>;
+    ruleLists?: pulumi.Input<pulumi.Input<inputs.Dayu.CcHttpPolicyRuleList>[] | undefined>;
     /**
      * Match mode, and valid values are `matching`, `speedlimit`. Note: the speed limit type CC self-define policy can only set one.
      */
-    smode?: pulumi.Input<string>;
+    smode?: pulumi.Input<string | undefined>;
     /**
      * Indicate the CC self-define http policy takes effect or not.
      */
-    switch?: pulumi.Input<boolean>;
+    switch?: pulumi.Input<boolean | undefined>;
 }
 
 /**
@@ -249,19 +249,19 @@ export interface CcHttpPolicyArgs {
     /**
      * Action mode, only valid when `smode` is `matching`. Valid values are `alg` and `drop`.
      */
-    action?: pulumi.Input<string>;
+    action?: pulumi.Input<string | undefined>;
     /**
      * Max frequency per minute, only valid when `smode` is `speedlimit`, the valid value ranges from 1 to 10000.
      */
-    frequency?: pulumi.Input<number>;
+    frequency?: pulumi.Input<number | undefined>;
     /**
      * Ip of the CC self-define http policy, only valid when `resourceType` is `bgp-multip`. The num of list items can only be set one.
      */
-    ip?: pulumi.Input<string>;
+    ip?: pulumi.Input<string | undefined>;
     /**
      * Name of the CC self-define http policy. Length should between 1 and 20.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * ID of the resource that the CC self-define http policy works for.
      */
@@ -273,13 +273,13 @@ export interface CcHttpPolicyArgs {
     /**
      * Rule list of the CC self-define http policy,  only valid when `smode` is `matching`.
      */
-    ruleLists?: pulumi.Input<pulumi.Input<inputs.Dayu.CcHttpPolicyRuleList>[]>;
+    ruleLists?: pulumi.Input<pulumi.Input<inputs.Dayu.CcHttpPolicyRuleList>[] | undefined>;
     /**
      * Match mode, and valid values are `matching`, `speedlimit`. Note: the speed limit type CC self-define policy can only set one.
      */
-    smode?: pulumi.Input<string>;
+    smode?: pulumi.Input<string | undefined>;
     /**
      * Indicate the CC self-define http policy takes effect or not.
      */
-    switch?: pulumi.Input<boolean>;
+    switch?: pulumi.Input<boolean | undefined>;
 }

@@ -14,7 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance.Inputs
     public sealed class GetTypesFilterArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
-        /// The filter name. Valid values: `Zone`, `instance-family` and `instance-charge-type`.
+        /// The filter name. Valid values: `Zone`, `instance-family`, `instance-type`, `instance-charge-type` and `sort-keys`.
         /// </summary>
         [Input("name", required: true)]
         public string Name { get; set; } = null!;

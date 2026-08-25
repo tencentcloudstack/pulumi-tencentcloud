@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Ha.getVipEipAttachments({
+ * const foo = tencentcloud.ha.getVipEipAttachments({
  *     havipId: "havip-kjqwe4ba",
  *     addressIp: "1.1.1.1",
  * });
@@ -79,7 +79,7 @@ export interface GetVipEipAttachmentsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Ha.getVipEipAttachments({
+ * const foo = tencentcloud.ha.getVipEipAttachments({
  *     havipId: "havip-kjqwe4ba",
  *     addressIp: "1.1.1.1",
  * });
@@ -101,7 +101,7 @@ export interface GetVipEipAttachmentsOutputArgs {
     /**
      * Public IP address of EIP to be queried.
      */
-    addressIp?: pulumi.Input<string>;
+    addressIp?: pulumi.Input<string | undefined>;
     /**
      * ID of the attached HA VIP to be queried.
      */
@@ -109,5 +109,5 @@ export interface GetVipEipAttachmentsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

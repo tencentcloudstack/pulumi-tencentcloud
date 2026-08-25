@@ -100,11 +100,11 @@ export interface AddCalcEnginesToProjectOperationState {
     /**
      * DLC cluster information.
      */
-    dlcInfos?: pulumi.Input<pulumi.Input<inputs.Wedata.AddCalcEnginesToProjectOperationDlcInfo>[]>;
+    dlcInfos?: pulumi.Input<pulumi.Input<inputs.Wedata.AddCalcEnginesToProjectOperationDlcInfo>[] | undefined>;
     /**
      * Project ID to be modified.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
 }
 
 /**

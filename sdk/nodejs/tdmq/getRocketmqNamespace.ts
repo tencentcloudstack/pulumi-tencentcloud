@@ -24,7 +24,7 @@ import * as utilities from "../utilities";
  *     namespaceName: "tf_example",
  *     remark: "remark.",
  * });
- * const example = tencentcloud.Tdmq.getRocketmqNamespaceOutput({
+ * const example = tencentcloud.tdmq.getRocketmqNamespaceOutput({
  *     clusterId: exampleRocketmqCluster.clusterId,
  *     nameKeyword: exampleRocketmqNamespace.namespaceName,
  * });
@@ -91,7 +91,7 @@ export interface GetRocketmqNamespaceResult {
  *     namespaceName: "tf_example",
  *     remark: "remark.",
  * });
- * const example = tencentcloud.Tdmq.getRocketmqNamespaceOutput({
+ * const example = tencentcloud.tdmq.getRocketmqNamespaceOutput({
  *     clusterId: exampleRocketmqCluster.clusterId,
  *     nameKeyword: exampleRocketmqNamespace.namespaceName,
  * });
@@ -117,9 +117,9 @@ export interface GetRocketmqNamespaceOutputArgs {
     /**
      * Search by name.
      */
-    nameKeyword?: pulumi.Input<string>;
+    nameKeyword?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

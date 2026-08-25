@@ -70,11 +70,11 @@ import (
 //				return err
 //			}
 //			_, err = vpc.NewSnapshotPolicyAttachment(ctx, "attachment", &vpc.SnapshotPolicyAttachmentArgs{
-//				SnapshotPolicyId: exampleSnapshotPolicy.ID(),
+//				SnapshotPolicyId: exampleSnapshotPolicy.ID().ToIDOutput().ToStringOutput(),
 //				Instances: vpc.SnapshotPolicyAttachmentInstanceArray{
 //					&vpc.SnapshotPolicyAttachmentInstanceArgs{
 //						InstanceType:   pulumi.String("securitygroup"),
-//						InstanceId:     exampleGroup.ID(),
+//						InstanceId:     exampleGroup.ID().ToIDOutput().ToStringOutput(),
 //						InstanceName:   pulumi.String("tf-example"),
 //						InstanceRegion: pulumi.String("ap-guangzhou"),
 //					},
@@ -91,7 +91,7 @@ import (
 //
 // ## Import
 //
-// vpc snapshot_policy_attachment can be imported using the id, e.g.
+// vpc snapshotPolicyAttachment can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Vpc/snapshotPolicyAttachment:SnapshotPolicyAttachment snapshot_policy_attachment snapshot_policy_attachment_id

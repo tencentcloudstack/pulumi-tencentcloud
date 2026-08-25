@@ -71,12 +71,8 @@ type GetInstanceTrafficPackageResult struct {
 }
 
 func GetInstanceTrafficPackageOutput(ctx *pulumi.Context, args GetInstanceTrafficPackageOutputArgs, opts ...pulumi.InvokeOption) GetInstanceTrafficPackageResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstanceTrafficPackageResultOutput, error) {
-			args := v.(GetInstanceTrafficPackageArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Lighthouse/getInstanceTrafficPackage:getInstanceTrafficPackage", args, GetInstanceTrafficPackageResultOutput{}, options).(GetInstanceTrafficPackageResultOutput), nil
-		}).(GetInstanceTrafficPackageResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Lighthouse/getInstanceTrafficPackage:getInstanceTrafficPackage", args, GetInstanceTrafficPackageResultOutput{}, options).(GetInstanceTrafficPackageResultOutput)
 }
 
 // A collection of arguments for invoking getInstanceTrafficPackage.

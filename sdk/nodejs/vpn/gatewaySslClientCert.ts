@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * vpc vpn_gateway_ssl_client_cert can be imported using the id, e.g.
+ * vpc vpnGatewaySslClientCert can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Vpn/gatewaySslClientCert:GatewaySslClientCert vpn_gateway_ssl_client_cert ssl_client_id
@@ -99,11 +99,11 @@ export interface GatewaySslClientCertState {
     /**
      * SSL-VPN-CLIENT Instance ID.
      */
-    sslVpnClientId?: pulumi.Input<string>;
+    sslVpnClientId?: pulumi.Input<string | undefined>;
     /**
      * `on`: Enable, `off`: Disable.
      */
-    switch?: pulumi.Input<string>;
+    switch?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -117,5 +117,5 @@ export interface GatewaySslClientCertArgs {
     /**
      * `on`: Enable, `off`: Disable.
      */
-    switch?: pulumi.Input<string>;
+    switch?: pulumi.Input<string | undefined>;
 }

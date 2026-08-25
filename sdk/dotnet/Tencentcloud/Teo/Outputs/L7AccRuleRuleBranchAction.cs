@@ -19,6 +19,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly Outputs.L7AccRuleRuleBranchActionAccessUrlRedirectParameters? AccessUrlRedirectParameters;
         /// <summary>
+        /// Advanced origin routing optimization configuration parameter. This parameter is required when Name is set to AdvancedOriginRouting.
+        /// </summary>
+        public readonly Outputs.L7AccRuleRuleBranchActionAdvancedOriginRoutingParameters? AdvancedOriginRoutingParameters;
+        /// <summary>
         /// Token authentication configuration parameter. this parameter is required when name is authentication.
         /// </summary>
         public readonly Outputs.L7AccRuleRuleBranchActionAuthenticationParameters? AuthenticationParameters;
@@ -46,6 +50,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// Intelligent compression configuration. this parameter is required when name is set to compression.
         /// </summary>
         public readonly Outputs.L7AccRuleRuleBranchActionCompressionParameters? CompressionParameters;
+        /// <summary>
+        /// Content compression configuration parameters. This parameter is required when the `Name` parameter is set to `ContentCompression`. This parameter uses a whitelist function; please contact Tencent Cloud engineers if needed.
+        /// </summary>
+        public readonly Outputs.L7AccRuleRuleBranchActionContentCompressionParameters? ContentCompressionParameters;
         /// <summary>
         /// Custom error page configuration parameters. this parameter is required when name is errorpage.
         /// </summary>
@@ -126,7 +134,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// - `ModifyResponseHeader`: Modify HTTP node response header;
         /// - `ModifyRequestHeader`: Modify HTTP node request header;
         /// - `ResponseSpeedLimit`: Single connection download speed limit.
-        /// - `SetContentIdentifierParameters`: Set content identifier.
+        /// - `SetContentIdentifier`: Set content identifier.
+        /// - `Vary`: Vary feature configuration.
+        /// - `ContentCompression`: Content compression configuration.
+        /// - `OriginAuthentication`: Origin authentication configuration.
+        /// - `AdvancedOriginRouting`: Advanced origin routing optimization.
+        /// - `Shield`: Origin offload (Shield).
+        /// - `SiteFailover`: Origin site failover.
         /// </summary>
         public readonly string Name;
         /// <summary>
@@ -137,6 +151,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// Offline cache configuration parameter. this parameter is required when name is offlinecache.
         /// </summary>
         public readonly Outputs.L7AccRuleRuleBranchActionOfflineCacheParameters? OfflineCacheParameters;
+        /// <summary>
+        /// Origin authentication configuration parameter. This parameter is required when Name is set to OriginAuthentication. This is a whitelist feature; please contact Tencent Cloud engineers if needed.
+        /// </summary>
+        public readonly Outputs.L7AccRuleRuleBranchActionOriginAuthenticationParameters? OriginAuthenticationParameters;
         /// <summary>
         /// Back-to-origin HTTPS configuration parameter. This parameter is required when the Name value is `OriginPullProtocol`.
         /// </summary>
@@ -161,6 +179,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// Content identification configuration parameter. this parameter is required when name is httpresponse.
         /// </summary>
         public readonly Outputs.L7AccRuleRuleBranchActionSetContentIdentifierParameters? SetContentIdentifierParameters;
+        /// <summary>
+        /// Origin offload (Shield) configuration parameter. This parameter is required when Name is set to Shield.
+        /// </summary>
+        public readonly Outputs.L7AccRuleRuleBranchActionShieldParameters? ShieldParameters;
+        /// <summary>
+        /// Origin site failover configuration parameter. This parameter is required when Name is set to SiteFailover.
+        /// </summary>
+        public readonly Outputs.L7AccRuleRuleBranchActionSiteFailoverParameters? SiteFailoverParameters;
         /// <summary>
         /// Smart acceleration configuration parameter. this parameter is required when name is smartrouting.
         /// </summary>
@@ -190,6 +216,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly Outputs.L7AccRuleRuleBranchActionUpstreamUrlRewriteParameters? UpstreamUrlRewriteParameters;
         /// <summary>
+        /// Vary configuration parameter. This parameter is required when Name is set to Vary.
+        /// </summary>
+        public readonly Outputs.L7AccRuleRuleBranchActionVaryParameters? VaryParameters;
+        /// <summary>
         /// The websocket configuration parameter. this parameter is required when name is websocket.
         /// </summary>
         public readonly Outputs.L7AccRuleRuleBranchActionWebSocketParameters? WebSocketParameters;
@@ -197,6 +227,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         [OutputConstructor]
         private L7AccRuleRuleBranchAction(
             Outputs.L7AccRuleRuleBranchActionAccessUrlRedirectParameters? accessUrlRedirectParameters,
+
+            Outputs.L7AccRuleRuleBranchActionAdvancedOriginRoutingParameters? advancedOriginRoutingParameters,
 
             Outputs.L7AccRuleRuleBranchActionAuthenticationParameters? authenticationParameters,
 
@@ -211,6 +243,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
             Outputs.L7AccRuleRuleBranchActionClientIpHeaderParameters? clientIpHeaderParameters,
 
             Outputs.L7AccRuleRuleBranchActionCompressionParameters? compressionParameters,
+
+            Outputs.L7AccRuleRuleBranchActionContentCompressionParameters? contentCompressionParameters,
 
             Outputs.L7AccRuleRuleBranchActionErrorPageParameters? errorPageParameters,
 
@@ -240,6 +274,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
 
             Outputs.L7AccRuleRuleBranchActionOfflineCacheParameters? offlineCacheParameters,
 
+            Outputs.L7AccRuleRuleBranchActionOriginAuthenticationParameters? originAuthenticationParameters,
+
             Outputs.L7AccRuleRuleBranchActionOriginPullProtocolParameters? originPullProtocolParameters,
 
             Outputs.L7AccRuleRuleBranchActionPostMaxSizeParameters? postMaxSizeParameters,
@@ -251,6 +287,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
             Outputs.L7AccRuleRuleBranchActionResponseSpeedLimitParameters? responseSpeedLimitParameters,
 
             Outputs.L7AccRuleRuleBranchActionSetContentIdentifierParameters? setContentIdentifierParameters,
+
+            Outputs.L7AccRuleRuleBranchActionShieldParameters? shieldParameters,
+
+            Outputs.L7AccRuleRuleBranchActionSiteFailoverParameters? siteFailoverParameters,
 
             Outputs.L7AccRuleRuleBranchActionSmartRoutingParameters? smartRoutingParameters,
 
@@ -266,9 +306,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
 
             Outputs.L7AccRuleRuleBranchActionUpstreamUrlRewriteParameters? upstreamUrlRewriteParameters,
 
+            Outputs.L7AccRuleRuleBranchActionVaryParameters? varyParameters,
+
             Outputs.L7AccRuleRuleBranchActionWebSocketParameters? webSocketParameters)
         {
             AccessUrlRedirectParameters = accessUrlRedirectParameters;
+            AdvancedOriginRoutingParameters = advancedOriginRoutingParameters;
             AuthenticationParameters = authenticationParameters;
             CacheKeyParameters = cacheKeyParameters;
             CacheParameters = cacheParameters;
@@ -276,6 +319,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
             ClientIpCountryParameters = clientIpCountryParameters;
             ClientIpHeaderParameters = clientIpHeaderParameters;
             CompressionParameters = compressionParameters;
+            ContentCompressionParameters = contentCompressionParameters;
             ErrorPageParameters = errorPageParameters;
             ForceRedirectHttpsParameters = forceRedirectHttpsParameters;
             HostHeaderParameters = hostHeaderParameters;
@@ -290,12 +334,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
             Name = name;
             OcspStaplingParameters = ocspStaplingParameters;
             OfflineCacheParameters = offlineCacheParameters;
+            OriginAuthenticationParameters = originAuthenticationParameters;
             OriginPullProtocolParameters = originPullProtocolParameters;
             PostMaxSizeParameters = postMaxSizeParameters;
             QuicParameters = quicParameters;
             RangeOriginPullParameters = rangeOriginPullParameters;
             ResponseSpeedLimitParameters = responseSpeedLimitParameters;
             SetContentIdentifierParameters = setContentIdentifierParameters;
+            ShieldParameters = shieldParameters;
+            SiteFailoverParameters = siteFailoverParameters;
             SmartRoutingParameters = smartRoutingParameters;
             StatusCodeCacheParameters = statusCodeCacheParameters;
             TlsConfigParameters = tlsConfigParameters;
@@ -303,6 +350,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
             UpstreamHttp2Parameters = upstreamHttp2Parameters;
             UpstreamRequestParameters = upstreamRequestParameters;
             UpstreamUrlRewriteParameters = upstreamUrlRewriteParameters;
+            VaryParameters = varyParameters;
             WebSocketParameters = webSocketParameters;
         }
     }

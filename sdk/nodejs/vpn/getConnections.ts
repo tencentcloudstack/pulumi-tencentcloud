@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Vpn.getConnections({});
+ * const example = tencentcloud.vpn.getConnections({});
  * ```
  *
  * ### Query vpn connections by filters
@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Vpn.getConnections({
+ * const example = tencentcloud.vpn.getConnections({
  *     name: "tf-example",
  *     id: "vpnx-fq4e4364",
  *     vpnGatewayId: "vpngw-8ccsnclt",
@@ -131,7 +131,7 @@ export interface GetConnectionsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Vpn.getConnections({});
+ * const example = tencentcloud.vpn.getConnections({});
  * ```
  *
  * ### Query vpn connections by filters
@@ -140,7 +140,7 @@ export interface GetConnectionsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Vpn.getConnections({
+ * const example = tencentcloud.vpn.getConnections({
  *     name: "tf-example",
  *     id: "vpnx-fq4e4364",
  *     vpnGatewayId: "vpngw-8ccsnclt",
@@ -173,29 +173,29 @@ export interface GetConnectionsOutputArgs {
     /**
      * Customer gateway ID of the VPN connection.
      */
-    customerGatewayId?: pulumi.Input<string>;
+    customerGatewayId?: pulumi.Input<string | undefined>;
     /**
      * ID of the VPN connection.
      */
-    id?: pulumi.Input<string>;
+    id?: pulumi.Input<string | undefined>;
     /**
      * Name of the VPN connection. The length of character is limited to 1-60.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Tags of the VPN connection to be queried.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * ID of the VPC.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * VPN gateway ID of the VPN connection.
      */
-    vpnGatewayId?: pulumi.Input<string>;
+    vpnGatewayId?: pulumi.Input<string | undefined>;
 }

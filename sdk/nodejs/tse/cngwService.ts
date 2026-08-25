@@ -70,7 +70,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * tse cngw_service can be imported using the id, e.g.
+ * tse cngwService can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Tse/cngwService:CngwService cngw_service gatewayId#name
@@ -216,45 +216,45 @@ export interface CngwServiceState {
     /**
      * gateway ID.
      */
-    gatewayId?: pulumi.Input<string>;
+    gatewayId?: pulumi.Input<string | undefined>;
     /**
      * service name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * path.
      */
-    path?: pulumi.Input<string>;
+    path?: pulumi.Input<string | undefined>;
     /**
      * protocol. Reference value:`https`, `http`, `tcp`, `udp`.
      */
-    protocol?: pulumi.Input<string>;
+    protocol?: pulumi.Input<string | undefined>;
     /**
      * retry times.
      */
-    retries?: pulumi.Input<number>;
+    retries?: pulumi.Input<number | undefined>;
     /**
      * service id.
      */
-    serviceId?: pulumi.Input<string>;
+    serviceId?: pulumi.Input<string | undefined>;
     /**
      * Deprecate ineffective tags Tag description list.
      *
      * @deprecated Deprecate ineffective tags
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * time out, unit:ms.
      */
-    timeout?: pulumi.Input<number>;
+    timeout?: pulumi.Input<number | undefined>;
     /**
      * service config information.
      */
-    upstreamInfo?: pulumi.Input<inputs.Tse.CngwServiceUpstreamInfo>;
+    upstreamInfo?: pulumi.Input<inputs.Tse.CngwServiceUpstreamInfo | undefined>;
     /**
      * service type. Reference value:`Kubernetes`, `Registry`, `IPList`, `HostIP`, `Scf`.
      */
-    upstreamType?: pulumi.Input<string>;
+    upstreamType?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -268,7 +268,7 @@ export interface CngwServiceArgs {
     /**
      * service name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * path.
      */
@@ -286,7 +286,7 @@ export interface CngwServiceArgs {
      *
      * @deprecated Deprecate ineffective tags
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * time out, unit:ms.
      */

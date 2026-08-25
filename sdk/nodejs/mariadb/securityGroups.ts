@@ -24,8 +24,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * mariadb security_groups can be imported using the id, e.g.
- *
+ * mariadb securityGroups can be imported using the id, e.g.
  * ```sh
  * $ pulumi import tencentcloud:Mariadb/securityGroups:SecurityGroups security_groups tdsql-4pzs5b67#sg-7kpsbxdb#mariadb
  * ```
@@ -114,15 +113,15 @@ export interface SecurityGroupsState {
     /**
      * instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * product name, fixed to mariadb.
      */
-    product?: pulumi.Input<string>;
+    product?: pulumi.Input<string | undefined>;
     /**
      * security group id.
      */
-    securityGroupId?: pulumi.Input<string>;
+    securityGroupId?: pulumi.Input<string | undefined>;
 }
 
 /**

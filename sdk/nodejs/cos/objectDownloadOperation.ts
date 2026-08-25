@@ -104,15 +104,15 @@ export interface ObjectDownloadOperationState {
     /**
      * Bucket.
      */
-    bucket?: pulumi.Input<string>;
+    bucket?: pulumi.Input<string | undefined>;
     /**
      * Download path.
      */
-    downloadPath?: pulumi.Input<string>;
+    downloadPath?: pulumi.Input<string | undefined>;
     /**
      * Object key.
      */
-    key?: pulumi.Input<string>;
+    key?: pulumi.Input<string | undefined>;
 }
 
 /**

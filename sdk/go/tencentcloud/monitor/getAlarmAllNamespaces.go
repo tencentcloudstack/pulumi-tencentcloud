@@ -87,12 +87,8 @@ type GetAlarmAllNamespacesResult struct {
 }
 
 func GetAlarmAllNamespacesOutput(ctx *pulumi.Context, args GetAlarmAllNamespacesOutputArgs, opts ...pulumi.InvokeOption) GetAlarmAllNamespacesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetAlarmAllNamespacesResultOutput, error) {
-			args := v.(GetAlarmAllNamespacesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Monitor/getAlarmAllNamespaces:getAlarmAllNamespaces", args, GetAlarmAllNamespacesResultOutput{}, options).(GetAlarmAllNamespacesResultOutput), nil
-		}).(GetAlarmAllNamespacesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Monitor/getAlarmAllNamespaces:getAlarmAllNamespaces", args, GetAlarmAllNamespacesResultOutput{}, options).(GetAlarmAllNamespacesResultOutput)
 }
 
 // A collection of arguments for invoking getAlarmAllNamespaces.

@@ -145,23 +145,23 @@ export interface NamespaceRoleAttachmentState {
     /**
      * The id of tdmq cluster.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Creation time of resource.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * The name of tdmq namespace.
      */
-    environId?: pulumi.Input<string>;
+    environId?: pulumi.Input<string | undefined>;
     /**
      * The permissions of tdmq role.
      */
-    permissions?: pulumi.Input<pulumi.Input<string>[]>;
+    permissions?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The name of tdmq role.
      */
-    roleName?: pulumi.Input<string>;
+    roleName?: pulumi.Input<string | undefined>;
 }
 
 /**

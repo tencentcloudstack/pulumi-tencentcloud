@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "sqlserver",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -56,9 +56,9 @@ import * as utilities from "../utilities";
  * });
  * const exampleAccount = new tencentcloud.sqlserver.Account("example", {
  *     instanceId: example.id,
- *     name: "tf_example_account",
- *     password: "Qwer@234",
- *     remark: "test-remark",
+ *     name: "tf_example",
+ *     password: "Password@123",
+ *     remark: "remark.",
  * });
  * ```
  *
@@ -67,7 +67,7 @@ import * as utilities from "../utilities";
  * SQL Server account can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Sqlserver/account:Account example mssql-3cdq7kx5#tf_example_account
+ * $ pulumi import tencentcloud:Sqlserver/account:Account example mssql-3cdq7kx5#tf_example
  * ```
  */
 export class Account extends pulumi.CustomResource {
@@ -183,35 +183,35 @@ export interface AccountState {
     /**
      * Create time of the SQL Server account.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Instance ID that the account belongs to.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Indicate that the account is root account or not.
      */
-    isAdmin?: pulumi.Input<boolean>;
+    isAdmin?: pulumi.Input<boolean | undefined>;
     /**
      * Name of the SQL Server account.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Password of the SQL Server account.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * Remark of the SQL Server account.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Status of the SQL Server account. Valid values: 1, 2, 3, 4. 1 for creating, 2 for running, 3 for modifying, 4 for resetting password, -1 for deleting.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * Last updated time of the SQL Server account.
      */
-    updateTime?: pulumi.Input<string>;
+    updateTime?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -225,11 +225,11 @@ export interface AccountArgs {
     /**
      * Indicate that the account is root account or not.
      */
-    isAdmin?: pulumi.Input<boolean>;
+    isAdmin?: pulumi.Input<boolean | undefined>;
     /**
      * Name of the SQL Server account.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Password of the SQL Server account.
      */
@@ -237,5 +237,5 @@ export interface AccountArgs {
     /**
      * Remark of the SQL Server account.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
 }

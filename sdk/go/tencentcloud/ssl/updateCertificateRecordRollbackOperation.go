@@ -41,7 +41,7 @@ import (
 //
 // ## Import
 //
-// ssl update_certificate_record_rollback can be imported using the id, e.g.
+// ssl updateCertificateRecordRollback can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Ssl/updateCertificateRecordRollbackOperation:UpdateCertificateRecordRollbackOperation update_certificate_record_rollback update_certificate_record_rollback_id

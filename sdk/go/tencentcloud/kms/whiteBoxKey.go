@@ -48,7 +48,7 @@ import (
 //
 // ## Import
 //
-// kms white_box_key can be imported using the id, e.g.
+// kms whiteBoxKey can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Kms/whiteBoxKey:WhiteBoxKey example 244dab8c-6dad-11ea-80c6-5254006d0810

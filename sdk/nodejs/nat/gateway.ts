@@ -231,47 +231,47 @@ export interface GatewayState {
     /**
      * EIP IP address set bound to the gateway. The value of at least 1 and at most 10 if do not apply for a whitelist.
      */
-    assignedEipSets?: pulumi.Input<pulumi.Input<string>[]>;
+    assignedEipSets?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000`. Default is `100`. When the value of parameter `natProductVersion` is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to `5000`.
      */
-    bandwidth?: pulumi.Input<number>;
+    bandwidth?: pulumi.Input<number | undefined>;
     /**
      * Create time of the NAT gateway.
      */
-    createdTime?: pulumi.Input<string>;
+    createdTime?: pulumi.Input<string | undefined>;
     /**
      * The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`. When the value of parameter `natProductVersion` is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to `2000000`.
      */
-    maxConcurrent?: pulumi.Input<number>;
+    maxConcurrent?: pulumi.Input<number | undefined>;
     /**
      * Name of the NAT gateway.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * 1: traditional NAT, 2: standard NAT, default value is 1.
      */
-    natProductVersion?: pulumi.Input<number>;
+    natProductVersion?: pulumi.Input<number | undefined>;
     /**
      * The elastic public IP bandwidth value (unit: Mbps) for binding NAT gateway. When this parameter is not filled in, it defaults to the bandwidth value of the elastic public IP, and for some users, it defaults to the bandwidth limit of the elastic public IP of that user type.
      */
-    stockPublicIpAddressesBandwidthOut?: pulumi.Input<number>;
+    stockPublicIpAddressesBandwidthOut?: pulumi.Input<number | undefined>;
     /**
      * Subnet of NAT.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * The available tags within this NAT gateway.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * ID of the vpc.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * The availability zone, such as `ap-guangzhou-3`.
      */
-    zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -285,31 +285,31 @@ export interface GatewayArgs {
     /**
      * The maximum public network output bandwidth of NAT gateway (unit: Mbps). Valid values: `20`, `50`, `100`, `200`, `500`, `1000`, `2000`, `5000`. Default is `100`. When the value of parameter `natProductVersion` is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to `5000`.
      */
-    bandwidth?: pulumi.Input<number>;
+    bandwidth?: pulumi.Input<number | undefined>;
     /**
      * The upper limit of concurrent connection of NAT gateway. Valid values: `1000000`, `3000000`, `10000000`. Default is `1000000`. When the value of parameter `natProductVersion` is 2, which is the standard NAT type, this parameter does not need to be filled in and defaults to `2000000`.
      */
-    maxConcurrent?: pulumi.Input<number>;
+    maxConcurrent?: pulumi.Input<number | undefined>;
     /**
      * Name of the NAT gateway.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * 1: traditional NAT, 2: standard NAT, default value is 1.
      */
-    natProductVersion?: pulumi.Input<number>;
+    natProductVersion?: pulumi.Input<number | undefined>;
     /**
      * The elastic public IP bandwidth value (unit: Mbps) for binding NAT gateway. When this parameter is not filled in, it defaults to the bandwidth value of the elastic public IP, and for some users, it defaults to the bandwidth limit of the elastic public IP of that user type.
      */
-    stockPublicIpAddressesBandwidthOut?: pulumi.Input<number>;
+    stockPublicIpAddressesBandwidthOut?: pulumi.Input<number | undefined>;
     /**
      * Subnet of NAT.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * The available tags within this NAT gateway.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * ID of the vpc.
      */
@@ -317,5 +317,5 @@ export interface GatewayArgs {
     /**
      * The availability zone, such as `ap-guangzhou-3`.
      */
-    zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string | undefined>;
 }

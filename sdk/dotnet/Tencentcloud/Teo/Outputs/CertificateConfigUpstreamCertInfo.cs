@@ -15,13 +15,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class CertificateConfigUpstreamCertInfo
     {
         /// <summary>
+        /// In the origin certificate verification scenario, this field is the CA certificate used by EO nodes during origin-pull for verifying the origin server's certificate. Deployed on EO nodes for EO to authenticate the server certificate. When used as an input parameter, leaving it blank means retaining the original configuration.
+        /// </summary>
+        public readonly Outputs.CertificateConfigUpstreamCertInfoUpstreamCertificateVerify? UpstreamCertificateVerify;
+        /// <summary>
         /// In the origin-pull mutual authentication scenario, this field represents the certificate (including the public and private keys) carried during EO node origin-pull, which is deployed in the EO node for the origin server to authenticate the EO node. When used as an input parameter, it is left blank to indicate retaining the original configuration.
         /// </summary>
         public readonly Outputs.CertificateConfigUpstreamCertInfoUpstreamMutualTls? UpstreamMutualTls;
 
         [OutputConstructor]
-        private CertificateConfigUpstreamCertInfo(Outputs.CertificateConfigUpstreamCertInfoUpstreamMutualTls? upstreamMutualTls)
+        private CertificateConfigUpstreamCertInfo(
+            Outputs.CertificateConfigUpstreamCertInfoUpstreamCertificateVerify? upstreamCertificateVerify,
+
+            Outputs.CertificateConfigUpstreamCertInfoUpstreamMutualTls? upstreamMutualTls)
         {
+            UpstreamCertificateVerify = upstreamCertificateVerify;
             UpstreamMutualTls = upstreamMutualTls;
         }
     }

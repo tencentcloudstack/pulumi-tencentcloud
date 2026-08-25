@@ -13,15 +13,19 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as std from "@pulumi/std";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Clb.getInstances({
+ * const example = tencentcloud.clb.getInstances({
  *     clbId: "lb-k2zjp9lv",
  *     networkType: "OPEN",
- *     clbName: "myclb",
+ *     clbName: "tf-example",
  *     projectId: 0,
- *     resultOutputFile: "mytestpath",
+ *     resultOutputFile: "myOutputPath",
  * });
+ * export const exclusiveClusterInfo = example.then(example => std.jsondecode({
+ *     input: example.clbLists?.[0]?.exclusiveCluster,
+ * })).then(invoke => invoke.result);
  * ```
  */
 export function getInstances(args?: GetInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetInstancesResult> {
@@ -105,15 +109,19 @@ export interface GetInstancesResult {
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
+ * import * as std from "@pulumi/std";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Clb.getInstances({
+ * const example = tencentcloud.clb.getInstances({
  *     clbId: "lb-k2zjp9lv",
  *     networkType: "OPEN",
- *     clbName: "myclb",
+ *     clbName: "tf-example",
  *     projectId: 0,
- *     resultOutputFile: "mytestpath",
+ *     resultOutputFile: "myOutputPath",
  * });
+ * export const exclusiveClusterInfo = example.then(example => std.jsondecode({
+ *     input: example.clbLists?.[0]?.exclusiveCluster,
+ * })).then(invoke => invoke.result);
  * ```
  */
 export function getInstancesOutput(args?: GetInstancesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstancesResult> {
@@ -136,25 +144,25 @@ export interface GetInstancesOutputArgs {
     /**
      * ID of the CLB to be queried.
      */
-    clbId?: pulumi.Input<string>;
+    clbId?: pulumi.Input<string | undefined>;
     /**
      * Name of the CLB to be queried.
      */
-    clbName?: pulumi.Input<string>;
+    clbName?: pulumi.Input<string | undefined>;
     /**
      * Master available zone id.
      */
-    masterZone?: pulumi.Input<string>;
+    masterZone?: pulumi.Input<string | undefined>;
     /**
      * Type of CLB instance, and available values include `OPEN` and `INTERNAL`.
      */
-    networkType?: pulumi.Input<string>;
+    networkType?: pulumi.Input<string | undefined>;
     /**
      * Project ID of the CLB.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

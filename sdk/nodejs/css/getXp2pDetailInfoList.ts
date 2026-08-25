@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const xp2pDetailInfoList = tencentcloud.Css.getXp2pDetailInfoList({
+ * const xp2pDetailInfoList = tencentcloud.css.getXp2pDetailInfoList({
  *     queryTime: "2023-11-01T14:55:01+08:00",
  *     types: ["live"],
  * });
@@ -89,7 +89,7 @@ export interface GetXp2pDetailInfoListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const xp2pDetailInfoList = tencentcloud.Css.getXp2pDetailInfoList({
+ * const xp2pDetailInfoList = tencentcloud.css.getXp2pDetailInfoList({
  *     queryTime: "2023-11-01T14:55:01+08:00",
  *     types: ["live"],
  * });
@@ -114,21 +114,21 @@ export interface GetXp2pDetailInfoListOutputArgs {
     /**
      * The dimension parameter can be used to specify the dimension for the query. If this parameter is not passed, the query will default to stream-level data. If you pass this parameter, it will only retrieve data for the specified dimension. The available dimension currently supported is AppId dimension, which allows you to query data based on the application ID. Please note that the returned fields will be related to the specified dimension.
      */
-    dimensions?: pulumi.Input<pulumi.Input<string>[]>;
+    dimensions?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The UTC minute granularity query time for querying usage data for a specific minute is in the format: yyyy-mm-ddTHH:MM:00Z. Please refer to the link https://cloud.tencent.com/document/product/266/11732#I.For example, if the local time is 2019-01-08 10:00:00 in Beijing, the corresponding UTC time would be 2019-01-08T10:00:00+08:00.This query supports data from the past six months.
      */
-    queryTime?: pulumi.Input<string>;
+    queryTime?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * The stream array can be used to specify the streams to be queried. If no stream is specified, the query will include all streams by default.
      */
-    streamNames?: pulumi.Input<pulumi.Input<string>[]>;
+    streamNames?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The type array can be used to specify the type of media content to be queried. The two available options are live for live streaming and vod for video on demand. If no type is specified, the query will include both live and VOD content by default.
      */
-    types?: pulumi.Input<pulumi.Input<string>[]>;
+    types?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

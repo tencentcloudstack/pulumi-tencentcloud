@@ -46,7 +46,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// 
     /// ## Import
     /// 
-    /// vpc notify_routes can be imported using the id, e.g.
+    /// vpc NotifyRoutes can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Vpc/notifyRoutes:NotifyRoutes notify_routes route_table_id#route_item_id

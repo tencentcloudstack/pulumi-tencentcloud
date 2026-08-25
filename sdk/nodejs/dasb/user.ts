@@ -86,7 +86,7 @@ export class User extends pulumi.CustomResource {
      */
     declare public readonly realName: pulumi.Output<string>;
     /**
-     * Username, 3-20 characters, must start with an English letter and cannot contain characters other than letters, numbers, '.', '_', '-'.
+     * Username, 3-20 characters, must start with an English letter and cannot contain characters other than `letters`, `numbers`, `.`, `_`, `-`.
      */
     declare public readonly userName: pulumi.Output<string>;
     /**
@@ -156,43 +156,43 @@ export interface UserState {
     /**
      * Authentication method, 0 - local, 1 - LDAP, 2 - OAuth. If not passed, the default is 0.
      */
-    authType?: pulumi.Input<number>;
+    authType?: pulumi.Input<number | undefined>;
     /**
      * Department ID, such as: 1.2.3.
      */
-    departmentId?: pulumi.Input<string>;
+    departmentId?: pulumi.Input<string | undefined>;
     /**
      * Email. Please provide at least one of `phone` or `email`.
      */
-    email?: pulumi.Input<string>;
+    email?: pulumi.Input<string | undefined>;
     /**
      * The set of user group IDs to which it belongs.
      */
-    groupIdSets?: pulumi.Input<pulumi.Input<number>[]>;
+    groupIdSets?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Enter it in the format of country area code|mobile phone number. For example: +86|***********, +852|xxxxxxxx. Please provide at least one of `phone` or `email`.
      */
-    phone?: pulumi.Input<string>;
+    phone?: pulumi.Input<string | undefined>;
     /**
      * Real name, maximum length 20 characters, cannot contain blank characters.
      */
-    realName?: pulumi.Input<string>;
+    realName?: pulumi.Input<string | undefined>;
     /**
-     * Username, 3-20 characters, must start with an English letter and cannot contain characters other than letters, numbers, '.', '_', '-'.
+     * Username, 3-20 characters, must start with an English letter and cannot contain characters other than `letters`, `numbers`, `.`, `_`, `-`.
      */
-    userName?: pulumi.Input<string>;
+    userName?: pulumi.Input<string | undefined>;
     /**
      * User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.
      */
-    validateFrom?: pulumi.Input<string>;
+    validateFrom?: pulumi.Input<string | undefined>;
     /**
      * Access time period limit, a string composed of 0 and 1, length 168 (7 * 24), representing the time period the user is allowed to access in a week. The Nth character in the string represents the Nth hour of the week, 0 - means access is not allowed, 1 - means access is allowed.
      */
-    validateTime?: pulumi.Input<string>;
+    validateTime?: pulumi.Input<string | undefined>;
     /**
      * User expiration time, such as: 2021-09-23T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.
      */
-    validateTo?: pulumi.Input<string>;
+    validateTo?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -202,41 +202,41 @@ export interface UserArgs {
     /**
      * Authentication method, 0 - local, 1 - LDAP, 2 - OAuth. If not passed, the default is 0.
      */
-    authType?: pulumi.Input<number>;
+    authType?: pulumi.Input<number | undefined>;
     /**
      * Department ID, such as: 1.2.3.
      */
-    departmentId?: pulumi.Input<string>;
+    departmentId?: pulumi.Input<string | undefined>;
     /**
      * Email. Please provide at least one of `phone` or `email`.
      */
-    email?: pulumi.Input<string>;
+    email?: pulumi.Input<string | undefined>;
     /**
      * The set of user group IDs to which it belongs.
      */
-    groupIdSets?: pulumi.Input<pulumi.Input<number>[]>;
+    groupIdSets?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Enter it in the format of country area code|mobile phone number. For example: +86|***********, +852|xxxxxxxx. Please provide at least one of `phone` or `email`.
      */
-    phone?: pulumi.Input<string>;
+    phone?: pulumi.Input<string | undefined>;
     /**
      * Real name, maximum length 20 characters, cannot contain blank characters.
      */
     realName: pulumi.Input<string>;
     /**
-     * Username, 3-20 characters, must start with an English letter and cannot contain characters other than letters, numbers, '.', '_', '-'.
+     * Username, 3-20 characters, must start with an English letter and cannot contain characters other than `letters`, `numbers`, `.`, `_`, `-`.
      */
     userName: pulumi.Input<string>;
     /**
      * User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.
      */
-    validateFrom?: pulumi.Input<string>;
+    validateFrom?: pulumi.Input<string | undefined>;
     /**
      * Access time period limit, a string composed of 0 and 1, length 168 (7 * 24), representing the time period the user is allowed to access in a week. The Nth character in the string represents the Nth hour of the week, 0 - means access is not allowed, 1 - means access is allowed.
      */
-    validateTime?: pulumi.Input<string>;
+    validateTime?: pulumi.Input<string | undefined>;
     /**
      * User expiration time, such as: 2021-09-23T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.
      */
-    validateTo?: pulumi.Input<string>;
+    validateTo?: pulumi.Input<string | undefined>;
 }

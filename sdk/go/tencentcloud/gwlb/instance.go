@@ -36,17 +36,17 @@ import (
 //			if param := cfg.Get("availabilityZone"); param != "" {
 //				availabilityZone = param
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("subnet"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("10.0.20.0/28"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -54,8 +54,8 @@ import (
 //				return err
 //			}
 //			_, err = gwlb.NewInstance(ctx, "gwlb_instance", &gwlb.InstanceArgs{
-//				VpcId:            vpc.ID(),
-//				SubnetId:         subnet.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 //				LoadBalancerName: pulumi.String("tf-test"),
 //				LbChargeType:     pulumi.String("POSTPAID_BY_HOUR"),
 //				Tags: gwlb.InstanceTagArray{
@@ -76,7 +76,7 @@ import (
 //
 // ## Import
 //
-// gwlb gwlb_instance can be imported using the id, e.g.
+// gwlb gwlbInstance can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Gwlb/instance:Instance gwlb_instance gwlb_instance_id

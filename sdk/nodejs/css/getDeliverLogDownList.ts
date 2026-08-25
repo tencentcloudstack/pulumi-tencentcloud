@@ -44,5 +44,5 @@ export function getDeliverLogDownListOutput(args?: GetDeliverLogDownListOutputAr
  * A collection of arguments for invoking getDeliverLogDownList.
  */
 export interface GetDeliverLogDownListOutputArgs {
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

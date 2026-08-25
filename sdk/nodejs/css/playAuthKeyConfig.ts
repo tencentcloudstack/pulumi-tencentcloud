@@ -24,7 +24,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * css play_auth_key_config can be imported using the id, e.g.
+ * css playAuthKeyConfig can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Css/playAuthKeyConfig:PlayAuthKeyConfig play_auth_key_config play_auth_key_config_id
@@ -120,23 +120,23 @@ export interface PlayAuthKeyConfigState {
     /**
      * Alternate key for authentication. No transfer means that the current value is not modified.
      */
-    authBackKey?: pulumi.Input<string>;
+    authBackKey?: pulumi.Input<string | undefined>;
     /**
      * Valid time, unit: second. No transfer means that the current value is not modified.
      */
-    authDelta?: pulumi.Input<number>;
+    authDelta?: pulumi.Input<number | undefined>;
     /**
      * Authentication key. No transfer means that the current value is not modified.
      */
-    authKey?: pulumi.Input<string>;
+    authKey?: pulumi.Input<string | undefined>;
     /**
      * Domain Name.
      */
-    domainName?: pulumi.Input<string>;
+    domainName?: pulumi.Input<string | undefined>;
     /**
      * Enable or not, 0: Close, 1: Enable. No transfer means that the current value is not modified.
      */
-    enable?: pulumi.Input<number>;
+    enable?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -146,15 +146,15 @@ export interface PlayAuthKeyConfigArgs {
     /**
      * Alternate key for authentication. No transfer means that the current value is not modified.
      */
-    authBackKey?: pulumi.Input<string>;
+    authBackKey?: pulumi.Input<string | undefined>;
     /**
      * Valid time, unit: second. No transfer means that the current value is not modified.
      */
-    authDelta?: pulumi.Input<number>;
+    authDelta?: pulumi.Input<number | undefined>;
     /**
      * Authentication key. No transfer means that the current value is not modified.
      */
-    authKey?: pulumi.Input<string>;
+    authKey?: pulumi.Input<string | undefined>;
     /**
      * Domain Name.
      */
@@ -162,5 +162,5 @@ export interface PlayAuthKeyConfigArgs {
     /**
      * Enable or not, 0: Close, 1: Enable. No transfer means that the current value is not modified.
      */
-    enable?: pulumi.Input<number>;
+    enable?: pulumi.Input<number | undefined>;
 }

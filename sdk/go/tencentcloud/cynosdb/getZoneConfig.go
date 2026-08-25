@@ -62,12 +62,8 @@ type GetZoneConfigResult struct {
 }
 
 func GetZoneConfigOutput(ctx *pulumi.Context, args GetZoneConfigOutputArgs, opts ...pulumi.InvokeOption) GetZoneConfigResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetZoneConfigResultOutput, error) {
-			args := v.(GetZoneConfigArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cynosdb/getZoneConfig:getZoneConfig", args, GetZoneConfigResultOutput{}, options).(GetZoneConfigResultOutput), nil
-		}).(GetZoneConfigResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cynosdb/getZoneConfig:getZoneConfig", args, GetZoneConfigResultOutput{}, options).(GetZoneConfigResultOutput)
 }
 
 // A collection of arguments for invoking getZoneConfig.

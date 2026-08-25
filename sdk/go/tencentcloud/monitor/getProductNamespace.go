@@ -67,12 +67,8 @@ type GetProductNamespaceResult struct {
 }
 
 func GetProductNamespaceOutput(ctx *pulumi.Context, args GetProductNamespaceOutputArgs, opts ...pulumi.InvokeOption) GetProductNamespaceResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetProductNamespaceResultOutput, error) {
-			args := v.(GetProductNamespaceArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Monitor/getProductNamespace:getProductNamespace", args, GetProductNamespaceResultOutput{}, options).(GetProductNamespaceResultOutput), nil
-		}).(GetProductNamespaceResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Monitor/getProductNamespace:getProductNamespace", args, GetProductNamespaceResultOutput{}, options).(GetProductNamespaceResultOutput)
 }
 
 // A collection of arguments for invoking getProductNamespace.

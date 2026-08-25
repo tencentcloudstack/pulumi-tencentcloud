@@ -81,12 +81,8 @@ type GetDbSpaceStatusResult struct {
 }
 
 func GetDbSpaceStatusOutput(ctx *pulumi.Context, args GetDbSpaceStatusOutputArgs, opts ...pulumi.InvokeOption) GetDbSpaceStatusResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDbSpaceStatusResultOutput, error) {
-			args := v.(GetDbSpaceStatusArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dbbrain/getDbSpaceStatus:getDbSpaceStatus", args, GetDbSpaceStatusResultOutput{}, options).(GetDbSpaceStatusResultOutput), nil
-		}).(GetDbSpaceStatusResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dbbrain/getDbSpaceStatus:getDbSpaceStatus", args, GetDbSpaceStatusResultOutput{}, options).(GetDbSpaceStatusResultOutput)
 }
 
 // A collection of arguments for invoking getDbSpaceStatus.

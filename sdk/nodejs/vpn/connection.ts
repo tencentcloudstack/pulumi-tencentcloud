@@ -370,163 +370,163 @@ export interface ConnectionState {
     /**
      * BGP config.
      */
-    bgpConfig?: pulumi.Input<inputs.Vpn.ConnectionBgpConfig>;
+    bgpConfig?: pulumi.Input<inputs.Vpn.ConnectionBgpConfig | undefined>;
     /**
      * Create time of the VPN connection.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * ID of the customer gateway.
      */
-    customerGatewayId?: pulumi.Input<string>;
+    customerGatewayId?: pulumi.Input<string | undefined>;
     /**
      * The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.
      */
-    dpdAction?: pulumi.Input<string>;
+    dpdAction?: pulumi.Input<string | undefined>;
     /**
      * Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).
      */
-    dpdEnable?: pulumi.Input<number>;
+    dpdEnable?: pulumi.Input<number | undefined>;
     /**
      * DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.
      */
-    dpdTimeout?: pulumi.Input<number>;
+    dpdTimeout?: pulumi.Input<number | undefined>;
     /**
      * Whether intra-tunnel health checks are supported.
      */
-    enableHealthCheck?: pulumi.Input<boolean>;
+    enableHealthCheck?: pulumi.Input<boolean | undefined>;
     /**
      * Encrypt proto of the VPN connection.
      */
-    encryptProto?: pulumi.Input<string>;
+    encryptProto?: pulumi.Input<string | undefined>;
     /**
      * VPN channel health check configuration.
      */
-    healthCheckConfig?: pulumi.Input<inputs.Vpn.ConnectionHealthCheckConfig>;
+    healthCheckConfig?: pulumi.Input<inputs.Vpn.ConnectionHealthCheckConfig | undefined>;
     /**
      * Health check the address of this terminal.
      */
-    healthCheckLocalIp?: pulumi.Input<string>;
+    healthCheckLocalIp?: pulumi.Input<string | undefined>;
     /**
      * Health check peer address.
      */
-    healthCheckRemoteIp?: pulumi.Input<string>;
+    healthCheckRemoteIp?: pulumi.Input<string | undefined>;
     /**
      * DH group name of the IKE operation specification. Valid values: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`. Default value is `GROUP1`.
      */
-    ikeDhGroupName?: pulumi.Input<string>;
+    ikeDhGroupName?: pulumi.Input<string | undefined>;
     /**
      * Exchange mode of the IKE operation specification. Valid values: `AGGRESSIVE`, `MAIN`. Default value is `MAIN`.
      */
-    ikeExchangeMode?: pulumi.Input<string>;
+    ikeExchangeMode?: pulumi.Input<string | undefined>;
     /**
      * Local address of IKE operation specification, valid when ikeLocalIdentity is `ADDRESS`, generally the value is `publicIpAddress` of the related VPN gateway.
      */
-    ikeLocalAddress?: pulumi.Input<string>;
+    ikeLocalAddress?: pulumi.Input<string | undefined>;
     /**
      * Local FQDN name of the IKE operation specification.
      */
-    ikeLocalFqdnName?: pulumi.Input<string>;
+    ikeLocalFqdnName?: pulumi.Input<string | undefined>;
     /**
      * Local identity way of IKE operation specification. Valid values: `ADDRESS`, `FQDN`. Default value is `ADDRESS`.
      */
-    ikeLocalIdentity?: pulumi.Input<string>;
+    ikeLocalIdentity?: pulumi.Input<string | undefined>;
     /**
      * Proto authenticate algorithm of the IKE operation specification. Valid values: `MD5`, `SHA`, `SHA-256`. Default Value is `MD5`.
      */
-    ikeProtoAuthenAlgorithm?: pulumi.Input<string>;
+    ikeProtoAuthenAlgorithm?: pulumi.Input<string | undefined>;
     /**
      * Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`,`AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
      */
-    ikeProtoEncryAlgorithm?: pulumi.Input<string>;
+    ikeProtoEncryAlgorithm?: pulumi.Input<string | undefined>;
     /**
      * Remote address of IKE operation specification, valid when ikeRemoteIdentity is `ADDRESS`, generally the value is `publicIpAddress` of the related customer gateway.
      */
-    ikeRemoteAddress?: pulumi.Input<string>;
+    ikeRemoteAddress?: pulumi.Input<string | undefined>;
     /**
      * Remote FQDN name of the IKE operation specification.
      */
-    ikeRemoteFqdnName?: pulumi.Input<string>;
+    ikeRemoteFqdnName?: pulumi.Input<string | undefined>;
     /**
      * Remote identity way of IKE operation specification. Valid values: `ADDRESS`, `FQDN`. Default value is `ADDRESS`.
      */
-    ikeRemoteIdentity?: pulumi.Input<string>;
+    ikeRemoteIdentity?: pulumi.Input<string | undefined>;
     /**
      * SA lifetime of the IKE operation specification, unit is `second`. The value ranges from 60 to 604800. Default value is 86400 seconds.
      */
-    ikeSaLifetimeSeconds?: pulumi.Input<number>;
+    ikeSaLifetimeSeconds?: pulumi.Input<number | undefined>;
     /**
      * Version of the IKE operation specification, values: `IKEV1`, `IKEV2`. Default value is `IKEV1`.
      */
-    ikeVersion?: pulumi.Input<string>;
+    ikeVersion?: pulumi.Input<string | undefined>;
     /**
      * Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `NULL`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
      */
-    ipsecEncryptAlgorithm?: pulumi.Input<string>;
+    ipsecEncryptAlgorithm?: pulumi.Input<string | undefined>;
     /**
      * Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is `MD5`.
      */
-    ipsecIntegrityAlgorithm?: pulumi.Input<string>;
+    ipsecIntegrityAlgorithm?: pulumi.Input<string | undefined>;
     /**
      * PFS DH group. Valid value: `DH-GROUP1`, `DH-GROUP2`, `DH-GROUP5`, `DH-GROUP14`, `DH-GROUP24`, `NULL`. Default value is `NULL`.
      */
-    ipsecPfsDhGroup?: pulumi.Input<string>;
+    ipsecPfsDhGroup?: pulumi.Input<string | undefined>;
     /**
      * SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.
      */
-    ipsecSaLifetimeSeconds?: pulumi.Input<number>;
+    ipsecSaLifetimeSeconds?: pulumi.Input<number | undefined>;
     /**
      * SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.
      */
-    ipsecSaLifetimeTraffic?: pulumi.Input<number>;
+    ipsecSaLifetimeTraffic?: pulumi.Input<number | undefined>;
     /**
      * Indicate whether is ccn type. Modification of this field only impacts force new logic of `vpcId`. If `isCcnType` is true, modification of `vpcId` will be ignored.
      */
-    isCcnType?: pulumi.Input<boolean>;
+    isCcnType?: pulumi.Input<boolean | undefined>;
     /**
      * Name of the VPN connection. The length of character is limited to 1-60.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * The default negotiation type is `active`. Optional values: `active` (active negotiation), `passive` (passive negotiation), `flowTrigger` (traffic negotiation).
      */
-    negotiationType?: pulumi.Input<string>;
+    negotiationType?: pulumi.Input<string | undefined>;
     /**
      * Net status of the VPN connection. Valid value: `AVAILABLE`.
      */
-    netStatus?: pulumi.Input<string>;
+    netStatus?: pulumi.Input<string | undefined>;
     /**
      * Pre-shared key of the VPN connection.
      */
-    preShareKey?: pulumi.Input<string>;
+    preShareKey?: pulumi.Input<string | undefined>;
     /**
      * Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`, `Bgp`.
      */
-    routeType?: pulumi.Input<string>;
+    routeType?: pulumi.Input<string | undefined>;
     /**
      * SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.
      */
-    securityGroupPolicies?: pulumi.Input<pulumi.Input<inputs.Vpn.ConnectionSecurityGroupPolicy>[]>;
+    securityGroupPolicies?: pulumi.Input<pulumi.Input<inputs.Vpn.ConnectionSecurityGroupPolicy>[] | undefined>;
     /**
      * State of the connection. Valid value: `PENDING`, `AVAILABLE`, `DELETING`.
      */
-    state?: pulumi.Input<string>;
+    state?: pulumi.Input<string | undefined>;
     /**
      * A list of tags used to associate different resources.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * ID of the VPC. Required if vpn gateway is not in `CCN` type, and doesn't make sense for `CCN` vpn gateway.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * ID of the VPN gateway.
      */
-    vpnGatewayId?: pulumi.Input<string>;
+    vpnGatewayId?: pulumi.Input<string | undefined>;
     /**
      * Vpn proto of the VPN connection.
      */
-    vpnProto?: pulumi.Input<string>;
+    vpnProto?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -536,7 +536,7 @@ export interface ConnectionArgs {
     /**
      * BGP config.
      */
-    bgpConfig?: pulumi.Input<inputs.Vpn.ConnectionBgpConfig>;
+    bgpConfig?: pulumi.Input<inputs.Vpn.ConnectionBgpConfig | undefined>;
     /**
      * ID of the customer gateway.
      */
@@ -544,107 +544,107 @@ export interface ConnectionArgs {
     /**
      * The action after DPD timeout. Valid values: clear (disconnect) and restart (try again). It is valid when DpdEnable is 1.
      */
-    dpdAction?: pulumi.Input<string>;
+    dpdAction?: pulumi.Input<string | undefined>;
     /**
      * Specifies whether to enable DPD. Valid values: 0 (disable) and 1 (enable).
      */
-    dpdEnable?: pulumi.Input<number>;
+    dpdEnable?: pulumi.Input<number | undefined>;
     /**
      * DPD timeout period.Valid value ranges: [30~60], Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of DpdEnable is 1.
      */
-    dpdTimeout?: pulumi.Input<number>;
+    dpdTimeout?: pulumi.Input<number | undefined>;
     /**
      * Whether intra-tunnel health checks are supported.
      */
-    enableHealthCheck?: pulumi.Input<boolean>;
+    enableHealthCheck?: pulumi.Input<boolean | undefined>;
     /**
      * VPN channel health check configuration.
      */
-    healthCheckConfig?: pulumi.Input<inputs.Vpn.ConnectionHealthCheckConfig>;
+    healthCheckConfig?: pulumi.Input<inputs.Vpn.ConnectionHealthCheckConfig | undefined>;
     /**
      * Health check the address of this terminal.
      */
-    healthCheckLocalIp?: pulumi.Input<string>;
+    healthCheckLocalIp?: pulumi.Input<string | undefined>;
     /**
      * Health check peer address.
      */
-    healthCheckRemoteIp?: pulumi.Input<string>;
+    healthCheckRemoteIp?: pulumi.Input<string | undefined>;
     /**
      * DH group name of the IKE operation specification. Valid values: `GROUP1`, `GROUP2`, `GROUP5`, `GROUP14`, `GROUP24`. Default value is `GROUP1`.
      */
-    ikeDhGroupName?: pulumi.Input<string>;
+    ikeDhGroupName?: pulumi.Input<string | undefined>;
     /**
      * Exchange mode of the IKE operation specification. Valid values: `AGGRESSIVE`, `MAIN`. Default value is `MAIN`.
      */
-    ikeExchangeMode?: pulumi.Input<string>;
+    ikeExchangeMode?: pulumi.Input<string | undefined>;
     /**
      * Local address of IKE operation specification, valid when ikeLocalIdentity is `ADDRESS`, generally the value is `publicIpAddress` of the related VPN gateway.
      */
-    ikeLocalAddress?: pulumi.Input<string>;
+    ikeLocalAddress?: pulumi.Input<string | undefined>;
     /**
      * Local FQDN name of the IKE operation specification.
      */
-    ikeLocalFqdnName?: pulumi.Input<string>;
+    ikeLocalFqdnName?: pulumi.Input<string | undefined>;
     /**
      * Local identity way of IKE operation specification. Valid values: `ADDRESS`, `FQDN`. Default value is `ADDRESS`.
      */
-    ikeLocalIdentity?: pulumi.Input<string>;
+    ikeLocalIdentity?: pulumi.Input<string | undefined>;
     /**
      * Proto authenticate algorithm of the IKE operation specification. Valid values: `MD5`, `SHA`, `SHA-256`. Default Value is `MD5`.
      */
-    ikeProtoAuthenAlgorithm?: pulumi.Input<string>;
+    ikeProtoAuthenAlgorithm?: pulumi.Input<string | undefined>;
     /**
      * Proto encrypt algorithm of the IKE operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`,`AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
      */
-    ikeProtoEncryAlgorithm?: pulumi.Input<string>;
+    ikeProtoEncryAlgorithm?: pulumi.Input<string | undefined>;
     /**
      * Remote address of IKE operation specification, valid when ikeRemoteIdentity is `ADDRESS`, generally the value is `publicIpAddress` of the related customer gateway.
      */
-    ikeRemoteAddress?: pulumi.Input<string>;
+    ikeRemoteAddress?: pulumi.Input<string | undefined>;
     /**
      * Remote FQDN name of the IKE operation specification.
      */
-    ikeRemoteFqdnName?: pulumi.Input<string>;
+    ikeRemoteFqdnName?: pulumi.Input<string | undefined>;
     /**
      * Remote identity way of IKE operation specification. Valid values: `ADDRESS`, `FQDN`. Default value is `ADDRESS`.
      */
-    ikeRemoteIdentity?: pulumi.Input<string>;
+    ikeRemoteIdentity?: pulumi.Input<string | undefined>;
     /**
      * SA lifetime of the IKE operation specification, unit is `second`. The value ranges from 60 to 604800. Default value is 86400 seconds.
      */
-    ikeSaLifetimeSeconds?: pulumi.Input<number>;
+    ikeSaLifetimeSeconds?: pulumi.Input<number | undefined>;
     /**
      * Version of the IKE operation specification, values: `IKEV1`, `IKEV2`. Default value is `IKEV1`.
      */
-    ikeVersion?: pulumi.Input<string>;
+    ikeVersion?: pulumi.Input<string | undefined>;
     /**
      * Encrypt algorithm of the IPSEC operation specification. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, `NULL`, `AES128GCM128`, `AES192GCM128`, `AES256GCM128`. Default value is `3DES-CBC`.
      */
-    ipsecEncryptAlgorithm?: pulumi.Input<string>;
+    ipsecEncryptAlgorithm?: pulumi.Input<string | undefined>;
     /**
      * Integrity algorithm of the IPSEC operation specification. Valid values: `SHA1`, `MD5`, `SHA-256`. Default value is `MD5`.
      */
-    ipsecIntegrityAlgorithm?: pulumi.Input<string>;
+    ipsecIntegrityAlgorithm?: pulumi.Input<string | undefined>;
     /**
      * PFS DH group. Valid value: `DH-GROUP1`, `DH-GROUP2`, `DH-GROUP5`, `DH-GROUP14`, `DH-GROUP24`, `NULL`. Default value is `NULL`.
      */
-    ipsecPfsDhGroup?: pulumi.Input<string>;
+    ipsecPfsDhGroup?: pulumi.Input<string | undefined>;
     /**
      * SA lifetime of the IPSEC operation specification, unit is second. Valid value ranges: [180~604800]. Default value is 3600 seconds.
      */
-    ipsecSaLifetimeSeconds?: pulumi.Input<number>;
+    ipsecSaLifetimeSeconds?: pulumi.Input<number | undefined>;
     /**
      * SA lifetime of the IPSEC operation specification, unit is KB. The value should not be less then 2560. Default value is 1843200.
      */
-    ipsecSaLifetimeTraffic?: pulumi.Input<number>;
+    ipsecSaLifetimeTraffic?: pulumi.Input<number | undefined>;
     /**
      * Name of the VPN connection. The length of character is limited to 1-60.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * The default negotiation type is `active`. Optional values: `active` (active negotiation), `passive` (passive negotiation), `flowTrigger` (traffic negotiation).
      */
-    negotiationType?: pulumi.Input<string>;
+    negotiationType?: pulumi.Input<string | undefined>;
     /**
      * Pre-shared key of the VPN connection.
      */
@@ -652,19 +652,19 @@ export interface ConnectionArgs {
     /**
      * Route type of the VPN connection. Valid value: `STATIC`, `StaticRoute`, `Policy`, `Bgp`.
      */
-    routeType?: pulumi.Input<string>;
+    routeType?: pulumi.Input<string | undefined>;
     /**
      * SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}, 10.0.0.5/24 is the vpc intranet segment, and 172.123.10.5/16 is the IDC network segment. Users specify which network segments in the VPC can communicate with which network segments in your IDC.
      */
-    securityGroupPolicies?: pulumi.Input<pulumi.Input<inputs.Vpn.ConnectionSecurityGroupPolicy>[]>;
+    securityGroupPolicies?: pulumi.Input<pulumi.Input<inputs.Vpn.ConnectionSecurityGroupPolicy>[] | undefined>;
     /**
      * A list of tags used to associate different resources.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * ID of the VPC. Required if vpn gateway is not in `CCN` type, and doesn't make sense for `CCN` vpn gateway.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * ID of the VPN gateway.
      */

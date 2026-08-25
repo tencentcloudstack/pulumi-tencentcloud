@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Identity
 {
     /// <summary>
-    /// Provides a resource to create a organization IdentityCenterExternalSamlIdentityProvider
+    /// Provides a resource to create a Organization identity center external saml identity provider
     /// 
     /// ## Example Usage
     /// 
@@ -23,10 +23,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Identity
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var identityCenterExternalSamlIdentityProvider = new Tencentcloud.Identity.CenterExternalSamlIdentityProvider("identity_center_external_saml_identity_provider", new()
+    ///     var example = new Tencentcloud.Identity.CenterExternalSamlIdentityProvider("example", new()
     ///     {
-    ///         ZoneId = "z-xxxxxx",
+    ///         ZoneId = "z-1os7c9znogct",
     ///         SsoStatus = "Enabled",
+    ///         EncodedMetadataDocument = "PD94bWwgdmVyc2lvbj0iM......VzY3JpcHRvcj4=",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Or
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Identity.CenterExternalSamlIdentityProvider("example", new()
+    ///     {
+    ///         ZoneId = "z-1os7c9znogct",
+    ///         EntityId = "https://sts.windows.net/d513d5bc-9f39-4069-ba9a-1eeab2ca58c1/",
+    ///         LoginUrl = "https://login.microsoftonline.com/d513d5bc-9f39-4069-ba9a-1eeab2ca58c1/saml2",
+    ///         SsoStatus = "Enabled",
+    ///         X509Certificate = @"-----BEGIN CERTIFICATE-----
+    /// MIIC8DCCAdigAwIBAgIQVbznAx6JSrhKG7gfJdx+jDANBgkqhkiG9w0BAQsFADA0MTIwMAYDVQQD
+    /// ......
+    /// ......
+    /// ......
+    /// 8hRskP2V6CH9PS0Zz2Zq
+    /// -----END CERTIFICATE-----
+    /// ",
     ///     });
     /// 
     /// });
@@ -34,10 +64,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Identity
     /// 
     /// ## Import
     /// 
-    /// organization identity_center_external_saml_identity_provider can be imported using the id, e.g.
+    /// Organization identity center external saml identity provider can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Identity/centerExternalSamlIdentityProvider:CenterExternalSamlIdentityProvider identity_center_external_saml_identity_provider ${zoneId}
+    /// $ pulumi import tencentcloud:Identity/centerExternalSamlIdentityProvider:CenterExternalSamlIdentityProvider example z-1os7c9znogct
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Identity/centerExternalSamlIdentityProvider:CenterExternalSamlIdentityProvider")]

@@ -51826,7 +51826,9 @@ type TranscodeTemplateEnhanceConfigVideoEnhance struct {
 	ColorEnhance *TranscodeTemplateEnhanceConfigVideoEnhanceColorEnhance `pulumi:"colorEnhance"`
 	// Video Noise Reduction Configuration.Note: This field may return null, indicating that no valid value can be obtained.
 	Denoise *TranscodeTemplateEnhanceConfigVideoEnhanceDenoise `pulumi:"denoise"`
-	// Face Enhancement Configuration.Note: This field may return null, indicating that no valid value can be obtained.
+	// It has been deprecated from version v1.82.67. Please do not use this again. Face Enhancement Configuration.Note: This field may return null, indicating that no valid value can be obtained.
+	//
+	// Deprecated: It has been deprecated from version v1.82.67. Please do not use this again.
 	FaceEnhance *TranscodeTemplateEnhanceConfigVideoEnhanceFaceEnhance `pulumi:"faceEnhance"`
 	// Interpolation frame rate configuration.Note: This field may return null, indicating that no valid value can be obtained.
 	FrameRate *TranscodeTemplateEnhanceConfigVideoEnhanceFrameRate `pulumi:"frameRate"`
@@ -51838,7 +51840,9 @@ type TranscodeTemplateEnhanceConfigVideoEnhance struct {
 	LowLightEnhance *TranscodeTemplateEnhanceConfigVideoEnhanceLowLightEnhance `pulumi:"lowLightEnhance"`
 	// De-scratch configuration.Note: This field may return null, indicating that no valid value can be obtained.
 	ScratchRepair *TranscodeTemplateEnhanceConfigVideoEnhanceScratchRepair `pulumi:"scratchRepair"`
-	// Detail Enhancement Configuration.Note: This field may return null, indicating that no valid value can be obtained.
+	// It has been deprecated from version v1.82.67. Please do not use this again. Detail Enhancement Configuration.Note: This field may return null, indicating that no valid value can be obtained.
+	//
+	// Deprecated: It has been deprecated from version v1.82.67. Please do not use this again.
 	SharpEnhance *TranscodeTemplateEnhanceConfigVideoEnhanceSharpEnhance `pulumi:"sharpEnhance"`
 	// Super resolution configuration.Note: This field may return null, indicating that no valid value can be obtained.
 	SuperResolution *TranscodeTemplateEnhanceConfigVideoEnhanceSuperResolution `pulumi:"superResolution"`
@@ -51862,7 +51866,9 @@ type TranscodeTemplateEnhanceConfigVideoEnhanceArgs struct {
 	ColorEnhance TranscodeTemplateEnhanceConfigVideoEnhanceColorEnhancePtrInput `pulumi:"colorEnhance"`
 	// Video Noise Reduction Configuration.Note: This field may return null, indicating that no valid value can be obtained.
 	Denoise TranscodeTemplateEnhanceConfigVideoEnhanceDenoisePtrInput `pulumi:"denoise"`
-	// Face Enhancement Configuration.Note: This field may return null, indicating that no valid value can be obtained.
+	// It has been deprecated from version v1.82.67. Please do not use this again. Face Enhancement Configuration.Note: This field may return null, indicating that no valid value can be obtained.
+	//
+	// Deprecated: It has been deprecated from version v1.82.67. Please do not use this again.
 	FaceEnhance TranscodeTemplateEnhanceConfigVideoEnhanceFaceEnhancePtrInput `pulumi:"faceEnhance"`
 	// Interpolation frame rate configuration.Note: This field may return null, indicating that no valid value can be obtained.
 	FrameRate TranscodeTemplateEnhanceConfigVideoEnhanceFrameRatePtrInput `pulumi:"frameRate"`
@@ -51874,7 +51880,9 @@ type TranscodeTemplateEnhanceConfigVideoEnhanceArgs struct {
 	LowLightEnhance TranscodeTemplateEnhanceConfigVideoEnhanceLowLightEnhancePtrInput `pulumi:"lowLightEnhance"`
 	// De-scratch configuration.Note: This field may return null, indicating that no valid value can be obtained.
 	ScratchRepair TranscodeTemplateEnhanceConfigVideoEnhanceScratchRepairPtrInput `pulumi:"scratchRepair"`
-	// Detail Enhancement Configuration.Note: This field may return null, indicating that no valid value can be obtained.
+	// It has been deprecated from version v1.82.67. Please do not use this again. Detail Enhancement Configuration.Note: This field may return null, indicating that no valid value can be obtained.
+	//
+	// Deprecated: It has been deprecated from version v1.82.67. Please do not use this again.
 	SharpEnhance TranscodeTemplateEnhanceConfigVideoEnhanceSharpEnhancePtrInput `pulumi:"sharpEnhance"`
 	// Super resolution configuration.Note: This field may return null, indicating that no valid value can be obtained.
 	SuperResolution TranscodeTemplateEnhanceConfigVideoEnhanceSuperResolutionPtrInput `pulumi:"superResolution"`
@@ -51978,7 +51986,9 @@ func (o TranscodeTemplateEnhanceConfigVideoEnhanceOutput) Denoise() TranscodeTem
 	}).(TranscodeTemplateEnhanceConfigVideoEnhanceDenoisePtrOutput)
 }
 
-// Face Enhancement Configuration.Note: This field may return null, indicating that no valid value can be obtained.
+// It has been deprecated from version v1.82.67. Please do not use this again. Face Enhancement Configuration.Note: This field may return null, indicating that no valid value can be obtained.
+//
+// Deprecated: It has been deprecated from version v1.82.67. Please do not use this again.
 func (o TranscodeTemplateEnhanceConfigVideoEnhanceOutput) FaceEnhance() TranscodeTemplateEnhanceConfigVideoEnhanceFaceEnhancePtrOutput {
 	return o.ApplyT(func(v TranscodeTemplateEnhanceConfigVideoEnhance) *TranscodeTemplateEnhanceConfigVideoEnhanceFaceEnhance {
 		return v.FaceEnhance
@@ -52020,7 +52030,9 @@ func (o TranscodeTemplateEnhanceConfigVideoEnhanceOutput) ScratchRepair() Transc
 	}).(TranscodeTemplateEnhanceConfigVideoEnhanceScratchRepairPtrOutput)
 }
 
-// Detail Enhancement Configuration.Note: This field may return null, indicating that no valid value can be obtained.
+// It has been deprecated from version v1.82.67. Please do not use this again. Detail Enhancement Configuration.Note: This field may return null, indicating that no valid value can be obtained.
+//
+// Deprecated: It has been deprecated from version v1.82.67. Please do not use this again.
 func (o TranscodeTemplateEnhanceConfigVideoEnhanceOutput) SharpEnhance() TranscodeTemplateEnhanceConfigVideoEnhanceSharpEnhancePtrOutput {
 	return o.ApplyT(func(v TranscodeTemplateEnhanceConfigVideoEnhance) *TranscodeTemplateEnhanceConfigVideoEnhanceSharpEnhance {
 		return v.SharpEnhance
@@ -52088,7 +52100,9 @@ func (o TranscodeTemplateEnhanceConfigVideoEnhancePtrOutput) Denoise() Transcode
 	}).(TranscodeTemplateEnhanceConfigVideoEnhanceDenoisePtrOutput)
 }
 
-// Face Enhancement Configuration.Note: This field may return null, indicating that no valid value can be obtained.
+// It has been deprecated from version v1.82.67. Please do not use this again. Face Enhancement Configuration.Note: This field may return null, indicating that no valid value can be obtained.
+//
+// Deprecated: It has been deprecated from version v1.82.67. Please do not use this again.
 func (o TranscodeTemplateEnhanceConfigVideoEnhancePtrOutput) FaceEnhance() TranscodeTemplateEnhanceConfigVideoEnhanceFaceEnhancePtrOutput {
 	return o.ApplyT(func(v *TranscodeTemplateEnhanceConfigVideoEnhance) *TranscodeTemplateEnhanceConfigVideoEnhanceFaceEnhance {
 		if v == nil {
@@ -52148,7 +52162,9 @@ func (o TranscodeTemplateEnhanceConfigVideoEnhancePtrOutput) ScratchRepair() Tra
 	}).(TranscodeTemplateEnhanceConfigVideoEnhanceScratchRepairPtrOutput)
 }
 
-// Detail Enhancement Configuration.Note: This field may return null, indicating that no valid value can be obtained.
+// It has been deprecated from version v1.82.67. Please do not use this again. Detail Enhancement Configuration.Note: This field may return null, indicating that no valid value can be obtained.
+//
+// Deprecated: It has been deprecated from version v1.82.67. Please do not use this again.
 func (o TranscodeTemplateEnhanceConfigVideoEnhancePtrOutput) SharpEnhance() TranscodeTemplateEnhanceConfigVideoEnhanceSharpEnhancePtrOutput {
 	return o.ApplyT(func(v *TranscodeTemplateEnhanceConfigVideoEnhance) *TranscodeTemplateEnhanceConfigVideoEnhanceSharpEnhance {
 		if v == nil {

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Vpn.getGatewayRoutes({
+ * const example = tencentcloud.vpn.getGatewayRoutes({
  *     vpnGatewayId: "vpngw-8dua3tbl",
  *     destinationCidr: "10.0.0.0/8",
  *     instanceType: "VPNCONN",
@@ -87,7 +87,7 @@ export interface GetGatewayRoutesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Vpn.getGatewayRoutes({
+ * const example = tencentcloud.vpn.getGatewayRoutes({
  *     vpnGatewayId: "vpngw-8dua3tbl",
  *     destinationCidr: "10.0.0.0/8",
  *     instanceType: "VPNCONN",
@@ -113,19 +113,19 @@ export interface GetGatewayRoutesOutputArgs {
     /**
      * Destination IDC IP range.
      */
-    destinationCidr?: pulumi.Input<string>;
+    destinationCidr?: pulumi.Input<string | undefined>;
     /**
      * Instance ID of the next hop.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Next hop type (type of the associated instance). Valid values: VPNCONN (VPN tunnel) and CCN (CCN instance).
      */
-    instanceType?: pulumi.Input<string>;
+    instanceType?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * VPN gateway ID.
      */

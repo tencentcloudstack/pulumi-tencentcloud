@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Dlc.getStandardEngineResourceGroupConfigInformation({
+ * const example = tencentcloud.dlc.getStandardEngineResourceGroupConfigInformation({
  *     sortBy: "create-time",
  *     sorting: "desc",
  *     filters: [{
@@ -84,7 +84,7 @@ export interface GetStandardEngineResourceGroupConfigInformationResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Dlc.getStandardEngineResourceGroupConfigInformation({
+ * const example = tencentcloud.dlc.getStandardEngineResourceGroupConfigInformation({
  *     sortBy: "create-time",
  *     sorting: "desc",
  *     filters: [{
@@ -112,17 +112,17 @@ export interface GetStandardEngineResourceGroupConfigInformationOutputArgs {
     /**
      * Filter conditions are optional, engine-resource-group-id or engine-id.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Dlc.GetStandardEngineResourceGroupConfigInformationFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Dlc.GetStandardEngineResourceGroupConfigInformationFilterArgs>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Sort Field.
      */
-    sortBy?: pulumi.Input<string>;
+    sortBy?: pulumi.Input<string | undefined>;
     /**
      * Ascending or descending.
      */
-    sorting?: pulumi.Input<string>;
+    sorting?: pulumi.Input<string | undefined>;
 }

@@ -16,6 +16,8 @@ import (
 //
 // ## Example Usage
 //
+// ### Basic Configuration
+//
 // ```go
 // package main
 //
@@ -41,6 +43,37 @@ import (
 //
 // ```
 //
+// ### With Tags
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpn"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := vpn.NewSslClient(ctx, "client", &vpn.SslClientArgs{
+//				SslVpnServerId:   pulumi.String("vpns-aog5xcjj"),
+//				SslVpnClientName: pulumi.String("my-ssl-client"),
+//				Tags: pulumi.StringMap{
+//					"Environment": pulumi.String("production"),
+//					"Owner":       pulumi.String("team-a"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
 // ## Import
 //
 // VPN SSL Client can be imported, e.g.
@@ -55,6 +88,8 @@ type SslClient struct {
 	SslVpnClientName pulumi.StringOutput `pulumi:"sslVpnClientName"`
 	// VPN ssl server id.
 	SslVpnServerId pulumi.StringOutput `pulumi:"sslVpnServerId"`
+	// Tags of the VPN SSL client.
+	Tags pulumi.StringMapOutput `pulumi:"tags"`
 }
 
 // NewSslClient registers a new resource with the given unique name, arguments, and options.
@@ -97,6 +132,8 @@ type sslClientState struct {
 	SslVpnClientName *string `pulumi:"sslVpnClientName"`
 	// VPN ssl server id.
 	SslVpnServerId *string `pulumi:"sslVpnServerId"`
+	// Tags of the VPN SSL client.
+	Tags map[string]string `pulumi:"tags"`
 }
 
 type SslClientState struct {
@@ -104,6 +141,8 @@ type SslClientState struct {
 	SslVpnClientName pulumi.StringPtrInput
 	// VPN ssl server id.
 	SslVpnServerId pulumi.StringPtrInput
+	// Tags of the VPN SSL client.
+	Tags pulumi.StringMapInput
 }
 
 func (SslClientState) ElementType() reflect.Type {
@@ -115,6 +154,8 @@ type sslClientArgs struct {
 	SslVpnClientName string `pulumi:"sslVpnClientName"`
 	// VPN ssl server id.
 	SslVpnServerId string `pulumi:"sslVpnServerId"`
+	// Tags of the VPN SSL client.
+	Tags map[string]string `pulumi:"tags"`
 }
 
 // The set of arguments for constructing a SslClient resource.
@@ -123,6 +164,8 @@ type SslClientArgs struct {
 	SslVpnClientName pulumi.StringInput
 	// VPN ssl server id.
 	SslVpnServerId pulumi.StringInput
+	// Tags of the VPN SSL client.
+	Tags pulumi.StringMapInput
 }
 
 func (SslClientArgs) ElementType() reflect.Type {
@@ -220,6 +263,11 @@ func (o SslClientOutput) SslVpnClientName() pulumi.StringOutput {
 // VPN ssl server id.
 func (o SslClientOutput) SslVpnServerId() pulumi.StringOutput {
 	return o.ApplyT(func(v *SslClient) pulumi.StringOutput { return v.SslVpnServerId }).(pulumi.StringOutput)
+}
+
+// Tags of the VPN SSL client.
+func (o SslClientOutput) Tags() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *SslClient) pulumi.StringMapOutput { return v.Tags }).(pulumi.StringMapOutput)
 }
 
 type SslClientArrayOutput struct{ *pulumi.OutputState }

@@ -47,10 +47,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// ## Import
     /// 
-    /// clb function_targets_attachment can be imported using the id, e.g.
+    /// clb FunctionTargetsAttachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Clb/functionTargetsAttachment:FunctionTargetsAttachment function_targets loadBalancerId#listenerId#locationId or loadBalancerId#listenerId#domain#rule
+    /// terraform import tencentcloud_clb_function_targets_attachment.function_targets loadBalancerId#listenerId#locationId or loadBalancerId#listenerId#domain#rule
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clb/functionTargetsAttachment:FunctionTargetsAttachment")]

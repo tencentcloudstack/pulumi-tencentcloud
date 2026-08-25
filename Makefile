@@ -82,6 +82,7 @@ build_python:: PYPI_VERSION := $(shell pulumictl get version --language python)
 build_python:: export PULUMI_SKIP_MISSING_MAPPING_ERROR := ${PULUMI_SKIP_ERROR}
 build_python:: install_plugins tfgen # build the python sdk
 	$(WORKING_DIR)/bin/$(TFGEN) python --overlays provider/overlays/python --out sdk/python/
+	python3 scripts/fix_python_sdk_lint.py sdk/python/tencentcloud_iac_pulumi
 	cd sdk/python/ && \
 	cp ../../README.md . && \
 	python3 -m venv .venv && \
@@ -125,6 +126,27 @@ clean::
 install_plugins::
 	[ -x $(shell which pulumi) ] || curl -fsSL https://get.pulumi.com | sh
 	pulumi plugin install resource random 4.3.1
+	# Pin the std plugin version used by tfgen/codegen to translate doc examples
+	# (e.g. "@pulumi/std" -> Go import path). Without pinning, a fresh CI runner
+	# would auto-install whatever is "latest" at build time, which can differ
+	# from what a developer has cached locally and produce non-deterministic
+	# generated SDK code (e.g. github.com/pulumi/pulumi-std/sdk/go/std vs
+	# github.com/pulumi/pulumi-std/sdk/v2/go/std), breaking the "worktree clean"
+	# check in CI.
+	pulumi plugin install resource std 2.3.2
+	# Pin the terraform *converter* plugin (invoked internally by
+	# `pulumi convert --from terraform --language pcl`, which tfgen shells
+	# out to for translating upstream Terraform doc examples - including
+	# HCL `lifecycle { ignore_changes = [...] }` blocks - into per-language
+	# SDK example snippets, e.g. Go's `pulumi.IgnoreChanges(...)`). This
+	# plugin is resolved independently of the Pulumi CLI core version and,
+	# left unpinned, a fresh CI runner (no local plugin cache) will fetch
+	# whatever is "latest" at build time. Different converter versions can
+	# translate the same `lifecycle` block differently (e.g. dropping vs.
+	# emitting the ignore_changes/IgnoreChanges option), producing
+	# non-reproducible schema.json/SDK diffs and breaking the "worktree
+	# clean" check in CI even though the source docs never changed.
+	pulumi plugin install converter terraform 1.2.4
 
 install_dotnet_sdk::
 	mkdir -p $(WORKING_DIR)/nuget

@@ -41,7 +41,7 @@ import (
 //				return err
 //			}
 //			_, err = apigateway.NewApi(ctx, "api", &apigateway.ApiArgs{
-//				ServiceId:           service.ID(),
+//				ServiceId:           service.ID().ToIDOutput().ToStringOutput(),
 //				ApiName:             pulumi.String("tf_example"),
 //				ApiDesc:             pulumi.String("my hello api update"),
 //				AuthType:            pulumi.String("SECRET"),
@@ -137,12 +137,8 @@ type GetThrottlingApisResult struct {
 }
 
 func GetThrottlingApisOutput(ctx *pulumi.Context, args GetThrottlingApisOutputArgs, opts ...pulumi.InvokeOption) GetThrottlingApisResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetThrottlingApisResultOutput, error) {
-			args := v.(GetThrottlingApisArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:ApiGateway/getThrottlingApis:getThrottlingApis", args, GetThrottlingApisResultOutput{}, options).(GetThrottlingApisResultOutput), nil
-		}).(GetThrottlingApisResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:ApiGateway/getThrottlingApis:getThrottlingApis", args, GetThrottlingApisResultOutput{}, options).(GetThrottlingApisResultOutput)
 }
 
 // A collection of arguments for invoking getThrottlingApis.

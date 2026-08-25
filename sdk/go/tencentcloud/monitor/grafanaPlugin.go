@@ -36,15 +36,15 @@ import (
 //			if param := cfg.Get("availabilityZone"); param != "" {
 //				availabilityZone = param
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("tf_monitor_vpc"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("tf_monitor_subnet"),
 //				CidrBlock:        pulumi.String("10.0.1.0/24"),
@@ -54,9 +54,9 @@ import (
 //			}
 //			foo, err := monitor.NewGrafanaInstance(ctx, "foo", &monitor.GrafanaInstanceArgs{
 //				InstanceName: pulumi.String("test-grafana"),
-//				VpcId:        vpc.ID(),
+//				VpcId:        vpc2.ID().ToIDOutput().ToStringOutput(),
 //				SubnetIds: pulumi.StringArray{
-//					subnet.ID(),
+//					subnet2.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				GrafanaInitPassword: pulumi.String("1234567890"),
 //				EnableInternet:      pulumi.Bool(false),
@@ -68,7 +68,7 @@ import (
 //				return err
 //			}
 //			_, err = monitor.NewGrafanaPlugin(ctx, "grafanaPlugin", &monitor.GrafanaPluginArgs{
-//				InstanceId: foo.ID(),
+//				InstanceId: foo.ID().ToIDOutput().ToStringOutput(),
 //				PluginId:   pulumi.String("grafana-piechart-panel"),
 //				Version:    pulumi.String("1.6.2"),
 //			})
@@ -84,7 +84,6 @@ import (
 // ## Import
 //
 // monitor grafanaPlugin can be imported using the instance_id#plugin_id, e.g.
-//
 // ```sh
 // $ pulumi import tencentcloud:Monitor/grafanaPlugin:GrafanaPlugin grafanaPlugin grafana-50nj6v00#grafana-piechart-panel
 // ```

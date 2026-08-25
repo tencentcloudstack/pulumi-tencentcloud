@@ -73,12 +73,8 @@ type GetRollbackTimeResult struct {
 }
 
 func GetRollbackTimeOutput(ctx *pulumi.Context, args GetRollbackTimeOutputArgs, opts ...pulumi.InvokeOption) GetRollbackTimeResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetRollbackTimeResultOutput, error) {
-			args := v.(GetRollbackTimeArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Sqlserver/getRollbackTime:getRollbackTime", args, GetRollbackTimeResultOutput{}, options).(GetRollbackTimeResultOutput), nil
-		}).(GetRollbackTimeResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Sqlserver/getRollbackTime:getRollbackTime", args, GetRollbackTimeResultOutput{}, options).(GetRollbackTimeResultOutput)
 }
 
 // A collection of arguments for invoking getRollbackTime.

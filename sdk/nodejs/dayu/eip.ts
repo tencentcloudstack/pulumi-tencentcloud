@@ -178,59 +178,59 @@ export interface EipState {
     /**
      * Resource id to bind.
      */
-    bindResourceId?: pulumi.Input<string>;
+    bindResourceId?: pulumi.Input<string | undefined>;
     /**
      * Resource region to bind.
      */
-    bindResourceRegion?: pulumi.Input<string>;
+    bindResourceRegion?: pulumi.Input<string | undefined>;
     /**
      * Resource type to bind, value range [`clb`, `cvm`].
      */
-    bindResourceType?: pulumi.Input<string>;
+    bindResourceType?: pulumi.Input<string | undefined>;
     /**
      * Created time of the resource instance.
      */
-    createdTime?: pulumi.Input<string>;
+    createdTime?: pulumi.Input<string | undefined>;
     /**
      * Eip of the resource.
      */
-    eip?: pulumi.Input<string>;
+    eip?: pulumi.Input<string | undefined>;
     /**
      * Eip address status of the resource instance.
      */
-    eipAddressStatus?: pulumi.Input<string>;
+    eipAddressStatus?: pulumi.Input<string | undefined>;
     /**
      * Eip bound rsc eni of the resource instance.
      */
-    eipBoundRscEni?: pulumi.Input<string>;
+    eipBoundRscEni?: pulumi.Input<string | undefined>;
     /**
      * Eip bound rsc ins of the resource instance.
      */
-    eipBoundRscIns?: pulumi.Input<string>;
+    eipBoundRscIns?: pulumi.Input<string | undefined>;
     /**
      * Eip bound rsc vip of the resource instance.
      */
-    eipBoundRscVip?: pulumi.Input<string>;
+    eipBoundRscVip?: pulumi.Input<string | undefined>;
     /**
      * Expired time of the resource instance.
      */
-    expiredTime?: pulumi.Input<string>;
+    expiredTime?: pulumi.Input<string | undefined>;
     /**
      * Modify time of the resource instance.
      */
-    modifyTime?: pulumi.Input<string>;
+    modifyTime?: pulumi.Input<string | undefined>;
     /**
      * Protection status of the resource instance.
      */
-    protectionStatus?: pulumi.Input<string>;
+    protectionStatus?: pulumi.Input<string | undefined>;
     /**
      * ID of the resource.
      */
-    resourceId?: pulumi.Input<string>;
+    resourceId?: pulumi.Input<string | undefined>;
     /**
      * Region of the resource instance.
      */
-    resourceRegion?: pulumi.Input<string>;
+    resourceRegion?: pulumi.Input<string | undefined>;
 }
 
 /**

@@ -129,27 +129,27 @@ export interface InstanceAccountState {
     /**
      * The read and write permission information of the account.
      */
-    authRoles?: pulumi.Input<pulumi.Input<inputs.Mongodb.InstanceAccountAuthRole>[]>;
+    authRoles?: pulumi.Input<pulumi.Input<inputs.Mongodb.InstanceAccountAuthRole>[] | undefined>;
     /**
      * Instance ID, the format is: cmgo-9d0p6umb.Same as the instance ID displayed in the cloud database console page.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * The password corresponding to the mongouser account. mongouser is the system default account, which is the password set when creating an instance.
      */
-    mongoUserPassword?: pulumi.Input<string>;
+    mongoUserPassword?: pulumi.Input<string | undefined>;
     /**
      * New account password. Password complexity requirements are as follows: character length range [8,32]. Contains at least letters, numbers and special characters (exclamation point!, at@, pound sign #, percent sign %, caret ^, asterisk *, parentheses (), underscore _).
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * Account remarks.
      */
-    userDesc?: pulumi.Input<string>;
+    userDesc?: pulumi.Input<string | undefined>;
     /**
      * The new account name. Its format requirements are as follows: character range [1,32]. Characters in the range of [A,Z], [a,z], [1,9] as well as underscore _ and dash - can be input.
      */
-    userName?: pulumi.Input<string>;
+    userName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -159,7 +159,7 @@ export interface InstanceAccountArgs {
     /**
      * The read and write permission information of the account.
      */
-    authRoles?: pulumi.Input<pulumi.Input<inputs.Mongodb.InstanceAccountAuthRole>[]>;
+    authRoles?: pulumi.Input<pulumi.Input<inputs.Mongodb.InstanceAccountAuthRole>[] | undefined>;
     /**
      * Instance ID, the format is: cmgo-9d0p6umb.Same as the instance ID displayed in the cloud database console page.
      */
@@ -167,15 +167,15 @@ export interface InstanceAccountArgs {
     /**
      * The password corresponding to the mongouser account. mongouser is the system default account, which is the password set when creating an instance.
      */
-    mongoUserPassword?: pulumi.Input<string>;
+    mongoUserPassword?: pulumi.Input<string | undefined>;
     /**
      * New account password. Password complexity requirements are as follows: character length range [8,32]. Contains at least letters, numbers and special characters (exclamation point!, at@, pound sign #, percent sign %, caret ^, asterisk *, parentheses (), underscore _).
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * Account remarks.
      */
-    userDesc?: pulumi.Input<string>;
+    userDesc?: pulumi.Input<string | undefined>;
     /**
      * The new account name. Its format requirements are as follows: character range [1,32]. Characters in the range of [A,Z], [a,z], [1,9] as well as underscore _ and dash - can be input.
      */

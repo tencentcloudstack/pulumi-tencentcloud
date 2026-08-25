@@ -51,7 +51,7 @@ import (
 //
 // ## Import
 //
-// cos bucket_referer can be imported using the id, e.g.
+// cos bucketReferer can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Cos/bucketReferer:BucketReferer bucket_referer bucket_id

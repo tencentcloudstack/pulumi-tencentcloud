@@ -44,7 +44,7 @@ import (
 //
 // ## Import
 //
-// mariadb backup_time can be imported using the id, e.g.
+// mariadb backupTime can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Mariadb/backupTime:BackupTime backup_time backup_time_id

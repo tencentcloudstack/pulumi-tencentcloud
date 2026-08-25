@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * cynosdb binlog_save_days can be imported using the id, e.g.
+ * cynosdb binlogSaveDays can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Cynosdb/binlogSaveDays:BinlogSaveDays binlog_save_days binlog_save_days_id
@@ -102,11 +102,11 @@ export interface BinlogSaveDaysState {
     /**
      * Binlog retention days.
      */
-    binlogSaveDays?: pulumi.Input<number>;
+    binlogSaveDays?: pulumi.Input<number | undefined>;
     /**
      * Cluster ID.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
 }
 
 /**

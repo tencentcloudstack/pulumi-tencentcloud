@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const queue = tencentcloud.Tcmq.getQueue({
+ * const queue = tencentcloud.tcmq.getQueue({
  *     queueName: "queue_name",
  * });
  * ```
@@ -100,7 +100,7 @@ export interface GetQueueResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const queue = tencentcloud.Tcmq.getQueue({
+ * const queue = tencentcloud.tcmq.getQueue({
  *     queueName: "queue_name",
  * });
  * ```
@@ -126,29 +126,29 @@ export interface GetQueueOutputArgs {
     /**
      * Filter. Currently, you can filter by tag. The tag name must be prefixed with `tag:`, such as `tag: owner`, `tag: environment`, or `tag: business`.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Tcmq.GetQueueFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Tcmq.GetQueueFilterArgs>[] | undefined>;
     /**
      * For filtering by tag, this parameter must be set to `true`.
      */
-    isTagFilter?: pulumi.Input<boolean>;
+    isTagFilter?: pulumi.Input<boolean | undefined>;
     /**
      * The number of queues to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.
      */
-    limit?: pulumi.Input<number>;
+    limit?: pulumi.Input<number | undefined>;
     /**
      * Starting position of a queue list to be returned on the current page in case of paginated return. If a value is entered, limit must be specified. If this parameter is left empty, 0 will be used by default.
      */
-    offset?: pulumi.Input<number>;
+    offset?: pulumi.Input<number | undefined>;
     /**
      * Filter by QueueName.
      */
-    queueName?: pulumi.Input<string>;
+    queueName?: pulumi.Input<string | undefined>;
     /**
      * Filter by CMQ queue name.
      */
-    queueNameLists?: pulumi.Input<pulumi.Input<string>[]>;
+    queueNameLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

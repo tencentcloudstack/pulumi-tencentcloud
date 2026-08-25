@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Image.getFromFamily({
+ * const example = tencentcloud.image.getFromFamily({
  *     imageFamily: "business-daily-update",
  * });
  * ```
@@ -66,7 +66,7 @@ export interface GetFromFamilyResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Image.getFromFamily({
+ * const example = tencentcloud.image.getFromFamily({
  *     imageFamily: "business-daily-update",
  * });
  * ```
@@ -90,5 +90,5 @@ export interface GetFromFamilyOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

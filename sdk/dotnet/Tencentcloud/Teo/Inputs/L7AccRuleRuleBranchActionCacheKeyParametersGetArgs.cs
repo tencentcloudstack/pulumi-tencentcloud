@@ -32,7 +32,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public Input<Inputs.L7AccRuleRuleBranchActionCacheKeyParametersHeaderGetArgs>? Header { get; set; }
 
         /// <summary>
-        /// Switch for ignoring case. values: enable; off: disable.note: at least one of fullurlcache, ignorecase, header, scheme, or cookie must be configured.
+        /// Switch for ignoring case. values: on: enable; off: disable. note: at least one of fullurlcache, ignorecase, header, scheme, or cookie must be configured.
         /// </summary>
         [Input("ignoreCase")]
         public Input<string>? IgnoreCase { get; set; }

@@ -31,7 +31,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := mongodb.NewInstanceSsl(ctx, "example", &mongodb.InstanceSslArgs{
-//				InstanceId: pulumi.String("cmgo-xxxxxxxx"),
+//				InstanceId: pulumi.String("cmgo-olr1xx9d"),
 //				Enable:     pulumi.Bool(true),
 //			})
 //			if err != nil {
@@ -48,7 +48,7 @@ import (
 // MongoDB instance SSL configuration can be imported using the instance id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Mongodb/instanceSsl:InstanceSsl example cmgo-xxxxxxxx
+// $ pulumi import tencentcloud:Mongodb/instanceSsl:InstanceSsl example cmgo-olr1xx9d
 // ```
 type InstanceSsl struct {
 	pulumi.CustomResourceState

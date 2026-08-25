@@ -70,12 +70,8 @@ type GetTemplateGroupsResult struct {
 }
 
 func GetTemplateGroupsOutput(ctx *pulumi.Context, args GetTemplateGroupsOutputArgs, opts ...pulumi.InvokeOption) GetTemplateGroupsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetTemplateGroupsResultOutput, error) {
-			args := v.(GetTemplateGroupsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Protocol/getTemplateGroups:getTemplateGroups", args, GetTemplateGroupsResultOutput{}, options).(GetTemplateGroupsResultOutput), nil
-		}).(GetTemplateGroupsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Protocol/getTemplateGroups:getTemplateGroups", args, GetTemplateGroupsResultOutput{}, options).(GetTemplateGroupsResultOutput)
 }
 
 // A collection of arguments for invoking getTemplateGroups.

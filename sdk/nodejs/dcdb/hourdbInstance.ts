@@ -39,7 +39,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * DCDB hourdb instance can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Dcdb/hourdbInstance:HourdbInstance example tdsqlshard-nr6j5sed
  * ```
@@ -227,79 +226,79 @@ export interface HourdbInstanceState {
     /**
      * db engine version, default to Percona 5.7.17.
      */
-    dbVersionId?: pulumi.Input<string>;
+    dbVersionId?: pulumi.Input<string | undefined>;
     /**
      * DCN source instance ID.
      */
-    dcnInstanceId?: pulumi.Input<string>;
+    dcnInstanceId?: pulumi.Input<string | undefined>;
     /**
      * DCN source region.
      */
-    dcnRegion?: pulumi.Input<string>;
+    dcnRegion?: pulumi.Input<string | undefined>;
     /**
      * Whether to open the extranet access.
      */
-    extranetAccess?: pulumi.Input<boolean>;
+    extranetAccess?: pulumi.Input<boolean | undefined>;
     /**
      * name of this instance.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * Whether to support IPv6.
      */
-    ipv6Flag?: pulumi.Input<number>;
+    ipv6Flag?: pulumi.Input<number | undefined>;
     /**
      * project id.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * resource tags.
      */
-    resourceTags?: pulumi.Input<pulumi.Input<inputs.Dcdb.HourdbInstanceResourceTag>[]>;
+    resourceTags?: pulumi.Input<pulumi.Input<inputs.Dcdb.HourdbInstanceResourceTag>[] | undefined>;
     /**
      * security group id.
      */
-    securityGroupId?: pulumi.Input<string>;
+    securityGroupId?: pulumi.Input<string | undefined>;
     /**
      * instance shard count.
      */
-    shardCount?: pulumi.Input<number>;
+    shardCount?: pulumi.Input<number | undefined>;
     /**
      * memory(GB) for each shard. It can be obtained by querying api DescribeShardSpec.
      */
-    shardMemory?: pulumi.Input<number>;
+    shardMemory?: pulumi.Input<number | undefined>;
     /**
      * node count for each shard. It can be obtained by querying api DescribeShardSpec.
      */
-    shardNodeCount?: pulumi.Input<number>;
+    shardNodeCount?: pulumi.Input<number | undefined>;
     /**
      * storage(GB) for each shard. It can be obtained by querying api DescribeShardSpec.
      */
-    shardStorage?: pulumi.Input<number>;
+    shardStorage?: pulumi.Input<number | undefined>;
     /**
      * subnet id, its required when vpcId is set.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * The field is required to specify VIP.
      */
-    vip?: pulumi.Input<string>;
+    vip?: pulumi.Input<string | undefined>;
     /**
      * The field is required to specify VIPv6.
      */
-    vipv6?: pulumi.Input<string>;
+    vipv6?: pulumi.Input<string | undefined>;
     /**
      * vpc id.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * Intranet port.
      */
-    vport?: pulumi.Input<number>;
+    vport?: pulumi.Input<number | undefined>;
     /**
      * available zone.
      */
-    zones?: pulumi.Input<pulumi.Input<string>[]>;
+    zones?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -309,39 +308,39 @@ export interface HourdbInstanceArgs {
     /**
      * db engine version, default to Percona 5.7.17.
      */
-    dbVersionId?: pulumi.Input<string>;
+    dbVersionId?: pulumi.Input<string | undefined>;
     /**
      * DCN source instance ID.
      */
-    dcnInstanceId?: pulumi.Input<string>;
+    dcnInstanceId?: pulumi.Input<string | undefined>;
     /**
      * DCN source region.
      */
-    dcnRegion?: pulumi.Input<string>;
+    dcnRegion?: pulumi.Input<string | undefined>;
     /**
      * Whether to open the extranet access.
      */
-    extranetAccess?: pulumi.Input<boolean>;
+    extranetAccess?: pulumi.Input<boolean | undefined>;
     /**
      * name of this instance.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * Whether to support IPv6.
      */
-    ipv6Flag?: pulumi.Input<number>;
+    ipv6Flag?: pulumi.Input<number | undefined>;
     /**
      * project id.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * resource tags.
      */
-    resourceTags?: pulumi.Input<pulumi.Input<inputs.Dcdb.HourdbInstanceResourceTag>[]>;
+    resourceTags?: pulumi.Input<pulumi.Input<inputs.Dcdb.HourdbInstanceResourceTag>[] | undefined>;
     /**
      * security group id.
      */
-    securityGroupId?: pulumi.Input<string>;
+    securityGroupId?: pulumi.Input<string | undefined>;
     /**
      * instance shard count.
      */
@@ -361,21 +360,21 @@ export interface HourdbInstanceArgs {
     /**
      * subnet id, its required when vpcId is set.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * The field is required to specify VIP.
      */
-    vip?: pulumi.Input<string>;
+    vip?: pulumi.Input<string | undefined>;
     /**
      * The field is required to specify VIPv6.
      */
-    vipv6?: pulumi.Input<string>;
+    vipv6?: pulumi.Input<string | undefined>;
     /**
      * vpc id.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * available zone.
      */
-    zones?: pulumi.Input<pulumi.Input<string>[]>;
+    zones?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

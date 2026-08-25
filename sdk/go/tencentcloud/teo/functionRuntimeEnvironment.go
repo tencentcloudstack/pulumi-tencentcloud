@@ -55,7 +55,7 @@ import (
 //
 // ## Import
 //
-// teo teo_function_runtime_environment can be imported using the id, e.g.
+// teo teoFunctionRuntimeEnvironment can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Teo/functionRuntimeEnvironment:FunctionRuntimeEnvironment teo_function_runtime_environment zone_id#function_id

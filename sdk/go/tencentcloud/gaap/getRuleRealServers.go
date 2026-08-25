@@ -69,12 +69,8 @@ type GetRuleRealServersResult struct {
 }
 
 func GetRuleRealServersOutput(ctx *pulumi.Context, args GetRuleRealServersOutputArgs, opts ...pulumi.InvokeOption) GetRuleRealServersResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetRuleRealServersResultOutput, error) {
-			args := v.(GetRuleRealServersArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Gaap/getRuleRealServers:getRuleRealServers", args, GetRuleRealServersResultOutput{}, options).(GetRuleRealServersResultOutput), nil
-		}).(GetRuleRealServersResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Gaap/getRuleRealServers:getRuleRealServers", args, GetRuleRealServersResultOutput{}, options).(GetRuleRealServersResultOutput)
 }
 
 // A collection of arguments for invoking getRuleRealServers.

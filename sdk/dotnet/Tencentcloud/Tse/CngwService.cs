@@ -91,7 +91,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
     /// 
     /// ## Import
     /// 
-    /// tse cngw_service can be imported using the id, e.g.
+    /// tse CngwService can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Tse/cngwService:CngwService cngw_service gatewayId#name

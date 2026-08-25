@@ -487,6 +487,483 @@ func (o InstanceVpcListPtrOutput) VpcId() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+type MessageEnrichmentRuleActions struct {
+	// Correlation Data.
+	CorrelationData *string `pulumi:"correlationData"`
+	// Message expiration interval.
+	MessageExpiryInterval *int `pulumi:"messageExpiryInterval"`
+	// Response Topic.
+	ResponseTopic *string `pulumi:"responseTopic"`
+	// User Properties.
+	UserProperties []MessageEnrichmentRuleActionsUserProperty `pulumi:"userProperties"`
+}
+
+// MessageEnrichmentRuleActionsInput is an input type that accepts MessageEnrichmentRuleActionsArgs and MessageEnrichmentRuleActionsOutput values.
+// You can construct a concrete instance of `MessageEnrichmentRuleActionsInput` via:
+//
+//	MessageEnrichmentRuleActionsArgs{...}
+type MessageEnrichmentRuleActionsInput interface {
+	pulumi.Input
+
+	ToMessageEnrichmentRuleActionsOutput() MessageEnrichmentRuleActionsOutput
+	ToMessageEnrichmentRuleActionsOutputWithContext(context.Context) MessageEnrichmentRuleActionsOutput
+}
+
+type MessageEnrichmentRuleActionsArgs struct {
+	// Correlation Data.
+	CorrelationData pulumi.StringPtrInput `pulumi:"correlationData"`
+	// Message expiration interval.
+	MessageExpiryInterval pulumi.IntPtrInput `pulumi:"messageExpiryInterval"`
+	// Response Topic.
+	ResponseTopic pulumi.StringPtrInput `pulumi:"responseTopic"`
+	// User Properties.
+	UserProperties MessageEnrichmentRuleActionsUserPropertyArrayInput `pulumi:"userProperties"`
+}
+
+func (MessageEnrichmentRuleActionsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*MessageEnrichmentRuleActions)(nil)).Elem()
+}
+
+func (i MessageEnrichmentRuleActionsArgs) ToMessageEnrichmentRuleActionsOutput() MessageEnrichmentRuleActionsOutput {
+	return i.ToMessageEnrichmentRuleActionsOutputWithContext(context.Background())
+}
+
+func (i MessageEnrichmentRuleActionsArgs) ToMessageEnrichmentRuleActionsOutputWithContext(ctx context.Context) MessageEnrichmentRuleActionsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MessageEnrichmentRuleActionsOutput)
+}
+
+func (i MessageEnrichmentRuleActionsArgs) ToMessageEnrichmentRuleActionsPtrOutput() MessageEnrichmentRuleActionsPtrOutput {
+	return i.ToMessageEnrichmentRuleActionsPtrOutputWithContext(context.Background())
+}
+
+func (i MessageEnrichmentRuleActionsArgs) ToMessageEnrichmentRuleActionsPtrOutputWithContext(ctx context.Context) MessageEnrichmentRuleActionsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MessageEnrichmentRuleActionsOutput).ToMessageEnrichmentRuleActionsPtrOutputWithContext(ctx)
+}
+
+// MessageEnrichmentRuleActionsPtrInput is an input type that accepts MessageEnrichmentRuleActionsArgs, MessageEnrichmentRuleActionsPtr and MessageEnrichmentRuleActionsPtrOutput values.
+// You can construct a concrete instance of `MessageEnrichmentRuleActionsPtrInput` via:
+//
+//	        MessageEnrichmentRuleActionsArgs{...}
+//
+//	or:
+//
+//	        nil
+type MessageEnrichmentRuleActionsPtrInput interface {
+	pulumi.Input
+
+	ToMessageEnrichmentRuleActionsPtrOutput() MessageEnrichmentRuleActionsPtrOutput
+	ToMessageEnrichmentRuleActionsPtrOutputWithContext(context.Context) MessageEnrichmentRuleActionsPtrOutput
+}
+
+type messageEnrichmentRuleActionsPtrType MessageEnrichmentRuleActionsArgs
+
+func MessageEnrichmentRuleActionsPtr(v *MessageEnrichmentRuleActionsArgs) MessageEnrichmentRuleActionsPtrInput {
+	return (*messageEnrichmentRuleActionsPtrType)(v)
+}
+
+func (*messageEnrichmentRuleActionsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**MessageEnrichmentRuleActions)(nil)).Elem()
+}
+
+func (i *messageEnrichmentRuleActionsPtrType) ToMessageEnrichmentRuleActionsPtrOutput() MessageEnrichmentRuleActionsPtrOutput {
+	return i.ToMessageEnrichmentRuleActionsPtrOutputWithContext(context.Background())
+}
+
+func (i *messageEnrichmentRuleActionsPtrType) ToMessageEnrichmentRuleActionsPtrOutputWithContext(ctx context.Context) MessageEnrichmentRuleActionsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MessageEnrichmentRuleActionsPtrOutput)
+}
+
+type MessageEnrichmentRuleActionsOutput struct{ *pulumi.OutputState }
+
+func (MessageEnrichmentRuleActionsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*MessageEnrichmentRuleActions)(nil)).Elem()
+}
+
+func (o MessageEnrichmentRuleActionsOutput) ToMessageEnrichmentRuleActionsOutput() MessageEnrichmentRuleActionsOutput {
+	return o
+}
+
+func (o MessageEnrichmentRuleActionsOutput) ToMessageEnrichmentRuleActionsOutputWithContext(ctx context.Context) MessageEnrichmentRuleActionsOutput {
+	return o
+}
+
+func (o MessageEnrichmentRuleActionsOutput) ToMessageEnrichmentRuleActionsPtrOutput() MessageEnrichmentRuleActionsPtrOutput {
+	return o.ToMessageEnrichmentRuleActionsPtrOutputWithContext(context.Background())
+}
+
+func (o MessageEnrichmentRuleActionsOutput) ToMessageEnrichmentRuleActionsPtrOutputWithContext(ctx context.Context) MessageEnrichmentRuleActionsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v MessageEnrichmentRuleActions) *MessageEnrichmentRuleActions {
+		return &v
+	}).(MessageEnrichmentRuleActionsPtrOutput)
+}
+
+// Correlation Data.
+func (o MessageEnrichmentRuleActionsOutput) CorrelationData() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MessageEnrichmentRuleActions) *string { return v.CorrelationData }).(pulumi.StringPtrOutput)
+}
+
+// Message expiration interval.
+func (o MessageEnrichmentRuleActionsOutput) MessageExpiryInterval() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v MessageEnrichmentRuleActions) *int { return v.MessageExpiryInterval }).(pulumi.IntPtrOutput)
+}
+
+// Response Topic.
+func (o MessageEnrichmentRuleActionsOutput) ResponseTopic() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v MessageEnrichmentRuleActions) *string { return v.ResponseTopic }).(pulumi.StringPtrOutput)
+}
+
+// User Properties.
+func (o MessageEnrichmentRuleActionsOutput) UserProperties() MessageEnrichmentRuleActionsUserPropertyArrayOutput {
+	return o.ApplyT(func(v MessageEnrichmentRuleActions) []MessageEnrichmentRuleActionsUserProperty {
+		return v.UserProperties
+	}).(MessageEnrichmentRuleActionsUserPropertyArrayOutput)
+}
+
+type MessageEnrichmentRuleActionsPtrOutput struct{ *pulumi.OutputState }
+
+func (MessageEnrichmentRuleActionsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**MessageEnrichmentRuleActions)(nil)).Elem()
+}
+
+func (o MessageEnrichmentRuleActionsPtrOutput) ToMessageEnrichmentRuleActionsPtrOutput() MessageEnrichmentRuleActionsPtrOutput {
+	return o
+}
+
+func (o MessageEnrichmentRuleActionsPtrOutput) ToMessageEnrichmentRuleActionsPtrOutputWithContext(ctx context.Context) MessageEnrichmentRuleActionsPtrOutput {
+	return o
+}
+
+func (o MessageEnrichmentRuleActionsPtrOutput) Elem() MessageEnrichmentRuleActionsOutput {
+	return o.ApplyT(func(v *MessageEnrichmentRuleActions) MessageEnrichmentRuleActions {
+		if v != nil {
+			return *v
+		}
+		var ret MessageEnrichmentRuleActions
+		return ret
+	}).(MessageEnrichmentRuleActionsOutput)
+}
+
+// Correlation Data.
+func (o MessageEnrichmentRuleActionsPtrOutput) CorrelationData() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MessageEnrichmentRuleActions) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CorrelationData
+	}).(pulumi.StringPtrOutput)
+}
+
+// Message expiration interval.
+func (o MessageEnrichmentRuleActionsPtrOutput) MessageExpiryInterval() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *MessageEnrichmentRuleActions) *int {
+		if v == nil {
+			return nil
+		}
+		return v.MessageExpiryInterval
+	}).(pulumi.IntPtrOutput)
+}
+
+// Response Topic.
+func (o MessageEnrichmentRuleActionsPtrOutput) ResponseTopic() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MessageEnrichmentRuleActions) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ResponseTopic
+	}).(pulumi.StringPtrOutput)
+}
+
+// User Properties.
+func (o MessageEnrichmentRuleActionsPtrOutput) UserProperties() MessageEnrichmentRuleActionsUserPropertyArrayOutput {
+	return o.ApplyT(func(v *MessageEnrichmentRuleActions) []MessageEnrichmentRuleActionsUserProperty {
+		if v == nil {
+			return nil
+		}
+		return v.UserProperties
+	}).(MessageEnrichmentRuleActionsUserPropertyArrayOutput)
+}
+
+type MessageEnrichmentRuleActionsUserProperty struct {
+	// Key.
+	Key string `pulumi:"key"`
+	// Value.
+	Value string `pulumi:"value"`
+}
+
+// MessageEnrichmentRuleActionsUserPropertyInput is an input type that accepts MessageEnrichmentRuleActionsUserPropertyArgs and MessageEnrichmentRuleActionsUserPropertyOutput values.
+// You can construct a concrete instance of `MessageEnrichmentRuleActionsUserPropertyInput` via:
+//
+//	MessageEnrichmentRuleActionsUserPropertyArgs{...}
+type MessageEnrichmentRuleActionsUserPropertyInput interface {
+	pulumi.Input
+
+	ToMessageEnrichmentRuleActionsUserPropertyOutput() MessageEnrichmentRuleActionsUserPropertyOutput
+	ToMessageEnrichmentRuleActionsUserPropertyOutputWithContext(context.Context) MessageEnrichmentRuleActionsUserPropertyOutput
+}
+
+type MessageEnrichmentRuleActionsUserPropertyArgs struct {
+	// Key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (MessageEnrichmentRuleActionsUserPropertyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*MessageEnrichmentRuleActionsUserProperty)(nil)).Elem()
+}
+
+func (i MessageEnrichmentRuleActionsUserPropertyArgs) ToMessageEnrichmentRuleActionsUserPropertyOutput() MessageEnrichmentRuleActionsUserPropertyOutput {
+	return i.ToMessageEnrichmentRuleActionsUserPropertyOutputWithContext(context.Background())
+}
+
+func (i MessageEnrichmentRuleActionsUserPropertyArgs) ToMessageEnrichmentRuleActionsUserPropertyOutputWithContext(ctx context.Context) MessageEnrichmentRuleActionsUserPropertyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MessageEnrichmentRuleActionsUserPropertyOutput)
+}
+
+// MessageEnrichmentRuleActionsUserPropertyArrayInput is an input type that accepts MessageEnrichmentRuleActionsUserPropertyArray and MessageEnrichmentRuleActionsUserPropertyArrayOutput values.
+// You can construct a concrete instance of `MessageEnrichmentRuleActionsUserPropertyArrayInput` via:
+//
+//	MessageEnrichmentRuleActionsUserPropertyArray{ MessageEnrichmentRuleActionsUserPropertyArgs{...} }
+type MessageEnrichmentRuleActionsUserPropertyArrayInput interface {
+	pulumi.Input
+
+	ToMessageEnrichmentRuleActionsUserPropertyArrayOutput() MessageEnrichmentRuleActionsUserPropertyArrayOutput
+	ToMessageEnrichmentRuleActionsUserPropertyArrayOutputWithContext(context.Context) MessageEnrichmentRuleActionsUserPropertyArrayOutput
+}
+
+type MessageEnrichmentRuleActionsUserPropertyArray []MessageEnrichmentRuleActionsUserPropertyInput
+
+func (MessageEnrichmentRuleActionsUserPropertyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]MessageEnrichmentRuleActionsUserProperty)(nil)).Elem()
+}
+
+func (i MessageEnrichmentRuleActionsUserPropertyArray) ToMessageEnrichmentRuleActionsUserPropertyArrayOutput() MessageEnrichmentRuleActionsUserPropertyArrayOutput {
+	return i.ToMessageEnrichmentRuleActionsUserPropertyArrayOutputWithContext(context.Background())
+}
+
+func (i MessageEnrichmentRuleActionsUserPropertyArray) ToMessageEnrichmentRuleActionsUserPropertyArrayOutputWithContext(ctx context.Context) MessageEnrichmentRuleActionsUserPropertyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MessageEnrichmentRuleActionsUserPropertyArrayOutput)
+}
+
+type MessageEnrichmentRuleActionsUserPropertyOutput struct{ *pulumi.OutputState }
+
+func (MessageEnrichmentRuleActionsUserPropertyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*MessageEnrichmentRuleActionsUserProperty)(nil)).Elem()
+}
+
+func (o MessageEnrichmentRuleActionsUserPropertyOutput) ToMessageEnrichmentRuleActionsUserPropertyOutput() MessageEnrichmentRuleActionsUserPropertyOutput {
+	return o
+}
+
+func (o MessageEnrichmentRuleActionsUserPropertyOutput) ToMessageEnrichmentRuleActionsUserPropertyOutputWithContext(ctx context.Context) MessageEnrichmentRuleActionsUserPropertyOutput {
+	return o
+}
+
+// Key.
+func (o MessageEnrichmentRuleActionsUserPropertyOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v MessageEnrichmentRuleActionsUserProperty) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Value.
+func (o MessageEnrichmentRuleActionsUserPropertyOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v MessageEnrichmentRuleActionsUserProperty) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type MessageEnrichmentRuleActionsUserPropertyArrayOutput struct{ *pulumi.OutputState }
+
+func (MessageEnrichmentRuleActionsUserPropertyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]MessageEnrichmentRuleActionsUserProperty)(nil)).Elem()
+}
+
+func (o MessageEnrichmentRuleActionsUserPropertyArrayOutput) ToMessageEnrichmentRuleActionsUserPropertyArrayOutput() MessageEnrichmentRuleActionsUserPropertyArrayOutput {
+	return o
+}
+
+func (o MessageEnrichmentRuleActionsUserPropertyArrayOutput) ToMessageEnrichmentRuleActionsUserPropertyArrayOutputWithContext(ctx context.Context) MessageEnrichmentRuleActionsUserPropertyArrayOutput {
+	return o
+}
+
+func (o MessageEnrichmentRuleActionsUserPropertyArrayOutput) Index(i pulumi.IntInput) MessageEnrichmentRuleActionsUserPropertyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) MessageEnrichmentRuleActionsUserProperty {
+		return vs[0].([]MessageEnrichmentRuleActionsUserProperty)[vs[1].(int)]
+	}).(MessageEnrichmentRuleActionsUserPropertyOutput)
+}
+
+type MessageEnrichmentRuleCondition struct {
+	// Client ID.
+	ClientId string `pulumi:"clientId"`
+	// Topic.
+	Topic string `pulumi:"topic"`
+	// User name.
+	Username string `pulumi:"username"`
+}
+
+// MessageEnrichmentRuleConditionInput is an input type that accepts MessageEnrichmentRuleConditionArgs and MessageEnrichmentRuleConditionOutput values.
+// You can construct a concrete instance of `MessageEnrichmentRuleConditionInput` via:
+//
+//	MessageEnrichmentRuleConditionArgs{...}
+type MessageEnrichmentRuleConditionInput interface {
+	pulumi.Input
+
+	ToMessageEnrichmentRuleConditionOutput() MessageEnrichmentRuleConditionOutput
+	ToMessageEnrichmentRuleConditionOutputWithContext(context.Context) MessageEnrichmentRuleConditionOutput
+}
+
+type MessageEnrichmentRuleConditionArgs struct {
+	// Client ID.
+	ClientId pulumi.StringInput `pulumi:"clientId"`
+	// Topic.
+	Topic pulumi.StringInput `pulumi:"topic"`
+	// User name.
+	Username pulumi.StringInput `pulumi:"username"`
+}
+
+func (MessageEnrichmentRuleConditionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*MessageEnrichmentRuleCondition)(nil)).Elem()
+}
+
+func (i MessageEnrichmentRuleConditionArgs) ToMessageEnrichmentRuleConditionOutput() MessageEnrichmentRuleConditionOutput {
+	return i.ToMessageEnrichmentRuleConditionOutputWithContext(context.Background())
+}
+
+func (i MessageEnrichmentRuleConditionArgs) ToMessageEnrichmentRuleConditionOutputWithContext(ctx context.Context) MessageEnrichmentRuleConditionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MessageEnrichmentRuleConditionOutput)
+}
+
+func (i MessageEnrichmentRuleConditionArgs) ToMessageEnrichmentRuleConditionPtrOutput() MessageEnrichmentRuleConditionPtrOutput {
+	return i.ToMessageEnrichmentRuleConditionPtrOutputWithContext(context.Background())
+}
+
+func (i MessageEnrichmentRuleConditionArgs) ToMessageEnrichmentRuleConditionPtrOutputWithContext(ctx context.Context) MessageEnrichmentRuleConditionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MessageEnrichmentRuleConditionOutput).ToMessageEnrichmentRuleConditionPtrOutputWithContext(ctx)
+}
+
+// MessageEnrichmentRuleConditionPtrInput is an input type that accepts MessageEnrichmentRuleConditionArgs, MessageEnrichmentRuleConditionPtr and MessageEnrichmentRuleConditionPtrOutput values.
+// You can construct a concrete instance of `MessageEnrichmentRuleConditionPtrInput` via:
+//
+//	        MessageEnrichmentRuleConditionArgs{...}
+//
+//	or:
+//
+//	        nil
+type MessageEnrichmentRuleConditionPtrInput interface {
+	pulumi.Input
+
+	ToMessageEnrichmentRuleConditionPtrOutput() MessageEnrichmentRuleConditionPtrOutput
+	ToMessageEnrichmentRuleConditionPtrOutputWithContext(context.Context) MessageEnrichmentRuleConditionPtrOutput
+}
+
+type messageEnrichmentRuleConditionPtrType MessageEnrichmentRuleConditionArgs
+
+func MessageEnrichmentRuleConditionPtr(v *MessageEnrichmentRuleConditionArgs) MessageEnrichmentRuleConditionPtrInput {
+	return (*messageEnrichmentRuleConditionPtrType)(v)
+}
+
+func (*messageEnrichmentRuleConditionPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**MessageEnrichmentRuleCondition)(nil)).Elem()
+}
+
+func (i *messageEnrichmentRuleConditionPtrType) ToMessageEnrichmentRuleConditionPtrOutput() MessageEnrichmentRuleConditionPtrOutput {
+	return i.ToMessageEnrichmentRuleConditionPtrOutputWithContext(context.Background())
+}
+
+func (i *messageEnrichmentRuleConditionPtrType) ToMessageEnrichmentRuleConditionPtrOutputWithContext(ctx context.Context) MessageEnrichmentRuleConditionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(MessageEnrichmentRuleConditionPtrOutput)
+}
+
+type MessageEnrichmentRuleConditionOutput struct{ *pulumi.OutputState }
+
+func (MessageEnrichmentRuleConditionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*MessageEnrichmentRuleCondition)(nil)).Elem()
+}
+
+func (o MessageEnrichmentRuleConditionOutput) ToMessageEnrichmentRuleConditionOutput() MessageEnrichmentRuleConditionOutput {
+	return o
+}
+
+func (o MessageEnrichmentRuleConditionOutput) ToMessageEnrichmentRuleConditionOutputWithContext(ctx context.Context) MessageEnrichmentRuleConditionOutput {
+	return o
+}
+
+func (o MessageEnrichmentRuleConditionOutput) ToMessageEnrichmentRuleConditionPtrOutput() MessageEnrichmentRuleConditionPtrOutput {
+	return o.ToMessageEnrichmentRuleConditionPtrOutputWithContext(context.Background())
+}
+
+func (o MessageEnrichmentRuleConditionOutput) ToMessageEnrichmentRuleConditionPtrOutputWithContext(ctx context.Context) MessageEnrichmentRuleConditionPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v MessageEnrichmentRuleCondition) *MessageEnrichmentRuleCondition {
+		return &v
+	}).(MessageEnrichmentRuleConditionPtrOutput)
+}
+
+// Client ID.
+func (o MessageEnrichmentRuleConditionOutput) ClientId() pulumi.StringOutput {
+	return o.ApplyT(func(v MessageEnrichmentRuleCondition) string { return v.ClientId }).(pulumi.StringOutput)
+}
+
+// Topic.
+func (o MessageEnrichmentRuleConditionOutput) Topic() pulumi.StringOutput {
+	return o.ApplyT(func(v MessageEnrichmentRuleCondition) string { return v.Topic }).(pulumi.StringOutput)
+}
+
+// User name.
+func (o MessageEnrichmentRuleConditionOutput) Username() pulumi.StringOutput {
+	return o.ApplyT(func(v MessageEnrichmentRuleCondition) string { return v.Username }).(pulumi.StringOutput)
+}
+
+type MessageEnrichmentRuleConditionPtrOutput struct{ *pulumi.OutputState }
+
+func (MessageEnrichmentRuleConditionPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**MessageEnrichmentRuleCondition)(nil)).Elem()
+}
+
+func (o MessageEnrichmentRuleConditionPtrOutput) ToMessageEnrichmentRuleConditionPtrOutput() MessageEnrichmentRuleConditionPtrOutput {
+	return o
+}
+
+func (o MessageEnrichmentRuleConditionPtrOutput) ToMessageEnrichmentRuleConditionPtrOutputWithContext(ctx context.Context) MessageEnrichmentRuleConditionPtrOutput {
+	return o
+}
+
+func (o MessageEnrichmentRuleConditionPtrOutput) Elem() MessageEnrichmentRuleConditionOutput {
+	return o.ApplyT(func(v *MessageEnrichmentRuleCondition) MessageEnrichmentRuleCondition {
+		if v != nil {
+			return *v
+		}
+		var ret MessageEnrichmentRuleCondition
+		return ret
+	}).(MessageEnrichmentRuleConditionOutput)
+}
+
+// Client ID.
+func (o MessageEnrichmentRuleConditionPtrOutput) ClientId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MessageEnrichmentRuleCondition) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ClientId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Topic.
+func (o MessageEnrichmentRuleConditionPtrOutput) Topic() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MessageEnrichmentRuleCondition) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Topic
+	}).(pulumi.StringPtrOutput)
+}
+
+// User name.
+func (o MessageEnrichmentRuleConditionPtrOutput) Username() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *MessageEnrichmentRuleCondition) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Username
+	}).(pulumi.StringPtrOutput)
+}
+
 type GetInstancesData struct {
 	// Limit on the number of authorization rules.
 	AuthorizationPolicyLimit int `pulumi:"authorizationPolicyLimit"`
@@ -1091,6 +1568,12 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*InstancePublicEndpointRuleArrayInput)(nil)).Elem(), InstancePublicEndpointRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceVpcListInput)(nil)).Elem(), InstanceVpcListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceVpcListPtrInput)(nil)).Elem(), InstanceVpcListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MessageEnrichmentRuleActionsInput)(nil)).Elem(), MessageEnrichmentRuleActionsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MessageEnrichmentRuleActionsPtrInput)(nil)).Elem(), MessageEnrichmentRuleActionsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MessageEnrichmentRuleActionsUserPropertyInput)(nil)).Elem(), MessageEnrichmentRuleActionsUserPropertyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MessageEnrichmentRuleActionsUserPropertyArrayInput)(nil)).Elem(), MessageEnrichmentRuleActionsUserPropertyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MessageEnrichmentRuleConditionInput)(nil)).Elem(), MessageEnrichmentRuleConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*MessageEnrichmentRuleConditionPtrInput)(nil)).Elem(), MessageEnrichmentRuleConditionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesDataInput)(nil)).Elem(), GetInstancesDataArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesDataArrayInput)(nil)).Elem(), GetInstancesDataArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesFilterInput)(nil)).Elem(), GetInstancesFilterArgs{})
@@ -1107,6 +1590,12 @@ func init() {
 	pulumi.RegisterOutputType(InstancePublicEndpointRuleArrayOutput{})
 	pulumi.RegisterOutputType(InstanceVpcListOutput{})
 	pulumi.RegisterOutputType(InstanceVpcListPtrOutput{})
+	pulumi.RegisterOutputType(MessageEnrichmentRuleActionsOutput{})
+	pulumi.RegisterOutputType(MessageEnrichmentRuleActionsPtrOutput{})
+	pulumi.RegisterOutputType(MessageEnrichmentRuleActionsUserPropertyOutput{})
+	pulumi.RegisterOutputType(MessageEnrichmentRuleActionsUserPropertyArrayOutput{})
+	pulumi.RegisterOutputType(MessageEnrichmentRuleConditionOutput{})
+	pulumi.RegisterOutputType(MessageEnrichmentRuleConditionPtrOutput{})
 	pulumi.RegisterOutputType(GetInstancesDataOutput{})
 	pulumi.RegisterOutputType(GetInstancesDataArrayOutput{})
 	pulumi.RegisterOutputType(GetInstancesFilterOutput{})

@@ -33,7 +33,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// 
     /// ## Import
     /// 
-    /// ssl deploy_certificate_record_rollback can be imported using the id, e.g.
+    /// ssl DeployCertificateRecordRollback can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Ssl/deployCertificateRecordRollbackOperation:DeployCertificateRecordRollbackOperation deploy_certificate_record_rollback deploy_certificate_record_rollback_id

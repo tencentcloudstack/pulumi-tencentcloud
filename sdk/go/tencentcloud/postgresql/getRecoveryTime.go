@@ -69,12 +69,8 @@ type GetRecoveryTimeResult struct {
 }
 
 func GetRecoveryTimeOutput(ctx *pulumi.Context, args GetRecoveryTimeOutputArgs, opts ...pulumi.InvokeOption) GetRecoveryTimeResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetRecoveryTimeResultOutput, error) {
-			args := v.(GetRecoveryTimeArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Postgresql/getRecoveryTime:getRecoveryTime", args, GetRecoveryTimeResultOutput{}, options).(GetRecoveryTimeResultOutput), nil
-		}).(GetRecoveryTimeResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Postgresql/getRecoveryTime:getRecoveryTime", args, GetRecoveryTimeResultOutput{}, options).(GetRecoveryTimeResultOutput)
 }
 
 // A collection of arguments for invoking getRecoveryTime.

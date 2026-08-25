@@ -64,12 +64,8 @@ type GetImportImageOsResult struct {
 }
 
 func GetImportImageOsOutput(ctx *pulumi.Context, args GetImportImageOsOutputArgs, opts ...pulumi.InvokeOption) GetImportImageOsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetImportImageOsResultOutput, error) {
-			args := v.(GetImportImageOsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cvm/getImportImageOs:getImportImageOs", args, GetImportImageOsResultOutput{}, options).(GetImportImageOsResultOutput), nil
-		}).(GetImportImageOsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cvm/getImportImageOs:getImportImageOs", args, GetImportImageOsResultOutput{}, options).(GetImportImageOsResultOutput)
 }
 
 // A collection of arguments for invoking getImportImageOs.

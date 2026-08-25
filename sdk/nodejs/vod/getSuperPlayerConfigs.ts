@@ -36,7 +36,7 @@ import * as utilities from "../utilities";
  *     scheme: "Default",
  *     comment: "test",
  * });
- * const foo = tencentcloud.Vod.getSuperPlayerConfigs({
+ * const foo = tencentcloud.vod.getSuperPlayerConfigs({
  *     type: "Custom",
  *     name: "tf-super-player",
  * });
@@ -128,7 +128,7 @@ export interface GetSuperPlayerConfigsResult {
  *     scheme: "Default",
  *     comment: "test",
  * });
- * const foo = tencentcloud.Vod.getSuperPlayerConfigs({
+ * const foo = tencentcloud.vod.getSuperPlayerConfigs({
  *     type: "Custom",
  *     name: "tf-super-player",
  * });
@@ -152,17 +152,17 @@ export interface GetSuperPlayerConfigsOutputArgs {
     /**
      * Name of super player config.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
      */
-    subAppId?: pulumi.Input<number>;
+    subAppId?: pulumi.Input<number | undefined>;
     /**
      * Config type filter. Valid values: `Preset`, `Custom`. `Preset`: preset template; `Custom`: custom template.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }

@@ -85,12 +85,8 @@ type GetChcHostsResult struct {
 }
 
 func GetChcHostsOutput(ctx *pulumi.Context, args GetChcHostsOutputArgs, opts ...pulumi.InvokeOption) GetChcHostsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetChcHostsResultOutput, error) {
-			args := v.(GetChcHostsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cvm/getChcHosts:getChcHosts", args, GetChcHostsResultOutput{}, options).(GetChcHostsResultOutput), nil
-		}).(GetChcHostsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cvm/getChcHosts:getChcHosts", args, GetChcHostsResultOutput{}, options).(GetChcHostsResultOutput)
 }
 
 // A collection of arguments for invoking getChcHosts.

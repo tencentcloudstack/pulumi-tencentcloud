@@ -38,14 +38,14 @@ import (
 //				return err
 //			}
 //			fooSecurityPolicy, err := gaap.NewSecurityPolicy(ctx, "foo", &gaap.SecurityPolicyArgs{
-//				ProxyId: foo.ID(),
+//				ProxyId: foo.ID().ToIDOutput().ToStringOutput(),
 //				Action:  pulumi.String("ACCEPT"),
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			fooSecurityRule, err := gaap.NewSecurityRule(ctx, "foo", &gaap.SecurityRuleArgs{
-//				PolicyId: fooSecurityPolicy.ID(),
+//				PolicyId: fooSecurityPolicy.ID().ToIDOutput().ToStringOutput(),
 //				Name:     pulumi.String("ci-test-gaap-s-rule"),
 //				CidrIp:   pulumi.String("1.1.1.1"),
 //				Action:   pulumi.String("ACCEPT"),
@@ -55,14 +55,10 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			_ = pulumi.All(fooSecurityPolicy.ID(), fooSecurityRule.Protocol).ApplyT(func(_args []interface{}) (gaap.GetSecurityRulesResult, error) {
-//				id := _args[0].(string)
-//				protocol := _args[1].(*string)
-//				return gaap.GetSecurityRulesResult(interface{}(gaap.GetSecurityRules(ctx, &gaap.GetSecurityRulesArgs{
-//					PolicyId: id,
-//					Protocol: pulumi.StringRef(pulumi.StringRef(protocol)),
-//				}, nil))), nil
-//			}).(gaap.GetSecurityRulesResultOutput)
+//			_ = gaap.GetSecurityRulesOutput(ctx, gaap.GetSecurityRulesOutputArgs{
+//				PolicyId: fooSecurityPolicy.ID().ToIDOutput().ToStringOutput(),
+//				Protocol: fooSecurityRule.Protocol,
+//			}, nil)
 //			return nil
 //		})
 //	}
@@ -120,12 +116,8 @@ type GetSecurityRulesResult struct {
 }
 
 func GetSecurityRulesOutput(ctx *pulumi.Context, args GetSecurityRulesOutputArgs, opts ...pulumi.InvokeOption) GetSecurityRulesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSecurityRulesResultOutput, error) {
-			args := v.(GetSecurityRulesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Gaap/getSecurityRules:getSecurityRules", args, GetSecurityRulesResultOutput{}, options).(GetSecurityRulesResultOutput), nil
-		}).(GetSecurityRulesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Gaap/getSecurityRules:getSecurityRules", args, GetSecurityRulesResultOutput{}, options).(GetSecurityRulesResultOutput)
 }
 
 // A collection of arguments for invoking getSecurityRules.

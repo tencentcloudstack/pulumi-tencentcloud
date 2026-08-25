@@ -54,7 +54,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
     /// ## Import
     /// 
     /// rum project can be imported using the id, e.g.
-    /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Rum/project:Project example 139422
     /// ```

@@ -21,6 +21,8 @@ import (
 //
 // import (
 //
+//	"strconv"
+//
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/dasb"
 //
@@ -38,14 +40,14 @@ import (
 //				return err
 //			}
 //			exampleDeviceAccount, err := dasb.NewDeviceAccount(ctx, "example", &dasb.DeviceAccountArgs{
-//				DeviceId: example.ID(),
+//				DeviceId: example.ID().ToIDOutput().ApplyT(func(id pulumi.ID) (int, error) { return strconv.Atoi(string(id)) }).(pulumi.IntOutput),
 //				Account:  pulumi.String("root"),
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			_, err = dasb.NewBindDeviceAccountPrivateKey(ctx, "example", &dasb.BindDeviceAccountPrivateKeyArgs{
-//				DeviceAccountId:    exampleDeviceAccount.ID(),
+//				DeviceAccountId:    exampleDeviceAccount.ID().ToIDOutput().ApplyT(func(id pulumi.ID) (int, error) { return strconv.Atoi(string(id)) }).(pulumi.IntOutput),
 //				PrivateKey:         pulumi.String("MIICXAIBAAKBgQCqGKukO1De7zhZj6+H0qtjTkVxwTCpvKe4eCZ0FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/3j+skZ6UtW+5u09lHNsj6tQ51s1SPrCBkedbNf0Tp0GbMJDyR4e9T04ZZwIDAQABAoGAFijko56+qGyN8M0RVyaRAXz++xTqHBLh"),
 //				PrivateKeyPassword: pulumi.String("TerraformPassword"),
 //			})

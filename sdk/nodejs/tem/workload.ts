@@ -31,7 +31,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * tem workload can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Tem/workload:Workload workload envirnomentId#applicationId
  * ```
@@ -243,87 +242,87 @@ export interface WorkloadState {
     /**
      * application ID.
      */
-    applicationId?: pulumi.Input<string>;
+    applicationId?: pulumi.Input<string | undefined>;
     /**
      * cpu.
      */
-    cpuSpec?: pulumi.Input<number>;
+    cpuSpec?: pulumi.Input<number | undefined>;
     /**
      * deploy mode, support IMAGE.
      */
-    deployMode?: pulumi.Input<string>;
+    deployMode?: pulumi.Input<string | undefined>;
     /**
      * deploy strategy.
      */
-    deployStrategyConf?: pulumi.Input<inputs.Tem.WorkloadDeployStrategyConf>;
+    deployStrategyConf?: pulumi.Input<inputs.Tem.WorkloadDeployStrategyConf | undefined>;
     /**
      * deploy version.
      */
-    deployVersion?: pulumi.Input<string>;
+    deployVersion?: pulumi.Input<string | undefined>;
     /**
      * .
      */
-    envConfs?: pulumi.Input<pulumi.Input<inputs.Tem.WorkloadEnvConf>[]>;
+    envConfs?: pulumi.Input<pulumi.Input<inputs.Tem.WorkloadEnvConf>[] | undefined>;
     /**
      * environment ID.
      */
-    environmentId?: pulumi.Input<string>;
+    environmentId?: pulumi.Input<string | undefined>;
     /**
      * repository name.
      */
-    imgRepo?: pulumi.Input<string>;
+    imgRepo?: pulumi.Input<string | undefined>;
     /**
      * initial pod number.
      */
-    initPodNum?: pulumi.Input<number>;
+    initPodNum?: pulumi.Input<number | undefined>;
     /**
      * liveness config.
      */
-    liveness?: pulumi.Input<inputs.Tem.WorkloadLiveness>;
+    liveness?: pulumi.Input<inputs.Tem.WorkloadLiveness | undefined>;
     /**
      * mem.
      */
-    memorySpec?: pulumi.Input<number>;
+    memorySpec?: pulumi.Input<number | undefined>;
     /**
      * mem.
      */
-    postStart?: pulumi.Input<string>;
+    postStart?: pulumi.Input<string | undefined>;
     /**
      * mem.
      */
-    preStop?: pulumi.Input<string>;
+    preStop?: pulumi.Input<string | undefined>;
     /**
      * .
      */
-    readiness?: pulumi.Input<inputs.Tem.WorkloadReadiness>;
+    readiness?: pulumi.Input<inputs.Tem.WorkloadReadiness | undefined>;
     /**
      * repo server addr when deploy by image.
      */
-    repoServer?: pulumi.Input<string>;
+    repoServer?: pulumi.Input<string | undefined>;
     /**
      * repo type when deploy: 0: tcr personal; 1: tcr enterprise; 2: public repository; 3: tem host tcr; 4: demo repo.
      */
-    repoType?: pulumi.Input<number>;
+    repoType?: pulumi.Input<number | undefined>;
     /**
      * security groups.
      */
-    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * .
      */
-    startupProbe?: pulumi.Input<inputs.Tem.WorkloadStartupProbe>;
+    startupProbe?: pulumi.Input<inputs.Tem.WorkloadStartupProbe | undefined>;
     /**
      * storage configuration.
      */
-    storageConfs?: pulumi.Input<pulumi.Input<inputs.Tem.WorkloadStorageConf>[]>;
+    storageConfs?: pulumi.Input<pulumi.Input<inputs.Tem.WorkloadStorageConf>[] | undefined>;
     /**
      * storage mount configuration.
      */
-    storageMountConfs?: pulumi.Input<pulumi.Input<inputs.Tem.WorkloadStorageMountConf>[]>;
+    storageMountConfs?: pulumi.Input<pulumi.Input<inputs.Tem.WorkloadStorageMountConf>[] | undefined>;
     /**
      * tcr instance id when deploy by image.
      */
-    tcrInstanceId?: pulumi.Input<string>;
+    tcrInstanceId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -345,7 +344,7 @@ export interface WorkloadArgs {
     /**
      * deploy strategy.
      */
-    deployStrategyConf?: pulumi.Input<inputs.Tem.WorkloadDeployStrategyConf>;
+    deployStrategyConf?: pulumi.Input<inputs.Tem.WorkloadDeployStrategyConf | undefined>;
     /**
      * deploy version.
      */
@@ -353,7 +352,7 @@ export interface WorkloadArgs {
     /**
      * .
      */
-    envConfs?: pulumi.Input<pulumi.Input<inputs.Tem.WorkloadEnvConf>[]>;
+    envConfs?: pulumi.Input<pulumi.Input<inputs.Tem.WorkloadEnvConf>[] | undefined>;
     /**
      * environment ID.
      */
@@ -369,7 +368,7 @@ export interface WorkloadArgs {
     /**
      * liveness config.
      */
-    liveness?: pulumi.Input<inputs.Tem.WorkloadLiveness>;
+    liveness?: pulumi.Input<inputs.Tem.WorkloadLiveness | undefined>;
     /**
      * mem.
      */
@@ -377,41 +376,41 @@ export interface WorkloadArgs {
     /**
      * mem.
      */
-    postStart?: pulumi.Input<string>;
+    postStart?: pulumi.Input<string | undefined>;
     /**
      * mem.
      */
-    preStop?: pulumi.Input<string>;
+    preStop?: pulumi.Input<string | undefined>;
     /**
      * .
      */
-    readiness?: pulumi.Input<inputs.Tem.WorkloadReadiness>;
+    readiness?: pulumi.Input<inputs.Tem.WorkloadReadiness | undefined>;
     /**
      * repo server addr when deploy by image.
      */
-    repoServer?: pulumi.Input<string>;
+    repoServer?: pulumi.Input<string | undefined>;
     /**
      * repo type when deploy: 0: tcr personal; 1: tcr enterprise; 2: public repository; 3: tem host tcr; 4: demo repo.
      */
-    repoType?: pulumi.Input<number>;
+    repoType?: pulumi.Input<number | undefined>;
     /**
      * security groups.
      */
-    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * .
      */
-    startupProbe?: pulumi.Input<inputs.Tem.WorkloadStartupProbe>;
+    startupProbe?: pulumi.Input<inputs.Tem.WorkloadStartupProbe | undefined>;
     /**
      * storage configuration.
      */
-    storageConfs?: pulumi.Input<pulumi.Input<inputs.Tem.WorkloadStorageConf>[]>;
+    storageConfs?: pulumi.Input<pulumi.Input<inputs.Tem.WorkloadStorageConf>[] | undefined>;
     /**
      * storage mount configuration.
      */
-    storageMountConfs?: pulumi.Input<pulumi.Input<inputs.Tem.WorkloadStorageMountConf>[]>;
+    storageMountConfs?: pulumi.Input<pulumi.Input<inputs.Tem.WorkloadStorageMountConf>[] | undefined>;
     /**
      * tcr instance id when deploy by image.
      */
-    tcrInstanceId?: pulumi.Input<string>;
+    tcrInstanceId?: pulumi.Input<string | undefined>;
 }

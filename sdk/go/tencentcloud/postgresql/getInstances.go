@@ -11,9 +11,35 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Use this data source to query postgresql instances
+// Use this data source to query PostgreSQL instances
 //
 // ## Example Usage
+//
+// ### Query all postgresql instances
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/postgresql"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := postgresql.GetInstances(ctx, &postgresql.GetInstancesArgs{}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Query postgresql instances by filters
 //
 // ```go
 // package main
@@ -28,19 +54,9 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := postgresql.GetInstances(ctx, &postgresql.GetInstancesArgs{
-//				Name: pulumi.StringRef("test"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			_, err = postgresql.GetInstances(ctx, &postgresql.GetInstancesArgs{
-//				ProjectId: pulumi.IntRef(0),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			_, err = postgresql.GetInstances(ctx, &postgresql.GetInstancesArgs{
-//				Id: pulumi.StringRef("postgres-h9t4fde1"),
+//				Id:        pulumi.StringRef("postgres-gngyhl9d"),
+//				Name:      pulumi.StringRef("tf-example"),
+//				ProjectId: pulumi.StringRef("1235143"),
 //			}, nil)
 //			if err != nil {
 //				return err
@@ -67,31 +83,31 @@ type GetInstancesArgs struct {
 	// Name of the postgresql instance to be query.
 	Name *string `pulumi:"name"`
 	// Project ID of the postgresql instance to be query.
-	ProjectId *int `pulumi:"projectId"`
+	ProjectId *string `pulumi:"projectId"`
 	// Used to save results.
 	ResultOutputFile *string `pulumi:"resultOutputFile"`
 }
 
 // A collection of values returned by getInstances.
 type GetInstancesResult struct {
+	// Instance details set.
+	DbInstanceSets []GetInstancesDbInstanceSet `pulumi:"dbInstanceSets"`
 	// ID of the postgresql instance.
 	Id *string `pulumi:"id"`
-	// A list of postgresql instances. Each element contains the following attributes.
+	// (**Deprecated**) It has been deprecated from version 1.82.64. Please use `dbInstanceSet` instead. A list of postgresql instances. Each element contains the following attributes.
+	//
+	// Deprecated: It has been deprecated from version 1.82.64. Please use `dbInstanceSet` instead.
 	InstanceLists []GetInstancesInstanceList `pulumi:"instanceLists"`
 	// Name of the postgresql instance.
 	Name *string `pulumi:"name"`
 	// Project id, default value is 0.
-	ProjectId        *int    `pulumi:"projectId"`
+	ProjectId        *string `pulumi:"projectId"`
 	ResultOutputFile *string `pulumi:"resultOutputFile"`
 }
 
 func GetInstancesOutput(ctx *pulumi.Context, args GetInstancesOutputArgs, opts ...pulumi.InvokeOption) GetInstancesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstancesResultOutput, error) {
-			args := v.(GetInstancesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Postgresql/getInstances:getInstances", args, GetInstancesResultOutput{}, options).(GetInstancesResultOutput), nil
-		}).(GetInstancesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Postgresql/getInstances:getInstances", args, GetInstancesResultOutput{}, options).(GetInstancesResultOutput)
 }
 
 // A collection of arguments for invoking getInstances.
@@ -101,7 +117,7 @@ type GetInstancesOutputArgs struct {
 	// Name of the postgresql instance to be query.
 	Name pulumi.StringPtrInput `pulumi:"name"`
 	// Project ID of the postgresql instance to be query.
-	ProjectId pulumi.IntPtrInput `pulumi:"projectId"`
+	ProjectId pulumi.StringPtrInput `pulumi:"projectId"`
 	// Used to save results.
 	ResultOutputFile pulumi.StringPtrInput `pulumi:"resultOutputFile"`
 }
@@ -125,12 +141,19 @@ func (o GetInstancesResultOutput) ToGetInstancesResultOutputWithContext(ctx cont
 	return o
 }
 
+// Instance details set.
+func (o GetInstancesResultOutput) DbInstanceSets() GetInstancesDbInstanceSetArrayOutput {
+	return o.ApplyT(func(v GetInstancesResult) []GetInstancesDbInstanceSet { return v.DbInstanceSets }).(GetInstancesDbInstanceSetArrayOutput)
+}
+
 // ID of the postgresql instance.
 func (o GetInstancesResultOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetInstancesResult) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
 
-// A list of postgresql instances. Each element contains the following attributes.
+// (**Deprecated**) It has been deprecated from version 1.82.64. Please use `dbInstanceSet` instead. A list of postgresql instances. Each element contains the following attributes.
+//
+// Deprecated: It has been deprecated from version 1.82.64. Please use `dbInstanceSet` instead.
 func (o GetInstancesResultOutput) InstanceLists() GetInstancesInstanceListArrayOutput {
 	return o.ApplyT(func(v GetInstancesResult) []GetInstancesInstanceList { return v.InstanceLists }).(GetInstancesInstanceListArrayOutput)
 }
@@ -141,8 +164,8 @@ func (o GetInstancesResultOutput) Name() pulumi.StringPtrOutput {
 }
 
 // Project id, default value is 0.
-func (o GetInstancesResultOutput) ProjectId() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v GetInstancesResult) *int { return v.ProjectId }).(pulumi.IntPtrOutput)
+func (o GetInstancesResultOutput) ProjectId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetInstancesResult) *string { return v.ProjectId }).(pulumi.StringPtrOutput)
 }
 
 func (o GetInstancesResultOutput) ResultOutputFile() pulumi.StringPtrOutput {

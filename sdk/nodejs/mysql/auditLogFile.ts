@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "cdb",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -198,35 +198,35 @@ export interface AuditLogFileState {
     /**
      * download url.
      */
-    downloadUrl?: pulumi.Input<string>;
+    downloadUrl?: pulumi.Input<string | undefined>;
     /**
      * end time.
      */
-    endTime?: pulumi.Input<string>;
+    endTime?: pulumi.Input<string | undefined>;
     /**
      * size of file(KB).
      */
-    fileSize?: pulumi.Input<number>;
+    fileSize?: pulumi.Input<number | undefined>;
     /**
      * Filter condition. Logs can be filtered according to the filter conditions set.
      */
-    filter?: pulumi.Input<inputs.Mysql.AuditLogFileFilter>;
+    filter?: pulumi.Input<inputs.Mysql.AuditLogFileFilter | undefined>;
     /**
      * The ID of instance.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Sort by. supported values are: `ASC`- ascending order, `DESC`- descending order.
      */
-    order?: pulumi.Input<string>;
+    order?: pulumi.Input<string | undefined>;
     /**
      * Sort field. supported values include:`timestamp` - timestamp; `affectRows` - affected rows; `execTime` - execution time.
      */
-    orderBy?: pulumi.Input<string>;
+    orderBy?: pulumi.Input<string | undefined>;
     /**
      * start time.
      */
-    startTime?: pulumi.Input<string>;
+    startTime?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -240,7 +240,7 @@ export interface AuditLogFileArgs {
     /**
      * Filter condition. Logs can be filtered according to the filter conditions set.
      */
-    filter?: pulumi.Input<inputs.Mysql.AuditLogFileFilter>;
+    filter?: pulumi.Input<inputs.Mysql.AuditLogFileFilter | undefined>;
     /**
      * The ID of instance.
      */
@@ -248,11 +248,11 @@ export interface AuditLogFileArgs {
     /**
      * Sort by. supported values are: `ASC`- ascending order, `DESC`- descending order.
      */
-    order?: pulumi.Input<string>;
+    order?: pulumi.Input<string | undefined>;
     /**
      * Sort field. supported values include:`timestamp` - timestamp; `affectRows` - affected rows; `execTime` - execution time.
      */
-    orderBy?: pulumi.Input<string>;
+    orderBy?: pulumi.Input<string | undefined>;
     /**
      * start time.
      */

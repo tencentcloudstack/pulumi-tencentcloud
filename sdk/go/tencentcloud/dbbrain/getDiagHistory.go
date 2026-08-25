@@ -82,12 +82,8 @@ type GetDiagHistoryResult struct {
 }
 
 func GetDiagHistoryOutput(ctx *pulumi.Context, args GetDiagHistoryOutputArgs, opts ...pulumi.InvokeOption) GetDiagHistoryResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDiagHistoryResultOutput, error) {
-			args := v.(GetDiagHistoryArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dbbrain/getDiagHistory:getDiagHistory", args, GetDiagHistoryResultOutput{}, options).(GetDiagHistoryResultOutput), nil
-		}).(GetDiagHistoryResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dbbrain/getDiagHistory:getDiagHistory", args, GetDiagHistoryResultOutput{}, options).(GetDiagHistoryResultOutput)
 }
 
 // A collection of arguments for invoking getDiagHistory.

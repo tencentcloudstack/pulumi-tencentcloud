@@ -34,7 +34,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * tem appConfig can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Tem/appConfig:AppConfig appConfig environmentId#name
  * ```
@@ -120,15 +119,15 @@ export interface AppConfigState {
     /**
      * payload.
      */
-    configDatas?: pulumi.Input<pulumi.Input<inputs.Tem.AppConfigConfigData>[]>;
+    configDatas?: pulumi.Input<pulumi.Input<inputs.Tem.AppConfigConfigData>[] | undefined>;
     /**
      * environment ID.
      */
-    environmentId?: pulumi.Input<string>;
+    environmentId?: pulumi.Input<string | undefined>;
     /**
      * appConfig name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -146,5 +145,5 @@ export interface AppConfigArgs {
     /**
      * appConfig name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }

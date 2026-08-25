@@ -14,6 +14,8 @@ import (
 
 // Provides a resource to manage CDH instance.
 //
+// > **NOTE:** CHD instance not supported delete, please contact the work order for processing
+//
 // ## Example Usage
 //
 // ```go
@@ -22,24 +24,18 @@ import (
 // import (
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cdh"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			cfg := config.New(ctx, "")
-//			availabilityZone := "ap-guangzhou-3"
-//			if param := cfg.Get("availabilityZone"); param != "" {
-//				availabilityZone = param
-//			}
-//			_, err := cdh.NewInstance(ctx, "foo", &cdh.InstanceArgs{
-//				AvailabilityZone: pulumi.String(availabilityZone),
+//			_, err := cdh.NewInstance(ctx, "example", &cdh.InstanceArgs{
+//				AvailabilityZone: pulumi.String("ap-guangzhou-6"),
 //				HostType:         pulumi.String("HC20"),
 //				ChargeType:       pulumi.String("PREPAID"),
 //				PrepaidPeriod:    pulumi.Int(1),
-//				HostName:         pulumi.String("test"),
+//				HostName:         pulumi.String("tf-example"),
 //				PrepaidRenewFlag: pulumi.String("NOTIFY_AND_MANUAL_RENEW"),
 //			})
 //			if err != nil {
@@ -56,7 +52,7 @@ import (
 // CDH instance can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Cdh/instance:Instance foo host-d6s7i5q4
+// $ pulumi import tencentcloud:Cdh/instance:Instance example host-d6s7i5q4
 // ```
 type Instance struct {
 	pulumi.CustomResourceState

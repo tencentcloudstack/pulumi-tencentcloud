@@ -42,7 +42,7 @@ import (
 //				return err
 //			}
 //			_, err = apigateway.NewIpStrategy(ctx, "test", &apigateway.IpStrategyArgs{
-//				ServiceId:    service.ID(),
+//				ServiceId:    service.ID().ToIDOutput().ToStringOutput(),
 //				StrategyName: pulumi.String("tf_test"),
 //				StrategyType: pulumi.String("BLACK"),
 //				StrategyData: pulumi.String("9.9.9.9"),

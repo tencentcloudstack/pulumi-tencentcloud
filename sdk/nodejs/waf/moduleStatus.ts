@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * waf module_status can be imported using the id, e.g.
+ * waf moduleStatus can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Waf/moduleStatus:ModuleStatus example demo.waf.com
@@ -146,31 +146,31 @@ export interface ModuleStatusState {
     /**
      * ACL module status, 0:closed, 1:opened.
      */
-    accessControl?: pulumi.Input<number>;
+    accessControl?: pulumi.Input<number | undefined>;
     /**
      * Anti leakage module status, 0:closed, 1:opened.
      */
-    antiLeakage?: pulumi.Input<number>;
+    antiLeakage?: pulumi.Input<number | undefined>;
     /**
      * Anti tamper module status, 0:closed, 1:opened.
      */
-    antiTamper?: pulumi.Input<number>;
+    antiTamper?: pulumi.Input<number | undefined>;
     /**
      * API security module status, 0:closed, 1:opened.
      */
-    apiProtection?: pulumi.Input<number>;
+    apiProtection?: pulumi.Input<number | undefined>;
     /**
      * CC module status, 0:closed, 1:opened.
      */
-    ccProtection?: pulumi.Input<number>;
+    ccProtection?: pulumi.Input<number | undefined>;
     /**
      * Domain.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * WEB security module status, 0:closed, 1:opened.
      */
-    webSecurity?: pulumi.Input<number>;
+    webSecurity?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -184,11 +184,11 @@ export interface ModuleStatusArgs {
     /**
      * Anti leakage module status, 0:closed, 1:opened.
      */
-    antiLeakage?: pulumi.Input<number>;
+    antiLeakage?: pulumi.Input<number | undefined>;
     /**
      * Anti tamper module status, 0:closed, 1:opened.
      */
-    antiTamper?: pulumi.Input<number>;
+    antiTamper?: pulumi.Input<number | undefined>;
     /**
      * API security module status, 0:closed, 1:opened.
      */

@@ -38,8 +38,8 @@ import (
 //				GroupName:      "nice_group",
 //				PolicyViewName: "cvm_device",
 //				Remark:         "this is a test policy group",
-//				Conditions: []map[string]interface{}{
-//					map[string]interface{}{
+//				Conditions: []map[string]int{
+//					{
 //						"metricId":          33,
 //						"alarmNotifyType":   1,
 //						"alarmNotifyPeriod": 600,

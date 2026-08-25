@@ -16,11 +16,11 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * // query by role_id
- * const foo = tencentcloud.Cam.getRolePolicyAttachments({
+ * const foo = tencentcloud.cam.getRolePolicyAttachments({
  *     roleId: fooTencentcloudCamRole.id,
  * });
  * // query by role_id and policy_id
- * const bar = tencentcloud.Cam.getRolePolicyAttachments({
+ * const bar = tencentcloud.cam.getRolePolicyAttachments({
  *     roleId: fooTencentcloudCamRole.id,
  *     policyId: fooTencentcloudCamPolicy.id,
  * });
@@ -103,11 +103,11 @@ export interface GetRolePolicyAttachmentsResult {
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * // query by role_id
- * const foo = tencentcloud.Cam.getRolePolicyAttachments({
+ * const foo = tencentcloud.cam.getRolePolicyAttachments({
  *     roleId: fooTencentcloudCamRole.id,
  * });
  * // query by role_id and policy_id
- * const bar = tencentcloud.Cam.getRolePolicyAttachments({
+ * const bar = tencentcloud.cam.getRolePolicyAttachments({
  *     roleId: fooTencentcloudCamRole.id,
  *     policyId: fooTencentcloudCamPolicy.id,
  * });
@@ -131,19 +131,19 @@ export interface GetRolePolicyAttachmentsOutputArgs {
     /**
      * Mode of Creation of the CAM user policy attachment. `1` means the cam policy attachment is created by production, and the others indicate syntax strategy ways.
      */
-    createMode?: pulumi.Input<number>;
+    createMode?: pulumi.Input<number | undefined>;
     /**
      * ID of CAM policy to be queried.
      */
-    policyId?: pulumi.Input<string>;
+    policyId?: pulumi.Input<string | undefined>;
     /**
      * Type of the policy strategy. Valid values are 'User', 'QCS'. 'User' means customer strategy and 'QCS' means preset strategy.
      */
-    policyType?: pulumi.Input<string>;
+    policyType?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * ID of the attached CAM role to be queried.
      */

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const userProject = tencentcloud.Bi.getUserProject({
+ * const userProject = tencentcloud.bi.getUserProject({
  *     projectId: 123,
  *     allPage: true,
  * });
@@ -74,7 +74,7 @@ export interface GetUserProjectResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const userProject = tencentcloud.Bi.getUserProject({
+ * const userProject = tencentcloud.bi.getUserProject({
  *     projectId: 123,
  *     allPage: true,
  * });
@@ -97,13 +97,13 @@ export interface GetUserProjectOutputArgs {
     /**
      * Whether to display all, if true, ignore paging.
      */
-    allPage?: pulumi.Input<boolean>;
+    allPage?: pulumi.Input<boolean | undefined>;
     /**
      * Project id.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

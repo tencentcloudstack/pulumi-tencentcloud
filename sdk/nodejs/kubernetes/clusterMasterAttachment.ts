@@ -196,55 +196,55 @@ export interface ClusterMasterAttachmentState {
     /**
      * ID of the cluster.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * When the node belongs to the podCIDR size customization mode, the maximum number of pods running on the node can be specified.
      */
-    desiredPodNumbers?: pulumi.Input<pulumi.Input<number>[]>;
+    desiredPodNumbers?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Activate TencentCloud Automation Tools (TAT) service. If this parameter is not specified, the public image will default to enabling the Cloud Automation Assistant service, while other images will default to not enabling the Cloud Automation Assistant service.
      */
-    enhancedAutomationService?: pulumi.Input<boolean>;
+    enhancedAutomationService?: pulumi.Input<boolean | undefined>;
     /**
      * To specify whether to enable cloud monitor service. Default is TRUE.
      */
-    enhancedMonitorService?: pulumi.Input<boolean>;
+    enhancedMonitorService?: pulumi.Input<boolean | undefined>;
     /**
      * To specify whether to enable cloud security service. Default is TRUE.
      */
-    enhancedSecurityService?: pulumi.Input<boolean>;
+    enhancedSecurityService?: pulumi.Input<boolean | undefined>;
     /**
      * Custom parameters for cluster master component.
      */
-    extraArgs?: pulumi.Input<inputs.Kubernetes.ClusterMasterAttachmentExtraArgs>;
+    extraArgs?: pulumi.Input<inputs.Kubernetes.ClusterMasterAttachmentExtraArgs | undefined>;
     /**
      * When reinstalling the system, you can specify the HostName of the instance to be modified (this parameter must be passed when the cluster is in HostName mode, and the rule name should be consistent with the HostName of the CVM instance creation interface except that uppercase characters are not supported).
      */
-    hostName?: pulumi.Input<string>;
+    hostName?: pulumi.Input<string | undefined>;
     /**
      * ID of the CVM instance, this cvm will reinstall the system.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * The key pair to use for the instance, it looks like skey-16jig7tx, it should be set if `password` not set.
      */
-    keyIds?: pulumi.Input<string>;
+    keyIds?: pulumi.Input<string | undefined>;
     /**
      * Advanced Node Settings. commonly used to attach existing instances.
      */
-    masterConfig?: pulumi.Input<inputs.Kubernetes.ClusterMasterAttachmentMasterConfig>;
+    masterConfig?: pulumi.Input<inputs.Kubernetes.ClusterMasterAttachmentMasterConfig | undefined>;
     /**
      * Node role, values: MASTER_ETCD, WORKER. MASTER_ETCD needs to be specified only when creating an INDEPENDENT_CLUSTER independent cluster. The number of MASTER_ETCD nodes is 3-7, and it is recommended to have an odd number. The minimum configuration for MASTER_ETCD is 4C8G.
      */
-    nodeRole?: pulumi.Input<string>;
+    nodeRole?: pulumi.Input<string | undefined>;
     /**
      * Password to access, should be set if `keyIds` not set.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * The security group to which the instance belongs. This parameter can be obtained by calling the sgId field in the return value of DescribeSecureGroups. If this parameter is not specified, the default security group will be bound.
      */
-    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -258,27 +258,27 @@ export interface ClusterMasterAttachmentArgs {
     /**
      * When the node belongs to the podCIDR size customization mode, the maximum number of pods running on the node can be specified.
      */
-    desiredPodNumbers?: pulumi.Input<pulumi.Input<number>[]>;
+    desiredPodNumbers?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Activate TencentCloud Automation Tools (TAT) service. If this parameter is not specified, the public image will default to enabling the Cloud Automation Assistant service, while other images will default to not enabling the Cloud Automation Assistant service.
      */
-    enhancedAutomationService?: pulumi.Input<boolean>;
+    enhancedAutomationService?: pulumi.Input<boolean | undefined>;
     /**
      * To specify whether to enable cloud monitor service. Default is TRUE.
      */
-    enhancedMonitorService?: pulumi.Input<boolean>;
+    enhancedMonitorService?: pulumi.Input<boolean | undefined>;
     /**
      * To specify whether to enable cloud security service. Default is TRUE.
      */
-    enhancedSecurityService?: pulumi.Input<boolean>;
+    enhancedSecurityService?: pulumi.Input<boolean | undefined>;
     /**
      * Custom parameters for cluster master component.
      */
-    extraArgs?: pulumi.Input<inputs.Kubernetes.ClusterMasterAttachmentExtraArgs>;
+    extraArgs?: pulumi.Input<inputs.Kubernetes.ClusterMasterAttachmentExtraArgs | undefined>;
     /**
      * When reinstalling the system, you can specify the HostName of the instance to be modified (this parameter must be passed when the cluster is in HostName mode, and the rule name should be consistent with the HostName of the CVM instance creation interface except that uppercase characters are not supported).
      */
-    hostName?: pulumi.Input<string>;
+    hostName?: pulumi.Input<string | undefined>;
     /**
      * ID of the CVM instance, this cvm will reinstall the system.
      */
@@ -286,11 +286,11 @@ export interface ClusterMasterAttachmentArgs {
     /**
      * The key pair to use for the instance, it looks like skey-16jig7tx, it should be set if `password` not set.
      */
-    keyIds?: pulumi.Input<string>;
+    keyIds?: pulumi.Input<string | undefined>;
     /**
      * Advanced Node Settings. commonly used to attach existing instances.
      */
-    masterConfig?: pulumi.Input<inputs.Kubernetes.ClusterMasterAttachmentMasterConfig>;
+    masterConfig?: pulumi.Input<inputs.Kubernetes.ClusterMasterAttachmentMasterConfig | undefined>;
     /**
      * Node role, values: MASTER_ETCD, WORKER. MASTER_ETCD needs to be specified only when creating an INDEPENDENT_CLUSTER independent cluster. The number of MASTER_ETCD nodes is 3-7, and it is recommended to have an odd number. The minimum configuration for MASTER_ETCD is 4C8G.
      */
@@ -298,9 +298,9 @@ export interface ClusterMasterAttachmentArgs {
     /**
      * Password to access, should be set if `keyIds` not set.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * The security group to which the instance belongs. This parameter can be obtained by calling the sgId field in the return value of DescribeSecureGroups. If this parameter is not specified, the default security group will be bound.
      */
-    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

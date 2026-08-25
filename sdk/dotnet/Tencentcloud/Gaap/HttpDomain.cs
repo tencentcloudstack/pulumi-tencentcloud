@@ -53,8 +53,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
     /// 
     /// GAAP http domain can be imported using the id, e.g.
     /// 
+    /// &gt; **NOTE:** The format of tencentcloud.Gaap.HttpDomain id is `[listener-id]+[protocol]+[domain]`.
+    /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Gaap/httpDomain:HttpDomain  tencentcloud_gaap_http_domain.foo listener-11112222+HTTP+www.qq.com
+    ///   $ pulumi import tencentcloud:Gaap/httpDomain:HttpDomain foo listener-11112222+HTTP+www.qq.com
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Gaap/httpDomain:HttpDomain")]

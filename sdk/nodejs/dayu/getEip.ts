@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const test = tencentcloud.Dayu.getEip({
+ * const test = tencentcloud.dayu.getEip({
  *     resourceId: "bgpip-000004xg",
  * });
  * ```
@@ -84,7 +84,7 @@ export interface GetEipResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const test = tencentcloud.Dayu.getEip({
+ * const test = tencentcloud.dayu.getEip({
  *     resourceId: "bgpip-000004xg",
  * });
  * ```
@@ -107,15 +107,15 @@ export interface GetEipOutputArgs {
     /**
      * The binding state of the instance, value range [BINDING, BIND, UNBINDING, UNBIND], default is [BINDING, BIND, UNBINDING, UNBIND].
      */
-    bindStatuses?: pulumi.Input<pulumi.Input<string>[]>;
+    bindStatuses?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The number of pages, default is `10`.
      */
-    limit?: pulumi.Input<number>;
+    limit?: pulumi.Input<number | undefined>;
     /**
      * The page start offset, default is `0`.
      */
-    offset?: pulumi.Input<number>;
+    offset?: pulumi.Input<number | undefined>;
     /**
      * Id of the resource.
      */
@@ -123,5 +123,5 @@ export interface GetEipOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

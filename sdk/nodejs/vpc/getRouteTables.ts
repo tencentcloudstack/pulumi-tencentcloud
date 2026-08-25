@@ -7,7 +7,7 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Use this data source to query vpc route tables information.
+ * Use this data source to query VPC route tables information.
  *
  * ## Example Usage
  *
@@ -28,19 +28,19 @@ import * as utilities from "../utilities";
  *         test: "test",
  *     },
  * });
- * const idInstances = tencentcloud.Vpc.getRouteTablesOutput({
+ * const idInstances = tencentcloud.vpc.getRouteTablesOutput({
  *     routeTableId: routeTable.id,
  * });
- * const nameInstances = tencentcloud.Vpc.getRouteTablesOutput({
+ * const nameInstances = tencentcloud.vpc.getRouteTablesOutput({
  *     name: routeTable.name,
  * });
- * const vpcDefaultInstance = tencentcloud.Vpc.getRouteTablesOutput({
+ * const vpcDefaultInstance = tencentcloud.vpc.getRouteTablesOutput({
  *     vpcId: foo.id,
  *     associationMain: true,
  * });
- * const tagsInstances = routeTable.tags.apply(tags => tencentcloud.Vpc.getRouteTablesOutput({
- *     tags: tags,
- * }));
+ * const tagsInstances = tencentcloud.vpc.getRouteTablesOutput({
+ *     tags: routeTable.tags,
+ * });
  * ```
  */
 export function getRouteTables(args?: GetRouteTablesArgs, opts?: pulumi.InvokeOptions): Promise<GetRouteTablesResult> {
@@ -124,7 +124,7 @@ export interface GetRouteTablesResult {
     readonly vpcId?: string;
 }
 /**
- * Use this data source to query vpc route tables information.
+ * Use this data source to query VPC route tables information.
  *
  * ## Example Usage
  *
@@ -145,19 +145,19 @@ export interface GetRouteTablesResult {
  *         test: "test",
  *     },
  * });
- * const idInstances = tencentcloud.Vpc.getRouteTablesOutput({
+ * const idInstances = tencentcloud.vpc.getRouteTablesOutput({
  *     routeTableId: routeTable.id,
  * });
- * const nameInstances = tencentcloud.Vpc.getRouteTablesOutput({
+ * const nameInstances = tencentcloud.vpc.getRouteTablesOutput({
  *     name: routeTable.name,
  * });
- * const vpcDefaultInstance = tencentcloud.Vpc.getRouteTablesOutput({
+ * const vpcDefaultInstance = tencentcloud.vpc.getRouteTablesOutput({
  *     vpcId: foo.id,
  *     associationMain: true,
  * });
- * const tagsInstances = routeTable.tags.apply(tags => tencentcloud.Vpc.getRouteTablesOutput({
- *     tags: tags,
- * }));
+ * const tagsInstances = tencentcloud.vpc.getRouteTablesOutput({
+ *     tags: routeTable.tags,
+ * });
  * ```
  */
 export function getRouteTablesOutput(args?: GetRouteTablesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRouteTablesResult> {
@@ -181,29 +181,29 @@ export interface GetRouteTablesOutputArgs {
     /**
      * Filter the main routing table.
      */
-    associationMain?: pulumi.Input<boolean>;
+    associationMain?: pulumi.Input<boolean | undefined>;
     /**
      * Name of the routing table to be queried.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * ID of the routing table to be queried.
      */
-    routeTableId?: pulumi.Input<string>;
+    routeTableId?: pulumi.Input<string | undefined>;
     /**
      * Filter if routing table has this tag.
      */
-    tagKey?: pulumi.Input<string>;
+    tagKey?: pulumi.Input<string | undefined>;
     /**
      * Tags of the routing table to be queried.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * ID of the VPC to be queried.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }

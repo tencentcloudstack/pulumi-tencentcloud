@@ -61,10 +61,10 @@ import * as utilities from "../utilities";
  *     preLimit: 100,
  *     testLimit: 100,
  * });
- * const id = tencentcloud.ApiGateway.getThrottlingApis({
+ * const id = tencentcloud.apigateway.getThrottlingApis({
  *     serviceId: serviceId,
  * });
- * const foo = tencentcloud.ApiGateway.getThrottlingApis({
+ * const foo = tencentcloud.apigateway.getThrottlingApis({
  *     serviceId: serviceTencentcloudApiGatewayApi.serviceId,
  *     environmentNames: [
  *         "release",
@@ -175,10 +175,10 @@ export interface GetThrottlingApisResult {
  *     preLimit: 100,
  *     testLimit: 100,
  * });
- * const id = tencentcloud.ApiGateway.getThrottlingApis({
+ * const id = tencentcloud.apigateway.getThrottlingApis({
  *     serviceId: serviceId,
  * });
- * const foo = tencentcloud.ApiGateway.getThrottlingApis({
+ * const foo = tencentcloud.apigateway.getThrottlingApis({
  *     serviceId: serviceTencentcloudApiGatewayApi.serviceId,
  *     environmentNames: [
  *         "release",
@@ -204,13 +204,13 @@ export interface GetThrottlingApisOutputArgs {
     /**
      * Environment list.
      */
-    environmentNames?: pulumi.Input<pulumi.Input<string>[]>;
+    environmentNames?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Unique service ID of API.
      */
-    serviceId?: pulumi.Input<string>;
+    serviceId?: pulumi.Input<string | undefined>;
 }

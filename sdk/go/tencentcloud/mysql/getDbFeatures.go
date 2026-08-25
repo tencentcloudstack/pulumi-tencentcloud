@@ -83,12 +83,8 @@ type GetDbFeaturesResult struct {
 }
 
 func GetDbFeaturesOutput(ctx *pulumi.Context, args GetDbFeaturesOutputArgs, opts ...pulumi.InvokeOption) GetDbFeaturesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDbFeaturesResultOutput, error) {
-			args := v.(GetDbFeaturesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mysql/getDbFeatures:getDbFeatures", args, GetDbFeaturesResultOutput{}, options).(GetDbFeaturesResultOutput), nil
-		}).(GetDbFeaturesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mysql/getDbFeatures:getDbFeatures", args, GetDbFeaturesResultOutput{}, options).(GetDbFeaturesResultOutput)
 }
 
 // A collection of arguments for invoking getDbFeatures.

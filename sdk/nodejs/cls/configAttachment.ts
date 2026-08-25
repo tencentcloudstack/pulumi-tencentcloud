@@ -9,7 +9,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * cls config_attachment can be imported using the id, e.g.
+ * cls configAttachment can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Cls/configAttachment:ConfigAttachment attach config_id#group_id
@@ -90,11 +90,11 @@ export interface ConfigAttachmentState {
     /**
      * Collection configuration id.
      */
-    configId?: pulumi.Input<string>;
+    configId?: pulumi.Input<string | undefined>;
     /**
      * Machine group id.
      */
-    groupId?: pulumi.Input<string>;
+    groupId?: pulumi.Input<string | undefined>;
 }
 
 /**

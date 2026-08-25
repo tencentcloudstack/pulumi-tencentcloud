@@ -137,23 +137,23 @@ export interface WebCallbackState {
     /**
      * Secret key.
      */
-    key?: pulumi.Input<string>;
+    key?: pulumi.Input<string | undefined>;
     /**
      * Request method. Supports POST and PUT. Required when Type is Http.
      */
-    method?: pulumi.Input<string>;
+    method?: pulumi.Input<string | undefined>;
     /**
      * Notification content name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Channel type. WeCom: WeChat for Enterprise; DingTalk: DingTalk; Lark: Feishu; Http: custom callback.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
     /**
      * Webhook address.
      */
-    webhook?: pulumi.Input<string>;
+    webhook?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -163,15 +163,15 @@ export interface WebCallbackArgs {
     /**
      * Secret key.
      */
-    key?: pulumi.Input<string>;
+    key?: pulumi.Input<string | undefined>;
     /**
      * Request method. Supports POST and PUT. Required when Type is Http.
      */
-    method?: pulumi.Input<string>;
+    method?: pulumi.Input<string | undefined>;
     /**
      * Notification content name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Channel type. WeCom: WeChat for Enterprise; DingTalk: DingTalk; Lark: Feishu; Http: custom callback.
      */

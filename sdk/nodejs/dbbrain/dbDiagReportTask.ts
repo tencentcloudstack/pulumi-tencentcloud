@@ -136,31 +136,31 @@ export interface DbDiagReportTaskState {
     /**
      * An array of contact group IDs to receive mail from.
      */
-    contactGroups?: pulumi.Input<pulumi.Input<number>[]>;
+    contactGroups?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * An array of contact IDs to receive emails from.
      */
-    contactPeople?: pulumi.Input<pulumi.Input<number>[]>;
+    contactPeople?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * End time, such as 2020-11-09T14:00:00+08:00.
      */
-    endTime?: pulumi.Input<string>;
+    endTime?: pulumi.Input<string | undefined>;
     /**
      * instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Service product type, supported values include: mysql - cloud database MySQL, cynosdb - cloud database CynosDB for MySQL.
      */
-    product?: pulumi.Input<string>;
+    product?: pulumi.Input<string | undefined>;
     /**
      * Whether to send mail: 0 - no, 1 - yes.
      */
-    sendMailFlag?: pulumi.Input<number>;
+    sendMailFlag?: pulumi.Input<number | undefined>;
     /**
      * Start time, such as 2020-11-08T14:00:00+08:00.
      */
-    startTime?: pulumi.Input<string>;
+    startTime?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -170,11 +170,11 @@ export interface DbDiagReportTaskArgs {
     /**
      * An array of contact group IDs to receive mail from.
      */
-    contactGroups?: pulumi.Input<pulumi.Input<number>[]>;
+    contactGroups?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * An array of contact IDs to receive emails from.
      */
-    contactPeople?: pulumi.Input<pulumi.Input<number>[]>;
+    contactPeople?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * End time, such as 2020-11-09T14:00:00+08:00.
      */

@@ -30,7 +30,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * teo teo_security_ip_group can be imported using the id, e.g.
+ * teo teoSecurityIpGroup can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Teo/securityIpGroup:SecurityIpGroup teo_security_ip_group zone_id#group_id
@@ -111,11 +111,11 @@ export interface SecurityIpGroupState {
     /**
      * IP group information, replace all when modifying.
      */
-    ipGroup?: pulumi.Input<inputs.Teo.SecurityIpGroupIpGroup>;
+    ipGroup?: pulumi.Input<inputs.Teo.SecurityIpGroupIpGroup | undefined>;
     /**
      * Site ID.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**

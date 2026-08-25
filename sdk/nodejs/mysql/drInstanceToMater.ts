@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "cdb",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -59,7 +59,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * mysql dr_instance_to_mater can be imported using the id, e.g.
+ * mysql drInstanceToMater can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Mysql/drInstanceToMater:DrInstanceToMater dr_instance_to_mater dr_instance_to_mater_id
@@ -131,7 +131,7 @@ export interface DrInstanceToMaterState {
     /**
      * Disaster recovery instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**

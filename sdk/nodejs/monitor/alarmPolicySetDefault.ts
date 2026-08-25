@@ -94,11 +94,11 @@ export interface AlarmPolicySetDefaultState {
     /**
      * Fixed value, as `monitor`.
      */
-    module?: pulumi.Input<string>;
+    module?: pulumi.Input<string | undefined>;
     /**
      * Policy id.
      */
-    policyId?: pulumi.Input<string>;
+    policyId?: pulumi.Input<string | undefined>;
 }
 
 /**

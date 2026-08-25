@@ -28,11 +28,23 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns.Inputs
         /// <summary>
         /// Forwarding target IP address.
         /// </summary>
-        [Input("host", required: true)]
-        public Input<string> Host { get; set; } = null!;
+        [Input("host")]
+        public Input<string>? Host { get; set; }
+
+        [Input("hosts")]
+        private InputList<string>? _hosts;
 
         /// <summary>
-        /// Specifies the forwarding IP port number.
+        /// Forwarding target IPs address.
+        /// </summary>
+        public InputList<string> Hosts
+        {
+            get => _hosts ?? (_hosts = new InputList<string>());
+            set => _hosts = value;
+        }
+
+        /// <summary>
+        /// Specifies the forwarding IP port number. This only applies when configuring `Host`; if using `Hosts`, you can choose any port value from `Hosts`.
         /// </summary>
         [Input("port", required: true)]
         public Input<int> Port { get; set; } = null!;

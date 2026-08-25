@@ -74,12 +74,8 @@ type LookupRouteTableInputPoliciesResult struct {
 }
 
 func LookupRouteTableInputPoliciesOutput(ctx *pulumi.Context, args LookupRouteTableInputPoliciesOutputArgs, opts ...pulumi.InvokeOption) LookupRouteTableInputPoliciesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupRouteTableInputPoliciesResultOutput, error) {
-			args := v.(LookupRouteTableInputPoliciesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ccn/getRouteTableInputPolicies:getRouteTableInputPolicies", args, LookupRouteTableInputPoliciesResultOutput{}, options).(LookupRouteTableInputPoliciesResultOutput), nil
-		}).(LookupRouteTableInputPoliciesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ccn/getRouteTableInputPolicies:getRouteTableInputPolicies", args, LookupRouteTableInputPoliciesResultOutput{}, options).(LookupRouteTableInputPoliciesResultOutput)
 }
 
 // A collection of arguments for invoking getRouteTableInputPolicies.

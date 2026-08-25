@@ -127,7 +127,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
     /// 
     /// ## Import
     /// 
-    /// eb eb_transform can be imported using the id, e.g.
+    /// eb EbTransform can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Eb/eventTransform:EventTransform eb_transform eb_transform_id

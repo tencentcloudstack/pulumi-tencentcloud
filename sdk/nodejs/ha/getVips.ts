@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const haVips = tencentcloud.Ha.getVips({});
+ * const haVips = tencentcloud.ha.getVips({});
  * ```
  */
 export function getVips(args?: GetVipsArgs, opts?: pulumi.InvokeOptions): Promise<GetVipsResult> {
@@ -104,7 +104,7 @@ export interface GetVipsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const haVips = tencentcloud.Ha.getVips({});
+ * const haVips = tencentcloud.ha.getVips({});
  * ```
  */
 export function getVipsOutput(args?: GetVipsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetVipsResult> {
@@ -127,25 +127,25 @@ export interface GetVipsOutputArgs {
     /**
      * EIP of the HA VIP to be queried.
      */
-    addressIp?: pulumi.Input<string>;
+    addressIp?: pulumi.Input<string | undefined>;
     /**
      * ID of the HA VIP to be queried.
      */
-    id?: pulumi.Input<string>;
+    id?: pulumi.Input<string | undefined>;
     /**
      * Name of the HA VIP. The length of character is limited to 1-60.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Subnet id of the HA VIP to be queried.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * VPC id of the HA VIP to be queried.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }

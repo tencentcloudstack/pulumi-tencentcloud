@@ -84,6 +84,9 @@ import * as utilities from "../utilities";
  *             cacheTime: 600,
  *             followOrigin: "on",
  *         },
+ *         networkErrorLogging: {
+ *             "switch": "off",
+ *         },
  *         ocspStapling: {
  *             "switch": "off",
  *         },
@@ -127,15 +130,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * teo l7_acc_setting can be imported using the zone_id, e.g.
- *
- * `
- *
- * ```sh
- * $ pulumi import tencentcloud:Teo/l7AccSetting:L7AccSetting teo_l7_acc_setting zone-297z8rf93cfw
- * ```
- *
- * `
+ * teo l7AccSetting can be imported using the zone_id, e.g.
  */
 export class L7AccSetting extends pulumi.CustomResource {
     /**
@@ -218,15 +213,15 @@ export interface L7AccSettingState {
     /**
      * Site acceleration global configuration. the settings in this parameter will apply to all domain names under the site. you only need to modify the required settings directly, and other settings not passed in will remain unchanged.
      */
-    zoneConfig?: pulumi.Input<inputs.Teo.L7AccSettingZoneConfig>;
+    zoneConfig?: pulumi.Input<inputs.Teo.L7AccSettingZoneConfig | undefined>;
     /**
      * Zone id.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
     /**
      * Zone name.
      */
-    zoneName?: pulumi.Input<string>;
+    zoneName?: pulumi.Input<string | undefined>;
 }
 
 /**

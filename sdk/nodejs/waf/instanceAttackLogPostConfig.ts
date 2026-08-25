@@ -104,11 +104,11 @@ export interface InstanceAttackLogPostConfigState {
     /**
      * Attack log delivery switch. 0- Disable, 1- Enable.
      */
-    attackLogPost?: pulumi.Input<number>;
+    attackLogPost?: pulumi.Input<number | undefined>;
     /**
      * Waf instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**

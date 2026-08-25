@@ -14,6 +14,8 @@ import (
 
 // Provide a resource to create a VPC.
 //
+// > **NOTE:** In accordance with VPC business requirements, the default value for `isMulticast` has been updated to `false`(previously `true`) in version `v1.82.93` of the provider. If you wish to utilize this feature, you must first contact the VPC product team to have your account added to the whitelist, and then set the `isMulticast` field to `true`.
+//
 // ## Example Usage
 //
 // ### Create a basic VPC
@@ -39,7 +41,7 @@ import (
 //				},
 //				IsMulticast: pulumi.Bool(false),
 //				Tags: pulumi.StringMap{
-//					"test": pulumi.String("test"),
+//					"createBy": pulumi.String("Terraform"),
 //				},
 //			})
 //			if err != nil {
@@ -73,7 +75,43 @@ import (
 //					pulumi.String("172.16.0.0/24"),
 //				},
 //				Tags: pulumi.StringMap{
-//					"test": pulumi.String("test"),
+//					"createBy": pulumi.String("Terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Enable route vpc publish
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/vpc"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//				Name:      pulumi.String("tf-example"),
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//				DnsServers: pulumi.StringArray{
+//					pulumi.String("119.29.29.29"),
+//					pulumi.String("8.8.8.8"),
+//				},
+//				IsMulticast:           pulumi.Bool(false),
+//				EnableRouteVpcPublish: pulumi.Bool(true),
+//				Tags: pulumi.StringMap{
+//					"createBy": pulumi.String("Terraform"),
 //				},
 //			})
 //			if err != nil {
@@ -90,7 +128,7 @@ import (
 // Vpc instance can be imported, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Vpc/instance:Instance test vpc-id
+// $ pulumi import tencentcloud:Vpc/instance:Instance vpc vpc-8vazrwjv
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -107,10 +145,14 @@ type Instance struct {
 	DnsServers pulumi.StringArrayOutput `pulumi:"dnsServers"`
 	// List of Docker Assistant CIDR.
 	DockerAssistantCidrs pulumi.StringArrayOutput `pulumi:"dockerAssistantCidrs"`
+	// Vpc association with CCN route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.
+	EnableRouteVpcPublish pulumi.BoolOutput `pulumi:"enableRouteVpcPublish"`
+	// Vpc association with CCN IPV6 route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.
+	EnableRouteVpcPublishIpv6 pulumi.BoolOutput `pulumi:"enableRouteVpcPublishIpv6"`
 	// Indicates whether it is the default VPC for this region.
 	IsDefault pulumi.BoolOutput `pulumi:"isDefault"`
-	// Indicates whether VPC multicast is enabled. The default value is 'true'.
-	IsMulticast pulumi.BoolPtrOutput `pulumi:"isMulticast"`
+	// Indicates whether VPC multicast is enabled. The default value is `false`. Multicast are whitelist-restricted. We recommend disabling these features if they are not applicable to your environment.
+	IsMulticast pulumi.BoolOutput `pulumi:"isMulticast"`
 	// The name of the VPC.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Tags of the VPC.
@@ -162,9 +204,13 @@ type instanceState struct {
 	DnsServers []string `pulumi:"dnsServers"`
 	// List of Docker Assistant CIDR.
 	DockerAssistantCidrs []string `pulumi:"dockerAssistantCidrs"`
+	// Vpc association with CCN route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.
+	EnableRouteVpcPublish *bool `pulumi:"enableRouteVpcPublish"`
+	// Vpc association with CCN IPV6 route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.
+	EnableRouteVpcPublishIpv6 *bool `pulumi:"enableRouteVpcPublishIpv6"`
 	// Indicates whether it is the default VPC for this region.
 	IsDefault *bool `pulumi:"isDefault"`
-	// Indicates whether VPC multicast is enabled. The default value is 'true'.
+	// Indicates whether VPC multicast is enabled. The default value is `false`. Multicast are whitelist-restricted. We recommend disabling these features if they are not applicable to your environment.
 	IsMulticast *bool `pulumi:"isMulticast"`
 	// The name of the VPC.
 	Name *string `pulumi:"name"`
@@ -185,9 +231,13 @@ type InstanceState struct {
 	DnsServers pulumi.StringArrayInput
 	// List of Docker Assistant CIDR.
 	DockerAssistantCidrs pulumi.StringArrayInput
+	// Vpc association with CCN route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.
+	EnableRouteVpcPublish pulumi.BoolPtrInput
+	// Vpc association with CCN IPV6 route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.
+	EnableRouteVpcPublishIpv6 pulumi.BoolPtrInput
 	// Indicates whether it is the default VPC for this region.
 	IsDefault pulumi.BoolPtrInput
-	// Indicates whether VPC multicast is enabled. The default value is 'true'.
+	// Indicates whether VPC multicast is enabled. The default value is `false`. Multicast are whitelist-restricted. We recommend disabling these features if they are not applicable to your environment.
 	IsMulticast pulumi.BoolPtrInput
 	// The name of the VPC.
 	Name pulumi.StringPtrInput
@@ -206,7 +256,11 @@ type instanceArgs struct {
 	CidrBlock string `pulumi:"cidrBlock"`
 	// The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.
 	DnsServers []string `pulumi:"dnsServers"`
-	// Indicates whether VPC multicast is enabled. The default value is 'true'.
+	// Vpc association with CCN route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.
+	EnableRouteVpcPublish *bool `pulumi:"enableRouteVpcPublish"`
+	// Vpc association with CCN IPV6 route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.
+	EnableRouteVpcPublishIpv6 *bool `pulumi:"enableRouteVpcPublishIpv6"`
+	// Indicates whether VPC multicast is enabled. The default value is `false`. Multicast are whitelist-restricted. We recommend disabling these features if they are not applicable to your environment.
 	IsMulticast *bool `pulumi:"isMulticast"`
 	// The name of the VPC.
 	Name *string `pulumi:"name"`
@@ -222,7 +276,11 @@ type InstanceArgs struct {
 	CidrBlock pulumi.StringInput
 	// The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.
 	DnsServers pulumi.StringArrayInput
-	// Indicates whether VPC multicast is enabled. The default value is 'true'.
+	// Vpc association with CCN route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.
+	EnableRouteVpcPublish pulumi.BoolPtrInput
+	// Vpc association with CCN IPV6 route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.
+	EnableRouteVpcPublishIpv6 pulumi.BoolPtrInput
+	// Indicates whether VPC multicast is enabled. The default value is `false`. Multicast are whitelist-restricted. We recommend disabling these features if they are not applicable to your environment.
 	IsMulticast pulumi.BoolPtrInput
 	// The name of the VPC.
 	Name pulumi.StringPtrInput
@@ -347,14 +405,24 @@ func (o InstanceOutput) DockerAssistantCidrs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringArrayOutput { return v.DockerAssistantCidrs }).(pulumi.StringArrayOutput)
 }
 
+// Vpc association with CCN route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.
+func (o InstanceOutput) EnableRouteVpcPublish() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Instance) pulumi.BoolOutput { return v.EnableRouteVpcPublish }).(pulumi.BoolOutput)
+}
+
+// Vpc association with CCN IPV6 route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.
+func (o InstanceOutput) EnableRouteVpcPublishIpv6() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Instance) pulumi.BoolOutput { return v.EnableRouteVpcPublishIpv6 }).(pulumi.BoolOutput)
+}
+
 // Indicates whether it is the default VPC for this region.
 func (o InstanceOutput) IsDefault() pulumi.BoolOutput {
 	return o.ApplyT(func(v *Instance) pulumi.BoolOutput { return v.IsDefault }).(pulumi.BoolOutput)
 }
 
-// Indicates whether VPC multicast is enabled. The default value is 'true'.
-func (o InstanceOutput) IsMulticast() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *Instance) pulumi.BoolPtrOutput { return v.IsMulticast }).(pulumi.BoolPtrOutput)
+// Indicates whether VPC multicast is enabled. The default value is `false`. Multicast are whitelist-restricted. We recommend disabling these features if they are not applicable to your environment.
+func (o InstanceOutput) IsMulticast() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Instance) pulumi.BoolOutput { return v.IsMulticast }).(pulumi.BoolOutput)
 }
 
 // The name of the VPC.

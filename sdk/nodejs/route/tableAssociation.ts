@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * vpc route_table can be imported using the id, e.g.
+ * vpc routeTable can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Route/tableAssociation:TableAssociation route_table_association subnet_id
@@ -102,11 +102,11 @@ export interface TableAssociationState {
     /**
      * The route table instance ID, such as `rtb-azd4dt1c`.
      */
-    routeTableId?: pulumi.Input<string>;
+    routeTableId?: pulumi.Input<string | undefined>;
     /**
      * Subnet instance ID, such as `subnet-3x5lf5q0`. This can be queried using the DescribeSubnets API.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
 }
 
 /**

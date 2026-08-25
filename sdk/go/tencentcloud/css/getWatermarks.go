@@ -62,12 +62,8 @@ type GetWatermarksResult struct {
 }
 
 func GetWatermarksOutput(ctx *pulumi.Context, args GetWatermarksOutputArgs, opts ...pulumi.InvokeOption) GetWatermarksResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetWatermarksResultOutput, error) {
-			args := v.(GetWatermarksArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Css/getWatermarks:getWatermarks", args, GetWatermarksResultOutput{}, options).(GetWatermarksResultOutput), nil
-		}).(GetWatermarksResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Css/getWatermarks:getWatermarks", args, GetWatermarksResultOutput{}, options).(GetWatermarksResultOutput)
 }
 
 // A collection of arguments for invoking getWatermarks.

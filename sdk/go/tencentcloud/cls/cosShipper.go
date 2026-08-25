@@ -21,8 +21,6 @@ import (
 //
 // import (
 //
-//	"fmt"
-//
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cls"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cos"
@@ -55,7 +53,7 @@ import (
 //			}
 //			exampleTopic, err := cls.NewTopic(ctx, "example", &cls.TopicArgs{
 //				TopicName:          pulumi.String("tf-example"),
-//				LogsetId:           exampleLogset.ID(),
+//				LogsetId:           exampleLogset.ID().ToIDOutput().ToStringOutput(),
 //				AutoSplit:          pulumi.Bool(false),
 //				MaxSplitPartitions: pulumi.Int(20),
 //				PartitionCount:     pulumi.Int(1),
@@ -69,13 +67,14 @@ import (
 //				return err
 //			}
 //			_, err = cls.NewCosShipper(ctx, "example", &cls.CosShipperArgs{
-//				Bucket:      example.ID(),
-//				TopicId:     exampleTopic.ID(),
+//				Bucket:      example.ID().ToIDOutput().ToStringOutput(),
+//				TopicId:     exampleTopic.ID().ToIDOutput().ToStringOutput(),
 //				Interval:    pulumi.Int(300),
 //				MaxSize:     pulumi.Int(200),
 //				Partition:   pulumi.String("/%Y/%m/%d/%H/"),
 //				Prefix:      pulumi.String("ap-guangzhou-fffsasad-1649734752"),
 //				ShipperName: pulumi.String("ap-guangzhou-fffsasad-1649734752"),
+//				TimeZone:    pulumi.String("GMT+08:00"),
 //				Compress: &cls.CosShipperCompressArgs{
 //					Format: pulumi.String("lzop"),
 //				},
@@ -87,6 +86,58 @@ import (
 //							pulumi.String("__FILENAME__"),
 //							pulumi.String("__SOURCE__"),
 //							pulumi.String("__TIMESTAMP__"),
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Example with Parquet format:
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cls"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := cls.NewCosShipper(ctx, "parquet_example", &cls.CosShipperArgs{
+//				Bucket:      pulumi.Any(example.Id),
+//				TopicId:     pulumi.Any(exampleTencentcloudClsTopic.Id),
+//				Interval:    pulumi.Int(300),
+//				MaxSize:     pulumi.Int(256),
+//				Partition:   pulumi.String("/%Y/%m/%d/%H/"),
+//				Prefix:      pulumi.String("logs/parquet/"),
+//				ShipperName: pulumi.String("parquet-shipper"),
+//				Compress: &cls.CosShipperCompressArgs{
+//					Format: pulumi.String("gzip"),
+//				},
+//				Content: &cls.CosShipperContentArgs{
+//					Format: pulumi.String("parquet"),
+//					Parquet: &cls.CosShipperContentParquetArgs{
+//						ParquetKeyInfos: cls.CosShipperContentParquetParquetKeyInfoArray{
+//							&cls.CosShipperContentParquetParquetKeyInfoArgs{
+//								KeyName:             pulumi.String("level"),
+//								KeyType:             pulumi.String("string"),
+//								KeyNonExistingField: pulumi.String("INFO"),
+//							},
+//							&cls.CosShipperContentParquetParquetKeyInfoArgs{
+//								KeyName:             pulumi.String("user_id"),
+//								KeyType:             pulumi.String("int64"),
+//								KeyNonExistingField: pulumi.String("0"),
+//							},
 //						},
 //					},
 //				},
@@ -136,6 +187,8 @@ type CosShipper struct {
 	StartTime pulumi.IntOutput `pulumi:"startTime"`
 	// COS bucket storage type. support: STANDARD_IA, ARCHIVE, DEEP_ARCHIVE, STANDARD, MAZ_STANDARD, MAZ_STANDARD_IA, INTELLIGENT_TIERING.
 	StorageType pulumi.StringPtrOutput `pulumi:"storageType"`
+	// Timezone used to generate the time variable in the COS file path when shipping logs. Supports GMT and UTC timezone formats, e.g., `GMT+08:00`, `UTC+08:00`.
+	TimeZone pulumi.StringOutput `pulumi:"timeZone"`
 	// ID of the log topic to which the shipping rule to be created belongs.
 	TopicId pulumi.StringOutput `pulumi:"topicId"`
 }
@@ -208,6 +261,8 @@ type cosShipperState struct {
 	StartTime *int `pulumi:"startTime"`
 	// COS bucket storage type. support: STANDARD_IA, ARCHIVE, DEEP_ARCHIVE, STANDARD, MAZ_STANDARD, MAZ_STANDARD_IA, INTELLIGENT_TIERING.
 	StorageType *string `pulumi:"storageType"`
+	// Timezone used to generate the time variable in the COS file path when shipping logs. Supports GMT and UTC timezone formats, e.g., `GMT+08:00`, `UTC+08:00`.
+	TimeZone *string `pulumi:"timeZone"`
 	// ID of the log topic to which the shipping rule to be created belongs.
 	TopicId *string `pulumi:"topicId"`
 }
@@ -239,6 +294,8 @@ type CosShipperState struct {
 	StartTime pulumi.IntPtrInput
 	// COS bucket storage type. support: STANDARD_IA, ARCHIVE, DEEP_ARCHIVE, STANDARD, MAZ_STANDARD, MAZ_STANDARD_IA, INTELLIGENT_TIERING.
 	StorageType pulumi.StringPtrInput
+	// Timezone used to generate the time variable in the COS file path when shipping logs. Supports GMT and UTC timezone formats, e.g., `GMT+08:00`, `UTC+08:00`.
+	TimeZone pulumi.StringPtrInput
 	// ID of the log topic to which the shipping rule to be created belongs.
 	TopicId pulumi.StringPtrInput
 }
@@ -274,6 +331,8 @@ type cosShipperArgs struct {
 	StartTime *int `pulumi:"startTime"`
 	// COS bucket storage type. support: STANDARD_IA, ARCHIVE, DEEP_ARCHIVE, STANDARD, MAZ_STANDARD, MAZ_STANDARD_IA, INTELLIGENT_TIERING.
 	StorageType *string `pulumi:"storageType"`
+	// Timezone used to generate the time variable in the COS file path when shipping logs. Supports GMT and UTC timezone formats, e.g., `GMT+08:00`, `UTC+08:00`.
+	TimeZone *string `pulumi:"timeZone"`
 	// ID of the log topic to which the shipping rule to be created belongs.
 	TopicId string `pulumi:"topicId"`
 }
@@ -306,6 +365,8 @@ type CosShipperArgs struct {
 	StartTime pulumi.IntPtrInput
 	// COS bucket storage type. support: STANDARD_IA, ARCHIVE, DEEP_ARCHIVE, STANDARD, MAZ_STANDARD, MAZ_STANDARD_IA, INTELLIGENT_TIERING.
 	StorageType pulumi.StringPtrInput
+	// Timezone used to generate the time variable in the COS file path when shipping logs. Supports GMT and UTC timezone formats, e.g., `GMT+08:00`, `UTC+08:00`.
+	TimeZone pulumi.StringPtrInput
 	// ID of the log topic to which the shipping rule to be created belongs.
 	TopicId pulumi.StringInput
 }
@@ -460,6 +521,11 @@ func (o CosShipperOutput) StartTime() pulumi.IntOutput {
 // COS bucket storage type. support: STANDARD_IA, ARCHIVE, DEEP_ARCHIVE, STANDARD, MAZ_STANDARD, MAZ_STANDARD_IA, INTELLIGENT_TIERING.
 func (o CosShipperOutput) StorageType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CosShipper) pulumi.StringPtrOutput { return v.StorageType }).(pulumi.StringPtrOutput)
+}
+
+// Timezone used to generate the time variable in the COS file path when shipping logs. Supports GMT and UTC timezone formats, e.g., `GMT+08:00`, `UTC+08:00`.
+func (o CosShipperOutput) TimeZone() pulumi.StringOutput {
+	return o.ApplyT(func(v *CosShipper) pulumi.StringOutput { return v.TimeZone }).(pulumi.StringOutput)
 }
 
 // ID of the log topic to which the shipping rule to be created belongs.

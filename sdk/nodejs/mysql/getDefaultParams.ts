@@ -84,9 +84,9 @@ export interface GetDefaultParamsOutputArgs {
     /**
      * MySQL database version.
      */
-    dbVersion?: pulumi.Input<string>;
+    dbVersion?: pulumi.Input<string | undefined>;
     /**
      * Used for save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

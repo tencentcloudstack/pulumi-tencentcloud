@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const groups = tencentcloud.Tsf.getGroups({
+ * const groups = tencentcloud.tsf.getGroups({
  *     searchWord: "keep",
  *     applicationId: "application-a24x29xv",
  *     orderBy: "createTime",
@@ -132,7 +132,7 @@ export interface GetGroupsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const groups = tencentcloud.Tsf.getGroups({
+ * const groups = tencentcloud.tsf.getGroups({
  *     searchWord: "keep",
  *     applicationId: "application-a24x29xv",
  *     orderBy: "createTime",
@@ -169,41 +169,41 @@ export interface GetGroupsOutputArgs {
     /**
      * applicationId.
      */
-    applicationId?: pulumi.Input<string>;
+    applicationId?: pulumi.Input<string | undefined>;
     /**
      * clusterId.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * group Id list.
      */
-    groupIdLists?: pulumi.Input<pulumi.Input<string>[]>;
+    groupIdLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Group resourceType list.
      */
-    groupResourceTypeLists?: pulumi.Input<pulumi.Input<string>[]>;
+    groupResourceTypeLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * namespace Id.
      */
-    namespaceId?: pulumi.Input<string>;
+    namespaceId?: pulumi.Input<string | undefined>;
     /**
      * sort term.
      */
-    orderBy?: pulumi.Input<string>;
+    orderBy?: pulumi.Input<string | undefined>;
     /**
      * order type, 0 desc, 1 asc.
      */
-    orderType?: pulumi.Input<number>;
+    orderType?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * searchWord, support groupName.
      */
-    searchWord?: pulumi.Input<string>;
+    searchWord?: pulumi.Input<string | undefined>;
     /**
      * group status filter, `Running`: running, `Unknown`: unknown.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
 }

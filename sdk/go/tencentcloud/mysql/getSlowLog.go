@@ -67,12 +67,8 @@ type GetSlowLogResult struct {
 }
 
 func GetSlowLogOutput(ctx *pulumi.Context, args GetSlowLogOutputArgs, opts ...pulumi.InvokeOption) GetSlowLogResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSlowLogResultOutput, error) {
-			args := v.(GetSlowLogArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mysql/getSlowLog:getSlowLog", args, GetSlowLogResultOutput{}, options).(GetSlowLogResultOutput), nil
-		}).(GetSlowLogResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mysql/getSlowLog:getSlowLog", args, GetSlowLogResultOutput{}, options).(GetSlowLogResultOutput)
 }
 
 // A collection of arguments for invoking getSlowLog.

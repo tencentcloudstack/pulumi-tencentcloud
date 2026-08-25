@@ -87,7 +87,6 @@ import (
 // ## Import
 //
 // tem scaleRule can be imported using the id, e.g.
-//
 // ```sh
 // $ pulumi import tencentcloud:Tem/scaleRule:ScaleRule scaleRule environmentId#applicationId#scaleRuleId
 // ```

@@ -9,6 +9,8 @@ import * as utilities from "../utilities";
 /**
  * Provides a resource to create a TEO l7 acc rule v2
  *
+ * > **NOTE:** Compared to tencentcloud_teo_l7_acc_rule, tencentcloud.Teo.L7AccRuleV2 is simpler to use but is limited to managing a single rule and lacks the ability to maintain rule ordering. It is best suited for scenarios where you need to manage multiple rules independently and priority/sequencing is not a concern.
+ *
  * ## Example Usage
  *
  * ```typescript
@@ -18,7 +20,7 @@ import * as utilities from "../utilities";
  * const example = new tencentcloud.teo.L7AccRuleV2("example", {
  *     zoneId: "zone-3fkff38fyw8s",
  *     descriptions: ["description"],
- *     ruleName: "网站加速",
+ *     ruleName: "Web Acceleration",
  *     status: "enable",
  *     branches: [{
  *         condition: "${http.request.host} in ['www.example.com']",
@@ -65,6 +67,28 @@ import * as utilities from "../utilities";
  *                     ],
  *                 },
  *             },
+ *             {
+ *                 name: "ContentCompression",
+ *                 contentCompressionParameters: {
+ *                     "switch": "on",
+ *                 },
+ *             },
+ *             {
+ *                 name: "Vary",
+ *                 varyParameters: {
+ *                     "switch": "on",
+ *                 },
+ *             },
+ *             {
+ *                 name: "OriginAuthentication",
+ *                 originAuthenticationParameters: {
+ *                     requestProperties: [{
+ *                         type: "Header",
+ *                         name: "Authorization",
+ *                         value: "Bearer token123",
+ *                     }],
+ *                 },
+ *             },
  *         ],
  *         subRules: [
  *             {
@@ -99,17 +123,53 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ### Using AdvancedOriginRouting, Shield, and SiteFailover actions
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const exampleFailover = new tencentcloud.teo.L7AccRuleV2("example_failover", {
+ *     zoneId: "zone-3fkff38fyw8s",
+ *     descriptions: ["description"],
+ *     ruleName: "Web Acceleration Failover",
+ *     status: "enable",
+ *     branches: [{
+ *         condition: "${http.request.host} in ['www.example.com']",
+ *         actions: [
+ *             {
+ *                 name: "AdvancedOriginRouting",
+ *                 advancedOriginRoutingParameters: {
+ *                     direction: "MainlandChinaAndGlobalAdaptive",
+ *                 },
+ *             },
+ *             {
+ *                 name: "Shield",
+ *                 shieldParameters: {
+ *                     shieldSpaceId: "shield-space-abc123",
+ *                 },
+ *             },
+ *             {
+ *                 name: "SiteFailover",
+ *                 siteFailoverParameters: {
+ *                     siteFailoverStatusCodes: [500],
+ *                     siteFailoverParams: [{
+ *                         mode: "FailoverToHost",
+ *                         origin: "backup.example.com",
+ *                         originProtocol: "https",
+ *                         httpsOriginPort: 443,
+ *                         statusCode: 302,
+ *                     }],
+ *                 },
+ *             },
+ *         ],
+ *     }],
+ * });
+ * ```
+ *
  * ## Import
  *
  * TEO l7 acc rule v2 can be imported using the {zone_id}#{rule_id}, e.g.
- *
- * `
- *
- * ```sh
- * $ pulumi import tencentcloud:Teo/l7AccRuleV2:L7AccRuleV2 example zone-3fkff38fyw8s#rule-3ft1xeuhlj1b
- * ```
- *
- * `
  */
 export class L7AccRuleV2 extends pulumi.CustomResource {
     /**
@@ -213,31 +273,31 @@ export interface L7AccRuleV2State {
     /**
      * Sub-Rule branch. this list currently supports filling in only one rule; multiple entries are invalid.
      */
-    branches?: pulumi.Input<pulumi.Input<inputs.Teo.L7AccRuleV2Branch>[]>;
+    branches?: pulumi.Input<pulumi.Input<inputs.Teo.L7AccRuleV2Branch>[] | undefined>;
     /**
      * Rule annotation. multiple annotations can be added.
      */
-    descriptions?: pulumi.Input<pulumi.Input<string>[]>;
+    descriptions?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Rule ID. Unique identifier of the rule.
      */
-    ruleId?: pulumi.Input<string>;
+    ruleId?: pulumi.Input<string | undefined>;
     /**
      * Rule name. The name length limit is 255 characters.
      */
-    ruleName?: pulumi.Input<string>;
+    ruleName?: pulumi.Input<string | undefined>;
     /**
      * Rule priority. only used as an output parameter.
      */
-    rulePriority?: pulumi.Input<number>;
+    rulePriority?: pulumi.Input<number | undefined>;
     /**
      * Rule status. The possible values are: `enable`: enabled; `disable`: disabled.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Zone id.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -247,19 +307,19 @@ export interface L7AccRuleV2Args {
     /**
      * Sub-Rule branch. this list currently supports filling in only one rule; multiple entries are invalid.
      */
-    branches?: pulumi.Input<pulumi.Input<inputs.Teo.L7AccRuleV2Branch>[]>;
+    branches?: pulumi.Input<pulumi.Input<inputs.Teo.L7AccRuleV2Branch>[] | undefined>;
     /**
      * Rule annotation. multiple annotations can be added.
      */
-    descriptions?: pulumi.Input<pulumi.Input<string>[]>;
+    descriptions?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Rule name. The name length limit is 255 characters.
      */
-    ruleName?: pulumi.Input<string>;
+    ruleName?: pulumi.Input<string | undefined>;
     /**
      * Rule status. The possible values are: `enable`: enabled; `disable`: disabled.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Zone id.
      */

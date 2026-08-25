@@ -13,6 +13,523 @@ import (
 
 var _ = internal.GetEnvOrDefault
 
+type AuditLogFileFilter struct {
+	// Minimum affected rows.
+	AffectRows *int `pulumi:"affectRows"`
+	// Operation types.
+	Atypes []string `pulumi:"atypes"`
+	// Minimum execution time in ms.
+	ExecTime *int `pulumi:"execTime"`
+	// Client addresses.
+	Hosts []string `pulumi:"hosts"`
+	// Keywords to filter logs.
+	Params []string `pulumi:"params"`
+	// Execution results.
+	Results []string `pulumi:"results"`
+	// Usernames.
+	Users []string `pulumi:"users"`
+}
+
+// AuditLogFileFilterInput is an input type that accepts AuditLogFileFilterArgs and AuditLogFileFilterOutput values.
+// You can construct a concrete instance of `AuditLogFileFilterInput` via:
+//
+//	AuditLogFileFilterArgs{...}
+type AuditLogFileFilterInput interface {
+	pulumi.Input
+
+	ToAuditLogFileFilterOutput() AuditLogFileFilterOutput
+	ToAuditLogFileFilterOutputWithContext(context.Context) AuditLogFileFilterOutput
+}
+
+type AuditLogFileFilterArgs struct {
+	// Minimum affected rows.
+	AffectRows pulumi.IntPtrInput `pulumi:"affectRows"`
+	// Operation types.
+	Atypes pulumi.StringArrayInput `pulumi:"atypes"`
+	// Minimum execution time in ms.
+	ExecTime pulumi.IntPtrInput `pulumi:"execTime"`
+	// Client addresses.
+	Hosts pulumi.StringArrayInput `pulumi:"hosts"`
+	// Keywords to filter logs.
+	Params pulumi.StringArrayInput `pulumi:"params"`
+	// Execution results.
+	Results pulumi.StringArrayInput `pulumi:"results"`
+	// Usernames.
+	Users pulumi.StringArrayInput `pulumi:"users"`
+}
+
+func (AuditLogFileFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AuditLogFileFilter)(nil)).Elem()
+}
+
+func (i AuditLogFileFilterArgs) ToAuditLogFileFilterOutput() AuditLogFileFilterOutput {
+	return i.ToAuditLogFileFilterOutputWithContext(context.Background())
+}
+
+func (i AuditLogFileFilterArgs) ToAuditLogFileFilterOutputWithContext(ctx context.Context) AuditLogFileFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AuditLogFileFilterOutput)
+}
+
+func (i AuditLogFileFilterArgs) ToAuditLogFileFilterPtrOutput() AuditLogFileFilterPtrOutput {
+	return i.ToAuditLogFileFilterPtrOutputWithContext(context.Background())
+}
+
+func (i AuditLogFileFilterArgs) ToAuditLogFileFilterPtrOutputWithContext(ctx context.Context) AuditLogFileFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AuditLogFileFilterOutput).ToAuditLogFileFilterPtrOutputWithContext(ctx)
+}
+
+// AuditLogFileFilterPtrInput is an input type that accepts AuditLogFileFilterArgs, AuditLogFileFilterPtr and AuditLogFileFilterPtrOutput values.
+// You can construct a concrete instance of `AuditLogFileFilterPtrInput` via:
+//
+//	        AuditLogFileFilterArgs{...}
+//
+//	or:
+//
+//	        nil
+type AuditLogFileFilterPtrInput interface {
+	pulumi.Input
+
+	ToAuditLogFileFilterPtrOutput() AuditLogFileFilterPtrOutput
+	ToAuditLogFileFilterPtrOutputWithContext(context.Context) AuditLogFileFilterPtrOutput
+}
+
+type auditLogFileFilterPtrType AuditLogFileFilterArgs
+
+func AuditLogFileFilterPtr(v *AuditLogFileFilterArgs) AuditLogFileFilterPtrInput {
+	return (*auditLogFileFilterPtrType)(v)
+}
+
+func (*auditLogFileFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**AuditLogFileFilter)(nil)).Elem()
+}
+
+func (i *auditLogFileFilterPtrType) ToAuditLogFileFilterPtrOutput() AuditLogFileFilterPtrOutput {
+	return i.ToAuditLogFileFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *auditLogFileFilterPtrType) ToAuditLogFileFilterPtrOutputWithContext(ctx context.Context) AuditLogFileFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AuditLogFileFilterPtrOutput)
+}
+
+type AuditLogFileFilterOutput struct{ *pulumi.OutputState }
+
+func (AuditLogFileFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AuditLogFileFilter)(nil)).Elem()
+}
+
+func (o AuditLogFileFilterOutput) ToAuditLogFileFilterOutput() AuditLogFileFilterOutput {
+	return o
+}
+
+func (o AuditLogFileFilterOutput) ToAuditLogFileFilterOutputWithContext(ctx context.Context) AuditLogFileFilterOutput {
+	return o
+}
+
+func (o AuditLogFileFilterOutput) ToAuditLogFileFilterPtrOutput() AuditLogFileFilterPtrOutput {
+	return o.ToAuditLogFileFilterPtrOutputWithContext(context.Background())
+}
+
+func (o AuditLogFileFilterOutput) ToAuditLogFileFilterPtrOutputWithContext(ctx context.Context) AuditLogFileFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v AuditLogFileFilter) *AuditLogFileFilter {
+		return &v
+	}).(AuditLogFileFilterPtrOutput)
+}
+
+// Minimum affected rows.
+func (o AuditLogFileFilterOutput) AffectRows() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AuditLogFileFilter) *int { return v.AffectRows }).(pulumi.IntPtrOutput)
+}
+
+// Operation types.
+func (o AuditLogFileFilterOutput) Atypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AuditLogFileFilter) []string { return v.Atypes }).(pulumi.StringArrayOutput)
+}
+
+// Minimum execution time in ms.
+func (o AuditLogFileFilterOutput) ExecTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AuditLogFileFilter) *int { return v.ExecTime }).(pulumi.IntPtrOutput)
+}
+
+// Client addresses.
+func (o AuditLogFileFilterOutput) Hosts() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AuditLogFileFilter) []string { return v.Hosts }).(pulumi.StringArrayOutput)
+}
+
+// Keywords to filter logs.
+func (o AuditLogFileFilterOutput) Params() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AuditLogFileFilter) []string { return v.Params }).(pulumi.StringArrayOutput)
+}
+
+// Execution results.
+func (o AuditLogFileFilterOutput) Results() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AuditLogFileFilter) []string { return v.Results }).(pulumi.StringArrayOutput)
+}
+
+// Usernames.
+func (o AuditLogFileFilterOutput) Users() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AuditLogFileFilter) []string { return v.Users }).(pulumi.StringArrayOutput)
+}
+
+type AuditLogFileFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (AuditLogFileFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**AuditLogFileFilter)(nil)).Elem()
+}
+
+func (o AuditLogFileFilterPtrOutput) ToAuditLogFileFilterPtrOutput() AuditLogFileFilterPtrOutput {
+	return o
+}
+
+func (o AuditLogFileFilterPtrOutput) ToAuditLogFileFilterPtrOutputWithContext(ctx context.Context) AuditLogFileFilterPtrOutput {
+	return o
+}
+
+func (o AuditLogFileFilterPtrOutput) Elem() AuditLogFileFilterOutput {
+	return o.ApplyT(func(v *AuditLogFileFilter) AuditLogFileFilter {
+		if v != nil {
+			return *v
+		}
+		var ret AuditLogFileFilter
+		return ret
+	}).(AuditLogFileFilterOutput)
+}
+
+// Minimum affected rows.
+func (o AuditLogFileFilterPtrOutput) AffectRows() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *AuditLogFileFilter) *int {
+		if v == nil {
+			return nil
+		}
+		return v.AffectRows
+	}).(pulumi.IntPtrOutput)
+}
+
+// Operation types.
+func (o AuditLogFileFilterPtrOutput) Atypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *AuditLogFileFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Atypes
+	}).(pulumi.StringArrayOutput)
+}
+
+// Minimum execution time in ms.
+func (o AuditLogFileFilterPtrOutput) ExecTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *AuditLogFileFilter) *int {
+		if v == nil {
+			return nil
+		}
+		return v.ExecTime
+	}).(pulumi.IntPtrOutput)
+}
+
+// Client addresses.
+func (o AuditLogFileFilterPtrOutput) Hosts() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *AuditLogFileFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Hosts
+	}).(pulumi.StringArrayOutput)
+}
+
+// Keywords to filter logs.
+func (o AuditLogFileFilterPtrOutput) Params() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *AuditLogFileFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Params
+	}).(pulumi.StringArrayOutput)
+}
+
+// Execution results.
+func (o AuditLogFileFilterPtrOutput) Results() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *AuditLogFileFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Results
+	}).(pulumi.StringArrayOutput)
+}
+
+// Usernames.
+func (o AuditLogFileFilterPtrOutput) Users() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *AuditLogFileFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Users
+	}).(pulumi.StringArrayOutput)
+}
+
+type AuditLogFileItem struct {
+	// Creation time.
+	CreateTime *string `pulumi:"createTime"`
+	// Download URL.
+	DownloadUrl *string `pulumi:"downloadUrl"`
+	// Error message.
+	ErrMsg *string `pulumi:"errMsg"`
+	// File name.
+	FileName *string `pulumi:"fileName"`
+	// File size in KB.
+	FileSize *int `pulumi:"fileSize"`
+	// Download progress.
+	ProgressRate *int `pulumi:"progressRate"`
+	// File status. Valid values: `creating`, `failed`, `success`.
+	Status *string `pulumi:"status"`
+}
+
+// AuditLogFileItemInput is an input type that accepts AuditLogFileItemArgs and AuditLogFileItemOutput values.
+// You can construct a concrete instance of `AuditLogFileItemInput` via:
+//
+//	AuditLogFileItemArgs{...}
+type AuditLogFileItemInput interface {
+	pulumi.Input
+
+	ToAuditLogFileItemOutput() AuditLogFileItemOutput
+	ToAuditLogFileItemOutputWithContext(context.Context) AuditLogFileItemOutput
+}
+
+type AuditLogFileItemArgs struct {
+	// Creation time.
+	CreateTime pulumi.StringPtrInput `pulumi:"createTime"`
+	// Download URL.
+	DownloadUrl pulumi.StringPtrInput `pulumi:"downloadUrl"`
+	// Error message.
+	ErrMsg pulumi.StringPtrInput `pulumi:"errMsg"`
+	// File name.
+	FileName pulumi.StringPtrInput `pulumi:"fileName"`
+	// File size in KB.
+	FileSize pulumi.IntPtrInput `pulumi:"fileSize"`
+	// Download progress.
+	ProgressRate pulumi.IntPtrInput `pulumi:"progressRate"`
+	// File status. Valid values: `creating`, `failed`, `success`.
+	Status pulumi.StringPtrInput `pulumi:"status"`
+}
+
+func (AuditLogFileItemArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AuditLogFileItem)(nil)).Elem()
+}
+
+func (i AuditLogFileItemArgs) ToAuditLogFileItemOutput() AuditLogFileItemOutput {
+	return i.ToAuditLogFileItemOutputWithContext(context.Background())
+}
+
+func (i AuditLogFileItemArgs) ToAuditLogFileItemOutputWithContext(ctx context.Context) AuditLogFileItemOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AuditLogFileItemOutput)
+}
+
+// AuditLogFileItemArrayInput is an input type that accepts AuditLogFileItemArray and AuditLogFileItemArrayOutput values.
+// You can construct a concrete instance of `AuditLogFileItemArrayInput` via:
+//
+//	AuditLogFileItemArray{ AuditLogFileItemArgs{...} }
+type AuditLogFileItemArrayInput interface {
+	pulumi.Input
+
+	ToAuditLogFileItemArrayOutput() AuditLogFileItemArrayOutput
+	ToAuditLogFileItemArrayOutputWithContext(context.Context) AuditLogFileItemArrayOutput
+}
+
+type AuditLogFileItemArray []AuditLogFileItemInput
+
+func (AuditLogFileItemArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AuditLogFileItem)(nil)).Elem()
+}
+
+func (i AuditLogFileItemArray) ToAuditLogFileItemArrayOutput() AuditLogFileItemArrayOutput {
+	return i.ToAuditLogFileItemArrayOutputWithContext(context.Background())
+}
+
+func (i AuditLogFileItemArray) ToAuditLogFileItemArrayOutputWithContext(ctx context.Context) AuditLogFileItemArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AuditLogFileItemArrayOutput)
+}
+
+type AuditLogFileItemOutput struct{ *pulumi.OutputState }
+
+func (AuditLogFileItemOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AuditLogFileItem)(nil)).Elem()
+}
+
+func (o AuditLogFileItemOutput) ToAuditLogFileItemOutput() AuditLogFileItemOutput {
+	return o
+}
+
+func (o AuditLogFileItemOutput) ToAuditLogFileItemOutputWithContext(ctx context.Context) AuditLogFileItemOutput {
+	return o
+}
+
+// Creation time.
+func (o AuditLogFileItemOutput) CreateTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AuditLogFileItem) *string { return v.CreateTime }).(pulumi.StringPtrOutput)
+}
+
+// Download URL.
+func (o AuditLogFileItemOutput) DownloadUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AuditLogFileItem) *string { return v.DownloadUrl }).(pulumi.StringPtrOutput)
+}
+
+// Error message.
+func (o AuditLogFileItemOutput) ErrMsg() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AuditLogFileItem) *string { return v.ErrMsg }).(pulumi.StringPtrOutput)
+}
+
+// File name.
+func (o AuditLogFileItemOutput) FileName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AuditLogFileItem) *string { return v.FileName }).(pulumi.StringPtrOutput)
+}
+
+// File size in KB.
+func (o AuditLogFileItemOutput) FileSize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AuditLogFileItem) *int { return v.FileSize }).(pulumi.IntPtrOutput)
+}
+
+// Download progress.
+func (o AuditLogFileItemOutput) ProgressRate() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AuditLogFileItem) *int { return v.ProgressRate }).(pulumi.IntPtrOutput)
+}
+
+// File status. Valid values: `creating`, `failed`, `success`.
+func (o AuditLogFileItemOutput) Status() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AuditLogFileItem) *string { return v.Status }).(pulumi.StringPtrOutput)
+}
+
+type AuditLogFileItemArrayOutput struct{ *pulumi.OutputState }
+
+func (AuditLogFileItemArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AuditLogFileItem)(nil)).Elem()
+}
+
+func (o AuditLogFileItemArrayOutput) ToAuditLogFileItemArrayOutput() AuditLogFileItemArrayOutput {
+	return o
+}
+
+func (o AuditLogFileItemArrayOutput) ToAuditLogFileItemArrayOutputWithContext(ctx context.Context) AuditLogFileItemArrayOutput {
+	return o
+}
+
+func (o AuditLogFileItemArrayOutput) Index(i pulumi.IntInput) AuditLogFileItemOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AuditLogFileItem {
+		return vs[0].([]AuditLogFileItem)[vs[1].(int)]
+	}).(AuditLogFileItemOutput)
+}
+
+type AuditServiceRuleFilter struct {
+	// Filter match type. Must be EQ.
+	Compare string `pulumi:"compare"`
+	// Filter condition name. Valid values: SrcIp, DB, Collection, User, SqlType.
+	Type string `pulumi:"type"`
+	// Filter match values.
+	Values []string `pulumi:"values"`
+}
+
+// AuditServiceRuleFilterInput is an input type that accepts AuditServiceRuleFilterArgs and AuditServiceRuleFilterOutput values.
+// You can construct a concrete instance of `AuditServiceRuleFilterInput` via:
+//
+//	AuditServiceRuleFilterArgs{...}
+type AuditServiceRuleFilterInput interface {
+	pulumi.Input
+
+	ToAuditServiceRuleFilterOutput() AuditServiceRuleFilterOutput
+	ToAuditServiceRuleFilterOutputWithContext(context.Context) AuditServiceRuleFilterOutput
+}
+
+type AuditServiceRuleFilterArgs struct {
+	// Filter match type. Must be EQ.
+	Compare pulumi.StringInput `pulumi:"compare"`
+	// Filter condition name. Valid values: SrcIp, DB, Collection, User, SqlType.
+	Type pulumi.StringInput `pulumi:"type"`
+	// Filter match values.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (AuditServiceRuleFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AuditServiceRuleFilter)(nil)).Elem()
+}
+
+func (i AuditServiceRuleFilterArgs) ToAuditServiceRuleFilterOutput() AuditServiceRuleFilterOutput {
+	return i.ToAuditServiceRuleFilterOutputWithContext(context.Background())
+}
+
+func (i AuditServiceRuleFilterArgs) ToAuditServiceRuleFilterOutputWithContext(ctx context.Context) AuditServiceRuleFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AuditServiceRuleFilterOutput)
+}
+
+// AuditServiceRuleFilterArrayInput is an input type that accepts AuditServiceRuleFilterArray and AuditServiceRuleFilterArrayOutput values.
+// You can construct a concrete instance of `AuditServiceRuleFilterArrayInput` via:
+//
+//	AuditServiceRuleFilterArray{ AuditServiceRuleFilterArgs{...} }
+type AuditServiceRuleFilterArrayInput interface {
+	pulumi.Input
+
+	ToAuditServiceRuleFilterArrayOutput() AuditServiceRuleFilterArrayOutput
+	ToAuditServiceRuleFilterArrayOutputWithContext(context.Context) AuditServiceRuleFilterArrayOutput
+}
+
+type AuditServiceRuleFilterArray []AuditServiceRuleFilterInput
+
+func (AuditServiceRuleFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AuditServiceRuleFilter)(nil)).Elem()
+}
+
+func (i AuditServiceRuleFilterArray) ToAuditServiceRuleFilterArrayOutput() AuditServiceRuleFilterArrayOutput {
+	return i.ToAuditServiceRuleFilterArrayOutputWithContext(context.Background())
+}
+
+func (i AuditServiceRuleFilterArray) ToAuditServiceRuleFilterArrayOutputWithContext(ctx context.Context) AuditServiceRuleFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AuditServiceRuleFilterArrayOutput)
+}
+
+type AuditServiceRuleFilterOutput struct{ *pulumi.OutputState }
+
+func (AuditServiceRuleFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AuditServiceRuleFilter)(nil)).Elem()
+}
+
+func (o AuditServiceRuleFilterOutput) ToAuditServiceRuleFilterOutput() AuditServiceRuleFilterOutput {
+	return o
+}
+
+func (o AuditServiceRuleFilterOutput) ToAuditServiceRuleFilterOutputWithContext(ctx context.Context) AuditServiceRuleFilterOutput {
+	return o
+}
+
+// Filter match type. Must be EQ.
+func (o AuditServiceRuleFilterOutput) Compare() pulumi.StringOutput {
+	return o.ApplyT(func(v AuditServiceRuleFilter) string { return v.Compare }).(pulumi.StringOutput)
+}
+
+// Filter condition name. Valid values: SrcIp, DB, Collection, User, SqlType.
+func (o AuditServiceRuleFilterOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v AuditServiceRuleFilter) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// Filter match values.
+func (o AuditServiceRuleFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AuditServiceRuleFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type AuditServiceRuleFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (AuditServiceRuleFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AuditServiceRuleFilter)(nil)).Elem()
+}
+
+func (o AuditServiceRuleFilterArrayOutput) ToAuditServiceRuleFilterArrayOutput() AuditServiceRuleFilterArrayOutput {
+	return o
+}
+
+func (o AuditServiceRuleFilterArrayOutput) ToAuditServiceRuleFilterArrayOutputWithContext(ctx context.Context) AuditServiceRuleFilterArrayOutput {
+	return o
+}
+
+func (o AuditServiceRuleFilterArrayOutput) Index(i pulumi.IntInput) AuditServiceRuleFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AuditServiceRuleFilter {
+		return vs[0].([]AuditServiceRuleFilter)[vs[1].(int)]
+	}).(AuditServiceRuleFilterOutput)
+}
+
 type InstanceAccountAuthRole struct {
 	// Permission information of the current account. 0: No permission. 1: read-only. 2: Write only. 3: Read and write.
 	Mask int `pulumi:"mask"`
@@ -682,7 +1199,7 @@ func (o InstanceStandbyInstanceListArrayOutput) Index(i pulumi.IntInput) Instanc
 type InstanceTransparentDataEncryptionKeyInfoList struct {
 	// Instance and key binding time.
 	CreateTime *string `pulumi:"createTime"`
-	// Master Key ID.
+	// Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.
 	KeyId *string `pulumi:"keyId"`
 	// Master key name.
 	KeyName *string `pulumi:"keyName"`
@@ -708,7 +1225,7 @@ type InstanceTransparentDataEncryptionKeyInfoListInput interface {
 type InstanceTransparentDataEncryptionKeyInfoListArgs struct {
 	// Instance and key binding time.
 	CreateTime pulumi.StringPtrInput `pulumi:"createTime"`
-	// Master Key ID.
+	// Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.
 	KeyId pulumi.StringPtrInput `pulumi:"keyId"`
 	// Master key name.
 	KeyName pulumi.StringPtrInput `pulumi:"keyName"`
@@ -776,7 +1293,7 @@ func (o InstanceTransparentDataEncryptionKeyInfoListOutput) CreateTime() pulumi.
 	return o.ApplyT(func(v InstanceTransparentDataEncryptionKeyInfoList) *string { return v.CreateTime }).(pulumi.StringPtrOutput)
 }
 
-// Master Key ID.
+// Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.
 func (o InstanceTransparentDataEncryptionKeyInfoListOutput) KeyId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v InstanceTransparentDataEncryptionKeyInfoList) *string { return v.KeyId }).(pulumi.StringPtrOutput)
 }
@@ -821,21 +1338,1061 @@ func (o InstanceTransparentDataEncryptionKeyInfoListArrayOutput) Index(i pulumi.
 	}).(InstanceTransparentDataEncryptionKeyInfoListOutput)
 }
 
+type ShardingInstanceAddNodeList struct {
+	// Node role to add. Valid values: `SECONDARY` (Mongod node), `READONLY` (read-only node), `MONGOS` (Mongos node).
+	Role string `pulumi:"role"`
+	// The availability zone for the new node.
+	Zone string `pulumi:"zone"`
+}
+
+// ShardingInstanceAddNodeListInput is an input type that accepts ShardingInstanceAddNodeListArgs and ShardingInstanceAddNodeListOutput values.
+// You can construct a concrete instance of `ShardingInstanceAddNodeListInput` via:
+//
+//	ShardingInstanceAddNodeListArgs{...}
+type ShardingInstanceAddNodeListInput interface {
+	pulumi.Input
+
+	ToShardingInstanceAddNodeListOutput() ShardingInstanceAddNodeListOutput
+	ToShardingInstanceAddNodeListOutputWithContext(context.Context) ShardingInstanceAddNodeListOutput
+}
+
+type ShardingInstanceAddNodeListArgs struct {
+	// Node role to add. Valid values: `SECONDARY` (Mongod node), `READONLY` (read-only node), `MONGOS` (Mongos node).
+	Role pulumi.StringInput `pulumi:"role"`
+	// The availability zone for the new node.
+	Zone pulumi.StringInput `pulumi:"zone"`
+}
+
+func (ShardingInstanceAddNodeListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ShardingInstanceAddNodeList)(nil)).Elem()
+}
+
+func (i ShardingInstanceAddNodeListArgs) ToShardingInstanceAddNodeListOutput() ShardingInstanceAddNodeListOutput {
+	return i.ToShardingInstanceAddNodeListOutputWithContext(context.Background())
+}
+
+func (i ShardingInstanceAddNodeListArgs) ToShardingInstanceAddNodeListOutputWithContext(ctx context.Context) ShardingInstanceAddNodeListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ShardingInstanceAddNodeListOutput)
+}
+
+// ShardingInstanceAddNodeListArrayInput is an input type that accepts ShardingInstanceAddNodeListArray and ShardingInstanceAddNodeListArrayOutput values.
+// You can construct a concrete instance of `ShardingInstanceAddNodeListArrayInput` via:
+//
+//	ShardingInstanceAddNodeListArray{ ShardingInstanceAddNodeListArgs{...} }
+type ShardingInstanceAddNodeListArrayInput interface {
+	pulumi.Input
+
+	ToShardingInstanceAddNodeListArrayOutput() ShardingInstanceAddNodeListArrayOutput
+	ToShardingInstanceAddNodeListArrayOutputWithContext(context.Context) ShardingInstanceAddNodeListArrayOutput
+}
+
+type ShardingInstanceAddNodeListArray []ShardingInstanceAddNodeListInput
+
+func (ShardingInstanceAddNodeListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ShardingInstanceAddNodeList)(nil)).Elem()
+}
+
+func (i ShardingInstanceAddNodeListArray) ToShardingInstanceAddNodeListArrayOutput() ShardingInstanceAddNodeListArrayOutput {
+	return i.ToShardingInstanceAddNodeListArrayOutputWithContext(context.Background())
+}
+
+func (i ShardingInstanceAddNodeListArray) ToShardingInstanceAddNodeListArrayOutputWithContext(ctx context.Context) ShardingInstanceAddNodeListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ShardingInstanceAddNodeListArrayOutput)
+}
+
+type ShardingInstanceAddNodeListOutput struct{ *pulumi.OutputState }
+
+func (ShardingInstanceAddNodeListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ShardingInstanceAddNodeList)(nil)).Elem()
+}
+
+func (o ShardingInstanceAddNodeListOutput) ToShardingInstanceAddNodeListOutput() ShardingInstanceAddNodeListOutput {
+	return o
+}
+
+func (o ShardingInstanceAddNodeListOutput) ToShardingInstanceAddNodeListOutputWithContext(ctx context.Context) ShardingInstanceAddNodeListOutput {
+	return o
+}
+
+// Node role to add. Valid values: `SECONDARY` (Mongod node), `READONLY` (read-only node), `MONGOS` (Mongos node).
+func (o ShardingInstanceAddNodeListOutput) Role() pulumi.StringOutput {
+	return o.ApplyT(func(v ShardingInstanceAddNodeList) string { return v.Role }).(pulumi.StringOutput)
+}
+
+// The availability zone for the new node.
+func (o ShardingInstanceAddNodeListOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v ShardingInstanceAddNodeList) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+type ShardingInstanceAddNodeListArrayOutput struct{ *pulumi.OutputState }
+
+func (ShardingInstanceAddNodeListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ShardingInstanceAddNodeList)(nil)).Elem()
+}
+
+func (o ShardingInstanceAddNodeListArrayOutput) ToShardingInstanceAddNodeListArrayOutput() ShardingInstanceAddNodeListArrayOutput {
+	return o
+}
+
+func (o ShardingInstanceAddNodeListArrayOutput) ToShardingInstanceAddNodeListArrayOutputWithContext(ctx context.Context) ShardingInstanceAddNodeListArrayOutput {
+	return o
+}
+
+func (o ShardingInstanceAddNodeListArrayOutput) Index(i pulumi.IntInput) ShardingInstanceAddNodeListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ShardingInstanceAddNodeList {
+		return vs[0].([]ShardingInstanceAddNodeList)[vs[1].(int)]
+	}).(ShardingInstanceAddNodeListOutput)
+}
+
+type ShardingInstanceRemoveNodeList struct {
+	// Node ID to remove. For sharding cluster, specify the node name corresponding to one shard group. For example: `cmgo-xxxx_0-node-readonly0`.
+	NodeName string `pulumi:"nodeName"`
+	// Node role to remove. Valid values: `SECONDARY` (Mongod secondary node), `READONLY` (read-only node), `MONGOS` (Mongos node).
+	Role string `pulumi:"role"`
+	// The availability zone of the node to remove.
+	Zone string `pulumi:"zone"`
+}
+
+// ShardingInstanceRemoveNodeListInput is an input type that accepts ShardingInstanceRemoveNodeListArgs and ShardingInstanceRemoveNodeListOutput values.
+// You can construct a concrete instance of `ShardingInstanceRemoveNodeListInput` via:
+//
+//	ShardingInstanceRemoveNodeListArgs{...}
+type ShardingInstanceRemoveNodeListInput interface {
+	pulumi.Input
+
+	ToShardingInstanceRemoveNodeListOutput() ShardingInstanceRemoveNodeListOutput
+	ToShardingInstanceRemoveNodeListOutputWithContext(context.Context) ShardingInstanceRemoveNodeListOutput
+}
+
+type ShardingInstanceRemoveNodeListArgs struct {
+	// Node ID to remove. For sharding cluster, specify the node name corresponding to one shard group. For example: `cmgo-xxxx_0-node-readonly0`.
+	NodeName pulumi.StringInput `pulumi:"nodeName"`
+	// Node role to remove. Valid values: `SECONDARY` (Mongod secondary node), `READONLY` (read-only node), `MONGOS` (Mongos node).
+	Role pulumi.StringInput `pulumi:"role"`
+	// The availability zone of the node to remove.
+	Zone pulumi.StringInput `pulumi:"zone"`
+}
+
+func (ShardingInstanceRemoveNodeListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ShardingInstanceRemoveNodeList)(nil)).Elem()
+}
+
+func (i ShardingInstanceRemoveNodeListArgs) ToShardingInstanceRemoveNodeListOutput() ShardingInstanceRemoveNodeListOutput {
+	return i.ToShardingInstanceRemoveNodeListOutputWithContext(context.Background())
+}
+
+func (i ShardingInstanceRemoveNodeListArgs) ToShardingInstanceRemoveNodeListOutputWithContext(ctx context.Context) ShardingInstanceRemoveNodeListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ShardingInstanceRemoveNodeListOutput)
+}
+
+// ShardingInstanceRemoveNodeListArrayInput is an input type that accepts ShardingInstanceRemoveNodeListArray and ShardingInstanceRemoveNodeListArrayOutput values.
+// You can construct a concrete instance of `ShardingInstanceRemoveNodeListArrayInput` via:
+//
+//	ShardingInstanceRemoveNodeListArray{ ShardingInstanceRemoveNodeListArgs{...} }
+type ShardingInstanceRemoveNodeListArrayInput interface {
+	pulumi.Input
+
+	ToShardingInstanceRemoveNodeListArrayOutput() ShardingInstanceRemoveNodeListArrayOutput
+	ToShardingInstanceRemoveNodeListArrayOutputWithContext(context.Context) ShardingInstanceRemoveNodeListArrayOutput
+}
+
+type ShardingInstanceRemoveNodeListArray []ShardingInstanceRemoveNodeListInput
+
+func (ShardingInstanceRemoveNodeListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ShardingInstanceRemoveNodeList)(nil)).Elem()
+}
+
+func (i ShardingInstanceRemoveNodeListArray) ToShardingInstanceRemoveNodeListArrayOutput() ShardingInstanceRemoveNodeListArrayOutput {
+	return i.ToShardingInstanceRemoveNodeListArrayOutputWithContext(context.Background())
+}
+
+func (i ShardingInstanceRemoveNodeListArray) ToShardingInstanceRemoveNodeListArrayOutputWithContext(ctx context.Context) ShardingInstanceRemoveNodeListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ShardingInstanceRemoveNodeListArrayOutput)
+}
+
+type ShardingInstanceRemoveNodeListOutput struct{ *pulumi.OutputState }
+
+func (ShardingInstanceRemoveNodeListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ShardingInstanceRemoveNodeList)(nil)).Elem()
+}
+
+func (o ShardingInstanceRemoveNodeListOutput) ToShardingInstanceRemoveNodeListOutput() ShardingInstanceRemoveNodeListOutput {
+	return o
+}
+
+func (o ShardingInstanceRemoveNodeListOutput) ToShardingInstanceRemoveNodeListOutputWithContext(ctx context.Context) ShardingInstanceRemoveNodeListOutput {
+	return o
+}
+
+// Node ID to remove. For sharding cluster, specify the node name corresponding to one shard group. For example: `cmgo-xxxx_0-node-readonly0`.
+func (o ShardingInstanceRemoveNodeListOutput) NodeName() pulumi.StringOutput {
+	return o.ApplyT(func(v ShardingInstanceRemoveNodeList) string { return v.NodeName }).(pulumi.StringOutput)
+}
+
+// Node role to remove. Valid values: `SECONDARY` (Mongod secondary node), `READONLY` (read-only node), `MONGOS` (Mongos node).
+func (o ShardingInstanceRemoveNodeListOutput) Role() pulumi.StringOutput {
+	return o.ApplyT(func(v ShardingInstanceRemoveNodeList) string { return v.Role }).(pulumi.StringOutput)
+}
+
+// The availability zone of the node to remove.
+func (o ShardingInstanceRemoveNodeListOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v ShardingInstanceRemoveNodeList) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+type ShardingInstanceRemoveNodeListArrayOutput struct{ *pulumi.OutputState }
+
+func (ShardingInstanceRemoveNodeListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ShardingInstanceRemoveNodeList)(nil)).Elem()
+}
+
+func (o ShardingInstanceRemoveNodeListArrayOutput) ToShardingInstanceRemoveNodeListArrayOutput() ShardingInstanceRemoveNodeListArrayOutput {
+	return o
+}
+
+func (o ShardingInstanceRemoveNodeListArrayOutput) ToShardingInstanceRemoveNodeListArrayOutputWithContext(ctx context.Context) ShardingInstanceRemoveNodeListArrayOutput {
+	return o
+}
+
+func (o ShardingInstanceRemoveNodeListArrayOutput) Index(i pulumi.IntInput) ShardingInstanceRemoveNodeListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ShardingInstanceRemoveNodeList {
+		return vs[0].([]ShardingInstanceRemoveNodeList)[vs[1].(int)]
+	}).(ShardingInstanceRemoveNodeListOutput)
+}
+
+type GetDbInstanceNodePropertyMongo struct {
+	// Node access address.
+	Address string `pulumi:"address"`
+	// Whether the node is a Hidden node.
+	Hidden bool `pulumi:"hidden"`
+	// Node name.
+	NodeName string `pulumi:"nodeName"`
+	// Node priority. Value range: [0, 100].
+	Priority int `pulumi:"priority"`
+	// Replica set ID.
+	ReplicateSetId string `pulumi:"replicateSetId"`
+	// Node role. Valid values: PRIMARY, SECONDARY, READONLY, ARBITER.
+	Role string `pulumi:"role"`
+	// Primary-secondary sync delay in seconds.
+	SlaveDelay int `pulumi:"slaveDelay"`
+	// Node status. Valid values: NORMAL, STARTUP, STARTUP2, RECOVERING, DOWN, UNKNOWN, ROLLBACK, REMOVED.
+	Status string `pulumi:"status"`
+	// Node tags for filtering.
+	Tags []GetDbInstanceNodePropertyMongoTag `pulumi:"tags"`
+	// Node votes. 1: has votes; 0: no votes.
+	Votes int `pulumi:"votes"`
+	// Node public network access address (IP or domain name).
+	WanServiceAddress string `pulumi:"wanServiceAddress"`
+	// The availability zone where the node is located.
+	Zone string `pulumi:"zone"`
+}
+
+// GetDbInstanceNodePropertyMongoInput is an input type that accepts GetDbInstanceNodePropertyMongoArgs and GetDbInstanceNodePropertyMongoOutput values.
+// You can construct a concrete instance of `GetDbInstanceNodePropertyMongoInput` via:
+//
+//	GetDbInstanceNodePropertyMongoArgs{...}
+type GetDbInstanceNodePropertyMongoInput interface {
+	pulumi.Input
+
+	ToGetDbInstanceNodePropertyMongoOutput() GetDbInstanceNodePropertyMongoOutput
+	ToGetDbInstanceNodePropertyMongoOutputWithContext(context.Context) GetDbInstanceNodePropertyMongoOutput
+}
+
+type GetDbInstanceNodePropertyMongoArgs struct {
+	// Node access address.
+	Address pulumi.StringInput `pulumi:"address"`
+	// Whether the node is a Hidden node.
+	Hidden pulumi.BoolInput `pulumi:"hidden"`
+	// Node name.
+	NodeName pulumi.StringInput `pulumi:"nodeName"`
+	// Node priority. Value range: [0, 100].
+	Priority pulumi.IntInput `pulumi:"priority"`
+	// Replica set ID.
+	ReplicateSetId pulumi.StringInput `pulumi:"replicateSetId"`
+	// Node role. Valid values: PRIMARY, SECONDARY, READONLY, ARBITER.
+	Role pulumi.StringInput `pulumi:"role"`
+	// Primary-secondary sync delay in seconds.
+	SlaveDelay pulumi.IntInput `pulumi:"slaveDelay"`
+	// Node status. Valid values: NORMAL, STARTUP, STARTUP2, RECOVERING, DOWN, UNKNOWN, ROLLBACK, REMOVED.
+	Status pulumi.StringInput `pulumi:"status"`
+	// Node tags for filtering.
+	Tags GetDbInstanceNodePropertyMongoTagArrayInput `pulumi:"tags"`
+	// Node votes. 1: has votes; 0: no votes.
+	Votes pulumi.IntInput `pulumi:"votes"`
+	// Node public network access address (IP or domain name).
+	WanServiceAddress pulumi.StringInput `pulumi:"wanServiceAddress"`
+	// The availability zone where the node is located.
+	Zone pulumi.StringInput `pulumi:"zone"`
+}
+
+func (GetDbInstanceNodePropertyMongoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDbInstanceNodePropertyMongo)(nil)).Elem()
+}
+
+func (i GetDbInstanceNodePropertyMongoArgs) ToGetDbInstanceNodePropertyMongoOutput() GetDbInstanceNodePropertyMongoOutput {
+	return i.ToGetDbInstanceNodePropertyMongoOutputWithContext(context.Background())
+}
+
+func (i GetDbInstanceNodePropertyMongoArgs) ToGetDbInstanceNodePropertyMongoOutputWithContext(ctx context.Context) GetDbInstanceNodePropertyMongoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDbInstanceNodePropertyMongoOutput)
+}
+
+// GetDbInstanceNodePropertyMongoArrayInput is an input type that accepts GetDbInstanceNodePropertyMongoArray and GetDbInstanceNodePropertyMongoArrayOutput values.
+// You can construct a concrete instance of `GetDbInstanceNodePropertyMongoArrayInput` via:
+//
+//	GetDbInstanceNodePropertyMongoArray{ GetDbInstanceNodePropertyMongoArgs{...} }
+type GetDbInstanceNodePropertyMongoArrayInput interface {
+	pulumi.Input
+
+	ToGetDbInstanceNodePropertyMongoArrayOutput() GetDbInstanceNodePropertyMongoArrayOutput
+	ToGetDbInstanceNodePropertyMongoArrayOutputWithContext(context.Context) GetDbInstanceNodePropertyMongoArrayOutput
+}
+
+type GetDbInstanceNodePropertyMongoArray []GetDbInstanceNodePropertyMongoInput
+
+func (GetDbInstanceNodePropertyMongoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDbInstanceNodePropertyMongo)(nil)).Elem()
+}
+
+func (i GetDbInstanceNodePropertyMongoArray) ToGetDbInstanceNodePropertyMongoArrayOutput() GetDbInstanceNodePropertyMongoArrayOutput {
+	return i.ToGetDbInstanceNodePropertyMongoArrayOutputWithContext(context.Background())
+}
+
+func (i GetDbInstanceNodePropertyMongoArray) ToGetDbInstanceNodePropertyMongoArrayOutputWithContext(ctx context.Context) GetDbInstanceNodePropertyMongoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDbInstanceNodePropertyMongoArrayOutput)
+}
+
+type GetDbInstanceNodePropertyMongoOutput struct{ *pulumi.OutputState }
+
+func (GetDbInstanceNodePropertyMongoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDbInstanceNodePropertyMongo)(nil)).Elem()
+}
+
+func (o GetDbInstanceNodePropertyMongoOutput) ToGetDbInstanceNodePropertyMongoOutput() GetDbInstanceNodePropertyMongoOutput {
+	return o
+}
+
+func (o GetDbInstanceNodePropertyMongoOutput) ToGetDbInstanceNodePropertyMongoOutputWithContext(ctx context.Context) GetDbInstanceNodePropertyMongoOutput {
+	return o
+}
+
+// Node access address.
+func (o GetDbInstanceNodePropertyMongoOutput) Address() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceNodePropertyMongo) string { return v.Address }).(pulumi.StringOutput)
+}
+
+// Whether the node is a Hidden node.
+func (o GetDbInstanceNodePropertyMongoOutput) Hidden() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetDbInstanceNodePropertyMongo) bool { return v.Hidden }).(pulumi.BoolOutput)
+}
+
+// Node name.
+func (o GetDbInstanceNodePropertyMongoOutput) NodeName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceNodePropertyMongo) string { return v.NodeName }).(pulumi.StringOutput)
+}
+
+// Node priority. Value range: [0, 100].
+func (o GetDbInstanceNodePropertyMongoOutput) Priority() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDbInstanceNodePropertyMongo) int { return v.Priority }).(pulumi.IntOutput)
+}
+
+// Replica set ID.
+func (o GetDbInstanceNodePropertyMongoOutput) ReplicateSetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceNodePropertyMongo) string { return v.ReplicateSetId }).(pulumi.StringOutput)
+}
+
+// Node role. Valid values: PRIMARY, SECONDARY, READONLY, ARBITER.
+func (o GetDbInstanceNodePropertyMongoOutput) Role() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceNodePropertyMongo) string { return v.Role }).(pulumi.StringOutput)
+}
+
+// Primary-secondary sync delay in seconds.
+func (o GetDbInstanceNodePropertyMongoOutput) SlaveDelay() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDbInstanceNodePropertyMongo) int { return v.SlaveDelay }).(pulumi.IntOutput)
+}
+
+// Node status. Valid values: NORMAL, STARTUP, STARTUP2, RECOVERING, DOWN, UNKNOWN, ROLLBACK, REMOVED.
+func (o GetDbInstanceNodePropertyMongoOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceNodePropertyMongo) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// Node tags for filtering.
+func (o GetDbInstanceNodePropertyMongoOutput) Tags() GetDbInstanceNodePropertyMongoTagArrayOutput {
+	return o.ApplyT(func(v GetDbInstanceNodePropertyMongo) []GetDbInstanceNodePropertyMongoTag { return v.Tags }).(GetDbInstanceNodePropertyMongoTagArrayOutput)
+}
+
+// Node votes. 1: has votes; 0: no votes.
+func (o GetDbInstanceNodePropertyMongoOutput) Votes() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDbInstanceNodePropertyMongo) int { return v.Votes }).(pulumi.IntOutput)
+}
+
+// Node public network access address (IP or domain name).
+func (o GetDbInstanceNodePropertyMongoOutput) WanServiceAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceNodePropertyMongo) string { return v.WanServiceAddress }).(pulumi.StringOutput)
+}
+
+// The availability zone where the node is located.
+func (o GetDbInstanceNodePropertyMongoOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceNodePropertyMongo) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+type GetDbInstanceNodePropertyMongoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDbInstanceNodePropertyMongoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDbInstanceNodePropertyMongo)(nil)).Elem()
+}
+
+func (o GetDbInstanceNodePropertyMongoArrayOutput) ToGetDbInstanceNodePropertyMongoArrayOutput() GetDbInstanceNodePropertyMongoArrayOutput {
+	return o
+}
+
+func (o GetDbInstanceNodePropertyMongoArrayOutput) ToGetDbInstanceNodePropertyMongoArrayOutputWithContext(ctx context.Context) GetDbInstanceNodePropertyMongoArrayOutput {
+	return o
+}
+
+func (o GetDbInstanceNodePropertyMongoArrayOutput) Index(i pulumi.IntInput) GetDbInstanceNodePropertyMongoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDbInstanceNodePropertyMongo {
+		return vs[0].([]GetDbInstanceNodePropertyMongo)[vs[1].(int)]
+	}).(GetDbInstanceNodePropertyMongoOutput)
+}
+
+type GetDbInstanceNodePropertyMongoTag struct {
+	// Node tag key.
+	TagKey string `pulumi:"tagKey"`
+	// Node tag value.
+	TagValue string `pulumi:"tagValue"`
+}
+
+// GetDbInstanceNodePropertyMongoTagInput is an input type that accepts GetDbInstanceNodePropertyMongoTagArgs and GetDbInstanceNodePropertyMongoTagOutput values.
+// You can construct a concrete instance of `GetDbInstanceNodePropertyMongoTagInput` via:
+//
+//	GetDbInstanceNodePropertyMongoTagArgs{...}
+type GetDbInstanceNodePropertyMongoTagInput interface {
+	pulumi.Input
+
+	ToGetDbInstanceNodePropertyMongoTagOutput() GetDbInstanceNodePropertyMongoTagOutput
+	ToGetDbInstanceNodePropertyMongoTagOutputWithContext(context.Context) GetDbInstanceNodePropertyMongoTagOutput
+}
+
+type GetDbInstanceNodePropertyMongoTagArgs struct {
+	// Node tag key.
+	TagKey pulumi.StringInput `pulumi:"tagKey"`
+	// Node tag value.
+	TagValue pulumi.StringInput `pulumi:"tagValue"`
+}
+
+func (GetDbInstanceNodePropertyMongoTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDbInstanceNodePropertyMongoTag)(nil)).Elem()
+}
+
+func (i GetDbInstanceNodePropertyMongoTagArgs) ToGetDbInstanceNodePropertyMongoTagOutput() GetDbInstanceNodePropertyMongoTagOutput {
+	return i.ToGetDbInstanceNodePropertyMongoTagOutputWithContext(context.Background())
+}
+
+func (i GetDbInstanceNodePropertyMongoTagArgs) ToGetDbInstanceNodePropertyMongoTagOutputWithContext(ctx context.Context) GetDbInstanceNodePropertyMongoTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDbInstanceNodePropertyMongoTagOutput)
+}
+
+// GetDbInstanceNodePropertyMongoTagArrayInput is an input type that accepts GetDbInstanceNodePropertyMongoTagArray and GetDbInstanceNodePropertyMongoTagArrayOutput values.
+// You can construct a concrete instance of `GetDbInstanceNodePropertyMongoTagArrayInput` via:
+//
+//	GetDbInstanceNodePropertyMongoTagArray{ GetDbInstanceNodePropertyMongoTagArgs{...} }
+type GetDbInstanceNodePropertyMongoTagArrayInput interface {
+	pulumi.Input
+
+	ToGetDbInstanceNodePropertyMongoTagArrayOutput() GetDbInstanceNodePropertyMongoTagArrayOutput
+	ToGetDbInstanceNodePropertyMongoTagArrayOutputWithContext(context.Context) GetDbInstanceNodePropertyMongoTagArrayOutput
+}
+
+type GetDbInstanceNodePropertyMongoTagArray []GetDbInstanceNodePropertyMongoTagInput
+
+func (GetDbInstanceNodePropertyMongoTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDbInstanceNodePropertyMongoTag)(nil)).Elem()
+}
+
+func (i GetDbInstanceNodePropertyMongoTagArray) ToGetDbInstanceNodePropertyMongoTagArrayOutput() GetDbInstanceNodePropertyMongoTagArrayOutput {
+	return i.ToGetDbInstanceNodePropertyMongoTagArrayOutputWithContext(context.Background())
+}
+
+func (i GetDbInstanceNodePropertyMongoTagArray) ToGetDbInstanceNodePropertyMongoTagArrayOutputWithContext(ctx context.Context) GetDbInstanceNodePropertyMongoTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDbInstanceNodePropertyMongoTagArrayOutput)
+}
+
+type GetDbInstanceNodePropertyMongoTagOutput struct{ *pulumi.OutputState }
+
+func (GetDbInstanceNodePropertyMongoTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDbInstanceNodePropertyMongoTag)(nil)).Elem()
+}
+
+func (o GetDbInstanceNodePropertyMongoTagOutput) ToGetDbInstanceNodePropertyMongoTagOutput() GetDbInstanceNodePropertyMongoTagOutput {
+	return o
+}
+
+func (o GetDbInstanceNodePropertyMongoTagOutput) ToGetDbInstanceNodePropertyMongoTagOutputWithContext(ctx context.Context) GetDbInstanceNodePropertyMongoTagOutput {
+	return o
+}
+
+// Node tag key.
+func (o GetDbInstanceNodePropertyMongoTagOutput) TagKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceNodePropertyMongoTag) string { return v.TagKey }).(pulumi.StringOutput)
+}
+
+// Node tag value.
+func (o GetDbInstanceNodePropertyMongoTagOutput) TagValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceNodePropertyMongoTag) string { return v.TagValue }).(pulumi.StringOutput)
+}
+
+type GetDbInstanceNodePropertyMongoTagArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDbInstanceNodePropertyMongoTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDbInstanceNodePropertyMongoTag)(nil)).Elem()
+}
+
+func (o GetDbInstanceNodePropertyMongoTagArrayOutput) ToGetDbInstanceNodePropertyMongoTagArrayOutput() GetDbInstanceNodePropertyMongoTagArrayOutput {
+	return o
+}
+
+func (o GetDbInstanceNodePropertyMongoTagArrayOutput) ToGetDbInstanceNodePropertyMongoTagArrayOutputWithContext(ctx context.Context) GetDbInstanceNodePropertyMongoTagArrayOutput {
+	return o
+}
+
+func (o GetDbInstanceNodePropertyMongoTagArrayOutput) Index(i pulumi.IntInput) GetDbInstanceNodePropertyMongoTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDbInstanceNodePropertyMongoTag {
+		return vs[0].([]GetDbInstanceNodePropertyMongoTag)[vs[1].(int)]
+	}).(GetDbInstanceNodePropertyMongoTagOutput)
+}
+
+type GetDbInstanceNodePropertyReplicateSet struct {
+	// Node property list in the replica set.
+	Nodes []GetDbInstanceNodePropertyReplicateSetNode `pulumi:"nodes"`
+}
+
+// GetDbInstanceNodePropertyReplicateSetInput is an input type that accepts GetDbInstanceNodePropertyReplicateSetArgs and GetDbInstanceNodePropertyReplicateSetOutput values.
+// You can construct a concrete instance of `GetDbInstanceNodePropertyReplicateSetInput` via:
+//
+//	GetDbInstanceNodePropertyReplicateSetArgs{...}
+type GetDbInstanceNodePropertyReplicateSetInput interface {
+	pulumi.Input
+
+	ToGetDbInstanceNodePropertyReplicateSetOutput() GetDbInstanceNodePropertyReplicateSetOutput
+	ToGetDbInstanceNodePropertyReplicateSetOutputWithContext(context.Context) GetDbInstanceNodePropertyReplicateSetOutput
+}
+
+type GetDbInstanceNodePropertyReplicateSetArgs struct {
+	// Node property list in the replica set.
+	Nodes GetDbInstanceNodePropertyReplicateSetNodeArrayInput `pulumi:"nodes"`
+}
+
+func (GetDbInstanceNodePropertyReplicateSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDbInstanceNodePropertyReplicateSet)(nil)).Elem()
+}
+
+func (i GetDbInstanceNodePropertyReplicateSetArgs) ToGetDbInstanceNodePropertyReplicateSetOutput() GetDbInstanceNodePropertyReplicateSetOutput {
+	return i.ToGetDbInstanceNodePropertyReplicateSetOutputWithContext(context.Background())
+}
+
+func (i GetDbInstanceNodePropertyReplicateSetArgs) ToGetDbInstanceNodePropertyReplicateSetOutputWithContext(ctx context.Context) GetDbInstanceNodePropertyReplicateSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDbInstanceNodePropertyReplicateSetOutput)
+}
+
+// GetDbInstanceNodePropertyReplicateSetArrayInput is an input type that accepts GetDbInstanceNodePropertyReplicateSetArray and GetDbInstanceNodePropertyReplicateSetArrayOutput values.
+// You can construct a concrete instance of `GetDbInstanceNodePropertyReplicateSetArrayInput` via:
+//
+//	GetDbInstanceNodePropertyReplicateSetArray{ GetDbInstanceNodePropertyReplicateSetArgs{...} }
+type GetDbInstanceNodePropertyReplicateSetArrayInput interface {
+	pulumi.Input
+
+	ToGetDbInstanceNodePropertyReplicateSetArrayOutput() GetDbInstanceNodePropertyReplicateSetArrayOutput
+	ToGetDbInstanceNodePropertyReplicateSetArrayOutputWithContext(context.Context) GetDbInstanceNodePropertyReplicateSetArrayOutput
+}
+
+type GetDbInstanceNodePropertyReplicateSetArray []GetDbInstanceNodePropertyReplicateSetInput
+
+func (GetDbInstanceNodePropertyReplicateSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDbInstanceNodePropertyReplicateSet)(nil)).Elem()
+}
+
+func (i GetDbInstanceNodePropertyReplicateSetArray) ToGetDbInstanceNodePropertyReplicateSetArrayOutput() GetDbInstanceNodePropertyReplicateSetArrayOutput {
+	return i.ToGetDbInstanceNodePropertyReplicateSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetDbInstanceNodePropertyReplicateSetArray) ToGetDbInstanceNodePropertyReplicateSetArrayOutputWithContext(ctx context.Context) GetDbInstanceNodePropertyReplicateSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDbInstanceNodePropertyReplicateSetArrayOutput)
+}
+
+type GetDbInstanceNodePropertyReplicateSetOutput struct{ *pulumi.OutputState }
+
+func (GetDbInstanceNodePropertyReplicateSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDbInstanceNodePropertyReplicateSet)(nil)).Elem()
+}
+
+func (o GetDbInstanceNodePropertyReplicateSetOutput) ToGetDbInstanceNodePropertyReplicateSetOutput() GetDbInstanceNodePropertyReplicateSetOutput {
+	return o
+}
+
+func (o GetDbInstanceNodePropertyReplicateSetOutput) ToGetDbInstanceNodePropertyReplicateSetOutputWithContext(ctx context.Context) GetDbInstanceNodePropertyReplicateSetOutput {
+	return o
+}
+
+// Node property list in the replica set.
+func (o GetDbInstanceNodePropertyReplicateSetOutput) Nodes() GetDbInstanceNodePropertyReplicateSetNodeArrayOutput {
+	return o.ApplyT(func(v GetDbInstanceNodePropertyReplicateSet) []GetDbInstanceNodePropertyReplicateSetNode {
+		return v.Nodes
+	}).(GetDbInstanceNodePropertyReplicateSetNodeArrayOutput)
+}
+
+type GetDbInstanceNodePropertyReplicateSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDbInstanceNodePropertyReplicateSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDbInstanceNodePropertyReplicateSet)(nil)).Elem()
+}
+
+func (o GetDbInstanceNodePropertyReplicateSetArrayOutput) ToGetDbInstanceNodePropertyReplicateSetArrayOutput() GetDbInstanceNodePropertyReplicateSetArrayOutput {
+	return o
+}
+
+func (o GetDbInstanceNodePropertyReplicateSetArrayOutput) ToGetDbInstanceNodePropertyReplicateSetArrayOutputWithContext(ctx context.Context) GetDbInstanceNodePropertyReplicateSetArrayOutput {
+	return o
+}
+
+func (o GetDbInstanceNodePropertyReplicateSetArrayOutput) Index(i pulumi.IntInput) GetDbInstanceNodePropertyReplicateSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDbInstanceNodePropertyReplicateSet {
+		return vs[0].([]GetDbInstanceNodePropertyReplicateSet)[vs[1].(int)]
+	}).(GetDbInstanceNodePropertyReplicateSetOutput)
+}
+
+type GetDbInstanceNodePropertyReplicateSetNode struct {
+	// Node access address.
+	Address string `pulumi:"address"`
+	// Whether the node is a Hidden node.
+	Hidden bool `pulumi:"hidden"`
+	// Node name.
+	NodeName string `pulumi:"nodeName"`
+	// Node priority. Value range: [0, 100].
+	Priority int `pulumi:"priority"`
+	// Replica set ID.
+	ReplicateSetId string `pulumi:"replicateSetId"`
+	// Node role. Valid values: PRIMARY, SECONDARY, READONLY, ARBITER.
+	Role string `pulumi:"role"`
+	// Primary-secondary sync delay in seconds.
+	SlaveDelay int `pulumi:"slaveDelay"`
+	// Node status. Valid values: NORMAL, STARTUP, STARTUP2, RECOVERING, DOWN, UNKNOWN, ROLLBACK, REMOVED.
+	Status string `pulumi:"status"`
+	// Node tags for filtering.
+	Tags []GetDbInstanceNodePropertyReplicateSetNodeTag `pulumi:"tags"`
+	// Node votes. 1: has votes; 0: no votes.
+	Votes int `pulumi:"votes"`
+	// Node public network access address (IP or domain name).
+	WanServiceAddress string `pulumi:"wanServiceAddress"`
+	// The availability zone where the node is located.
+	Zone string `pulumi:"zone"`
+}
+
+// GetDbInstanceNodePropertyReplicateSetNodeInput is an input type that accepts GetDbInstanceNodePropertyReplicateSetNodeArgs and GetDbInstanceNodePropertyReplicateSetNodeOutput values.
+// You can construct a concrete instance of `GetDbInstanceNodePropertyReplicateSetNodeInput` via:
+//
+//	GetDbInstanceNodePropertyReplicateSetNodeArgs{...}
+type GetDbInstanceNodePropertyReplicateSetNodeInput interface {
+	pulumi.Input
+
+	ToGetDbInstanceNodePropertyReplicateSetNodeOutput() GetDbInstanceNodePropertyReplicateSetNodeOutput
+	ToGetDbInstanceNodePropertyReplicateSetNodeOutputWithContext(context.Context) GetDbInstanceNodePropertyReplicateSetNodeOutput
+}
+
+type GetDbInstanceNodePropertyReplicateSetNodeArgs struct {
+	// Node access address.
+	Address pulumi.StringInput `pulumi:"address"`
+	// Whether the node is a Hidden node.
+	Hidden pulumi.BoolInput `pulumi:"hidden"`
+	// Node name.
+	NodeName pulumi.StringInput `pulumi:"nodeName"`
+	// Node priority. Value range: [0, 100].
+	Priority pulumi.IntInput `pulumi:"priority"`
+	// Replica set ID.
+	ReplicateSetId pulumi.StringInput `pulumi:"replicateSetId"`
+	// Node role. Valid values: PRIMARY, SECONDARY, READONLY, ARBITER.
+	Role pulumi.StringInput `pulumi:"role"`
+	// Primary-secondary sync delay in seconds.
+	SlaveDelay pulumi.IntInput `pulumi:"slaveDelay"`
+	// Node status. Valid values: NORMAL, STARTUP, STARTUP2, RECOVERING, DOWN, UNKNOWN, ROLLBACK, REMOVED.
+	Status pulumi.StringInput `pulumi:"status"`
+	// Node tags for filtering.
+	Tags GetDbInstanceNodePropertyReplicateSetNodeTagArrayInput `pulumi:"tags"`
+	// Node votes. 1: has votes; 0: no votes.
+	Votes pulumi.IntInput `pulumi:"votes"`
+	// Node public network access address (IP or domain name).
+	WanServiceAddress pulumi.StringInput `pulumi:"wanServiceAddress"`
+	// The availability zone where the node is located.
+	Zone pulumi.StringInput `pulumi:"zone"`
+}
+
+func (GetDbInstanceNodePropertyReplicateSetNodeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDbInstanceNodePropertyReplicateSetNode)(nil)).Elem()
+}
+
+func (i GetDbInstanceNodePropertyReplicateSetNodeArgs) ToGetDbInstanceNodePropertyReplicateSetNodeOutput() GetDbInstanceNodePropertyReplicateSetNodeOutput {
+	return i.ToGetDbInstanceNodePropertyReplicateSetNodeOutputWithContext(context.Background())
+}
+
+func (i GetDbInstanceNodePropertyReplicateSetNodeArgs) ToGetDbInstanceNodePropertyReplicateSetNodeOutputWithContext(ctx context.Context) GetDbInstanceNodePropertyReplicateSetNodeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDbInstanceNodePropertyReplicateSetNodeOutput)
+}
+
+// GetDbInstanceNodePropertyReplicateSetNodeArrayInput is an input type that accepts GetDbInstanceNodePropertyReplicateSetNodeArray and GetDbInstanceNodePropertyReplicateSetNodeArrayOutput values.
+// You can construct a concrete instance of `GetDbInstanceNodePropertyReplicateSetNodeArrayInput` via:
+//
+//	GetDbInstanceNodePropertyReplicateSetNodeArray{ GetDbInstanceNodePropertyReplicateSetNodeArgs{...} }
+type GetDbInstanceNodePropertyReplicateSetNodeArrayInput interface {
+	pulumi.Input
+
+	ToGetDbInstanceNodePropertyReplicateSetNodeArrayOutput() GetDbInstanceNodePropertyReplicateSetNodeArrayOutput
+	ToGetDbInstanceNodePropertyReplicateSetNodeArrayOutputWithContext(context.Context) GetDbInstanceNodePropertyReplicateSetNodeArrayOutput
+}
+
+type GetDbInstanceNodePropertyReplicateSetNodeArray []GetDbInstanceNodePropertyReplicateSetNodeInput
+
+func (GetDbInstanceNodePropertyReplicateSetNodeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDbInstanceNodePropertyReplicateSetNode)(nil)).Elem()
+}
+
+func (i GetDbInstanceNodePropertyReplicateSetNodeArray) ToGetDbInstanceNodePropertyReplicateSetNodeArrayOutput() GetDbInstanceNodePropertyReplicateSetNodeArrayOutput {
+	return i.ToGetDbInstanceNodePropertyReplicateSetNodeArrayOutputWithContext(context.Background())
+}
+
+func (i GetDbInstanceNodePropertyReplicateSetNodeArray) ToGetDbInstanceNodePropertyReplicateSetNodeArrayOutputWithContext(ctx context.Context) GetDbInstanceNodePropertyReplicateSetNodeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDbInstanceNodePropertyReplicateSetNodeArrayOutput)
+}
+
+type GetDbInstanceNodePropertyReplicateSetNodeOutput struct{ *pulumi.OutputState }
+
+func (GetDbInstanceNodePropertyReplicateSetNodeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDbInstanceNodePropertyReplicateSetNode)(nil)).Elem()
+}
+
+func (o GetDbInstanceNodePropertyReplicateSetNodeOutput) ToGetDbInstanceNodePropertyReplicateSetNodeOutput() GetDbInstanceNodePropertyReplicateSetNodeOutput {
+	return o
+}
+
+func (o GetDbInstanceNodePropertyReplicateSetNodeOutput) ToGetDbInstanceNodePropertyReplicateSetNodeOutputWithContext(ctx context.Context) GetDbInstanceNodePropertyReplicateSetNodeOutput {
+	return o
+}
+
+// Node access address.
+func (o GetDbInstanceNodePropertyReplicateSetNodeOutput) Address() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceNodePropertyReplicateSetNode) string { return v.Address }).(pulumi.StringOutput)
+}
+
+// Whether the node is a Hidden node.
+func (o GetDbInstanceNodePropertyReplicateSetNodeOutput) Hidden() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetDbInstanceNodePropertyReplicateSetNode) bool { return v.Hidden }).(pulumi.BoolOutput)
+}
+
+// Node name.
+func (o GetDbInstanceNodePropertyReplicateSetNodeOutput) NodeName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceNodePropertyReplicateSetNode) string { return v.NodeName }).(pulumi.StringOutput)
+}
+
+// Node priority. Value range: [0, 100].
+func (o GetDbInstanceNodePropertyReplicateSetNodeOutput) Priority() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDbInstanceNodePropertyReplicateSetNode) int { return v.Priority }).(pulumi.IntOutput)
+}
+
+// Replica set ID.
+func (o GetDbInstanceNodePropertyReplicateSetNodeOutput) ReplicateSetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceNodePropertyReplicateSetNode) string { return v.ReplicateSetId }).(pulumi.StringOutput)
+}
+
+// Node role. Valid values: PRIMARY, SECONDARY, READONLY, ARBITER.
+func (o GetDbInstanceNodePropertyReplicateSetNodeOutput) Role() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceNodePropertyReplicateSetNode) string { return v.Role }).(pulumi.StringOutput)
+}
+
+// Primary-secondary sync delay in seconds.
+func (o GetDbInstanceNodePropertyReplicateSetNodeOutput) SlaveDelay() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDbInstanceNodePropertyReplicateSetNode) int { return v.SlaveDelay }).(pulumi.IntOutput)
+}
+
+// Node status. Valid values: NORMAL, STARTUP, STARTUP2, RECOVERING, DOWN, UNKNOWN, ROLLBACK, REMOVED.
+func (o GetDbInstanceNodePropertyReplicateSetNodeOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceNodePropertyReplicateSetNode) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// Node tags for filtering.
+func (o GetDbInstanceNodePropertyReplicateSetNodeOutput) Tags() GetDbInstanceNodePropertyReplicateSetNodeTagArrayOutput {
+	return o.ApplyT(func(v GetDbInstanceNodePropertyReplicateSetNode) []GetDbInstanceNodePropertyReplicateSetNodeTag {
+		return v.Tags
+	}).(GetDbInstanceNodePropertyReplicateSetNodeTagArrayOutput)
+}
+
+// Node votes. 1: has votes; 0: no votes.
+func (o GetDbInstanceNodePropertyReplicateSetNodeOutput) Votes() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDbInstanceNodePropertyReplicateSetNode) int { return v.Votes }).(pulumi.IntOutput)
+}
+
+// Node public network access address (IP or domain name).
+func (o GetDbInstanceNodePropertyReplicateSetNodeOutput) WanServiceAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceNodePropertyReplicateSetNode) string { return v.WanServiceAddress }).(pulumi.StringOutput)
+}
+
+// The availability zone where the node is located.
+func (o GetDbInstanceNodePropertyReplicateSetNodeOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceNodePropertyReplicateSetNode) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+type GetDbInstanceNodePropertyReplicateSetNodeArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDbInstanceNodePropertyReplicateSetNodeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDbInstanceNodePropertyReplicateSetNode)(nil)).Elem()
+}
+
+func (o GetDbInstanceNodePropertyReplicateSetNodeArrayOutput) ToGetDbInstanceNodePropertyReplicateSetNodeArrayOutput() GetDbInstanceNodePropertyReplicateSetNodeArrayOutput {
+	return o
+}
+
+func (o GetDbInstanceNodePropertyReplicateSetNodeArrayOutput) ToGetDbInstanceNodePropertyReplicateSetNodeArrayOutputWithContext(ctx context.Context) GetDbInstanceNodePropertyReplicateSetNodeArrayOutput {
+	return o
+}
+
+func (o GetDbInstanceNodePropertyReplicateSetNodeArrayOutput) Index(i pulumi.IntInput) GetDbInstanceNodePropertyReplicateSetNodeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDbInstanceNodePropertyReplicateSetNode {
+		return vs[0].([]GetDbInstanceNodePropertyReplicateSetNode)[vs[1].(int)]
+	}).(GetDbInstanceNodePropertyReplicateSetNodeOutput)
+}
+
+type GetDbInstanceNodePropertyReplicateSetNodeTag struct {
+	// Node tag key.
+	TagKey string `pulumi:"tagKey"`
+	// Node tag value.
+	TagValue string `pulumi:"tagValue"`
+}
+
+// GetDbInstanceNodePropertyReplicateSetNodeTagInput is an input type that accepts GetDbInstanceNodePropertyReplicateSetNodeTagArgs and GetDbInstanceNodePropertyReplicateSetNodeTagOutput values.
+// You can construct a concrete instance of `GetDbInstanceNodePropertyReplicateSetNodeTagInput` via:
+//
+//	GetDbInstanceNodePropertyReplicateSetNodeTagArgs{...}
+type GetDbInstanceNodePropertyReplicateSetNodeTagInput interface {
+	pulumi.Input
+
+	ToGetDbInstanceNodePropertyReplicateSetNodeTagOutput() GetDbInstanceNodePropertyReplicateSetNodeTagOutput
+	ToGetDbInstanceNodePropertyReplicateSetNodeTagOutputWithContext(context.Context) GetDbInstanceNodePropertyReplicateSetNodeTagOutput
+}
+
+type GetDbInstanceNodePropertyReplicateSetNodeTagArgs struct {
+	// Node tag key.
+	TagKey pulumi.StringInput `pulumi:"tagKey"`
+	// Node tag value.
+	TagValue pulumi.StringInput `pulumi:"tagValue"`
+}
+
+func (GetDbInstanceNodePropertyReplicateSetNodeTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDbInstanceNodePropertyReplicateSetNodeTag)(nil)).Elem()
+}
+
+func (i GetDbInstanceNodePropertyReplicateSetNodeTagArgs) ToGetDbInstanceNodePropertyReplicateSetNodeTagOutput() GetDbInstanceNodePropertyReplicateSetNodeTagOutput {
+	return i.ToGetDbInstanceNodePropertyReplicateSetNodeTagOutputWithContext(context.Background())
+}
+
+func (i GetDbInstanceNodePropertyReplicateSetNodeTagArgs) ToGetDbInstanceNodePropertyReplicateSetNodeTagOutputWithContext(ctx context.Context) GetDbInstanceNodePropertyReplicateSetNodeTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDbInstanceNodePropertyReplicateSetNodeTagOutput)
+}
+
+// GetDbInstanceNodePropertyReplicateSetNodeTagArrayInput is an input type that accepts GetDbInstanceNodePropertyReplicateSetNodeTagArray and GetDbInstanceNodePropertyReplicateSetNodeTagArrayOutput values.
+// You can construct a concrete instance of `GetDbInstanceNodePropertyReplicateSetNodeTagArrayInput` via:
+//
+//	GetDbInstanceNodePropertyReplicateSetNodeTagArray{ GetDbInstanceNodePropertyReplicateSetNodeTagArgs{...} }
+type GetDbInstanceNodePropertyReplicateSetNodeTagArrayInput interface {
+	pulumi.Input
+
+	ToGetDbInstanceNodePropertyReplicateSetNodeTagArrayOutput() GetDbInstanceNodePropertyReplicateSetNodeTagArrayOutput
+	ToGetDbInstanceNodePropertyReplicateSetNodeTagArrayOutputWithContext(context.Context) GetDbInstanceNodePropertyReplicateSetNodeTagArrayOutput
+}
+
+type GetDbInstanceNodePropertyReplicateSetNodeTagArray []GetDbInstanceNodePropertyReplicateSetNodeTagInput
+
+func (GetDbInstanceNodePropertyReplicateSetNodeTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDbInstanceNodePropertyReplicateSetNodeTag)(nil)).Elem()
+}
+
+func (i GetDbInstanceNodePropertyReplicateSetNodeTagArray) ToGetDbInstanceNodePropertyReplicateSetNodeTagArrayOutput() GetDbInstanceNodePropertyReplicateSetNodeTagArrayOutput {
+	return i.ToGetDbInstanceNodePropertyReplicateSetNodeTagArrayOutputWithContext(context.Background())
+}
+
+func (i GetDbInstanceNodePropertyReplicateSetNodeTagArray) ToGetDbInstanceNodePropertyReplicateSetNodeTagArrayOutputWithContext(ctx context.Context) GetDbInstanceNodePropertyReplicateSetNodeTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDbInstanceNodePropertyReplicateSetNodeTagArrayOutput)
+}
+
+type GetDbInstanceNodePropertyReplicateSetNodeTagOutput struct{ *pulumi.OutputState }
+
+func (GetDbInstanceNodePropertyReplicateSetNodeTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDbInstanceNodePropertyReplicateSetNodeTag)(nil)).Elem()
+}
+
+func (o GetDbInstanceNodePropertyReplicateSetNodeTagOutput) ToGetDbInstanceNodePropertyReplicateSetNodeTagOutput() GetDbInstanceNodePropertyReplicateSetNodeTagOutput {
+	return o
+}
+
+func (o GetDbInstanceNodePropertyReplicateSetNodeTagOutput) ToGetDbInstanceNodePropertyReplicateSetNodeTagOutputWithContext(ctx context.Context) GetDbInstanceNodePropertyReplicateSetNodeTagOutput {
+	return o
+}
+
+// Node tag key.
+func (o GetDbInstanceNodePropertyReplicateSetNodeTagOutput) TagKey() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceNodePropertyReplicateSetNodeTag) string { return v.TagKey }).(pulumi.StringOutput)
+}
+
+// Node tag value.
+func (o GetDbInstanceNodePropertyReplicateSetNodeTagOutput) TagValue() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDbInstanceNodePropertyReplicateSetNodeTag) string { return v.TagValue }).(pulumi.StringOutput)
+}
+
+type GetDbInstanceNodePropertyReplicateSetNodeTagArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDbInstanceNodePropertyReplicateSetNodeTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDbInstanceNodePropertyReplicateSetNodeTag)(nil)).Elem()
+}
+
+func (o GetDbInstanceNodePropertyReplicateSetNodeTagArrayOutput) ToGetDbInstanceNodePropertyReplicateSetNodeTagArrayOutput() GetDbInstanceNodePropertyReplicateSetNodeTagArrayOutput {
+	return o
+}
+
+func (o GetDbInstanceNodePropertyReplicateSetNodeTagArrayOutput) ToGetDbInstanceNodePropertyReplicateSetNodeTagArrayOutputWithContext(ctx context.Context) GetDbInstanceNodePropertyReplicateSetNodeTagArrayOutput {
+	return o
+}
+
+func (o GetDbInstanceNodePropertyReplicateSetNodeTagArrayOutput) Index(i pulumi.IntInput) GetDbInstanceNodePropertyReplicateSetNodeTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDbInstanceNodePropertyReplicateSetNodeTag {
+		return vs[0].([]GetDbInstanceNodePropertyReplicateSetNodeTag)[vs[1].(int)]
+	}).(GetDbInstanceNodePropertyReplicateSetNodeTagOutput)
+}
+
+type GetDbInstanceNodePropertyTag struct {
+	// Node tag key.
+	TagKey *string `pulumi:"tagKey"`
+	// Node tag value.
+	TagValue *string `pulumi:"tagValue"`
+}
+
+// GetDbInstanceNodePropertyTagInput is an input type that accepts GetDbInstanceNodePropertyTagArgs and GetDbInstanceNodePropertyTagOutput values.
+// You can construct a concrete instance of `GetDbInstanceNodePropertyTagInput` via:
+//
+//	GetDbInstanceNodePropertyTagArgs{...}
+type GetDbInstanceNodePropertyTagInput interface {
+	pulumi.Input
+
+	ToGetDbInstanceNodePropertyTagOutput() GetDbInstanceNodePropertyTagOutput
+	ToGetDbInstanceNodePropertyTagOutputWithContext(context.Context) GetDbInstanceNodePropertyTagOutput
+}
+
+type GetDbInstanceNodePropertyTagArgs struct {
+	// Node tag key.
+	TagKey pulumi.StringPtrInput `pulumi:"tagKey"`
+	// Node tag value.
+	TagValue pulumi.StringPtrInput `pulumi:"tagValue"`
+}
+
+func (GetDbInstanceNodePropertyTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDbInstanceNodePropertyTag)(nil)).Elem()
+}
+
+func (i GetDbInstanceNodePropertyTagArgs) ToGetDbInstanceNodePropertyTagOutput() GetDbInstanceNodePropertyTagOutput {
+	return i.ToGetDbInstanceNodePropertyTagOutputWithContext(context.Background())
+}
+
+func (i GetDbInstanceNodePropertyTagArgs) ToGetDbInstanceNodePropertyTagOutputWithContext(ctx context.Context) GetDbInstanceNodePropertyTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDbInstanceNodePropertyTagOutput)
+}
+
+// GetDbInstanceNodePropertyTagArrayInput is an input type that accepts GetDbInstanceNodePropertyTagArray and GetDbInstanceNodePropertyTagArrayOutput values.
+// You can construct a concrete instance of `GetDbInstanceNodePropertyTagArrayInput` via:
+//
+//	GetDbInstanceNodePropertyTagArray{ GetDbInstanceNodePropertyTagArgs{...} }
+type GetDbInstanceNodePropertyTagArrayInput interface {
+	pulumi.Input
+
+	ToGetDbInstanceNodePropertyTagArrayOutput() GetDbInstanceNodePropertyTagArrayOutput
+	ToGetDbInstanceNodePropertyTagArrayOutputWithContext(context.Context) GetDbInstanceNodePropertyTagArrayOutput
+}
+
+type GetDbInstanceNodePropertyTagArray []GetDbInstanceNodePropertyTagInput
+
+func (GetDbInstanceNodePropertyTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDbInstanceNodePropertyTag)(nil)).Elem()
+}
+
+func (i GetDbInstanceNodePropertyTagArray) ToGetDbInstanceNodePropertyTagArrayOutput() GetDbInstanceNodePropertyTagArrayOutput {
+	return i.ToGetDbInstanceNodePropertyTagArrayOutputWithContext(context.Background())
+}
+
+func (i GetDbInstanceNodePropertyTagArray) ToGetDbInstanceNodePropertyTagArrayOutputWithContext(ctx context.Context) GetDbInstanceNodePropertyTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDbInstanceNodePropertyTagArrayOutput)
+}
+
+type GetDbInstanceNodePropertyTagOutput struct{ *pulumi.OutputState }
+
+func (GetDbInstanceNodePropertyTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDbInstanceNodePropertyTag)(nil)).Elem()
+}
+
+func (o GetDbInstanceNodePropertyTagOutput) ToGetDbInstanceNodePropertyTagOutput() GetDbInstanceNodePropertyTagOutput {
+	return o
+}
+
+func (o GetDbInstanceNodePropertyTagOutput) ToGetDbInstanceNodePropertyTagOutputWithContext(ctx context.Context) GetDbInstanceNodePropertyTagOutput {
+	return o
+}
+
+// Node tag key.
+func (o GetDbInstanceNodePropertyTagOutput) TagKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetDbInstanceNodePropertyTag) *string { return v.TagKey }).(pulumi.StringPtrOutput)
+}
+
+// Node tag value.
+func (o GetDbInstanceNodePropertyTagOutput) TagValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetDbInstanceNodePropertyTag) *string { return v.TagValue }).(pulumi.StringPtrOutput)
+}
+
+type GetDbInstanceNodePropertyTagArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDbInstanceNodePropertyTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDbInstanceNodePropertyTag)(nil)).Elem()
+}
+
+func (o GetDbInstanceNodePropertyTagArrayOutput) ToGetDbInstanceNodePropertyTagArrayOutput() GetDbInstanceNodePropertyTagArrayOutput {
+	return o
+}
+
+func (o GetDbInstanceNodePropertyTagArrayOutput) ToGetDbInstanceNodePropertyTagArrayOutputWithContext(ctx context.Context) GetDbInstanceNodePropertyTagArrayOutput {
+	return o
+}
+
+func (o GetDbInstanceNodePropertyTagArrayOutput) Index(i pulumi.IntInput) GetDbInstanceNodePropertyTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDbInstanceNodePropertyTag {
+		return vs[0].([]GetDbInstanceNodePropertyTag)[vs[1].(int)]
+	}).(GetDbInstanceNodePropertyTagOutput)
+}
+
 type GetInstanceBackupsBackupList struct {
+	// Backup record ID.
+	BackId int `pulumi:"backId"`
 	// Remark of backup.
 	BackupDesc string `pulumi:"backupDesc"`
 	// Backup mode, currently supported: 0-logic backup, 1-physical backup, 2-all backups.The default is logical backup.
 	BackupMethod int `pulumi:"backupMethod"`
 	// Backup mode name.
 	BackupName string `pulumi:"backupName"`
+	// Region where the backup is stored (for cross-region backups).
+	BackupRegion string `pulumi:"backupRegion"`
 	// Size of backup(KN).
 	BackupSize int `pulumi:"backupSize"`
 	// Backup mode type.
 	BackupType int `pulumi:"backupType"`
+	// Scheduled deletion time for the backup.
+	DeleteTime string `pulumi:"deleteTime"`
 	// end time of backup.
 	EndTime string `pulumi:"endTime"`
 	// Instance ID, the format is: cmgo-9d0p6umb.Same as the instance ID displayed in the cloud database console page.
 	InstanceId string `pulumi:"instanceId"`
+	// Time point supported for backup restore.
+	RestoreTime string `pulumi:"restoreTime"`
 	// start time of backup.
 	StartTime string `pulumi:"startTime"`
 	// Backup status.
@@ -854,20 +2411,28 @@ type GetInstanceBackupsBackupListInput interface {
 }
 
 type GetInstanceBackupsBackupListArgs struct {
+	// Backup record ID.
+	BackId pulumi.IntInput `pulumi:"backId"`
 	// Remark of backup.
 	BackupDesc pulumi.StringInput `pulumi:"backupDesc"`
 	// Backup mode, currently supported: 0-logic backup, 1-physical backup, 2-all backups.The default is logical backup.
 	BackupMethod pulumi.IntInput `pulumi:"backupMethod"`
 	// Backup mode name.
 	BackupName pulumi.StringInput `pulumi:"backupName"`
+	// Region where the backup is stored (for cross-region backups).
+	BackupRegion pulumi.StringInput `pulumi:"backupRegion"`
 	// Size of backup(KN).
 	BackupSize pulumi.IntInput `pulumi:"backupSize"`
 	// Backup mode type.
 	BackupType pulumi.IntInput `pulumi:"backupType"`
+	// Scheduled deletion time for the backup.
+	DeleteTime pulumi.StringInput `pulumi:"deleteTime"`
 	// end time of backup.
 	EndTime pulumi.StringInput `pulumi:"endTime"`
 	// Instance ID, the format is: cmgo-9d0p6umb.Same as the instance ID displayed in the cloud database console page.
 	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Time point supported for backup restore.
+	RestoreTime pulumi.StringInput `pulumi:"restoreTime"`
 	// start time of backup.
 	StartTime pulumi.StringInput `pulumi:"startTime"`
 	// Backup status.
@@ -925,6 +2490,11 @@ func (o GetInstanceBackupsBackupListOutput) ToGetInstanceBackupsBackupListOutput
 	return o
 }
 
+// Backup record ID.
+func (o GetInstanceBackupsBackupListOutput) BackId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstanceBackupsBackupList) int { return v.BackId }).(pulumi.IntOutput)
+}
+
 // Remark of backup.
 func (o GetInstanceBackupsBackupListOutput) BackupDesc() pulumi.StringOutput {
 	return o.ApplyT(func(v GetInstanceBackupsBackupList) string { return v.BackupDesc }).(pulumi.StringOutput)
@@ -940,6 +2510,11 @@ func (o GetInstanceBackupsBackupListOutput) BackupName() pulumi.StringOutput {
 	return o.ApplyT(func(v GetInstanceBackupsBackupList) string { return v.BackupName }).(pulumi.StringOutput)
 }
 
+// Region where the backup is stored (for cross-region backups).
+func (o GetInstanceBackupsBackupListOutput) BackupRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceBackupsBackupList) string { return v.BackupRegion }).(pulumi.StringOutput)
+}
+
 // Size of backup(KN).
 func (o GetInstanceBackupsBackupListOutput) BackupSize() pulumi.IntOutput {
 	return o.ApplyT(func(v GetInstanceBackupsBackupList) int { return v.BackupSize }).(pulumi.IntOutput)
@@ -950,6 +2525,11 @@ func (o GetInstanceBackupsBackupListOutput) BackupType() pulumi.IntOutput {
 	return o.ApplyT(func(v GetInstanceBackupsBackupList) int { return v.BackupType }).(pulumi.IntOutput)
 }
 
+// Scheduled deletion time for the backup.
+func (o GetInstanceBackupsBackupListOutput) DeleteTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceBackupsBackupList) string { return v.DeleteTime }).(pulumi.StringOutput)
+}
+
 // end time of backup.
 func (o GetInstanceBackupsBackupListOutput) EndTime() pulumi.StringOutput {
 	return o.ApplyT(func(v GetInstanceBackupsBackupList) string { return v.EndTime }).(pulumi.StringOutput)
@@ -958,6 +2538,11 @@ func (o GetInstanceBackupsBackupListOutput) EndTime() pulumi.StringOutput {
 // Instance ID, the format is: cmgo-9d0p6umb.Same as the instance ID displayed in the cloud database console page.
 func (o GetInstanceBackupsBackupListOutput) InstanceId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetInstanceBackupsBackupList) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Time point supported for backup restore.
+func (o GetInstanceBackupsBackupListOutput) RestoreTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceBackupsBackupList) string { return v.RestoreTime }).(pulumi.StringOutput)
 }
 
 // start time of backup.
@@ -2515,6 +4100,12 @@ func (o GetZoneConfigListArrayOutput) Index(i pulumi.IntInput) GetZoneConfigList
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*AuditLogFileFilterInput)(nil)).Elem(), AuditLogFileFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AuditLogFileFilterPtrInput)(nil)).Elem(), AuditLogFileFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AuditLogFileItemInput)(nil)).Elem(), AuditLogFileItemArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AuditLogFileItemArrayInput)(nil)).Elem(), AuditLogFileItemArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AuditServiceRuleFilterInput)(nil)).Elem(), AuditServiceRuleFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AuditServiceRuleFilterArrayInput)(nil)).Elem(), AuditServiceRuleFilterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceAccountAuthRoleInput)(nil)).Elem(), InstanceAccountAuthRoleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceAccountAuthRoleArrayInput)(nil)).Elem(), InstanceAccountAuthRoleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceAddNodeListInput)(nil)).Elem(), InstanceAddNodeListArgs{})
@@ -2529,6 +4120,22 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceStandbyInstanceListArrayInput)(nil)).Elem(), InstanceStandbyInstanceListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceTransparentDataEncryptionKeyInfoListInput)(nil)).Elem(), InstanceTransparentDataEncryptionKeyInfoListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceTransparentDataEncryptionKeyInfoListArrayInput)(nil)).Elem(), InstanceTransparentDataEncryptionKeyInfoListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ShardingInstanceAddNodeListInput)(nil)).Elem(), ShardingInstanceAddNodeListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ShardingInstanceAddNodeListArrayInput)(nil)).Elem(), ShardingInstanceAddNodeListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ShardingInstanceRemoveNodeListInput)(nil)).Elem(), ShardingInstanceRemoveNodeListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ShardingInstanceRemoveNodeListArrayInput)(nil)).Elem(), ShardingInstanceRemoveNodeListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDbInstanceNodePropertyMongoInput)(nil)).Elem(), GetDbInstanceNodePropertyMongoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDbInstanceNodePropertyMongoArrayInput)(nil)).Elem(), GetDbInstanceNodePropertyMongoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDbInstanceNodePropertyMongoTagInput)(nil)).Elem(), GetDbInstanceNodePropertyMongoTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDbInstanceNodePropertyMongoTagArrayInput)(nil)).Elem(), GetDbInstanceNodePropertyMongoTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDbInstanceNodePropertyReplicateSetInput)(nil)).Elem(), GetDbInstanceNodePropertyReplicateSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDbInstanceNodePropertyReplicateSetArrayInput)(nil)).Elem(), GetDbInstanceNodePropertyReplicateSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDbInstanceNodePropertyReplicateSetNodeInput)(nil)).Elem(), GetDbInstanceNodePropertyReplicateSetNodeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDbInstanceNodePropertyReplicateSetNodeArrayInput)(nil)).Elem(), GetDbInstanceNodePropertyReplicateSetNodeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDbInstanceNodePropertyReplicateSetNodeTagInput)(nil)).Elem(), GetDbInstanceNodePropertyReplicateSetNodeTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDbInstanceNodePropertyReplicateSetNodeTagArrayInput)(nil)).Elem(), GetDbInstanceNodePropertyReplicateSetNodeTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDbInstanceNodePropertyTagInput)(nil)).Elem(), GetDbInstanceNodePropertyTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDbInstanceNodePropertyTagArrayInput)(nil)).Elem(), GetDbInstanceNodePropertyTagArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceBackupsBackupListInput)(nil)).Elem(), GetInstanceBackupsBackupListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceBackupsBackupListArrayInput)(nil)).Elem(), GetInstanceBackupsBackupListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceConnectionsClientInput)(nil)).Elem(), GetInstanceConnectionsClientArgs{})
@@ -2549,6 +4156,12 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesInstanceListArrayInput)(nil)).Elem(), GetInstancesInstanceListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneConfigListInput)(nil)).Elem(), GetZoneConfigListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetZoneConfigListArrayInput)(nil)).Elem(), GetZoneConfigListArray{})
+	pulumi.RegisterOutputType(AuditLogFileFilterOutput{})
+	pulumi.RegisterOutputType(AuditLogFileFilterPtrOutput{})
+	pulumi.RegisterOutputType(AuditLogFileItemOutput{})
+	pulumi.RegisterOutputType(AuditLogFileItemArrayOutput{})
+	pulumi.RegisterOutputType(AuditServiceRuleFilterOutput{})
+	pulumi.RegisterOutputType(AuditServiceRuleFilterArrayOutput{})
 	pulumi.RegisterOutputType(InstanceAccountAuthRoleOutput{})
 	pulumi.RegisterOutputType(InstanceAccountAuthRoleArrayOutput{})
 	pulumi.RegisterOutputType(InstanceAddNodeListOutput{})
@@ -2563,6 +4176,22 @@ func init() {
 	pulumi.RegisterOutputType(InstanceStandbyInstanceListArrayOutput{})
 	pulumi.RegisterOutputType(InstanceTransparentDataEncryptionKeyInfoListOutput{})
 	pulumi.RegisterOutputType(InstanceTransparentDataEncryptionKeyInfoListArrayOutput{})
+	pulumi.RegisterOutputType(ShardingInstanceAddNodeListOutput{})
+	pulumi.RegisterOutputType(ShardingInstanceAddNodeListArrayOutput{})
+	pulumi.RegisterOutputType(ShardingInstanceRemoveNodeListOutput{})
+	pulumi.RegisterOutputType(ShardingInstanceRemoveNodeListArrayOutput{})
+	pulumi.RegisterOutputType(GetDbInstanceNodePropertyMongoOutput{})
+	pulumi.RegisterOutputType(GetDbInstanceNodePropertyMongoArrayOutput{})
+	pulumi.RegisterOutputType(GetDbInstanceNodePropertyMongoTagOutput{})
+	pulumi.RegisterOutputType(GetDbInstanceNodePropertyMongoTagArrayOutput{})
+	pulumi.RegisterOutputType(GetDbInstanceNodePropertyReplicateSetOutput{})
+	pulumi.RegisterOutputType(GetDbInstanceNodePropertyReplicateSetArrayOutput{})
+	pulumi.RegisterOutputType(GetDbInstanceNodePropertyReplicateSetNodeOutput{})
+	pulumi.RegisterOutputType(GetDbInstanceNodePropertyReplicateSetNodeArrayOutput{})
+	pulumi.RegisterOutputType(GetDbInstanceNodePropertyReplicateSetNodeTagOutput{})
+	pulumi.RegisterOutputType(GetDbInstanceNodePropertyReplicateSetNodeTagArrayOutput{})
+	pulumi.RegisterOutputType(GetDbInstanceNodePropertyTagOutput{})
+	pulumi.RegisterOutputType(GetDbInstanceNodePropertyTagArrayOutput{})
 	pulumi.RegisterOutputType(GetInstanceBackupsBackupListOutput{})
 	pulumi.RegisterOutputType(GetInstanceBackupsBackupListArrayOutput{})
 	pulumi.RegisterOutputType(GetInstanceConnectionsClientOutput{})

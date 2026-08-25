@@ -148,35 +148,35 @@ export interface SignState {
     /**
      * Power of attorney, which should be submitted if SignPurpose is for use by others. You should Base64-encode the image first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter. Note: this field will take effect only when SignPurpose is 1 (for user by others).
      */
-    commissionImage?: pulumi.Input<string>;
+    commissionImage?: pulumi.Input<string | undefined>;
     /**
      * DocumentType is used for enterprise authentication, or website, app authentication, etc. DocumentType: 0, 1, 2, 3, 4, 5, 6, 7, 8.
      */
-    documentType?: pulumi.Input<number>;
+    documentType?: pulumi.Input<number | undefined>;
     /**
      * Whether it is Global SMS: 0: Mainland China SMS; 1: Global SMS.
      */
-    international?: pulumi.Input<number>;
+    international?: pulumi.Input<number | undefined>;
     /**
      * You should Base64-encode the image of the identity certificate corresponding to the signature first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter.
      */
-    proofImage?: pulumi.Input<string>;
+    proofImage?: pulumi.Input<string | undefined>;
     /**
      * Signature application remarks.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Sms sign name, unique.
      */
-    signName?: pulumi.Input<string>;
+    signName?: pulumi.Input<string | undefined>;
     /**
      * Signature purpose: 0: for personal use; 1: for others.
      */
-    signPurpose?: pulumi.Input<number>;
+    signPurpose?: pulumi.Input<number | undefined>;
     /**
      * Sms sign type: 0, 1, 2, 3, 4, 5, 6.
      */
-    signType?: pulumi.Input<number>;
+    signType?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -186,7 +186,7 @@ export interface SignArgs {
     /**
      * Power of attorney, which should be submitted if SignPurpose is for use by others. You should Base64-encode the image first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter. Note: this field will take effect only when SignPurpose is 1 (for user by others).
      */
-    commissionImage?: pulumi.Input<string>;
+    commissionImage?: pulumi.Input<string | undefined>;
     /**
      * DocumentType is used for enterprise authentication, or website, app authentication, etc. DocumentType: 0, 1, 2, 3, 4, 5, 6, 7, 8.
      */
@@ -202,7 +202,7 @@ export interface SignArgs {
     /**
      * Signature application remarks.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Sms sign name, unique.
      */

@@ -36,7 +36,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// ## Import
     /// 
-    /// css pad_rule_attachment can be imported using the id, e.g.
+    /// css PadRuleAttachment can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Css/padRuleAttachment:PadRuleAttachment pad_rule_attachment templateId#domainName

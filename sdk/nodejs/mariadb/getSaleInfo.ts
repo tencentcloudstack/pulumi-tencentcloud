@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const saleInfo = tencentcloud.Mariadb.getSaleInfo({});
+ * const saleInfo = tencentcloud.mariadb.getSaleInfo({});
  * ```
  */
 export function getSaleInfo(args?: GetSaleInfoArgs, opts?: pulumi.InvokeOptions): Promise<GetSaleInfoResult> {
@@ -59,7 +59,7 @@ export interface GetSaleInfoResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const saleInfo = tencentcloud.Mariadb.getSaleInfo({});
+ * const saleInfo = tencentcloud.mariadb.getSaleInfo({});
  * ```
  */
 export function getSaleInfoOutput(args?: GetSaleInfoOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSaleInfoResult> {
@@ -77,5 +77,5 @@ export interface GetSaleInfoOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

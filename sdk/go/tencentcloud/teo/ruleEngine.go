@@ -183,8 +183,7 @@ import (
 //
 // ## Import
 //
-// teo rule_engine can be imported using the id#rule_id, e.g.
-//
+// teo ruleEngine can be imported using the id#rule_id, e.g.
 // ```sh
 // $ pulumi import tencentcloud:Teo/ruleEngine:RuleEngine rule_engine zone-297z8rf93cfw#rule-ajol584a
 // ```

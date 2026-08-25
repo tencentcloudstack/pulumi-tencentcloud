@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
 {
     /// <summary>
-    /// Provides a resource to create a CAM-ROLE-SSO (Only support OIDC).
+    /// Provides a resource to create a CAM-ROLE-SSO(Only support OIDC).
     /// 
     /// ## Example Usage
     /// 
@@ -23,16 +23,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var foo = new Tencentcloud.Cam.RoleSso("foo", new()
+    ///     var example = new Tencentcloud.Cam.RoleSso("example", new()
     ///     {
-    ///         Name = "tf_cam_role_sso",
+    ///         Name = "tf_example",
     ///         IdentityUrl = "https://login.microsoftonline.com/.../v2.0",
-    ///         IdentityKey = "...",
+    ///         IdentityKey = "baz****",
     ///         ClientIds = new[]
     ///         {
-    ///             "...",
+    ///             "61adcf00620c31e3ddbc9546",
     ///         },
     ///         Description = "this is a description",
+    ///         AutoRotateKey = 1,
     ///     });
     /// 
     /// });
@@ -40,15 +41,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// 
     /// ## Import
     /// 
-    /// CAM-ROLE-SSO can be imported using the `name`, e.g.
+    /// CAM-ROLE-SSO(Only support OIDC) can be imported using the `Name`, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Cam/roleSso:RoleSso foo "test"
+    /// $ pulumi import tencentcloud:Cam/roleSso:RoleSso example tf_example
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cam/roleSso:RoleSso")]
     public partial class RoleSso : global::Pulumi.CustomResource
     {
+        /// <summary>
+        /// OIDC public key auto-rotation switch. Enum values: 0 (disabled), 1 (enabled). Default value: 0.
+        /// </summary>
+        [Output("autoRotateKey")]
+        public Output<int> AutoRotateKey { get; private set; } = null!;
+
         /// <summary>
         /// Client ids.
         /// </summary>
@@ -62,7 +69,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
-        /// Sign the public key.
+        /// Sign the public key. Base64 encryption is required.
         /// </summary>
         [Output("identityKey")]
         public Output<string> IdentityKey { get; private set; } = null!;
@@ -126,6 +133,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
 
     public sealed class RoleSsoArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// OIDC public key auto-rotation switch. Enum values: 0 (disabled), 1 (enabled). Default value: 0.
+        /// </summary>
+        [Input("autoRotateKey")]
+        public Input<int>? AutoRotateKey { get; set; }
+
         [Input("clientIds", required: true)]
         private InputList<string>? _clientIds;
 
@@ -145,7 +158,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// Sign the public key.
+        /// Sign the public key. Base64 encryption is required.
         /// </summary>
         [Input("identityKey", required: true)]
         public Input<string> IdentityKey { get; set; } = null!;
@@ -170,6 +183,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
 
     public sealed class RoleSsoState : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// OIDC public key auto-rotation switch. Enum values: 0 (disabled), 1 (enabled). Default value: 0.
+        /// </summary>
+        [Input("autoRotateKey")]
+        public Input<int>? AutoRotateKey { get; set; }
+
         [Input("clientIds")]
         private InputList<string>? _clientIds;
 
@@ -189,7 +208,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// Sign the public key.
+        /// Sign the public key. Base64 encryption is required.
         /// </summary>
         [Input("identityKey")]
         public Input<string>? IdentityKey { get; set; }

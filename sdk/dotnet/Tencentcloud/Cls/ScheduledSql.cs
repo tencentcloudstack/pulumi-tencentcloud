@@ -75,7 +75,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// 
     /// ## Import
     /// 
-    /// cls scheduled_sql can be imported using the id, e.g.
+    /// cls ScheduledSql can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Cls/scheduledSql:ScheduledSql scheduled_sql scheduled_sql_id

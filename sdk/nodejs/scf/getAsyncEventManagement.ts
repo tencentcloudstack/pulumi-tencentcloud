@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const asyncEventManagement = tencentcloud.Scf.getAsyncEventManagement({
+ * const asyncEventManagement = tencentcloud.scf.getAsyncEventManagement({
  *     functionName: "keep-1676351130",
  *     namespace: "default",
  *     qualifier: "$LATEST",
@@ -124,7 +124,7 @@ export interface GetAsyncEventManagementResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const asyncEventManagement = tencentcloud.Scf.getAsyncEventManagement({
+ * const asyncEventManagement = tencentcloud.scf.getAsyncEventManagement({
  *     functionName: "keep-1676351130",
  *     namespace: "default",
  *     qualifier: "$LATEST",
@@ -159,33 +159,33 @@ export interface GetAsyncEventManagementOutputArgs {
     /**
      * Filter (event invocation request ID).
      */
-    invokeRequestId?: pulumi.Input<string>;
+    invokeRequestId?: pulumi.Input<string | undefined>;
     /**
      * Filter (invocation type list), Values: CMQ, CKAFKA_TRIGGER, APIGW, COS, TRIGGER_TIMER, MPS_TRIGGER, CLS_TRIGGER, OTHERS.
      */
-    invokeTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    invokeTypes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Function namespace.
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
     /**
      * Valid values: ASC, DESC. Default value: DESC.
      */
-    order?: pulumi.Input<string>;
+    order?: pulumi.Input<string | undefined>;
     /**
      * Valid values: StartTime, EndTime. Default value: StartTime.
      */
-    orderby?: pulumi.Input<string>;
+    orderby?: pulumi.Input<string | undefined>;
     /**
      * Filter (function version).
      */
-    qualifier?: pulumi.Input<string>;
+    qualifier?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Filter (event status list), Values: RUNNING, FINISHED, ABORTED, FAILED.
      */
-    statuses?: pulumi.Input<pulumi.Input<string>[]>;
+    statuses?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

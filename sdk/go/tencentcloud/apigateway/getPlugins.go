@@ -49,7 +49,7 @@ import (
 //				return err
 //			}
 //			exampleApi, err := apigateway.NewApi(ctx, "example", &apigateway.ApiArgs{
-//				ServiceId:           exampleService.ID(),
+//				ServiceId:           exampleService.ID().ToIDOutput().ToStringOutput(),
 //				ApiName:             pulumi.String("hello"),
 //				ApiDesc:             pulumi.String("my hello api"),
 //				AuthType:            pulumi.String("NONE"),
@@ -96,7 +96,7 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			tmpJSON0, err := json.Marshal(map[string]interface{}{
+//			tmpJSON0, err := json.Marshal(map[string]string{
 //				"type":   "white_list",
 //				"blocks": "1.1.1.1",
 //			})
@@ -115,7 +115,7 @@ import (
 //			}
 //			_ = apigateway.GetPluginsOutput(ctx, apigateway.GetPluginsOutputArgs{
 //				ServiceId:       exampleServiceRelease.ServiceId,
-//				PluginId:        examplePlugin.ID(),
+//				PluginId:        examplePlugin.ID().ToIDOutput().ToStringOutput(),
 //				EnvironmentName: pulumi.String("release"),
 //			}, nil)
 //			return nil
@@ -158,12 +158,8 @@ type LookupPluginsResult struct {
 }
 
 func LookupPluginsOutput(ctx *pulumi.Context, args LookupPluginsOutputArgs, opts ...pulumi.InvokeOption) LookupPluginsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupPluginsResultOutput, error) {
-			args := v.(LookupPluginsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:ApiGateway/getPlugins:getPlugins", args, LookupPluginsResultOutput{}, options).(LookupPluginsResultOutput), nil
-		}).(LookupPluginsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:ApiGateway/getPlugins:getPlugins", args, LookupPluginsResultOutput{}, options).(LookupPluginsResultOutput)
 }
 
 // A collection of arguments for invoking getPlugins.

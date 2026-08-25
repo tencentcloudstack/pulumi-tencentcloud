@@ -43,7 +43,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
     /// ## Import
     /// 
     /// pts file can be imported using the project_id#file_id, e.g.
-    /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Pts/file:File file project-45vw7v82#file-de2dbaf8
     /// ```

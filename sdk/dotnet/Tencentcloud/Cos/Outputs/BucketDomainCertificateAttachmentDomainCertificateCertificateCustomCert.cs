@@ -17,7 +17,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Outputs
         /// <summary>
         /// Public key of certificate.
         /// </summary>
-        public readonly string Cert;
+        public readonly string? Cert;
         /// <summary>
         /// ID of certificate.
         /// </summary>
@@ -25,15 +25,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Outputs
         /// <summary>
         /// Private key of certificate.
         /// </summary>
-        public readonly string PrivateKey;
+        public readonly string? PrivateKey;
 
         [OutputConstructor]
         private BucketDomainCertificateAttachmentDomainCertificateCertificateCustomCert(
-            string cert,
+            string? cert,
 
             string? certId,
 
-            string privateKey)
+            string? privateKey)
         {
             Cert = cert;
             CertId = certId;

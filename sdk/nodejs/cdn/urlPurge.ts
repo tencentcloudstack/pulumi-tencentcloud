@@ -126,27 +126,27 @@ export interface UrlPurgeState {
     /**
      * Specify purge area. NOTE: only purge same area cache contents.
      */
-    area?: pulumi.Input<string>;
+    area?: pulumi.Input<string | undefined>;
     /**
      * logs of latest purge task.
      */
-    purgeHistories?: pulumi.Input<pulumi.Input<inputs.Cdn.UrlPurgePurgeHistory>[]>;
+    purgeHistories?: pulumi.Input<pulumi.Input<inputs.Cdn.UrlPurgePurgeHistory>[] | undefined>;
     /**
      * Change to purge again. NOTE: this argument only works while resource update, if set to `0` or null will not be triggered.
      */
-    redo?: pulumi.Input<number>;
+    redo?: pulumi.Input<number | undefined>;
     /**
      * Task id of last operation.
      */
-    taskId?: pulumi.Input<string>;
+    taskId?: pulumi.Input<string | undefined>;
     /**
      * Whether to encode urls, if set to `true` will auto encode instead of manual process.
      */
-    urlEncode?: pulumi.Input<boolean>;
+    urlEncode?: pulumi.Input<boolean | undefined>;
     /**
      * List of url to purge. NOTE: urls need include protocol prefix `http://` or `https://`.
      */
-    urls?: pulumi.Input<pulumi.Input<string>[]>;
+    urls?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -156,15 +156,15 @@ export interface UrlPurgeArgs {
     /**
      * Specify purge area. NOTE: only purge same area cache contents.
      */
-    area?: pulumi.Input<string>;
+    area?: pulumi.Input<string | undefined>;
     /**
      * Change to purge again. NOTE: this argument only works while resource update, if set to `0` or null will not be triggered.
      */
-    redo?: pulumi.Input<number>;
+    redo?: pulumi.Input<number | undefined>;
     /**
      * Whether to encode urls, if set to `true` will auto encode instead of manual process.
      */
-    urlEncode?: pulumi.Input<boolean>;
+    urlEncode?: pulumi.Input<boolean | undefined>;
     /**
      * List of url to purge. NOTE: urls need include protocol prefix `http://` or `https://`.
      */

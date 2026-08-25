@@ -12,7 +12,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a cfw vpcPolicy
+// Provides a resource to create a CFW vpc policy
 //
 // ## Example Usage
 //
@@ -51,10 +51,10 @@ import (
 //
 // ## Import
 //
-// cfw vpc_policy can be imported using the id, e.g.
+// CFW vpc policy can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Cfw/vpcPolicy:VpcPolicy vpc_policy vpc_policy_id
+// $ pulumi import tencentcloud:Cfw/vpcPolicy:VpcPolicy example 11321
 // ```
 type VpcPolicy struct {
 	pulumi.CustomResourceState
@@ -75,6 +75,8 @@ type VpcPolicy struct {
 	FwGroupName pulumi.StringOutput `pulumi:"fwGroupName"`
 	// Uuid used internally, this field is generally not used.
 	InternalUuid pulumi.IntOutput `pulumi:"internalUuid"`
+	// Execution order.
+	OrderIndex pulumi.IntOutput `pulumi:"orderIndex"`
 	// Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.
 	ParamTemplateId pulumi.StringOutput `pulumi:"paramTemplateId"`
 	// Parameter template Name. Note: This field may return null, indicating that no valid value can be obtained.
@@ -163,6 +165,8 @@ type vpcPolicyState struct {
 	FwGroupName *string `pulumi:"fwGroupName"`
 	// Uuid used internally, this field is generally not used.
 	InternalUuid *int `pulumi:"internalUuid"`
+	// Execution order.
+	OrderIndex *int `pulumi:"orderIndex"`
 	// Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.
 	ParamTemplateId *string `pulumi:"paramTemplateId"`
 	// Parameter template Name. Note: This field may return null, indicating that no valid value can be obtained.
@@ -198,6 +202,8 @@ type VpcPolicyState struct {
 	FwGroupName pulumi.StringPtrInput
 	// Uuid used internally, this field is generally not used.
 	InternalUuid pulumi.IntPtrInput
+	// Execution order.
+	OrderIndex pulumi.IntPtrInput
 	// Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.
 	ParamTemplateId pulumi.StringPtrInput
 	// Parameter template Name. Note: This field may return null, indicating that no valid value can be obtained.
@@ -392,6 +398,11 @@ func (o VpcPolicyOutput) FwGroupName() pulumi.StringOutput {
 // Uuid used internally, this field is generally not used.
 func (o VpcPolicyOutput) InternalUuid() pulumi.IntOutput {
 	return o.ApplyT(func(v *VpcPolicy) pulumi.IntOutput { return v.InternalUuid }).(pulumi.IntOutput)
+}
+
+// Execution order.
+func (o VpcPolicyOutput) OrderIndex() pulumi.IntOutput {
+	return o.ApplyT(func(v *VpcPolicy) pulumi.IntOutput { return v.OrderIndex }).(pulumi.IntOutput)
 }
 
 // Parameter template id. Note: This field may return null, indicating that no valid value can be obtained.

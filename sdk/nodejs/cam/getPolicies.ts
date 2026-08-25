@@ -11,18 +11,26 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * ### Query all policies
+ *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * // query by policy_id
- * const foo = tencentcloud.Cam.getPolicies({
- *     policyId: fooTencentcloudCamPolicy.id,
- * });
- * // query by policy_id and name
- * const bar = tencentcloud.Cam.getPolicies({
- *     policyId: fooTencentcloudCamPolicy.id,
- *     name: "tf-auto-test",
+ * const example = tencentcloud.cam.getPolicies({});
+ * ```
+ *
+ * ### Query policies by filter
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = tencentcloud.cam.getPolicies({
+ *     name: "tf-example",
+ *     policyId: "236215899",
+ *     type: 1,
+ *     createMode: 2,
  * });
  * ```
  */
@@ -32,9 +40,11 @@ export function getPolicies(args?: GetPoliciesArgs, opts?: pulumi.InvokeOptions)
     return pulumi.runtime.invoke("tencentcloud:Cam/getPolicies:getPolicies", {
         "createMode": args.createMode,
         "description": args.description,
+        "keyWord": args.keyWord,
         "name": args.name,
         "policyId": args.policyId,
         "resultOutputFile": args.resultOutputFile,
+        "scope": args.scope,
         "type": args.type,
     }, opts);
 }
@@ -52,6 +62,10 @@ export interface GetPoliciesArgs {
      */
     description?: string;
     /**
+     * Match by strategy name.
+     */
+    keyWord?: string;
+    /**
      * Name of the CAM policy to be queried.
      */
     name?: string;
@@ -63,6 +77,10 @@ export interface GetPoliciesArgs {
      * Used to save results.
      */
     resultOutputFile?: string;
+    /**
+     * Available values are 'All', 'QCS', and' Local '.' All 'retrieves all policies,' QCS' retrieves preset policies, 'Local' retrieves custom policies, and defaults to 'All'.
+     */
+    scope?: string;
     /**
      * Type of the policy strategy. Valid values: `1`, `2`. `1` means customer strategy and `2` means preset strategy.
      */
@@ -85,6 +103,7 @@ export interface GetPoliciesResult {
      * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    readonly keyWord?: string;
     /**
      * Name of CAM policy.
      */
@@ -98,6 +117,7 @@ export interface GetPoliciesResult {
      */
     readonly policyLists: outputs.Cam.GetPoliciesPolicyList[];
     readonly resultOutputFile?: string;
+    readonly scope?: string;
     /**
      * Type of the policy strategy. `1` means customer strategy and `2` means preset strategy.
      */
@@ -108,18 +128,26 @@ export interface GetPoliciesResult {
  *
  * ## Example Usage
  *
+ * ### Query all policies
+ *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * // query by policy_id
- * const foo = tencentcloud.Cam.getPolicies({
- *     policyId: fooTencentcloudCamPolicy.id,
- * });
- * // query by policy_id and name
- * const bar = tencentcloud.Cam.getPolicies({
- *     policyId: fooTencentcloudCamPolicy.id,
- *     name: "tf-auto-test",
+ * const example = tencentcloud.cam.getPolicies({});
+ * ```
+ *
+ * ### Query policies by filter
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = tencentcloud.cam.getPolicies({
+ *     name: "tf-example",
+ *     policyId: "236215899",
+ *     type: 1,
+ *     createMode: 2,
  * });
  * ```
  */
@@ -129,9 +157,11 @@ export function getPoliciesOutput(args?: GetPoliciesOutputArgs, opts?: pulumi.In
     return pulumi.runtime.invokeOutput("tencentcloud:Cam/getPolicies:getPolicies", {
         "createMode": args.createMode,
         "description": args.description,
+        "keyWord": args.keyWord,
         "name": args.name,
         "policyId": args.policyId,
         "resultOutputFile": args.resultOutputFile,
+        "scope": args.scope,
         "type": args.type,
     }, opts);
 }
@@ -143,25 +173,33 @@ export interface GetPoliciesOutputArgs {
     /**
      * Mode of creation of policy strategy. Valid values: `1`, `2`. `1` means policy was created with console, and `2` means it was created by strategies.
      */
-    createMode?: pulumi.Input<number>;
+    createMode?: pulumi.Input<number | undefined>;
     /**
      * The description of the CAM policy.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
+    /**
+     * Match by strategy name.
+     */
+    keyWord?: pulumi.Input<string | undefined>;
     /**
      * Name of the CAM policy to be queried.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * ID of CAM policy to be queried.
      */
-    policyId?: pulumi.Input<string>;
+    policyId?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
+    /**
+     * Available values are 'All', 'QCS', and' Local '.' All 'retrieves all policies,' QCS' retrieves preset policies, 'Local' retrieves custom policies, and defaults to 'All'.
+     */
+    scope?: pulumi.Input<string | undefined>;
     /**
      * Type of the policy strategy. Valid values: `1`, `2`. `1` means customer strategy and `2` means preset strategy.
      */
-    type?: pulumi.Input<number>;
+    type?: pulumi.Input<number | undefined>;
 }

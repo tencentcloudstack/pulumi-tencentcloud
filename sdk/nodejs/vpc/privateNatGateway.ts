@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a vpc private nat gateway
+ * Provides a resource to create a VPC private nat gateway
  *
  * ## Example Usage
  *
@@ -13,18 +13,21 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const privateNatGateway = new tencentcloud.vpc.PrivateNatGateway("private_nat_gateway", {
- *     natGatewayName: "xxx",
- *     vpcId: "xxx",
+ * const example = new tencentcloud.vpc.PrivateNatGateway("example", {
+ *     natGatewayName: "tf-example",
+ *     vpcId: "vpc-i5yyodl9",
+ *     tags: {
+ *         createBy: "Terraform",
+ *     },
  * });
  * ```
  *
  * ## Import
  *
- * vpc private_nat_gateway can be imported using the id, e.g.
+ * VPC private nat gateway can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Vpc/privateNatGateway:PrivateNatGateway private_nat_gateway private_nat_gateway_id
+ * $ pulumi import tencentcloud:Vpc/privateNatGateway:PrivateNatGateway example intranat-ljdy849x
  * ```
  */
 export class PrivateNatGateway extends pulumi.CustomResource {
@@ -64,9 +67,17 @@ export class PrivateNatGateway extends pulumi.CustomResource {
      */
     declare public readonly crossDomain: pulumi.Output<boolean>;
     /**
+     * Private network NAT gateway instance ID.
+     */
+    declare public /*out*/ readonly natGatewayId: pulumi.Output<string>;
+    /**
      * Private network gateway name.
      */
     declare public readonly natGatewayName: pulumi.Output<string>;
+    /**
+     * Tag description of the instance.
+     */
+    declare public readonly tags: pulumi.Output<{[key: string]: string} | undefined>;
     /**
      * Private Cloud instance ID. This parameter is required when creating a VPC type private network NAT gateway or a private network NAT gateway of private network gateway.
      */
@@ -91,7 +102,9 @@ export class PrivateNatGateway extends pulumi.CustomResource {
             const state = argsOrState as PrivateNatGatewayState | undefined;
             resourceInputs["ccnId"] = state?.ccnId;
             resourceInputs["crossDomain"] = state?.crossDomain;
+            resourceInputs["natGatewayId"] = state?.natGatewayId;
             resourceInputs["natGatewayName"] = state?.natGatewayName;
+            resourceInputs["tags"] = state?.tags;
             resourceInputs["vpcId"] = state?.vpcId;
             resourceInputs["vpcType"] = state?.vpcType;
         } else {
@@ -102,8 +115,10 @@ export class PrivateNatGateway extends pulumi.CustomResource {
             resourceInputs["ccnId"] = args?.ccnId;
             resourceInputs["crossDomain"] = args?.crossDomain;
             resourceInputs["natGatewayName"] = args?.natGatewayName;
+            resourceInputs["tags"] = args?.tags;
             resourceInputs["vpcId"] = args?.vpcId;
             resourceInputs["vpcType"] = args?.vpcType;
+            resourceInputs["natGatewayId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(PrivateNatGateway.__pulumiType, name, resourceInputs, opts);
@@ -117,23 +132,31 @@ export interface PrivateNatGatewayState {
     /**
      * Cloud Connect Network type The Cloud Connect Network instance ID required to be bound to the private network NAT gateway.
      */
-    ccnId?: pulumi.Input<string>;
+    ccnId?: pulumi.Input<string | undefined>;
     /**
      * Cross-domain parameters. Cross-domain binding of VPCs is supported only when the value is True.
      */
-    crossDomain?: pulumi.Input<boolean>;
+    crossDomain?: pulumi.Input<boolean | undefined>;
+    /**
+     * Private network NAT gateway instance ID.
+     */
+    natGatewayId?: pulumi.Input<string | undefined>;
     /**
      * Private network gateway name.
      */
-    natGatewayName?: pulumi.Input<string>;
+    natGatewayName?: pulumi.Input<string | undefined>;
+    /**
+     * Tag description of the instance.
+     */
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Private Cloud instance ID. This parameter is required when creating a VPC type private network NAT gateway or a private network NAT gateway of private network gateway.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * VPC type private network NAT gateway. Only when the value is True will a VPC type private network NAT gateway be created.
      */
-    vpcType?: pulumi.Input<boolean>;
+    vpcType?: pulumi.Input<boolean | undefined>;
 }
 
 /**
@@ -143,21 +166,25 @@ export interface PrivateNatGatewayArgs {
     /**
      * Cloud Connect Network type The Cloud Connect Network instance ID required to be bound to the private network NAT gateway.
      */
-    ccnId?: pulumi.Input<string>;
+    ccnId?: pulumi.Input<string | undefined>;
     /**
      * Cross-domain parameters. Cross-domain binding of VPCs is supported only when the value is True.
      */
-    crossDomain?: pulumi.Input<boolean>;
+    crossDomain?: pulumi.Input<boolean | undefined>;
     /**
      * Private network gateway name.
      */
     natGatewayName: pulumi.Input<string>;
     /**
+     * Tag description of the instance.
+     */
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
+    /**
      * Private Cloud instance ID. This parameter is required when creating a VPC type private network NAT gateway or a private network NAT gateway of private network gateway.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * VPC type private network NAT gateway. Only when the value is True will a VPC type private network NAT gateway be created.
      */
-    vpcType?: pulumi.Input<boolean>;
+    vpcType?: pulumi.Input<boolean | undefined>;
 }

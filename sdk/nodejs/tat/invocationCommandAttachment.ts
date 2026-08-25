@@ -185,63 +185,63 @@ export interface InvocationCommandAttachmentState {
     /**
      * Command ID.
      */
-    commandId?: pulumi.Input<string>;
+    commandId?: pulumi.Input<string | undefined>;
     /**
      * Command name. The name can be up to 60 bytes, and contain [a-z], [A-Z], [0-9] and [_-.].
      */
-    commandName?: pulumi.Input<string>;
+    commandName?: pulumi.Input<string | undefined>;
     /**
      * Command type. SHELL and POWERSHELL are supported. The default value is SHELL.
      */
-    commandType?: pulumi.Input<string>;
+    commandType?: pulumi.Input<string | undefined>;
     /**
      * Base64-encoded command. The maximum length is 64 KB.
      */
-    content?: pulumi.Input<string>;
+    content?: pulumi.Input<string | undefined>;
     /**
      * The default value of the custom parameter value when it is enabled. The field type is JSON encoded string. For example, {varA: 222}.key is the name of the custom parameter and value is the default value. Both key and value are strings.If Parameters is not provided, the default values specified here are used.Up to 20 custom parameters are supported.The name of the custom parameter cannot exceed 64 characters and can contain [a-z], [A-Z], [0-9] and [-_].
      */
-    defaultParameters?: pulumi.Input<string>;
+    defaultParameters?: pulumi.Input<string | undefined>;
     /**
      * Command description. The maximum length is 120 characters.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable the custom parameter feature.This cannot be modified once created.Default value: false.
      */
-    enableParameter?: pulumi.Input<boolean>;
+    enableParameter?: pulumi.Input<boolean | undefined>;
     /**
      * ID of instances about to execute commands. Supported instance types:  CVM  LIGHTHOUSE.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * The COS bucket URL for uploading logs; The URL must start with https, such as https://BucketName-123454321.cos.ap-beijing.myqcloud.com.
      */
-    outputCosBucketUrl?: pulumi.Input<string>;
+    outputCosBucketUrl?: pulumi.Input<string | undefined>;
     /**
      * The COS bucket directory where the logs are saved; Check below for the rules of the directory name: 1 It must be a combination of number, letters, and visible characters, Up to 60 characters are allowed; 2 Use a slash (/) to create a subdirectory; 3 can not be used as the folder name; It cannot start with a slash (/), and cannot contain consecutive slashes.
      */
-    outputCosKeyPrefix?: pulumi.Input<string>;
+    outputCosKeyPrefix?: pulumi.Input<string | undefined>;
     /**
      * Custom parameters of Command. The field type is JSON encoded string. For example, {varA: 222}.key is the name of the custom parameter and value is the default value. Both key and value are strings.If no parameter value is provided, the DefaultParameters is used.Up to 20 custom parameters are supported.The name of the custom parameter cannot exceed 64 characters and can contain [a-z], [A-Z], [0-9] and [-_].
      */
-    parameters?: pulumi.Input<string>;
+    parameters?: pulumi.Input<string | undefined>;
     /**
      * Whether to save the command. Valid values:rue: SaveFalse:Do not saveThe default value is False.
      */
-    saveCommand?: pulumi.Input<boolean>;
+    saveCommand?: pulumi.Input<boolean | undefined>;
     /**
      * Command timeout period. Default value: 60 seconds. Value range: [1, 86400].
      */
-    timeout?: pulumi.Input<number>;
+    timeout?: pulumi.Input<number | undefined>;
     /**
      * The username used to execute the command on the CVM or Lighthouse instance.The principle of least privilege is the best practice for permission management. We recommend you execute TAT commands as a general user. By default, the user root is used to execute commands on Linux and the user System is used on Windows.
      */
-    username?: pulumi.Input<string>;
+    username?: pulumi.Input<string | undefined>;
     /**
      * Command execution path. The default value is /root for SHELL commands and C:Program Filesqcloudtat_agentworkdir for POWERSHELL commands.
      */
-    workingDirectory?: pulumi.Input<string>;
+    workingDirectory?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -251,11 +251,11 @@ export interface InvocationCommandAttachmentArgs {
     /**
      * Command name. The name can be up to 60 bytes, and contain [a-z], [A-Z], [0-9] and [_-.].
      */
-    commandName?: pulumi.Input<string>;
+    commandName?: pulumi.Input<string | undefined>;
     /**
      * Command type. SHELL and POWERSHELL are supported. The default value is SHELL.
      */
-    commandType?: pulumi.Input<string>;
+    commandType?: pulumi.Input<string | undefined>;
     /**
      * Base64-encoded command. The maximum length is 64 KB.
      */
@@ -263,15 +263,15 @@ export interface InvocationCommandAttachmentArgs {
     /**
      * The default value of the custom parameter value when it is enabled. The field type is JSON encoded string. For example, {varA: 222}.key is the name of the custom parameter and value is the default value. Both key and value are strings.If Parameters is not provided, the default values specified here are used.Up to 20 custom parameters are supported.The name of the custom parameter cannot exceed 64 characters and can contain [a-z], [A-Z], [0-9] and [-_].
      */
-    defaultParameters?: pulumi.Input<string>;
+    defaultParameters?: pulumi.Input<string | undefined>;
     /**
      * Command description. The maximum length is 120 characters.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable the custom parameter feature.This cannot be modified once created.Default value: false.
      */
-    enableParameter?: pulumi.Input<boolean>;
+    enableParameter?: pulumi.Input<boolean | undefined>;
     /**
      * ID of instances about to execute commands. Supported instance types:  CVM  LIGHTHOUSE.
      */
@@ -279,29 +279,29 @@ export interface InvocationCommandAttachmentArgs {
     /**
      * The COS bucket URL for uploading logs; The URL must start with https, such as https://BucketName-123454321.cos.ap-beijing.myqcloud.com.
      */
-    outputCosBucketUrl?: pulumi.Input<string>;
+    outputCosBucketUrl?: pulumi.Input<string | undefined>;
     /**
      * The COS bucket directory where the logs are saved; Check below for the rules of the directory name: 1 It must be a combination of number, letters, and visible characters, Up to 60 characters are allowed; 2 Use a slash (/) to create a subdirectory; 3 can not be used as the folder name; It cannot start with a slash (/), and cannot contain consecutive slashes.
      */
-    outputCosKeyPrefix?: pulumi.Input<string>;
+    outputCosKeyPrefix?: pulumi.Input<string | undefined>;
     /**
      * Custom parameters of Command. The field type is JSON encoded string. For example, {varA: 222}.key is the name of the custom parameter and value is the default value. Both key and value are strings.If no parameter value is provided, the DefaultParameters is used.Up to 20 custom parameters are supported.The name of the custom parameter cannot exceed 64 characters and can contain [a-z], [A-Z], [0-9] and [-_].
      */
-    parameters?: pulumi.Input<string>;
+    parameters?: pulumi.Input<string | undefined>;
     /**
      * Whether to save the command. Valid values:rue: SaveFalse:Do not saveThe default value is False.
      */
-    saveCommand?: pulumi.Input<boolean>;
+    saveCommand?: pulumi.Input<boolean | undefined>;
     /**
      * Command timeout period. Default value: 60 seconds. Value range: [1, 86400].
      */
-    timeout?: pulumi.Input<number>;
+    timeout?: pulumi.Input<number | undefined>;
     /**
      * The username used to execute the command on the CVM or Lighthouse instance.The principle of least privilege is the best practice for permission management. We recommend you execute TAT commands as a general user. By default, the user root is used to execute commands on Linux and the user System is used on Windows.
      */
-    username?: pulumi.Input<string>;
+    username?: pulumi.Input<string | undefined>;
     /**
      * Command execution path. The default value is /root for SHELL commands and C:Program Filesqcloudtat_agentworkdir for POWERSHELL commands.
      */
-    workingDirectory?: pulumi.Input<string>;
+    workingDirectory?: pulumi.Input<string | undefined>;
 }

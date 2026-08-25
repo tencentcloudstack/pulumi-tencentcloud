@@ -45,7 +45,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
         /// <summary>
         /// Disaster recover groups to which a CVM instance belongs. Only support maximum 1.
         /// </summary>
-        public readonly string? DisasterRecoverGroupIds;
+        public readonly ImmutableArray<string> DisasterRecoverGroupIds;
         /// <summary>
         /// To specify whether to enable cloud monitor service. Default is TRUE.
         /// </summary>
@@ -147,7 +147,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
 
             int? desiredPodNum,
 
-            string? disasterRecoverGroupIds,
+            ImmutableArray<string> disasterRecoverGroupIds,
 
             bool? enhancedMonitorService,
 

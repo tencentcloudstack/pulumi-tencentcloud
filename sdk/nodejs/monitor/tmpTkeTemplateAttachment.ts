@@ -20,13 +20,13 @@ import * as utilities from "../utilities";
  * const availabilityZoneFirst = config.get("availabilityZoneFirst") || "ap-guangzhou-3";
  * const availabilityZoneSecond = config.get("availabilityZoneSecond") || "ap-guangzhou-4";
  * const exampleClusterCidr = config.get("exampleClusterCidr") || "10.31.0.0/16";
- * const vpcOne = tencentcloud.Vpc.getSubnets({
+ * const vpcOne = tencentcloud.vpc.getSubnets({
  *     isDefault: true,
  *     availabilityZone: availabilityZoneFirst,
  * });
  * const firstVpcId = vpcOne.then(vpcOne => vpcOne.instanceLists?.[0]?.vpcId);
  * const firstSubnetId = vpcOne.then(vpcOne => vpcOne.instanceLists?.[0]?.subnetId);
- * const vpcTwo = tencentcloud.Vpc.getSubnets({
+ * const vpcTwo = tencentcloud.vpc.getSubnets({
  *     isDefault: true,
  *     availabilityZone: availabilityZoneSecond,
  * });
@@ -34,7 +34,7 @@ import * as utilities from "../utilities";
  * const secondSubnetId = vpcTwo.then(vpcTwo => vpcTwo.instanceLists?.[0]?.subnetId);
  * const sg = new tencentcloud.security.Group("sg", {name: "tf-example-sg"});
  * const sgId = sg.id;
- * const _default = tencentcloud.Images.getInstance({
+ * const _default = tencentcloud.images.getInstance({
  *     imageTypes: ["PUBLIC_IMAGE"],
  *     imageNameRegex: "Final",
  * });
@@ -290,11 +290,11 @@ export interface TmpTkeTemplateAttachmentState {
     /**
      * Sync target details.
      */
-    targets?: pulumi.Input<inputs.Monitor.TmpTkeTemplateAttachmentTargets>;
+    targets?: pulumi.Input<inputs.Monitor.TmpTkeTemplateAttachmentTargets | undefined>;
     /**
      * The ID of the template, which is used for the outgoing reference.
      */
-    templateId?: pulumi.Input<string>;
+    templateId?: pulumi.Input<string | undefined>;
 }
 
 /**

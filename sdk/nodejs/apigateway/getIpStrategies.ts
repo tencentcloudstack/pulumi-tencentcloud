@@ -31,10 +31,10 @@ import * as utilities from "../utilities";
  *     strategyType: "BLACK",
  *     strategyData: "9.9.9.9",
  * });
- * const id = tencentcloud.ApiGateway.getIpStrategiesOutput({
+ * const id = tencentcloud.apigateway.getIpStrategiesOutput({
  *     serviceId: test.serviceId,
  * });
- * const name = tencentcloud.ApiGateway.getIpStrategiesOutput({
+ * const name = tencentcloud.apigateway.getIpStrategiesOutput({
  *     serviceId: test.serviceId,
  *     strategyName: test.strategyName,
  * });
@@ -114,10 +114,10 @@ export interface GetIpStrategiesResult {
  *     strategyType: "BLACK",
  *     strategyData: "9.9.9.9",
  * });
- * const id = tencentcloud.ApiGateway.getIpStrategiesOutput({
+ * const id = tencentcloud.apigateway.getIpStrategiesOutput({
  *     serviceId: test.serviceId,
  * });
- * const name = tencentcloud.ApiGateway.getIpStrategiesOutput({
+ * const name = tencentcloud.apigateway.getIpStrategiesOutput({
  *     serviceId: test.serviceId,
  *     strategyName: test.strategyName,
  * });
@@ -139,7 +139,7 @@ export interface GetIpStrategiesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * The service ID to be queried.
      */
@@ -147,5 +147,5 @@ export interface GetIpStrategiesOutputArgs {
     /**
      * Name of IP policy.
      */
-    strategyName?: pulumi.Input<string>;
+    strategyName?: pulumi.Input<string | undefined>;
 }

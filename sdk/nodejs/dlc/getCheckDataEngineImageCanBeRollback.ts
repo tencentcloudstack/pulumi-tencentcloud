@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Dlc.getCheckDataEngineImageCanBeRollback({
+ * const example = tencentcloud.dlc.getCheckDataEngineImageCanBeRollback({
  *     dataEngineId: "DataEngine-80ibn1cj",
  * });
  * ```
@@ -72,7 +72,7 @@ export interface GetCheckDataEngineImageCanBeRollbackResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Dlc.getCheckDataEngineImageCanBeRollback({
+ * const example = tencentcloud.dlc.getCheckDataEngineImageCanBeRollback({
  *     dataEngineId: "DataEngine-80ibn1cj",
  * });
  * ```
@@ -96,5 +96,5 @@ export interface GetCheckDataEngineImageCanBeRollbackOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

@@ -32,7 +32,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * scf scf_custom_domain can be imported using the id, e.g.
+ * scf scfCustomDomain can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Scf/customDomain:CustomDomain scf_custom_domain ${domain}
@@ -134,23 +134,23 @@ export interface CustomDomainState {
     /**
      * Certificate configuration information, required for HTTPS protocol.
      */
-    certConfig?: pulumi.Input<inputs.Scf.CustomDomainCertConfig>;
+    certConfig?: pulumi.Input<inputs.Scf.CustomDomainCertConfig | undefined>;
     /**
      * Domain names, pan-domain names are not supported.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Routing configuration.
      */
-    endpointsConfigs?: pulumi.Input<pulumi.Input<inputs.Scf.CustomDomainEndpointsConfig>[]>;
+    endpointsConfigs?: pulumi.Input<pulumi.Input<inputs.Scf.CustomDomainEndpointsConfig>[] | undefined>;
     /**
      * Protocol, value range: HTTP, HTTPS, HTTP&HTTPS.
      */
-    protocol?: pulumi.Input<string>;
+    protocol?: pulumi.Input<string | undefined>;
     /**
      * Web Application Firewall Configuration.
      */
-    wafConfig?: pulumi.Input<inputs.Scf.CustomDomainWafConfig>;
+    wafConfig?: pulumi.Input<inputs.Scf.CustomDomainWafConfig | undefined>;
 }
 
 /**
@@ -160,7 +160,7 @@ export interface CustomDomainArgs {
     /**
      * Certificate configuration information, required for HTTPS protocol.
      */
-    certConfig?: pulumi.Input<inputs.Scf.CustomDomainCertConfig>;
+    certConfig?: pulumi.Input<inputs.Scf.CustomDomainCertConfig | undefined>;
     /**
      * Domain names, pan-domain names are not supported.
      */
@@ -176,5 +176,5 @@ export interface CustomDomainArgs {
     /**
      * Web Application Firewall Configuration.
      */
-    wafConfig?: pulumi.Input<inputs.Scf.CustomDomainWafConfig>;
+    wafConfig?: pulumi.Input<inputs.Scf.CustomDomainWafConfig | undefined>;
 }

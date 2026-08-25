@@ -108,19 +108,19 @@ export interface TerminateAsyncEventState {
     /**
      * Function name.
      */
-    functionName?: pulumi.Input<string>;
+    functionName?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable grace shutdown. If it's true, a SIGTERM signal is sent to the specified request. See [Sending termination signal](https://www.tencentcloud.com/document/product/583/63969?from_cn_redirect=1#.E5.8F.91.E9.80.81.E7.BB.88.E6.AD.A2.E4.BF.A1.E5.8F.B7]. It's set to false by default.
      */
-    graceShutdown?: pulumi.Input<boolean>;
+    graceShutdown?: pulumi.Input<boolean | undefined>;
     /**
      * Terminated invocation request ID.
      */
-    invokeRequestId?: pulumi.Input<string>;
+    invokeRequestId?: pulumi.Input<string | undefined>;
     /**
      * Namespace.
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -134,7 +134,7 @@ export interface TerminateAsyncEventArgs {
     /**
      * Whether to enable grace shutdown. If it's true, a SIGTERM signal is sent to the specified request. See [Sending termination signal](https://www.tencentcloud.com/document/product/583/63969?from_cn_redirect=1#.E5.8F.91.E9.80.81.E7.BB.88.E6.AD.A2.E4.BF.A1.E5.8F.B7]. It's set to false by default.
      */
-    graceShutdown?: pulumi.Input<boolean>;
+    graceShutdown?: pulumi.Input<boolean | undefined>;
     /**
      * Terminated invocation request ID.
      */
@@ -142,5 +142,5 @@ export interface TerminateAsyncEventArgs {
     /**
      * Namespace.
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
 }

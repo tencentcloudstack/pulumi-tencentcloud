@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Instance.getTypes({
+ * const example = tencentcloud.instance.getTypes({
  *     availabilityZone: "ap-guangzhou-6",
  *     cpuCoreCount: 4,
  *     memorySize: 8,
@@ -28,7 +28,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Instance.getTypes({
+ * const example = tencentcloud.instance.getTypes({
  *     cpuCoreCount: 4,
  *     memorySize: 8,
  *     excludeSoldOut: true,
@@ -43,6 +43,79 @@ import * as utilities from "../utilities";
  *         },
  *     ],
  * });
+ * ```
+ *
+ * ### Query with Network and Performance Requirements
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const highNetwork = tencentcloud.instance.getTypes({
+ *     availabilityZone: "ap-guangzhou-6",
+ *     cpuCoreCount: 8,
+ *     memorySize: 16,
+ * });
+ * export const instanceDetails = highNetwork.then(highNetwork => .map(instance => ({
+ *     type: instance.instanceType,
+ *     typeName: instance.typeName,
+ *     networkCard: instance.networkCard,
+ *     bandwidth: instance.instanceBandwidth,
+ *     pps: instance.instancePps,
+ *     cpuType: instance.cpuType,
+ *     frequency: instance.frequency,
+ *     statusCategory: instance.statusCategory,
+ * })));
+ * ```
+ *
+ * ### Query GPU Instances
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const gpuInstances = tencentcloud.instance.getTypes({
+ *     gpuCoreCount: 1,
+ *     filters: [{
+ *         name: "zone",
+ *         values: ["ap-guangzhou-6"],
+ *     }],
+ * });
+ * export const gpuDetails = gpuInstances.then(gpuInstances => .map(instance => ({
+ *     type: instance.instanceType,
+ *     gpuCount: instance.gpuCount,
+ *     fpga: instance.fpga,
+ * })));
+ * ```
+ *
+ * ### Query with Local Disk Support
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const localDisk = tencentcloud.instance.getTypes({
+ *     availabilityZone: "ap-guangzhou-6",
+ *     cpuCoreCount: 4,
+ * });
+ * export const localDiskTypes = localDisk.then(localDisk => .filter(instance => instance.localDiskTypeList.length > 0).map(instance => (instance.localDiskTypeList)));
+ * ```
+ *
+ * ### Query Price Information
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const withPricing = tencentcloud.instance.getTypes({
+ *     availabilityZone: "ap-guangzhou-6",
+ *     cpuCoreCount: 2,
+ *     memorySize: 4,
+ * });
+ * export const pricingInfo = withPricing.then(withPricing => .map(instance => ({
+ *     type: instance.instanceType,
+ *     price: instance.price.length > 0 ? instance.price[0] : null,
+ * })));
  * ```
  */
 export function getTypes(args?: GetTypesArgs, opts?: pulumi.InvokeOptions): Promise<GetTypesResult> {
@@ -140,7 +213,7 @@ export interface GetTypesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Instance.getTypes({
+ * const example = tencentcloud.instance.getTypes({
  *     availabilityZone: "ap-guangzhou-6",
  *     cpuCoreCount: 4,
  *     memorySize: 8,
@@ -153,7 +226,7 @@ export interface GetTypesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Instance.getTypes({
+ * const example = tencentcloud.instance.getTypes({
  *     cpuCoreCount: 4,
  *     memorySize: 8,
  *     excludeSoldOut: true,
@@ -168,6 +241,79 @@ export interface GetTypesResult {
  *         },
  *     ],
  * });
+ * ```
+ *
+ * ### Query with Network and Performance Requirements
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const highNetwork = tencentcloud.instance.getTypes({
+ *     availabilityZone: "ap-guangzhou-6",
+ *     cpuCoreCount: 8,
+ *     memorySize: 16,
+ * });
+ * export const instanceDetails = highNetwork.then(highNetwork => .map(instance => ({
+ *     type: instance.instanceType,
+ *     typeName: instance.typeName,
+ *     networkCard: instance.networkCard,
+ *     bandwidth: instance.instanceBandwidth,
+ *     pps: instance.instancePps,
+ *     cpuType: instance.cpuType,
+ *     frequency: instance.frequency,
+ *     statusCategory: instance.statusCategory,
+ * })));
+ * ```
+ *
+ * ### Query GPU Instances
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const gpuInstances = tencentcloud.instance.getTypes({
+ *     gpuCoreCount: 1,
+ *     filters: [{
+ *         name: "zone",
+ *         values: ["ap-guangzhou-6"],
+ *     }],
+ * });
+ * export const gpuDetails = gpuInstances.then(gpuInstances => .map(instance => ({
+ *     type: instance.instanceType,
+ *     gpuCount: instance.gpuCount,
+ *     fpga: instance.fpga,
+ * })));
+ * ```
+ *
+ * ### Query with Local Disk Support
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const localDisk = tencentcloud.instance.getTypes({
+ *     availabilityZone: "ap-guangzhou-6",
+ *     cpuCoreCount: 4,
+ * });
+ * export const localDiskTypes = localDisk.then(localDisk => .filter(instance => instance.localDiskTypeList.length > 0).map(instance => (instance.localDiskTypeList)));
+ * ```
+ *
+ * ### Query Price Information
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const withPricing = tencentcloud.instance.getTypes({
+ *     availabilityZone: "ap-guangzhou-6",
+ *     cpuCoreCount: 2,
+ *     memorySize: 4,
+ * });
+ * export const pricingInfo = withPricing.then(withPricing => .map(instance => ({
+ *     type: instance.instanceType,
+ *     price: instance.price.length > 0 ? instance.price[0] : null,
+ * })));
  * ```
  */
 export function getTypesOutput(args?: GetTypesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTypesResult> {
@@ -192,33 +338,33 @@ export interface GetTypesOutputArgs {
     /**
      * The available zone that the CVM instance locates at. This field is conflict with `filter`.
      */
-    availabilityZone?: pulumi.Input<string>;
+    availabilityZone?: pulumi.Input<string | undefined>;
     /**
      * Cbs filter.
      */
-    cbsFilter?: pulumi.Input<inputs.Instance.GetTypesCbsFilterArgs>;
+    cbsFilter?: pulumi.Input<inputs.Instance.GetTypesCbsFilterArgs | undefined>;
     /**
      * The number of CPU cores of the instance.
      */
-    cpuCoreCount?: pulumi.Input<number>;
+    cpuCoreCount?: pulumi.Input<number | undefined>;
     /**
      * Indicate to filter instances types that is sold out or not, default is false.
      */
-    excludeSoldOut?: pulumi.Input<boolean>;
+    excludeSoldOut?: pulumi.Input<boolean | undefined>;
     /**
      * One or more name/value pairs to filter. This field is conflict with `availabilityZone`.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Instance.GetTypesFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Instance.GetTypesFilterArgs>[] | undefined>;
     /**
      * The number of GPU cores of the instance.
      */
-    gpuCoreCount?: pulumi.Input<number>;
+    gpuCoreCount?: pulumi.Input<number | undefined>;
     /**
      * Instance memory capacity, unit in GB.
      */
-    memorySize?: pulumi.Input<number>;
+    memorySize?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

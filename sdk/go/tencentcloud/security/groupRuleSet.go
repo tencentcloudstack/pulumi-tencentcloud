@@ -59,14 +59,14 @@ import (
 //			fooTemplateGroup, err := address.NewTemplateGroup(ctx, "foo", &address.TemplateGroupArgs{
 //				Name: pulumi.String("test-set-atg"),
 //				TemplateIds: pulumi.StringArray{
-//					foo.ID(),
+//					foo.ID().ToIDOutput().ToStringOutput(),
 //				},
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			_, err = security.NewGroupRuleSet(ctx, "base", &security.GroupRuleSetArgs{
-//				SecurityGroupId: base.ID(),
+//				SecurityGroupId: base.ID().ToIDOutput().ToStringOutput(),
 //				Ingresses: security.GroupRuleSetIngressArray{
 //					&security.GroupRuleSetIngressArgs{
 //						Action:      pulumi.String("ACCEPT"),
@@ -100,7 +100,7 @@ import (
 //						Action:           pulumi.String("DROP"),
 //						Protocol:         pulumi.String("TCP"),
 //						Port:             pulumi.String("80"),
-//						SourceSecurityId: relative.ID(),
+//						SourceSecurityId: relative.ID().ToIDOutput().ToStringOutput(),
 //						Description:      pulumi.String("E:Block relative"),
 //					},
 //				},
@@ -113,12 +113,12 @@ import (
 //					},
 //					&security.GroupRuleSetEgressArgs{
 //						Action:            pulumi.String("DROP"),
-//						AddressTemplateId: foo.ID(),
+//						AddressTemplateId: foo.ID().ToIDOutput().ToStringOutput(),
 //						Description:       pulumi.String("B:Allow template"),
 //					},
 //					&security.GroupRuleSetEgressArgs{
 //						Action:               pulumi.String("DROP"),
-//						AddressTemplateGroup: fooTemplateGroup.ID(),
+//						AddressTemplateGroup: fooTemplateGroup.ID().ToIDOutput().ToStringOutput(),
 //						Description:          pulumi.String("C:DROP template group"),
 //					},
 //				},
@@ -134,7 +134,7 @@ import (
 //
 // ## Import
 //
-// Resource tencentcloud_security_group_rule_set can be imported by passing security grou id:
+// Resource Security.GroupRuleSet can be imported by passing security grou id:
 //
 // ```sh
 // $ pulumi import tencentcloud:Security/groupRuleSet:GroupRuleSet sglab_1 sg-xxxxxxxx

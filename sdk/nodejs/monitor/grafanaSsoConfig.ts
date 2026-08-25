@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * monitor grafana_sso_config can be imported using the id, e.g.
+ * monitor grafanaSsoConfig can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Monitor/grafanaSsoConfig:GrafanaSsoConfig grafana_sso_config instance_id
@@ -102,11 +102,11 @@ export interface GrafanaSsoConfigState {
     /**
      * Whether to enable SSO: `true` for enabling; `false` for disabling.
      */
-    enableSso?: pulumi.Input<boolean>;
+    enableSso?: pulumi.Input<boolean | undefined>;
     /**
      * Grafana instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**

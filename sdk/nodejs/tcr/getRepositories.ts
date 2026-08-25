@@ -93,9 +93,9 @@ export interface GetRepositoriesOutputArgs {
     /**
      * ID of the TCR repositories to query.
      */
-    repositoryName?: pulumi.Input<string>;
+    repositoryName?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

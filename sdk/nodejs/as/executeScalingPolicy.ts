@@ -13,10 +13,10 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "as",
  * });
- * const image = tencentcloud.Images.getInstance({
+ * const image = tencentcloud.images.getInstance({
  *     imageTypes: ["PUBLIC_IMAGE"],
  *     osName: "TencentOS Server 3.2 (Final)",
  * });
@@ -74,7 +74,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * as execute_scaling_policy can be imported using the id, e.g.
+ * as executeScalingPolicy can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:As/executeScalingPolicy:ExecuteScalingPolicy execute_scaling_policy execute_scaling_policy_id
@@ -158,15 +158,15 @@ export interface ExecuteScalingPolicyState {
     /**
      * Auto-scaling policy ID. This parameter is not available to a target tracking policy.
      */
-    autoScalingPolicyId?: pulumi.Input<string>;
+    autoScalingPolicyId?: pulumi.Input<string | undefined>;
     /**
      * Whether to check if the auto scaling group is in the cooldown period. Default value: false.
      */
-    honorCooldown?: pulumi.Input<boolean>;
+    honorCooldown?: pulumi.Input<boolean | undefined>;
     /**
      * Source that triggers the scaling policy. Valid values: API and CLOUD_MONITOR. Default value: API. The value CLOUD_MONITOR is specific to the Cloud Monitor service.
      */
-    triggerSource?: pulumi.Input<string>;
+    triggerSource?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -180,9 +180,9 @@ export interface ExecuteScalingPolicyArgs {
     /**
      * Whether to check if the auto scaling group is in the cooldown period. Default value: false.
      */
-    honorCooldown?: pulumi.Input<boolean>;
+    honorCooldown?: pulumi.Input<boolean | undefined>;
     /**
      * Source that triggers the scaling policy. Valid values: API and CLOUD_MONITOR. Default value: API. The value CLOUD_MONITOR is specific to the Cloud Monitor service.
      */
-    triggerSource?: pulumi.Input<string>;
+    triggerSource?: pulumi.Input<string | undefined>;
 }

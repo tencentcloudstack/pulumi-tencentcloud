@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zone = tencentcloud.Redis.getZoneConfig({
+ * const zone = tencentcloud.redis.getZoneConfig({
  *     typeId: 7,
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -58,7 +58,7 @@ import * as utilities from "../utilities";
  * const config = new pulumi.Config();
  * const redisReplicasNum = config.getNumber("redisReplicasNum") || 3;
  * const redisTypeId = config.getNumber("redisTypeId") || 7;
- * const az = tencentcloud.Availability.getZonesByProduct({
+ * const az = tencentcloud.availability.getZonesByProduct({
  *     product: "redis",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -111,7 +111,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zone = tencentcloud.Redis.getZoneConfig({
+ * const zone = tencentcloud.redis.getZoneConfig({
  *     typeId: 7,
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -161,7 +161,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zone = tencentcloud.Redis.getZoneConfig({
+ * const zone = tencentcloud.redis.getZoneConfig({
  *     typeId: 7,
  *     region: "ap-guangzhou",
  * });
@@ -216,7 +216,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zone = tencentcloud.Redis.getZoneConfig({
+ * const zone = tencentcloud.redis.getZoneConfig({
  *     typeId: 200,
  *     region: "ap-guangzhou",
  * });
@@ -295,18 +295,18 @@ import * as utilities from "../utilities";
  * const config = new pulumi.Config();
  * const cdcId = config.get("cdcId") || "cluster-262n63e8";
  * const cdcRegion = config.get("cdcRegion") || "ap-guangzhou";
- * const clusters = tencentcloud.Redis.getClusters({
+ * const clusters = tencentcloud.redis.getClusters({
  *     dedicatedClusterId: cdcId,
  * });
  * export const name = clusters.then(clusters => clusters.resources?.[0]?.redisClusterId);
- * const zone = tencentcloud.Redis.getZoneConfig({
+ * const zone = tencentcloud.redis.getZoneConfig({
  *     typeId: 7,
  *     region: cdcRegion,
  * });
- * const example = tencentcloud.Cdc.getDedicatedClusters({
+ * const example = tencentcloud.cdc.getDedicatedClusters({
  *     dedicatedClusterIds: [cdcId],
  * });
- * const subnets = tencentcloud.Vpc.getSubnets({
+ * const subnets = tencentcloud.vpc.getSubnets({
  *     cdcId: cdcId,
  * });
  * const exampleInstance = new tencentcloud.redis.Instance("example", {
@@ -370,7 +370,7 @@ export class Instance extends pulumi.CustomResource {
      */
     declare public readonly availabilityZone: pulumi.Output<string>;
     /**
-     * The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create new with new charge type.
+     * The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`.
      */
     declare public readonly chargeType: pulumi.Output<string | undefined>;
     /**
@@ -446,7 +446,7 @@ export class Instance extends pulumi.CustomResource {
      */
     declare public readonly redisReplicasNum: pulumi.Output<number | undefined>;
     /**
-     * The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [`1`, `3`, `5`, `8`, `12`, `16`, `24 `, `32`, `40`, `48`, `64`, `80`, `96`, `128`].
+     * The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [`1`, `3`, `5`, `8`, `12`, `16`, ` 24  `, `32`, `40`, `48`, `64`, `80`, `96`, `128`].
      */
     declare public readonly redisShardNum: pulumi.Output<number>;
     /**
@@ -604,141 +604,141 @@ export interface InstanceState {
     /**
      * Auto-renew flag. 0 - default state (manual renewal); 1 - automatic renewal; 2 - explicit no automatic renewal.
      */
-    autoRenewFlag?: pulumi.Input<number>;
+    autoRenewFlag?: pulumi.Input<number | undefined>;
     /**
      * The available zone of an instance to be created, like `ap-beijing-7`, please refer to `tencentcloud_redis_zone_config.list`.
      */
-    availabilityZone?: pulumi.Input<string>;
+    availabilityZone?: pulumi.Input<string | undefined>;
     /**
-     * The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create new with new charge type.
+     * The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
     /**
      * The time when the instance was created.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Dedicated Cluster ID.
      */
-    dedicatedClusterId?: pulumi.Input<string>;
+    dedicatedClusterId?: pulumi.Input<string | undefined>;
     /**
      * Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
      */
-    forceDelete?: pulumi.Input<boolean>;
+    forceDelete?: pulumi.Input<boolean | undefined>;
     /**
      * IP address of an instance. When the `operationNetwork` is `changeVip`, this parameter needs to be configured.
      */
-    ip?: pulumi.Input<string>;
+    ip?: pulumi.Input<string | undefined>;
     /**
      * The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. `512MB` is supported only in master-slave instance.
      */
-    memSize?: pulumi.Input<number>;
+    memSize?: pulumi.Input<number | undefined>;
     /**
      * Instance name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.
      */
-    noAuth?: pulumi.Input<boolean>;
+    noAuth?: pulumi.Input<boolean | undefined>;
     /**
      * Readonly Primary/Replica nodes.
      */
-    nodeInfos?: pulumi.Input<pulumi.Input<inputs.Redis.InstanceNodeInfo>[]>;
+    nodeInfos?: pulumi.Input<pulumi.Input<inputs.Redis.InstanceNodeInfo>[] | undefined>;
     /**
      * Refers to the category of the pre-modified network, including: `changeVip`: refers to switching the private network, including its intranet IPv4 address and port; `changeVpc`: refers to switching the subnet to which the private network belongs; `changeBaseToVpc`: refers to switching the basic network to a private network; `changeVPort`: refers to only modifying the instance network port.
      */
-    operationNetwork?: pulumi.Input<string>;
+    operationNetwork?: pulumi.Input<string | undefined>;
     /**
      * Specify params template id. If not set, will use default template.
      */
-    paramsTemplateId?: pulumi.Input<string>;
+    paramsTemplateId?: pulumi.Input<string | undefined>;
     /**
      * Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * The port used to access a redis instance. The default value is 6379. When the `operationNetwork` is `changeVPort` or `changeVip`, this parameter needs to be configured.
      */
-    port?: pulumi.Input<number>;
+    port?: pulumi.Input<number | undefined>;
     /**
      * The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
      */
-    prepaidPeriod?: pulumi.Input<number>;
+    prepaidPeriod?: pulumi.Input<number | undefined>;
     /**
      * Specify the product version of the instance. `local`: Local disk version, `cloud`: Cloud disk version, `cdc`: Exclusive cluster version. Default is `local`.
      */
-    productVersion?: pulumi.Input<string>;
+    productVersion?: pulumi.Input<string | undefined>;
     /**
      * Specifies which project the instance should belong to.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
      */
-    recycle?: pulumi.Input<number>;
+    recycle?: pulumi.Input<number | undefined>;
     /**
      * Exclusive cluster ID. When the `productVersion` is set to `cdc`, this parameter must be set.
      */
-    redisClusterId?: pulumi.Input<string>;
+    redisClusterId?: pulumi.Input<string | undefined>;
     /**
      * The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.
      */
-    redisReplicasNum?: pulumi.Input<number>;
+    redisReplicasNum?: pulumi.Input<number | undefined>;
     /**
-     * The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [`1`, `3`, `5`, `8`, `12`, `16`, `24 `, `32`, `40`, `48`, `64`, `80`, `96`, `128`].
+     * The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [`1`, `3`, `5`, `8`, `12`, `16`, ` 24  `, `32`, `40`, `48`, `64`, `80`, `96`, `128`].
      */
-    redisShardNum?: pulumi.Input<number>;
+    redisShardNum?: pulumi.Input<number | undefined>;
     /**
      * ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
      */
-    replicaZoneIds?: pulumi.Input<pulumi.Input<number>[]>;
+    replicaZoneIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas >=2.
      */
-    replicasReadOnly?: pulumi.Input<boolean>;
+    replicasReadOnly?: pulumi.Input<boolean | undefined>;
     /**
      * ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.
      */
-    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroups?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Current status of an instance, maybe: init, processing, online, isolate and todelete.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Specifies which subnet the instance should belong to. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * Instance tags.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: `clusterCkv`,`cluster_redis5.0`,`clusterRedis`,`masterSlaveCkv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`masterSlaveRedis`,`standaloneRedis`, specific region support specific types, need to refer data `tencentcloud.Redis.getZoneConfig`.
      *
      * @deprecated It has been deprecated from version 1.33.1. Please use 'type_id' instead.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
     /**
      * Instance type. Available values reference data source `tencentcloud.Redis.getZoneConfig` or [document](https://intl.cloud.tencent.com/document/product/239/32069), toggle immediately when modified.<ul><li>2: Redis 2.8 Memory Edition (standard architecture);</li> <li>3: CKV 3.2 Memory Edition (standard architecture);</li> <li>4: CKV 3.2 Memory Edition (cluster architecture);</li> <li>6: Redis 4.0 Memory Edition (standard architecture);</li> <li>7: Redis 4.0 Memory Edition (cluster architecture);</li> <li>8: Redis 5.0 Memory Edition (standard architecture);</li> <li>9: Redis 5.0 Memory Edition (cluster architecture);</li> <li>15: Redis 6.2 Memory Edition (standard architecture);</li> <li>16: Redis 6.2 Memory Edition (cluster architecture);</li> <li>17: Redis 7.0 Memory Edition (standard architecture);</li> <li>18: Redis 7.0 Memory Edition (cluster architecture). </li> <li>200: Memcached 1.6 Memory Edition (cluster architecture). </li>Note: The CKV version is currently used by existing users and is temporarily retained.</ul>.
      */
-    typeId?: pulumi.Input<number>;
+    typeId?: pulumi.Input<number | undefined>;
     /**
      * ID of the vpc with which the instance is to be associated. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * Switching mode: `1`-maintenance time window switching, `2`-immediate switching, default value `2`.
      */
-    waitSwitch?: pulumi.Input<number>;
+    waitSwitch?: pulumi.Input<number | undefined>;
     /**
      * Allocate Wan Address.
      */
-    wanAddress?: pulumi.Input<string>;
+    wanAddress?: pulumi.Input<string | undefined>;
     /**
      * Wan address switch, default `close`, values: `open`, `close`.
      */
-    wanAddressSwitch?: pulumi.Input<string>;
+    wanAddressSwitch?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -748,23 +748,23 @@ export interface InstanceArgs {
     /**
      * Auto-renew flag. 0 - default state (manual renewal); 1 - automatic renewal; 2 - explicit no automatic renewal.
      */
-    autoRenewFlag?: pulumi.Input<number>;
+    autoRenewFlag?: pulumi.Input<number | undefined>;
     /**
      * The available zone of an instance to be created, like `ap-beijing-7`, please refer to `tencentcloud_redis_zone_config.list`.
      */
     availabilityZone: pulumi.Input<string>;
     /**
-     * The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`. Note: TencentCloud International only supports `POSTPAID`. Caution that update operation on this field will delete old instances and create new with new charge type.
+     * The charge type of instance. Valid values: `PREPAID` and `POSTPAID`. Default value is `POSTPAID`.
      */
-    chargeType?: pulumi.Input<string>;
+    chargeType?: pulumi.Input<string | undefined>;
     /**
      * Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin.
      */
-    forceDelete?: pulumi.Input<boolean>;
+    forceDelete?: pulumi.Input<boolean | undefined>;
     /**
      * IP address of an instance. When the `operationNetwork` is `changeVip`, this parameter needs to be configured.
      */
-    ip?: pulumi.Input<string>;
+    ip?: pulumi.Input<string | undefined>;
     /**
      * The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. `512MB` is supported only in master-slave instance.
      */
@@ -772,95 +772,95 @@ export interface InstanceArgs {
     /**
      * Instance name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Indicates whether the redis instance support no-auth access. NOTE: Only available in private cloud environment.
      */
-    noAuth?: pulumi.Input<boolean>;
+    noAuth?: pulumi.Input<boolean | undefined>;
     /**
      * Refers to the category of the pre-modified network, including: `changeVip`: refers to switching the private network, including its intranet IPv4 address and port; `changeVpc`: refers to switching the subnet to which the private network belongs; `changeBaseToVpc`: refers to switching the basic network to a private network; `changeVPort`: refers to only modifying the instance network port.
      */
-    operationNetwork?: pulumi.Input<string>;
+    operationNetwork?: pulumi.Input<string | undefined>;
     /**
      * Specify params template id. If not set, will use default template.
      */
-    paramsTemplateId?: pulumi.Input<string>;
+    paramsTemplateId?: pulumi.Input<string | undefined>;
     /**
      * Password for a Redis user, which should be 8 to 16 characters. NOTE: Only `no_auth=true` specified can make password empty.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * The port used to access a redis instance. The default value is 6379. When the `operationNetwork` is `changeVPort` or `changeVip`, this parameter needs to be configured.
      */
-    port?: pulumi.Input<number>;
+    port?: pulumi.Input<number | undefined>;
     /**
      * The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
      */
-    prepaidPeriod?: pulumi.Input<number>;
+    prepaidPeriod?: pulumi.Input<number | undefined>;
     /**
      * Specify the product version of the instance. `local`: Local disk version, `cloud`: Cloud disk version, `cdc`: Exclusive cluster version. Default is `local`.
      */
-    productVersion?: pulumi.Input<string>;
+    productVersion?: pulumi.Input<string | undefined>;
     /**
      * Specifies which project the instance should belong to.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
      */
-    recycle?: pulumi.Input<number>;
+    recycle?: pulumi.Input<number | undefined>;
     /**
      * Exclusive cluster ID. When the `productVersion` is set to `cdc`, this parameter must be set.
      */
-    redisClusterId?: pulumi.Input<string>;
+    redisClusterId?: pulumi.Input<string | undefined>;
     /**
      * The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.
      */
-    redisReplicasNum?: pulumi.Input<number>;
+    redisReplicasNum?: pulumi.Input<number | undefined>;
     /**
-     * The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [`1`, `3`, `5`, `8`, `12`, `16`, `24 `, `32`, `40`, `48`, `64`, `80`, `96`, `128`].
+     * The number of instance shards; this parameter does not need to be configured for standard version instances; for cluster version instances, the number of shards ranges from: [`1`, `3`, `5`, `8`, `12`, `16`, ` 24  `, `32`, `40`, `48`, `64`, `80`, `96`, `128`].
      */
-    redisShardNum?: pulumi.Input<number>;
+    redisShardNum?: pulumi.Input<number | undefined>;
     /**
      * ID of replica nodes available zone. This is not required for standalone and master slave versions. NOTE: Removing some of the same zone of replicas (e.g. removing 100001 of [100001, 100001, 100002]) will pick the first hit to remove.
      */
-    replicaZoneIds?: pulumi.Input<pulumi.Input<number>[]>;
+    replicaZoneIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Whether copy read-only is supported, Redis 2.8 Standard Edition and CKV Standard Edition do not support replica read-only, turn on replica read-only, the instance will automatically read and write separate, write requests are routed to the primary node, read requests are routed to the replica node, if you need to open replica read-only, the recommended number of replicas >=2.
      */
-    replicasReadOnly?: pulumi.Input<boolean>;
+    replicasReadOnly?: pulumi.Input<boolean | undefined>;
     /**
      * ID of security group. If both vpcId and subnetId are not set, this argument should not be set either.
      */
-    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroups?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Specifies which subnet the instance should belong to. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * Instance tags.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * It has been deprecated from version 1.33.1. Please use 'type_id' instead. Instance type. Available values: `clusterCkv`,`cluster_redis5.0`,`clusterRedis`,`masterSlaveCkv`,`master_slave_redis4.0`,`master_slave_redis5.0`,`masterSlaveRedis`,`standaloneRedis`, specific region support specific types, need to refer data `tencentcloud.Redis.getZoneConfig`.
      *
      * @deprecated It has been deprecated from version 1.33.1. Please use 'type_id' instead.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
     /**
      * Instance type. Available values reference data source `tencentcloud.Redis.getZoneConfig` or [document](https://intl.cloud.tencent.com/document/product/239/32069), toggle immediately when modified.<ul><li>2: Redis 2.8 Memory Edition (standard architecture);</li> <li>3: CKV 3.2 Memory Edition (standard architecture);</li> <li>4: CKV 3.2 Memory Edition (cluster architecture);</li> <li>6: Redis 4.0 Memory Edition (standard architecture);</li> <li>7: Redis 4.0 Memory Edition (cluster architecture);</li> <li>8: Redis 5.0 Memory Edition (standard architecture);</li> <li>9: Redis 5.0 Memory Edition (cluster architecture);</li> <li>15: Redis 6.2 Memory Edition (standard architecture);</li> <li>16: Redis 6.2 Memory Edition (cluster architecture);</li> <li>17: Redis 7.0 Memory Edition (standard architecture);</li> <li>18: Redis 7.0 Memory Edition (cluster architecture). </li> <li>200: Memcached 1.6 Memory Edition (cluster architecture). </li>Note: The CKV version is currently used by existing users and is temporarily retained.</ul>.
      */
-    typeId?: pulumi.Input<number>;
+    typeId?: pulumi.Input<number | undefined>;
     /**
      * ID of the vpc with which the instance is to be associated. When the `operationNetwork` is `changeVpc` or `changeBaseToVpc`, this parameter needs to be configured.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * Switching mode: `1`-maintenance time window switching, `2`-immediate switching, default value `2`.
      */
-    waitSwitch?: pulumi.Input<number>;
+    waitSwitch?: pulumi.Input<number | undefined>;
     /**
      * Wan address switch, default `close`, values: `open`, `close`.
      */
-    wanAddressSwitch?: pulumi.Input<string>;
+    wanAddressSwitch?: pulumi.Input<string | undefined>;
 }

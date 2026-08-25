@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  *
  * const config = new pulumi.Config();
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
- * const cvm4c8m = tencentcloud.Instance.getTypes({
+ * const cvm4c8m = tencentcloud.instance.getTypes({
  *     excludeSoldOut: true,
  *     cpuCoreCount: 4,
  *     memorySize: 8,
@@ -165,7 +165,7 @@ export class Cluster extends pulumi.CustomResource {
      * Whether to enable the cluster Master node public network. Value range:
      * - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
      * - NOT_NEED_MASTER_WAN: Indicates that it is not turned on.
-     * By default, the cluster Master node internet is enabled.
+     *   By default, the cluster Master node internet is enabled.
      */
     declare public readonly needMasterWan: pulumi.Output<string | undefined>;
     /**
@@ -346,62 +346,62 @@ export interface ClusterState {
     /**
      * 0 means turn off automatic renewal, 1 means turn on automatic renewal. Default is 0.
      */
-    autoRenew?: pulumi.Input<number>;
+    autoRenew?: pulumi.Input<number | undefined>;
     /**
      * It will be deprecated in later versions. Display strategy of EMR instance.
      *
      * @deprecated It will be deprecated in later versions.
      */
-    displayStrategy?: pulumi.Input<string>;
+    displayStrategy?: pulumi.Input<string | undefined>;
     /**
      * Access the external file system.
      */
-    extendFsField?: pulumi.Input<string>;
+    extendFsField?: pulumi.Input<string | undefined>;
     /**
      * Created EMR instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or underscores(_).
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * Instance login settings. There are two optional fields:- password: Instance login password: 8-16 characters, including uppercase letters, lowercase letters, numbers and special characters. Special symbols only support! @% ^ *. The first bit of the password cannot be a special character;- public_key_id: Public key id. After the key is associated, the instance can be accessed through the corresponding private key.
      */
-    loginSettings?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    loginSettings?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * true means that cross-AZ deployment is enabled; it is only a user parameter when creating a new cluster, and no subsequent adjustment is supported.
      */
-    multiZone?: pulumi.Input<boolean>;
+    multiZone?: pulumi.Input<boolean | undefined>;
     /**
      * The specification of node resources is as follows: fill in a few available areas. In order, the first one is the main available area, the second one is the backup available area, and the third one is the arbitration available area.
      */
-    multiZoneSettings?: pulumi.Input<pulumi.Input<inputs.Emr.ClusterMultiZoneSetting>[]>;
+    multiZoneSettings?: pulumi.Input<pulumi.Input<inputs.Emr.ClusterMultiZoneSetting>[] | undefined>;
     /**
      * Whether to enable the cluster Master node public network. Value range:
      * - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
      * - NOT_NEED_MASTER_WAN: Indicates that it is not turned on.
-     * By default, the cluster Master node internet is enabled.
+     *   By default, the cluster Master node internet is enabled.
      */
-    needMasterWan?: pulumi.Input<string>;
+    needMasterWan?: pulumi.Input<string | undefined>;
     /**
      * The pay mode of instance. 0 represent POSTPAID_BY_HOUR, 1 represent PREPAID.
      */
-    payMode?: pulumi.Input<number>;
+    payMode?: pulumi.Input<number | undefined>;
     /**
      * It will be deprecated in later versions. Use `placementInfo` instead. The location of the instance.
      *
      * @deprecated It will be deprecated in later versions. Use `placementInfo` instead.
      */
-    placement?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    placement?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * The location of the instance.
      */
-    placementInfo?: pulumi.Input<inputs.Emr.ClusterPlacementInfo>;
+    placementInfo?: pulumi.Input<inputs.Emr.ClusterPlacementInfo | undefined>;
     /**
      * Pre executed file settings. It can only be set at the time of creation, and cannot be modified.
      */
-    preExecutedFileSettings?: pulumi.Input<pulumi.Input<inputs.Emr.ClusterPreExecutedFileSetting>[]>;
+    preExecutedFileSettings?: pulumi.Input<pulumi.Input<inputs.Emr.ClusterPreExecutedFileSetting>[] | undefined>;
     /**
      * Product ID. Different products ID represents different EMR product versions. Value range:
      * - 16: represents EMR-V2.3.0
@@ -419,11 +419,11 @@ export interface ClusterState {
      * - 53: represents EMR-V3.6.0
      * - 54: represents STARROCKS-V2.0.0.
      */
-    productId?: pulumi.Input<number>;
+    productId?: pulumi.Input<number | undefined>;
     /**
      * Resource specification of EMR instance.
      */
-    resourceSpec?: pulumi.Input<inputs.Emr.ClusterResourceSpec>;
+    resourceSpec?: pulumi.Input<inputs.Emr.ClusterResourceSpec | undefined>;
     /**
      * Scene-based value:
      * - Hadoop-Kudu
@@ -431,40 +431,40 @@ export interface ClusterState {
      * - Hadoop-Presto
      * - Hadoop-Hbase.
      */
-    sceneName?: pulumi.Input<string>;
+    sceneName?: pulumi.Input<string | undefined>;
     /**
      * The ID of the security group to which the instance belongs, in the form of sg-xxxxxxxx.
      */
-    sgId?: pulumi.Input<string>;
+    sgId?: pulumi.Input<string | undefined>;
     /**
      * The softwares of a EMR instance.
      */
-    softwares?: pulumi.Input<pulumi.Input<string>[]>;
+    softwares?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The flag whether the instance support high availability.(0=>not support, 1=>support).
      */
-    supportHa?: pulumi.Input<number>;
+    supportHa?: pulumi.Input<number | undefined>;
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Terminate nodes. Note: it only works when the number of nodes decreases.
      */
-    terminateNodeInfos?: pulumi.Input<pulumi.Input<inputs.Emr.ClusterTerminateNodeInfo>[]>;
+    terminateNodeInfos?: pulumi.Input<pulumi.Input<inputs.Emr.ClusterTerminateNodeInfo>[] | undefined>;
     /**
      * The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
      * When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
      */
-    timeSpan?: pulumi.Input<number>;
+    timeSpan?: pulumi.Input<number | undefined>;
     /**
      * The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second). When PayMode is 1, TimeUnit can only take the value m(month).
      */
-    timeUnit?: pulumi.Input<string>;
+    timeUnit?: pulumi.Input<string | undefined>;
     /**
      * The private net config of EMR instance.
      */
-    vpcSettings?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    vpcSettings?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 /**
@@ -474,17 +474,17 @@ export interface ClusterArgs {
     /**
      * 0 means turn off automatic renewal, 1 means turn on automatic renewal. Default is 0.
      */
-    autoRenew?: pulumi.Input<number>;
+    autoRenew?: pulumi.Input<number | undefined>;
     /**
      * It will be deprecated in later versions. Display strategy of EMR instance.
      *
      * @deprecated It will be deprecated in later versions.
      */
-    displayStrategy?: pulumi.Input<string>;
+    displayStrategy?: pulumi.Input<string | undefined>;
     /**
      * Access the external file system.
      */
-    extendFsField?: pulumi.Input<string>;
+    extendFsField?: pulumi.Input<string | undefined>;
     /**
      * Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or underscores(_).
      */
@@ -492,22 +492,22 @@ export interface ClusterArgs {
     /**
      * Instance login settings. There are two optional fields:- password: Instance login password: 8-16 characters, including uppercase letters, lowercase letters, numbers and special characters. Special symbols only support! @% ^ *. The first bit of the password cannot be a special character;- public_key_id: Public key id. After the key is associated, the instance can be accessed through the corresponding private key.
      */
-    loginSettings?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    loginSettings?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * true means that cross-AZ deployment is enabled; it is only a user parameter when creating a new cluster, and no subsequent adjustment is supported.
      */
-    multiZone?: pulumi.Input<boolean>;
+    multiZone?: pulumi.Input<boolean | undefined>;
     /**
      * The specification of node resources is as follows: fill in a few available areas. In order, the first one is the main available area, the second one is the backup available area, and the third one is the arbitration available area.
      */
-    multiZoneSettings?: pulumi.Input<pulumi.Input<inputs.Emr.ClusterMultiZoneSetting>[]>;
+    multiZoneSettings?: pulumi.Input<pulumi.Input<inputs.Emr.ClusterMultiZoneSetting>[] | undefined>;
     /**
      * Whether to enable the cluster Master node public network. Value range:
      * - NEED_MASTER_WAN: Indicates that the cluster Master node public network is enabled.
      * - NOT_NEED_MASTER_WAN: Indicates that it is not turned on.
-     * By default, the cluster Master node internet is enabled.
+     *   By default, the cluster Master node internet is enabled.
      */
-    needMasterWan?: pulumi.Input<string>;
+    needMasterWan?: pulumi.Input<string | undefined>;
     /**
      * The pay mode of instance. 0 represent POSTPAID_BY_HOUR, 1 represent PREPAID.
      */
@@ -517,15 +517,15 @@ export interface ClusterArgs {
      *
      * @deprecated It will be deprecated in later versions. Use `placementInfo` instead.
      */
-    placement?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    placement?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * The location of the instance.
      */
-    placementInfo?: pulumi.Input<inputs.Emr.ClusterPlacementInfo>;
+    placementInfo?: pulumi.Input<inputs.Emr.ClusterPlacementInfo | undefined>;
     /**
      * Pre executed file settings. It can only be set at the time of creation, and cannot be modified.
      */
-    preExecutedFileSettings?: pulumi.Input<pulumi.Input<inputs.Emr.ClusterPreExecutedFileSetting>[]>;
+    preExecutedFileSettings?: pulumi.Input<pulumi.Input<inputs.Emr.ClusterPreExecutedFileSetting>[] | undefined>;
     /**
      * Product ID. Different products ID represents different EMR product versions. Value range:
      * - 16: represents EMR-V2.3.0
@@ -547,7 +547,7 @@ export interface ClusterArgs {
     /**
      * Resource specification of EMR instance.
      */
-    resourceSpec?: pulumi.Input<inputs.Emr.ClusterResourceSpec>;
+    resourceSpec?: pulumi.Input<inputs.Emr.ClusterResourceSpec | undefined>;
     /**
      * Scene-based value:
      * - Hadoop-Kudu
@@ -555,11 +555,11 @@ export interface ClusterArgs {
      * - Hadoop-Presto
      * - Hadoop-Hbase.
      */
-    sceneName?: pulumi.Input<string>;
+    sceneName?: pulumi.Input<string | undefined>;
     /**
      * The ID of the security group to which the instance belongs, in the form of sg-xxxxxxxx.
      */
-    sgId?: pulumi.Input<string>;
+    sgId?: pulumi.Input<string | undefined>;
     /**
      * The softwares of a EMR instance.
      */
@@ -571,20 +571,20 @@ export interface ClusterArgs {
     /**
      * Tag description list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Terminate nodes. Note: it only works when the number of nodes decreases.
      */
-    terminateNodeInfos?: pulumi.Input<pulumi.Input<inputs.Emr.ClusterTerminateNodeInfo>[]>;
+    terminateNodeInfos?: pulumi.Input<pulumi.Input<inputs.Emr.ClusterTerminateNodeInfo>[] | undefined>;
     /**
      * The length of time the instance was purchased. Use with TimeUnit.When TimeUnit is s, the parameter can only be filled in at 3600, representing a metered instance.
      * When TimeUnit is m, the number filled in by this parameter indicates the length of purchase of the monthly instance of the package year, such as 1 for one month of purchase.
      */
-    timeSpan?: pulumi.Input<number>;
+    timeSpan?: pulumi.Input<number | undefined>;
     /**
      * The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second). When PayMode is 1, TimeUnit can only take the value m(month).
      */
-    timeUnit?: pulumi.Input<string>;
+    timeUnit?: pulumi.Input<string | undefined>;
     /**
      * The private net config of EMR instance.
      */

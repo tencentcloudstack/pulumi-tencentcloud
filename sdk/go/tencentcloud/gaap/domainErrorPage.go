@@ -42,20 +42,20 @@ import (
 //				Protocol: pulumi.String("HTTP"),
 //				Name:     pulumi.String("ci-test-gaap-l7-listener"),
 //				Port:     pulumi.Int(80),
-//				ProxyId:  foo.ID(),
+//				ProxyId:  foo.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			fooHttpDomain, err := gaap.NewHttpDomain(ctx, "foo", &gaap.HttpDomainArgs{
-//				ListenerId: fooLayer7Listener.ID(),
+//				ListenerId: fooLayer7Listener.ID().ToIDOutput().ToStringOutput(),
 //				Domain:     pulumi.String("www.qq.com"),
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			_, err = gaap.NewDomainErrorPage(ctx, "foo", &gaap.DomainErrorPageArgs{
-//				ListenerId: fooLayer7Listener.ID(),
+//				ListenerId: fooLayer7Listener.ID().ToIDOutput().ToStringOutput(),
 //				Domain:     fooHttpDomain.Domain,
 //				ErrorCodes: pulumi.IntArray{
 //					pulumi.Int(404),

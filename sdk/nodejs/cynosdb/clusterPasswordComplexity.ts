@@ -29,7 +29,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * cynosdb cluster_password_complexity can be imported using the id, e.g.
+ * cynosdb clusterPasswordComplexity can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Cynosdb/clusterPasswordComplexity:ClusterPasswordComplexity cluster_password_complexity cluster_password_complexity_id
@@ -152,31 +152,31 @@ export interface ClusterPasswordComplexityState {
     /**
      * Cluster ID.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Data dictionary.
      */
-    validatePasswordDictionaries?: pulumi.Input<pulumi.Input<string>[]>;
+    validatePasswordDictionaries?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Password length.
      */
-    validatePasswordLength?: pulumi.Input<number>;
+    validatePasswordLength?: pulumi.Input<number | undefined>;
     /**
      * Number of uppercase and lowercase characters.
      */
-    validatePasswordMixedCaseCount?: pulumi.Input<number>;
+    validatePasswordMixedCaseCount?: pulumi.Input<number | undefined>;
     /**
      * Number of digits.
      */
-    validatePasswordNumberCount?: pulumi.Input<number>;
+    validatePasswordNumberCount?: pulumi.Input<number | undefined>;
     /**
      * Password strength (MEDIUM, STRONG).
      */
-    validatePasswordPolicy?: pulumi.Input<string>;
+    validatePasswordPolicy?: pulumi.Input<string | undefined>;
     /**
      * Number of special characters.
      */
-    validatePasswordSpecialCharCount?: pulumi.Input<number>;
+    validatePasswordSpecialCharCount?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -190,7 +190,7 @@ export interface ClusterPasswordComplexityArgs {
     /**
      * Data dictionary.
      */
-    validatePasswordDictionaries?: pulumi.Input<pulumi.Input<string>[]>;
+    validatePasswordDictionaries?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Password length.
      */

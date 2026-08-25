@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const msApiList = tencentcloud.Tsf.getMsApiList({
+ * const msApiList = tencentcloud.tsf.getMsApiList({
  *     microserviceId: "ms-yq3jo6jd",
  *     searchWord: "echo",
  * });
@@ -73,7 +73,7 @@ export interface GetMsApiListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const msApiList = tencentcloud.Tsf.getMsApiList({
+ * const msApiList = tencentcloud.tsf.getMsApiList({
  *     microserviceId: "ms-yq3jo6jd",
  *     searchWord: "echo",
  * });
@@ -99,9 +99,9 @@ export interface GetMsApiListOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * search word, support  service name.
      */
-    searchWord?: pulumi.Input<string>;
+    searchWord?: pulumi.Input<string | undefined>;
 }

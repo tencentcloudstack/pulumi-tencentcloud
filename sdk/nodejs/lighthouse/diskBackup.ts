@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * lighthouse disk_backup can be imported using the id, e.g.
+ * lighthouse diskBackup can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Lighthouse/diskBackup:DiskBackup disk_backup disk_backup_id
@@ -99,11 +99,11 @@ export interface DiskBackupState {
     /**
      * Disk backup name. The maximum length is 90 characters.
      */
-    diskBackupName?: pulumi.Input<string>;
+    diskBackupName?: pulumi.Input<string | undefined>;
     /**
      * Disk ID. Only data disks are supported to create disk backup.
      */
-    diskId?: pulumi.Input<string>;
+    diskId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -113,7 +113,7 @@ export interface DiskBackupArgs {
     /**
      * Disk backup name. The maximum length is 90 characters.
      */
-    diskBackupName?: pulumi.Input<string>;
+    diskBackupName?: pulumi.Input<string | undefined>;
     /**
      * Disk ID. Only data disks are supported to create disk backup.
      */

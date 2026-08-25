@@ -15,11 +15,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class L7AccRuleV2BranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchActionUpstreamRequestParameters
     {
         /// <summary>
-        /// Cookie configuration. optional. if not provided, it will not be configured.
+        /// Cookie configuration. Optional. If not provided, it will not be configured.
         /// </summary>
         public readonly Outputs.L7AccRuleV2BranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchActionUpstreamRequestParametersCookie? Cookie;
         /// <summary>
-        /// Query string configuration. optional. if not provided, it will not be configured.
+        /// Query string configuration. Optional. If not provided, it will not be configured.
         /// </summary>
         public readonly Outputs.L7AccRuleV2BranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchSubRuleBranchActionUpstreamRequestParametersQueryString? QueryString;
 

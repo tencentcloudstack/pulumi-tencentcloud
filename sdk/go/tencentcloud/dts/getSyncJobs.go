@@ -47,7 +47,7 @@ import (
 //				return err
 //			}
 //			_ = dts.GetSyncJobsOutput(ctx, dts.GetSyncJobsOutputArgs{
-//				JobId:   job.ID(),
+//				JobId:   job.ID().ToIDOutput().ToStringOutput(),
 //				JobName: pulumi.String("tf_dts_test"),
 //			}, nil)
 //			return nil
@@ -113,12 +113,8 @@ type GetSyncJobsResult struct {
 }
 
 func GetSyncJobsOutput(ctx *pulumi.Context, args GetSyncJobsOutputArgs, opts ...pulumi.InvokeOption) GetSyncJobsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSyncJobsResultOutput, error) {
-			args := v.(GetSyncJobsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dts/getSyncJobs:getSyncJobs", args, GetSyncJobsResultOutput{}, options).(GetSyncJobsResultOutput), nil
-		}).(GetSyncJobsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dts/getSyncJobs:getSyncJobs", args, GetSyncJobsResultOutput{}, options).(GetSyncJobsResultOutput)
 }
 
 // A collection of arguments for invoking getSyncJobs.

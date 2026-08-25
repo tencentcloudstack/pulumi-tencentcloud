@@ -229,71 +229,71 @@ export interface InstanceState {
     /**
      * Bandwidth of the DC.
      */
-    bandwidth?: pulumi.Input<number>;
+    bandwidth?: pulumi.Input<number | undefined>;
     /**
      * BGP ASN of the user. A required field within BGP.
      */
-    bgpAsn?: pulumi.Input<number>;
+    bgpAsn?: pulumi.Input<number | undefined>;
     /**
      * BGP key of the user.
      */
-    bgpAuthKey?: pulumi.Input<string>;
+    bgpAuthKey?: pulumi.Input<string | undefined>;
     /**
      * Creation time of resource.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Interconnect IP of the DC within client.
      */
-    customerAddress?: pulumi.Input<string>;
+    customerAddress?: pulumi.Input<string | undefined>;
     /**
      * ID of the DC to be queried, application deployment offline.
      */
-    dcId?: pulumi.Input<string>;
+    dcId?: pulumi.Input<string | undefined>;
     /**
      * Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.
      */
-    dcOwnerAccount?: pulumi.Input<string>;
+    dcOwnerAccount?: pulumi.Input<string | undefined>;
     /**
      * ID of the DC Gateway. Currently only new in the console.
      */
-    dcgId?: pulumi.Input<string>;
+    dcgId?: pulumi.Input<string | undefined>;
     /**
      * Name of the dedicated tunnel.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Network region.
      */
-    networkRegion?: pulumi.Input<string>;
+    networkRegion?: pulumi.Input<string | undefined>;
     /**
      * Type of the network. Valid value: `VPC`, `BMVPC` and `CCN`. The default value is `VPC`.
      */
-    networkType?: pulumi.Input<string>;
+    networkType?: pulumi.Input<string | undefined>;
     /**
      * Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.
      */
-    routeFilterPrefixes?: pulumi.Input<pulumi.Input<string>[]>;
+    routeFilterPrefixes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Type of the route, and available values include BGP and STATIC. The default value is `BGP`.
      */
-    routeType?: pulumi.Input<string>;
+    routeType?: pulumi.Input<string | undefined>;
     /**
      * State of the dedicated tunnels. Valid value: `PENDING`, `ALLOCATING`, `ALLOCATED`, `ALTERING`, `DELETING`, `DELETED`, `COMFIRMING` and `REJECTED`.
      */
-    state?: pulumi.Input<string>;
+    state?: pulumi.Input<string | undefined>;
     /**
      * Interconnect IP of the DC within Tencent.
      */
-    tencentAddress?: pulumi.Input<string>;
+    tencentAddress?: pulumi.Input<string | undefined>;
     /**
      * Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the physical connect.
      */
-    vlan?: pulumi.Input<number>;
+    vlan?: pulumi.Input<number | undefined>;
     /**
      * ID of the VPC or BMVPC.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -303,19 +303,19 @@ export interface InstanceArgs {
     /**
      * Bandwidth of the DC.
      */
-    bandwidth?: pulumi.Input<number>;
+    bandwidth?: pulumi.Input<number | undefined>;
     /**
      * BGP ASN of the user. A required field within BGP.
      */
-    bgpAsn?: pulumi.Input<number>;
+    bgpAsn?: pulumi.Input<number | undefined>;
     /**
      * BGP key of the user.
      */
-    bgpAuthKey?: pulumi.Input<string>;
+    bgpAuthKey?: pulumi.Input<string | undefined>;
     /**
      * Interconnect IP of the DC within client.
      */
-    customerAddress?: pulumi.Input<string>;
+    customerAddress?: pulumi.Input<string | undefined>;
     /**
      * ID of the DC to be queried, application deployment offline.
      */
@@ -323,7 +323,7 @@ export interface InstanceArgs {
     /**
      * Connection owner, who is the current customer by default. The developer account ID should be entered for shared connections.
      */
-    dcOwnerAccount?: pulumi.Input<string>;
+    dcOwnerAccount?: pulumi.Input<string | undefined>;
     /**
      * ID of the DC Gateway. Currently only new in the console.
      */
@@ -331,33 +331,33 @@ export interface InstanceArgs {
     /**
      * Name of the dedicated tunnel.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Network region.
      */
-    networkRegion?: pulumi.Input<string>;
+    networkRegion?: pulumi.Input<string | undefined>;
     /**
      * Type of the network. Valid value: `VPC`, `BMVPC` and `CCN`. The default value is `VPC`.
      */
-    networkType?: pulumi.Input<string>;
+    networkType?: pulumi.Input<string | undefined>;
     /**
      * Static route, the network address of the user IDC. It can be modified after setting but cannot be deleted. AN unable field within BGP.
      */
-    routeFilterPrefixes?: pulumi.Input<pulumi.Input<string>[]>;
+    routeFilterPrefixes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Type of the route, and available values include BGP and STATIC. The default value is `BGP`.
      */
-    routeType?: pulumi.Input<string>;
+    routeType?: pulumi.Input<string | undefined>;
     /**
      * Interconnect IP of the DC within Tencent.
      */
-    tencentAddress?: pulumi.Input<string>;
+    tencentAddress?: pulumi.Input<string | undefined>;
     /**
      * Vlan of the dedicated tunnels. Valid value ranges: (0~3000). `0` means that only one tunnel can be created for the physical connect.
      */
-    vlan?: pulumi.Input<number>;
+    vlan?: pulumi.Input<number | undefined>;
     /**
      * ID of the VPC or BMVPC.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }

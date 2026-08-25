@@ -11,7 +11,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Use this data source to query detailed information of cwp machinesSimple
+// Use this data source to query detailed information of CWP machines simple
 //
 // ## Example Usage
 //
@@ -24,22 +24,24 @@ import (
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cwp"
 //
 // )
-// func main() {
-// pulumi.Run(func(ctx *pulumi.Context) error {
-// _, err := cwp.GetMachinesSimple(ctx, &cwp.GetMachinesSimpleArgs{
-// MachineType: "CVM",
-// MachineRegion: "ap-guangzhou",
-// ProjectIds: interface{}{
-// 1210293,
-// 1157652,
-// },
-// }, nil);
-// if err != nil {
-// return err
-// }
-// return nil
-// })
-// }
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := cwp.GetMachinesSimple(ctx, &cwp.GetMachinesSimpleArgs{
+//				MachineType:   "CVM",
+//				MachineRegion: "ap-guangzhou",
+//				ProjectIds: []int{
+//					1210293,
+//					1157652,
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ### Query by Keyword filter
@@ -53,30 +55,32 @@ import (
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cwp"
 //
 // )
-// func main() {
-// pulumi.Run(func(ctx *pulumi.Context) error {
-// _, err := cwp.GetMachinesSimple(ctx, &cwp.GetMachinesSimpleArgs{
-// MachineType: "CVM",
-// MachineRegion: "ap-guangzhou",
-// ProjectIds: interface{}{
-// 0,
-// },
-// Filters: []cwp.GetMachinesSimpleFilter{
-// {
-// Name: "Keywords",
-// Values: []string{
-// "tf_example",
-// },
-// ExactMatch: pulumi.BoolRef(true),
-// },
-// },
-// }, nil);
-// if err != nil {
-// return err
-// }
-// return nil
-// })
-// }
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := cwp.GetMachinesSimple(ctx, &cwp.GetMachinesSimpleArgs{
+//				MachineType:   "CVM",
+//				MachineRegion: "ap-guangzhou",
+//				ProjectIds: []int{
+//					0,
+//				},
+//				Filters: []cwp.GetMachinesSimpleFilter{
+//					{
+//						Name: "Keywords",
+//						Values: []string{
+//							"tf_example",
+//						},
+//						ExactMatch: pulumi.BoolRef(true),
+//					},
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ### Query by Version filter
@@ -90,30 +94,32 @@ import (
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cwp"
 //
 // )
-// func main() {
-// pulumi.Run(func(ctx *pulumi.Context) error {
-// _, err := cwp.GetMachinesSimple(ctx, &cwp.GetMachinesSimpleArgs{
-// MachineType: "CVM",
-// MachineRegion: "ap-guangzhou",
-// ProjectIds: interface{}{
-// 0,
-// },
-// Filters: []cwp.GetMachinesSimpleFilter{
-// {
-// Name: "Version",
-// Values: []string{
-// "BASIC_VERSION",
-// },
-// ExactMatch: pulumi.BoolRef(true),
-// },
-// },
-// }, nil);
-// if err != nil {
-// return err
-// }
-// return nil
-// })
-// }
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := cwp.GetMachinesSimple(ctx, &cwp.GetMachinesSimpleArgs{
+//				MachineType:   "CVM",
+//				MachineRegion: "ap-guangzhou",
+//				ProjectIds: []int{
+//					0,
+//				},
+//				Filters: []cwp.GetMachinesSimpleFilter{
+//					{
+//						Name: "Version",
+//						Values: []string{
+//							"BASIC_VERSION",
+//						},
+//						ExactMatch: pulumi.BoolRef(true),
+//					},
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 //
 // ### Query by TagId filter
@@ -190,12 +196,8 @@ type GetMachinesSimpleResult struct {
 }
 
 func GetMachinesSimpleOutput(ctx *pulumi.Context, args GetMachinesSimpleOutputArgs, opts ...pulumi.InvokeOption) GetMachinesSimpleResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetMachinesSimpleResultOutput, error) {
-			args := v.(GetMachinesSimpleArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cwp/getMachinesSimple:getMachinesSimple", args, GetMachinesSimpleResultOutput{}, options).(GetMachinesSimpleResultOutput), nil
-		}).(GetMachinesSimpleResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cwp/getMachinesSimple:getMachinesSimple", args, GetMachinesSimpleResultOutput{}, options).(GetMachinesSimpleResultOutput)
 }
 
 // A collection of arguments for invoking getMachinesSimple.

@@ -38,7 +38,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
     /// GAAP certificate can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Gaap/certificate:Certificate  tencentcloud_gaap_certificate.foo cert-d5y6ei3b
+    ///   $ pulumi import tencentcloud:Gaap/certificate:Certificate foo cert-d5y6ei3b
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Gaap/certificate:Certificate")]

@@ -22,14 +22,14 @@ import * as utilities from "../utilities";
  * });
  * const exampleUserGroup = new tencentcloud.dasb.UserGroup("example", {name: "tf_example"});
  * const exampleUserGroupMembers = new tencentcloud.dasb.UserGroupMembers("example", {
- *     userGroupId: exampleUserGroup.id,
- *     memberIdSets: [example.id],
+ *     userGroupId: exampleUserGroup.id.apply(x =>Number(x)),
+ *     memberIdSets: [example.id.apply(x =>Number(x))],
  * });
  * ```
  *
  * ## Import
  *
- * dasb user_group_members can be imported using the id, e.g.
+ * dasb userGroupMembers can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Dasb/userGroupMembers:UserGroupMembers example 3#14
@@ -110,11 +110,11 @@ export interface UserGroupMembersState {
     /**
      * Collection of member user IDs.
      */
-    memberIdSets?: pulumi.Input<pulumi.Input<number>[]>;
+    memberIdSets?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * User Group ID.
      */
-    userGroupId?: pulumi.Input<number>;
+    userGroupId?: pulumi.Input<number | undefined>;
 }
 
 /**

@@ -133,12 +133,8 @@ type GetEventUrlResult struct {
 }
 
 func GetEventUrlOutput(ctx *pulumi.Context, args GetEventUrlOutputArgs, opts ...pulumi.InvokeOption) GetEventUrlResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetEventUrlResultOutput, error) {
-			args := v.(GetEventUrlArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Rum/getEventUrl:getEventUrl", args, GetEventUrlResultOutput{}, options).(GetEventUrlResultOutput), nil
-		}).(GetEventUrlResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Rum/getEventUrl:getEventUrl", args, GetEventUrlResultOutput{}, options).(GetEventUrlResultOutput)
 }
 
 // A collection of arguments for invoking getEventUrl.

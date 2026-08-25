@@ -23,7 +23,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * mysql deploy_group can be imported using the id, e.g.
+ * mysql deployGroup can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Mysql/deployGroup:DeployGroup deploy_group deploy_group_id
@@ -113,19 +113,19 @@ export interface DeployGroupState {
     /**
      * The name of deploy group. the maximum length cannot exceed 60 characters.
      */
-    deployGroupName?: pulumi.Input<string>;
+    deployGroupName?: pulumi.Input<string | undefined>;
     /**
      * The description of deploy group. the maximum length cannot exceed 200 characters.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * The device class of deploy group. optional value is SH12+SH02, TS85, etc.
      */
-    devClasses?: pulumi.Input<pulumi.Input<string>[]>;
+    devClasses?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The limit on the number of instances on the same physical machine in deploy group affinity policy 1.
      */
-    limitNum?: pulumi.Input<number>;
+    limitNum?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -139,13 +139,13 @@ export interface DeployGroupArgs {
     /**
      * The description of deploy group. the maximum length cannot exceed 200 characters.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * The device class of deploy group. optional value is SH12+SH02, TS85, etc.
      */
-    devClasses?: pulumi.Input<pulumi.Input<string>[]>;
+    devClasses?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The limit on the number of instances on the same physical machine in deploy group affinity policy 1.
      */
-    limitNum?: pulumi.Input<number>;
+    limitNum?: pulumi.Input<number | undefined>;
 }

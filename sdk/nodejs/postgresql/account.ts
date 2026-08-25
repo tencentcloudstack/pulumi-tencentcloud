@@ -174,27 +174,27 @@ export interface AccountState {
     /**
      * Instance ID in the format of postgres-4wdeb0zv.
      */
-    dbInstanceId?: pulumi.Input<string>;
+    dbInstanceId?: pulumi.Input<string | undefined>;
     /**
      * whether lock account. true: locked; false: unlock.
      */
-    lockStatus?: pulumi.Input<boolean>;
+    lockStatus?: pulumi.Input<boolean | undefined>;
     /**
      * Password, which can contain 8-32 letters, digits, and symbols (()`~!@#$%^&amp;amp;amp;*-+=_|{}[]:;&amp;amp;#39;&amp;amp;lt;&amp;amp;gt;,.?/); can&amp;amp;#39;t start with slash /.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * Remarks correspond to user `UserName`, which can contain 0-60 letters, digits, symbols (-_), and Chinese characters.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * The type of user. Valid values: 1. normal: regular user; 2. tencentDBSuper: user with the pgTencentdbSuperuser role.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
     /**
      * Instance username, which can contain 1-16 letters, digits, and underscore (_); can&amp;amp;#39;t be postgres; can&amp;amp;#39;t start with numbers, pg_, and tencentdb_.
      */
-    userName?: pulumi.Input<string>;
+    userName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -208,7 +208,7 @@ export interface AccountArgs {
     /**
      * whether lock account. true: locked; false: unlock.
      */
-    lockStatus?: pulumi.Input<boolean>;
+    lockStatus?: pulumi.Input<boolean | undefined>;
     /**
      * Password, which can contain 8-32 letters, digits, and symbols (()`~!@#$%^&amp;amp;amp;*-+=_|{}[]:;&amp;amp;#39;&amp;amp;lt;&amp;amp;gt;,.?/); can&amp;amp;#39;t start with slash /.
      */
@@ -216,7 +216,7 @@ export interface AccountArgs {
     /**
      * Remarks correspond to user `UserName`, which can contain 0-60 letters, digits, symbols (-_), and Chinese characters.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * The type of user. Valid values: 1. normal: regular user; 2. tencentDBSuper: user with the pgTencentdbSuperuser role.
      */

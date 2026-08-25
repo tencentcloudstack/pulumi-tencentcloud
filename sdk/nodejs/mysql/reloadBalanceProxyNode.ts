@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "cdb",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -150,11 +150,11 @@ export interface ReloadBalanceProxyNodeState {
     /**
      * Proxy address id.
      */
-    proxyAddressId?: pulumi.Input<string>;
+    proxyAddressId?: pulumi.Input<string | undefined>;
     /**
      * Proxy id.
      */
-    proxyGroupId?: pulumi.Input<string>;
+    proxyGroupId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -164,7 +164,7 @@ export interface ReloadBalanceProxyNodeArgs {
     /**
      * Proxy address id.
      */
-    proxyAddressId?: pulumi.Input<string>;
+    proxyAddressId?: pulumi.Input<string | undefined>;
     /**
      * Proxy id.
      */

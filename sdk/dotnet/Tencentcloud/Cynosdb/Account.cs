@@ -15,6 +15,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// ## Example Usage
     /// 
+    /// ### If host is %
+    /// 
     /// ```csharp
     /// using System.Collections.Generic;
     /// using System.Linq;
@@ -23,14 +25,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var account = new Tencentcloud.Cynosdb.Account("account", new()
+    ///     var example = new Tencentcloud.Cynosdb.Account("example", new()
     ///     {
-    ///         ClusterId = "cynosdbmysql-bws8h88b",
-    ///         AccountName = "terraform_test",
-    ///         AccountPassword = "Password@1234",
+    ///         ClusterId = "cynosdbmysql-ddciqx2l",
+    ///         AccountName = "tf_example",
+    ///         AccountPassword = "Password@123",
     ///         Host = "%",
-    ///         Description = "terraform test",
-    ///         MaxUserConnections = 2,
+    ///         Description = "remark.",
+    ///         MaxUserConnections = 10,
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### If host is ip
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Cynosdb.Account("example", new()
+    ///     {
+    ///         ClusterId = "cynosdbmysql-ddciqx2l",
+    ///         AccountName = "tf_example",
+    ///         AccountPassword = "Password@123",
+    ///         Host = "1.1.1.1",
+    ///         Description = "remark.",
+    ///         MaxUserConnections = 0,
     ///     });
     /// 
     /// });
@@ -38,10 +63,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// ## Import
     /// 
-    /// cynosdb account can be imported using the id, e.g.
+    /// cynosdb account can be imported using the clusterId#accountName#host, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Cynosdb/account:Account account account_id
+    /// $ pulumi import tencentcloud:Cynosdb/account:Account example cynosdbmysql-ddciqx2l#tf_example#%
+    /// 
+    /// or
+    /// 
+    /// $ pulumi import tencentcloud:Cynosdb/account:Account example cynosdbmysql-ddciqx2l#tf_example#1.1.1.1
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/account:Account")]

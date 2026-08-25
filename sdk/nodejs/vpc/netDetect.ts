@@ -11,7 +11,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * vpc net_detect can be imported using the id, e.g.
+ * vpc netDetect can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Vpc/netDetect:NetDetect net_detect net_detect_id
@@ -128,31 +128,31 @@ export interface NetDetectState {
     /**
      * An array of probe destination IPv4 addresses. Up to two.
      */
-    detectDestinationIps?: pulumi.Input<pulumi.Input<string>[]>;
+    detectDestinationIps?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Network probe description.
      */
-    netDetectDescription?: pulumi.Input<string>;
+    netDetectDescription?: pulumi.Input<string | undefined>;
     /**
      * Network probe name, the maximum length cannot exceed 60 bytes.
      */
-    netDetectName?: pulumi.Input<string>;
+    netDetectName?: pulumi.Input<string | undefined>;
     /**
      * The destination gateway of the next hop, the value is related to the next hop type. If the next hop type is VPN, and the value is the VPN gateway ID, such as: vpngw-12345678; If the next hop type is DIRECTCONNECT, and the value is the private line gateway ID, such as: dcg-12345678; If the next hop type is PEERCONNECTION, which takes the value of the peer connection ID, such as: pcx-12345678; If the next hop type is NAT, and the value is Nat gateway, such as: nat-12345678; If the next hop type is NORMAL_CVM, which takes the IPv4 address of the cloud server, such as: 10.0.0.12; If the next hop type is CCN, and the value is the cloud network ID, such as: ccn-12345678; If the next hop type is NONEXTHOP, and the specified network probe is a network probe without a next hop.
      */
-    nextHopDestination?: pulumi.Input<string>;
+    nextHopDestination?: pulumi.Input<string | undefined>;
     /**
      * The next hop type, currently we support the following types: `VPN`: VPN gateway; `DIRECTCONNECT`: private line gateway; `PEERCONNECTION`: peer connection; `NAT`: NAT gateway; `NORMAL_CVM`: normal cloud server; `CCN`: cloud networking gateway; `NONEXTHOP`: no next hop.
      */
-    nextHopType?: pulumi.Input<string>;
+    nextHopType?: pulumi.Input<string | undefined>;
     /**
      * Subnet instance ID. Such as:subnet-12345678.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * `VPC` instance `ID`. Such as:`vpc-12345678`.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -166,7 +166,7 @@ export interface NetDetectArgs {
     /**
      * Network probe description.
      */
-    netDetectDescription?: pulumi.Input<string>;
+    netDetectDescription?: pulumi.Input<string | undefined>;
     /**
      * Network probe name, the maximum length cannot exceed 60 bytes.
      */
@@ -174,11 +174,11 @@ export interface NetDetectArgs {
     /**
      * The destination gateway of the next hop, the value is related to the next hop type. If the next hop type is VPN, and the value is the VPN gateway ID, such as: vpngw-12345678; If the next hop type is DIRECTCONNECT, and the value is the private line gateway ID, such as: dcg-12345678; If the next hop type is PEERCONNECTION, which takes the value of the peer connection ID, such as: pcx-12345678; If the next hop type is NAT, and the value is Nat gateway, such as: nat-12345678; If the next hop type is NORMAL_CVM, which takes the IPv4 address of the cloud server, such as: 10.0.0.12; If the next hop type is CCN, and the value is the cloud network ID, such as: ccn-12345678; If the next hop type is NONEXTHOP, and the specified network probe is a network probe without a next hop.
      */
-    nextHopDestination?: pulumi.Input<string>;
+    nextHopDestination?: pulumi.Input<string | undefined>;
     /**
      * The next hop type, currently we support the following types: `VPN`: VPN gateway; `DIRECTCONNECT`: private line gateway; `PEERCONNECTION`: peer connection; `NAT`: NAT gateway; `NORMAL_CVM`: normal cloud server; `CCN`: cloud networking gateway; `NONEXTHOP`: no next hop.
      */
-    nextHopType?: pulumi.Input<string>;
+    nextHopType?: pulumi.Input<string | undefined>;
     /**
      * Subnet instance ID. Such as:subnet-12345678.
      */

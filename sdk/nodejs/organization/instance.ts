@@ -185,71 +185,71 @@ export interface InstanceState {
     /**
      * Organize the creation time.Note: This field may return NULL, indicating that the valid value cannot be obtained.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Creator Uin.Note: This field may return NULL, indicating that the valid value cannot be obtained.
      */
-    hostUin?: pulumi.Input<number>;
+    hostUin?: pulumi.Input<number | undefined>;
     /**
      * Whether the members are allowed to withdraw.Allow: Allow, not allowed: DENIEDNote: This field may return NULL, indicating that the valid value cannot be obtained.
      */
-    isAllowQuit?: pulumi.Input<string>;
+    isAllowQuit?: pulumi.Input<string | undefined>;
     /**
      * Whether a trusted service administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.
      */
-    isAssignManager?: pulumi.Input<boolean>;
+    isAssignManager?: pulumi.Input<boolean | undefined>;
     /**
      * Whether the real -name subject administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.
      */
-    isAuthManager?: pulumi.Input<boolean>;
+    isAuthManager?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to organize an administrator.Yes: true, no: falseNote: This field may return NULL, indicating that the valid value cannot be obtained.
      */
-    isManager?: pulumi.Input<boolean>;
+    isManager?: pulumi.Input<boolean | undefined>;
     /**
      * Members join time.Note: This field may return NULL, indicating that the valid value cannot be obtained.
      */
-    joinTime?: pulumi.Input<string>;
+    joinTime?: pulumi.Input<string | undefined>;
     /**
      * Creator nickname.Note: This field may return NULL, indicating that the valid value cannot be obtained.
      */
-    nickName?: pulumi.Input<string>;
+    nickName?: pulumi.Input<string | undefined>;
     /**
      * Enterprise organization ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.
      */
-    orgId?: pulumi.Input<number>;
+    orgId?: pulumi.Input<number | undefined>;
     /**
      * List of membership authority of members.Note: This field may return NULL, indicating that the valid value cannot be obtained.
      */
-    orgPermissions?: pulumi.Input<pulumi.Input<inputs.Organization.InstanceOrgPermission>[]>;
+    orgPermissions?: pulumi.Input<pulumi.Input<inputs.Organization.InstanceOrgPermission>[] | undefined>;
     /**
      * Strategic name.Note: This field may return NULL, indicating that the valid value cannot be obtained.
      */
-    orgPolicyName?: pulumi.Input<string>;
+    orgPolicyName?: pulumi.Input<string | undefined>;
     /**
      * Strategy type.Financial Management: FinancialNote: This field may return NULL, indicating that the valid value cannot be obtained.
      */
-    orgPolicyType?: pulumi.Input<string>;
+    orgPolicyType?: pulumi.Input<string | undefined>;
     /**
      * Enterprise organization type.Note: This field may return NULL, indicating that the valid value cannot be obtained.
      */
-    orgType?: pulumi.Input<number>;
+    orgType?: pulumi.Input<number | undefined>;
     /**
      * The name of the payment.Note: This field may return NULL, indicating that the valid value cannot be obtained.
      */
-    payName?: pulumi.Input<string>;
+    payName?: pulumi.Input<string | undefined>;
     /**
      * UIN on behalf of the payer.Note: This field may return NULL, indicating that the valid value cannot be obtained.
      */
-    payUin?: pulumi.Input<string>;
+    payUin?: pulumi.Input<string | undefined>;
     /**
      * Organize the root node ID.Note: This field may return NULL, indicating that the valid value cannot be obtained.
      */
-    rootNodeId?: pulumi.Input<number>;
+    rootNodeId?: pulumi.Input<number | undefined>;
     /**
      * Root node name.
      */
-    rootNodeName?: pulumi.Input<string>;
+    rootNodeName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -259,5 +259,5 @@ export interface InstanceArgs {
     /**
      * Root node name.
      */
-    rootNodeName?: pulumi.Input<string>;
+    rootNodeName?: pulumi.Input<string | undefined>;
 }

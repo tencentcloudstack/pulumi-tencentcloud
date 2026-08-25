@@ -28,7 +28,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc-example"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
@@ -36,7 +36,7 @@ import (
 //				return err
 //			}
 //			_, err = vpc.NewAcl(ctx, "example", &vpc.AclArgs{
-//				VpcId: vpc.ID(),
+//				VpcId: vpc2.ID().ToIDOutput().ToStringOutput(),
 //				Name:  pulumi.String("tf-example"),
 //				Ingresses: pulumi.StringArray{
 //					pulumi.String("ACCEPT#192.168.1.0/24#800#TCP"),

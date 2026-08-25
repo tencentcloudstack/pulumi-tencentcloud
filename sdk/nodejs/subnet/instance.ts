@@ -7,6 +7,8 @@ import * as utilities from "../utilities";
 /**
  * Provide a resource to create a VPC subnet.
  *
+ * > **NOTE:** In accordance with VPC business requirements, the default value for `isMulticast` has been updated to `false`(previously `true`) in version `v1.82.93` of the provider. If you wish to utilize this feature, you must first contact the VPC product team to have your account added to the whitelist, and then set the `isMulticast` field to `true`.
+ *
  * ## Example Usage
  *
  * ## Import
@@ -70,9 +72,9 @@ export class Instance extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly isDefault: pulumi.Output<boolean>;
     /**
-     * Indicates whether multicast is enabled. The default value is 'true'.
+     * Indicates whether multicast is enabled. The default value is `false`. We recommend disabling these features if they are not applicable to your environment.
      */
-    declare public readonly isMulticast: pulumi.Output<boolean | undefined>;
+    declare public readonly isMulticast: pulumi.Output<boolean>;
     /**
      * The name of subnet to be created.
      */
@@ -149,47 +151,47 @@ export interface InstanceState {
     /**
      * The availability zone within which the subnet should be created.
      */
-    availabilityZone?: pulumi.Input<string>;
+    availabilityZone?: pulumi.Input<string | undefined>;
     /**
      * The number of available IPs.
      */
-    availableIpCount?: pulumi.Input<number>;
+    availableIpCount?: pulumi.Input<number | undefined>;
     /**
      * ID of CDC instance.
      */
-    cdcId?: pulumi.Input<string>;
+    cdcId?: pulumi.Input<string | undefined>;
     /**
      * A network address block of the subnet.
      */
-    cidrBlock?: pulumi.Input<string>;
+    cidrBlock?: pulumi.Input<string | undefined>;
     /**
      * Creation time of subnet resource.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Indicates whether it is the default VPC for this region.
      */
-    isDefault?: pulumi.Input<boolean>;
+    isDefault?: pulumi.Input<boolean | undefined>;
     /**
-     * Indicates whether multicast is enabled. The default value is 'true'.
+     * Indicates whether multicast is enabled. The default value is `false`. We recommend disabling these features if they are not applicable to your environment.
      */
-    isMulticast?: pulumi.Input<boolean>;
+    isMulticast?: pulumi.Input<boolean | undefined>;
     /**
      * The name of subnet to be created.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * ID of a routing table to which the subnet should be associated.
      */
-    routeTableId?: pulumi.Input<string>;
+    routeTableId?: pulumi.Input<string | undefined>;
     /**
      * Tags of the subnet.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * ID of the VPC to be associated.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -203,27 +205,27 @@ export interface InstanceArgs {
     /**
      * ID of CDC instance.
      */
-    cdcId?: pulumi.Input<string>;
+    cdcId?: pulumi.Input<string | undefined>;
     /**
      * A network address block of the subnet.
      */
     cidrBlock: pulumi.Input<string>;
     /**
-     * Indicates whether multicast is enabled. The default value is 'true'.
+     * Indicates whether multicast is enabled. The default value is `false`. We recommend disabling these features if they are not applicable to your environment.
      */
-    isMulticast?: pulumi.Input<boolean>;
+    isMulticast?: pulumi.Input<boolean | undefined>;
     /**
      * The name of subnet to be created.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * ID of a routing table to which the subnet should be associated.
      */
-    routeTableId?: pulumi.Input<string>;
+    routeTableId?: pulumi.Input<string | undefined>;
     /**
      * Tags of the subnet.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * ID of the VPC to be associated.
      */

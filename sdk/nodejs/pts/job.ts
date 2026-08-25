@@ -26,7 +26,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * pts job can be imported using the projectId#scenarioId#jobId, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Pts/job:Job job project-45vw7v82#scenario-22q19f3k#job-dtm93vx0
  * ```
@@ -289,131 +288,131 @@ export interface JobState {
     /**
      * Cause of interruption.
      */
-    abortReason?: pulumi.Input<number>;
+    abortReason?: pulumi.Input<number | undefined>;
     /**
      * Creation time of the job.
      */
-    createdAt?: pulumi.Input<string>;
+    createdAt?: pulumi.Input<string | undefined>;
     /**
      * Scheduled job ID.
      */
-    cronId?: pulumi.Input<string>;
+    cronId?: pulumi.Input<string | undefined>;
     /**
      * Dataset file for the job.
      */
-    datasets?: pulumi.Input<pulumi.Input<inputs.Pts.JobDataset>[]>;
+    datasets?: pulumi.Input<pulumi.Input<inputs.Pts.JobDataset>[] | undefined>;
     /**
      * Whether to debug.
      */
-    debug?: pulumi.Input<boolean>;
+    debug?: pulumi.Input<boolean | undefined>;
     /**
      * Domain name binding configuration.
      */
-    domainNameConfigs?: pulumi.Input<pulumi.Input<inputs.Pts.JobDomainNameConfig>[]>;
+    domainNameConfigs?: pulumi.Input<pulumi.Input<inputs.Pts.JobDomainNameConfig>[] | undefined>;
     /**
      * Job duration.
      */
-    duration?: pulumi.Input<number>;
+    duration?: pulumi.Input<number | undefined>;
     /**
      * End time of the job.
      */
-    endTime?: pulumi.Input<string>;
+    endTime?: pulumi.Input<string | undefined>;
     /**
      * Percentage of error rate.
      */
-    errorRate?: pulumi.Input<number>;
+    errorRate?: pulumi.Input<number | undefined>;
     /**
      * Job Id.
      */
-    jobId?: pulumi.Input<string>;
+    jobId?: pulumi.Input<string | undefined>;
     /**
      * Job owner.
      */
-    jobOwner?: pulumi.Input<string>;
+    jobOwner?: pulumi.Input<string | undefined>;
     /**
      * Pressure configuration of job.
      */
-    loads?: pulumi.Input<pulumi.Input<inputs.Pts.JobLoad>[]>;
+    loads?: pulumi.Input<pulumi.Input<inputs.Pts.JobLoad>[] | undefined>;
     /**
      * Maximum requests per second.
      */
-    maxRequestsPerSecond?: pulumi.Input<number>;
+    maxRequestsPerSecond?: pulumi.Input<number | undefined>;
     /**
      * Maximum number of VU for the job.
      */
-    maxVirtualUserCount?: pulumi.Input<number>;
+    maxVirtualUserCount?: pulumi.Input<number | undefined>;
     /**
      * Note.
      */
-    note?: pulumi.Input<string>;
+    note?: pulumi.Input<string | undefined>;
     /**
      * Expansion package file information.
      */
-    plugins?: pulumi.Input<pulumi.Input<inputs.Pts.JobPlugin>[]>;
+    plugins?: pulumi.Input<pulumi.Input<inputs.Pts.JobPlugin>[] | undefined>;
     /**
      * Project ID.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * Protocol script information.
      */
-    protocols?: pulumi.Input<pulumi.Input<inputs.Pts.JobProtocol>[]>;
+    protocols?: pulumi.Input<pulumi.Input<inputs.Pts.JobProtocol>[] | undefined>;
     /**
      * Request file information.
      */
-    requestFiles?: pulumi.Input<pulumi.Input<inputs.Pts.JobRequestFile>[]>;
+    requestFiles?: pulumi.Input<pulumi.Input<inputs.Pts.JobRequestFile>[] | undefined>;
     /**
      * Total number of requests.
      */
-    requestTotal?: pulumi.Input<number>;
+    requestTotal?: pulumi.Input<number | undefined>;
     /**
      * Average number of requests per second.
      */
-    requestsPerSecond?: pulumi.Input<number>;
+    requestsPerSecond?: pulumi.Input<number | undefined>;
     /**
      * Average response time.
      */
-    responseTimeAverage?: pulumi.Input<number>;
+    responseTimeAverage?: pulumi.Input<number | undefined>;
     /**
      * Maximum response time.
      */
-    responseTimeMax?: pulumi.Input<number>;
+    responseTimeMax?: pulumi.Input<number | undefined>;
     /**
      * Minimum response time.
      */
-    responseTimeMin?: pulumi.Input<number>;
+    responseTimeMin?: pulumi.Input<number | undefined>;
     /**
      * 90th percentile response time.
      */
-    responseTimeP90?: pulumi.Input<number>;
+    responseTimeP90?: pulumi.Input<number | undefined>;
     /**
      * 95th percentile response time.
      */
-    responseTimeP95?: pulumi.Input<number>;
+    responseTimeP95?: pulumi.Input<number | undefined>;
     /**
      * 99th percentile response time.
      */
-    responseTimeP99?: pulumi.Input<number>;
+    responseTimeP99?: pulumi.Input<number | undefined>;
     /**
      * Pts scenario id.
      */
-    scenarioId?: pulumi.Input<string>;
+    scenarioId?: pulumi.Input<string | undefined>;
     /**
      * Start time of the job.
      */
-    startTime?: pulumi.Input<string>;
+    startTime?: pulumi.Input<string | undefined>;
     /**
      * The running status of the task; `0`: JobUnknown, `1`: JobCreated, `2`: JobPending, `3`: JobPreparing, `4`: JobSelectClustering, `5`: JobCreateTasking, `6`: JobSyncTasking, `11`: JobRunning, `12`: JobFinished, `13`: JobPrepareException, `14`: JobFinishException, `15`: JobAborting, `16`: JobAborted, `17`: JobAbortException, `18`: JobDeleted, `19`: JobSelectClusterException, `20`: JobCreateTaskException, `21`: JobSyncTaskException.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * Test script information.
      */
-    testScripts?: pulumi.Input<pulumi.Input<inputs.Pts.JobTestScript>[]>;
+    testScripts?: pulumi.Input<pulumi.Input<inputs.Pts.JobTestScript>[] | undefined>;
     /**
      * Scene Type.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -423,7 +422,7 @@ export interface JobArgs {
     /**
      * Whether to debug.
      */
-    debug?: pulumi.Input<boolean>;
+    debug?: pulumi.Input<boolean | undefined>;
     /**
      * Job owner.
      */
@@ -431,7 +430,7 @@ export interface JobArgs {
     /**
      * Note.
      */
-    note?: pulumi.Input<string>;
+    note?: pulumi.Input<string | undefined>;
     /**
      * Project ID.
      */

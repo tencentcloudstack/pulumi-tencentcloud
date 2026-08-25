@@ -82,7 +82,7 @@ export interface DeployYarnOperationState {
     /**
      * EMR Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**

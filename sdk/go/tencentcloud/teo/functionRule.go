@@ -12,7 +12,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a teo teoFunctionRule
+// Provides a resource to create a TEO function rule
 //
 // ## Example Usage
 //
@@ -28,51 +28,28 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := teo.NewFunctionRule(ctx, "teo_function_rule", &teo.FunctionRuleArgs{
-//				FunctionId: pulumi.String("ef-txx7fnua"),
-//				Remark:     pulumi.String("aaa"),
-//				ZoneId:     pulumi.String("zone-2qtuhspy7cr6"),
+//			_, err := teo.NewFunctionRule(ctx, "example", &teo.FunctionRuleArgs{
+//				FunctionId:  pulumi.String("ef-m01xn26e"),
+//				Remark:      pulumi.String("remark."),
+//				TriggerType: pulumi.String("direct"),
+//				ZoneId:      pulumi.String("zone-3fkff38fyw8s"),
 //				FunctionRuleConditions: teo.FunctionRuleFunctionRuleConditionArray{
 //					&teo.FunctionRuleFunctionRuleConditionArgs{
 //						RuleConditions: teo.FunctionRuleFunctionRuleConditionRuleConditionArray{
 //							&teo.FunctionRuleFunctionRuleConditionRuleConditionArgs{
 //								IgnoreCase: pulumi.Bool(false),
-//								Name:       nil,
 //								Operator:   pulumi.String("equal"),
 //								Target:     pulumi.String("host"),
 //								Values: pulumi.StringArray{
-//									pulumi.String("aaa.makn.cn"),
+//									pulumi.String("test.makn.cn"),
 //								},
 //							},
 //							&teo.FunctionRuleFunctionRuleConditionRuleConditionArgs{
 //								IgnoreCase: pulumi.Bool(false),
-//								Name:       nil,
 //								Operator:   pulumi.String("equal"),
-//								Target:     pulumi.String("extension"),
+//								Target:     pulumi.String("url"),
 //								Values: pulumi.StringArray{
-//									pulumi.String(".txt"),
-//								},
-//							},
-//						},
-//					},
-//					&teo.FunctionRuleFunctionRuleConditionArgs{
-//						RuleConditions: teo.FunctionRuleFunctionRuleConditionRuleConditionArray{
-//							&teo.FunctionRuleFunctionRuleConditionRuleConditionArgs{
-//								IgnoreCase: pulumi.Bool(false),
-//								Name:       nil,
-//								Operator:   pulumi.String("notequal"),
-//								Target:     pulumi.String("host"),
-//								Values: pulumi.StringArray{
-//									pulumi.String("aaa.makn.cn"),
-//								},
-//							},
-//							&teo.FunctionRuleFunctionRuleConditionRuleConditionArgs{
-//								IgnoreCase: pulumi.Bool(false),
-//								Name:       nil,
-//								Operator:   pulumi.String("equal"),
-//								Target:     pulumi.String("extension"),
-//								Values: pulumi.StringArray{
-//									pulumi.String(".png"),
+//									pulumi.String("/path"),
 //								},
 //							},
 //						},
@@ -90,10 +67,10 @@ import (
 //
 // ## Import
 //
-// teo teo_function_rule can be imported using the id, e.g.
+// teo teoFunctionRule can be imported using the zoneId#functionId#ruleId, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Teo/functionRule:FunctionRule teo_function_rule zone_id#function_id#rule_id
+// $ pulumi import tencentcloud:Teo/functionRule:FunctionRule example zone-3fkff38fyw8s#ef-m01xn26e#rule-yuvufj6h
 // ```
 type FunctionRule struct {
 	pulumi.CustomResourceState
@@ -110,6 +87,8 @@ type FunctionRule struct {
 	Remark pulumi.StringPtrOutput `pulumi:"remark"`
 	// ID of the Function Rule.
 	RuleId pulumi.StringOutput `pulumi:"ruleId"`
+	// Function selection configuration type. Valid values: `direct`, `weight`, `region`. Defaults to `direct` when not specified.
+	TriggerType pulumi.StringOutput `pulumi:"triggerType"`
 	// ID of the site.
 	ZoneId pulumi.StringOutput `pulumi:"zoneId"`
 }
@@ -165,6 +144,8 @@ type functionRuleState struct {
 	Remark *string `pulumi:"remark"`
 	// ID of the Function Rule.
 	RuleId *string `pulumi:"ruleId"`
+	// Function selection configuration type. Valid values: `direct`, `weight`, `region`. Defaults to `direct` when not specified.
+	TriggerType *string `pulumi:"triggerType"`
 	// ID of the site.
 	ZoneId *string `pulumi:"zoneId"`
 }
@@ -182,6 +163,8 @@ type FunctionRuleState struct {
 	Remark pulumi.StringPtrInput
 	// ID of the Function Rule.
 	RuleId pulumi.StringPtrInput
+	// Function selection configuration type. Valid values: `direct`, `weight`, `region`. Defaults to `direct` when not specified.
+	TriggerType pulumi.StringPtrInput
 	// ID of the site.
 	ZoneId pulumi.StringPtrInput
 }
@@ -197,6 +180,8 @@ type functionRuleArgs struct {
 	FunctionRuleConditions []FunctionRuleFunctionRuleCondition `pulumi:"functionRuleConditions"`
 	// Rule description, maximum support of 60 characters.
 	Remark *string `pulumi:"remark"`
+	// Function selection configuration type. Valid values: `direct`, `weight`, `region`. Defaults to `direct` when not specified.
+	TriggerType *string `pulumi:"triggerType"`
 	// ID of the site.
 	ZoneId string `pulumi:"zoneId"`
 }
@@ -209,6 +194,8 @@ type FunctionRuleArgs struct {
 	FunctionRuleConditions FunctionRuleFunctionRuleConditionArrayInput
 	// Rule description, maximum support of 60 characters.
 	Remark pulumi.StringPtrInput
+	// Function selection configuration type. Valid values: `direct`, `weight`, `region`. Defaults to `direct` when not specified.
+	TriggerType pulumi.StringPtrInput
 	// ID of the site.
 	ZoneId pulumi.StringInput
 }
@@ -328,6 +315,11 @@ func (o FunctionRuleOutput) Remark() pulumi.StringPtrOutput {
 // ID of the Function Rule.
 func (o FunctionRuleOutput) RuleId() pulumi.StringOutput {
 	return o.ApplyT(func(v *FunctionRule) pulumi.StringOutput { return v.RuleId }).(pulumi.StringOutput)
+}
+
+// Function selection configuration type. Valid values: `direct`, `weight`, `region`. Defaults to `direct` when not specified.
+func (o FunctionRuleOutput) TriggerType() pulumi.StringOutput {
+	return o.ApplyT(func(v *FunctionRule) pulumi.StringOutput { return v.TriggerType }).(pulumi.StringOutput)
 }
 
 // ID of the site.

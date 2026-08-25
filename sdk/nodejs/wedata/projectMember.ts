@@ -136,15 +136,15 @@ export interface ProjectMemberState {
     /**
      * Project ID.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * Role ID.
      */
-    roleIds?: pulumi.Input<pulumi.Input<string>[]>;
+    roleIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * User ID.
      */
-    userUin?: pulumi.Input<string>;
+    userUin?: pulumi.Input<string | undefined>;
 }
 
 /**

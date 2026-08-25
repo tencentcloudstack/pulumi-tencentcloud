@@ -102,12 +102,8 @@ type GetDiagEventResult struct {
 }
 
 func GetDiagEventOutput(ctx *pulumi.Context, args GetDiagEventOutputArgs, opts ...pulumi.InvokeOption) GetDiagEventResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDiagEventResultOutput, error) {
-			args := v.(GetDiagEventArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dbbrain/getDiagEvent:getDiagEvent", args, GetDiagEventResultOutput{}, options).(GetDiagEventResultOutput), nil
-		}).(GetDiagEventResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dbbrain/getDiagEvent:getDiagEvent", args, GetDiagEventResultOutput{}, options).(GetDiagEventResultOutput)
 }
 
 // A collection of arguments for invoking getDiagEvent.

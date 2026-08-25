@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zone = tencentcloud.Redis.getZoneConfig({
+ * const zone = tencentcloud.redis.getZoneConfig({
  *     typeId: 7,
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -63,7 +63,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * redis read_only can be imported using the instanceId, e.g.
+ * redis readOnly can be imported using the instanceId, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Redis/readOnly:ReadOnly example crs-c1nl9rpv
@@ -144,11 +144,11 @@ export interface ReadOnlyState {
     /**
      * Instance input mode: `0`: read-write; `1`: read-only.
      */
-    inputMode?: pulumi.Input<string>;
+    inputMode?: pulumi.Input<string | undefined>;
     /**
      * The ID of instance.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**

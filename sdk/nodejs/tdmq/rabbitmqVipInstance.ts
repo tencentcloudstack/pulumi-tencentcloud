@@ -9,6 +9,33 @@ import * as utilities from "../utilities";
 /**
  * Provides a resource to create a TDMQ rabbitmq vip instance
  *
+ * ### Enable public network access
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.tdmq.RabbitmqVipInstance("example", {
+ *     zoneIds: [100006],
+ *     vpcId: "vpc-i5yyodl9",
+ *     subnetId: "subnet-hhi88a58",
+ *     clusterName: "tf-example",
+ *     nodeSpec: "rabbit-vip-basic-1",
+ *     nodeNum: 1,
+ *     storageSize: 200,
+ *     enableCreateDefaultHaMirrorQueue: false,
+ *     autoRenewFlag: true,
+ *     payMode: 0,
+ *     clusterVersion: "3.11.8",
+ *     enablePublicAccess: true,
+ *     bandWidth: 100,
+ *     resourceTags: [{
+ *         tagKey: "tagKey",
+ *         tagValue: "tagValue",
+ *     }],
+ * });
+ * ```
+ *
  * ## Import
  *
  * TDMQ rabbitmq vip instance can be imported using the id, e.g.
@@ -48,7 +75,11 @@ export class RabbitmqVipInstance extends pulumi.CustomResource {
     /**
      * Automatic renewal, the default is true.
      */
-    declare public readonly autoRenewFlag: pulumi.Output<boolean | undefined>;
+    declare public readonly autoRenewFlag: pulumi.Output<boolean>;
+    /**
+     * Public network bandwidth in Mbps.
+     */
+    declare public readonly bandWidth: pulumi.Output<number>;
     /**
      * cluster name.
      */
@@ -62,13 +93,17 @@ export class RabbitmqVipInstance extends pulumi.CustomResource {
      */
     declare public readonly enableCreateDefaultHaMirrorQueue: pulumi.Output<boolean | undefined>;
     /**
+     * Whether to enable public network access. Default is false.
+     */
+    declare public readonly enablePublicAccess: pulumi.Output<boolean | undefined>;
+    /**
      * The number of nodes, a minimum of 3 nodes for a multi-availability zone. If not passed, the default single availability zone is 1, and the multi-availability zone is 3.
      */
-    declare public readonly nodeNum: pulumi.Output<number | undefined>;
+    declare public readonly nodeNum: pulumi.Output<number>;
     /**
      * Node specifications. Valid values: rabbit-vip-basic-5 (for 2C4G), rabbit-vip-profession-2c8g (for 2C8G), rabbit-vip-basic-1 (for 4C8G), rabbit-vip-profession-4c16g (for 4C16G), rabbit-vip-basic-2 (for 8C16G), rabbit-vip-profession-8c32g (for 8C32G), rabbit-vip-basic-4 (for 16C32G), rabbit-vip-profession-16c64g (for 16C64G). The default is rabbit-vip-basic-1. NOTE: The above specifications may be sold out or removed from the shelves.
      */
-    declare public readonly nodeSpec: pulumi.Output<string | undefined>;
+    declare public readonly nodeSpec: pulumi.Output<string>;
     /**
      * Payment method: 0 indicates postpaid; 1 indicates prepaid. Default: prepaid.
      */
@@ -78,9 +113,13 @@ export class RabbitmqVipInstance extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly publicAccessEndpoint: pulumi.Output<string>;
     /**
+     * Instance resource tags. Each tag is a key-value pair for resource identification and management.
+     */
+    declare public readonly resourceTags: pulumi.Output<outputs.Tdmq.RabbitmqVipInstanceResourceTag[] | undefined>;
+    /**
      * Single node storage specification, the default is 200G.
      */
-    declare public readonly storageSize: pulumi.Output<number | undefined>;
+    declare public readonly storageSize: pulumi.Output<number>;
     /**
      * Private network SubnetId.
      */
@@ -88,7 +127,7 @@ export class RabbitmqVipInstance extends pulumi.CustomResource {
     /**
      * Purchase duration, the default is 1 (month).
      */
-    declare public readonly timeSpan: pulumi.Output<number | undefined>;
+    declare public readonly timeSpan: pulumi.Output<number>;
     /**
      * Private network VpcId.
      */
@@ -116,13 +155,16 @@ export class RabbitmqVipInstance extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as RabbitmqVipInstanceState | undefined;
             resourceInputs["autoRenewFlag"] = state?.autoRenewFlag;
+            resourceInputs["bandWidth"] = state?.bandWidth;
             resourceInputs["clusterName"] = state?.clusterName;
             resourceInputs["clusterVersion"] = state?.clusterVersion;
             resourceInputs["enableCreateDefaultHaMirrorQueue"] = state?.enableCreateDefaultHaMirrorQueue;
+            resourceInputs["enablePublicAccess"] = state?.enablePublicAccess;
             resourceInputs["nodeNum"] = state?.nodeNum;
             resourceInputs["nodeSpec"] = state?.nodeSpec;
             resourceInputs["payMode"] = state?.payMode;
             resourceInputs["publicAccessEndpoint"] = state?.publicAccessEndpoint;
+            resourceInputs["resourceTags"] = state?.resourceTags;
             resourceInputs["storageSize"] = state?.storageSize;
             resourceInputs["subnetId"] = state?.subnetId;
             resourceInputs["timeSpan"] = state?.timeSpan;
@@ -144,12 +186,15 @@ export class RabbitmqVipInstance extends pulumi.CustomResource {
                 throw new Error("Missing required property 'zoneIds'");
             }
             resourceInputs["autoRenewFlag"] = args?.autoRenewFlag;
+            resourceInputs["bandWidth"] = args?.bandWidth;
             resourceInputs["clusterName"] = args?.clusterName;
             resourceInputs["clusterVersion"] = args?.clusterVersion;
             resourceInputs["enableCreateDefaultHaMirrorQueue"] = args?.enableCreateDefaultHaMirrorQueue;
+            resourceInputs["enablePublicAccess"] = args?.enablePublicAccess;
             resourceInputs["nodeNum"] = args?.nodeNum;
             resourceInputs["nodeSpec"] = args?.nodeSpec;
             resourceInputs["payMode"] = args?.payMode;
+            resourceInputs["resourceTags"] = args?.resourceTags;
             resourceInputs["storageSize"] = args?.storageSize;
             resourceInputs["subnetId"] = args?.subnetId;
             resourceInputs["timeSpan"] = args?.timeSpan;
@@ -170,59 +215,71 @@ export interface RabbitmqVipInstanceState {
     /**
      * Automatic renewal, the default is true.
      */
-    autoRenewFlag?: pulumi.Input<boolean>;
+    autoRenewFlag?: pulumi.Input<boolean | undefined>;
+    /**
+     * Public network bandwidth in Mbps.
+     */
+    bandWidth?: pulumi.Input<number | undefined>;
     /**
      * cluster name.
      */
-    clusterName?: pulumi.Input<string>;
+    clusterName?: pulumi.Input<string | undefined>;
     /**
      * Cluster version, the default is `3.8.30`, valid values: `3.8.30`, `3.11.8` and `3.13.7`.
      */
-    clusterVersion?: pulumi.Input<string>;
+    clusterVersion?: pulumi.Input<string | undefined>;
     /**
      * Mirrored queue, the default is false.
      */
-    enableCreateDefaultHaMirrorQueue?: pulumi.Input<boolean>;
+    enableCreateDefaultHaMirrorQueue?: pulumi.Input<boolean | undefined>;
+    /**
+     * Whether to enable public network access. Default is false.
+     */
+    enablePublicAccess?: pulumi.Input<boolean | undefined>;
     /**
      * The number of nodes, a minimum of 3 nodes for a multi-availability zone. If not passed, the default single availability zone is 1, and the multi-availability zone is 3.
      */
-    nodeNum?: pulumi.Input<number>;
+    nodeNum?: pulumi.Input<number | undefined>;
     /**
      * Node specifications. Valid values: rabbit-vip-basic-5 (for 2C4G), rabbit-vip-profession-2c8g (for 2C8G), rabbit-vip-basic-1 (for 4C8G), rabbit-vip-profession-4c16g (for 4C16G), rabbit-vip-basic-2 (for 8C16G), rabbit-vip-profession-8c32g (for 8C32G), rabbit-vip-basic-4 (for 16C32G), rabbit-vip-profession-16c64g (for 16C64G). The default is rabbit-vip-basic-1. NOTE: The above specifications may be sold out or removed from the shelves.
      */
-    nodeSpec?: pulumi.Input<string>;
+    nodeSpec?: pulumi.Input<string | undefined>;
     /**
      * Payment method: 0 indicates postpaid; 1 indicates prepaid. Default: prepaid.
      */
-    payMode?: pulumi.Input<number>;
+    payMode?: pulumi.Input<number | undefined>;
     /**
      * Public Network Access Point.
      */
-    publicAccessEndpoint?: pulumi.Input<string>;
+    publicAccessEndpoint?: pulumi.Input<string | undefined>;
+    /**
+     * Instance resource tags. Each tag is a key-value pair for resource identification and management.
+     */
+    resourceTags?: pulumi.Input<pulumi.Input<inputs.Tdmq.RabbitmqVipInstanceResourceTag>[] | undefined>;
     /**
      * Single node storage specification, the default is 200G.
      */
-    storageSize?: pulumi.Input<number>;
+    storageSize?: pulumi.Input<number | undefined>;
     /**
      * Private network SubnetId.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * Purchase duration, the default is 1 (month).
      */
-    timeSpan?: pulumi.Input<number>;
+    timeSpan?: pulumi.Input<number | undefined>;
     /**
      * Private network VpcId.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * List of VPC Access Points.
      */
-    vpcs?: pulumi.Input<pulumi.Input<inputs.Tdmq.RabbitmqVipInstanceVpc>[]>;
+    vpcs?: pulumi.Input<pulumi.Input<inputs.Tdmq.RabbitmqVipInstanceVpc>[] | undefined>;
     /**
      * availability zone.
      */
-    zoneIds?: pulumi.Input<pulumi.Input<number>[]>;
+    zoneIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
 }
 
 /**
@@ -232,7 +289,11 @@ export interface RabbitmqVipInstanceArgs {
     /**
      * Automatic renewal, the default is true.
      */
-    autoRenewFlag?: pulumi.Input<boolean>;
+    autoRenewFlag?: pulumi.Input<boolean | undefined>;
+    /**
+     * Public network bandwidth in Mbps.
+     */
+    bandWidth?: pulumi.Input<number | undefined>;
     /**
      * cluster name.
      */
@@ -240,27 +301,35 @@ export interface RabbitmqVipInstanceArgs {
     /**
      * Cluster version, the default is `3.8.30`, valid values: `3.8.30`, `3.11.8` and `3.13.7`.
      */
-    clusterVersion?: pulumi.Input<string>;
+    clusterVersion?: pulumi.Input<string | undefined>;
     /**
      * Mirrored queue, the default is false.
      */
-    enableCreateDefaultHaMirrorQueue?: pulumi.Input<boolean>;
+    enableCreateDefaultHaMirrorQueue?: pulumi.Input<boolean | undefined>;
+    /**
+     * Whether to enable public network access. Default is false.
+     */
+    enablePublicAccess?: pulumi.Input<boolean | undefined>;
     /**
      * The number of nodes, a minimum of 3 nodes for a multi-availability zone. If not passed, the default single availability zone is 1, and the multi-availability zone is 3.
      */
-    nodeNum?: pulumi.Input<number>;
+    nodeNum?: pulumi.Input<number | undefined>;
     /**
      * Node specifications. Valid values: rabbit-vip-basic-5 (for 2C4G), rabbit-vip-profession-2c8g (for 2C8G), rabbit-vip-basic-1 (for 4C8G), rabbit-vip-profession-4c16g (for 4C16G), rabbit-vip-basic-2 (for 8C16G), rabbit-vip-profession-8c32g (for 8C32G), rabbit-vip-basic-4 (for 16C32G), rabbit-vip-profession-16c64g (for 16C64G). The default is rabbit-vip-basic-1. NOTE: The above specifications may be sold out or removed from the shelves.
      */
-    nodeSpec?: pulumi.Input<string>;
+    nodeSpec?: pulumi.Input<string | undefined>;
     /**
      * Payment method: 0 indicates postpaid; 1 indicates prepaid. Default: prepaid.
      */
-    payMode?: pulumi.Input<number>;
+    payMode?: pulumi.Input<number | undefined>;
+    /**
+     * Instance resource tags. Each tag is a key-value pair for resource identification and management.
+     */
+    resourceTags?: pulumi.Input<pulumi.Input<inputs.Tdmq.RabbitmqVipInstanceResourceTag>[] | undefined>;
     /**
      * Single node storage specification, the default is 200G.
      */
-    storageSize?: pulumi.Input<number>;
+    storageSize?: pulumi.Input<number | undefined>;
     /**
      * Private network SubnetId.
      */
@@ -268,7 +337,7 @@ export interface RabbitmqVipInstanceArgs {
     /**
      * Purchase duration, the default is 1 (month).
      */
-    timeSpan?: pulumi.Input<number>;
+    timeSpan?: pulumi.Input<number | undefined>;
     /**
      * Private network VpcId.
      */

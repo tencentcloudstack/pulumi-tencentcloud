@@ -11,9 +11,11 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
 {
     /// <summary>
-    /// Provides a resource to create a postgresql BaseBackup
+    /// Provides a resource to create a PostgreSQL base backup
     /// 
     /// ## Example Usage
+    /// 
+    /// ### Create a PostgreSQL base backup
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
@@ -23,16 +25,47 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var baseBackup = new Tencentcloud.Postgresql.BaseBackup("base_backup", new()
+    ///     var example = new Tencentcloud.Postgresql.BaseBackup("example", new()
     ///     {
-    ///         DbInstanceId = pgsqlId,
+    ///         DbInstanceId = "postgres-ckwcgdf1",
     ///         Tags = 
     ///         {
-    ///             { "createdBy", "terraform" },
+    ///             { "createdBy", "Terraform" },
     ///         },
     ///     });
     /// 
     /// });
+    /// ```
+    /// 
+    /// ### Customize the expire time
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Postgresql.BaseBackup("example", new()
+    ///     {
+    ///         DbInstanceId = "postgres-ckwcgdf1",
+    ///         NewExpireTime = "2027-04-23 20:07:36",
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "Terraform" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## Import
+    /// 
+    /// PostgreSQL base backup can be imported using the dBInstanceId#baseBackupId, e.g.
+    /// 
+    /// ```sh
+    /// $ pulumi import tencentcloud:Postgresql/baseBackup:BaseBackup example postgres-ckwcgdf1#bac3d001-5160-5077-9139-49c1310e0854
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/baseBackup:BaseBackup")]

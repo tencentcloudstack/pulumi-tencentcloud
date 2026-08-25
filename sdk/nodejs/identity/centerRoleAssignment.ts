@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a organization identityCenterRoleAssignment
+ * Provides a resource to create a Organization identity center role assignment
  *
  * ## Example Usage
  *
@@ -13,22 +13,22 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const identityCenterRoleAssignment = new tencentcloud.identity.CenterRoleAssignment("identity_center_role_assignment", {
- *     zoneId: "z-xxxxxx",
- *     principalId: "u-xxxxxx",
+ * const example = new tencentcloud.identity.CenterRoleAssignment("example", {
+ *     zoneId: "z-1os7c9znogct",
+ *     principalId: "u-lyfm8b7qoi5l",
  *     principalType: "User",
- *     targetUin: "xxxxxx",
+ *     targetUin: 100043911945,
  *     targetType: "MemberUin",
- *     roleConfigurationId: "rc-xxxxxx",
+ *     roleConfigurationId: "rc-ihogrs0e6ceg",
  * });
  * ```
  *
  * ## Import
  *
- * organization identity_center_role_assignment can be imported using the id, e.g.
+ * Organization identity center role assignment can be imported using the {zoneId}#{roleConfigurationId}#{targetType}#{targetUinString}#{principalType}, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Identity/centerRoleAssignment:CenterRoleAssignment identity_center_role_assignment {zoneId}#{roleConfigurationId}#{targetType}#{targetUinString}#{principalType}#{principalId}
+ * $ pulumi import tencentcloud:Identity/centerRoleAssignment:CenterRoleAssignment example z-1os7c9znogct#rc-ihogrs0e6ceg#MemberUin#100043911945#User#u-lyfm8b7qoi5l
  * ```
  */
 export class CenterRoleAssignment extends pulumi.CustomResource {
@@ -183,56 +183,56 @@ export interface CenterRoleAssignmentState {
     /**
      * Create time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * When you remove the last authorization configured with a certain privilege on a group account target account, whether to cancel the privilege configuration deployment at the same time. Value: DeprovisionForLastRoleAssignmentOnAccount: Remove privileges to configure deployment. None (default): Configure deployment without delegating privileges.
      */
-    deprovisionStrategy?: pulumi.Input<string>;
+    deprovisionStrategy?: pulumi.Input<string | undefined>;
     /**
      * Identity ID for the CAM user synchronization. Valid values:
      * When the PrincipalType value is Group, it is the CIC user group ID (g-********).
      * When the PrincipalType value is User, it is the CIC user ID (u-********).
      */
-    principalId?: pulumi.Input<string>;
+    principalId?: pulumi.Input<string | undefined>;
     /**
      * Principal name.
      */
-    principalName?: pulumi.Input<string>;
+    principalName?: pulumi.Input<string | undefined>;
     /**
      * Identity type for the CAM user synchronization. Valid values:
      *
      * User: indicates that the identity for the CAM user synchronization is a CIC user.
      * Group: indicates that the identity for the CAM user synchronization is a CIC user group.
      */
-    principalType?: pulumi.Input<string>;
+    principalType?: pulumi.Input<string | undefined>;
     /**
      * Permission configuration ID.
      */
-    roleConfigurationId?: pulumi.Input<string>;
+    roleConfigurationId?: pulumi.Input<string | undefined>;
     /**
      * Role configuration name.
      */
-    roleConfigurationName?: pulumi.Input<string>;
+    roleConfigurationName?: pulumi.Input<string | undefined>;
     /**
      * Target name.
      */
-    targetName?: pulumi.Input<string>;
+    targetName?: pulumi.Input<string | undefined>;
     /**
      * Type of the synchronized target account of the Tencent Cloud Organization. ManagerUin: admin account; MemberUin: member account.
      */
-    targetType?: pulumi.Input<string>;
+    targetType?: pulumi.Input<string | undefined>;
     /**
      * UIN of the synchronized target account of the Tencent Cloud Organization.
      */
-    targetUin?: pulumi.Input<number>;
+    targetUin?: pulumi.Input<number | undefined>;
     /**
      * Update time.
      */
-    updateTime?: pulumi.Input<string>;
+    updateTime?: pulumi.Input<string | undefined>;
     /**
      * Space ID.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -242,7 +242,7 @@ export interface CenterRoleAssignmentArgs {
     /**
      * When you remove the last authorization configured with a certain privilege on a group account target account, whether to cancel the privilege configuration deployment at the same time. Value: DeprovisionForLastRoleAssignmentOnAccount: Remove privileges to configure deployment. None (default): Configure deployment without delegating privileges.
      */
-    deprovisionStrategy?: pulumi.Input<string>;
+    deprovisionStrategy?: pulumi.Input<string | undefined>;
     /**
      * Identity ID for the CAM user synchronization. Valid values:
      * When the PrincipalType value is Group, it is the CIC user group ID (g-********).

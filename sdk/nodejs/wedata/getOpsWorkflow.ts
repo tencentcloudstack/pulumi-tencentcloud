@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataOpsWorkflow = tencentcloud.Wedata.getOpsWorkflow({
+ * const wedataOpsWorkflow = tencentcloud.wedata.getOpsWorkflow({
  *     projectId: "2905622749543821312",
  *     workflowId: "f328ab83-62e1-4b0a-9a18-a79b42722792",
  * });
@@ -73,7 +73,7 @@ export interface GetOpsWorkflowResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const wedataOpsWorkflow = tencentcloud.Wedata.getOpsWorkflow({
+ * const wedataOpsWorkflow = tencentcloud.wedata.getOpsWorkflow({
  *     projectId: "2905622749543821312",
  *     workflowId: "f328ab83-62e1-4b0a-9a18-a79b42722792",
  * });
@@ -99,7 +99,7 @@ export interface GetOpsWorkflowOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Workflow ID.
      */

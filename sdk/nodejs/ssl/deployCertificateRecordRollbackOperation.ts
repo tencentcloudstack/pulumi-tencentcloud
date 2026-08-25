@@ -18,7 +18,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * ssl deploy_certificate_record_rollback can be imported using the id, e.g.
+ * ssl deployCertificateRecordRollback can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Ssl/deployCertificateRecordRollbackOperation:DeployCertificateRecordRollbackOperation deploy_certificate_record_rollback deploy_certificate_record_rollback_id
@@ -87,7 +87,7 @@ export interface DeployCertificateRecordRollbackOperationState {
     /**
      * Deployment record ID to be rollback.
      */
-    deployRecordId?: pulumi.Input<number>;
+    deployRecordId?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -97,5 +97,5 @@ export interface DeployCertificateRecordRollbackOperationArgs {
     /**
      * Deployment record ID to be rollback.
      */
-    deployRecordId?: pulumi.Input<number>;
+    deployRecordId?: pulumi.Input<number | undefined>;
 }

@@ -70,12 +70,8 @@ type GetGatewayFlowQosResult struct {
 }
 
 func GetGatewayFlowQosOutput(ctx *pulumi.Context, args GetGatewayFlowQosOutputArgs, opts ...pulumi.InvokeOption) GetGatewayFlowQosResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetGatewayFlowQosResultOutput, error) {
-			args := v.(GetGatewayFlowQosArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Vpc/getGatewayFlowQos:getGatewayFlowQos", args, GetGatewayFlowQosResultOutput{}, options).(GetGatewayFlowQosResultOutput), nil
-		}).(GetGatewayFlowQosResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Vpc/getGatewayFlowQos:getGatewayFlowQos", args, GetGatewayFlowQosResultOutput{}, options).(GetGatewayFlowQosResultOutput)
 }
 
 // A collection of arguments for invoking getGatewayFlowQos.

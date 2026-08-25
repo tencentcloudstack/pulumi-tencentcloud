@@ -21,7 +21,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -69,7 +68,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// 
     ///     var imageId = @default.Apply(@default =&gt; @default.Apply(getInstanceResult =&gt; getInstanceResult.ImageId));
     /// 
-    ///     var sgRule = new Tencentcloud.Index.SecurityGroupLiteRule("sg_rule", new()
+    ///     var sgRule = new Tencentcloud.SecurityGroupLiteRule("sg_rule", new()
     ///     {
     ///         SecurityGroupId = sg.Id,
     ///         Ingresses = new[]

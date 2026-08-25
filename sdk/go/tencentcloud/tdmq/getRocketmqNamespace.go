@@ -83,12 +83,8 @@ type LookupRocketmqNamespaceResult struct {
 }
 
 func LookupRocketmqNamespaceOutput(ctx *pulumi.Context, args LookupRocketmqNamespaceOutputArgs, opts ...pulumi.InvokeOption) LookupRocketmqNamespaceResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupRocketmqNamespaceResultOutput, error) {
-			args := v.(LookupRocketmqNamespaceArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tdmq/getRocketmqNamespace:getRocketmqNamespace", args, LookupRocketmqNamespaceResultOutput{}, options).(LookupRocketmqNamespaceResultOutput), nil
-		}).(LookupRocketmqNamespaceResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tdmq/getRocketmqNamespace:getRocketmqNamespace", args, LookupRocketmqNamespaceResultOutput{}, options).(LookupRocketmqNamespaceResultOutput)
 }
 
 // A collection of arguments for invoking getRocketmqNamespace.

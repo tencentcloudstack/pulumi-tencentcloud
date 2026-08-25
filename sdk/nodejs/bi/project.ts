@@ -113,19 +113,19 @@ export interface ProjectState {
     /**
      * Logo background color.
      */
-    colorCode?: pulumi.Input<string>;
+    colorCode?: pulumi.Input<string | undefined>;
     /**
      * Project logo.
      */
-    logo?: pulumi.Input<string>;
+    logo?: pulumi.Input<string | undefined>;
     /**
      * Remark.
      */
-    mark?: pulumi.Input<string>;
+    mark?: pulumi.Input<string | undefined>;
     /**
      * Project name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -139,13 +139,13 @@ export interface ProjectArgs {
     /**
      * Project logo.
      */
-    logo?: pulumi.Input<string>;
+    logo?: pulumi.Input<string | undefined>;
     /**
      * Remark.
      */
-    mark?: pulumi.Input<string>;
+    mark?: pulumi.Input<string | undefined>;
     /**
      * Project name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }

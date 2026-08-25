@@ -19,8 +19,10 @@ type ExtendEndPointForwardIp struct {
 	// Forwarding target IP network access type. CLB: The forwarding IP is the internal CLB VIP. CCN: Forwarding IP through CCN routing.
 	AccessType string `pulumi:"accessType"`
 	// Forwarding target IP address.
-	Host string `pulumi:"host"`
-	// Specifies the forwarding IP port number.
+	Host *string `pulumi:"host"`
+	// Forwarding target IPs address.
+	Hosts []string `pulumi:"hosts"`
+	// Specifies the forwarding IP port number. This only applies when configuring `host`; if using `hosts`, you can choose any port value from `hosts`.
 	Port int `pulumi:"port"`
 	// Specifies the forwarding target IP protocol.
 	Proto *string `pulumi:"proto"`
@@ -53,8 +55,10 @@ type ExtendEndPointForwardIpArgs struct {
 	// Forwarding target IP network access type. CLB: The forwarding IP is the internal CLB VIP. CCN: Forwarding IP through CCN routing.
 	AccessType pulumi.StringInput `pulumi:"accessType"`
 	// Forwarding target IP address.
-	Host pulumi.StringInput `pulumi:"host"`
-	// Specifies the forwarding IP port number.
+	Host pulumi.StringPtrInput `pulumi:"host"`
+	// Forwarding target IPs address.
+	Hosts pulumi.StringArrayInput `pulumi:"hosts"`
+	// Specifies the forwarding IP port number. This only applies when configuring `host`; if using `hosts`, you can choose any port value from `hosts`.
 	Port pulumi.IntInput `pulumi:"port"`
 	// Specifies the forwarding target IP protocol.
 	Proto pulumi.StringPtrInput `pulumi:"proto"`
@@ -158,11 +162,16 @@ func (o ExtendEndPointForwardIpOutput) AccessType() pulumi.StringOutput {
 }
 
 // Forwarding target IP address.
-func (o ExtendEndPointForwardIpOutput) Host() pulumi.StringOutput {
-	return o.ApplyT(func(v ExtendEndPointForwardIp) string { return v.Host }).(pulumi.StringOutput)
+func (o ExtendEndPointForwardIpOutput) Host() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ExtendEndPointForwardIp) *string { return v.Host }).(pulumi.StringPtrOutput)
 }
 
-// Specifies the forwarding IP port number.
+// Forwarding target IPs address.
+func (o ExtendEndPointForwardIpOutput) Hosts() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ExtendEndPointForwardIp) []string { return v.Hosts }).(pulumi.StringArrayOutput)
+}
+
+// Specifies the forwarding IP port number. This only applies when configuring `host`; if using `hosts`, you can choose any port value from `hosts`.
 func (o ExtendEndPointForwardIpOutput) Port() pulumi.IntOutput {
 	return o.ApplyT(func(v ExtendEndPointForwardIp) int { return v.Port }).(pulumi.IntOutput)
 }
@@ -247,11 +256,21 @@ func (o ExtendEndPointForwardIpPtrOutput) Host() pulumi.StringPtrOutput {
 		if v == nil {
 			return nil
 		}
-		return &v.Host
+		return v.Host
 	}).(pulumi.StringPtrOutput)
 }
 
-// Specifies the forwarding IP port number.
+// Forwarding target IPs address.
+func (o ExtendEndPointForwardIpPtrOutput) Hosts() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ExtendEndPointForwardIp) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Hosts
+	}).(pulumi.StringArrayOutput)
+}
+
+// Specifies the forwarding IP port number. This only applies when configuring `host`; if using `hosts`, you can choose any port value from `hosts`.
 func (o ExtendEndPointForwardIpPtrOutput) Port() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ExtendEndPointForwardIp) *int {
 		if v == nil {

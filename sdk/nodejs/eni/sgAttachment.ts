@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "vpc",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -63,7 +63,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * vpc eni_sg_attachment can be imported using the id, e.g.
+ * vpc eniSgAttachment can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Eni/sgAttachment:SgAttachment eni_sg_attachment eni_sg_attachment_id
@@ -144,11 +144,11 @@ export interface SgAttachmentState {
     /**
      * ENI instance ID. Such as:eni-pxir56ns. It Only support set one eni instance now.
      */
-    networkInterfaceIds?: pulumi.Input<string>;
+    networkInterfaceIds?: pulumi.Input<string | undefined>;
     /**
      * Security group instance ID, for example:sg-33ocnj9n, can be obtained through DescribeSecurityGroups. There is a limit of 100 instances per request.
      */
-    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**

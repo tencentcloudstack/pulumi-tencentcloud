@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const all = tencentcloud.Availability.getZonesByProduct({
+ * const all = tencentcloud.availability.getZonesByProduct({
  *     product: "cvm",
  * });
  * ```
@@ -81,7 +81,7 @@ export interface GetZonesByProductResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const all = tencentcloud.Availability.getZonesByProduct({
+ * const all = tencentcloud.availability.getZonesByProduct({
  *     product: "cvm",
  * });
  * ```
@@ -103,11 +103,11 @@ export interface GetZonesByProductOutputArgs {
     /**
      * A bool variable indicates that the query will include `UNAVAILABLE` zones.
      */
-    includeUnavailable?: pulumi.Input<boolean>;
+    includeUnavailable?: pulumi.Input<boolean | undefined>;
     /**
      * When specified, only the zone with the exactly name match will be returned.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * A string variable indicates that the query will use product information.
      */
@@ -115,5 +115,5 @@ export interface GetZonesByProductOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

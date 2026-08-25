@@ -73,12 +73,8 @@ type GetRotationDetailResult struct {
 }
 
 func GetRotationDetailOutput(ctx *pulumi.Context, args GetRotationDetailOutputArgs, opts ...pulumi.InvokeOption) GetRotationDetailResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetRotationDetailResultOutput, error) {
-			args := v.(GetRotationDetailArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Ssm/getRotationDetail:getRotationDetail", args, GetRotationDetailResultOutput{}, options).(GetRotationDetailResultOutput), nil
-		}).(GetRotationDetailResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Ssm/getRotationDetail:getRotationDetail", args, GetRotationDetailResultOutput{}, options).(GetRotationDetailResultOutput)
 }
 
 // A collection of arguments for invoking getRotationDetail.

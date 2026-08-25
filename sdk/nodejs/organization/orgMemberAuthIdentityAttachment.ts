@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * organization org_member_auth_identity can be imported using the id, e.g.
+ * organization orgMemberAuthIdentity can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Organization/orgMemberAuthIdentityAttachment:OrgMemberAuthIdentityAttachment org_member_auth_identity org_member_auth_identity_id
@@ -102,11 +102,11 @@ export interface OrgMemberAuthIdentityAttachmentState {
     /**
      * Identity Id list. Up to 5.
      */
-    identityIds?: pulumi.Input<pulumi.Input<number>[]>;
+    identityIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Member Uin.
      */
-    memberUin?: pulumi.Input<number>;
+    memberUin?: pulumi.Input<number | undefined>;
 }
 
 /**

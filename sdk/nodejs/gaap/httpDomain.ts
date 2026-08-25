@@ -36,8 +36,10 @@ import * as utilities from "../utilities";
  *
  * GAAP http domain can be imported using the id, e.g.
  *
+ * > **NOTE:** The format of tencentcloud.Gaap.HttpDomain id is `[listener-id]+[protocol]+[domain]`.
+ *
  * ```sh
- * $ pulumi import tencentcloud:Gaap/httpDomain:HttpDomain  tencentcloud_gaap_http_domain.foo listener-11112222+HTTP+www.qq.com
+ *   $ pulumi import tencentcloud:Gaap/httpDomain:HttpDomain foo listener-11112222+HTTP+www.qq.com
  * ```
  */
 export class HttpDomain extends pulumi.CustomResource {
@@ -197,67 +199,67 @@ export interface HttpDomainState {
     /**
      * Indicates whether basic authentication is enable, default value is `false`.
      */
-    basicAuth?: pulumi.Input<boolean>;
+    basicAuth?: pulumi.Input<boolean | undefined>;
     /**
      * ID of the basic authentication.
      */
-    basicAuthId?: pulumi.Input<string>;
+    basicAuthId?: pulumi.Input<string | undefined>;
     /**
      * ID of the server certificate, default value is `default`.
      */
-    certificateId?: pulumi.Input<string>;
+    certificateId?: pulumi.Input<string | undefined>;
     /**
      * It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead. ID of the client certificate, default value is `default`.
      *
      * @deprecated It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead.
      */
-    clientCertificateId?: pulumi.Input<string>;
+    clientCertificateId?: pulumi.Input<string | undefined>;
     /**
      * ID list of the poly client certificate.
      */
-    clientCertificateIds?: pulumi.Input<pulumi.Input<string>[]>;
+    clientCertificateIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Forward domain of the layer7 listener.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Indicates whether SSL certificate authentication is enable, default value is `false`.
      */
-    gaapAuth?: pulumi.Input<boolean>;
+    gaapAuth?: pulumi.Input<boolean | undefined>;
     /**
      * ID of the SSL certificate.
      */
-    gaapAuthId?: pulumi.Input<string>;
+    gaapAuthId?: pulumi.Input<string | undefined>;
     /**
      * Group Id.
      */
-    groupId?: pulumi.Input<string>;
+    groupId?: pulumi.Input<string | undefined>;
     /**
      * Whether to use as the default domain name, the default is false.
      */
-    isDefaultServer?: pulumi.Input<boolean>;
+    isDefaultServer?: pulumi.Input<boolean | undefined>;
     /**
      * ID of the layer7 listener.
      */
-    listenerId?: pulumi.Input<string>;
+    listenerId?: pulumi.Input<string | undefined>;
     /**
      * Indicates whether realserver authentication is enable, default value is `false`.
      */
-    realserverAuth?: pulumi.Input<boolean>;
+    realserverAuth?: pulumi.Input<boolean | undefined>;
     /**
      * CA certificate domain of the realserver. It has been deprecated.
      */
-    realserverCertificateDomain?: pulumi.Input<string>;
+    realserverCertificateDomain?: pulumi.Input<string | undefined>;
     /**
      * It has been deprecated from version 1.28.0. Set `realserverCertificateIds` instead. CA certificate ID of the realserver.
      *
      * @deprecated It has been deprecated from version 1.28.0. Set `realserverCertificateIds` instead.
      */
-    realserverCertificateId?: pulumi.Input<string>;
+    realserverCertificateId?: pulumi.Input<string | undefined>;
     /**
      * CA certificate ID list of the realserver.
      */
-    realserverCertificateIds?: pulumi.Input<pulumi.Input<string>[]>;
+    realserverCertificateIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -267,25 +269,25 @@ export interface HttpDomainArgs {
     /**
      * Indicates whether basic authentication is enable, default value is `false`.
      */
-    basicAuth?: pulumi.Input<boolean>;
+    basicAuth?: pulumi.Input<boolean | undefined>;
     /**
      * ID of the basic authentication.
      */
-    basicAuthId?: pulumi.Input<string>;
+    basicAuthId?: pulumi.Input<string | undefined>;
     /**
      * ID of the server certificate, default value is `default`.
      */
-    certificateId?: pulumi.Input<string>;
+    certificateId?: pulumi.Input<string | undefined>;
     /**
      * It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead. ID of the client certificate, default value is `default`.
      *
      * @deprecated It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead.
      */
-    clientCertificateId?: pulumi.Input<string>;
+    clientCertificateId?: pulumi.Input<string | undefined>;
     /**
      * ID list of the poly client certificate.
      */
-    clientCertificateIds?: pulumi.Input<pulumi.Input<string>[]>;
+    clientCertificateIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Forward domain of the layer7 listener.
      */
@@ -293,19 +295,19 @@ export interface HttpDomainArgs {
     /**
      * Indicates whether SSL certificate authentication is enable, default value is `false`.
      */
-    gaapAuth?: pulumi.Input<boolean>;
+    gaapAuth?: pulumi.Input<boolean | undefined>;
     /**
      * ID of the SSL certificate.
      */
-    gaapAuthId?: pulumi.Input<string>;
+    gaapAuthId?: pulumi.Input<string | undefined>;
     /**
      * Group Id.
      */
-    groupId?: pulumi.Input<string>;
+    groupId?: pulumi.Input<string | undefined>;
     /**
      * Whether to use as the default domain name, the default is false.
      */
-    isDefaultServer?: pulumi.Input<boolean>;
+    isDefaultServer?: pulumi.Input<boolean | undefined>;
     /**
      * ID of the layer7 listener.
      */
@@ -313,19 +315,19 @@ export interface HttpDomainArgs {
     /**
      * Indicates whether realserver authentication is enable, default value is `false`.
      */
-    realserverAuth?: pulumi.Input<boolean>;
+    realserverAuth?: pulumi.Input<boolean | undefined>;
     /**
      * CA certificate domain of the realserver. It has been deprecated.
      */
-    realserverCertificateDomain?: pulumi.Input<string>;
+    realserverCertificateDomain?: pulumi.Input<string | undefined>;
     /**
      * It has been deprecated from version 1.28.0. Set `realserverCertificateIds` instead. CA certificate ID of the realserver.
      *
      * @deprecated It has been deprecated from version 1.28.0. Set `realserverCertificateIds` instead.
      */
-    realserverCertificateId?: pulumi.Input<string>;
+    realserverCertificateId?: pulumi.Input<string | undefined>;
     /**
      * CA certificate ID list of the realserver.
      */
-    realserverCertificateIds?: pulumi.Input<pulumi.Input<string>[]>;
+    realserverCertificateIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

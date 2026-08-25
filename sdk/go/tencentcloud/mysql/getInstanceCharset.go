@@ -67,12 +67,8 @@ type GetInstanceCharsetResult struct {
 }
 
 func GetInstanceCharsetOutput(ctx *pulumi.Context, args GetInstanceCharsetOutputArgs, opts ...pulumi.InvokeOption) GetInstanceCharsetResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetInstanceCharsetResultOutput, error) {
-			args := v.(GetInstanceCharsetArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mysql/getInstanceCharset:getInstanceCharset", args, GetInstanceCharsetResultOutput{}, options).(GetInstanceCharsetResultOutput), nil
-		}).(GetInstanceCharsetResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mysql/getInstanceCharset:getInstanceCharset", args, GetInstanceCharsetResultOutput{}, options).(GetInstanceCharsetResultOutput)
 }
 
 // A collection of arguments for invoking getInstanceCharset.

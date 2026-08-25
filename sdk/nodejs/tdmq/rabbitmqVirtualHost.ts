@@ -9,7 +9,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * tdmq rabbitmq_virtual_host can be imported using the id, e.g.
+ * tdmq rabbitmqVirtualHost can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Tdmq/rabbitmqVirtualHost:RabbitmqVirtualHost example amqp-pbavw2wd#tf-example-vhost
@@ -102,19 +102,19 @@ export interface RabbitmqVirtualHostState {
     /**
      * describe.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Cluster instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Message track switch, true is on, false is off, default is off.
      */
-    traceFlag?: pulumi.Input<boolean>;
+    traceFlag?: pulumi.Input<boolean | undefined>;
     /**
      * vhost name.
      */
-    virtualHost?: pulumi.Input<string>;
+    virtualHost?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -124,7 +124,7 @@ export interface RabbitmqVirtualHostArgs {
     /**
      * describe.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Cluster instance ID.
      */
@@ -132,7 +132,7 @@ export interface RabbitmqVirtualHostArgs {
     /**
      * Message track switch, true is on, false is off, default is off.
      */
-    traceFlag?: pulumi.Input<boolean>;
+    traceFlag?: pulumi.Input<boolean | undefined>;
     /**
      * vhost name.
      */

@@ -39,7 +39,7 @@ import (
 //			_, err = clb.NewClsLogAttachment(ctx, "example", &clb.ClsLogAttachmentArgs{
 //				LoadBalancerId: pulumi.String("lb-n26tx0bm"),
 //				LogSetId:       pulumi.String("2ed70190-bf06-4777-980d-2d8a327a2554"),
-//				LogTopicId:     example.ID(),
+//				LogTopicId:     example.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err

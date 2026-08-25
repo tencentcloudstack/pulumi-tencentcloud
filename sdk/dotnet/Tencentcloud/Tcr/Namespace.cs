@@ -50,6 +50,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     ///                 CveId = "cve-xxxxx",
     ///             },
     ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "env", "production" },
+    ///             { "createdBy", "terraform" },
+    ///         },
     ///     });
     /// 
     /// });
@@ -107,6 +112,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// </summary>
         [Output("severity")]
         public Output<string?> Severity { get; private set; } = null!;
+
+        /// <summary>
+        /// Tag key-value pairs for the TCR namespace.
+        /// </summary>
+        [Output("tags")]
+        public Output<ImmutableDictionary<string, string>> Tags { get; private set; } = null!;
 
 
         /// <summary>
@@ -203,6 +214,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         [Input("severity")]
         public Input<string>? Severity { get; set; }
 
+        [Input("tags")]
+        private InputMap<string>? _tags;
+
+        /// <summary>
+        /// Tag key-value pairs for the TCR namespace.
+        /// </summary>
+        public InputMap<string> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<string>());
+            set => _tags = value;
+        }
+
         public NamespaceArgs()
         {
         }
@@ -258,6 +281,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// </summary>
         [Input("severity")]
         public Input<string>? Severity { get; set; }
+
+        [Input("tags")]
+        private InputMap<string>? _tags;
+
+        /// <summary>
+        /// Tag key-value pairs for the TCR namespace.
+        /// </summary>
+        public InputMap<string> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<string>());
+            set => _tags = value;
+        }
 
         public NamespaceState()
         {

@@ -15,43 +15,43 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain.Outputs
     public sealed class GetDiagEventsListResult
     {
         /// <summary>
-        /// diag item.
+        /// Diag item.
         /// </summary>
         public readonly string DiagItem;
         /// <summary>
-        /// diag type.
+        /// Diag type.
         /// </summary>
         public readonly string DiagType;
         /// <summary>
-        /// end time.
+        /// End time.
         /// </summary>
         public readonly string EndTime;
         /// <summary>
-        /// event id.
+        /// Event ID.
         /// </summary>
         public readonly int EventId;
         /// <summary>
-        /// instance id.
+        /// Instance ID.
         /// </summary>
         public readonly string InstanceId;
         /// <summary>
-        /// metric.
+        /// Metric.
         /// </summary>
         public readonly string Metric;
         /// <summary>
-        /// outline.
+        /// Outline.
         /// </summary>
         public readonly string Outline;
         /// <summary>
-        /// region.
+        /// Region.
         /// </summary>
         public readonly string Region;
         /// <summary>
-        /// severity.
+        /// Severity.
         /// </summary>
         public readonly int Severity;
         /// <summary>
-        /// start time.
+        /// Start time.
         /// </summary>
         public readonly string StartTime;
 

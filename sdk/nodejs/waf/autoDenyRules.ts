@@ -23,7 +23,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * waf auto_deny_rules can be imported using the id, e.g.
+ * waf autoDenyRules can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Waf/autoDenyRules:AutoDenyRules example demo.waf.com
@@ -122,19 +122,19 @@ export interface AutoDenyRulesState {
     /**
      * The threshold number of attacks that triggers IP autodeny, ranging from 2 to 100 times.
      */
-    attackThreshold?: pulumi.Input<number>;
+    attackThreshold?: pulumi.Input<number | undefined>;
     /**
      * The IP autodeny time after triggering the IP autodeny, ranging from 5 to 360 minutes.
      */
-    denyTimeThreshold?: pulumi.Input<number>;
+    denyTimeThreshold?: pulumi.Input<number | undefined>;
     /**
      * Domain.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * IP autodeny statistical time, ranging from 1-60 minutes.
      */
-    timeThreshold?: pulumi.Input<number>;
+    timeThreshold?: pulumi.Input<number | undefined>;
 }
 
 /**

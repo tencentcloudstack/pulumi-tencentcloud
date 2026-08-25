@@ -23,9 +23,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var parameters = new Tencentcloud.Mariadb.Parameters("parameters", new()
+    ///     var example = new Tencentcloud.Mariadb.Parameters("example", new()
     ///     {
-    ///         InstanceId = "tdsql-4pzs5b67",
+    ///         InstanceId = "tdsql-5n00ev40zl",
     ///         Params = new[]
     ///         {
     ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
@@ -42,6 +42,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     ///             {
     ///                 Param = "autocommit",
     ///                 Value = "ON",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "binlog_transaction_dependency_history_size",
+    ///                 Value = "25000",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "binlog_write_threshold",
+    ///                 Value = "1610612736",
     ///             },
     ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
     ///             {
@@ -71,7 +81,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
     ///             {
     ///                 Param = "default_collation_for_utf8mb4",
-    ///                 Value = "utf8mb4_general_ci",
+    ///                 Value = "utf8mb4_0900_ai_ci",
     ///             },
     ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
     ///             {
@@ -110,13 +120,38 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     ///             },
     ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
     ///             {
+    ///                 Param = "explicit_defaults_for_timestamp",
+    ///                 Value = "ON",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
     ///                 Param = "group_concat_max_len",
     ///                 Value = "1024",
     ///             },
     ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
     ///             {
+    ///                 Param = "innodb_autoinc_lock_mode",
+    ///                 Value = "2",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "innodb_backquery_enable",
+    ///                 Value = "OFF",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "innodb_backquery_window",
+    ///                 Value = "86400",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
     ///                 Param = "innodb_concurrency_tickets",
     ///                 Value = "5000",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "innodb_encryption_algorithm",
+    ///                 Value = "AES",
     ///             },
     ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
     ///             {
@@ -132,6 +167,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     ///             {
     ///                 Param = "innodb_max_dirty_pages_pct",
     ///                 Value = "70.000000",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "innodb_max_undo_log_size",
+    ///                 Value = "1073741824",
     ///             },
     ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
     ///             {
@@ -166,7 +206,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
     ///             {
     ///                 Param = "innodb_strict_mode",
-    ///                 Value = "OFF",
+    ///                 Value = "ON",
     ///             },
     ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
     ///             {
@@ -182,6 +222,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     ///             {
     ///                 Param = "interactive_timeout",
     ///                 Value = "28800",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "join_buffer_size",
+    ///                 Value = "2097152",
     ///             },
     ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
     ///             {
@@ -222,6 +267,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     ///             {
     ///                 Param = "low_priority_updates",
     ///                 Value = "OFF",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "lower_case_table_names",
+    ///                 Value = "1",
     ///             },
     ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
     ///             {
@@ -280,6 +330,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     ///             },
     ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
     ///             {
+    ///                 Param = "optimizer_switch",
+    ///                 Value = "batched_key_access=off,block_nested_loop=on,condition_fanout_filter=on,csi_prefer_first_match_semi_join=on,csi_prefer_hash_group_by=on,csi_prefer_no_ref_access=on,csi_route_prefer=on,derived_condition_pushdown=on,derived_merge=on,duplicateweedout=on,engine_condition_pushdown=on,firstmatch=on,group_by_no_tmptable_for_csi=on,hash_join=on,hypergraph_optimizer=off,index_condition_pushdown=on,index_merge=on,index_merge_intersection=on,index_merge_sort_union=on,index_merge_union=on,loosescan=on,materialization=on,mrr=on,mrr_cost_based=on,prefer_ordering_index=on,semijoin=on,skip_scan=on,sort_merge_join=off,subquery_materialization_cost_based=on,subquery_to_derived=off,use_index_extensions=on,use_invisible_indexes=off,winmagic=off",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "performance_schema",
+    ///                 Value = "ON",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
     ///                 Param = "query_alloc_block_size",
     ///                 Value = "16384",
     ///             },
@@ -287,6 +347,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     ///             {
     ///                 Param = "query_prealloc_size",
     ///                 Value = "24576",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "reject_table_no_pk",
+    ///                 Value = "1",
     ///             },
     ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
     ///             {
@@ -335,6 +400,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     ///             },
     ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
     ///             {
+    ///                 Param = "thread_pool_oversubscribe",
+    ///                 Value = "30",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "thread_pool_size",
+    ///                 Value = "24",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
     ///                 Param = "time_zone",
     ///                 Value = "+08:00",
     ///             },
@@ -362,9 +437,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     /// ## Import
     /// 
     /// mariadb parameters can be imported using the id, e.g.
-    /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Mariadb/parameters:Parameters parameters tdsql-4pzs5b67
+    /// $ pulumi import tencentcloud:Mariadb/parameters:Parameters example tdsql-4pzs5b67
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mariadb/parameters:Parameters")]

@@ -18,7 +18,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * vpc traffic_package can be imported using the id, e.g.
+ * vpc trafficPackage can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Vpc/trafficPackage:TrafficPackage traffic_package traffic_package_id
@@ -108,19 +108,19 @@ export interface TrafficPackageState {
     /**
      * Created time.
      */
-    createdTime?: pulumi.Input<string>;
+    createdTime?: pulumi.Input<string | undefined>;
     /**
      * Remaining amount.
      */
-    remainingAmount?: pulumi.Input<number>;
+    remainingAmount?: pulumi.Input<number | undefined>;
     /**
      * Traffic Package Amount, eg: 10,20,50,512,1024,5120,51200,60,300,600,3072,6144,30720,61440,307200.
      */
-    trafficAmount?: pulumi.Input<number>;
+    trafficAmount?: pulumi.Input<number | undefined>;
     /**
      * Used amount.
      */
-    usedAmount?: pulumi.Input<number>;
+    usedAmount?: pulumi.Input<number | undefined>;
 }
 
 /**

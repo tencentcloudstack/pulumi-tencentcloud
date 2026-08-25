@@ -15,12 +15,12 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const idTest = tencentcloud.Dayu.getCcHttpPolicies({
+ * const idTest = tencentcloud.dayu.getCcHttpPolicies({
  *     resourceType: testPolicy.resourceType,
  *     resourceId: testPolicy.resourceId,
  *     policyId: testPolicy.policyId,
  * });
- * const nameTest = tencentcloud.Dayu.getCcHttpPolicies({
+ * const nameTest = tencentcloud.dayu.getCcHttpPolicies({
  *     resourceType: testPolicy.resourceType,
  *     resourceId: testPolicy.resourceId,
  *     name: testPolicy.name,
@@ -103,12 +103,12 @@ export interface GetCcHttpPoliciesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const idTest = tencentcloud.Dayu.getCcHttpPolicies({
+ * const idTest = tencentcloud.dayu.getCcHttpPolicies({
  *     resourceType: testPolicy.resourceType,
  *     resourceId: testPolicy.resourceId,
  *     policyId: testPolicy.policyId,
  * });
- * const nameTest = tencentcloud.Dayu.getCcHttpPolicies({
+ * const nameTest = tencentcloud.dayu.getCcHttpPolicies({
  *     resourceType: testPolicy.resourceType,
  *     resourceId: testPolicy.resourceId,
  *     name: testPolicy.name,
@@ -133,11 +133,11 @@ export interface GetCcHttpPoliciesOutputArgs {
     /**
      * Name of the CC http policy to be queried.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Id of the CC http policy to be queried.
      */
-    policyId?: pulumi.Input<string>;
+    policyId?: pulumi.Input<string | undefined>;
     /**
      * ID of the resource that the CC http policy works for.
      */
@@ -149,5 +149,5 @@ export interface GetCcHttpPoliciesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

@@ -16,11 +16,11 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * // query by group_id
- * const foo = tencentcloud.Cam.getGroups({
+ * const foo = tencentcloud.cam.getGroups({
  *     groupId: fooTencentcloudCamGroup.id,
  * });
  * // query by name
- * const bar = tencentcloud.Cam.getGroups({
+ * const bar = tencentcloud.cam.getGroups({
  *     name: "cam-group-test",
  * });
  * ```
@@ -94,11 +94,11 @@ export interface GetGroupsResult {
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * // query by group_id
- * const foo = tencentcloud.Cam.getGroups({
+ * const foo = tencentcloud.cam.getGroups({
  *     groupId: fooTencentcloudCamGroup.id,
  * });
  * // query by name
- * const bar = tencentcloud.Cam.getGroups({
+ * const bar = tencentcloud.cam.getGroups({
  *     name: "cam-group-test",
  * });
  * ```
@@ -121,17 +121,17 @@ export interface GetGroupsOutputArgs {
     /**
      * ID of CAM group to be queried.
      */
-    groupId?: pulumi.Input<string>;
+    groupId?: pulumi.Input<string | undefined>;
     /**
      * Name of the CAM group to be queried.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Description of the cam group to be queried.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

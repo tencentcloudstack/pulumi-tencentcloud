@@ -22,6 +22,7 @@ import * as utilities from "../utilities";
  *     value: "1.2.3.9",
  *     subDomain: "demo",
  * });
+ * export const updatedOn = demo.updatedOn;
  * ```
  *
  * ## Import
@@ -73,6 +74,10 @@ export class Record extends pulumi.CustomResource {
      */
     declare public readonly mx: pulumi.Output<number | undefined>;
     /**
+     * ID of the record.
+     */
+    declare public /*out*/ readonly recordId: pulumi.Output<string>;
+    /**
      * The record line.
      */
     declare public readonly recordLine: pulumi.Output<string>;
@@ -96,6 +101,10 @@ export class Record extends pulumi.CustomResource {
      * TTL, the range is 1-604800, and the minimum value of different levels of domain names is different. Default is 600.
      */
     declare public readonly ttl: pulumi.Output<number | undefined>;
+    /**
+     * Last update time of the record.
+     */
+    declare public /*out*/ readonly updatedOn: pulumi.Output<string>;
     /**
      * The record value.
      */
@@ -121,12 +130,14 @@ export class Record extends pulumi.CustomResource {
             resourceInputs["domain"] = state?.domain;
             resourceInputs["monitorStatus"] = state?.monitorStatus;
             resourceInputs["mx"] = state?.mx;
+            resourceInputs["recordId"] = state?.recordId;
             resourceInputs["recordLine"] = state?.recordLine;
             resourceInputs["recordType"] = state?.recordType;
             resourceInputs["remark"] = state?.remark;
             resourceInputs["status"] = state?.status;
             resourceInputs["subDomain"] = state?.subDomain;
             resourceInputs["ttl"] = state?.ttl;
+            resourceInputs["updatedOn"] = state?.updatedOn;
             resourceInputs["value"] = state?.value;
             resourceInputs["weight"] = state?.weight;
         } else {
@@ -154,6 +165,8 @@ export class Record extends pulumi.CustomResource {
             resourceInputs["value"] = args?.value;
             resourceInputs["weight"] = args?.weight;
             resourceInputs["monitorStatus"] = undefined /*out*/;
+            resourceInputs["recordId"] = undefined /*out*/;
+            resourceInputs["updatedOn"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Record.__pulumiType, name, resourceInputs, opts);
@@ -167,47 +180,55 @@ export interface RecordState {
     /**
      * The Domain.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * The monitoring status of the record.
      */
-    monitorStatus?: pulumi.Input<string>;
+    monitorStatus?: pulumi.Input<string | undefined>;
     /**
      * MX priority, valid when the record type is MX, range 1-20. Note: must set when record type equal MX.
      */
-    mx?: pulumi.Input<number>;
+    mx?: pulumi.Input<number | undefined>;
+    /**
+     * ID of the record.
+     */
+    recordId?: pulumi.Input<string | undefined>;
     /**
      * The record line.
      */
-    recordLine?: pulumi.Input<string>;
+    recordLine?: pulumi.Input<string | undefined>;
     /**
      * The record type.
      */
-    recordType?: pulumi.Input<string>;
+    recordType?: pulumi.Input<string | undefined>;
     /**
      * The Remark of record.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * The host records, default value is `@`.
      */
-    subDomain?: pulumi.Input<string>;
+    subDomain?: pulumi.Input<string | undefined>;
     /**
      * TTL, the range is 1-604800, and the minimum value of different levels of domain names is different. Default is 600.
      */
-    ttl?: pulumi.Input<number>;
+    ttl?: pulumi.Input<number | undefined>;
+    /**
+     * Last update time of the record.
+     */
+    updatedOn?: pulumi.Input<string | undefined>;
     /**
      * The record value.
      */
-    value?: pulumi.Input<string>;
+    value?: pulumi.Input<string | undefined>;
     /**
      * Weight information. An integer from 1 to 100. Only enterprise VIP domain names are available, does not pass this parameter, means that the weight information is not set.
      */
-    weight?: pulumi.Input<number>;
+    weight?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -221,7 +242,7 @@ export interface RecordArgs {
     /**
      * MX priority, valid when the record type is MX, range 1-20. Note: must set when record type equal MX.
      */
-    mx?: pulumi.Input<number>;
+    mx?: pulumi.Input<number | undefined>;
     /**
      * The record line.
      */
@@ -233,19 +254,19 @@ export interface RecordArgs {
     /**
      * The Remark of record.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Records the initial state, with values ranging from ENABLE and DISABLE. The default is ENABLE, and if DISABLE is passed in, resolution will not take effect and the limits of load balancing will not be verified.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * The host records, default value is `@`.
      */
-    subDomain?: pulumi.Input<string>;
+    subDomain?: pulumi.Input<string | undefined>;
     /**
      * TTL, the range is 1-604800, and the minimum value of different levels of domain names is different. Default is 600.
      */
-    ttl?: pulumi.Input<number>;
+    ttl?: pulumi.Input<number | undefined>;
     /**
      * The record value.
      */
@@ -253,5 +274,5 @@ export interface RecordArgs {
     /**
      * Weight information. An integer from 1 to 100. Only enterprise VIP domain names are available, does not pass this parameter, means that the weight information is not set.
      */
-    weight?: pulumi.Input<number>;
+    weight?: pulumi.Input<number | undefined>;
 }

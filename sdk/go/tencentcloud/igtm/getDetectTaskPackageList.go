@@ -101,12 +101,8 @@ type GetDetectTaskPackageListResult struct {
 }
 
 func GetDetectTaskPackageListOutput(ctx *pulumi.Context, args GetDetectTaskPackageListOutputArgs, opts ...pulumi.InvokeOption) GetDetectTaskPackageListResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetDetectTaskPackageListResultOutput, error) {
-			args := v.(GetDetectTaskPackageListArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Igtm/getDetectTaskPackageList:getDetectTaskPackageList", args, GetDetectTaskPackageListResultOutput{}, options).(GetDetectTaskPackageListResultOutput), nil
-		}).(GetDetectTaskPackageListResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Igtm/getDetectTaskPackageList:getDetectTaskPackageList", args, GetDetectTaskPackageListResultOutput{}, options).(GetDetectTaskPackageListResultOutput)
 }
 
 // A collection of arguments for invoking getDetectTaskPackageList.

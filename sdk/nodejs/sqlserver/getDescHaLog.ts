@@ -60,7 +60,7 @@ export function getDescHaLogOutput(args: GetDescHaLogOutputArgs, opts?: pulumi.I
 export interface GetDescHaLogOutputArgs {
     endTime: pulumi.Input<string>;
     instanceId: pulumi.Input<string>;
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     startTime: pulumi.Input<string>;
-    switchType?: pulumi.Input<number>;
+    switchType?: pulumi.Input<number | undefined>;
 }

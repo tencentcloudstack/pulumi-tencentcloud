@@ -34,7 +34,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * mps ai_analysis_template can be imported using the id, e.g.
+ * mps aiAnalysisTemplate can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Mps/aiAnalysisTemplate:AiAnalysisTemplate ai_analysis_template ai_analysis_template_id
@@ -133,27 +133,27 @@ export interface AiAnalysisTemplateState {
     /**
      * Ai classification task control parameters.
      */
-    classificationConfigure?: pulumi.Input<inputs.Mps.AiAnalysisTemplateClassificationConfigure>;
+    classificationConfigure?: pulumi.Input<inputs.Mps.AiAnalysisTemplateClassificationConfigure | undefined>;
     /**
      * Ai analysis template description information, length limit: 256 characters.
      */
-    comment?: pulumi.Input<string>;
+    comment?: pulumi.Input<string | undefined>;
     /**
      * Ai cover task control parameters.
      */
-    coverConfigure?: pulumi.Input<inputs.Mps.AiAnalysisTemplateCoverConfigure>;
+    coverConfigure?: pulumi.Input<inputs.Mps.AiAnalysisTemplateCoverConfigure | undefined>;
     /**
      * Ai frame tag task control parameters.
      */
-    frameTagConfigure?: pulumi.Input<inputs.Mps.AiAnalysisTemplateFrameTagConfigure>;
+    frameTagConfigure?: pulumi.Input<inputs.Mps.AiAnalysisTemplateFrameTagConfigure | undefined>;
     /**
      * Ai analysis template name, length limit: 64 characters.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Ai tag task control parameters.
      */
-    tagConfigure?: pulumi.Input<inputs.Mps.AiAnalysisTemplateTagConfigure>;
+    tagConfigure?: pulumi.Input<inputs.Mps.AiAnalysisTemplateTagConfigure | undefined>;
 }
 
 /**
@@ -163,25 +163,25 @@ export interface AiAnalysisTemplateArgs {
     /**
      * Ai classification task control parameters.
      */
-    classificationConfigure?: pulumi.Input<inputs.Mps.AiAnalysisTemplateClassificationConfigure>;
+    classificationConfigure?: pulumi.Input<inputs.Mps.AiAnalysisTemplateClassificationConfigure | undefined>;
     /**
      * Ai analysis template description information, length limit: 256 characters.
      */
-    comment?: pulumi.Input<string>;
+    comment?: pulumi.Input<string | undefined>;
     /**
      * Ai cover task control parameters.
      */
-    coverConfigure?: pulumi.Input<inputs.Mps.AiAnalysisTemplateCoverConfigure>;
+    coverConfigure?: pulumi.Input<inputs.Mps.AiAnalysisTemplateCoverConfigure | undefined>;
     /**
      * Ai frame tag task control parameters.
      */
-    frameTagConfigure?: pulumi.Input<inputs.Mps.AiAnalysisTemplateFrameTagConfigure>;
+    frameTagConfigure?: pulumi.Input<inputs.Mps.AiAnalysisTemplateFrameTagConfigure | undefined>;
     /**
      * Ai analysis template name, length limit: 64 characters.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Ai tag task control parameters.
      */
-    tagConfigure?: pulumi.Input<inputs.Mps.AiAnalysisTemplateTagConfigure>;
+    tagConfigure?: pulumi.Input<inputs.Mps.AiAnalysisTemplateTagConfigure | undefined>;
 }

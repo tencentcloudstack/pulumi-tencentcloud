@@ -131,27 +131,27 @@ export interface SecurityAuditLogExportTaskState {
     /**
      * request of async id.
      */
-    asyncRequestId?: pulumi.Input<number>;
+    asyncRequestId?: pulumi.Input<number | undefined>;
     /**
      * List of log risk levels, supported values include: 0 no risk; 1 low risk; 2 medium risk; 3 high risk.
      */
-    dangerLevels?: pulumi.Input<pulumi.Input<number>[]>;
+    dangerLevels?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * end time.
      */
-    endTime?: pulumi.Input<string>;
+    endTime?: pulumi.Input<string | undefined>;
     /**
      * product, optional value is mysql.
      */
-    product?: pulumi.Input<string>;
+    product?: pulumi.Input<string | undefined>;
     /**
      * security audit group id.
      */
-    secAuditGroupId?: pulumi.Input<string>;
+    secAuditGroupId?: pulumi.Input<string | undefined>;
     /**
      * start time.
      */
-    startTime?: pulumi.Input<string>;
+    startTime?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -161,7 +161,7 @@ export interface SecurityAuditLogExportTaskArgs {
     /**
      * List of log risk levels, supported values include: 0 no risk; 1 low risk; 2 medium risk; 3 high risk.
      */
-    dangerLevels?: pulumi.Input<pulumi.Input<number>[]>;
+    dangerLevels?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * end time.
      */

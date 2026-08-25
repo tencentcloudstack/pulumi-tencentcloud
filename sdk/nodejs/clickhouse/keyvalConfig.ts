@@ -107,11 +107,11 @@ export interface KeyvalConfigState {
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * configuration list.
      */
-    items?: pulumi.Input<inputs.Clickhouse.KeyvalConfigItems>;
+    items?: pulumi.Input<inputs.Clickhouse.KeyvalConfigItems | undefined>;
 }
 
 /**

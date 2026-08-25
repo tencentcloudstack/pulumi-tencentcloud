@@ -53,12 +53,8 @@ type GetBaseBackupsResult struct {
 }
 
 func GetBaseBackupsOutput(ctx *pulumi.Context, args GetBaseBackupsOutputArgs, opts ...pulumi.InvokeOption) GetBaseBackupsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetBaseBackupsResultOutput, error) {
-			args := v.(GetBaseBackupsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Postgresql/getBaseBackups:getBaseBackups", args, GetBaseBackupsResultOutput{}, options).(GetBaseBackupsResultOutput), nil
-		}).(GetBaseBackupsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Postgresql/getBaseBackups:getBaseBackups", args, GetBaseBackupsResultOutput{}, options).(GetBaseBackupsResultOutput)
 }
 
 // A collection of arguments for invoking getBaseBackups.

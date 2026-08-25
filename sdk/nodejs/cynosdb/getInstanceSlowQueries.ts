@@ -19,7 +19,7 @@ import * as utilities from "../utilities";
  *
  * const config = new pulumi.Config();
  * const cynosdbClusterId = config.get("cynosdbClusterId") || "default_cynosdb_cluster";
- * const instanceSlowQueries = tencentcloud.Cynosdb.getInstanceSlowQueries({
+ * const instanceSlowQueries = tencentcloud.cynosdb.getInstanceSlowQueries({
  *     instanceId: cynosdbClusterId,
  *     startTime: "2023-06-20 23:19:03",
  *     endTime: "2023-06-30 23:19:03",
@@ -39,7 +39,7 @@ import * as utilities from "../utilities";
  *
  * const config = new pulumi.Config();
  * const cynosdbClusterId = config.get("cynosdbClusterId") || "default_cynosdb_cluster";
- * const instanceSlowQueries = tencentcloud.Cynosdb.getInstanceSlowQueries({
+ * const instanceSlowQueries = tencentcloud.cynosdb.getInstanceSlowQueries({
  *     instanceId: cynosdbClusterId,
  *     startTime: "2023-06-20 23:19:03",
  *     endTime: "2023-06-30 23:19:03",
@@ -56,7 +56,7 @@ import * as utilities from "../utilities";
  *
  * const config = new pulumi.Config();
  * const cynosdbClusterId = config.get("cynosdbClusterId") || "default_cynosdb_cluster";
- * const instanceSlowQueries = tencentcloud.Cynosdb.getInstanceSlowQueries({
+ * const instanceSlowQueries = tencentcloud.cynosdb.getInstanceSlowQueries({
  *     instanceId: cynosdbClusterId,
  *     username: "keep_dts",
  *     host: "%%",
@@ -161,7 +161,7 @@ export interface GetInstanceSlowQueriesResult {
  *
  * const config = new pulumi.Config();
  * const cynosdbClusterId = config.get("cynosdbClusterId") || "default_cynosdb_cluster";
- * const instanceSlowQueries = tencentcloud.Cynosdb.getInstanceSlowQueries({
+ * const instanceSlowQueries = tencentcloud.cynosdb.getInstanceSlowQueries({
  *     instanceId: cynosdbClusterId,
  *     startTime: "2023-06-20 23:19:03",
  *     endTime: "2023-06-30 23:19:03",
@@ -181,7 +181,7 @@ export interface GetInstanceSlowQueriesResult {
  *
  * const config = new pulumi.Config();
  * const cynosdbClusterId = config.get("cynosdbClusterId") || "default_cynosdb_cluster";
- * const instanceSlowQueries = tencentcloud.Cynosdb.getInstanceSlowQueries({
+ * const instanceSlowQueries = tencentcloud.cynosdb.getInstanceSlowQueries({
  *     instanceId: cynosdbClusterId,
  *     startTime: "2023-06-20 23:19:03",
  *     endTime: "2023-06-30 23:19:03",
@@ -198,7 +198,7 @@ export interface GetInstanceSlowQueriesResult {
  *
  * const config = new pulumi.Config();
  * const cynosdbClusterId = config.get("cynosdbClusterId") || "default_cynosdb_cluster";
- * const instanceSlowQueries = tencentcloud.Cynosdb.getInstanceSlowQueries({
+ * const instanceSlowQueries = tencentcloud.cynosdb.getInstanceSlowQueries({
  *     instanceId: cynosdbClusterId,
  *     username: "keep_dts",
  *     host: "%%",
@@ -230,15 +230,15 @@ export interface GetInstanceSlowQueriesOutputArgs {
     /**
      * Database name.
      */
-    database?: pulumi.Input<string>;
+    database?: pulumi.Input<string | undefined>;
     /**
      * Latest transaction start time.
      */
-    endTime?: pulumi.Input<string>;
+    endTime?: pulumi.Input<string | undefined>;
     /**
      * Client host.
      */
-    host?: pulumi.Input<string>;
+    host?: pulumi.Input<string | undefined>;
     /**
      * Instance ID.
      */
@@ -246,21 +246,21 @@ export interface GetInstanceSlowQueriesOutputArgs {
     /**
      * Sort field, optional values: QueryTime, LockTime, RowsExamined, RowsSent.
      */
-    orderBy?: pulumi.Input<string>;
+    orderBy?: pulumi.Input<string | undefined>;
     /**
      * Sort type, optional values: asc, desc.
      */
-    orderByType?: pulumi.Input<string>;
+    orderByType?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Earliest transaction start time.
      */
-    startTime?: pulumi.Input<string>;
+    startTime?: pulumi.Input<string | undefined>;
     /**
      * user name.
      */
-    username?: pulumi.Input<string>;
+    username?: pulumi.Input<string | undefined>;
 }

@@ -39,7 +39,7 @@ import (
 //			}
 //			_ = gaap.GetProxiesOutput(ctx, gaap.GetProxiesOutputArgs{
 //				Ids: pulumi.StringArray{
-//					fooProxy.ID(),
+//					fooProxy.ID().ToIDOutput().ToStringOutput(),
 //				},
 //			}, nil)
 //			return nil
@@ -92,12 +92,8 @@ type GetProxiesResult struct {
 }
 
 func GetProxiesOutput(ctx *pulumi.Context, args GetProxiesOutputArgs, opts ...pulumi.InvokeOption) GetProxiesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetProxiesResultOutput, error) {
-			args := v.(GetProxiesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Gaap/getProxies:getProxies", args, GetProxiesResultOutput{}, options).(GetProxiesResultOutput), nil
-		}).(GetProxiesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Gaap/getProxies:getProxies", args, GetProxiesResultOutput{}, options).(GetProxiesResultOutput)
 }
 
 // A collection of arguments for invoking getProxies.

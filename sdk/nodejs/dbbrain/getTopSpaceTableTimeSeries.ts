@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const topSpaceTableTimeSeries = tencentcloud.Dbbrain.getTopSpaceTableTimeSeries({
+ * const topSpaceTableTimeSeries = tencentcloud.dbbrain.getTopSpaceTableTimeSeries({
  *     instanceId: "%s",
  *     sortBy: "DataLength",
  *     startDate: "%s",
@@ -100,7 +100,7 @@ export interface GetTopSpaceTableTimeSeriesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const topSpaceTableTimeSeries = tencentcloud.Dbbrain.getTopSpaceTableTimeSeries({
+ * const topSpaceTableTimeSeries = tencentcloud.dbbrain.getTopSpaceTableTimeSeries({
  *     instanceId: "%s",
  *     sortBy: "DataLength",
  *     startDate: "%s",
@@ -129,7 +129,7 @@ export interface GetTopSpaceTableTimeSeriesOutputArgs {
     /**
      * The deadline, such as 2021-01-01, the earliest is the 29th day before the current day, and the default is the current day.
      */
-    endDate?: pulumi.Input<string>;
+    endDate?: pulumi.Input<string | undefined>;
     /**
      * instance id.
      */
@@ -137,21 +137,21 @@ export interface GetTopSpaceTableTimeSeriesOutputArgs {
     /**
      * The number of Top tables returned, the maximum value is 100, and the default is 20.
      */
-    limit?: pulumi.Input<number>;
+    limit?: pulumi.Input<number | undefined>;
     /**
      * Service product type, supported values include: mysql - cloud database MySQL, cynosdb - cloud database CynosDB for MySQL, the default is mysql.
      */
-    product?: pulumi.Input<string>;
+    product?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * The sorting field used to filter the Top table. The optional fields include DataLength, IndexLength, TotalLength, DataFree, FragRatio, TableRows, and PhysicalFileSize. The default is PhysicalFileSize.
      */
-    sortBy?: pulumi.Input<string>;
+    sortBy?: pulumi.Input<string | undefined>;
     /**
      * The start date, such as 2021-01-01, the earliest is the 29th day before the current day, and the default is the 6th day before the deadline.
      */
-    startDate?: pulumi.Input<string>;
+    startDate?: pulumi.Input<string | undefined>;
 }

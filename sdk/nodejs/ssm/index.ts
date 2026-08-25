@@ -60,6 +60,11 @@ export type SecretVersion = import("./secretVersion").SecretVersion;
 export const SecretVersion: typeof import("./secretVersion").SecretVersion = null as any;
 utilities.lazyLoad(exports, ["SecretVersion"], () => require("./secretVersion"));
 
+export { SecretVersionV2Args, SecretVersionV2State } from "./secretVersionV2";
+export type SecretVersionV2 = import("./secretVersionV2").SecretVersionV2;
+export const SecretVersionV2: typeof import("./secretVersionV2").SecretVersionV2 = null as any;
+utilities.lazyLoad(exports, ["SecretVersionV2"], () => require("./secretVersionV2"));
+
 export { SshKeyPairSecretArgs, SshKeyPairSecretState } from "./sshKeyPairSecret";
 export type SshKeyPairSecret = import("./sshKeyPairSecret").SshKeyPairSecret;
 export const SshKeyPairSecret: typeof import("./sshKeyPairSecret").SshKeyPairSecret = null as any;
@@ -78,6 +83,8 @@ const _module = {
                 return new Secret(name, <any>undefined, { urn })
             case "tencentcloud:Ssm/secretVersion:SecretVersion":
                 return new SecretVersion(name, <any>undefined, { urn })
+            case "tencentcloud:Ssm/secretVersionV2:SecretVersionV2":
+                return new SecretVersionV2(name, <any>undefined, { urn })
             case "tencentcloud:Ssm/sshKeyPairSecret:SshKeyPairSecret":
                 return new SshKeyPairSecret(name, <any>undefined, { urn })
             default:
@@ -89,4 +96,5 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Ssm/productSecret", _modu
 pulumi.runtime.registerResourceModule("tencentcloud", "Ssm/rotateProductSecret", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Ssm/secret", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Ssm/secretVersion", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Ssm/secretVersionV2", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Ssm/sshKeyPairSecret", _module)

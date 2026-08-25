@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const topic = tencentcloud.Tcmq.getTopic({
+ * const topic = tencentcloud.tcmq.getTopic({
  *     topicName: "topic_name",
  * });
  * ```
@@ -100,7 +100,7 @@ export interface GetTopicResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const topic = tencentcloud.Tcmq.getTopic({
+ * const topic = tencentcloud.tcmq.getTopic({
  *     topicName: "topic_name",
  * });
  * ```
@@ -126,29 +126,29 @@ export interface GetTopicOutputArgs {
     /**
      * Filter. Currently, you can filter by tag. The tag name must be prefixed with `tag:`, such as `tag: owner`, `tag: environment`, or `tag: business`.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Tcmq.GetTopicFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Tcmq.GetTopicFilterArgs>[] | undefined>;
     /**
      * For filtering by tag, this parameter must be set to `true`.
      */
-    isTagFilter?: pulumi.Input<boolean>;
+    isTagFilter?: pulumi.Input<boolean | undefined>;
     /**
      * Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.
      */
-    limit?: pulumi.Input<number>;
+    limit?: pulumi.Input<number | undefined>;
     /**
      * Starting position of the list of topics to be returned on the current page in case of paginated return. If a value is entered, limit is required. If this parameter is left empty, 0 will be used by default.
      */
-    offset?: pulumi.Input<number>;
+    offset?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Fuzzy search by TopicName.
      */
-    topicName?: pulumi.Input<string>;
+    topicName?: pulumi.Input<string | undefined>;
     /**
      * Filter by CMQ topic name.
      */
-    topicNameLists?: pulumi.Input<pulumi.Input<string>[]>;
+    topicNameLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

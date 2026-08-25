@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * dasb device_group can be imported using the id, e.g.
+ * dasb deviceGroup can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Dasb/deviceGroup:DeviceGroup example 36
@@ -96,11 +96,11 @@ export interface DeviceGroupState {
     /**
      * The ID of the department to which the asset group belongs, such as: 1.2.3 name, with a maximum length of 32 characters.
      */
-    departmentId?: pulumi.Input<string>;
+    departmentId?: pulumi.Input<string | undefined>;
     /**
      * Device group name, the maximum length is 32 characters.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -110,9 +110,9 @@ export interface DeviceGroupArgs {
     /**
      * The ID of the department to which the asset group belongs, such as: 1.2.3 name, with a maximum length of 32 characters.
      */
-    departmentId?: pulumi.Input<string>;
+    departmentId?: pulumi.Input<string | undefined>;
     /**
      * Device group name, the maximum length is 32 characters.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
 }

@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * ssl replace_certificate can be imported using the id, e.g.
+ * ssl replaceCertificate can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Ssl/replaceCertificateOperation:ReplaceCertificateOperation replace_certificate replace_certificate_id
@@ -139,35 +139,35 @@ export interface ReplaceCertificateOperationState {
     /**
      * CSR encryption method, optional: RSA, ECC, SM2. (Selectable only if CsrType is Online), default is RSA.
      */
-    certCsrEncryptAlgo?: pulumi.Input<string>;
+    certCsrEncryptAlgo?: pulumi.Input<string | undefined>;
     /**
      * CSR encryption parameter, when CsrEncryptAlgo is RSA, you can choose 2048, 4096, etc., and the default is 2048; when CsrEncryptAlgo is ECC, you can choose prime256v1, secp384r1, etc., and the default is prime256v1;.
      */
-    certCsrKeyParameter?: pulumi.Input<string>;
+    certCsrKeyParameter?: pulumi.Input<string | undefined>;
     /**
      * Certificate ID.
      */
-    certificateId?: pulumi.Input<string>;
+    certificateId?: pulumi.Input<string | undefined>;
     /**
      * CSR Content.
      */
-    csrContent?: pulumi.Input<string>;
+    csrContent?: pulumi.Input<string | undefined>;
     /**
      * KEY Password.
      */
-    csrKeyPassword?: pulumi.Input<string>;
+    csrKeyPassword?: pulumi.Input<string | undefined>;
     /**
      * Type, default Original. Available options: Original = original certificate CSR, Upload = manual upload, Online = online generation.
      */
-    csrType?: pulumi.Input<string>;
+    csrType?: pulumi.Input<string | undefined>;
     /**
      * Reason for reissue.
      */
-    reason?: pulumi.Input<string>;
+    reason?: pulumi.Input<string | undefined>;
     /**
      * Verification type: DNS_AUTO = automatic DNS verification (this verification type is only supported for domain names that are resolved by Tencent Cloud and have normal resolution status), DNS = manual DNS verification, FILE = file verification.
      */
-    validType?: pulumi.Input<string>;
+    validType?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -177,11 +177,11 @@ export interface ReplaceCertificateOperationArgs {
     /**
      * CSR encryption method, optional: RSA, ECC, SM2. (Selectable only if CsrType is Online), default is RSA.
      */
-    certCsrEncryptAlgo?: pulumi.Input<string>;
+    certCsrEncryptAlgo?: pulumi.Input<string | undefined>;
     /**
      * CSR encryption parameter, when CsrEncryptAlgo is RSA, you can choose 2048, 4096, etc., and the default is 2048; when CsrEncryptAlgo is ECC, you can choose prime256v1, secp384r1, etc., and the default is prime256v1;.
      */
-    certCsrKeyParameter?: pulumi.Input<string>;
+    certCsrKeyParameter?: pulumi.Input<string | undefined>;
     /**
      * Certificate ID.
      */
@@ -189,19 +189,19 @@ export interface ReplaceCertificateOperationArgs {
     /**
      * CSR Content.
      */
-    csrContent?: pulumi.Input<string>;
+    csrContent?: pulumi.Input<string | undefined>;
     /**
      * KEY Password.
      */
-    csrKeyPassword?: pulumi.Input<string>;
+    csrKeyPassword?: pulumi.Input<string | undefined>;
     /**
      * Type, default Original. Available options: Original = original certificate CSR, Upload = manual upload, Online = online generation.
      */
-    csrType?: pulumi.Input<string>;
+    csrType?: pulumi.Input<string | undefined>;
     /**
      * Reason for reissue.
      */
-    reason?: pulumi.Input<string>;
+    reason?: pulumi.Input<string | undefined>;
     /**
      * Verification type: DNS_AUTO = automatic DNS verification (this verification type is only supported for domain names that are resolved by Tencent Cloud and have normal resolution status), DNS = manual DNS verification, FILE = file verification.
      */

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const mysql = tencentcloud.Mysql.getZoneConfig({
+ * const mysql = tencentcloud.mysql.getZoneConfig({
  *     region: "ap-guangzhou",
  *     resultOutputFile: "mytestpath",
  * });
@@ -68,7 +68,7 @@ export interface GetZoneConfigResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const mysql = tencentcloud.Mysql.getZoneConfig({
+ * const mysql = tencentcloud.mysql.getZoneConfig({
  *     region: "ap-guangzhou",
  *     resultOutputFile: "mytestpath",
  * });
@@ -90,9 +90,9 @@ export interface GetZoneConfigOutputArgs {
     /**
      * Region parameter, which is used to identify the region to which the data you want to work with belongs.
      */
-    region?: pulumi.Input<string>;
+    region?: pulumi.Input<string | undefined>;
     /**
      * Used to store results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

@@ -73,15 +73,15 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc-example"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String(zone.Lists[3].Zone),
 //				Name:             pulumi.String("subnet-example"),
 //				CidrBlock:        pulumi.String("10.0.0.0/16"),
@@ -98,8 +98,8 @@ import (
 //				RedisReplicasNum: pulumi.Int(zone.Lists[3].RedisReplicasNums[0]),
 //				Name:             pulumi.String("tf_example"),
 //				Port:             pulumi.Int(6379),
-//				VpcId:            vpc.ID(),
-//				SubnetId:         subnet.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:         subnet2.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err
@@ -109,7 +109,7 @@ import (
 //				Description: pulumi.String("redis desc."),
 //				IsEnabled:   pulumi.Bool(true),
 //				SecretType:  pulumi.Int(4),
-//				AdditionalConfig: example.ID().ApplyT(func(id string) (pulumi.String, error) {
+//				AdditionalConfig: example.ID().ApplyT(func(id pulumi.ID) (pulumi.String, error) {
 //					var _zero pulumi.String
 //					tmpJSON0, err := json.Marshal(map[string]interface{}{
 //						"Region":     "ap-guangzhou",
@@ -143,7 +143,6 @@ import (
 // ## Import
 //
 // SSM secret can be imported using the secretName, e.g.
-//
 // ```sh
 // $ pulumi import tencentcloud:Ssm/secret:Secret foo test
 // ```

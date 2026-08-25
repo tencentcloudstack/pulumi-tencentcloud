@@ -132,47 +132,47 @@ export interface RecordTemplateState {
     /**
      * Aac recording parameters are set when Aac recording is enabled.
      */
-    aacParam?: pulumi.Input<inputs.Css.RecordTemplateAacParam>;
+    aacParam?: pulumi.Input<inputs.Css.RecordTemplateAacParam | undefined>;
     /**
      * Description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Flv recording parameters are set when Flv recording is enabled.
      */
-    flvParam?: pulumi.Input<inputs.Css.RecordTemplateFlvParam>;
+    flvParam?: pulumi.Input<inputs.Css.RecordTemplateFlvParam | undefined>;
     /**
      * FLV records special parameters.
      */
-    flvSpecialParam?: pulumi.Input<inputs.Css.RecordTemplateFlvSpecialParam>;
+    flvSpecialParam?: pulumi.Input<inputs.Css.RecordTemplateFlvSpecialParam | undefined>;
     /**
      * Hls recording parameters, which are set when hls recording is enabled.
      */
-    hlsParam?: pulumi.Input<inputs.Css.RecordTemplateHlsParam>;
+    hlsParam?: pulumi.Input<inputs.Css.RecordTemplateHlsParam | undefined>;
     /**
      * HLS specific recording parameters.
      */
-    hlsSpecialParam?: pulumi.Input<inputs.Css.RecordTemplateHlsSpecialParam>;
+    hlsSpecialParam?: pulumi.Input<inputs.Css.RecordTemplateHlsSpecialParam | undefined>;
     /**
      * Live broadcast type, 0 by default. 0: Ordinary live broadcast, 1: Slow broadcast.
      */
-    isDelayLive?: pulumi.Input<number>;
+    isDelayLive?: pulumi.Input<number | undefined>;
     /**
      * Mp3 recording parameters are set when Mp3 recording is turned on.
      */
-    mp3Param?: pulumi.Input<inputs.Css.RecordTemplateMp3Param>;
+    mp3Param?: pulumi.Input<inputs.Css.RecordTemplateMp3Param | undefined>;
     /**
      * Mp4 recording parameters are set when Mp4 recording is enabled.
      */
-    mp4Param?: pulumi.Input<inputs.Css.RecordTemplateMp4Param>;
+    mp4Param?: pulumi.Input<inputs.Css.RecordTemplateMp4Param | undefined>;
     /**
      * Whether to remove the watermark. This parameter is invalid when the type is slow live broadcast.
      */
-    removeWatermark?: pulumi.Input<boolean>;
+    removeWatermark?: pulumi.Input<boolean | undefined>;
     /**
      * Template name. Only `Chinese`, `English`, `numbers`, `_`, `-` are supported.
      */
-    templateName?: pulumi.Input<string>;
+    templateName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -182,43 +182,43 @@ export interface RecordTemplateArgs {
     /**
      * Aac recording parameters are set when Aac recording is enabled.
      */
-    aacParam?: pulumi.Input<inputs.Css.RecordTemplateAacParam>;
+    aacParam?: pulumi.Input<inputs.Css.RecordTemplateAacParam | undefined>;
     /**
      * Description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Flv recording parameters are set when Flv recording is enabled.
      */
-    flvParam?: pulumi.Input<inputs.Css.RecordTemplateFlvParam>;
+    flvParam?: pulumi.Input<inputs.Css.RecordTemplateFlvParam | undefined>;
     /**
      * FLV records special parameters.
      */
-    flvSpecialParam?: pulumi.Input<inputs.Css.RecordTemplateFlvSpecialParam>;
+    flvSpecialParam?: pulumi.Input<inputs.Css.RecordTemplateFlvSpecialParam | undefined>;
     /**
      * Hls recording parameters, which are set when hls recording is enabled.
      */
-    hlsParam?: pulumi.Input<inputs.Css.RecordTemplateHlsParam>;
+    hlsParam?: pulumi.Input<inputs.Css.RecordTemplateHlsParam | undefined>;
     /**
      * HLS specific recording parameters.
      */
-    hlsSpecialParam?: pulumi.Input<inputs.Css.RecordTemplateHlsSpecialParam>;
+    hlsSpecialParam?: pulumi.Input<inputs.Css.RecordTemplateHlsSpecialParam | undefined>;
     /**
      * Live broadcast type, 0 by default. 0: Ordinary live broadcast, 1: Slow broadcast.
      */
-    isDelayLive?: pulumi.Input<number>;
+    isDelayLive?: pulumi.Input<number | undefined>;
     /**
      * Mp3 recording parameters are set when Mp3 recording is turned on.
      */
-    mp3Param?: pulumi.Input<inputs.Css.RecordTemplateMp3Param>;
+    mp3Param?: pulumi.Input<inputs.Css.RecordTemplateMp3Param | undefined>;
     /**
      * Mp4 recording parameters are set when Mp4 recording is enabled.
      */
-    mp4Param?: pulumi.Input<inputs.Css.RecordTemplateMp4Param>;
+    mp4Param?: pulumi.Input<inputs.Css.RecordTemplateMp4Param | undefined>;
     /**
      * Whether to remove the watermark. This parameter is invalid when the type is slow live broadcast.
      */
-    removeWatermark?: pulumi.Input<boolean>;
+    removeWatermark?: pulumi.Input<boolean | undefined>;
     /**
      * Template name. Only `Chinese`, `English`, `numbers`, `_`, `-` are supported.
      */

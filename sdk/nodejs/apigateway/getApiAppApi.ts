@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.ApiGateway.getApiAppApi({
+ * const example = tencentcloud.apigateway.getApiAppApi({
  *     serviceId: "service-nxz6yync",
  *     apiId: "api-0cvmf4x4",
  *     apiRegion: "ap-guangzhou",
@@ -86,7 +86,7 @@ export interface GetApiAppApiResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.ApiGateway.getApiAppApi({
+ * const example = tencentcloud.apigateway.getApiAppApi({
  *     serviceId: "service-nxz6yync",
  *     apiId: "api-0cvmf4x4",
  *     apiRegion: "ap-guangzhou",
@@ -118,7 +118,7 @@ export interface GetApiAppApiOutputArgs {
     /**
      * Used to save apiAppApis.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * The unique ID of the service where the API resides.
      */

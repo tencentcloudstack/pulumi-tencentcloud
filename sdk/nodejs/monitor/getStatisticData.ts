@@ -65,10 +65,10 @@ export function getStatisticDataOutput(args: GetStatisticDataOutputArgs, opts?: 
  * A collection of arguments for invoking getStatisticData.
  */
 export interface GetStatisticDataOutputArgs {
-    conditions?: pulumi.Input<pulumi.Input<inputs.Monitor.GetStatisticDataConditionArgs>[]>;
-    groupBys?: pulumi.Input<pulumi.Input<string>[]>;
+    conditions?: pulumi.Input<pulumi.Input<inputs.Monitor.GetStatisticDataConditionArgs>[] | undefined>;
+    groupBys?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     metricNames: pulumi.Input<pulumi.Input<string>[]>;
     module: pulumi.Input<string>;
     namespace: pulumi.Input<string>;
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

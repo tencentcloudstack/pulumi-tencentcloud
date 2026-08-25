@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * scf reserved_concurrency_config can be imported using the id, e.g.
+ * scf reservedConcurrencyConfig can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Scf/reservedConcurrencyConfig:ReservedConcurrencyConfig reserved_concurrency_config reserved_concurrency_config_id
@@ -109,15 +109,15 @@ export interface ReservedConcurrencyConfigState {
     /**
      * Specifies the function of which you want to configure the reserved quota.
      */
-    functionName?: pulumi.Input<string>;
+    functionName?: pulumi.Input<string | undefined>;
     /**
      * Function namespace. Default value: default.
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
     /**
      * Reserved memory quota of the function. Note: the upper limit for the total reserved quota of the function is the user's total concurrency memory minus 12800.
      */
-    reservedConcurrencyMem?: pulumi.Input<number>;
+    reservedConcurrencyMem?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -131,7 +131,7 @@ export interface ReservedConcurrencyConfigArgs {
     /**
      * Function namespace. Default value: default.
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
     /**
      * Reserved memory quota of the function. Note: the upper limit for the total reserved quota of the function is the user's total concurrency memory minus 12800.
      */

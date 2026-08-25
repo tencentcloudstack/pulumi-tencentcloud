@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const autoScaleRecords = tencentcloud.Emr.getAutoScaleRecords({
+ * const autoScaleRecords = tencentcloud.emr.getAutoScaleRecords({
  *     instanceId: "emr-bpum4pad",
  *     filters: [{
  *         key: "StartTime",
@@ -76,7 +76,7 @@ export interface GetAutoScaleRecordsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const autoScaleRecords = tencentcloud.Emr.getAutoScaleRecords({
+ * const autoScaleRecords = tencentcloud.emr.getAutoScaleRecords({
  *     instanceId: "emr-bpum4pad",
  *     filters: [{
  *         key: "StartTime",
@@ -101,7 +101,7 @@ export interface GetAutoScaleRecordsOutputArgs {
     /**
      * Record filtering parameters, currently only `StartTime`, `EndTime` and `StrategyName` are supported. `StartTime` and `EndTime` support the time format of 2006-01-02 15:04:05 or 2006/01/02 15:04:05.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Emr.GetAutoScaleRecordsFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Emr.GetAutoScaleRecordsFilterArgs>[] | undefined>;
     /**
      * EMR cluster ID.
      */
@@ -109,5 +109,5 @@ export interface GetAutoScaleRecordsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

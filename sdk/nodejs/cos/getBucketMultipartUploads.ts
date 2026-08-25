@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const cosBucketMultipartUploads = tencentcloud.Cos.getBucketMultipartUploads({
+ * const cosBucketMultipartUploads = tencentcloud.cos.getBucketMultipartUploads({
  *     bucket: "xxxxxx",
  * });
  * ```
@@ -84,7 +84,7 @@ export interface GetBucketMultipartUploadsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const cosBucketMultipartUploads = tencentcloud.Cos.getBucketMultipartUploads({
+ * const cosBucketMultipartUploads = tencentcloud.cos.getBucketMultipartUploads({
  *     bucket: "xxxxxx",
  * });
  * ```
@@ -111,17 +111,17 @@ export interface GetBucketMultipartUploadsOutputArgs {
     /**
      * The delimiter is a symbol, and the Object name contains the Object between the specified prefix and the first occurrence of delimiter characters as a set of elements: common prefix. If there is no prefix, start from the beginning of the path.
      */
-    delimiter?: pulumi.Input<string>;
+    delimiter?: pulumi.Input<string | undefined>;
     /**
      * Specifies the encoding format of the return value. Legal value: url.
      */
-    encodingType?: pulumi.Input<string>;
+    encodingType?: pulumi.Input<string | undefined>;
     /**
      * The returned Object key must be prefixed with Prefix. Note that when using the prefix query, the returned key still contains Prefix.
      */
-    prefix?: pulumi.Input<string>;
+    prefix?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

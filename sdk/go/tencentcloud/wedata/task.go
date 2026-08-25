@@ -23,7 +23,7 @@ import (
 //
 //	"fmt"
 //
-//	"github.com/pulumi/pulumi-std/sdk/go/std"
+//	"github.com/pulumi/pulumi-std/sdk/v2/go/std"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/wedata"
 //
@@ -121,7 +121,7 @@ import (
 //
 // ## Import
 //
-// wedata wedata_task can be imported using the id, e.g.
+// wedata wedataTask can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Wedata/task:Task wedata_task wedata_task_id

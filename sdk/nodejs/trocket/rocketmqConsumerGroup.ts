@@ -177,31 +177,31 @@ export interface RocketmqConsumerGroupState {
     /**
      * Whether to enable consumption.
      */
-    consumeEnable?: pulumi.Input<boolean>;
+    consumeEnable?: pulumi.Input<boolean | undefined>;
     /**
      * `true`: Sequential delivery, `false`: Concurrent delivery.
      */
-    consumeMessageOrderly?: pulumi.Input<boolean>;
+    consumeMessageOrderly?: pulumi.Input<boolean | undefined>;
     /**
      * Name of consumer group.
      */
-    consumerGroup?: pulumi.Input<string>;
+    consumerGroup?: pulumi.Input<string | undefined>;
     /**
      * Instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Max retry times.
      */
-    maxRetryTimes?: pulumi.Input<number>;
+    maxRetryTimes?: pulumi.Input<number | undefined>;
     /**
      * remark.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Tag of consumer group.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 /**
@@ -231,9 +231,9 @@ export interface RocketmqConsumerGroupArgs {
     /**
      * remark.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * Tag of consumer group.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

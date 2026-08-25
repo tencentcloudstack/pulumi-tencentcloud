@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const idTest = tencentcloud.Tcaplus.getIdls({
+ * const idTest = tencentcloud.tcaplus.getIdls({
  *     clusterId: "19162256624",
  * });
  * ```
@@ -66,7 +66,7 @@ export interface GetIdlsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const idTest = tencentcloud.Tcaplus.getIdls({
+ * const idTest = tencentcloud.tcaplus.getIdls({
  *     clusterId: "19162256624",
  * });
  * ```
@@ -90,5 +90,5 @@ export interface GetIdlsOutputArgs {
     /**
      * File for saving results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

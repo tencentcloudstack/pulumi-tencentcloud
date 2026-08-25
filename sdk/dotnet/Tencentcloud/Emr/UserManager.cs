@@ -19,7 +19,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -42,7 +41,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
     /// 
     /// ## Import
     /// 
-    /// emr user_manager can be imported using the id, e.g.
+    /// emr UserManager can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Emr/userManager:UserManager user_manager instanceId#userName

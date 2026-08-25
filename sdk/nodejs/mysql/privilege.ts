@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "cdb",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -227,31 +227,31 @@ export interface PrivilegeState {
     /**
      * Account host, default is `%`.
      */
-    accountHost?: pulumi.Input<string>;
+    accountHost?: pulumi.Input<string | undefined>;
     /**
      * Account name.the forbidden value is:root,mysql.sys,tencentroot.
      */
-    accountName?: pulumi.Input<string>;
+    accountName?: pulumi.Input<string | undefined>;
     /**
      * Column privileges list.
      */
-    columns?: pulumi.Input<pulumi.Input<inputs.Mysql.PrivilegeColumn>[]>;
+    columns?: pulumi.Input<pulumi.Input<inputs.Mysql.PrivilegeColumn>[] | undefined>;
     /**
      * Database privileges list.
      */
-    databases?: pulumi.Input<pulumi.Input<inputs.Mysql.PrivilegeDatabase>[]>;
+    databases?: pulumi.Input<pulumi.Input<inputs.Mysql.PrivilegeDatabase>[] | undefined>;
     /**
      * Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
      */
-    globals?: pulumi.Input<pulumi.Input<string>[]>;
+    globals?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Instance ID.
      */
-    mysqlId?: pulumi.Input<string>;
+    mysqlId?: pulumi.Input<string | undefined>;
     /**
      * Table privileges list.
      */
-    tables?: pulumi.Input<pulumi.Input<inputs.Mysql.PrivilegeTable>[]>;
+    tables?: pulumi.Input<pulumi.Input<inputs.Mysql.PrivilegeTable>[] | undefined>;
 }
 
 /**
@@ -261,7 +261,7 @@ export interface PrivilegeArgs {
     /**
      * Account host, default is `%`.
      */
-    accountHost?: pulumi.Input<string>;
+    accountHost?: pulumi.Input<string | undefined>;
     /**
      * Account name.the forbidden value is:root,mysql.sys,tencentroot.
      */
@@ -269,11 +269,11 @@ export interface PrivilegeArgs {
     /**
      * Column privileges list.
      */
-    columns?: pulumi.Input<pulumi.Input<inputs.Mysql.PrivilegeColumn>[]>;
+    columns?: pulumi.Input<pulumi.Input<inputs.Mysql.PrivilegeColumn>[] | undefined>;
     /**
      * Database privileges list.
      */
-    databases?: pulumi.Input<pulumi.Input<inputs.Mysql.PrivilegeDatabase>[]>;
+    databases?: pulumi.Input<pulumi.Input<inputs.Mysql.PrivilegeDatabase>[] | undefined>;
     /**
      * Global privileges. available values for Privileges:ALTER,ALTER ROUTINE,CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,CREATE USER,CREATE VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK TABLES,PROCESS,REFERENCES,RELOAD,REPLICATION CLIENT,REPLICATION SLAVE,SELECT,SHOW DATABASES,SHOW VIEW,TRIGGER,UPDATE.
      */
@@ -285,5 +285,5 @@ export interface PrivilegeArgs {
     /**
      * Table privileges list.
      */
-    tables?: pulumi.Input<pulumi.Input<inputs.Mysql.PrivilegeTable>[]>;
+    tables?: pulumi.Input<pulumi.Input<inputs.Mysql.PrivilegeTable>[] | undefined>;
 }

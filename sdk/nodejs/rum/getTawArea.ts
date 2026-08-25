@@ -56,8 +56,8 @@ export function getTawAreaOutput(args?: GetTawAreaOutputArgs, opts?: pulumi.Invo
  * A collection of arguments for invoking getTawArea.
  */
 export interface GetTawAreaOutputArgs {
-    areaIds?: pulumi.Input<pulumi.Input<number>[]>;
-    areaKeys?: pulumi.Input<pulumi.Input<string>[]>;
-    areaStatuses?: pulumi.Input<pulumi.Input<number>[]>;
-    resultOutputFile?: pulumi.Input<string>;
+    areaIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
+    areaKeys?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    areaStatuses?: pulumi.Input<pulumi.Input<number>[] | undefined>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Ckafka.getUsers({
+ * const foo = tencentcloud.ckafka.getUsers({
  *     instanceId: "ckafka-f9ife4zz",
  *     accountName: "test",
  * });
@@ -76,7 +76,7 @@ export interface GetUsersResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.Ckafka.getUsers({
+ * const foo = tencentcloud.ckafka.getUsers({
  *     instanceId: "ckafka-f9ife4zz",
  *     accountName: "test",
  * });
@@ -98,7 +98,7 @@ export interface GetUsersOutputArgs {
     /**
      * Account name used when query ckafka users' infos. Could be a substr of user name.
      */
-    accountName?: pulumi.Input<string>;
+    accountName?: pulumi.Input<string | undefined>;
     /**
      * Id of the ckafka instance.
      */
@@ -106,5 +106,5 @@ export interface GetUsersOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

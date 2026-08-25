@@ -146,31 +146,31 @@ export interface ApiKeyState {
     /**
      * User defined key ID, required when accessKeyType is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.
      */
-    accessKeyId?: pulumi.Input<string>;
+    accessKeyId?: pulumi.Input<string | undefined>;
     /**
      * The user-defined key must be passed when the accessKeyType is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.
      */
-    accessKeySecret?: pulumi.Input<string>;
+    accessKeySecret?: pulumi.Input<string | undefined>;
     /**
      * Key type, supports both auto and manual (custom keys), defaults to auto.
      */
-    accessKeyType?: pulumi.Input<string>;
+    accessKeyType?: pulumi.Input<string | undefined>;
     /**
      * Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Last modified time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
      */
-    modifyTime?: pulumi.Input<string>;
+    modifyTime?: pulumi.Input<string | undefined>;
     /**
      * Custom key name.
      */
-    secretName?: pulumi.Input<string>;
+    secretName?: pulumi.Input<string | undefined>;
     /**
      * Key status. Valid values: `on`, `off`.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -180,15 +180,15 @@ export interface ApiKeyArgs {
     /**
      * User defined key ID, required when accessKeyType is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.
      */
-    accessKeyId?: pulumi.Input<string>;
+    accessKeyId?: pulumi.Input<string | undefined>;
     /**
      * The user-defined key must be passed when the accessKeyType is manual. The length is 10-50 characters, consisting of letters, numbers, and English underscores.
      */
-    accessKeySecret?: pulumi.Input<string>;
+    accessKeySecret?: pulumi.Input<string | undefined>;
     /**
      * Key type, supports both auto and manual (custom keys), defaults to auto.
      */
-    accessKeyType?: pulumi.Input<string>;
+    accessKeyType?: pulumi.Input<string | undefined>;
     /**
      * Custom key name.
      */
@@ -196,5 +196,5 @@ export interface ApiKeyArgs {
     /**
      * Key status. Valid values: `on`, `off`.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
 }

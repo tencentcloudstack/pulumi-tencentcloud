@@ -40,7 +40,7 @@ import (
 //				UsagePlanName: plan.UsagePlanName,
 //			}, nil)
 //			_ = apigateway.GetUsagePlansOutput(ctx, apigateway.GetUsagePlansOutputArgs{
-//				UsagePlanId: plan.ID(),
+//				UsagePlanId: plan.ID().ToIDOutput().ToStringOutput(),
 //			}, nil)
 //			return nil
 //		})
@@ -81,12 +81,8 @@ type GetUsagePlansResult struct {
 }
 
 func GetUsagePlansOutput(ctx *pulumi.Context, args GetUsagePlansOutputArgs, opts ...pulumi.InvokeOption) GetUsagePlansResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetUsagePlansResultOutput, error) {
-			args := v.(GetUsagePlansArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:ApiGateway/getUsagePlans:getUsagePlans", args, GetUsagePlansResultOutput{}, options).(GetUsagePlansResultOutput), nil
-		}).(GetUsagePlansResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:ApiGateway/getUsagePlans:getUsagePlans", args, GetUsagePlansResultOutput{}, options).(GetUsagePlansResultOutput)
 }
 
 // A collection of arguments for invoking getUsagePlans.

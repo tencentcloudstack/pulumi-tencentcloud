@@ -24,7 +24,7 @@ import * as utilities from "../utilities";
  *         2,
  *     ],
  * });
- * const test = tencentcloud.Dbbrain.getSecurityAuditLogDownloadUrlsOutput({
+ * const test = tencentcloud.dbbrain.getSecurityAuditLogDownloadUrlsOutput({
  *     secAuditGroupId: "%s",
  *     asyncRequestId: task.asyncRequestId,
  *     product: "mysql",
@@ -100,7 +100,7 @@ export interface GetSecurityAuditLogDownloadUrlsResult {
  *         2,
  *     ],
  * });
- * const test = tencentcloud.Dbbrain.getSecurityAuditLogDownloadUrlsOutput({
+ * const test = tencentcloud.dbbrain.getSecurityAuditLogDownloadUrlsOutput({
  *     secAuditGroupId: "%s",
  *     asyncRequestId: task.asyncRequestId,
  *     product: "mysql",
@@ -132,7 +132,7 @@ export interface GetSecurityAuditLogDownloadUrlsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Security audit group Id.
      */

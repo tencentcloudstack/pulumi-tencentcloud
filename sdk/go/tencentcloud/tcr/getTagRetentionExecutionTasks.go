@@ -76,12 +76,8 @@ type GetTagRetentionExecutionTasksResult struct {
 }
 
 func GetTagRetentionExecutionTasksOutput(ctx *pulumi.Context, args GetTagRetentionExecutionTasksOutputArgs, opts ...pulumi.InvokeOption) GetTagRetentionExecutionTasksResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetTagRetentionExecutionTasksResultOutput, error) {
-			args := v.(GetTagRetentionExecutionTasksArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tcr/getTagRetentionExecutionTasks:getTagRetentionExecutionTasks", args, GetTagRetentionExecutionTasksResultOutput{}, options).(GetTagRetentionExecutionTasksResultOutput), nil
-		}).(GetTagRetentionExecutionTasksResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tcr/getTagRetentionExecutionTasks:getTagRetentionExecutionTasks", args, GetTagRetentionExecutionTasksResultOutput{}, options).(GetTagRetentionExecutionTasksResultOutput)
 }
 
 // A collection of arguments for invoking getTagRetentionExecutionTasks.

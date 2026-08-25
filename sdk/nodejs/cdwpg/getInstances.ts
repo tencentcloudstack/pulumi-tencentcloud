@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const cdwpgInstances = tencentcloud.Cdwpg.getInstances({});
+ * const cdwpgInstances = tencentcloud.cdwpg.getInstances({});
  * ```
  */
 export function getInstances(args?: GetInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetInstancesResult> {
@@ -77,7 +77,7 @@ export interface GetInstancesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const cdwpgInstances = tencentcloud.Cdwpg.getInstances({});
+ * const cdwpgInstances = tencentcloud.cdwpg.getInstances({});
  * ```
  */
 export function getInstancesOutput(args?: GetInstancesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstancesResult> {
@@ -98,17 +98,17 @@ export interface GetInstancesOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Search instance id.
      */
-    searchInstanceId?: pulumi.Input<string>;
+    searchInstanceId?: pulumi.Input<string | undefined>;
     /**
      * Search instance name.
      */
-    searchInstanceName?: pulumi.Input<string>;
+    searchInstanceName?: pulumi.Input<string | undefined>;
     /**
      * Search tags.
      */
-    searchTags?: pulumi.Input<pulumi.Input<string>[]>;
+    searchTags?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

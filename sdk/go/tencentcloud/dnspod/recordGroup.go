@@ -43,7 +43,7 @@ import (
 //
 // ## Import
 //
-// dnspod record_group can be imported using the domain#groupId, e.g.
+// dnspod recordGroup can be imported using the domain#groupId, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Dnspod/recordGroup:RecordGroup record_group domain#groupId

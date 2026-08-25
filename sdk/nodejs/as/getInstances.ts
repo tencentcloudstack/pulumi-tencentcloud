@@ -26,7 +26,7 @@ import * as utilities from "../utilities";
  *         test: "test",
  *     },
  * });
- * const instances = tencentcloud.As.getInstancesOutput({
+ * const instances = tencentcloud.as.getInstancesOutput({
  *     filters: [{
  *         name: "auto-scaling-group-id",
  *         values: [scalingGroup.id],
@@ -98,7 +98,7 @@ export interface GetInstancesResult {
  *         test: "test",
  *     },
  * });
- * const instances = tencentcloud.As.getInstancesOutput({
+ * const instances = tencentcloud.as.getInstancesOutput({
  *     filters: [{
  *         name: "auto-scaling-group-id",
  *         values: [scalingGroup.id],
@@ -123,13 +123,13 @@ export interface GetInstancesOutputArgs {
     /**
      * Filter conditions. If there are multiple Filters, the relationship between Filters is a logical AND (AND) relationship. If there are multiple Values in the same Filter, the relationship between Values under the same Filter is a logical OR (OR) relationship.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.As.GetInstancesFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.As.GetInstancesFilterArgs>[] | undefined>;
     /**
      * Instance ID of the cloud server (CVM) to be queried. The limit is 100 per request.
      */
-    instanceIds?: pulumi.Input<pulumi.Input<string>[]>;
+    instanceIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

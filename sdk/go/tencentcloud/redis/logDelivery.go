@@ -92,12 +92,14 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := redis.NewLogDelivery(ctx, "example", &redis.LogDeliveryArgs{
-//				InstanceId:  pulumi.String("crs-dmjj8en7"),
-//				LogRegion:   pulumi.String("ap-guangzhou"),
-//				LogsetName:  pulumi.String("tf-example"),
-//				TopicName:   pulumi.String("tf-example"),
-//				Period:      pulumi.Int(20),
-//				CreateIndex: pulumi.Bool(true),
+//				InstanceId:     pulumi.String("crs-dmjj8en7"),
+//				LogRegion:      pulumi.String("ap-guangzhou"),
+//				LogsetName:     pulumi.String("tf-example132"),
+//				TopicName:      pulumi.String("tf-example132"),
+//				Period:         pulumi.Int(20),
+//				CreateIndex:    pulumi.Bool(true),
+//				IsDeleteTopic:  pulumi.Bool(true),
+//				IsDeleteLogset: pulumi.Bool(true),
 //			})
 //			if err != nil {
 //				return err
@@ -110,7 +112,7 @@ import (
 //
 // ## Import
 //
-// Redis log delivery can be imported, e.g.
+// Redis log delivery can be imported using the instanceId, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Redis/logDelivery:LogDelivery example crs-dmjj8en7
@@ -122,6 +124,10 @@ type LogDelivery struct {
 	CreateIndex pulumi.BoolOutput `pulumi:"createIndex"`
 	// Instance ID.
 	InstanceId pulumi.StringOutput `pulumi:"instanceId"`
+	// Whether to delete the associated Logset when deleting the log delivery. Default is false.
+	IsDeleteLogset pulumi.BoolPtrOutput `pulumi:"isDeleteLogset"`
+	// Whether to delete the associated Topic when deleting the log delivery. Default is false.
+	IsDeleteTopic pulumi.BoolPtrOutput `pulumi:"isDeleteTopic"`
 	// The region where the log set is located; if not specified, the region where the instance is located will be used by default.
 	LogRegion pulumi.StringOutput `pulumi:"logRegion"`
 	// The ID of the log set being delivered.
@@ -173,6 +179,10 @@ type logDeliveryState struct {
 	CreateIndex *bool `pulumi:"createIndex"`
 	// Instance ID.
 	InstanceId *string `pulumi:"instanceId"`
+	// Whether to delete the associated Logset when deleting the log delivery. Default is false.
+	IsDeleteLogset *bool `pulumi:"isDeleteLogset"`
+	// Whether to delete the associated Topic when deleting the log delivery. Default is false.
+	IsDeleteTopic *bool `pulumi:"isDeleteTopic"`
 	// The region where the log set is located; if not specified, the region where the instance is located will be used by default.
 	LogRegion *string `pulumi:"logRegion"`
 	// The ID of the log set being delivered.
@@ -192,6 +202,10 @@ type LogDeliveryState struct {
 	CreateIndex pulumi.BoolPtrInput
 	// Instance ID.
 	InstanceId pulumi.StringPtrInput
+	// Whether to delete the associated Logset when deleting the log delivery. Default is false.
+	IsDeleteLogset pulumi.BoolPtrInput
+	// Whether to delete the associated Topic when deleting the log delivery. Default is false.
+	IsDeleteTopic pulumi.BoolPtrInput
 	// The region where the log set is located; if not specified, the region where the instance is located will be used by default.
 	LogRegion pulumi.StringPtrInput
 	// The ID of the log set being delivered.
@@ -215,6 +229,10 @@ type logDeliveryArgs struct {
 	CreateIndex *bool `pulumi:"createIndex"`
 	// Instance ID.
 	InstanceId string `pulumi:"instanceId"`
+	// Whether to delete the associated Logset when deleting the log delivery. Default is false.
+	IsDeleteLogset *bool `pulumi:"isDeleteLogset"`
+	// Whether to delete the associated Topic when deleting the log delivery. Default is false.
+	IsDeleteTopic *bool `pulumi:"isDeleteTopic"`
 	// The region where the log set is located; if not specified, the region where the instance is located will be used by default.
 	LogRegion *string `pulumi:"logRegion"`
 	// The ID of the log set being delivered.
@@ -235,6 +253,10 @@ type LogDeliveryArgs struct {
 	CreateIndex pulumi.BoolPtrInput
 	// Instance ID.
 	InstanceId pulumi.StringInput
+	// Whether to delete the associated Logset when deleting the log delivery. Default is false.
+	IsDeleteLogset pulumi.BoolPtrInput
+	// Whether to delete the associated Topic when deleting the log delivery. Default is false.
+	IsDeleteTopic pulumi.BoolPtrInput
 	// The region where the log set is located; if not specified, the region where the instance is located will be used by default.
 	LogRegion pulumi.StringPtrInput
 	// The ID of the log set being delivered.
@@ -344,6 +366,16 @@ func (o LogDeliveryOutput) CreateIndex() pulumi.BoolOutput {
 // Instance ID.
 func (o LogDeliveryOutput) InstanceId() pulumi.StringOutput {
 	return o.ApplyT(func(v *LogDelivery) pulumi.StringOutput { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Whether to delete the associated Logset when deleting the log delivery. Default is false.
+func (o LogDeliveryOutput) IsDeleteLogset() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *LogDelivery) pulumi.BoolPtrOutput { return v.IsDeleteLogset }).(pulumi.BoolPtrOutput)
+}
+
+// Whether to delete the associated Topic when deleting the log delivery. Default is false.
+func (o LogDeliveryOutput) IsDeleteTopic() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *LogDelivery) pulumi.BoolPtrOutput { return v.IsDeleteTopic }).(pulumi.BoolPtrOutput)
 }
 
 // The region where the log set is located; if not specified, the region where the instance is located will be used by default.

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instanceCurrentOp = tencentcloud.Mongodb.getInstanceCurrentOp({
+ * const instanceCurrentOp = tencentcloud.mongodb.getInstanceCurrentOp({
  *     instanceId: "cmgo-b43i3wkj",
  *     op: "command",
  *     orderByType: "desc",
@@ -122,7 +122,7 @@ export interface GetInstanceCurrentOpResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instanceCurrentOp = tencentcloud.Mongodb.getInstanceCurrentOp({
+ * const instanceCurrentOp = tencentcloud.mongodb.getInstanceCurrentOp({
  *     instanceId: "cmgo-b43i3wkj",
  *     op: "command",
  *     orderByType: "desc",
@@ -155,33 +155,33 @@ export interface GetInstanceCurrentOpOutputArgs {
     /**
      * Filter condition, the time that the operation has been executed (unit: millisecond),the result will return the operation that exceeds the set time, the default value is 0,and the value range is [0, 3600000].
      */
-    millisecondRunning?: pulumi.Input<number>;
+    millisecondRunning?: pulumi.Input<number | undefined>;
     /**
      * Filter condition, the namespace namespace to which the operation belongs, in the format of db.collection.
      */
-    ns?: pulumi.Input<string>;
+    ns?: pulumi.Input<string | undefined>;
     /**
      * Filter condition, operation type, possible values: none, update, insert, query, command, getmore,remove and killcursors.
      */
-    op?: pulumi.Input<string>;
+    op?: pulumi.Input<string | undefined>;
     /**
      * Returns the sorted field of the result set, currently supports: MicrosecsRunning/microsecsrunning,the default is ascending sort.
      */
-    orderBy?: pulumi.Input<string>;
+    orderBy?: pulumi.Input<string | undefined>;
     /**
      * Returns the sorting method of the result set, possible values: ASC/asc or DESC/desc.
      */
-    orderByType?: pulumi.Input<string>;
+    orderByType?: pulumi.Input<string | undefined>;
     /**
      * filter condition, shard name.
      */
-    replicaSetName?: pulumi.Input<string>;
+    replicaSetName?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Filter condition, node status, possible value: primary, secondary.
      */
-    state?: pulumi.Input<string>;
+    state?: pulumi.Input<string | undefined>;
 }

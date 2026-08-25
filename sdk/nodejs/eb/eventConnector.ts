@@ -19,7 +19,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.User.getInfo({});
+ * const foo = tencentcloud.user.getInfo({});
  * const fooEventBus = new tencentcloud.eb.EventBus("foo", {
  *     eventBusName: "tf-event_bus",
  *     description: "event bus desc",
@@ -63,7 +63,7 @@ import * as utilities from "../utilities";
  *     enable: true,
  *     type: "ckafka",
  *     connectionDescription: {
- *         resourceDescription: pulumi.all([uin, uin, ckafkaId]).apply(([uin, uin1, ckafkaId]) => `qcs::ckafka:ap-guangzhou:uin/${uin}:ckafkaId/uin/${uin1}/${ckafkaId}`),
+ *         resourceDescription: pulumi.all([uin, ckafkaId]).apply(([uin, ckafkaId]) => `qcs::ckafka:ap-guangzhou:uin/${uin}:ckafkaId/uin/${uin}/${ckafkaId}`),
  *         ckafkaParams: {
  *             offset: "latest",
  *             topicName: "dasdasd",
@@ -78,7 +78,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = tencentcloud.User.getInfo({});
+ * const foo = tencentcloud.user.getInfo({});
  * const fooEventBus = new tencentcloud.eb.EventBus("foo", {
  *     eventBusName: "tf-event_bus",
  *     description: "event bus desc",
@@ -118,7 +118,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * eb event_connector can be imported using the id, e.g.
+ * eb eventConnector can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Eb/eventConnector:EventConnector event_connector eventBusId#connectionId
@@ -226,27 +226,27 @@ export interface EventConnectorState {
     /**
      * Connector description.
      */
-    connectionDescription?: pulumi.Input<inputs.Eb.EventConnectorConnectionDescription>;
+    connectionDescription?: pulumi.Input<inputs.Eb.EventConnectorConnectionDescription | undefined>;
     /**
      * connector name.
      */
-    connectionName?: pulumi.Input<string>;
+    connectionName?: pulumi.Input<string | undefined>;
     /**
      * description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * switch.
      */
-    enable?: pulumi.Input<boolean>;
+    enable?: pulumi.Input<boolean | undefined>;
     /**
      * event bus Id.
      */
-    eventBusId?: pulumi.Input<string>;
+    eventBusId?: pulumi.Input<string | undefined>;
     /**
      * type.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -264,11 +264,11 @@ export interface EventConnectorArgs {
     /**
      * description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * switch.
      */
-    enable?: pulumi.Input<boolean>;
+    enable?: pulumi.Input<boolean | undefined>;
     /**
      * event bus Id.
      */
@@ -276,5 +276,5 @@ export interface EventConnectorArgs {
     /**
      * type.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }

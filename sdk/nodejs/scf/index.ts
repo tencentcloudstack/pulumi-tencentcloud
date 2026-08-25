@@ -130,6 +130,11 @@ export type TerminateAsyncEvent = import("./terminateAsyncEvent").TerminateAsync
 export const TerminateAsyncEvent: typeof import("./terminateAsyncEvent").TerminateAsyncEvent = null as any;
 utilities.lazyLoad(exports, ["TerminateAsyncEvent"], () => require("./terminateAsyncEvent"));
 
+export { TriggerArgs, TriggerState } from "./trigger";
+export type Trigger = import("./trigger").Trigger;
+export const Trigger: typeof import("./trigger").Trigger = null as any;
+utilities.lazyLoad(exports, ["Trigger"], () => require("./trigger"));
+
 export { TriggerConfigArgs, TriggerConfigState } from "./triggerConfig";
 export type TriggerConfig = import("./triggerConfig").TriggerConfig;
 export const TriggerConfig: typeof import("./triggerConfig").TriggerConfig = null as any;
@@ -164,6 +169,8 @@ const _module = {
                 return new SyncInvokeFunction(name, <any>undefined, { urn })
             case "tencentcloud:Scf/terminateAsyncEvent:TerminateAsyncEvent":
                 return new TerminateAsyncEvent(name, <any>undefined, { urn })
+            case "tencentcloud:Scf/trigger:Trigger":
+                return new Trigger(name, <any>undefined, { urn })
             case "tencentcloud:Scf/triggerConfig:TriggerConfig":
                 return new TriggerConfig(name, <any>undefined, { urn })
             default:
@@ -183,4 +190,5 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Scf/provisionedConcurrenc
 pulumi.runtime.registerResourceModule("tencentcloud", "Scf/reservedConcurrencyConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Scf/syncInvokeFunction", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Scf/terminateAsyncEvent", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Scf/trigger", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Scf/triggerConfig", _module)

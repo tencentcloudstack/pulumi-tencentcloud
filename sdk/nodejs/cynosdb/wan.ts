@@ -126,27 +126,27 @@ export interface WanState {
     /**
      * Cluster ID.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Instance Group ID.
      */
-    instanceGrpId?: pulumi.Input<string>;
+    instanceGrpId?: pulumi.Input<string | undefined>;
     /**
      * Domain name.
      */
-    wanDomain?: pulumi.Input<string>;
+    wanDomain?: pulumi.Input<string | undefined>;
     /**
      * Network ip.
      */
-    wanIp?: pulumi.Input<string>;
+    wanIp?: pulumi.Input<string | undefined>;
     /**
      * Internet port.
      */
-    wanPort?: pulumi.Input<number>;
+    wanPort?: pulumi.Input<number | undefined>;
     /**
      * Internet status.
      */
-    wanStatus?: pulumi.Input<string>;
+    wanStatus?: pulumi.Input<string | undefined>;
 }
 
 /**

@@ -36,7 +36,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// 
     /// ## Import
     /// 
-    /// waf auto_deny_rules can be imported using the id, e.g.
+    /// waf AutoDenyRules can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Waf/autoDenyRules:AutoDenyRules example demo.waf.com

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const triggers = tencentcloud.Scf.getTriggers({
+ * const triggers = tencentcloud.scf.getTriggers({
  *     functionName: "keep-1676351130",
  *     namespace: "default",
  *     orderBy: "add_time",
@@ -93,7 +93,7 @@ export interface GetTriggersResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const triggers = tencentcloud.Scf.getTriggers({
+ * const triggers = tencentcloud.scf.getTriggers({
  *     functionName: "keep-1676351130",
  *     namespace: "default",
  *     orderBy: "add_time",
@@ -120,7 +120,7 @@ export interface GetTriggersOutputArgs {
     /**
      * * Qualifier:Function version, alias.
      */
-    filters?: pulumi.Input<pulumi.Input<inputs.Scf.GetTriggersFilterArgs>[]>;
+    filters?: pulumi.Input<pulumi.Input<inputs.Scf.GetTriggersFilterArgs>[] | undefined>;
     /**
      * Function name.
      */
@@ -128,17 +128,17 @@ export interface GetTriggersOutputArgs {
     /**
      * Namespace. Default value: default.
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
     /**
      * Indicates whether the returned results are sorted in ascending or descending order. Valid values: ASC, DESC. Default value: DESC.
      */
-    order?: pulumi.Input<string>;
+    order?: pulumi.Input<string | undefined>;
     /**
      * Indicates by which field to sort the returned results. Valid values: add_time, mod_time. Default value: mod_time.
      */
-    orderBy?: pulumi.Input<string>;
+    orderBy?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

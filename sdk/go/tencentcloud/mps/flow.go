@@ -58,7 +58,7 @@ import (
 //						},
 //					},
 //				},
-//				EventId: event.ID(),
+//				EventId: event.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err
@@ -107,7 +107,7 @@ import (
 //						},
 //					},
 //				},
-//				EventId: eventRtp.ID(),
+//				EventId: eventRtp.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err
@@ -158,13 +158,13 @@ import (
 //						},
 //					},
 //				},
-//				EventId: eventRtp.ID(),
+//				EventId: eventRtp.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			output, err := mps.NewOutput(ctx, "output", &mps.OutputArgs{
-//				FlowId: flowRtp.ID(),
+//				FlowId: flowRtp.ID().ToIDOutput().ToStringOutput(),
 //				Output: &mps.OutputOutputTypeArgs{
 //					OutputName:   pulumi.String("your_output_name"),
 //					Description:  pulumi.String("tf mps output group"),
@@ -186,7 +186,7 @@ import (
 //				return err
 //			}
 //			_, err = mps.NewStartFlowOperation(ctx, "operation", &mps.StartFlowOperationArgs{
-//				FlowId: flowRtp.ID(),
+//				FlowId: flowRtp.ID().ToIDOutput().ToStringOutput(),
 //				Start:  pulumi.Bool(true),
 //			}, pulumi.DependsOn([]pulumi.Resource{
 //				output,

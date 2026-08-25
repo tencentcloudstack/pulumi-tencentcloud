@@ -43,7 +43,7 @@ import (
 //
 // ## Import
 //
-// dnspod snapshot_config can be imported using the id, e.g.
+// dnspod snapshotConfig can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Dnspod/snapshotConfig:SnapshotConfig snapshot_config domain

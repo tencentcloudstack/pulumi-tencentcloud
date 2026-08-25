@@ -12,7 +12,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a vpc private nat gateway
+// Provides a resource to create a VPC private nat gateway
 //
 // ## Example Usage
 //
@@ -28,9 +28,12 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := vpc.NewPrivateNatGateway(ctx, "private_nat_gateway", &vpc.PrivateNatGatewayArgs{
-//				NatGatewayName: pulumi.String("xxx"),
-//				VpcId:          pulumi.String("xxx"),
+//			_, err := vpc.NewPrivateNatGateway(ctx, "example", &vpc.PrivateNatGatewayArgs{
+//				NatGatewayName: pulumi.String("tf-example"),
+//				VpcId:          pulumi.String("vpc-i5yyodl9"),
+//				Tags: pulumi.StringMap{
+//					"createBy": pulumi.String("Terraform"),
+//				},
 //			})
 //			if err != nil {
 //				return err
@@ -43,10 +46,10 @@ import (
 //
 // ## Import
 //
-// vpc private_nat_gateway can be imported using the id, e.g.
+// VPC private nat gateway can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Vpc/privateNatGateway:PrivateNatGateway private_nat_gateway private_nat_gateway_id
+// $ pulumi import tencentcloud:Vpc/privateNatGateway:PrivateNatGateway example intranat-ljdy849x
 // ```
 type PrivateNatGateway struct {
 	pulumi.CustomResourceState
@@ -55,8 +58,12 @@ type PrivateNatGateway struct {
 	CcnId pulumi.StringOutput `pulumi:"ccnId"`
 	// Cross-domain parameters. Cross-domain binding of VPCs is supported only when the value is True.
 	CrossDomain pulumi.BoolOutput `pulumi:"crossDomain"`
+	// Private network NAT gateway instance ID.
+	NatGatewayId pulumi.StringOutput `pulumi:"natGatewayId"`
 	// Private network gateway name.
 	NatGatewayName pulumi.StringOutput `pulumi:"natGatewayName"`
+	// Tag description of the instance.
+	Tags pulumi.StringMapOutput `pulumi:"tags"`
 	// Private Cloud instance ID. This parameter is required when creating a VPC type private network NAT gateway or a private network NAT gateway of private network gateway.
 	VpcId pulumi.StringOutput `pulumi:"vpcId"`
 	// VPC type private network NAT gateway. Only when the value is True will a VPC type private network NAT gateway be created.
@@ -100,8 +107,12 @@ type privateNatGatewayState struct {
 	CcnId *string `pulumi:"ccnId"`
 	// Cross-domain parameters. Cross-domain binding of VPCs is supported only when the value is True.
 	CrossDomain *bool `pulumi:"crossDomain"`
+	// Private network NAT gateway instance ID.
+	NatGatewayId *string `pulumi:"natGatewayId"`
 	// Private network gateway name.
 	NatGatewayName *string `pulumi:"natGatewayName"`
+	// Tag description of the instance.
+	Tags map[string]string `pulumi:"tags"`
 	// Private Cloud instance ID. This parameter is required when creating a VPC type private network NAT gateway or a private network NAT gateway of private network gateway.
 	VpcId *string `pulumi:"vpcId"`
 	// VPC type private network NAT gateway. Only when the value is True will a VPC type private network NAT gateway be created.
@@ -113,8 +124,12 @@ type PrivateNatGatewayState struct {
 	CcnId pulumi.StringPtrInput
 	// Cross-domain parameters. Cross-domain binding of VPCs is supported only when the value is True.
 	CrossDomain pulumi.BoolPtrInput
+	// Private network NAT gateway instance ID.
+	NatGatewayId pulumi.StringPtrInput
 	// Private network gateway name.
 	NatGatewayName pulumi.StringPtrInput
+	// Tag description of the instance.
+	Tags pulumi.StringMapInput
 	// Private Cloud instance ID. This parameter is required when creating a VPC type private network NAT gateway or a private network NAT gateway of private network gateway.
 	VpcId pulumi.StringPtrInput
 	// VPC type private network NAT gateway. Only when the value is True will a VPC type private network NAT gateway be created.
@@ -132,6 +147,8 @@ type privateNatGatewayArgs struct {
 	CrossDomain *bool `pulumi:"crossDomain"`
 	// Private network gateway name.
 	NatGatewayName string `pulumi:"natGatewayName"`
+	// Tag description of the instance.
+	Tags map[string]string `pulumi:"tags"`
 	// Private Cloud instance ID. This parameter is required when creating a VPC type private network NAT gateway or a private network NAT gateway of private network gateway.
 	VpcId *string `pulumi:"vpcId"`
 	// VPC type private network NAT gateway. Only when the value is True will a VPC type private network NAT gateway be created.
@@ -146,6 +163,8 @@ type PrivateNatGatewayArgs struct {
 	CrossDomain pulumi.BoolPtrInput
 	// Private network gateway name.
 	NatGatewayName pulumi.StringInput
+	// Tag description of the instance.
+	Tags pulumi.StringMapInput
 	// Private Cloud instance ID. This parameter is required when creating a VPC type private network NAT gateway or a private network NAT gateway of private network gateway.
 	VpcId pulumi.StringPtrInput
 	// VPC type private network NAT gateway. Only when the value is True will a VPC type private network NAT gateway be created.
@@ -249,9 +268,19 @@ func (o PrivateNatGatewayOutput) CrossDomain() pulumi.BoolOutput {
 	return o.ApplyT(func(v *PrivateNatGateway) pulumi.BoolOutput { return v.CrossDomain }).(pulumi.BoolOutput)
 }
 
+// Private network NAT gateway instance ID.
+func (o PrivateNatGatewayOutput) NatGatewayId() pulumi.StringOutput {
+	return o.ApplyT(func(v *PrivateNatGateway) pulumi.StringOutput { return v.NatGatewayId }).(pulumi.StringOutput)
+}
+
 // Private network gateway name.
 func (o PrivateNatGatewayOutput) NatGatewayName() pulumi.StringOutput {
 	return o.ApplyT(func(v *PrivateNatGateway) pulumi.StringOutput { return v.NatGatewayName }).(pulumi.StringOutput)
+}
+
+// Tag description of the instance.
+func (o PrivateNatGatewayOutput) Tags() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *PrivateNatGateway) pulumi.StringMapOutput { return v.Tags }).(pulumi.StringMapOutput)
 }
 
 // Private Cloud instance ID. This parameter is required when creating a VPC type private network NAT gateway or a private network NAT gateway of private network gateway.

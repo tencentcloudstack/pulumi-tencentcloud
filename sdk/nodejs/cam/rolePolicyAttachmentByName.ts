@@ -16,10 +16,10 @@ import * as utilities from "../utilities";
  * const config = new pulumi.Config();
  * const camPolicyBasic = config.get("camPolicyBasic") || "keep-cam-policy";
  * const camRoleBasic = config.get("camRoleBasic") || "keep-cam-role";
- * const policy = tencentcloud.Cam.getPolicies({
+ * const policy = tencentcloud.cam.getPolicies({
  *     name: camPolicyBasic,
  * });
- * const roles = tencentcloud.Cam.getRoles({
+ * const roles = tencentcloud.cam.getRoles({
  *     name: camRoleBasic,
  * });
  * const rolePolicyAttachmentBasic = new tencentcloud.cam.RolePolicyAttachmentByName("role_policy_attachment_basic", {
@@ -129,23 +129,23 @@ export interface RolePolicyAttachmentByNameState {
     /**
      * Mode of Creation of the CAM role policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
      */
-    createMode?: pulumi.Input<number>;
+    createMode?: pulumi.Input<number | undefined>;
     /**
      * The create time of the CAM role policy attachment.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Name of the policy.
      */
-    policyName?: pulumi.Input<string>;
+    policyName?: pulumi.Input<string | undefined>;
     /**
      * Type of the policy strategy. `User` means customer strategy and `QCS` means preset strategy.
      */
-    policyType?: pulumi.Input<string>;
+    policyType?: pulumi.Input<string | undefined>;
     /**
      * Name of the attached CAM role.
      */
-    roleName?: pulumi.Input<string>;
+    roleName?: pulumi.Input<string | undefined>;
 }
 
 /**

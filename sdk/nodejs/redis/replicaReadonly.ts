@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zone = tencentcloud.Redis.getZoneConfig({
+ * const zone = tencentcloud.redis.getZoneConfig({
  *     typeId: 7,
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -141,15 +141,15 @@ export interface ReplicaReadonlyState {
     /**
      * The ID of instance.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * The replica is read-only, `enable` - enable read-write splitting, `disable`- disable read-write splitting.
      */
-    operate?: pulumi.Input<string>;
+    operate?: pulumi.Input<string | undefined>;
     /**
      * Routing policy: Enter `master` or `replication`, which indicates the master node or slave node.
      */
-    readonlyPolicies?: pulumi.Input<pulumi.Input<string>[]>;
+    readonlyPolicies?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -167,5 +167,5 @@ export interface ReplicaReadonlyArgs {
     /**
      * Routing policy: Enter `master` or `replication`, which indicates the master node or slave node.
      */
-    readonlyPolicies?: pulumi.Input<pulumi.Input<string>[]>;
+    readonlyPolicies?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

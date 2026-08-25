@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const domainAnalytics = tencentcloud.Dnspod.getDomainAnalytics({
+ * const domainAnalytics = tencentcloud.dnspod.getDomainAnalytics({
  *     domain: "dnspod.cn",
  *     startDate: "2023-10-07",
  *     endDate: "2023-10-12",
@@ -113,7 +113,7 @@ export interface GetDomainAnalyticsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const domainAnalytics = tencentcloud.Dnspod.getDomainAnalytics({
+ * const domainAnalytics = tencentcloud.dnspod.getDomainAnalytics({
  *     domain: "dnspod.cn",
  *     startDate: "2023-10-07",
  *     endDate: "2023-10-12",
@@ -140,7 +140,7 @@ export interface GetDomainAnalyticsOutputArgs {
     /**
      * DATE: Statistics by day dimension HOUR: Statistics by hour dimension.
      */
-    dnsFormat?: pulumi.Input<string>;
+    dnsFormat?: pulumi.Input<string | undefined>;
     /**
      * The domain name to query for resolution volume.
      */
@@ -148,7 +148,7 @@ export interface GetDomainAnalyticsOutputArgs {
     /**
      * Domain ID. The parameter DomainId has a higher priority than the parameter Domain. If the parameter DomainId is passed, the parameter Domain will be ignored. You can find all Domains and DomainIds through the DescribeDomainList interface.
      */
-    domainId?: pulumi.Input<number>;
+    domainId?: pulumi.Input<number | undefined>;
     /**
      * The end date of the query, format: YYYY-MM-DD.
      */
@@ -156,7 +156,7 @@ export interface GetDomainAnalyticsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * The start date of the query, format: YYYY-MM-DD.
      */

@@ -33,7 +33,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Identity
     /// 
     /// ## Import
     /// 
-    /// organization identity_center_scim_credential can be imported using the id, e.g.
+    /// organization IdentityCenterScimCredential can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Identity/centerScimCredential:CenterScimCredential identity_center_scim_credential ${zone_id}#${credential_id}

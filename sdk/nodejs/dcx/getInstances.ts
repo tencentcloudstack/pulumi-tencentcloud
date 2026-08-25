@@ -15,10 +15,10 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const nameSelect = tencentcloud.Dcx.getInstances({
+ * const nameSelect = tencentcloud.dcx.getInstances({
  *     name: "main",
  * });
- * const id = tencentcloud.Dcx.getInstances({
+ * const id = tencentcloud.dcx.getInstances({
  *     dcxId: "dcx-3ikuw30k",
  * });
  * ```
@@ -82,10 +82,10 @@ export interface GetInstancesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const nameSelect = tencentcloud.Dcx.getInstances({
+ * const nameSelect = tencentcloud.dcx.getInstances({
  *     name: "main",
  * });
- * const id = tencentcloud.Dcx.getInstances({
+ * const id = tencentcloud.dcx.getInstances({
  *     dcxId: "dcx-3ikuw30k",
  * });
  * ```
@@ -107,13 +107,13 @@ export interface GetInstancesOutputArgs {
     /**
      * ID of the dedicated tunnels to be queried.
      */
-    dcxId?: pulumi.Input<string>;
+    dcxId?: pulumi.Input<string | undefined>;
     /**
      * Name of the dedicated tunnels to be queried.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

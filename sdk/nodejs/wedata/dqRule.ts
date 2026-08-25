@@ -42,7 +42,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * wedata dq_rule can be imported using the id, e.g.
+ * wedata dqRule can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Wedata/dqRule:DqRule example 1948767646355341312#894
@@ -267,95 +267,95 @@ export interface DqRuleState {
     /**
      * Alarm trigger levels 1. Low, 2. Medium, 3. High.
      */
-    alarmLevel?: pulumi.Input<number>;
+    alarmLevel?: pulumi.Input<number | undefined>;
     /**
      * Alarm trigger condition.
      */
-    compareRule?: pulumi.Input<inputs.Wedata.DqRuleCompareRule>;
+    compareRule?: pulumi.Input<inputs.Wedata.DqRuleCompareRule | undefined>;
     /**
      * Condition scans WHERE condition expressions.
      */
-    conditionExpression?: pulumi.Input<string>;
+    conditionExpression?: pulumi.Input<string | undefined>;
     /**
      * Detection scope 1. Full Table 2. Conditional scan.
      */
-    conditionType?: pulumi.Input<number>;
+    conditionType?: pulumi.Input<number | undefined>;
     /**
      * Custom sql.
      */
-    customSql?: pulumi.Input<string>;
+    customSql?: pulumi.Input<string | undefined>;
     /**
      * Rule description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Custom template sql expression field replacement parameters.
      */
-    fieldConfig?: pulumi.Input<inputs.Wedata.DqRuleFieldConfig>;
+    fieldConfig?: pulumi.Input<inputs.Wedata.DqRuleFieldConfig | undefined>;
     /**
      * Rule name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Project id.
      */
-    projectId?: pulumi.Input<string>;
+    projectId?: pulumi.Input<string | undefined>;
     /**
      * Rules belong to quality dimensions (1. accuracy, 2. uniqueness, 3. completeness, 4. consistency, 5. timeliness, 6. effectiveness).
      */
-    qualityDim?: pulumi.Input<number>;
+    qualityDim?: pulumi.Input<number | undefined>;
     /**
      * The source field and the target field are associated with a conditional on expression.
      */
-    relConditionExpr?: pulumi.Input<string>;
+    relConditionExpr?: pulumi.Input<string | undefined>;
     /**
      * Rule group id.
      */
-    ruleGroupId?: pulumi.Input<number>;
+    ruleGroupId?: pulumi.Input<number | undefined>;
     /**
      * Rule ID.
      */
-    ruleId?: pulumi.Input<string>;
+    ruleId?: pulumi.Input<string | undefined>;
     /**
      * Rule template id.
      */
-    ruleTemplateId?: pulumi.Input<number>;
+    ruleTemplateId?: pulumi.Input<number | undefined>;
     /**
      * List of execution engines supported by this rule.
      */
-    sourceEngineTypes?: pulumi.Input<pulumi.Input<number>[]>;
+    sourceEngineTypes?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Source field type. int, string.
      */
-    sourceObjectDataTypeName?: pulumi.Input<string>;
+    sourceObjectDataTypeName?: pulumi.Input<string | undefined>;
     /**
      * Source field name.
      */
-    sourceObjectValue?: pulumi.Input<string>;
+    sourceObjectValue?: pulumi.Input<string | undefined>;
     /**
      * Table id.
      */
-    tableId?: pulumi.Input<string>;
+    tableId?: pulumi.Input<string | undefined>;
     /**
      * Target filter condition expression.
      */
-    targetConditionExpr?: pulumi.Input<string>;
+    targetConditionExpr?: pulumi.Input<string | undefined>;
     /**
      * Target database id.
      */
-    targetDatabaseId?: pulumi.Input<string>;
+    targetDatabaseId?: pulumi.Input<string | undefined>;
     /**
      * Target field name  CITY.
      */
-    targetObjectValue?: pulumi.Input<string>;
+    targetObjectValue?: pulumi.Input<string | undefined>;
     /**
      * Target table id.
      */
-    targetTableId?: pulumi.Input<string>;
+    targetTableId?: pulumi.Input<string | undefined>;
     /**
      * Rule Type 1. System Template, 2. Custom Template, 3. Custom SQL.
      */
-    type?: pulumi.Input<number>;
+    type?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -373,7 +373,7 @@ export interface DqRuleArgs {
     /**
      * Condition scans WHERE condition expressions.
      */
-    conditionExpression?: pulumi.Input<string>;
+    conditionExpression?: pulumi.Input<string | undefined>;
     /**
      * Detection scope 1. Full Table 2. Conditional scan.
      */
@@ -381,19 +381,19 @@ export interface DqRuleArgs {
     /**
      * Custom sql.
      */
-    customSql?: pulumi.Input<string>;
+    customSql?: pulumi.Input<string | undefined>;
     /**
      * Rule description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Custom template sql expression field replacement parameters.
      */
-    fieldConfig?: pulumi.Input<inputs.Wedata.DqRuleFieldConfig>;
+    fieldConfig?: pulumi.Input<inputs.Wedata.DqRuleFieldConfig | undefined>;
     /**
      * Rule name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Project id.
      */
@@ -401,15 +401,15 @@ export interface DqRuleArgs {
     /**
      * Rules belong to quality dimensions (1. accuracy, 2. uniqueness, 3. completeness, 4. consistency, 5. timeliness, 6. effectiveness).
      */
-    qualityDim?: pulumi.Input<number>;
+    qualityDim?: pulumi.Input<number | undefined>;
     /**
      * The source field and the target field are associated with a conditional on expression.
      */
-    relConditionExpr?: pulumi.Input<string>;
+    relConditionExpr?: pulumi.Input<string | undefined>;
     /**
      * Rule group id.
      */
-    ruleGroupId?: pulumi.Input<number>;
+    ruleGroupId?: pulumi.Input<number | undefined>;
     /**
      * Rule template id.
      */
@@ -417,7 +417,7 @@ export interface DqRuleArgs {
     /**
      * List of execution engines supported by this rule.
      */
-    sourceEngineTypes?: pulumi.Input<pulumi.Input<number>[]>;
+    sourceEngineTypes?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Source field type. int, string.
      */
@@ -429,23 +429,23 @@ export interface DqRuleArgs {
     /**
      * Table id.
      */
-    tableId?: pulumi.Input<string>;
+    tableId?: pulumi.Input<string | undefined>;
     /**
      * Target filter condition expression.
      */
-    targetConditionExpr?: pulumi.Input<string>;
+    targetConditionExpr?: pulumi.Input<string | undefined>;
     /**
      * Target database id.
      */
-    targetDatabaseId?: pulumi.Input<string>;
+    targetDatabaseId?: pulumi.Input<string | undefined>;
     /**
      * Target field name  CITY.
      */
-    targetObjectValue?: pulumi.Input<string>;
+    targetObjectValue?: pulumi.Input<string | undefined>;
     /**
      * Target table id.
      */
-    targetTableId?: pulumi.Input<string>;
+    targetTableId?: pulumi.Input<string | undefined>;
     /**
      * Rule Type 1. System Template, 2. Custom Template, 3. Custom SQL.
      */

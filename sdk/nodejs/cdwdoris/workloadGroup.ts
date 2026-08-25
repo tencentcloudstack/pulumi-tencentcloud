@@ -7,7 +7,7 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a cdwdoris workload group
+ * Provides a resource to create a CDWDoris workload group
  *
  * > **NOTE:** To use this resource, The `workloadGroupStatus` field of `tencentcloud.Cdwdoris.Instance` needs to be set to true.
  *
@@ -155,11 +155,11 @@ export interface WorkloadGroupState {
     /**
      * Instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Resource group configuration.
      */
-    workloadGroup?: pulumi.Input<inputs.Cdwdoris.WorkloadGroupWorkloadGroup>;
+    workloadGroup?: pulumi.Input<inputs.Cdwdoris.WorkloadGroupWorkloadGroup | undefined>;
 }
 
 /**
@@ -173,5 +173,5 @@ export interface WorkloadGroupArgs {
     /**
      * Resource group configuration.
      */
-    workloadGroup?: pulumi.Input<inputs.Cdwdoris.WorkloadGroupWorkloadGroup>;
+    workloadGroup?: pulumi.Input<inputs.Cdwdoris.WorkloadGroupWorkloadGroup | undefined>;
 }

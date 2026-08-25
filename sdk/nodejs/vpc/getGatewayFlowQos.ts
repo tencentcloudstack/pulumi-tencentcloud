@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const gatewayFlowQos = tencentcloud.Vpc.getGatewayFlowQos({
+ * const gatewayFlowQos = tencentcloud.vpc.getGatewayFlowQos({
  *     gatewayId: "vpngw-gt8bianl",
  * });
  * ```
@@ -72,7 +72,7 @@ export interface GetGatewayFlowQosResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const gatewayFlowQos = tencentcloud.Vpc.getGatewayFlowQos({
+ * const gatewayFlowQos = tencentcloud.vpc.getGatewayFlowQos({
  *     gatewayId: "vpngw-gt8bianl",
  * });
  * ```
@@ -97,9 +97,9 @@ export interface GetGatewayFlowQosOutputArgs {
     /**
      * Intranet IP of the cloud server with traffic limitation.
      */
-    ipAddresses?: pulumi.Input<pulumi.Input<string>[]>;
+    ipAddresses?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

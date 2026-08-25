@@ -19,7 +19,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Images.getInstance({
+ * const example = tencentcloud.images.getInstance({
  *     imageTypes: ["PUBLIC_IMAGE"],
  *     osName: "TencentOS Server 4 for x86_64",
  * });
@@ -62,7 +62,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Images.getInstance({
+ * const example = tencentcloud.images.getInstance({
  *     imageTypes: ["PUBLIC_IMAGE"],
  *     osName: "TencentOS Server 4 for x86_64",
  * });
@@ -139,7 +139,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Images.getInstance({
+ * const example = tencentcloud.images.getInstance({
  *     imageTypes: ["PUBLIC_IMAGE"],
  *     osName: "TencentOS Server 4 for x86_64",
  * });
@@ -184,7 +184,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Images.getInstance({
+ * const example = tencentcloud.images.getInstance({
  *     imageTypes: ["PUBLIC_IMAGE"],
  *     osName: "TencentOS Server 4 for x86_64",
  * });
@@ -527,155 +527,155 @@ export interface ScalingConfigState {
     /**
      * Anti-DDoS service package ID. This is required when you want to request an AntiDDoS IP.
      */
-    antiDdosPackageId?: pulumi.Input<string>;
+    antiDdosPackageId?: pulumi.Input<string | undefined>;
     /**
      * Bandwidth package ID.
      */
-    bandwidthPackageId?: pulumi.Input<string>;
+    bandwidthPackageId?: pulumi.Input<string | undefined>;
     /**
      * CAM role name authorized to access.
      */
-    camRoleName?: pulumi.Input<string>;
+    camRoleName?: pulumi.Input<string | undefined>;
     /**
      * Name of a launch configuration.
      */
-    configurationName?: pulumi.Input<string>;
+    configurationName?: pulumi.Input<string | undefined>;
     /**
      * The time when the launch configuration was created.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Configurations of data disk.
      */
-    dataDisks?: pulumi.Input<pulumi.Input<inputs.As.ScalingConfigDataDisk>[]>;
+    dataDisks?: pulumi.Input<pulumi.Input<inputs.As.ScalingConfigDataDisk>[] | undefined>;
     /**
      * Dedicated Cluster ID.
      */
-    dedicatedClusterId?: pulumi.Input<string>;
+    dedicatedClusterId?: pulumi.Input<string | undefined>;
     /**
      * Placement group ID. Only one is allowed.
      */
-    disasterRecoverGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    disasterRecoverGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Policy of cloud disk type. Valid values: `ORIGINAL` and `AUTOMATIC`. Default is `ORIGINAL`.
      */
-    diskTypePolicy?: pulumi.Input<string>;
+    diskTypePolicy?: pulumi.Input<string | undefined>;
     /**
      * To specify whether to enable cloud automation tools service.
      */
-    enhancedAutomationToolsService?: pulumi.Input<boolean>;
+    enhancedAutomationToolsService?: pulumi.Input<boolean | undefined>;
     /**
      * To specify whether to enable cloud monitor service. Default is `TRUE`.
      */
-    enhancedMonitorService?: pulumi.Input<boolean>;
+    enhancedMonitorService?: pulumi.Input<boolean | undefined>;
     /**
      * To specify whether to enable cloud security service. Default is `TRUE`.
      */
-    enhancedSecurityService?: pulumi.Input<boolean>;
+    enhancedSecurityService?: pulumi.Input<boolean | undefined>;
     /**
      * Related settings of the cloud server hostname (HostName).
      */
-    hostNameSettings?: pulumi.Input<inputs.As.ScalingConfigHostNameSettings>;
+    hostNameSettings?: pulumi.Input<inputs.As.ScalingConfigHostNameSettings | undefined>;
     /**
      * Image Family Name. Either Image ID or Image Family Name must be provided, but not both.
      */
-    imageFamily?: pulumi.Input<string>;
+    imageFamily?: pulumi.Input<string | undefined>;
     /**
      * An available image ID for a cvm instance.
      */
-    imageId?: pulumi.Input<string>;
+    imageId?: pulumi.Input<string | undefined>;
     /**
      * Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`, `CDCPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
      */
-    instanceChargeType?: pulumi.Input<string>;
+    instanceChargeType?: pulumi.Input<string | undefined>;
     /**
      * The tenancy (in month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
      */
-    instanceChargeTypePrepaidPeriod?: pulumi.Input<number>;
+    instanceChargeTypePrepaidPeriod?: pulumi.Input<number | undefined>;
     /**
      * Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to `PREPAID`.
      */
-    instanceChargeTypePrepaidRenewFlag?: pulumi.Input<string>;
+    instanceChargeTypePrepaidRenewFlag?: pulumi.Input<string | undefined>;
     /**
      * Settings of CVM instance names.
      */
-    instanceNameSettings?: pulumi.Input<inputs.As.ScalingConfigInstanceNameSettings>;
+    instanceNameSettings?: pulumi.Input<inputs.As.ScalingConfigInstanceNameSettings | undefined>;
     /**
      * A list of tags used to associate different resources.
      */
-    instanceTags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    instanceTags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Specified types of CVM instances.
      */
-    instanceTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    instanceTypes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
      */
-    internetChargeType?: pulumi.Input<string>;
+    internetChargeType?: pulumi.Input<string | undefined>;
     /**
      * Max bandwidth of Internet access in Mbps. Default is `0`.
      */
-    internetMaxBandwidthOut?: pulumi.Input<number>;
+    internetMaxBandwidthOut?: pulumi.Input<number | undefined>;
     /**
      * AddressType. Default value: WanIP. For beta users of dedicated IP. the value can be: HighQualityEIP: Dedicated IP. Note that dedicated IPs are only available in partial regions. For beta users of Anti-DDoS IP, the value can be: AntiDDoSEIP: Anti-DDoS EIP. Note that Anti-DDoS IPs are only available in partial regions.
      */
-    ipv4AddressType?: pulumi.Input<string>;
+    ipv4AddressType?: pulumi.Input<string | undefined>;
     /**
      * Whether to delete the bound EIP when the instance is destroyed. Range of values: True: retain the EIP; False: not retain the EIP. Note that when the IPv4AddressType field specifies the EIP type, the default behavior is not to retain the EIP. WanIP is unaffected by this field and will always be deleted with the instance. Changing this field configuration will take effect immediately for resources already bound to a scaling group.
      */
-    isKeepEip?: pulumi.Input<boolean>;
+    isKeepEip?: pulumi.Input<boolean | undefined>;
     /**
      * Specify whether to keep original settings of a CVM image. And it can't be used with password or keyIds together.
      */
-    keepImageLogin?: pulumi.Input<boolean>;
+    keepImageLogin?: pulumi.Input<boolean | undefined>;
     /**
      * ID list of keys.
      */
-    keyIds?: pulumi.Input<pulumi.Input<string>[]>;
+    keyIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Password to access.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * Specifys to which project the configuration belongs.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Specify whether to assign an Internet IP address.
      */
-    publicIpAssigned?: pulumi.Input<boolean>;
+    publicIpAssigned?: pulumi.Input<boolean | undefined>;
     /**
      * Security groups to which a CVM instance belongs.
      */
-    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Type of spot instance, only support `one-time` now. Note: it only works when instanceChargeType is set to `SPOTPAID`.
      */
-    spotInstanceType?: pulumi.Input<string>;
+    spotInstanceType?: pulumi.Input<string | undefined>;
     /**
      * Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when instanceChargeType is set to `SPOTPAID`.
      */
-    spotMaxPrice?: pulumi.Input<string>;
+    spotMaxPrice?: pulumi.Input<string | undefined>;
     /**
      * Current statues of a launch configuration.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Volume of system disk in GB. Default is `50`.
      */
-    systemDiskSize?: pulumi.Input<number>;
+    systemDiskSize?: pulumi.Input<number | undefined>;
     /**
      * Type of a CVM disk. Valid values: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`. valid when diskTypePolicy is ORIGINAL.
      */
-    systemDiskType?: pulumi.Input<string>;
+    systemDiskType?: pulumi.Input<string | undefined>;
     /**
      * Tags of launch configuration.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * ase64-encoded User Data text, the length limit is 16KB.
      */
-    userData?: pulumi.Input<string>;
+    userData?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -685,15 +685,15 @@ export interface ScalingConfigArgs {
     /**
      * Anti-DDoS service package ID. This is required when you want to request an AntiDDoS IP.
      */
-    antiDdosPackageId?: pulumi.Input<string>;
+    antiDdosPackageId?: pulumi.Input<string | undefined>;
     /**
      * Bandwidth package ID.
      */
-    bandwidthPackageId?: pulumi.Input<string>;
+    bandwidthPackageId?: pulumi.Input<string | undefined>;
     /**
      * CAM role name authorized to access.
      */
-    camRoleName?: pulumi.Input<string>;
+    camRoleName?: pulumi.Input<string | undefined>;
     /**
      * Name of a launch configuration.
      */
@@ -701,63 +701,63 @@ export interface ScalingConfigArgs {
     /**
      * Configurations of data disk.
      */
-    dataDisks?: pulumi.Input<pulumi.Input<inputs.As.ScalingConfigDataDisk>[]>;
+    dataDisks?: pulumi.Input<pulumi.Input<inputs.As.ScalingConfigDataDisk>[] | undefined>;
     /**
      * Dedicated Cluster ID.
      */
-    dedicatedClusterId?: pulumi.Input<string>;
+    dedicatedClusterId?: pulumi.Input<string | undefined>;
     /**
      * Placement group ID. Only one is allowed.
      */
-    disasterRecoverGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    disasterRecoverGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Policy of cloud disk type. Valid values: `ORIGINAL` and `AUTOMATIC`. Default is `ORIGINAL`.
      */
-    diskTypePolicy?: pulumi.Input<string>;
+    diskTypePolicy?: pulumi.Input<string | undefined>;
     /**
      * To specify whether to enable cloud automation tools service.
      */
-    enhancedAutomationToolsService?: pulumi.Input<boolean>;
+    enhancedAutomationToolsService?: pulumi.Input<boolean | undefined>;
     /**
      * To specify whether to enable cloud monitor service. Default is `TRUE`.
      */
-    enhancedMonitorService?: pulumi.Input<boolean>;
+    enhancedMonitorService?: pulumi.Input<boolean | undefined>;
     /**
      * To specify whether to enable cloud security service. Default is `TRUE`.
      */
-    enhancedSecurityService?: pulumi.Input<boolean>;
+    enhancedSecurityService?: pulumi.Input<boolean | undefined>;
     /**
      * Related settings of the cloud server hostname (HostName).
      */
-    hostNameSettings?: pulumi.Input<inputs.As.ScalingConfigHostNameSettings>;
+    hostNameSettings?: pulumi.Input<inputs.As.ScalingConfigHostNameSettings | undefined>;
     /**
      * Image Family Name. Either Image ID or Image Family Name must be provided, but not both.
      */
-    imageFamily?: pulumi.Input<string>;
+    imageFamily?: pulumi.Input<string | undefined>;
     /**
      * An available image ID for a cvm instance.
      */
-    imageId?: pulumi.Input<string>;
+    imageId?: pulumi.Input<string | undefined>;
     /**
      * Charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`, `CDCPAID`. The default is `POSTPAID_BY_HOUR`. NOTE: `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time.
      */
-    instanceChargeType?: pulumi.Input<string>;
+    instanceChargeType?: pulumi.Input<string | undefined>;
     /**
      * The tenancy (in month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
      */
-    instanceChargeTypePrepaidPeriod?: pulumi.Input<number>;
+    instanceChargeTypePrepaidPeriod?: pulumi.Input<number | undefined>;
     /**
      * Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to `PREPAID`.
      */
-    instanceChargeTypePrepaidRenewFlag?: pulumi.Input<string>;
+    instanceChargeTypePrepaidRenewFlag?: pulumi.Input<string | undefined>;
     /**
      * Settings of CVM instance names.
      */
-    instanceNameSettings?: pulumi.Input<inputs.As.ScalingConfigInstanceNameSettings>;
+    instanceNameSettings?: pulumi.Input<inputs.As.ScalingConfigInstanceNameSettings | undefined>;
     /**
      * A list of tags used to associate different resources.
      */
-    instanceTags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    instanceTags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Specified types of CVM instances.
      */
@@ -765,65 +765,65 @@ export interface ScalingConfigArgs {
     /**
      * Charge types for network traffic. Valid values: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
      */
-    internetChargeType?: pulumi.Input<string>;
+    internetChargeType?: pulumi.Input<string | undefined>;
     /**
      * Max bandwidth of Internet access in Mbps. Default is `0`.
      */
-    internetMaxBandwidthOut?: pulumi.Input<number>;
+    internetMaxBandwidthOut?: pulumi.Input<number | undefined>;
     /**
      * AddressType. Default value: WanIP. For beta users of dedicated IP. the value can be: HighQualityEIP: Dedicated IP. Note that dedicated IPs are only available in partial regions. For beta users of Anti-DDoS IP, the value can be: AntiDDoSEIP: Anti-DDoS EIP. Note that Anti-DDoS IPs are only available in partial regions.
      */
-    ipv4AddressType?: pulumi.Input<string>;
+    ipv4AddressType?: pulumi.Input<string | undefined>;
     /**
      * Whether to delete the bound EIP when the instance is destroyed. Range of values: True: retain the EIP; False: not retain the EIP. Note that when the IPv4AddressType field specifies the EIP type, the default behavior is not to retain the EIP. WanIP is unaffected by this field and will always be deleted with the instance. Changing this field configuration will take effect immediately for resources already bound to a scaling group.
      */
-    isKeepEip?: pulumi.Input<boolean>;
+    isKeepEip?: pulumi.Input<boolean | undefined>;
     /**
      * Specify whether to keep original settings of a CVM image. And it can't be used with password or keyIds together.
      */
-    keepImageLogin?: pulumi.Input<boolean>;
+    keepImageLogin?: pulumi.Input<boolean | undefined>;
     /**
      * ID list of keys.
      */
-    keyIds?: pulumi.Input<pulumi.Input<string>[]>;
+    keyIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Password to access.
      */
-    password?: pulumi.Input<string>;
+    password?: pulumi.Input<string | undefined>;
     /**
      * Specifys to which project the configuration belongs.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Specify whether to assign an Internet IP address.
      */
-    publicIpAssigned?: pulumi.Input<boolean>;
+    publicIpAssigned?: pulumi.Input<boolean | undefined>;
     /**
      * Security groups to which a CVM instance belongs.
      */
-    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Type of spot instance, only support `one-time` now. Note: it only works when instanceChargeType is set to `SPOTPAID`.
      */
-    spotInstanceType?: pulumi.Input<string>;
+    spotInstanceType?: pulumi.Input<string | undefined>;
     /**
      * Max price of a spot instance, is the format of decimal string, for example "0.50". Note: it only works when instanceChargeType is set to `SPOTPAID`.
      */
-    spotMaxPrice?: pulumi.Input<string>;
+    spotMaxPrice?: pulumi.Input<string | undefined>;
     /**
      * Volume of system disk in GB. Default is `50`.
      */
-    systemDiskSize?: pulumi.Input<number>;
+    systemDiskSize?: pulumi.Input<number | undefined>;
     /**
      * Type of a CVM disk. Valid values: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`. valid when diskTypePolicy is ORIGINAL.
      */
-    systemDiskType?: pulumi.Input<string>;
+    systemDiskType?: pulumi.Input<string | undefined>;
     /**
      * Tags of launch configuration.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * ase64-encoded User Data text, the length limit is 16KB.
      */
-    userData?: pulumi.Input<string>;
+    userData?: pulumi.Input<string | undefined>;
 }

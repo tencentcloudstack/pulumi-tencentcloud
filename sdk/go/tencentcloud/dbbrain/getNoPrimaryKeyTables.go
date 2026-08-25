@@ -79,12 +79,8 @@ type GetNoPrimaryKeyTablesResult struct {
 }
 
 func GetNoPrimaryKeyTablesOutput(ctx *pulumi.Context, args GetNoPrimaryKeyTablesOutputArgs, opts ...pulumi.InvokeOption) GetNoPrimaryKeyTablesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetNoPrimaryKeyTablesResultOutput, error) {
-			args := v.(GetNoPrimaryKeyTablesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dbbrain/getNoPrimaryKeyTables:getNoPrimaryKeyTables", args, GetNoPrimaryKeyTablesResultOutput{}, options).(GetNoPrimaryKeyTablesResultOutput), nil
-		}).(GetNoPrimaryKeyTablesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dbbrain/getNoPrimaryKeyTables:getNoPrimaryKeyTables", args, GetNoPrimaryKeyTablesResultOutput{}, options).(GetNoPrimaryKeyTablesResultOutput)
 }
 
 // A collection of arguments for invoking getNoPrimaryKeyTables.

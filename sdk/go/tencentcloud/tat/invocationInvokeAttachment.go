@@ -12,7 +12,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a tat invocationInvokeAttachment
+// Provides a resource to create a tat invocation invoke attachment
 //
 // ## Example Usage
 //
@@ -28,14 +28,44 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := tat.NewInvocationInvokeAttachment(ctx, "invocation_invoke_attachment", &tat.InvocationInvokeAttachmentArgs{
-//				InstanceId:         pulumi.String("ins-881b1c8w"),
-//				WorkingDirectory:   pulumi.String("/root"),
-//				Timeout:            pulumi.Int(100),
+//			_, err := tat.NewInvocationInvokeAttachment(ctx, "example", &tat.InvocationInvokeAttachmentArgs{
+//				InstanceId:       pulumi.String("ins-hoek7x44"),
+//				WorkingDirectory: pulumi.String("/root/"),
+//				Timeout:          pulumi.Int(60),
+//				Username:         pulumi.String("root"),
+//				CommandId:        pulumi.String("cmd-l7otm4cn"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### or
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/tat"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := tat.NewInvocationInvokeAttachment(ctx, "example", &tat.InvocationInvokeAttachmentArgs{
+//				InstanceId:         pulumi.String("ins-hoek7x44"),
+//				WorkingDirectory:   pulumi.String("/root/"),
+//				Timeout:            pulumi.Int(60),
 //				Username:           pulumi.String("root"),
-//				OutputCosBucketUrl: pulumi.String("https://BucketName-123454321.cos.ap-beijing.myqcloud.com"),
-//				OutputCosKeyPrefix: pulumi.String("log"),
-//				CommandId:          pulumi.String("cmd-rxbs7f5z"),
+//				CommandId:          pulumi.String("cmd-l7otm4cn"),
+//				OutputCosBucketUrl: pulumi.String("https://your-bucket.cos.ap-guangzhou.myqcloud.com"),
+//				OutputCosKeyPrefix: pulumi.String("tat/invoke"),
 //			})
 //			if err != nil {
 //				return err
@@ -51,7 +81,7 @@ import (
 // tat invocation can be imported using the invocation_id#instance_id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Tat/invocationInvokeAttachment:InvocationInvokeAttachment invocation_invoke_attachment inv-mhs6ca8z#ins-881b1c8w
+// $ pulumi import tencentcloud:Tat/invocationInvokeAttachment:InvocationInvokeAttachment example inv-64mrb10i1j#ins-hoek7x44
 // ```
 type InvocationInvokeAttachment struct {
 	pulumi.CustomResourceState
@@ -60,6 +90,8 @@ type InvocationInvokeAttachment struct {
 	CommandId pulumi.StringOutput `pulumi:"commandId"`
 	// ID of instances about to execute commands. Supported instance types:  CVM  LIGHTHOUSE.
 	InstanceId pulumi.StringOutput `pulumi:"instanceId"`
+	// Invocation ID.
+	InvocationId pulumi.StringOutput `pulumi:"invocationId"`
 	// The COS bucket URL for uploading logs. The URL must start with https, such as https://BucketName-123454321.cos.ap-beijing.myqcloud.com.
 	OutputCosBucketUrl pulumi.StringPtrOutput `pulumi:"outputCosBucketUrl"`
 	// The COS bucket directory where the logs are saved; Check below for the rules of the directory name: 1 It must be a combination of number, letters, and visible characters, Up to 60 characters are allowed; 2 Use a slash (/) to create a subdirectory; 3 can not be used as the folder name; It cannot start with a slash (/), and cannot contain consecutive slashes.
@@ -114,6 +146,8 @@ type invocationInvokeAttachmentState struct {
 	CommandId *string `pulumi:"commandId"`
 	// ID of instances about to execute commands. Supported instance types:  CVM  LIGHTHOUSE.
 	InstanceId *string `pulumi:"instanceId"`
+	// Invocation ID.
+	InvocationId *string `pulumi:"invocationId"`
 	// The COS bucket URL for uploading logs. The URL must start with https, such as https://BucketName-123454321.cos.ap-beijing.myqcloud.com.
 	OutputCosBucketUrl *string `pulumi:"outputCosBucketUrl"`
 	// The COS bucket directory where the logs are saved; Check below for the rules of the directory name: 1 It must be a combination of number, letters, and visible characters, Up to 60 characters are allowed; 2 Use a slash (/) to create a subdirectory; 3 can not be used as the folder name; It cannot start with a slash (/), and cannot contain consecutive slashes.
@@ -133,6 +167,8 @@ type InvocationInvokeAttachmentState struct {
 	CommandId pulumi.StringPtrInput
 	// ID of instances about to execute commands. Supported instance types:  CVM  LIGHTHOUSE.
 	InstanceId pulumi.StringPtrInput
+	// Invocation ID.
+	InvocationId pulumi.StringPtrInput
 	// The COS bucket URL for uploading logs. The URL must start with https, such as https://BucketName-123454321.cos.ap-beijing.myqcloud.com.
 	OutputCosBucketUrl pulumi.StringPtrInput
 	// The COS bucket directory where the logs are saved; Check below for the rules of the directory name: 1 It must be a combination of number, letters, and visible characters, Up to 60 characters are allowed; 2 Use a slash (/) to create a subdirectory; 3 can not be used as the folder name; It cannot start with a slash (/), and cannot contain consecutive slashes.
@@ -285,6 +321,11 @@ func (o InvocationInvokeAttachmentOutput) CommandId() pulumi.StringOutput {
 // ID of instances about to execute commands. Supported instance types:  CVM  LIGHTHOUSE.
 func (o InvocationInvokeAttachmentOutput) InstanceId() pulumi.StringOutput {
 	return o.ApplyT(func(v *InvocationInvokeAttachment) pulumi.StringOutput { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Invocation ID.
+func (o InvocationInvokeAttachmentOutput) InvocationId() pulumi.StringOutput {
+	return o.ApplyT(func(v *InvocationInvokeAttachment) pulumi.StringOutput { return v.InvocationId }).(pulumi.StringOutput)
 }
 
 // The COS bucket URL for uploading logs. The URL must start with https, such as https://BucketName-123454321.cos.ap-beijing.myqcloud.com.

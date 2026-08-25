@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const groups = tencentcloud.Cam.getGroups({});
+ * const groups = tencentcloud.cam.getGroups({});
  * const group = new tencentcloud.index.MonitorPolicyGroup("group", {
  *     groupName: "nice_group",
  *     policyViewName: "cvm_device",
@@ -31,13 +31,13 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * const receiver = new tencentcloud.monitor.BindingReceiver("receiver", {
- *     groupId: group.id,
+ *     groupId: Number(group.id),
  *     receivers: {
  *         startTime: 0,
  *         endTime: 86399,
  *         notifyWays: ["SMS"],
  *         receiverType: "group",
- *         receiverGroupLists: [groups.then(groups => groups.groupLists?.[0]?.groupId)],
+ *         receiverGroupLists: [output(groups.then(groups => groups.groupLists?.[0]?.groupId)).apply(x =>Number(x))],
  *         receiveLanguage: "en-US",
  *     },
  * });
@@ -115,11 +115,11 @@ export interface BindingReceiverState {
     /**
      * Policy group ID for binding receivers.
      */
-    groupId?: pulumi.Input<number>;
+    groupId?: pulumi.Input<number | undefined>;
     /**
      * A list of receivers(will overwrite the configuration of the server or other resources). Each element contains the following attributes:
      */
-    receivers?: pulumi.Input<inputs.Monitor.BindingReceiverReceivers>;
+    receivers?: pulumi.Input<inputs.Monitor.BindingReceiverReceivers | undefined>;
 }
 
 /**
@@ -133,5 +133,5 @@ export interface BindingReceiverArgs {
     /**
      * A list of receivers(will overwrite the configuration of the server or other resources). Each element contains the following attributes:
      */
-    receivers?: pulumi.Input<inputs.Monitor.BindingReceiverReceivers>;
+    receivers?: pulumi.Input<inputs.Monitor.BindingReceiverReceivers | undefined>;
 }

@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * vpc end_point_service_white_list can be imported using the id, e.g.
+ * vpc endPointServiceWhiteList can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Vpc/endPointServiceWhiteList:EndPointServiceWhiteList end_point_service_white_list end_point_service_white_list_id
@@ -121,23 +121,23 @@ export interface EndPointServiceWhiteListState {
     /**
      * Create Time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Description of white list.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * ID of endpoint service.
      */
-    endPointServiceId?: pulumi.Input<string>;
+    endPointServiceId?: pulumi.Input<string | undefined>;
     /**
      * APPID.
      */
-    owner?: pulumi.Input<string>;
+    owner?: pulumi.Input<string | undefined>;
     /**
      * UIN.
      */
-    userUin?: pulumi.Input<string>;
+    userUin?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -147,7 +147,7 @@ export interface EndPointServiceWhiteListArgs {
     /**
      * Description of white list.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * ID of endpoint service.
      */

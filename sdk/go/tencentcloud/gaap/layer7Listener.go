@@ -42,7 +42,7 @@ import (
 //				Protocol: pulumi.String("HTTP"),
 //				Name:     pulumi.String("ci-test-gaap-l7-listener"),
 //				Port:     pulumi.Int(80),
-//				ProxyId:  foo.ID(),
+//				ProxyId:  foo.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err
@@ -58,7 +58,9 @@ import (
 // GAAP layer7 listener can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Gaap/layer7Listener:Layer7Listener  tencentcloud_gaap_layer7_listener.foo listener-11112222
+//
+//	$ pulumi import tencentcloud:Gaap/layer7Listener:Layer7Listener foo listener-11112222
+//
 // ```
 type Layer7Listener struct {
 	pulumi.CustomResourceState

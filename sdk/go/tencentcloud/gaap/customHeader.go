@@ -52,7 +52,7 @@ import (
 //
 // ## Import
 //
-// gaap custom_header can be imported using the id, e.g.
+// gaap customHeader can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Gaap/customHeader:CustomHeader custom_header ruleId

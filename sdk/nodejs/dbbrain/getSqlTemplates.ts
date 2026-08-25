@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const sqlTemplates = tencentcloud.Dbbrain.getSqlTemplates({
+ * const sqlTemplates = tencentcloud.dbbrain.getSqlTemplates({
  *     instanceId: "",
  *     schema: "",
  *     sqlText: "",
@@ -93,7 +93,7 @@ export interface GetSqlTemplatesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const sqlTemplates = tencentcloud.Dbbrain.getSqlTemplates({
+ * const sqlTemplates = tencentcloud.dbbrain.getSqlTemplates({
  *     instanceId: "",
  *     schema: "",
  *     sqlText: "",
@@ -123,11 +123,11 @@ export interface GetSqlTemplatesOutputArgs {
     /**
      * Service product type, supported values include: mysql - cloud database MySQL, cynosdb - cloud database CynosDB for MySQL, the default is mysql.
      */
-    product?: pulumi.Input<string>;
+    product?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * database name.
      */

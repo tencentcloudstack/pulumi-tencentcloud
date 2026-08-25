@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getAttackOverview({
+ * const example = tencentcloud.waf.getAttackOverview({
  *     fromTime: "2023-09-01 00:00:00",
  *     toTime: "2023-09-07 00:00:00",
  * });
@@ -27,7 +27,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getAttackOverview({
+ * const example = tencentcloud.waf.getAttackOverview({
  *     fromTime: "2023-09-01 00:00:00",
  *     toTime: "2023-09-07 00:00:00",
  *     appid: 1304251372,
@@ -139,7 +139,7 @@ export interface GetAttackOverviewResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getAttackOverview({
+ * const example = tencentcloud.waf.getAttackOverview({
  *     fromTime: "2023-09-01 00:00:00",
  *     toTime: "2023-09-07 00:00:00",
  * });
@@ -151,7 +151,7 @@ export interface GetAttackOverviewResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Waf.getAttackOverview({
+ * const example = tencentcloud.waf.getAttackOverview({
  *     fromTime: "2023-09-01 00:00:00",
  *     toTime: "2023-09-07 00:00:00",
  *     appid: 1304251372,
@@ -181,15 +181,15 @@ export interface GetAttackOverviewOutputArgs {
     /**
      * App id.
      */
-    appid?: pulumi.Input<number>;
+    appid?: pulumi.Input<number | undefined>;
     /**
      * Domain.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * support `sparta-waf`, `clb-waf`, otherwise not filter.
      */
-    edition?: pulumi.Input<string>;
+    edition?: pulumi.Input<string | undefined>;
     /**
      * Begin time.
      */
@@ -197,11 +197,11 @@ export interface GetAttackOverviewOutputArgs {
     /**
      * Waf instanceId, otherwise not filter.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * End time.
      */

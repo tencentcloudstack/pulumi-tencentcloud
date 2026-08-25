@@ -89,12 +89,8 @@ type GetBusResult struct {
 }
 
 func GetBusOutput(ctx *pulumi.Context, args GetBusOutputArgs, opts ...pulumi.InvokeOption) GetBusResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetBusResultOutput, error) {
-			args := v.(GetBusArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Eb/getBus:getBus", args, GetBusResultOutput{}, options).(GetBusResultOutput), nil
-		}).(GetBusResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Eb/getBus:getBus", args, GetBusResultOutput{}, options).(GetBusResultOutput)
 }
 
 // A collection of arguments for invoking getBus.

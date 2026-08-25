@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const myFavouriteRegion = tencentcloud.Availability.getRegions({
+ * const myFavouriteRegion = tencentcloud.availability.getRegions({
  *     name: "ap-guangzhou",
  * });
  * ```
@@ -76,7 +76,7 @@ export interface GetRegionsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const myFavouriteRegion = tencentcloud.Availability.getRegions({
+ * const myFavouriteRegion = tencentcloud.availability.getRegions({
  *     name: "ap-guangzhou",
  * });
  * ```
@@ -98,13 +98,13 @@ export interface GetRegionsOutputArgs {
     /**
      * A bool variable indicates that the query will include `UNAVAILABLE` regions.
      */
-    includeUnavailable?: pulumi.Input<boolean>;
+    includeUnavailable?: pulumi.Input<boolean | undefined>;
     /**
      * When specified, only the region with the exactly name match will be returned. `default` value means it consistent with the provider region.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

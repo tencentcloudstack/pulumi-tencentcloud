@@ -83,12 +83,8 @@ type GetResourceGroupMetricsResult struct {
 }
 
 func GetResourceGroupMetricsOutput(ctx *pulumi.Context, args GetResourceGroupMetricsOutputArgs, opts ...pulumi.InvokeOption) GetResourceGroupMetricsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetResourceGroupMetricsResultOutput, error) {
-			args := v.(GetResourceGroupMetricsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Wedata/getResourceGroupMetrics:getResourceGroupMetrics", args, GetResourceGroupMetricsResultOutput{}, options).(GetResourceGroupMetricsResultOutput), nil
-		}).(GetResourceGroupMetricsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Wedata/getResourceGroupMetrics:getResourceGroupMetrics", args, GetResourceGroupMetricsResultOutput{}, options).(GetResourceGroupMetricsResultOutput)
 }
 
 // A collection of arguments for invoking getResourceGroupMetrics.

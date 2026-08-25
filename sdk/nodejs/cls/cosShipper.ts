@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const info = tencentcloud.User.getInfo({});
+ * const info = tencentcloud.user.getInfo({});
  * const appId = info.then(info => info.appId);
  * const example = new tencentcloud.cos.Bucket("example", {
  *     bucket: appId.then(appId => `private-bucket-${appId}`),
@@ -47,6 +47,7 @@ import * as utilities from "../utilities";
  *     partition: "/%Y/%m/%d/%H/",
  *     prefix: "ap-guangzhou-fffsasad-1649734752",
  *     shipperName: "ap-guangzhou-fffsasad-1649734752",
+ *     timeZone: "GMT+08:00",
  *     compress: {
  *         format: "lzop",
  *     },
@@ -58,6 +59,43 @@ import * as utilities from "../utilities";
  *                 "__FILENAME__",
  *                 "__SOURCE__",
  *                 "__TIMESTAMP__",
+ *             ],
+ *         },
+ *     },
+ * });
+ * ```
+ *
+ * ### Example with Parquet format:
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const parquetExample = new tencentcloud.cls.CosShipper("parquet_example", {
+ *     bucket: example.id,
+ *     topicId: exampleTencentcloudClsTopic.id,
+ *     interval: 300,
+ *     maxSize: 256,
+ *     partition: "/%Y/%m/%d/%H/",
+ *     prefix: "logs/parquet/",
+ *     shipperName: "parquet-shipper",
+ *     compress: {
+ *         format: "gzip",
+ *     },
+ *     content: {
+ *         format: "parquet",
+ *         parquet: {
+ *             parquetKeyInfos: [
+ *                 {
+ *                     keyName: "level",
+ *                     keyType: "string",
+ *                     keyNonExistingField: "INFO",
+ *                 },
+ *                 {
+ *                     keyName: "user_id",
+ *                     keyType: "int64",
+ *                     keyNonExistingField: "0",
+ *                 },
  *             ],
  *         },
  *     },
@@ -153,6 +191,10 @@ export class CosShipper extends pulumi.CustomResource {
      */
     declare public readonly storageType: pulumi.Output<string | undefined>;
     /**
+     * Timezone used to generate the time variable in the COS file path when shipping logs. Supports GMT and UTC timezone formats, e.g., `GMT+08:00`, `UTC+08:00`.
+     */
+    declare public readonly timeZone: pulumi.Output<string>;
+    /**
      * ID of the log topic to which the shipping rule to be created belongs.
      */
     declare public readonly topicId: pulumi.Output<string>;
@@ -183,6 +225,7 @@ export class CosShipper extends pulumi.CustomResource {
             resourceInputs["shipperName"] = state?.shipperName;
             resourceInputs["startTime"] = state?.startTime;
             resourceInputs["storageType"] = state?.storageType;
+            resourceInputs["timeZone"] = state?.timeZone;
             resourceInputs["topicId"] = state?.topicId;
         } else {
             const args = argsOrState as CosShipperArgs | undefined;
@@ -211,6 +254,7 @@ export class CosShipper extends pulumi.CustomResource {
             resourceInputs["shipperName"] = args?.shipperName;
             resourceInputs["startTime"] = args?.startTime;
             resourceInputs["storageType"] = args?.storageType;
+            resourceInputs["timeZone"] = args?.timeZone;
             resourceInputs["topicId"] = args?.topicId;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -225,59 +269,63 @@ export interface CosShipperState {
     /**
      * Destination bucket in the shipping rule to be created.
      */
-    bucket?: pulumi.Input<string>;
+    bucket?: pulumi.Input<string | undefined>;
     /**
      * Compression configuration of shipped log.
      */
-    compress?: pulumi.Input<inputs.Cls.CosShipperCompress>;
+    compress?: pulumi.Input<inputs.Cls.CosShipperCompress | undefined>;
     /**
      * Format configuration of shipped log content.
      */
-    content?: pulumi.Input<inputs.Cls.CosShipperContent>;
+    content?: pulumi.Input<inputs.Cls.CosShipperContent | undefined>;
     /**
      * End time for data shipping, which cannot be set to a future time. If you do not specify this parameter, it indicates continuous data shipping.
      */
-    endTime?: pulumi.Input<number>;
+    endTime?: pulumi.Input<number | undefined>;
     /**
      * Naming a shipping file. Valid values: 0 (by random number); 1 (by shipping time). Default value: 0.
      */
-    filenameMode?: pulumi.Input<number>;
+    filenameMode?: pulumi.Input<number | undefined>;
     /**
      * Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
      */
-    filterRules?: pulumi.Input<pulumi.Input<inputs.Cls.CosShipperFilterRule>[]>;
+    filterRules?: pulumi.Input<pulumi.Input<inputs.Cls.CosShipperFilterRule>[] | undefined>;
     /**
      * Shipping time interval in seconds. Default value: 300. Value range: 300~900.
      */
-    interval?: pulumi.Input<number>;
+    interval?: pulumi.Input<number | undefined>;
     /**
      * Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100~256.
      */
-    maxSize?: pulumi.Input<number>;
+    maxSize?: pulumi.Input<number | undefined>;
     /**
      * Partition rule of shipped log, which can be represented in strftime time format.
      */
-    partition?: pulumi.Input<string>;
+    partition?: pulumi.Input<string | undefined>;
     /**
      * Prefix of the shipping directory in the shipping rule to be created.
      */
-    prefix?: pulumi.Input<string>;
+    prefix?: pulumi.Input<string | undefined>;
     /**
      * Shipping rule name.
      */
-    shipperName?: pulumi.Input<string>;
+    shipperName?: pulumi.Input<string | undefined>;
     /**
      * Start time for data shipping, which cannot be earlier than the lifecycle start time of the log topic. If you do not specify this parameter, it will be set to the time when you create the data shipping task.
      */
-    startTime?: pulumi.Input<number>;
+    startTime?: pulumi.Input<number | undefined>;
     /**
      * COS bucket storage type. support: STANDARD_IA, ARCHIVE, DEEP_ARCHIVE, STANDARD, MAZ_STANDARD, MAZ_STANDARD_IA, INTELLIGENT_TIERING.
      */
-    storageType?: pulumi.Input<string>;
+    storageType?: pulumi.Input<string | undefined>;
+    /**
+     * Timezone used to generate the time variable in the COS file path when shipping logs. Supports GMT and UTC timezone formats, e.g., `GMT+08:00`, `UTC+08:00`.
+     */
+    timeZone?: pulumi.Input<string | undefined>;
     /**
      * ID of the log topic to which the shipping rule to be created belongs.
      */
-    topicId?: pulumi.Input<string>;
+    topicId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -291,35 +339,35 @@ export interface CosShipperArgs {
     /**
      * Compression configuration of shipped log.
      */
-    compress?: pulumi.Input<inputs.Cls.CosShipperCompress>;
+    compress?: pulumi.Input<inputs.Cls.CosShipperCompress | undefined>;
     /**
      * Format configuration of shipped log content.
      */
-    content?: pulumi.Input<inputs.Cls.CosShipperContent>;
+    content?: pulumi.Input<inputs.Cls.CosShipperContent | undefined>;
     /**
      * End time for data shipping, which cannot be set to a future time. If you do not specify this parameter, it indicates continuous data shipping.
      */
-    endTime?: pulumi.Input<number>;
+    endTime?: pulumi.Input<number | undefined>;
     /**
      * Naming a shipping file. Valid values: 0 (by random number); 1 (by shipping time). Default value: 0.
      */
-    filenameMode?: pulumi.Input<number>;
+    filenameMode?: pulumi.Input<number | undefined>;
     /**
      * Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
      */
-    filterRules?: pulumi.Input<pulumi.Input<inputs.Cls.CosShipperFilterRule>[]>;
+    filterRules?: pulumi.Input<pulumi.Input<inputs.Cls.CosShipperFilterRule>[] | undefined>;
     /**
      * Shipping time interval in seconds. Default value: 300. Value range: 300~900.
      */
-    interval?: pulumi.Input<number>;
+    interval?: pulumi.Input<number | undefined>;
     /**
      * Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100~256.
      */
-    maxSize?: pulumi.Input<number>;
+    maxSize?: pulumi.Input<number | undefined>;
     /**
      * Partition rule of shipped log, which can be represented in strftime time format.
      */
-    partition?: pulumi.Input<string>;
+    partition?: pulumi.Input<string | undefined>;
     /**
      * Prefix of the shipping directory in the shipping rule to be created.
      */
@@ -331,11 +379,15 @@ export interface CosShipperArgs {
     /**
      * Start time for data shipping, which cannot be earlier than the lifecycle start time of the log topic. If you do not specify this parameter, it will be set to the time when you create the data shipping task.
      */
-    startTime?: pulumi.Input<number>;
+    startTime?: pulumi.Input<number | undefined>;
     /**
      * COS bucket storage type. support: STANDARD_IA, ARCHIVE, DEEP_ARCHIVE, STANDARD, MAZ_STANDARD, MAZ_STANDARD_IA, INTELLIGENT_TIERING.
      */
-    storageType?: pulumi.Input<string>;
+    storageType?: pulumi.Input<string | undefined>;
+    /**
+     * Timezone used to generate the time variable in the COS file path when shipping logs. Supports GMT and UTC timezone formats, e.g., `GMT+08:00`, `UTC+08:00`.
+     */
+    timeZone?: pulumi.Input<string | undefined>;
     /**
      * ID of the log topic to which the shipping rule to be created belongs.
      */

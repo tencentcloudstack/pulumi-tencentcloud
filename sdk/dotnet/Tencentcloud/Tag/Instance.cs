@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tag
 {
     /// <summary>
-    /// Provides a resource to create a tag
+    /// Provides a resource to create a Tag
     /// 
     /// ## Example Usage
     /// 
@@ -34,7 +34,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tag
     /// 
     /// ## Import
     /// 
-    /// tag can be imported using the id, e.g.
+    /// Tag can be imported using the tagKey#tagValue, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Tag/instance:Instance example tagKey#tagValue

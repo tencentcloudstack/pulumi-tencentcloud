@@ -42,7 +42,7 @@ import (
 //
 // ## Import
 //
-// ssl complete_certificate can be imported using the id, e.g.
+// ssl completeCertificate can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Ssl/completeCertificateOperation:CompleteCertificateOperation complete_certificate complete_certificate_id

@@ -94,11 +94,11 @@ export interface SuspendResumeDataEngineState {
     /**
      * The name of a virtual cluster.
      */
-    dataEngineName?: pulumi.Input<string>;
+    dataEngineName?: pulumi.Input<string | undefined>;
     /**
      * The operation type: `suspend` or `resume`.
      */
-    operate?: pulumi.Input<string>;
+    operate?: pulumi.Input<string | undefined>;
 }
 
 /**

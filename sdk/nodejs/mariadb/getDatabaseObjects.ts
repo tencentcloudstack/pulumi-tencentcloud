@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const databaseObjects = tencentcloud.Mariadb.getDatabaseObjects({
+ * const databaseObjects = tencentcloud.mariadb.getDatabaseObjects({
  *     instanceId: "tdsql-n2fw7pn3",
  *     dbName: "mysql",
  * });
@@ -85,7 +85,7 @@ export interface GetDatabaseObjectsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const databaseObjects = tencentcloud.Mariadb.getDatabaseObjects({
+ * const databaseObjects = tencentcloud.mariadb.getDatabaseObjects({
  *     instanceId: "tdsql-n2fw7pn3",
  *     dbName: "mysql",
  * });
@@ -115,5 +115,5 @@ export interface GetDatabaseObjectsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

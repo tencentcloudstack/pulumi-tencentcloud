@@ -21,8 +21,6 @@ import (
 //
 // import (
 //
-//	"fmt"
-//
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/emr"
@@ -72,7 +70,7 @@ import (
 //			emrSubnet, err := subnet.NewInstance(ctx, "emr_subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("emr-subnets"),
-//				VpcId:            emrVpc.ID(),
+//				VpcId:            emrVpc.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("10.0.20.0/28"),
 //				IsMulticast:      pulumi.Bool(false),
 //			})
@@ -90,8 +88,8 @@ import (
 //			_, err = emr.NewCluster(ctx, "emr_cluster", &emr.ClusterArgs{
 //				ProductId: pulumi.Int(38),
 //				VpcSettings: pulumi.StringMap{
-//					"vpc_id":    emrVpc.ID(),
-//					"subnet_id": emrSubnet.ID(),
+//					"vpc_id":    emrVpc.ID().ToIDOutput().ToStringOutput(),
+//					"subnet_id": emrSubnet.ID().ToIDOutput().ToStringOutput(),
 //				},
 //				Softwares: pulumi.StringArray{
 //					pulumi.String("hdfs-2.8.5"),
@@ -134,7 +132,7 @@ import (
 //					Zone:      pulumi.String(availabilityZone),
 //					ProjectId: pulumi.Int(0),
 //				},
-//				SgId: emrSg.ID(),
+//				SgId: emrSg.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err

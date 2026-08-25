@@ -136,11 +136,11 @@ export interface TmpMultipleWritesListState {
     /**
      * Instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Data multiple write configuration.
      */
-    remoteWrites?: pulumi.Input<pulumi.Input<inputs.Monitor.TmpMultipleWritesListRemoteWrite>[]>;
+    remoteWrites?: pulumi.Input<pulumi.Input<inputs.Monitor.TmpMultipleWritesListRemoteWrite>[] | undefined>;
 }
 
 /**
@@ -154,5 +154,5 @@ export interface TmpMultipleWritesListArgs {
     /**
      * Data multiple write configuration.
      */
-    remoteWrites?: pulumi.Input<pulumi.Input<inputs.Monitor.TmpMultipleWritesListRemoteWrite>[]>;
+    remoteWrites?: pulumi.Input<pulumi.Input<inputs.Monitor.TmpMultipleWritesListRemoteWrite>[] | undefined>;
 }

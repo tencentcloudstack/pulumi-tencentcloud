@@ -50,7 +50,7 @@ import (
 //
 // ## Import
 //
-// teo teo_dns_record can be imported using the id, e.g.
+// teo teoDnsRecord can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Teo/dnsRecord:DnsRecord teo_dns_record {zoneId}#{recordId}
@@ -62,10 +62,9 @@ type DnsRecord struct {
 	Content pulumi.StringOutput `pulumi:"content"`
 	// Creation time.
 	CreatedOn pulumi.StringOutput `pulumi:"createdOn"`
-	// DNS record resolution route. if not specified, the default is DEFAULT, which means the default resolution route and is effective in all regions.
-	//
-	// - resolution route configuration is only applicable when type (dns record type) is A, AAAA, or CNAME.
-	// - resolution route configuration is only applicable to standard version and enterprise edition packages. for valid values, please refer to: [resolution routes and corresponding code enumeration](https://intl.cloud.tencent.com/document/product/1552/112542?from_cn_redirect=1).
+	// DNS record resolution route, not specified as default, indicates the default resolution route, which is effective for all regions.
+	// -The resolution of line configuration is only applicable when the Type (DNS record type) is A, AAAA, or CNAME.
+	// -The analysis of line configuration is only applicable to standard and enterprise packages. Please refer to the analysis of line and corresponding code enumeration for values.
 	Location pulumi.StringOutput `pulumi:"location"`
 	// Modify time.
 	ModifiedOn pulumi.StringOutput `pulumi:"modifiedOn"`
@@ -73,6 +72,8 @@ type DnsRecord struct {
 	Name pulumi.StringOutput `pulumi:"name"`
 	// MX record priority, which takes effect only when type (dns record type) is MX. the smaller the value, the higher the priority. users can specify a value range of 0-50. the default value is 0 if not specified.
 	Priority pulumi.IntOutput `pulumi:"priority"`
+	// DNS record id.
+	RecordId pulumi.StringOutput `pulumi:"recordId"`
 	// DNS record resolution status, the following values:
 	// - enable: has taken effect;
 	// - disable: has been disabled.
@@ -139,10 +140,9 @@ type dnsRecordState struct {
 	Content *string `pulumi:"content"`
 	// Creation time.
 	CreatedOn *string `pulumi:"createdOn"`
-	// DNS record resolution route. if not specified, the default is DEFAULT, which means the default resolution route and is effective in all regions.
-	//
-	// - resolution route configuration is only applicable when type (dns record type) is A, AAAA, or CNAME.
-	// - resolution route configuration is only applicable to standard version and enterprise edition packages. for valid values, please refer to: [resolution routes and corresponding code enumeration](https://intl.cloud.tencent.com/document/product/1552/112542?from_cn_redirect=1).
+	// DNS record resolution route, not specified as default, indicates the default resolution route, which is effective for all regions.
+	// -The resolution of line configuration is only applicable when the Type (DNS record type) is A, AAAA, or CNAME.
+	// -The analysis of line configuration is only applicable to standard and enterprise packages. Please refer to the analysis of line and corresponding code enumeration for values.
 	Location *string `pulumi:"location"`
 	// Modify time.
 	ModifiedOn *string `pulumi:"modifiedOn"`
@@ -150,6 +150,8 @@ type dnsRecordState struct {
 	Name *string `pulumi:"name"`
 	// MX record priority, which takes effect only when type (dns record type) is MX. the smaller the value, the higher the priority. users can specify a value range of 0-50. the default value is 0 if not specified.
 	Priority *int `pulumi:"priority"`
+	// DNS record id.
+	RecordId *string `pulumi:"recordId"`
 	// DNS record resolution status, the following values:
 	// - enable: has taken effect;
 	// - disable: has been disabled.
@@ -178,10 +180,9 @@ type DnsRecordState struct {
 	Content pulumi.StringPtrInput
 	// Creation time.
 	CreatedOn pulumi.StringPtrInput
-	// DNS record resolution route. if not specified, the default is DEFAULT, which means the default resolution route and is effective in all regions.
-	//
-	// - resolution route configuration is only applicable when type (dns record type) is A, AAAA, or CNAME.
-	// - resolution route configuration is only applicable to standard version and enterprise edition packages. for valid values, please refer to: [resolution routes and corresponding code enumeration](https://intl.cloud.tencent.com/document/product/1552/112542?from_cn_redirect=1).
+	// DNS record resolution route, not specified as default, indicates the default resolution route, which is effective for all regions.
+	// -The resolution of line configuration is only applicable when the Type (DNS record type) is A, AAAA, or CNAME.
+	// -The analysis of line configuration is only applicable to standard and enterprise packages. Please refer to the analysis of line and corresponding code enumeration for values.
 	Location pulumi.StringPtrInput
 	// Modify time.
 	ModifiedOn pulumi.StringPtrInput
@@ -189,6 +190,8 @@ type DnsRecordState struct {
 	Name pulumi.StringPtrInput
 	// MX record priority, which takes effect only when type (dns record type) is MX. the smaller the value, the higher the priority. users can specify a value range of 0-50. the default value is 0 if not specified.
 	Priority pulumi.IntPtrInput
+	// DNS record id.
+	RecordId pulumi.StringPtrInput
 	// DNS record resolution status, the following values:
 	// - enable: has taken effect;
 	// - disable: has been disabled.
@@ -219,10 +222,9 @@ func (DnsRecordState) ElementType() reflect.Type {
 type dnsRecordArgs struct {
 	// DNS record content. fill in the corresponding content according to the type value. if the domain name is in chinese, korean, or japanese, it needs to be converted to punycode before input.
 	Content string `pulumi:"content"`
-	// DNS record resolution route. if not specified, the default is DEFAULT, which means the default resolution route and is effective in all regions.
-	//
-	// - resolution route configuration is only applicable when type (dns record type) is A, AAAA, or CNAME.
-	// - resolution route configuration is only applicable to standard version and enterprise edition packages. for valid values, please refer to: [resolution routes and corresponding code enumeration](https://intl.cloud.tencent.com/document/product/1552/112542?from_cn_redirect=1).
+	// DNS record resolution route, not specified as default, indicates the default resolution route, which is effective for all regions.
+	// -The resolution of line configuration is only applicable when the Type (DNS record type) is A, AAAA, or CNAME.
+	// -The analysis of line configuration is only applicable to standard and enterprise packages. Please refer to the analysis of line and corresponding code enumeration for values.
 	Location *string `pulumi:"location"`
 	// DNS record name. if the domain name is in chinese, korean, or japanese, it needs to be converted to punycode before input.
 	Name *string `pulumi:"name"`
@@ -255,10 +257,9 @@ type dnsRecordArgs struct {
 type DnsRecordArgs struct {
 	// DNS record content. fill in the corresponding content according to the type value. if the domain name is in chinese, korean, or japanese, it needs to be converted to punycode before input.
 	Content pulumi.StringInput
-	// DNS record resolution route. if not specified, the default is DEFAULT, which means the default resolution route and is effective in all regions.
-	//
-	// - resolution route configuration is only applicable when type (dns record type) is A, AAAA, or CNAME.
-	// - resolution route configuration is only applicable to standard version and enterprise edition packages. for valid values, please refer to: [resolution routes and corresponding code enumeration](https://intl.cloud.tencent.com/document/product/1552/112542?from_cn_redirect=1).
+	// DNS record resolution route, not specified as default, indicates the default resolution route, which is effective for all regions.
+	// -The resolution of line configuration is only applicable when the Type (DNS record type) is A, AAAA, or CNAME.
+	// -The analysis of line configuration is only applicable to standard and enterprise packages. Please refer to the analysis of line and corresponding code enumeration for values.
 	Location pulumi.StringPtrInput
 	// DNS record name. if the domain name is in chinese, korean, or japanese, it needs to be converted to punycode before input.
 	Name pulumi.StringPtrInput
@@ -384,10 +385,9 @@ func (o DnsRecordOutput) CreatedOn() pulumi.StringOutput {
 	return o.ApplyT(func(v *DnsRecord) pulumi.StringOutput { return v.CreatedOn }).(pulumi.StringOutput)
 }
 
-// DNS record resolution route. if not specified, the default is DEFAULT, which means the default resolution route and is effective in all regions.
-//
-// - resolution route configuration is only applicable when type (dns record type) is A, AAAA, or CNAME.
-// - resolution route configuration is only applicable to standard version and enterprise edition packages. for valid values, please refer to: [resolution routes and corresponding code enumeration](https://intl.cloud.tencent.com/document/product/1552/112542?from_cn_redirect=1).
+// DNS record resolution route, not specified as default, indicates the default resolution route, which is effective for all regions.
+// -The resolution of line configuration is only applicable when the Type (DNS record type) is A, AAAA, or CNAME.
+// -The analysis of line configuration is only applicable to standard and enterprise packages. Please refer to the analysis of line and corresponding code enumeration for values.
 func (o DnsRecordOutput) Location() pulumi.StringOutput {
 	return o.ApplyT(func(v *DnsRecord) pulumi.StringOutput { return v.Location }).(pulumi.StringOutput)
 }
@@ -405,6 +405,11 @@ func (o DnsRecordOutput) Name() pulumi.StringOutput {
 // MX record priority, which takes effect only when type (dns record type) is MX. the smaller the value, the higher the priority. users can specify a value range of 0-50. the default value is 0 if not specified.
 func (o DnsRecordOutput) Priority() pulumi.IntOutput {
 	return o.ApplyT(func(v *DnsRecord) pulumi.IntOutput { return v.Priority }).(pulumi.IntOutput)
+}
+
+// DNS record id.
+func (o DnsRecordOutput) RecordId() pulumi.StringOutput {
+	return o.ApplyT(func(v *DnsRecord) pulumi.StringOutput { return v.RecordId }).(pulumi.StringOutput)
 }
 
 // DNS record resolution status, the following values:

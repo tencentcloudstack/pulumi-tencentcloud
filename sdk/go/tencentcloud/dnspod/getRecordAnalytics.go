@@ -95,12 +95,8 @@ type GetRecordAnalyticsResult struct {
 }
 
 func GetRecordAnalyticsOutput(ctx *pulumi.Context, args GetRecordAnalyticsOutputArgs, opts ...pulumi.InvokeOption) GetRecordAnalyticsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetRecordAnalyticsResultOutput, error) {
-			args := v.(GetRecordAnalyticsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dnspod/getRecordAnalytics:getRecordAnalytics", args, GetRecordAnalyticsResultOutput{}, options).(GetRecordAnalyticsResultOutput), nil
-		}).(GetRecordAnalyticsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dnspod/getRecordAnalytics:getRecordAnalytics", args, GetRecordAnalyticsResultOutput{}, options).(GetRecordAnalyticsResultOutput)
 }
 
 // A collection of arguments for invoking getRecordAnalytics.

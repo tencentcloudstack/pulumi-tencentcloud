@@ -25,7 +25,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * css backup_stream can be imported using the id, e.g.
+ * css backupStream can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Css/backupStream:BackupStream backup_stream pushDomainName#appName#streamName
@@ -124,19 +124,19 @@ export interface BackupStreamState {
     /**
      * App name.
      */
-    appName?: pulumi.Input<string>;
+    appName?: pulumi.Input<string | undefined>;
     /**
      * Push domain.
      */
-    pushDomainName?: pulumi.Input<string>;
+    pushDomainName?: pulumi.Input<string | undefined>;
     /**
      * Stream id.
      */
-    streamName?: pulumi.Input<string>;
+    streamName?: pulumi.Input<string | undefined>;
     /**
      * Sequence.
      */
-    upstreamSequence?: pulumi.Input<string>;
+    upstreamSequence?: pulumi.Input<string | undefined>;
 }
 
 /**

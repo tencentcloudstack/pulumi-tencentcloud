@@ -67,12 +67,8 @@ type GetFlowResult struct {
 }
 
 func GetFlowOutput(ctx *pulumi.Context, args GetFlowOutputArgs, opts ...pulumi.InvokeOption) GetFlowResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetFlowResultOutput, error) {
-			args := v.(GetFlowArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mariadb/getFlow:getFlow", args, GetFlowResultOutput{}, options).(GetFlowResultOutput), nil
-		}).(GetFlowResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mariadb/getFlow:getFlow", args, GetFlowResultOutput{}, options).(GetFlowResultOutput)
 }
 
 // A collection of arguments for invoking getFlow.

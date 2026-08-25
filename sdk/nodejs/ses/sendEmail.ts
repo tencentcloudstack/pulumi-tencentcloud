@@ -155,43 +155,43 @@ export interface SendEmailState {
     /**
      * Parameters for the attachments to be sent. The TencentCloud API supports a request packet of up to 8 MB in size,and the size of the attachment content will increase by 1.5 times after Base64 encoding. Therefore,you need to keep the total size of all attachments below 4 MB. If the entire request exceeds 8 MB,the API will return an error.
      */
-    attachments?: pulumi.Input<pulumi.Input<inputs.Ses.SendEmailAttachment>[]>;
+    attachments?: pulumi.Input<pulumi.Input<inputs.Ses.SendEmailAttachment>[] | undefined>;
     /**
      * The email address of the cc recipient can support up to 20 cc recipients.
      */
-    bccs?: pulumi.Input<pulumi.Input<string>[]>;
+    bccs?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Cc recipient email address, up to 20 people can be copied.
      */
-    ccs?: pulumi.Input<pulumi.Input<string>[]>;
+    ccs?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Recipient email addresses. You can send an email to up to 50 recipients at a time. Note: the email content will display all recipient addresses. To send one-to-one emails to several recipients, please call the API multiple times to send the emails.
      */
-    destinations?: pulumi.Input<pulumi.Input<string>[]>;
+    destinations?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Sender address. Enter a sender address, for example, noreply@mail.qcloud.com.To display the sender name, enter the address in the following format:Sender.
      */
-    fromEmailAddress?: pulumi.Input<string>;
+    fromEmailAddress?: pulumi.Input<string | undefined>;
     /**
      * Reply-to address. You can enter a valid personal email address that can receive emails. If this parameter is left empty, reply emails will fail to be sent.
      */
-    replyToAddresses?: pulumi.Input<string>;
+    replyToAddresses?: pulumi.Input<string | undefined>;
     /**
      * Email subject.
      */
-    subject?: pulumi.Input<string>;
+    subject?: pulumi.Input<string | undefined>;
     /**
      * Template parameters for template-based sending. As Simple has been disused, Template is required.
      */
-    template?: pulumi.Input<inputs.Ses.SendEmailTemplate>;
+    template?: pulumi.Input<inputs.Ses.SendEmailTemplate | undefined>;
     /**
      * Email triggering type. 0 (default): non-trigger-based, suitable for marketing emails and non-immediate emails;1: trigger-based, suitable for immediate emails such as emails containing verification codes.If the size of an email exceeds a specified value,the system will automatically choose the non-trigger-based type.
      */
-    triggerType?: pulumi.Input<number>;
+    triggerType?: pulumi.Input<number | undefined>;
     /**
      * Unsubscribe link option.  0: Do not add unsubscribe link; 1: English 2: Simplified Chinese;  3: Traditional Chinese; 4: Spanish; 5: French;  6: German; 7: Japanese; 8: Korean;  9: Arabic; 10: Thai.
      */
-    unsubscribe?: pulumi.Input<string>;
+    unsubscribe?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -201,15 +201,15 @@ export interface SendEmailArgs {
     /**
      * Parameters for the attachments to be sent. The TencentCloud API supports a request packet of up to 8 MB in size,and the size of the attachment content will increase by 1.5 times after Base64 encoding. Therefore,you need to keep the total size of all attachments below 4 MB. If the entire request exceeds 8 MB,the API will return an error.
      */
-    attachments?: pulumi.Input<pulumi.Input<inputs.Ses.SendEmailAttachment>[]>;
+    attachments?: pulumi.Input<pulumi.Input<inputs.Ses.SendEmailAttachment>[] | undefined>;
     /**
      * The email address of the cc recipient can support up to 20 cc recipients.
      */
-    bccs?: pulumi.Input<pulumi.Input<string>[]>;
+    bccs?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Cc recipient email address, up to 20 people can be copied.
      */
-    ccs?: pulumi.Input<pulumi.Input<string>[]>;
+    ccs?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Recipient email addresses. You can send an email to up to 50 recipients at a time. Note: the email content will display all recipient addresses. To send one-to-one emails to several recipients, please call the API multiple times to send the emails.
      */
@@ -221,7 +221,7 @@ export interface SendEmailArgs {
     /**
      * Reply-to address. You can enter a valid personal email address that can receive emails. If this parameter is left empty, reply emails will fail to be sent.
      */
-    replyToAddresses?: pulumi.Input<string>;
+    replyToAddresses?: pulumi.Input<string | undefined>;
     /**
      * Email subject.
      */
@@ -229,13 +229,13 @@ export interface SendEmailArgs {
     /**
      * Template parameters for template-based sending. As Simple has been disused, Template is required.
      */
-    template?: pulumi.Input<inputs.Ses.SendEmailTemplate>;
+    template?: pulumi.Input<inputs.Ses.SendEmailTemplate | undefined>;
     /**
      * Email triggering type. 0 (default): non-trigger-based, suitable for marketing emails and non-immediate emails;1: trigger-based, suitable for immediate emails such as emails containing verification codes.If the size of an email exceeds a specified value,the system will automatically choose the non-trigger-based type.
      */
-    triggerType?: pulumi.Input<number>;
+    triggerType?: pulumi.Input<number | undefined>;
     /**
      * Unsubscribe link option.  0: Do not add unsubscribe link; 1: English 2: Simplified Chinese;  3: Traditional Chinese; 4: Spanish; 5: French;  6: German; 7: Japanese; 8: Korean;  9: Arabic; 10: Thai.
      */
-    unsubscribe?: pulumi.Input<string>;
+    unsubscribe?: pulumi.Input<string | undefined>;
 }

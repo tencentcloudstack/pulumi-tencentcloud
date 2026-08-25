@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Sqlserver.getRollbackTime({
+ * const example = tencentcloud.sqlserver.getRollbackTime({
  *     instanceId: "mssql-qelbzgwf",
  *     dbs: ["keep_pubsub_db"],
  * });
@@ -73,7 +73,7 @@ export interface GetRollbackTimeResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Sqlserver.getRollbackTime({
+ * const example = tencentcloud.sqlserver.getRollbackTime({
  *     instanceId: "mssql-qelbzgwf",
  *     dbs: ["keep_pubsub_db"],
  * });
@@ -103,5 +103,5 @@ export interface GetRollbackTimeOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

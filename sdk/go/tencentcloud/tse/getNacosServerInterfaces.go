@@ -67,12 +67,8 @@ type GetNacosServerInterfacesResult struct {
 }
 
 func GetNacosServerInterfacesOutput(ctx *pulumi.Context, args GetNacosServerInterfacesOutputArgs, opts ...pulumi.InvokeOption) GetNacosServerInterfacesResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetNacosServerInterfacesResultOutput, error) {
-			args := v.(GetNacosServerInterfacesArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Tse/getNacosServerInterfaces:getNacosServerInterfaces", args, GetNacosServerInterfacesResultOutput{}, options).(GetNacosServerInterfacesResultOutput), nil
-		}).(GetNacosServerInterfacesResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Tse/getNacosServerInterfaces:getNacosServerInterfaces", args, GetNacosServerInterfacesResultOutput{}, options).(GetNacosServerInterfacesResultOutput)
 }
 
 // A collection of arguments for invoking getNacosServerInterfaces.

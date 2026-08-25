@@ -53,7 +53,7 @@ import (
 //			}
 //			json0 := string(tmpJSON0)
 //			_, err = eb.NewEventRule(ctx, "event_rule", &eb.EventRuleArgs{
-//				EventBusId:   foo.ID(),
+//				EventBusId:   foo.ID().ToIDOutput().ToStringOutput(),
 //				RuleName:     pulumi.String("tf-event_rule"),
 //				Description:  pulumi.String("event rule desc"),
 //				Enable:       pulumi.Bool(true),
@@ -73,7 +73,7 @@ import (
 //
 // ## Import
 //
-// eb event_rule can be imported using the id, e.g.
+// eb eventRule can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Eb/eventRule:EventRule event_rule event_rule_id

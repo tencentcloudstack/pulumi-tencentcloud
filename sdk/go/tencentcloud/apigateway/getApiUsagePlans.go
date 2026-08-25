@@ -50,7 +50,7 @@ import (
 //				return err
 //			}
 //			exampleApi, err := apigateway.NewApi(ctx, "example", &apigateway.ApiArgs{
-//				ServiceId:           exampleService.ID(),
+//				ServiceId:           exampleService.ID().ToIDOutput().ToStringOutput(),
 //				ApiName:             pulumi.String("tf_example"),
 //				ApiDesc:             pulumi.String("my hello api update"),
 //				AuthType:            pulumi.String("SECRET"),
@@ -90,11 +90,11 @@ import (
 //				return err
 //			}
 //			exampleUsagePlanAttachment, err := apigateway.NewUsagePlanAttachment(ctx, "example", &apigateway.UsagePlanAttachmentArgs{
-//				UsagePlanId: exampleUsagePlan.ID(),
-//				ServiceId:   exampleService.ID(),
+//				UsagePlanId: exampleUsagePlan.ID().ToIDOutput().ToStringOutput(),
+//				ServiceId:   exampleService.ID().ToIDOutput().ToStringOutput(),
 //				Environment: pulumi.String("release"),
 //				BindType:    pulumi.String("API"),
-//				ApiId:       exampleApi.ID(),
+//				ApiId:       exampleApi.ID().ToIDOutput().ToStringOutput(),
 //			})
 //			if err != nil {
 //				return err
@@ -137,12 +137,8 @@ type LookupApiUsagePlansResult struct {
 }
 
 func LookupApiUsagePlansOutput(ctx *pulumi.Context, args LookupApiUsagePlansOutputArgs, opts ...pulumi.InvokeOption) LookupApiUsagePlansResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupApiUsagePlansResultOutput, error) {
-			args := v.(LookupApiUsagePlansArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:ApiGateway/getApiUsagePlans:getApiUsagePlans", args, LookupApiUsagePlansResultOutput{}, options).(LookupApiUsagePlansResultOutput), nil
-		}).(LookupApiUsagePlansResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:ApiGateway/getApiUsagePlans:getApiUsagePlans", args, LookupApiUsagePlansResultOutput{}, options).(LookupApiUsagePlansResultOutput)
 }
 
 // A collection of arguments for invoking getApiUsagePlans.

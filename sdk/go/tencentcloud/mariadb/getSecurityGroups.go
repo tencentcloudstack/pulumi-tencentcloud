@@ -71,12 +71,8 @@ type LookupSecurityGroupsResult struct {
 }
 
 func LookupSecurityGroupsOutput(ctx *pulumi.Context, args LookupSecurityGroupsOutputArgs, opts ...pulumi.InvokeOption) LookupSecurityGroupsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupSecurityGroupsResultOutput, error) {
-			args := v.(LookupSecurityGroupsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Mariadb/getSecurityGroups:getSecurityGroups", args, LookupSecurityGroupsResultOutput{}, options).(LookupSecurityGroupsResultOutput), nil
-		}).(LookupSecurityGroupsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Mariadb/getSecurityGroups:getSecurityGroups", args, LookupSecurityGroupsResultOutput{}, options).(LookupSecurityGroupsResultOutput)
 }
 
 // A collection of arguments for invoking getSecurityGroups.

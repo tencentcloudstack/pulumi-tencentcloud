@@ -77,12 +77,8 @@ type GetFunctionAddressResult struct {
 }
 
 func GetFunctionAddressOutput(ctx *pulumi.Context, args GetFunctionAddressOutputArgs, opts ...pulumi.InvokeOption) GetFunctionAddressResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetFunctionAddressResultOutput, error) {
-			args := v.(GetFunctionAddressArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Scf/getFunctionAddress:getFunctionAddress", args, GetFunctionAddressResultOutput{}, options).(GetFunctionAddressResultOutput), nil
-		}).(GetFunctionAddressResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Scf/getFunctionAddress:getFunctionAddress", args, GetFunctionAddressResultOutput{}, options).(GetFunctionAddressResultOutput)
 }
 
 // A collection of arguments for invoking getFunctionAddress.

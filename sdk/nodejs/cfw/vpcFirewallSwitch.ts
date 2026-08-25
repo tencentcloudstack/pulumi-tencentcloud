@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cfw.getVpcFwSwitches({
+ * const example = tencentcloud.cfw.getVpcFwSwitches({
  *     vpcInsId: "cfwg-c8c2de41",
  * });
  * const exampleVpcFirewallSwitch = new tencentcloud.cfw.VpcFirewallSwitch("example", {
@@ -31,7 +31,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Cfw.getVpcFwSwitches({
+ * const example = tencentcloud.cfw.getVpcFwSwitches({
  *     vpcInsId: "cfwg-c8c2de41",
  * });
  * const exampleVpcFirewallSwitch = new tencentcloud.cfw.VpcFirewallSwitch("example", {
@@ -43,7 +43,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * cfw vpc_firewall_switch can be imported using the id, e.g.
+ * cfw vpcFirewallSwitch can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Cfw/vpcFirewallSwitch:VpcFirewallSwitch example cfwg-c8c2de41#cfws-f2c63ded84
@@ -133,15 +133,15 @@ export interface VpcFirewallSwitchState {
     /**
      * Turn the switch on or off. 0: turn off the switch; 1: Turn on the switch.
      */
-    enable?: pulumi.Input<number>;
+    enable?: pulumi.Input<number | undefined>;
     /**
      * Firewall switch ID.
      */
-    switchId?: pulumi.Input<string>;
+    switchId?: pulumi.Input<string | undefined>;
     /**
      * Firewall instance id.
      */
-    vpcInsId?: pulumi.Input<string>;
+    vpcInsId?: pulumi.Input<string | undefined>;
 }
 
 /**

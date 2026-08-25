@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const monitorReport = tencentcloud.Css.getMonitorReport({
+ * const monitorReport = tencentcloud.css.getMonitorReport({
  *     monitorId: "0e8a12b5-df2a-4a1b-aa98-97d5610aa142",
  * });
  * ```
@@ -70,7 +70,7 @@ export interface GetMonitorReportResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const monitorReport = tencentcloud.Css.getMonitorReport({
+ * const monitorReport = tencentcloud.css.getMonitorReport({
  *     monitorId: "0e8a12b5-df2a-4a1b-aa98-97d5610aa142",
  * });
  * ```
@@ -94,5 +94,5 @@ export interface GetMonitorReportOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

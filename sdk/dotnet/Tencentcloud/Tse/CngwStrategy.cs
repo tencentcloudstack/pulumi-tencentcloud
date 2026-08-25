@@ -94,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
     /// 
     /// ## Import
     /// 
-    /// tse cngw_strategy can be imported using the id, e.g.
+    /// tse CngwStrategy can be imported using the id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Tse/cngwStrategy:CngwStrategy cngw_strategy gateway-cf8c99c3#strategy-a6744ff8

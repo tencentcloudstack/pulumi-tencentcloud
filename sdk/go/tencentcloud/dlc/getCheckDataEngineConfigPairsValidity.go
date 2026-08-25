@@ -75,12 +75,8 @@ type GetCheckDataEngineConfigPairsValidityResult struct {
 }
 
 func GetCheckDataEngineConfigPairsValidityOutput(ctx *pulumi.Context, args GetCheckDataEngineConfigPairsValidityOutputArgs, opts ...pulumi.InvokeOption) GetCheckDataEngineConfigPairsValidityResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetCheckDataEngineConfigPairsValidityResultOutput, error) {
-			args := v.(GetCheckDataEngineConfigPairsValidityArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dlc/getCheckDataEngineConfigPairsValidity:getCheckDataEngineConfigPairsValidity", args, GetCheckDataEngineConfigPairsValidityResultOutput{}, options).(GetCheckDataEngineConfigPairsValidityResultOutput), nil
-		}).(GetCheckDataEngineConfigPairsValidityResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dlc/getCheckDataEngineConfigPairsValidity:getCheckDataEngineConfigPairsValidity", args, GetCheckDataEngineConfigPairsValidityResultOutput{}, options).(GetCheckDataEngineConfigPairsValidityResultOutput)
 }
 
 // A collection of arguments for invoking getCheckDataEngineConfigPairsValidity.

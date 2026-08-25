@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const gatewayFlowMonitorDetail = tencentcloud.Vpc.getGatewayFlowMonitorDetail({
+ * const gatewayFlowMonitorDetail = tencentcloud.vpc.getGatewayFlowMonitorDetail({
  *     timePoint: "2023-06-02 12:15:20",
  *     vpnId: "vpngw-gt8bianl",
  *     orderField: "OutTraffic",
@@ -105,7 +105,7 @@ export interface GetGatewayFlowMonitorDetailResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const gatewayFlowMonitorDetail = tencentcloud.Vpc.getGatewayFlowMonitorDetail({
+ * const gatewayFlowMonitorDetail = tencentcloud.vpc.getGatewayFlowMonitorDetail({
  *     timePoint: "2023-06-02 12:15:20",
  *     vpnId: "vpngw-gt8bianl",
  *     orderField: "OutTraffic",
@@ -134,27 +134,27 @@ export interface GetGatewayFlowMonitorDetailOutputArgs {
     /**
      * The instance ID of the Direct Connect gateway, such as `dcg-ltjahce6`.
      */
-    directConnectGatewayId?: pulumi.Input<string>;
+    directConnectGatewayId?: pulumi.Input<string | undefined>;
     /**
      * The instance ID of the NAT gateway, such as `nat-ltjahce6`.
      */
-    natId?: pulumi.Input<string>;
+    natId?: pulumi.Input<string | undefined>;
     /**
      * Order methods. Ascending: `ASC`, Descending: `DESC`.
      */
-    orderDirection?: pulumi.Input<string>;
+    orderDirection?: pulumi.Input<string | undefined>;
     /**
      * The order field supports `InPkg`, `OutPkg`, `InTraffic`, and `OutTraffic`.
      */
-    orderField?: pulumi.Input<string>;
+    orderField?: pulumi.Input<string | undefined>;
     /**
      * The instance ID of the peering connection, such as `pcx-ltjahce6`.
      */
-    peeringConnectionId?: pulumi.Input<string>;
+    peeringConnectionId?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * The point in time. This indicates details of this minute will be queried. For example, in `2019-02-28 18:15:20`, details at `18:15` will be queried.
      */
@@ -162,5 +162,5 @@ export interface GetGatewayFlowMonitorDetailOutputArgs {
     /**
      * The instance ID of the VPN gateway, such as `vpn-ltjahce6`.
      */
-    vpnId?: pulumi.Input<string>;
+    vpnId?: pulumi.Input<string | undefined>;
 }

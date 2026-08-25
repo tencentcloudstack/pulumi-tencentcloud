@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const listenerStatistics = tencentcloud.Gaap.getListenerStatistics({
+ * const listenerStatistics = tencentcloud.gaap.getListenerStatistics({
  *     listenerId: "listener-xxxxxx",
  *     startTime: "2023-10-19 00:00:00",
  *     endTime: "2023-10-19 23:59:59",
@@ -100,7 +100,7 @@ export interface GetListenerStatisticsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const listenerStatistics = tencentcloud.Gaap.getListenerStatistics({
+ * const listenerStatistics = tencentcloud.gaap.getListenerStatistics({
  *     listenerId: "listener-xxxxxx",
  *     startTime: "2023-10-19 00:00:00",
  *     endTime: "2023-10-19 23:59:59",
@@ -150,7 +150,7 @@ export interface GetListenerStatisticsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Start Time.
      */

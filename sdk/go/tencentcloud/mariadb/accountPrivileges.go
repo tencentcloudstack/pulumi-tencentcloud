@@ -54,7 +54,7 @@ import (
 //
 // ## Import
 //
-// mariadb account_privileges can be imported using the id, e.g.
+// mariadb accountPrivileges can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Mariadb/accountPrivileges:AccountPrivileges account_privileges account_privileges_id

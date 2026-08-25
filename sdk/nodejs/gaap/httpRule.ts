@@ -69,7 +69,7 @@ import * as utilities from "../utilities";
  * GAAP http rule can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Gaap/httpRule:HttpRule  tencentcloud_gaap_http_rule.foo rule-3bsuu01r
+ *   $ pulumi import tencentcloud:Gaap/httpRule:HttpRule foo rule-3bsuu01r
  * ```
  */
 export class HttpRule extends pulumi.CustomResource {
@@ -234,63 +234,63 @@ export interface HttpRuleState {
     /**
      * Timeout of the health check response, default value is 2s.
      */
-    connectTimeout?: pulumi.Input<number>;
+    connectTimeout?: pulumi.Input<number | undefined>;
     /**
      * Forward domain of the forward rule.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * The default value of requested host which is forwarded to the realserver by the listener is `default`.
      */
-    forwardHost?: pulumi.Input<string>;
+    forwardHost?: pulumi.Input<string | undefined>;
     /**
      * Indicates whether health check is enable.
      */
-    healthCheck?: pulumi.Input<boolean>;
+    healthCheck?: pulumi.Input<boolean | undefined>;
     /**
      * Method of the health check. Valid value: `GET` and `HEAD`.
      */
-    healthCheckMethod?: pulumi.Input<string>;
+    healthCheckMethod?: pulumi.Input<string | undefined>;
     /**
      * Path of health check. Maximum length is 80.
      */
-    healthCheckPath?: pulumi.Input<string>;
+    healthCheckPath?: pulumi.Input<string | undefined>;
     /**
      * Return code of confirmed normal. Valid value: `100`, `200`, `300`, `400` and `500`.
      */
-    healthCheckStatusCodes?: pulumi.Input<pulumi.Input<number>[]>;
+    healthCheckStatusCodes?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Interval of the health check, default value is 5s.
      */
-    interval?: pulumi.Input<number>;
+    interval?: pulumi.Input<number | undefined>;
     /**
      * ID of the layer7 listener.
      */
-    listenerId?: pulumi.Input<string>;
+    listenerId?: pulumi.Input<string | undefined>;
     /**
      * Path of the forward rule. Maximum length is 80.
      */
-    path?: pulumi.Input<string>;
+    path?: pulumi.Input<string | undefined>;
     /**
      * Type of the realserver. Valid value: `IP` and `DOMAIN`.
      */
-    realserverType?: pulumi.Input<string>;
+    realserverType?: pulumi.Input<string | undefined>;
     /**
      * An information list of GAAP realserver.
      */
-    realservers?: pulumi.Input<pulumi.Input<inputs.Gaap.HttpRuleRealserver>[]>;
+    realservers?: pulumi.Input<pulumi.Input<inputs.Gaap.HttpRuleRealserver>[] | undefined>;
     /**
      * Scheduling policy of the forward rule, default value is `rr`. Valid value: `rr`, `wrr` and `lc`.
      */
-    scheduler?: pulumi.Input<string>;
+    scheduler?: pulumi.Input<string | undefined>;
     /**
      * ServerNameIndication (SNI) is required when the SNI switch is turned on.
      */
-    sni?: pulumi.Input<string>;
+    sni?: pulumi.Input<string | undefined>;
     /**
      * ServerNameIndication (SNI) switch. ON means on and OFF means off.
      */
-    sniSwitch?: pulumi.Input<string>;
+    sniSwitch?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -300,7 +300,7 @@ export interface HttpRuleArgs {
     /**
      * Timeout of the health check response, default value is 2s.
      */
-    connectTimeout?: pulumi.Input<number>;
+    connectTimeout?: pulumi.Input<number | undefined>;
     /**
      * Forward domain of the forward rule.
      */
@@ -308,7 +308,7 @@ export interface HttpRuleArgs {
     /**
      * The default value of requested host which is forwarded to the realserver by the listener is `default`.
      */
-    forwardHost?: pulumi.Input<string>;
+    forwardHost?: pulumi.Input<string | undefined>;
     /**
      * Indicates whether health check is enable.
      */
@@ -316,19 +316,19 @@ export interface HttpRuleArgs {
     /**
      * Method of the health check. Valid value: `GET` and `HEAD`.
      */
-    healthCheckMethod?: pulumi.Input<string>;
+    healthCheckMethod?: pulumi.Input<string | undefined>;
     /**
      * Path of health check. Maximum length is 80.
      */
-    healthCheckPath?: pulumi.Input<string>;
+    healthCheckPath?: pulumi.Input<string | undefined>;
     /**
      * Return code of confirmed normal. Valid value: `100`, `200`, `300`, `400` and `500`.
      */
-    healthCheckStatusCodes?: pulumi.Input<pulumi.Input<number>[]>;
+    healthCheckStatusCodes?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Interval of the health check, default value is 5s.
      */
-    interval?: pulumi.Input<number>;
+    interval?: pulumi.Input<number | undefined>;
     /**
      * ID of the layer7 listener.
      */
@@ -344,17 +344,17 @@ export interface HttpRuleArgs {
     /**
      * An information list of GAAP realserver.
      */
-    realservers?: pulumi.Input<pulumi.Input<inputs.Gaap.HttpRuleRealserver>[]>;
+    realservers?: pulumi.Input<pulumi.Input<inputs.Gaap.HttpRuleRealserver>[] | undefined>;
     /**
      * Scheduling policy of the forward rule, default value is `rr`. Valid value: `rr`, `wrr` and `lc`.
      */
-    scheduler?: pulumi.Input<string>;
+    scheduler?: pulumi.Input<string | undefined>;
     /**
      * ServerNameIndication (SNI) is required when the SNI switch is turned on.
      */
-    sni?: pulumi.Input<string>;
+    sni?: pulumi.Input<string | undefined>;
     /**
      * ServerNameIndication (SNI) switch. ON means on and OFF means off.
      */
-    sniSwitch?: pulumi.Input<string>;
+    sniSwitch?: pulumi.Input<string | undefined>;
 }

@@ -82,7 +82,7 @@ export interface SyncJobStopOperationState {
     /**
      * Synchronization instance id (i.e. identifies a synchronization job).
      */
-    jobId?: pulumi.Input<string>;
+    jobId?: pulumi.Input<string | undefined>;
 }
 
 /**

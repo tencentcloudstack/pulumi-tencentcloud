@@ -168,47 +168,47 @@ export interface ApplicationFileConfigState {
     /**
      * Config file associated application ID.
      */
-    applicationId?: pulumi.Input<string>;
+    applicationId?: pulumi.Input<string | undefined>;
     /**
      * Configuration file encoding, utf-8 or gbk. Note: If you choose gbk, you need the support of a new version of tsf-consul-template (public cloud virtual machines need to use 1.32 tsf-agent, and containers need to obtain the latest tsf-consul-template-docker.tar.gz from the documentation).
      */
-    configFileCode?: pulumi.Input<string>;
+    configFileCode?: pulumi.Input<string | undefined>;
     /**
      * Config file name.
      */
-    configFileName?: pulumi.Input<string>;
+    configFileName?: pulumi.Input<string | undefined>;
     /**
      * config release path.
      */
-    configFilePath?: pulumi.Input<string>;
+    configFilePath?: pulumi.Input<string | undefined>;
     /**
      * Configuration file content (the original content encoding needs to be in utf-8 format, if the ConfigFileCode is gbk, it will be converted in the background).
      */
-    configFileValue?: pulumi.Input<string>;
+    configFileValue?: pulumi.Input<string | undefined>;
     /**
      * Config Name.
      */
-    configName?: pulumi.Input<string>;
+    configName?: pulumi.Input<string | undefined>;
     /**
      * post command.
      */
-    configPostCmd?: pulumi.Input<string>;
+    configPostCmd?: pulumi.Input<string | undefined>;
     /**
      * Config version.
      */
-    configVersion?: pulumi.Input<string>;
+    configVersion?: pulumi.Input<string | undefined>;
     /**
      * config version description.
      */
-    configVersionDesc?: pulumi.Input<string>;
+    configVersionDesc?: pulumi.Input<string | undefined>;
     /**
      * the config value is encoded with base64 or not.
      */
-    encodeWithBase64?: pulumi.Input<boolean>;
+    encodeWithBase64?: pulumi.Input<boolean | undefined>;
     /**
      * datasource for auth.
      */
-    programIdLists?: pulumi.Input<pulumi.Input<string>[]>;
+    programIdLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -222,7 +222,7 @@ export interface ApplicationFileConfigArgs {
     /**
      * Configuration file encoding, utf-8 or gbk. Note: If you choose gbk, you need the support of a new version of tsf-consul-template (public cloud virtual machines need to use 1.32 tsf-agent, and containers need to obtain the latest tsf-consul-template-docker.tar.gz from the documentation).
      */
-    configFileCode?: pulumi.Input<string>;
+    configFileCode?: pulumi.Input<string | undefined>;
     /**
      * Config file name.
      */
@@ -242,7 +242,7 @@ export interface ApplicationFileConfigArgs {
     /**
      * post command.
      */
-    configPostCmd?: pulumi.Input<string>;
+    configPostCmd?: pulumi.Input<string | undefined>;
     /**
      * Config version.
      */
@@ -250,13 +250,13 @@ export interface ApplicationFileConfigArgs {
     /**
      * config version description.
      */
-    configVersionDesc?: pulumi.Input<string>;
+    configVersionDesc?: pulumi.Input<string | undefined>;
     /**
      * the config value is encoded with base64 or not.
      */
-    encodeWithBase64?: pulumi.Input<boolean>;
+    encodeWithBase64?: pulumi.Input<boolean | undefined>;
     /**
      * datasource for auth.
      */
-    programIdLists?: pulumi.Input<pulumi.Input<string>[]>;
+    programIdLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

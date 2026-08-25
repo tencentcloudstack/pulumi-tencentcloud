@@ -111,19 +111,19 @@ export interface ClusterAccessState {
     /**
      * Cluster access status.
      */
-    accessedStatus?: pulumi.Input<string>;
+    accessedStatus?: pulumi.Input<string | undefined>;
     /**
      * Cluster Id.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Cluster defender status.
      */
-    defenderStatus?: pulumi.Input<string>;
+    defenderStatus?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable cluster defend status.
      */
-    switchOn?: pulumi.Input<boolean>;
+    switchOn?: pulumi.Input<boolean | undefined>;
 }
 
 /**
@@ -137,5 +137,5 @@ export interface ClusterAccessArgs {
     /**
      * Whether to enable cluster defend status.
      */
-    switchOn?: pulumi.Input<boolean>;
+    switchOn?: pulumi.Input<boolean | undefined>;
 }

@@ -15,10 +15,20 @@ export type AttachDataMaskPolicy = import("./attachDataMaskPolicy").AttachDataMa
 export const AttachDataMaskPolicy: typeof import("./attachDataMaskPolicy").AttachDataMaskPolicy = null as any;
 utilities.lazyLoad(exports, ["AttachDataMaskPolicy"], () => require("./attachDataMaskPolicy"));
 
+export { AttachUserPolicyAttachmentArgs, AttachUserPolicyAttachmentState } from "./attachUserPolicyAttachment";
+export type AttachUserPolicyAttachment = import("./attachUserPolicyAttachment").AttachUserPolicyAttachment;
+export const AttachUserPolicyAttachment: typeof import("./attachUserPolicyAttachment").AttachUserPolicyAttachment = null as any;
+utilities.lazyLoad(exports, ["AttachUserPolicyAttachment"], () => require("./attachUserPolicyAttachment"));
+
 export { AttachUserPolicyOperationArgs, AttachUserPolicyOperationState } from "./attachUserPolicyOperation";
 export type AttachUserPolicyOperation = import("./attachUserPolicyOperation").AttachUserPolicyOperation;
 export const AttachUserPolicyOperation: typeof import("./attachUserPolicyOperation").AttachUserPolicyOperation = null as any;
 utilities.lazyLoad(exports, ["AttachUserPolicyOperation"], () => require("./attachUserPolicyOperation"));
+
+export { AttachWorkGroupPolicyAttachmentArgs, AttachWorkGroupPolicyAttachmentState } from "./attachWorkGroupPolicyAttachment";
+export type AttachWorkGroupPolicyAttachment = import("./attachWorkGroupPolicyAttachment").AttachWorkGroupPolicyAttachment;
+export const AttachWorkGroupPolicyAttachment: typeof import("./attachWorkGroupPolicyAttachment").AttachWorkGroupPolicyAttachment = null as any;
+utilities.lazyLoad(exports, ["AttachWorkGroupPolicyAttachment"], () => require("./attachWorkGroupPolicyAttachment"));
 
 export { AttachWorkGroupPolicyOperationArgs, AttachWorkGroupPolicyOperationState } from "./attachWorkGroupPolicyOperation";
 export type AttachWorkGroupPolicyOperation = import("./attachWorkGroupPolicyOperation").AttachWorkGroupPolicyOperation;
@@ -249,8 +259,12 @@ const _module = {
                 return new AddUsersToWorkGroupAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Dlc/attachDataMaskPolicy:AttachDataMaskPolicy":
                 return new AttachDataMaskPolicy(name, <any>undefined, { urn })
+            case "tencentcloud:Dlc/attachUserPolicyAttachment:AttachUserPolicyAttachment":
+                return new AttachUserPolicyAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Dlc/attachUserPolicyOperation:AttachUserPolicyOperation":
                 return new AttachUserPolicyOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Dlc/attachWorkGroupPolicyAttachment:AttachWorkGroupPolicyAttachment":
+                return new AttachWorkGroupPolicyAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Dlc/attachWorkGroupPolicyOperation:AttachWorkGroupPolicyOperation":
                 return new AttachWorkGroupPolicyOperation(name, <any>undefined, { urn })
             case "tencentcloud:Dlc/bindWorkGroupsToUserAttachment:BindWorkGroupsToUserAttachment":
@@ -306,7 +320,9 @@ const _module = {
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Dlc/addUsersToWorkGroupAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dlc/attachDataMaskPolicy", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Dlc/attachUserPolicyAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dlc/attachUserPolicyOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Dlc/attachWorkGroupPolicyAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dlc/attachWorkGroupPolicyOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dlc/bindWorkGroupsToUserAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dlc/dataEngine", _module)

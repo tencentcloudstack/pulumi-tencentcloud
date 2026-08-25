@@ -51,6 +51,7 @@ import * as utilities from "../utilities";
  *         storageType: "cos",
  *         storageAccountId: "100037717137",
  *         storageAppId: "1309116520",
+ *         compress: 1,
  *     },
  * });
  * ```
@@ -58,7 +59,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * audit track can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Audit/track:Track example 24283
  * ```
@@ -116,7 +116,7 @@ export class Track extends pulumi.CustomResource {
      */
     declare public readonly status: pulumi.Output<number>;
     /**
-     * Track Storage, support `cos` and `cls`.
+     * Track Storage, support `cos`, `cls` and `ckafka`.
      */
     declare public readonly storage: pulumi.Output<outputs.Audit.TrackStorage>;
     /**
@@ -183,35 +183,35 @@ export interface TrackState {
     /**
      * Track interface type, optional:- `Read`: Read interface- `Write`: Write interface- `*`: All interface.
      */
-    actionType?: pulumi.Input<string>;
+    actionType?: pulumi.Input<string | undefined>;
     /**
      * Track create time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Track interface name list:- when ResourceType is `*`, EventNames is must `[&amp;quot;*&amp;quot;]`- when ResourceType is a single product, EventNames support all interface:`[&amp;quot;*&amp;quot;]`- when ResourceType is a single product, EventNames support some interface, up to 10.
      */
-    eventNames?: pulumi.Input<pulumi.Input<string>[]>;
+    eventNames?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Track name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Track product, optional:- `*`: All product- Single product, such as `cos`.
      */
-    resourceType?: pulumi.Input<string>;
+    resourceType?: pulumi.Input<string | undefined>;
     /**
      * Track status, optional:- `0`: Close- `1`: Open.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
-     * Track Storage, support `cos` and `cls`.
+     * Track Storage, support `cos`, `cls` and `ckafka`.
      */
-    storage?: pulumi.Input<inputs.Audit.TrackStorage>;
+    storage?: pulumi.Input<inputs.Audit.TrackStorage | undefined>;
     /**
      * Whether to enable the delivery of group member operation logs to the group management account or trusted service management account, optional:- `0`: Close- `1`: Open.
      */
-    trackForAllMembers?: pulumi.Input<number>;
+    trackForAllMembers?: pulumi.Input<number | undefined>;
 }
 
 /**
@@ -229,7 +229,7 @@ export interface TrackArgs {
     /**
      * Track name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Track product, optional:- `*`: All product- Single product, such as `cos`.
      */
@@ -239,11 +239,11 @@ export interface TrackArgs {
      */
     status: pulumi.Input<number>;
     /**
-     * Track Storage, support `cos` and `cls`.
+     * Track Storage, support `cos`, `cls` and `ckafka`.
      */
     storage: pulumi.Input<inputs.Audit.TrackStorage>;
     /**
      * Whether to enable the delivery of group member operation logs to the group management account or trusted service management account, optional:- `0`: Close- `1`: Open.
      */
-    trackForAllMembers?: pulumi.Input<number>;
+    trackForAllMembers?: pulumi.Input<number | undefined>;
 }

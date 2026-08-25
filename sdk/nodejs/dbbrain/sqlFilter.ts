@@ -18,7 +18,7 @@ import * as utilities from "../utilities";
  * const config = new pulumi.Config();
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
  * const region = config.get("region") || "ap-guangzhou";
- * const mysql = tencentcloud.Mysql.getInstance({
+ * const mysql = tencentcloud.mysql.getInstance({
  *     instanceName: "instance_name",
  * });
  * const mysqlId = mysql.then(mysql => mysql.instanceLists?.[0]?.mysqlId);
@@ -164,39 +164,39 @@ export interface SqlFilterState {
     /**
      * filter duration.
      */
-    duration?: pulumi.Input<number>;
+    duration?: pulumi.Input<number | undefined>;
     /**
      * filter id.
      */
-    filterId?: pulumi.Input<number>;
+    filterId?: pulumi.Input<number | undefined>;
     /**
      * filter key.
      */
-    filterKey?: pulumi.Input<string>;
+    filterKey?: pulumi.Input<string | undefined>;
     /**
      * instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * maximum concurreny.
      */
-    maxConcurrency?: pulumi.Input<number>;
+    maxConcurrency?: pulumi.Input<number | undefined>;
     /**
      * product, optional value is &amp;#39;mysql&amp;#39;, &amp;#39;cynosdb&amp;#39;.
      */
-    product?: pulumi.Input<string>;
+    product?: pulumi.Input<string | undefined>;
     /**
      * session token.
      */
-    sessionToken?: pulumi.Input<inputs.Dbbrain.SqlFilterSessionToken>;
+    sessionToken?: pulumi.Input<inputs.Dbbrain.SqlFilterSessionToken | undefined>;
     /**
      * sql type, optional value is SELECT, UPDATE, DELETE, INSERT, REPLACE.
      */
-    sqlType?: pulumi.Input<string>;
+    sqlType?: pulumi.Input<string | undefined>;
     /**
      * filter status.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -222,7 +222,7 @@ export interface SqlFilterArgs {
     /**
      * product, optional value is &amp;#39;mysql&amp;#39;, &amp;#39;cynosdb&amp;#39;.
      */
-    product?: pulumi.Input<string>;
+    product?: pulumi.Input<string | undefined>;
     /**
      * session token.
      */
@@ -234,5 +234,5 @@ export interface SqlFilterArgs {
     /**
      * filter status.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
 }

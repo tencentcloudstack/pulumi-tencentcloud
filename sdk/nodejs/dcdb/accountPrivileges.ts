@@ -11,7 +11,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * dcdb account_privileges can be imported using the id, e.g.
+ * dcdb accountPrivileges can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Dcdb/accountPrivileges:AccountPrivileges account_privileges instanceId#userName#host#dbName#tabName#viewName#colName
@@ -122,31 +122,31 @@ export interface AccountPrivilegesState {
     /**
      * The account of the database, including username and host.
      */
-    account?: pulumi.Input<inputs.Dcdb.AccountPrivilegesAccount>;
+    account?: pulumi.Input<inputs.Dcdb.AccountPrivilegesAccount | undefined>;
     /**
      * Permissions for columns in database tables. Optional values for the Privileges permission are:  SELECT, INSERT, UPDATE, REFERENCES.  Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
      */
-    columnPrivileges?: pulumi.Input<inputs.Dcdb.AccountPrivilegesColumnPrivileges>;
+    columnPrivileges?: pulumi.Input<inputs.Dcdb.AccountPrivilegesColumnPrivileges | undefined>;
     /**
      * Database permissions. Optional values for the Privileges permission are: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE TEMPORARY TABLES,  LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.  Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
      */
-    databasePrivileges?: pulumi.Input<inputs.Dcdb.AccountPrivilegesDatabasePrivileges>;
+    databasePrivileges?: pulumi.Input<inputs.Dcdb.AccountPrivilegesDatabasePrivileges | undefined>;
     /**
      * Global permissions. Among them, the optional value of the permission in GlobalPrivileges is: SELECT, INSERT, UPDATE, DELETE, CREATE, PROCESS, DROP, REFERENCES, INDEX, ALTER, SHOW DATABASES,  CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.  Note that if this parameter is not passed, it means that the existing permissions are reserved. If it needs to be cleared, pass an empty array in this field.
      */
-    globalPrivileges?: pulumi.Input<pulumi.Input<string>[]>;
+    globalPrivileges?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The ID of instance.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Permissions for tables in the database. Optional values for the Privileges permission are: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER. Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
      */
-    tablePrivileges?: pulumi.Input<inputs.Dcdb.AccountPrivilegesTablePrivileges>;
+    tablePrivileges?: pulumi.Input<inputs.Dcdb.AccountPrivilegesTablePrivileges | undefined>;
     /**
      * Permissions for database views. Optional values for the Privileges permission are:  SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER.  Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
      */
-    viewPrivileges?: pulumi.Input<inputs.Dcdb.AccountPrivilegesViewPrivileges>;
+    viewPrivileges?: pulumi.Input<inputs.Dcdb.AccountPrivilegesViewPrivileges | undefined>;
 }
 
 /**
@@ -160,15 +160,15 @@ export interface AccountPrivilegesArgs {
     /**
      * Permissions for columns in database tables. Optional values for the Privileges permission are:  SELECT, INSERT, UPDATE, REFERENCES.  Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
      */
-    columnPrivileges?: pulumi.Input<inputs.Dcdb.AccountPrivilegesColumnPrivileges>;
+    columnPrivileges?: pulumi.Input<inputs.Dcdb.AccountPrivilegesColumnPrivileges | undefined>;
     /**
      * Database permissions. Optional values for the Privileges permission are: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE TEMPORARY TABLES,  LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.  Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
      */
-    databasePrivileges?: pulumi.Input<inputs.Dcdb.AccountPrivilegesDatabasePrivileges>;
+    databasePrivileges?: pulumi.Input<inputs.Dcdb.AccountPrivilegesDatabasePrivileges | undefined>;
     /**
      * Global permissions. Among them, the optional value of the permission in GlobalPrivileges is: SELECT, INSERT, UPDATE, DELETE, CREATE, PROCESS, DROP, REFERENCES, INDEX, ALTER, SHOW DATABASES,  CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER.  Note that if this parameter is not passed, it means that the existing permissions are reserved. If it needs to be cleared, pass an empty array in this field.
      */
-    globalPrivileges?: pulumi.Input<pulumi.Input<string>[]>;
+    globalPrivileges?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * The ID of instance.
      */
@@ -176,9 +176,9 @@ export interface AccountPrivilegesArgs {
     /**
      * Permissions for tables in the database. Optional values for the Privileges permission are: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER. Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
      */
-    tablePrivileges?: pulumi.Input<inputs.Dcdb.AccountPrivilegesTablePrivileges>;
+    tablePrivileges?: pulumi.Input<inputs.Dcdb.AccountPrivilegesTablePrivileges | undefined>;
     /**
      * Permissions for database views. Optional values for the Privileges permission are:  SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, CREATE VIEW, SHOW VIEW, TRIGGER.  Note that if this parameter is not passed, the existing privileges are reserved. If you need to clear them, please pass an empty array in the complex type Privileges field.
      */
-    viewPrivileges?: pulumi.Input<inputs.Dcdb.AccountPrivilegesViewPrivileges>;
+    viewPrivileges?: pulumi.Input<inputs.Dcdb.AccountPrivilegesViewPrivileges | undefined>;
 }

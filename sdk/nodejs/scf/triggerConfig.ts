@@ -7,6 +7,8 @@ import * as utilities from "../utilities";
 /**
  * Provides a resource to create a scf triggerConfig
  *
+ * > **NOTE:** Use of the current resource is no longer recommended; `tencentcloud.Scf.Trigger` is recommended instead.
+ *
  * ## Example Usage
  *
  * ```typescript
@@ -28,7 +30,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * scf trigger_config can be imported using the id, e.g.
+ * scf triggerConfig can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Scf/triggerConfig:TriggerConfig trigger_config functionName#namespace#triggerName
@@ -154,39 +156,39 @@ export interface TriggerConfigState {
     /**
      * User Additional Information.
      */
-    customArgument?: pulumi.Input<string>;
+    customArgument?: pulumi.Input<string | undefined>;
     /**
      * Trigger description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Status of trigger. Values: OPEN (enabled); CLOSE disabled).
      */
-    enable?: pulumi.Input<string>;
+    enable?: pulumi.Input<string | undefined>;
     /**
      * Function name.
      */
-    functionName?: pulumi.Input<string>;
+    functionName?: pulumi.Input<string | undefined>;
     /**
      * Function namespace.
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
     /**
      * Function version. It defaults to `$LATEST`. It's recommended to use `[$DEFAULT](https://intl.cloud.tencent.com/document/product/583/36149?from_cn_redirect=1#.E9.BB.98.E8.AE.A4.E5.88.AB.E5.90.8D)` for canary release.
      */
-    qualifier?: pulumi.Input<string>;
+    qualifier?: pulumi.Input<string | undefined>;
     /**
      * TriggerDesc parameter.
      */
-    triggerDesc?: pulumi.Input<string>;
+    triggerDesc?: pulumi.Input<string | undefined>;
     /**
      * Trigger Name.
      */
-    triggerName?: pulumi.Input<string>;
+    triggerName?: pulumi.Input<string | undefined>;
     /**
      * Trigger type.
      */
-    type?: pulumi.Input<string>;
+    type?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -196,15 +198,15 @@ export interface TriggerConfigArgs {
     /**
      * User Additional Information.
      */
-    customArgument?: pulumi.Input<string>;
+    customArgument?: pulumi.Input<string | undefined>;
     /**
      * Trigger description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Status of trigger. Values: OPEN (enabled); CLOSE disabled).
      */
-    enable?: pulumi.Input<string>;
+    enable?: pulumi.Input<string | undefined>;
     /**
      * Function name.
      */
@@ -212,15 +214,15 @@ export interface TriggerConfigArgs {
     /**
      * Function namespace.
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
     /**
      * Function version. It defaults to `$LATEST`. It's recommended to use `[$DEFAULT](https://intl.cloud.tencent.com/document/product/583/36149?from_cn_redirect=1#.E9.BB.98.E8.AE.A4.E5.88.AB.E5.90.8D)` for canary release.
      */
-    qualifier?: pulumi.Input<string>;
+    qualifier?: pulumi.Input<string | undefined>;
     /**
      * TriggerDesc parameter.
      */
-    triggerDesc?: pulumi.Input<string>;
+    triggerDesc?: pulumi.Input<string | undefined>;
     /**
      * Trigger Name.
      */

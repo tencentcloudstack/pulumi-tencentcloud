@@ -28,7 +28,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc-example"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
@@ -37,7 +37,7 @@ import (
 //			}
 //			_, err = vpc.NewLocalGateway(ctx, "example", &vpc.LocalGatewayArgs{
 //				LocalGatewayName: pulumi.String("tf-example"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CdcId:            pulumi.String("cluster-j9gyu1iy"),
 //			})
 //			if err != nil {
@@ -51,7 +51,7 @@ import (
 //
 // ## Import
 //
-// vpc local_gateway can be imported using the id, e.g.
+// vpc localGateway can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Vpc/localGateway:LocalGateway local_gateway local_gateway_id

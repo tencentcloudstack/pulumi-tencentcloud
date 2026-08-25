@@ -7,7 +7,7 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a mariadb instance
+ * Provides a resource to create a MariaDB instance(prepaid)
  *
  * ## Example Usage
  *
@@ -15,21 +15,20 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instance = new tencentcloud.mariadb.Instance("instance", {
- *     zones: ["ap-guangzhou-3"],
+ * const example = new tencentcloud.mariadb.Instance("example", {
+ *     zones: [
+ *         "ap-guangzhou-6",
+ *         "ap-guangzhou-7",
+ *     ],
+ *     instanceName: "tf-example",
  *     nodeCount: 2,
  *     memory: 8,
- *     storage: 10,
+ *     storage: 500,
  *     period: 1,
- *     vpcId: "vpc-ii1jfbhl",
- *     subnetId: "subnet-3ku415by",
+ *     vpcId: "vpc-i5yyodl9",
+ *     subnetId: "subnet-hhi88a58",
  *     dbVersionId: "8.0",
- *     instanceName: "terraform-test",
  *     autoRenewFlag: 1,
- *     ipv6Flag: 0,
- *     tags: {
- *         createby: "terrafrom-2",
- *     },
  *     initParams: [
  *         {
  *             param: "character_set_server",
@@ -48,17 +47,18 @@ import * as utilities from "../utilities";
  *             value: "1",
  *         },
  *     ],
- *     dcnRegion: "",
- *     dcnInstanceId: "",
+ *     tags: {
+ *         createBy: "Terrafrom",
+ *     },
  * });
  * ```
  *
  * ## Import
  *
- * mariadb tencentcloud_mariadb_instance can be imported using the id, e.g.
+ * MariaDB instance(prepaid) can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Mariadb/instance:Instance instance tdsql-4pzs5b67
+ * $ pulumi import tencentcloud:Mariadb/instance:Instance example tdsql-4pzs5b67
  * ```
  */
 export class Instance extends pulumi.CustomResource {
@@ -454,219 +454,219 @@ export interface InstanceState {
     /**
      * ID of the application to which the instance belongs.
      */
-    appId?: pulumi.Input<number>;
+    appId?: pulumi.Input<number | undefined>;
     /**
      * Automatic renewal flag, 1: automatic renewal, 2: no automatic renewal.
      */
-    autoRenewFlag?: pulumi.Input<number>;
+    autoRenewFlag?: pulumi.Input<number | undefined>;
     /**
      * Whether to automatically use the voucher for payment, the default is not used.
      */
-    autoVoucher?: pulumi.Input<boolean>;
+    autoVoucher?: pulumi.Input<boolean | undefined>;
     /**
      * Number of CPU cores of the instance.
      */
-    cpu?: pulumi.Input<number>;
+    cpu?: pulumi.Input<number | undefined>;
     /**
      * Instance creation time, the format is 2006-01-02 15:04:05.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Database Engine.
      */
-    dbEngine?: pulumi.Input<string>;
+    dbEngine?: pulumi.Input<string | undefined>;
     /**
      * Database engine version, currently available: 8.0.18, 10.1.9, 5.7.17. If not passed, the default is Percona 5.7.17.
      */
-    dbVersionId?: pulumi.Input<string>;
+    dbVersionId?: pulumi.Input<string | undefined>;
     /**
      * Number of DCN disaster recovery instances.
      */
-    dcnDstNum?: pulumi.Input<number>;
+    dcnDstNum?: pulumi.Input<number | undefined>;
     /**
      * DCN flag, 0-none, 1-primary instance, 2-disaster backup instance.
      */
-    dcnFlag?: pulumi.Input<number>;
+    dcnFlag?: pulumi.Input<number | undefined>;
     /**
      * DCN source instance ID.
      */
-    dcnInstanceId?: pulumi.Input<string>;
+    dcnInstanceId?: pulumi.Input<string | undefined>;
     /**
      * DCN source region.
      */
-    dcnRegion?: pulumi.Input<string>;
+    dcnRegion?: pulumi.Input<string | undefined>;
     /**
      * DCN status, 0-none, 1-creating, 2-synchronizing, 3-disconnected.
      */
-    dcnStatus?: pulumi.Input<number>;
+    dcnStatus?: pulumi.Input<number | undefined>;
     /**
      * Exclusive cluster ID, if it is empty, it means a normal instance.
      */
-    exclusterId?: pulumi.Input<string>;
+    exclusterId?: pulumi.Input<string | undefined>;
     /**
      * Parameter list. The optional values of this interface are: characterSetServer (character set, required) enum: utf8,latin1,gbk,utf8mb4,gb18030, lowerCaseTableNames (table name case sensitive, required, 0 - sensitive; 1 - insensitive), innodbPageSize (innodb data page, Default 16K), syncMode (sync mode: 0 - asynchronous; 1 - strong synchronous; 2 - strong synchronous can degenerate. The default is strong synchronous can degenerate).
      */
-    initParams?: pulumi.Input<pulumi.Input<inputs.Mariadb.InstanceInitParam>[]>;
+    initParams?: pulumi.Input<pulumi.Input<inputs.Mariadb.InstanceInitParam>[] | undefined>;
     /**
      * Instance ID, uniquely identifies a TDSQL instance.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Instance name, you can set the name of the instance independently through this field.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * 1: primary instance (exclusive), 2: primary instance, 3: disaster recovery instance, 4: disaster recovery instance (exclusive type).
      */
-    instanceType?: pulumi.Input<number>;
+    instanceType?: pulumi.Input<number | undefined>;
     /**
      * Whether IPv6 is supported.
      */
-    ipv6Flag?: pulumi.Input<number>;
+    ipv6Flag?: pulumi.Input<number | undefined>;
     /**
      * Whether the instance supports auditing. 1-supported; 0-not supported.
      */
-    isAuditSupported?: pulumi.Input<number>;
+    isAuditSupported?: pulumi.Input<number | undefined>;
     /**
      * Whether data encryption is supported. 1-supported; 0-not supported.
      */
-    isEncryptSupported?: pulumi.Input<number>;
+    isEncryptSupported?: pulumi.Input<number | undefined>;
     /**
      * Whether it is a temporary instance, 0 means no, non-zero means yes.
      */
-    isTmp?: pulumi.Input<number>;
+    isTmp?: pulumi.Input<number | undefined>;
     /**
      * Asynchronous task process ID when the instance is in an asynchronous task.
      */
-    locker?: pulumi.Input<number>;
+    locker?: pulumi.Input<number | undefined>;
     /**
      * Machine Model.
      */
-    machine?: pulumi.Input<string>;
+    machine?: pulumi.Input<string | undefined>;
     /**
      * Memory size, unit: GB, can be obtained by querying instance specifications through DescribeDBInstanceSpecs.
      */
-    memory?: pulumi.Input<number>;
+    memory?: pulumi.Input<number | undefined>;
     /**
      * Number of nodes, 2 is one master and one slave, 3 is one master and two slaves.
      */
-    nodeCount?: pulumi.Input<number>;
+    nodeCount?: pulumi.Input<number | undefined>;
     /**
      * Payment Mode.
      */
-    paymode?: pulumi.Input<string>;
+    paymode?: pulumi.Input<string | undefined>;
     /**
      * The duration of the purchase, unit: month.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * Instance expiration time, the format is 2006-01-02 15:04:05.
      */
-    periodEndTime?: pulumi.Input<string>;
+    periodEndTime?: pulumi.Input<string | undefined>;
     /**
      * Product Type ID.
      */
-    pid?: pulumi.Input<number>;
+    pid?: pulumi.Input<number | undefined>;
     /**
      * Project ID, which can be obtained by viewing the project list, if not passed, it will be associated with the default project.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Maximum Qps value.
      */
-    qps?: pulumi.Input<number>;
+    qps?: pulumi.Input<number | undefined>;
     /**
      * The name of the region where the instance is located, such as ap-shanghai.
      */
-    region?: pulumi.Input<string>;
+    region?: pulumi.Input<string | undefined>;
     /**
      * Security group ID list.
      */
-    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Instance status: 0 creating, 1 process processing, 2 running, 3 instance not initialized, -1 instance isolated, 4 instance initializing, 5 instance deleting, 6 instance restarting, 7 data migration.
      */
-    status?: pulumi.Input<number>;
+    status?: pulumi.Input<number | undefined>;
     /**
      * Description of the current running state of the instance.
      */
-    statusDesc?: pulumi.Input<string>;
+    statusDesc?: pulumi.Input<string | undefined>;
     /**
      * Storage size, unit: GB. You can query instance specifications through DescribeDBInstanceSpecs to obtain the lower and upper limits of disk specifications corresponding to different memory sizes.
      */
-    storage?: pulumi.Input<number>;
+    storage?: pulumi.Input<number | undefined>;
     /**
      * Virtual private network subnet ID, required when VpcId is not empty.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * tag list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * TDSQL version information.
      */
-    tdsqlVersion?: pulumi.Input<string>;
+    tdsqlVersion?: pulumi.Input<string | undefined>;
     /**
      * The account to which the instance belongs.
      */
-    uin?: pulumi.Input<string>;
+    uin?: pulumi.Input<string | undefined>;
     /**
      * The last update time of the instance in the format of 2006-01-02 15:04:05.
      */
-    updateTime?: pulumi.Input<string>;
+    updateTime?: pulumi.Input<string | undefined>;
     /**
      * Intranet IP address.
      */
-    vip?: pulumi.Input<string>;
+    vip?: pulumi.Input<string | undefined>;
     /**
      * Intranet IPv6.
      */
-    vipv6?: pulumi.Input<string>;
+    vipv6?: pulumi.Input<string | undefined>;
     /**
      * A list of voucher IDs. Currently, only one voucher can be specified.
      */
-    voucherIds?: pulumi.Input<pulumi.Input<string>[]>;
+    voucherIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Virtual private network ID, if not passed, it means that it is created as a basic network.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * Intranet port.
      */
-    vport?: pulumi.Input<number>;
+    vport?: pulumi.Input<number | undefined>;
     /**
      * The domain name accessed from the external network, which can be resolved by the public network.
      */
-    wanDomain?: pulumi.Input<string>;
+    wanDomain?: pulumi.Input<string | undefined>;
     /**
      * Internet port.
      */
-    wanPort?: pulumi.Input<number>;
+    wanPort?: pulumi.Input<number | undefined>;
     /**
      * Internet IPv6 port.
      */
-    wanPortIpv6?: pulumi.Input<number>;
+    wanPortIpv6?: pulumi.Input<number | undefined>;
     /**
      * External network status, 0-unopened; 1-opened; 2-closed; 3-opening.
      */
-    wanStatus?: pulumi.Input<number>;
+    wanStatus?: pulumi.Input<number | undefined>;
     /**
      * Internet IPv6 status.
      */
-    wanStatusIpv6?: pulumi.Input<number>;
+    wanStatusIpv6?: pulumi.Input<number | undefined>;
     /**
      * Extranet IP address, accessible from the public network.
      */
-    wanVip?: pulumi.Input<string>;
+    wanVip?: pulumi.Input<string | undefined>;
     /**
      * Internet IPv6.
      */
-    wanVipv6?: pulumi.Input<string>;
+    wanVipv6?: pulumi.Input<string | undefined>;
     /**
      * Instance node availability zone distribution, up to two availability zones can be filled. When the shard specification is one master and two slaves, two of the nodes are in the first availability zone.
      */
-    zones?: pulumi.Input<pulumi.Input<string>[]>;
+    zones?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }
 
 /**
@@ -676,35 +676,35 @@ export interface InstanceArgs {
     /**
      * Automatic renewal flag, 1: automatic renewal, 2: no automatic renewal.
      */
-    autoRenewFlag?: pulumi.Input<number>;
+    autoRenewFlag?: pulumi.Input<number | undefined>;
     /**
      * Whether to automatically use the voucher for payment, the default is not used.
      */
-    autoVoucher?: pulumi.Input<boolean>;
+    autoVoucher?: pulumi.Input<boolean | undefined>;
     /**
      * Database engine version, currently available: 8.0.18, 10.1.9, 5.7.17. If not passed, the default is Percona 5.7.17.
      */
-    dbVersionId?: pulumi.Input<string>;
+    dbVersionId?: pulumi.Input<string | undefined>;
     /**
      * DCN source instance ID.
      */
-    dcnInstanceId?: pulumi.Input<string>;
+    dcnInstanceId?: pulumi.Input<string | undefined>;
     /**
      * DCN source region.
      */
-    dcnRegion?: pulumi.Input<string>;
+    dcnRegion?: pulumi.Input<string | undefined>;
     /**
      * Parameter list. The optional values of this interface are: characterSetServer (character set, required) enum: utf8,latin1,gbk,utf8mb4,gb18030, lowerCaseTableNames (table name case sensitive, required, 0 - sensitive; 1 - insensitive), innodbPageSize (innodb data page, Default 16K), syncMode (sync mode: 0 - asynchronous; 1 - strong synchronous; 2 - strong synchronous can degenerate. The default is strong synchronous can degenerate).
      */
-    initParams?: pulumi.Input<pulumi.Input<inputs.Mariadb.InstanceInitParam>[]>;
+    initParams?: pulumi.Input<pulumi.Input<inputs.Mariadb.InstanceInitParam>[] | undefined>;
     /**
      * Instance name, you can set the name of the instance independently through this field.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * Whether IPv6 is supported.
      */
-    ipv6Flag?: pulumi.Input<number>;
+    ipv6Flag?: pulumi.Input<number | undefined>;
     /**
      * Memory size, unit: GB, can be obtained by querying instance specifications through DescribeDBInstanceSpecs.
      */
@@ -716,15 +716,15 @@ export interface InstanceArgs {
     /**
      * The duration of the purchase, unit: month.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * Project ID, which can be obtained by viewing the project list, if not passed, it will be associated with the default project.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Security group ID list.
      */
-    securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Storage size, unit: GB. You can query instance specifications through DescribeDBInstanceSpecs to obtain the lower and upper limits of disk specifications corresponding to different memory sizes.
      */
@@ -732,23 +732,23 @@ export interface InstanceArgs {
     /**
      * Virtual private network subnet ID, required when VpcId is not empty.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * tag list.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Intranet IP address.
      */
-    vip?: pulumi.Input<string>;
+    vip?: pulumi.Input<string | undefined>;
     /**
      * A list of voucher IDs. Currently, only one voucher can be specified.
      */
-    voucherIds?: pulumi.Input<pulumi.Input<string>[]>;
+    voucherIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Virtual private network ID, if not passed, it means that it is created as a basic network.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * Instance node availability zone distribution, up to two availability zones can be filled. When the shard specification is one master and two slaves, two of the nodes are in the first availability zone.
      */

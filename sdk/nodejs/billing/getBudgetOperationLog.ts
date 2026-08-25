@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const billingBudgetOperationLog = tencentcloud.Billing.getBudgetOperationLog({
+ * const billingBudgetOperationLog = tencentcloud.billing.getBudgetOperationLog({
  *     budgetId: "1971489821259956225",
  * });
  * ```
@@ -69,7 +69,7 @@ export interface GetBudgetOperationLogResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const billingBudgetOperationLog = tencentcloud.Billing.getBudgetOperationLog({
+ * const billingBudgetOperationLog = tencentcloud.billing.getBudgetOperationLog({
  *     budgetId: "1971489821259956225",
  * });
  * ```
@@ -93,5 +93,5 @@ export interface GetBudgetOperationLogOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

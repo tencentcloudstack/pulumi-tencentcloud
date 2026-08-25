@@ -29,7 +29,7 @@ import * as utilities from "../utilities";
  * });
  * const exampleDeviceGroup = new tencentcloud.dasb.DeviceGroup("example", {name: "tf_example"});
  * const exampleDeviceAccount = new tencentcloud.dasb.DeviceAccount("example", {
- *     deviceId: exampleDevice.id,
+ *     deviceId: exampleDevice.id.apply(x =>Number(x)),
  *     account: "root",
  * });
  * const exampleCmdTemplate = new tencentcloud.dasb.CmdTemplate("example", {
@@ -48,12 +48,12 @@ import * as utilities from "../utilities";
  *     allowFileDown: true,
  *     maxFileUpSize: 0,
  *     maxFileDownSize: 0,
- *     userIdSets: [example.id],
- *     userGroupIdSets: [exampleUserGroup.id],
- *     deviceIdSets: [exampleDevice.id],
- *     deviceGroupIdSets: [exampleDeviceGroup.id],
+ *     userIdSets: [example.id.apply(x =>Number(x))],
+ *     userGroupIdSets: [exampleUserGroup.id.apply(x =>Number(x))],
+ *     deviceIdSets: [exampleDevice.id.apply(x =>Number(x))],
+ *     deviceGroupIdSets: [exampleDeviceGroup.id.apply(x =>Number(x))],
  *     accountSets: [exampleDeviceAccount.id],
- *     cmdTemplateIdSets: [exampleCmdTemplate.id],
+ *     cmdTemplateIdSets: [exampleCmdTemplate.id.apply(x =>Number(x))],
  *     acTemplateIdSets: [],
  *     allowDiskFileUp: true,
  *     allowDiskFileDown: true,
@@ -297,111 +297,111 @@ export interface AclState {
     /**
      * Associate high-risk DB template IDs.
      */
-    acTemplateIdSets?: pulumi.Input<pulumi.Input<string>[]>;
+    acTemplateIdSets?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Associated accounts.
      */
-    accountSets?: pulumi.Input<pulumi.Input<string>[]>;
+    accountSets?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Allow access credential,default allow.
      */
-    allowAccessCredential?: pulumi.Input<boolean>;
+    allowAccessCredential?: pulumi.Input<boolean | undefined>;
     /**
      * Allow any account.
      */
-    allowAnyAccount?: pulumi.Input<boolean>;
+    allowAnyAccount?: pulumi.Input<boolean | undefined>;
     /**
      * Allow clip file down.
      */
-    allowClipFileDown?: pulumi.Input<boolean>;
+    allowClipFileDown?: pulumi.Input<boolean | undefined>;
     /**
      * Allow clip file up.
      */
-    allowClipFileUp?: pulumi.Input<boolean>;
+    allowClipFileUp?: pulumi.Input<boolean | undefined>;
     /**
      * Allow clip text down.
      */
-    allowClipTextDown?: pulumi.Input<boolean>;
+    allowClipTextDown?: pulumi.Input<boolean | undefined>;
     /**
      * Allow clip text up.
      */
-    allowClipTextUp?: pulumi.Input<boolean>;
+    allowClipTextUp?: pulumi.Input<boolean | undefined>;
     /**
      * Allow disk file download.
      */
-    allowDiskFileDown?: pulumi.Input<boolean>;
+    allowDiskFileDown?: pulumi.Input<boolean | undefined>;
     /**
      * Allow disk file upload.
      */
-    allowDiskFileUp?: pulumi.Input<boolean>;
+    allowDiskFileUp?: pulumi.Input<boolean | undefined>;
     /**
      * Allow disk redirect.
      */
-    allowDiskRedirect?: pulumi.Input<boolean>;
+    allowDiskRedirect?: pulumi.Input<boolean | undefined>;
     /**
      * Allow sftp file delete.
      */
-    allowFileDel?: pulumi.Input<boolean>;
+    allowFileDel?: pulumi.Input<boolean | undefined>;
     /**
      * Allow sftp file download.
      */
-    allowFileDown?: pulumi.Input<boolean>;
+    allowFileDown?: pulumi.Input<boolean | undefined>;
     /**
      * Allow sftp up file.
      */
-    allowFileUp?: pulumi.Input<boolean>;
+    allowFileUp?: pulumi.Input<boolean | undefined>;
     /**
      * Allow shell file download.
      */
-    allowShellFileDown?: pulumi.Input<boolean>;
+    allowShellFileDown?: pulumi.Input<boolean | undefined>;
     /**
      * Allow shell file upload.
      */
-    allowShellFileUp?: pulumi.Input<boolean>;
+    allowShellFileUp?: pulumi.Input<boolean | undefined>;
     /**
      * Associated high-risk command template ID.
      */
-    cmdTemplateIdSets?: pulumi.Input<pulumi.Input<number>[]>;
+    cmdTemplateIdSets?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Department id.
      */
-    departmentId?: pulumi.Input<string>;
+    departmentId?: pulumi.Input<string | undefined>;
     /**
      * Associated device group ID.
      */
-    deviceGroupIdSets?: pulumi.Input<pulumi.Input<number>[]>;
+    deviceGroupIdSets?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Associated collection of device IDs.
      */
-    deviceIdSets?: pulumi.Input<pulumi.Input<number>[]>;
+    deviceIdSets?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * File transfer download size limit (reserved parameter, currently unused).
      */
-    maxFileDownSize?: pulumi.Input<number>;
+    maxFileDownSize?: pulumi.Input<number | undefined>;
     /**
      * File upload transfer size limit (artifact parameter, currently unused).
      */
-    maxFileUpSize?: pulumi.Input<number>;
+    maxFileUpSize?: pulumi.Input<number | undefined>;
     /**
      * Acl name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Associated user group ID.
      */
-    userGroupIdSets?: pulumi.Input<pulumi.Input<number>[]>;
+    userGroupIdSets?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Associated set of user IDs.
      */
-    userIdSets?: pulumi.Input<pulumi.Input<number>[]>;
+    userIdSets?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Access permission effective time, such as: 2021-09-22T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.
      */
-    validateFrom?: pulumi.Input<string>;
+    validateFrom?: pulumi.Input<string | undefined>;
     /**
      * Access permission expiration time, such as: 2021-09-23T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.
      */
-    validateTo?: pulumi.Input<string>;
+    validateTo?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -411,15 +411,15 @@ export interface AclArgs {
     /**
      * Associate high-risk DB template IDs.
      */
-    acTemplateIdSets?: pulumi.Input<pulumi.Input<string>[]>;
+    acTemplateIdSets?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Associated accounts.
      */
-    accountSets?: pulumi.Input<pulumi.Input<string>[]>;
+    accountSets?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Allow access credential,default allow.
      */
-    allowAccessCredential?: pulumi.Input<boolean>;
+    allowAccessCredential?: pulumi.Input<boolean | undefined>;
     /**
      * Allow any account.
      */
@@ -427,27 +427,27 @@ export interface AclArgs {
     /**
      * Allow clip file down.
      */
-    allowClipFileDown?: pulumi.Input<boolean>;
+    allowClipFileDown?: pulumi.Input<boolean | undefined>;
     /**
      * Allow clip file up.
      */
-    allowClipFileUp?: pulumi.Input<boolean>;
+    allowClipFileUp?: pulumi.Input<boolean | undefined>;
     /**
      * Allow clip text down.
      */
-    allowClipTextDown?: pulumi.Input<boolean>;
+    allowClipTextDown?: pulumi.Input<boolean | undefined>;
     /**
      * Allow clip text up.
      */
-    allowClipTextUp?: pulumi.Input<boolean>;
+    allowClipTextUp?: pulumi.Input<boolean | undefined>;
     /**
      * Allow disk file download.
      */
-    allowDiskFileDown?: pulumi.Input<boolean>;
+    allowDiskFileDown?: pulumi.Input<boolean | undefined>;
     /**
      * Allow disk file upload.
      */
-    allowDiskFileUp?: pulumi.Input<boolean>;
+    allowDiskFileUp?: pulumi.Input<boolean | undefined>;
     /**
      * Allow disk redirect.
      */
@@ -455,65 +455,65 @@ export interface AclArgs {
     /**
      * Allow sftp file delete.
      */
-    allowFileDel?: pulumi.Input<boolean>;
+    allowFileDel?: pulumi.Input<boolean | undefined>;
     /**
      * Allow sftp file download.
      */
-    allowFileDown?: pulumi.Input<boolean>;
+    allowFileDown?: pulumi.Input<boolean | undefined>;
     /**
      * Allow sftp up file.
      */
-    allowFileUp?: pulumi.Input<boolean>;
+    allowFileUp?: pulumi.Input<boolean | undefined>;
     /**
      * Allow shell file download.
      */
-    allowShellFileDown?: pulumi.Input<boolean>;
+    allowShellFileDown?: pulumi.Input<boolean | undefined>;
     /**
      * Allow shell file upload.
      */
-    allowShellFileUp?: pulumi.Input<boolean>;
+    allowShellFileUp?: pulumi.Input<boolean | undefined>;
     /**
      * Associated high-risk command template ID.
      */
-    cmdTemplateIdSets?: pulumi.Input<pulumi.Input<number>[]>;
+    cmdTemplateIdSets?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Department id.
      */
-    departmentId?: pulumi.Input<string>;
+    departmentId?: pulumi.Input<string | undefined>;
     /**
      * Associated device group ID.
      */
-    deviceGroupIdSets?: pulumi.Input<pulumi.Input<number>[]>;
+    deviceGroupIdSets?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Associated collection of device IDs.
      */
-    deviceIdSets?: pulumi.Input<pulumi.Input<number>[]>;
+    deviceIdSets?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * File transfer download size limit (reserved parameter, currently unused).
      */
-    maxFileDownSize?: pulumi.Input<number>;
+    maxFileDownSize?: pulumi.Input<number | undefined>;
     /**
      * File upload transfer size limit (artifact parameter, currently unused).
      */
-    maxFileUpSize?: pulumi.Input<number>;
+    maxFileUpSize?: pulumi.Input<number | undefined>;
     /**
      * Acl name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Associated user group ID.
      */
-    userGroupIdSets?: pulumi.Input<pulumi.Input<number>[]>;
+    userGroupIdSets?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Associated set of user IDs.
      */
-    userIdSets?: pulumi.Input<pulumi.Input<number>[]>;
+    userIdSets?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Access permission effective time, such as: 2021-09-22T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.
      */
-    validateFrom?: pulumi.Input<string>;
+    validateFrom?: pulumi.Input<string | undefined>;
     /**
      * Access permission expiration time, such as: 2021-09-23T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.
      */
-    validateTo?: pulumi.Input<string>;
+    validateTo?: pulumi.Input<string | undefined>;
 }

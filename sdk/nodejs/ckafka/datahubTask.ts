@@ -44,7 +44,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * ckafka datahub_task can be imported using the id, e.g.
+ * ckafka datahubTask can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Ckafka/datahubTask:DatahubTask datahub_task datahub_task_id
@@ -155,31 +155,31 @@ export interface DatahubTaskState {
     /**
      * SchemaId.
      */
-    schemaId?: pulumi.Input<string>;
+    schemaId?: pulumi.Input<string | undefined>;
     /**
      * data resource.
      */
-    sourceResource?: pulumi.Input<inputs.Ckafka.DatahubTaskSourceResource>;
+    sourceResource?: pulumi.Input<inputs.Ckafka.DatahubTaskSourceResource | undefined>;
     /**
      * Target Resource.
      */
-    targetResource?: pulumi.Input<inputs.Ckafka.DatahubTaskTargetResource>;
+    targetResource?: pulumi.Input<inputs.Ckafka.DatahubTaskTargetResource | undefined>;
     /**
      * name of the task.
      */
-    taskName?: pulumi.Input<string>;
+    taskName?: pulumi.Input<string | undefined>;
     /**
      * type of the task, SOURCE(data input), SINK(data output).
      */
-    taskType?: pulumi.Input<string>;
+    taskType?: pulumi.Input<string | undefined>;
     /**
      * Data Processing Rules.
      */
-    transformParam?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformParam>;
+    transformParam?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformParam | undefined>;
     /**
      * Data processing rules.
      */
-    transformsParam?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParam>;
+    transformsParam?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParam | undefined>;
 }
 
 /**
@@ -189,15 +189,15 @@ export interface DatahubTaskArgs {
     /**
      * SchemaId.
      */
-    schemaId?: pulumi.Input<string>;
+    schemaId?: pulumi.Input<string | undefined>;
     /**
      * data resource.
      */
-    sourceResource?: pulumi.Input<inputs.Ckafka.DatahubTaskSourceResource>;
+    sourceResource?: pulumi.Input<inputs.Ckafka.DatahubTaskSourceResource | undefined>;
     /**
      * Target Resource.
      */
-    targetResource?: pulumi.Input<inputs.Ckafka.DatahubTaskTargetResource>;
+    targetResource?: pulumi.Input<inputs.Ckafka.DatahubTaskTargetResource | undefined>;
     /**
      * name of the task.
      */
@@ -209,9 +209,9 @@ export interface DatahubTaskArgs {
     /**
      * Data Processing Rules.
      */
-    transformParam?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformParam>;
+    transformParam?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformParam | undefined>;
     /**
      * Data processing rules.
      */
-    transformsParam?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParam>;
+    transformsParam?: pulumi.Input<inputs.Ckafka.DatahubTaskTransformsParam | undefined>;
 }

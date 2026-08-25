@@ -72,12 +72,8 @@ type GetRegionAndPriceResult struct {
 }
 
 func GetRegionAndPriceOutput(ctx *pulumi.Context, args GetRegionAndPriceOutputArgs, opts ...pulumi.InvokeOption) GetRegionAndPriceResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetRegionAndPriceResultOutput, error) {
-			args := v.(GetRegionAndPriceArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Gaap/getRegionAndPrice:getRegionAndPrice", args, GetRegionAndPriceResultOutput{}, options).(GetRegionAndPriceResultOutput), nil
-		}).(GetRegionAndPriceResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Gaap/getRegionAndPrice:getRegionAndPrice", args, GetRegionAndPriceResultOutput{}, options).(GetRegionAndPriceResultOutput)
 }
 
 // A collection of arguments for invoking getRegionAndPrice.

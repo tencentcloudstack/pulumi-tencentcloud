@@ -21,7 +21,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * ssl download_certificate can be imported using the id, e.g.
+ * ssl downloadCertificate can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Ssl/downloadCertificateOperation:DownloadCertificateOperation download_certificate download_certificate_id
@@ -102,11 +102,11 @@ export interface DownloadCertificateOperationState {
     /**
      * Certificate ID.
      */
-    certificateId?: pulumi.Input<string>;
+    certificateId?: pulumi.Input<string | undefined>;
     /**
      * Certificate ID.
      */
-    outputPath?: pulumi.Input<string>;
+    outputPath?: pulumi.Input<string | undefined>;
 }
 
 /**

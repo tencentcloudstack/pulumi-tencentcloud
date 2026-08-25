@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
 {
     /// <summary>
-    /// Provides a resource to create a cynosdb proxy
+    /// Provides a resource to create a CynosDB proxy
     /// 
     /// ## Example Usage
     /// 
@@ -137,6 +137,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// </summary>
         [Output("uniqueVpcId")]
         public Output<string> UniqueVpcId { get; private set; } = null!;
+
+        /// <summary>
+        /// Internal IP address.
+        /// </summary>
+        [Output("vip")]
+        public Output<string> Vip { get; private set; } = null!;
 
 
         /// <summary>
@@ -378,6 +384,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// </summary>
         [Input("uniqueVpcId")]
         public Input<string>? UniqueVpcId { get; set; }
+
+        /// <summary>
+        /// Internal IP address.
+        /// </summary>
+        [Input("vip")]
+        public Input<string>? Vip { get; set; }
 
         public ProxyState()
         {

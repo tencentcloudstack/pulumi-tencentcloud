@@ -20,14 +20,14 @@ import * as utilities from "../utilities";
  *     duplicationStrategy: "TakeOver",
  *     principalId: "u-xxxxxx",
  *     principalType: "User",
- *     targetUin: "xxxxxx",
+ *     targetUin: Number("xxxxxx"),
  *     targetType: "MemberUin",
  * });
  * ```
  *
  * ## Import
  *
- * organization identity_center_user_sync_provisioning can be imported using the id, e.g.
+ * organization identityCenterUserSyncProvisioning can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Identity/centerUserSyncProvisioning:CenterUserSyncProvisioning identity_center_user_sync_provisioning ${zoneId}#${userProvisioningId}
@@ -184,66 +184,66 @@ export interface CenterUserSyncProvisioningState {
     /**
      * Create time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Deletion policy. It indicates the handling policy for CAM users already synchronized when the CAM user synchronization is deleted. Valid values: Delete: Delete the CAM users already synchronized from CIC to CAM when the CAM user synchronization is deleted; Keep: Keep the CAM users already synchronized from CIC to CAM when the CAM user synchronization is deleted.
      */
-    deletionStrategy?: pulumi.Input<string>;
+    deletionStrategy?: pulumi.Input<string | undefined>;
     /**
      * Description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Conflict policy. It indicates the handling policy for existence of a user with the same username when CIC users are synchronized to CAM. Valid values: KeepBoth: Keep both, that is, add the _cic suffix to the CIC user's username and then try to create a CAM user with the username when CIC users are synchronized to CAM and a user with the same username already exists in CAM; TakeOver: Replace, that is, directly replace the existing CAM user with the synchronized CIC user when CIC users are synchronized to CAM and a user with the same username already exists in CAM.
      */
-    duplicationStrategy?: pulumi.Input<string>;
+    duplicationStrategy?: pulumi.Input<string | undefined>;
     /**
      * Identity ID for the CAM user synchronization. Valid values:
      * When the PrincipalType value is Group, it is the CIC user group ID (g-********).
      * When the PrincipalType value is User, it is the CIC user ID (u-********).
      */
-    principalId?: pulumi.Input<string>;
+    principalId?: pulumi.Input<string | undefined>;
     /**
      * The identity name of the CAM user synchronization. Value: When PrincipalType is Group, the value is the CIC user group name; When PrincipalType takes the value to User, the value is the CIC user name.
      */
-    principalName?: pulumi.Input<string>;
+    principalName?: pulumi.Input<string | undefined>;
     /**
      * Identity type for the CAM user synchronization. Valid values:
      *
      * User: indicates that the identity for the CAM user synchronization is a CIC user.
      * Group: indicates that the identity for the CAM user synchronization is a CIC user group.
      */
-    principalType?: pulumi.Input<string>;
+    principalType?: pulumi.Input<string | undefined>;
     /**
      * Status of CAM user synchronization. Value:
      * * Enabled: CAM user synchronization is enabled;
      * * Disabled: CAM user synchronization is not enabled.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Group account The name of the target account..
      */
-    targetName?: pulumi.Input<string>;
+    targetName?: pulumi.Input<string | undefined>;
     /**
      * Type of the synchronized target account of the Tencent Cloud Organization. ManagerUin: admin account; MemberUin: member account.
      */
-    targetType?: pulumi.Input<string>;
+    targetType?: pulumi.Input<string | undefined>;
     /**
      * UIN of the synchronized target account of the Tencent Cloud Organization.
      */
-    targetUin?: pulumi.Input<number>;
+    targetUin?: pulumi.Input<number | undefined>;
     /**
      * Update time.
      */
-    updateTime?: pulumi.Input<string>;
+    updateTime?: pulumi.Input<string | undefined>;
     /**
      * User provisioning id.
      */
-    userProvisioningId?: pulumi.Input<string>;
+    userProvisioningId?: pulumi.Input<string | undefined>;
     /**
      * Space ID.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -253,36 +253,36 @@ export interface CenterUserSyncProvisioningArgs {
     /**
      * Deletion policy. It indicates the handling policy for CAM users already synchronized when the CAM user synchronization is deleted. Valid values: Delete: Delete the CAM users already synchronized from CIC to CAM when the CAM user synchronization is deleted; Keep: Keep the CAM users already synchronized from CIC to CAM when the CAM user synchronization is deleted.
      */
-    deletionStrategy?: pulumi.Input<string>;
+    deletionStrategy?: pulumi.Input<string | undefined>;
     /**
      * Description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Conflict policy. It indicates the handling policy for existence of a user with the same username when CIC users are synchronized to CAM. Valid values: KeepBoth: Keep both, that is, add the _cic suffix to the CIC user's username and then try to create a CAM user with the username when CIC users are synchronized to CAM and a user with the same username already exists in CAM; TakeOver: Replace, that is, directly replace the existing CAM user with the synchronized CIC user when CIC users are synchronized to CAM and a user with the same username already exists in CAM.
      */
-    duplicationStrategy?: pulumi.Input<string>;
+    duplicationStrategy?: pulumi.Input<string | undefined>;
     /**
      * Identity ID for the CAM user synchronization. Valid values:
      * When the PrincipalType value is Group, it is the CIC user group ID (g-********).
      * When the PrincipalType value is User, it is the CIC user ID (u-********).
      */
-    principalId?: pulumi.Input<string>;
+    principalId?: pulumi.Input<string | undefined>;
     /**
      * Identity type for the CAM user synchronization. Valid values:
      *
      * User: indicates that the identity for the CAM user synchronization is a CIC user.
      * Group: indicates that the identity for the CAM user synchronization is a CIC user group.
      */
-    principalType?: pulumi.Input<string>;
+    principalType?: pulumi.Input<string | undefined>;
     /**
      * Type of the synchronized target account of the Tencent Cloud Organization. ManagerUin: admin account; MemberUin: member account.
      */
-    targetType?: pulumi.Input<string>;
+    targetType?: pulumi.Input<string | undefined>;
     /**
      * UIN of the synchronized target account of the Tencent Cloud Organization.
      */
-    targetUin?: pulumi.Input<number>;
+    targetUin?: pulumi.Input<number | undefined>;
     /**
      * Space ID.
      */

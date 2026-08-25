@@ -44,7 +44,7 @@ import (
 //
 // ## Import
 //
-// chdfs mount_point can be imported using the id, e.g.
+// chdfs mountPoint can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Chdfs/mountPoint:MountPoint mount_point mount_point_id

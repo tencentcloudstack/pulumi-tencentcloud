@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * organization identity_center_user_group_attachment can be imported using the id, e.g.
+ * organization identityCenterUserGroupAttachment can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Identity/centerUserGroupAttachment:CenterUserGroupAttachment identity_center_user_group_attachment ${zoneId}#${groupId}#${userId}
@@ -112,15 +112,15 @@ export interface CenterUserGroupAttachmentState {
     /**
      * User group ID.
      */
-    groupId?: pulumi.Input<string>;
+    groupId?: pulumi.Input<string | undefined>;
     /**
      * User ID.
      */
-    userId?: pulumi.Input<string>;
+    userId?: pulumi.Input<string | undefined>;
     /**
      * Zone id.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**

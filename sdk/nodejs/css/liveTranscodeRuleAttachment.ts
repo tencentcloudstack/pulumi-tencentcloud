@@ -37,14 +37,13 @@ import * as utilities from "../utilities";
  *     domainName: task.domainName,
  *     appName: task.appName,
  *     streamName: task.streamName,
- *     templateId: temp.id,
+ *     templateId: temp.id.apply(x =>Number(x)),
  * });
  * ```
  *
  * ## Import
  *
- * css live_transcode_rule_attachment can be imported using the id, e.g.
- *
+ * css liveTranscodeRuleAttachment can be imported using the id, e.g.
  * ```sh
  * $ pulumi import tencentcloud:Css/liveTranscodeRuleAttachment:LiveTranscodeRuleAttachment live_transcode_rule_attachment liveTranscodeRuleAttachment_id
  * ```
@@ -154,27 +153,27 @@ export interface LiveTranscodeRuleAttachmentState {
     /**
      * app name which you want to bind, can be empty string if not binding specific app name.
      */
-    appName?: pulumi.Input<string>;
+    appName?: pulumi.Input<string | undefined>;
     /**
      * create time.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * domain name hich you want to bind the transcode template.
      */
-    domainName?: pulumi.Input<string>;
+    domainName?: pulumi.Input<string | undefined>;
     /**
      * stream name which you want to bind, can be empty string if not binding specific stream.
      */
-    streamName?: pulumi.Input<string>;
+    streamName?: pulumi.Input<string | undefined>;
     /**
      * template created by css_live_transcode_template.
      */
-    templateId?: pulumi.Input<number>;
+    templateId?: pulumi.Input<number | undefined>;
     /**
      * update time.
      */
-    updateTime?: pulumi.Input<string>;
+    updateTime?: pulumi.Input<string | undefined>;
 }
 
 /**

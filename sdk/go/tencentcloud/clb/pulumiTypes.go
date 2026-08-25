@@ -613,6 +613,608 @@ func (o FunctionTargetsAttachmentFunctionTargetsFunctionPtrOutput) FunctionQuali
 	}).(pulumi.StringPtrOutput)
 }
 
+type InstanceExclusiveCluster struct {
+	// vpcgw cluster
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ClassicalCluster *InstanceExclusiveClusterClassicalCluster `pulumi:"classicalCluster"`
+	// Layer-4 dedicated cluster list
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	L4Clusters []InstanceExclusiveClusterL4Cluster `pulumi:"l4Clusters"`
+	// Layer-7 dedicated cluster list
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	L7Clusters []InstanceExclusiveClusterL7Cluster `pulumi:"l7Clusters"`
+}
+
+// InstanceExclusiveClusterInput is an input type that accepts InstanceExclusiveClusterArgs and InstanceExclusiveClusterOutput values.
+// You can construct a concrete instance of `InstanceExclusiveClusterInput` via:
+//
+//	InstanceExclusiveClusterArgs{...}
+type InstanceExclusiveClusterInput interface {
+	pulumi.Input
+
+	ToInstanceExclusiveClusterOutput() InstanceExclusiveClusterOutput
+	ToInstanceExclusiveClusterOutputWithContext(context.Context) InstanceExclusiveClusterOutput
+}
+
+type InstanceExclusiveClusterArgs struct {
+	// vpcgw cluster
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ClassicalCluster InstanceExclusiveClusterClassicalClusterPtrInput `pulumi:"classicalCluster"`
+	// Layer-4 dedicated cluster list
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	L4Clusters InstanceExclusiveClusterL4ClusterArrayInput `pulumi:"l4Clusters"`
+	// Layer-7 dedicated cluster list
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	L7Clusters InstanceExclusiveClusterL7ClusterArrayInput `pulumi:"l7Clusters"`
+}
+
+func (InstanceExclusiveClusterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*InstanceExclusiveCluster)(nil)).Elem()
+}
+
+func (i InstanceExclusiveClusterArgs) ToInstanceExclusiveClusterOutput() InstanceExclusiveClusterOutput {
+	return i.ToInstanceExclusiveClusterOutputWithContext(context.Background())
+}
+
+func (i InstanceExclusiveClusterArgs) ToInstanceExclusiveClusterOutputWithContext(ctx context.Context) InstanceExclusiveClusterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstanceExclusiveClusterOutput)
+}
+
+func (i InstanceExclusiveClusterArgs) ToInstanceExclusiveClusterPtrOutput() InstanceExclusiveClusterPtrOutput {
+	return i.ToInstanceExclusiveClusterPtrOutputWithContext(context.Background())
+}
+
+func (i InstanceExclusiveClusterArgs) ToInstanceExclusiveClusterPtrOutputWithContext(ctx context.Context) InstanceExclusiveClusterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstanceExclusiveClusterOutput).ToInstanceExclusiveClusterPtrOutputWithContext(ctx)
+}
+
+// InstanceExclusiveClusterPtrInput is an input type that accepts InstanceExclusiveClusterArgs, InstanceExclusiveClusterPtr and InstanceExclusiveClusterPtrOutput values.
+// You can construct a concrete instance of `InstanceExclusiveClusterPtrInput` via:
+//
+//	        InstanceExclusiveClusterArgs{...}
+//
+//	or:
+//
+//	        nil
+type InstanceExclusiveClusterPtrInput interface {
+	pulumi.Input
+
+	ToInstanceExclusiveClusterPtrOutput() InstanceExclusiveClusterPtrOutput
+	ToInstanceExclusiveClusterPtrOutputWithContext(context.Context) InstanceExclusiveClusterPtrOutput
+}
+
+type instanceExclusiveClusterPtrType InstanceExclusiveClusterArgs
+
+func InstanceExclusiveClusterPtr(v *InstanceExclusiveClusterArgs) InstanceExclusiveClusterPtrInput {
+	return (*instanceExclusiveClusterPtrType)(v)
+}
+
+func (*instanceExclusiveClusterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**InstanceExclusiveCluster)(nil)).Elem()
+}
+
+func (i *instanceExclusiveClusterPtrType) ToInstanceExclusiveClusterPtrOutput() InstanceExclusiveClusterPtrOutput {
+	return i.ToInstanceExclusiveClusterPtrOutputWithContext(context.Background())
+}
+
+func (i *instanceExclusiveClusterPtrType) ToInstanceExclusiveClusterPtrOutputWithContext(ctx context.Context) InstanceExclusiveClusterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstanceExclusiveClusterPtrOutput)
+}
+
+type InstanceExclusiveClusterOutput struct{ *pulumi.OutputState }
+
+func (InstanceExclusiveClusterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*InstanceExclusiveCluster)(nil)).Elem()
+}
+
+func (o InstanceExclusiveClusterOutput) ToInstanceExclusiveClusterOutput() InstanceExclusiveClusterOutput {
+	return o
+}
+
+func (o InstanceExclusiveClusterOutput) ToInstanceExclusiveClusterOutputWithContext(ctx context.Context) InstanceExclusiveClusterOutput {
+	return o
+}
+
+func (o InstanceExclusiveClusterOutput) ToInstanceExclusiveClusterPtrOutput() InstanceExclusiveClusterPtrOutput {
+	return o.ToInstanceExclusiveClusterPtrOutputWithContext(context.Background())
+}
+
+func (o InstanceExclusiveClusterOutput) ToInstanceExclusiveClusterPtrOutputWithContext(ctx context.Context) InstanceExclusiveClusterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v InstanceExclusiveCluster) *InstanceExclusiveCluster {
+		return &v
+	}).(InstanceExclusiveClusterPtrOutput)
+}
+
+// vpcgw cluster
+// Note: this field may return null, indicating that no valid values can be obtained.
+func (o InstanceExclusiveClusterOutput) ClassicalCluster() InstanceExclusiveClusterClassicalClusterPtrOutput {
+	return o.ApplyT(func(v InstanceExclusiveCluster) *InstanceExclusiveClusterClassicalCluster { return v.ClassicalCluster }).(InstanceExclusiveClusterClassicalClusterPtrOutput)
+}
+
+// Layer-4 dedicated cluster list
+// Note: this field may return null, indicating that no valid values can be obtained.
+func (o InstanceExclusiveClusterOutput) L4Clusters() InstanceExclusiveClusterL4ClusterArrayOutput {
+	return o.ApplyT(func(v InstanceExclusiveCluster) []InstanceExclusiveClusterL4Cluster { return v.L4Clusters }).(InstanceExclusiveClusterL4ClusterArrayOutput)
+}
+
+// Layer-7 dedicated cluster list
+// Note: this field may return null, indicating that no valid values can be obtained.
+func (o InstanceExclusiveClusterOutput) L7Clusters() InstanceExclusiveClusterL7ClusterArrayOutput {
+	return o.ApplyT(func(v InstanceExclusiveCluster) []InstanceExclusiveClusterL7Cluster { return v.L7Clusters }).(InstanceExclusiveClusterL7ClusterArrayOutput)
+}
+
+type InstanceExclusiveClusterPtrOutput struct{ *pulumi.OutputState }
+
+func (InstanceExclusiveClusterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**InstanceExclusiveCluster)(nil)).Elem()
+}
+
+func (o InstanceExclusiveClusterPtrOutput) ToInstanceExclusiveClusterPtrOutput() InstanceExclusiveClusterPtrOutput {
+	return o
+}
+
+func (o InstanceExclusiveClusterPtrOutput) ToInstanceExclusiveClusterPtrOutputWithContext(ctx context.Context) InstanceExclusiveClusterPtrOutput {
+	return o
+}
+
+func (o InstanceExclusiveClusterPtrOutput) Elem() InstanceExclusiveClusterOutput {
+	return o.ApplyT(func(v *InstanceExclusiveCluster) InstanceExclusiveCluster {
+		if v != nil {
+			return *v
+		}
+		var ret InstanceExclusiveCluster
+		return ret
+	}).(InstanceExclusiveClusterOutput)
+}
+
+// vpcgw cluster
+// Note: this field may return null, indicating that no valid values can be obtained.
+func (o InstanceExclusiveClusterPtrOutput) ClassicalCluster() InstanceExclusiveClusterClassicalClusterPtrOutput {
+	return o.ApplyT(func(v *InstanceExclusiveCluster) *InstanceExclusiveClusterClassicalCluster {
+		if v == nil {
+			return nil
+		}
+		return v.ClassicalCluster
+	}).(InstanceExclusiveClusterClassicalClusterPtrOutput)
+}
+
+// Layer-4 dedicated cluster list
+// Note: this field may return null, indicating that no valid values can be obtained.
+func (o InstanceExclusiveClusterPtrOutput) L4Clusters() InstanceExclusiveClusterL4ClusterArrayOutput {
+	return o.ApplyT(func(v *InstanceExclusiveCluster) []InstanceExclusiveClusterL4Cluster {
+		if v == nil {
+			return nil
+		}
+		return v.L4Clusters
+	}).(InstanceExclusiveClusterL4ClusterArrayOutput)
+}
+
+// Layer-7 dedicated cluster list
+// Note: this field may return null, indicating that no valid values can be obtained.
+func (o InstanceExclusiveClusterPtrOutput) L7Clusters() InstanceExclusiveClusterL7ClusterArrayOutput {
+	return o.ApplyT(func(v *InstanceExclusiveCluster) []InstanceExclusiveClusterL7Cluster {
+		if v == nil {
+			return nil
+		}
+		return v.L7Clusters
+	}).(InstanceExclusiveClusterL7ClusterArrayOutput)
+}
+
+type InstanceExclusiveClusterClassicalCluster struct {
+	// Unique cluster ID.
+	ClusterId string `pulumi:"clusterId"`
+	// Cluster name.
+	ClusterName *string `pulumi:"clusterName"`
+	// Cluster AZ, such as ap-guangzhou-1
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Zone *string `pulumi:"zone"`
+}
+
+// InstanceExclusiveClusterClassicalClusterInput is an input type that accepts InstanceExclusiveClusterClassicalClusterArgs and InstanceExclusiveClusterClassicalClusterOutput values.
+// You can construct a concrete instance of `InstanceExclusiveClusterClassicalClusterInput` via:
+//
+//	InstanceExclusiveClusterClassicalClusterArgs{...}
+type InstanceExclusiveClusterClassicalClusterInput interface {
+	pulumi.Input
+
+	ToInstanceExclusiveClusterClassicalClusterOutput() InstanceExclusiveClusterClassicalClusterOutput
+	ToInstanceExclusiveClusterClassicalClusterOutputWithContext(context.Context) InstanceExclusiveClusterClassicalClusterOutput
+}
+
+type InstanceExclusiveClusterClassicalClusterArgs struct {
+	// Unique cluster ID.
+	ClusterId pulumi.StringInput `pulumi:"clusterId"`
+	// Cluster name.
+	ClusterName pulumi.StringPtrInput `pulumi:"clusterName"`
+	// Cluster AZ, such as ap-guangzhou-1
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Zone pulumi.StringPtrInput `pulumi:"zone"`
+}
+
+func (InstanceExclusiveClusterClassicalClusterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*InstanceExclusiveClusterClassicalCluster)(nil)).Elem()
+}
+
+func (i InstanceExclusiveClusterClassicalClusterArgs) ToInstanceExclusiveClusterClassicalClusterOutput() InstanceExclusiveClusterClassicalClusterOutput {
+	return i.ToInstanceExclusiveClusterClassicalClusterOutputWithContext(context.Background())
+}
+
+func (i InstanceExclusiveClusterClassicalClusterArgs) ToInstanceExclusiveClusterClassicalClusterOutputWithContext(ctx context.Context) InstanceExclusiveClusterClassicalClusterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstanceExclusiveClusterClassicalClusterOutput)
+}
+
+func (i InstanceExclusiveClusterClassicalClusterArgs) ToInstanceExclusiveClusterClassicalClusterPtrOutput() InstanceExclusiveClusterClassicalClusterPtrOutput {
+	return i.ToInstanceExclusiveClusterClassicalClusterPtrOutputWithContext(context.Background())
+}
+
+func (i InstanceExclusiveClusterClassicalClusterArgs) ToInstanceExclusiveClusterClassicalClusterPtrOutputWithContext(ctx context.Context) InstanceExclusiveClusterClassicalClusterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstanceExclusiveClusterClassicalClusterOutput).ToInstanceExclusiveClusterClassicalClusterPtrOutputWithContext(ctx)
+}
+
+// InstanceExclusiveClusterClassicalClusterPtrInput is an input type that accepts InstanceExclusiveClusterClassicalClusterArgs, InstanceExclusiveClusterClassicalClusterPtr and InstanceExclusiveClusterClassicalClusterPtrOutput values.
+// You can construct a concrete instance of `InstanceExclusiveClusterClassicalClusterPtrInput` via:
+//
+//	        InstanceExclusiveClusterClassicalClusterArgs{...}
+//
+//	or:
+//
+//	        nil
+type InstanceExclusiveClusterClassicalClusterPtrInput interface {
+	pulumi.Input
+
+	ToInstanceExclusiveClusterClassicalClusterPtrOutput() InstanceExclusiveClusterClassicalClusterPtrOutput
+	ToInstanceExclusiveClusterClassicalClusterPtrOutputWithContext(context.Context) InstanceExclusiveClusterClassicalClusterPtrOutput
+}
+
+type instanceExclusiveClusterClassicalClusterPtrType InstanceExclusiveClusterClassicalClusterArgs
+
+func InstanceExclusiveClusterClassicalClusterPtr(v *InstanceExclusiveClusterClassicalClusterArgs) InstanceExclusiveClusterClassicalClusterPtrInput {
+	return (*instanceExclusiveClusterClassicalClusterPtrType)(v)
+}
+
+func (*instanceExclusiveClusterClassicalClusterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**InstanceExclusiveClusterClassicalCluster)(nil)).Elem()
+}
+
+func (i *instanceExclusiveClusterClassicalClusterPtrType) ToInstanceExclusiveClusterClassicalClusterPtrOutput() InstanceExclusiveClusterClassicalClusterPtrOutput {
+	return i.ToInstanceExclusiveClusterClassicalClusterPtrOutputWithContext(context.Background())
+}
+
+func (i *instanceExclusiveClusterClassicalClusterPtrType) ToInstanceExclusiveClusterClassicalClusterPtrOutputWithContext(ctx context.Context) InstanceExclusiveClusterClassicalClusterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstanceExclusiveClusterClassicalClusterPtrOutput)
+}
+
+type InstanceExclusiveClusterClassicalClusterOutput struct{ *pulumi.OutputState }
+
+func (InstanceExclusiveClusterClassicalClusterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*InstanceExclusiveClusterClassicalCluster)(nil)).Elem()
+}
+
+func (o InstanceExclusiveClusterClassicalClusterOutput) ToInstanceExclusiveClusterClassicalClusterOutput() InstanceExclusiveClusterClassicalClusterOutput {
+	return o
+}
+
+func (o InstanceExclusiveClusterClassicalClusterOutput) ToInstanceExclusiveClusterClassicalClusterOutputWithContext(ctx context.Context) InstanceExclusiveClusterClassicalClusterOutput {
+	return o
+}
+
+func (o InstanceExclusiveClusterClassicalClusterOutput) ToInstanceExclusiveClusterClassicalClusterPtrOutput() InstanceExclusiveClusterClassicalClusterPtrOutput {
+	return o.ToInstanceExclusiveClusterClassicalClusterPtrOutputWithContext(context.Background())
+}
+
+func (o InstanceExclusiveClusterClassicalClusterOutput) ToInstanceExclusiveClusterClassicalClusterPtrOutputWithContext(ctx context.Context) InstanceExclusiveClusterClassicalClusterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v InstanceExclusiveClusterClassicalCluster) *InstanceExclusiveClusterClassicalCluster {
+		return &v
+	}).(InstanceExclusiveClusterClassicalClusterPtrOutput)
+}
+
+// Unique cluster ID.
+func (o InstanceExclusiveClusterClassicalClusterOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v InstanceExclusiveClusterClassicalCluster) string { return v.ClusterId }).(pulumi.StringOutput)
+}
+
+// Cluster name.
+func (o InstanceExclusiveClusterClassicalClusterOutput) ClusterName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v InstanceExclusiveClusterClassicalCluster) *string { return v.ClusterName }).(pulumi.StringPtrOutput)
+}
+
+// Cluster AZ, such as ap-guangzhou-1
+// Note: this field may return null, indicating that no valid values can be obtained.
+func (o InstanceExclusiveClusterClassicalClusterOutput) Zone() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v InstanceExclusiveClusterClassicalCluster) *string { return v.Zone }).(pulumi.StringPtrOutput)
+}
+
+type InstanceExclusiveClusterClassicalClusterPtrOutput struct{ *pulumi.OutputState }
+
+func (InstanceExclusiveClusterClassicalClusterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**InstanceExclusiveClusterClassicalCluster)(nil)).Elem()
+}
+
+func (o InstanceExclusiveClusterClassicalClusterPtrOutput) ToInstanceExclusiveClusterClassicalClusterPtrOutput() InstanceExclusiveClusterClassicalClusterPtrOutput {
+	return o
+}
+
+func (o InstanceExclusiveClusterClassicalClusterPtrOutput) ToInstanceExclusiveClusterClassicalClusterPtrOutputWithContext(ctx context.Context) InstanceExclusiveClusterClassicalClusterPtrOutput {
+	return o
+}
+
+func (o InstanceExclusiveClusterClassicalClusterPtrOutput) Elem() InstanceExclusiveClusterClassicalClusterOutput {
+	return o.ApplyT(func(v *InstanceExclusiveClusterClassicalCluster) InstanceExclusiveClusterClassicalCluster {
+		if v != nil {
+			return *v
+		}
+		var ret InstanceExclusiveClusterClassicalCluster
+		return ret
+	}).(InstanceExclusiveClusterClassicalClusterOutput)
+}
+
+// Unique cluster ID.
+func (o InstanceExclusiveClusterClassicalClusterPtrOutput) ClusterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *InstanceExclusiveClusterClassicalCluster) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ClusterId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Cluster name.
+func (o InstanceExclusiveClusterClassicalClusterPtrOutput) ClusterName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *InstanceExclusiveClusterClassicalCluster) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ClusterName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Cluster AZ, such as ap-guangzhou-1
+// Note: this field may return null, indicating that no valid values can be obtained.
+func (o InstanceExclusiveClusterClassicalClusterPtrOutput) Zone() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *InstanceExclusiveClusterClassicalCluster) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Zone
+	}).(pulumi.StringPtrOutput)
+}
+
+type InstanceExclusiveClusterL4Cluster struct {
+	// Unique cluster ID.
+	ClusterId string `pulumi:"clusterId"`
+	// Cluster name.
+	ClusterName *string `pulumi:"clusterName"`
+	// Cluster AZ, such as ap-guangzhou-1
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Zone *string `pulumi:"zone"`
+}
+
+// InstanceExclusiveClusterL4ClusterInput is an input type that accepts InstanceExclusiveClusterL4ClusterArgs and InstanceExclusiveClusterL4ClusterOutput values.
+// You can construct a concrete instance of `InstanceExclusiveClusterL4ClusterInput` via:
+//
+//	InstanceExclusiveClusterL4ClusterArgs{...}
+type InstanceExclusiveClusterL4ClusterInput interface {
+	pulumi.Input
+
+	ToInstanceExclusiveClusterL4ClusterOutput() InstanceExclusiveClusterL4ClusterOutput
+	ToInstanceExclusiveClusterL4ClusterOutputWithContext(context.Context) InstanceExclusiveClusterL4ClusterOutput
+}
+
+type InstanceExclusiveClusterL4ClusterArgs struct {
+	// Unique cluster ID.
+	ClusterId pulumi.StringInput `pulumi:"clusterId"`
+	// Cluster name.
+	ClusterName pulumi.StringPtrInput `pulumi:"clusterName"`
+	// Cluster AZ, such as ap-guangzhou-1
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Zone pulumi.StringPtrInput `pulumi:"zone"`
+}
+
+func (InstanceExclusiveClusterL4ClusterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*InstanceExclusiveClusterL4Cluster)(nil)).Elem()
+}
+
+func (i InstanceExclusiveClusterL4ClusterArgs) ToInstanceExclusiveClusterL4ClusterOutput() InstanceExclusiveClusterL4ClusterOutput {
+	return i.ToInstanceExclusiveClusterL4ClusterOutputWithContext(context.Background())
+}
+
+func (i InstanceExclusiveClusterL4ClusterArgs) ToInstanceExclusiveClusterL4ClusterOutputWithContext(ctx context.Context) InstanceExclusiveClusterL4ClusterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstanceExclusiveClusterL4ClusterOutput)
+}
+
+// InstanceExclusiveClusterL4ClusterArrayInput is an input type that accepts InstanceExclusiveClusterL4ClusterArray and InstanceExclusiveClusterL4ClusterArrayOutput values.
+// You can construct a concrete instance of `InstanceExclusiveClusterL4ClusterArrayInput` via:
+//
+//	InstanceExclusiveClusterL4ClusterArray{ InstanceExclusiveClusterL4ClusterArgs{...} }
+type InstanceExclusiveClusterL4ClusterArrayInput interface {
+	pulumi.Input
+
+	ToInstanceExclusiveClusterL4ClusterArrayOutput() InstanceExclusiveClusterL4ClusterArrayOutput
+	ToInstanceExclusiveClusterL4ClusterArrayOutputWithContext(context.Context) InstanceExclusiveClusterL4ClusterArrayOutput
+}
+
+type InstanceExclusiveClusterL4ClusterArray []InstanceExclusiveClusterL4ClusterInput
+
+func (InstanceExclusiveClusterL4ClusterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]InstanceExclusiveClusterL4Cluster)(nil)).Elem()
+}
+
+func (i InstanceExclusiveClusterL4ClusterArray) ToInstanceExclusiveClusterL4ClusterArrayOutput() InstanceExclusiveClusterL4ClusterArrayOutput {
+	return i.ToInstanceExclusiveClusterL4ClusterArrayOutputWithContext(context.Background())
+}
+
+func (i InstanceExclusiveClusterL4ClusterArray) ToInstanceExclusiveClusterL4ClusterArrayOutputWithContext(ctx context.Context) InstanceExclusiveClusterL4ClusterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstanceExclusiveClusterL4ClusterArrayOutput)
+}
+
+type InstanceExclusiveClusterL4ClusterOutput struct{ *pulumi.OutputState }
+
+func (InstanceExclusiveClusterL4ClusterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*InstanceExclusiveClusterL4Cluster)(nil)).Elem()
+}
+
+func (o InstanceExclusiveClusterL4ClusterOutput) ToInstanceExclusiveClusterL4ClusterOutput() InstanceExclusiveClusterL4ClusterOutput {
+	return o
+}
+
+func (o InstanceExclusiveClusterL4ClusterOutput) ToInstanceExclusiveClusterL4ClusterOutputWithContext(ctx context.Context) InstanceExclusiveClusterL4ClusterOutput {
+	return o
+}
+
+// Unique cluster ID.
+func (o InstanceExclusiveClusterL4ClusterOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v InstanceExclusiveClusterL4Cluster) string { return v.ClusterId }).(pulumi.StringOutput)
+}
+
+// Cluster name.
+func (o InstanceExclusiveClusterL4ClusterOutput) ClusterName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v InstanceExclusiveClusterL4Cluster) *string { return v.ClusterName }).(pulumi.StringPtrOutput)
+}
+
+// Cluster AZ, such as ap-guangzhou-1
+// Note: this field may return null, indicating that no valid values can be obtained.
+func (o InstanceExclusiveClusterL4ClusterOutput) Zone() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v InstanceExclusiveClusterL4Cluster) *string { return v.Zone }).(pulumi.StringPtrOutput)
+}
+
+type InstanceExclusiveClusterL4ClusterArrayOutput struct{ *pulumi.OutputState }
+
+func (InstanceExclusiveClusterL4ClusterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]InstanceExclusiveClusterL4Cluster)(nil)).Elem()
+}
+
+func (o InstanceExclusiveClusterL4ClusterArrayOutput) ToInstanceExclusiveClusterL4ClusterArrayOutput() InstanceExclusiveClusterL4ClusterArrayOutput {
+	return o
+}
+
+func (o InstanceExclusiveClusterL4ClusterArrayOutput) ToInstanceExclusiveClusterL4ClusterArrayOutputWithContext(ctx context.Context) InstanceExclusiveClusterL4ClusterArrayOutput {
+	return o
+}
+
+func (o InstanceExclusiveClusterL4ClusterArrayOutput) Index(i pulumi.IntInput) InstanceExclusiveClusterL4ClusterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) InstanceExclusiveClusterL4Cluster {
+		return vs[0].([]InstanceExclusiveClusterL4Cluster)[vs[1].(int)]
+	}).(InstanceExclusiveClusterL4ClusterOutput)
+}
+
+type InstanceExclusiveClusterL7Cluster struct {
+	// Unique cluster ID.
+	ClusterId string `pulumi:"clusterId"`
+	// Cluster name.
+	ClusterName *string `pulumi:"clusterName"`
+	// Cluster AZ, such as ap-guangzhou-1
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Zone *string `pulumi:"zone"`
+}
+
+// InstanceExclusiveClusterL7ClusterInput is an input type that accepts InstanceExclusiveClusterL7ClusterArgs and InstanceExclusiveClusterL7ClusterOutput values.
+// You can construct a concrete instance of `InstanceExclusiveClusterL7ClusterInput` via:
+//
+//	InstanceExclusiveClusterL7ClusterArgs{...}
+type InstanceExclusiveClusterL7ClusterInput interface {
+	pulumi.Input
+
+	ToInstanceExclusiveClusterL7ClusterOutput() InstanceExclusiveClusterL7ClusterOutput
+	ToInstanceExclusiveClusterL7ClusterOutputWithContext(context.Context) InstanceExclusiveClusterL7ClusterOutput
+}
+
+type InstanceExclusiveClusterL7ClusterArgs struct {
+	// Unique cluster ID.
+	ClusterId pulumi.StringInput `pulumi:"clusterId"`
+	// Cluster name.
+	ClusterName pulumi.StringPtrInput `pulumi:"clusterName"`
+	// Cluster AZ, such as ap-guangzhou-1
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Zone pulumi.StringPtrInput `pulumi:"zone"`
+}
+
+func (InstanceExclusiveClusterL7ClusterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*InstanceExclusiveClusterL7Cluster)(nil)).Elem()
+}
+
+func (i InstanceExclusiveClusterL7ClusterArgs) ToInstanceExclusiveClusterL7ClusterOutput() InstanceExclusiveClusterL7ClusterOutput {
+	return i.ToInstanceExclusiveClusterL7ClusterOutputWithContext(context.Background())
+}
+
+func (i InstanceExclusiveClusterL7ClusterArgs) ToInstanceExclusiveClusterL7ClusterOutputWithContext(ctx context.Context) InstanceExclusiveClusterL7ClusterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstanceExclusiveClusterL7ClusterOutput)
+}
+
+// InstanceExclusiveClusterL7ClusterArrayInput is an input type that accepts InstanceExclusiveClusterL7ClusterArray and InstanceExclusiveClusterL7ClusterArrayOutput values.
+// You can construct a concrete instance of `InstanceExclusiveClusterL7ClusterArrayInput` via:
+//
+//	InstanceExclusiveClusterL7ClusterArray{ InstanceExclusiveClusterL7ClusterArgs{...} }
+type InstanceExclusiveClusterL7ClusterArrayInput interface {
+	pulumi.Input
+
+	ToInstanceExclusiveClusterL7ClusterArrayOutput() InstanceExclusiveClusterL7ClusterArrayOutput
+	ToInstanceExclusiveClusterL7ClusterArrayOutputWithContext(context.Context) InstanceExclusiveClusterL7ClusterArrayOutput
+}
+
+type InstanceExclusiveClusterL7ClusterArray []InstanceExclusiveClusterL7ClusterInput
+
+func (InstanceExclusiveClusterL7ClusterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]InstanceExclusiveClusterL7Cluster)(nil)).Elem()
+}
+
+func (i InstanceExclusiveClusterL7ClusterArray) ToInstanceExclusiveClusterL7ClusterArrayOutput() InstanceExclusiveClusterL7ClusterArrayOutput {
+	return i.ToInstanceExclusiveClusterL7ClusterArrayOutputWithContext(context.Background())
+}
+
+func (i InstanceExclusiveClusterL7ClusterArray) ToInstanceExclusiveClusterL7ClusterArrayOutputWithContext(ctx context.Context) InstanceExclusiveClusterL7ClusterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstanceExclusiveClusterL7ClusterArrayOutput)
+}
+
+type InstanceExclusiveClusterL7ClusterOutput struct{ *pulumi.OutputState }
+
+func (InstanceExclusiveClusterL7ClusterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*InstanceExclusiveClusterL7Cluster)(nil)).Elem()
+}
+
+func (o InstanceExclusiveClusterL7ClusterOutput) ToInstanceExclusiveClusterL7ClusterOutput() InstanceExclusiveClusterL7ClusterOutput {
+	return o
+}
+
+func (o InstanceExclusiveClusterL7ClusterOutput) ToInstanceExclusiveClusterL7ClusterOutputWithContext(ctx context.Context) InstanceExclusiveClusterL7ClusterOutput {
+	return o
+}
+
+// Unique cluster ID.
+func (o InstanceExclusiveClusterL7ClusterOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v InstanceExclusiveClusterL7Cluster) string { return v.ClusterId }).(pulumi.StringOutput)
+}
+
+// Cluster name.
+func (o InstanceExclusiveClusterL7ClusterOutput) ClusterName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v InstanceExclusiveClusterL7Cluster) *string { return v.ClusterName }).(pulumi.StringPtrOutput)
+}
+
+// Cluster AZ, such as ap-guangzhou-1
+// Note: this field may return null, indicating that no valid values can be obtained.
+func (o InstanceExclusiveClusterL7ClusterOutput) Zone() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v InstanceExclusiveClusterL7Cluster) *string { return v.Zone }).(pulumi.StringPtrOutput)
+}
+
+type InstanceExclusiveClusterL7ClusterArrayOutput struct{ *pulumi.OutputState }
+
+func (InstanceExclusiveClusterL7ClusterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]InstanceExclusiveClusterL7Cluster)(nil)).Elem()
+}
+
+func (o InstanceExclusiveClusterL7ClusterArrayOutput) ToInstanceExclusiveClusterL7ClusterArrayOutput() InstanceExclusiveClusterL7ClusterArrayOutput {
+	return o
+}
+
+func (o InstanceExclusiveClusterL7ClusterArrayOutput) ToInstanceExclusiveClusterL7ClusterArrayOutputWithContext(ctx context.Context) InstanceExclusiveClusterL7ClusterArrayOutput {
+	return o
+}
+
+func (o InstanceExclusiveClusterL7ClusterArrayOutput) Index(i pulumi.IntInput) InstanceExclusiveClusterL7ClusterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) InstanceExclusiveClusterL7Cluster {
+		return vs[0].([]InstanceExclusiveClusterL7Cluster)[vs[1].(int)]
+	}).(InstanceExclusiveClusterL7ClusterOutput)
+}
+
 type InstanceSnatIp struct {
 	// Snat IP address, If set to empty will auto allocated.
 	Ip *string `pulumi:"ip"`
@@ -1459,7 +2061,7 @@ func (o ReplaceCertForLbsCertificatePtrOutput) SslMode() pulumi.StringPtrOutput 
 
 type SnatIpIp struct {
 	// Snat IP.
-	Ip string `pulumi:"ip"`
+	Ip *string `pulumi:"ip"`
 	// Subnet ID.
 	SubnetId string `pulumi:"subnetId"`
 }
@@ -1477,7 +2079,7 @@ type SnatIpIpInput interface {
 
 type SnatIpIpArgs struct {
 	// Snat IP.
-	Ip pulumi.StringInput `pulumi:"ip"`
+	Ip pulumi.StringPtrInput `pulumi:"ip"`
 	// Subnet ID.
 	SubnetId pulumi.StringInput `pulumi:"subnetId"`
 }
@@ -1534,8 +2136,8 @@ func (o SnatIpIpOutput) ToSnatIpIpOutputWithContext(ctx context.Context) SnatIpI
 }
 
 // Snat IP.
-func (o SnatIpIpOutput) Ip() pulumi.StringOutput {
-	return o.ApplyT(func(v SnatIpIp) string { return v.Ip }).(pulumi.StringOutput)
+func (o SnatIpIpOutput) Ip() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SnatIpIp) *string { return v.Ip }).(pulumi.StringPtrOutput)
 }
 
 // Subnet ID.
@@ -1685,6 +2287,371 @@ func (o TargetGroupAttachmentsAssociationArrayOutput) Index(i pulumi.IntInput) T
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TargetGroupAttachmentsAssociation {
 		return vs[0].([]TargetGroupAttachmentsAssociation)[vs[1].(int)]
 	}).(TargetGroupAttachmentsAssociationOutput)
+}
+
+type TargetGroupHealthCheck struct {
+	// Unhealthy threshold. Number of consecutive failed health checks required before marking the backend as unhealthy. Range: [2, 10]. Default: 3.
+	BadLimit *int `pulumi:"badLimit"`
+	// Extended status code for health check.
+	ExtendedCode *string `pulumi:"extendedCode"`
+	// Health check interval in seconds. Range: [2, 300]. Default: 5.
+	GapTime *int `pulumi:"gapTime"`
+	// Healthy threshold. Number of consecutive successful health checks required before marking the backend as healthy. Range: [2, 10]. Default: 3.
+	GoodLimit *int `pulumi:"goodLimit"`
+	// Whether to enable health check. true: enable, false: disable.
+	HealthSwitch bool `pulumi:"healthSwitch"`
+	// Health check domain. For HTTP/HTTPS protocol.
+	HttpCheckDomain *string `pulumi:"httpCheckDomain"`
+	// Health check HTTP method. For HTTP/HTTPS protocol. Valid values: HEAD, GET. Default: HEAD.
+	HttpCheckMethod *string `pulumi:"httpCheckMethod"`
+	// Health check path. For HTTP/HTTPS protocol. Must start with /. If not specified, / is used by default.
+	HttpCheckPath *string `pulumi:"httpCheckPath"`
+	// HTTP status codes indicating health. For HTTP/HTTPS protocol. Example: 1 (1xx), 2 (2xx), 4 (3xx), 8 (4xx), 16 (5xx). Multiple values can be combined, e.g., 7 (1xx, 2xx, 3xx).
+	HttpCode *int `pulumi:"httpCode"`
+	// HTTP version for health check. Required when health check protocol is HTTP. Valid values: HTTP/1.0, HTTP/1.1. Only valid for TCP target groups.
+	HttpVersion *string `pulumi:"httpVersion"`
+	// Health check port. If not specified, the backend server port is used by default.
+	Port *int `pulumi:"port"`
+	// Health check protocol. Valid values: TCP, HTTP, HTTPS, PING, CUSTOM, GRPC. Valid for v2 target groups.
+	Protocol *string `pulumi:"protocol"`
+	// Health check response timeout in seconds. Range: [2, 60]. Default: 2.
+	Timeout *int `pulumi:"timeout"`
+}
+
+// TargetGroupHealthCheckInput is an input type that accepts TargetGroupHealthCheckArgs and TargetGroupHealthCheckOutput values.
+// You can construct a concrete instance of `TargetGroupHealthCheckInput` via:
+//
+//	TargetGroupHealthCheckArgs{...}
+type TargetGroupHealthCheckInput interface {
+	pulumi.Input
+
+	ToTargetGroupHealthCheckOutput() TargetGroupHealthCheckOutput
+	ToTargetGroupHealthCheckOutputWithContext(context.Context) TargetGroupHealthCheckOutput
+}
+
+type TargetGroupHealthCheckArgs struct {
+	// Unhealthy threshold. Number of consecutive failed health checks required before marking the backend as unhealthy. Range: [2, 10]. Default: 3.
+	BadLimit pulumi.IntPtrInput `pulumi:"badLimit"`
+	// Extended status code for health check.
+	ExtendedCode pulumi.StringPtrInput `pulumi:"extendedCode"`
+	// Health check interval in seconds. Range: [2, 300]. Default: 5.
+	GapTime pulumi.IntPtrInput `pulumi:"gapTime"`
+	// Healthy threshold. Number of consecutive successful health checks required before marking the backend as healthy. Range: [2, 10]. Default: 3.
+	GoodLimit pulumi.IntPtrInput `pulumi:"goodLimit"`
+	// Whether to enable health check. true: enable, false: disable.
+	HealthSwitch pulumi.BoolInput `pulumi:"healthSwitch"`
+	// Health check domain. For HTTP/HTTPS protocol.
+	HttpCheckDomain pulumi.StringPtrInput `pulumi:"httpCheckDomain"`
+	// Health check HTTP method. For HTTP/HTTPS protocol. Valid values: HEAD, GET. Default: HEAD.
+	HttpCheckMethod pulumi.StringPtrInput `pulumi:"httpCheckMethod"`
+	// Health check path. For HTTP/HTTPS protocol. Must start with /. If not specified, / is used by default.
+	HttpCheckPath pulumi.StringPtrInput `pulumi:"httpCheckPath"`
+	// HTTP status codes indicating health. For HTTP/HTTPS protocol. Example: 1 (1xx), 2 (2xx), 4 (3xx), 8 (4xx), 16 (5xx). Multiple values can be combined, e.g., 7 (1xx, 2xx, 3xx).
+	HttpCode pulumi.IntPtrInput `pulumi:"httpCode"`
+	// HTTP version for health check. Required when health check protocol is HTTP. Valid values: HTTP/1.0, HTTP/1.1. Only valid for TCP target groups.
+	HttpVersion pulumi.StringPtrInput `pulumi:"httpVersion"`
+	// Health check port. If not specified, the backend server port is used by default.
+	Port pulumi.IntPtrInput `pulumi:"port"`
+	// Health check protocol. Valid values: TCP, HTTP, HTTPS, PING, CUSTOM, GRPC. Valid for v2 target groups.
+	Protocol pulumi.StringPtrInput `pulumi:"protocol"`
+	// Health check response timeout in seconds. Range: [2, 60]. Default: 2.
+	Timeout pulumi.IntPtrInput `pulumi:"timeout"`
+}
+
+func (TargetGroupHealthCheckArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TargetGroupHealthCheck)(nil)).Elem()
+}
+
+func (i TargetGroupHealthCheckArgs) ToTargetGroupHealthCheckOutput() TargetGroupHealthCheckOutput {
+	return i.ToTargetGroupHealthCheckOutputWithContext(context.Background())
+}
+
+func (i TargetGroupHealthCheckArgs) ToTargetGroupHealthCheckOutputWithContext(ctx context.Context) TargetGroupHealthCheckOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TargetGroupHealthCheckOutput)
+}
+
+func (i TargetGroupHealthCheckArgs) ToTargetGroupHealthCheckPtrOutput() TargetGroupHealthCheckPtrOutput {
+	return i.ToTargetGroupHealthCheckPtrOutputWithContext(context.Background())
+}
+
+func (i TargetGroupHealthCheckArgs) ToTargetGroupHealthCheckPtrOutputWithContext(ctx context.Context) TargetGroupHealthCheckPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TargetGroupHealthCheckOutput).ToTargetGroupHealthCheckPtrOutputWithContext(ctx)
+}
+
+// TargetGroupHealthCheckPtrInput is an input type that accepts TargetGroupHealthCheckArgs, TargetGroupHealthCheckPtr and TargetGroupHealthCheckPtrOutput values.
+// You can construct a concrete instance of `TargetGroupHealthCheckPtrInput` via:
+//
+//	        TargetGroupHealthCheckArgs{...}
+//
+//	or:
+//
+//	        nil
+type TargetGroupHealthCheckPtrInput interface {
+	pulumi.Input
+
+	ToTargetGroupHealthCheckPtrOutput() TargetGroupHealthCheckPtrOutput
+	ToTargetGroupHealthCheckPtrOutputWithContext(context.Context) TargetGroupHealthCheckPtrOutput
+}
+
+type targetGroupHealthCheckPtrType TargetGroupHealthCheckArgs
+
+func TargetGroupHealthCheckPtr(v *TargetGroupHealthCheckArgs) TargetGroupHealthCheckPtrInput {
+	return (*targetGroupHealthCheckPtrType)(v)
+}
+
+func (*targetGroupHealthCheckPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**TargetGroupHealthCheck)(nil)).Elem()
+}
+
+func (i *targetGroupHealthCheckPtrType) ToTargetGroupHealthCheckPtrOutput() TargetGroupHealthCheckPtrOutput {
+	return i.ToTargetGroupHealthCheckPtrOutputWithContext(context.Background())
+}
+
+func (i *targetGroupHealthCheckPtrType) ToTargetGroupHealthCheckPtrOutputWithContext(ctx context.Context) TargetGroupHealthCheckPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TargetGroupHealthCheckPtrOutput)
+}
+
+type TargetGroupHealthCheckOutput struct{ *pulumi.OutputState }
+
+func (TargetGroupHealthCheckOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TargetGroupHealthCheck)(nil)).Elem()
+}
+
+func (o TargetGroupHealthCheckOutput) ToTargetGroupHealthCheckOutput() TargetGroupHealthCheckOutput {
+	return o
+}
+
+func (o TargetGroupHealthCheckOutput) ToTargetGroupHealthCheckOutputWithContext(ctx context.Context) TargetGroupHealthCheckOutput {
+	return o
+}
+
+func (o TargetGroupHealthCheckOutput) ToTargetGroupHealthCheckPtrOutput() TargetGroupHealthCheckPtrOutput {
+	return o.ToTargetGroupHealthCheckPtrOutputWithContext(context.Background())
+}
+
+func (o TargetGroupHealthCheckOutput) ToTargetGroupHealthCheckPtrOutputWithContext(ctx context.Context) TargetGroupHealthCheckPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v TargetGroupHealthCheck) *TargetGroupHealthCheck {
+		return &v
+	}).(TargetGroupHealthCheckPtrOutput)
+}
+
+// Unhealthy threshold. Number of consecutive failed health checks required before marking the backend as unhealthy. Range: [2, 10]. Default: 3.
+func (o TargetGroupHealthCheckOutput) BadLimit() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v TargetGroupHealthCheck) *int { return v.BadLimit }).(pulumi.IntPtrOutput)
+}
+
+// Extended status code for health check.
+func (o TargetGroupHealthCheckOutput) ExtendedCode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TargetGroupHealthCheck) *string { return v.ExtendedCode }).(pulumi.StringPtrOutput)
+}
+
+// Health check interval in seconds. Range: [2, 300]. Default: 5.
+func (o TargetGroupHealthCheckOutput) GapTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v TargetGroupHealthCheck) *int { return v.GapTime }).(pulumi.IntPtrOutput)
+}
+
+// Healthy threshold. Number of consecutive successful health checks required before marking the backend as healthy. Range: [2, 10]. Default: 3.
+func (o TargetGroupHealthCheckOutput) GoodLimit() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v TargetGroupHealthCheck) *int { return v.GoodLimit }).(pulumi.IntPtrOutput)
+}
+
+// Whether to enable health check. true: enable, false: disable.
+func (o TargetGroupHealthCheckOutput) HealthSwitch() pulumi.BoolOutput {
+	return o.ApplyT(func(v TargetGroupHealthCheck) bool { return v.HealthSwitch }).(pulumi.BoolOutput)
+}
+
+// Health check domain. For HTTP/HTTPS protocol.
+func (o TargetGroupHealthCheckOutput) HttpCheckDomain() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TargetGroupHealthCheck) *string { return v.HttpCheckDomain }).(pulumi.StringPtrOutput)
+}
+
+// Health check HTTP method. For HTTP/HTTPS protocol. Valid values: HEAD, GET. Default: HEAD.
+func (o TargetGroupHealthCheckOutput) HttpCheckMethod() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TargetGroupHealthCheck) *string { return v.HttpCheckMethod }).(pulumi.StringPtrOutput)
+}
+
+// Health check path. For HTTP/HTTPS protocol. Must start with /. If not specified, / is used by default.
+func (o TargetGroupHealthCheckOutput) HttpCheckPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TargetGroupHealthCheck) *string { return v.HttpCheckPath }).(pulumi.StringPtrOutput)
+}
+
+// HTTP status codes indicating health. For HTTP/HTTPS protocol. Example: 1 (1xx), 2 (2xx), 4 (3xx), 8 (4xx), 16 (5xx). Multiple values can be combined, e.g., 7 (1xx, 2xx, 3xx).
+func (o TargetGroupHealthCheckOutput) HttpCode() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v TargetGroupHealthCheck) *int { return v.HttpCode }).(pulumi.IntPtrOutput)
+}
+
+// HTTP version for health check. Required when health check protocol is HTTP. Valid values: HTTP/1.0, HTTP/1.1. Only valid for TCP target groups.
+func (o TargetGroupHealthCheckOutput) HttpVersion() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TargetGroupHealthCheck) *string { return v.HttpVersion }).(pulumi.StringPtrOutput)
+}
+
+// Health check port. If not specified, the backend server port is used by default.
+func (o TargetGroupHealthCheckOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v TargetGroupHealthCheck) *int { return v.Port }).(pulumi.IntPtrOutput)
+}
+
+// Health check protocol. Valid values: TCP, HTTP, HTTPS, PING, CUSTOM, GRPC. Valid for v2 target groups.
+func (o TargetGroupHealthCheckOutput) Protocol() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TargetGroupHealthCheck) *string { return v.Protocol }).(pulumi.StringPtrOutput)
+}
+
+// Health check response timeout in seconds. Range: [2, 60]. Default: 2.
+func (o TargetGroupHealthCheckOutput) Timeout() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v TargetGroupHealthCheck) *int { return v.Timeout }).(pulumi.IntPtrOutput)
+}
+
+type TargetGroupHealthCheckPtrOutput struct{ *pulumi.OutputState }
+
+func (TargetGroupHealthCheckPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**TargetGroupHealthCheck)(nil)).Elem()
+}
+
+func (o TargetGroupHealthCheckPtrOutput) ToTargetGroupHealthCheckPtrOutput() TargetGroupHealthCheckPtrOutput {
+	return o
+}
+
+func (o TargetGroupHealthCheckPtrOutput) ToTargetGroupHealthCheckPtrOutputWithContext(ctx context.Context) TargetGroupHealthCheckPtrOutput {
+	return o
+}
+
+func (o TargetGroupHealthCheckPtrOutput) Elem() TargetGroupHealthCheckOutput {
+	return o.ApplyT(func(v *TargetGroupHealthCheck) TargetGroupHealthCheck {
+		if v != nil {
+			return *v
+		}
+		var ret TargetGroupHealthCheck
+		return ret
+	}).(TargetGroupHealthCheckOutput)
+}
+
+// Unhealthy threshold. Number of consecutive failed health checks required before marking the backend as unhealthy. Range: [2, 10]. Default: 3.
+func (o TargetGroupHealthCheckPtrOutput) BadLimit() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *TargetGroupHealthCheck) *int {
+		if v == nil {
+			return nil
+		}
+		return v.BadLimit
+	}).(pulumi.IntPtrOutput)
+}
+
+// Extended status code for health check.
+func (o TargetGroupHealthCheckPtrOutput) ExtendedCode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TargetGroupHealthCheck) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ExtendedCode
+	}).(pulumi.StringPtrOutput)
+}
+
+// Health check interval in seconds. Range: [2, 300]. Default: 5.
+func (o TargetGroupHealthCheckPtrOutput) GapTime() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *TargetGroupHealthCheck) *int {
+		if v == nil {
+			return nil
+		}
+		return v.GapTime
+	}).(pulumi.IntPtrOutput)
+}
+
+// Healthy threshold. Number of consecutive successful health checks required before marking the backend as healthy. Range: [2, 10]. Default: 3.
+func (o TargetGroupHealthCheckPtrOutput) GoodLimit() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *TargetGroupHealthCheck) *int {
+		if v == nil {
+			return nil
+		}
+		return v.GoodLimit
+	}).(pulumi.IntPtrOutput)
+}
+
+// Whether to enable health check. true: enable, false: disable.
+func (o TargetGroupHealthCheckPtrOutput) HealthSwitch() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *TargetGroupHealthCheck) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.HealthSwitch
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Health check domain. For HTTP/HTTPS protocol.
+func (o TargetGroupHealthCheckPtrOutput) HttpCheckDomain() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TargetGroupHealthCheck) *string {
+		if v == nil {
+			return nil
+		}
+		return v.HttpCheckDomain
+	}).(pulumi.StringPtrOutput)
+}
+
+// Health check HTTP method. For HTTP/HTTPS protocol. Valid values: HEAD, GET. Default: HEAD.
+func (o TargetGroupHealthCheckPtrOutput) HttpCheckMethod() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TargetGroupHealthCheck) *string {
+		if v == nil {
+			return nil
+		}
+		return v.HttpCheckMethod
+	}).(pulumi.StringPtrOutput)
+}
+
+// Health check path. For HTTP/HTTPS protocol. Must start with /. If not specified, / is used by default.
+func (o TargetGroupHealthCheckPtrOutput) HttpCheckPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TargetGroupHealthCheck) *string {
+		if v == nil {
+			return nil
+		}
+		return v.HttpCheckPath
+	}).(pulumi.StringPtrOutput)
+}
+
+// HTTP status codes indicating health. For HTTP/HTTPS protocol. Example: 1 (1xx), 2 (2xx), 4 (3xx), 8 (4xx), 16 (5xx). Multiple values can be combined, e.g., 7 (1xx, 2xx, 3xx).
+func (o TargetGroupHealthCheckPtrOutput) HttpCode() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *TargetGroupHealthCheck) *int {
+		if v == nil {
+			return nil
+		}
+		return v.HttpCode
+	}).(pulumi.IntPtrOutput)
+}
+
+// HTTP version for health check. Required when health check protocol is HTTP. Valid values: HTTP/1.0, HTTP/1.1. Only valid for TCP target groups.
+func (o TargetGroupHealthCheckPtrOutput) HttpVersion() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TargetGroupHealthCheck) *string {
+		if v == nil {
+			return nil
+		}
+		return v.HttpVersion
+	}).(pulumi.StringPtrOutput)
+}
+
+// Health check port. If not specified, the backend server port is used by default.
+func (o TargetGroupHealthCheckPtrOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *TargetGroupHealthCheck) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Port
+	}).(pulumi.IntPtrOutput)
+}
+
+// Health check protocol. Valid values: TCP, HTTP, HTTPS, PING, CUSTOM, GRPC. Valid for v2 target groups.
+func (o TargetGroupHealthCheckPtrOutput) Protocol() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *TargetGroupHealthCheck) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Protocol
+	}).(pulumi.StringPtrOutput)
+}
+
+// Health check response timeout in seconds. Range: [2, 60]. Default: 2.
+func (o TargetGroupHealthCheckPtrOutput) Timeout() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *TargetGroupHealthCheck) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Timeout
+	}).(pulumi.IntPtrOutput)
 }
 
 type TargetGroupTargetGroupInstance struct {
@@ -6587,6 +7554,20 @@ func (o GetInstanceTrafficLoadBalancerTrafficArrayOutput) Index(i pulumi.IntInpu
 type GetInstancesClbList struct {
 	// IP version, only applicable to open CLB. Valid values are `IPV4`, `IPV6` and `IPv6FullChain`.
 	AddressIpVersion string `pulumi:"addressIpVersion"`
+	// IPv6 address of the CLB instance.
+	AddressIpv6 string `pulumi:"addressIpv6"`
+	// Anycast CLB publishing region, returns empty string for non-anycast CLB.
+	AnycastZone string `pulumi:"anycastZone"`
+	// Endpoint ID associated with the CLB instance.
+	AssociateEndpoint string `pulumi:"associateEndpoint"`
+	// CLB attribute flags array.
+	AttributeFlags []string `pulumi:"attributeFlags"`
+	// Available zone forwarding affinity information (JSON format).
+	AvailableZoneAffinityInfo string `pulumi:"availableZoneAffinityInfo"`
+	// Backup zone list, each element contains zone_id/zone/zone_name/zone_region/local_zone.
+	BackupZoneSets []GetInstancesClbListBackupZoneSet `pulumi:"backupZoneSets"`
+	// Billing type, PREPAID: Prepaid, POSTPAID_BY_HOUR: Pay-as-you-go.
+	ChargeType string `pulumi:"chargeType"`
 	// ID of the CLB to be queried.
 	ClbId string `pulumi:"clbId"`
 	// Name of the CLB to be queried.
@@ -6595,22 +7576,86 @@ type GetInstancesClbList struct {
 	ClbVips []string `pulumi:"clbVips"`
 	// ID of the cluster.
 	ClusterId string `pulumi:"clusterId"`
+	// Cluster ID list.
+	ClusterIds []string `pulumi:"clusterIds"`
+	// Layer-7 exclusive tag.
+	ClusterTag string `pulumi:"clusterTag"`
+	// CLB dimension personalized configuration ID.
+	ConfigId string `pulumi:"configId"`
 	// Create time of the CLB.
 	CreateTime string `pulumi:"createTime"`
+	// CLB domain (only for public network Classic CLB), gradually deprecated.
+	Domain string `pulumi:"domain"`
+	// Network egress.
+	Egress string `pulumi:"egress"`
+	// Whether the instance type is exclusive, 1: Exclusive, 0: Not exclusive.
+	Exclusive int `pulumi:"exclusive"`
+	// Internal exclusive cluster information (JSON format).
+	ExclusiveCluster string `pulumi:"exclusiveCluster"`
+	// Expiration time of the CLB instance, only for prepaid CLB, format: YYYY-MM-DD HH:mm:ss.
+	ExpireTime string `pulumi:"expireTime"`
+	// Reserved field, generally no need to pay attention (JSON format).
+	ExtraInfo string `pulumi:"extraInfo"`
+	// CLB type identifier, 1: CLB, 0: Classic CLB.
+	Forward int `pulumi:"forward"`
+	// Log service (CLS) health check log set ID.
+	HealthLogSetId string `pulumi:"healthLogSetId"`
+	// Log service (CLS) health check log topic ID.
+	HealthLogTopicId string `pulumi:"healthLogTopicId"`
 	// Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.
 	InternetBandwidthMaxOut int `pulumi:"internetBandwidthMaxOut"`
 	// Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
 	InternetChargeType string `pulumi:"internetChargeType"`
+	// IPv6 mode when IP version is ipv6, IPv6Nat64 or IPv6FullChain.
+	Ipv6Mode string `pulumi:"ipv6Mode"`
+	// Whether the VIP is blocked.
+	IsBlock bool `pulumi:"isBlock"`
+	// Time of blocking or unblocking, format: YYYY-MM-DD HH:mm:ss.
+	IsBlockTime string `pulumi:"isBlockTime"`
+	// Whether Anti-DDoS Pro can be bound.
+	IsDdos bool `pulumi:"isDdos"`
+	// Time when the CLB instance was isolated, format: YYYY-MM-DD HH:mm:ss.
+	IsolatedTime string `pulumi:"isolatedTime"`
+	// Whether isolated, 0: Not isolated, 1: Isolated.
+	Isolation int `pulumi:"isolation"`
+	// Domain of the CLB instance.
+	LoadBalancerDomain string `pulumi:"loadBalancerDomain"`
+	// Whether backend services allow traffic from CLB.
+	LoadBalancerPassToTarget bool `pulumi:"loadBalancerPassToTarget"`
+	// Whether the IP type is local BGP.
+	LocalBgp bool `pulumi:"localBgp"`
 	// Whether this available zone is local zone, This field maybe null, means cannot get a valid value.
 	LocalZone bool `pulumi:"localZone"`
+	// Log service (CLS) log set ID.
+	LogSetId string `pulumi:"logSetId"`
+	// Log service (CLS) log topic ID.
+	LogTopicId string `pulumi:"logTopicId"`
+	// IPv6FullChain CLB layer-7 listener supports mixed binding of IPv4/IPv6 targets.
+	MixIpTarget bool `pulumi:"mixIpTarget"`
 	// Type of CLB instance, and available values include `OPEN` and `INTERNAL`.
 	NetworkType string `pulumi:"networkType"`
+	// Whether CLB is NFV, empty: No, l7nfv: Layer-7 is NFV.
+	NfvInfo string `pulumi:"nfvInfo"`
 	// VPC ID in a numeric form. Note: This field may return null, indicating that no valid values can be obtained.
 	NumericalVpcId int `pulumi:"numericalVpcId"`
+	// Anti-DDoS Pro LB identifier, 1: Anti-DDoS Pro, 0: Not Anti-DDoS Pro.
+	OpenBgp int `pulumi:"openBgp"`
+	// Prepaid purchase period, unit: month.
+	PrepaidPeriod int `pulumi:"prepaidPeriod"`
+	// Prepaid renewal flag, NOTIFY_AND_AUTO_RENEW: Notify and auto-renew, NOTIFY_AND_MANUAL_RENEW: Notify but not auto-renew, DISABLE_NOTIFY_AND_MANUAL_RENEW: No notification and not auto-renew.
+	PrepaidRenewFlag string `pulumi:"prepaidRenewFlag"`
 	// Project ID of the CLB.
 	ProjectId int `pulumi:"projectId"`
 	// ID set of the security groups.
 	SecurityGroups []string `pulumi:"securityGroups"`
+	// Performance capacity type specification (clb.c1.small/clb.c2.medium/clb.c3.small/clb.c3.medium/clb.c4.small/clb.c4.medium/clb.c4.large/clb.c4.xlarge or empty string).
+	SlaType string `pulumi:"slaType"`
+	// Whether SNAT is enabled.
+	Snat bool `pulumi:"snat"`
+	// SnatIp list after enabling SnatPro (JSON format).
+	SnatIps string `pulumi:"snatIps"`
+	// Whether SnatPro is enabled.
+	SnatPro bool `pulumi:"snatPro"`
 	// The status of CLB.
 	Status int `pulumi:"status"`
 	// Latest state transition time of CLB.
@@ -6619,6 +7664,8 @@ type GetInstancesClbList struct {
 	SubnetId string `pulumi:"subnetId"`
 	// The available tags within this CLB.
 	Tags map[string]string `pulumi:"tags"`
+	// Number of bound backend services.
+	TargetCount int `pulumi:"targetCount"`
 	// Region information of backend service are attached the CLB.
 	TargetRegionInfoRegion string `pulumi:"targetRegionInfoRegion"`
 	// VpcId information of backend service are attached the CLB.
@@ -6635,6 +7682,8 @@ type GetInstancesClbList struct {
 	ZoneName string `pulumi:"zoneName"`
 	// Region that this available zone belong to, This field maybe null, means cannot get a valid value.
 	ZoneRegion string `pulumi:"zoneRegion"`
+	// Zones where rules are deployed for VPC internal load balancers with nearby access mode. Note: This field may return null, indicating no valid values can be obtained.
+	Zones []string `pulumi:"zones"`
 }
 
 // GetInstancesClbListInput is an input type that accepts GetInstancesClbListArgs and GetInstancesClbListOutput values.
@@ -6651,6 +7700,20 @@ type GetInstancesClbListInput interface {
 type GetInstancesClbListArgs struct {
 	// IP version, only applicable to open CLB. Valid values are `IPV4`, `IPV6` and `IPv6FullChain`.
 	AddressIpVersion pulumi.StringInput `pulumi:"addressIpVersion"`
+	// IPv6 address of the CLB instance.
+	AddressIpv6 pulumi.StringInput `pulumi:"addressIpv6"`
+	// Anycast CLB publishing region, returns empty string for non-anycast CLB.
+	AnycastZone pulumi.StringInput `pulumi:"anycastZone"`
+	// Endpoint ID associated with the CLB instance.
+	AssociateEndpoint pulumi.StringInput `pulumi:"associateEndpoint"`
+	// CLB attribute flags array.
+	AttributeFlags pulumi.StringArrayInput `pulumi:"attributeFlags"`
+	// Available zone forwarding affinity information (JSON format).
+	AvailableZoneAffinityInfo pulumi.StringInput `pulumi:"availableZoneAffinityInfo"`
+	// Backup zone list, each element contains zone_id/zone/zone_name/zone_region/local_zone.
+	BackupZoneSets GetInstancesClbListBackupZoneSetArrayInput `pulumi:"backupZoneSets"`
+	// Billing type, PREPAID: Prepaid, POSTPAID_BY_HOUR: Pay-as-you-go.
+	ChargeType pulumi.StringInput `pulumi:"chargeType"`
 	// ID of the CLB to be queried.
 	ClbId pulumi.StringInput `pulumi:"clbId"`
 	// Name of the CLB to be queried.
@@ -6659,22 +7722,86 @@ type GetInstancesClbListArgs struct {
 	ClbVips pulumi.StringArrayInput `pulumi:"clbVips"`
 	// ID of the cluster.
 	ClusterId pulumi.StringInput `pulumi:"clusterId"`
+	// Cluster ID list.
+	ClusterIds pulumi.StringArrayInput `pulumi:"clusterIds"`
+	// Layer-7 exclusive tag.
+	ClusterTag pulumi.StringInput `pulumi:"clusterTag"`
+	// CLB dimension personalized configuration ID.
+	ConfigId pulumi.StringInput `pulumi:"configId"`
 	// Create time of the CLB.
 	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// CLB domain (only for public network Classic CLB), gradually deprecated.
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Network egress.
+	Egress pulumi.StringInput `pulumi:"egress"`
+	// Whether the instance type is exclusive, 1: Exclusive, 0: Not exclusive.
+	Exclusive pulumi.IntInput `pulumi:"exclusive"`
+	// Internal exclusive cluster information (JSON format).
+	ExclusiveCluster pulumi.StringInput `pulumi:"exclusiveCluster"`
+	// Expiration time of the CLB instance, only for prepaid CLB, format: YYYY-MM-DD HH:mm:ss.
+	ExpireTime pulumi.StringInput `pulumi:"expireTime"`
+	// Reserved field, generally no need to pay attention (JSON format).
+	ExtraInfo pulumi.StringInput `pulumi:"extraInfo"`
+	// CLB type identifier, 1: CLB, 0: Classic CLB.
+	Forward pulumi.IntInput `pulumi:"forward"`
+	// Log service (CLS) health check log set ID.
+	HealthLogSetId pulumi.StringInput `pulumi:"healthLogSetId"`
+	// Log service (CLS) health check log topic ID.
+	HealthLogTopicId pulumi.StringInput `pulumi:"healthLogTopicId"`
 	// Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.
 	InternetBandwidthMaxOut pulumi.IntInput `pulumi:"internetBandwidthMaxOut"`
 	// Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
 	InternetChargeType pulumi.StringInput `pulumi:"internetChargeType"`
+	// IPv6 mode when IP version is ipv6, IPv6Nat64 or IPv6FullChain.
+	Ipv6Mode pulumi.StringInput `pulumi:"ipv6Mode"`
+	// Whether the VIP is blocked.
+	IsBlock pulumi.BoolInput `pulumi:"isBlock"`
+	// Time of blocking or unblocking, format: YYYY-MM-DD HH:mm:ss.
+	IsBlockTime pulumi.StringInput `pulumi:"isBlockTime"`
+	// Whether Anti-DDoS Pro can be bound.
+	IsDdos pulumi.BoolInput `pulumi:"isDdos"`
+	// Time when the CLB instance was isolated, format: YYYY-MM-DD HH:mm:ss.
+	IsolatedTime pulumi.StringInput `pulumi:"isolatedTime"`
+	// Whether isolated, 0: Not isolated, 1: Isolated.
+	Isolation pulumi.IntInput `pulumi:"isolation"`
+	// Domain of the CLB instance.
+	LoadBalancerDomain pulumi.StringInput `pulumi:"loadBalancerDomain"`
+	// Whether backend services allow traffic from CLB.
+	LoadBalancerPassToTarget pulumi.BoolInput `pulumi:"loadBalancerPassToTarget"`
+	// Whether the IP type is local BGP.
+	LocalBgp pulumi.BoolInput `pulumi:"localBgp"`
 	// Whether this available zone is local zone, This field maybe null, means cannot get a valid value.
 	LocalZone pulumi.BoolInput `pulumi:"localZone"`
+	// Log service (CLS) log set ID.
+	LogSetId pulumi.StringInput `pulumi:"logSetId"`
+	// Log service (CLS) log topic ID.
+	LogTopicId pulumi.StringInput `pulumi:"logTopicId"`
+	// IPv6FullChain CLB layer-7 listener supports mixed binding of IPv4/IPv6 targets.
+	MixIpTarget pulumi.BoolInput `pulumi:"mixIpTarget"`
 	// Type of CLB instance, and available values include `OPEN` and `INTERNAL`.
 	NetworkType pulumi.StringInput `pulumi:"networkType"`
+	// Whether CLB is NFV, empty: No, l7nfv: Layer-7 is NFV.
+	NfvInfo pulumi.StringInput `pulumi:"nfvInfo"`
 	// VPC ID in a numeric form. Note: This field may return null, indicating that no valid values can be obtained.
 	NumericalVpcId pulumi.IntInput `pulumi:"numericalVpcId"`
+	// Anti-DDoS Pro LB identifier, 1: Anti-DDoS Pro, 0: Not Anti-DDoS Pro.
+	OpenBgp pulumi.IntInput `pulumi:"openBgp"`
+	// Prepaid purchase period, unit: month.
+	PrepaidPeriod pulumi.IntInput `pulumi:"prepaidPeriod"`
+	// Prepaid renewal flag, NOTIFY_AND_AUTO_RENEW: Notify and auto-renew, NOTIFY_AND_MANUAL_RENEW: Notify but not auto-renew, DISABLE_NOTIFY_AND_MANUAL_RENEW: No notification and not auto-renew.
+	PrepaidRenewFlag pulumi.StringInput `pulumi:"prepaidRenewFlag"`
 	// Project ID of the CLB.
 	ProjectId pulumi.IntInput `pulumi:"projectId"`
 	// ID set of the security groups.
 	SecurityGroups pulumi.StringArrayInput `pulumi:"securityGroups"`
+	// Performance capacity type specification (clb.c1.small/clb.c2.medium/clb.c3.small/clb.c3.medium/clb.c4.small/clb.c4.medium/clb.c4.large/clb.c4.xlarge or empty string).
+	SlaType pulumi.StringInput `pulumi:"slaType"`
+	// Whether SNAT is enabled.
+	Snat pulumi.BoolInput `pulumi:"snat"`
+	// SnatIp list after enabling SnatPro (JSON format).
+	SnatIps pulumi.StringInput `pulumi:"snatIps"`
+	// Whether SnatPro is enabled.
+	SnatPro pulumi.BoolInput `pulumi:"snatPro"`
 	// The status of CLB.
 	Status pulumi.IntInput `pulumi:"status"`
 	// Latest state transition time of CLB.
@@ -6683,6 +7810,8 @@ type GetInstancesClbListArgs struct {
 	SubnetId pulumi.StringInput `pulumi:"subnetId"`
 	// The available tags within this CLB.
 	Tags pulumi.StringMapInput `pulumi:"tags"`
+	// Number of bound backend services.
+	TargetCount pulumi.IntInput `pulumi:"targetCount"`
 	// Region information of backend service are attached the CLB.
 	TargetRegionInfoRegion pulumi.StringInput `pulumi:"targetRegionInfoRegion"`
 	// VpcId information of backend service are attached the CLB.
@@ -6699,6 +7828,8 @@ type GetInstancesClbListArgs struct {
 	ZoneName pulumi.StringInput `pulumi:"zoneName"`
 	// Region that this available zone belong to, This field maybe null, means cannot get a valid value.
 	ZoneRegion pulumi.StringInput `pulumi:"zoneRegion"`
+	// Zones where rules are deployed for VPC internal load balancers with nearby access mode. Note: This field may return null, indicating no valid values can be obtained.
+	Zones pulumi.StringArrayInput `pulumi:"zones"`
 }
 
 func (GetInstancesClbListArgs) ElementType() reflect.Type {
@@ -6757,6 +7888,41 @@ func (o GetInstancesClbListOutput) AddressIpVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v GetInstancesClbList) string { return v.AddressIpVersion }).(pulumi.StringOutput)
 }
 
+// IPv6 address of the CLB instance.
+func (o GetInstancesClbListOutput) AddressIpv6() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesClbList) string { return v.AddressIpv6 }).(pulumi.StringOutput)
+}
+
+// Anycast CLB publishing region, returns empty string for non-anycast CLB.
+func (o GetInstancesClbListOutput) AnycastZone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesClbList) string { return v.AnycastZone }).(pulumi.StringOutput)
+}
+
+// Endpoint ID associated with the CLB instance.
+func (o GetInstancesClbListOutput) AssociateEndpoint() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesClbList) string { return v.AssociateEndpoint }).(pulumi.StringOutput)
+}
+
+// CLB attribute flags array.
+func (o GetInstancesClbListOutput) AttributeFlags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetInstancesClbList) []string { return v.AttributeFlags }).(pulumi.StringArrayOutput)
+}
+
+// Available zone forwarding affinity information (JSON format).
+func (o GetInstancesClbListOutput) AvailableZoneAffinityInfo() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesClbList) string { return v.AvailableZoneAffinityInfo }).(pulumi.StringOutput)
+}
+
+// Backup zone list, each element contains zone_id/zone/zone_name/zone_region/local_zone.
+func (o GetInstancesClbListOutput) BackupZoneSets() GetInstancesClbListBackupZoneSetArrayOutput {
+	return o.ApplyT(func(v GetInstancesClbList) []GetInstancesClbListBackupZoneSet { return v.BackupZoneSets }).(GetInstancesClbListBackupZoneSetArrayOutput)
+}
+
+// Billing type, PREPAID: Prepaid, POSTPAID_BY_HOUR: Pay-as-you-go.
+func (o GetInstancesClbListOutput) ChargeType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesClbList) string { return v.ChargeType }).(pulumi.StringOutput)
+}
+
 // ID of the CLB to be queried.
 func (o GetInstancesClbListOutput) ClbId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetInstancesClbList) string { return v.ClbId }).(pulumi.StringOutput)
@@ -6777,9 +7943,69 @@ func (o GetInstancesClbListOutput) ClusterId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetInstancesClbList) string { return v.ClusterId }).(pulumi.StringOutput)
 }
 
+// Cluster ID list.
+func (o GetInstancesClbListOutput) ClusterIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetInstancesClbList) []string { return v.ClusterIds }).(pulumi.StringArrayOutput)
+}
+
+// Layer-7 exclusive tag.
+func (o GetInstancesClbListOutput) ClusterTag() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesClbList) string { return v.ClusterTag }).(pulumi.StringOutput)
+}
+
+// CLB dimension personalized configuration ID.
+func (o GetInstancesClbListOutput) ConfigId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesClbList) string { return v.ConfigId }).(pulumi.StringOutput)
+}
+
 // Create time of the CLB.
 func (o GetInstancesClbListOutput) CreateTime() pulumi.StringOutput {
 	return o.ApplyT(func(v GetInstancesClbList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// CLB domain (only for public network Classic CLB), gradually deprecated.
+func (o GetInstancesClbListOutput) Domain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesClbList) string { return v.Domain }).(pulumi.StringOutput)
+}
+
+// Network egress.
+func (o GetInstancesClbListOutput) Egress() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesClbList) string { return v.Egress }).(pulumi.StringOutput)
+}
+
+// Whether the instance type is exclusive, 1: Exclusive, 0: Not exclusive.
+func (o GetInstancesClbListOutput) Exclusive() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesClbList) int { return v.Exclusive }).(pulumi.IntOutput)
+}
+
+// Internal exclusive cluster information (JSON format).
+func (o GetInstancesClbListOutput) ExclusiveCluster() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesClbList) string { return v.ExclusiveCluster }).(pulumi.StringOutput)
+}
+
+// Expiration time of the CLB instance, only for prepaid CLB, format: YYYY-MM-DD HH:mm:ss.
+func (o GetInstancesClbListOutput) ExpireTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesClbList) string { return v.ExpireTime }).(pulumi.StringOutput)
+}
+
+// Reserved field, generally no need to pay attention (JSON format).
+func (o GetInstancesClbListOutput) ExtraInfo() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesClbList) string { return v.ExtraInfo }).(pulumi.StringOutput)
+}
+
+// CLB type identifier, 1: CLB, 0: Classic CLB.
+func (o GetInstancesClbListOutput) Forward() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesClbList) int { return v.Forward }).(pulumi.IntOutput)
+}
+
+// Log service (CLS) health check log set ID.
+func (o GetInstancesClbListOutput) HealthLogSetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesClbList) string { return v.HealthLogSetId }).(pulumi.StringOutput)
+}
+
+// Log service (CLS) health check log topic ID.
+func (o GetInstancesClbListOutput) HealthLogTopicId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesClbList) string { return v.HealthLogTopicId }).(pulumi.StringOutput)
 }
 
 // Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.
@@ -6792,9 +8018,69 @@ func (o GetInstancesClbListOutput) InternetChargeType() pulumi.StringOutput {
 	return o.ApplyT(func(v GetInstancesClbList) string { return v.InternetChargeType }).(pulumi.StringOutput)
 }
 
+// IPv6 mode when IP version is ipv6, IPv6Nat64 or IPv6FullChain.
+func (o GetInstancesClbListOutput) Ipv6Mode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesClbList) string { return v.Ipv6Mode }).(pulumi.StringOutput)
+}
+
+// Whether the VIP is blocked.
+func (o GetInstancesClbListOutput) IsBlock() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstancesClbList) bool { return v.IsBlock }).(pulumi.BoolOutput)
+}
+
+// Time of blocking or unblocking, format: YYYY-MM-DD HH:mm:ss.
+func (o GetInstancesClbListOutput) IsBlockTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesClbList) string { return v.IsBlockTime }).(pulumi.StringOutput)
+}
+
+// Whether Anti-DDoS Pro can be bound.
+func (o GetInstancesClbListOutput) IsDdos() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstancesClbList) bool { return v.IsDdos }).(pulumi.BoolOutput)
+}
+
+// Time when the CLB instance was isolated, format: YYYY-MM-DD HH:mm:ss.
+func (o GetInstancesClbListOutput) IsolatedTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesClbList) string { return v.IsolatedTime }).(pulumi.StringOutput)
+}
+
+// Whether isolated, 0: Not isolated, 1: Isolated.
+func (o GetInstancesClbListOutput) Isolation() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesClbList) int { return v.Isolation }).(pulumi.IntOutput)
+}
+
+// Domain of the CLB instance.
+func (o GetInstancesClbListOutput) LoadBalancerDomain() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesClbList) string { return v.LoadBalancerDomain }).(pulumi.StringOutput)
+}
+
+// Whether backend services allow traffic from CLB.
+func (o GetInstancesClbListOutput) LoadBalancerPassToTarget() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstancesClbList) bool { return v.LoadBalancerPassToTarget }).(pulumi.BoolOutput)
+}
+
+// Whether the IP type is local BGP.
+func (o GetInstancesClbListOutput) LocalBgp() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstancesClbList) bool { return v.LocalBgp }).(pulumi.BoolOutput)
+}
+
 // Whether this available zone is local zone, This field maybe null, means cannot get a valid value.
 func (o GetInstancesClbListOutput) LocalZone() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetInstancesClbList) bool { return v.LocalZone }).(pulumi.BoolOutput)
+}
+
+// Log service (CLS) log set ID.
+func (o GetInstancesClbListOutput) LogSetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesClbList) string { return v.LogSetId }).(pulumi.StringOutput)
+}
+
+// Log service (CLS) log topic ID.
+func (o GetInstancesClbListOutput) LogTopicId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesClbList) string { return v.LogTopicId }).(pulumi.StringOutput)
+}
+
+// IPv6FullChain CLB layer-7 listener supports mixed binding of IPv4/IPv6 targets.
+func (o GetInstancesClbListOutput) MixIpTarget() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstancesClbList) bool { return v.MixIpTarget }).(pulumi.BoolOutput)
 }
 
 // Type of CLB instance, and available values include `OPEN` and `INTERNAL`.
@@ -6802,9 +8088,29 @@ func (o GetInstancesClbListOutput) NetworkType() pulumi.StringOutput {
 	return o.ApplyT(func(v GetInstancesClbList) string { return v.NetworkType }).(pulumi.StringOutput)
 }
 
+// Whether CLB is NFV, empty: No, l7nfv: Layer-7 is NFV.
+func (o GetInstancesClbListOutput) NfvInfo() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesClbList) string { return v.NfvInfo }).(pulumi.StringOutput)
+}
+
 // VPC ID in a numeric form. Note: This field may return null, indicating that no valid values can be obtained.
 func (o GetInstancesClbListOutput) NumericalVpcId() pulumi.IntOutput {
 	return o.ApplyT(func(v GetInstancesClbList) int { return v.NumericalVpcId }).(pulumi.IntOutput)
+}
+
+// Anti-DDoS Pro LB identifier, 1: Anti-DDoS Pro, 0: Not Anti-DDoS Pro.
+func (o GetInstancesClbListOutput) OpenBgp() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesClbList) int { return v.OpenBgp }).(pulumi.IntOutput)
+}
+
+// Prepaid purchase period, unit: month.
+func (o GetInstancesClbListOutput) PrepaidPeriod() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesClbList) int { return v.PrepaidPeriod }).(pulumi.IntOutput)
+}
+
+// Prepaid renewal flag, NOTIFY_AND_AUTO_RENEW: Notify and auto-renew, NOTIFY_AND_MANUAL_RENEW: Notify but not auto-renew, DISABLE_NOTIFY_AND_MANUAL_RENEW: No notification and not auto-renew.
+func (o GetInstancesClbListOutput) PrepaidRenewFlag() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesClbList) string { return v.PrepaidRenewFlag }).(pulumi.StringOutput)
 }
 
 // Project ID of the CLB.
@@ -6815,6 +8121,26 @@ func (o GetInstancesClbListOutput) ProjectId() pulumi.IntOutput {
 // ID set of the security groups.
 func (o GetInstancesClbListOutput) SecurityGroups() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetInstancesClbList) []string { return v.SecurityGroups }).(pulumi.StringArrayOutput)
+}
+
+// Performance capacity type specification (clb.c1.small/clb.c2.medium/clb.c3.small/clb.c3.medium/clb.c4.small/clb.c4.medium/clb.c4.large/clb.c4.xlarge or empty string).
+func (o GetInstancesClbListOutput) SlaType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesClbList) string { return v.SlaType }).(pulumi.StringOutput)
+}
+
+// Whether SNAT is enabled.
+func (o GetInstancesClbListOutput) Snat() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstancesClbList) bool { return v.Snat }).(pulumi.BoolOutput)
+}
+
+// SnatIp list after enabling SnatPro (JSON format).
+func (o GetInstancesClbListOutput) SnatIps() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesClbList) string { return v.SnatIps }).(pulumi.StringOutput)
+}
+
+// Whether SnatPro is enabled.
+func (o GetInstancesClbListOutput) SnatPro() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstancesClbList) bool { return v.SnatPro }).(pulumi.BoolOutput)
 }
 
 // The status of CLB.
@@ -6835,6 +8161,11 @@ func (o GetInstancesClbListOutput) SubnetId() pulumi.StringOutput {
 // The available tags within this CLB.
 func (o GetInstancesClbListOutput) Tags() pulumi.StringMapOutput {
 	return o.ApplyT(func(v GetInstancesClbList) map[string]string { return v.Tags }).(pulumi.StringMapOutput)
+}
+
+// Number of bound backend services.
+func (o GetInstancesClbListOutput) TargetCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesClbList) int { return v.TargetCount }).(pulumi.IntOutput)
 }
 
 // Region information of backend service are attached the CLB.
@@ -6877,6 +8208,11 @@ func (o GetInstancesClbListOutput) ZoneRegion() pulumi.StringOutput {
 	return o.ApplyT(func(v GetInstancesClbList) string { return v.ZoneRegion }).(pulumi.StringOutput)
 }
 
+// Zones where rules are deployed for VPC internal load balancers with nearby access mode. Note: This field may return null, indicating no valid values can be obtained.
+func (o GetInstancesClbListOutput) Zones() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetInstancesClbList) []string { return v.Zones }).(pulumi.StringArrayOutput)
+}
+
 type GetInstancesClbListArrayOutput struct{ *pulumi.OutputState }
 
 func (GetInstancesClbListArrayOutput) ElementType() reflect.Type {
@@ -6895,6 +8231,139 @@ func (o GetInstancesClbListArrayOutput) Index(i pulumi.IntInput) GetInstancesClb
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesClbList {
 		return vs[0].([]GetInstancesClbList)[vs[1].(int)]
 	}).(GetInstancesClbListOutput)
+}
+
+type GetInstancesClbListBackupZoneSet struct {
+	// Whether this available zone is local zone, This field maybe null, means cannot get a valid value.
+	LocalZone bool `pulumi:"localZone"`
+	// Available zone unique id(string representation), This field maybe null, means cannot get a valid value.
+	Zone string `pulumi:"zone"`
+	// Available zone unique id(numerical representation), This field maybe null, means cannot get a valid value.
+	ZoneId int `pulumi:"zoneId"`
+	// Available zone name, This field maybe null, means cannot get a valid value.
+	ZoneName string `pulumi:"zoneName"`
+	// Region that this available zone belong to, This field maybe null, means cannot get a valid value.
+	ZoneRegion string `pulumi:"zoneRegion"`
+}
+
+// GetInstancesClbListBackupZoneSetInput is an input type that accepts GetInstancesClbListBackupZoneSetArgs and GetInstancesClbListBackupZoneSetOutput values.
+// You can construct a concrete instance of `GetInstancesClbListBackupZoneSetInput` via:
+//
+//	GetInstancesClbListBackupZoneSetArgs{...}
+type GetInstancesClbListBackupZoneSetInput interface {
+	pulumi.Input
+
+	ToGetInstancesClbListBackupZoneSetOutput() GetInstancesClbListBackupZoneSetOutput
+	ToGetInstancesClbListBackupZoneSetOutputWithContext(context.Context) GetInstancesClbListBackupZoneSetOutput
+}
+
+type GetInstancesClbListBackupZoneSetArgs struct {
+	// Whether this available zone is local zone, This field maybe null, means cannot get a valid value.
+	LocalZone pulumi.BoolInput `pulumi:"localZone"`
+	// Available zone unique id(string representation), This field maybe null, means cannot get a valid value.
+	Zone pulumi.StringInput `pulumi:"zone"`
+	// Available zone unique id(numerical representation), This field maybe null, means cannot get a valid value.
+	ZoneId pulumi.IntInput `pulumi:"zoneId"`
+	// Available zone name, This field maybe null, means cannot get a valid value.
+	ZoneName pulumi.StringInput `pulumi:"zoneName"`
+	// Region that this available zone belong to, This field maybe null, means cannot get a valid value.
+	ZoneRegion pulumi.StringInput `pulumi:"zoneRegion"`
+}
+
+func (GetInstancesClbListBackupZoneSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesClbListBackupZoneSet)(nil)).Elem()
+}
+
+func (i GetInstancesClbListBackupZoneSetArgs) ToGetInstancesClbListBackupZoneSetOutput() GetInstancesClbListBackupZoneSetOutput {
+	return i.ToGetInstancesClbListBackupZoneSetOutputWithContext(context.Background())
+}
+
+func (i GetInstancesClbListBackupZoneSetArgs) ToGetInstancesClbListBackupZoneSetOutputWithContext(ctx context.Context) GetInstancesClbListBackupZoneSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesClbListBackupZoneSetOutput)
+}
+
+// GetInstancesClbListBackupZoneSetArrayInput is an input type that accepts GetInstancesClbListBackupZoneSetArray and GetInstancesClbListBackupZoneSetArrayOutput values.
+// You can construct a concrete instance of `GetInstancesClbListBackupZoneSetArrayInput` via:
+//
+//	GetInstancesClbListBackupZoneSetArray{ GetInstancesClbListBackupZoneSetArgs{...} }
+type GetInstancesClbListBackupZoneSetArrayInput interface {
+	pulumi.Input
+
+	ToGetInstancesClbListBackupZoneSetArrayOutput() GetInstancesClbListBackupZoneSetArrayOutput
+	ToGetInstancesClbListBackupZoneSetArrayOutputWithContext(context.Context) GetInstancesClbListBackupZoneSetArrayOutput
+}
+
+type GetInstancesClbListBackupZoneSetArray []GetInstancesClbListBackupZoneSetInput
+
+func (GetInstancesClbListBackupZoneSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesClbListBackupZoneSet)(nil)).Elem()
+}
+
+func (i GetInstancesClbListBackupZoneSetArray) ToGetInstancesClbListBackupZoneSetArrayOutput() GetInstancesClbListBackupZoneSetArrayOutput {
+	return i.ToGetInstancesClbListBackupZoneSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetInstancesClbListBackupZoneSetArray) ToGetInstancesClbListBackupZoneSetArrayOutputWithContext(ctx context.Context) GetInstancesClbListBackupZoneSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetInstancesClbListBackupZoneSetArrayOutput)
+}
+
+type GetInstancesClbListBackupZoneSetOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesClbListBackupZoneSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetInstancesClbListBackupZoneSet)(nil)).Elem()
+}
+
+func (o GetInstancesClbListBackupZoneSetOutput) ToGetInstancesClbListBackupZoneSetOutput() GetInstancesClbListBackupZoneSetOutput {
+	return o
+}
+
+func (o GetInstancesClbListBackupZoneSetOutput) ToGetInstancesClbListBackupZoneSetOutputWithContext(ctx context.Context) GetInstancesClbListBackupZoneSetOutput {
+	return o
+}
+
+// Whether this available zone is local zone, This field maybe null, means cannot get a valid value.
+func (o GetInstancesClbListBackupZoneSetOutput) LocalZone() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetInstancesClbListBackupZoneSet) bool { return v.LocalZone }).(pulumi.BoolOutput)
+}
+
+// Available zone unique id(string representation), This field maybe null, means cannot get a valid value.
+func (o GetInstancesClbListBackupZoneSetOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesClbListBackupZoneSet) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+// Available zone unique id(numerical representation), This field maybe null, means cannot get a valid value.
+func (o GetInstancesClbListBackupZoneSetOutput) ZoneId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetInstancesClbListBackupZoneSet) int { return v.ZoneId }).(pulumi.IntOutput)
+}
+
+// Available zone name, This field maybe null, means cannot get a valid value.
+func (o GetInstancesClbListBackupZoneSetOutput) ZoneName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesClbListBackupZoneSet) string { return v.ZoneName }).(pulumi.StringOutput)
+}
+
+// Region that this available zone belong to, This field maybe null, means cannot get a valid value.
+func (o GetInstancesClbListBackupZoneSetOutput) ZoneRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesClbListBackupZoneSet) string { return v.ZoneRegion }).(pulumi.StringOutput)
+}
+
+type GetInstancesClbListBackupZoneSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetInstancesClbListBackupZoneSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetInstancesClbListBackupZoneSet)(nil)).Elem()
+}
+
+func (o GetInstancesClbListBackupZoneSetArrayOutput) ToGetInstancesClbListBackupZoneSetArrayOutput() GetInstancesClbListBackupZoneSetArrayOutput {
+	return o
+}
+
+func (o GetInstancesClbListBackupZoneSetArrayOutput) ToGetInstancesClbListBackupZoneSetArrayOutputWithContext(ctx context.Context) GetInstancesClbListBackupZoneSetArrayOutput {
+	return o
+}
+
+func (o GetInstancesClbListBackupZoneSetArrayOutput) Index(i pulumi.IntInput) GetInstancesClbListBackupZoneSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetInstancesClbListBackupZoneSet {
+		return vs[0].([]GetInstancesClbListBackupZoneSet)[vs[1].(int)]
+	}).(GetInstancesClbListBackupZoneSetOutput)
 }
 
 type GetListenerRulesRuleList struct {
@@ -10314,6 +11783,14 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*FunctionTargetsAttachmentFunctionTargetsPtrInput)(nil)).Elem(), FunctionTargetsAttachmentFunctionTargetsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*FunctionTargetsAttachmentFunctionTargetsFunctionInput)(nil)).Elem(), FunctionTargetsAttachmentFunctionTargetsFunctionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*FunctionTargetsAttachmentFunctionTargetsFunctionPtrInput)(nil)).Elem(), FunctionTargetsAttachmentFunctionTargetsFunctionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*InstanceExclusiveClusterInput)(nil)).Elem(), InstanceExclusiveClusterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*InstanceExclusiveClusterPtrInput)(nil)).Elem(), InstanceExclusiveClusterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*InstanceExclusiveClusterClassicalClusterInput)(nil)).Elem(), InstanceExclusiveClusterClassicalClusterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*InstanceExclusiveClusterClassicalClusterPtrInput)(nil)).Elem(), InstanceExclusiveClusterClassicalClusterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*InstanceExclusiveClusterL4ClusterInput)(nil)).Elem(), InstanceExclusiveClusterL4ClusterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*InstanceExclusiveClusterL4ClusterArrayInput)(nil)).Elem(), InstanceExclusiveClusterL4ClusterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*InstanceExclusiveClusterL7ClusterInput)(nil)).Elem(), InstanceExclusiveClusterL7ClusterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*InstanceExclusiveClusterL7ClusterArrayInput)(nil)).Elem(), InstanceExclusiveClusterL7ClusterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceSnatIpInput)(nil)).Elem(), InstanceSnatIpArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceSnatIpArrayInput)(nil)).Elem(), InstanceSnatIpArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ListenerMultiCertInfoInput)(nil)).Elem(), ListenerMultiCertInfoArgs{})
@@ -10328,6 +11805,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*SnatIpIpArrayInput)(nil)).Elem(), SnatIpIpArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TargetGroupAttachmentsAssociationInput)(nil)).Elem(), TargetGroupAttachmentsAssociationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TargetGroupAttachmentsAssociationArrayInput)(nil)).Elem(), TargetGroupAttachmentsAssociationArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TargetGroupHealthCheckInput)(nil)).Elem(), TargetGroupHealthCheckArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TargetGroupHealthCheckPtrInput)(nil)).Elem(), TargetGroupHealthCheckArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TargetGroupTargetGroupInstanceInput)(nil)).Elem(), TargetGroupTargetGroupInstanceArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TargetGroupTargetGroupInstanceArrayInput)(nil)).Elem(), TargetGroupTargetGroupInstanceArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetAttachmentsAttachmentListInput)(nil)).Elem(), GetAttachmentsAttachmentListArgs{})
@@ -10396,6 +11875,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceTrafficLoadBalancerTrafficArrayInput)(nil)).Elem(), GetInstanceTrafficLoadBalancerTrafficArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesClbListInput)(nil)).Elem(), GetInstancesClbListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesClbListArrayInput)(nil)).Elem(), GetInstancesClbListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesClbListBackupZoneSetInput)(nil)).Elem(), GetInstancesClbListBackupZoneSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetInstancesClbListBackupZoneSetArrayInput)(nil)).Elem(), GetInstancesClbListBackupZoneSetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetListenerRulesRuleListInput)(nil)).Elem(), GetListenerRulesRuleListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetListenerRulesRuleListArrayInput)(nil)).Elem(), GetListenerRulesRuleListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetListenersByTargetsBackendInput)(nil)).Elem(), GetListenersByTargetsBackendArgs{})
@@ -10450,6 +11931,14 @@ func init() {
 	pulumi.RegisterOutputType(FunctionTargetsAttachmentFunctionTargetsPtrOutput{})
 	pulumi.RegisterOutputType(FunctionTargetsAttachmentFunctionTargetsFunctionOutput{})
 	pulumi.RegisterOutputType(FunctionTargetsAttachmentFunctionTargetsFunctionPtrOutput{})
+	pulumi.RegisterOutputType(InstanceExclusiveClusterOutput{})
+	pulumi.RegisterOutputType(InstanceExclusiveClusterPtrOutput{})
+	pulumi.RegisterOutputType(InstanceExclusiveClusterClassicalClusterOutput{})
+	pulumi.RegisterOutputType(InstanceExclusiveClusterClassicalClusterPtrOutput{})
+	pulumi.RegisterOutputType(InstanceExclusiveClusterL4ClusterOutput{})
+	pulumi.RegisterOutputType(InstanceExclusiveClusterL4ClusterArrayOutput{})
+	pulumi.RegisterOutputType(InstanceExclusiveClusterL7ClusterOutput{})
+	pulumi.RegisterOutputType(InstanceExclusiveClusterL7ClusterArrayOutput{})
 	pulumi.RegisterOutputType(InstanceSnatIpOutput{})
 	pulumi.RegisterOutputType(InstanceSnatIpArrayOutput{})
 	pulumi.RegisterOutputType(ListenerMultiCertInfoOutput{})
@@ -10464,6 +11953,8 @@ func init() {
 	pulumi.RegisterOutputType(SnatIpIpArrayOutput{})
 	pulumi.RegisterOutputType(TargetGroupAttachmentsAssociationOutput{})
 	pulumi.RegisterOutputType(TargetGroupAttachmentsAssociationArrayOutput{})
+	pulumi.RegisterOutputType(TargetGroupHealthCheckOutput{})
+	pulumi.RegisterOutputType(TargetGroupHealthCheckPtrOutput{})
 	pulumi.RegisterOutputType(TargetGroupTargetGroupInstanceOutput{})
 	pulumi.RegisterOutputType(TargetGroupTargetGroupInstanceArrayOutput{})
 	pulumi.RegisterOutputType(GetAttachmentsAttachmentListOutput{})
@@ -10532,6 +12023,8 @@ func init() {
 	pulumi.RegisterOutputType(GetInstanceTrafficLoadBalancerTrafficArrayOutput{})
 	pulumi.RegisterOutputType(GetInstancesClbListOutput{})
 	pulumi.RegisterOutputType(GetInstancesClbListArrayOutput{})
+	pulumi.RegisterOutputType(GetInstancesClbListBackupZoneSetOutput{})
+	pulumi.RegisterOutputType(GetInstancesClbListBackupZoneSetArrayOutput{})
 	pulumi.RegisterOutputType(GetListenerRulesRuleListOutput{})
 	pulumi.RegisterOutputType(GetListenerRulesRuleListArrayOutput{})
 	pulumi.RegisterOutputType(GetListenersByTargetsBackendOutput{})

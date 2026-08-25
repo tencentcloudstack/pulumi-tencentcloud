@@ -56,7 +56,6 @@ import (
 // ## Import
 //
 // FreeCertificate instance can be imported, e.g.
-//
 // ```sh
 // $ pulumi import tencentcloud:Ssl/freeCertificate:FreeCertificate test free_certificate-id
 // ```

@@ -32,7 +32,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * gaap custom_header can be imported using the id, e.g.
+ * gaap customHeader can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Gaap/customHeader:CustomHeader custom_header ruleId
@@ -110,11 +110,11 @@ export interface CustomHeaderState {
     /**
      * Headers.
      */
-    headers?: pulumi.Input<pulumi.Input<inputs.Gaap.CustomHeaderHeader>[]>;
+    headers?: pulumi.Input<pulumi.Input<inputs.Gaap.CustomHeaderHeader>[] | undefined>;
     /**
      * Rule id.
      */
-    ruleId?: pulumi.Input<string>;
+    ruleId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -124,7 +124,7 @@ export interface CustomHeaderArgs {
     /**
      * Headers.
      */
-    headers?: pulumi.Input<pulumi.Input<inputs.Gaap.CustomHeaderHeader>[]>;
+    headers?: pulumi.Input<pulumi.Input<inputs.Gaap.CustomHeaderHeader>[] | undefined>;
     /**
      * Rule id.
      */

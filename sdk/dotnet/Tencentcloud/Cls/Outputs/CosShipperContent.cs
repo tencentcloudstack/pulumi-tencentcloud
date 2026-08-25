@@ -19,13 +19,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Outputs
         /// </summary>
         public readonly Outputs.CosShipperContentCsv? Csv;
         /// <summary>
-        /// Content format. Valid values: json, csv.
+        /// Content format. Valid values: json, csv, parquet.
         /// </summary>
         public readonly string Format;
         /// <summary>
         /// JSON format content description.Note: this field may return null, indicating that no valid values can be obtained.
         /// </summary>
         public readonly Outputs.CosShipperContentJson? Json;
+        /// <summary>
+        /// Parquet format content description.Note: this field may return null, indicating that no valid values can be obtained.
+        /// </summary>
+        public readonly Outputs.CosShipperContentParquet? Parquet;
 
         [OutputConstructor]
         private CosShipperContent(
@@ -33,11 +37,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Outputs
 
             string format,
 
-            Outputs.CosShipperContentJson? json)
+            Outputs.CosShipperContentJson? json,
+
+            Outputs.CosShipperContentParquet? parquet)
         {
             Csv = csv;
             Format = format;
             Json = json;
+            Parquet = parquet;
         }
     }
 }

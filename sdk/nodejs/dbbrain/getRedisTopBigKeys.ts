@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const redisTopBigKeys = tencentcloud.Dbbrain.getRedisTopBigKeys({
+ * const redisTopBigKeys = tencentcloud.dbbrain.getRedisTopBigKeys({
  *     instanceId: redisId,
  *     date: "%s",
  *     product: "redis",
@@ -94,7 +94,7 @@ export interface GetRedisTopBigKeysResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const redisTopBigKeys = tencentcloud.Dbbrain.getRedisTopBigKeys({
+ * const redisTopBigKeys = tencentcloud.dbbrain.getRedisTopBigKeys({
  *     instanceId: redisId,
  *     date: "%s",
  *     product: "redis",
@@ -130,7 +130,7 @@ export interface GetRedisTopBigKeysOutputArgs {
     /**
      * Key type filter condition, the default is no filter, the value includes `string`, `list`, `set`, `hash`, `sortedset`, `stream`.
      */
-    keyType?: pulumi.Input<string>;
+    keyType?: pulumi.Input<string | undefined>;
     /**
      * Service product type, supported values include `redis` - cloud database Redis.
      */
@@ -138,9 +138,9 @@ export interface GetRedisTopBigKeysOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Sorting field, the value includes `Capacity` - memory, `ItemCount` - number of elements, the default is `Capacity`.
      */
-    sortBy?: pulumi.Input<string>;
+    sortBy?: pulumi.Input<string | undefined>;
 }

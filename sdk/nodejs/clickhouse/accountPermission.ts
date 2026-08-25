@@ -42,7 +42,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * clickhouse account_permission can be imported using the id, e.g.
+ * clickhouse accountPermission can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Clickhouse/accountPermission:AccountPermission account_permission ${instanceId}#${cluster}#${userName}
@@ -153,27 +153,27 @@ export interface AccountPermissionState {
     /**
      * Whether all database tables.
      */
-    allDatabase?: pulumi.Input<boolean>;
+    allDatabase?: pulumi.Input<boolean | undefined>;
     /**
      * Cluster name.
      */
-    cluster?: pulumi.Input<string>;
+    cluster?: pulumi.Input<string | undefined>;
     /**
      * Database privilege list.
      */
-    databasePrivilegeLists?: pulumi.Input<pulumi.Input<inputs.Clickhouse.AccountPermissionDatabasePrivilegeList>[]>;
+    databasePrivilegeLists?: pulumi.Input<pulumi.Input<inputs.Clickhouse.AccountPermissionDatabasePrivilegeList>[] | undefined>;
     /**
      * Global privileges.
      */
-    globalPrivileges?: pulumi.Input<pulumi.Input<string>[]>;
+    globalPrivileges?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * User name.
      */
-    userName?: pulumi.Input<string>;
+    userName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -191,11 +191,11 @@ export interface AccountPermissionArgs {
     /**
      * Database privilege list.
      */
-    databasePrivilegeLists?: pulumi.Input<pulumi.Input<inputs.Clickhouse.AccountPermissionDatabasePrivilegeList>[]>;
+    databasePrivilegeLists?: pulumi.Input<pulumi.Input<inputs.Clickhouse.AccountPermissionDatabasePrivilegeList>[] | undefined>;
     /**
      * Global privileges.
      */
-    globalPrivileges?: pulumi.Input<pulumi.Input<string>[]>;
+    globalPrivileges?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Instance id.
      */

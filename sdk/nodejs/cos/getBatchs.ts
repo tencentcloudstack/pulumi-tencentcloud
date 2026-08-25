@@ -17,9 +17,9 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const cosBatchs = tencentcloud.Cos.getBatchs({
+ * const cosBatchs = tencentcloud.cos.getBatchs({
  *     uin: "xxxxxx",
- *     appid: "xxxxxx",
+ *     appid: Number("xxxxxx"),
  * });
  * ```
  */
@@ -83,9 +83,9 @@ export interface GetBatchsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const cosBatchs = tencentcloud.Cos.getBatchs({
+ * const cosBatchs = tencentcloud.cos.getBatchs({
  *     uin: "xxxxxx",
- *     appid: "xxxxxx",
+ *     appid: Number("xxxxxx"),
  * });
  * ```
  */
@@ -110,11 +110,11 @@ export interface GetBatchsOutputArgs {
     /**
      * The task status information you need to query. If you do not specify a task status, COS returns the status of all tasks that have been executed, including those that are in progress. If you specify a task status, COS returns the task in the specified state. Optional task states include: Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended.
      */
-    jobStatuses?: pulumi.Input<string>;
+    jobStatuses?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Uin.
      */

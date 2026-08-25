@@ -13,6 +13,873 @@ import (
 
 var _ = internal.GetEnvOrDefault
 
+type ClusterNatFwSwitchNatCcnSwitch struct {
+	// List of access instances.
+	AccessInstanceLists []ClusterNatFwSwitchNatCcnSwitchAccessInstanceList `pulumi:"accessInstanceLists"`
+	// CCN instance ID.
+	CcnId string `pulumi:"ccnId"`
+	// CIDR of the lead VPC.
+	LeadVpcCidr *string `pulumi:"leadVpcCidr"`
+	// NAT firewall instance ID.
+	NatInsId string `pulumi:"natInsId"`
+	// Traffic steering routing method, 0: multi-route table, 1: policy routing. Automatic access mode only supports policy routing (1); manual access mode supports both multi-route table (0) and policy routing (1).
+	RoutingMode *int `pulumi:"routingMode"`
+	// Switch access mode, 1: automatic access, 2: manual access.
+	SwitchMode int `pulumi:"switchMode"`
+}
+
+// ClusterNatFwSwitchNatCcnSwitchInput is an input type that accepts ClusterNatFwSwitchNatCcnSwitchArgs and ClusterNatFwSwitchNatCcnSwitchOutput values.
+// You can construct a concrete instance of `ClusterNatFwSwitchNatCcnSwitchInput` via:
+//
+//	ClusterNatFwSwitchNatCcnSwitchArgs{...}
+type ClusterNatFwSwitchNatCcnSwitchInput interface {
+	pulumi.Input
+
+	ToClusterNatFwSwitchNatCcnSwitchOutput() ClusterNatFwSwitchNatCcnSwitchOutput
+	ToClusterNatFwSwitchNatCcnSwitchOutputWithContext(context.Context) ClusterNatFwSwitchNatCcnSwitchOutput
+}
+
+type ClusterNatFwSwitchNatCcnSwitchArgs struct {
+	// List of access instances.
+	AccessInstanceLists ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArrayInput `pulumi:"accessInstanceLists"`
+	// CCN instance ID.
+	CcnId pulumi.StringInput `pulumi:"ccnId"`
+	// CIDR of the lead VPC.
+	LeadVpcCidr pulumi.StringPtrInput `pulumi:"leadVpcCidr"`
+	// NAT firewall instance ID.
+	NatInsId pulumi.StringInput `pulumi:"natInsId"`
+	// Traffic steering routing method, 0: multi-route table, 1: policy routing. Automatic access mode only supports policy routing (1); manual access mode supports both multi-route table (0) and policy routing (1).
+	RoutingMode pulumi.IntPtrInput `pulumi:"routingMode"`
+	// Switch access mode, 1: automatic access, 2: manual access.
+	SwitchMode pulumi.IntInput `pulumi:"switchMode"`
+}
+
+func (ClusterNatFwSwitchNatCcnSwitchArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterNatFwSwitchNatCcnSwitch)(nil)).Elem()
+}
+
+func (i ClusterNatFwSwitchNatCcnSwitchArgs) ToClusterNatFwSwitchNatCcnSwitchOutput() ClusterNatFwSwitchNatCcnSwitchOutput {
+	return i.ToClusterNatFwSwitchNatCcnSwitchOutputWithContext(context.Background())
+}
+
+func (i ClusterNatFwSwitchNatCcnSwitchArgs) ToClusterNatFwSwitchNatCcnSwitchOutputWithContext(ctx context.Context) ClusterNatFwSwitchNatCcnSwitchOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterNatFwSwitchNatCcnSwitchOutput)
+}
+
+func (i ClusterNatFwSwitchNatCcnSwitchArgs) ToClusterNatFwSwitchNatCcnSwitchPtrOutput() ClusterNatFwSwitchNatCcnSwitchPtrOutput {
+	return i.ToClusterNatFwSwitchNatCcnSwitchPtrOutputWithContext(context.Background())
+}
+
+func (i ClusterNatFwSwitchNatCcnSwitchArgs) ToClusterNatFwSwitchNatCcnSwitchPtrOutputWithContext(ctx context.Context) ClusterNatFwSwitchNatCcnSwitchPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterNatFwSwitchNatCcnSwitchOutput).ToClusterNatFwSwitchNatCcnSwitchPtrOutputWithContext(ctx)
+}
+
+// ClusterNatFwSwitchNatCcnSwitchPtrInput is an input type that accepts ClusterNatFwSwitchNatCcnSwitchArgs, ClusterNatFwSwitchNatCcnSwitchPtr and ClusterNatFwSwitchNatCcnSwitchPtrOutput values.
+// You can construct a concrete instance of `ClusterNatFwSwitchNatCcnSwitchPtrInput` via:
+//
+//	        ClusterNatFwSwitchNatCcnSwitchArgs{...}
+//
+//	or:
+//
+//	        nil
+type ClusterNatFwSwitchNatCcnSwitchPtrInput interface {
+	pulumi.Input
+
+	ToClusterNatFwSwitchNatCcnSwitchPtrOutput() ClusterNatFwSwitchNatCcnSwitchPtrOutput
+	ToClusterNatFwSwitchNatCcnSwitchPtrOutputWithContext(context.Context) ClusterNatFwSwitchNatCcnSwitchPtrOutput
+}
+
+type clusterNatFwSwitchNatCcnSwitchPtrType ClusterNatFwSwitchNatCcnSwitchArgs
+
+func ClusterNatFwSwitchNatCcnSwitchPtr(v *ClusterNatFwSwitchNatCcnSwitchArgs) ClusterNatFwSwitchNatCcnSwitchPtrInput {
+	return (*clusterNatFwSwitchNatCcnSwitchPtrType)(v)
+}
+
+func (*clusterNatFwSwitchNatCcnSwitchPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterNatFwSwitchNatCcnSwitch)(nil)).Elem()
+}
+
+func (i *clusterNatFwSwitchNatCcnSwitchPtrType) ToClusterNatFwSwitchNatCcnSwitchPtrOutput() ClusterNatFwSwitchNatCcnSwitchPtrOutput {
+	return i.ToClusterNatFwSwitchNatCcnSwitchPtrOutputWithContext(context.Background())
+}
+
+func (i *clusterNatFwSwitchNatCcnSwitchPtrType) ToClusterNatFwSwitchNatCcnSwitchPtrOutputWithContext(ctx context.Context) ClusterNatFwSwitchNatCcnSwitchPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterNatFwSwitchNatCcnSwitchPtrOutput)
+}
+
+type ClusterNatFwSwitchNatCcnSwitchOutput struct{ *pulumi.OutputState }
+
+func (ClusterNatFwSwitchNatCcnSwitchOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterNatFwSwitchNatCcnSwitch)(nil)).Elem()
+}
+
+func (o ClusterNatFwSwitchNatCcnSwitchOutput) ToClusterNatFwSwitchNatCcnSwitchOutput() ClusterNatFwSwitchNatCcnSwitchOutput {
+	return o
+}
+
+func (o ClusterNatFwSwitchNatCcnSwitchOutput) ToClusterNatFwSwitchNatCcnSwitchOutputWithContext(ctx context.Context) ClusterNatFwSwitchNatCcnSwitchOutput {
+	return o
+}
+
+func (o ClusterNatFwSwitchNatCcnSwitchOutput) ToClusterNatFwSwitchNatCcnSwitchPtrOutput() ClusterNatFwSwitchNatCcnSwitchPtrOutput {
+	return o.ToClusterNatFwSwitchNatCcnSwitchPtrOutputWithContext(context.Background())
+}
+
+func (o ClusterNatFwSwitchNatCcnSwitchOutput) ToClusterNatFwSwitchNatCcnSwitchPtrOutputWithContext(ctx context.Context) ClusterNatFwSwitchNatCcnSwitchPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ClusterNatFwSwitchNatCcnSwitch) *ClusterNatFwSwitchNatCcnSwitch {
+		return &v
+	}).(ClusterNatFwSwitchNatCcnSwitchPtrOutput)
+}
+
+// List of access instances.
+func (o ClusterNatFwSwitchNatCcnSwitchOutput) AccessInstanceLists() ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArrayOutput {
+	return o.ApplyT(func(v ClusterNatFwSwitchNatCcnSwitch) []ClusterNatFwSwitchNatCcnSwitchAccessInstanceList {
+		return v.AccessInstanceLists
+	}).(ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArrayOutput)
+}
+
+// CCN instance ID.
+func (o ClusterNatFwSwitchNatCcnSwitchOutput) CcnId() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterNatFwSwitchNatCcnSwitch) string { return v.CcnId }).(pulumi.StringOutput)
+}
+
+// CIDR of the lead VPC.
+func (o ClusterNatFwSwitchNatCcnSwitchOutput) LeadVpcCidr() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterNatFwSwitchNatCcnSwitch) *string { return v.LeadVpcCidr }).(pulumi.StringPtrOutput)
+}
+
+// NAT firewall instance ID.
+func (o ClusterNatFwSwitchNatCcnSwitchOutput) NatInsId() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterNatFwSwitchNatCcnSwitch) string { return v.NatInsId }).(pulumi.StringOutput)
+}
+
+// Traffic steering routing method, 0: multi-route table, 1: policy routing. Automatic access mode only supports policy routing (1); manual access mode supports both multi-route table (0) and policy routing (1).
+func (o ClusterNatFwSwitchNatCcnSwitchOutput) RoutingMode() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ClusterNatFwSwitchNatCcnSwitch) *int { return v.RoutingMode }).(pulumi.IntPtrOutput)
+}
+
+// Switch access mode, 1: automatic access, 2: manual access.
+func (o ClusterNatFwSwitchNatCcnSwitchOutput) SwitchMode() pulumi.IntOutput {
+	return o.ApplyT(func(v ClusterNatFwSwitchNatCcnSwitch) int { return v.SwitchMode }).(pulumi.IntOutput)
+}
+
+type ClusterNatFwSwitchNatCcnSwitchPtrOutput struct{ *pulumi.OutputState }
+
+func (ClusterNatFwSwitchNatCcnSwitchPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ClusterNatFwSwitchNatCcnSwitch)(nil)).Elem()
+}
+
+func (o ClusterNatFwSwitchNatCcnSwitchPtrOutput) ToClusterNatFwSwitchNatCcnSwitchPtrOutput() ClusterNatFwSwitchNatCcnSwitchPtrOutput {
+	return o
+}
+
+func (o ClusterNatFwSwitchNatCcnSwitchPtrOutput) ToClusterNatFwSwitchNatCcnSwitchPtrOutputWithContext(ctx context.Context) ClusterNatFwSwitchNatCcnSwitchPtrOutput {
+	return o
+}
+
+func (o ClusterNatFwSwitchNatCcnSwitchPtrOutput) Elem() ClusterNatFwSwitchNatCcnSwitchOutput {
+	return o.ApplyT(func(v *ClusterNatFwSwitchNatCcnSwitch) ClusterNatFwSwitchNatCcnSwitch {
+		if v != nil {
+			return *v
+		}
+		var ret ClusterNatFwSwitchNatCcnSwitch
+		return ret
+	}).(ClusterNatFwSwitchNatCcnSwitchOutput)
+}
+
+// List of access instances.
+func (o ClusterNatFwSwitchNatCcnSwitchPtrOutput) AccessInstanceLists() ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArrayOutput {
+	return o.ApplyT(func(v *ClusterNatFwSwitchNatCcnSwitch) []ClusterNatFwSwitchNatCcnSwitchAccessInstanceList {
+		if v == nil {
+			return nil
+		}
+		return v.AccessInstanceLists
+	}).(ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArrayOutput)
+}
+
+// CCN instance ID.
+func (o ClusterNatFwSwitchNatCcnSwitchPtrOutput) CcnId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterNatFwSwitchNatCcnSwitch) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.CcnId
+	}).(pulumi.StringPtrOutput)
+}
+
+// CIDR of the lead VPC.
+func (o ClusterNatFwSwitchNatCcnSwitchPtrOutput) LeadVpcCidr() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterNatFwSwitchNatCcnSwitch) *string {
+		if v == nil {
+			return nil
+		}
+		return v.LeadVpcCidr
+	}).(pulumi.StringPtrOutput)
+}
+
+// NAT firewall instance ID.
+func (o ClusterNatFwSwitchNatCcnSwitchPtrOutput) NatInsId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ClusterNatFwSwitchNatCcnSwitch) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.NatInsId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Traffic steering routing method, 0: multi-route table, 1: policy routing. Automatic access mode only supports policy routing (1); manual access mode supports both multi-route table (0) and policy routing (1).
+func (o ClusterNatFwSwitchNatCcnSwitchPtrOutput) RoutingMode() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ClusterNatFwSwitchNatCcnSwitch) *int {
+		if v == nil {
+			return nil
+		}
+		return v.RoutingMode
+	}).(pulumi.IntPtrOutput)
+}
+
+// Switch access mode, 1: automatic access, 2: manual access.
+func (o ClusterNatFwSwitchNatCcnSwitchPtrOutput) SwitchMode() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ClusterNatFwSwitchNatCcnSwitch) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.SwitchMode
+	}).(pulumi.IntPtrOutput)
+}
+
+type ClusterNatFwSwitchNatCcnSwitchAccessInstanceList struct {
+	// List of network segments for accessing firewall.
+	AccessCidrLists []string `pulumi:"accessCidrLists"`
+	// Network segment mode for accessing firewall: 0-no access, 1-access all network segments associated with the instance, 2-access user-defined network segments.
+	AccessCidrMode int `pulumi:"accessCidrMode"`
+	// Instance ID.
+	InstanceId string `pulumi:"instanceId"`
+	// Region where the instance is located.
+	InstanceRegion string `pulumi:"instanceRegion"`
+	// Instance type such as VPC or DIRECTCONNECT.
+	InstanceType string `pulumi:"instanceType"`
+}
+
+// ClusterNatFwSwitchNatCcnSwitchAccessInstanceListInput is an input type that accepts ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArgs and ClusterNatFwSwitchNatCcnSwitchAccessInstanceListOutput values.
+// You can construct a concrete instance of `ClusterNatFwSwitchNatCcnSwitchAccessInstanceListInput` via:
+//
+//	ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArgs{...}
+type ClusterNatFwSwitchNatCcnSwitchAccessInstanceListInput interface {
+	pulumi.Input
+
+	ToClusterNatFwSwitchNatCcnSwitchAccessInstanceListOutput() ClusterNatFwSwitchNatCcnSwitchAccessInstanceListOutput
+	ToClusterNatFwSwitchNatCcnSwitchAccessInstanceListOutputWithContext(context.Context) ClusterNatFwSwitchNatCcnSwitchAccessInstanceListOutput
+}
+
+type ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArgs struct {
+	// List of network segments for accessing firewall.
+	AccessCidrLists pulumi.StringArrayInput `pulumi:"accessCidrLists"`
+	// Network segment mode for accessing firewall: 0-no access, 1-access all network segments associated with the instance, 2-access user-defined network segments.
+	AccessCidrMode pulumi.IntInput `pulumi:"accessCidrMode"`
+	// Instance ID.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Region where the instance is located.
+	InstanceRegion pulumi.StringInput `pulumi:"instanceRegion"`
+	// Instance type such as VPC or DIRECTCONNECT.
+	InstanceType pulumi.StringInput `pulumi:"instanceType"`
+}
+
+func (ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterNatFwSwitchNatCcnSwitchAccessInstanceList)(nil)).Elem()
+}
+
+func (i ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArgs) ToClusterNatFwSwitchNatCcnSwitchAccessInstanceListOutput() ClusterNatFwSwitchNatCcnSwitchAccessInstanceListOutput {
+	return i.ToClusterNatFwSwitchNatCcnSwitchAccessInstanceListOutputWithContext(context.Background())
+}
+
+func (i ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArgs) ToClusterNatFwSwitchNatCcnSwitchAccessInstanceListOutputWithContext(ctx context.Context) ClusterNatFwSwitchNatCcnSwitchAccessInstanceListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterNatFwSwitchNatCcnSwitchAccessInstanceListOutput)
+}
+
+// ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArrayInput is an input type that accepts ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArray and ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArrayOutput values.
+// You can construct a concrete instance of `ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArrayInput` via:
+//
+//	ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArray{ ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArgs{...} }
+type ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArrayInput interface {
+	pulumi.Input
+
+	ToClusterNatFwSwitchNatCcnSwitchAccessInstanceListArrayOutput() ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArrayOutput
+	ToClusterNatFwSwitchNatCcnSwitchAccessInstanceListArrayOutputWithContext(context.Context) ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArrayOutput
+}
+
+type ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArray []ClusterNatFwSwitchNatCcnSwitchAccessInstanceListInput
+
+func (ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterNatFwSwitchNatCcnSwitchAccessInstanceList)(nil)).Elem()
+}
+
+func (i ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArray) ToClusterNatFwSwitchNatCcnSwitchAccessInstanceListArrayOutput() ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArrayOutput {
+	return i.ToClusterNatFwSwitchNatCcnSwitchAccessInstanceListArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArray) ToClusterNatFwSwitchNatCcnSwitchAccessInstanceListArrayOutputWithContext(ctx context.Context) ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArrayOutput)
+}
+
+type ClusterNatFwSwitchNatCcnSwitchAccessInstanceListOutput struct{ *pulumi.OutputState }
+
+func (ClusterNatFwSwitchNatCcnSwitchAccessInstanceListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterNatFwSwitchNatCcnSwitchAccessInstanceList)(nil)).Elem()
+}
+
+func (o ClusterNatFwSwitchNatCcnSwitchAccessInstanceListOutput) ToClusterNatFwSwitchNatCcnSwitchAccessInstanceListOutput() ClusterNatFwSwitchNatCcnSwitchAccessInstanceListOutput {
+	return o
+}
+
+func (o ClusterNatFwSwitchNatCcnSwitchAccessInstanceListOutput) ToClusterNatFwSwitchNatCcnSwitchAccessInstanceListOutputWithContext(ctx context.Context) ClusterNatFwSwitchNatCcnSwitchAccessInstanceListOutput {
+	return o
+}
+
+// List of network segments for accessing firewall.
+func (o ClusterNatFwSwitchNatCcnSwitchAccessInstanceListOutput) AccessCidrLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ClusterNatFwSwitchNatCcnSwitchAccessInstanceList) []string { return v.AccessCidrLists }).(pulumi.StringArrayOutput)
+}
+
+// Network segment mode for accessing firewall: 0-no access, 1-access all network segments associated with the instance, 2-access user-defined network segments.
+func (o ClusterNatFwSwitchNatCcnSwitchAccessInstanceListOutput) AccessCidrMode() pulumi.IntOutput {
+	return o.ApplyT(func(v ClusterNatFwSwitchNatCcnSwitchAccessInstanceList) int { return v.AccessCidrMode }).(pulumi.IntOutput)
+}
+
+// Instance ID.
+func (o ClusterNatFwSwitchNatCcnSwitchAccessInstanceListOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterNatFwSwitchNatCcnSwitchAccessInstanceList) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Region where the instance is located.
+func (o ClusterNatFwSwitchNatCcnSwitchAccessInstanceListOutput) InstanceRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterNatFwSwitchNatCcnSwitchAccessInstanceList) string { return v.InstanceRegion }).(pulumi.StringOutput)
+}
+
+// Instance type such as VPC or DIRECTCONNECT.
+func (o ClusterNatFwSwitchNatCcnSwitchAccessInstanceListOutput) InstanceType() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterNatFwSwitchNatCcnSwitchAccessInstanceList) string { return v.InstanceType }).(pulumi.StringOutput)
+}
+
+type ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterNatFwSwitchNatCcnSwitchAccessInstanceList)(nil)).Elem()
+}
+
+func (o ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArrayOutput) ToClusterNatFwSwitchNatCcnSwitchAccessInstanceListArrayOutput() ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArrayOutput {
+	return o
+}
+
+func (o ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArrayOutput) ToClusterNatFwSwitchNatCcnSwitchAccessInstanceListArrayOutputWithContext(ctx context.Context) ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArrayOutput {
+	return o
+}
+
+func (o ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArrayOutput) Index(i pulumi.IntInput) ClusterNatFwSwitchNatCcnSwitchAccessInstanceListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterNatFwSwitchNatCcnSwitchAccessInstanceList {
+		return vs[0].([]ClusterNatFwSwitchNatCcnSwitchAccessInstanceList)[vs[1].(int)]
+	}).(ClusterNatFwSwitchNatCcnSwitchAccessInstanceListOutput)
+}
+
+type ClusterVpcFwSwitchInterconnectPair struct {
+	// Group A.
+	GroupAs []ClusterVpcFwSwitchInterconnectPairGroupA `pulumi:"groupAs"`
+	// Group B.
+	GroupBs []ClusterVpcFwSwitchInterconnectPairGroupB `pulumi:"groupBs"`
+	// Interconnect mode: `CrossConnect`: cross interconnect (each instance in group A interconnects with each instance in group B), `FullMesh`: full mesh (group A content is identical to group B, equivalent to pairwise interconnection within the group).
+	InterconnectMode string `pulumi:"interconnectMode"`
+}
+
+// ClusterVpcFwSwitchInterconnectPairInput is an input type that accepts ClusterVpcFwSwitchInterconnectPairArgs and ClusterVpcFwSwitchInterconnectPairOutput values.
+// You can construct a concrete instance of `ClusterVpcFwSwitchInterconnectPairInput` via:
+//
+//	ClusterVpcFwSwitchInterconnectPairArgs{...}
+type ClusterVpcFwSwitchInterconnectPairInput interface {
+	pulumi.Input
+
+	ToClusterVpcFwSwitchInterconnectPairOutput() ClusterVpcFwSwitchInterconnectPairOutput
+	ToClusterVpcFwSwitchInterconnectPairOutputWithContext(context.Context) ClusterVpcFwSwitchInterconnectPairOutput
+}
+
+type ClusterVpcFwSwitchInterconnectPairArgs struct {
+	// Group A.
+	GroupAs ClusterVpcFwSwitchInterconnectPairGroupAArrayInput `pulumi:"groupAs"`
+	// Group B.
+	GroupBs ClusterVpcFwSwitchInterconnectPairGroupBArrayInput `pulumi:"groupBs"`
+	// Interconnect mode: `CrossConnect`: cross interconnect (each instance in group A interconnects with each instance in group B), `FullMesh`: full mesh (group A content is identical to group B, equivalent to pairwise interconnection within the group).
+	InterconnectMode pulumi.StringInput `pulumi:"interconnectMode"`
+}
+
+func (ClusterVpcFwSwitchInterconnectPairArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterVpcFwSwitchInterconnectPair)(nil)).Elem()
+}
+
+func (i ClusterVpcFwSwitchInterconnectPairArgs) ToClusterVpcFwSwitchInterconnectPairOutput() ClusterVpcFwSwitchInterconnectPairOutput {
+	return i.ToClusterVpcFwSwitchInterconnectPairOutputWithContext(context.Background())
+}
+
+func (i ClusterVpcFwSwitchInterconnectPairArgs) ToClusterVpcFwSwitchInterconnectPairOutputWithContext(ctx context.Context) ClusterVpcFwSwitchInterconnectPairOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterVpcFwSwitchInterconnectPairOutput)
+}
+
+// ClusterVpcFwSwitchInterconnectPairArrayInput is an input type that accepts ClusterVpcFwSwitchInterconnectPairArray and ClusterVpcFwSwitchInterconnectPairArrayOutput values.
+// You can construct a concrete instance of `ClusterVpcFwSwitchInterconnectPairArrayInput` via:
+//
+//	ClusterVpcFwSwitchInterconnectPairArray{ ClusterVpcFwSwitchInterconnectPairArgs{...} }
+type ClusterVpcFwSwitchInterconnectPairArrayInput interface {
+	pulumi.Input
+
+	ToClusterVpcFwSwitchInterconnectPairArrayOutput() ClusterVpcFwSwitchInterconnectPairArrayOutput
+	ToClusterVpcFwSwitchInterconnectPairArrayOutputWithContext(context.Context) ClusterVpcFwSwitchInterconnectPairArrayOutput
+}
+
+type ClusterVpcFwSwitchInterconnectPairArray []ClusterVpcFwSwitchInterconnectPairInput
+
+func (ClusterVpcFwSwitchInterconnectPairArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterVpcFwSwitchInterconnectPair)(nil)).Elem()
+}
+
+func (i ClusterVpcFwSwitchInterconnectPairArray) ToClusterVpcFwSwitchInterconnectPairArrayOutput() ClusterVpcFwSwitchInterconnectPairArrayOutput {
+	return i.ToClusterVpcFwSwitchInterconnectPairArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterVpcFwSwitchInterconnectPairArray) ToClusterVpcFwSwitchInterconnectPairArrayOutputWithContext(ctx context.Context) ClusterVpcFwSwitchInterconnectPairArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterVpcFwSwitchInterconnectPairArrayOutput)
+}
+
+type ClusterVpcFwSwitchInterconnectPairOutput struct{ *pulumi.OutputState }
+
+func (ClusterVpcFwSwitchInterconnectPairOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterVpcFwSwitchInterconnectPair)(nil)).Elem()
+}
+
+func (o ClusterVpcFwSwitchInterconnectPairOutput) ToClusterVpcFwSwitchInterconnectPairOutput() ClusterVpcFwSwitchInterconnectPairOutput {
+	return o
+}
+
+func (o ClusterVpcFwSwitchInterconnectPairOutput) ToClusterVpcFwSwitchInterconnectPairOutputWithContext(ctx context.Context) ClusterVpcFwSwitchInterconnectPairOutput {
+	return o
+}
+
+// Group A.
+func (o ClusterVpcFwSwitchInterconnectPairOutput) GroupAs() ClusterVpcFwSwitchInterconnectPairGroupAArrayOutput {
+	return o.ApplyT(func(v ClusterVpcFwSwitchInterconnectPair) []ClusterVpcFwSwitchInterconnectPairGroupA {
+		return v.GroupAs
+	}).(ClusterVpcFwSwitchInterconnectPairGroupAArrayOutput)
+}
+
+// Group B.
+func (o ClusterVpcFwSwitchInterconnectPairOutput) GroupBs() ClusterVpcFwSwitchInterconnectPairGroupBArrayOutput {
+	return o.ApplyT(func(v ClusterVpcFwSwitchInterconnectPair) []ClusterVpcFwSwitchInterconnectPairGroupB {
+		return v.GroupBs
+	}).(ClusterVpcFwSwitchInterconnectPairGroupBArrayOutput)
+}
+
+// Interconnect mode: `CrossConnect`: cross interconnect (each instance in group A interconnects with each instance in group B), `FullMesh`: full mesh (group A content is identical to group B, equivalent to pairwise interconnection within the group).
+func (o ClusterVpcFwSwitchInterconnectPairOutput) InterconnectMode() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterVpcFwSwitchInterconnectPair) string { return v.InterconnectMode }).(pulumi.StringOutput)
+}
+
+type ClusterVpcFwSwitchInterconnectPairArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterVpcFwSwitchInterconnectPairArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterVpcFwSwitchInterconnectPair)(nil)).Elem()
+}
+
+func (o ClusterVpcFwSwitchInterconnectPairArrayOutput) ToClusterVpcFwSwitchInterconnectPairArrayOutput() ClusterVpcFwSwitchInterconnectPairArrayOutput {
+	return o
+}
+
+func (o ClusterVpcFwSwitchInterconnectPairArrayOutput) ToClusterVpcFwSwitchInterconnectPairArrayOutputWithContext(ctx context.Context) ClusterVpcFwSwitchInterconnectPairArrayOutput {
+	return o
+}
+
+func (o ClusterVpcFwSwitchInterconnectPairArrayOutput) Index(i pulumi.IntInput) ClusterVpcFwSwitchInterconnectPairOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterVpcFwSwitchInterconnectPair {
+		return vs[0].([]ClusterVpcFwSwitchInterconnectPair)[vs[1].(int)]
+	}).(ClusterVpcFwSwitchInterconnectPairOutput)
+}
+
+type ClusterVpcFwSwitchInterconnectPairGroupA struct {
+	// List of network segments for accessing firewall.
+	AccessCidrLists []string `pulumi:"accessCidrLists"`
+	// Network segment mode for accessing firewall: 0-no access, 1-access all network segments associated with the instance, 2-access user-defined network segments.
+	AccessCidrMode int `pulumi:"accessCidrMode"`
+	// Instance ID.
+	InstanceId string `pulumi:"instanceId"`
+	// Region where the instance is located.
+	InstanceRegion string `pulumi:"instanceRegion"`
+	// Instance type such as VPC or DIRECTCONNECT.
+	InstanceType string `pulumi:"instanceType"`
+}
+
+// ClusterVpcFwSwitchInterconnectPairGroupAInput is an input type that accepts ClusterVpcFwSwitchInterconnectPairGroupAArgs and ClusterVpcFwSwitchInterconnectPairGroupAOutput values.
+// You can construct a concrete instance of `ClusterVpcFwSwitchInterconnectPairGroupAInput` via:
+//
+//	ClusterVpcFwSwitchInterconnectPairGroupAArgs{...}
+type ClusterVpcFwSwitchInterconnectPairGroupAInput interface {
+	pulumi.Input
+
+	ToClusterVpcFwSwitchInterconnectPairGroupAOutput() ClusterVpcFwSwitchInterconnectPairGroupAOutput
+	ToClusterVpcFwSwitchInterconnectPairGroupAOutputWithContext(context.Context) ClusterVpcFwSwitchInterconnectPairGroupAOutput
+}
+
+type ClusterVpcFwSwitchInterconnectPairGroupAArgs struct {
+	// List of network segments for accessing firewall.
+	AccessCidrLists pulumi.StringArrayInput `pulumi:"accessCidrLists"`
+	// Network segment mode for accessing firewall: 0-no access, 1-access all network segments associated with the instance, 2-access user-defined network segments.
+	AccessCidrMode pulumi.IntInput `pulumi:"accessCidrMode"`
+	// Instance ID.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Region where the instance is located.
+	InstanceRegion pulumi.StringInput `pulumi:"instanceRegion"`
+	// Instance type such as VPC or DIRECTCONNECT.
+	InstanceType pulumi.StringInput `pulumi:"instanceType"`
+}
+
+func (ClusterVpcFwSwitchInterconnectPairGroupAArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterVpcFwSwitchInterconnectPairGroupA)(nil)).Elem()
+}
+
+func (i ClusterVpcFwSwitchInterconnectPairGroupAArgs) ToClusterVpcFwSwitchInterconnectPairGroupAOutput() ClusterVpcFwSwitchInterconnectPairGroupAOutput {
+	return i.ToClusterVpcFwSwitchInterconnectPairGroupAOutputWithContext(context.Background())
+}
+
+func (i ClusterVpcFwSwitchInterconnectPairGroupAArgs) ToClusterVpcFwSwitchInterconnectPairGroupAOutputWithContext(ctx context.Context) ClusterVpcFwSwitchInterconnectPairGroupAOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterVpcFwSwitchInterconnectPairGroupAOutput)
+}
+
+// ClusterVpcFwSwitchInterconnectPairGroupAArrayInput is an input type that accepts ClusterVpcFwSwitchInterconnectPairGroupAArray and ClusterVpcFwSwitchInterconnectPairGroupAArrayOutput values.
+// You can construct a concrete instance of `ClusterVpcFwSwitchInterconnectPairGroupAArrayInput` via:
+//
+//	ClusterVpcFwSwitchInterconnectPairGroupAArray{ ClusterVpcFwSwitchInterconnectPairGroupAArgs{...} }
+type ClusterVpcFwSwitchInterconnectPairGroupAArrayInput interface {
+	pulumi.Input
+
+	ToClusterVpcFwSwitchInterconnectPairGroupAArrayOutput() ClusterVpcFwSwitchInterconnectPairGroupAArrayOutput
+	ToClusterVpcFwSwitchInterconnectPairGroupAArrayOutputWithContext(context.Context) ClusterVpcFwSwitchInterconnectPairGroupAArrayOutput
+}
+
+type ClusterVpcFwSwitchInterconnectPairGroupAArray []ClusterVpcFwSwitchInterconnectPairGroupAInput
+
+func (ClusterVpcFwSwitchInterconnectPairGroupAArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterVpcFwSwitchInterconnectPairGroupA)(nil)).Elem()
+}
+
+func (i ClusterVpcFwSwitchInterconnectPairGroupAArray) ToClusterVpcFwSwitchInterconnectPairGroupAArrayOutput() ClusterVpcFwSwitchInterconnectPairGroupAArrayOutput {
+	return i.ToClusterVpcFwSwitchInterconnectPairGroupAArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterVpcFwSwitchInterconnectPairGroupAArray) ToClusterVpcFwSwitchInterconnectPairGroupAArrayOutputWithContext(ctx context.Context) ClusterVpcFwSwitchInterconnectPairGroupAArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterVpcFwSwitchInterconnectPairGroupAArrayOutput)
+}
+
+type ClusterVpcFwSwitchInterconnectPairGroupAOutput struct{ *pulumi.OutputState }
+
+func (ClusterVpcFwSwitchInterconnectPairGroupAOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterVpcFwSwitchInterconnectPairGroupA)(nil)).Elem()
+}
+
+func (o ClusterVpcFwSwitchInterconnectPairGroupAOutput) ToClusterVpcFwSwitchInterconnectPairGroupAOutput() ClusterVpcFwSwitchInterconnectPairGroupAOutput {
+	return o
+}
+
+func (o ClusterVpcFwSwitchInterconnectPairGroupAOutput) ToClusterVpcFwSwitchInterconnectPairGroupAOutputWithContext(ctx context.Context) ClusterVpcFwSwitchInterconnectPairGroupAOutput {
+	return o
+}
+
+// List of network segments for accessing firewall.
+func (o ClusterVpcFwSwitchInterconnectPairGroupAOutput) AccessCidrLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ClusterVpcFwSwitchInterconnectPairGroupA) []string { return v.AccessCidrLists }).(pulumi.StringArrayOutput)
+}
+
+// Network segment mode for accessing firewall: 0-no access, 1-access all network segments associated with the instance, 2-access user-defined network segments.
+func (o ClusterVpcFwSwitchInterconnectPairGroupAOutput) AccessCidrMode() pulumi.IntOutput {
+	return o.ApplyT(func(v ClusterVpcFwSwitchInterconnectPairGroupA) int { return v.AccessCidrMode }).(pulumi.IntOutput)
+}
+
+// Instance ID.
+func (o ClusterVpcFwSwitchInterconnectPairGroupAOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterVpcFwSwitchInterconnectPairGroupA) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Region where the instance is located.
+func (o ClusterVpcFwSwitchInterconnectPairGroupAOutput) InstanceRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterVpcFwSwitchInterconnectPairGroupA) string { return v.InstanceRegion }).(pulumi.StringOutput)
+}
+
+// Instance type such as VPC or DIRECTCONNECT.
+func (o ClusterVpcFwSwitchInterconnectPairGroupAOutput) InstanceType() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterVpcFwSwitchInterconnectPairGroupA) string { return v.InstanceType }).(pulumi.StringOutput)
+}
+
+type ClusterVpcFwSwitchInterconnectPairGroupAArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterVpcFwSwitchInterconnectPairGroupAArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterVpcFwSwitchInterconnectPairGroupA)(nil)).Elem()
+}
+
+func (o ClusterVpcFwSwitchInterconnectPairGroupAArrayOutput) ToClusterVpcFwSwitchInterconnectPairGroupAArrayOutput() ClusterVpcFwSwitchInterconnectPairGroupAArrayOutput {
+	return o
+}
+
+func (o ClusterVpcFwSwitchInterconnectPairGroupAArrayOutput) ToClusterVpcFwSwitchInterconnectPairGroupAArrayOutputWithContext(ctx context.Context) ClusterVpcFwSwitchInterconnectPairGroupAArrayOutput {
+	return o
+}
+
+func (o ClusterVpcFwSwitchInterconnectPairGroupAArrayOutput) Index(i pulumi.IntInput) ClusterVpcFwSwitchInterconnectPairGroupAOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterVpcFwSwitchInterconnectPairGroupA {
+		return vs[0].([]ClusterVpcFwSwitchInterconnectPairGroupA)[vs[1].(int)]
+	}).(ClusterVpcFwSwitchInterconnectPairGroupAOutput)
+}
+
+type ClusterVpcFwSwitchInterconnectPairGroupB struct {
+	// List of network segments for accessing firewall.
+	AccessCidrLists []string `pulumi:"accessCidrLists"`
+	// Network segment mode for accessing firewall: 0-no access, 1-access all network segments associated with the instance, 2-access user-defined network segments.
+	AccessCidrMode int `pulumi:"accessCidrMode"`
+	// Instance ID.
+	InstanceId string `pulumi:"instanceId"`
+	// Region where the instance is located.
+	InstanceRegion string `pulumi:"instanceRegion"`
+	// Instance type such as VPC or DIRECTCONNECT.
+	InstanceType string `pulumi:"instanceType"`
+}
+
+// ClusterVpcFwSwitchInterconnectPairGroupBInput is an input type that accepts ClusterVpcFwSwitchInterconnectPairGroupBArgs and ClusterVpcFwSwitchInterconnectPairGroupBOutput values.
+// You can construct a concrete instance of `ClusterVpcFwSwitchInterconnectPairGroupBInput` via:
+//
+//	ClusterVpcFwSwitchInterconnectPairGroupBArgs{...}
+type ClusterVpcFwSwitchInterconnectPairGroupBInput interface {
+	pulumi.Input
+
+	ToClusterVpcFwSwitchInterconnectPairGroupBOutput() ClusterVpcFwSwitchInterconnectPairGroupBOutput
+	ToClusterVpcFwSwitchInterconnectPairGroupBOutputWithContext(context.Context) ClusterVpcFwSwitchInterconnectPairGroupBOutput
+}
+
+type ClusterVpcFwSwitchInterconnectPairGroupBArgs struct {
+	// List of network segments for accessing firewall.
+	AccessCidrLists pulumi.StringArrayInput `pulumi:"accessCidrLists"`
+	// Network segment mode for accessing firewall: 0-no access, 1-access all network segments associated with the instance, 2-access user-defined network segments.
+	AccessCidrMode pulumi.IntInput `pulumi:"accessCidrMode"`
+	// Instance ID.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Region where the instance is located.
+	InstanceRegion pulumi.StringInput `pulumi:"instanceRegion"`
+	// Instance type such as VPC or DIRECTCONNECT.
+	InstanceType pulumi.StringInput `pulumi:"instanceType"`
+}
+
+func (ClusterVpcFwSwitchInterconnectPairGroupBArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterVpcFwSwitchInterconnectPairGroupB)(nil)).Elem()
+}
+
+func (i ClusterVpcFwSwitchInterconnectPairGroupBArgs) ToClusterVpcFwSwitchInterconnectPairGroupBOutput() ClusterVpcFwSwitchInterconnectPairGroupBOutput {
+	return i.ToClusterVpcFwSwitchInterconnectPairGroupBOutputWithContext(context.Background())
+}
+
+func (i ClusterVpcFwSwitchInterconnectPairGroupBArgs) ToClusterVpcFwSwitchInterconnectPairGroupBOutputWithContext(ctx context.Context) ClusterVpcFwSwitchInterconnectPairGroupBOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterVpcFwSwitchInterconnectPairGroupBOutput)
+}
+
+// ClusterVpcFwSwitchInterconnectPairGroupBArrayInput is an input type that accepts ClusterVpcFwSwitchInterconnectPairGroupBArray and ClusterVpcFwSwitchInterconnectPairGroupBArrayOutput values.
+// You can construct a concrete instance of `ClusterVpcFwSwitchInterconnectPairGroupBArrayInput` via:
+//
+//	ClusterVpcFwSwitchInterconnectPairGroupBArray{ ClusterVpcFwSwitchInterconnectPairGroupBArgs{...} }
+type ClusterVpcFwSwitchInterconnectPairGroupBArrayInput interface {
+	pulumi.Input
+
+	ToClusterVpcFwSwitchInterconnectPairGroupBArrayOutput() ClusterVpcFwSwitchInterconnectPairGroupBArrayOutput
+	ToClusterVpcFwSwitchInterconnectPairGroupBArrayOutputWithContext(context.Context) ClusterVpcFwSwitchInterconnectPairGroupBArrayOutput
+}
+
+type ClusterVpcFwSwitchInterconnectPairGroupBArray []ClusterVpcFwSwitchInterconnectPairGroupBInput
+
+func (ClusterVpcFwSwitchInterconnectPairGroupBArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterVpcFwSwitchInterconnectPairGroupB)(nil)).Elem()
+}
+
+func (i ClusterVpcFwSwitchInterconnectPairGroupBArray) ToClusterVpcFwSwitchInterconnectPairGroupBArrayOutput() ClusterVpcFwSwitchInterconnectPairGroupBArrayOutput {
+	return i.ToClusterVpcFwSwitchInterconnectPairGroupBArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterVpcFwSwitchInterconnectPairGroupBArray) ToClusterVpcFwSwitchInterconnectPairGroupBArrayOutputWithContext(ctx context.Context) ClusterVpcFwSwitchInterconnectPairGroupBArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterVpcFwSwitchInterconnectPairGroupBArrayOutput)
+}
+
+type ClusterVpcFwSwitchInterconnectPairGroupBOutput struct{ *pulumi.OutputState }
+
+func (ClusterVpcFwSwitchInterconnectPairGroupBOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterVpcFwSwitchInterconnectPairGroupB)(nil)).Elem()
+}
+
+func (o ClusterVpcFwSwitchInterconnectPairGroupBOutput) ToClusterVpcFwSwitchInterconnectPairGroupBOutput() ClusterVpcFwSwitchInterconnectPairGroupBOutput {
+	return o
+}
+
+func (o ClusterVpcFwSwitchInterconnectPairGroupBOutput) ToClusterVpcFwSwitchInterconnectPairGroupBOutputWithContext(ctx context.Context) ClusterVpcFwSwitchInterconnectPairGroupBOutput {
+	return o
+}
+
+// List of network segments for accessing firewall.
+func (o ClusterVpcFwSwitchInterconnectPairGroupBOutput) AccessCidrLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ClusterVpcFwSwitchInterconnectPairGroupB) []string { return v.AccessCidrLists }).(pulumi.StringArrayOutput)
+}
+
+// Network segment mode for accessing firewall: 0-no access, 1-access all network segments associated with the instance, 2-access user-defined network segments.
+func (o ClusterVpcFwSwitchInterconnectPairGroupBOutput) AccessCidrMode() pulumi.IntOutput {
+	return o.ApplyT(func(v ClusterVpcFwSwitchInterconnectPairGroupB) int { return v.AccessCidrMode }).(pulumi.IntOutput)
+}
+
+// Instance ID.
+func (o ClusterVpcFwSwitchInterconnectPairGroupBOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterVpcFwSwitchInterconnectPairGroupB) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Region where the instance is located.
+func (o ClusterVpcFwSwitchInterconnectPairGroupBOutput) InstanceRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterVpcFwSwitchInterconnectPairGroupB) string { return v.InstanceRegion }).(pulumi.StringOutput)
+}
+
+// Instance type such as VPC or DIRECTCONNECT.
+func (o ClusterVpcFwSwitchInterconnectPairGroupBOutput) InstanceType() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterVpcFwSwitchInterconnectPairGroupB) string { return v.InstanceType }).(pulumi.StringOutput)
+}
+
+type ClusterVpcFwSwitchInterconnectPairGroupBArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterVpcFwSwitchInterconnectPairGroupBArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterVpcFwSwitchInterconnectPairGroupB)(nil)).Elem()
+}
+
+func (o ClusterVpcFwSwitchInterconnectPairGroupBArrayOutput) ToClusterVpcFwSwitchInterconnectPairGroupBArrayOutput() ClusterVpcFwSwitchInterconnectPairGroupBArrayOutput {
+	return o
+}
+
+func (o ClusterVpcFwSwitchInterconnectPairGroupBArrayOutput) ToClusterVpcFwSwitchInterconnectPairGroupBArrayOutputWithContext(ctx context.Context) ClusterVpcFwSwitchInterconnectPairGroupBArrayOutput {
+	return o
+}
+
+func (o ClusterVpcFwSwitchInterconnectPairGroupBArrayOutput) Index(i pulumi.IntInput) ClusterVpcFwSwitchInterconnectPairGroupBOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterVpcFwSwitchInterconnectPairGroupB {
+		return vs[0].([]ClusterVpcFwSwitchInterconnectPairGroupB)[vs[1].(int)]
+	}).(ClusterVpcFwSwitchInterconnectPairGroupBOutput)
+}
+
+type ClusterVpcFwSwitchRegionCidrConfig struct {
+	// CIDR mode: 0-skip, 1-automatic, 2-custom.
+	CidrMode int `pulumi:"cidrMode"`
+	// Custom CIDR (required when CidrMode=2), empty string otherwise.
+	CustomCidr string `pulumi:"customCidr"`
+	// Traffic steering region.
+	Region string `pulumi:"region"`
+}
+
+// ClusterVpcFwSwitchRegionCidrConfigInput is an input type that accepts ClusterVpcFwSwitchRegionCidrConfigArgs and ClusterVpcFwSwitchRegionCidrConfigOutput values.
+// You can construct a concrete instance of `ClusterVpcFwSwitchRegionCidrConfigInput` via:
+//
+//	ClusterVpcFwSwitchRegionCidrConfigArgs{...}
+type ClusterVpcFwSwitchRegionCidrConfigInput interface {
+	pulumi.Input
+
+	ToClusterVpcFwSwitchRegionCidrConfigOutput() ClusterVpcFwSwitchRegionCidrConfigOutput
+	ToClusterVpcFwSwitchRegionCidrConfigOutputWithContext(context.Context) ClusterVpcFwSwitchRegionCidrConfigOutput
+}
+
+type ClusterVpcFwSwitchRegionCidrConfigArgs struct {
+	// CIDR mode: 0-skip, 1-automatic, 2-custom.
+	CidrMode pulumi.IntInput `pulumi:"cidrMode"`
+	// Custom CIDR (required when CidrMode=2), empty string otherwise.
+	CustomCidr pulumi.StringInput `pulumi:"customCidr"`
+	// Traffic steering region.
+	Region pulumi.StringInput `pulumi:"region"`
+}
+
+func (ClusterVpcFwSwitchRegionCidrConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterVpcFwSwitchRegionCidrConfig)(nil)).Elem()
+}
+
+func (i ClusterVpcFwSwitchRegionCidrConfigArgs) ToClusterVpcFwSwitchRegionCidrConfigOutput() ClusterVpcFwSwitchRegionCidrConfigOutput {
+	return i.ToClusterVpcFwSwitchRegionCidrConfigOutputWithContext(context.Background())
+}
+
+func (i ClusterVpcFwSwitchRegionCidrConfigArgs) ToClusterVpcFwSwitchRegionCidrConfigOutputWithContext(ctx context.Context) ClusterVpcFwSwitchRegionCidrConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterVpcFwSwitchRegionCidrConfigOutput)
+}
+
+// ClusterVpcFwSwitchRegionCidrConfigArrayInput is an input type that accepts ClusterVpcFwSwitchRegionCidrConfigArray and ClusterVpcFwSwitchRegionCidrConfigArrayOutput values.
+// You can construct a concrete instance of `ClusterVpcFwSwitchRegionCidrConfigArrayInput` via:
+//
+//	ClusterVpcFwSwitchRegionCidrConfigArray{ ClusterVpcFwSwitchRegionCidrConfigArgs{...} }
+type ClusterVpcFwSwitchRegionCidrConfigArrayInput interface {
+	pulumi.Input
+
+	ToClusterVpcFwSwitchRegionCidrConfigArrayOutput() ClusterVpcFwSwitchRegionCidrConfigArrayOutput
+	ToClusterVpcFwSwitchRegionCidrConfigArrayOutputWithContext(context.Context) ClusterVpcFwSwitchRegionCidrConfigArrayOutput
+}
+
+type ClusterVpcFwSwitchRegionCidrConfigArray []ClusterVpcFwSwitchRegionCidrConfigInput
+
+func (ClusterVpcFwSwitchRegionCidrConfigArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterVpcFwSwitchRegionCidrConfig)(nil)).Elem()
+}
+
+func (i ClusterVpcFwSwitchRegionCidrConfigArray) ToClusterVpcFwSwitchRegionCidrConfigArrayOutput() ClusterVpcFwSwitchRegionCidrConfigArrayOutput {
+	return i.ToClusterVpcFwSwitchRegionCidrConfigArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterVpcFwSwitchRegionCidrConfigArray) ToClusterVpcFwSwitchRegionCidrConfigArrayOutputWithContext(ctx context.Context) ClusterVpcFwSwitchRegionCidrConfigArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterVpcFwSwitchRegionCidrConfigArrayOutput)
+}
+
+type ClusterVpcFwSwitchRegionCidrConfigOutput struct{ *pulumi.OutputState }
+
+func (ClusterVpcFwSwitchRegionCidrConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterVpcFwSwitchRegionCidrConfig)(nil)).Elem()
+}
+
+func (o ClusterVpcFwSwitchRegionCidrConfigOutput) ToClusterVpcFwSwitchRegionCidrConfigOutput() ClusterVpcFwSwitchRegionCidrConfigOutput {
+	return o
+}
+
+func (o ClusterVpcFwSwitchRegionCidrConfigOutput) ToClusterVpcFwSwitchRegionCidrConfigOutputWithContext(ctx context.Context) ClusterVpcFwSwitchRegionCidrConfigOutput {
+	return o
+}
+
+// CIDR mode: 0-skip, 1-automatic, 2-custom.
+func (o ClusterVpcFwSwitchRegionCidrConfigOutput) CidrMode() pulumi.IntOutput {
+	return o.ApplyT(func(v ClusterVpcFwSwitchRegionCidrConfig) int { return v.CidrMode }).(pulumi.IntOutput)
+}
+
+// Custom CIDR (required when CidrMode=2), empty string otherwise.
+func (o ClusterVpcFwSwitchRegionCidrConfigOutput) CustomCidr() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterVpcFwSwitchRegionCidrConfig) string { return v.CustomCidr }).(pulumi.StringOutput)
+}
+
+// Traffic steering region.
+func (o ClusterVpcFwSwitchRegionCidrConfigOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v ClusterVpcFwSwitchRegionCidrConfig) string { return v.Region }).(pulumi.StringOutput)
+}
+
+type ClusterVpcFwSwitchRegionCidrConfigArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterVpcFwSwitchRegionCidrConfigArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterVpcFwSwitchRegionCidrConfig)(nil)).Elem()
+}
+
+func (o ClusterVpcFwSwitchRegionCidrConfigArrayOutput) ToClusterVpcFwSwitchRegionCidrConfigArrayOutput() ClusterVpcFwSwitchRegionCidrConfigArrayOutput {
+	return o
+}
+
+func (o ClusterVpcFwSwitchRegionCidrConfigArrayOutput) ToClusterVpcFwSwitchRegionCidrConfigArrayOutputWithContext(ctx context.Context) ClusterVpcFwSwitchRegionCidrConfigArrayOutput {
+	return o
+}
+
+func (o ClusterVpcFwSwitchRegionCidrConfigArrayOutput) Index(i pulumi.IntInput) ClusterVpcFwSwitchRegionCidrConfigOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterVpcFwSwitchRegionCidrConfig {
+		return vs[0].([]ClusterVpcFwSwitchRegionCidrConfig)[vs[1].(int)]
+	}).(ClusterVpcFwSwitchRegionCidrConfigOutput)
+}
+
 type NatInstanceNewModeItems struct {
 	// List of egress elastic public network IPs bound in the new mode.
 	Eips []string `pulumi:"eips"`
@@ -171,7 +1038,8 @@ func (o NatInstanceNewModeItemsPtrOutput) VpcLists() pulumi.StringArrayOutput {
 
 type VpcInstanceVpcFwInstance struct {
 	// Deploy regional information.
-	FwDeploy VpcInstanceVpcFwInstanceFwDeploy `pulumi:"fwDeploy"`
+	FwDeploy   VpcInstanceVpcFwInstanceFwDeploy    `pulumi:"fwDeploy"`
+	FwGateways []VpcInstanceVpcFwInstanceFwGateway `pulumi:"fwGateways"`
 	// Firewall instance ID (passed in editing scenario).
 	FwInsId *string `pulumi:"fwInsId"`
 	// Firewall instance name.
@@ -193,7 +1061,8 @@ type VpcInstanceVpcFwInstanceInput interface {
 
 type VpcInstanceVpcFwInstanceArgs struct {
 	// Deploy regional information.
-	FwDeploy VpcInstanceVpcFwInstanceFwDeployInput `pulumi:"fwDeploy"`
+	FwDeploy   VpcInstanceVpcFwInstanceFwDeployInput       `pulumi:"fwDeploy"`
+	FwGateways VpcInstanceVpcFwInstanceFwGatewayArrayInput `pulumi:"fwGateways"`
 	// Firewall instance ID (passed in editing scenario).
 	FwInsId pulumi.StringPtrInput `pulumi:"fwInsId"`
 	// Firewall instance name.
@@ -256,6 +1125,10 @@ func (o VpcInstanceVpcFwInstanceOutput) ToVpcInstanceVpcFwInstanceOutputWithCont
 // Deploy regional information.
 func (o VpcInstanceVpcFwInstanceOutput) FwDeploy() VpcInstanceVpcFwInstanceFwDeployOutput {
 	return o.ApplyT(func(v VpcInstanceVpcFwInstance) VpcInstanceVpcFwInstanceFwDeploy { return v.FwDeploy }).(VpcInstanceVpcFwInstanceFwDeployOutput)
+}
+
+func (o VpcInstanceVpcFwInstanceOutput) FwGateways() VpcInstanceVpcFwInstanceFwGatewayArrayOutput {
+	return o.ApplyT(func(v VpcInstanceVpcFwInstance) []VpcInstanceVpcFwInstanceFwGateway { return v.FwGateways }).(VpcInstanceVpcFwInstanceFwGatewayArrayOutput)
 }
 
 // Firewall instance ID (passed in editing scenario).
@@ -372,6 +1245,121 @@ func (o VpcInstanceVpcFwInstanceFwDeployOutput) ZoneSets() pulumi.StringArrayOut
 	return o.ApplyT(func(v VpcInstanceVpcFwInstanceFwDeploy) []string { return v.ZoneSets }).(pulumi.StringArrayOutput)
 }
 
+type VpcInstanceVpcFwInstanceFwGateway struct {
+	// Gateway ID.
+	GatewayId *string `pulumi:"gatewayId"`
+	// IP address.
+	IpAddress *string `pulumi:"ipAddress"`
+	// Vpc ID.
+	VpcId *string `pulumi:"vpcId"`
+}
+
+// VpcInstanceVpcFwInstanceFwGatewayInput is an input type that accepts VpcInstanceVpcFwInstanceFwGatewayArgs and VpcInstanceVpcFwInstanceFwGatewayOutput values.
+// You can construct a concrete instance of `VpcInstanceVpcFwInstanceFwGatewayInput` via:
+//
+//	VpcInstanceVpcFwInstanceFwGatewayArgs{...}
+type VpcInstanceVpcFwInstanceFwGatewayInput interface {
+	pulumi.Input
+
+	ToVpcInstanceVpcFwInstanceFwGatewayOutput() VpcInstanceVpcFwInstanceFwGatewayOutput
+	ToVpcInstanceVpcFwInstanceFwGatewayOutputWithContext(context.Context) VpcInstanceVpcFwInstanceFwGatewayOutput
+}
+
+type VpcInstanceVpcFwInstanceFwGatewayArgs struct {
+	// Gateway ID.
+	GatewayId pulumi.StringPtrInput `pulumi:"gatewayId"`
+	// IP address.
+	IpAddress pulumi.StringPtrInput `pulumi:"ipAddress"`
+	// Vpc ID.
+	VpcId pulumi.StringPtrInput `pulumi:"vpcId"`
+}
+
+func (VpcInstanceVpcFwInstanceFwGatewayArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*VpcInstanceVpcFwInstanceFwGateway)(nil)).Elem()
+}
+
+func (i VpcInstanceVpcFwInstanceFwGatewayArgs) ToVpcInstanceVpcFwInstanceFwGatewayOutput() VpcInstanceVpcFwInstanceFwGatewayOutput {
+	return i.ToVpcInstanceVpcFwInstanceFwGatewayOutputWithContext(context.Background())
+}
+
+func (i VpcInstanceVpcFwInstanceFwGatewayArgs) ToVpcInstanceVpcFwInstanceFwGatewayOutputWithContext(ctx context.Context) VpcInstanceVpcFwInstanceFwGatewayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(VpcInstanceVpcFwInstanceFwGatewayOutput)
+}
+
+// VpcInstanceVpcFwInstanceFwGatewayArrayInput is an input type that accepts VpcInstanceVpcFwInstanceFwGatewayArray and VpcInstanceVpcFwInstanceFwGatewayArrayOutput values.
+// You can construct a concrete instance of `VpcInstanceVpcFwInstanceFwGatewayArrayInput` via:
+//
+//	VpcInstanceVpcFwInstanceFwGatewayArray{ VpcInstanceVpcFwInstanceFwGatewayArgs{...} }
+type VpcInstanceVpcFwInstanceFwGatewayArrayInput interface {
+	pulumi.Input
+
+	ToVpcInstanceVpcFwInstanceFwGatewayArrayOutput() VpcInstanceVpcFwInstanceFwGatewayArrayOutput
+	ToVpcInstanceVpcFwInstanceFwGatewayArrayOutputWithContext(context.Context) VpcInstanceVpcFwInstanceFwGatewayArrayOutput
+}
+
+type VpcInstanceVpcFwInstanceFwGatewayArray []VpcInstanceVpcFwInstanceFwGatewayInput
+
+func (VpcInstanceVpcFwInstanceFwGatewayArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]VpcInstanceVpcFwInstanceFwGateway)(nil)).Elem()
+}
+
+func (i VpcInstanceVpcFwInstanceFwGatewayArray) ToVpcInstanceVpcFwInstanceFwGatewayArrayOutput() VpcInstanceVpcFwInstanceFwGatewayArrayOutput {
+	return i.ToVpcInstanceVpcFwInstanceFwGatewayArrayOutputWithContext(context.Background())
+}
+
+func (i VpcInstanceVpcFwInstanceFwGatewayArray) ToVpcInstanceVpcFwInstanceFwGatewayArrayOutputWithContext(ctx context.Context) VpcInstanceVpcFwInstanceFwGatewayArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(VpcInstanceVpcFwInstanceFwGatewayArrayOutput)
+}
+
+type VpcInstanceVpcFwInstanceFwGatewayOutput struct{ *pulumi.OutputState }
+
+func (VpcInstanceVpcFwInstanceFwGatewayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*VpcInstanceVpcFwInstanceFwGateway)(nil)).Elem()
+}
+
+func (o VpcInstanceVpcFwInstanceFwGatewayOutput) ToVpcInstanceVpcFwInstanceFwGatewayOutput() VpcInstanceVpcFwInstanceFwGatewayOutput {
+	return o
+}
+
+func (o VpcInstanceVpcFwInstanceFwGatewayOutput) ToVpcInstanceVpcFwInstanceFwGatewayOutputWithContext(ctx context.Context) VpcInstanceVpcFwInstanceFwGatewayOutput {
+	return o
+}
+
+// Gateway ID.
+func (o VpcInstanceVpcFwInstanceFwGatewayOutput) GatewayId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v VpcInstanceVpcFwInstanceFwGateway) *string { return v.GatewayId }).(pulumi.StringPtrOutput)
+}
+
+// IP address.
+func (o VpcInstanceVpcFwInstanceFwGatewayOutput) IpAddress() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v VpcInstanceVpcFwInstanceFwGateway) *string { return v.IpAddress }).(pulumi.StringPtrOutput)
+}
+
+// Vpc ID.
+func (o VpcInstanceVpcFwInstanceFwGatewayOutput) VpcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v VpcInstanceVpcFwInstanceFwGateway) *string { return v.VpcId }).(pulumi.StringPtrOutput)
+}
+
+type VpcInstanceVpcFwInstanceFwGatewayArrayOutput struct{ *pulumi.OutputState }
+
+func (VpcInstanceVpcFwInstanceFwGatewayArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]VpcInstanceVpcFwInstanceFwGateway)(nil)).Elem()
+}
+
+func (o VpcInstanceVpcFwInstanceFwGatewayArrayOutput) ToVpcInstanceVpcFwInstanceFwGatewayArrayOutput() VpcInstanceVpcFwInstanceFwGatewayArrayOutput {
+	return o
+}
+
+func (o VpcInstanceVpcFwInstanceFwGatewayArrayOutput) ToVpcInstanceVpcFwInstanceFwGatewayArrayOutputWithContext(ctx context.Context) VpcInstanceVpcFwInstanceFwGatewayArrayOutput {
+	return o
+}
+
+func (o VpcInstanceVpcFwInstanceFwGatewayArrayOutput) Index(i pulumi.IntInput) VpcInstanceVpcFwInstanceFwGatewayOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) VpcInstanceVpcFwInstanceFwGateway {
+		return vs[0].([]VpcInstanceVpcFwInstanceFwGateway)[vs[1].(int)]
+	}).(VpcInstanceVpcFwInstanceFwGatewayOutput)
+}
+
 type VpcPolicyBetaList struct {
 	// Last execution time. Note: This field may return null, indicating that no valid value can be obtained.
 	LastTime *string `pulumi:"lastTime"`
@@ -485,6 +1473,647 @@ func (o VpcPolicyBetaListArrayOutput) Index(i pulumi.IntInput) VpcPolicyBetaList
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) VpcPolicyBetaList {
 		return vs[0].([]VpcPolicyBetaList)[vs[1].(int)]
 	}).(VpcPolicyBetaListOutput)
+}
+
+type GetCcnAssociatedInstancesCcnAssociatedInstance struct {
+	// List of network segments for the instance.
+	CidrLsts []string `pulumi:"cidrLsts"`
+	// Instance type.
+	InsType string `pulumi:"insType"`
+	// Instance ID.
+	InstanceId string `pulumi:"instanceId"`
+	// Instance name.
+	InstanceName string `pulumi:"instanceName"`
+	// Region where the instance belongs.
+	InstanceRegion string `pulumi:"instanceRegion"`
+}
+
+// GetCcnAssociatedInstancesCcnAssociatedInstanceInput is an input type that accepts GetCcnAssociatedInstancesCcnAssociatedInstanceArgs and GetCcnAssociatedInstancesCcnAssociatedInstanceOutput values.
+// You can construct a concrete instance of `GetCcnAssociatedInstancesCcnAssociatedInstanceInput` via:
+//
+//	GetCcnAssociatedInstancesCcnAssociatedInstanceArgs{...}
+type GetCcnAssociatedInstancesCcnAssociatedInstanceInput interface {
+	pulumi.Input
+
+	ToGetCcnAssociatedInstancesCcnAssociatedInstanceOutput() GetCcnAssociatedInstancesCcnAssociatedInstanceOutput
+	ToGetCcnAssociatedInstancesCcnAssociatedInstanceOutputWithContext(context.Context) GetCcnAssociatedInstancesCcnAssociatedInstanceOutput
+}
+
+type GetCcnAssociatedInstancesCcnAssociatedInstanceArgs struct {
+	// List of network segments for the instance.
+	CidrLsts pulumi.StringArrayInput `pulumi:"cidrLsts"`
+	// Instance type.
+	InsType pulumi.StringInput `pulumi:"insType"`
+	// Instance ID.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Instance name.
+	InstanceName pulumi.StringInput `pulumi:"instanceName"`
+	// Region where the instance belongs.
+	InstanceRegion pulumi.StringInput `pulumi:"instanceRegion"`
+}
+
+func (GetCcnAssociatedInstancesCcnAssociatedInstanceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCcnAssociatedInstancesCcnAssociatedInstance)(nil)).Elem()
+}
+
+func (i GetCcnAssociatedInstancesCcnAssociatedInstanceArgs) ToGetCcnAssociatedInstancesCcnAssociatedInstanceOutput() GetCcnAssociatedInstancesCcnAssociatedInstanceOutput {
+	return i.ToGetCcnAssociatedInstancesCcnAssociatedInstanceOutputWithContext(context.Background())
+}
+
+func (i GetCcnAssociatedInstancesCcnAssociatedInstanceArgs) ToGetCcnAssociatedInstancesCcnAssociatedInstanceOutputWithContext(ctx context.Context) GetCcnAssociatedInstancesCcnAssociatedInstanceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCcnAssociatedInstancesCcnAssociatedInstanceOutput)
+}
+
+// GetCcnAssociatedInstancesCcnAssociatedInstanceArrayInput is an input type that accepts GetCcnAssociatedInstancesCcnAssociatedInstanceArray and GetCcnAssociatedInstancesCcnAssociatedInstanceArrayOutput values.
+// You can construct a concrete instance of `GetCcnAssociatedInstancesCcnAssociatedInstanceArrayInput` via:
+//
+//	GetCcnAssociatedInstancesCcnAssociatedInstanceArray{ GetCcnAssociatedInstancesCcnAssociatedInstanceArgs{...} }
+type GetCcnAssociatedInstancesCcnAssociatedInstanceArrayInput interface {
+	pulumi.Input
+
+	ToGetCcnAssociatedInstancesCcnAssociatedInstanceArrayOutput() GetCcnAssociatedInstancesCcnAssociatedInstanceArrayOutput
+	ToGetCcnAssociatedInstancesCcnAssociatedInstanceArrayOutputWithContext(context.Context) GetCcnAssociatedInstancesCcnAssociatedInstanceArrayOutput
+}
+
+type GetCcnAssociatedInstancesCcnAssociatedInstanceArray []GetCcnAssociatedInstancesCcnAssociatedInstanceInput
+
+func (GetCcnAssociatedInstancesCcnAssociatedInstanceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCcnAssociatedInstancesCcnAssociatedInstance)(nil)).Elem()
+}
+
+func (i GetCcnAssociatedInstancesCcnAssociatedInstanceArray) ToGetCcnAssociatedInstancesCcnAssociatedInstanceArrayOutput() GetCcnAssociatedInstancesCcnAssociatedInstanceArrayOutput {
+	return i.ToGetCcnAssociatedInstancesCcnAssociatedInstanceArrayOutputWithContext(context.Background())
+}
+
+func (i GetCcnAssociatedInstancesCcnAssociatedInstanceArray) ToGetCcnAssociatedInstancesCcnAssociatedInstanceArrayOutputWithContext(ctx context.Context) GetCcnAssociatedInstancesCcnAssociatedInstanceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCcnAssociatedInstancesCcnAssociatedInstanceArrayOutput)
+}
+
+type GetCcnAssociatedInstancesCcnAssociatedInstanceOutput struct{ *pulumi.OutputState }
+
+func (GetCcnAssociatedInstancesCcnAssociatedInstanceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCcnAssociatedInstancesCcnAssociatedInstance)(nil)).Elem()
+}
+
+func (o GetCcnAssociatedInstancesCcnAssociatedInstanceOutput) ToGetCcnAssociatedInstancesCcnAssociatedInstanceOutput() GetCcnAssociatedInstancesCcnAssociatedInstanceOutput {
+	return o
+}
+
+func (o GetCcnAssociatedInstancesCcnAssociatedInstanceOutput) ToGetCcnAssociatedInstancesCcnAssociatedInstanceOutputWithContext(ctx context.Context) GetCcnAssociatedInstancesCcnAssociatedInstanceOutput {
+	return o
+}
+
+// List of network segments for the instance.
+func (o GetCcnAssociatedInstancesCcnAssociatedInstanceOutput) CidrLsts() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetCcnAssociatedInstancesCcnAssociatedInstance) []string { return v.CidrLsts }).(pulumi.StringArrayOutput)
+}
+
+// Instance type.
+func (o GetCcnAssociatedInstancesCcnAssociatedInstanceOutput) InsType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCcnAssociatedInstancesCcnAssociatedInstance) string { return v.InsType }).(pulumi.StringOutput)
+}
+
+// Instance ID.
+func (o GetCcnAssociatedInstancesCcnAssociatedInstanceOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCcnAssociatedInstancesCcnAssociatedInstance) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Instance name.
+func (o GetCcnAssociatedInstancesCcnAssociatedInstanceOutput) InstanceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCcnAssociatedInstancesCcnAssociatedInstance) string { return v.InstanceName }).(pulumi.StringOutput)
+}
+
+// Region where the instance belongs.
+func (o GetCcnAssociatedInstancesCcnAssociatedInstanceOutput) InstanceRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCcnAssociatedInstancesCcnAssociatedInstance) string { return v.InstanceRegion }).(pulumi.StringOutput)
+}
+
+type GetCcnAssociatedInstancesCcnAssociatedInstanceArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCcnAssociatedInstancesCcnAssociatedInstanceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCcnAssociatedInstancesCcnAssociatedInstance)(nil)).Elem()
+}
+
+func (o GetCcnAssociatedInstancesCcnAssociatedInstanceArrayOutput) ToGetCcnAssociatedInstancesCcnAssociatedInstanceArrayOutput() GetCcnAssociatedInstancesCcnAssociatedInstanceArrayOutput {
+	return o
+}
+
+func (o GetCcnAssociatedInstancesCcnAssociatedInstanceArrayOutput) ToGetCcnAssociatedInstancesCcnAssociatedInstanceArrayOutputWithContext(ctx context.Context) GetCcnAssociatedInstancesCcnAssociatedInstanceArrayOutput {
+	return o
+}
+
+func (o GetCcnAssociatedInstancesCcnAssociatedInstanceArrayOutput) Index(i pulumi.IntInput) GetCcnAssociatedInstancesCcnAssociatedInstanceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCcnAssociatedInstancesCcnAssociatedInstance {
+		return vs[0].([]GetCcnAssociatedInstancesCcnAssociatedInstance)[vs[1].(int)]
+	}).(GetCcnAssociatedInstancesCcnAssociatedInstanceOutput)
+}
+
+type GetCcnInstanceRegionStatusRegionFwStatus struct {
+	// CIDR of the traffic steering network, empty if traffic steering network is not deployed.
+	Cidr string `pulumi:"cidr"`
+	// Region.
+	Region string `pulumi:"region"`
+	// Traffic steering network deployment status.
+	// 1. `NotDeployed` Firewall cluster not deployed.
+	// 2. `Deployed` Firewall cluster deployed, but traffic steering network not created.
+	// 3. `Auto` Firewall cluster deployed, and traffic steering network created with automatically selected network segment.
+	// 4. `Custom` Firewall cluster deployed, and traffic steering network created with user-defined network segment.
+	Status string `pulumi:"status"`
+}
+
+// GetCcnInstanceRegionStatusRegionFwStatusInput is an input type that accepts GetCcnInstanceRegionStatusRegionFwStatusArgs and GetCcnInstanceRegionStatusRegionFwStatusOutput values.
+// You can construct a concrete instance of `GetCcnInstanceRegionStatusRegionFwStatusInput` via:
+//
+//	GetCcnInstanceRegionStatusRegionFwStatusArgs{...}
+type GetCcnInstanceRegionStatusRegionFwStatusInput interface {
+	pulumi.Input
+
+	ToGetCcnInstanceRegionStatusRegionFwStatusOutput() GetCcnInstanceRegionStatusRegionFwStatusOutput
+	ToGetCcnInstanceRegionStatusRegionFwStatusOutputWithContext(context.Context) GetCcnInstanceRegionStatusRegionFwStatusOutput
+}
+
+type GetCcnInstanceRegionStatusRegionFwStatusArgs struct {
+	// CIDR of the traffic steering network, empty if traffic steering network is not deployed.
+	Cidr pulumi.StringInput `pulumi:"cidr"`
+	// Region.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Traffic steering network deployment status.
+	// 1. `NotDeployed` Firewall cluster not deployed.
+	// 2. `Deployed` Firewall cluster deployed, but traffic steering network not created.
+	// 3. `Auto` Firewall cluster deployed, and traffic steering network created with automatically selected network segment.
+	// 4. `Custom` Firewall cluster deployed, and traffic steering network created with user-defined network segment.
+	Status pulumi.StringInput `pulumi:"status"`
+}
+
+func (GetCcnInstanceRegionStatusRegionFwStatusArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCcnInstanceRegionStatusRegionFwStatus)(nil)).Elem()
+}
+
+func (i GetCcnInstanceRegionStatusRegionFwStatusArgs) ToGetCcnInstanceRegionStatusRegionFwStatusOutput() GetCcnInstanceRegionStatusRegionFwStatusOutput {
+	return i.ToGetCcnInstanceRegionStatusRegionFwStatusOutputWithContext(context.Background())
+}
+
+func (i GetCcnInstanceRegionStatusRegionFwStatusArgs) ToGetCcnInstanceRegionStatusRegionFwStatusOutputWithContext(ctx context.Context) GetCcnInstanceRegionStatusRegionFwStatusOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCcnInstanceRegionStatusRegionFwStatusOutput)
+}
+
+// GetCcnInstanceRegionStatusRegionFwStatusArrayInput is an input type that accepts GetCcnInstanceRegionStatusRegionFwStatusArray and GetCcnInstanceRegionStatusRegionFwStatusArrayOutput values.
+// You can construct a concrete instance of `GetCcnInstanceRegionStatusRegionFwStatusArrayInput` via:
+//
+//	GetCcnInstanceRegionStatusRegionFwStatusArray{ GetCcnInstanceRegionStatusRegionFwStatusArgs{...} }
+type GetCcnInstanceRegionStatusRegionFwStatusArrayInput interface {
+	pulumi.Input
+
+	ToGetCcnInstanceRegionStatusRegionFwStatusArrayOutput() GetCcnInstanceRegionStatusRegionFwStatusArrayOutput
+	ToGetCcnInstanceRegionStatusRegionFwStatusArrayOutputWithContext(context.Context) GetCcnInstanceRegionStatusRegionFwStatusArrayOutput
+}
+
+type GetCcnInstanceRegionStatusRegionFwStatusArray []GetCcnInstanceRegionStatusRegionFwStatusInput
+
+func (GetCcnInstanceRegionStatusRegionFwStatusArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCcnInstanceRegionStatusRegionFwStatus)(nil)).Elem()
+}
+
+func (i GetCcnInstanceRegionStatusRegionFwStatusArray) ToGetCcnInstanceRegionStatusRegionFwStatusArrayOutput() GetCcnInstanceRegionStatusRegionFwStatusArrayOutput {
+	return i.ToGetCcnInstanceRegionStatusRegionFwStatusArrayOutputWithContext(context.Background())
+}
+
+func (i GetCcnInstanceRegionStatusRegionFwStatusArray) ToGetCcnInstanceRegionStatusRegionFwStatusArrayOutputWithContext(ctx context.Context) GetCcnInstanceRegionStatusRegionFwStatusArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCcnInstanceRegionStatusRegionFwStatusArrayOutput)
+}
+
+type GetCcnInstanceRegionStatusRegionFwStatusOutput struct{ *pulumi.OutputState }
+
+func (GetCcnInstanceRegionStatusRegionFwStatusOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCcnInstanceRegionStatusRegionFwStatus)(nil)).Elem()
+}
+
+func (o GetCcnInstanceRegionStatusRegionFwStatusOutput) ToGetCcnInstanceRegionStatusRegionFwStatusOutput() GetCcnInstanceRegionStatusRegionFwStatusOutput {
+	return o
+}
+
+func (o GetCcnInstanceRegionStatusRegionFwStatusOutput) ToGetCcnInstanceRegionStatusRegionFwStatusOutputWithContext(ctx context.Context) GetCcnInstanceRegionStatusRegionFwStatusOutput {
+	return o
+}
+
+// CIDR of the traffic steering network, empty if traffic steering network is not deployed.
+func (o GetCcnInstanceRegionStatusRegionFwStatusOutput) Cidr() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCcnInstanceRegionStatusRegionFwStatus) string { return v.Cidr }).(pulumi.StringOutput)
+}
+
+// Region.
+func (o GetCcnInstanceRegionStatusRegionFwStatusOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCcnInstanceRegionStatusRegionFwStatus) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Traffic steering network deployment status.
+// 1. `NotDeployed` Firewall cluster not deployed.
+// 2. `Deployed` Firewall cluster deployed, but traffic steering network not created.
+// 3. `Auto` Firewall cluster deployed, and traffic steering network created with automatically selected network segment.
+// 4. `Custom` Firewall cluster deployed, and traffic steering network created with user-defined network segment.
+func (o GetCcnInstanceRegionStatusRegionFwStatusOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCcnInstanceRegionStatusRegionFwStatus) string { return v.Status }).(pulumi.StringOutput)
+}
+
+type GetCcnInstanceRegionStatusRegionFwStatusArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCcnInstanceRegionStatusRegionFwStatusArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCcnInstanceRegionStatusRegionFwStatus)(nil)).Elem()
+}
+
+func (o GetCcnInstanceRegionStatusRegionFwStatusArrayOutput) ToGetCcnInstanceRegionStatusRegionFwStatusArrayOutput() GetCcnInstanceRegionStatusRegionFwStatusArrayOutput {
+	return o
+}
+
+func (o GetCcnInstanceRegionStatusRegionFwStatusArrayOutput) ToGetCcnInstanceRegionStatusRegionFwStatusArrayOutputWithContext(ctx context.Context) GetCcnInstanceRegionStatusRegionFwStatusArrayOutput {
+	return o
+}
+
+func (o GetCcnInstanceRegionStatusRegionFwStatusArrayOutput) Index(i pulumi.IntInput) GetCcnInstanceRegionStatusRegionFwStatusOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCcnInstanceRegionStatusRegionFwStatus {
+		return vs[0].([]GetCcnInstanceRegionStatusRegionFwStatus)[vs[1].(int)]
+	}).(GetCcnInstanceRegionStatusRegionFwStatusOutput)
+}
+
+type GetCcnVpcFwSwitchInterconnectPair struct {
+	// Group A.
+	GroupAs []GetCcnVpcFwSwitchInterconnectPairGroupA `pulumi:"groupAs"`
+	// Group B.
+	GroupBs []GetCcnVpcFwSwitchInterconnectPairGroupB `pulumi:"groupBs"`
+	// Interconnect mode: "CrossConnect": cross interconnect (each instance in group A interconnects with each instance in group B), "FullMesh": full mesh (group A content is identical to group B, equivalent to pairwise interconnection within the group).
+	InterconnectMode string `pulumi:"interconnectMode"`
+}
+
+// GetCcnVpcFwSwitchInterconnectPairInput is an input type that accepts GetCcnVpcFwSwitchInterconnectPairArgs and GetCcnVpcFwSwitchInterconnectPairOutput values.
+// You can construct a concrete instance of `GetCcnVpcFwSwitchInterconnectPairInput` via:
+//
+//	GetCcnVpcFwSwitchInterconnectPairArgs{...}
+type GetCcnVpcFwSwitchInterconnectPairInput interface {
+	pulumi.Input
+
+	ToGetCcnVpcFwSwitchInterconnectPairOutput() GetCcnVpcFwSwitchInterconnectPairOutput
+	ToGetCcnVpcFwSwitchInterconnectPairOutputWithContext(context.Context) GetCcnVpcFwSwitchInterconnectPairOutput
+}
+
+type GetCcnVpcFwSwitchInterconnectPairArgs struct {
+	// Group A.
+	GroupAs GetCcnVpcFwSwitchInterconnectPairGroupAArrayInput `pulumi:"groupAs"`
+	// Group B.
+	GroupBs GetCcnVpcFwSwitchInterconnectPairGroupBArrayInput `pulumi:"groupBs"`
+	// Interconnect mode: "CrossConnect": cross interconnect (each instance in group A interconnects with each instance in group B), "FullMesh": full mesh (group A content is identical to group B, equivalent to pairwise interconnection within the group).
+	InterconnectMode pulumi.StringInput `pulumi:"interconnectMode"`
+}
+
+func (GetCcnVpcFwSwitchInterconnectPairArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCcnVpcFwSwitchInterconnectPair)(nil)).Elem()
+}
+
+func (i GetCcnVpcFwSwitchInterconnectPairArgs) ToGetCcnVpcFwSwitchInterconnectPairOutput() GetCcnVpcFwSwitchInterconnectPairOutput {
+	return i.ToGetCcnVpcFwSwitchInterconnectPairOutputWithContext(context.Background())
+}
+
+func (i GetCcnVpcFwSwitchInterconnectPairArgs) ToGetCcnVpcFwSwitchInterconnectPairOutputWithContext(ctx context.Context) GetCcnVpcFwSwitchInterconnectPairOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCcnVpcFwSwitchInterconnectPairOutput)
+}
+
+// GetCcnVpcFwSwitchInterconnectPairArrayInput is an input type that accepts GetCcnVpcFwSwitchInterconnectPairArray and GetCcnVpcFwSwitchInterconnectPairArrayOutput values.
+// You can construct a concrete instance of `GetCcnVpcFwSwitchInterconnectPairArrayInput` via:
+//
+//	GetCcnVpcFwSwitchInterconnectPairArray{ GetCcnVpcFwSwitchInterconnectPairArgs{...} }
+type GetCcnVpcFwSwitchInterconnectPairArrayInput interface {
+	pulumi.Input
+
+	ToGetCcnVpcFwSwitchInterconnectPairArrayOutput() GetCcnVpcFwSwitchInterconnectPairArrayOutput
+	ToGetCcnVpcFwSwitchInterconnectPairArrayOutputWithContext(context.Context) GetCcnVpcFwSwitchInterconnectPairArrayOutput
+}
+
+type GetCcnVpcFwSwitchInterconnectPairArray []GetCcnVpcFwSwitchInterconnectPairInput
+
+func (GetCcnVpcFwSwitchInterconnectPairArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCcnVpcFwSwitchInterconnectPair)(nil)).Elem()
+}
+
+func (i GetCcnVpcFwSwitchInterconnectPairArray) ToGetCcnVpcFwSwitchInterconnectPairArrayOutput() GetCcnVpcFwSwitchInterconnectPairArrayOutput {
+	return i.ToGetCcnVpcFwSwitchInterconnectPairArrayOutputWithContext(context.Background())
+}
+
+func (i GetCcnVpcFwSwitchInterconnectPairArray) ToGetCcnVpcFwSwitchInterconnectPairArrayOutputWithContext(ctx context.Context) GetCcnVpcFwSwitchInterconnectPairArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCcnVpcFwSwitchInterconnectPairArrayOutput)
+}
+
+type GetCcnVpcFwSwitchInterconnectPairOutput struct{ *pulumi.OutputState }
+
+func (GetCcnVpcFwSwitchInterconnectPairOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCcnVpcFwSwitchInterconnectPair)(nil)).Elem()
+}
+
+func (o GetCcnVpcFwSwitchInterconnectPairOutput) ToGetCcnVpcFwSwitchInterconnectPairOutput() GetCcnVpcFwSwitchInterconnectPairOutput {
+	return o
+}
+
+func (o GetCcnVpcFwSwitchInterconnectPairOutput) ToGetCcnVpcFwSwitchInterconnectPairOutputWithContext(ctx context.Context) GetCcnVpcFwSwitchInterconnectPairOutput {
+	return o
+}
+
+// Group A.
+func (o GetCcnVpcFwSwitchInterconnectPairOutput) GroupAs() GetCcnVpcFwSwitchInterconnectPairGroupAArrayOutput {
+	return o.ApplyT(func(v GetCcnVpcFwSwitchInterconnectPair) []GetCcnVpcFwSwitchInterconnectPairGroupA { return v.GroupAs }).(GetCcnVpcFwSwitchInterconnectPairGroupAArrayOutput)
+}
+
+// Group B.
+func (o GetCcnVpcFwSwitchInterconnectPairOutput) GroupBs() GetCcnVpcFwSwitchInterconnectPairGroupBArrayOutput {
+	return o.ApplyT(func(v GetCcnVpcFwSwitchInterconnectPair) []GetCcnVpcFwSwitchInterconnectPairGroupB { return v.GroupBs }).(GetCcnVpcFwSwitchInterconnectPairGroupBArrayOutput)
+}
+
+// Interconnect mode: "CrossConnect": cross interconnect (each instance in group A interconnects with each instance in group B), "FullMesh": full mesh (group A content is identical to group B, equivalent to pairwise interconnection within the group).
+func (o GetCcnVpcFwSwitchInterconnectPairOutput) InterconnectMode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCcnVpcFwSwitchInterconnectPair) string { return v.InterconnectMode }).(pulumi.StringOutput)
+}
+
+type GetCcnVpcFwSwitchInterconnectPairArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCcnVpcFwSwitchInterconnectPairArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCcnVpcFwSwitchInterconnectPair)(nil)).Elem()
+}
+
+func (o GetCcnVpcFwSwitchInterconnectPairArrayOutput) ToGetCcnVpcFwSwitchInterconnectPairArrayOutput() GetCcnVpcFwSwitchInterconnectPairArrayOutput {
+	return o
+}
+
+func (o GetCcnVpcFwSwitchInterconnectPairArrayOutput) ToGetCcnVpcFwSwitchInterconnectPairArrayOutputWithContext(ctx context.Context) GetCcnVpcFwSwitchInterconnectPairArrayOutput {
+	return o
+}
+
+func (o GetCcnVpcFwSwitchInterconnectPairArrayOutput) Index(i pulumi.IntInput) GetCcnVpcFwSwitchInterconnectPairOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCcnVpcFwSwitchInterconnectPair {
+		return vs[0].([]GetCcnVpcFwSwitchInterconnectPair)[vs[1].(int)]
+	}).(GetCcnVpcFwSwitchInterconnectPairOutput)
+}
+
+type GetCcnVpcFwSwitchInterconnectPairGroupA struct {
+	// List of network segments for accessing firewall.
+	AccessCidrLists []string `pulumi:"accessCidrLists"`
+	// Network segment mode for accessing firewall: 0-no access, 1-access all network segments associated with the instance, 2-access user-defined network segments.
+	AccessCidrMode int `pulumi:"accessCidrMode"`
+	// Instance ID.
+	InstanceId string `pulumi:"instanceId"`
+	// Region where the instance is located.
+	InstanceRegion string `pulumi:"instanceRegion"`
+	// Instance type such as VPC or DIRECTCONNECT.
+	InstanceType string `pulumi:"instanceType"`
+}
+
+// GetCcnVpcFwSwitchInterconnectPairGroupAInput is an input type that accepts GetCcnVpcFwSwitchInterconnectPairGroupAArgs and GetCcnVpcFwSwitchInterconnectPairGroupAOutput values.
+// You can construct a concrete instance of `GetCcnVpcFwSwitchInterconnectPairGroupAInput` via:
+//
+//	GetCcnVpcFwSwitchInterconnectPairGroupAArgs{...}
+type GetCcnVpcFwSwitchInterconnectPairGroupAInput interface {
+	pulumi.Input
+
+	ToGetCcnVpcFwSwitchInterconnectPairGroupAOutput() GetCcnVpcFwSwitchInterconnectPairGroupAOutput
+	ToGetCcnVpcFwSwitchInterconnectPairGroupAOutputWithContext(context.Context) GetCcnVpcFwSwitchInterconnectPairGroupAOutput
+}
+
+type GetCcnVpcFwSwitchInterconnectPairGroupAArgs struct {
+	// List of network segments for accessing firewall.
+	AccessCidrLists pulumi.StringArrayInput `pulumi:"accessCidrLists"`
+	// Network segment mode for accessing firewall: 0-no access, 1-access all network segments associated with the instance, 2-access user-defined network segments.
+	AccessCidrMode pulumi.IntInput `pulumi:"accessCidrMode"`
+	// Instance ID.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Region where the instance is located.
+	InstanceRegion pulumi.StringInput `pulumi:"instanceRegion"`
+	// Instance type such as VPC or DIRECTCONNECT.
+	InstanceType pulumi.StringInput `pulumi:"instanceType"`
+}
+
+func (GetCcnVpcFwSwitchInterconnectPairGroupAArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCcnVpcFwSwitchInterconnectPairGroupA)(nil)).Elem()
+}
+
+func (i GetCcnVpcFwSwitchInterconnectPairGroupAArgs) ToGetCcnVpcFwSwitchInterconnectPairGroupAOutput() GetCcnVpcFwSwitchInterconnectPairGroupAOutput {
+	return i.ToGetCcnVpcFwSwitchInterconnectPairGroupAOutputWithContext(context.Background())
+}
+
+func (i GetCcnVpcFwSwitchInterconnectPairGroupAArgs) ToGetCcnVpcFwSwitchInterconnectPairGroupAOutputWithContext(ctx context.Context) GetCcnVpcFwSwitchInterconnectPairGroupAOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCcnVpcFwSwitchInterconnectPairGroupAOutput)
+}
+
+// GetCcnVpcFwSwitchInterconnectPairGroupAArrayInput is an input type that accepts GetCcnVpcFwSwitchInterconnectPairGroupAArray and GetCcnVpcFwSwitchInterconnectPairGroupAArrayOutput values.
+// You can construct a concrete instance of `GetCcnVpcFwSwitchInterconnectPairGroupAArrayInput` via:
+//
+//	GetCcnVpcFwSwitchInterconnectPairGroupAArray{ GetCcnVpcFwSwitchInterconnectPairGroupAArgs{...} }
+type GetCcnVpcFwSwitchInterconnectPairGroupAArrayInput interface {
+	pulumi.Input
+
+	ToGetCcnVpcFwSwitchInterconnectPairGroupAArrayOutput() GetCcnVpcFwSwitchInterconnectPairGroupAArrayOutput
+	ToGetCcnVpcFwSwitchInterconnectPairGroupAArrayOutputWithContext(context.Context) GetCcnVpcFwSwitchInterconnectPairGroupAArrayOutput
+}
+
+type GetCcnVpcFwSwitchInterconnectPairGroupAArray []GetCcnVpcFwSwitchInterconnectPairGroupAInput
+
+func (GetCcnVpcFwSwitchInterconnectPairGroupAArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCcnVpcFwSwitchInterconnectPairGroupA)(nil)).Elem()
+}
+
+func (i GetCcnVpcFwSwitchInterconnectPairGroupAArray) ToGetCcnVpcFwSwitchInterconnectPairGroupAArrayOutput() GetCcnVpcFwSwitchInterconnectPairGroupAArrayOutput {
+	return i.ToGetCcnVpcFwSwitchInterconnectPairGroupAArrayOutputWithContext(context.Background())
+}
+
+func (i GetCcnVpcFwSwitchInterconnectPairGroupAArray) ToGetCcnVpcFwSwitchInterconnectPairGroupAArrayOutputWithContext(ctx context.Context) GetCcnVpcFwSwitchInterconnectPairGroupAArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCcnVpcFwSwitchInterconnectPairGroupAArrayOutput)
+}
+
+type GetCcnVpcFwSwitchInterconnectPairGroupAOutput struct{ *pulumi.OutputState }
+
+func (GetCcnVpcFwSwitchInterconnectPairGroupAOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCcnVpcFwSwitchInterconnectPairGroupA)(nil)).Elem()
+}
+
+func (o GetCcnVpcFwSwitchInterconnectPairGroupAOutput) ToGetCcnVpcFwSwitchInterconnectPairGroupAOutput() GetCcnVpcFwSwitchInterconnectPairGroupAOutput {
+	return o
+}
+
+func (o GetCcnVpcFwSwitchInterconnectPairGroupAOutput) ToGetCcnVpcFwSwitchInterconnectPairGroupAOutputWithContext(ctx context.Context) GetCcnVpcFwSwitchInterconnectPairGroupAOutput {
+	return o
+}
+
+// List of network segments for accessing firewall.
+func (o GetCcnVpcFwSwitchInterconnectPairGroupAOutput) AccessCidrLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetCcnVpcFwSwitchInterconnectPairGroupA) []string { return v.AccessCidrLists }).(pulumi.StringArrayOutput)
+}
+
+// Network segment mode for accessing firewall: 0-no access, 1-access all network segments associated with the instance, 2-access user-defined network segments.
+func (o GetCcnVpcFwSwitchInterconnectPairGroupAOutput) AccessCidrMode() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCcnVpcFwSwitchInterconnectPairGroupA) int { return v.AccessCidrMode }).(pulumi.IntOutput)
+}
+
+// Instance ID.
+func (o GetCcnVpcFwSwitchInterconnectPairGroupAOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCcnVpcFwSwitchInterconnectPairGroupA) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Region where the instance is located.
+func (o GetCcnVpcFwSwitchInterconnectPairGroupAOutput) InstanceRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCcnVpcFwSwitchInterconnectPairGroupA) string { return v.InstanceRegion }).(pulumi.StringOutput)
+}
+
+// Instance type such as VPC or DIRECTCONNECT.
+func (o GetCcnVpcFwSwitchInterconnectPairGroupAOutput) InstanceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCcnVpcFwSwitchInterconnectPairGroupA) string { return v.InstanceType }).(pulumi.StringOutput)
+}
+
+type GetCcnVpcFwSwitchInterconnectPairGroupAArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCcnVpcFwSwitchInterconnectPairGroupAArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCcnVpcFwSwitchInterconnectPairGroupA)(nil)).Elem()
+}
+
+func (o GetCcnVpcFwSwitchInterconnectPairGroupAArrayOutput) ToGetCcnVpcFwSwitchInterconnectPairGroupAArrayOutput() GetCcnVpcFwSwitchInterconnectPairGroupAArrayOutput {
+	return o
+}
+
+func (o GetCcnVpcFwSwitchInterconnectPairGroupAArrayOutput) ToGetCcnVpcFwSwitchInterconnectPairGroupAArrayOutputWithContext(ctx context.Context) GetCcnVpcFwSwitchInterconnectPairGroupAArrayOutput {
+	return o
+}
+
+func (o GetCcnVpcFwSwitchInterconnectPairGroupAArrayOutput) Index(i pulumi.IntInput) GetCcnVpcFwSwitchInterconnectPairGroupAOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCcnVpcFwSwitchInterconnectPairGroupA {
+		return vs[0].([]GetCcnVpcFwSwitchInterconnectPairGroupA)[vs[1].(int)]
+	}).(GetCcnVpcFwSwitchInterconnectPairGroupAOutput)
+}
+
+type GetCcnVpcFwSwitchInterconnectPairGroupB struct {
+	// List of network segments for accessing firewall.
+	AccessCidrLists []string `pulumi:"accessCidrLists"`
+	// Network segment mode for accessing firewall: 0-no access, 1-access all network segments associated with the instance, 2-access user-defined network segments.
+	AccessCidrMode int `pulumi:"accessCidrMode"`
+	// Instance ID.
+	InstanceId string `pulumi:"instanceId"`
+	// Region where the instance is located.
+	InstanceRegion string `pulumi:"instanceRegion"`
+	// Instance type such as VPC or DIRECTCONNECT.
+	InstanceType string `pulumi:"instanceType"`
+}
+
+// GetCcnVpcFwSwitchInterconnectPairGroupBInput is an input type that accepts GetCcnVpcFwSwitchInterconnectPairGroupBArgs and GetCcnVpcFwSwitchInterconnectPairGroupBOutput values.
+// You can construct a concrete instance of `GetCcnVpcFwSwitchInterconnectPairGroupBInput` via:
+//
+//	GetCcnVpcFwSwitchInterconnectPairGroupBArgs{...}
+type GetCcnVpcFwSwitchInterconnectPairGroupBInput interface {
+	pulumi.Input
+
+	ToGetCcnVpcFwSwitchInterconnectPairGroupBOutput() GetCcnVpcFwSwitchInterconnectPairGroupBOutput
+	ToGetCcnVpcFwSwitchInterconnectPairGroupBOutputWithContext(context.Context) GetCcnVpcFwSwitchInterconnectPairGroupBOutput
+}
+
+type GetCcnVpcFwSwitchInterconnectPairGroupBArgs struct {
+	// List of network segments for accessing firewall.
+	AccessCidrLists pulumi.StringArrayInput `pulumi:"accessCidrLists"`
+	// Network segment mode for accessing firewall: 0-no access, 1-access all network segments associated with the instance, 2-access user-defined network segments.
+	AccessCidrMode pulumi.IntInput `pulumi:"accessCidrMode"`
+	// Instance ID.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Region where the instance is located.
+	InstanceRegion pulumi.StringInput `pulumi:"instanceRegion"`
+	// Instance type such as VPC or DIRECTCONNECT.
+	InstanceType pulumi.StringInput `pulumi:"instanceType"`
+}
+
+func (GetCcnVpcFwSwitchInterconnectPairGroupBArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCcnVpcFwSwitchInterconnectPairGroupB)(nil)).Elem()
+}
+
+func (i GetCcnVpcFwSwitchInterconnectPairGroupBArgs) ToGetCcnVpcFwSwitchInterconnectPairGroupBOutput() GetCcnVpcFwSwitchInterconnectPairGroupBOutput {
+	return i.ToGetCcnVpcFwSwitchInterconnectPairGroupBOutputWithContext(context.Background())
+}
+
+func (i GetCcnVpcFwSwitchInterconnectPairGroupBArgs) ToGetCcnVpcFwSwitchInterconnectPairGroupBOutputWithContext(ctx context.Context) GetCcnVpcFwSwitchInterconnectPairGroupBOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCcnVpcFwSwitchInterconnectPairGroupBOutput)
+}
+
+// GetCcnVpcFwSwitchInterconnectPairGroupBArrayInput is an input type that accepts GetCcnVpcFwSwitchInterconnectPairGroupBArray and GetCcnVpcFwSwitchInterconnectPairGroupBArrayOutput values.
+// You can construct a concrete instance of `GetCcnVpcFwSwitchInterconnectPairGroupBArrayInput` via:
+//
+//	GetCcnVpcFwSwitchInterconnectPairGroupBArray{ GetCcnVpcFwSwitchInterconnectPairGroupBArgs{...} }
+type GetCcnVpcFwSwitchInterconnectPairGroupBArrayInput interface {
+	pulumi.Input
+
+	ToGetCcnVpcFwSwitchInterconnectPairGroupBArrayOutput() GetCcnVpcFwSwitchInterconnectPairGroupBArrayOutput
+	ToGetCcnVpcFwSwitchInterconnectPairGroupBArrayOutputWithContext(context.Context) GetCcnVpcFwSwitchInterconnectPairGroupBArrayOutput
+}
+
+type GetCcnVpcFwSwitchInterconnectPairGroupBArray []GetCcnVpcFwSwitchInterconnectPairGroupBInput
+
+func (GetCcnVpcFwSwitchInterconnectPairGroupBArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCcnVpcFwSwitchInterconnectPairGroupB)(nil)).Elem()
+}
+
+func (i GetCcnVpcFwSwitchInterconnectPairGroupBArray) ToGetCcnVpcFwSwitchInterconnectPairGroupBArrayOutput() GetCcnVpcFwSwitchInterconnectPairGroupBArrayOutput {
+	return i.ToGetCcnVpcFwSwitchInterconnectPairGroupBArrayOutputWithContext(context.Background())
+}
+
+func (i GetCcnVpcFwSwitchInterconnectPairGroupBArray) ToGetCcnVpcFwSwitchInterconnectPairGroupBArrayOutputWithContext(ctx context.Context) GetCcnVpcFwSwitchInterconnectPairGroupBArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetCcnVpcFwSwitchInterconnectPairGroupBArrayOutput)
+}
+
+type GetCcnVpcFwSwitchInterconnectPairGroupBOutput struct{ *pulumi.OutputState }
+
+func (GetCcnVpcFwSwitchInterconnectPairGroupBOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetCcnVpcFwSwitchInterconnectPairGroupB)(nil)).Elem()
+}
+
+func (o GetCcnVpcFwSwitchInterconnectPairGroupBOutput) ToGetCcnVpcFwSwitchInterconnectPairGroupBOutput() GetCcnVpcFwSwitchInterconnectPairGroupBOutput {
+	return o
+}
+
+func (o GetCcnVpcFwSwitchInterconnectPairGroupBOutput) ToGetCcnVpcFwSwitchInterconnectPairGroupBOutputWithContext(ctx context.Context) GetCcnVpcFwSwitchInterconnectPairGroupBOutput {
+	return o
+}
+
+// List of network segments for accessing firewall.
+func (o GetCcnVpcFwSwitchInterconnectPairGroupBOutput) AccessCidrLists() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetCcnVpcFwSwitchInterconnectPairGroupB) []string { return v.AccessCidrLists }).(pulumi.StringArrayOutput)
+}
+
+// Network segment mode for accessing firewall: 0-no access, 1-access all network segments associated with the instance, 2-access user-defined network segments.
+func (o GetCcnVpcFwSwitchInterconnectPairGroupBOutput) AccessCidrMode() pulumi.IntOutput {
+	return o.ApplyT(func(v GetCcnVpcFwSwitchInterconnectPairGroupB) int { return v.AccessCidrMode }).(pulumi.IntOutput)
+}
+
+// Instance ID.
+func (o GetCcnVpcFwSwitchInterconnectPairGroupBOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCcnVpcFwSwitchInterconnectPairGroupB) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Region where the instance is located.
+func (o GetCcnVpcFwSwitchInterconnectPairGroupBOutput) InstanceRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCcnVpcFwSwitchInterconnectPairGroupB) string { return v.InstanceRegion }).(pulumi.StringOutput)
+}
+
+// Instance type such as VPC or DIRECTCONNECT.
+func (o GetCcnVpcFwSwitchInterconnectPairGroupBOutput) InstanceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCcnVpcFwSwitchInterconnectPairGroupB) string { return v.InstanceType }).(pulumi.StringOutput)
+}
+
+type GetCcnVpcFwSwitchInterconnectPairGroupBArrayOutput struct{ *pulumi.OutputState }
+
+func (GetCcnVpcFwSwitchInterconnectPairGroupBArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetCcnVpcFwSwitchInterconnectPairGroupB)(nil)).Elem()
+}
+
+func (o GetCcnVpcFwSwitchInterconnectPairGroupBArrayOutput) ToGetCcnVpcFwSwitchInterconnectPairGroupBArrayOutput() GetCcnVpcFwSwitchInterconnectPairGroupBArrayOutput {
+	return o
+}
+
+func (o GetCcnVpcFwSwitchInterconnectPairGroupBArrayOutput) ToGetCcnVpcFwSwitchInterconnectPairGroupBArrayOutputWithContext(ctx context.Context) GetCcnVpcFwSwitchInterconnectPairGroupBArrayOutput {
+	return o
+}
+
+func (o GetCcnVpcFwSwitchInterconnectPairGroupBArrayOutput) Index(i pulumi.IntInput) GetCcnVpcFwSwitchInterconnectPairGroupBOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetCcnVpcFwSwitchInterconnectPairGroupB {
+		return vs[0].([]GetCcnVpcFwSwitchInterconnectPairGroupB)[vs[1].(int)]
+	}).(GetCcnVpcFwSwitchInterconnectPairGroupBOutput)
 }
 
 type GetEdgeFwSwitchesData struct {
@@ -663,6 +2292,272 @@ func (o GetEdgeFwSwitchesDataArrayOutput) Index(i pulumi.IntInput) GetEdgeFwSwit
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetEdgeFwSwitchesData {
 		return vs[0].([]GetEdgeFwSwitchesData)[vs[1].(int)]
 	}).(GetEdgeFwSwitchesDataOutput)
+}
+
+type GetNatFwClusterRegionStatusNatClusterRegionStatusQueryList struct {
+	// Asset type. Valid values: `natCcn` (CCN+NAT scenario), `nat` (standalone NAT scenario).
+	AssetType string `pulumi:"assetType"`
+	// CCN ID.
+	CcnId string `pulumi:"ccnId"`
+	// NAT gateway ID.
+	NatInsId string `pulumi:"natInsId"`
+	// Traffic steering routing method. 0: multi-route table mode, 1: policy routing mode.
+	RoutingMode *int `pulumi:"routingMode"`
+}
+
+// GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListInput is an input type that accepts GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArgs and GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListOutput values.
+// You can construct a concrete instance of `GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListInput` via:
+//
+//	GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArgs{...}
+type GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListInput interface {
+	pulumi.Input
+
+	ToGetNatFwClusterRegionStatusNatClusterRegionStatusQueryListOutput() GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListOutput
+	ToGetNatFwClusterRegionStatusNatClusterRegionStatusQueryListOutputWithContext(context.Context) GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListOutput
+}
+
+type GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArgs struct {
+	// Asset type. Valid values: `natCcn` (CCN+NAT scenario), `nat` (standalone NAT scenario).
+	AssetType pulumi.StringInput `pulumi:"assetType"`
+	// CCN ID.
+	CcnId pulumi.StringInput `pulumi:"ccnId"`
+	// NAT gateway ID.
+	NatInsId pulumi.StringInput `pulumi:"natInsId"`
+	// Traffic steering routing method. 0: multi-route table mode, 1: policy routing mode.
+	RoutingMode pulumi.IntPtrInput `pulumi:"routingMode"`
+}
+
+func (GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNatFwClusterRegionStatusNatClusterRegionStatusQueryList)(nil)).Elem()
+}
+
+func (i GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArgs) ToGetNatFwClusterRegionStatusNatClusterRegionStatusQueryListOutput() GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListOutput {
+	return i.ToGetNatFwClusterRegionStatusNatClusterRegionStatusQueryListOutputWithContext(context.Background())
+}
+
+func (i GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArgs) ToGetNatFwClusterRegionStatusNatClusterRegionStatusQueryListOutputWithContext(ctx context.Context) GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListOutput)
+}
+
+// GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArrayInput is an input type that accepts GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArray and GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArrayOutput values.
+// You can construct a concrete instance of `GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArrayInput` via:
+//
+//	GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArray{ GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArgs{...} }
+type GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArrayInput interface {
+	pulumi.Input
+
+	ToGetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArrayOutput() GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArrayOutput
+	ToGetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArrayOutputWithContext(context.Context) GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArrayOutput
+}
+
+type GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArray []GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListInput
+
+func (GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNatFwClusterRegionStatusNatClusterRegionStatusQueryList)(nil)).Elem()
+}
+
+func (i GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArray) ToGetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArrayOutput() GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArrayOutput {
+	return i.ToGetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArrayOutputWithContext(context.Background())
+}
+
+func (i GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArray) ToGetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArrayOutputWithContext(ctx context.Context) GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArrayOutput)
+}
+
+type GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListOutput struct{ *pulumi.OutputState }
+
+func (GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNatFwClusterRegionStatusNatClusterRegionStatusQueryList)(nil)).Elem()
+}
+
+func (o GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListOutput) ToGetNatFwClusterRegionStatusNatClusterRegionStatusQueryListOutput() GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListOutput {
+	return o
+}
+
+func (o GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListOutput) ToGetNatFwClusterRegionStatusNatClusterRegionStatusQueryListOutputWithContext(ctx context.Context) GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListOutput {
+	return o
+}
+
+// Asset type. Valid values: `natCcn` (CCN+NAT scenario), `nat` (standalone NAT scenario).
+func (o GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListOutput) AssetType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNatFwClusterRegionStatusNatClusterRegionStatusQueryList) string { return v.AssetType }).(pulumi.StringOutput)
+}
+
+// CCN ID.
+func (o GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListOutput) CcnId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNatFwClusterRegionStatusNatClusterRegionStatusQueryList) string { return v.CcnId }).(pulumi.StringOutput)
+}
+
+// NAT gateway ID.
+func (o GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListOutput) NatInsId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNatFwClusterRegionStatusNatClusterRegionStatusQueryList) string { return v.NatInsId }).(pulumi.StringOutput)
+}
+
+// Traffic steering routing method. 0: multi-route table mode, 1: policy routing mode.
+func (o GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListOutput) RoutingMode() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetNatFwClusterRegionStatusNatClusterRegionStatusQueryList) *int { return v.RoutingMode }).(pulumi.IntPtrOutput)
+}
+
+type GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArrayOutput struct{ *pulumi.OutputState }
+
+func (GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNatFwClusterRegionStatusNatClusterRegionStatusQueryList)(nil)).Elem()
+}
+
+func (o GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArrayOutput) ToGetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArrayOutput() GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArrayOutput {
+	return o
+}
+
+func (o GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArrayOutput) ToGetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArrayOutputWithContext(ctx context.Context) GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArrayOutput {
+	return o
+}
+
+func (o GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArrayOutput) Index(i pulumi.IntInput) GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetNatFwClusterRegionStatusNatClusterRegionStatusQueryList {
+		return vs[0].([]GetNatFwClusterRegionStatusNatClusterRegionStatusQueryList)[vs[1].(int)]
+	}).(GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListOutput)
+}
+
+type GetNatFwClusterRegionStatusRegionFwStatus struct {
+	// CCN ID.
+	CcnId string `pulumi:"ccnId"`
+	// Traffic steering network CIDR. Only has value when Status is Auto or Custom.
+	Cidr string `pulumi:"cidr"`
+	// NAT gateway ID.
+	NatInsId string `pulumi:"natInsId"`
+	// Region, e.g. ap-guangzhou.
+	Region string `pulumi:"region"`
+	// Traffic steering routing method. 0: multi-route table mode, 1: policy routing mode.
+	RoutingMode int `pulumi:"routingMode"`
+	// Region cluster status. Valid values: `NotDeployed` (cluster not deployed), `Deployed` (cluster deployed but traffic steering network not created), `DeployedCustomOnly` (cluster deployed but internal segment covered, need custom traffic steering segment), `Auto` (traffic steering network created with auto-assigned CIDR), `Custom` (traffic steering network created with custom CIDR).
+	Status string `pulumi:"status"`
+}
+
+// GetNatFwClusterRegionStatusRegionFwStatusInput is an input type that accepts GetNatFwClusterRegionStatusRegionFwStatusArgs and GetNatFwClusterRegionStatusRegionFwStatusOutput values.
+// You can construct a concrete instance of `GetNatFwClusterRegionStatusRegionFwStatusInput` via:
+//
+//	GetNatFwClusterRegionStatusRegionFwStatusArgs{...}
+type GetNatFwClusterRegionStatusRegionFwStatusInput interface {
+	pulumi.Input
+
+	ToGetNatFwClusterRegionStatusRegionFwStatusOutput() GetNatFwClusterRegionStatusRegionFwStatusOutput
+	ToGetNatFwClusterRegionStatusRegionFwStatusOutputWithContext(context.Context) GetNatFwClusterRegionStatusRegionFwStatusOutput
+}
+
+type GetNatFwClusterRegionStatusRegionFwStatusArgs struct {
+	// CCN ID.
+	CcnId pulumi.StringInput `pulumi:"ccnId"`
+	// Traffic steering network CIDR. Only has value when Status is Auto or Custom.
+	Cidr pulumi.StringInput `pulumi:"cidr"`
+	// NAT gateway ID.
+	NatInsId pulumi.StringInput `pulumi:"natInsId"`
+	// Region, e.g. ap-guangzhou.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Traffic steering routing method. 0: multi-route table mode, 1: policy routing mode.
+	RoutingMode pulumi.IntInput `pulumi:"routingMode"`
+	// Region cluster status. Valid values: `NotDeployed` (cluster not deployed), `Deployed` (cluster deployed but traffic steering network not created), `DeployedCustomOnly` (cluster deployed but internal segment covered, need custom traffic steering segment), `Auto` (traffic steering network created with auto-assigned CIDR), `Custom` (traffic steering network created with custom CIDR).
+	Status pulumi.StringInput `pulumi:"status"`
+}
+
+func (GetNatFwClusterRegionStatusRegionFwStatusArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNatFwClusterRegionStatusRegionFwStatus)(nil)).Elem()
+}
+
+func (i GetNatFwClusterRegionStatusRegionFwStatusArgs) ToGetNatFwClusterRegionStatusRegionFwStatusOutput() GetNatFwClusterRegionStatusRegionFwStatusOutput {
+	return i.ToGetNatFwClusterRegionStatusRegionFwStatusOutputWithContext(context.Background())
+}
+
+func (i GetNatFwClusterRegionStatusRegionFwStatusArgs) ToGetNatFwClusterRegionStatusRegionFwStatusOutputWithContext(ctx context.Context) GetNatFwClusterRegionStatusRegionFwStatusOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNatFwClusterRegionStatusRegionFwStatusOutput)
+}
+
+// GetNatFwClusterRegionStatusRegionFwStatusArrayInput is an input type that accepts GetNatFwClusterRegionStatusRegionFwStatusArray and GetNatFwClusterRegionStatusRegionFwStatusArrayOutput values.
+// You can construct a concrete instance of `GetNatFwClusterRegionStatusRegionFwStatusArrayInput` via:
+//
+//	GetNatFwClusterRegionStatusRegionFwStatusArray{ GetNatFwClusterRegionStatusRegionFwStatusArgs{...} }
+type GetNatFwClusterRegionStatusRegionFwStatusArrayInput interface {
+	pulumi.Input
+
+	ToGetNatFwClusterRegionStatusRegionFwStatusArrayOutput() GetNatFwClusterRegionStatusRegionFwStatusArrayOutput
+	ToGetNatFwClusterRegionStatusRegionFwStatusArrayOutputWithContext(context.Context) GetNatFwClusterRegionStatusRegionFwStatusArrayOutput
+}
+
+type GetNatFwClusterRegionStatusRegionFwStatusArray []GetNatFwClusterRegionStatusRegionFwStatusInput
+
+func (GetNatFwClusterRegionStatusRegionFwStatusArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNatFwClusterRegionStatusRegionFwStatus)(nil)).Elem()
+}
+
+func (i GetNatFwClusterRegionStatusRegionFwStatusArray) ToGetNatFwClusterRegionStatusRegionFwStatusArrayOutput() GetNatFwClusterRegionStatusRegionFwStatusArrayOutput {
+	return i.ToGetNatFwClusterRegionStatusRegionFwStatusArrayOutputWithContext(context.Background())
+}
+
+func (i GetNatFwClusterRegionStatusRegionFwStatusArray) ToGetNatFwClusterRegionStatusRegionFwStatusArrayOutputWithContext(ctx context.Context) GetNatFwClusterRegionStatusRegionFwStatusArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetNatFwClusterRegionStatusRegionFwStatusArrayOutput)
+}
+
+type GetNatFwClusterRegionStatusRegionFwStatusOutput struct{ *pulumi.OutputState }
+
+func (GetNatFwClusterRegionStatusRegionFwStatusOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetNatFwClusterRegionStatusRegionFwStatus)(nil)).Elem()
+}
+
+func (o GetNatFwClusterRegionStatusRegionFwStatusOutput) ToGetNatFwClusterRegionStatusRegionFwStatusOutput() GetNatFwClusterRegionStatusRegionFwStatusOutput {
+	return o
+}
+
+func (o GetNatFwClusterRegionStatusRegionFwStatusOutput) ToGetNatFwClusterRegionStatusRegionFwStatusOutputWithContext(ctx context.Context) GetNatFwClusterRegionStatusRegionFwStatusOutput {
+	return o
+}
+
+// CCN ID.
+func (o GetNatFwClusterRegionStatusRegionFwStatusOutput) CcnId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNatFwClusterRegionStatusRegionFwStatus) string { return v.CcnId }).(pulumi.StringOutput)
+}
+
+// Traffic steering network CIDR. Only has value when Status is Auto or Custom.
+func (o GetNatFwClusterRegionStatusRegionFwStatusOutput) Cidr() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNatFwClusterRegionStatusRegionFwStatus) string { return v.Cidr }).(pulumi.StringOutput)
+}
+
+// NAT gateway ID.
+func (o GetNatFwClusterRegionStatusRegionFwStatusOutput) NatInsId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNatFwClusterRegionStatusRegionFwStatus) string { return v.NatInsId }).(pulumi.StringOutput)
+}
+
+// Region, e.g. ap-guangzhou.
+func (o GetNatFwClusterRegionStatusRegionFwStatusOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNatFwClusterRegionStatusRegionFwStatus) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Traffic steering routing method. 0: multi-route table mode, 1: policy routing mode.
+func (o GetNatFwClusterRegionStatusRegionFwStatusOutput) RoutingMode() pulumi.IntOutput {
+	return o.ApplyT(func(v GetNatFwClusterRegionStatusRegionFwStatus) int { return v.RoutingMode }).(pulumi.IntOutput)
+}
+
+// Region cluster status. Valid values: `NotDeployed` (cluster not deployed), `Deployed` (cluster deployed but traffic steering network not created), `DeployedCustomOnly` (cluster deployed but internal segment covered, need custom traffic steering segment), `Auto` (traffic steering network created with auto-assigned CIDR), `Custom` (traffic steering network created with custom CIDR).
+func (o GetNatFwClusterRegionStatusRegionFwStatusOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetNatFwClusterRegionStatusRegionFwStatus) string { return v.Status }).(pulumi.StringOutput)
+}
+
+type GetNatFwClusterRegionStatusRegionFwStatusArrayOutput struct{ *pulumi.OutputState }
+
+func (GetNatFwClusterRegionStatusRegionFwStatusArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetNatFwClusterRegionStatusRegionFwStatus)(nil)).Elem()
+}
+
+func (o GetNatFwClusterRegionStatusRegionFwStatusArrayOutput) ToGetNatFwClusterRegionStatusRegionFwStatusArrayOutput() GetNatFwClusterRegionStatusRegionFwStatusArrayOutput {
+	return o
+}
+
+func (o GetNatFwClusterRegionStatusRegionFwStatusArrayOutput) ToGetNatFwClusterRegionStatusRegionFwStatusArrayOutputWithContext(ctx context.Context) GetNatFwClusterRegionStatusRegionFwStatusArrayOutput {
+	return o
+}
+
+func (o GetNatFwClusterRegionStatusRegionFwStatusArrayOutput) Index(i pulumi.IntInput) GetNatFwClusterRegionStatusRegionFwStatusOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetNatFwClusterRegionStatusRegionFwStatus {
+		return vs[0].([]GetNatFwClusterRegionStatusRegionFwStatus)[vs[1].(int)]
+	}).(GetNatFwClusterRegionStatusRegionFwStatusOutput)
 }
 
 type GetNatFwSwitchesData struct {
@@ -1040,28 +2935,84 @@ func (o GetVpcFwSwitchesSwitchListArrayOutput) Index(i pulumi.IntInput) GetVpcFw
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterNatFwSwitchNatCcnSwitchInput)(nil)).Elem(), ClusterNatFwSwitchNatCcnSwitchArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterNatFwSwitchNatCcnSwitchPtrInput)(nil)).Elem(), ClusterNatFwSwitchNatCcnSwitchArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterNatFwSwitchNatCcnSwitchAccessInstanceListInput)(nil)).Elem(), ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArrayInput)(nil)).Elem(), ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterVpcFwSwitchInterconnectPairInput)(nil)).Elem(), ClusterVpcFwSwitchInterconnectPairArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterVpcFwSwitchInterconnectPairArrayInput)(nil)).Elem(), ClusterVpcFwSwitchInterconnectPairArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterVpcFwSwitchInterconnectPairGroupAInput)(nil)).Elem(), ClusterVpcFwSwitchInterconnectPairGroupAArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterVpcFwSwitchInterconnectPairGroupAArrayInput)(nil)).Elem(), ClusterVpcFwSwitchInterconnectPairGroupAArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterVpcFwSwitchInterconnectPairGroupBInput)(nil)).Elem(), ClusterVpcFwSwitchInterconnectPairGroupBArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterVpcFwSwitchInterconnectPairGroupBArrayInput)(nil)).Elem(), ClusterVpcFwSwitchInterconnectPairGroupBArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterVpcFwSwitchRegionCidrConfigInput)(nil)).Elem(), ClusterVpcFwSwitchRegionCidrConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterVpcFwSwitchRegionCidrConfigArrayInput)(nil)).Elem(), ClusterVpcFwSwitchRegionCidrConfigArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NatInstanceNewModeItemsInput)(nil)).Elem(), NatInstanceNewModeItemsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NatInstanceNewModeItemsPtrInput)(nil)).Elem(), NatInstanceNewModeItemsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*VpcInstanceVpcFwInstanceInput)(nil)).Elem(), VpcInstanceVpcFwInstanceArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*VpcInstanceVpcFwInstanceArrayInput)(nil)).Elem(), VpcInstanceVpcFwInstanceArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*VpcInstanceVpcFwInstanceFwDeployInput)(nil)).Elem(), VpcInstanceVpcFwInstanceFwDeployArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VpcInstanceVpcFwInstanceFwGatewayInput)(nil)).Elem(), VpcInstanceVpcFwInstanceFwGatewayArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VpcInstanceVpcFwInstanceFwGatewayArrayInput)(nil)).Elem(), VpcInstanceVpcFwInstanceFwGatewayArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*VpcPolicyBetaListInput)(nil)).Elem(), VpcPolicyBetaListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*VpcPolicyBetaListArrayInput)(nil)).Elem(), VpcPolicyBetaListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCcnAssociatedInstancesCcnAssociatedInstanceInput)(nil)).Elem(), GetCcnAssociatedInstancesCcnAssociatedInstanceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCcnAssociatedInstancesCcnAssociatedInstanceArrayInput)(nil)).Elem(), GetCcnAssociatedInstancesCcnAssociatedInstanceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCcnInstanceRegionStatusRegionFwStatusInput)(nil)).Elem(), GetCcnInstanceRegionStatusRegionFwStatusArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCcnInstanceRegionStatusRegionFwStatusArrayInput)(nil)).Elem(), GetCcnInstanceRegionStatusRegionFwStatusArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCcnVpcFwSwitchInterconnectPairInput)(nil)).Elem(), GetCcnVpcFwSwitchInterconnectPairArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCcnVpcFwSwitchInterconnectPairArrayInput)(nil)).Elem(), GetCcnVpcFwSwitchInterconnectPairArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCcnVpcFwSwitchInterconnectPairGroupAInput)(nil)).Elem(), GetCcnVpcFwSwitchInterconnectPairGroupAArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCcnVpcFwSwitchInterconnectPairGroupAArrayInput)(nil)).Elem(), GetCcnVpcFwSwitchInterconnectPairGroupAArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCcnVpcFwSwitchInterconnectPairGroupBInput)(nil)).Elem(), GetCcnVpcFwSwitchInterconnectPairGroupBArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetCcnVpcFwSwitchInterconnectPairGroupBArrayInput)(nil)).Elem(), GetCcnVpcFwSwitchInterconnectPairGroupBArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetEdgeFwSwitchesDataInput)(nil)).Elem(), GetEdgeFwSwitchesDataArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetEdgeFwSwitchesDataArrayInput)(nil)).Elem(), GetEdgeFwSwitchesDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListInput)(nil)).Elem(), GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArrayInput)(nil)).Elem(), GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNatFwClusterRegionStatusRegionFwStatusInput)(nil)).Elem(), GetNatFwClusterRegionStatusRegionFwStatusArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetNatFwClusterRegionStatusRegionFwStatusArrayInput)(nil)).Elem(), GetNatFwClusterRegionStatusRegionFwStatusArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetNatFwSwitchesDataInput)(nil)).Elem(), GetNatFwSwitchesDataArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetNatFwSwitchesDataArrayInput)(nil)).Elem(), GetNatFwSwitchesDataArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetVpcFwSwitchesSwitchListInput)(nil)).Elem(), GetVpcFwSwitchesSwitchListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetVpcFwSwitchesSwitchListArrayInput)(nil)).Elem(), GetVpcFwSwitchesSwitchListArray{})
+	pulumi.RegisterOutputType(ClusterNatFwSwitchNatCcnSwitchOutput{})
+	pulumi.RegisterOutputType(ClusterNatFwSwitchNatCcnSwitchPtrOutput{})
+	pulumi.RegisterOutputType(ClusterNatFwSwitchNatCcnSwitchAccessInstanceListOutput{})
+	pulumi.RegisterOutputType(ClusterNatFwSwitchNatCcnSwitchAccessInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(ClusterVpcFwSwitchInterconnectPairOutput{})
+	pulumi.RegisterOutputType(ClusterVpcFwSwitchInterconnectPairArrayOutput{})
+	pulumi.RegisterOutputType(ClusterVpcFwSwitchInterconnectPairGroupAOutput{})
+	pulumi.RegisterOutputType(ClusterVpcFwSwitchInterconnectPairGroupAArrayOutput{})
+	pulumi.RegisterOutputType(ClusterVpcFwSwitchInterconnectPairGroupBOutput{})
+	pulumi.RegisterOutputType(ClusterVpcFwSwitchInterconnectPairGroupBArrayOutput{})
+	pulumi.RegisterOutputType(ClusterVpcFwSwitchRegionCidrConfigOutput{})
+	pulumi.RegisterOutputType(ClusterVpcFwSwitchRegionCidrConfigArrayOutput{})
 	pulumi.RegisterOutputType(NatInstanceNewModeItemsOutput{})
 	pulumi.RegisterOutputType(NatInstanceNewModeItemsPtrOutput{})
 	pulumi.RegisterOutputType(VpcInstanceVpcFwInstanceOutput{})
 	pulumi.RegisterOutputType(VpcInstanceVpcFwInstanceArrayOutput{})
 	pulumi.RegisterOutputType(VpcInstanceVpcFwInstanceFwDeployOutput{})
+	pulumi.RegisterOutputType(VpcInstanceVpcFwInstanceFwGatewayOutput{})
+	pulumi.RegisterOutputType(VpcInstanceVpcFwInstanceFwGatewayArrayOutput{})
 	pulumi.RegisterOutputType(VpcPolicyBetaListOutput{})
 	pulumi.RegisterOutputType(VpcPolicyBetaListArrayOutput{})
+	pulumi.RegisterOutputType(GetCcnAssociatedInstancesCcnAssociatedInstanceOutput{})
+	pulumi.RegisterOutputType(GetCcnAssociatedInstancesCcnAssociatedInstanceArrayOutput{})
+	pulumi.RegisterOutputType(GetCcnInstanceRegionStatusRegionFwStatusOutput{})
+	pulumi.RegisterOutputType(GetCcnInstanceRegionStatusRegionFwStatusArrayOutput{})
+	pulumi.RegisterOutputType(GetCcnVpcFwSwitchInterconnectPairOutput{})
+	pulumi.RegisterOutputType(GetCcnVpcFwSwitchInterconnectPairArrayOutput{})
+	pulumi.RegisterOutputType(GetCcnVpcFwSwitchInterconnectPairGroupAOutput{})
+	pulumi.RegisterOutputType(GetCcnVpcFwSwitchInterconnectPairGroupAArrayOutput{})
+	pulumi.RegisterOutputType(GetCcnVpcFwSwitchInterconnectPairGroupBOutput{})
+	pulumi.RegisterOutputType(GetCcnVpcFwSwitchInterconnectPairGroupBArrayOutput{})
 	pulumi.RegisterOutputType(GetEdgeFwSwitchesDataOutput{})
 	pulumi.RegisterOutputType(GetEdgeFwSwitchesDataArrayOutput{})
+	pulumi.RegisterOutputType(GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListOutput{})
+	pulumi.RegisterOutputType(GetNatFwClusterRegionStatusNatClusterRegionStatusQueryListArrayOutput{})
+	pulumi.RegisterOutputType(GetNatFwClusterRegionStatusRegionFwStatusOutput{})
+	pulumi.RegisterOutputType(GetNatFwClusterRegionStatusRegionFwStatusArrayOutput{})
 	pulumi.RegisterOutputType(GetNatFwSwitchesDataOutput{})
 	pulumi.RegisterOutputType(GetNatFwSwitchesDataArrayOutput{})
 	pulumi.RegisterOutputType(GetVpcFwSwitchesSwitchListOutput{})

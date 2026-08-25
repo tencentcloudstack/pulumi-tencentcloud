@@ -73,12 +73,8 @@ type GetScalingConfigsResult struct {
 }
 
 func GetScalingConfigsOutput(ctx *pulumi.Context, args GetScalingConfigsOutputArgs, opts ...pulumi.InvokeOption) GetScalingConfigsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetScalingConfigsResultOutput, error) {
-			args := v.(GetScalingConfigsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:As/getScalingConfigs:getScalingConfigs", args, GetScalingConfigsResultOutput{}, options).(GetScalingConfigsResultOutput), nil
-		}).(GetScalingConfigsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:As/getScalingConfigs:getScalingConfigs", args, GetScalingConfigsResultOutput{}, options).(GetScalingConfigsResultOutput)
 }
 
 // A collection of arguments for invoking getScalingConfigs.

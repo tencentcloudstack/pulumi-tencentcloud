@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const slowLogData = tencentcloud.Mysql.getSlowLogData({
+ * const slowLogData = tencentcloud.mysql.getSlowLogData({
  *     instanceId: "cdb-fitq5t9h",
  *     startTime: 1682664459,
  *     endTime: 1684392459,
@@ -122,7 +122,7 @@ export interface GetSlowLogDataResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const slowLogData = tencentcloud.Mysql.getSlowLogData({
+ * const slowLogData = tencentcloud.mysql.getSlowLogData({
  *     instanceId: "cdb-fitq5t9h",
  *     startTime: 1682664459,
  *     endTime: 1684392459,
@@ -158,7 +158,7 @@ export interface GetSlowLogDataOutputArgs {
     /**
      * List of databases accessed.
      */
-    dataBases?: pulumi.Input<pulumi.Input<string>[]>;
+    dataBases?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * End timestamp. For example 1585142640.
      */
@@ -166,7 +166,7 @@ export interface GetSlowLogDataOutputArgs {
     /**
      * Only valid when the instance is the master instance or disaster recovery instance, the optional value: slave, which means to pull the log of the slave machine.
      */
-    instType?: pulumi.Input<string>;
+    instType?: pulumi.Input<string | undefined>;
     /**
      * instance id.
      */
@@ -174,15 +174,15 @@ export interface GetSlowLogDataOutputArgs {
     /**
      * Sort in ascending or descending order. Currently supported: ASC,DESC.
      */
-    orderBy?: pulumi.Input<string>;
+    orderBy?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Sort field. Currently supported: Timestamp, QueryTime, LockTime, RowsExamined, RowsSent.
      */
-    sortBy?: pulumi.Input<string>;
+    sortBy?: pulumi.Input<string | undefined>;
     /**
      * Start timestamp. For example 1585142640.
      */
@@ -190,9 +190,9 @@ export interface GetSlowLogDataOutputArgs {
     /**
      * List of client hosts.
      */
-    userHosts?: pulumi.Input<pulumi.Input<string>[]>;
+    userHosts?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * A list of client usernames.
      */
-    userNames?: pulumi.Input<pulumi.Input<string>[]>;
+    userNames?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

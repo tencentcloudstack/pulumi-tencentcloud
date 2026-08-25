@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const templateLimits = tencentcloud.Vpc.getTemplateLimits({});
+ * const templateLimits = tencentcloud.vpc.getTemplateLimits({});
  * ```
  */
 export function getTemplateLimits(args?: GetTemplateLimitsArgs, opts?: pulumi.InvokeOptions): Promise<GetTemplateLimitsResult> {
@@ -59,7 +59,7 @@ export interface GetTemplateLimitsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const templateLimits = tencentcloud.Vpc.getTemplateLimits({});
+ * const templateLimits = tencentcloud.vpc.getTemplateLimits({});
  * ```
  */
 export function getTemplateLimitsOutput(args?: GetTemplateLimitsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTemplateLimitsResult> {
@@ -77,5 +77,5 @@ export interface GetTemplateLimitsOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

@@ -41,7 +41,7 @@ import (
 //				return err
 //			}
 //			exampleApi, err := apigateway.NewApi(ctx, "example", &apigateway.ApiArgs{
-//				ServiceId:           exampleService.ID(),
+//				ServiceId:           exampleService.ID().ToIDOutput().ToStringOutput(),
 //				ApiName:             pulumi.String("tf_example"),
 //				ApiDesc:             pulumi.String("my hello api update"),
 //				AuthType:            pulumi.String("APP"),
@@ -156,12 +156,8 @@ type GetApiAppServiceResult struct {
 }
 
 func GetApiAppServiceOutput(ctx *pulumi.Context, args GetApiAppServiceOutputArgs, opts ...pulumi.InvokeOption) GetApiAppServiceResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetApiAppServiceResultOutput, error) {
-			args := v.(GetApiAppServiceArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:ApiGateway/getApiAppService:getApiAppService", args, GetApiAppServiceResultOutput{}, options).(GetApiAppServiceResultOutput), nil
-		}).(GetApiAppServiceResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:ApiGateway/getApiAppService:getApiAppService", args, GetApiAppServiceResultOutput{}, options).(GetApiAppServiceResultOutput)
 }
 
 // A collection of arguments for invoking getApiAppService.

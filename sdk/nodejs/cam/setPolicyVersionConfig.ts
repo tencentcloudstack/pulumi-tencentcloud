@@ -102,11 +102,11 @@ export interface SetPolicyVersionConfigState {
     /**
      * Policy ID.
      */
-    policyId?: pulumi.Input<number>;
+    policyId?: pulumi.Input<number | undefined>;
     /**
      * The policy version number, which can be obtained from ListPolicyVersions.
      */
-    versionId?: pulumi.Input<number>;
+    versionId?: pulumi.Input<number | undefined>;
 }
 
 /**

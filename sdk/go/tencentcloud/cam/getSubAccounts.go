@@ -24,19 +24,21 @@ import (
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cam"
 //
 // )
-// func main() {
-// pulumi.Run(func(ctx *pulumi.Context) error {
-// _, err := cam.GetSubAccounts(ctx, &cam.GetSubAccountsArgs{
-// FilterSubAccountUins: interface{}{
-// 100037718139,
-// },
-// }, nil);
-// if err != nil {
-// return err
-// }
-// return nil
-// })
-// }
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := cam.GetSubAccounts(ctx, &cam.GetSubAccountsArgs{
+//				FilterSubAccountUins: pulumi.IntArray{
+//					100037718139,
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
 func GetSubAccounts(ctx *pulumi.Context, args *GetSubAccountsArgs, opts ...pulumi.InvokeOption) (*GetSubAccountsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
@@ -67,12 +69,8 @@ type GetSubAccountsResult struct {
 }
 
 func GetSubAccountsOutput(ctx *pulumi.Context, args GetSubAccountsOutputArgs, opts ...pulumi.InvokeOption) GetSubAccountsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSubAccountsResultOutput, error) {
-			args := v.(GetSubAccountsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cam/getSubAccounts:getSubAccounts", args, GetSubAccountsResultOutput{}, options).(GetSubAccountsResultOutput), nil
-		}).(GetSubAccountsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cam/getSubAccounts:getSubAccounts", args, GetSubAccountsResultOutput{}, options).(GetSubAccountsResultOutput)
 }
 
 // A collection of arguments for invoking getSubAccounts.

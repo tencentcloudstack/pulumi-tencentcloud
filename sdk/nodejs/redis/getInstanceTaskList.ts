@@ -15,15 +15,15 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instanceTaskList = tencentcloud.Redis.getInstanceTaskList({
+ * const instanceTaskList = tencentcloud.redis.getInstanceTaskList({
  *     instanceId: "crs-c1nl9rpv",
  *     instanceName: "",
- *     projectIds: [""],
+ *     projectIds: [Number("")],
  *     taskTypes: [""],
  *     beginTime: "2021-12-30 00:00:00",
  *     endTime: "2021-12-30 00:00:00",
- *     taskStatuses: [""],
- *     results: [""],
+ *     taskStatuses: [Number("")],
+ *     results: [Number("")],
  *     operateUins: [""],
  * });
  * ```
@@ -135,15 +135,15 @@ export interface GetInstanceTaskListResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instanceTaskList = tencentcloud.Redis.getInstanceTaskList({
+ * const instanceTaskList = tencentcloud.redis.getInstanceTaskList({
  *     instanceId: "crs-c1nl9rpv",
  *     instanceName: "",
- *     projectIds: [""],
+ *     projectIds: [Number("")],
  *     taskTypes: [""],
  *     beginTime: "2021-12-30 00:00:00",
  *     endTime: "2021-12-30 00:00:00",
- *     taskStatuses: [""],
- *     results: [""],
+ *     taskStatuses: [Number("")],
+ *     results: [Number("")],
  *     operateUins: [""],
  * });
  * ```
@@ -172,41 +172,41 @@ export interface GetInstanceTaskListOutputArgs {
     /**
      * Start time.
      */
-    beginTime?: pulumi.Input<string>;
+    beginTime?: pulumi.Input<string | undefined>;
     /**
      * Termination time.
      */
-    endTime?: pulumi.Input<string>;
+    endTime?: pulumi.Input<string | undefined>;
     /**
      * The ID of instance.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Instance name.
      */
-    instanceName?: pulumi.Input<string>;
+    instanceName?: pulumi.Input<string | undefined>;
     /**
      * Operator Uin.
      */
-    operateUins?: pulumi.Input<pulumi.Input<string>[]>;
+    operateUins?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Project Id.
      */
-    projectIds?: pulumi.Input<pulumi.Input<number>[]>;
+    projectIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Task status.
      */
-    results?: pulumi.Input<pulumi.Input<number>[]>;
+    results?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Task status.
      */
-    taskStatuses?: pulumi.Input<pulumi.Input<number>[]>;
+    taskStatuses?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Task type.
      */
-    taskTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    taskTypes?: pulumi.Input<pulumi.Input<string>[] | undefined>;
 }

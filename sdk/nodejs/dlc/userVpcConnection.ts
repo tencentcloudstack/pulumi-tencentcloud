@@ -141,27 +141,27 @@ export interface UserVpcConnectionState {
     /**
      * Engine network ID.
      */
-    engineNetworkId?: pulumi.Input<string>;
+    engineNetworkId?: pulumi.Input<string | undefined>;
     /**
      * User subnet ID.
      */
-    userSubnetId?: pulumi.Input<string>;
+    userSubnetId?: pulumi.Input<string | undefined>;
     /**
      * User endpoint ID.
      */
-    userVpcEndpointId?: pulumi.Input<string>;
+    userVpcEndpointId?: pulumi.Input<string | undefined>;
     /**
      * User vpc endpoint name.
      */
-    userVpcEndpointName?: pulumi.Input<string>;
+    userVpcEndpointName?: pulumi.Input<string | undefined>;
     /**
      * Manually specify VIP, if not filled in, an IP address under the subnet will be automatically assigned.
      */
-    userVpcEndpointVip?: pulumi.Input<string>;
+    userVpcEndpointVip?: pulumi.Input<string | undefined>;
     /**
      * User vpc ID.
      */
-    userVpcId?: pulumi.Input<string>;
+    userVpcId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -183,7 +183,7 @@ export interface UserVpcConnectionArgs {
     /**
      * Manually specify VIP, if not filled in, an IP address under the subnet will be automatically assigned.
      */
-    userVpcEndpointVip?: pulumi.Input<string>;
+    userVpcEndpointVip?: pulumi.Input<string | undefined>;
     /**
      * User vpc ID.
      */

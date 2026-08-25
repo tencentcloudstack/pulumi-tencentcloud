@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const defaultParameters = tencentcloud.Postgresql.getDefaultParameters({
+ * const defaultParameters = tencentcloud.postgresql.getDefaultParameters({
  *     dbMajorVersion: "13",
  *     dbEngine: "postgresql",
  * });
@@ -73,7 +73,7 @@ export interface GetDefaultParametersResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const defaultParameters = tencentcloud.Postgresql.getDefaultParameters({
+ * const defaultParameters = tencentcloud.postgresql.getDefaultParameters({
  *     dbMajorVersion: "13",
  *     dbEngine: "postgresql",
  * });
@@ -103,5 +103,5 @@ export interface GetDefaultParametersOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

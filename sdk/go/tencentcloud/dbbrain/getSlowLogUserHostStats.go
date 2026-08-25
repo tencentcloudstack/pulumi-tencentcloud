@@ -82,12 +82,8 @@ type GetSlowLogUserHostStatsResult struct {
 }
 
 func GetSlowLogUserHostStatsOutput(ctx *pulumi.Context, args GetSlowLogUserHostStatsOutputArgs, opts ...pulumi.InvokeOption) GetSlowLogUserHostStatsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSlowLogUserHostStatsResultOutput, error) {
-			args := v.(GetSlowLogUserHostStatsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dbbrain/getSlowLogUserHostStats:getSlowLogUserHostStats", args, GetSlowLogUserHostStatsResultOutput{}, options).(GetSlowLogUserHostStatsResultOutput), nil
-		}).(GetSlowLogUserHostStatsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dbbrain/getSlowLogUserHostStats:getSlowLogUserHostStats", args, GetSlowLogUserHostStatsResultOutput{}, options).(GetSlowLogUserHostStatsResultOutput)
 }
 
 // A collection of arguments for invoking getSlowLogUserHostStats.

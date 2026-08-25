@@ -29,7 +29,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * cdwpg cdwpg_userhba can be imported using the id, e.g.
+ * cdwpg cdwpgUserhba can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Cdwpg/userhba:Userhba cdwpg_userhba cdwpg_userhba_id
@@ -107,11 +107,11 @@ export interface UserhbaState {
     /**
      * HBA configuration array.
      */
-    hbaConfigs?: pulumi.Input<pulumi.Input<inputs.Cdwpg.UserhbaHbaConfig>[]>;
+    hbaConfigs?: pulumi.Input<pulumi.Input<inputs.Cdwpg.UserhbaHbaConfig>[] | undefined>;
     /**
      * Instance id.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -121,7 +121,7 @@ export interface UserhbaArgs {
     /**
      * HBA configuration array.
      */
-    hbaConfigs?: pulumi.Input<pulumi.Input<inputs.Cdwpg.UserhbaHbaConfig>[]>;
+    hbaConfigs?: pulumi.Input<pulumi.Input<inputs.Cdwpg.UserhbaHbaConfig>[] | undefined>;
     /**
      * Instance id.
      */

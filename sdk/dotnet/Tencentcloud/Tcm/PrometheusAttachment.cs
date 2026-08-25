@@ -43,8 +43,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm
     /// 
     /// ## Import
     /// 
-    /// tcm prometheus_attachment can be imported using the mesh_id, e.g.
-    /// 
+    /// tcm PrometheusAttachment can be imported using the mesh_id, e.g.
     /// ```sh
     /// $ pulumi import tencentcloud:Tcm/prometheusAttachment:PrometheusAttachment prometheus_attachment mesh-rofjmxxx
     /// ```

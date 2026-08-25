@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const functionVersions = tencentcloud.Scf.getFunctionVersions({
+ * const functionVersions = tencentcloud.scf.getFunctionVersions({
  *     functionName: "keep-1676351130",
  *     namespace: "default",
  * });
@@ -85,7 +85,7 @@ export interface GetFunctionVersionsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const functionVersions = tencentcloud.Scf.getFunctionVersions({
+ * const functionVersions = tencentcloud.scf.getFunctionVersions({
  *     functionName: "keep-1676351130",
  *     namespace: "default",
  * });
@@ -113,17 +113,17 @@ export interface GetFunctionVersionsOutputArgs {
     /**
      * The namespace where the function locates.
      */
-    namespace?: pulumi.Input<string>;
+    namespace?: pulumi.Input<string | undefined>;
     /**
      * It specifies whether to return the results in ascending or descending order. The value is `ASC` or `DESC`.
      */
-    order?: pulumi.Input<string>;
+    order?: pulumi.Input<string | undefined>;
     /**
      * It specifies the sorting order of the results according to a specified field, such as `AddTime`, `ModTime`.
      */
-    orderBy?: pulumi.Input<string>;
+    orderBy?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

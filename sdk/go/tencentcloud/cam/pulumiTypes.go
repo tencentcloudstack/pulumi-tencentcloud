@@ -1674,6 +1674,281 @@ func (o GetPoliciesPolicyListArrayOutput) Index(i pulumi.IntInput) GetPoliciesPo
 	}).(GetPoliciesPolicyListOutput)
 }
 
+type GetPolicyDetailPolicyInfo struct {
+	// Time the policy was created.
+	AddTime string `pulumi:"addTime"`
+	// Policy description.
+	Description string `pulumi:"description"`
+	// Whether the policy is a service-linked role policy. 0 means no, 1 means yes.
+	IsServiceLinkedRolePolicy int `pulumi:"isServiceLinkedRolePolicy"`
+	// Policy document.
+	PolicyDocument string `pulumi:"policyDocument"`
+	// Policy name.
+	PolicyName string `pulumi:"policyName"`
+	// Preset policy alias. Note: this field may return null.
+	PresetAlias string `pulumi:"presetAlias"`
+	// Tags associated with the policy.
+	Tags []GetPolicyDetailPolicyInfoTag `pulumi:"tags"`
+	// Policy type. 1 means custom policy, 2 means preset policy.
+	Type int `pulumi:"type"`
+	// Time the policy was last updated.
+	UpdateTime string `pulumi:"updateTime"`
+}
+
+// GetPolicyDetailPolicyInfoInput is an input type that accepts GetPolicyDetailPolicyInfoArgs and GetPolicyDetailPolicyInfoOutput values.
+// You can construct a concrete instance of `GetPolicyDetailPolicyInfoInput` via:
+//
+//	GetPolicyDetailPolicyInfoArgs{...}
+type GetPolicyDetailPolicyInfoInput interface {
+	pulumi.Input
+
+	ToGetPolicyDetailPolicyInfoOutput() GetPolicyDetailPolicyInfoOutput
+	ToGetPolicyDetailPolicyInfoOutputWithContext(context.Context) GetPolicyDetailPolicyInfoOutput
+}
+
+type GetPolicyDetailPolicyInfoArgs struct {
+	// Time the policy was created.
+	AddTime pulumi.StringInput `pulumi:"addTime"`
+	// Policy description.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Whether the policy is a service-linked role policy. 0 means no, 1 means yes.
+	IsServiceLinkedRolePolicy pulumi.IntInput `pulumi:"isServiceLinkedRolePolicy"`
+	// Policy document.
+	PolicyDocument pulumi.StringInput `pulumi:"policyDocument"`
+	// Policy name.
+	PolicyName pulumi.StringInput `pulumi:"policyName"`
+	// Preset policy alias. Note: this field may return null.
+	PresetAlias pulumi.StringInput `pulumi:"presetAlias"`
+	// Tags associated with the policy.
+	Tags GetPolicyDetailPolicyInfoTagArrayInput `pulumi:"tags"`
+	// Policy type. 1 means custom policy, 2 means preset policy.
+	Type pulumi.IntInput `pulumi:"type"`
+	// Time the policy was last updated.
+	UpdateTime pulumi.StringInput `pulumi:"updateTime"`
+}
+
+func (GetPolicyDetailPolicyInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPolicyDetailPolicyInfo)(nil)).Elem()
+}
+
+func (i GetPolicyDetailPolicyInfoArgs) ToGetPolicyDetailPolicyInfoOutput() GetPolicyDetailPolicyInfoOutput {
+	return i.ToGetPolicyDetailPolicyInfoOutputWithContext(context.Background())
+}
+
+func (i GetPolicyDetailPolicyInfoArgs) ToGetPolicyDetailPolicyInfoOutputWithContext(ctx context.Context) GetPolicyDetailPolicyInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPolicyDetailPolicyInfoOutput)
+}
+
+// GetPolicyDetailPolicyInfoArrayInput is an input type that accepts GetPolicyDetailPolicyInfoArray and GetPolicyDetailPolicyInfoArrayOutput values.
+// You can construct a concrete instance of `GetPolicyDetailPolicyInfoArrayInput` via:
+//
+//	GetPolicyDetailPolicyInfoArray{ GetPolicyDetailPolicyInfoArgs{...} }
+type GetPolicyDetailPolicyInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetPolicyDetailPolicyInfoArrayOutput() GetPolicyDetailPolicyInfoArrayOutput
+	ToGetPolicyDetailPolicyInfoArrayOutputWithContext(context.Context) GetPolicyDetailPolicyInfoArrayOutput
+}
+
+type GetPolicyDetailPolicyInfoArray []GetPolicyDetailPolicyInfoInput
+
+func (GetPolicyDetailPolicyInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPolicyDetailPolicyInfo)(nil)).Elem()
+}
+
+func (i GetPolicyDetailPolicyInfoArray) ToGetPolicyDetailPolicyInfoArrayOutput() GetPolicyDetailPolicyInfoArrayOutput {
+	return i.ToGetPolicyDetailPolicyInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetPolicyDetailPolicyInfoArray) ToGetPolicyDetailPolicyInfoArrayOutputWithContext(ctx context.Context) GetPolicyDetailPolicyInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPolicyDetailPolicyInfoArrayOutput)
+}
+
+type GetPolicyDetailPolicyInfoOutput struct{ *pulumi.OutputState }
+
+func (GetPolicyDetailPolicyInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPolicyDetailPolicyInfo)(nil)).Elem()
+}
+
+func (o GetPolicyDetailPolicyInfoOutput) ToGetPolicyDetailPolicyInfoOutput() GetPolicyDetailPolicyInfoOutput {
+	return o
+}
+
+func (o GetPolicyDetailPolicyInfoOutput) ToGetPolicyDetailPolicyInfoOutputWithContext(ctx context.Context) GetPolicyDetailPolicyInfoOutput {
+	return o
+}
+
+// Time the policy was created.
+func (o GetPolicyDetailPolicyInfoOutput) AddTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPolicyDetailPolicyInfo) string { return v.AddTime }).(pulumi.StringOutput)
+}
+
+// Policy description.
+func (o GetPolicyDetailPolicyInfoOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPolicyDetailPolicyInfo) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Whether the policy is a service-linked role policy. 0 means no, 1 means yes.
+func (o GetPolicyDetailPolicyInfoOutput) IsServiceLinkedRolePolicy() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPolicyDetailPolicyInfo) int { return v.IsServiceLinkedRolePolicy }).(pulumi.IntOutput)
+}
+
+// Policy document.
+func (o GetPolicyDetailPolicyInfoOutput) PolicyDocument() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPolicyDetailPolicyInfo) string { return v.PolicyDocument }).(pulumi.StringOutput)
+}
+
+// Policy name.
+func (o GetPolicyDetailPolicyInfoOutput) PolicyName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPolicyDetailPolicyInfo) string { return v.PolicyName }).(pulumi.StringOutput)
+}
+
+// Preset policy alias. Note: this field may return null.
+func (o GetPolicyDetailPolicyInfoOutput) PresetAlias() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPolicyDetailPolicyInfo) string { return v.PresetAlias }).(pulumi.StringOutput)
+}
+
+// Tags associated with the policy.
+func (o GetPolicyDetailPolicyInfoOutput) Tags() GetPolicyDetailPolicyInfoTagArrayOutput {
+	return o.ApplyT(func(v GetPolicyDetailPolicyInfo) []GetPolicyDetailPolicyInfoTag { return v.Tags }).(GetPolicyDetailPolicyInfoTagArrayOutput)
+}
+
+// Policy type. 1 means custom policy, 2 means preset policy.
+func (o GetPolicyDetailPolicyInfoOutput) Type() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPolicyDetailPolicyInfo) int { return v.Type }).(pulumi.IntOutput)
+}
+
+// Time the policy was last updated.
+func (o GetPolicyDetailPolicyInfoOutput) UpdateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPolicyDetailPolicyInfo) string { return v.UpdateTime }).(pulumi.StringOutput)
+}
+
+type GetPolicyDetailPolicyInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetPolicyDetailPolicyInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPolicyDetailPolicyInfo)(nil)).Elem()
+}
+
+func (o GetPolicyDetailPolicyInfoArrayOutput) ToGetPolicyDetailPolicyInfoArrayOutput() GetPolicyDetailPolicyInfoArrayOutput {
+	return o
+}
+
+func (o GetPolicyDetailPolicyInfoArrayOutput) ToGetPolicyDetailPolicyInfoArrayOutputWithContext(ctx context.Context) GetPolicyDetailPolicyInfoArrayOutput {
+	return o
+}
+
+func (o GetPolicyDetailPolicyInfoArrayOutput) Index(i pulumi.IntInput) GetPolicyDetailPolicyInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetPolicyDetailPolicyInfo {
+		return vs[0].([]GetPolicyDetailPolicyInfo)[vs[1].(int)]
+	}).(GetPolicyDetailPolicyInfoOutput)
+}
+
+type GetPolicyDetailPolicyInfoTag struct {
+	// Tag key.
+	Key string `pulumi:"key"`
+	// Tag value.
+	Value string `pulumi:"value"`
+}
+
+// GetPolicyDetailPolicyInfoTagInput is an input type that accepts GetPolicyDetailPolicyInfoTagArgs and GetPolicyDetailPolicyInfoTagOutput values.
+// You can construct a concrete instance of `GetPolicyDetailPolicyInfoTagInput` via:
+//
+//	GetPolicyDetailPolicyInfoTagArgs{...}
+type GetPolicyDetailPolicyInfoTagInput interface {
+	pulumi.Input
+
+	ToGetPolicyDetailPolicyInfoTagOutput() GetPolicyDetailPolicyInfoTagOutput
+	ToGetPolicyDetailPolicyInfoTagOutputWithContext(context.Context) GetPolicyDetailPolicyInfoTagOutput
+}
+
+type GetPolicyDetailPolicyInfoTagArgs struct {
+	// Tag key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Tag value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetPolicyDetailPolicyInfoTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPolicyDetailPolicyInfoTag)(nil)).Elem()
+}
+
+func (i GetPolicyDetailPolicyInfoTagArgs) ToGetPolicyDetailPolicyInfoTagOutput() GetPolicyDetailPolicyInfoTagOutput {
+	return i.ToGetPolicyDetailPolicyInfoTagOutputWithContext(context.Background())
+}
+
+func (i GetPolicyDetailPolicyInfoTagArgs) ToGetPolicyDetailPolicyInfoTagOutputWithContext(ctx context.Context) GetPolicyDetailPolicyInfoTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPolicyDetailPolicyInfoTagOutput)
+}
+
+// GetPolicyDetailPolicyInfoTagArrayInput is an input type that accepts GetPolicyDetailPolicyInfoTagArray and GetPolicyDetailPolicyInfoTagArrayOutput values.
+// You can construct a concrete instance of `GetPolicyDetailPolicyInfoTagArrayInput` via:
+//
+//	GetPolicyDetailPolicyInfoTagArray{ GetPolicyDetailPolicyInfoTagArgs{...} }
+type GetPolicyDetailPolicyInfoTagArrayInput interface {
+	pulumi.Input
+
+	ToGetPolicyDetailPolicyInfoTagArrayOutput() GetPolicyDetailPolicyInfoTagArrayOutput
+	ToGetPolicyDetailPolicyInfoTagArrayOutputWithContext(context.Context) GetPolicyDetailPolicyInfoTagArrayOutput
+}
+
+type GetPolicyDetailPolicyInfoTagArray []GetPolicyDetailPolicyInfoTagInput
+
+func (GetPolicyDetailPolicyInfoTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPolicyDetailPolicyInfoTag)(nil)).Elem()
+}
+
+func (i GetPolicyDetailPolicyInfoTagArray) ToGetPolicyDetailPolicyInfoTagArrayOutput() GetPolicyDetailPolicyInfoTagArrayOutput {
+	return i.ToGetPolicyDetailPolicyInfoTagArrayOutputWithContext(context.Background())
+}
+
+func (i GetPolicyDetailPolicyInfoTagArray) ToGetPolicyDetailPolicyInfoTagArrayOutputWithContext(ctx context.Context) GetPolicyDetailPolicyInfoTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetPolicyDetailPolicyInfoTagArrayOutput)
+}
+
+type GetPolicyDetailPolicyInfoTagOutput struct{ *pulumi.OutputState }
+
+func (GetPolicyDetailPolicyInfoTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetPolicyDetailPolicyInfoTag)(nil)).Elem()
+}
+
+func (o GetPolicyDetailPolicyInfoTagOutput) ToGetPolicyDetailPolicyInfoTagOutput() GetPolicyDetailPolicyInfoTagOutput {
+	return o
+}
+
+func (o GetPolicyDetailPolicyInfoTagOutput) ToGetPolicyDetailPolicyInfoTagOutputWithContext(ctx context.Context) GetPolicyDetailPolicyInfoTagOutput {
+	return o
+}
+
+// Tag key.
+func (o GetPolicyDetailPolicyInfoTagOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPolicyDetailPolicyInfoTag) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o GetPolicyDetailPolicyInfoTagOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetPolicyDetailPolicyInfoTag) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetPolicyDetailPolicyInfoTagArrayOutput struct{ *pulumi.OutputState }
+
+func (GetPolicyDetailPolicyInfoTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetPolicyDetailPolicyInfoTag)(nil)).Elem()
+}
+
+func (o GetPolicyDetailPolicyInfoTagArrayOutput) ToGetPolicyDetailPolicyInfoTagArrayOutput() GetPolicyDetailPolicyInfoTagArrayOutput {
+	return o
+}
+
+func (o GetPolicyDetailPolicyInfoTagArrayOutput) ToGetPolicyDetailPolicyInfoTagArrayOutputWithContext(ctx context.Context) GetPolicyDetailPolicyInfoTagArrayOutput {
+	return o
+}
+
+func (o GetPolicyDetailPolicyInfoTagArrayOutput) Index(i pulumi.IntInput) GetPolicyDetailPolicyInfoTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetPolicyDetailPolicyInfoTag {
+		return vs[0].([]GetPolicyDetailPolicyInfoTag)[vs[1].(int)]
+	}).(GetPolicyDetailPolicyInfoTagOutput)
+}
+
 type GetPolicyGrantingServiceAccessList struct {
 	// Action list.
 	Actions []GetPolicyGrantingServiceAccessListAction `pulumi:"actions"`
@@ -3482,6 +3757,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetListEntitiesForPolicyListArrayInput)(nil)).Elem(), GetListEntitiesForPolicyListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetPoliciesPolicyListInput)(nil)).Elem(), GetPoliciesPolicyListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetPoliciesPolicyListArrayInput)(nil)).Elem(), GetPoliciesPolicyListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPolicyDetailPolicyInfoInput)(nil)).Elem(), GetPolicyDetailPolicyInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPolicyDetailPolicyInfoArrayInput)(nil)).Elem(), GetPolicyDetailPolicyInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPolicyDetailPolicyInfoTagInput)(nil)).Elem(), GetPolicyDetailPolicyInfoTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetPolicyDetailPolicyInfoTagArrayInput)(nil)).Elem(), GetPolicyDetailPolicyInfoTagArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetPolicyGrantingServiceAccessListInput)(nil)).Elem(), GetPolicyGrantingServiceAccessListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetPolicyGrantingServiceAccessListArrayInput)(nil)).Elem(), GetPolicyGrantingServiceAccessListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetPolicyGrantingServiceAccessListActionInput)(nil)).Elem(), GetPolicyGrantingServiceAccessListActionArgs{})
@@ -3532,6 +3811,10 @@ func init() {
 	pulumi.RegisterOutputType(GetListEntitiesForPolicyListArrayOutput{})
 	pulumi.RegisterOutputType(GetPoliciesPolicyListOutput{})
 	pulumi.RegisterOutputType(GetPoliciesPolicyListArrayOutput{})
+	pulumi.RegisterOutputType(GetPolicyDetailPolicyInfoOutput{})
+	pulumi.RegisterOutputType(GetPolicyDetailPolicyInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetPolicyDetailPolicyInfoTagOutput{})
+	pulumi.RegisterOutputType(GetPolicyDetailPolicyInfoTagArrayOutput{})
 	pulumi.RegisterOutputType(GetPolicyGrantingServiceAccessListOutput{})
 	pulumi.RegisterOutputType(GetPolicyGrantingServiceAccessListArrayOutput{})
 	pulumi.RegisterOutputType(GetPolicyGrantingServiceAccessListActionOutput{})

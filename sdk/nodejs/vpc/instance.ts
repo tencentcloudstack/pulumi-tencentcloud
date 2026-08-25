@@ -7,6 +7,8 @@ import * as utilities from "../utilities";
 /**
  * Provide a resource to create a VPC.
  *
+ * > **NOTE:** In accordance with VPC business requirements, the default value for `isMulticast` has been updated to `false`(previously `true`) in version `v1.82.93` of the provider. If you wish to utilize this feature, you must first contact the VPC product team to have your account added to the whitelist, and then set the `isMulticast` field to `true`.
+ *
  * ## Example Usage
  *
  * ### Create a basic VPC
@@ -24,7 +26,7 @@ import * as utilities from "../utilities";
  *     ],
  *     isMulticast: false,
  *     tags: {
- *         test: "test",
+ *         createBy: "Terraform",
  *     },
  * });
  * ```
@@ -41,7 +43,28 @@ import * as utilities from "../utilities";
  *     isMulticast: false,
  *     assistantCidrs: ["172.16.0.0/24"],
  *     tags: {
- *         test: "test",
+ *         createBy: "Terraform",
+ *     },
+ * });
+ * ```
+ *
+ * ### Enable route vpc publish
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {
+ *     name: "tf-example",
+ *     cidrBlock: "10.0.0.0/16",
+ *     dnsServers: [
+ *         "119.29.29.29",
+ *         "8.8.8.8",
+ *     ],
+ *     isMulticast: false,
+ *     enableRouteVpcPublish: true,
+ *     tags: {
+ *         createBy: "Terraform",
  *     },
  * });
  * ```
@@ -51,7 +74,7 @@ import * as utilities from "../utilities";
  * Vpc instance can be imported, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Vpc/instance:Instance test vpc-id
+ * $ pulumi import tencentcloud:Vpc/instance:Instance vpc vpc-8vazrwjv
  * ```
  */
 export class Instance extends pulumi.CustomResource {
@@ -107,13 +130,21 @@ export class Instance extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly dockerAssistantCidrs: pulumi.Output<string[]>;
     /**
+     * Vpc association with CCN route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.
+     */
+    declare public readonly enableRouteVpcPublish: pulumi.Output<boolean>;
+    /**
+     * Vpc association with CCN IPV6 route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.
+     */
+    declare public readonly enableRouteVpcPublishIpv6: pulumi.Output<boolean>;
+    /**
      * Indicates whether it is the default VPC for this region.
      */
     declare public /*out*/ readonly isDefault: pulumi.Output<boolean>;
     /**
-     * Indicates whether VPC multicast is enabled. The default value is 'true'.
+     * Indicates whether VPC multicast is enabled. The default value is `false`. Multicast are whitelist-restricted. We recommend disabling these features if they are not applicable to your environment.
      */
-    declare public readonly isMulticast: pulumi.Output<boolean | undefined>;
+    declare public readonly isMulticast: pulumi.Output<boolean>;
     /**
      * The name of the VPC.
      */
@@ -142,6 +173,8 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["defaultRouteTableId"] = state?.defaultRouteTableId;
             resourceInputs["dnsServers"] = state?.dnsServers;
             resourceInputs["dockerAssistantCidrs"] = state?.dockerAssistantCidrs;
+            resourceInputs["enableRouteVpcPublish"] = state?.enableRouteVpcPublish;
+            resourceInputs["enableRouteVpcPublishIpv6"] = state?.enableRouteVpcPublishIpv6;
             resourceInputs["isDefault"] = state?.isDefault;
             resourceInputs["isMulticast"] = state?.isMulticast;
             resourceInputs["name"] = state?.name;
@@ -154,6 +187,8 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["assistantCidrs"] = args?.assistantCidrs;
             resourceInputs["cidrBlock"] = args?.cidrBlock;
             resourceInputs["dnsServers"] = args?.dnsServers;
+            resourceInputs["enableRouteVpcPublish"] = args?.enableRouteVpcPublish;
+            resourceInputs["enableRouteVpcPublishIpv6"] = args?.enableRouteVpcPublishIpv6;
             resourceInputs["isMulticast"] = args?.isMulticast;
             resourceInputs["name"] = args?.name;
             resourceInputs["tags"] = args?.tags;
@@ -174,43 +209,51 @@ export interface InstanceState {
     /**
      * List of Assistant CIDR, NOTE: Only `NORMAL` typed CIDRs included, check the Docker CIDR by readonly `assistantDockerCidrs`.
      */
-    assistantCidrs?: pulumi.Input<pulumi.Input<string>[]>;
+    assistantCidrs?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).
      */
-    cidrBlock?: pulumi.Input<string>;
+    cidrBlock?: pulumi.Input<string | undefined>;
     /**
      * Creation time of VPC.
      */
-    createTime?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string | undefined>;
     /**
      * Default route table id, which created automatically after VPC create.
      */
-    defaultRouteTableId?: pulumi.Input<string>;
+    defaultRouteTableId?: pulumi.Input<string | undefined>;
     /**
      * The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.
      */
-    dnsServers?: pulumi.Input<pulumi.Input<string>[]>;
+    dnsServers?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * List of Docker Assistant CIDR.
      */
-    dockerAssistantCidrs?: pulumi.Input<pulumi.Input<string>[]>;
+    dockerAssistantCidrs?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
+     * Vpc association with CCN route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.
+     */
+    enableRouteVpcPublish?: pulumi.Input<boolean | undefined>;
+    /**
+     * Vpc association with CCN IPV6 route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.
+     */
+    enableRouteVpcPublishIpv6?: pulumi.Input<boolean | undefined>;
     /**
      * Indicates whether it is the default VPC for this region.
      */
-    isDefault?: pulumi.Input<boolean>;
+    isDefault?: pulumi.Input<boolean | undefined>;
     /**
-     * Indicates whether VPC multicast is enabled. The default value is 'true'.
+     * Indicates whether VPC multicast is enabled. The default value is `false`. Multicast are whitelist-restricted. We recommend disabling these features if they are not applicable to your environment.
      */
-    isMulticast?: pulumi.Input<boolean>;
+    isMulticast?: pulumi.Input<boolean | undefined>;
     /**
      * The name of the VPC.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Tags of the VPC.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }
 
 /**
@@ -220,7 +263,7 @@ export interface InstanceArgs {
     /**
      * List of Assistant CIDR, NOTE: Only `NORMAL` typed CIDRs included, check the Docker CIDR by readonly `assistantDockerCidrs`.
      */
-    assistantCidrs?: pulumi.Input<pulumi.Input<string>[]>;
+    assistantCidrs?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * A network address block which should be a subnet of the three internal network segments (10.0.0.0/16, 172.16.0.0/12 and 192.168.0.0/16).
      */
@@ -228,17 +271,25 @@ export interface InstanceArgs {
     /**
      * The DNS server list of the VPC. And you can specify 0 to 5 servers to this list.
      */
-    dnsServers?: pulumi.Input<pulumi.Input<string>[]>;
+    dnsServers?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
-     * Indicates whether VPC multicast is enabled. The default value is 'true'.
+     * Vpc association with CCN route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.
      */
-    isMulticast?: pulumi.Input<boolean>;
+    enableRouteVpcPublish?: pulumi.Input<boolean | undefined>;
+    /**
+     * Vpc association with CCN IPV6 route publish policy. true: enables cidr route publishing. false: enables subnet route publishing. default is subnet route publishing when creating a vpc. to select cidr route publishing, submit a ticket for adding to allowlist.
+     */
+    enableRouteVpcPublishIpv6?: pulumi.Input<boolean | undefined>;
+    /**
+     * Indicates whether VPC multicast is enabled. The default value is `false`. Multicast are whitelist-restricted. We recommend disabling these features if they are not applicable to your environment.
+     */
+    isMulticast?: pulumi.Input<boolean | undefined>;
     /**
      * The name of the VPC.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Tags of the VPC.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

@@ -70,12 +70,8 @@ type GetBucketInventorysResult struct {
 }
 
 func GetBucketInventorysOutput(ctx *pulumi.Context, args GetBucketInventorysOutputArgs, opts ...pulumi.InvokeOption) GetBucketInventorysResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetBucketInventorysResultOutput, error) {
-			args := v.(GetBucketInventorysArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Cos/getBucketInventorys:getBucketInventorys", args, GetBucketInventorysResultOutput{}, options).(GetBucketInventorysResultOutput), nil
-		}).(GetBucketInventorysResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Cos/getBucketInventorys:getBucketInventorys", args, GetBucketInventorysResultOutput{}, options).(GetBucketInventorysResultOutput)
 }
 
 // A collection of arguments for invoking getBucketInventorys.

@@ -228,51 +228,51 @@ export interface ClsLogAttachmentState {
     /**
      * Cls region.
      */
-    clsRegion?: pulumi.Input<string>;
+    clsRegion?: pulumi.Input<string | undefined>;
     /**
      * Whether to create index.
      */
-    createIndex?: pulumi.Input<boolean>;
+    createIndex?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to create log set.
      */
-    createLogSet?: pulumi.Input<boolean>;
+    createLogSet?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to create log topic.
      */
-    createLogTopic?: pulumi.Input<boolean>;
+    createLogTopic?: pulumi.Input<boolean | undefined>;
     /**
      * The id of instance.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * If `createLogSet` is `true`, use log set name, Else use log set Id.
      */
-    logSet?: pulumi.Input<string>;
+    logSet?: pulumi.Input<string | undefined>;
     /**
      * Log set Id.
      */
-    logSetId?: pulumi.Input<string>;
+    logSetId?: pulumi.Input<string | undefined>;
     /**
      * If `createLogTopic` is `true`, use log topic name, Else use log topic Id.
      */
-    logTopic?: pulumi.Input<string>;
+    logTopic?: pulumi.Input<string | undefined>;
     /**
      * Log topic Id.
      */
-    logTopicId?: pulumi.Input<string>;
+    logTopicId?: pulumi.Input<string | undefined>;
     /**
      * Log type. Support `error` or `slowlog`.
      */
-    logType?: pulumi.Input<string>;
+    logType?: pulumi.Input<string | undefined>;
     /**
      * The validity period of the log theme is 30 days by default when not filled in.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * Log Status.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -282,19 +282,19 @@ export interface ClsLogAttachmentArgs {
     /**
      * Cls region.
      */
-    clsRegion?: pulumi.Input<string>;
+    clsRegion?: pulumi.Input<string | undefined>;
     /**
      * Whether to create index.
      */
-    createIndex?: pulumi.Input<boolean>;
+    createIndex?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to create log set.
      */
-    createLogSet?: pulumi.Input<boolean>;
+    createLogSet?: pulumi.Input<boolean | undefined>;
     /**
      * Whether to create log topic.
      */
-    createLogTopic?: pulumi.Input<boolean>;
+    createLogTopic?: pulumi.Input<boolean | undefined>;
     /**
      * The id of instance.
      */
@@ -314,5 +314,5 @@ export interface ClsLogAttachmentArgs {
     /**
      * The validity period of the log theme is 30 days by default when not filled in.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
 }

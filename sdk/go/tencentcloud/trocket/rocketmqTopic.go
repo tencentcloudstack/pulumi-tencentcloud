@@ -37,7 +37,7 @@ import (
 //				availabilityZone = param
 //			}
 //			// create vpc
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //				Name:      pulumi.String("vpc"),
 //			})
@@ -45,8 +45,8 @@ import (
 //				return err
 //			}
 //			// create subnet
-//			subnet, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//			subnet2, err := subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("subnet"),
 //				CidrBlock:        pulumi.String("10.0.1.0/24"),
@@ -61,8 +61,8 @@ import (
 //				InstanceType: pulumi.String("BASIC"),
 //				SkuCode:      pulumi.String("basic_2k"),
 //				Remark:       pulumi.String("remark."),
-//				VpcId:        vpc.ID(),
-//				SubnetId:     subnet.ID(),
+//				VpcId:        vpc2.ID().ToIDOutput().ToStringOutput(),
+//				SubnetId:     subnet2.ID().ToIDOutput().ToStringOutput(),
 //				Tags: pulumi.StringMap{
 //					"tag_key":   pulumi.String("createBy"),
 //					"tag_value": pulumi.String("Terraform"),
@@ -73,7 +73,7 @@ import (
 //			}
 //			// create topic
 //			_, err = trocket.NewRocketmqTopic(ctx, "example", &trocket.RocketmqTopicArgs{
-//				InstanceId: example.ID(),
+//				InstanceId: example.ID().ToIDOutput().ToStringOutput(),
 //				Topic:      pulumi.String("tf-example"),
 //				TopicType:  pulumi.String("NORMAL"),
 //				QueueNum:   pulumi.Int(4),

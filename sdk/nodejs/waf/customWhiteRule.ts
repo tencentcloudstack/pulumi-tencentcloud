@@ -283,47 +283,47 @@ export interface CustomWhiteRuleState {
     /**
      * The bypass modules are connected by commas between multiple modules. Supported modules ACL (Custom Rules), OWASP (Rule Engine), Webshell (Malicious File Detection), GeoIP (Geographic Block), BWIP (IP Black and White List), CC, BotRPC (BOT Protection), AntiLeakage (Information Leakage Prevention), API (API Security), AI (AI Engine), ipOutoDeny (IP Block), Applet (Mini Program Traffic Risk Control).
      */
-    bypass?: pulumi.Input<string>;
+    bypass?: pulumi.Input<string | undefined>;
     /**
      * Domain name that needs to add policy.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Expiration time in second-level timestamp, for example, 1677254399 indicates the expiration time is 2023-02-24 23:59:59; 0 indicates it will never expire.
      */
-    expireTime?: pulumi.Input<string>;
+    expireTime?: pulumi.Input<string | undefined>;
     /**
      * Rule execution time.
      */
-    jobDateTime?: pulumi.Input<inputs.Waf.CustomWhiteRuleJobDateTime>;
+    jobDateTime?: pulumi.Input<inputs.Waf.CustomWhiteRuleJobDateTime | undefined>;
     /**
      * Rule execution mode: TimedJob indicates scheduled execution. CronJob indicates periodic execution.
      */
-    jobType?: pulumi.Input<string>;
+    jobType?: pulumi.Input<string | undefined>;
     /**
      * Logical operator of configuration mode, and/or.
      */
-    logicalOp?: pulumi.Input<string>;
+    logicalOp?: pulumi.Input<string | undefined>;
     /**
      * Rule Name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * rule ID.
      */
-    ruleId?: pulumi.Input<string>;
+    ruleId?: pulumi.Input<string | undefined>;
     /**
      * Priority, value range 1-100, The smaller the number, the higher the execution priority of this rule.
      */
-    sortId?: pulumi.Input<string>;
+    sortId?: pulumi.Input<string | undefined>;
     /**
      * The status of the switch, 1 is on, 0 is off, default 1.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Strategies detail.
      */
-    strategies?: pulumi.Input<pulumi.Input<inputs.Waf.CustomWhiteRuleStrategy>[]>;
+    strategies?: pulumi.Input<pulumi.Input<inputs.Waf.CustomWhiteRuleStrategy>[] | undefined>;
 }
 
 /**
@@ -345,19 +345,19 @@ export interface CustomWhiteRuleArgs {
     /**
      * Rule execution time.
      */
-    jobDateTime?: pulumi.Input<inputs.Waf.CustomWhiteRuleJobDateTime>;
+    jobDateTime?: pulumi.Input<inputs.Waf.CustomWhiteRuleJobDateTime | undefined>;
     /**
      * Rule execution mode: TimedJob indicates scheduled execution. CronJob indicates periodic execution.
      */
-    jobType?: pulumi.Input<string>;
+    jobType?: pulumi.Input<string | undefined>;
     /**
      * Logical operator of configuration mode, and/or.
      */
-    logicalOp?: pulumi.Input<string>;
+    logicalOp?: pulumi.Input<string | undefined>;
     /**
      * Rule Name.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Priority, value range 1-100, The smaller the number, the higher the execution priority of this rule.
      */
@@ -365,7 +365,7 @@ export interface CustomWhiteRuleArgs {
     /**
      * The status of the switch, 1 is on, 0 is off, default 1.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
     /**
      * Strategies detail.
      */

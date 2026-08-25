@@ -169,47 +169,47 @@ export interface OrganizationMemberOperationState {
     /**
      * List of supporting documents of mutual trust entities.
      */
-    authFiles?: pulumi.Input<pulumi.Input<inputs.Invite.OrganizationMemberOperationAuthFile>[]>;
+    authFiles?: pulumi.Input<pulumi.Input<inputs.Invite.OrganizationMemberOperationAuthFile>[] | undefined>;
     /**
      * Whether to allow members to withdraw. Allow: Allow, Disallow: Denied.
      */
-    isAllowQuit?: pulumi.Input<string>;
+    isAllowQuit?: pulumi.Input<string | undefined>;
     /**
      * Invited account Uin.
      */
-    memberUin?: pulumi.Input<number>;
+    memberUin?: pulumi.Input<number | undefined>;
     /**
      * Member name. The maximum length is 25 characters and supports English letters, numbers, Chinese characters, symbols `+`, `@`, `&`, `.`, `[`, `]`, `-`, `:`, `,` and enumeration comma.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Node ID of the member's department.
      */
-    nodeId?: pulumi.Input<number>;
+    nodeId?: pulumi.Input<number | undefined>;
     /**
      * Payer Uin. Member needs to pay on behalf of.
      */
-    payUin?: pulumi.Input<string>;
+    payUin?: pulumi.Input<string | undefined>;
     /**
      * List of member financial authority IDs. Values: 1-View bill, 2-View balance, 3-Fund transfer, 4-Consolidated disbursement, 5-Invoice, 6-Benefit inheritance, 7-Proxy payment, 1 and 2 must be default.
      */
-    permissionIds?: pulumi.Input<pulumi.Input<number>[]>;
+    permissionIds?: pulumi.Input<pulumi.Input<number>[] | undefined>;
     /**
      * Relationship strategies. Value taken: Financial.
      */
-    policyType?: pulumi.Input<string>;
+    policyType?: pulumi.Input<string | undefined>;
     /**
      * Name of the real-name subject of mutual trust.
      */
-    relationAuthName?: pulumi.Input<string>;
+    relationAuthName?: pulumi.Input<string | undefined>;
     /**
      * Remark.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * List of member tags. Maximum 10.
      */
-    tags?: pulumi.Input<pulumi.Input<inputs.Invite.OrganizationMemberOperationTag>[]>;
+    tags?: pulumi.Input<pulumi.Input<inputs.Invite.OrganizationMemberOperationTag>[] | undefined>;
 }
 
 /**
@@ -219,11 +219,11 @@ export interface OrganizationMemberOperationArgs {
     /**
      * List of supporting documents of mutual trust entities.
      */
-    authFiles?: pulumi.Input<pulumi.Input<inputs.Invite.OrganizationMemberOperationAuthFile>[]>;
+    authFiles?: pulumi.Input<pulumi.Input<inputs.Invite.OrganizationMemberOperationAuthFile>[] | undefined>;
     /**
      * Whether to allow members to withdraw. Allow: Allow, Disallow: Denied.
      */
-    isAllowQuit?: pulumi.Input<string>;
+    isAllowQuit?: pulumi.Input<string | undefined>;
     /**
      * Invited account Uin.
      */
@@ -231,7 +231,7 @@ export interface OrganizationMemberOperationArgs {
     /**
      * Member name. The maximum length is 25 characters and supports English letters, numbers, Chinese characters, symbols `+`, `@`, `&`, `.`, `[`, `]`, `-`, `:`, `,` and enumeration comma.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Node ID of the member's department.
      */
@@ -239,7 +239,7 @@ export interface OrganizationMemberOperationArgs {
     /**
      * Payer Uin. Member needs to pay on behalf of.
      */
-    payUin?: pulumi.Input<string>;
+    payUin?: pulumi.Input<string | undefined>;
     /**
      * List of member financial authority IDs. Values: 1-View bill, 2-View balance, 3-Fund transfer, 4-Consolidated disbursement, 5-Invoice, 6-Benefit inheritance, 7-Proxy payment, 1 and 2 must be default.
      */
@@ -251,13 +251,13 @@ export interface OrganizationMemberOperationArgs {
     /**
      * Name of the real-name subject of mutual trust.
      */
-    relationAuthName?: pulumi.Input<string>;
+    relationAuthName?: pulumi.Input<string | undefined>;
     /**
      * Remark.
      */
-    remark?: pulumi.Input<string>;
+    remark?: pulumi.Input<string | undefined>;
     /**
      * List of member tags. Maximum 10.
      */
-    tags?: pulumi.Input<pulumi.Input<inputs.Invite.OrganizationMemberOperationTag>[]>;
+    tags?: pulumi.Input<pulumi.Input<inputs.Invite.OrganizationMemberOperationTag>[] | undefined>;
 }

@@ -34,6 +34,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc.Outputs
         /// ID of a route table entry.
         /// </summary>
         public readonly string RouteEntryId;
+        /// <summary>
+        /// The unique policy ID for the route.
+        /// </summary>
+        public readonly string RouteItemId;
 
         [OutputConstructor]
         private GetRouteTablesInstanceListRouteEntryInfoResult(
@@ -45,13 +49,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc.Outputs
 
             string nextType,
 
-            string routeEntryId)
+            string routeEntryId,
+
+            string routeItemId)
         {
             Description = description;
             DestinationCidrBlock = destinationCidrBlock;
             NextHub = nextHub;
             NextType = nextType;
             RouteEntryId = routeEntryId;
+            RouteItemId = routeItemId;
         }
     }
 }

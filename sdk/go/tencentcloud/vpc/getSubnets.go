@@ -36,7 +36,7 @@ import (
 //			if param := cfg.Get("availabilityZone"); param != "" {
 //				availabilityZone = param
 //			}
-//			vpc, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
+//			vpc2, err := vpc.NewInstance(ctx, "vpc", &vpc.InstanceArgs{
 //				Name:      pulumi.String("vpc"),
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
@@ -46,7 +46,7 @@ import (
 //			_, err = subnet.NewInstance(ctx, "subnet", &subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				Name:             pulumi.String("subnet1"),
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				CidrBlock:        pulumi.String("10.0.20.0/28"),
 //				IsMulticast:      pulumi.Bool(false),
 //				Tags: pulumi.StringMap{
@@ -57,7 +57,7 @@ import (
 //				return err
 //			}
 //			_, err = subnet.NewInstance(ctx, "subnetCDC", &subnet.InstanceArgs{
-//				VpcId:            vpc.ID(),
+//				VpcId:            vpc2.ID().ToIDOutput().ToStringOutput(),
 //				Name:             pulumi.String("subnet2"),
 //				CidrBlock:        pulumi.String("10.0.0.0/16"),
 //				CdcId:            pulumi.String("cluster-lchwgxhs"),
@@ -160,12 +160,8 @@ type GetSubnetsResult struct {
 }
 
 func GetSubnetsOutput(ctx *pulumi.Context, args GetSubnetsOutputArgs, opts ...pulumi.InvokeOption) GetSubnetsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetSubnetsResultOutput, error) {
-			args := v.(GetSubnetsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Vpc/getSubnets:getSubnets", args, GetSubnetsResultOutput{}, options).(GetSubnetsResultOutput), nil
-		}).(GetSubnetsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Vpc/getSubnets:getSubnets", args, GetSubnetsResultOutput{}, options).(GetSubnetsResultOutput)
 }
 
 // A collection of arguments for invoking getSubnets.

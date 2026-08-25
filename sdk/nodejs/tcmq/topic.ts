@@ -114,23 +114,23 @@ export interface TopicState {
     /**
      * Used to specify the message match policy for the topic. `1`: tag match policy (default value); `2`: routing match policy.
      */
-    filterType?: pulumi.Input<number>;
+    filterType?: pulumi.Input<number | undefined>;
     /**
      * Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.
      */
-    maxMsgSize?: pulumi.Input<number>;
+    maxMsgSize?: pulumi.Input<number | undefined>;
     /**
      * Message retention period. Value range: 60-86400 seconds (i.e., 1 minute-1 day). Default value: 86400.
      */
-    msgRetentionSeconds?: pulumi.Input<number>;
+    msgRetentionSeconds?: pulumi.Input<number | undefined>;
     /**
      * Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
      */
-    topicName?: pulumi.Input<string>;
+    topicName?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable message trace. true: yes; false: no. If this field is left empty, the feature will not be enabled.
      */
-    trace?: pulumi.Input<boolean>;
+    trace?: pulumi.Input<boolean | undefined>;
 }
 
 /**
@@ -140,15 +140,15 @@ export interface TopicArgs {
     /**
      * Used to specify the message match policy for the topic. `1`: tag match policy (default value); `2`: routing match policy.
      */
-    filterType?: pulumi.Input<number>;
+    filterType?: pulumi.Input<number | undefined>;
     /**
      * Maximum message length. Value range: 1024-65536 bytes (i.e., 1-64 KB). Default value: 65536.
      */
-    maxMsgSize?: pulumi.Input<number>;
+    maxMsgSize?: pulumi.Input<number | undefined>;
     /**
      * Message retention period. Value range: 60-86400 seconds (i.e., 1 minute-1 day). Default value: 86400.
      */
-    msgRetentionSeconds?: pulumi.Input<number>;
+    msgRetentionSeconds?: pulumi.Input<number | undefined>;
     /**
      * Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
      */
@@ -156,5 +156,5 @@ export interface TopicArgs {
     /**
      * Whether to enable message trace. true: yes; false: no. If this field is left empty, the feature will not be enabled.
      */
-    trace?: pulumi.Input<boolean>;
+    trace?: pulumi.Input<boolean | undefined>;
 }

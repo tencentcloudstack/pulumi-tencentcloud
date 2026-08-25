@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.Availability.getZonesByProduct({
+ * const zones = tencentcloud.availability.getZonesByProduct({
  *     product: "cdb",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {
@@ -186,31 +186,31 @@ export interface ParamTemplateState {
     /**
      * The description of parameter template.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * The engine type of instance, optional value is InnoDB or RocksDB, default to InnoDB.
      */
-    engineType?: pulumi.Input<string>;
+    engineType?: pulumi.Input<string | undefined>;
     /**
      * The version of MySQL.
      */
-    engineVersion?: pulumi.Input<string>;
+    engineVersion?: pulumi.Input<string | undefined>;
     /**
      * The name of parameter template.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * parameter list.
      */
-    paramLists?: pulumi.Input<pulumi.Input<inputs.Mysql.ParamTemplateParamList>[]>;
+    paramLists?: pulumi.Input<pulumi.Input<inputs.Mysql.ParamTemplateParamList>[] | undefined>;
     /**
      * The ID of source parameter template.
      */
-    templateId?: pulumi.Input<number>;
+    templateId?: pulumi.Input<number | undefined>;
     /**
      * The default type of parameter template, supported value is HIGH_STABILITY or HIGH_PERFORMANCE.
      */
-    templateType?: pulumi.Input<string>;
+    templateType?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -220,29 +220,29 @@ export interface ParamTemplateArgs {
     /**
      * The description of parameter template.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * The engine type of instance, optional value is InnoDB or RocksDB, default to InnoDB.
      */
-    engineType?: pulumi.Input<string>;
+    engineType?: pulumi.Input<string | undefined>;
     /**
      * The version of MySQL.
      */
-    engineVersion?: pulumi.Input<string>;
+    engineVersion?: pulumi.Input<string | undefined>;
     /**
      * The name of parameter template.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * parameter list.
      */
-    paramLists?: pulumi.Input<pulumi.Input<inputs.Mysql.ParamTemplateParamList>[]>;
+    paramLists?: pulumi.Input<pulumi.Input<inputs.Mysql.ParamTemplateParamList>[] | undefined>;
     /**
      * The ID of source parameter template.
      */
-    templateId?: pulumi.Input<number>;
+    templateId?: pulumi.Input<number | undefined>;
     /**
      * The default type of parameter template, supported value is HIGH_STABILITY or HIGH_PERFORMANCE.
      */
-    templateType?: pulumi.Input<string>;
+    templateType?: pulumi.Input<string | undefined>;
 }

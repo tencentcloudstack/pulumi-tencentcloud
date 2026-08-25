@@ -32,7 +32,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public Input<string>? Origin { get; set; }
 
         /// <summary>
-        /// Origin-Pull protocol configuration. this parameter is required when origintype is ipdomain, origingroup, or loadbalance. valid values are: Http: use http protocol; Https: use https protocol; Follow: follow the protocol.
+        /// Origin-Pull protocol configuration. this parameter is required when origintype is ipdomain, origingroup, or loadbalance. valid values are: http: use http protocol; https: use https protocol; follow: follow the protocol.
         /// </summary>
         [Input("originProtocol")]
         public Input<string>? OriginProtocol { get; set; }

@@ -161,19 +161,19 @@ export interface TargetGroupAttachmentState {
     /**
      * ID of the CLB.
      */
-    clbId?: pulumi.Input<string>;
+    clbId?: pulumi.Input<string | undefined>;
     /**
      * ID of the CLB listener.
      */
-    listenerId?: pulumi.Input<string>;
+    listenerId?: pulumi.Input<string | undefined>;
     /**
      * ID of the CLB listener rule.
      */
-    ruleId?: pulumi.Input<string>;
+    ruleId?: pulumi.Input<string | undefined>;
     /**
      * ID of the CLB target group.
      */
-    targetGroupId?: pulumi.Input<string>;
+    targetGroupId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -187,11 +187,11 @@ export interface TargetGroupAttachmentArgs {
     /**
      * ID of the CLB listener.
      */
-    listenerId?: pulumi.Input<string>;
+    listenerId?: pulumi.Input<string | undefined>;
     /**
      * ID of the CLB listener rule.
      */
-    ruleId?: pulumi.Input<string>;
+    ruleId?: pulumi.Input<string | undefined>;
     /**
      * ID of the CLB target group.
      */

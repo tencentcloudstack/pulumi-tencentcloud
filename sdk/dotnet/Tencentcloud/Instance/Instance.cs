@@ -25,6 +25,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
     /// 
     /// &gt; **NOTE:** When creating a prepaid CVM instance and binding a data disk, you need to explicitly set `DeleteWithInstance` to `False`.
     /// 
+    /// &gt; **NOTE:** When using dedicated resource pool packs, both `DedicatedResourcePackTenancy` and `DedicatedResourcePackIds` must be specified together. These parameters work with pre-purchased resource pool packs (resource `TencentcloudCvmResourcePoolPacks`).
+    /// 
     /// ## Example Usage
     /// 
     /// ### Create a general POSTPAID_BY_HOUR CVM instance
@@ -33,7 +35,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -95,6 +96,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
     ///         InstanceType = types.Apply(getTypesResult =&gt; getTypesResult.InstanceTypes[0]?.InstanceType),
     ///         SystemDiskType = "CLOUD_PREMIUM",
     ///         SystemDiskSize = 50,
+    ///         KmsKeyId = "kms-xxxxxxxx",
     ///         Hostname = "user",
     ///         ProjectId = 0,
     ///         VpcId = vpc.Id,
@@ -123,7 +125,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -217,7 +218,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -305,6 +305,110 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
     /// });
     /// ```
     /// 
+    /// ### Create a CVM instance using dedicated resource pool pack
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///     var images = Tencentcloud.Images.GetInstance.Invoke(new()
+    ///     {
+    ///         ImageTypes = new[]
+    ///         {
+    ///             "PUBLIC_IMAGE",
+    ///         },
+    ///         ImageNameRegex = "OpenCloudOS Server",
+    ///     });
+    /// 
+    ///     var types = Tencentcloud.Instance.GetTypes.Invoke(new()
+    ///     {
+    ///         Filters = new[]
+    ///         {
+    ///             new Tencentcloud.Instance.Inputs.GetTypesFilterInputArgs
+    ///             {
+    ///                 Name = "instance-family",
+    ///                 Values = new[]
+    ///                 {
+    ///                     "S1",
+    ///                     "S2",
+    ///                     "S3",
+    ///                     "S4",
+    ///                     "S5",
+    ///                 },
+    ///             },
+    ///         },
+    ///         CpuCoreCount = 2,
+    ///         ExcludeSoldOut = true,
+    ///     });
+    /// 
+    ///     // create vpc
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///         Name = "vpc",
+    ///     });
+    /// 
+    ///     // create subnet
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = availabilityZone,
+    ///         Name = "subnet",
+    ///         CidrBlock = "10.0.1.0/24",
+    ///     });
+    /// 
+    ///     // create resource pool pack (prerequisite)
+    ///     var example = new Tencentcloud.Cvm.ResourcePoolPack("example", new()
+    ///     {
+    ///         Zone = availabilityZone,
+    ///         InstanceType = types.Apply(getTypesResult =&gt; getTypesResult.InstanceTypes[0]?.InstanceType),
+    ///         InstanceCount = 10,
+    ///         Period = 1,
+    ///         ResourcePoolPackType = "Standard",
+    ///     });
+    /// 
+    ///     // create CVM instance using resource pool pack
+    ///     var exampleInstance = new Tencentcloud.Instance.Instance("example", new()
+    ///     {
+    ///         InstanceName = "tf-example-with-pool-pack",
+    ///         AvailabilityZone = availabilityZone,
+    ///         ImageId = images.Apply(getInstanceResult =&gt; getInstanceResult.Images[0]?.ImageId),
+    ///         InstanceType = types.Apply(getTypesResult =&gt; getTypesResult.InstanceTypes[0]?.InstanceType),
+    ///         SystemDiskType = "CLOUD_PREMIUM",
+    ///         SystemDiskSize = 50,
+    ///         Hostname = "user",
+    ///         ProjectId = 0,
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         DedicatedResourcePackTenancy = "ResourcePool",
+    ///         DedicatedResourcePackIds = new[]
+    ///         {
+    ///             exampleTencentcloudCvmResourcePoolPacks.DedicatedResourcePackId,
+    ///         },
+    ///         DataDisks = new[]
+    ///         {
+    ///             new Tencentcloud.Instance.Inputs.InstanceDataDiskArgs
+    ///             {
+    ///                 DataDiskType = "CLOUD_PREMIUM",
+    ///                 DataDiskSize = 50,
+    ///                 Encrypt = false,
+    ///             },
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "tagKey", "tagValue" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
     /// ### Create CVM instance with PlacementGroupId
     /// 
     /// ```csharp
@@ -348,7 +452,54 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
     /// });
     /// ```
     /// 
-    /// ### Create CVM instance with template
+    /// ### Create CVM instance with DisasterRecoverGroupIds
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Instance.Instance("example", new()
+    ///     {
+    ///         InstanceName = "tf-example",
+    ///         AvailabilityZone = "ap-guangzhou-6",
+    ///         ImageId = "img-eb30mz89",
+    ///         InstanceType = "S5.MEDIUM4",
+    ///         SystemDiskSize = 50,
+    ///         SystemDiskName = "sys_disk_1",
+    ///         Hostname = "user",
+    ///         ProjectId = 0,
+    ///         VpcId = "vpc-i5yyodl9",
+    ///         SubnetId = "subnet-hhi88a58",
+    ///         DisasterRecoverGroupIds = new[]
+    ///         {
+    ///             "ps-ejt4brtz",
+    ///         },
+    ///         DataDisks = new[]
+    ///         {
+    ///             new Tencentcloud.Instance.Inputs.InstanceDataDiskArgs
+    ///             {
+    ///                 DataDiskType = "CLOUD_HSSD",
+    ///                 DataDiskSize = 100,
+    ///                 Encrypt = false,
+    ///                 DataDiskName = "data_disk_1",
+    ///             },
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "tagKey", "tagValue" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### field is a create-only parameter. Once the instance is created, this field will not be updated from the API.
+    /// 
+    /// Create CVM instance with template
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
@@ -464,6 +615,55 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
     /// });
     /// ```
     /// 
+    /// ### Create CVM instance with CPU topology configuration
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Instance.Instance("example", new()
+    ///     {
+    ///         InstanceName = "tf-example",
+    ///         AvailabilityZone = "ap-guangzhou-6",
+    ///         ImageId = "img-eb30mz89",
+    ///         InstanceType = "S5.MEDIUM4",
+    ///         SystemDiskType = "CLOUD_HSSD",
+    ///         SystemDiskSize = 50,
+    ///         Hostname = "user",
+    ///         ProjectId = 0,
+    ///         VpcId = "vpc-i5yyodl9",
+    ///         SubnetId = "subnet-hhi88a58",
+    ///         OrderlySecurityGroups = new[]
+    ///         {
+    ///             "sg-ma82yjwp",
+    ///         },
+    ///         CpuTopology = new Tencentcloud.Instance.Inputs.InstanceCpuTopologyArgs
+    ///         {
+    ///             CoreCount = 2,
+    ///             ThreadPerCore = 1,
+    ///         },
+    ///         DataDisks = new[]
+    ///         {
+    ///             new Tencentcloud.Instance.Inputs.InstanceDataDiskArgs
+    ///             {
+    ///                 DataDiskType = "CLOUD_HSSD",
+    ///                 DataDiskSize = 100,
+    ///                 Encrypt = false,
+    ///             },
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "tagKey", "tagValue" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
     /// ## Import
     /// 
     /// CVM instance can be imported using the id, e.g.
@@ -524,6 +724,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         public Output<int> Cpu { get; private set; } = null!;
 
         /// <summary>
+        /// CPU topology configuration. Only supported when creating instances.
+        /// </summary>
+        [Output("cpuTopology")]
+        public Output<Outputs.InstanceCpuTopology> CpuTopology { get; private set; } = null!;
+
+        /// <summary>
         /// Create time of the instance.
         /// </summary>
         [Output("createTime")]
@@ -540,6 +746,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         /// </summary>
         [Output("dedicatedClusterId")]
         public Output<string?> DedicatedClusterId { get; private set; } = null!;
+
+        /// <summary>
+        /// List of dedicated resource pack IDs (e.g., rpp-xxxxxxxx). When creating instances using pre-purchased resource pool packs, this parameter must be specified together with `DedicatedResourcePackTenancy` to match the corresponding tenancy strategy. Related resource: `TencentcloudCvmResourcePoolPacks`.
+        /// </summary>
+        [Output("dedicatedResourcePackIds")]
+        public Output<ImmutableArray<string>> DedicatedResourcePackIds { get; private set; } = null!;
+
+        /// <summary>
+        /// Dedicated resource pack tenancy strategy. Valid values: `ResourcePool` (use instance resource pool for resource pre-deduction).
+        /// </summary>
+        [Output("dedicatedResourcePackTenancy")]
+        public Output<string?> DedicatedResourcePackTenancy { get; private set; } = null!;
 
         /// <summary>
         /// Whether the termination protection is enabled. Default is `False`. If set true, which means that this instance can not be deleted by an API action.
@@ -566,6 +784,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         public Output<bool?> DisableSecurityService { get; private set; } = null!;
 
         /// <summary>
+        /// Placement group ID list. Supports up to 3 group IDs. When set, `PlacementGroupId` will be ignored and this list will be used for CRUD operations.
+        /// </summary>
+        [Output("disasterRecoverGroupIds")]
+        public Output<ImmutableArray<string>> DisasterRecoverGroupIds { get; private set; } = null!;
+
+        /// <summary>
         /// Expired time of the instance.
         /// </summary>
         [Output("expiredTime")]
@@ -578,10 +802,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         public Output<bool?> ForceDelete { get; private set; } = null!;
 
         /// <summary>
-        /// Whether to force the instance host to be replaced. Value range: true: Allows the instance to change the host and restart the instance. Local disk machines do not support specifying this parameter; false: Does not allow the instance to change the host and only join the placement group on the current host. This may cause the placement group to fail to change. Only useful for change `PlacementGroupId`, Default is false.
+        /// Whether to force the instance host to be replaced. Value range: true: Allows the instance to change the host and restart the instance. Local disk machines do not support specifying this parameter; false: Does not allow the instance to change the host and only join the placement group on the current host. This may cause the placement group to fail to change. Can be used with both `PlacementGroupId` and `DisasterRecoverGroupIds`. Default is false.
         /// </summary>
         [Output("forceReplacePlacementGroupId")]
         public Output<bool?> ForceReplacePlacementGroupId { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.
+        /// </summary>
+        [Output("forceStop")]
+        public Output<bool> ForceStop { get; private set; } = null!;
 
         /// <summary>
         /// The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Changing the `Hostname` will cause the instance system to restart.
@@ -619,6 +849,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         [Output("instanceChargeTypePrepaidRenewFlag")]
         public Output<string> InstanceChargeTypePrepaidRenewFlag { get; private set; } = null!;
 
+        /// <summary>
+        /// The name of the instance. The max length of InstanceName is 128, and default value is `Terraform-CVM-Instance`.
+        /// </summary>
         [Output("instanceName")]
         public Output<string> InstanceName { get; private set; } = null!;
 
@@ -719,6 +952,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         public Output<string> OsName { get; private set; } = null!;
 
         /// <summary>
+        /// The partition number of the placement group. Valid values: 1-30. If not specified when creating an instance with a partition placement group, the partition number will be randomly assigned. Required when modifying `DisasterRecoverGroupIds` or `PlacementGroupId` in update operations.
+        /// </summary>
+        [Output("partitionNumber")]
+        public Output<int?> PartitionNumber { get; private set; } = null!;
+
+        /// <summary>
         /// Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifications may lead to the reinstallation of the instance's operating system.
         /// </summary>
         [Output("password")]
@@ -753,6 +992,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         /// </summary>
         [Output("publicIpv6Addresses")]
         public Output<ImmutableArray<string>> PublicIpv6Addresses { get; private set; } = null!;
+
+        /// <summary>
+        /// The rack ID of the instance resource pool to which the instance belongs.
+        /// </summary>
+        [Output("rackId")]
+        public Output<string> RackId { get; private set; } = null!;
 
         /// <summary>
         /// Release elastic IP. Under EIP 2.0, only the first EIP under the primary network card is provided, and the EIP types are limited to HighQualityEIP, AntiDDoSEIP, EIPv6, and HighQualityEIPv6. Default behavior is not released.
@@ -803,10 +1048,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         public Output<string> SubnetId { get; private set; } = null!;
 
         /// <summary>
+        /// Whether the system disk is encrypted. Valid values: true (encrypted), false (not encrypted). Default value: false.
+        /// </summary>
+        [Output("systemDiskEncrypt")]
+        public Output<bool> SystemDiskEncrypt { get; private set; } = null!;
+
+        /// <summary>
         /// System disk snapshot ID used to initialize the system disk. When system disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
         /// </summary>
         [Output("systemDiskId")]
         public Output<string> SystemDiskId { get; private set; } = null!;
+
+        /// <summary>
+        /// Custom KMS key ID for system disk encryption.
+        /// </summary>
+        [Output("systemDiskKmsKeyId")]
+        public Output<string> SystemDiskKmsKeyId { get; private set; } = null!;
 
         /// <summary>
         /// Name of the system disk.
@@ -961,6 +1218,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         [Input("cdhInstanceType")]
         public Input<string>? CdhInstanceType { get; set; }
 
+        /// <summary>
+        /// CPU topology configuration. Only supported when creating instances.
+        /// </summary>
+        [Input("cpuTopology")]
+        public Input<Inputs.InstanceCpuTopologyArgs>? CpuTopology { get; set; }
+
         [Input("dataDisks")]
         private InputList<Inputs.InstanceDataDiskArgs>? _dataDisks;
 
@@ -978,6 +1241,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         /// </summary>
         [Input("dedicatedClusterId")]
         public Input<string>? DedicatedClusterId { get; set; }
+
+        [Input("dedicatedResourcePackIds")]
+        private InputList<string>? _dedicatedResourcePackIds;
+
+        /// <summary>
+        /// List of dedicated resource pack IDs (e.g., rpp-xxxxxxxx). When creating instances using pre-purchased resource pool packs, this parameter must be specified together with `DedicatedResourcePackTenancy` to match the corresponding tenancy strategy. Related resource: `TencentcloudCvmResourcePoolPacks`.
+        /// </summary>
+        public InputList<string> DedicatedResourcePackIds
+        {
+            get => _dedicatedResourcePackIds ?? (_dedicatedResourcePackIds = new InputList<string>());
+            set => _dedicatedResourcePackIds = value;
+        }
+
+        /// <summary>
+        /// Dedicated resource pack tenancy strategy. Valid values: `ResourcePool` (use instance resource pool for resource pre-deduction).
+        /// </summary>
+        [Input("dedicatedResourcePackTenancy")]
+        public Input<string>? DedicatedResourcePackTenancy { get; set; }
 
         /// <summary>
         /// Whether the termination protection is enabled. Default is `False`. If set true, which means that this instance can not be deleted by an API action.
@@ -1003,6 +1284,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         [Input("disableSecurityService")]
         public Input<bool>? DisableSecurityService { get; set; }
 
+        [Input("disasterRecoverGroupIds")]
+        private InputList<string>? _disasterRecoverGroupIds;
+
+        /// <summary>
+        /// Placement group ID list. Supports up to 3 group IDs. When set, `PlacementGroupId` will be ignored and this list will be used for CRUD operations.
+        /// </summary>
+        public InputList<string> DisasterRecoverGroupIds
+        {
+            get => _disasterRecoverGroupIds ?? (_disasterRecoverGroupIds = new InputList<string>());
+            set => _disasterRecoverGroupIds = value;
+        }
+
         /// <summary>
         /// Indicate whether to force delete the instance. Default is `False`. If set true, the instance will be permanently deleted instead of being moved into the recycle bin. Note: only works for `PREPAID` instance.
         /// </summary>
@@ -1010,10 +1303,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         public Input<bool>? ForceDelete { get; set; }
 
         /// <summary>
-        /// Whether to force the instance host to be replaced. Value range: true: Allows the instance to change the host and restart the instance. Local disk machines do not support specifying this parameter; false: Does not allow the instance to change the host and only join the placement group on the current host. This may cause the placement group to fail to change. Only useful for change `PlacementGroupId`, Default is false.
+        /// Whether to force the instance host to be replaced. Value range: true: Allows the instance to change the host and restart the instance. Local disk machines do not support specifying this parameter; false: Does not allow the instance to change the host and only join the placement group on the current host. This may cause the placement group to fail to change. Can be used with both `PlacementGroupId` and `DisasterRecoverGroupIds`. Default is false.
         /// </summary>
         [Input("forceReplacePlacementGroupId")]
         public Input<bool>? ForceReplacePlacementGroupId { get; set; }
+
+        /// <summary>
+        /// Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.
+        /// </summary>
+        [Input("forceStop")]
+        public Input<bool>? ForceStop { get; set; }
 
         /// <summary>
         /// The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Changing the `Hostname` will cause the instance system to restart.
@@ -1051,6 +1350,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         [Input("instanceChargeTypePrepaidRenewFlag")]
         public Input<string>? InstanceChargeTypePrepaidRenewFlag { get; set; }
 
+        /// <summary>
+        /// The name of the instance. The max length of InstanceName is 128, and default value is `Terraform-CVM-Instance`.
+        /// </summary>
         [Input("instanceName")]
         public Input<string>? InstanceName { get; set; }
 
@@ -1137,6 +1439,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
             get => _orderlySecurityGroups ?? (_orderlySecurityGroups = new InputList<string>());
             set => _orderlySecurityGroups = value;
         }
+
+        /// <summary>
+        /// The partition number of the placement group. Valid values: 1-30. If not specified when creating an instance with a partition placement group, the partition number will be randomly assigned. Required when modifying `DisasterRecoverGroupIds` or `PlacementGroupId` in update operations.
+        /// </summary>
+        [Input("partitionNumber")]
+        public Input<int>? PartitionNumber { get; set; }
 
         [Input("password")]
         private Input<string>? _password;
@@ -1228,10 +1536,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         public Input<string>? SubnetId { get; set; }
 
         /// <summary>
+        /// Whether the system disk is encrypted. Valid values: true (encrypted), false (not encrypted). Default value: false.
+        /// </summary>
+        [Input("systemDiskEncrypt")]
+        public Input<bool>? SystemDiskEncrypt { get; set; }
+
+        /// <summary>
         /// System disk snapshot ID used to initialize the system disk. When system disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
         /// </summary>
         [Input("systemDiskId")]
         public Input<string>? SystemDiskId { get; set; }
+
+        /// <summary>
+        /// Custom KMS key ID for system disk encryption.
+        /// </summary>
+        [Input("systemDiskKmsKeyId")]
+        public Input<string>? SystemDiskKmsKeyId { get; set; }
 
         /// <summary>
         /// Name of the system disk.
@@ -1350,6 +1670,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         public Input<int>? Cpu { get; set; }
 
         /// <summary>
+        /// CPU topology configuration. Only supported when creating instances.
+        /// </summary>
+        [Input("cpuTopology")]
+        public Input<Inputs.InstanceCpuTopologyGetArgs>? CpuTopology { get; set; }
+
+        /// <summary>
         /// Create time of the instance.
         /// </summary>
         [Input("createTime")]
@@ -1372,6 +1698,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         /// </summary>
         [Input("dedicatedClusterId")]
         public Input<string>? DedicatedClusterId { get; set; }
+
+        [Input("dedicatedResourcePackIds")]
+        private InputList<string>? _dedicatedResourcePackIds;
+
+        /// <summary>
+        /// List of dedicated resource pack IDs (e.g., rpp-xxxxxxxx). When creating instances using pre-purchased resource pool packs, this parameter must be specified together with `DedicatedResourcePackTenancy` to match the corresponding tenancy strategy. Related resource: `TencentcloudCvmResourcePoolPacks`.
+        /// </summary>
+        public InputList<string> DedicatedResourcePackIds
+        {
+            get => _dedicatedResourcePackIds ?? (_dedicatedResourcePackIds = new InputList<string>());
+            set => _dedicatedResourcePackIds = value;
+        }
+
+        /// <summary>
+        /// Dedicated resource pack tenancy strategy. Valid values: `ResourcePool` (use instance resource pool for resource pre-deduction).
+        /// </summary>
+        [Input("dedicatedResourcePackTenancy")]
+        public Input<string>? DedicatedResourcePackTenancy { get; set; }
 
         /// <summary>
         /// Whether the termination protection is enabled. Default is `False`. If set true, which means that this instance can not be deleted by an API action.
@@ -1397,6 +1741,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         [Input("disableSecurityService")]
         public Input<bool>? DisableSecurityService { get; set; }
 
+        [Input("disasterRecoverGroupIds")]
+        private InputList<string>? _disasterRecoverGroupIds;
+
+        /// <summary>
+        /// Placement group ID list. Supports up to 3 group IDs. When set, `PlacementGroupId` will be ignored and this list will be used for CRUD operations.
+        /// </summary>
+        public InputList<string> DisasterRecoverGroupIds
+        {
+            get => _disasterRecoverGroupIds ?? (_disasterRecoverGroupIds = new InputList<string>());
+            set => _disasterRecoverGroupIds = value;
+        }
+
         /// <summary>
         /// Expired time of the instance.
         /// </summary>
@@ -1410,10 +1766,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         public Input<bool>? ForceDelete { get; set; }
 
         /// <summary>
-        /// Whether to force the instance host to be replaced. Value range: true: Allows the instance to change the host and restart the instance. Local disk machines do not support specifying this parameter; false: Does not allow the instance to change the host and only join the placement group on the current host. This may cause the placement group to fail to change. Only useful for change `PlacementGroupId`, Default is false.
+        /// Whether to force the instance host to be replaced. Value range: true: Allows the instance to change the host and restart the instance. Local disk machines do not support specifying this parameter; false: Does not allow the instance to change the host and only join the placement group on the current host. This may cause the placement group to fail to change. Can be used with both `PlacementGroupId` and `DisasterRecoverGroupIds`. Default is false.
         /// </summary>
         [Input("forceReplacePlacementGroupId")]
         public Input<bool>? ForceReplacePlacementGroupId { get; set; }
+
+        /// <summary>
+        /// Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.
+        /// </summary>
+        [Input("forceStop")]
+        public Input<bool>? ForceStop { get; set; }
 
         /// <summary>
         /// The hostname of the instance. Windows instance: The name should be a combination of 2 to 15 characters comprised of letters (case insensitive), numbers, and hyphens (-). Period (.) is not supported, and the name cannot be a string of pure numbers. Other types (such as Linux) of instances: The name should be a combination of 2 to 60 characters, supporting multiple periods (.). The piece between two periods is composed of letters (case insensitive), numbers, and hyphens (-). Changing the `Hostname` will cause the instance system to restart.
@@ -1451,6 +1813,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         [Input("instanceChargeTypePrepaidRenewFlag")]
         public Input<string>? InstanceChargeTypePrepaidRenewFlag { get; set; }
 
+        /// <summary>
+        /// The name of the instance. The max length of InstanceName is 128, and default value is `Terraform-CVM-Instance`.
+        /// </summary>
         [Input("instanceName")]
         public Input<string>? InstanceName { get; set; }
 
@@ -1568,6 +1933,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         [Input("osName")]
         public Input<string>? OsName { get; set; }
 
+        /// <summary>
+        /// The partition number of the placement group. Valid values: 1-30. If not specified when creating an instance with a partition placement group, the partition number will be randomly assigned. Required when modifying `DisasterRecoverGroupIds` or `PlacementGroupId` in update operations.
+        /// </summary>
+        [Input("partitionNumber")]
+        public Input<int>? PartitionNumber { get; set; }
+
         [Input("password")]
         private Input<string>? _password;
 
@@ -1619,6 +1990,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
             get => _publicIpv6Addresses ?? (_publicIpv6Addresses = new InputList<string>());
             set => _publicIpv6Addresses = value;
         }
+
+        /// <summary>
+        /// The rack ID of the instance resource pool to which the instance belongs.
+        /// </summary>
+        [Input("rackId")]
+        public Input<string>? RackId { get; set; }
 
         /// <summary>
         /// Release elastic IP. Under EIP 2.0, only the first EIP under the primary network card is provided, and the EIP types are limited to HighQualityEIP, AntiDDoSEIP, EIPv6, and HighQualityEIPv6. Default behavior is not released.
@@ -1676,10 +2053,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         public Input<string>? SubnetId { get; set; }
 
         /// <summary>
+        /// Whether the system disk is encrypted. Valid values: true (encrypted), false (not encrypted). Default value: false.
+        /// </summary>
+        [Input("systemDiskEncrypt")]
+        public Input<bool>? SystemDiskEncrypt { get; set; }
+
+        /// <summary>
         /// System disk snapshot ID used to initialize the system disk. When system disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
         /// </summary>
         [Input("systemDiskId")]
         public Input<string>? SystemDiskId { get; set; }
+
+        /// <summary>
+        /// Custom KMS key ID for system disk encryption.
+        /// </summary>
+        [Input("systemDiskKmsKeyId")]
+        public Input<string>? SystemDiskKmsKeyId { get; set; }
 
         /// <summary>
         /// Name of the system disk.

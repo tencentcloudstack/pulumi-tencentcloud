@@ -34,7 +34,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * tdcpg cluster can be imported using the id, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Tdcpg/cluster:Cluster cluster cluster_id
  * ```
@@ -197,55 +196,55 @@ export interface ClusterState {
     /**
      * cluster name.
      */
-    clusterName?: pulumi.Input<string>;
+    clusterName?: pulumi.Input<string | undefined>;
     /**
      * cpu cores.
      */
-    cpu?: pulumi.Input<number>;
+    cpu?: pulumi.Input<number | undefined>;
     /**
      * community version number, default to 10.17.
      */
-    dbVersion?: pulumi.Input<string>;
+    dbVersion?: pulumi.Input<string | undefined>;
     /**
      * instance count.
      */
-    instanceCount?: pulumi.Input<number>;
+    instanceCount?: pulumi.Input<number | undefined>;
     /**
      * user password.
      */
-    masterUserPassword?: pulumi.Input<string>;
+    masterUserPassword?: pulumi.Input<string | undefined>;
     /**
      * memory size.
      */
-    memory?: pulumi.Input<number>;
+    memory?: pulumi.Input<number | undefined>;
     /**
      * pay mode, the value is either PREPAID or POSTPAID_BY_HOUR.
      */
-    payMode?: pulumi.Input<string>;
+    payMode?: pulumi.Input<string | undefined>;
     /**
      * purchase time, required when PayMode is PREPAID, the value range is 1~60, default to 1.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * project id, default to 0, means default project.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * max storage, the unit is GB.
      */
-    storage?: pulumi.Input<number>;
+    storage?: pulumi.Input<number | undefined>;
     /**
      * subnet id.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * vpc id.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * available zone.
      */
-    zone?: pulumi.Input<string>;
+    zone?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -255,7 +254,7 @@ export interface ClusterArgs {
     /**
      * cluster name.
      */
-    clusterName?: pulumi.Input<string>;
+    clusterName?: pulumi.Input<string | undefined>;
     /**
      * cpu cores.
      */
@@ -263,11 +262,11 @@ export interface ClusterArgs {
     /**
      * community version number, default to 10.17.
      */
-    dbVersion?: pulumi.Input<string>;
+    dbVersion?: pulumi.Input<string | undefined>;
     /**
      * instance count.
      */
-    instanceCount?: pulumi.Input<number>;
+    instanceCount?: pulumi.Input<number | undefined>;
     /**
      * user password.
      */
@@ -283,15 +282,15 @@ export interface ClusterArgs {
     /**
      * purchase time, required when PayMode is PREPAID, the value range is 1~60, default to 1.
      */
-    period?: pulumi.Input<number>;
+    period?: pulumi.Input<number | undefined>;
     /**
      * project id, default to 0, means default project.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * max storage, the unit is GB.
      */
-    storage?: pulumi.Input<number>;
+    storage?: pulumi.Input<number | undefined>;
     /**
      * subnet id.
      */

@@ -175,10 +175,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc.Outputs
         /// </summary>
         public readonly int TolerableQueueTime;
         /// <summary>
-        /// (**Deprecated**) It has been deprecated. Use `UiUrl` instead. Jump address of ui.
-        /// </summary>
-        public readonly string UiURL;
-        /// <summary>
         /// Jump address of ui.
         /// </summary>
         public readonly string UiUrl;
@@ -281,8 +277,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc.Outputs
 
             int tolerableQueueTime,
 
-            string uiURL,
-
             string uiUrl,
 
             int updateTime,
@@ -333,7 +327,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc.Outputs
             SubAccountUin = subAccountUin;
             TagLists = tagLists;
             TolerableQueueTime = tolerableQueueTime;
-            UiURL = uiURL;
             UiUrl = uiUrl;
             UpdateTime = updateTime;
             UserAlias = userAlias;

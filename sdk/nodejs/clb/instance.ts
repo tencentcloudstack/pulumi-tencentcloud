@@ -32,13 +32,26 @@ import * as utilities from "../utilities";
  *     cidrBlock: "10.0.1.0/24",
  *     isMulticast: false,
  * });
- * // create clb
- * const example = new tencentcloud.clb.Instance("example", {
+ * // create INTERNAL clb
+ * const example1 = new tencentcloud.clb.Instance("example1", {
  *     networkType: "INTERNAL",
  *     clbName: "tf-example",
  *     projectId: 0,
  *     vpcId: vpc.id,
  *     subnetId: subnet.id,
+ *     tags: {
+ *         tagKey: "tagValue",
+ *     },
+ * });
+ * // create INTERNAL clb by sla_type and internet_bandwidth_max_out
+ * const example2 = new tencentcloud.clb.Instance("example2", {
+ *     networkType: "INTERNAL",
+ *     clbName: "tf-example",
+ *     projectId: 0,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     slaType: "clb.c2.medium",
+ *     internetBandwidthMaxOut: 100,
  *     tags: {
  *         tagKey: "tagValue",
  *     },
@@ -143,6 +156,42 @@ import * as utilities from "../utilities";
  *     clbName: "tf-example",
  *     projectId: 0,
  *     slaType: "clb.c3.medium",
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     tags: {
+ *         tagKey: "tagValue",
+ *     },
+ * });
+ * ```
+ *
+ * ### changes.
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+ * // create vpc
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {
+ *     cidrBlock: "10.0.0.0/16",
+ *     name: "vpc",
+ * });
+ * // create subnet
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: availabilityZone,
+ *     name: "subnet",
+ *     cidrBlock: "10.0.1.0/24",
+ *     isMulticast: false,
+ * });
+ * // create clb and forcibly upgrade sla_type
+ * const example = new tencentcloud.clb.Instance("example", {
+ *     networkType: "INTERNAL",
+ *     clbName: "tf-example",
+ *     projectId: 0,
+ *     slaType: "clb.c3.medium",
+ *     force: true,
  *     vpcId: vpc.id,
  *     subnetId: subnet.id,
  *     tags: {
@@ -463,6 +512,24 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ### Create instance with associate endpoint
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.clb.Instance("example", {
+ *     networkType: "OPEN",
+ *     clbName: "tf-example",
+ *     projectId: 0,
+ *     vpcId: "vpc-e51ilko8",
+ *     associateEndpoint: "vpce-du9ssd3z",
+ *     tags: {
+ *         createBy: "Terraform",
+ *     },
+ * });
+ * ```
+ *
  * ## Import
  *
  * CLB instance can be imported using the id, e.g.
@@ -508,6 +575,10 @@ export class Instance extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly addressIpv6: pulumi.Output<string>;
     /**
+     * The associated terminal node ID; passing an empty string indicates unassociating the node.
+     */
+    declare public readonly associateEndpoint: pulumi.Output<string | undefined>;
+    /**
      * Bandwidth package id. If set, the `internetChargeType` must be `BANDWIDTH_PACKAGE`.
      */
     declare public readonly bandwidthPackageId: pulumi.Output<string | undefined>;
@@ -540,7 +611,18 @@ export class Instance extends pulumi.CustomResource {
      */
     declare public readonly eipAddressId: pulumi.Output<string>;
     /**
-     * Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is Mbps.
+     * Information about the dedicated CLB instance. You must specify this parameter when you create a dedicated CLB instance in a private network.
+     */
+    declare public readonly exclusiveCluster: pulumi.Output<outputs.Clb.InstanceExclusiveCluster>;
+    /**
+     * Whether to forcibly upgrade the CLB instance, default is `false`. This parameter only takes effect when `slaType` changes.
+     */
+    declare public readonly force: pulumi.Output<boolean | undefined>;
+    /**
+     * Maximum outbound bandwidth, in Mbps. This parameter is valid only for public network shared, LCU-supported, and exclusive CLB instances and private network LCU-supported CLB instances.
+     * - The range of the maximum outbound bandwidth for public network shared and exclusive CLB instances is 1-2,048 Mbps.
+     * - The range of the maximum outbound bandwidth for public network and private network LCU-supported CLB instances is 1-61,440 Mbps.
+     *   (Default to 10Mbps when CreateLoadBalancer is call.).
      */
     declare public readonly internetBandwidthMaxOut: pulumi.Output<number>;
     /**
@@ -643,6 +725,7 @@ export class Instance extends pulumi.CustomResource {
             const state = argsOrState as InstanceState | undefined;
             resourceInputs["addressIpVersion"] = state?.addressIpVersion;
             resourceInputs["addressIpv6"] = state?.addressIpv6;
+            resourceInputs["associateEndpoint"] = state?.associateEndpoint;
             resourceInputs["bandwidthPackageId"] = state?.bandwidthPackageId;
             resourceInputs["clbName"] = state?.clbName;
             resourceInputs["clbVips"] = state?.clbVips;
@@ -651,6 +734,8 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["domain"] = state?.domain;
             resourceInputs["dynamicVip"] = state?.dynamicVip;
             resourceInputs["eipAddressId"] = state?.eipAddressId;
+            resourceInputs["exclusiveCluster"] = state?.exclusiveCluster;
+            resourceInputs["force"] = state?.force;
             resourceInputs["internetBandwidthMaxOut"] = state?.internetBandwidthMaxOut;
             resourceInputs["internetChargeType"] = state?.internetChargeType;
             resourceInputs["ipv6Mode"] = state?.ipv6Mode;
@@ -682,12 +767,15 @@ export class Instance extends pulumi.CustomResource {
                 throw new Error("Missing required property 'networkType'");
             }
             resourceInputs["addressIpVersion"] = args?.addressIpVersion;
+            resourceInputs["associateEndpoint"] = args?.associateEndpoint;
             resourceInputs["bandwidthPackageId"] = args?.bandwidthPackageId;
             resourceInputs["clbName"] = args?.clbName;
             resourceInputs["clusterId"] = args?.clusterId;
             resourceInputs["deleteProtect"] = args?.deleteProtect;
             resourceInputs["dynamicVip"] = args?.dynamicVip;
             resourceInputs["eipAddressId"] = args?.eipAddressId;
+            resourceInputs["exclusiveCluster"] = args?.exclusiveCluster;
+            resourceInputs["force"] = args?.force;
             resourceInputs["internetBandwidthMaxOut"] = args?.internetBandwidthMaxOut;
             resourceInputs["internetChargeType"] = args?.internetChargeType;
             resourceInputs["loadBalancerPassToTarget"] = args?.loadBalancerPassToTarget;
@@ -726,131 +814,146 @@ export interface InstanceState {
     /**
      * It's only applicable to public network CLB instances. IP version. Values: `IPV4`, `IPV6` and `IPv6FullChain` (case-insensitive). Default: `IPV4`. Note: IPV6 indicates IPv6 NAT64, while IPv6FullChain indicates IPv6.
      */
-    addressIpVersion?: pulumi.Input<string>;
+    addressIpVersion?: pulumi.Input<string | undefined>;
     /**
      * The IPv6 address of the load balancing instance.
      */
-    addressIpv6?: pulumi.Input<string>;
+    addressIpv6?: pulumi.Input<string | undefined>;
+    /**
+     * The associated terminal node ID; passing an empty string indicates unassociating the node.
+     */
+    associateEndpoint?: pulumi.Input<string | undefined>;
     /**
      * Bandwidth package id. If set, the `internetChargeType` must be `BANDWIDTH_PACKAGE`.
      */
-    bandwidthPackageId?: pulumi.Input<string>;
+    bandwidthPackageId?: pulumi.Input<string | undefined>;
     /**
      * Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.
      */
-    clbName?: pulumi.Input<string>;
+    clbName?: pulumi.Input<string | undefined>;
     /**
      * The virtual service address table of the CLB.
      */
-    clbVips?: pulumi.Input<pulumi.Input<string>[]>;
+    clbVips?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Cluster ID.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable delete protection.
      */
-    deleteProtect?: pulumi.Input<boolean>;
+    deleteProtect?: pulumi.Input<boolean | undefined>;
     /**
      * Domain name of the CLB instance.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * If create dynamic vip CLB instance, `true` or `false`.
      */
-    dynamicVip?: pulumi.Input<boolean>;
+    dynamicVip?: pulumi.Input<boolean | undefined>;
     /**
      * The unique ID of the EIP, such as eip-1v2rmbwk, is only applicable to the intranet load balancing binding EIP. During the EIP change, there may be a brief network interruption.
      */
-    eipAddressId?: pulumi.Input<string>;
+    eipAddressId?: pulumi.Input<string | undefined>;
     /**
-     * Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is Mbps.
+     * Information about the dedicated CLB instance. You must specify this parameter when you create a dedicated CLB instance in a private network.
      */
-    internetBandwidthMaxOut?: pulumi.Input<number>;
+    exclusiveCluster?: pulumi.Input<inputs.Clb.InstanceExclusiveCluster | undefined>;
+    /**
+     * Whether to forcibly upgrade the CLB instance, default is `false`. This parameter only takes effect when `slaType` changes.
+     */
+    force?: pulumi.Input<boolean | undefined>;
+    /**
+     * Maximum outbound bandwidth, in Mbps. This parameter is valid only for public network shared, LCU-supported, and exclusive CLB instances and private network LCU-supported CLB instances.
+     * - The range of the maximum outbound bandwidth for public network shared and exclusive CLB instances is 1-2,048 Mbps.
+     * - The range of the maximum outbound bandwidth for public network and private network LCU-supported CLB instances is 1-61,440 Mbps.
+     *   (Default to 10Mbps when CreateLoadBalancer is call.).
+     */
+    internetBandwidthMaxOut?: pulumi.Input<number | undefined>;
     /**
      * Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
      */
-    internetChargeType?: pulumi.Input<string>;
+    internetChargeType?: pulumi.Input<string | undefined>;
     /**
      * This field is meaningful when the IP address version is ipv6, `IPv6Nat64` | `IPv6FullChain`.
      */
-    ipv6Mode?: pulumi.Input<string>;
+    ipv6Mode?: pulumi.Input<string | undefined>;
     /**
      * Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.
      */
-    loadBalancerPassToTarget?: pulumi.Input<boolean>;
+    loadBalancerPassToTarget?: pulumi.Input<boolean | undefined>;
     /**
      * The id of log set.
      */
-    logSetId?: pulumi.Input<string>;
+    logSetId?: pulumi.Input<string | undefined>;
     /**
      * The id of log topic.
      */
-    logTopicId?: pulumi.Input<string>;
+    logTopicId?: pulumi.Input<string | undefined>;
     /**
      * Setting master zone id of cross available zone disaster recovery, only applicable to open CLB.
      */
-    masterZoneId?: pulumi.Input<string>;
+    masterZoneId?: pulumi.Input<string | undefined>;
     /**
      * Type of CLB instance. Valid values: `OPEN` and `INTERNAL`.
      */
-    networkType?: pulumi.Input<string>;
+    networkType?: pulumi.Input<string | undefined>;
     /**
      * ID of the project within the CLB instance, `0` - Default Project.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Security groups of the CLB instance. Supports both `OPEN` and `INTERNAL` CLBs.
      */
-    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroups?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * This parameter is required to create LCU-supported instances. Values:`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4; `clb.c2.medium`: Standard; `clb.c3.small`: Advanced 1; `clb.c3.medium`: Advanced 1; `clb.c4.small`: Super Large 1; `clb.c4.medium`: Super Large 2; `clb.c4.large`: Super Large 3; `clb.c4.xlarge`: Super Large 4. For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
      */
-    slaType?: pulumi.Input<string>;
+    slaType?: pulumi.Input<string | undefined>;
     /**
      * Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.
      */
-    slaveZoneId?: pulumi.Input<string>;
+    slaveZoneId?: pulumi.Input<string | undefined>;
     /**
      * Snat Ip List, required with `snat_pro=true`. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource `tencentcloud.Clb.SnatIp` to handle fixed ips.
      */
-    snatIps?: pulumi.Input<pulumi.Input<inputs.Clb.InstanceSnatIp>[]>;
+    snatIps?: pulumi.Input<pulumi.Input<inputs.Clb.InstanceSnatIp>[] | undefined>;
     /**
      * Indicates whether Binding IPs of other VPCs feature switch.
      */
-    snatPro?: pulumi.Input<boolean>;
+    snatPro?: pulumi.Input<boolean | undefined>;
     /**
      * In the case of purchasing a `INTERNAL` clb instance, the subnet id must be specified. The VIP of the `INTERNAL` clb instance will be generated from this subnet.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * The available tags within this CLB.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Region information of backend services are attached the CLB instance. Only supports `OPEN` CLBs.
      */
-    targetRegionInfoRegion?: pulumi.Input<string>;
+    targetRegionInfoRegion?: pulumi.Input<string | undefined>;
     /**
      * Vpc information of backend services are attached the CLB instance. Only supports `OPEN` CLBs.
      */
-    targetRegionInfoVpcId?: pulumi.Input<string>;
+    targetRegionInfoVpcId?: pulumi.Input<string | undefined>;
     /**
      * Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.
      */
-    vip?: pulumi.Input<string>;
+    vip?: pulumi.Input<string | undefined>;
     /**
      * Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).
      */
-    vipIsp?: pulumi.Input<string>;
+    vipIsp?: pulumi.Input<string | undefined>;
     /**
      * VPC ID of the CLB.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * Available zone id, only applicable to open CLB.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -860,11 +963,15 @@ export interface InstanceArgs {
     /**
      * It's only applicable to public network CLB instances. IP version. Values: `IPV4`, `IPV6` and `IPv6FullChain` (case-insensitive). Default: `IPV4`. Note: IPV6 indicates IPv6 NAT64, while IPv6FullChain indicates IPv6.
      */
-    addressIpVersion?: pulumi.Input<string>;
+    addressIpVersion?: pulumi.Input<string | undefined>;
+    /**
+     * The associated terminal node ID; passing an empty string indicates unassociating the node.
+     */
+    associateEndpoint?: pulumi.Input<string | undefined>;
     /**
      * Bandwidth package id. If set, the `internetChargeType` must be `BANDWIDTH_PACKAGE`.
      */
-    bandwidthPackageId?: pulumi.Input<string>;
+    bandwidthPackageId?: pulumi.Input<string | undefined>;
     /**
      * Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.
      */
@@ -872,43 +979,54 @@ export interface InstanceArgs {
     /**
      * Cluster ID.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Whether to enable delete protection.
      */
-    deleteProtect?: pulumi.Input<boolean>;
+    deleteProtect?: pulumi.Input<boolean | undefined>;
     /**
      * If create dynamic vip CLB instance, `true` or `false`.
      */
-    dynamicVip?: pulumi.Input<boolean>;
+    dynamicVip?: pulumi.Input<boolean | undefined>;
     /**
      * The unique ID of the EIP, such as eip-1v2rmbwk, is only applicable to the intranet load balancing binding EIP. During the EIP change, there may be a brief network interruption.
      */
-    eipAddressId?: pulumi.Input<string>;
+    eipAddressId?: pulumi.Input<string | undefined>;
     /**
-     * Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is Mbps.
+     * Information about the dedicated CLB instance. You must specify this parameter when you create a dedicated CLB instance in a private network.
      */
-    internetBandwidthMaxOut?: pulumi.Input<number>;
+    exclusiveCluster?: pulumi.Input<inputs.Clb.InstanceExclusiveCluster | undefined>;
+    /**
+     * Whether to forcibly upgrade the CLB instance, default is `false`. This parameter only takes effect when `slaType` changes.
+     */
+    force?: pulumi.Input<boolean | undefined>;
+    /**
+     * Maximum outbound bandwidth, in Mbps. This parameter is valid only for public network shared, LCU-supported, and exclusive CLB instances and private network LCU-supported CLB instances.
+     * - The range of the maximum outbound bandwidth for public network shared and exclusive CLB instances is 1-2,048 Mbps.
+     * - The range of the maximum outbound bandwidth for public network and private network LCU-supported CLB instances is 1-61,440 Mbps.
+     *   (Default to 10Mbps when CreateLoadBalancer is call.).
+     */
+    internetBandwidthMaxOut?: pulumi.Input<number | undefined>;
     /**
      * Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
      */
-    internetChargeType?: pulumi.Input<string>;
+    internetChargeType?: pulumi.Input<string | undefined>;
     /**
      * Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.
      */
-    loadBalancerPassToTarget?: pulumi.Input<boolean>;
+    loadBalancerPassToTarget?: pulumi.Input<boolean | undefined>;
     /**
      * The id of log set.
      */
-    logSetId?: pulumi.Input<string>;
+    logSetId?: pulumi.Input<string | undefined>;
     /**
      * The id of log topic.
      */
-    logTopicId?: pulumi.Input<string>;
+    logTopicId?: pulumi.Input<string | undefined>;
     /**
      * Setting master zone id of cross available zone disaster recovery, only applicable to open CLB.
      */
-    masterZoneId?: pulumi.Input<string>;
+    masterZoneId?: pulumi.Input<string | undefined>;
     /**
      * Type of CLB instance. Valid values: `OPEN` and `INTERNAL`.
      */
@@ -916,57 +1034,57 @@ export interface InstanceArgs {
     /**
      * ID of the project within the CLB instance, `0` - Default Project.
      */
-    projectId?: pulumi.Input<number>;
+    projectId?: pulumi.Input<number | undefined>;
     /**
      * Security groups of the CLB instance. Supports both `OPEN` and `INTERNAL` CLBs.
      */
-    securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    securityGroups?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * This parameter is required to create LCU-supported instances. Values:`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4; `clb.c2.medium`: Standard; `clb.c3.small`: Advanced 1; `clb.c3.medium`: Advanced 1; `clb.c4.small`: Super Large 1; `clb.c4.medium`: Super Large 2; `clb.c4.large`: Super Large 3; `clb.c4.xlarge`: Super Large 4. For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
      */
-    slaType?: pulumi.Input<string>;
+    slaType?: pulumi.Input<string | undefined>;
     /**
      * Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.
      */
-    slaveZoneId?: pulumi.Input<string>;
+    slaveZoneId?: pulumi.Input<string | undefined>;
     /**
      * Snat Ip List, required with `snat_pro=true`. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource `tencentcloud.Clb.SnatIp` to handle fixed ips.
      */
-    snatIps?: pulumi.Input<pulumi.Input<inputs.Clb.InstanceSnatIp>[]>;
+    snatIps?: pulumi.Input<pulumi.Input<inputs.Clb.InstanceSnatIp>[] | undefined>;
     /**
      * Indicates whether Binding IPs of other VPCs feature switch.
      */
-    snatPro?: pulumi.Input<boolean>;
+    snatPro?: pulumi.Input<boolean | undefined>;
     /**
      * In the case of purchasing a `INTERNAL` clb instance, the subnet id must be specified. The VIP of the `INTERNAL` clb instance will be generated from this subnet.
      */
-    subnetId?: pulumi.Input<string>;
+    subnetId?: pulumi.Input<string | undefined>;
     /**
      * The available tags within this CLB.
      */
-    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
      * Region information of backend services are attached the CLB instance. Only supports `OPEN` CLBs.
      */
-    targetRegionInfoRegion?: pulumi.Input<string>;
+    targetRegionInfoRegion?: pulumi.Input<string | undefined>;
     /**
      * Vpc information of backend services are attached the CLB instance. Only supports `OPEN` CLBs.
      */
-    targetRegionInfoVpcId?: pulumi.Input<string>;
+    targetRegionInfoVpcId?: pulumi.Input<string | undefined>;
     /**
      * Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.
      */
-    vip?: pulumi.Input<string>;
+    vip?: pulumi.Input<string | undefined>;
     /**
      * Network operator, only applicable to open CLB. Valid values are `CMCC`(China Mobile), `CTCC`(Telecom), `CUCC`(China Unicom) and `BGP`. If this ISP is specified, network billing method can only use the bandwidth package billing (BANDWIDTH_PACKAGE).
      */
-    vipIsp?: pulumi.Input<string>;
+    vipIsp?: pulumi.Input<string | undefined>;
     /**
      * VPC ID of the CLB.
      */
-    vpcId?: pulumi.Input<string>;
+    vpcId?: pulumi.Input<string | undefined>;
     /**
      * Available zone id, only applicable to open CLB.
      */
-    zoneId?: pulumi.Input<string>;
+    zoneId?: pulumi.Input<string | undefined>;
 }

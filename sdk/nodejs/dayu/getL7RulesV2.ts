@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const test = tencentcloud.Dayu.getL7RulesV2({
+ * const test = tencentcloud.dayu.getL7RulesV2({
  *     business: "bgpip",
  *     domain: "qq.com",
  *     protocol: "https",
@@ -117,7 +117,7 @@ export interface GetL7RulesV2Result {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const test = tencentcloud.Dayu.getL7RulesV2({
+ * const test = tencentcloud.dayu.getL7RulesV2({
  *     business: "bgpip",
  *     domain: "qq.com",
  *     protocol: "https",
@@ -148,29 +148,29 @@ export interface GetL7RulesV2OutputArgs {
     /**
      * Domain of resource.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Ip of the resource.
      */
-    ip?: pulumi.Input<string>;
+    ip?: pulumi.Input<string | undefined>;
     /**
      * It has been deprecated from version 1.81.21. The number of pages, default is `10`.
      *
      * @deprecated It has been deprecated from version 1.81.21.
      */
-    limit?: pulumi.Input<number>;
+    limit?: pulumi.Input<number | undefined>;
     /**
      * It has been deprecated from version 1.81.21. The page start offset, default is `0`.
      *
      * @deprecated It has been deprecated from version 1.81.21.
      */
-    offset?: pulumi.Input<number>;
+    offset?: pulumi.Input<number | undefined>;
     /**
      * Protocol of resource, value range [`http`, `https`].
      */
-    protocol?: pulumi.Input<string>;
+    protocol?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

@@ -136,31 +136,31 @@ export interface DomainState {
     /**
      * Domain Name.
      */
-    domainName?: pulumi.Input<string>;
+    domainName?: pulumi.Input<string | undefined>;
     /**
      * Domain type: `0`: push stream. `1`: playback.
      */
-    domainType?: pulumi.Input<number>;
+    domainType?: pulumi.Input<number | undefined>;
     /**
      * Switch. true: enable the specified domain, false: disable the specified domain.
      */
-    enable?: pulumi.Input<boolean>;
+    enable?: pulumi.Input<boolean | undefined>;
     /**
      * Whether it is LCB: `0`: LVB. `1`: LCB. Default value is 0.
      */
-    isDelayLive?: pulumi.Input<number>;
+    isDelayLive?: pulumi.Input<number | undefined>;
     /**
      * `0`: LVB. `1`: LVB on Mini Program. Note: this field may return null, indicating that no valid values can be obtained. Default value is 0.
      */
-    isMiniProgramLive?: pulumi.Input<number>;
+    isMiniProgramLive?: pulumi.Input<number | undefined>;
     /**
      * Play Type. This parameter is valid only if `DomainType` is 1. Available values: `1`: in Mainland China. `2`: global. `3`: outside Mainland China. Default value is 1.
      */
-    playType?: pulumi.Input<number>;
+    playType?: pulumi.Input<number | undefined>;
     /**
      * Domain name attribution verification type. `dnsCheck`, `fileCheck`, `dbCheck`. The default is `dbCheck`.
      */
-    verifyOwnerType?: pulumi.Input<string>;
+    verifyOwnerType?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -178,21 +178,21 @@ export interface DomainArgs {
     /**
      * Switch. true: enable the specified domain, false: disable the specified domain.
      */
-    enable?: pulumi.Input<boolean>;
+    enable?: pulumi.Input<boolean | undefined>;
     /**
      * Whether it is LCB: `0`: LVB. `1`: LCB. Default value is 0.
      */
-    isDelayLive?: pulumi.Input<number>;
+    isDelayLive?: pulumi.Input<number | undefined>;
     /**
      * `0`: LVB. `1`: LVB on Mini Program. Note: this field may return null, indicating that no valid values can be obtained. Default value is 0.
      */
-    isMiniProgramLive?: pulumi.Input<number>;
+    isMiniProgramLive?: pulumi.Input<number | undefined>;
     /**
      * Play Type. This parameter is valid only if `DomainType` is 1. Available values: `1`: in Mainland China. `2`: global. `3`: outside Mainland China. Default value is 1.
      */
-    playType?: pulumi.Input<number>;
+    playType?: pulumi.Input<number | undefined>;
     /**
      * Domain name attribution verification type. `dnsCheck`, `fileCheck`, `dbCheck`. The default is `dbCheck`.
      */
-    verifyOwnerType?: pulumi.Input<string>;
+    verifyOwnerType?: pulumi.Input<string | undefined>;
 }

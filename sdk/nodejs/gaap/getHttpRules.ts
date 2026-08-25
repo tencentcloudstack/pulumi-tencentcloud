@@ -44,7 +44,7 @@ import * as utilities from "../utilities";
  *         port: 80,
  *     }],
  * });
- * const foo = tencentcloud.Gaap.getHttpRulesOutput({
+ * const foo = tencentcloud.gaap.getHttpRulesOutput({
  *     listenerId: fooLayer7Listener.id,
  *     domain: fooHttpRule.domain,
  * });
@@ -155,7 +155,7 @@ export interface GetHttpRulesResult {
  *         port: 80,
  *     }],
  * });
- * const foo = tencentcloud.Gaap.getHttpRulesOutput({
+ * const foo = tencentcloud.gaap.getHttpRulesOutput({
  *     listenerId: fooLayer7Listener.id,
  *     domain: fooHttpRule.domain,
  * });
@@ -179,11 +179,11 @@ export interface GetHttpRulesOutputArgs {
     /**
      * Forward domain of the layer7 listener to be queried.
      */
-    domain?: pulumi.Input<string>;
+    domain?: pulumi.Input<string | undefined>;
     /**
      * Requested host which is forwarded to the realserver by the listener to be queried.
      */
-    forwardHost?: pulumi.Input<string>;
+    forwardHost?: pulumi.Input<string | undefined>;
     /**
      * ID of the layer7 listener to be queried.
      */
@@ -191,9 +191,9 @@ export interface GetHttpRulesOutputArgs {
     /**
      * Path of the forward rule to be queried.
      */
-    path?: pulumi.Input<string>;
+    path?: pulumi.Input<string | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

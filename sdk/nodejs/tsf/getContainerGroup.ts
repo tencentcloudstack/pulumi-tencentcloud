@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const containerGroup = tencentcloud.Tsf.getContainerGroup({
+ * const containerGroup = tencentcloud.tsf.getContainerGroup({
  *     applicationId: "application-a24x29xv",
  *     searchWord: "keep",
  *     orderBy: "createTime",
@@ -108,7 +108,7 @@ export interface GetContainerGroupResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const containerGroup = tencentcloud.Tsf.getContainerGroup({
+ * const containerGroup = tencentcloud.tsf.getContainerGroup({
  *     applicationId: "application-a24x29xv",
  *     searchWord: "keep",
  *     orderBy: "createTime",
@@ -139,29 +139,29 @@ export interface GetContainerGroupOutputArgs {
     /**
      * ApplicationId, required.
      */
-    applicationId?: pulumi.Input<string>;
+    applicationId?: pulumi.Input<string | undefined>;
     /**
      * Cluster Id.
      */
-    clusterId?: pulumi.Input<string>;
+    clusterId?: pulumi.Input<string | undefined>;
     /**
      * Namespace Id.
      */
-    namespaceId?: pulumi.Input<string>;
+    namespaceId?: pulumi.Input<string | undefined>;
     /**
      * The sorting field. By default, it is the createTime field. Supports id, name, createTime.
      */
-    orderBy?: pulumi.Input<string>;
+    orderBy?: pulumi.Input<string | undefined>;
     /**
      * The sorting order. By default, it is 1, indicating descending order. 0 indicates ascending order, and 1 indicates descending order.
      */
-    orderType?: pulumi.Input<number>;
+    orderType?: pulumi.Input<number | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * search word, support group name.
      */
-    searchWord?: pulumi.Input<string>;
+    searchWord?: pulumi.Input<string | undefined>;
 }

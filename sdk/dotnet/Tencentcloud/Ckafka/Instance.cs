@@ -21,7 +21,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -76,6 +75,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
     ///         {
     ///             Enable = 1,
     ///         },
+    ///         DeleteProtectionEnable = 1,
     ///     });
     /// 
     /// });
@@ -87,7 +87,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
@@ -189,13 +188,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public Output<Outputs.InstanceConfig?> Config { get; private set; } = null!;
 
         /// <summary>
+        /// Custom certificate ID, only effective when `SpecificationsType` is set to `Profession`, supports custom certificate capabilities.
+        /// </summary>
+        [Output("customSslCertId")]
+        public Output<string?> CustomSslCertId { get; private set; } = null!;
+
+        /// <summary>
+        /// Instance delete protection switch of ckafka instance: `1` enable, `0` disable.
+        /// </summary>
+        [Output("deleteProtectionEnable")]
+        public Output<int> DeleteProtectionEnable { get; private set; } = null!;
+
+        /// <summary>
         /// Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
         /// </summary>
         [Output("diskSize")]
         public Output<int> DiskSize { get; private set; } = null!;
 
         /// <summary>
-        /// Type of disk.
+        /// Disk type for Professional Edition instances; this field is not required for Standard Edition instances. `CLOUD_SSD`: SSD Cloud Disk; `CLOUD_BASIC`: High-Performance Cloud Disk. If not specified, the default value is `CLOUD_BASIC`.
         /// </summary>
         [Output("diskType")]
         public Output<string> DiskType { get; private set; } = null!;
@@ -406,13 +417,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public Input<Inputs.InstanceConfigArgs>? Config { get; set; }
 
         /// <summary>
+        /// Custom certificate ID, only effective when `SpecificationsType` is set to `Profession`, supports custom certificate capabilities.
+        /// </summary>
+        [Input("customSslCertId")]
+        public Input<string>? CustomSslCertId { get; set; }
+
+        /// <summary>
+        /// Instance delete protection switch of ckafka instance: `1` enable, `0` disable.
+        /// </summary>
+        [Input("deleteProtectionEnable")]
+        public Input<int>? DeleteProtectionEnable { get; set; }
+
+        /// <summary>
         /// Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
         /// </summary>
         [Input("diskSize")]
         public Input<int>? DiskSize { get; set; }
 
         /// <summary>
-        /// Type of disk.
+        /// Disk type for Professional Edition instances; this field is not required for Standard Edition instances. `CLOUD_SSD`: SSD Cloud Disk; `CLOUD_BASIC`: High-Performance Cloud Disk. If not specified, the default value is `CLOUD_BASIC`.
         /// </summary>
         [Input("diskType")]
         public Input<string>? DiskType { get; set; }
@@ -591,13 +614,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public Input<Inputs.InstanceConfigGetArgs>? Config { get; set; }
 
         /// <summary>
+        /// Custom certificate ID, only effective when `SpecificationsType` is set to `Profession`, supports custom certificate capabilities.
+        /// </summary>
+        [Input("customSslCertId")]
+        public Input<string>? CustomSslCertId { get; set; }
+
+        /// <summary>
+        /// Instance delete protection switch of ckafka instance: `1` enable, `0` disable.
+        /// </summary>
+        [Input("deleteProtectionEnable")]
+        public Input<int>? DeleteProtectionEnable { get; set; }
+
+        /// <summary>
         /// Disk Size. Its interval varies with bandwidth, and the input must be within the interval, which can be viewed through the control. If it is not within the interval, the plan will cause a change when first created.
         /// </summary>
         [Input("diskSize")]
         public Input<int>? DiskSize { get; set; }
 
         /// <summary>
-        /// Type of disk.
+        /// Disk type for Professional Edition instances; this field is not required for Standard Edition instances. `CLOUD_SSD`: SSD Cloud Disk; `CLOUD_BASIC`: High-Performance Cloud Disk. If not specified, the default value is `CLOUD_BASIC`.
         /// </summary>
         [Input("diskType")]
         public Input<string>? DiskType { get; set; }

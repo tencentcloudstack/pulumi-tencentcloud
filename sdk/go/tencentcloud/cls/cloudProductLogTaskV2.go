@@ -14,7 +14,7 @@ import (
 
 // Provides a resource to create a cls cloud product log task
 //
-// > **NOTE:** In the destruction of resources, if cascading deletion of logset and topic is required, please set `forceDelete` to `true`.
+// > **NOTE:** In the destruction of resources, if cascading deletion of logset and topic is required, please set `isDeleteTopic` and `isDeleteLogset` to `true`.
 //
 // ## Example Usage
 //
@@ -40,7 +40,8 @@ import (
 //				ClsRegion:          pulumi.String("ap-guangzhou"),
 //				LogsetName:         pulumi.String("tf-example"),
 //				TopicName:          pulumi.String("tf-example"),
-//				ForceDelete:        pulumi.Bool(true),
+//				IsDeleteTopic:      pulumi.Bool(true),
+//				IsDeleteLogset:     pulumi.Bool(true),
 //			})
 //			if err != nil {
 //				return err
@@ -73,7 +74,42 @@ import (
 //				ClsRegion:          pulumi.String("ap-guangzhou"),
 //				LogsetId:           pulumi.String("ca5b4f56-1174-4eee-bc4c-69e48e0e8c45"),
 //				TopicId:            pulumi.String("d8177ca9-466b-42f4-a110-5933daf0a83a"),
-//				ForceDelete:        pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ### Create log delivery with tags bound to the associated logset and topic
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cls"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := cls.NewCloudProductLogTaskV2(ctx, "example", &cls.CloudProductLogTaskV2Args{
+//				InstanceId:         pulumi.String("postgres-0an6hpv3"),
+//				AssumerName:        pulumi.String("PostgreSQL"),
+//				LogType:            pulumi.String("PostgreSQL-SLOW"),
+//				CloudProductRegion: pulumi.String("gz"),
+//				ClsRegion:          pulumi.String("ap-guangzhou"),
+//				LogsetName:         pulumi.String("tf-example"),
+//				TopicName:          pulumi.String("tf-example"),
+//				Tags: pulumi.StringMap{
+//					"Environment": pulumi.String("production"),
+//					"Team":        pulumi.String("backend"),
+//				},
 //			})
 //			if err != nil {
 //				return err
@@ -94,39 +130,60 @@ import (
 type CloudProductLogTaskV2 struct {
 	pulumi.CustomResourceState
 
-	// Cloud product identification, Values: CDS, CWP, CDB, TDSQL-C, MongoDB, TDStore, DCDB, MariaDB, PostgreSQL, BH, APIS.
+	// Cloud product identification. Supported values: APIS, BH, CDB, CDS, CFS, CLB, CSIP, CWP, DCDB, DNSPod, EMR, HTTPDNS, KHL, llmsgw, MariaDB, MDP, MongoDB, PostgreSQL, TCSS, TDSQL-C, TDStore, TencentDB-Redis, TEO, TokenHub, TSE.
 	AssumerName pulumi.StringOutput `pulumi:"assumerName"`
-	// Cloud product region. There are differences in the input format of different log types in different regions. Please refer to the following example:
-	// - CDS(all log type): ap-guangzhou
-	// - CDB-AUDIT: gz
-	// - TDSQL-C-AUDIT: gz
-	// - MongoDB-AUDIT: gz
-	// - MongoDB-SlowLog: ap-guangzhou
-	// - MongoDB-ErrorLog: ap-guangzhou
-	// - TDMYSQL-SLOW: gz
-	// - DCDB(all log type): gz
-	// - MariaDB(all log type): gz
-	// - PostgreSQL(all log type): gz
-	// - BH(all log type): overseas-polaris(Domestic sites overseas)/fsi-polaris(Domestic sites finance)/general-polaris(Domestic sites)/intl-sg-prod(International sites)
-	// - APIS(all log type): gz.
+	// Cloud product region. The input format varies by log type:
+	// - Short region code (e.g., `gz`, `sh`, `bj`): applies to APIS (all), CDB-AUDIT, TDSQL-C-AUDIT, TDMYSQL-SLOW, DCDB (all), MariaDB (all), PostgreSQL (all), MongoDB-AUDIT, TencentDB-Redis (all), EMR-OPERATION.
+	// - Long region code (e.g., `ap-guangzhou`, `ap-shanghai`): applies to CDS (all), MongoDB-SlowLog, MongoDB-ErrorLog, MongoDB-OperationLog, DNSPod-RESOLVELOG, HTTPDNS-RESOLVELOG, MDP-SSAI, CFS-AUDIT, TEO-INEFERENCE, CSIP, TCSS, TSE, CWP, KHL.
+	// - BH Polaris name: applies to BH (all), values: `overseas-polaris` (Hong Kong and overseas), `fsi-polaris` (finance zone), `general-polaris` (general zone), `intl-sg-prod` (international site).
 	CloudProductRegion pulumi.StringOutput `pulumi:"cloudProductRegion"`
-	// CLS target region.
+	// CLS target region. Refer to the region list documentation for supported regions.
 	ClsRegion pulumi.StringOutput `pulumi:"clsRegion"`
-	// Log configuration extension information, generally used to store additional log delivery configurations.
+	// Log configuration extension information, generally used to store additional log delivery configurations. Example: `{"ServiceName":["HDFS","KNOX","YARN","ZOOKEEPER"],"Policy":0}`.
 	Extend pulumi.StringOutput `pulumi:"extend"`
-	// Indicate whether to forcibly delete the corresponding logset and topic. If set to true, it will be forcibly deleted. Default is false.
+	// It has been deprecated from version 1.82.102. Please use `isDeleteTopic` or `isDeleteLogset` instead. Indicate whether to forcibly delete the corresponding logset and topic. If set to true, it will be forcibly deleted. Default is false.
+	//
+	// Deprecated: It has been deprecated from version 1.82.102. Please use `isDeleteTopic` or `isDeleteLogset` instead.
 	ForceDelete pulumi.BoolPtrOutput `pulumi:"forceDelete"`
-	// Instance ID.
+	// Instance ID. Obtain it from the official documentation of the corresponding cloud product.
 	InstanceId pulumi.StringOutput `pulumi:"instanceId"`
-	// Log type, Values: CDS-AUDIT, CDS-RISK, CDB-AUDIT, TDSQL-C-AUDIT, MongoDB-AUDIT, MongoDB-SlowLog, MongoDB-ErrorLog, TDMYSQL-SLOW, DCDB-AUDIT, DCDB-SLOW, DCDB-ERROR, MariaDB-AUDIT, MariaDB-SLOW, MariaDB-ERROR, PostgreSQL-SLOW, PostgreSQL-ERROR, PostgreSQL-AUDIT, BH-FILELOG, BH-COMMANDLOG, APIS-ACCESS.
+	// Whether to delete the associated Logset when deleting the log collection task. This field only takes effect when `forceDelete` is false. If the Logset has other Topics, it will not be deleted. Default is false.
+	IsDeleteLogset pulumi.BoolPtrOutput `pulumi:"isDeleteLogset"`
+	// Whether to delete the associated Topic when deleting the log collection task. This field only takes effect when `forceDelete` is false. Default is false.
+	IsDeleteTopic pulumi.BoolPtrOutput `pulumi:"isDeleteTopic"`
+	// Log type, must correspond to the `assumerName` value. Mapping:
+	// - APIS: APIS-ACCESS
+	// - BH: BH-COMMANDLOG, BH-FILELOG
+	// - CDB: CDB-AUDIT
+	// - CDS: CDS-AUDIT, CDS-RISK
+	// - CFS: CFS-AUDIT
+	// - CLB: CMR-SPEND
+	// - CSIP: CSIP
+	// - CWP: CWP
+	// - DCDB: DCDB-AUDIT, DCDB-ERROR, DCDB-SLOW
+	// - DNSPod: DNSPod-RESOLVELOG
+	// - EMR: EMR-OPERATION
+	// - HTTPDNS: HTTPDNS-RESOLVELOG
+	// - MariaDB: MariaDB-AUDIT, MariaDB-ERROR, MariaDB-SLOW
+	// - MDP: MDP-SSAI
+	// - MongoDB: MongoDB-AUDIT, MongoDB-ErrorLog, MongoDB-OperationLog, MongoDB-SlowLog
+	// - PostgreSQL: PostgreSQL-AUDIT, PostgreSQL-ERROR, PostgreSQL-SLOW
+	// - TCSS: TCSS
+	// - TDSQL-C: TDSQL-C-AUDIT
+	// - TDStore: TDMYSQL-SLOW
+	// - TencentDB-Redis: Redis-AUDIT, Redis-ERROR, Redis-SLOW
+	// - TEO: TEO-INEFERENCE
+	// - llmsgw: llmsgw-mcp-security-alarm.
 	LogType pulumi.StringOutput `pulumi:"logType"`
-	// Log set ID.
+	// Log set ID. Obtain it via the DescribeLogsets API.
 	LogsetId pulumi.StringOutput `pulumi:"logsetId"`
-	// Log set name, required if `logsetId` is not filled in. If the log set does not exist, it will be automatically created.
+	// Log set name, required when `logsetId` is not specified. If the log set does not exist, it will be created automatically.
 	LogsetName pulumi.StringOutput `pulumi:"logsetName"`
-	// Log theme ID.
+	// Tag description list. Up to 10 tag key-value pairs are supported, and each tag key can only be bound to the same resource once. Tags are bound to the associated log topic.
+	Tags pulumi.StringMapOutput `pulumi:"tags"`
+	// Log topic ID. Obtain it via the DescribeTopics API.
 	TopicId pulumi.StringOutput `pulumi:"topicId"`
-	// The name of the log topic is required when `topicId` is not filled in. If the log theme does not exist, it will be automatically created.
+	// Log topic name, required when `topicId` is not specified. If the log topic does not exist, it will be created automatically.
 	TopicName pulumi.StringOutput `pulumi:"topicName"`
 }
 
@@ -175,76 +232,118 @@ func GetCloudProductLogTaskV2(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering CloudProductLogTaskV2 resources.
 type cloudProductLogTaskV2State struct {
-	// Cloud product identification, Values: CDS, CWP, CDB, TDSQL-C, MongoDB, TDStore, DCDB, MariaDB, PostgreSQL, BH, APIS.
+	// Cloud product identification. Supported values: APIS, BH, CDB, CDS, CFS, CLB, CSIP, CWP, DCDB, DNSPod, EMR, HTTPDNS, KHL, llmsgw, MariaDB, MDP, MongoDB, PostgreSQL, TCSS, TDSQL-C, TDStore, TencentDB-Redis, TEO, TokenHub, TSE.
 	AssumerName *string `pulumi:"assumerName"`
-	// Cloud product region. There are differences in the input format of different log types in different regions. Please refer to the following example:
-	// - CDS(all log type): ap-guangzhou
-	// - CDB-AUDIT: gz
-	// - TDSQL-C-AUDIT: gz
-	// - MongoDB-AUDIT: gz
-	// - MongoDB-SlowLog: ap-guangzhou
-	// - MongoDB-ErrorLog: ap-guangzhou
-	// - TDMYSQL-SLOW: gz
-	// - DCDB(all log type): gz
-	// - MariaDB(all log type): gz
-	// - PostgreSQL(all log type): gz
-	// - BH(all log type): overseas-polaris(Domestic sites overseas)/fsi-polaris(Domestic sites finance)/general-polaris(Domestic sites)/intl-sg-prod(International sites)
-	// - APIS(all log type): gz.
+	// Cloud product region. The input format varies by log type:
+	// - Short region code (e.g., `gz`, `sh`, `bj`): applies to APIS (all), CDB-AUDIT, TDSQL-C-AUDIT, TDMYSQL-SLOW, DCDB (all), MariaDB (all), PostgreSQL (all), MongoDB-AUDIT, TencentDB-Redis (all), EMR-OPERATION.
+	// - Long region code (e.g., `ap-guangzhou`, `ap-shanghai`): applies to CDS (all), MongoDB-SlowLog, MongoDB-ErrorLog, MongoDB-OperationLog, DNSPod-RESOLVELOG, HTTPDNS-RESOLVELOG, MDP-SSAI, CFS-AUDIT, TEO-INEFERENCE, CSIP, TCSS, TSE, CWP, KHL.
+	// - BH Polaris name: applies to BH (all), values: `overseas-polaris` (Hong Kong and overseas), `fsi-polaris` (finance zone), `general-polaris` (general zone), `intl-sg-prod` (international site).
 	CloudProductRegion *string `pulumi:"cloudProductRegion"`
-	// CLS target region.
+	// CLS target region. Refer to the region list documentation for supported regions.
 	ClsRegion *string `pulumi:"clsRegion"`
-	// Log configuration extension information, generally used to store additional log delivery configurations.
+	// Log configuration extension information, generally used to store additional log delivery configurations. Example: `{"ServiceName":["HDFS","KNOX","YARN","ZOOKEEPER"],"Policy":0}`.
 	Extend *string `pulumi:"extend"`
-	// Indicate whether to forcibly delete the corresponding logset and topic. If set to true, it will be forcibly deleted. Default is false.
+	// It has been deprecated from version 1.82.102. Please use `isDeleteTopic` or `isDeleteLogset` instead. Indicate whether to forcibly delete the corresponding logset and topic. If set to true, it will be forcibly deleted. Default is false.
+	//
+	// Deprecated: It has been deprecated from version 1.82.102. Please use `isDeleteTopic` or `isDeleteLogset` instead.
 	ForceDelete *bool `pulumi:"forceDelete"`
-	// Instance ID.
+	// Instance ID. Obtain it from the official documentation of the corresponding cloud product.
 	InstanceId *string `pulumi:"instanceId"`
-	// Log type, Values: CDS-AUDIT, CDS-RISK, CDB-AUDIT, TDSQL-C-AUDIT, MongoDB-AUDIT, MongoDB-SlowLog, MongoDB-ErrorLog, TDMYSQL-SLOW, DCDB-AUDIT, DCDB-SLOW, DCDB-ERROR, MariaDB-AUDIT, MariaDB-SLOW, MariaDB-ERROR, PostgreSQL-SLOW, PostgreSQL-ERROR, PostgreSQL-AUDIT, BH-FILELOG, BH-COMMANDLOG, APIS-ACCESS.
+	// Whether to delete the associated Logset when deleting the log collection task. This field only takes effect when `forceDelete` is false. If the Logset has other Topics, it will not be deleted. Default is false.
+	IsDeleteLogset *bool `pulumi:"isDeleteLogset"`
+	// Whether to delete the associated Topic when deleting the log collection task. This field only takes effect when `forceDelete` is false. Default is false.
+	IsDeleteTopic *bool `pulumi:"isDeleteTopic"`
+	// Log type, must correspond to the `assumerName` value. Mapping:
+	// - APIS: APIS-ACCESS
+	// - BH: BH-COMMANDLOG, BH-FILELOG
+	// - CDB: CDB-AUDIT
+	// - CDS: CDS-AUDIT, CDS-RISK
+	// - CFS: CFS-AUDIT
+	// - CLB: CMR-SPEND
+	// - CSIP: CSIP
+	// - CWP: CWP
+	// - DCDB: DCDB-AUDIT, DCDB-ERROR, DCDB-SLOW
+	// - DNSPod: DNSPod-RESOLVELOG
+	// - EMR: EMR-OPERATION
+	// - HTTPDNS: HTTPDNS-RESOLVELOG
+	// - MariaDB: MariaDB-AUDIT, MariaDB-ERROR, MariaDB-SLOW
+	// - MDP: MDP-SSAI
+	// - MongoDB: MongoDB-AUDIT, MongoDB-ErrorLog, MongoDB-OperationLog, MongoDB-SlowLog
+	// - PostgreSQL: PostgreSQL-AUDIT, PostgreSQL-ERROR, PostgreSQL-SLOW
+	// - TCSS: TCSS
+	// - TDSQL-C: TDSQL-C-AUDIT
+	// - TDStore: TDMYSQL-SLOW
+	// - TencentDB-Redis: Redis-AUDIT, Redis-ERROR, Redis-SLOW
+	// - TEO: TEO-INEFERENCE
+	// - llmsgw: llmsgw-mcp-security-alarm.
 	LogType *string `pulumi:"logType"`
-	// Log set ID.
+	// Log set ID. Obtain it via the DescribeLogsets API.
 	LogsetId *string `pulumi:"logsetId"`
-	// Log set name, required if `logsetId` is not filled in. If the log set does not exist, it will be automatically created.
+	// Log set name, required when `logsetId` is not specified. If the log set does not exist, it will be created automatically.
 	LogsetName *string `pulumi:"logsetName"`
-	// Log theme ID.
+	// Tag description list. Up to 10 tag key-value pairs are supported, and each tag key can only be bound to the same resource once. Tags are bound to the associated log topic.
+	Tags map[string]string `pulumi:"tags"`
+	// Log topic ID. Obtain it via the DescribeTopics API.
 	TopicId *string `pulumi:"topicId"`
-	// The name of the log topic is required when `topicId` is not filled in. If the log theme does not exist, it will be automatically created.
+	// Log topic name, required when `topicId` is not specified. If the log topic does not exist, it will be created automatically.
 	TopicName *string `pulumi:"topicName"`
 }
 
 type CloudProductLogTaskV2State struct {
-	// Cloud product identification, Values: CDS, CWP, CDB, TDSQL-C, MongoDB, TDStore, DCDB, MariaDB, PostgreSQL, BH, APIS.
+	// Cloud product identification. Supported values: APIS, BH, CDB, CDS, CFS, CLB, CSIP, CWP, DCDB, DNSPod, EMR, HTTPDNS, KHL, llmsgw, MariaDB, MDP, MongoDB, PostgreSQL, TCSS, TDSQL-C, TDStore, TencentDB-Redis, TEO, TokenHub, TSE.
 	AssumerName pulumi.StringPtrInput
-	// Cloud product region. There are differences in the input format of different log types in different regions. Please refer to the following example:
-	// - CDS(all log type): ap-guangzhou
-	// - CDB-AUDIT: gz
-	// - TDSQL-C-AUDIT: gz
-	// - MongoDB-AUDIT: gz
-	// - MongoDB-SlowLog: ap-guangzhou
-	// - MongoDB-ErrorLog: ap-guangzhou
-	// - TDMYSQL-SLOW: gz
-	// - DCDB(all log type): gz
-	// - MariaDB(all log type): gz
-	// - PostgreSQL(all log type): gz
-	// - BH(all log type): overseas-polaris(Domestic sites overseas)/fsi-polaris(Domestic sites finance)/general-polaris(Domestic sites)/intl-sg-prod(International sites)
-	// - APIS(all log type): gz.
+	// Cloud product region. The input format varies by log type:
+	// - Short region code (e.g., `gz`, `sh`, `bj`): applies to APIS (all), CDB-AUDIT, TDSQL-C-AUDIT, TDMYSQL-SLOW, DCDB (all), MariaDB (all), PostgreSQL (all), MongoDB-AUDIT, TencentDB-Redis (all), EMR-OPERATION.
+	// - Long region code (e.g., `ap-guangzhou`, `ap-shanghai`): applies to CDS (all), MongoDB-SlowLog, MongoDB-ErrorLog, MongoDB-OperationLog, DNSPod-RESOLVELOG, HTTPDNS-RESOLVELOG, MDP-SSAI, CFS-AUDIT, TEO-INEFERENCE, CSIP, TCSS, TSE, CWP, KHL.
+	// - BH Polaris name: applies to BH (all), values: `overseas-polaris` (Hong Kong and overseas), `fsi-polaris` (finance zone), `general-polaris` (general zone), `intl-sg-prod` (international site).
 	CloudProductRegion pulumi.StringPtrInput
-	// CLS target region.
+	// CLS target region. Refer to the region list documentation for supported regions.
 	ClsRegion pulumi.StringPtrInput
-	// Log configuration extension information, generally used to store additional log delivery configurations.
+	// Log configuration extension information, generally used to store additional log delivery configurations. Example: `{"ServiceName":["HDFS","KNOX","YARN","ZOOKEEPER"],"Policy":0}`.
 	Extend pulumi.StringPtrInput
-	// Indicate whether to forcibly delete the corresponding logset and topic. If set to true, it will be forcibly deleted. Default is false.
+	// It has been deprecated from version 1.82.102. Please use `isDeleteTopic` or `isDeleteLogset` instead. Indicate whether to forcibly delete the corresponding logset and topic. If set to true, it will be forcibly deleted. Default is false.
+	//
+	// Deprecated: It has been deprecated from version 1.82.102. Please use `isDeleteTopic` or `isDeleteLogset` instead.
 	ForceDelete pulumi.BoolPtrInput
-	// Instance ID.
+	// Instance ID. Obtain it from the official documentation of the corresponding cloud product.
 	InstanceId pulumi.StringPtrInput
-	// Log type, Values: CDS-AUDIT, CDS-RISK, CDB-AUDIT, TDSQL-C-AUDIT, MongoDB-AUDIT, MongoDB-SlowLog, MongoDB-ErrorLog, TDMYSQL-SLOW, DCDB-AUDIT, DCDB-SLOW, DCDB-ERROR, MariaDB-AUDIT, MariaDB-SLOW, MariaDB-ERROR, PostgreSQL-SLOW, PostgreSQL-ERROR, PostgreSQL-AUDIT, BH-FILELOG, BH-COMMANDLOG, APIS-ACCESS.
+	// Whether to delete the associated Logset when deleting the log collection task. This field only takes effect when `forceDelete` is false. If the Logset has other Topics, it will not be deleted. Default is false.
+	IsDeleteLogset pulumi.BoolPtrInput
+	// Whether to delete the associated Topic when deleting the log collection task. This field only takes effect when `forceDelete` is false. Default is false.
+	IsDeleteTopic pulumi.BoolPtrInput
+	// Log type, must correspond to the `assumerName` value. Mapping:
+	// - APIS: APIS-ACCESS
+	// - BH: BH-COMMANDLOG, BH-FILELOG
+	// - CDB: CDB-AUDIT
+	// - CDS: CDS-AUDIT, CDS-RISK
+	// - CFS: CFS-AUDIT
+	// - CLB: CMR-SPEND
+	// - CSIP: CSIP
+	// - CWP: CWP
+	// - DCDB: DCDB-AUDIT, DCDB-ERROR, DCDB-SLOW
+	// - DNSPod: DNSPod-RESOLVELOG
+	// - EMR: EMR-OPERATION
+	// - HTTPDNS: HTTPDNS-RESOLVELOG
+	// - MariaDB: MariaDB-AUDIT, MariaDB-ERROR, MariaDB-SLOW
+	// - MDP: MDP-SSAI
+	// - MongoDB: MongoDB-AUDIT, MongoDB-ErrorLog, MongoDB-OperationLog, MongoDB-SlowLog
+	// - PostgreSQL: PostgreSQL-AUDIT, PostgreSQL-ERROR, PostgreSQL-SLOW
+	// - TCSS: TCSS
+	// - TDSQL-C: TDSQL-C-AUDIT
+	// - TDStore: TDMYSQL-SLOW
+	// - TencentDB-Redis: Redis-AUDIT, Redis-ERROR, Redis-SLOW
+	// - TEO: TEO-INEFERENCE
+	// - llmsgw: llmsgw-mcp-security-alarm.
 	LogType pulumi.StringPtrInput
-	// Log set ID.
+	// Log set ID. Obtain it via the DescribeLogsets API.
 	LogsetId pulumi.StringPtrInput
-	// Log set name, required if `logsetId` is not filled in. If the log set does not exist, it will be automatically created.
+	// Log set name, required when `logsetId` is not specified. If the log set does not exist, it will be created automatically.
 	LogsetName pulumi.StringPtrInput
-	// Log theme ID.
+	// Tag description list. Up to 10 tag key-value pairs are supported, and each tag key can only be bound to the same resource once. Tags are bound to the associated log topic.
+	Tags pulumi.StringMapInput
+	// Log topic ID. Obtain it via the DescribeTopics API.
 	TopicId pulumi.StringPtrInput
-	// The name of the log topic is required when `topicId` is not filled in. If the log theme does not exist, it will be automatically created.
+	// Log topic name, required when `topicId` is not specified. If the log topic does not exist, it will be created automatically.
 	TopicName pulumi.StringPtrInput
 }
 
@@ -253,77 +352,119 @@ func (CloudProductLogTaskV2State) ElementType() reflect.Type {
 }
 
 type cloudProductLogTaskV2Args struct {
-	// Cloud product identification, Values: CDS, CWP, CDB, TDSQL-C, MongoDB, TDStore, DCDB, MariaDB, PostgreSQL, BH, APIS.
+	// Cloud product identification. Supported values: APIS, BH, CDB, CDS, CFS, CLB, CSIP, CWP, DCDB, DNSPod, EMR, HTTPDNS, KHL, llmsgw, MariaDB, MDP, MongoDB, PostgreSQL, TCSS, TDSQL-C, TDStore, TencentDB-Redis, TEO, TokenHub, TSE.
 	AssumerName string `pulumi:"assumerName"`
-	// Cloud product region. There are differences in the input format of different log types in different regions. Please refer to the following example:
-	// - CDS(all log type): ap-guangzhou
-	// - CDB-AUDIT: gz
-	// - TDSQL-C-AUDIT: gz
-	// - MongoDB-AUDIT: gz
-	// - MongoDB-SlowLog: ap-guangzhou
-	// - MongoDB-ErrorLog: ap-guangzhou
-	// - TDMYSQL-SLOW: gz
-	// - DCDB(all log type): gz
-	// - MariaDB(all log type): gz
-	// - PostgreSQL(all log type): gz
-	// - BH(all log type): overseas-polaris(Domestic sites overseas)/fsi-polaris(Domestic sites finance)/general-polaris(Domestic sites)/intl-sg-prod(International sites)
-	// - APIS(all log type): gz.
+	// Cloud product region. The input format varies by log type:
+	// - Short region code (e.g., `gz`, `sh`, `bj`): applies to APIS (all), CDB-AUDIT, TDSQL-C-AUDIT, TDMYSQL-SLOW, DCDB (all), MariaDB (all), PostgreSQL (all), MongoDB-AUDIT, TencentDB-Redis (all), EMR-OPERATION.
+	// - Long region code (e.g., `ap-guangzhou`, `ap-shanghai`): applies to CDS (all), MongoDB-SlowLog, MongoDB-ErrorLog, MongoDB-OperationLog, DNSPod-RESOLVELOG, HTTPDNS-RESOLVELOG, MDP-SSAI, CFS-AUDIT, TEO-INEFERENCE, CSIP, TCSS, TSE, CWP, KHL.
+	// - BH Polaris name: applies to BH (all), values: `overseas-polaris` (Hong Kong and overseas), `fsi-polaris` (finance zone), `general-polaris` (general zone), `intl-sg-prod` (international site).
 	CloudProductRegion string `pulumi:"cloudProductRegion"`
-	// CLS target region.
+	// CLS target region. Refer to the region list documentation for supported regions.
 	ClsRegion string `pulumi:"clsRegion"`
-	// Log configuration extension information, generally used to store additional log delivery configurations.
+	// Log configuration extension information, generally used to store additional log delivery configurations. Example: `{"ServiceName":["HDFS","KNOX","YARN","ZOOKEEPER"],"Policy":0}`.
 	Extend *string `pulumi:"extend"`
-	// Indicate whether to forcibly delete the corresponding logset and topic. If set to true, it will be forcibly deleted. Default is false.
+	// It has been deprecated from version 1.82.102. Please use `isDeleteTopic` or `isDeleteLogset` instead. Indicate whether to forcibly delete the corresponding logset and topic. If set to true, it will be forcibly deleted. Default is false.
+	//
+	// Deprecated: It has been deprecated from version 1.82.102. Please use `isDeleteTopic` or `isDeleteLogset` instead.
 	ForceDelete *bool `pulumi:"forceDelete"`
-	// Instance ID.
+	// Instance ID. Obtain it from the official documentation of the corresponding cloud product.
 	InstanceId string `pulumi:"instanceId"`
-	// Log type, Values: CDS-AUDIT, CDS-RISK, CDB-AUDIT, TDSQL-C-AUDIT, MongoDB-AUDIT, MongoDB-SlowLog, MongoDB-ErrorLog, TDMYSQL-SLOW, DCDB-AUDIT, DCDB-SLOW, DCDB-ERROR, MariaDB-AUDIT, MariaDB-SLOW, MariaDB-ERROR, PostgreSQL-SLOW, PostgreSQL-ERROR, PostgreSQL-AUDIT, BH-FILELOG, BH-COMMANDLOG, APIS-ACCESS.
+	// Whether to delete the associated Logset when deleting the log collection task. This field only takes effect when `forceDelete` is false. If the Logset has other Topics, it will not be deleted. Default is false.
+	IsDeleteLogset *bool `pulumi:"isDeleteLogset"`
+	// Whether to delete the associated Topic when deleting the log collection task. This field only takes effect when `forceDelete` is false. Default is false.
+	IsDeleteTopic *bool `pulumi:"isDeleteTopic"`
+	// Log type, must correspond to the `assumerName` value. Mapping:
+	// - APIS: APIS-ACCESS
+	// - BH: BH-COMMANDLOG, BH-FILELOG
+	// - CDB: CDB-AUDIT
+	// - CDS: CDS-AUDIT, CDS-RISK
+	// - CFS: CFS-AUDIT
+	// - CLB: CMR-SPEND
+	// - CSIP: CSIP
+	// - CWP: CWP
+	// - DCDB: DCDB-AUDIT, DCDB-ERROR, DCDB-SLOW
+	// - DNSPod: DNSPod-RESOLVELOG
+	// - EMR: EMR-OPERATION
+	// - HTTPDNS: HTTPDNS-RESOLVELOG
+	// - MariaDB: MariaDB-AUDIT, MariaDB-ERROR, MariaDB-SLOW
+	// - MDP: MDP-SSAI
+	// - MongoDB: MongoDB-AUDIT, MongoDB-ErrorLog, MongoDB-OperationLog, MongoDB-SlowLog
+	// - PostgreSQL: PostgreSQL-AUDIT, PostgreSQL-ERROR, PostgreSQL-SLOW
+	// - TCSS: TCSS
+	// - TDSQL-C: TDSQL-C-AUDIT
+	// - TDStore: TDMYSQL-SLOW
+	// - TencentDB-Redis: Redis-AUDIT, Redis-ERROR, Redis-SLOW
+	// - TEO: TEO-INEFERENCE
+	// - llmsgw: llmsgw-mcp-security-alarm.
 	LogType string `pulumi:"logType"`
-	// Log set ID.
+	// Log set ID. Obtain it via the DescribeLogsets API.
 	LogsetId *string `pulumi:"logsetId"`
-	// Log set name, required if `logsetId` is not filled in. If the log set does not exist, it will be automatically created.
+	// Log set name, required when `logsetId` is not specified. If the log set does not exist, it will be created automatically.
 	LogsetName *string `pulumi:"logsetName"`
-	// Log theme ID.
+	// Tag description list. Up to 10 tag key-value pairs are supported, and each tag key can only be bound to the same resource once. Tags are bound to the associated log topic.
+	Tags map[string]string `pulumi:"tags"`
+	// Log topic ID. Obtain it via the DescribeTopics API.
 	TopicId *string `pulumi:"topicId"`
-	// The name of the log topic is required when `topicId` is not filled in. If the log theme does not exist, it will be automatically created.
+	// Log topic name, required when `topicId` is not specified. If the log topic does not exist, it will be created automatically.
 	TopicName *string `pulumi:"topicName"`
 }
 
 // The set of arguments for constructing a CloudProductLogTaskV2 resource.
 type CloudProductLogTaskV2Args struct {
-	// Cloud product identification, Values: CDS, CWP, CDB, TDSQL-C, MongoDB, TDStore, DCDB, MariaDB, PostgreSQL, BH, APIS.
+	// Cloud product identification. Supported values: APIS, BH, CDB, CDS, CFS, CLB, CSIP, CWP, DCDB, DNSPod, EMR, HTTPDNS, KHL, llmsgw, MariaDB, MDP, MongoDB, PostgreSQL, TCSS, TDSQL-C, TDStore, TencentDB-Redis, TEO, TokenHub, TSE.
 	AssumerName pulumi.StringInput
-	// Cloud product region. There are differences in the input format of different log types in different regions. Please refer to the following example:
-	// - CDS(all log type): ap-guangzhou
-	// - CDB-AUDIT: gz
-	// - TDSQL-C-AUDIT: gz
-	// - MongoDB-AUDIT: gz
-	// - MongoDB-SlowLog: ap-guangzhou
-	// - MongoDB-ErrorLog: ap-guangzhou
-	// - TDMYSQL-SLOW: gz
-	// - DCDB(all log type): gz
-	// - MariaDB(all log type): gz
-	// - PostgreSQL(all log type): gz
-	// - BH(all log type): overseas-polaris(Domestic sites overseas)/fsi-polaris(Domestic sites finance)/general-polaris(Domestic sites)/intl-sg-prod(International sites)
-	// - APIS(all log type): gz.
+	// Cloud product region. The input format varies by log type:
+	// - Short region code (e.g., `gz`, `sh`, `bj`): applies to APIS (all), CDB-AUDIT, TDSQL-C-AUDIT, TDMYSQL-SLOW, DCDB (all), MariaDB (all), PostgreSQL (all), MongoDB-AUDIT, TencentDB-Redis (all), EMR-OPERATION.
+	// - Long region code (e.g., `ap-guangzhou`, `ap-shanghai`): applies to CDS (all), MongoDB-SlowLog, MongoDB-ErrorLog, MongoDB-OperationLog, DNSPod-RESOLVELOG, HTTPDNS-RESOLVELOG, MDP-SSAI, CFS-AUDIT, TEO-INEFERENCE, CSIP, TCSS, TSE, CWP, KHL.
+	// - BH Polaris name: applies to BH (all), values: `overseas-polaris` (Hong Kong and overseas), `fsi-polaris` (finance zone), `general-polaris` (general zone), `intl-sg-prod` (international site).
 	CloudProductRegion pulumi.StringInput
-	// CLS target region.
+	// CLS target region. Refer to the region list documentation for supported regions.
 	ClsRegion pulumi.StringInput
-	// Log configuration extension information, generally used to store additional log delivery configurations.
+	// Log configuration extension information, generally used to store additional log delivery configurations. Example: `{"ServiceName":["HDFS","KNOX","YARN","ZOOKEEPER"],"Policy":0}`.
 	Extend pulumi.StringPtrInput
-	// Indicate whether to forcibly delete the corresponding logset and topic. If set to true, it will be forcibly deleted. Default is false.
+	// It has been deprecated from version 1.82.102. Please use `isDeleteTopic` or `isDeleteLogset` instead. Indicate whether to forcibly delete the corresponding logset and topic. If set to true, it will be forcibly deleted. Default is false.
+	//
+	// Deprecated: It has been deprecated from version 1.82.102. Please use `isDeleteTopic` or `isDeleteLogset` instead.
 	ForceDelete pulumi.BoolPtrInput
-	// Instance ID.
+	// Instance ID. Obtain it from the official documentation of the corresponding cloud product.
 	InstanceId pulumi.StringInput
-	// Log type, Values: CDS-AUDIT, CDS-RISK, CDB-AUDIT, TDSQL-C-AUDIT, MongoDB-AUDIT, MongoDB-SlowLog, MongoDB-ErrorLog, TDMYSQL-SLOW, DCDB-AUDIT, DCDB-SLOW, DCDB-ERROR, MariaDB-AUDIT, MariaDB-SLOW, MariaDB-ERROR, PostgreSQL-SLOW, PostgreSQL-ERROR, PostgreSQL-AUDIT, BH-FILELOG, BH-COMMANDLOG, APIS-ACCESS.
+	// Whether to delete the associated Logset when deleting the log collection task. This field only takes effect when `forceDelete` is false. If the Logset has other Topics, it will not be deleted. Default is false.
+	IsDeleteLogset pulumi.BoolPtrInput
+	// Whether to delete the associated Topic when deleting the log collection task. This field only takes effect when `forceDelete` is false. Default is false.
+	IsDeleteTopic pulumi.BoolPtrInput
+	// Log type, must correspond to the `assumerName` value. Mapping:
+	// - APIS: APIS-ACCESS
+	// - BH: BH-COMMANDLOG, BH-FILELOG
+	// - CDB: CDB-AUDIT
+	// - CDS: CDS-AUDIT, CDS-RISK
+	// - CFS: CFS-AUDIT
+	// - CLB: CMR-SPEND
+	// - CSIP: CSIP
+	// - CWP: CWP
+	// - DCDB: DCDB-AUDIT, DCDB-ERROR, DCDB-SLOW
+	// - DNSPod: DNSPod-RESOLVELOG
+	// - EMR: EMR-OPERATION
+	// - HTTPDNS: HTTPDNS-RESOLVELOG
+	// - MariaDB: MariaDB-AUDIT, MariaDB-ERROR, MariaDB-SLOW
+	// - MDP: MDP-SSAI
+	// - MongoDB: MongoDB-AUDIT, MongoDB-ErrorLog, MongoDB-OperationLog, MongoDB-SlowLog
+	// - PostgreSQL: PostgreSQL-AUDIT, PostgreSQL-ERROR, PostgreSQL-SLOW
+	// - TCSS: TCSS
+	// - TDSQL-C: TDSQL-C-AUDIT
+	// - TDStore: TDMYSQL-SLOW
+	// - TencentDB-Redis: Redis-AUDIT, Redis-ERROR, Redis-SLOW
+	// - TEO: TEO-INEFERENCE
+	// - llmsgw: llmsgw-mcp-security-alarm.
 	LogType pulumi.StringInput
-	// Log set ID.
+	// Log set ID. Obtain it via the DescribeLogsets API.
 	LogsetId pulumi.StringPtrInput
-	// Log set name, required if `logsetId` is not filled in. If the log set does not exist, it will be automatically created.
+	// Log set name, required when `logsetId` is not specified. If the log set does not exist, it will be created automatically.
 	LogsetName pulumi.StringPtrInput
-	// Log theme ID.
+	// Tag description list. Up to 10 tag key-value pairs are supported, and each tag key can only be bound to the same resource once. Tags are bound to the associated log topic.
+	Tags pulumi.StringMapInput
+	// Log topic ID. Obtain it via the DescribeTopics API.
 	TopicId pulumi.StringPtrInput
-	// The name of the log topic is required when `topicId` is not filled in. If the log theme does not exist, it will be automatically created.
+	// Log topic name, required when `topicId` is not specified. If the log topic does not exist, it will be created automatically.
 	TopicName pulumi.StringPtrInput
 }
 
@@ -414,69 +555,99 @@ func (o CloudProductLogTaskV2Output) ToCloudProductLogTaskV2OutputWithContext(ct
 	return o
 }
 
-// Cloud product identification, Values: CDS, CWP, CDB, TDSQL-C, MongoDB, TDStore, DCDB, MariaDB, PostgreSQL, BH, APIS.
+// Cloud product identification. Supported values: APIS, BH, CDB, CDS, CFS, CLB, CSIP, CWP, DCDB, DNSPod, EMR, HTTPDNS, KHL, llmsgw, MariaDB, MDP, MongoDB, PostgreSQL, TCSS, TDSQL-C, TDStore, TencentDB-Redis, TEO, TokenHub, TSE.
 func (o CloudProductLogTaskV2Output) AssumerName() pulumi.StringOutput {
 	return o.ApplyT(func(v *CloudProductLogTaskV2) pulumi.StringOutput { return v.AssumerName }).(pulumi.StringOutput)
 }
 
-// Cloud product region. There are differences in the input format of different log types in different regions. Please refer to the following example:
-// - CDS(all log type): ap-guangzhou
-// - CDB-AUDIT: gz
-// - TDSQL-C-AUDIT: gz
-// - MongoDB-AUDIT: gz
-// - MongoDB-SlowLog: ap-guangzhou
-// - MongoDB-ErrorLog: ap-guangzhou
-// - TDMYSQL-SLOW: gz
-// - DCDB(all log type): gz
-// - MariaDB(all log type): gz
-// - PostgreSQL(all log type): gz
-// - BH(all log type): overseas-polaris(Domestic sites overseas)/fsi-polaris(Domestic sites finance)/general-polaris(Domestic sites)/intl-sg-prod(International sites)
-// - APIS(all log type): gz.
+// Cloud product region. The input format varies by log type:
+// - Short region code (e.g., `gz`, `sh`, `bj`): applies to APIS (all), CDB-AUDIT, TDSQL-C-AUDIT, TDMYSQL-SLOW, DCDB (all), MariaDB (all), PostgreSQL (all), MongoDB-AUDIT, TencentDB-Redis (all), EMR-OPERATION.
+// - Long region code (e.g., `ap-guangzhou`, `ap-shanghai`): applies to CDS (all), MongoDB-SlowLog, MongoDB-ErrorLog, MongoDB-OperationLog, DNSPod-RESOLVELOG, HTTPDNS-RESOLVELOG, MDP-SSAI, CFS-AUDIT, TEO-INEFERENCE, CSIP, TCSS, TSE, CWP, KHL.
+// - BH Polaris name: applies to BH (all), values: `overseas-polaris` (Hong Kong and overseas), `fsi-polaris` (finance zone), `general-polaris` (general zone), `intl-sg-prod` (international site).
 func (o CloudProductLogTaskV2Output) CloudProductRegion() pulumi.StringOutput {
 	return o.ApplyT(func(v *CloudProductLogTaskV2) pulumi.StringOutput { return v.CloudProductRegion }).(pulumi.StringOutput)
 }
 
-// CLS target region.
+// CLS target region. Refer to the region list documentation for supported regions.
 func (o CloudProductLogTaskV2Output) ClsRegion() pulumi.StringOutput {
 	return o.ApplyT(func(v *CloudProductLogTaskV2) pulumi.StringOutput { return v.ClsRegion }).(pulumi.StringOutput)
 }
 
-// Log configuration extension information, generally used to store additional log delivery configurations.
+// Log configuration extension information, generally used to store additional log delivery configurations. Example: `{"ServiceName":["HDFS","KNOX","YARN","ZOOKEEPER"],"Policy":0}`.
 func (o CloudProductLogTaskV2Output) Extend() pulumi.StringOutput {
 	return o.ApplyT(func(v *CloudProductLogTaskV2) pulumi.StringOutput { return v.Extend }).(pulumi.StringOutput)
 }
 
-// Indicate whether to forcibly delete the corresponding logset and topic. If set to true, it will be forcibly deleted. Default is false.
+// It has been deprecated from version 1.82.102. Please use `isDeleteTopic` or `isDeleteLogset` instead. Indicate whether to forcibly delete the corresponding logset and topic. If set to true, it will be forcibly deleted. Default is false.
+//
+// Deprecated: It has been deprecated from version 1.82.102. Please use `isDeleteTopic` or `isDeleteLogset` instead.
 func (o CloudProductLogTaskV2Output) ForceDelete() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *CloudProductLogTaskV2) pulumi.BoolPtrOutput { return v.ForceDelete }).(pulumi.BoolPtrOutput)
 }
 
-// Instance ID.
+// Instance ID. Obtain it from the official documentation of the corresponding cloud product.
 func (o CloudProductLogTaskV2Output) InstanceId() pulumi.StringOutput {
 	return o.ApplyT(func(v *CloudProductLogTaskV2) pulumi.StringOutput { return v.InstanceId }).(pulumi.StringOutput)
 }
 
-// Log type, Values: CDS-AUDIT, CDS-RISK, CDB-AUDIT, TDSQL-C-AUDIT, MongoDB-AUDIT, MongoDB-SlowLog, MongoDB-ErrorLog, TDMYSQL-SLOW, DCDB-AUDIT, DCDB-SLOW, DCDB-ERROR, MariaDB-AUDIT, MariaDB-SLOW, MariaDB-ERROR, PostgreSQL-SLOW, PostgreSQL-ERROR, PostgreSQL-AUDIT, BH-FILELOG, BH-COMMANDLOG, APIS-ACCESS.
+// Whether to delete the associated Logset when deleting the log collection task. This field only takes effect when `forceDelete` is false. If the Logset has other Topics, it will not be deleted. Default is false.
+func (o CloudProductLogTaskV2Output) IsDeleteLogset() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *CloudProductLogTaskV2) pulumi.BoolPtrOutput { return v.IsDeleteLogset }).(pulumi.BoolPtrOutput)
+}
+
+// Whether to delete the associated Topic when deleting the log collection task. This field only takes effect when `forceDelete` is false. Default is false.
+func (o CloudProductLogTaskV2Output) IsDeleteTopic() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *CloudProductLogTaskV2) pulumi.BoolPtrOutput { return v.IsDeleteTopic }).(pulumi.BoolPtrOutput)
+}
+
+// Log type, must correspond to the `assumerName` value. Mapping:
+// - APIS: APIS-ACCESS
+// - BH: BH-COMMANDLOG, BH-FILELOG
+// - CDB: CDB-AUDIT
+// - CDS: CDS-AUDIT, CDS-RISK
+// - CFS: CFS-AUDIT
+// - CLB: CMR-SPEND
+// - CSIP: CSIP
+// - CWP: CWP
+// - DCDB: DCDB-AUDIT, DCDB-ERROR, DCDB-SLOW
+// - DNSPod: DNSPod-RESOLVELOG
+// - EMR: EMR-OPERATION
+// - HTTPDNS: HTTPDNS-RESOLVELOG
+// - MariaDB: MariaDB-AUDIT, MariaDB-ERROR, MariaDB-SLOW
+// - MDP: MDP-SSAI
+// - MongoDB: MongoDB-AUDIT, MongoDB-ErrorLog, MongoDB-OperationLog, MongoDB-SlowLog
+// - PostgreSQL: PostgreSQL-AUDIT, PostgreSQL-ERROR, PostgreSQL-SLOW
+// - TCSS: TCSS
+// - TDSQL-C: TDSQL-C-AUDIT
+// - TDStore: TDMYSQL-SLOW
+// - TencentDB-Redis: Redis-AUDIT, Redis-ERROR, Redis-SLOW
+// - TEO: TEO-INEFERENCE
+// - llmsgw: llmsgw-mcp-security-alarm.
 func (o CloudProductLogTaskV2Output) LogType() pulumi.StringOutput {
 	return o.ApplyT(func(v *CloudProductLogTaskV2) pulumi.StringOutput { return v.LogType }).(pulumi.StringOutput)
 }
 
-// Log set ID.
+// Log set ID. Obtain it via the DescribeLogsets API.
 func (o CloudProductLogTaskV2Output) LogsetId() pulumi.StringOutput {
 	return o.ApplyT(func(v *CloudProductLogTaskV2) pulumi.StringOutput { return v.LogsetId }).(pulumi.StringOutput)
 }
 
-// Log set name, required if `logsetId` is not filled in. If the log set does not exist, it will be automatically created.
+// Log set name, required when `logsetId` is not specified. If the log set does not exist, it will be created automatically.
 func (o CloudProductLogTaskV2Output) LogsetName() pulumi.StringOutput {
 	return o.ApplyT(func(v *CloudProductLogTaskV2) pulumi.StringOutput { return v.LogsetName }).(pulumi.StringOutput)
 }
 
-// Log theme ID.
+// Tag description list. Up to 10 tag key-value pairs are supported, and each tag key can only be bound to the same resource once. Tags are bound to the associated log topic.
+func (o CloudProductLogTaskV2Output) Tags() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *CloudProductLogTaskV2) pulumi.StringMapOutput { return v.Tags }).(pulumi.StringMapOutput)
+}
+
+// Log topic ID. Obtain it via the DescribeTopics API.
 func (o CloudProductLogTaskV2Output) TopicId() pulumi.StringOutput {
 	return o.ApplyT(func(v *CloudProductLogTaskV2) pulumi.StringOutput { return v.TopicId }).(pulumi.StringOutput)
 }
 
-// The name of the log topic is required when `topicId` is not filled in. If the log theme does not exist, it will be automatically created.
+// Log topic name, required when `topicId` is not specified. If the log topic does not exist, it will be created automatically.
 func (o CloudProductLogTaskV2Output) TopicName() pulumi.StringOutput {
 	return o.ApplyT(func(v *CloudProductLogTaskV2) pulumi.StringOutput { return v.TopicName }).(pulumi.StringOutput)
 }

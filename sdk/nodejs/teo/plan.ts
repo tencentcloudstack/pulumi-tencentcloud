@@ -114,35 +114,35 @@ export interface PlanState {
     /**
      * Service area, possible values are: <li>mainland: Mainland China; </li><li>overseas: Worldwide (excluding Mainland China); </li><li>global: Worldwide (including Mainland China). </li>.
      */
-    area?: pulumi.Input<string>;
+    area?: pulumi.Input<string | undefined>;
     /**
      * The time when the package takes effect.
      */
-    enabledTime?: pulumi.Input<string>;
+    enabledTime?: pulumi.Input<string | undefined>;
     /**
      * The expiration date of the package.
      */
-    expiredTime?: pulumi.Input<string>;
+    expiredTime?: pulumi.Input<string | undefined>;
     /**
      * Payment type, possible values: <li>0: post-payment; </li><li>1: pre-payment. </li>.
      */
-    payMode?: pulumi.Input<string>;
+    payMode?: pulumi.Input<string | undefined>;
     /**
      * Plan ID.
      */
-    planId?: pulumi.Input<string>;
+    planId?: pulumi.Input<string | undefined>;
     /**
      * The subscription package type, the possible values are: `personal`: personal package, prepaid package; `basic`: basic package, prepaid package; `standard`: standard package, prepaid package; `enterprise`: enterprise package, postpaid package.
      */
-    planType?: pulumi.Input<string>;
+    planType?: pulumi.Input<string | undefined>;
     /**
      * Subscription prepaid package parameters. When PlanType is personal, basic, or standard, this parameter is optional and is used to enter the subscription duration of the package and whether to enable automatic renewal. If this parameter is not filled in, the default subscription duration is 1 month and automatic renewal is not enabled.
      */
-    prepaidPlanParam?: pulumi.Input<inputs.Teo.PlanPrepaidPlanParam>;
+    prepaidPlanParam?: pulumi.Input<inputs.Teo.PlanPrepaidPlanParam | undefined>;
     /**
      * Package status, the values are: <li>normal: normal status; </li><li>expiring-soon: about to expire; </li><li>expired: expired; </li><li>isolated: isolated; </li><li>overdue-isolated: overdue isolated. </li>.
      */
-    status?: pulumi.Input<string>;
+    status?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -156,5 +156,5 @@ export interface PlanArgs {
     /**
      * Subscription prepaid package parameters. When PlanType is personal, basic, or standard, this parameter is optional and is used to enter the subscription duration of the package and whether to enable automatic renewal. If this parameter is not filled in, the default subscription duration is 1 month and automatic renewal is not enabled.
      */
-    prepaidPlanParam?: pulumi.Input<inputs.Teo.PlanPrepaidPlanParam>;
+    prepaidPlanParam?: pulumi.Input<inputs.Teo.PlanPrepaidPlanParam | undefined>;
 }

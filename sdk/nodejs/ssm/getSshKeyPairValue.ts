@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Ssm.getSshKeyPairValue({
+ * const example = tencentcloud.ssm.getSshKeyPairValue({
  *     secretName: "keep_terraform",
  *     sshKeyId: "skey-2ae2snwd",
  * });
@@ -27,7 +27,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Ssm.getSshKeyPairValue({
+ * const example = tencentcloud.ssm.getSshKeyPairValue({
  *     secretName: "keep_terraform",
  * });
  * ```
@@ -38,7 +38,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Ssm.getSshKeyPairValue({
+ * const example = tencentcloud.ssm.getSshKeyPairValue({
  *     sshKeyId: "skey-2ae2snwd",
  * });
  * ```
@@ -114,7 +114,7 @@ export interface GetSshKeyPairValueResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Ssm.getSshKeyPairValue({
+ * const example = tencentcloud.ssm.getSshKeyPairValue({
  *     secretName: "keep_terraform",
  *     sshKeyId: "skey-2ae2snwd",
  * });
@@ -126,7 +126,7 @@ export interface GetSshKeyPairValueResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Ssm.getSshKeyPairValue({
+ * const example = tencentcloud.ssm.getSshKeyPairValue({
  *     secretName: "keep_terraform",
  * });
  * ```
@@ -137,7 +137,7 @@ export interface GetSshKeyPairValueResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = tencentcloud.Ssm.getSshKeyPairValue({
+ * const example = tencentcloud.ssm.getSshKeyPairValue({
  *     sshKeyId: "skey-2ae2snwd",
  * });
  * ```
@@ -159,13 +159,13 @@ export interface GetSshKeyPairValueOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
     /**
      * Secret name.
      */
-    secretName?: pulumi.Input<string>;
+    secretName?: pulumi.Input<string | undefined>;
     /**
      * The key pair ID is the unique identifier of the key pair in the cloud server.
      */
-    sshKeyId?: pulumi.Input<string>;
+    sshKeyId?: pulumi.Input<string | undefined>;
 }

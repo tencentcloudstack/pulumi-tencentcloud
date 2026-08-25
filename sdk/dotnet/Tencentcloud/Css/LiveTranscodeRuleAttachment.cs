@@ -63,8 +63,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// ## Import
     /// 
-    /// css live_transcode_rule_attachment can be imported using the id, e.g.
-    /// 
+    /// css LiveTranscodeRuleAttachment can be imported using the id, e.g.
     /// ```sh
     /// $ pulumi import tencentcloud:Css/liveTranscodeRuleAttachment:LiveTranscodeRuleAttachment live_transcode_rule_attachment liveTranscodeRuleAttachment_id
     /// ```

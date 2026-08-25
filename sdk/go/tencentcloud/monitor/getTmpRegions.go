@@ -67,12 +67,8 @@ type GetTmpRegionsResult struct {
 }
 
 func GetTmpRegionsOutput(ctx *pulumi.Context, args GetTmpRegionsOutputArgs, opts ...pulumi.InvokeOption) GetTmpRegionsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetTmpRegionsResultOutput, error) {
-			args := v.(GetTmpRegionsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Monitor/getTmpRegions:getTmpRegions", args, GetTmpRegionsResultOutput{}, options).(GetTmpRegionsResultOutput), nil
-		}).(GetTmpRegionsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Monitor/getTmpRegions:getTmpRegions", args, GetTmpRegionsResultOutput{}, options).(GetTmpRegionsResultOutput)
 }
 
 // A collection of arguments for invoking getTmpRegions.

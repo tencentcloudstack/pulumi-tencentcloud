@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const addressQuota = tencentcloud.Eip.getAddressQuota({});
+ * const addressQuota = tencentcloud.eip.getAddressQuota({});
  * ```
  */
 export function getAddressQuota(args?: GetAddressQuotaArgs, opts?: pulumi.InvokeOptions): Promise<GetAddressQuotaResult> {
@@ -59,7 +59,7 @@ export interface GetAddressQuotaResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const addressQuota = tencentcloud.Eip.getAddressQuota({});
+ * const addressQuota = tencentcloud.eip.getAddressQuota({});
  * ```
  */
 export function getAddressQuotaOutput(args?: GetAddressQuotaOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAddressQuotaResult> {
@@ -77,5 +77,5 @@ export interface GetAddressQuotaOutputArgs {
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

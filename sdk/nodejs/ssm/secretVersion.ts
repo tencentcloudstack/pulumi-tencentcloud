@@ -49,7 +49,6 @@ import * as utilities from "../utilities";
  * ## Import
  *
  * SSM secret version can be imported using the secretName#versionId, e.g.
- *
  * ```sh
  * $ pulumi import tencentcloud:Ssm/secretVersion:SecretVersion v1 test#v1
  * ```
@@ -83,19 +82,19 @@ export class SecretVersion extends pulumi.CustomResource {
     }
 
     /**
-     * The base64-encoded binary secret. secretBinary and secretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
+     * Binary credential information, encoded using Base64. You must set exactly one of SecretBinary or SecretString.
      */
     declare public readonly secretBinary: pulumi.Output<string | undefined>;
     /**
-     * Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+     * Specifies the name of the credential to which the new version is to be added.
      */
     declare public readonly secretName: pulumi.Output<string>;
     /**
-     * The string text of secret. secretBinary and secretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
+     * Text-based credential information in plaintext (Base64 encoding is not required). You must set exactly one of SecretBinary or SecretString.
      */
     declare public readonly secretString: pulumi.Output<string | undefined>;
     /**
-     * Version of secret. The maximum length is 64 bytes. The versionId can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+     * Specifies the version ID for the newly added version. It can be up to 64 bytes in length and must consist of a combination of letters, numbers, and the characters `-`, `_`, or `.`, starting with a letter or a number.
      */
     declare public readonly versionId: pulumi.Output<string>;
 
@@ -139,21 +138,21 @@ export class SecretVersion extends pulumi.CustomResource {
  */
 export interface SecretVersionState {
     /**
-     * The base64-encoded binary secret. secretBinary and secretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
+     * Binary credential information, encoded using Base64. You must set exactly one of SecretBinary or SecretString.
      */
-    secretBinary?: pulumi.Input<string>;
+    secretBinary?: pulumi.Input<string | undefined>;
     /**
-     * Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+     * Specifies the name of the credential to which the new version is to be added.
      */
-    secretName?: pulumi.Input<string>;
+    secretName?: pulumi.Input<string | undefined>;
     /**
-     * The string text of secret. secretBinary and secretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
+     * Text-based credential information in plaintext (Base64 encoding is not required). You must set exactly one of SecretBinary or SecretString.
      */
-    secretString?: pulumi.Input<string>;
+    secretString?: pulumi.Input<string | undefined>;
     /**
-     * Version of secret. The maximum length is 64 bytes. The versionId can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+     * Specifies the version ID for the newly added version. It can be up to 64 bytes in length and must consist of a combination of letters, numbers, and the characters `-`, `_`, or `.`, starting with a letter or a number.
      */
-    versionId?: pulumi.Input<string>;
+    versionId?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -161,19 +160,19 @@ export interface SecretVersionState {
  */
 export interface SecretVersionArgs {
     /**
-     * The base64-encoded binary secret. secretBinary and secretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
+     * Binary credential information, encoded using Base64. You must set exactly one of SecretBinary or SecretString.
      */
-    secretBinary?: pulumi.Input<string>;
+    secretBinary?: pulumi.Input<string | undefined>;
     /**
-     * Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+     * Specifies the name of the credential to which the new version is to be added.
      */
     secretName: pulumi.Input<string>;
     /**
-     * The string text of secret. secretBinary and secretString must be set only one, and the maximum support is 4096 bytes. When secret status is `Disabled`, this field will not update anymore.
+     * Text-based credential information in plaintext (Base64 encoding is not required). You must set exactly one of SecretBinary or SecretString.
      */
-    secretString?: pulumi.Input<string>;
+    secretString?: pulumi.Input<string | undefined>;
     /**
-     * Version of secret. The maximum length is 64 bytes. The versionId can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+     * Specifies the version ID for the newly added version. It can be up to 64 bytes in length and must consist of a combination of letters, numbers, and the characters `-`, `_`, or `.`, starting with a letter or a number.
      */
     versionId: pulumi.Input<string>;
 }

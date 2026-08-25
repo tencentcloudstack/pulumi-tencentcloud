@@ -99,11 +99,11 @@ export interface EventState {
     /**
      * Event description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Event name.
      */
-    eventName?: pulumi.Input<string>;
+    eventName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -113,7 +113,7 @@ export interface EventArgs {
     /**
      * Event description.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * Event name.
      */

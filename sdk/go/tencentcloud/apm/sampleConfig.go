@@ -41,7 +41,7 @@ import (
 //				return err
 //			}
 //			_, err = apm.NewSampleConfig(ctx, "example", &apm.SampleConfigArgs{
-//				InstanceId:    example.ID(),
+//				InstanceId:    example.ID().ToIDOutput().ToStringOutput(),
 //				SampleName:    pulumi.String("tf-example"),
 //				SampleRate:    pulumi.Int(90),
 //				ServiceName:   pulumi.String("java-order-serive"),

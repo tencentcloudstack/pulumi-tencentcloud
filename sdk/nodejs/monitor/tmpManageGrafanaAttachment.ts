@@ -54,7 +54,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * monitor tmp_manage_grafana_attachment can be imported using the id, e.g.
+ * monitor tmpManageGrafanaAttachment can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Monitor/tmpManageGrafanaAttachment:TmpManageGrafanaAttachment manage_grafana_attachment prom-xxxxxxxx
@@ -135,11 +135,11 @@ export interface TmpManageGrafanaAttachmentState {
     /**
      * Grafana instance ID.
      */
-    grafanaId?: pulumi.Input<string>;
+    grafanaId?: pulumi.Input<string | undefined>;
     /**
      * Prometheus instance ID.
      */
-    instanceId?: pulumi.Input<string>;
+    instanceId?: pulumi.Input<string | undefined>;
 }
 
 /**

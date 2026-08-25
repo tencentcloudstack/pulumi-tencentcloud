@@ -20,7 +20,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb.Inputs
         public Input<string>? CreateTime { get; set; }
 
         /// <summary>
-        /// Master Key ID.
+        /// Key ID. If this parameter is not set and the specific key ID is not specified, Tencent Cloud will automatically generate the key and this key will be beyond the control of Terraform.
         /// </summary>
         [Input("keyId")]
         public Input<string>? KeyId { get; set; }

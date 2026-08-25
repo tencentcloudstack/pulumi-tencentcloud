@@ -75,12 +75,8 @@ type GetL4RulesV2Result struct {
 }
 
 func GetL4RulesV2Output(ctx *pulumi.Context, args GetL4RulesV2OutputArgs, opts ...pulumi.InvokeOption) GetL4RulesV2ResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetL4RulesV2ResultOutput, error) {
-			args := v.(GetL4RulesV2Args)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Dayu/getL4RulesV2:getL4RulesV2", args, GetL4RulesV2ResultOutput{}, options).(GetL4RulesV2ResultOutput), nil
-		}).(GetL4RulesV2ResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Dayu/getL4RulesV2:getL4RulesV2", args, GetL4RulesV2ResultOutput{}, options).(GetL4RulesV2ResultOutput)
 }
 
 // A collection of arguments for invoking getL4RulesV2.

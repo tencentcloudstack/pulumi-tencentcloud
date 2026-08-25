@@ -203,47 +203,47 @@ export interface AlarmNoticeState {
     /**
      * Amp consumer ID.
      */
-    ampConsumerId?: pulumi.Input<string>;
+    ampConsumerId?: pulumi.Input<string | undefined>;
     /**
      * A maximum of one alarm notification can be pushed to the CLS service.
      */
-    clsNotices?: pulumi.Input<pulumi.Input<inputs.Monitor.AlarmNoticeClsNotice>[]>;
+    clsNotices?: pulumi.Input<pulumi.Input<inputs.Monitor.AlarmNoticeClsNotice>[] | undefined>;
     /**
      * Whether it is the system default notification template 0=No 1=Yes.
      */
-    isPreset?: pulumi.Input<number>;
+    isPreset?: pulumi.Input<number | undefined>;
     /**
      * Notification template name within 60.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Notification language zh-CN=Chinese en-US=English.
      */
-    noticeLanguage?: pulumi.Input<string>;
+    noticeLanguage?: pulumi.Input<string | undefined>;
     /**
      * Alarm notification type ALARM=Notification not restored OK=Notification restored ALL.
      */
-    noticeType?: pulumi.Input<string>;
+    noticeType?: pulumi.Input<string | undefined>;
     /**
      * List of alarm policy IDs bound to the alarm notification template.
      */
-    policyIds?: pulumi.Input<pulumi.Input<string>[]>;
+    policyIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Last modified time.
      */
-    updatedAt?: pulumi.Input<string>;
+    updatedAt?: pulumi.Input<string | undefined>;
     /**
      * Last Modified By.
      */
-    updatedBy?: pulumi.Input<string>;
+    updatedBy?: pulumi.Input<string | undefined>;
     /**
      * The maximum number of callback notifications is 3.
      */
-    urlNotices?: pulumi.Input<pulumi.Input<inputs.Monitor.AlarmNoticeUrlNotice>[]>;
+    urlNotices?: pulumi.Input<pulumi.Input<inputs.Monitor.AlarmNoticeUrlNotice>[] | undefined>;
     /**
      * Alarm notification template list.(At most five).
      */
-    userNotices?: pulumi.Input<pulumi.Input<inputs.Monitor.AlarmNoticeUserNotice>[]>;
+    userNotices?: pulumi.Input<pulumi.Input<inputs.Monitor.AlarmNoticeUserNotice>[] | undefined>;
 }
 
 /**
@@ -253,11 +253,11 @@ export interface AlarmNoticeArgs {
     /**
      * A maximum of one alarm notification can be pushed to the CLS service.
      */
-    clsNotices?: pulumi.Input<pulumi.Input<inputs.Monitor.AlarmNoticeClsNotice>[]>;
+    clsNotices?: pulumi.Input<pulumi.Input<inputs.Monitor.AlarmNoticeClsNotice>[] | undefined>;
     /**
      * Notification template name within 60.
      */
-    name?: pulumi.Input<string>;
+    name?: pulumi.Input<string | undefined>;
     /**
      * Notification language zh-CN=Chinese en-US=English.
      */
@@ -269,9 +269,9 @@ export interface AlarmNoticeArgs {
     /**
      * The maximum number of callback notifications is 3.
      */
-    urlNotices?: pulumi.Input<pulumi.Input<inputs.Monitor.AlarmNoticeUrlNotice>[]>;
+    urlNotices?: pulumi.Input<pulumi.Input<inputs.Monitor.AlarmNoticeUrlNotice>[] | undefined>;
     /**
      * Alarm notification template list.(At most five).
      */
-    userNotices?: pulumi.Input<pulumi.Input<inputs.Monitor.AlarmNoticeUserNotice>[]>;
+    userNotices?: pulumi.Input<pulumi.Input<inputs.Monitor.AlarmNoticeUserNotice>[] | undefined>;
 }

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const basicDeviceStatus = tencentcloud.Antiddos.getBasicDeviceStatus({
+ * const basicDeviceStatus = tencentcloud.antiddos.getBasicDeviceStatus({
  *     ipLists: ["127.0.0.1"],
  *     filterRegion: 1,
  * });
@@ -84,7 +84,7 @@ export interface GetBasicDeviceStatusResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const basicDeviceStatus = tencentcloud.Antiddos.getBasicDeviceStatus({
+ * const basicDeviceStatus = tencentcloud.antiddos.getBasicDeviceStatus({
  *     ipLists: ["127.0.0.1"],
  *     filterRegion: 1,
  * });
@@ -108,17 +108,17 @@ export interface GetBasicDeviceStatusOutputArgs {
     /**
      * Region Id.
      */
-    filterRegion?: pulumi.Input<number>;
+    filterRegion?: pulumi.Input<number | undefined>;
     /**
      * Named resource transfer ID.
      */
-    idLists?: pulumi.Input<pulumi.Input<string>[]>;
+    idLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Ip resource list.
      */
-    ipLists?: pulumi.Input<pulumi.Input<string>[]>;
+    ipLists?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Used to save results.
      */
-    resultOutputFile?: pulumi.Input<string>;
+    resultOutputFile?: pulumi.Input<string | undefined>;
 }

@@ -14,13 +14,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
     public sealed class SyncJobTagArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// tag key.
+        /// Tag key.
         /// </summary>
         [Input("tagKey")]
         public Input<string>? TagKey { get; set; }
 
         /// <summary>
-        /// tag value.
+        /// Tag value.
         /// </summary>
         [Input("tagValue")]
         public Input<string>? TagValue { get; set; }

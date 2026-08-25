@@ -28,7 +28,7 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * css callback_template can be imported using the id, e.g.
+ * css callbackTemplate can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Css/callbackTemplate:CallbackTemplate callback_template templateId
@@ -148,39 +148,39 @@ export interface CallbackTemplateState {
     /**
      * Callback Key, public callback URL.
      */
-    callbackKey?: pulumi.Input<string>;
+    callbackKey?: pulumi.Input<string | undefined>;
     /**
      * Description information.Maximum length: 1024 bytes.Only `Chinese`, `English`, `numbers`, `_`, `-` are supported.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * PornCensorship callback URL.
      */
-    pornCensorshipNotifyUrl?: pulumi.Input<string>;
+    pornCensorshipNotifyUrl?: pulumi.Input<string | undefined>;
     /**
      * Streaming Exception Callback URL.
      */
-    pushExceptionNotifyUrl?: pulumi.Input<string>;
+    pushExceptionNotifyUrl?: pulumi.Input<string | undefined>;
     /**
      * Recording callback URL.
      */
-    recordNotifyUrl?: pulumi.Input<string>;
+    recordNotifyUrl?: pulumi.Input<string | undefined>;
     /**
      * Snapshot callback URL.
      */
-    snapshotNotifyUrl?: pulumi.Input<string>;
+    snapshotNotifyUrl?: pulumi.Input<string | undefined>;
     /**
      * Launch callback URL.
      */
-    streamBeginNotifyUrl?: pulumi.Input<string>;
+    streamBeginNotifyUrl?: pulumi.Input<string | undefined>;
     /**
      * Cutoff callback URL.
      */
-    streamEndNotifyUrl?: pulumi.Input<string>;
+    streamEndNotifyUrl?: pulumi.Input<string | undefined>;
     /**
      * Template name.Maximum length: 255 bytes. Only `Chinese`, `English`, `numbers`, `_`, `-` are supported.
      */
-    templateName?: pulumi.Input<string>;
+    templateName?: pulumi.Input<string | undefined>;
 }
 
 /**
@@ -190,35 +190,35 @@ export interface CallbackTemplateArgs {
     /**
      * Callback Key, public callback URL.
      */
-    callbackKey?: pulumi.Input<string>;
+    callbackKey?: pulumi.Input<string | undefined>;
     /**
      * Description information.Maximum length: 1024 bytes.Only `Chinese`, `English`, `numbers`, `_`, `-` are supported.
      */
-    description?: pulumi.Input<string>;
+    description?: pulumi.Input<string | undefined>;
     /**
      * PornCensorship callback URL.
      */
-    pornCensorshipNotifyUrl?: pulumi.Input<string>;
+    pornCensorshipNotifyUrl?: pulumi.Input<string | undefined>;
     /**
      * Streaming Exception Callback URL.
      */
-    pushExceptionNotifyUrl?: pulumi.Input<string>;
+    pushExceptionNotifyUrl?: pulumi.Input<string | undefined>;
     /**
      * Recording callback URL.
      */
-    recordNotifyUrl?: pulumi.Input<string>;
+    recordNotifyUrl?: pulumi.Input<string | undefined>;
     /**
      * Snapshot callback URL.
      */
-    snapshotNotifyUrl?: pulumi.Input<string>;
+    snapshotNotifyUrl?: pulumi.Input<string | undefined>;
     /**
      * Launch callback URL.
      */
-    streamBeginNotifyUrl?: pulumi.Input<string>;
+    streamBeginNotifyUrl?: pulumi.Input<string | undefined>;
     /**
      * Cutoff callback URL.
      */
-    streamEndNotifyUrl?: pulumi.Input<string>;
+    streamEndNotifyUrl?: pulumi.Input<string | undefined>;
     /**
      * Template name.Maximum length: 255 bytes. Only `Chinese`, `English`, `numbers`, `_`, `-` are supported.
      */

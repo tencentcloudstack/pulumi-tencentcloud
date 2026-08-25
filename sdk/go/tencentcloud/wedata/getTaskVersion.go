@@ -74,12 +74,8 @@ type GetTaskVersionResult struct {
 }
 
 func GetTaskVersionOutput(ctx *pulumi.Context, args GetTaskVersionOutputArgs, opts ...pulumi.InvokeOption) GetTaskVersionResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetTaskVersionResultOutput, error) {
-			args := v.(GetTaskVersionArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Wedata/getTaskVersion:getTaskVersion", args, GetTaskVersionResultOutput{}, options).(GetTaskVersionResultOutput), nil
-		}).(GetTaskVersionResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Wedata/getTaskVersion:getTaskVersion", args, GetTaskVersionResultOutput{}, options).(GetTaskVersionResultOutput)
 }
 
 // A collection of arguments for invoking getTaskVersion.

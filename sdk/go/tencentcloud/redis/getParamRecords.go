@@ -67,12 +67,8 @@ type GetParamRecordsResult struct {
 }
 
 func GetParamRecordsOutput(ctx *pulumi.Context, args GetParamRecordsOutputArgs, opts ...pulumi.InvokeOption) GetParamRecordsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetParamRecordsResultOutput, error) {
-			args := v.(GetParamRecordsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("tencentcloud:Redis/getParamRecords:getParamRecords", args, GetParamRecordsResultOutput{}, options).(GetParamRecordsResultOutput), nil
-		}).(GetParamRecordsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("tencentcloud:Redis/getParamRecords:getParamRecords", args, GetParamRecordsResultOutput{}, options).(GetParamRecordsResultOutput)
 }
 
 // A collection of arguments for invoking getParamRecords.
